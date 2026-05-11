@@ -1,0 +1,1279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: yaml_builder类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classyaml__builder.html','','classyaml__builder-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">yaml_builder类 参考<div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___yaml_config.html">YAML配置</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>YAML配置构建器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:afd0f5f049fdb832594099498ac0ed88c" id="r_afd0f5f049fdb832594099498ac0ed88c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder</a> ()</td></tr>
+<tr class="memdesc:afd0f5f049fdb832594099498ac0ed88c"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:ae086d26c7bad498fa96e9d94fcada35a" id="r_ae086d26c7bad498fa96e9d94fcada35a"><td class="memItemLeft"><a id="ae086d26c7bad498fa96e9d94fcada35a" name="ae086d26c7bad498fa96e9d94fcada35a"></a>
+&#160;</td><td class="memItemRight"><b>yaml_builder</b> (<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:ae086d26c7bad498fa96e9d94fcada35a"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数 <br /></td></tr>
+<tr class="memitem:a66bf0554bc0acb3520102497a4ec3b15" id="r_a66bf0554bc0acb3520102497a4ec3b15"><td class="memItemLeft"><a id="a66bf0554bc0acb3520102497a4ec3b15" name="a66bf0554bc0acb3520102497a4ec3b15"></a>
+<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&amp;other)=default</td></tr>
+<tr class="memdesc:a66bf0554bc0acb3520102497a4ec3b15"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符 <br /></td></tr>
+<tr class="memitem:a5d273c026749d5070a44af7890fe0c7b" id="r_a5d273c026749d5070a44af7890fe0c7b"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a5d273c026749d5070a44af7890fe0c7b">key</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> key)</td></tr>
+<tr class="memdesc:a5d273c026749d5070a44af7890fe0c7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置当前键名  <br /></td></tr>
+<tr class="memitem:a8f08fbdf2cf980de7ea90f8384369b3b" id="r_a8f08fbdf2cf980de7ea90f8384369b3b"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8f08fbdf2cf980de7ea90f8384369b3b">begin_mapping</a> ()</td></tr>
+<tr class="memdesc:a8f08fbdf2cf980de7ea90f8384369b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个映射（块样式）  <br /></td></tr>
+<tr class="memitem:a2413efd2943639d0be2666bf85c32ca5" id="r_a2413efd2943639d0be2666bf85c32ca5"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2413efd2943639d0be2666bf85c32ca5">begin_block_mapping</a> ()</td></tr>
+<tr class="memdesc:a2413efd2943639d0be2666bf85c32ca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个块样式映射  <br /></td></tr>
+<tr class="memitem:a119a470687c585b6a7950ca8056ef128" id="r_a119a470687c585b6a7950ca8056ef128"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a119a470687c585b6a7950ca8056ef128">begin_flow_mapping</a> ()</td></tr>
+<tr class="memdesc:a119a470687c585b6a7950ca8056ef128"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个流样式映射  <br /></td></tr>
+<tr class="memitem:a917239a95d7e58b912314cce568f5f78" id="r_a917239a95d7e58b912314cce568f5f78"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a917239a95d7e58b912314cce568f5f78">end_mapping</a> ()</td></tr>
+<tr class="memdesc:a917239a95d7e58b912314cce568f5f78"><td class="mdescLeft">&#160;</td><td class="mdescRight">结束当前映射  <br /></td></tr>
+<tr class="memitem:a29d9dad2258b83c27895e69cd03f2241" id="r_a29d9dad2258b83c27895e69cd03f2241"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a29d9dad2258b83c27895e69cd03f2241">begin_sequence</a> ()</td></tr>
+<tr class="memdesc:a29d9dad2258b83c27895e69cd03f2241"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个序列（块样式）  <br /></td></tr>
+<tr class="memitem:a8bf0a640a8266a18e3f0191bc7587391" id="r_a8bf0a640a8266a18e3f0191bc7587391"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8bf0a640a8266a18e3f0191bc7587391">begin_block_sequence</a> ()</td></tr>
+<tr class="memdesc:a8bf0a640a8266a18e3f0191bc7587391"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个块样式序列  <br /></td></tr>
+<tr class="memitem:a218b081dbb039cd9e572e2160324e671" id="r_a218b081dbb039cd9e572e2160324e671"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a218b081dbb039cd9e572e2160324e671">begin_flow_sequence</a> ()</td></tr>
+<tr class="memdesc:a218b081dbb039cd9e572e2160324e671"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始一个流样式序列  <br /></td></tr>
+<tr class="memitem:aadd8ba53f9f9244f069cd9e48c2e0962" id="r_aadd8ba53f9f9244f069cd9e48c2e0962"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aadd8ba53f9f9244f069cd9e48c2e0962">end_sequence</a> ()</td></tr>
+<tr class="memdesc:aadd8ba53f9f9244f069cd9e48c2e0962"><td class="mdescLeft">&#160;</td><td class="mdescRight">结束当前序列  <br /></td></tr>
+<tr class="memitem:a4721a2a7002baba478a19f0e1addda8f" id="r_a4721a2a7002baba478a19f0e1addda8f"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4721a2a7002baba478a19f0e1addda8f">value</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a> np)</td></tr>
+<tr class="memdesc:a4721a2a7002baba478a19f0e1addda8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置null值  <br /></td></tr>
+<tr class="memitem:af586623b16246c6cf122709408821187" id="r_af586623b16246c6cf122709408821187"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af586623b16246c6cf122709408821187">value</a> (const bool v)</td></tr>
+<tr class="memdesc:af586623b16246c6cf122709408821187"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置布尔值  <br /></td></tr>
+<tr class="memitem:a63ce58f5c5a5ad079de326e003e06d38" id="r_a63ce58f5c5a5ad079de326e003e06d38"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a63ce58f5c5a5ad079de326e003e06d38">value</a> (const <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> v)</td></tr>
+<tr class="memdesc:a63ce58f5c5a5ad079de326e003e06d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置64位整数值  <br /></td></tr>
+<tr class="memitem:a6729eda8d53dc059287474267741fc01" id="r_a6729eda8d53dc059287474267741fc01"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a6729eda8d53dc059287474267741fc01">value</a> (const int v)</td></tr>
+<tr class="memdesc:a6729eda8d53dc059287474267741fc01"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置整数值  <br /></td></tr>
+<tr class="memitem:a0413ca20bbad3235353eaa5b6a26a262" id="r_a0413ca20bbad3235353eaa5b6a26a262"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a0413ca20bbad3235353eaa5b6a26a262">value</a> (const double v)</td></tr>
+<tr class="memdesc:a0413ca20bbad3235353eaa5b6a26a262"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置双精度浮点数值  <br /></td></tr>
+<tr class="memitem:aaf3b9351b58c7dbf82d33e4046467be2" id="r_aaf3b9351b58c7dbf82d33e4046467be2"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aaf3b9351b58c7dbf82d33e4046467be2">value</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> v)</td></tr>
+<tr class="memdesc:aaf3b9351b58c7dbf82d33e4046467be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符串值（纯文本样式）  <br /></td></tr>
+<tr class="memitem:a428be6c1a85902809df8569aa4c37741" id="r_a428be6c1a85902809df8569aa4c37741"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a428be6c1a85902809df8569aa4c37741">value</a> (const char *v)</td></tr>
+<tr class="memdesc:a428be6c1a85902809df8569aa4c37741"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置C字符串值  <br /></td></tr>
+<tr class="memitem:ad53a3a20b01278d5d6b8bb86770d426e" id="r_ad53a3a20b01278d5d6b8bb86770d426e"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad53a3a20b01278d5d6b8bb86770d426e">value</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> v)</td></tr>
+<tr class="memdesc:ad53a3a20b01278d5d6b8bb86770d426e"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符串视图值  <br /></td></tr>
+<tr class="memitem:ae6e9b387a6cf7f7046ba11d3aa61e157" id="r_ae6e9b387a6cf7f7046ba11d3aa61e157"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae6e9b387a6cf7f7046ba11d3aa61e157">value</a> (<a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classyaml__value.html">yaml_value</a> &gt; v)</td></tr>
+<tr class="memdesc:ae6e9b387a6cf7f7046ba11d3aa61e157"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置已构建的YAML值  <br /></td></tr>
+<tr class="memitem:a45bcdb9b9f3d9b190a4fcf40206e1ad5" id="r_a45bcdb9b9f3d9b190a4fcf40206e1ad5"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a45bcdb9b9f3d9b190a4fcf40206e1ad5">value_datetime</a> (const <a class="el" href="classdatetime.html">datetime</a> &amp;dt)</td></tr>
+<tr class="memdesc:a45bcdb9b9f3d9b190a4fcf40206e1ad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置时间戳值  <br /></td></tr>
+<tr class="memitem:ab72a8a0b80df92517ba5e6293470ecd3" id="r_ab72a8a0b80df92517ba5e6293470ecd3"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab72a8a0b80df92517ba5e6293470ecd3">value_string</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> v, <a class="el" href="classyaml__string.html#a48e128d7b4fcf4d04fb90af96a5c5a9e">yaml_string::string_style</a> style)</td></tr>
+<tr class="memdesc:ab72a8a0b80df92517ba5e6293470ecd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置指定类型的字符串值  <br /></td></tr>
+<tr class="memitem:ae8f9c91fa8b60c91c887470233ad1928" id="r_ae8f9c91fa8b60c91c887470233ad1928"><td class="memTemplParams" colspan="2">template&lt;typename Iterable, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_action_check.html#ga97b8016a5394d04c7a2f3c1a99b037e9">is_iterable_v</a>&lt; Iterable &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ae8f9c91fa8b60c91c887470233ad1928 template"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae8f9c91fa8b60c91c887470233ad1928">value_iterable</a> (const Iterable &amp;iterable)</td></tr>
+<tr class="memdesc:ae8f9c91fa8b60c91c887470233ad1928"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置可迭代对象的值  <br /></td></tr>
+<tr class="memitem:ad11f29de622ff5609c67fce62f3e6089" id="r_ad11f29de622ff5609c67fce62f3e6089"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad11f29de622ff5609c67fce62f3e6089">value_mapping</a> (const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:ad11f29de622ff5609c67fce62f3e6089"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建映射值  <br /></td></tr>
+<tr class="memitem:a570fe0b339e76df05431240024b8f725" id="r_a570fe0b339e76df05431240024b8f725"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a570fe0b339e76df05431240024b8f725">value_block_mapping</a> (const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:a570fe0b339e76df05431240024b8f725"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建块样式映射值  <br /></td></tr>
+<tr class="memitem:afd42d89f79aa1a458e3b35a5b6cd2eef" id="r_afd42d89f79aa1a458e3b35a5b6cd2eef"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#afd42d89f79aa1a458e3b35a5b6cd2eef">value_flow_mapping</a> (const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:afd42d89f79aa1a458e3b35a5b6cd2eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建流样式映射值  <br /></td></tr>
+<tr class="memitem:af8eb036e15b843bb1b922aadb811edd9" id="r_af8eb036e15b843bb1b922aadb811edd9"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af8eb036e15b843bb1b922aadb811edd9">value_sequence</a> (const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:af8eb036e15b843bb1b922aadb811edd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建序列值  <br /></td></tr>
+<tr class="memitem:a1baa7da41564bd57925c6d786d981def" id="r_a1baa7da41564bd57925c6d786d981def"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1baa7da41564bd57925c6d786d981def">value_block_sequence</a> (const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:a1baa7da41564bd57925c6d786d981def"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建块样式序列值  <br /></td></tr>
+<tr class="memitem:a767f084a2a3142b8190470b388cffd66" id="r_a767f084a2a3142b8190470b388cffd66"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a767f084a2a3142b8190470b388cffd66">value_flow_sequence</a> (const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
+<tr class="memdesc:a767f084a2a3142b8190470b388cffd66"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建流样式序列值  <br /></td></tr>
+<tr class="memitem:abf640029a79cd8b4c580f06aa78f38a4" id="r_abf640029a79cd8b4c580f06aa78f38a4"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abf640029a79cd8b4c580f06aa78f38a4">anchor</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="group___thread.html#ga6f83c2a4509ed1d467ba909884e9850b">name</a>)</td></tr>
+<tr class="memdesc:abf640029a79cd8b4c580f06aa78f38a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">为下一个值设置锚点  <br /></td></tr>
+<tr class="memitem:a2e163eab341fe7de98b81521d91b9d65" id="r_a2e163eab341fe7de98b81521d91b9d65"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2e163eab341fe7de98b81521d91b9d65">tag</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> t)</td></tr>
+<tr class="memdesc:a2e163eab341fe7de98b81521d91b9d65"><td class="mdescLeft">&#160;</td><td class="mdescRight">为下一个值设置标签  <br /></td></tr>
+<tr class="memitem:a015f1851426fa2eebe9012d56ba68b85" id="r_a015f1851426fa2eebe9012d56ba68b85"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a015f1851426fa2eebe9012d56ba68b85">alias</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="group___thread.html#ga6f83c2a4509ed1d467ba909884e9850b">name</a>)</td></tr>
+<tr class="memdesc:a015f1851426fa2eebe9012d56ba68b85"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加一个别名引用  <br /></td></tr>
+<tr class="memitem:a9d283281f1259c7c80d8a0963aff8d95" id="r_a9d283281f1259c7c80d8a0963aff8d95"><td class="memItemLeft"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9d283281f1259c7c80d8a0963aff8d95">begin_document</a> ()</td></tr>
+<tr class="memdesc:a9d283281f1259c7c80d8a0963aff8d95"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始新文档（多文档模式）  <br /></td></tr>
+<tr class="memitem:a2d372bc19a85519834d067a14177b233" id="r_a2d372bc19a85519834d067a14177b233"><td class="memItemLeft"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classyaml__value.html">yaml_value</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2d372bc19a85519834d067a14177b233">build</a> ()</td></tr>
+<tr class="memdesc:a2d372bc19a85519834d067a14177b233"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建YAML文档树  <br /></td></tr>
+<tr class="memitem:a2bd8550faac05c3243a6699bf8010207" id="r_a2bd8550faac05c3243a6699bf8010207"><td class="memItemLeft"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classyaml__value.html">yaml_value</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2bd8550faac05c3243a6699bf8010207">build_documents</a> ()</td></tr>
+<tr class="memdesc:a2bd8550faac05c3243a6699bf8010207"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建多文档YAML文档树  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>YAML配置构建器 </p>
+<p>提供流式接口构建YAML配置格式，支持以下特性：</p><ul>
+<li>链式调用构建映射和序列</li>
+<li>自动类型转换（整数、浮点数、布尔值、字符串）</li>
+<li>函数式构建嵌套结构</li>
+<li>集合类型自动转换（可迭代对象、映射表）</li>
+<li>上下文管理（自动维护当前映射/序列状态）</li>
+<li>支持所有YAML字符串类型（Plain, SingleQuoted, DoubleQuoted, Literal, Folded）</li>
+<li>支持时间戳类型</li>
+<li>支持锚点、别名和标签</li>
+<li>支持块样式和流样式</li>
+<li>支持多文档 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00044">44</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="afd0f5f049fdb832594099498ac0ed88c" name="afd0f5f049fdb832594099498ac0ed88c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd0f5f049fdb832594099498ac0ed88c">&#9670;&#160;</a></span>yaml_builder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">yaml_builder::yaml_builder </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<p>创建一个新的构建器实例。默认根为块样式映射。 </p>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a015f1851426fa2eebe9012d56ba68b85">alias()</a>, <a class="el" href="#abf640029a79cd8b4c580f06aa78f38a4">anchor()</a>, <a class="el" href="#a2413efd2943639d0be2666bf85c32ca5">begin_block_mapping()</a>, <a class="el" href="#a8bf0a640a8266a18e3f0191bc7587391">begin_block_sequence()</a>, <a class="el" href="#a9d283281f1259c7c80d8a0963aff8d95">begin_document()</a>, <a class="el" href="#a119a470687c585b6a7950ca8056ef128">begin_flow_mapping()</a>, <a class="el" href="#a218b081dbb039cd9e572e2160324e671">begin_flow_sequence()</a>, <a class="el" href="#a8f08fbdf2cf980de7ea90f8384369b3b">begin_mapping()</a>, <a class="el" href="#a29d9dad2258b83c27895e69cd03f2241">begin_sequence()</a>, <a class="el" href="#a917239a95d7e58b912314cce568f5f78">end_mapping()</a>, <a class="el" href="#aadd8ba53f9f9244f069cd9e48c2e0962">end_sequence()</a>, <a class="el" href="#a5d273c026749d5070a44af7890fe0c7b">key()</a>, <a class="el" href="#a66bf0554bc0acb3520102497a4ec3b15">operator=()</a>, <a class="el" href="#a2e163eab341fe7de98b81521d91b9d65">tag()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00222">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00257">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00243">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00236">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00229">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00264">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00215">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00271">value()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00250">value()</a>, <a class="el" href="#a570fe0b339e76df05431240024b8f725">value_block_mapping()</a>, <a class="el" href="#a1baa7da41564bd57925c6d786d981def">value_block_sequence()</a>, <a class="el" href="#a45bcdb9b9f3d9b190a4fcf40206e1ad5">value_datetime()</a>, <a class="el" href="#afd42d89f79aa1a458e3b35a5b6cd2eef">value_flow_mapping()</a>, <a class="el" href="#a767f084a2a3142b8190470b388cffd66">value_flow_sequence()</a>, <a class="el" href="yaml__builder_8hpp_source.html#l00299">value_iterable()</a>, <a class="el" href="#ad11f29de622ff5609c67fce62f3e6089">value_mapping()</a>, <a class="el" href="#af8eb036e15b843bb1b922aadb811edd9">value_sequence()</a>, <a class="el" href="#ab72a8a0b80df92517ba5e6293470ecd3">value_string()</a>, <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a> , 以及 <a class="el" href="#ae086d26c7bad498fa96e9d94fcada35a">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a015f1851426fa2eebe9012d56ba68b85" name="a015f1851426fa2eebe9012d56ba68b85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a015f1851426fa2eebe9012d56ba68b85">&#9670;&#160;</a></span>alias()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::alias </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加一个别名引用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>锚点名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structyaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当锚点不存在时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>引用之前通过anchor()设置的同名节点。 </p>
+
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="abf640029a79cd8b4c580f06aa78f38a4" name="abf640029a79cd8b4c580f06aa78f38a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf640029a79cd8b4c580f06aa78f38a4">&#9670;&#160;</a></span>anchor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::anchor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>为下一个值设置锚点 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>锚点名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>锚点将应用到下一个通过value()或begin_*添加的值上。 </p>
+
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a2413efd2943639d0be2666bf85c32ca5" name="a2413efd2943639d0be2666bf85c32ca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2413efd2943639d0be2666bf85c32ca5">&#9670;&#160;</a></span>begin_block_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::begin_block_mapping </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个块样式映射 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a8bf0a640a8266a18e3f0191bc7587391" name="a8bf0a640a8266a18e3f0191bc7587391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bf0a640a8266a18e3f0191bc7587391">&#9670;&#160;</a></span>begin_block_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::begin_block_sequence </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个块样式序列 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a9d283281f1259c7c80d8a0963aff8d95" name="a9d283281f1259c7c80d8a0963aff8d95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d283281f1259c7c80d8a0963aff8d95">&#9670;&#160;</a></span>begin_document()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::begin_document </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始新文档（多文档模式） </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>保存当前文档并开始新文档。新文档的根默认为块样式映射。 </p>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a119a470687c585b6a7950ca8056ef128" name="a119a470687c585b6a7950ca8056ef128"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a119a470687c585b6a7950ca8056ef128">&#9670;&#160;</a></span>begin_flow_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::begin_flow_mapping </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个流样式映射 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="yaml__builder_8hpp_source.html#l00299">value_iterable()</a>.</p>
+
+</div>
+</div>
+<a id="a218b081dbb039cd9e572e2160324e671" name="a218b081dbb039cd9e572e2160324e671"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a218b081dbb039cd9e572e2160324e671">&#9670;&#160;</a></span>begin_flow_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::begin_flow_sequence </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个流样式序列 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a8f08fbdf2cf980de7ea90f8384369b3b" name="a8f08fbdf2cf980de7ea90f8384369b3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f08fbdf2cf980de7ea90f8384369b3b">&#9670;&#160;</a></span>begin_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::begin_mapping </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个映射（块样式） </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structyaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a29d9dad2258b83c27895e69cd03f2241" name="a29d9dad2258b83c27895e69cd03f2241"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29d9dad2258b83c27895e69cd03f2241">&#9670;&#160;</a></span>begin_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::begin_sequence </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>开始一个序列（块样式） </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structyaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当上下文无效或键名缺失时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="yaml__builder_8hpp_source.html#l00299">value_iterable()</a>.</p>
+
+</div>
+</div>
+<a id="a2d372bc19a85519834d067a14177b233" name="a2d372bc19a85519834d067a14177b233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d372bc19a85519834d067a14177b233">&#9670;&#160;</a></span>build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classyaml__value.html">yaml_value</a> &gt; yaml_builder::build </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构建YAML文档树 </p>
+<dl class="section return"><dt>返回</dt><dd>构建完成的根值 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structyaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当存在未闭合的上下文时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2bd8550faac05c3243a6699bf8010207" name="a2bd8550faac05c3243a6699bf8010207"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bd8550faac05c3243a6699bf8010207">&#9670;&#160;</a></span>build_documents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classyaml__value.html">yaml_value</a> &gt; &gt; yaml_builder::build_documents </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构建多文档YAML文档树 </p>
+<dl class="section return"><dt>返回</dt><dd>所有文档的根值列表 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structyaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当存在未闭合的上下文时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a917239a95d7e58b912314cce568f5f78" name="a917239a95d7e58b912314cce568f5f78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a917239a95d7e58b912314cce568f5f78">&#9670;&#160;</a></span>end_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::end_mapping </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>结束当前映射 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structyaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当不在映射上下文中时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="yaml__builder_8hpp_source.html#l00299">value_iterable()</a>.</p>
+
+</div>
+</div>
+<a id="aadd8ba53f9f9244f069cd9e48c2e0962" name="aadd8ba53f9f9244f069cd9e48c2e0962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadd8ba53f9f9244f069cd9e48c2e0962">&#9670;&#160;</a></span>end_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::end_sequence </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>结束当前序列 </p>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structyaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当不在序列上下文中时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="yaml__builder_8hpp_source.html#l00299">value_iterable()</a>.</p>
+
+</div>
+</div>
+<a id="a5d273c026749d5070a44af7890fe0c7b" name="a5d273c026749d5070a44af7890fe0c7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d273c026749d5070a44af7890fe0c7b">&#9670;&#160;</a></span>key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::key </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置当前键名 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键名字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structyaml__exception.html" title="YAML格式操作失败">yaml_exception</a></td><td>当不在映射上下文中时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a5d273c026749d5070a44af7890fe0c7b">key()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a5d273c026749d5070a44af7890fe0c7b">key()</a> , 以及 <a class="el" href="yaml__builder_8hpp_source.html#l00299">value_iterable()</a>.</p>
+
+</div>
+</div>
+<a id="a2e163eab341fe7de98b81521d91b9d65" name="a2e163eab341fe7de98b81521d91b9d65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e163eab341fe7de98b81521d91b9d65">&#9670;&#160;</a></span>tag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::tag </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>为下一个值设置标签 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>标签字符串（如"!mytag"、"!!str"） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>标签将应用到下一个通过value()或begin_*添加的值上。 </p>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="af586623b16246c6cf122709408821187" name="af586623b16246c6cf122709408821187"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af586623b16246c6cf122709408821187">&#9670;&#160;</a></span>value() <span class="overload">[1/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置布尔值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>布尔值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00222">222</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00835">make_shared()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a428be6c1a85902809df8569aa4c37741" name="a428be6c1a85902809df8569aa4c37741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a428be6c1a85902809df8569aa4c37741">&#9670;&#160;</a></span>value() <span class="overload">[2/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置C字符串值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>C字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00257">257</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="yaml__builder_8hpp_source.html#l00257">value()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="yaml__builder_8hpp_source.html#l00257">value()</a>.</p>
+
+</div>
+</div>
+<a id="a0413ca20bbad3235353eaa5b6a26a262" name="a0413ca20bbad3235353eaa5b6a26a262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0413ca20bbad3235353eaa5b6a26a262">&#9670;&#160;</a></span>value() <span class="overload">[3/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const double</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置双精度浮点数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>双精度浮点数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00243">243</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00835">make_shared()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a6729eda8d53dc059287474267741fc01" name="a6729eda8d53dc059287474267741fc01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6729eda8d53dc059287474267741fc01">&#9670;&#160;</a></span>value() <span class="overload">[4/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置整数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00236">236</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00835">make_shared()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a63ce58f5c5a5ad079de326e003e06d38" name="a63ce58f5c5a5ad079de326e003e06d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63ce58f5c5a5ad079de326e003e06d38">&#9670;&#160;</a></span>value() <span class="overload">[5/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置64位整数值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>64位整数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00229">229</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00835">make_shared()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="ad53a3a20b01278d5d6b8bb86770d426e" name="ad53a3a20b01278d5d6b8bb86770d426e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad53a3a20b01278d5d6b8bb86770d426e">&#9670;&#160;</a></span>value() <span class="overload">[6/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置字符串视图值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>字符串视图 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00264">264</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="yaml__builder_8hpp_source.html#l00264">value()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="yaml__builder_8hpp_source.html#l00264">value()</a>.</p>
+
+</div>
+</div>
+<a id="a4721a2a7002baba478a19f0e1addda8f" name="a4721a2a7002baba478a19f0e1addda8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4721a2a7002baba478a19f0e1addda8f">&#9670;&#160;</a></span>value() <span class="overload">[7/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em>np</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置null值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">np</td><td>空指针标记 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00215">215</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00835">make_shared()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="ae6e9b387a6cf7f7046ba11d3aa61e157" name="ae6e9b387a6cf7f7046ba11d3aa61e157"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6e9b387a6cf7f7046ba11d3aa61e157">&#9670;&#160;</a></span>value() <span class="overload">[8/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classyaml__value.html">yaml_value</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置已构建的YAML值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>YAML值指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00271">271</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="aaf3b9351b58c7dbf82d33e4046467be2" name="aaf3b9351b58c7dbf82d33e4046467be2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf3b9351b58c7dbf82d33e4046467be2">&#9670;&#160;</a></span>value() <span class="overload">[9/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置字符串值（纯文本样式） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>字符串值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00250">250</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shared__ptr_8hpp_source.html#l00835">make_shared()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="yaml__value_8hpp_source.html#l00427">yaml_string::Plain</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a570fe0b339e76df05431240024b8f725" name="a570fe0b339e76df05431240024b8f725"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a570fe0b339e76df05431240024b8f725">&#9670;&#160;</a></span>value_block_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value_block_mapping </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建块样式映射值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a1baa7da41564bd57925c6d786d981def" name="a1baa7da41564bd57925c6d786d981def"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1baa7da41564bd57925c6d786d981def">&#9670;&#160;</a></span>value_block_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value_block_sequence </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建块样式序列值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a45bcdb9b9f3d9b190a4fcf40206e1ad5" name="a45bcdb9b9f3d9b190a4fcf40206e1ad5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45bcdb9b9f3d9b190a4fcf40206e1ad5">&#9670;&#160;</a></span>value_datetime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value_datetime </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classdatetime.html">datetime</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>dt</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置时间戳值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dt</td><td>日期时间对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="afd42d89f79aa1a458e3b35a5b6cd2eef" name="afd42d89f79aa1a458e3b35a5b6cd2eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd42d89f79aa1a458e3b35a5b6cd2eef">&#9670;&#160;</a></span>value_flow_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value_flow_mapping </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建流样式映射值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a767f084a2a3142b8190470b388cffd66" name="a767f084a2a3142b8190470b388cffd66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a767f084a2a3142b8190470b388cffd66">&#9670;&#160;</a></span>value_flow_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value_flow_sequence </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建流样式序列值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="ae8f9c91fa8b60c91c887470233ad1928" name="ae8f9c91fa8b60c91c887470233ad1928"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8f9c91fa8b60c91c887470233ad1928">&#9670;&#160;</a></span>value_iterable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterable, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_action_check.html#ga97b8016a5394d04c7a2f3c1a99b037e9">is_iterable_v</a>&lt; Iterable &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value_iterable </td>
+          <td>(</td>
+          <td class="paramtype">const Iterable &amp;</td>          <td class="paramname"><span class="paramname"><em>iterable</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置可迭代对象的值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterable</td><td>可迭代类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iterable</td><td>可迭代对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>根据类型自动转换为序列或内联映射：</p><ul>
+<li>映射表类型转换为流样式映射</li>
+<li>其他可迭代类型转换为序列 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a> 第 <a class="el" href="yaml__builder_8hpp_source.html#l00299">299</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a119a470687c585b6a7950ca8056ef128">begin_flow_mapping()</a>, <a class="el" href="#a29d9dad2258b83c27895e69cd03f2241">begin_sequence()</a>, <a class="el" href="#a917239a95d7e58b912314cce568f5f78">end_mapping()</a>, <a class="el" href="#aadd8ba53f9f9244f069cd9e48c2e0962">end_sequence()</a>, <a class="el" href="pair_8hpp_source.html#l00100">pair&lt; T1, T2 &gt;::first</a>, <a class="el" href="type__traits_8hpp_source.html#l04223">is_maplike_v</a>, <a class="el" href="#a5d273c026749d5070a44af7890fe0c7b">key()</a>, <a class="el" href="pair_8hpp_source.html#l00101">pair&lt; T1, T2 &gt;::second</a> , 以及 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="ad11f29de622ff5609c67fce62f3e6089" name="ad11f29de622ff5609c67fce62f3e6089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad11f29de622ff5609c67fce62f3e6089">&#9670;&#160;</a></span>value_mapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value_mapping </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建映射值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="af8eb036e15b843bb1b922aadb811edd9" name="af8eb036e15b843bb1b922aadb811edd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8eb036e15b843bb1b922aadb811edd9">&#9670;&#160;</a></span>value_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value_sequence </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classyaml__builder.html">yaml_builder</a> &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>build_func</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>使用函数式方式构建序列值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">build_func</td><td>构建函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="ab72a8a0b80df92517ba5e6293470ecd3" name="ab72a8a0b80df92517ba5e6293470ecd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab72a8a0b80df92517ba5e6293470ecd3">&#9670;&#160;</a></span>value_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classyaml__builder.html">yaml_builder</a> &amp; yaml_builder::value_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classyaml__string.html#a48e128d7b4fcf4d04fb90af96a5c5a9e">yaml_string::string_style</a></td>          <td class="paramname"><span class="paramname"><em>style</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置指定类型的字符串值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>字符串值 </td></tr>
+    <tr><td class="paramname">style</td><td>字符串样式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd0f5f049fdb832594099498ac0ed88c">yaml_builder()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="yaml__builder_8hpp_source.html">yaml_builder.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classyaml__builder.html">yaml_builder</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classuuid" kind="class" language="C++" prot="public">
+    <compoundname>uuid</compoundname>
+    <basecompoundref refid="structistringify" prot="public" virt="non-virtual">istringify&lt; uuid &gt;</basecompoundref>
+    <basecompoundref refid="structihashable" prot="public" virt="non-virtual">ihashable&lt; uuid &gt;</basecompoundref>
+    <includes refid="uuid_8hpp" local="no">uuid.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classuuid_1ab1cafe08e325d63b34820f924043cc8e" prot="private" static="no" mutable="no">
+        <type><ref refid="classarray" kindref="compound">array</ref>&lt; <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>, 16 &gt;</type>
+        <definition>array&lt;byte_t, 16&gt; uuid::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>uuid::data_</qualifiedname>
+        <briefdescription>
+<para>16字节的UUID原始数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="51" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classuuid_1ab2e70259535ed42ec7f6e96d2891dadf" prot="private" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrandom__mt" kindref="compound">random_mt</ref> &amp;</type>
+        <definition>static random_mt &amp; uuid::tl_rng</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>tl_rng</name>
+        <qualifiedname>uuid::tl_rng</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="53" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classuuid_1accde25e6bb9cab49d3bb4ae6cdfc8334" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>uuid::uuid</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>uuid</name>
+        <qualifiedname>uuid::uuid</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建全零UUID（nil UUID）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="61" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" bodystart="61" bodyend="61"/>
+        <references refid="group___memory_functions_1ga0590f0952874df69fedc3740320ce1bb" compoundref="memory_8hpp" startline="219" endline="228">memory_zero</references>
+        <referencedby refid="classuuid_1a39e0dba0d3e3f3041efd6a4e2091d422">v4</referencedby>
+        <referencedby refid="classuuid_1a7664699bea951feb280cbcb34533a212">v7</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1abdc2b2f255bc9935d20bf5f8d13b8eac" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>uuid::uuid</definition>
+        <argsstring>(memory_view&lt; const byte_t, 16 &gt; bytes) noexcept</argsstring>
+        <name>uuid</name>
+        <qualifiedname>uuid::uuid</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>, 16 &gt;</type>
+          <declname>bytes</declname>
+        </param>
+        <briefdescription>
+<para>从16字节数组构造UUID </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>16字节的只读内存视图</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+直接复制字节数据构造UUID，不验证版本和格式。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="69" column="14"/>
+        <references refid="classuuid_1a0a233d2547def36ac1c84277714831d3" compoundref="uuid_8hpp" startline="132" endline="134">bytes</references>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1ae740a427e628462de51c491325334dc5" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>uuid::uuid</definition>
+        <argsstring>(string_view bytes)</argsstring>
+        <name>uuid</name>
+        <qualifiedname>uuid::uuid</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>bytes</declname>
+        </param>
+        <briefdescription>
+<para>从字符串构造UUID </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>UUID字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串格式无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+支持36字符带连字符或32字符无连字符格式 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="78" column="14"/>
+        <references refid="classuuid_1a0a233d2547def36ac1c84277714831d3" compoundref="uuid_8hpp" startline="132" endline="134">bytes</references>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1ad12fb42024a742f86f68de18044e47bc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void uuid::generate_v4</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>generate_v4</name>
+        <qualifiedname>uuid::generate_v4</qualifiedname>
+        <briefdescription>
+<para>生成UUID版本4（随机） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>基于随机数生成UUID，设置版本位为4，变体位为10。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="85" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1a55b4c336e0ec07cadea7668956ff02dd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void uuid::generate_v7</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>generate_v7</name>
+        <qualifiedname>uuid::generate_v7</qualifiedname>
+        <briefdescription>
+<para>生成UUID版本7（时间戳排序） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>基于Unix毫秒时间戳和随机数生成UUID，具有时间单调性。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="92" column="10"/>
+        <references refid="classuuid_1a55b4c336e0ec07cadea7668956ff02dd">generate_v7</references>
+        <referencedby refid="classuuid_1a55b4c336e0ec07cadea7668956ff02dd">generate_v7</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1afed76cebff20c615f9efdacb56324025" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD int</type>
+        <definition>NEFORCE_NODISCARD int uuid::version</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>version</name>
+        <qualifiedname>uuid::version</qualifiedname>
+        <briefdescription>
+<para>获取UUID版本号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>版本号（4或7） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="98" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" bodystart="98" bodyend="98"/>
+        <references refid="classuuid_1afed76cebff20c615f9efdacb56324025" compoundref="uuid_8hpp" startline="98" endline="98">version</references>
+        <referencedby refid="classuuid_1a7b932df0fce386cf7450038dca5eb2d8" compoundref="uuid_8hpp" startline="104" endline="104">is_v4</referencedby>
+        <referencedby refid="classuuid_1a362a3b3e0dc9258fcffd727bb6b0f043" compoundref="uuid_8hpp" startline="110" endline="110">is_v7</referencedby>
+        <referencedby refid="classuuid_1afed76cebff20c615f9efdacb56324025" compoundref="uuid_8hpp" startline="98" endline="98">version</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1a7b932df0fce386cf7450038dca5eb2d8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool uuid::is_v4</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_v4</name>
+        <qualifiedname>uuid::is_v4</qualifiedname>
+        <briefdescription>
+<para>检查是否为版本4 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是版本4返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="104" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" bodystart="104" bodyend="104"/>
+        <references refid="classuuid_1afed76cebff20c615f9efdacb56324025" compoundref="uuid_8hpp" startline="98" endline="98">version</references>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1a362a3b3e0dc9258fcffd727bb6b0f043" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool uuid::is_v7</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_v7</name>
+        <qualifiedname>uuid::is_v7</qualifiedname>
+        <briefdescription>
+<para>检查是否为版本7 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是版本7返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="110" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" bodystart="110" bodyend="110"/>
+        <references refid="classuuid_1afed76cebff20c615f9efdacb56324025" compoundref="uuid_8hpp" startline="98" endline="98">version</references>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1a8f23c32ccb449d4f565bb2f2e95b5164" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD optional&lt; uint64_t &gt; uuid::timestamp_v7</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>timestamp_v7</name>
+        <qualifiedname>uuid::timestamp_v7</qualifiedname>
+        <briefdescription>
+<para>获取UUID版本7的时间戳 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>包含Unix毫秒时间戳的optional，如果不是版本7返回空</para>
+</simplesect>
+从UUID版本7中提取前48位的时间戳信息。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="118" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1a3b9a971043995f1fef811e748e3d3fd9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string uuid::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>uuid::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为标准UUID字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式为&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;的字符串</para>
+</simplesect>
+将UUID转换为36字符的标准格式，包含4个连字符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="126" column="30"/>
+        <references refid="classuuid_1a3b9a971043995f1fef811e748e3d3fd9">to_string</references>
+        <referencedby refid="classuuid_1a3b9a971043995f1fef811e748e3d3fd9">to_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1a0a233d2547def36ac1c84277714831d3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>, 16 &gt;</type>
+        <definition>NEFORCE_NODISCARD memory_view&lt; const byte_t, 16 &gt; uuid::bytes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>bytes</name>
+        <qualifiedname>uuid::bytes</qualifiedname>
+        <briefdescription>
+<para>获取UUID的字节视图 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>16字节的只读内存视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="132" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" bodystart="132" bodyend="134"/>
+        <references refid="classuuid_1a0a233d2547def36ac1c84277714831d3" compoundref="uuid_8hpp" startline="132" endline="134">bytes</references>
+        <referencedby refid="classuuid_1a0a233d2547def36ac1c84277714831d3" compoundref="uuid_8hpp" startline="132" endline="134">bytes</referencedby>
+        <referencedby refid="classuuid_1abdc2b2f255bc9935d20bf5f8d13b8eac">uuid</referencedby>
+        <referencedby refid="classuuid_1ae740a427e628462de51c491325334dc5">uuid</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1a4c21fb5931a6f430e1d75c9adfd8da69" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD auto</type>
+        <definition>NEFORCE_NODISCARD auto uuid::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>uuid::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个字节的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="140" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" bodystart="140" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1a631ffcb816f07fe2ee3cd69102372cab" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD auto</type>
+        <definition>NEFORCE_NODISCARD auto uuid::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>uuid::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个字节之后的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="146" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" bodystart="146" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1a856178c937eb681bcac2ab30ed9bdf4f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD size_t uuid::to_hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_hash</name>
+        <qualifiedname>uuid::to_hash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="160" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" bodystart="160" bodyend="160"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classuuid_1a39e0dba0d3e3f3041efd6a4e2091d422" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classuuid" kindref="compound">uuid</ref></type>
+        <definition>static uuid uuid::v4</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>v4</name>
+        <qualifiedname>uuid::v4</qualifiedname>
+        <briefdescription>
+<para>静态方法：生成版本4 UUID </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>新生成的版本4 UUID </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="152" column="17"/>
+        <references refid="classuuid_1accde25e6bb9cab49d3bb4ae6cdfc8334" compoundref="uuid_8hpp" startline="61" endline="61">uuid</references>
+      </memberdef>
+      <memberdef kind="function" id="classuuid_1a7664699bea951feb280cbcb34533a212" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classuuid" kindref="compound">uuid</ref></type>
+        <definition>static uuid uuid::v7</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>v7</name>
+        <qualifiedname>uuid::v7</qualifiedname>
+        <briefdescription>
+<para>静态方法：生成版本7 UUID </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>新生成的版本7 UUID </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="158" column="17"/>
+        <references refid="group___hash_primary_1ga20409000240b9904721f7918223dc731" compoundref="hash_8hpp" startline="152" endline="159">FNV_hash</references>
+        <references refid="classuuid_1accde25e6bb9cab49d3bb4ae6cdfc8334" compoundref="uuid_8hpp" startline="61" endline="61">uuid</references>
+        <references refid="classuuid_1a7664699bea951feb280cbcb34533a212">v7</references>
+        <referencedby refid="classuuid_1a7664699bea951feb280cbcb34533a212">v7</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>通用唯一标识符类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>UUID格式：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (36字符，包括4个连字符) 表示一个128位的UUID，支持版本4和版本7的生成，以及从字符串/字节数组的解析。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>ihashable&lt; uuid &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="2">
+        <label>istringify&lt; uuid &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>uuid</label>
+        <link refid="classuuid"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>ihashable&lt; uuid &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="2">
+        <label>istringify&lt; uuid &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>uuid</label>
+        <link refid="classuuid"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" line="49" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/uuid.hpp" bodystart="49" bodyend="161"/>
+    <listofallmembers>
+      <member refid="classuuid_1a4c21fb5931a6f430e1d75c9adfd8da69" prot="public" virt="non-virtual"><scope>uuid</scope><name>begin</name></member>
+      <member refid="classuuid_1a0a233d2547def36ac1c84277714831d3" prot="public" virt="non-virtual"><scope>uuid</scope><name>bytes</name></member>
+      <member refid="classuuid_1ab1cafe08e325d63b34820f924043cc8e" prot="private" virt="non-virtual"><scope>uuid</scope><name>data_</name></member>
+      <member refid="classuuid_1a631ffcb816f07fe2ee3cd69102372cab" prot="public" virt="non-virtual"><scope>uuid</scope><name>end</name></member>
+      <member refid="classuuid_1ad12fb42024a742f86f68de18044e47bc" prot="public" virt="non-virtual"><scope>uuid</scope><name>generate_v4</name></member>
+      <member refid="classuuid_1a55b4c336e0ec07cadea7668956ff02dd" prot="public" virt="non-virtual"><scope>uuid</scope><name>generate_v7</name></member>
+      <member refid="classuuid_1a7b932df0fce386cf7450038dca5eb2d8" prot="public" virt="non-virtual"><scope>uuid</scope><name>is_v4</name></member>
+      <member refid="classuuid_1a362a3b3e0dc9258fcffd727bb6b0f043" prot="public" virt="non-virtual"><scope>uuid</scope><name>is_v7</name></member>
+      <member refid="classuuid_1a8f23c32ccb449d4f565bb2f2e95b5164" prot="public" virt="non-virtual"><scope>uuid</scope><name>timestamp_v7</name></member>
+      <member refid="classuuid_1ab2e70259535ed42ec7f6e96d2891dadf" prot="private" virt="non-virtual"><scope>uuid</scope><name>tl_rng</name></member>
+      <member refid="classuuid_1a856178c937eb681bcac2ab30ed9bdf4f" prot="public" virt="non-virtual"><scope>uuid</scope><name>to_hash</name></member>
+      <member refid="structihashable_1a3bb793a19699c7ccd86fa5d7e91cb513" prot="public" virt="non-virtual"><scope>uuid</scope><name>to_ihash</name></member>
+      <member refid="classuuid_1a3b9a971043995f1fef811e748e3d3fd9" prot="public" virt="non-virtual"><scope>uuid</scope><name>to_string</name></member>
+      <member refid="classuuid_1accde25e6bb9cab49d3bb4ae6cdfc8334" prot="public" virt="non-virtual"><scope>uuid</scope><name>uuid</name></member>
+      <member refid="classuuid_1abdc2b2f255bc9935d20bf5f8d13b8eac" prot="public" virt="non-virtual"><scope>uuid</scope><name>uuid</name></member>
+      <member refid="classuuid_1ae740a427e628462de51c491325334dc5" prot="public" virt="non-virtual"><scope>uuid</scope><name>uuid</name></member>
+      <member refid="classuuid_1a39e0dba0d3e3f3041efd6a4e2091d422" prot="public" virt="non-virtual"><scope>uuid</scope><name>v4</name></member>
+      <member refid="classuuid_1a7664699bea951feb280cbcb34533a212" prot="public" virt="non-virtual"><scope>uuid</scope><name>v7</name></member>
+      <member refid="classuuid_1afed76cebff20c615f9efdacb56324025" prot="public" virt="non-virtual"><scope>uuid</scope><name>version</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

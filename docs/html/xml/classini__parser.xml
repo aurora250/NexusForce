@@ -1,0 +1,520 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classini__parser" kind="class" language="C++" prot="public">
+    <compoundname>ini_parser</compoundname>
+    <includes refid="ini__parser_8hpp" local="no">ini_parser.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classini__parser_1a5d54c1b1268dadea6c04aa13c0878b43" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string ini_parser::text_</definition>
+        <argsstring></argsstring>
+        <name>text_</name>
+        <qualifiedname>ini_parser::text_</qualifiedname>
+        <briefdescription>
+<para>待解析的文本内容 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="43" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classini__parser_1a69a202602752e01e8a9cc4a63a66d8a5" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t ini_parser::len_</definition>
+        <argsstring></argsstring>
+        <name>len_</name>
+        <qualifiedname>ini_parser::len_</qualifiedname>
+        <briefdescription>
+<para>文本长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="44" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classini__parser_1a1d993d8251a5440f64dac9d38c917a31" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t ini_parser::pos_</definition>
+        <argsstring></argsstring>
+        <name>pos_</name>
+        <qualifiedname>ini_parser::pos_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>当前解析位置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="45" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classini__parser_1ad9b589029be2437c0d7811737ddc67da" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t ini_parser::line_</definition>
+        <argsstring></argsstring>
+        <name>line_</name>
+        <qualifiedname>ini_parser::line_</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>当前行号 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="46" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classini__parser_1a6fd0f807264caf91ef5e6fceb336808a" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t ini_parser::column_</definition>
+        <argsstring></argsstring>
+        <name>column_</name>
+        <qualifiedname>ini_parser::column_</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>当前列号 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="47" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classini__parser_1a54b7cf08a945d79074a086c1dabe5565" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classini__document" kindref="compound">ini_document</ref> &gt;</type>
+        <definition>unique_ptr&lt;ini_document&gt; ini_parser::root_</definition>
+        <argsstring></argsstring>
+        <name>root_</name>
+        <qualifiedname>ini_parser::root_</qualifiedname>
+        <briefdescription>
+<para>解析结果文档 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="49" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classini__parser_1a91841524b585947af3ad869db5288ad7" prot="private" static="no" mutable="no">
+        <type><ref refid="classini__section" kindref="compound">ini_section</ref> *</type>
+        <definition>ini_section* ini_parser::current_section_</definition>
+        <argsstring></argsstring>
+        <name>current_section_</name>
+        <qualifiedname>ini_parser::current_section_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>当前正在解析的节 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="50" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classini__parser_1a6002e21c8c20937908a38fad40051d62" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ini_parser::skip_whitespace</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>skip_whitespace</name>
+        <qualifiedname>ini_parser::skip_whitespace</qualifiedname>
+        <briefdescription>
+<para>跳过空白字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>跳过空格、制表符等空白字符，更新位置信息。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="57" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1a91e1172353403570c88ac094cf79ae80" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ini_parser::skip_line</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>skip_line</name>
+        <qualifiedname>ini_parser::skip_line</qualifiedname>
+        <briefdescription>
+<para>跳过当前行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>从当前位置跳过直到行尾，包括换行符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="64" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1accb9fef0e3acad8da035e9d1be9f734f" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>char</type>
+        <definition>char ini_parser::current</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>current</name>
+        <qualifiedname>ini_parser::current</qualifiedname>
+        <briefdescription>
+<para>获取当前字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前位置的字符，若已到末尾返回&apos;\0&apos; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="70" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1a4e416307cd18a17563b2eafad3b92353" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>char</type>
+        <definition>char ini_parser::peek</definition>
+        <argsstring>(size_t offset=1) const noexcept</argsstring>
+        <name>peek</name>
+        <qualifiedname>ini_parser::peek</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>offset</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>预取字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>向前偏移量，默认为1 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定偏移位置的字符 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="77" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1a8ae93ade73c8a2f0a6f311ac1261fdb4" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ini_parser::eof</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>eof</name>
+        <qualifiedname>ini_parser::eof</qualifiedname>
+        <briefdescription>
+<para>检查是否已到末尾 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已到文件末尾 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="83" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1a5e830f19975c7d3009376280acac7ab8" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ini_parser::advance</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>advance</name>
+        <qualifiedname>ini_parser::advance</qualifiedname>
+        <briefdescription>
+<para>前进一个字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>更新位置信息，处理换行符的行列计数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="90" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1a162052bcd483573acad342400ee64061" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ini_parser::is_comment_line</definition>
+        <argsstring>(const string &amp;line) const</argsstring>
+        <name>is_comment_line</name>
+        <qualifiedname>ini_parser::is_comment_line</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>判断是否为注释行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的行内容 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否为注释行（空行或以;、#开头的行） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="97" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1ab2de553c25e66c35239eabc35d7230b9" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ini_parser::is_section_line</definition>
+        <argsstring>(const string &amp;line, string &amp;section_name) const</argsstring>
+        <name>is_section_line</name>
+        <qualifiedname>ini_parser::is_section_line</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>section_name</declname>
+        </param>
+        <briefdescription>
+<para>判断是否为节定义行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的行内容 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>section_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[输出] 解析出的节名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否为节定义行</para>
+</simplesect>
+节定义格式：[section_name] 节名称会去除首尾空白字符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="108" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1ada901cd9b243b08bfe815624a3baace3" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ini_parser::parse_key_value</definition>
+        <argsstring>(const string &amp;line, string &amp;key, string &amp;value) const</argsstring>
+        <name>parse_key_value</name>
+        <qualifiedname>ini_parser::parse_key_value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>解析键值对 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要解析的行内容 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[输出] 解析出的键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>[输出] 解析出的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析是否成功</para>
+</simplesect>
+解析格式：key = value 键和值都会去除首尾空白字符。 如果值被引号包裹（单引号或双引号），会自动去除引号。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="121" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1a46b6ae07cb379ee987cec2019b333275" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ini_parser::parse_line</definition>
+        <argsstring>(const string &amp;line)</argsstring>
+        <name>parse_line</name>
+        <qualifiedname>ini_parser::parse_line</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>解析单行内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要解析的行 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当解析遇到语法错误时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+根据行类型（注释、节定义、键值对）进行相应处理。 如果是节定义，创建新节并切换当前节； 如果是键值对，添加到当前节中。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="132" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classini__parser_1a5becbf77ae74b693a87f2c39a1f026ea" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ini_parser::ini_parser</definition>
+        <argsstring>(string text)</argsstring>
+        <name>ini_parser</name>
+        <qualifiedname>ini_parser::ini_parser</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待解析的文本内容</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+初始化解析器，创建空的文档对象，并将当前节设置为全局节。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="141" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" bodystart="141" bodyend="146"/>
+        <references refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" compoundref="unique__ptr_8hpp" startline="973" endline="975">make_unique</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1abf0b263236c2d1d68bc601b475d8139e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classini__document" kindref="compound">ini_document</ref> &gt;</type>
+        <definition>unique_ptr&lt; ini_document &gt; ini_parser::parse</definition>
+        <argsstring>()</argsstring>
+        <name>parse</name>
+        <qualifiedname>ini_parser::parse</qualifiedname>
+        <briefdescription>
+<para>执行解析 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析完成的文档对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structini__exception" kindref="compound">ini_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当解析遇到语法错误时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+逐行解析整个文本内容，构建INI文档结构。 解析过程中遇到错误会抛出异常。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="156" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__parser_1a4f77d056af4d36af88f416f87ea10c0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classini__document" kindref="compound">ini_document</ref> &gt; &gt;</type>
+        <definition>optional&lt; unique_ptr&lt; ini_document &gt; &gt; ini_parser::try_parse</definition>
+        <argsstring>()</argsstring>
+        <name>try_parse</name>
+        <qualifiedname>ini_parser::try_parse</qualifiedname>
+        <briefdescription>
+<para>尝试执行解析 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析结果的可选对象</para>
+</simplesect>
+如果解析成功返回包含文档对象的optional， 如果解析失败返回空的optional。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="165" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>INI配置解析器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>解析INI格式，支持以下特性：<itemizedlist>
+<listitem><para>节定义（[section]格式）</para>
+</listitem><listitem><para>键值对（key=value格式）</para>
+</listitem><listitem><para>注释（支持;和#开头的行）</para>
+</listitem><listitem><para>空白行处理</para>
+</listitem><listitem><para>引号包裹的值</para>
+</listitem><listitem><para>值前后的空白字符修剪</para>
+</listitem></itemizedlist>
+</para>
+<para>解析过程会维护行号和列号信息，便于错误定位。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" line="41" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_parser.hpp" bodystart="41" bodyend="166"/>
+    <listofallmembers>
+      <member refid="classini__parser_1a5e830f19975c7d3009376280acac7ab8" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>advance</name></member>
+      <member refid="classini__parser_1a6fd0f807264caf91ef5e6fceb336808a" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>column_</name></member>
+      <member refid="classini__parser_1accb9fef0e3acad8da035e9d1be9f734f" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>current</name></member>
+      <member refid="classini__parser_1a91841524b585947af3ad869db5288ad7" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>current_section_</name></member>
+      <member refid="classini__parser_1a8ae93ade73c8a2f0a6f311ac1261fdb4" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>eof</name></member>
+      <member refid="classini__parser_1a5becbf77ae74b693a87f2c39a1f026ea" prot="public" virt="non-virtual"><scope>ini_parser</scope><name>ini_parser</name></member>
+      <member refid="classini__parser_1a162052bcd483573acad342400ee64061" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>is_comment_line</name></member>
+      <member refid="classini__parser_1ab2de553c25e66c35239eabc35d7230b9" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>is_section_line</name></member>
+      <member refid="classini__parser_1a69a202602752e01e8a9cc4a63a66d8a5" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>len_</name></member>
+      <member refid="classini__parser_1ad9b589029be2437c0d7811737ddc67da" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>line_</name></member>
+      <member refid="classini__parser_1abf0b263236c2d1d68bc601b475d8139e" prot="public" virt="non-virtual"><scope>ini_parser</scope><name>parse</name></member>
+      <member refid="classini__parser_1ada901cd9b243b08bfe815624a3baace3" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>parse_key_value</name></member>
+      <member refid="classini__parser_1a46b6ae07cb379ee987cec2019b333275" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>parse_line</name></member>
+      <member refid="classini__parser_1a4e416307cd18a17563b2eafad3b92353" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>peek</name></member>
+      <member refid="classini__parser_1a1d993d8251a5440f64dac9d38c917a31" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>pos_</name></member>
+      <member refid="classini__parser_1a54b7cf08a945d79074a086c1dabe5565" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>root_</name></member>
+      <member refid="classini__parser_1a91e1172353403570c88ac094cf79ae80" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>skip_line</name></member>
+      <member refid="classini__parser_1a6002e21c8c20937908a38fad40051d62" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>skip_whitespace</name></member>
+      <member refid="classini__parser_1a5d54c1b1268dadea6c04aa13c0878b43" prot="private" virt="non-virtual"><scope>ini_parser</scope><name>text_</name></member>
+      <member refid="classini__parser_1a4f77d056af4d36af88f416f87ea10c0d" prot="public" virt="non-virtual"><scope>ini_parser</scope><name>try_parse</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

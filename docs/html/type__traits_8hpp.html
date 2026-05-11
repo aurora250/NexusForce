@@ -248,6 +248,10 @@ type_traits.hpp 的引用(Include)关系图:</div>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型是否为POD类型  <a href="structis__pod.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:has_5Funique_5Fobject_5Frepresentations_3C_20T_20_3E" id="r_has_5Funique_5Fobject_5Frepresentations_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhas__unique__object__representations.html">has_unique_object_representations&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断类型是否具有唯一的对象表示  <a href="structhas__unique__object__representations.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:is_5Flayout_5Fcompatible_3C_20T1_2C_20T2_20_3E" id="r_is_5Flayout_5Fcompatible_3C_20T1_2C_20T2_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__layout__compatible.html">is_layout_compatible&lt; T1, T2 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断两个类型是否布局兼容  <a href="structis__layout__compatible.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:is_5Fpointer_5Finterconvertible_5Fbase_5Fof_3C_20Base_2C_20Derived_20_3E" id="r_is_5Fpointer_5Finterconvertible_5Fbase_5Fof_3C_20Base_2C_20Derived_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__pointer__interconvertible__base__of.html">is_pointer_interconvertible_base_of&lt; Base, Derived &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断Base是否是Derived的指针可互转换基类  <a href="structis__pointer__interconvertible__base__of.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:is_5Fbase_5Fof_3C_20Base_2C_20Derived_20_3E" id="r_is_5Fbase_5Fof_3C_20Base_2C_20Derived_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__base__of.html">is_base_of&lt; Base, Derived &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断Base是否是Derived的基类  <a href="structis__base__of.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:is_5Ftrivial_3C_20T_20_3E" id="r_is_5Ftrivial_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__trivial.html">is_trivial&lt; T &gt;</a></td></tr>
@@ -804,6 +808,14 @@ template&lt;typename T&gt; </td></tr>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga69a112cd33d70ecd8bf9026b0ed159da template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_aggregate_v</b> = <a class="el" href="structis__aggregate.html">is_aggregate</a>&lt;T&gt;::value</td></tr>
 <tr class="memdesc:ga69a112cd33d70ecd8bf9026b0ed159da"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_aggregate的便捷变量模板 <br /></td></tr>
+<tr class="memitem:ga18e62626599388f2cded71b6f2a5e815" id="r_ga18e62626599388f2cded71b6f2a5e815"><td class="memTemplParams" colspan="2">
+template&lt;typename T1, typename T2&gt; </td></tr>
+<tr class="memitem:ga18e62626599388f2cded71b6f2a5e815 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_layout_compatible_v</b> = <a class="el" href="structis__layout__compatible.html">is_layout_compatible</a>&lt;T1, T2&gt;::value</td></tr>
+<tr class="memdesc:ga18e62626599388f2cded71b6f2a5e815"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_layout_compatible的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gaddc7f256b2225640e9f4c908a2c5e6ee" id="r_gaddc7f256b2225640e9f4c908a2c5e6ee"><td class="memTemplParams" colspan="2">
+template&lt;typename Base, typename Derived&gt; </td></tr>
+<tr class="memitem:gaddc7f256b2225640e9f4c908a2c5e6ee template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_pointer_interconvertible_base_of_v</b></td></tr>
+<tr class="memdesc:gaddc7f256b2225640e9f4c908a2c5e6ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_pointer_interconvertible_base_of的便捷变量模板 <br /></td></tr>
 <tr class="memitem:ga2dd33cb2936b9c2e75a085b78a7349a1" id="r_ga2dd33cb2936b9c2e75a085b78a7349a1"><td class="memTemplParams" colspan="2">
 template&lt;typename Base, typename Derived&gt; </td></tr>
 <tr class="memitem:ga2dd33cb2936b9c2e75a085b78a7349a1 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_base_of_v</b> = <a class="el" href="structis__base__of.html">is_base_of</a>&lt;Base, Derived&gt;::value</td></tr>

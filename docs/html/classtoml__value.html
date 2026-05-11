@@ -89,11 +89,11 @@ $(function(){initNavTree('classtoml__value.html','','classtoml__value-members');
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">toml_value类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___toml_config.html">toml配置</a></div></div></div>
+  <div class="headertitle"><div class="title">toml_value类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___toml_config.html">TOML配置</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>toml值抽象基类  
+<p>TOML值抽象基类  
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="toml__value_8hpp_source.html">toml_value.hpp</a>&gt;</code></p>
@@ -116,7 +116,7 @@ Public 类型</h2></td></tr>
 , <a class="el" href="#a4b6fe229629c77a296512ebfd5278150a069296f0d8d4e02f51a3fe2a60fcc86f">Table</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a4b6fe229629c77a296512ebfd5278150"><td class="mdescLeft">&#160;</td><td class="mdescRight">toml值类型枚举  <a href="#a4b6fe229629c77a296512ebfd5278150">更多...</a><br /></td></tr>
+<tr class="memdesc:a4b6fe229629c77a296512ebfd5278150"><td class="mdescLeft">&#160;</td><td class="mdescRight">TOML值类型枚举  <a href="#a4b6fe229629c77a296512ebfd5278150">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
@@ -124,7 +124,7 @@ Public 成员函数</h2></td></tr>
 virtual&#160;</td><td class="memItemRight"><b>~toml_value</b> ()=default</td></tr>
 <tr class="memdesc:a3cc5cd2f0d3e9b6c7590237ff3647739"><td class="mdescLeft">&#160;</td><td class="mdescRight">虚析构函数 <br /></td></tr>
 <tr class="memitem:a2a95645e1f52b6c6a92b014caf1a9f7a" id="r_a2a95645e1f52b6c6a92b014caf1a9f7a"><td class="memItemLeft">virtual NEFORCE_NODISCARD <a class="el" href="#a4b6fe229629c77a296512ebfd5278150">types</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2a95645e1f52b6c6a92b014caf1a9f7a">type</a> () const noexcept=0</td></tr>
-<tr class="memdesc:a2a95645e1f52b6c6a92b014caf1a9f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取toml值类型  <br /></td></tr>
+<tr class="memdesc:a2a95645e1f52b6c6a92b014caf1a9f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取TOML值类型  <br /></td></tr>
 <tr class="memitem:a71542832a50c7fed77d955ece35364bf" id="r_a71542832a50c7fed77d955ece35364bf"><td class="memItemLeft">virtual NEFORCE_NODISCARD const <a class="el" href="classtoml__boolean.html">toml_boolean</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a71542832a50c7fed77d955ece35364bf">as_boolean</a> () const noexcept</td></tr>
 <tr class="memdesc:a71542832a50c7fed77d955ece35364bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为布尔值指针  <br /></td></tr>
 <tr class="memitem:ae9798f9d1287e6f641c73c7d2a2f74c9" id="r_ae9798f9d1287e6f641c73c7d2a2f74c9"><td class="memItemLeft">virtual NEFORCE_NODISCARD const <a class="el" href="classtoml__integer.html">toml_integer</a> *&#160;</td><td class="memItemRight"><a class="el" href="#ae9798f9d1287e6f641c73c7d2a2f74c9">as_integer</a> () const noexcept</td></tr>
@@ -162,8 +162,8 @@ virtual&#160;</td><td class="memItemRight"><b>~toml_value</b> ()=default</td></t
 <tr class="memdesc:aeb53a048cd2b8e99462c2cf0f5c602bc inherit pub_methods_structistringify"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为字符串  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>toml值抽象基类 </p>
-<p>提供toml值的统一接口，支持类型识别和字符串转换。 </p>
+<div class="textblock"><p>TOML值抽象基类 </p>
+<p>提供TOML值的统一接口，支持类型识别和字符串转换。 </p>
 
 <p class="definition">在文件 <a class="el" href="toml__value_8hpp_source.html">toml_value.hpp</a> 第 <a class="el" href="toml__value_8hpp_source.html#l00172">172</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
@@ -179,7 +179,7 @@ virtual&#160;</td><td class="memItemRight"><b>~toml_value</b> ()=default</td></t
       </table>
 </div><div class="memdoc">
 
-<p>toml值类型枚举 </p>
+<p>TOML值类型枚举 </p>
 <table class="fieldtable">
 <tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a4b6fe229629c77a296512ebfd5278150a36931a677a2099576584f9b02b32bbb5" name="a4b6fe229629c77a296512ebfd5278150a36931a677a2099576584f9b02b32bbb5"></a>Boolean&#160;</td><td class="fielddoc"><p>布尔值类型 </p>
 </td></tr>
@@ -670,7 +670,7 @@ virtual&#160;</td><td class="memItemRight"><b>~toml_value</b> ()=default</td></t
 </div><div class="memdoc">
 
 <p>转换为文档格式字符串 </p>
-<dl class="section return"><dt>返回</dt><dd>toml值的完整文档格式字符串表示 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>TOML值的完整文档格式字符串表示 </dd></dl>
 
 </div>
 </div>
@@ -690,7 +690,7 @@ virtual&#160;</td><td class="memItemRight"><b>~toml_value</b> ()=default</td></t
 </div><div class="memdoc">
 
 <p>转换为紧凑格式字符串 </p>
-<dl class="section return"><dt>返回</dt><dd>toml值的紧凑格式字符串表示 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>TOML值的紧凑格式字符串表示 </dd></dl>
 
 </div>
 </div>
@@ -717,7 +717,7 @@ virtual&#160;</td><td class="memItemRight"><b>~toml_value</b> ()=default</td></t
 </table>
 </div><div class="memdoc">
 
-<p>获取toml值类型 </p>
+<p>获取TOML值类型 </p>
 <dl class="section return"><dt>返回</dt><dd>类型枚举值 </dd></dl>
 
 <p>在 <a class="el" href="classtoml__array.html#a7eaa2ddd3464d0895d208654a7d74b1a">toml_array</a>, <a class="el" href="classtoml__boolean.html#a250c851029318768635b94c5ccffcd76">toml_boolean</a>, <a class="el" href="classtoml__datetime.html#a35b33230d37bcf570d1112f01bd729d4">toml_datetime</a>, <a class="el" href="classtoml__float.html#adccf2a235f2a8f14fd08580f412fabcd">toml_float</a>, <a class="el" href="classtoml__integer.html#a207a59666877318e4c09d7e7e08c0399">toml_integer</a>, <a class="el" href="classtoml__string.html#ae285f0bf26d75270939dc0908d966ad2">toml_string</a> , 以及 <a class="el" href="classtoml__table.html#ab0c114cd2cc33dd0f66339870c64d628">toml_table</a> 内被实现.</p>

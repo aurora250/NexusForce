@@ -89,11 +89,11 @@ $(function(){initNavTree('classini__parser.html','','classini__parser-members');
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ini_parser类 参考<div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___ini_config.html">ini配置</a></div></div></div>
+  <div class="headertitle"><div class="title">ini_parser类 参考<div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___ini_config.html">INI配置</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>ini配置解析器  
+<p>INI配置解析器  
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ini__parser_8hpp_source.html">ini_parser.hpp</a>&gt;</code></p>
@@ -108,8 +108,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a4f77d056af4d36af88f416f87ea10c0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试执行解析  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>ini配置解析器 </p>
-<p>解析ini格式，支持以下特性：</p><ul>
+<div class="textblock"><p>INI配置解析器 </p>
+<p>解析INI格式，支持以下特性：</p><ul>
 <li>节定义（[section]格式）</li>
 <li>键值对（key=value格式）</li>
 <li>注释（支持;和#开头的行）</li>
@@ -119,7 +119,7 @@ Public 成员函数</h2></td></tr>
 </ul>
 <p>解析过程会维护行号和列号信息，便于错误定位。 </p>
 
-<p class="definition">在文件 <a class="el" href="ini__parser_8hpp_source.html">ini_parser.hpp</a> 第 <a class="el" href="ini__parser_8hpp_source.html#l00043">43</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ini__parser_8hpp_source.html">ini_parser.hpp</a> 第 <a class="el" href="ini__parser_8hpp_source.html#l00041">41</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a5becbf77ae74b693a87f2c39a1f026ea" name="a5becbf77ae74b693a87f2c39a1f026ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5becbf77ae74b693a87f2c39a1f026ea">&#9670;&#160;</a></span>ini_parser()</h2>
@@ -153,9 +153,9 @@ Public 成员函数</h2></td></tr>
 </dl>
 <p>初始化解析器，创建空的文档对象，并将当前节设置为全局节。 </p>
 
-<p class="definition">在文件 <a class="el" href="ini__parser_8hpp_source.html">ini_parser.hpp</a> 第 <a class="el" href="ini__parser_8hpp_source.html#l00143">143</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ini__parser_8hpp_source.html">ini_parser.hpp</a> 第 <a class="el" href="ini__parser_8hpp_source.html#l00141">141</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00963">make_unique()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 </div>
 </div>
@@ -179,11 +179,11 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>解析完成的文档对象 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structini__exception.html" title="ini格式操作失败">ini_exception</a></td><td>当解析遇到语法错误时抛出</td></tr>
+    <tr><td class="paramname"><a class="el" href="structini__exception.html" title="INI格式操作失败">ini_exception</a></td><td>当解析遇到语法错误时抛出</td></tr>
   </table>
   </dd>
 </dl>
-<p>逐行解析整个文本内容，构建ini文档结构。 解析过程中遇到错误会抛出异常。 </p>
+<p>逐行解析整个文本内容，构建INI文档结构。 解析过程中遇到错误会抛出异常。 </p>
 
 </div>
 </div>

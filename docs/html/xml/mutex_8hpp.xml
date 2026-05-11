@@ -1,0 +1,555 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="mutex_8hpp" kind="file" language="C++">
+    <compoundname>mutex.hpp</compoundname>
+    <includes refid="type__traits_8hpp" local="yes">NeForce/core/typeinfo/type_traits.hpp</includes>
+    <includes refid="windef_8hpp" local="yes">NeForce/core/config/windef.hpp</includes>
+    <includes local="no">synchapi.h</includes>
+    <includes local="no">pthread.h</includes>
+    <includedby refid="condition__variable_8hpp" local="yes">condition_variable.hpp</includedby>
+    <includedby refid="console_8hpp" local="yes">console.hpp</includedby>
+    <includedby refid="file__async_8hpp" local="yes">file_async.hpp</includedby>
+    <includedby refid="file__mapper_8hpp" local="yes">file_mapper.hpp</includedby>
+    <includedby refid="file__sink_8hpp" local="yes">file_sink.hpp</includedby>
+    <includedby refid="file__watcher_8hpp" local="yes">file_watcher.hpp</includedby>
+    <includedby refid="http__client_8hpp" local="yes">http_client.hpp</includedby>
+    <includedby refid="http__filter_8hpp" local="yes">http_filter.hpp</includedby>
+    <includedby refid="plugin__manager_8hpp" local="yes">plugin_manager.hpp</includedby>
+    <includedby refid="registry_8hpp" local="yes">registry.hpp</includedby>
+    <includedby refid="shared__mutex_8hpp" local="yes">shared_mutex.hpp</includedby>
+    <includedby refid="signals_8hpp" local="yes">signals.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>mutex.hpp</label>
+        <link refid="mutex_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>NeForce/core/config/windef.hpp</label>
+        <link refid="windef_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>NeForce/core/typeinfo/type_traits.hpp</label>
+        <link refid="type__traits_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="types_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>assert.h</label>
+      </node>
+      <node id="8">
+        <label>pthread.h</label>
+      </node>
+      <node id="7">
+        <label>synchapi.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4">
+        <label>NeForce.hpp</label>
+        <link refid="_ne_force_8hpp"/>
+      </node>
+      <node id="2">
+        <label>condition_variable.hpp</label>
+        <link refid="condition__variable_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>mutex.hpp</label>
+        <link refid="mutex_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>shared_mutex.hpp</label>
+        <link refid="shared__mutex_8hpp"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>signals.hpp</label>
+        <link refid="signals_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>thread_pool.hpp</label>
+        <link refid="thread__pool_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>timer.hpp</label>
+        <link refid="timer_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>virtual_thread.hpp</label>
+        <link refid="virtual__thread_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>file.hpp</label>
+        <link refid="file_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>file_async.hpp</label>
+        <link refid="file__async_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>file_mapper.hpp</label>
+        <link refid="file__mapper_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>file_watcher.hpp</label>
+        <link refid="file__watcher_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>temp_file.hpp</label>
+        <link refid="temp__file_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>trace_memory.hpp</label>
+        <link refid="trace__memory_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>reflect.hpp</label>
+        <link refid="reflect_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>registry.hpp</label>
+        <link refid="registry_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>json_serializer.hpp</label>
+        <link refid="json__serializer_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>console.hpp</label>
+        <link refid="console_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>signal.hpp</label>
+        <link refid="signal_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>database_pool.hpp</label>
+        <link refid="database__pool_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>file_sink.hpp</label>
+        <link refid="file__sink_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>logger.hpp</label>
+        <link refid="logger_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>dns_client.hpp</label>
+        <link refid="dns__client_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>ftp_client.hpp</label>
+        <link refid="ftp__client_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>http_client.hpp</label>
+        <link refid="http__client_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>http_filter.hpp</label>
+        <link refid="http__filter_8hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>http_router.hpp</label>
+        <link refid="http__router_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>websocket.hpp</label>
+        <link refid="websocket_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>smtp_socket.hpp</label>
+        <link refid="smtp__socket_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>tcp_server.hpp</label>
+        <link refid="tcp__server_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>plugin_manager.hpp</label>
+        <link refid="plugin__manager_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classmutex" prot="public">mutex</innerclass>
+    <innerclass refid="classrecursive__mutex" prot="public">recursive_mutex</innerclass>
+    <innerclass refid="classlock" prot="public">lock</innerclass>
+    <innerclass refid="structdefer__lock__tag" prot="public">defer_lock_tag</innerclass>
+    <innerclass refid="structtry__lock__tag" prot="public">try_lock_tag</innerclass>
+    <innerclass refid="classunique__lock" prot="public">unique_lock</innerclass>
+    <sectiondef kind="var">
+      <member refid="group___mutex_1gafd2a4ed346c171a31775c9d071a3f32f" kind="variable"><name>defer_lock</name></member>
+      <member refid="group___mutex_1ga350cd44b97804684fc729a02a728a33e" kind="variable"><name>try_lock</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>互斥锁 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>此文件提供了互斥锁与锁工具的实现。 </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_ASYNC_MUTEX_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_ASYNC_MUTEX_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="type__traits_8hpp" kindref="compound">NeForce/core/typeinfo/type_traits.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&quot;<ref refid="windef_8hpp" kindref="compound">NeForce/core/config/windef.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;synchapi.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>ifdef<sp/>max</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>undef<sp/>max</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>ifdef<sp/>min</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>undef<sp/>min</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_LINUX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;pthread.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="classmutex" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" kindref="member">mutex</ref><sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="48" refid="classmutex_1a9283a31887fb04d3a3a4f4a21cf32c5e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classmutex_1a9283a31887fb04d3a3a4f4a21cf32c5e" kindref="member">native_handle_type</ref><sp/>=</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::SRWLOCK;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::pthread_mutex_t;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classmutex_1a9283a31887fb04d3a3a4f4a21cf32c5e" kindref="member">native_handle_type</ref><sp/>mutex_;<sp/></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="62" refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" kindref="member">mutex</ref>();</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="classmutex_1ae30185d87a48c5451a04c2861ba3d034" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex_1ae30185d87a48c5451a04c2861ba3d034" kindref="member">~mutex</ref>();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" kindref="member">mutex</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" kindref="member">mutex</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" kindref="member">mutex</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" kindref="member">mutex</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" kindref="member">mutex</ref>(<ref refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" kindref="member">mutex</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" kindref="member">mutex</ref>&amp;<sp/>operator=(<ref refid="classmutex_1a6b7350155befa79a8c6ad27c4c794b1e" kindref="member">mutex</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="classmutex_1aa19c6deaa8cffbd0fae09743e2f0631a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex_1a9283a31887fb04d3a3a4f4a21cf32c5e" kindref="member">native_handle_type</ref>*<sp/><ref refid="classmutex_1aa19c6deaa8cffbd0fae09743e2f0631a" kindref="member">native_handle</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;mutex_;<sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="classmutex_1a697eb3b5412412b28e625c6a2ed42b8f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmutex_1a9283a31887fb04d3a3a4f4a21cf32c5e" kindref="member">native_handle_type</ref>*<sp/><ref refid="classmutex_1a697eb3b5412412b28e625c6a2ed42b8f" kindref="member">native_handle</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;mutex_;<sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91" refid="classmutex_1a760ba333c299e9b27730051c4c794f50" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmutex_1a760ba333c299e9b27730051c4c794f50" kindref="member">lock</ref>();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="classmutex_1a362d78bead80c2899d89444380cab1bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classmutex_1a362d78bead80c2899d89444380cab1bd" kindref="member">unlock</ref>();</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106" refid="classmutex_1a27b92b2a9dbd002dc0af8485577fb40a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classmutex_1a27b92b2a9dbd002dc0af8485577fb40a" kindref="member">try_lock</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115" refid="classrecursive__mutex" refkind="compound"><highlight class="normal">class<sp/>NEFORCE_API<sp/><ref refid="classrecursive__mutex_1a1a208c1e6122fda628bdba8e3230edef" kindref="member">recursive_mutex</ref><sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="120" refid="classrecursive__mutex_1a5b1a25d45bfb24cbbd002d8e90b2b4cc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classrecursive__mutex_1a5b1a25d45bfb24cbbd002d8e90b2b4cc" kindref="member">native_handle_type</ref><sp/>=</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::CRITICAL_SECTION;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::pthread_mutex_t;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classrecursive__mutex_1a5b1a25d45bfb24cbbd002d8e90b2b4cc" kindref="member">native_handle_type</ref><sp/>recursive_mutex_;<sp/></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="134" refid="classrecursive__mutex_1a1a208c1e6122fda628bdba8e3230edef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classrecursive__mutex_1a1a208c1e6122fda628bdba8e3230edef" kindref="member">recursive_mutex</ref>();</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139" refid="classrecursive__mutex_1a0212c8018621e9952f5670c38b917753" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classrecursive__mutex_1a0212c8018621e9952f5670c38b917753" kindref="member">~recursive_mutex</ref>();</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classrecursive__mutex_1a1a208c1e6122fda628bdba8e3230edef" kindref="member">recursive_mutex</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrecursive__mutex_1a1a208c1e6122fda628bdba8e3230edef" kindref="member">recursive_mutex</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classrecursive__mutex_1a1a208c1e6122fda628bdba8e3230edef" kindref="member">recursive_mutex</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrecursive__mutex_1a1a208c1e6122fda628bdba8e3230edef" kindref="member">recursive_mutex</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148" refid="classrecursive__mutex_1a76007de8a6eb9a900b33f3364d0bc7c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classrecursive__mutex_1a5b1a25d45bfb24cbbd002d8e90b2b4cc" kindref="member">native_handle_type</ref>*<sp/><ref refid="classrecursive__mutex_1a76007de8a6eb9a900b33f3364d0bc7c5" kindref="member">native_handle</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;recursive_mutex_;<sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154" refid="classrecursive__mutex_1a5b4f3c78d75d2d91a9c083e63ffd56fe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classrecursive__mutex_1a5b1a25d45bfb24cbbd002d8e90b2b4cc" kindref="member">native_handle_type</ref>*<sp/><ref refid="classrecursive__mutex_1a5b4f3c78d75d2d91a9c083e63ffd56fe" kindref="member">native_handle</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;recursive_mutex_;<sp/>}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162" refid="classrecursive__mutex_1aee55fc137f714e2ddd184c54a06e4615" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classrecursive__mutex_1aee55fc137f714e2ddd184c54a06e4615" kindref="member">lock</ref>();</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169" refid="classrecursive__mutex_1aeae4819362f281ae4109f5ed7d0a530a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classrecursive__mutex_1aeae4819362f281ae4109f5ed7d0a530a" kindref="member">unlock</ref>();</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177" refid="classrecursive__mutex_1a0f40f3322d95e1ae6d08931d01348c11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classrecursive__mutex_1a0f40f3322d95e1ae6d08931d01348c11" kindref="member">try_lock</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal">template<sp/>&lt;typename<sp/>Mutex&gt;</highlight></codeline>
+<codeline lineno="189" refid="classlock" refkind="compound"><highlight class="normal">class<sp/><ref refid="classlock_1a10e52725d504ebc0e7d326f91b9cf32a" kindref="member">lock</ref><sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="191" refid="classlock_1a84a083c123993bf411cc52cc47fc7766" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classlock_1a84a083c123993bf411cc52cc47fc7766" kindref="member">mutex_type</ref><sp/>=<sp/>Mutex;<sp/></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlock_1a84a083c123993bf411cc52cc47fc7766" kindref="member">mutex_type</ref>&amp;<sp/>mutex_;<sp/></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="203" refid="classlock_1a10e52725d504ebc0e7d326f91b9cf32a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classlock_1a10e52725d504ebc0e7d326f91b9cf32a" kindref="member">lock</ref>(<ref refid="classlock_1a84a083c123993bf411cc52cc47fc7766" kindref="member">mutex_type</ref>&amp;<sp/>m)<sp/>:</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/>mutex_(m)<sp/>{</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mutex_.lock();</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213" refid="classlock_1adb4ce8b5e242ebe322010ba23f6f8f9b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlock_1adb4ce8b5e242ebe322010ba23f6f8f9b" kindref="member">~lock</ref>()<sp/>{<sp/>mutex_.unlock();<sp/>}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlock" kindref="compound">lock</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlock" kindref="compound">lock</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlock" kindref="compound">lock</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlock" kindref="compound">lock</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226" refid="structdefer__lock__tag" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">defer_lock_tag<sp/>{</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>defer_lock_tag()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="232" refid="group___mutex_1gafd2a4ed346c171a31775c9d071a3f32f" refkind="member"><highlight class="normal">NEFORCE_INLINE17<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structdefer__lock__tag" kindref="compound">defer_lock_tag</ref><sp/><ref refid="group___mutex_1gafd2a4ed346c171a31775c9d071a3f32f" kindref="member">defer_lock</ref>{};</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240" refid="structtry__lock__tag" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">try_lock_tag<sp/>{</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>try_lock_tag()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="246" refid="group___mutex_1ga350cd44b97804684fc729a02a728a33e" refkind="member"><highlight class="normal">NEFORCE_INLINE17<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structtry__lock__tag" kindref="compound">try_lock_tag</ref><sp/><ref refid="group___mutex_1ga350cd44b97804684fc729a02a728a33e" kindref="member">try_lock</ref>{};</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Mutex&gt;</highlight></codeline>
+<codeline lineno="256" refid="classunique__lock" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classunique__lock_1adc02b595ecffdcaeee2cbb7ce22f3dcc" kindref="member">unique_lock</ref><sp/>{</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="258" refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref><sp/>=<sp/>Mutex;<sp/></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref>*<sp/>mutex_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>owns_lock_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="270" refid="classunique__lock_1adc02b595ecffdcaeee2cbb7ce22f3dcc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__lock_1adc02b595ecffdcaeee2cbb7ce22f3dcc" kindref="member">unique_lock</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="278" refid="classunique__lock_1a70e659a56502b1a01865c17ebd46b37a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classunique__lock_1a70e659a56502b1a01865c17ebd46b37a" kindref="member">unique_lock</ref>(<ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref>&amp;<sp/>m)<sp/>:</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/>mutex_(&amp;m),</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/>owns_lock_(true)<sp/>{</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mutex_-&gt;lock();</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291" refid="classunique__lock_1a9ad41a54cefe430bb2a9ace2a91a3805" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__lock_1a9ad41a54cefe430bb2a9ace2a91a3805" kindref="member">unique_lock</ref>(<ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref>&amp;<sp/>m,<sp/><ref refid="structdefer__lock__tag" kindref="compound">defer_lock_tag</ref><sp/>tag)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/>mutex_(&amp;m)<sp/>{}</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="301" refid="classunique__lock_1a5a0a4f1190431a3365e2f4bf8cda50cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__lock_1a5a0a4f1190431a3365e2f4bf8cda50cb" kindref="member">unique_lock</ref>(<ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref>&amp;<sp/>m,<sp/><ref refid="structtry__lock__tag" kindref="compound">try_lock_tag</ref><sp/>tag)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/>mutex_(&amp;m),</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/>owns_lock_(m.try_lock())<sp/>{}</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__lock" kindref="compound">unique_lock</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__lock" kindref="compound">unique_lock</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__lock" kindref="compound">unique_lock</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__lock" kindref="compound">unique_lock</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314" refid="classunique__lock_1af9ba8cd379db40771df210a3987eb59d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__lock_1af9ba8cd379db40771df210a3987eb59d" kindref="member">unique_lock</ref>(<ref refid="classunique__lock_1adc02b595ecffdcaeee2cbb7ce22f3dcc" kindref="member">unique_lock</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/>mutex_(other.mutex_),</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/>owns_lock_(other.owns_lock_)<sp/>{</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.mutex_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.owns_lock_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"></highlight></codeline>
+<codeline lineno="328" refid="classunique__lock_1af4e3bf904517122a7dea67c6cfc7d113" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__lock_1adc02b595ecffdcaeee2cbb7ce22f3dcc" kindref="member">unique_lock</ref>&amp;<sp/><ref refid="classunique__lock_1af4e3bf904517122a7dea67c6cfc7d113" kindref="member">operator=</ref>(<ref refid="classunique__lock_1adc02b595ecffdcaeee2cbb7ce22f3dcc" kindref="member">unique_lock</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owns_lock_)<sp/>{</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mutex_-&gt;unlock();</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mutex_<sp/>=<sp/>other.mutex_;</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owns_lock_<sp/>=<sp/>other.owns_lock_;</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.mutex_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.owns_lock_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight></codeline>
+<codeline lineno="347" refid="classunique__lock_1a13eff43602002fe318715d71e929d342" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__lock_1a13eff43602002fe318715d71e929d342" kindref="member">~unique_lock</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owns_lock_)<sp/>{</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mutex_-&gt;unlock();</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"></highlight></codeline>
+<codeline lineno="357" refid="classunique__lock_1ac9969c01f6fb36a11e1a811a909f3a7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owns_lock_;<sp/>}</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"></highlight></codeline>
+<codeline lineno="363" refid="classunique__lock_1ace616792a495c421fbe42157cd4a89f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classunique__lock_1ace616792a495c421fbe42157cd4a89f9" kindref="member">owns_lock</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owns_lock_;<sp/>}</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight></codeline>
+<codeline lineno="369" refid="classunique__lock_1a9732001877bf83c2d0cbd51c404a0bfb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref>*<sp/><ref refid="classunique__lock_1a9732001877bf83c2d0cbd51c404a0bfb" kindref="member">mutex</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mutex_;<sp/>}</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="376" refid="classunique__lock_1aa31d80f6bf8c45a5e30d075896e0426a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classunique__lock_1aa31d80f6bf8c45a5e30d075896e0426a" kindref="member">lock_quiet</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!mutex_)<sp/>{</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owns_lock_)<sp/>{</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mutex_-&gt;lock();</highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owns_lock_<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"></highlight></codeline>
+<codeline lineno="392" refid="classunique__lock_1a0473323402bab23a6c89eb5a5ab58798" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classunique__lock_1a0473323402bab23a6c89eb5a5ab58798" kindref="member">unlock_quiet</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!mutex_)<sp/>{</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!owns_lock_)<sp/>{</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mutex_-&gt;unlock();</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owns_lock_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"></highlight></codeline>
+<codeline lineno="409" refid="classunique__lock_1a0f7defd5ab0b7d85f7d8bbc7d7a712a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classunique__lock_1a0f7defd5ab0b7d85f7d8bbc7d7a712a9" kindref="member">try_lock</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="410"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!mutex_)<sp/>{</highlight></codeline>
+<codeline lineno="411"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owns_lock_)<sp/>{</highlight></codeline>
+<codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owns_lock_<sp/>=<sp/>mutex_-&gt;try_lock();</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owns_lock_;</highlight></codeline>
+<codeline lineno="418"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="419"><highlight class="normal"></highlight></codeline>
+<codeline lineno="426" refid="classunique__lock_1a7e86a8f23cf3dc70f56fe36b988b4718" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref>*<sp/><ref refid="classunique__lock_1a7e86a8f23cf3dc70f56fe36b988b4718" kindref="member">release</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref>*<sp/>ret<sp/>=<sp/>mutex_;</highlight></codeline>
+<codeline lineno="428"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mutex_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="429"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owns_lock_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ret;</highlight></codeline>
+<codeline lineno="431"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="432"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="433"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Mutex</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="435"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="437"><highlight class="normal"></highlight></codeline>
+<codeline lineno="438"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="439"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_MUTEX_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp"/>
+  </compounddef>
+</doxygen>

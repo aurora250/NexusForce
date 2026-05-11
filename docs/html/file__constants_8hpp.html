@@ -96,69 +96,88 @@ $(function(){initNavTree('file__constants_8hpp.html','',''); });
 <p>文件操作常量定义  
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="windef_8hpp_source.html">NeForce/core/config/windef.hpp</a>&quot;</code><br />
+<code>#include &lt;windef.h&gt;</code><br />
+<code>#include &lt;WinBase.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 file_constants.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="file__constants_8hpp__incl.svg" width="151" height="294"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="file__constants_8hpp__incl.svg" width="436" height="294"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="file__constants_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
-<tr class="memitem:ga7629ed37340e93203c1f0c100a479b33" id="r_ga7629ed37340e93203c1f0c100a479b33"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___file.html#ga7629ed37340e93203c1f0c100a479b33">fud_t</a></td></tr>
-<tr class="memdesc:ga7629ed37340e93203c1f0c100a479b33"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件描述符类型  <br /></td></tr>
+<tr class="memitem:ga20cb70020500f32f8c015c7a044a4dfe" id="r_ga20cb70020500f32f8c015c7a044a4dfe"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group___file.html#ga20cb70020500f32f8c015c7a044a4dfe">fud_t</a></td></tr>
+<tr class="memdesc:ga20cb70020500f32f8c015c7a044a4dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件描述符类型  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 枚举</h2></td></tr>
+<tr class="memitem:ga9df1cddbb19e649f9e9603e4f8ed4cfe" id="r_ga9df1cddbb19e649f9e9603e4f8ed4cfe"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___file.html#ga9df1cddbb19e649f9e9603e4f8ed4cfe">file_access</a> : fud_t { <a class="el" href="group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfea3466fab4975481651940ed328aa990e4">file_access::READ</a> = GENERIC_READ
+, <a class="el" href="group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfead4b9e47f65b6e79b010582f15785867e">file_access::WRITE</a> = GENERIC_WRITE
+, <a class="el" href="group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfeaa7b843fb734e3b3fea8e5f902d3f4144">file_access::READ_WRITE</a> = GENERIC_READ | GENERIC_WRITE
+, <a class="el" href="group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfea375ffb668aa90f1c7fcae55e9734a752">file_access::APPEND</a> = FILE_APPEND_DATA | GENERIC_WRITE
+ }</td></tr>
+<tr class="memdesc:ga9df1cddbb19e649f9e9603e4f8ed4cfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件访问模式枚举  <a href="group___file.html#ga9df1cddbb19e649f9e9603e4f8ed4cfe">更多...</a><br /></td></tr>
 <tr class="memitem:gab6d1391a16c8df9584f7eec3ed893d4d" id="r_gab6d1391a16c8df9584f7eec3ed893d4d"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___file.html#gab6d1391a16c8df9584f7eec3ed893d4d">file_shared</a> : fud_t { <br />
-&#160;&#160;<a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4dabfba508a0527c128dc812fda6f57cc14">file_shared::SHARE_READ</a> = 1
-, <a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4da25243c198ae883813b4275039307d47a">file_shared::SHARE_WRITE</a> = 2
-, <a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4daa7fb68a7df7bad917e3686f900f1e179">file_shared::SHARE_READ_WRITE</a> = 3
-, <a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4daede250e232c3195050f4eaa485f1a395">file_shared::SHARE_DELETE</a> = 4
+&#160;&#160;<a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4dabfba508a0527c128dc812fda6f57cc14">file_shared::SHARE_READ</a> = FILE_SHARE_READ
+, <a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4da25243c198ae883813b4275039307d47a">file_shared::SHARE_WRITE</a> = FILE_SHARE_WRITE
+, <a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4daa7fb68a7df7bad917e3686f900f1e179">file_shared::SHARE_READ_WRITE</a> = FILE_SHARE_READ | FILE_SHARE_WRITE
+, <a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4daede250e232c3195050f4eaa485f1a395">file_shared::SHARE_DELETE</a> = FILE_SHARE_DELETE
 , <br />
-&#160;&#160;<a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4da1cce1ec8e196c2f881693930d2c14475">file_shared::SHARE_ALL</a> = 7
+&#160;&#160;<a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4da1cce1ec8e196c2f881693930d2c14475">file_shared::SHARE_ALL</a> = FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE
 , <a class="el" href="group___file.html#ggab6d1391a16c8df9584f7eec3ed893d4da44d94a6023de73e0b4ab722105b2ca45">file_shared::NO_SHARE</a> = 0
 <br />
  }</td></tr>
 <tr class="memdesc:gab6d1391a16c8df9584f7eec3ed893d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件共享模式枚举  <a href="group___file.html#gab6d1391a16c8df9584f7eec3ed893d4d">更多...</a><br /></td></tr>
 <tr class="memitem:ga90f3ddb67118cfb6f47aba25fbe6af40" id="r_ga90f3ddb67118cfb6f47aba25fbe6af40"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___file.html#ga90f3ddb67118cfb6f47aba25fbe6af40">file_creation</a> : fud_t { <br />
-&#160;&#160;<a class="el" href="group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40a2f44c48596198fcb93b5224b0d1d1e80">file_creation::CREATE_FORCE</a> = O_CREAT | O_TRUNC
-, <a class="el" href="group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40ad371e1779deb36155b5a9ceff025226a">file_creation::CREATE_NO_EXIST</a> = O_CREAT | O_EXCL
-, <a class="el" href="group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40a5e4067b50d7834bb5ab5421449bad9b4">file_creation::OPEN_FORCE</a> = O_CREAT
-, <a class="el" href="group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40adb93b4f44dd58007a0e7d89b7baa4690">file_creation::OPEN_EXIST</a> = 0
+&#160;&#160;<a class="el" href="group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40a2f44c48596198fcb93b5224b0d1d1e80">file_creation::CREATE_FORCE</a> = CREATE_ALWAYS
+, <a class="el" href="group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40ad371e1779deb36155b5a9ceff025226a">file_creation::CREATE_NO_EXIST</a> = CREATE_NEW
+, <a class="el" href="group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40a5e4067b50d7834bb5ab5421449bad9b4">file_creation::OPEN_FORCE</a> = OPEN_ALWAYS
+, <a class="el" href="group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40adb93b4f44dd58007a0e7d89b7baa4690">file_creation::OPEN_EXIST</a> = OPEN_EXISTING
 , <br />
-&#160;&#160;<a class="el" href="group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40a97cec37e07a66dd6a2f4841bd5d13b30">file_creation::TRUNCATE_EXIST</a> = O_TRUNC
+&#160;&#160;<a class="el" href="group___file.html#gga90f3ddb67118cfb6f47aba25fbe6af40a97cec37e07a66dd6a2f4841bd5d13b30">file_creation::TRUNCATE_EXIST</a> = TRUNCATE_EXISTING
 <br />
  }</td></tr>
 <tr class="memdesc:ga90f3ddb67118cfb6f47aba25fbe6af40"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件创建方式枚举  <a href="group___file.html#ga90f3ddb67118cfb6f47aba25fbe6af40">更多...</a><br /></td></tr>
 <tr class="memitem:gadd0b8478c8ee0d6b05880ca087016c9e" id="r_gadd0b8478c8ee0d6b05880ca087016c9e"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___file.html#gadd0b8478c8ee0d6b05880ca087016c9e">file_attri</a> : fud_t { <br />
-&#160;&#160;<a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea1e23852820b9154316c7c06e2b7ba051">file_attri::NORMAL</a> = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
-, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea34db6698cff32ac89724758fdaa5512e">file_attri::READONLY</a> = S_IRUSR | S_IRGRP | S_IROTH
-, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48">file_attri::DIRECTORY</a> = S_IFDIR
-, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d">file_attri::DEVICE</a> = S_IFBLK | S_IFCHR
+&#160;&#160;<a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea1e23852820b9154316c7c06e2b7ba051">file_attri::NORMAL</a> = FILE_ATTRIBUTE_NORMAL
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea34db6698cff32ac89724758fdaa5512e">file_attri::READONLY</a> = FILE_ATTRIBUTE_READONLY
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea347e628a8f72626a0611ef842fe9d304">file_attri::HIDDEN</a> = FILE_ATTRIBUTE_HIDDEN
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9eafa177138f94a7ea01f549b1aa7893d03">file_attri::SYSTEM</a> = FILE_ATTRIBUTE_SYSTEM
 , <br />
-&#160;&#160;<a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea3102e1ef56da08a1f6f199b6f8cb472d">file_attri::REPARSE_POINT</a> = S_IFLNK
-, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4">file_attri::OVERLAPPED</a> = 0
-, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea63c5a1202e435a488d11461119c447fe">file_attri::NO_BUFFERING</a> = O_DIRECT
-, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1">file_attri::WRITE_THROUGH</a> = O_SYNC
+&#160;&#160;<a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48">file_attri::DIRECTORY</a> = FILE_ATTRIBUTE_DIRECTORY
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea71f01f32e90440fd6039511dde69e995">file_attri::ARCHIVE</a> = FILE_ATTRIBUTE_ARCHIVE
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d">file_attri::DEVICE</a> = FILE_ATTRIBUTE_DEVICE
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea39e02cdeda38ebf7d4a898b900cf0776">file_attri::TEMPORARY</a> = FILE_ATTRIBUTE_TEMPORARY
+, <br />
+&#160;&#160;<a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea3102e1ef56da08a1f6f199b6f8cb472d">file_attri::REPARSE_POINT</a> = FILE_ATTRIBUTE_REPARSE_POINT
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea724ba27218714b182f22d5b24b5e4317">file_attri::COMPRESSED</a> = FILE_ATTRIBUTE_COMPRESSED
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea7ed929f45ba34eff59d81d74d4f80a58">file_attri::OFFLINE</a> = FILE_ATTRIBUTE_OFFLINE
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea3fe1c5068682cdee737d379207ab631f">file_attri::ENCRYPTED</a> = FILE_ATTRIBUTE_ENCRYPTED
+, <br />
+&#160;&#160;<a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea05470727787aa721cf53222b5d3d40f3">file_attri::VIRTUAL</a> = FILE_ATTRIBUTE_VIRTUAL
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4">file_attri::OVERLAPPED</a> = FILE_FLAG_OVERLAPPED
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea63c5a1202e435a488d11461119c447fe">file_attri::NO_BUFFERING</a> = FILE_FLAG_NO_BUFFERING
+, <a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1">file_attri::WRITE_THROUGH</a> = FILE_FLAG_WRITE_THROUGH
 , <br />
 &#160;&#160;<a class="el" href="group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea8606ac74fd2decc1899004c49b226fae">file_attri::OTHERS</a> = 0
 <br />
  }</td></tr>
 <tr class="memdesc:gadd0b8478c8ee0d6b05880ca087016c9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件属性和标志枚举  <a href="group___file.html#gadd0b8478c8ee0d6b05880ca087016c9e">更多...</a><br /></td></tr>
-<tr class="memitem:ga7af54bf3ecb820477ebc36f2f8fe9a7f" id="r_ga7af54bf3ecb820477ebc36f2f8fe9a7f"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___file.html#ga7af54bf3ecb820477ebc36f2f8fe9a7f">file_pointer</a> : fud_t { <a class="el" href="group___file.html#gga7af54bf3ecb820477ebc36f2f8fe9a7fa19aad9f2fe3ce0023298ab83f7e75775">file_pointer::BEGIN</a> = SEEK_SET
-, <a class="el" href="group___file.html#gga7af54bf3ecb820477ebc36f2f8fe9a7faa2770969c827f0f2910f6179418462df">file_pointer::CURRENT</a> = SEEK_CUR
-, <a class="el" href="group___file.html#gga7af54bf3ecb820477ebc36f2f8fe9a7fab1a326c06d88bf042f73d70f50197905">file_pointer::END</a> = SEEK_END
+<tr class="memitem:ga7af54bf3ecb820477ebc36f2f8fe9a7f" id="r_ga7af54bf3ecb820477ebc36f2f8fe9a7f"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___file.html#ga7af54bf3ecb820477ebc36f2f8fe9a7f">file_pointer</a> : fud_t { <a class="el" href="group___file.html#gga7af54bf3ecb820477ebc36f2f8fe9a7fa19aad9f2fe3ce0023298ab83f7e75775">file_pointer::BEGIN</a> = FILE_BEGIN
+, <a class="el" href="group___file.html#gga7af54bf3ecb820477ebc36f2f8fe9a7faa2770969c827f0f2910f6179418462df">file_pointer::CURRENT</a> = FILE_CURRENT
+, <a class="el" href="group___file.html#gga7af54bf3ecb820477ebc36f2f8fe9a7fab1a326c06d88bf042f73d70f50197905">file_pointer::END</a> = FILE_END
  }</td></tr>
 <tr class="memdesc:ga7af54bf3ecb820477ebc36f2f8fe9a7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件指针移动方式枚举  <a href="group___file.html#ga7af54bf3ecb820477ebc36f2f8fe9a7f">更多...</a><br /></td></tr>
 <tr class="memitem:ga7ff0ce5ce53760cad46eb6509f978ecf" id="r_ga7ff0ce5ce53760cad46eb6509f978ecf"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___file.html#ga7ff0ce5ce53760cad46eb6509f978ecf">file_lock</a> : fud_t { <br />
-&#160;&#160;<a class="el" href="group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfa049518eb4dc1859c7cebbe15876cfd63">file_lock::SHARED</a> = LOCK_SH
-, <a class="el" href="group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfaf45c3a0bb3687ed8e221253b3fd4a2ce">file_lock::EXCLUSIVE</a> = LOCK_EX
-, <a class="el" href="group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfa91a532cc7963546e8ea9686743f6a277">file_lock::FAIL_IMMEDIATELY</a> = LOCK_NB
-, <a class="el" href="group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfacf442cffd430815051b1d69196d57aaf">file_lock::SHARED_NB</a> = LOCK_SH | LOCK_NB
+&#160;&#160;<a class="el" href="group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfa049518eb4dc1859c7cebbe15876cfd63">file_lock::SHARED</a> = 0
+, <a class="el" href="group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfaf45c3a0bb3687ed8e221253b3fd4a2ce">file_lock::EXCLUSIVE</a> = LOCKFILE_EXCLUSIVE_LOCK
+, <a class="el" href="group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfa91a532cc7963546e8ea9686743f6a277">file_lock::FAIL_IMMEDIATELY</a> = LOCKFILE_FAIL_IMMEDIATELY
+, <a class="el" href="group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfacf442cffd430815051b1d69196d57aaf">file_lock::SHARED_NB</a> = LOCKFILE_FAIL_IMMEDIATELY
 , <br />
-&#160;&#160;<a class="el" href="group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfaec7817304af2e516f4ba7d65e6cdc63b">file_lock::EXCLUSIVE_NB</a> = LOCK_EX | LOCK_NB
+&#160;&#160;<a class="el" href="group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfaec7817304af2e516f4ba7d65e6cdc63b">file_lock::EXCLUSIVE_NB</a> = LOCKFILE_EXCLUSIVE_LOCK | LOCKFILE_FAIL_IMMEDIATELY
 <br />
  }</td></tr>
 <tr class="memdesc:ga7ff0ce5ce53760cad46eb6509f978ecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件锁类型枚举  <a href="group___file.html#ga7ff0ce5ce53760cad46eb6509f978ecf">更多...</a><br /></td></tr>

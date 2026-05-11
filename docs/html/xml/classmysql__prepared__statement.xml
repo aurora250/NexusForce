@@ -1,0 +1,733 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classmysql__prepared__statement" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>mysql_prepared_statement</compoundname>
+    <basecompoundref refid="structidb__prepared__statement" prot="public" virt="non-virtual">idb_prepared_statement</basecompoundref>
+    <includes refid="mysql__prepared__statement_8hpp" local="no">mysql_prepared_statement.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmysql__prepared__statement_1ae5eb9b101da9512db6117447fd0b3562" prot="private" static="no" mutable="no">
+        <type>::MYSQL_STMT *</type>
+        <definition>::MYSQL_STMT* mysql_prepared_statement::stmt_</definition>
+        <argsstring></argsstring>
+        <name>stmt_</name>
+        <qualifiedname>mysql_prepared_statement::stmt_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>MySQL预处理语句句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="45" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmysql__prepared__statement_1a1d9f02d4d357a3b7e8a37c5cad4c8630" prot="private" static="no" mutable="no">
+        <type>::MYSQL *</type>
+        <definition>::MYSQL* mysql_prepared_statement::conn_</definition>
+        <argsstring></argsstring>
+        <name>conn_</name>
+        <qualifiedname>mysql_prepared_statement::conn_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>MySQL连接句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="46" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmysql__prepared__statement_1a45ecfbf1e10856770c0b4aa0dee27428" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t mysql_prepared_statement::param_count_</definition>
+        <argsstring></argsstring>
+        <name>param_count_</name>
+        <qualifiedname>mysql_prepared_statement::param_count_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>参数数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="47" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmysql__prepared__statement_1a3c376f90ef9e5f800649cf540800376f" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt;::MYSQL_BIND &gt;</type>
+        <definition>vector&lt;::MYSQL_BIND&gt; mysql_prepared_statement::bind_params_</definition>
+        <argsstring></argsstring>
+        <name>bind_params_</name>
+        <qualifiedname>mysql_prepared_statement::bind_params_</qualifiedname>
+        <briefdescription>
+<para>参数绑定数组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="49" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmysql__prepared__statement_1aef4c5a24a7e5c96896ba26c68405d5e9" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classvector" kindref="compound">vector</ref>&lt; char &gt; &gt;</type>
+        <definition>vector&lt;vector&lt;char&gt; &gt; mysql_prepared_statement::param_buffers_</definition>
+        <argsstring></argsstring>
+        <name>param_buffers_</name>
+        <qualifiedname>mysql_prepared_statement::param_buffers_</qualifiedname>
+        <briefdescription>
+<para>参数数据缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="50" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmysql__prepared__statement_1a50cefcc27bf76e52e4d8fa3b85cb2e99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>mysql_prepared_statement::mysql_prepared_statement</definition>
+        <argsstring>(::MYSQL *conn, string_view sql)</argsstring>
+        <name>mysql_prepared_statement</name>
+        <qualifiedname>mysql_prepared_statement::mysql_prepared_statement</qualifiedname>
+        <param>
+          <type>::MYSQL *</type>
+          <declname>conn</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>conn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MySQL连接句柄 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SQL语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__stmt__exception" kindref="compound">database_stmt_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预处理失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+初始化预处理语句，获取参数数量。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="61" column="5"/>
+        <referencedby refid="classmysql__prepared__statement_1a8f6328cdbe8704d0a6224369a1bfecb9">mysql_prepared_statement</referencedby>
+        <referencedby refid="classmysql__prepared__statement_1a558e36dce44a272d4ba20b842f78eabf">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a8f6328cdbe8704d0a6224369a1bfecb9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>mysql_prepared_statement::mysql_prepared_statement</definition>
+        <argsstring>(mysql_prepared_statement &amp;&amp;other) noexcept</argsstring>
+        <name>mysql_prepared_statement</name>
+        <qualifiedname>mysql_prepared_statement::mysql_prepared_statement</qualifiedname>
+        <param>
+          <type><ref refid="classmysql__prepared__statement" kindref="compound">mysql_prepared_statement</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="67" column="5"/>
+        <references refid="classmysql__prepared__statement_1a50cefcc27bf76e52e4d8fa3b85cb2e99">mysql_prepared_statement</references>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a558e36dce44a272d4ba20b842f78eabf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classmysql__prepared__statement" kindref="compound">mysql_prepared_statement</ref> &amp;</type>
+        <definition>mysql_prepared_statement &amp; mysql_prepared_statement::operator=</definition>
+        <argsstring>(mysql_prepared_statement &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>mysql_prepared_statement::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classmysql__prepared__statement" kindref="compound">mysql_prepared_statement</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="74" column="30"/>
+        <references refid="classmysql__prepared__statement_1a50cefcc27bf76e52e4d8fa3b85cb2e99">mysql_prepared_statement</references>
+        <references refid="classmysql__prepared__statement_1a558e36dce44a272d4ba20b842f78eabf">operator=</references>
+        <referencedby refid="classmysql__prepared__statement_1a558e36dce44a272d4ba20b842f78eabf">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a251e51a042eff49d15ec074166990fc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>mysql_prepared_statement::mysql_prepared_statement</definition>
+        <argsstring>(const mysql_prepared_statement &amp;)=delete</argsstring>
+        <name>mysql_prepared_statement</name>
+        <qualifiedname>mysql_prepared_statement::mysql_prepared_statement</qualifiedname>
+        <param>
+          <type>const <ref refid="classmysql__prepared__statement" kindref="compound">mysql_prepared_statement</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="76" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a116fa59bcb0fa1a3404a599d5b3f9ee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classmysql__prepared__statement" kindref="compound">mysql_prepared_statement</ref> &amp;</type>
+        <definition>mysql_prepared_statement &amp; mysql_prepared_statement::operator=</definition>
+        <argsstring>(const mysql_prepared_statement &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>mysql_prepared_statement::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classmysql__prepared__statement" kindref="compound">mysql_prepared_statement</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="77" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a397184c618d3dbd7ab7757bf36b751e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>mysql_prepared_statement::~mysql_prepared_statement</definition>
+        <argsstring>() override</argsstring>
+        <name>~mysql_prepared_statement</name>
+        <qualifiedname>mysql_prepared_statement::~mysql_prepared_statement</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>关闭预处理语句，释放资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="84" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1afd86fdf8c16847967d5a7c5de2b676e4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_NODISCARD uint32_t mysql_prepared_statement::param_count</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>param_count</name>
+        <qualifiedname>mysql_prepared_statement::param_count</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1a67ab1c9f04a375b478a034db711b3675">param_count</reimplements>
+        <briefdescription>
+<para>获取参数数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SQL语句中的?占位符数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="90" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a1e8c7c9a1f518512c2d8cfd1774d7f28" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, const string &amp;value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1ab21150730b90141dfd37083d9d21e0f3">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定字符串参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="98" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="98" bodyend="98"/>
+        <references refid="classmysql__prepared__statement_1a1e8c7c9a1f518512c2d8cfd1774d7f28" compoundref="mysql__prepared__statement_8hpp" startline="98" endline="98">bind_param</references>
+        <referencedby refid="classmysql__prepared__statement_1a1e8c7c9a1f518512c2d8cfd1774d7f28" compoundref="mysql__prepared__statement_8hpp" startline="98" endline="98">bind_param</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a208804b6c294ebfcf5994c93b44abb45" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, string_view value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1acf37860b88bfa7fd95272d0c2b13ce0a">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定字符串视图参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="106" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a0d5f0817ee74927ebdd78b9e9d732b6f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, const char *value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1af8d4d5a5485c462827fa45fbd909d0ea">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定C字符串参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>C字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="114" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="114" bodyend="114"/>
+        <references refid="classmysql__prepared__statement_1a0d5f0817ee74927ebdd78b9e9d732b6f" compoundref="mysql__prepared__statement_8hpp" startline="114" endline="114">bind_param</references>
+        <referencedby refid="classmysql__prepared__statement_1a0d5f0817ee74927ebdd78b9e9d732b6f" compoundref="mysql__prepared__statement_8hpp" startline="114" endline="114">bind_param</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a05eaf0dcf4dd9b77cdd205e8c0db86dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, int32_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1a5fd7f0157b00d43b238e9b79404e82eb">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定32位整数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="122" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a9bb5cfcd48dd8b932e017e688957eb56" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, int64_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1a203cda3f3bf52a50d91488cc333f6dcd">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定64位整数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="130" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1ad52abb52ab828f7b0c4165f128f2c6e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, float64_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1af8c65a9348aaa14ca7e0b8cdc3bf92d9">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定浮点数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="138" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1ae44f222be28c90f9e72bacdc6ca485a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, cbyte_view value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1a7a9038b065d93470a68a23739987ddcc">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定二进制数据参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="146" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a232c3c1affb68ac94af71e1326c45ffa" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool mysql_prepared_statement::execute</definition>
+        <argsstring>() override</argsstring>
+        <name>execute</name>
+        <qualifiedname>mysql_prepared_statement::execute</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1a5edc6ce541b1a871ee9910ba9ec565f9">execute</reimplements>
+        <briefdescription>
+<para>执行非查询语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>执行成功返回true</para>
+</simplesect>
+执行已绑定参数的预处理语句，不返回结果集。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="154" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1a237b3e3dc7d510b41f48033b8fe77d57" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__result" kindref="compound">idb_prepared_result</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD unique_ptr&lt; idb_prepared_result &gt; mysql_prepared_statement::execute_query</definition>
+        <argsstring>() override</argsstring>
+        <name>execute_query</name>
+        <qualifiedname>mysql_prepared_statement::execute_query</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1a75ad5d2dbd0d97d8cfc70ed5ecea5faf">execute_query</reimplements>
+        <briefdescription>
+<para>执行查询语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>查询结果集，失败返回空指针</para>
+</simplesect>
+执行查询并返回结果集对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="162" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1af8b9fae314fb3fda7a160cdc867fdf1b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view mysql_prepared_statement::get_error</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_error</name>
+        <qualifiedname>mysql_prepared_statement::get_error</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1a67f600d24fe96ea4b26508953e1ac2ed">get_error</reimplements>
+        <briefdescription>
+<para>获取错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="168" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__statement_1aa3fc1b9769a1424d868b716c0145c8f1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_NODISCARD uint32_t mysql_prepared_statement::get_errno</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_errno</name>
+        <qualifiedname>mysql_prepared_statement::get_errno</qualifiedname>
+        <reimplements refid="structidb__prepared__statement_1ac2d8c780282f37e5033aa64025cd0435">get_errno</reimplements>
+        <briefdescription>
+<para>获取错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>MySQL错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="174" column="32"/>
+        <references refid="classmysql__prepared__statement_1aa3fc1b9769a1424d868b716c0145c8f1">get_errno</references>
+        <referencedby refid="classmysql__prepared__statement_1aa3fc1b9769a1424d868b716c0145c8f1">get_errno</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MySQL预处理语句类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_prepared_statement接口，支持参数绑定、语句执行和结果集获取。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>SQL语句预处理</para>
+</listitem><listitem><para>参数绑定</para>
+</listitem><listitem><para>语句执行</para>
+</listitem><listitem><para>查询执行</para>
+</listitem><listitem><para>错误信息获取</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>MySQL使用?作为参数占位符，参数索引从0开始。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>idb_prepared_statement</label>
+        <link refid="structidb__prepared__statement"/>
+      </node>
+      <node id="1">
+        <label>mysql_prepared_statement</label>
+        <link refid="classmysql__prepared__statement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>idb_prepared_statement</label>
+        <link refid="structidb__prepared__statement"/>
+      </node>
+      <node id="1">
+        <label>mysql_prepared_statement</label>
+        <link refid="classmysql__prepared__statement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="43" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="43" bodyend="175"/>
+    <listofallmembers>
+      <member refid="classmysql__prepared__statement_1a1e8c7c9a1f518512c2d8cfd1774d7f28" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classmysql__prepared__statement_1a208804b6c294ebfcf5994c93b44abb45" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classmysql__prepared__statement_1a0d5f0817ee74927ebdd78b9e9d732b6f" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classmysql__prepared__statement_1a05eaf0dcf4dd9b77cdd205e8c0db86dd" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classmysql__prepared__statement_1a9bb5cfcd48dd8b932e017e688957eb56" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classmysql__prepared__statement_1ad52abb52ab828f7b0c4165f128f2c6e5" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classmysql__prepared__statement_1ae44f222be28c90f9e72bacdc6ca485a5" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classmysql__prepared__statement_1a3c376f90ef9e5f800649cf540800376f" prot="private" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>bind_params_</name></member>
+      <member refid="classmysql__prepared__statement_1a1d9f02d4d357a3b7e8a37c5cad4c8630" prot="private" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>conn_</name></member>
+      <member refid="classmysql__prepared__statement_1a232c3c1affb68ac94af71e1326c45ffa" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>execute</name></member>
+      <member refid="classmysql__prepared__statement_1a237b3e3dc7d510b41f48033b8fe77d57" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>execute_query</name></member>
+      <member refid="classmysql__prepared__statement_1aa3fc1b9769a1424d868b716c0145c8f1" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>get_errno</name></member>
+      <member refid="classmysql__prepared__statement_1af8b9fae314fb3fda7a160cdc867fdf1b" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>get_error</name></member>
+      <member refid="classmysql__prepared__statement_1a50cefcc27bf76e52e4d8fa3b85cb2e99" prot="public" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>mysql_prepared_statement</name></member>
+      <member refid="classmysql__prepared__statement_1a8f6328cdbe8704d0a6224369a1bfecb9" prot="public" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>mysql_prepared_statement</name></member>
+      <member refid="classmysql__prepared__statement_1a251e51a042eff49d15ec074166990fc5" prot="public" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>mysql_prepared_statement</name></member>
+      <member refid="classmysql__prepared__statement_1a558e36dce44a272d4ba20b842f78eabf" prot="public" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>operator=</name></member>
+      <member refid="classmysql__prepared__statement_1a116fa59bcb0fa1a3404a599d5b3f9ee3" prot="public" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>operator=</name></member>
+      <member refid="classmysql__prepared__statement_1aef4c5a24a7e5c96896ba26c68405d5e9" prot="private" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>param_buffers_</name></member>
+      <member refid="classmysql__prepared__statement_1afd86fdf8c16847967d5a7c5de2b676e4" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>param_count</name></member>
+      <member refid="classmysql__prepared__statement_1a45ecfbf1e10856770c0b4aa0dee27428" prot="private" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>param_count_</name></member>
+      <member refid="classmysql__prepared__statement_1ae5eb9b101da9512db6117447fd0b3562" prot="private" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>stmt_</name></member>
+      <member refid="structidb__prepared__statement_1a013c8ca098540d8a643b85427c73ce05" prot="public" virt="virtual"><scope>mysql_prepared_statement</scope><name>~idb_prepared_statement</name></member>
+      <member refid="classmysql__prepared__statement_1a397184c618d3dbd7ab7757bf36b751e0" prot="public" virt="non-virtual"><scope>mysql_prepared_statement</scope><name>~mysql_prepared_statement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

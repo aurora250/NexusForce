@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structthread_1_1hook" kind="struct" language="C++" prot="public">
+    <compoundname>thread::hook</compoundname>
+    <includes refid="thread_8hpp" local="no">thread.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structthread_1_1hook_1ad2fdcf6ba77f77062ce7fe773bd2d2cf" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>point</name>
+        <qualifiedname>thread::hook::point</qualifiedname>
+        <enumvalue id="structthread_1_1hook_1ad2fdcf6ba77f77062ce7fe773bd2d2cfac791155e22a5ee01f385ee533fd91dd0" prot="public">
+          <name>before_create</name>
+          <briefdescription>
+<para>线程创建前 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structthread_1_1hook_1ad2fdcf6ba77f77062ce7fe773bd2d2cfa5c7067e65bdfce3ef3585a9a9fb9ac80" prot="public">
+          <name>after_create</name>
+          <briefdescription>
+<para>线程创建后 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structthread_1_1hook_1ad2fdcf6ba77f77062ce7fe773bd2d2cfa13e2a25074d78e849b7fae903fa49dbc" prot="public">
+          <name>thread_start</name>
+          <briefdescription>
+<para>线程函数开始执行 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structthread_1_1hook_1ad2fdcf6ba77f77062ce7fe773bd2d2cfa7bd3c5962dec6212482752210eb16a8b" prot="public">
+          <name>thread_end</name>
+          <briefdescription>
+<para>线程函数结束 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structthread_1_1hook_1ad2fdcf6ba77f77062ce7fe773bd2d2cfa2eae5b3e7d6706844f2660cac218e366" prot="public">
+          <name>before_destroy</name>
+          <briefdescription>
+<para>线程对象销毁前 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>钩子触发点枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="148" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="148" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structthread_1_1hook_1ab43416ec116fd0118fd18583d69fdae0" prot="public" static="no">
+        <type>void(*)(<ref refid="structthread_1_1hook_1ad2fdcf6ba77f77062ce7fe773bd2d2cf" kindref="member">point</ref> <ref refid="structthread_1_1hook_1ad2fdcf6ba77f77062ce7fe773bd2d2cf" kindref="member">point</ref>, <ref refid="structthread_1_1id" kindref="compound">id</ref> thread_id)</type>
+        <definition>using thread::hook::callback_t = void (*)(point point, id thread_id)</definition>
+        <argsstring></argsstring>
+        <name>callback_t</name>
+        <qualifiedname>thread::hook::callback_t</qualifiedname>
+        <briefdescription>
+<para>钩子回调函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="156" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="156" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structthread_1_1hook_1a0bf51ba4d0324bb83e390845315e47a4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void thread::hook::add_hook</definition>
+        <argsstring>(callback_t hook)</argsstring>
+        <name>add_hook</name>
+        <qualifiedname>thread::hook::add_hook</qualifiedname>
+        <param>
+          <type><ref refid="structthread_1_1hook_1ab43416ec116fd0118fd18583d69fdae0" kindref="member">callback_t</ref></type>
+          <declname>hook</declname>
+        </param>
+        <briefdescription>
+<para>添加钩子回调 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="162" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="structthread_1_1hook_1af745b29df61eaa20ae6735320abfd118" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void thread::hook::remove_hook</definition>
+        <argsstring>(callback_t hook)</argsstring>
+        <name>remove_hook</name>
+        <qualifiedname>thread::hook::remove_hook</qualifiedname>
+        <param>
+          <type><ref refid="structthread_1_1hook_1ab43416ec116fd0118fd18583d69fdae0" kindref="member">callback_t</ref></type>
+          <declname>hook</declname>
+        </param>
+        <briefdescription>
+<para>移除钩子回调 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hook</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移除的回调函数指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="168" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="structthread_1_1hook_1a464acf4a2b2781f2c768b26b85aa1425" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void thread::hook::invoke</definition>
+        <argsstring>(point point, id thread_id)</argsstring>
+        <name>invoke</name>
+        <qualifiedname>thread::hook::invoke</qualifiedname>
+        <param>
+          <type><ref refid="structthread_1_1hook_1ad2fdcf6ba77f77062ce7fe773bd2d2cf" kindref="member">point</ref></type>
+          <declname>point</declname>
+        </param>
+        <param>
+          <type><ref refid="structthread_1_1id" kindref="compound">id</ref></type>
+          <declname>thread_id</declname>
+        </param>
+        <briefdescription>
+<para>调用钩子回调 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>触发点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>thread_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>线程ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="175" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程生命周期钩子 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供线程生命周期事件的回调机制，用于监控线程的创建和销毁。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="143" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="143" bodyend="176"/>
+    <listofallmembers>
+      <member refid="structthread_1_1hook_1a0bf51ba4d0324bb83e390845315e47a4" prot="public" virt="non-virtual"><scope>thread::hook</scope><name>add_hook</name></member>
+      <member refid="structthread_1_1hook_1ab43416ec116fd0118fd18583d69fdae0" prot="public" virt="non-virtual"><scope>thread::hook</scope><name>callback_t</name></member>
+      <member refid="structthread_1_1hook_1a464acf4a2b2781f2c768b26b85aa1425" prot="public" virt="non-virtual"><scope>thread::hook</scope><name>invoke</name></member>
+      <member refid="structthread_1_1hook_1ad2fdcf6ba77f77062ce7fe773bd2d2cf" prot="public" virt="non-virtual"><scope>thread::hook</scope><name>point</name></member>
+      <member refid="structthread_1_1hook_1af745b29df61eaa20ae6735320abfd118" prot="public" virt="non-virtual"><scope>thread::hook</scope><name>remove_hook</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

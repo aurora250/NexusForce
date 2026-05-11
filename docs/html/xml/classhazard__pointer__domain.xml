@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classhazard__pointer__domain" kind="class" language="C++" prot="public">
+    <compoundname>hazard_pointer_domain</compoundname>
+    <includes refid="hazard__ptr_8hpp" local="no">hazard_ptr.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhazard__pointer__domain_1ab712b91a20bc6ad37f126c5d11fdaaba" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="structhazard__pointer__record" kindref="compound">hazard_pointer_record</ref> * &gt;</type>
+        <definition>atomic&lt;hazard_pointer_record*&gt; hazard_pointer_domain::head_</definition>
+        <argsstring></argsstring>
+        <name>head_</name>
+        <qualifiedname>hazard_pointer_domain::head_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>记录链表头 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="168" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="168" bodyend="168"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classhazard__pointer__domain_1a14a7792458e4af4473f9242390d36e31" prot="private" static="yes" mutable="no" thread_local="yes">
+        <type><ref refid="structretire__list" kindref="compound">retire_list</ref></type>
+        <definition>retire_list hazard_pointer_domain::tl_retire_list_</definition>
+        <argsstring></argsstring>
+        <name>tl_retire_list_</name>
+        <qualifiedname>hazard_pointer_domain::tl_retire_list_</qualifiedname>
+        <briefdescription>
+<para>线程本地退役列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="170" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhazard__pointer__domain_1a14932dac3b6255d71b9d2f3989b39505" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t hazard_pointer_domain::RETIRE_THRESHOLD</definition>
+        <argsstring></argsstring>
+        <name>RETIRE_THRESHOLD</name>
+        <qualifiedname>hazard_pointer_domain::RETIRE_THRESHOLD</qualifiedname>
+        <initializer>= 100</initializer>
+        <briefdescription>
+<para>回收阈值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="172" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="172" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhazard__pointer__domain_1ad1862c33a1390b1f509d2577599d074d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; void * &gt;</type>
+        <definition>vector&lt; void * &gt; hazard_pointer_domain::get_hazard_pointers</definition>
+        <argsstring>()</argsstring>
+        <name>get_hazard_pointers</name>
+        <qualifiedname>hazard_pointer_domain::get_hazard_pointers</qualifiedname>
+        <briefdescription>
+<para>获取所有活跃的险象指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>所有受保护的指针向量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="178" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="178" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classhazard__pointer__domain_1a8d19e54d52fa2b100d5dd2efd4c74242" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void hazard_pointer_domain::scan_and_reclaim</definition>
+        <argsstring>()</argsstring>
+        <name>scan_and_reclaim</name>
+        <qualifiedname>hazard_pointer_domain::scan_and_reclaim</qualifiedname>
+        <briefdescription>
+<para>扫描并回收可安全删除的对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>收集所有险象指针，将当前没有被任何险象指针保护的对象销毁。 使用二分查找确定对象是否受保护。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="201" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="201" bodyend="222"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhazard__pointer__domain_1ad95aec6be814f0f95f69aa41c089a5a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>hazard_pointer_domain::hazard_pointer_domain</definition>
+        <argsstring>()=default</argsstring>
+        <name>hazard_pointer_domain</name>
+        <qualifiedname>hazard_pointer_domain::hazard_pointer_domain</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="225" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classhazard__pointer__domain_1a96cda2b40cbab07f17120547422f77a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>hazard_pointer_domain::~hazard_pointer_domain</definition>
+        <argsstring>()</argsstring>
+        <name>~hazard_pointer_domain</name>
+        <qualifiedname>hazard_pointer_domain::~hazard_pointer_domain</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>释放所有险象指针记录。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="232" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="232" bodyend="239"/>
+        <references refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" compoundref="atomic_8hpp" startline="130" endline="132">atomic&lt; T &gt;::load</references>
+        <references refid="structhazard__pointer__record_1a9ea9b24dfd31f335203fe15ac7dd6725" compoundref="hazard__ptr_8hpp" startline="42" endline="42">hazard_pointer_record::next</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+      </memberdef>
+      <memberdef kind="function" id="classhazard__pointer__domain_1ab87d3fa76bff8fdd6ad167fee69ade0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>hazard_pointer_domain::hazard_pointer_domain</definition>
+        <argsstring>(const hazard_pointer_domain &amp;)=delete</argsstring>
+        <name>hazard_pointer_domain</name>
+        <qualifiedname>hazard_pointer_domain::hazard_pointer_domain</qualifiedname>
+        <param>
+          <type>const <ref refid="classhazard__pointer__domain" kindref="compound">hazard_pointer_domain</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="241" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classhazard__pointer__domain_1a3d51177b7375557f3ea3c4d9e8a1f8fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhazard__pointer__domain" kindref="compound">hazard_pointer_domain</ref> &amp;</type>
+        <definition>hazard_pointer_domain &amp; hazard_pointer_domain::operator=</definition>
+        <argsstring>(const hazard_pointer_domain &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>hazard_pointer_domain::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classhazard__pointer__domain" kindref="compound">hazard_pointer_domain</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="242" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classhazard__pointer__domain_1a54909fb9e1d5f81cb50df2dfc67607bc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structhazard__pointer__record" kindref="compound">hazard_pointer_record</ref> *</type>
+        <definition>hazard_pointer_record * hazard_pointer_domain::acquire_record</definition>
+        <argsstring>()</argsstring>
+        <name>acquire_record</name>
+        <qualifiedname>hazard_pointer_domain::acquire_record</qualifiedname>
+        <briefdescription>
+<para>获取一个可用的险象指针记录 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>可用的记录指针</para>
+</simplesect>
+首先尝试重用已有的空闲记录，如果没有则创建新记录。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="250" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="250" bodyend="268"/>
+        <references refid="structhazard__pointer__record_1af442cb95513e29efbe1c46a6d5fd33ec" compoundref="hazard__ptr_8hpp" startline="43" endline="43">hazard_pointer_record::active</references>
+        <references refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" compoundref="atomic_8hpp" startline="130" endline="132">atomic&lt; T &gt;::load</references>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
+        <references refid="structhazard__pointer__record_1a9ea9b24dfd31f335203fe15ac7dd6725" compoundref="hazard__ptr_8hpp" startline="42" endline="42">hazard_pointer_record::next</references>
+        <references refid="structatomic_1a3e1268f8d4abb49382c713740a13234a" compoundref="atomic_8hpp" startline="114" endline="116">atomic&lt; T &gt;::store</references>
+        <references refid="structatomic_3_01bool_01_4_1a62c07fee296a5aa40abf8b8560541de8" compoundref="atomic_8hpp" startline="350" endline="350">atomic&lt; bool &gt;::store</references>
+        <references refid="structhazard__pointer__record_1ab365c8bb8d47f7ed2d17c3d2b8dbb0a0" compoundref="hazard__ptr_8hpp" startline="51" endline="54">hazard_pointer_record::try_acquire</references>
+      </memberdef>
+      <memberdef kind="function" id="classhazard__pointer__domain_1a4697b38a56cf669c3a1f0a95e8d33a72" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Deleter</type>
+            <defval><ref refid="structdefault__deleter" kindref="compound">default_deleter</ref>&lt;T&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void hazard_pointer_domain::retire</definition>
+        <argsstring>(T *ptr, Deleter deleter=Deleter())</argsstring>
+        <name>retire</name>
+        <qualifiedname>hazard_pointer_domain::retire</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>Deleter</type>
+          <declname>deleter</declname>
+          <defval>Deleter()</defval>
+        </param>
+        <briefdescription>
+<para>退役一个对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要退役的指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>自定义删除器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将对象添加到当前线程的退役列表，如果列表大小超过阈值则触发回收。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="280" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="280" bodyend="291"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classhazard__pointer__domain_1a8a5da18cdd255865777498210fa79c20" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void hazard_pointer_domain::reclaim</definition>
+        <argsstring>()</argsstring>
+        <name>reclaim</name>
+        <qualifiedname>hazard_pointer_domain::reclaim</qualifiedname>
+        <briefdescription>
+<para>手动触发回收 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="296" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="296" bodyend="296"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classhazard__pointer__domain_1a107f8f2a3f102990a699df956e914df8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhazard__pointer__domain" kindref="compound">hazard_pointer_domain</ref> &amp;</type>
+        <definition>static hazard_pointer_domain &amp; hazard_pointer_domain::default_domain</definition>
+        <argsstring>()</argsstring>
+        <name>default_domain</name>
+        <qualifiedname>hazard_pointer_domain::default_domain</qualifiedname>
+        <briefdescription>
+<para>获取默认的险象指针域 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>默认域的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="302" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="302" bodyend="305"/>
+        <referencedby refid="group___hazard_pointer_1ga7b2387fe7f0ec8b3b3b2a047eb49e20e" compoundref="hazard__ptr_8hpp" startline="455" endline="457">make_hazard_pointer</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>险象指针域 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理所有险象指针记录和退役对象回收。每个域独立管理一组记录和回收策略。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="166" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="166" bodyend="306"/>
+    <listofallmembers>
+      <member refid="classhazard__pointer__domain_1a54909fb9e1d5f81cb50df2dfc67607bc" prot="public" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>acquire_record</name></member>
+      <member refid="classhazard__pointer__domain_1a107f8f2a3f102990a699df956e914df8" prot="public" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>default_domain</name></member>
+      <member refid="classhazard__pointer__domain_1ad1862c33a1390b1f509d2577599d074d" prot="private" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>get_hazard_pointers</name></member>
+      <member refid="classhazard__pointer__domain_1ad95aec6be814f0f95f69aa41c089a5a1" prot="public" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>hazard_pointer_domain</name></member>
+      <member refid="classhazard__pointer__domain_1ab87d3fa76bff8fdd6ad167fee69ade0a" prot="public" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>hazard_pointer_domain</name></member>
+      <member refid="classhazard__pointer__domain_1ab712b91a20bc6ad37f126c5d11fdaaba" prot="private" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>head_</name></member>
+      <member refid="classhazard__pointer__domain_1a3d51177b7375557f3ea3c4d9e8a1f8fa" prot="public" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>operator=</name></member>
+      <member refid="classhazard__pointer__domain_1a8a5da18cdd255865777498210fa79c20" prot="public" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>reclaim</name></member>
+      <member refid="classhazard__pointer__domain_1a4697b38a56cf669c3a1f0a95e8d33a72" prot="public" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>retire</name></member>
+      <member refid="classhazard__pointer__domain_1a14932dac3b6255d71b9d2f3989b39505" prot="private" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>RETIRE_THRESHOLD</name></member>
+      <member refid="classhazard__pointer__domain_1a8d19e54d52fa2b100d5dd2efd4c74242" prot="private" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>scan_and_reclaim</name></member>
+      <member refid="classhazard__pointer__domain_1a14a7792458e4af4473f9242390d36e31" prot="private" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>tl_retire_list_</name></member>
+      <member refid="classhazard__pointer__domain_1a96cda2b40cbab07f17120547422f77a9" prot="public" virt="non-virtual"><scope>hazard_pointer_domain</scope><name>~hazard_pointer_domain</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

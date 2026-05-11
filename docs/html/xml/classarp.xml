@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classarp" kind="class" language="C++" prot="public">
+    <compoundname>arp</compoundname>
+    <includes refid="arp_8hpp" local="no">arp.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classarp_1af51687eb3890db2e6ffdaf0171d2407e" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string arp::iface_</definition>
+        <argsstring></argsstring>
+        <name>iface_</name>
+        <qualifiedname>arp::iface_</qualifiedname>
+        <briefdescription>
+<para>网络接口名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" line="43" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classarp_1ad9fb1240d8b400db02d2eda070465feb" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool arp::opened_</definition>
+        <argsstring></argsstring>
+        <name>opened_</name>
+        <qualifiedname>arp::opened_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否已打开 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" line="46" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classarp_1ac7d983295928b11b7e514974f9c46bca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool arp::local_info</definition>
+        <argsstring>(const char *iface)</argsstring>
+        <name>local_info</name>
+        <qualifiedname>arp::local_info</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>iface</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" line="55" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classarp_1a3192beec9276a483c7ca61d60f648e9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>arp::arp</definition>
+        <argsstring>()=default</argsstring>
+        <name>arp</name>
+        <qualifiedname>arp::arp</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" line="62" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classarp_1a16f37dcda8efd02c423420d19aba74e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>arp::~arp</definition>
+        <argsstring>()=default</argsstring>
+        <name>~arp</name>
+        <qualifiedname>arp::~arp</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" line="67" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classarp_1ad0ca5dd4ac27dd76ad093f168ceef946" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool arp::open</definition>
+        <argsstring>(const char *iface=nullptr)</argsstring>
+        <name>open</name>
+        <qualifiedname>arp::open</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>iface</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>打开ARP解析器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iface</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>网络接口名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功返回true</para>
+</simplesect>
+初始化ARP解析器，获取本地网络接口信息。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" line="76" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classarp_1a4bd0d2c3b08b49ed9129f592fa87d963" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void arp::close</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>close</name>
+        <qualifiedname>arp::close</qualifiedname>
+        <briefdescription>
+<para>关闭ARP解析器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classarp_1a3d96f77c31db48d64ae720c33921f572" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classmac__address" kindref="compound">mac_address</ref> &gt;</type>
+        <definition>optional&lt; mac_address &gt; arp::resolve</definition>
+        <argsstring>(const ip_address &amp;target, milliseconds timeout=milliseconds(1000))</argsstring>
+        <name>resolve</name>
+        <qualifiedname>arp::resolve</qualifiedname>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>target</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref></type>
+          <declname>timeout</declname>
+          <defval><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref>(1000)</defval>
+        </param>
+        <briefdescription>
+<para>解析IP地址对应的MAC地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>target</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标IPv4地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间（毫秒），默认1000ms </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功返回MAC地址，失败返回none</para>
+</simplesect>
+发送ARP请求并等待ARP应答，获取目标IP的MAC地址。 如果超时未收到应答，返回none。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" line="92" column="14"/>
+        <references refid="classarp_1a3d96f77c31db48d64ae720c33921f572">resolve</references>
+        <referencedby refid="classarp_1a3d96f77c31db48d64ae720c33921f572">resolve</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>ARP协议实现类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供ARP地址解析功能，将IPv4地址转换为MAC地址。 需要在本地网络中有效，目标主机必须在线且可达。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>从IP地址解析MAC地址</para>
+</listitem><listitem><para>支持超时控制</para>
+</listitem><listitem><para>支持指定网络接口 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" line="41" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/arp.hpp" bodystart="41" bodyend="93"/>
+    <listofallmembers>
+      <member refid="classarp_1a3192beec9276a483c7ca61d60f648e9f" prot="public" virt="non-virtual"><scope>arp</scope><name>arp</name></member>
+      <member refid="classarp_1a4bd0d2c3b08b49ed9129f592fa87d963" prot="public" virt="non-virtual"><scope>arp</scope><name>close</name></member>
+      <member refid="classarp_1af51687eb3890db2e6ffdaf0171d2407e" prot="private" virt="non-virtual"><scope>arp</scope><name>iface_</name></member>
+      <member refid="classarp_1ac7d983295928b11b7e514974f9c46bca" prot="private" virt="non-virtual"><scope>arp</scope><name>local_info</name></member>
+      <member refid="classarp_1ad0ca5dd4ac27dd76ad093f168ceef946" prot="public" virt="non-virtual"><scope>arp</scope><name>open</name></member>
+      <member refid="classarp_1ad9fb1240d8b400db02d2eda070465feb" prot="private" virt="non-virtual"><scope>arp</scope><name>opened_</name></member>
+      <member refid="classarp_1a3d96f77c31db48d64ae720c33921f572" prot="public" virt="non-virtual"><scope>arp</scope><name>resolve</name></member>
+      <member refid="classarp_1a16f37dcda8efd02c423420d19aba74e5" prot="public" virt="non-virtual"><scope>arp</scope><name>~arp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

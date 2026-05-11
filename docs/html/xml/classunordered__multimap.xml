@@ -1,0 +1,2161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classunordered__multimap" kind="class" language="C++" prot="public">
+    <compoundname>unordered_multimap</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">icollector&lt; unordered_multimap&lt; Key, T, hash&lt; Key &gt;, equal_to&lt; Key &gt;, allocator&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt; &gt;</basecompoundref>
+    <includes refid="unordered__multimap_8hpp" local="no">unordered_multimap.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename HashFcn</type>
+        <defval><ref refid="structhash" kindref="compound">hash</ref>&lt;Key&gt;</defval>
+      </param>
+      <param>
+        <type>typename EqualKey</type>
+        <defval><ref refid="structequal__to" kindref="compound">equal_to</ref>&lt;Key&gt;</defval>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structhashtable__node" kindref="compound">hashtable_node</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;const Key, T&gt;&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classunordered__multimap_1a8d0c0926a855ed096ea555ac7b131d40" prot="private" static="no">
+        <type><ref refid="classhashtable" kindref="compound">hashtable</ref>&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; const Key, T &gt;, Key, HashFcn, <ref refid="structselect1st" kindref="compound">select1st</ref>&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;</type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::base_type = hashtable&lt;pair&lt;const Key, T&gt;, Key, HashFcn, select1st&lt;pair&lt;const Key, T&gt;&gt;, EqualKey,
+                               Alloc&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>unordered_multimap::base_type</qualifiedname>
+        <briefdescription>
+<para>底层哈希表类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="46" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classunordered__multimap_1a2eece86abca0846cd96e81014acd5758" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1aae291f880b71bf248fa077e9aa7e9940" kindref="member">base_type::key_type</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_type = typename base_type::key_type</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>unordered_multimap::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="50" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1a11f2cf024dfa875a85caaf74b15f9e11" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a938c4e2cb0e775c00a9ffa0bb433b4d3" kindref="member">base_type::value_type</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::value_type = typename base_type::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>unordered_multimap::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="51" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1afc6ca319e81bc9ca78493226527be4db" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a283933168f42e039508f8c756c5d0124" kindref="member">base_type::hasher</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hasher = typename base_type::hasher</definition>
+        <argsstring></argsstring>
+        <name>hasher</name>
+        <qualifiedname>unordered_multimap::hasher</qualifiedname>
+        <briefdescription>
+<para>哈希函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="52" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1a98d034a85c6c740ca18b40be64313604" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1acc0ee670388f0cd08557180388bf3f18" kindref="member">base_type::key_equal</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_equal = typename base_type::key_equal</definition>
+        <argsstring></argsstring>
+        <name>key_equal</name>
+        <qualifiedname>unordered_multimap::key_equal</qualifiedname>
+        <briefdescription>
+<para>键相等比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="53" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">base_type::size_type</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::size_type = typename base_type::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>unordered_multimap::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="55" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1a6438336510d9df7d63bff895a5ed0e4e" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a384b9b4e9ed2153582c4f6f118542fa9" kindref="member">base_type::difference_type</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::difference_type = typename base_type::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>unordered_multimap::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="56" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1a1efebf04ea755630aa815f696666fea8" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a4c3e2ca33edeb50042e2f250abaff685" kindref="member">base_type::pointer</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::pointer = typename base_type::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>unordered_multimap::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="57" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1a11e8ec33c7940ffb64fdced2fc08e8df" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a2776dd83d03ad5a303d786f90cf394e1" kindref="member">base_type::const_pointer</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::const_pointer = typename base_type::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>unordered_multimap::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="58" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1a05ec97927f1f8b71b02a038eeb5635d2" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a832269fbb741721437d43754623d7290" kindref="member">base_type::reference</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::reference = typename base_type::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>unordered_multimap::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="59" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1a8268603c5b658c4706c8377196f33356" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a6b95bd41b2d19b8ad99a1fdefade3fc4" kindref="member">base_type::const_reference</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::const_reference = typename base_type::const_reference</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>unordered_multimap::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="60" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">base_type::iterator</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::iterator = typename base_type::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>unordered_multimap::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="61" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">base_type::const_iterator</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::const_iterator = typename base_type::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>unordered_multimap::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="62" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunordered__multimap_1a8e2640169b16a77486e5cc7a78808585" prot="public" static="no">
+        <type>typename <ref refid="classhashtable_1a7dfad262d218f67878950a8044718468" kindref="member">base_type::allocator_type</ref></type>
+        <definition>using unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::allocator_type = typename base_type::allocator_type</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>unordered_multimap::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="63" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classunordered__multimap_1a6580a2dc0b0d35855827958a4b2791bf" prot="private" static="no" mutable="no">
+        <type>base_type</type>
+        <definition>base_type unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::ht_</definition>
+        <argsstring></argsstring>
+        <name>ht_</name>
+        <qualifiedname>unordered_multimap::ht_</qualifiedname>
+        <initializer>{100}</initializer>
+        <briefdescription>
+<para>底层哈希表实例，默认初始桶数为100 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="66" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classunordered__multimap_1af9c844706091b379b1544fc88bd96727" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>()=default</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空unordered_multimap。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="74" column="5"/>
+        <referencedby refid="classunordered__multimap_1a3f878fc9c5cc1b0aed9d2f53be21fd39" compoundref="unordered__multimap_8hpp" startline="467" endline="469">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_to</referencedby>
+        <referencedby refid="classunordered__multimap_1a1944096094ad8f23fe7d174e407478ff" compoundref="unordered__multimap_8hpp" startline="476" endline="478">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::less_than</referencedby>
+        <referencedby refid="classunordered__multimap_1a69630e0c2c18093e9ef74e50b895f86e" compoundref="unordered__multimap_8hpp" startline="112" endline="115">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classunordered__multimap_1a6ee24848260b936f04522634cef7705e" compoundref="unordered__multimap_8hpp" startline="129" endline="132">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classunordered__multimap_1a6c4a7ced9a0f2d1e906343a1d6621e3f" compoundref="unordered__multimap_8hpp" startline="460" endline="460">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classunordered__multimap_1a775d6ddab4de216506149b16f54eab2c" compoundref="unordered__multimap_8hpp" startline="104" endline="105">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1a6bba7da233f3a4c649d51fa34f674d59" compoundref="unordered__multimap_8hpp" startline="192" endline="193">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1ae73a8744c23b60d4c0f7177702cb6a44" compoundref="unordered__multimap_8hpp" startline="200" endline="201">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1adf6105b06549f96a30e329ea50f440da" compoundref="unordered__multimap_8hpp" startline="209" endline="210">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1ade898a36fab46a4f633f725e4177da58" compoundref="unordered__multimap_8hpp" startline="219" endline="220">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1a2ea94f6df51bf05246851aadc312cfe8" compoundref="unordered__multimap_8hpp" startline="121" endline="122">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a731219e571e335fb4b832cf596326b54" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(size_type n)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始桶数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="80" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="80" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a895858f30357bc936d47c3fe17d2c02f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(size_type n, const hasher &amp;hf)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1afc6ca319e81bc9ca78493226527be4db" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始桶数和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="88" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="88" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a8b036a24a4dd95096a71f488445b322e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1afc6ca319e81bc9ca78493226527be4db" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1a98d034a85c6c740ca18b40be64313604" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定初始桶数、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="97" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="97" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a775d6ddab4de216506149b16f54eab2c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(const unordered_multimap &amp;other)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap" kindref="compound">unordered_multimap</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unordered_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="104" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="104" bodyend="105"/>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a69630e0c2c18093e9ef74e50b895f86e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classunordered__multimap" kindref="compound">unordered_multimap</ref> &amp;</type>
+        <definition>unordered_multimap &amp; unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(const unordered_multimap &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>unordered_multimap::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap" kindref="compound">unordered_multimap</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unordered_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="112" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="112" bodyend="115"/>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a2ea94f6df51bf05246851aadc312cfe8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; base_type &gt;" virt="non-virtual">
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(unordered_multimap &amp;&amp;other)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap" kindref="compound">unordered_multimap</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unordered_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="121" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="121" bodyend="122"/>
+        <references refid="group___type_special_member_function_checks_1gac3058b8518087cdea482055e5af4577a" compoundref="type__traits_8hpp" startline="2841">is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a6ee24848260b936f04522634cef7705e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_assignable_v&lt; base_type &gt;" virt="non-virtual">
+        <type><ref refid="classunordered__multimap" kindref="compound">unordered_multimap</ref> &amp;</type>
+        <definition>unordered_multimap &amp; unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</definition>
+        <argsstring>(unordered_multimap &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>unordered_multimap::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap" kindref="compound">unordered_multimap</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unordered_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="129" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="129" bodyend="132"/>
+        <references refid="group___type_special_member_function_checks_1ga4e71583e475165e891f9ea1e02c6b8e4" compoundref="type__traits_8hpp" startline="2902">is_nothrow_move_assignable_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1ad011a31b5a3fe903ad34a1b877b604c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="141" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="141" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a96894bfed496bf703e610469561d89fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(Iterator first, Iterator list, size_type n)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>list</declname>
+        </param>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始桶数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="154" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="154" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a98ab626d5f7384d70b699d0fc7b836eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(Iterator first, Iterator last, size_type n, const hasher &amp;hf)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1afc6ca319e81bc9ca78493226527be4db" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始桶数和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="168" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="168" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1ab84f42b0ff9193d7f22dcf827744ae0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(Iterator first, Iterator last, size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1afc6ca319e81bc9ca78493226527be4db" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1a98d034a85c6c740ca18b40be64313604" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定初始桶数、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="183" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="183" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a6bba7da233f3a4c649d51fa34f674d59" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classunordered__multimap_1a11f2cf024dfa875a85caaf74b15f9e11" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="192" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="192" bodyend="193"/>
+        <references refid="classunordered__multimap_1adad5e0c929e9a984c65f2c0855ac9e06" compoundref="unordered__multimap_8hpp" startline="226" endline="226">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classunordered__multimap_1a6468a4e9fb20091634592f31cb768cba" compoundref="unordered__multimap_8hpp" startline="232" endline="232">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1ae73a8744c23b60d4c0f7177702cb6a44" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, size_type n)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classunordered__multimap_1a11f2cf024dfa875a85caaf74b15f9e11" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始桶数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="200" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="200" bodyend="201"/>
+        <references refid="classunordered__multimap_1adad5e0c929e9a984c65f2c0855ac9e06" compoundref="unordered__multimap_8hpp" startline="226" endline="226">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classunordered__multimap_1a6468a4e9fb20091634592f31cb768cba" compoundref="unordered__multimap_8hpp" startline="232" endline="232">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1adf6105b06549f96a30e329ea50f440da" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, size_type n, const hasher &amp;hf)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classunordered__multimap_1a11f2cf024dfa875a85caaf74b15f9e11" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1afc6ca319e81bc9ca78493226527be4db" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始桶数和哈希函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="209" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="209" bodyend="210"/>
+        <references refid="classunordered__multimap_1adad5e0c929e9a984c65f2c0855ac9e06" compoundref="unordered__multimap_8hpp" startline="226" endline="226">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classunordered__multimap_1a6468a4e9fb20091634592f31cb768cba" compoundref="unordered__multimap_8hpp" startline="232" endline="232">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1ade898a36fab46a4f633f725e4177da58" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, size_type n, const hasher &amp;hf, const key_equal &amp;eql)</argsstring>
+        <name>unordered_multimap</name>
+        <qualifiedname>unordered_multimap::unordered_multimap</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classunordered__multimap_1a11f2cf024dfa875a85caaf74b15f9e11" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1afc6ca319e81bc9ca78493226527be4db" kindref="member">hasher</ref> &amp;</type>
+          <declname>hf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1a98d034a85c6c740ca18b40be64313604" kindref="member">key_equal</ref> &amp;</type>
+          <declname>eql</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定初始桶数、哈希函数和键相等比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始桶数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="219" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="219" bodyend="220"/>
+        <references refid="classunordered__multimap_1adad5e0c929e9a984c65f2c0855ac9e06" compoundref="unordered__multimap_8hpp" startline="226" endline="226">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</references>
+        <references refid="classunordered__multimap_1a6468a4e9fb20091634592f31cb768cba" compoundref="unordered__multimap_8hpp" startline="232" endline="232">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</references>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1adad5e0c929e9a984c65f2c0855ac9e06" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>unordered_multimap::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="226" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="226" bodyend="226"/>
+        <referencedby refid="classunordered__multimap_1a6bba7da233f3a4c649d51fa34f674d59" compoundref="unordered__multimap_8hpp" startline="192" endline="193">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1ae73a8744c23b60d4c0f7177702cb6a44" compoundref="unordered__multimap_8hpp" startline="200" endline="201">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1adf6105b06549f96a30e329ea50f440da" compoundref="unordered__multimap_8hpp" startline="209" endline="210">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1ade898a36fab46a4f633f725e4177da58" compoundref="unordered__multimap_8hpp" startline="219" endline="220">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a6468a4e9fb20091634592f31cb768cba" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>unordered_multimap::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="232" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="232" bodyend="232"/>
+        <referencedby refid="classunordered__multimap_1a6bba7da233f3a4c649d51fa34f674d59" compoundref="unordered__multimap_8hpp" startline="192" endline="193">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1ae73a8744c23b60d4c0f7177702cb6a44" compoundref="unordered__multimap_8hpp" startline="200" endline="201">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1adf6105b06549f96a30e329ea50f440da" compoundref="unordered__multimap_8hpp" startline="209" endline="210">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multimap_1ade898a36fab46a4f633f725e4177da58" compoundref="unordered__multimap_8hpp" startline="219" endline="220">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a145c7176e0b7dc290dcd6e5c3dcf299b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>unordered_multimap::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="238" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="238" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a80a7f4bb9e3792ed261071e398f158f8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>unordered_multimap::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="244" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="244" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1aaf6d99b9eb78542f58ff520e65644c81" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>unordered_multimap::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="250" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="250" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1aa8a79a89b21041f24212ba67cb828ef6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>unordered_multimap::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="256" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="256" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a39c67c1b08119c08c335e8bb15bab06f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>unordered_multimap::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>unordered_multimap中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="262" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="262" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1ab76f2b77809cf674287a944d7f23d10c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>unordered_multimap::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="268" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="268" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a691b8dd49926d27401e511682b8cfd3b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>unordered_multimap::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="274" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="274" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a254e46eb1fdbe9d1a2f096a97519f344" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.count(key))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>unordered_multimap::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1a2eece86abca0846cd96e81014acd5758" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="281" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="281" bodyend="283"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a3e4caa260a4371835852f92dd9c3377c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::buckets_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>buckets_size</name>
+        <qualifiedname>unordered_multimap::buckets_size</qualifiedname>
+        <briefdescription>
+<para>获取桶数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>桶数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="289" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="289" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a50be96ea220252cd25a838b61e7c2261" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::buckets_max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>buckets_max_size</name>
+        <qualifiedname>unordered_multimap::buckets_max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大桶数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大桶数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="295" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="295" bodyend="295"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a502b6d45f1dea783020fd6a74f4001b8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::bucket_size</definition>
+        <argsstring>(size_type n) const noexcept</argsstring>
+        <name>bucket_size</name>
+        <qualifiedname>unordered_multimap::bucket_size</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取指定桶的大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>桶索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>桶中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="302" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="302" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1aa6c7af27be0cdfd652b7da5b75b4b11d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.hash_func())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1afc6ca319e81bc9ca78493226527be4db" kindref="member">hasher</ref></type>
+        <definition>NEFORCE_NODISCARD hasher unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hash_func</definition>
+        <argsstring>() const</argsstring>
+        <name>hash_func</name>
+        <qualifiedname>unordered_multimap::hash_func</qualifiedname>
+        <briefdescription>
+<para>获取哈希函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="308" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="308" bodyend="308"/>
+        <references refid="classunordered__multimap_1aa6c7af27be0cdfd652b7da5b75b4b11d" compoundref="unordered__multimap_8hpp" startline="308" endline="308">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hash_func</references>
+        <referencedby refid="classunordered__multimap_1aa6c7af27be0cdfd652b7da5b75b4b11d" compoundref="unordered__multimap_8hpp" startline="308" endline="308">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::hash_func</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1aeb22fb6a7644511d3b0150b196027c98" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_.key_eql())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a98d034a85c6c740ca18b40be64313604" kindref="member">key_equal</ref></type>
+        <definition>NEFORCE_NODISCARD key_equal unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_eql</definition>
+        <argsstring>() const</argsstring>
+        <name>key_eql</name>
+        <qualifiedname>unordered_multimap::key_eql</qualifiedname>
+        <briefdescription>
+<para>获取键相等比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键相等比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="314" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="314" bodyend="314"/>
+        <references refid="classunordered__multimap_1aeb22fb6a7644511d3b0150b196027c98" compoundref="unordered__multimap_8hpp" startline="314" endline="314">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_eql</references>
+        <referencedby refid="classunordered__multimap_1aeb22fb6a7644511d3b0150b196027c98" compoundref="unordered__multimap_8hpp" startline="314" endline="314">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::key_eql</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1ad8ea8c4262a1059018ef21c4553369c8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD float</type>
+        <definition>NEFORCE_NODISCARD float unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>load_factor</name>
+        <qualifiedname>unordered_multimap::load_factor</qualifiedname>
+        <briefdescription>
+<para>获取当前负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>负载因子 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="320" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="320" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a95b4071909a5879d93d5a2db204a8b83" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD float</type>
+        <definition>NEFORCE_NODISCARD float unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>unordered_multimap::max_load_factor</qualifiedname>
+        <briefdescription>
+<para>获取最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大负载因子 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="326" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="326" bodyend="326"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a38457e9fa8a1c255a007d13831eafb6b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::max_load_factor</definition>
+        <argsstring>(float lf) noexcept</argsstring>
+        <name>max_load_factor</name>
+        <qualifiedname>unordered_multimap::max_load_factor</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>lf</declname>
+        </param>
+        <briefdescription>
+<para>设置最大负载因子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的最大负载因子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="332" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="332" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1aaeb7e18b064d958dadbc6308b25add1b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::rehash</definition>
+        <argsstring>(size_type n)</argsstring>
+        <name>rehash</name>
+        <qualifiedname>unordered_multimap::rehash</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>重新哈希，调整桶数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标桶数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="338" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="338" bodyend="338"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a09220b72b7797b5fe7885a93d5cdb6eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::reserve</definition>
+        <argsstring>(size_type n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>unordered_multimap::reserve</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留空间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的元素数量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+确保unordered_multimap至少能容纳n个元素而不触发rehash。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="346" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="346" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1aee0eaa558b6df5d8a1e63c17e828be73" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+        <definition>iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>unordered_multimap::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在unordered_multimap中就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="355" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="355" bodyend="357"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a35f66d7afc952e4e482d42f618f2f418" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+        <definition>iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>unordered_multimap::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1a11f2cf024dfa875a85caaf74b15f9e11" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="364" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="364" bodyend="364"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a5377c211e163e4839921694fb7ec4697" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+        <definition>iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>unordered_multimap::insert</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1a11f2cf024dfa875a85caaf74b15f9e11" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="371" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="371" bodyend="371"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a34fb5dd50003d3704904cd3e0a6b726d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>unordered_multimap::insert</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="380" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="380" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a3052da5a6737b7ef788793523420c2ed" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" kindref="member">size_type</ref></type>
+        <definition>size_type unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>unordered_multimap::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1a2eece86abca0846cd96e81014acd5758" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="389" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="389" bodyend="389"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a2d1c1c33fe12e7511598e27b710402d0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+        <definition>iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(iterator position) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>unordered_multimap::erase</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="396" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="396" bodyend="396"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a2a1d8b3cf321c2430776aa5509b18d85" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+        <definition>iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>unordered_multimap::erase</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="404" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="404" bodyend="404"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1af1675f892f4a7729aa052c9317a12d53" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const_iterator position) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>unordered_multimap::erase</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="411" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="411" bodyend="411"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a7b2fd0f3defd4dcec2ed4fd0e9f6c01b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::erase</definition>
+        <argsstring>(const_iterator first, const_iterator last) noexcept</argsstring>
+        <name>erase</name>
+        <qualifiedname>unordered_multimap::erase</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="419" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="419" bodyend="419"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a9ff42cd8b3ca0fa43e7d5f80b5a3a974" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>unordered_multimap::clear</qualifiedname>
+        <briefdescription>
+<para>清空unordered_multimap </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="424" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="424" bodyend="424"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a949c1eee57b3ee354c0fb5d045725a4e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>unordered_multimap::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1a2eece86abca0846cd96e81014acd5758" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回end() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="431" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="431" bodyend="431"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a573651dbd7fea79423fc6fd9ed24dc6b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>unordered_multimap::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1a2eece86abca0846cd96e81014acd5758" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回cend() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="438" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="438" bodyend="438"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1af740afeec659c6e04f38bea8a5f15e1f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref>, <ref refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" kindref="member">iterator</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD pair&lt; iterator, iterator &gt; unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>unordered_multimap::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1a2eece86abca0846cd96e81014acd5758" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="445" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="445" bodyend="445"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a0ad6a39c7ccff20e7c1d2d33005ffdb5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref>, <ref refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD pair&lt; const_iterator, const_iterator &gt; unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>unordered_multimap::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap_1a2eece86abca0846cd96e81014acd5758" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的常量元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含范围起始和结束的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="452" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="452" bodyend="454"/>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a6c4a7ced9a0f2d1e906343a1d6621e3f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; base_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</definition>
+        <argsstring>(unordered_multimap &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>unordered_multimap::swap</qualifiedname>
+        <param>
+          <type><ref refid="classunordered__multimap" kindref="compound">unordered_multimap</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个unordered_multimap的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个unordered_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="460" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="460" bodyend="460"/>
+        <references refid="group___swap_utility_1ga9cc217ccd3ddd28edc3ebfd181bba2f3" compoundref="type__traits_8hpp" startline="3946">is_nothrow_swappable_v</references>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a3f878fc9c5cc1b0aed9d2f53be21fd39" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_==rhs.ht_)" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_to</definition>
+        <argsstring>(const unordered_multimap &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>unordered_multimap::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap" kindref="compound">unordered_multimap</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧unordered_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个unordered_multimap大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="467" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="467" bodyend="469"/>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classunordered__multimap_1a1944096094ad8f23fe7d174e407478ff" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(ht_&lt; rhs.ht_)" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::less_than</definition>
+        <argsstring>(const unordered_multimap &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>unordered_multimap::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classunordered__multimap" kindref="compound">unordered_multimap</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧unordered_multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="476" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="476" bodyend="478"/>
+        <references refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>无序多重映射容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>HashFcn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希函数类型，默认为hash&lt;Key&gt; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>EqualKey</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键相等比较函数类型，默认为equal_to&lt;Key&gt; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+unordered_multimap是一种关联容器，存储键值对（key-value pairs），允许重复键。 元素无序存储，由哈希函数将键映射到桶中。 支持快速的键查找，且允许重复键。底层使用哈希表实现。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="38" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" bodystart="38" bodyend="479"/>
+    <listofallmembers>
+      <member refid="classunordered__multimap_1a8e2640169b16a77486e5cc7a78808585" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>allocator_type</name></member>
+      <member refid="classunordered__multimap_1a8d0c0926a855ed096ea555ac7b131d40" prot="private" virt="non-virtual"><scope>unordered_multimap</scope><name>base_type</name></member>
+      <member refid="classunordered__multimap_1adad5e0c929e9a984c65f2c0855ac9e06" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>begin</name></member>
+      <member refid="classunordered__multimap_1a145c7176e0b7dc290dcd6e5c3dcf299b" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>begin</name></member>
+      <member refid="classunordered__multimap_1a502b6d45f1dea783020fd6a74f4001b8" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>bucket_size</name></member>
+      <member refid="classunordered__multimap_1a50be96ea220252cd25a838b61e7c2261" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>buckets_max_size</name></member>
+      <member refid="classunordered__multimap_1a3e4caa260a4371835852f92dd9c3377c" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>buckets_size</name></member>
+      <member refid="classunordered__multimap_1aaf6d99b9eb78542f58ff520e65644c81" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>cbegin</name></member>
+      <member refid="classunordered__multimap_1aa8a79a89b21041f24212ba67cb828ef6" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>cend</name></member>
+      <member refid="classunordered__multimap_1a9ff42cd8b3ca0fa43e7d5f80b5a3a974" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>clear</name></member>
+      <member refid="classunordered__multimap_1a05ae498b684f87d2da26ecba4efc4da5" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>const_iterator</name></member>
+      <member refid="classunordered__multimap_1a11e8ec33c7940ffb64fdced2fc08e8df" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>const_pointer</name></member>
+      <member refid="classunordered__multimap_1a8268603c5b658c4706c8377196f33356" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>const_reference</name></member>
+      <member refid="classunordered__multimap_1a254e46eb1fdbe9d1a2f096a97519f344" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>count</name></member>
+      <member refid="classunordered__multimap_1a6438336510d9df7d63bff895a5ed0e4e" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>difference_type</name></member>
+      <member refid="classunordered__multimap_1aee0eaa558b6df5d8a1e63c17e828be73" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>emplace</name></member>
+      <member refid="classunordered__multimap_1a691b8dd49926d27401e511682b8cfd3b" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>empty</name></member>
+      <member refid="classunordered__multimap_1a6468a4e9fb20091634592f31cb768cba" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>end</name></member>
+      <member refid="classunordered__multimap_1a80a7f4bb9e3792ed261071e398f158f8" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>end</name></member>
+      <member refid="classunordered__multimap_1af740afeec659c6e04f38bea8a5f15e1f" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>equal_range</name></member>
+      <member refid="classunordered__multimap_1a0ad6a39c7ccff20e7c1d2d33005ffdb5" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>equal_range</name></member>
+      <member refid="classunordered__multimap_1a3f878fc9c5cc1b0aed9d2f53be21fd39" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>equal_to</name></member>
+      <member refid="classunordered__multimap_1a3052da5a6737b7ef788793523420c2ed" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>erase</name></member>
+      <member refid="classunordered__multimap_1a2d1c1c33fe12e7511598e27b710402d0" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>erase</name></member>
+      <member refid="classunordered__multimap_1a2a1d8b3cf321c2430776aa5509b18d85" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>erase</name></member>
+      <member refid="classunordered__multimap_1af1675f892f4a7729aa052c9317a12d53" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>erase</name></member>
+      <member refid="classunordered__multimap_1a7b2fd0f3defd4dcec2ed4fd0e9f6c01b" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>erase</name></member>
+      <member refid="classunordered__multimap_1a949c1eee57b3ee354c0fb5d045725a4e" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>find</name></member>
+      <member refid="classunordered__multimap_1a573651dbd7fea79423fc6fd9ed24dc6b" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>find</name></member>
+      <member refid="classunordered__multimap_1aa6c7af27be0cdfd652b7da5b75b4b11d" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>hash_func</name></member>
+      <member refid="classunordered__multimap_1afc6ca319e81bc9ca78493226527be4db" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>hasher</name></member>
+      <member refid="classunordered__multimap_1a6580a2dc0b0d35855827958a4b2791bf" prot="private" virt="non-virtual"><scope>unordered_multimap</scope><name>ht_</name></member>
+      <member refid="classunordered__multimap_1a35f66d7afc952e4e482d42f618f2f418" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>insert</name></member>
+      <member refid="classunordered__multimap_1a5377c211e163e4839921694fb7ec4697" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>insert</name></member>
+      <member refid="classunordered__multimap_1a34fb5dd50003d3704904cd3e0a6b726d" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>insert</name></member>
+      <member refid="classunordered__multimap_1aae2c24b62b7387c90f085a32ffe2500a" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>iterator</name></member>
+      <member refid="classunordered__multimap_1aeb22fb6a7644511d3b0150b196027c98" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>key_eql</name></member>
+      <member refid="classunordered__multimap_1a98d034a85c6c740ca18b40be64313604" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>key_equal</name></member>
+      <member refid="classunordered__multimap_1a2eece86abca0846cd96e81014acd5758" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>key_type</name></member>
+      <member refid="classunordered__multimap_1a1944096094ad8f23fe7d174e407478ff" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>less_than</name></member>
+      <member refid="classunordered__multimap_1ad8ea8c4262a1059018ef21c4553369c8" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>load_factor</name></member>
+      <member refid="classunordered__multimap_1a95b4071909a5879d93d5a2db204a8b83" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>max_load_factor</name></member>
+      <member refid="classunordered__multimap_1a38457e9fa8a1c255a007d13831eafb6b" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>max_load_factor</name></member>
+      <member refid="classunordered__multimap_1ab76f2b77809cf674287a944d7f23d10c" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>max_size</name></member>
+      <member refid="classunordered__multimap_1a69630e0c2c18093e9ef74e50b895f86e" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>operator=</name></member>
+      <member refid="classunordered__multimap_1a6ee24848260b936f04522634cef7705e" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>operator=</name></member>
+      <member refid="classunordered__multimap_1a1efebf04ea755630aa815f696666fea8" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>pointer</name></member>
+      <member refid="classunordered__multimap_1a05ec97927f1f8b71b02a038eeb5635d2" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>reference</name></member>
+      <member refid="classunordered__multimap_1aaeb7e18b064d958dadbc6308b25add1b" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>rehash</name></member>
+      <member refid="classunordered__multimap_1a09220b72b7797b5fe7885a93d5cdb6eb" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>reserve</name></member>
+      <member refid="classunordered__multimap_1a39c67c1b08119c08c335e8bb15bab06f" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>size</name></member>
+      <member refid="classunordered__multimap_1a9585ab3a436c853091ba89c2cad0da17" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>size_type</name></member>
+      <member refid="classunordered__multimap_1a6c4a7ced9a0f2d1e906343a1d6621e3f" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>swap</name></member>
+      <member refid="classunordered__multimap_1af9c844706091b379b1544fc88bd96727" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1a731219e571e335fb4b832cf596326b54" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1a895858f30357bc936d47c3fe17d2c02f" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1a8b036a24a4dd95096a71f488445b322e" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1a775d6ddab4de216506149b16f54eab2c" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1a2ea94f6df51bf05246851aadc312cfe8" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1ad011a31b5a3fe903ad34a1b877b604c2" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1a96894bfed496bf703e610469561d89fa" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1a98ab626d5f7384d70b699d0fc7b836eb" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1ab84f42b0ff9193d7f22dcf827744ae0b" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1a6bba7da233f3a4c649d51fa34f674d59" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1ae73a8744c23b60d4c0f7177702cb6a44" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1adf6105b06549f96a30e329ea50f440da" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1ade898a36fab46a4f633f725e4177da58" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>unordered_multimap</name></member>
+      <member refid="classunordered__multimap_1a11f2cf024dfa875a85caaf74b15f9e11" prot="public" virt="non-virtual"><scope>unordered_multimap</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

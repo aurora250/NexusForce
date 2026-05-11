@@ -1,0 +1,616 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structnarrow__char__traits" kind="struct" language="C++" prot="public">
+    <compoundname>narrow_char_traits</compoundname>
+    <basecompoundref refid="structbase__char__traits" prot="private" virt="non-virtual">base_char_traits&lt; CharT, IntT &gt;</basecompoundref>
+    <includes refid="char__traits_8hpp" local="no">char_traits.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename CharT</type>
+      </param>
+      <param>
+        <type>typename IntT</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structnarrow__char__traits_1a55d014d9c375e785386af7f469e98275" prot="private" static="no">
+        <type><ref refid="structbase__char__traits" kindref="compound">base_char_traits</ref>&lt; CharT, IntT &gt;</type>
+        <definition>using narrow_char_traits&lt; CharT, IntT &gt;::base_type = base_char_traits&lt;CharT, IntT&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>narrow_char_traits::base_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="158" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" prot="public" static="no">
+        <type>CharT</type>
+        <definition>using narrow_char_traits&lt; CharT, IntT &gt;::char_type = CharT</definition>
+        <argsstring></argsstring>
+        <name>char_type</name>
+        <qualifiedname>narrow_char_traits::char_type</qualifiedname>
+        <briefdescription>
+<para>字符类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="161" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structnarrow__char__traits_1af2e705b8a7c3c7c096ebe0d2dd6341f5" prot="public" static="no">
+        <type>IntT</type>
+        <definition>using narrow_char_traits&lt; CharT, IntT &gt;::int_type = IntT</definition>
+        <argsstring></argsstring>
+        <name>int_type</name>
+        <qualifiedname>narrow_char_traits::int_type</qualifiedname>
+        <briefdescription>
+<para>整数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="162" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="162" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structnarrow__char__traits_1a745b3d8925fae2ece6efe17c5ee4157f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr int</type>
+        <definition>static NEFORCE_NODISCARD constexpr int narrow_char_traits&lt; CharT, IntT &gt;::compare</definition>
+        <argsstring>(const char_type *lhs, const char_type *rhs, const size_t n) noexcept</argsstring>
+        <name>compare</name>
+        <qualifiedname>narrow_char_traits::compare</qualifiedname>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+          <declname>rhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>比较两个字符序列（内存优化版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="180" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="180" bodyend="183"/>
+        <references refid="group___memory_functions_1ga16eceb015a4eb9f200a698ce02c5f291" compoundref="memory_8hpp" startline="125" endline="144">memory_compare</references>
+      </memberdef>
+      <memberdef kind="function" id="structnarrow__char__traits_1aaffe1b1a4acda1b54870187da4c04f5c" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+        <definition>static NEFORCE_NODISCARD constexpr const char_type * narrow_char_traits&lt; CharT, IntT &gt;::find</definition>
+        <argsstring>(const char_type *str, const size_t n, const char_type chr) noexcept</argsstring>
+        <name>find</name>
+        <qualifiedname>narrow_char_traits::find</qualifiedname>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref></type>
+          <declname>chr</declname>
+        </param>
+        <briefdescription>
+<para>在字符序列中查找指定字符（内存优化版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>chr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配字符的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="192" column="56" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="192" bodyend="195"/>
+        <references refid="group___memory_functions_1ga5cf4ca57fc2c90ba1be9b80fbc85628d" compoundref="memory_8hpp" startline="249" endline="262">memory_find</references>
+      </memberdef>
+      <memberdef kind="function" id="structnarrow__char__traits_1a797f3bcecfe1d37aba5414606822f79f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+        <definition>static constexpr char_type * narrow_char_traits&lt; CharT, IntT &gt;::assign</definition>
+        <argsstring>(char_type *str, size_t n, const char_type chr) noexcept</argsstring>
+        <name>assign</name>
+        <qualifiedname>narrow_char_traits::assign</qualifiedname>
+        <param>
+          <type><ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref></type>
+          <declname>chr</declname>
+        </param>
+        <briefdescription>
+<para>将字符序列中的每个字符设置为指定值（内存优化版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字符序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>chr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>str指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="204" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="204" bodyend="206"/>
+        <references refid="group___memory_functions_1gaa8bc88fb2da36b848b8e716ceb4097a4" compoundref="memory_8hpp" startline="198" endline="210">memory_set</references>
+      </memberdef>
+      <memberdef kind="function" id="structnarrow__char__traits_1a2a50838c26b58cd436345571b73a6f07" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static constexpr void narrow_char_traits&lt; CharT, IntT &gt;::assign</definition>
+        <argsstring>(char_type &amp;lhs, const char_type &amp;rhs) noexcept</argsstring>
+        <name>assign</name>
+        <qualifiedname>narrow_char_traits::assign</qualifiedname>
+        <param>
+          <type><ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>赋值单个字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左值引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右值引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="213" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="213" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="structnarrow__char__traits_1a9441f141e7409a997d4c505f2a30f302" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+        <definition>static constexpr char_type * base_char_traits&lt; CharT, IntT &gt;::copy</definition>
+        <argsstring>(char_type *dest, const char_type *srcs, const size_t count) noexcept</argsstring>
+        <name>copy</name>
+        <qualifiedname>narrow_char_traits::copy</qualifiedname>
+        <param>
+          <type><ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+          <declname>srcs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>复制字符序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>srcs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要复制的字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>dest指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="164" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="46" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="structnarrow__char__traits_1a2e0c7b127fdc34416e90059e23dff49d" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="structnarrow__char__traits_1af2e705b8a7c3c7c096ebe0d2dd6341f5" kindref="member">int_type</ref></type>
+        <definition>static NEFORCE_NODISCARD constexpr int_type base_char_traits&lt; CharT, IntT &gt;::eof</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>eof</name>
+        <qualifiedname>narrow_char_traits::eof</qualifiedname>
+        <briefdescription>
+<para>返回EOF值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>EOF值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="165" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="142" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="structnarrow__char__traits_1a10089f57df620db64b14f28bc7811992" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>static NEFORCE_NODISCARD constexpr bool base_char_traits&lt; CharT, IntT &gt;::eq</definition>
+        <argsstring>(const char_type lhs, const char_type rhs) noexcept</argsstring>
+        <name>eq</name>
+        <qualifiedname>narrow_char_traits::eq</qualifiedname>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="166" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="structnarrow__char__traits_1ac5375a2e03f6d9b5cf48b9b7d1824c37" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>static NEFORCE_NODISCARD constexpr size_t base_char_traits&lt; CharT, IntT &gt;::length</definition>
+        <argsstring>(const char_type *str) noexcept</argsstring>
+        <name>length</name>
+        <qualifiedname>narrow_char_traits::length</qualifiedname>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>计算字符串长度 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>以空字符结尾的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串长度（不含空字符） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="167" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="79" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="structnarrow__char__traits_1a83a2eacd18af0fdb68166cfe22861052" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>static NEFORCE_NODISCARD constexpr bool base_char_traits&lt; CharT, IntT &gt;::lt</definition>
+        <argsstring>(const char_type lhs, const char_type rhs) noexcept</argsstring>
+        <name>lt</name>
+        <qualifiedname>narrow_char_traits::lt</qualifiedname>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否lhs &lt; rhs </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="168" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="127" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="structnarrow__char__traits_1a902ab3a5f3e5e6e83cba89be5ce4fe2c" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+        <definition>static constexpr char_type * base_char_traits&lt; CharT, IntT &gt;::move</definition>
+        <argsstring>(char_type *dest, const char_type *srcs, const size_t count) noexcept</argsstring>
+        <name>move</name>
+        <qualifiedname>narrow_char_traits::move</qualifiedname>
+        <param>
+          <type><ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" kindref="member">char_type</ref> *</type>
+          <declname>srcs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>移动字符序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>srcs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>dest指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="169" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="58" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="structnarrow__char__traits_1ab0d0bae7e82561269ee9533167878c29" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="structnarrow__char__traits_1af2e705b8a7c3c7c096ebe0d2dd6341f5" kindref="member">int_type</ref></type>
+        <definition>static NEFORCE_NODISCARD constexpr int_type base_char_traits&lt; CharT, IntT &gt;::not_eof</definition>
+        <argsstring>(const int_type rsc) noexcept</argsstring>
+        <name>not_eof</name>
+        <qualifiedname>narrow_char_traits::not_eof</qualifiedname>
+        <param>
+          <type>const <ref refid="structnarrow__char__traits_1af2e705b8a7c3c7c096ebe0d2dd6341f5" kindref="member">int_type</ref></type>
+          <declname>rsc</declname>
+        </param>
+        <briefdescription>
+<para>如果不是EOF则返回原值，否则返回0 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rsc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>非EOF值或0 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="170" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="134" bodyend="136"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>窄字符特征模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IntT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+为窄字符类型提供优化的内存操作实现。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>base_char_traits&lt; CharT, IntT &gt;</label>
+        <link refid="structbase__char__traits"/>
+      </node>
+      <node id="1">
+        <label>narrow_char_traits&lt; CharT, IntT &gt;</label>
+        <link refid="structnarrow__char__traits"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>base_char_traits&lt; CharT, IntT &gt;</label>
+        <link refid="structbase__char__traits"/>
+      </node>
+      <node id="1">
+        <label>narrow_char_traits&lt; CharT, IntT &gt;</label>
+        <link refid="structnarrow__char__traits"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="154" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="154" bodyend="214"/>
+    <listofallmembers>
+      <member refid="structnarrow__char__traits_1a797f3bcecfe1d37aba5414606822f79f" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>assign</name></member>
+      <member refid="structnarrow__char__traits_1a2a50838c26b58cd436345571b73a6f07" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>assign</name></member>
+      <member refid="structbase__char__traits_1aeb5dd3a3a41755bc8ed19fb748fc2f13" prot="private" virt="non-virtual" ambiguityscope="base_char_traits::"><scope>narrow_char_traits</scope><name>assign</name></member>
+      <member refid="structnarrow__char__traits_1a55d014d9c375e785386af7f469e98275" prot="private" virt="non-virtual"><scope>narrow_char_traits</scope><name>base_type</name></member>
+      <member refid="structnarrow__char__traits_1a3c59eb90ff0c14bfcfd03c0149ac237c" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>char_type</name></member>
+      <member refid="structnarrow__char__traits_1a745b3d8925fae2ece6efe17c5ee4157f" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>compare</name></member>
+      <member refid="structnarrow__char__traits_1a9441f141e7409a997d4c505f2a30f302" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>copy</name></member>
+      <member refid="structnarrow__char__traits_1a2e0c7b127fdc34416e90059e23dff49d" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>eof</name></member>
+      <member refid="structnarrow__char__traits_1a10089f57df620db64b14f28bc7811992" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>eq</name></member>
+      <member refid="structnarrow__char__traits_1aaffe1b1a4acda1b54870187da4c04f5c" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>find</name></member>
+      <member refid="structnarrow__char__traits_1af2e705b8a7c3c7c096ebe0d2dd6341f5" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>int_type</name></member>
+      <member refid="structnarrow__char__traits_1ac5375a2e03f6d9b5cf48b9b7d1824c37" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>length</name></member>
+      <member refid="structnarrow__char__traits_1a83a2eacd18af0fdb68166cfe22861052" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>lt</name></member>
+      <member refid="structnarrow__char__traits_1a902ab3a5f3e5e6e83cba89be5ce4fe2c" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>move</name></member>
+      <member refid="structnarrow__char__traits_1ab0d0bae7e82561269ee9533167878c29" prot="public" virt="non-virtual"><scope>narrow_char_traits</scope><name>not_eof</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

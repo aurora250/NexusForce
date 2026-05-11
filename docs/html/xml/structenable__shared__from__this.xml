@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structenable__shared__from__this" kind="struct" language="C++" prot="public">
+    <compoundname>enable_shared_from_this</compoundname>
+    <includes refid="shared__ptr_8hpp" local="no">shared_ptr.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structenable__shared__from__this_1a65b130e60ac76ad76d46f699f311a148" prot="private" static="no" mutable="yes">
+        <type>inner::__smart_ptr_counter *</type>
+        <definition>inner::__smart_ptr_counter* enable_shared_from_this&lt; T &gt;::owner_</definition>
+        <argsstring></argsstring>
+        <name>owner_</name>
+        <qualifiedname>enable_shared_from_this::owner_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>控制块指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="760" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="760" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structenable__shared__from__this_1ab2104fa6e839672da3c30400e8325e52" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class shared_ptr</definition>
+        <argsstring></argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>enable_shared_from_this::shared_ptr</qualifiedname>
+        <param>
+          <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="769" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="769" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="structenable__shared__from__this_1a27df6e2a1650d985bdeda33f0303c83f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class weak_ptr</definition>
+        <argsstring></argsstring>
+        <name>weak_ptr</name>
+        <qualifiedname>enable_shared_from_this::weak_ptr</qualifiedname>
+        <param>
+          <type><ref refid="classweak__ptr" kindref="compound">weak_ptr</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="772" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="772" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="structenable__shared__from__this_1ada759e03c1dc0af0d5fa8535131e64db" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void inner::__setup_enable_shared_from_impl</definition>
+        <argsstring>(U *ptr, inner::__smart_ptr_counter *owner, true_type) noexcept</argsstring>
+        <name>inner::__setup_enable_shared_from_impl</name>
+        <qualifiedname>enable_shared_from_this::__setup_enable_shared_from_impl</qualifiedname>
+        <param>
+          <type>U *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>inner::__smart_ptr_counter *</type>
+          <declname>owner</declname>
+        </param>
+        <param>
+          <type><ref refid="group___type_traits_utilities_1gaa4e9c28fa52ab73ef48e5cbed20c66fd" kindref="member">true_type</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="763" column="17"/>
+      </memberdef>
+      <memberdef kind="friend" id="structenable__shared__from__this_1ac5df3f65c153ef103ab3b53468f791f4" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void inner::__setup_enable_shared_from</definition>
+        <argsstring>(U *, inner::__smart_ptr_counter *) noexcept</argsstring>
+        <name>inner::__setup_enable_shared_from</name>
+        <qualifiedname>enable_shared_from_this::__setup_enable_shared_from</qualifiedname>
+        <param>
+          <type>U *</type>
+        </param>
+        <param>
+          <type>inner::__smart_ptr_counter *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="766" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="structenable__shared__from__this_1a6badcf3b2e323032ff5766796093f96f" prot="protected" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>enable_shared_from_this&lt; T &gt;::enable_shared_from_this</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>enable_shared_from_this</name>
+        <qualifiedname>enable_shared_from_this::enable_shared_from_this</qualifiedname>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="778" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="778" bodyend="778"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structenable__shared__from__this_1ad048382df1fdf3e976e6e443d6bb61c6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt;</type>
+        <definition>shared_ptr&lt; T &gt; enable_shared_from_this&lt; T &gt;::shared_from_this</definition>
+        <argsstring>()</argsstring>
+        <name>shared_from_this</name>
+        <qualifiedname>enable_shared_from_this::shared_from_this</qualifiedname>
+        <briefdescription>
+<para>获取指向自身的共享指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向当前对象的共享指针 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果对象不由shared_ptr管理 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="786" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="786" bodyend="793"/>
+        <references refid="group___base_type_qualifier_check_1ga2dd33cb2936b9c2e75a085b78a7349a1" compoundref="type__traits_8hpp" startline="2232">is_base_of_v</references>
+      </memberdef>
+      <memberdef kind="function" id="structenable__shared__from__this_1aae5792ea877c713e199f549c155eece7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; const T &gt;</type>
+        <definition>shared_ptr&lt; const T &gt; enable_shared_from_this&lt; T &gt;::shared_from_this</definition>
+        <argsstring>() const</argsstring>
+        <name>shared_from_this</name>
+        <qualifiedname>enable_shared_from_this::shared_from_this</qualifiedname>
+        <briefdescription>
+<para>获取指向自身的常量共享指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向当前对象的常量共享指针 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果对象不由shared_ptr管理 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="800" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="800" bodyend="807"/>
+        <references refid="group___base_type_qualifier_check_1ga2dd33cb2936b9c2e75a085b78a7349a1" compoundref="type__traits_8hpp" startline="2232">is_base_of_v</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>启用从this创建共享指针的基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>派生类类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+允许在类的成员函数中安全地获取指向自身的共享智能指针。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="751" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="758" bodyend="808"/>
+    <listofallmembers>
+      <member refid="structenable__shared__from__this_1a6badcf3b2e323032ff5766796093f96f" prot="protected" virt="non-virtual"><scope>enable_shared_from_this</scope><name>enable_shared_from_this</name></member>
+      <member refid="structenable__shared__from__this_1ac5df3f65c153ef103ab3b53468f791f4" prot="private" virt="non-virtual"><scope>enable_shared_from_this</scope><name>inner::__setup_enable_shared_from</name></member>
+      <member refid="structenable__shared__from__this_1ada759e03c1dc0af0d5fa8535131e64db" prot="private" virt="non-virtual"><scope>enable_shared_from_this</scope><name>inner::__setup_enable_shared_from_impl</name></member>
+      <member refid="structenable__shared__from__this_1a65b130e60ac76ad76d46f699f311a148" prot="private" virt="non-virtual"><scope>enable_shared_from_this</scope><name>owner_</name></member>
+      <member refid="structenable__shared__from__this_1ad048382df1fdf3e976e6e443d6bb61c6" prot="public" virt="non-virtual"><scope>enable_shared_from_this</scope><name>shared_from_this</name></member>
+      <member refid="structenable__shared__from__this_1aae5792ea877c713e199f549c155eece7" prot="public" virt="non-virtual"><scope>enable_shared_from_this</scope><name>shared_from_this</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

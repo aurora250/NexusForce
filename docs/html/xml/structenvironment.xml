@@ -1,0 +1,372 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structenvironment" kind="class" language="C++" prot="public">
+    <compoundname>environment</compoundname>
+    <includes refid="environment_8hpp" local="no">environment.hpp</includes>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structenvironment_1aeda4c85dfd8e57007ca391fa315e4065" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>char</type>
+        <definition>char environment::delimiter</definition>
+        <argsstring></argsstring>
+        <name>delimiter</name>
+        <qualifiedname>environment::delimiter</qualifiedname>
+        <initializer>                        =
+
+&apos;;&apos;</initializer>
+        <briefdescription>
+<para>路径分隔符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="32" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structenvironment_1ae1d7972f4d2827ec30711d297db776a0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static NEFORCE_NODISCARD string environment::get</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>get</name>
+        <qualifiedname>environment::get</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取环境变量值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>环境变量名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>环境变量值，不存在返回空字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="44" column="37"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1a6a5a4531f8ec5310d84c067fcfb6c388" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool environment::set</definition>
+        <argsstring>(const string &amp;name, const string &amp;value, bool overwrite=true)</argsstring>
+        <name>set</name>
+        <qualifiedname>environment::set</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>overwrite</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置环境变量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>环境变量名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>环境变量值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>overwrite</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否覆盖已有值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否设置成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="53" column="17"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1af1d2eff32051b0a9ecb3a3c0a08078eb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool environment::unset</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>unset</name>
+        <qualifiedname>environment::unset</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>删除环境变量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>环境变量名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否删除成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="60" column="17"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1a90bd34e3e9d1904c293474485e0c32f2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>static NEFORCE_NODISCARD bool environment::exists</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>exists</name>
+        <qualifiedname>environment::exists</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>检查环境变量是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>环境变量名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否存在 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="67" column="35"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1acb87338d0d749ac03e7c8b5696b83cb7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>static NEFORCE_NODISCARD unordered_map&lt; string, string &gt; environment::all_envs</definition>
+        <argsstring>()</argsstring>
+        <name>all_envs</name>
+        <qualifiedname>environment::all_envs</qualifiedname>
+        <briefdescription>
+<para>获取所有环境变量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>环境变量名到值的映射 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="73" column="44"/>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1ad9a9b071bfbba0b3176e4d9b192cc84e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>static NEFORCE_NODISCARD vector&lt; string &gt; environment::path_list</definition>
+        <argsstring>()</argsstring>
+        <name>path_list</name>
+        <qualifiedname>environment::path_list</qualifiedname>
+        <briefdescription>
+<para>获取PATH环境变量的路径列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>路径列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="79" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1adf119ec3b8bc7c841cb0f7b4c16de664" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool environment::add_to_path</definition>
+        <argsstring>(const string &amp;path, int position=1)</argsstring>
+        <name>add_to_path</name>
+        <qualifiedname>environment::add_to_path</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>position</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>向PATH环境变量添加路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要添加的路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>添加位置（0：开头，其他：末尾） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否添加成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="87" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1aff47efa4542db447db3f6ed49cf1b576" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static NEFORCE_NODISCARD string environment::current_directory</definition>
+        <argsstring>()</argsstring>
+        <name>current_directory</name>
+        <qualifiedname>environment::current_directory</qualifiedname>
+        <briefdescription>
+<para>获取当前工作目录 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前目录路径 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsystem__exception" kindref="compound">system_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>获取失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="94" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1a7e41c2bcec41b00356169edd11c82a77" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static NEFORCE_NODISCARD string environment::current_user</definition>
+        <argsstring>()</argsstring>
+        <name>current_user</name>
+        <qualifiedname>environment::current_user</qualifiedname>
+        <briefdescription>
+<para>获取当前用户名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>用户名 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="100" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1a2795ee9467137d0e008c9f52b2ef32b9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static NEFORCE_NODISCARD string environment::temp_directory</definition>
+        <argsstring>()</argsstring>
+        <name>temp_directory</name>
+        <qualifiedname>environment::temp_directory</qualifiedname>
+        <briefdescription>
+<para>获取临时目录路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>临时目录路径</para>
+</simplesect>
+按照优先级尝试：<itemizedlist>
+<listitem><para>Windows: TMP, TEMP, USERPROFILE</para>
+</listitem><listitem><para>Linux: TMPDIR, TEMP, TMP, /tmp </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="110" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1a7e678b0b4b09dee4136f26a29494255e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static NEFORCE_NODISCARD string environment::home_directory</definition>
+        <argsstring>()</argsstring>
+        <name>home_directory</name>
+        <qualifiedname>environment::home_directory</qualifiedname>
+        <briefdescription>
+<para>获取用户主目录路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>主目录路径</para>
+</simplesect>
+按照优先级尝试：<itemizedlist>
+<listitem><para>Windows: USERPROFILE, HOMEDRIVE+HOMEPATH</para>
+</listitem><listitem><para>Linux: HOME </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="120" column="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>环境变量管理类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供静态方法用于访问和修改环境变量，所有操作都是线程安全的。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="28" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/environment.hpp" bodystart="28" bodyend="121"/>
+    <listofallmembers>
+      <member refid="structenvironment_1adf119ec3b8bc7c841cb0f7b4c16de664" prot="public" virt="non-virtual"><scope>environment</scope><name>add_to_path</name></member>
+      <member refid="structenvironment_1acb87338d0d749ac03e7c8b5696b83cb7" prot="public" virt="non-virtual"><scope>environment</scope><name>all_envs</name></member>
+      <member refid="structenvironment_1aff47efa4542db447db3f6ed49cf1b576" prot="public" virt="non-virtual"><scope>environment</scope><name>current_directory</name></member>
+      <member refid="structenvironment_1a7e41c2bcec41b00356169edd11c82a77" prot="public" virt="non-virtual"><scope>environment</scope><name>current_user</name></member>
+      <member refid="structenvironment_1aeda4c85dfd8e57007ca391fa315e4065" prot="public" virt="non-virtual"><scope>environment</scope><name>delimiter</name></member>
+      <member refid="structenvironment_1a90bd34e3e9d1904c293474485e0c32f2" prot="public" virt="non-virtual"><scope>environment</scope><name>exists</name></member>
+      <member refid="structenvironment_1ae1d7972f4d2827ec30711d297db776a0" prot="public" virt="non-virtual"><scope>environment</scope><name>get</name></member>
+      <member refid="structenvironment_1a7e678b0b4b09dee4136f26a29494255e" prot="public" virt="non-virtual"><scope>environment</scope><name>home_directory</name></member>
+      <member refid="structenvironment_1ad9a9b071bfbba0b3176e4d9b192cc84e" prot="public" virt="non-virtual"><scope>environment</scope><name>path_list</name></member>
+      <member refid="structenvironment_1a6a5a4531f8ec5310d84c067fcfb6c388" prot="public" virt="non-virtual"><scope>environment</scope><name>set</name></member>
+      <member refid="structenvironment_1a2795ee9467137d0e008c9f52b2ef32b9" prot="public" virt="non-virtual"><scope>environment</scope><name>temp_directory</name></member>
+      <member refid="structenvironment_1af1d2eff32051b0a9ecb3a3c0a08078eb" prot="public" virt="non-virtual"><scope>environment</scope><name>unset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

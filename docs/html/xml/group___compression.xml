@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___compression" kind="group">
+    <compoundname>Compression</compoundname>
+    <title>压缩解压缩</title>
+    <innerclass refid="classneforce_1_1lz4__compressor" prot="public">neforce::lz4_compressor</innerclass>
+    <innerclass refid="classzlib__compressor" prot="public">zlib_compressor</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group___compression_1gabea3bd6adfcf0a71d2d2f2987233318c" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>compress_level</name>
+        <enumvalue id="group___compression_1ggabea3bd6adfcf0a71d2d2f2987233318ca334c4a4c42fdb79d7ebc3e73b517e6f8" prot="public">
+          <name>none</name>
+          <initializer>= Z_NO_COMPRESSION</initializer>
+          <briefdescription>
+<para>无压缩 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___compression_1ggabea3bd6adfcf0a71d2d2f2987233318cad188afd04688367a1c19970e060207d4" prot="public">
+          <name>best_speed</name>
+          <initializer>= Z_BEST_SPEED</initializer>
+          <briefdescription>
+<para>最快速度，压缩率最低 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___compression_1ggabea3bd6adfcf0a71d2d2f2987233318ca6637b88286cba926cc1bb0ef49f9d2e8" prot="public">
+          <name>default_level</name>
+          <initializer>= Z_DEFAULT_COMPRESSION</initializer>
+          <briefdescription>
+<para>默认压缩级别 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___compression_1ggabea3bd6adfcf0a71d2d2f2987233318cac7564e4a9013f0001f9041cd4b3a5cdc" prot="public">
+          <name>best_compression</name>
+          <initializer>= Z_BEST_COMPRESSION</initializer>
+          <briefdescription>
+<para>最佳压缩率，速度最慢 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>压缩级别枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义不同的压缩级别，在压缩速度和压缩率之间进行权衡。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="57" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="57" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___compression_1ga573846ea8701aabec09c27f2d432c675" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>compress_strategy</name>
+        <enumvalue id="group___compression_1gga573846ea8701aabec09c27f2d432c675a631738167a29f3283fb2afb8be36482d" prot="public">
+          <name>default_strategy</name>
+          <initializer>= Z_DEFAULT_STRATEGY</initializer>
+          <briefdescription>
+<para>默认策略，适用于通用数据 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___compression_1gga573846ea8701aabec09c27f2d432c675adce4a640a8b606a2290c35b8d8d1e9d6" prot="public">
+          <name>filtered</name>
+          <initializer>= Z_FILTERED</initializer>
+          <briefdescription>
+<para>过滤策略，适用于由过滤器产生的数据 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___compression_1gga573846ea8701aabec09c27f2d432c675aecf69a2d3837334a0776b864fcaddbb0" prot="public">
+          <name>huffman_only</name>
+          <initializer>= Z_HUFFMAN_ONLY</initializer>
+          <briefdescription>
+<para>仅使用霍夫曼编码 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___compression_1gga573846ea8701aabec09c27f2d432c675a5e0ba941a9750318bd93522568476ad8" prot="public">
+          <name>rle</name>
+          <initializer>= Z_RLE</initializer>
+          <briefdescription>
+<para>游程编码 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___compression_1gga573846ea8701aabec09c27f2d432c675acec315e3d0975e5cc2811d5d8725f149" prot="public">
+          <name>fixed</name>
+          <initializer>= Z_FIXED</initializer>
+          <briefdescription>
+<para>固定霍夫曼编码 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>压缩策略枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义不同的压缩策略，针对不同类型的数据进行优化。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="70" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="70" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___compression_1ga3aad07e45fe05732549e0fb76f8578de" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>compress_format</name>
+        <enumvalue id="group___compression_1gga3aad07e45fe05732549e0fb76f8578dea7a990d405d2c6fb93aa8fbb0ec1a3b23" prot="public">
+          <name>zlib</name>
+          <briefdescription>
+<para>ZLIB格式（RFC 1950） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___compression_1gga3aad07e45fe05732549e0fb76f8578dea749cadba7b2ed8d4a2aaa91a9cb1896c" prot="public">
+          <name>gzip</name>
+          <briefdescription>
+<para>GZIP格式（RFC 1952） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___compression_1gga3aad07e45fe05732549e0fb76f8578dea7e8bb5a89f2842ac4af01b3b7e228592" prot="public">
+          <name>deflate</name>
+          <briefdescription>
+<para>原始Deflate流（无头尾） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>压缩格式枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义不同的压缩格式。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="84" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="84" bodyend="88"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>数据压缩和解压缩功能 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

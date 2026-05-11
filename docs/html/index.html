@@ -130,12 +130,14 @@ $(function(){initNavTree('index.html','',''); });
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">平台  </th><th class="markdownTableHeadNone">指令集  </th><th class="markdownTableHeadNone">位宽  </th><th class="markdownTableHeadNone">编译器  </th><th class="markdownTableHeadNone">C++ 标准  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🪟 WINDOWS  </td><td class="markdownTableBodyNone">X86  </td><td class="markdownTableBodyNone">32位  </td><td class="markdownTableBodyNone">MSVC  </td><td class="markdownTableBodyNone">14  </td></tr>
+<td class="markdownTableBodyNone">🪟 WINDOWS  </td><td class="markdownTableBodyNone">X86  </td><td class="markdownTableBodyNone">32位  </td><td class="markdownTableBodyNone">MSVC  </td><td class="markdownTableBodyNone">14 (除MinGW)  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">🐧 LINUX  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">64位  </td><td class="markdownTableBodyNone">MinGW  </td><td class="markdownTableBodyNone">17  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">GCC  </td><td class="markdownTableBodyNone">20  </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">LLVM-MinGW  </td><td class="markdownTableBodyNone">20  </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">GCC  </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">Clang  </td><td class="markdownTableBodyNone"></td></tr>
 </table>
 <hr  />
@@ -150,7 +152,7 @@ $(function(){initNavTree('index.html','',''); });
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">🔒 <b>CodeQL 安全分析</b>  </td><td class="markdownTableBodyNone"><b>0 漏洞</b>  </td><td class="markdownTableBodyNone"><span class="tt">security-and-quality</span> 全规则集，零安全告警  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🔍 <b>Clang-Tidy 静态检查</b>  </td><td class="markdownTableBodyNone"><b>零警告</b>  </td><td class="markdownTableBodyNone">全量规则集（<span class="tt">bugprone</span>/<span class="tt">cppcoreguidelines</span>/<span class="tt">hicpp</span>/<span class="tt">modernize</span>/<span class="tt">performance</span>/<span class="tt">readability</span>），警告即错误  </td></tr>
+<td class="markdownTableBodyNone">🔍 <b>Clang-Tidy 静态检查</b>  </td><td class="markdownTableBodyNone"><b>零警告</b>  </td><td class="markdownTableBodyNone">全量规则集（<span class="tt">bugprone</span> / <span class="tt">cppcoreguidelines</span> / <span class="tt">hicpp</span> / <span class="tt">modernize</span> / <span class="tt">performance</span> / <span class="tt">readability</span>），警告即错误  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">🎨 <b>Clang-Format 代码风格</b>  </td><td class="markdownTableBodyNone"><b>强制统一</b>  </td><td class="markdownTableBodyNone">120 列、4 空格、K&amp;R 变体大括号、强制大括号插入等  </td></tr>
 <tr class="markdownTableRowOdd">
@@ -180,6 +182,8 @@ $(function(){initNavTree('index.html','',''); });
 <td class="markdownTableBodyNone"><b>TOML 配置格式</b>  </td><td class="markdownTableBodyNone"><a href="https://toml.io/en/v1.0.0">TOML v1.0.0</a>  </td><td class="markdownTableBodyNone">包含日期时间格式遵循 <a href="https://www.rfc-editor.org/rfc/rfc3339">RFC 3339</a> / ISO 8601  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>UUID 生成</b>  </td><td class="markdownTableBodyNone"><a href="https://www.rfc-editor.org/rfc/rfc4122">RFC 4122</a>, <a href="https://www.rfc-editor.org/rfc/rfc9562">RFC 9562</a>  </td><td class="markdownTableBodyNone">UUID v4（随机）与 v7（时间有序）生成规范  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>HTTP 与 WebSocket</b>  </td><td class="markdownTableBodyNone"><a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110</a> / <a href="https://www.rfc-editor.org/rfc/rfc9112.html">RFC 9112</a> (HTTP/1.1), <a href="https://www.rfc-editor.org/rfc/rfc6265.html">RFC 6265</a> (Cookie), <a href="https://www.rfc-editor.org/rfc/rfc6455.html">RFC 6455</a> (WebSocket), <a href="https://fetch.spec.whatwg.org/#http-cors-protocol">W3C Fetch CORS</a>  </td><td class="markdownTableBodyNone">完整 HTTP 语义与路由、Cookie 管理、CORS 跨域策略、WebSocket 升级与帧协议  </td></tr>
 </table>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
 🔐 密码学与安全算法</h2>
@@ -222,6 +226,8 @@ $(function(){initNavTree('index.html','',''); });
 <td class="markdownTableBodyNone"><b>内省排序</b>  </td><td class="markdownTableBodyNone"><a href="https://doi.org/10.1002/(SICI)1097-024X(199708)27:8&lt;983::AID-SPE117&gt;3.0.CO;2-%23">Musser (1997)</a>  </td><td class="markdownTableBodyNone">混合快速/堆/插入排序，C++ 标准库 sort 默认算法  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>非加密哈希</b>  </td><td class="markdownTableBodyNone"><a href="https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17">FNV-1a 草案</a>, <a href="https://github.com/aappleby/smhasher/wiki/MurmurHash3">MurmurHash3</a>  </td><td class="markdownTableBodyNone">高性能哈希表与布隆过滤器专用  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>字节大小单位</b>  </td><td class="markdownTableBodyNone"><a href="https://www.iso.org/standard/31898.html">IEC 80000-13:2008</a>, <a href="https://standards.ieee.org/ieee/1541/10790/">IEEE 1541-2021</a>, <a href="https://www.bipm.org/en/publications/si-brochure">BIPM SI Brochure (9th Ed.)</a>  </td><td class="markdownTableBodyNone">二进制前缀 (KiB/MiB/GiB) 与十进制前缀 (kB/MB/GB)  </td></tr>
 </table>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
 ⚙️ 系统、并发与命令行</h2>
@@ -461,23 +467,23 @@ $(function(){initNavTree('index.html','',''); });
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">🔍 静态分析  </td><td class="markdownTableBodyNone"><a href="https://clang.llvm.org/extra/clang-tidy/">clang-tidy</a>  </td><td class="markdownTableBodyNone">19+  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">⚠️ 必选依赖  </td><td class="markdownTableBodyNone"><a href="https://google.github.io/googletest/">GTest</a>  </td><td class="markdownTableBodyNone">1.17.0#2  </td></tr>
+<td class="markdownTableBodyNone">⚠️ 必选依赖  </td><td class="markdownTableBodyNone"><a href="https://google.github.io/googletest/">GTest</a>  </td><td class="markdownTableBodyNone">1.17.0+  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.pcre.org/">pcre2</a>  </td><td class="markdownTableBodyNone">10.47  </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.pcre.org/">pcre2</a>  </td><td class="markdownTableBodyNone">10.47+  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.openssl.org/">OpenSSL</a>  </td><td class="markdownTableBodyNone">3.6.1#2  </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.openssl.org/">OpenSSL</a>  </td><td class="markdownTableBodyNone">3.6.1+  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">📦 可选依赖  </td><td class="markdownTableBodyNone"><a href="https://www.postgresql.org/">libpq</a>  </td><td class="markdownTableBodyNone">16.9#3  </td></tr>
+<td class="markdownTableBodyNone">📦 可选依赖  </td><td class="markdownTableBodyNone"><a href="https://www.postgresql.org/">libpq</a>  </td><td class="markdownTableBodyNone">16.9+  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.mysql.com/">libmysql</a>  </td><td class="markdownTableBodyNone">8.0.40#1  </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.mysql.com/">libmysql</a>  </td><td class="markdownTableBodyNone">8.0.40+  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://sqlite.org/index.html">sqlite3</a>  </td><td class="markdownTableBodyNone">3.51.2  </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://sqlite.org/index.html">sqlite3</a>  </td><td class="markdownTableBodyNone">3.51.2+  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://redis.ac.cn/docs/latest/develop/clients/hiredis/">hiredis</a>  </td><td class="markdownTableBodyNone">1.3.0  </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://redis.ac.cn/docs/latest/develop/clients/hiredis/">hiredis</a>  </td><td class="markdownTableBodyNone">1.3.0+  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://lz4.org/">lz4</a>  </td><td class="markdownTableBodyNone">1.10.0  </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://lz4.org/">lz4</a>  </td><td class="markdownTableBodyNone">1.10.0+  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.zlib.net/">zlib</a>  </td><td class="markdownTableBodyNone">1.3.1  </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><a href="https://www.zlib.net/">zlib</a>  </td><td class="markdownTableBodyNone">1.3.1+  </td></tr>
 </table>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
 🏗️ 编译步骤</h2>

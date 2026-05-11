@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['平台差异_0',['平台差异',['../group___u_t_f.html#platform_differences',1,'']]]
+  ['布尔值同义词_0',['布尔值同义词',['../group___yaml_config.html#boolean_synonyms',1,'']]],
+  ['布隆过滤器原理_1',['布隆过滤器原理',['../group___bloom_filter.html#bloom_filter_principles',1,'']]]
 ];

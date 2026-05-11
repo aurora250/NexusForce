@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structworker__context" kind="struct" language="C++" prot="public">
+    <compoundname>worker_context</compoundname>
+    <includes refid="thread__pool_8hpp" local="no">thread_pool.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structworker__context_1a9819ca5bea261e9484d75f512fc38326" prot="public" static="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>using worker_context::id_type = uint32_t</definition>
+        <argsstring></argsstring>
+        <name>id_type</name>
+        <qualifiedname>worker_context::id_type</qualifiedname>
+        <briefdescription>
+<para>线程ID类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="202" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="202" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structworker__context_1a3d472b2df48065b84ccdb033671a352c" prot="public" static="no" mutable="no">
+        <type><ref refid="classlocal__queue" kindref="compound">local_queue</ref></type>
+        <definition>local_queue worker_context::queue</definition>
+        <argsstring></argsstring>
+        <name>queue</name>
+        <qualifiedname>worker_context::queue</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>本地任务队列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="204" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="204" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="variable" id="structworker__context_1a0ce42d0b767acc53e81ba0e89aa4e3c4" prot="public" static="no" mutable="no">
+        <type><ref refid="structworker__context_1a9819ca5bea261e9484d75f512fc38326" kindref="member">id_type</ref></type>
+        <definition>id_type worker_context::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>worker_context::id</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>线程ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="205" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="205" bodyend="205"/>
+        <referencedby refid="group___thread_pool_1ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structworker__context_1a0708436cfb366b691690600be934454e" prot="public" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; worker_context::is_stealing</definition>
+        <argsstring></argsstring>
+        <name>is_stealing</name>
+        <qualifiedname>worker_context::is_stealing</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否正在执行窃取操作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="206" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="206" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="variable" id="structworker__context_1aa4cb896c147fd86efed7b3f176e8a233" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t worker_context::consecutive_idle_count</definition>
+        <argsstring></argsstring>
+        <name>consecutive_idle_count</name>
+        <qualifiedname>worker_context::consecutive_idle_count</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>连续空闲次数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="207" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="207" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structworker__context_1aefffdfb44765082768ec9843debfb727" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>worker_context::worker_context</definition>
+        <argsstring>()=default</argsstring>
+        <name>worker_context</name>
+        <qualifiedname>worker_context::worker_context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="209" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structworker__context_1a8653d668b6d1d14ba08f90c4217ddf13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>worker_context::worker_context</definition>
+        <argsstring>(const worker_context &amp;)=delete</argsstring>
+        <name>worker_context</name>
+        <qualifiedname>worker_context::worker_context</qualifiedname>
+        <param>
+          <type>const <ref refid="structworker__context" kindref="compound">worker_context</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="210" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structworker__context_1adfffa7bb28a8b49fd509c03f134a024c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structworker__context" kindref="compound">worker_context</ref> &amp;</type>
+        <definition>worker_context &amp; worker_context::operator=</definition>
+        <argsstring>(const worker_context &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>worker_context::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structworker__context" kindref="compound">worker_context</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="211" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="structworker__context_1ae75c126e56a59f3a42f356300d63eeba" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>worker_context::worker_context</definition>
+        <argsstring>(worker_context &amp;&amp;other) noexcept</argsstring>
+        <name>worker_context</name>
+        <qualifiedname>worker_context::worker_context</qualifiedname>
+        <param>
+          <type><ref refid="structworker__context" kindref="compound">worker_context</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="212" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structworker__context_1a7b1382543c6dd1cacff1c9b307cefe60" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structworker__context" kindref="compound">worker_context</ref> &amp;</type>
+        <definition>worker_context &amp; worker_context::operator=</definition>
+        <argsstring>(worker_context &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>worker_context::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structworker__context" kindref="compound">worker_context</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="213" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>工作线程上下文 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>存储每个工作线程的本地状态信息。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>atomic&lt; bool &gt;</label>
+        <link refid="structatomic_3_01bool_01_4"/>
+      </node>
+      <node id="2">
+        <label>local_queue</label>
+        <link refid="classlocal__queue"/>
+      </node>
+      <node id="1">
+        <label>worker_context</label>
+        <link refid="structworker__context"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>queue</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>is_stealing</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="201" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="201" bodyend="214"/>
+    <listofallmembers>
+      <member refid="structworker__context_1aa4cb896c147fd86efed7b3f176e8a233" prot="public" virt="non-virtual"><scope>worker_context</scope><name>consecutive_idle_count</name></member>
+      <member refid="structworker__context_1a0ce42d0b767acc53e81ba0e89aa4e3c4" prot="public" virt="non-virtual"><scope>worker_context</scope><name>id</name></member>
+      <member refid="structworker__context_1a9819ca5bea261e9484d75f512fc38326" prot="public" virt="non-virtual"><scope>worker_context</scope><name>id_type</name></member>
+      <member refid="structworker__context_1a0708436cfb366b691690600be934454e" prot="public" virt="non-virtual"><scope>worker_context</scope><name>is_stealing</name></member>
+      <member refid="structworker__context_1adfffa7bb28a8b49fd509c03f134a024c" prot="public" virt="non-virtual"><scope>worker_context</scope><name>operator=</name></member>
+      <member refid="structworker__context_1a7b1382543c6dd1cacff1c9b307cefe60" prot="public" virt="non-virtual"><scope>worker_context</scope><name>operator=</name></member>
+      <member refid="structworker__context_1a3d472b2df48065b84ccdb033671a352c" prot="public" virt="non-virtual"><scope>worker_context</scope><name>queue</name></member>
+      <member refid="structworker__context_1aefffdfb44765082768ec9843debfb727" prot="public" virt="non-virtual"><scope>worker_context</scope><name>worker_context</name></member>
+      <member refid="structworker__context_1a8653d668b6d1d14ba08f90c4217ddf13" prot="public" virt="non-virtual"><scope>worker_context</scope><name>worker_context</name></member>
+      <member refid="structworker__context_1ae75c126e56a59f3a42f356300d63eeba" prot="public" virt="non-virtual"><scope>worker_context</scope><name>worker_context</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

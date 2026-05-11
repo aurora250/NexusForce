@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___sign_manipulation" kind="group">
+    <compoundname>SignManipulation</compoundname>
+    <title>符号操作</title>
+    <innerclass refid="structmake__signed" prot="public">make_signed</innerclass>
+    <innerclass refid="structmake__unsigned" prot="public">make_unsigned</innerclass>
+    <innerclass refid="structmake__integer" prot="public">make_integer</innerclass>
+    <innerclass refid="structmax__value" prot="public">max_value</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___sign_manipulation_1gaafd5f69b53391404e954cf610afa6c54" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structmake__signed" kindref="compound">make_signed</ref>&lt; T &gt;::type</type>
+        <definition>using make_signed_t = typename make_signed&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>make_signed_t</name>
+        <briefdescription>
+<para>make_signed的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3319" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3319" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___sign_manipulation_1gaabeda2fce2dea6fa29533488400dd386" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structmake__unsigned" kindref="compound">make_unsigned</ref>&lt; T &gt;::type</type>
+        <definition>using make_unsigned_t = typename make_unsigned&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>make_unsigned_t</name>
+        <briefdescription>
+<para>make_unsigned的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3338" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3338" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___sign_manipulation_1ga51d97772a87f38fe037b211f10d3e021" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Size</declname>
+            <defname>Size</defname>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>IsSigned</declname>
+            <defname>IsSigned</defname>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structmake__integer" kindref="compound">make_integer</ref>&lt; Size, IsSigned &gt;::type</type>
+        <definition>using make_integer_t = typename make_integer&lt;Size, IsSigned&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>make_integer_t</name>
+        <briefdescription>
+<para>make_integer的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3374" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3374" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___sign_manipulation_1ga82d4617e7733dc89ce91f0e578a5a45a" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>size_t...</type>
+            <declname>Values</declname>
+            <defname>Values</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_INLINE17 constexpr size_t max_value_v</definition>
+        <argsstring></argsstring>
+        <name>max_value_v</name>
+        <initializer>= <ref refid="structmax__value" kindref="compound">max_value</ref>&lt;Values...&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3395" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3395" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>类型的符号操作 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

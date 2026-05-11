@@ -89,11 +89,11 @@ $(function(){initNavTree('classini__value.html','','classini__value-members'); }
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ini_value类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___ini_config.html">ini配置</a></div></div></div>
+  <div class="headertitle"><div class="title">ini_value类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___ini_config.html">INI配置</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>ini值抽象基类  
+<p>INI值抽象基类  
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ini__value_8hpp_source.html">ini_value.hpp</a>&gt;</code></p>
@@ -108,7 +108,7 @@ Public 类型</h2></td></tr>
 <tr class="memitem:a6a636deb4a29b4f18255a0ede3dca2f0" id="r_a6a636deb4a29b4f18255a0ede3dca2f0"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a6a636deb4a29b4f18255a0ede3dca2f0">types</a> { <a class="el" href="#a6a636deb4a29b4f18255a0ede3dca2f0af61a8412ef0d86235eed6b53c6000b86">Section</a>
 , <a class="el" href="#a6a636deb4a29b4f18255a0ede3dca2f0a76f68469f0a909646a3e6a2ab3c51562">Property</a>
  }</td></tr>
-<tr class="memdesc:a6a636deb4a29b4f18255a0ede3dca2f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">ini值类型枚举  <a href="#a6a636deb4a29b4f18255a0ede3dca2f0">更多...</a><br /></td></tr>
+<tr class="memdesc:a6a636deb4a29b4f18255a0ede3dca2f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">INI值类型枚举  <a href="#a6a636deb4a29b4f18255a0ede3dca2f0">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
@@ -116,7 +116,7 @@ Public 成员函数</h2></td></tr>
 virtual&#160;</td><td class="memItemRight"><b>~ini_value</b> ()=default</td></tr>
 <tr class="memdesc:ac1f79723f0630c412b8c15deb2b60725"><td class="mdescLeft">&#160;</td><td class="mdescRight">虚析构函数 <br /></td></tr>
 <tr class="memitem:a721b4228adb73ddc402724c6f34889fb" id="r_a721b4228adb73ddc402724c6f34889fb"><td class="memItemLeft">virtual NEFORCE_NODISCARD <a class="el" href="#a6a636deb4a29b4f18255a0ede3dca2f0">types</a>&#160;</td><td class="memItemRight"><a class="el" href="#a721b4228adb73ddc402724c6f34889fb">type</a> () const noexcept=0</td></tr>
-<tr class="memdesc:a721b4228adb73ddc402724c6f34889fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取ini值类型  <br /></td></tr>
+<tr class="memdesc:a721b4228adb73ddc402724c6f34889fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取INI值类型  <br /></td></tr>
 <tr class="memitem:aea8366c0aeecc956e688dd6800073f8b" id="r_aea8366c0aeecc956e688dd6800073f8b"><td class="memItemLeft">virtual NEFORCE_NODISCARD const <a class="el" href="classini__section.html">ini_section</a> *&#160;</td><td class="memItemRight"><a class="el" href="#aea8366c0aeecc956e688dd6800073f8b">as_section</a> () const noexcept</td></tr>
 <tr class="memdesc:aea8366c0aeecc956e688dd6800073f8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为节指针  <br /></td></tr>
 <tr class="memitem:afdd462e394276b2b6f9adb7436cd755d" id="r_afdd462e394276b2b6f9adb7436cd755d"><td class="memItemLeft">virtual NEFORCE_NODISCARD const <a class="el" href="classini__property.html">ini_property</a> *&#160;</td><td class="memItemRight"><a class="el" href="#afdd462e394276b2b6f9adb7436cd755d">as_property</a> () const noexcept</td></tr>
@@ -134,8 +134,8 @@ virtual&#160;</td><td class="memItemRight"><b>~ini_value</b> ()=default</td></tr
 <tr class="memdesc:aeb53a048cd2b8e99462c2cf0f5c602bc inherit pub_methods_structistringify"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为字符串  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>ini值抽象基类 </p>
-<p>提供ini配置元素的统一接口，支持类型识别和字符串转换。 </p>
+<div class="textblock"><p>INI值抽象基类 </p>
+<p>提供INI配置元素的统一接口，支持类型识别和字符串转换。 </p>
 
 <p class="definition">在文件 <a class="el" href="ini__value_8hpp_source.html">ini_value.hpp</a> 第 <a class="el" href="ini__value_8hpp_source.html#l00063">63</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
@@ -151,7 +151,7 @@ virtual&#160;</td><td class="memItemRight"><b>~ini_value</b> ()=default</td></tr
       </table>
 </div><div class="memdoc">
 
-<p>ini值类型枚举 </p>
+<p>INI值类型枚举 </p>
 <table class="fieldtable">
 <tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a6a636deb4a29b4f18255a0ede3dca2f0af61a8412ef0d86235eed6b53c6000b86" name="a6a636deb4a29b4f18255a0ede3dca2f0af61a8412ef0d86235eed6b53c6000b86"></a>Section&#160;</td><td class="fielddoc"><p>节类型 </p>
 </td></tr>
@@ -312,7 +312,7 @@ virtual&#160;</td><td class="memItemRight"><b>~ini_value</b> ()=default</td></tr
 </div><div class="memdoc">
 
 <p>转换为文档字符串 </p>
-<dl class="section return"><dt>返回</dt><dd>ini值的文档格式字符串 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>INI值的文档格式字符串 </dd></dl>
 
 </div>
 </div>
@@ -332,7 +332,7 @@ virtual&#160;</td><td class="memItemRight"><b>~ini_value</b> ()=default</td></tr
 </div><div class="memdoc">
 
 <p>转换为字符串 </p>
-<dl class="section return"><dt>返回</dt><dd>ini值的字符串表示 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>INI值的字符串表示 </dd></dl>
 
 </div>
 </div>
@@ -359,7 +359,7 @@ virtual&#160;</td><td class="memItemRight"><b>~ini_value</b> ()=default</td></tr
 </table>
 </div><div class="memdoc">
 
-<p>获取ini值类型 </p>
+<p>获取INI值类型 </p>
 <dl class="section return"><dt>返回</dt><dd>类型枚举值 </dd></dl>
 
 <p>在 <a class="el" href="classini__property.html#a4c41a9e8c251ed0e03f02240e15e4f12">ini_property</a> , 以及 <a class="el" href="classini__section.html#a9aad0d586d89f3086f31f99a70d35577">ini_section</a> 内被实现.</p>

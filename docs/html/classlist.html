@@ -143,8 +143,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a3903baa35110c46084458486afd187fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
 <tr class="memitem:af6f9b0fe5254c309585f263388067bf3" id="r_af6f9b0fe5254c309585f263388067bf3"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af6f9b0fe5254c309585f263388067bf3">list</a> (<a class="el" href="#a9d0b6a390d645f243a3e8a69635814bb">size_type</a> n)</td></tr>
 <tr class="memdesc:af6f9b0fe5254c309585f263388067bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造包含n个默认构造元素的链表  <br /></td></tr>
-<tr class="memitem:ad24814e2d074aee914011d81e2c1110c" id="r_ad24814e2d074aee914011d81e2c1110c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad24814e2d074aee914011d81e2c1110c">list</a> (<a class="el" href="#a9d0b6a390d645f243a3e8a69635814bb">size_type</a> n, T &amp;&amp;value)</td></tr>
-<tr class="memdesc:ad24814e2d074aee914011d81e2c1110c"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造包含n个指定值元素的链表  <br /></td></tr>
+<tr class="memitem:a7a31867b40318248c7976bc383e5afad" id="r_a7a31867b40318248c7976bc383e5afad"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7a31867b40318248c7976bc383e5afad">list</a> (<a class="el" href="#a9d0b6a390d645f243a3e8a69635814bb">size_type</a> n, const T &amp;value)</td></tr>
+<tr class="memdesc:a7a31867b40318248c7976bc383e5afad"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造包含n个指定值元素的链表  <br /></td></tr>
 <tr class="memitem:a763f88c4e27908913b488c1ac3ae17a0" id="r_a763f88c4e27908913b488c1ac3ae17a0"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___iterator_category_checks.html#ga5e725088b59bdd828910a9652983553a">is_iter_v</a>&lt; Iterator &gt;, int &gt; = 0&gt; </td></tr>
 <tr class="memitem:a763f88c4e27908913b488c1ac3ae17a0 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a763f88c4e27908913b488c1ac3ae17a0">list</a> (Iterator first, Iterator last)</td></tr>
 <tr class="memdesc:a763f88c4e27908913b488c1ac3ae17a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围构造函数  <br /></td></tr>
@@ -290,10 +290,10 @@ void&#160;</td><td class="memItemRight"><b>sort</b> ()</td></tr>
 <tr class="memdesc:afdf5afa655285dbb70723e2a9f20abf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量下标访问操作符  <br /></td></tr>
 <tr class="memitem:a9a3acc8406213b2213acb0bb4a42184d" id="r_a9a3acc8406213b2213acb0bb4a42184d"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#ab5458ac241728b01a4000eab33fb3626">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9a3acc8406213b2213acb0bb4a42184d">operator[]</a> (const <a class="el" href="#a9d0b6a390d645f243a3e8a69635814bb">size_type</a> position)</td></tr>
 <tr class="memdesc:a9a3acc8406213b2213acb0bb4a42184d"><td class="mdescLeft">&#160;</td><td class="mdescRight">下标访问操作符  <br /></td></tr>
-<tr class="memitem:abb102f3d8cfee1756e4b6c03fe32b02f" id="r_abb102f3d8cfee1756e4b6c03fe32b02f"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#abb102f3d8cfee1756e4b6c03fe32b02f">operator==</a> (const <a class="el" href="classlist.html">list</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga682c1803a35a1de8b019d003138ae5dd">equal</a>(<a class="el" href="#a7491a9c8c7ef263f033b3031085984ca">cbegin</a>(), <a class="el" href="#affdd210e54954d497bb2597f82314c41">cend</a>(), rhs.cbegin())))</td></tr>
-<tr class="memdesc:abb102f3d8cfee1756e4b6c03fe32b02f"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
-<tr class="memitem:a9dd270f1d4eeb84b3b87d757391c77ac" id="r_a9dd270f1d4eeb84b3b87d757391c77ac"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a9dd270f1d4eeb84b3b87d757391c77ac">operator&lt;</a> (const <a class="el" href="classlist.html">list</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga9b8af8f5da11c5b93627d6e5fb30f784">lexicographical_compare</a>(<a class="el" href="#a7491a9c8c7ef263f033b3031085984ca">cbegin</a>(), <a class="el" href="#affdd210e54954d497bb2597f82314c41">cend</a>(), rhs.cbegin(), rhs.cend())))</td></tr>
-<tr class="memdesc:a9dd270f1d4eeb84b3b87d757391c77ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
+<tr class="memitem:a7c05585b1f78fc3778098ec2d82929e0" id="r_a7c05585b1f78fc3778098ec2d82929e0"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a7c05585b1f78fc3778098ec2d82929e0">equal_to</a> (const <a class="el" href="classlist.html">list</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga682c1803a35a1de8b019d003138ae5dd">equal</a>(<a class="el" href="#a7491a9c8c7ef263f033b3031085984ca">cbegin</a>(), <a class="el" href="#affdd210e54954d497bb2597f82314c41">cend</a>(), rhs.cbegin())))</td></tr>
+<tr class="memdesc:a7c05585b1f78fc3778098ec2d82929e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:afb3279919d263d5fb8a729f3a5357d0c" id="r_afb3279919d263d5fb8a729f3a5357d0c"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#afb3279919d263d5fb8a729f3a5357d0c">less_than</a> (const <a class="el" href="classlist.html">list</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga9b8af8f5da11c5b93627d6e5fb30f784">lexicographical_compare</a>(<a class="el" href="#a7491a9c8c7ef263f033b3031085984ca">cbegin</a>(), <a class="el" href="#affdd210e54954d497bb2597f82314c41">cend</a>(), rhs.cbegin(), rhs.cend())))</td></tr>
+<tr class="memdesc:afb3279919d263d5fb8a729f3a5357d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;<br />
@@ -307,7 +307,7 @@ class list&lt; T, Alloc &gt;</div><p>双向链表容器 </p>
 </dl>
 <p>双向链表容器，提供常数时间的插入和删除操作。 不支持随机访问，但支持双向迭代。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00166">166</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00185">185</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a3903baa35110c46084458486afd187fc" name="a3903baa35110c46084458486afd187fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3903baa35110c46084458486afd187fc">&#9670;&#160;</a></span>list() <span class="overload">[1/7]</span></h2>
@@ -337,7 +337,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>默认构造函数 </p>
 <p>构造一个空链表。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00249">249</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00268">268</a> 行定义.</p>
 
 </div>
 </div>
@@ -374,12 +374,12 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00255">255</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00274">274</a> 行定义.</p>
 
 </div>
 </div>
-<a id="ad24814e2d074aee914011d81e2c1110c" name="ad24814e2d074aee914011d81e2c1110c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad24814e2d074aee914011d81e2c1110c">&#9670;&#160;</a></span>list() <span class="overload">[3/7]</span></h2>
+<a id="a7a31867b40318248c7976bc383e5afad" name="a7a31867b40318248c7976bc383e5afad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a31867b40318248c7976bc383e5afad">&#9670;&#160;</a></span>list() <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -397,7 +397,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -416,7 +416,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00263">263</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00282">282</a> 行定义.</p>
 
 </div>
 </div>
@@ -466,7 +466,7 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00283">283</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00301">301</a> 行定义.</p>
 
 </div>
 </div>
@@ -503,7 +503,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00301">301</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00318">318</a> 行定义.</p>
 
 </div>
 </div>
@@ -540,7 +540,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00319">319</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00336">336</a> 行定义.</p>
 
 </div>
 </div>
@@ -577,7 +577,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00340">340</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00357">357</a> 行定义.</p>
 
 </div>
 </div>
@@ -609,7 +609,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>析构函数 </p>
 <p>销毁所有元素并释放内存。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00365">365</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00382">382</a> 行定义.</p>
 
 </div>
 </div>
@@ -652,9 +652,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00580">580</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00597">597</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00601">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00618">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>.</p>
 
 </div>
 </div>
@@ -704,7 +704,7 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00592">592</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00609">609</a> 行定义.</p>
 
 </div>
 </div>
@@ -741,7 +741,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00601">601</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00618">618</a> 行定义.</p>
 
 </div>
 </div>
@@ -779,7 +779,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01016">1016</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01033">1033</a> 行定义.</p>
 
 </div>
 </div>
@@ -817,9 +817,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01003">1003</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01020">1020</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l01036">list&lt; pair&lt; Key, Value &gt; &gt;::operator[]()</a> , 以及 <a class="el" href="list_8hpp_source.html#l01029">list&lt; pair&lt; Key, Value &gt; &gt;::operator[]()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l01053">list&lt; pair&lt; Key, Value &gt; &gt;::operator[]()</a> , 以及 <a class="el" href="list_8hpp_source.html#l01046">list&lt; pair&lt; Key, Value &gt; &gt;::operator[]()</a>.</p>
 
 </div>
 </div>
@@ -851,7 +851,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>访问最后一个常量元素 </p>
 <dl class="section return"><dt>返回</dt><dd>最后一个元素的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00496">496</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00513">513</a> 行定义.</p>
 
 </div>
 </div>
@@ -883,7 +883,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>访问最后一个元素 </p>
 <dl class="section return"><dt>返回</dt><dd>最后一个元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00487">487</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00504">504</a> 行定义.</p>
 
 </div>
 </div>
@@ -915,7 +915,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取常量起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00391">391</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00408">408</a> 行定义.</p>
 
 </div>
 </div>
@@ -947,9 +947,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00379">379</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00396">396</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00580">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00592">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00537">list&lt; pair&lt; Key, Value &gt; &gt;::emplace_front()</a>, <a class="el" href="deque_8hpp_source.html#l01269">deque&lt; T, Alloc, BufSize &gt;::insert()</a>, <a class="el" href="compare_8hpp_source.html#l00339">max()</a>, <a class="el" href="list_8hpp_source.html#l00894">list&lt; pair&lt; Key, Value &gt; &gt;::merge_if()</a>, <a class="el" href="compare_8hpp_source.html#l00390">min()</a>, <a class="el" href="list_8hpp_source.html#l00309">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a>, <a class="el" href="list_8hpp_source.html#l00568">list&lt; pair&lt; Key, Value &gt; &gt;::pop_front()</a>, <a class="el" href="list_8hpp_source.html#l00545">list&lt; pair&lt; Key, Value &gt; &gt;::push_front()</a>, <a class="el" href="list_8hpp_source.html#l00551">list&lt; pair&lt; Key, Value &gt; &gt;::push_front()</a>, <a class="el" href="list_8hpp_source.html#l00808">list&lt; pair&lt; Key, Value &gt; &gt;::remove_if()</a>, <a class="el" href="list_8hpp_source.html#l00409">list&lt; pair&lt; Key, Value &gt; &gt;::rend()</a>, <a class="el" href="list_8hpp_source.html#l00834">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00947">list&lt; pair&lt; Key, Value &gt; &gt;::unique_if()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00597">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00609">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00554">list&lt; pair&lt; Key, Value &gt; &gt;::emplace_front()</a>, <a class="el" href="deque_8hpp_source.html#l01263">deque&lt; T, Alloc, BufSize &gt;::insert()</a>, <a class="el" href="compare_8hpp_source.html#l00270">max()</a>, <a class="el" href="list_8hpp_source.html#l00911">list&lt; pair&lt; Key, Value &gt; &gt;::merge_if()</a>, <a class="el" href="compare_8hpp_source.html#l00320">min()</a>, <a class="el" href="list_8hpp_source.html#l00326">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a>, <a class="el" href="list_8hpp_source.html#l00585">list&lt; pair&lt; Key, Value &gt; &gt;::pop_front()</a>, <a class="el" href="list_8hpp_source.html#l00562">list&lt; pair&lt; Key, Value &gt; &gt;::push_front()</a>, <a class="el" href="list_8hpp_source.html#l00568">list&lt; pair&lt; Key, Value &gt; &gt;::push_front()</a>, <a class="el" href="list_8hpp_source.html#l00825">list&lt; pair&lt; Key, Value &gt; &gt;::remove_if()</a>, <a class="el" href="list_8hpp_source.html#l00426">list&lt; pair&lt; Key, Value &gt; &gt;::rend()</a>, <a class="el" href="list_8hpp_source.html#l00851">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00964">list&lt; pair&lt; Key, Value &gt; &gt;::unique_if()</a>.</p>
 
 </div>
 </div>
@@ -981,9 +981,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取常量起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00427">427</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00444">444</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l01016">list&lt; pair&lt; Key, Value &gt; &gt;::at()</a>, <a class="el" href="list_8hpp_source.html#l01003">list&lt; pair&lt; Key, Value &gt; &gt;::at()</a>, <a class="el" href="list_8hpp_source.html#l00391">list&lt; pair&lt; Key, Value &gt; &gt;::begin()</a>, <a class="el" href="list_8hpp_source.html#l00445">list&lt; pair&lt; Key, Value &gt; &gt;::crend()</a>, <a class="el" href="list_8hpp_source.html#l01053">list&lt; pair&lt; Key, Value &gt; &gt;::operator&lt;()</a> , 以及 <a class="el" href="list_8hpp_source.html#l01043">list&lt; pair&lt; Key, Value &gt; &gt;::operator==()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l01033">list&lt; pair&lt; Key, Value &gt; &gt;::at()</a>, <a class="el" href="list_8hpp_source.html#l01020">list&lt; pair&lt; Key, Value &gt; &gt;::at()</a>, <a class="el" href="list_8hpp_source.html#l00408">list&lt; pair&lt; Key, Value &gt; &gt;::begin()</a>, <a class="el" href="list_8hpp_source.html#l00462">list&lt; pair&lt; Key, Value &gt; &gt;::crend()</a>, <a class="el" href="list_8hpp_source.html#l01060">list&lt; pair&lt; Key, Value &gt; &gt;::equal_to()</a> , 以及 <a class="el" href="list_8hpp_source.html#l01070">list&lt; pair&lt; Key, Value &gt; &gt;::less_than()</a>.</p>
 
 </div>
 </div>
@@ -1015,9 +1015,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取常量结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向无效元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00433">433</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00450">450</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00439">list&lt; pair&lt; Key, Value &gt; &gt;::crbegin()</a>, <a class="el" href="list_8hpp_source.html#l00397">list&lt; pair&lt; Key, Value &gt; &gt;::end()</a>, <a class="el" href="list_8hpp_source.html#l01053">list&lt; pair&lt; Key, Value &gt; &gt;::operator&lt;()</a> , 以及 <a class="el" href="list_8hpp_source.html#l01043">list&lt; pair&lt; Key, Value &gt; &gt;::operator==()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00456">list&lt; pair&lt; Key, Value &gt; &gt;::crbegin()</a>, <a class="el" href="list_8hpp_source.html#l00414">list&lt; pair&lt; Key, Value &gt; &gt;::end()</a>, <a class="el" href="list_8hpp_source.html#l01060">list&lt; pair&lt; Key, Value &gt; &gt;::equal_to()</a> , 以及 <a class="el" href="list_8hpp_source.html#l01070">list&lt; pair&lt; Key, Value &gt; &gt;::less_than()</a>.</p>
 
 </div>
 </div>
@@ -1049,9 +1049,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>清空链表 </p>
 <p>销毁所有元素，但保留哨兵节点。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00759">759</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00776">776</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00580">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00592">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00283">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>, <a class="el" href="list_8hpp_source.html#l00263">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>, <a class="el" href="list_8hpp_source.html#l00350">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00309">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00597">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00609">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00301">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>, <a class="el" href="list_8hpp_source.html#l00282">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>, <a class="el" href="list_8hpp_source.html#l00367">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00326">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a>.</p>
 
 </div>
 </div>
@@ -1083,9 +1083,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取常量反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向无效元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00439">439</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00456">456</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00415">list&lt; pair&lt; Key, Value &gt; &gt;::rbegin()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00432">list&lt; pair&lt; Key, Value &gt; &gt;::rbegin()</a>.</p>
 
 </div>
 </div>
@@ -1117,9 +1117,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取常量反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00445">445</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00462">462</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00421">list&lt; pair&lt; Key, Value &gt; &gt;::rend()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00438">list&lt; pair&lt; Key, Value &gt; &gt;::rend()</a>.</p>
 
 </div>
 </div>
@@ -1170,9 +1170,9 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00509">509</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00526">526</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00526">list&lt; pair&lt; Key, Value &gt; &gt;::emplace_back()</a>, <a class="el" href="list_8hpp_source.html#l00537">list&lt; pair&lt; Key, Value &gt; &gt;::emplace_front()</a>, <a class="el" href="list_8hpp_source.html#l00609">list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a>, <a class="el" href="list_8hpp_source.html#l00617">list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a>, <a class="el" href="list_8hpp_source.html#l00283">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00263">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00543">list&lt; pair&lt; Key, Value &gt; &gt;::emplace_back()</a>, <a class="el" href="list_8hpp_source.html#l00554">list&lt; pair&lt; Key, Value &gt; &gt;::emplace_front()</a>, <a class="el" href="list_8hpp_source.html#l00626">list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00634">list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a>.</p>
 
 </div>
 </div>
@@ -1218,7 +1218,9 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00526">526</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00543">543</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00301">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00282">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>.</p>
 
 </div>
 </div>
@@ -1264,7 +1266,7 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00537">537</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00554">554</a> 行定义.</p>
 
 </div>
 </div>
@@ -1296,9 +1298,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>检查是否为空 </p>
 <dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00463">463</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00480">480</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00496">list&lt; pair&lt; Key, Value &gt; &gt;::back()</a>, <a class="el" href="list_8hpp_source.html#l00487">list&lt; pair&lt; Key, Value &gt; &gt;::back()</a>, <a class="el" href="list_8hpp_source.html#l00729">list&lt; pair&lt; Key, Value &gt; &gt;::erase()</a>, <a class="el" href="list_8hpp_source.html#l00478">list&lt; pair&lt; Key, Value &gt; &gt;::front()</a>, <a class="el" href="list_8hpp_source.html#l00469">list&lt; pair&lt; Key, Value &gt; &gt;::front()</a>, <a class="el" href="list_8hpp_source.html#l00928">list&lt; pair&lt; Key, Value &gt; &gt;::reverse()</a>, <a class="el" href="list_8hpp_source.html#l00976">list&lt; pair&lt; Key, Value &gt; &gt;::sort_if()</a>, <a class="el" href="list_8hpp_source.html#l00834">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00947">list&lt; pair&lt; Key, Value &gt; &gt;::unique_if()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00513">list&lt; pair&lt; Key, Value &gt; &gt;::back()</a>, <a class="el" href="list_8hpp_source.html#l00504">list&lt; pair&lt; Key, Value &gt; &gt;::back()</a>, <a class="el" href="list_8hpp_source.html#l00746">list&lt; pair&lt; Key, Value &gt; &gt;::erase()</a>, <a class="el" href="list_8hpp_source.html#l00495">list&lt; pair&lt; Key, Value &gt; &gt;::front()</a>, <a class="el" href="list_8hpp_source.html#l00486">list&lt; pair&lt; Key, Value &gt; &gt;::front()</a>, <a class="el" href="list_8hpp_source.html#l00945">list&lt; pair&lt; Key, Value &gt; &gt;::reverse()</a>, <a class="el" href="list_8hpp_source.html#l00993">list&lt; pair&lt; Key, Value &gt; &gt;::sort_if()</a>, <a class="el" href="list_8hpp_source.html#l00851">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00964">list&lt; pair&lt; Key, Value &gt; &gt;::unique_if()</a>.</p>
 
 </div>
 </div>
@@ -1330,7 +1332,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取常量结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向无效元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00397">397</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00414">414</a> 行定义.</p>
 
 </div>
 </div>
@@ -1362,9 +1364,47 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向无效元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00385">385</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00402">402</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00526">list&lt; pair&lt; Key, Value &gt; &gt;::emplace_back()</a>, <a class="el" href="list_8hpp_source.html#l00729">list&lt; pair&lt; Key, Value &gt; &gt;::erase()</a>, <a class="el" href="deque_8hpp_source.html#l01269">deque&lt; T, Alloc, BufSize &gt;::insert()</a>, <a class="el" href="list_8hpp_source.html#l00283">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>, <a class="el" href="list_8hpp_source.html#l00263">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>, <a class="el" href="compare_8hpp_source.html#l00339">max()</a>, <a class="el" href="list_8hpp_source.html#l00894">list&lt; pair&lt; Key, Value &gt; &gt;::merge_if()</a>, <a class="el" href="compare_8hpp_source.html#l00390">min()</a>, <a class="el" href="list_8hpp_source.html#l00557">list&lt; pair&lt; Key, Value &gt; &gt;::push_back()</a>, <a class="el" href="list_8hpp_source.html#l00563">list&lt; pair&lt; Key, Value &gt; &gt;::push_back()</a>, <a class="el" href="list_8hpp_source.html#l00403">list&lt; pair&lt; Key, Value &gt; &gt;::rbegin()</a>, <a class="el" href="list_8hpp_source.html#l00808">list&lt; pair&lt; Key, Value &gt; &gt;::remove_if()</a>, <a class="el" href="list_8hpp_source.html#l00834">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00947">list&lt; pair&lt; Key, Value &gt; &gt;::unique_if()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00543">list&lt; pair&lt; Key, Value &gt; &gt;::emplace_back()</a>, <a class="el" href="list_8hpp_source.html#l00746">list&lt; pair&lt; Key, Value &gt; &gt;::erase()</a>, <a class="el" href="deque_8hpp_source.html#l01263">deque&lt; T, Alloc, BufSize &gt;::insert()</a>, <a class="el" href="compare_8hpp_source.html#l00270">max()</a>, <a class="el" href="list_8hpp_source.html#l00911">list&lt; pair&lt; Key, Value &gt; &gt;::merge_if()</a>, <a class="el" href="compare_8hpp_source.html#l00320">min()</a>, <a class="el" href="list_8hpp_source.html#l00574">list&lt; pair&lt; Key, Value &gt; &gt;::push_back()</a>, <a class="el" href="list_8hpp_source.html#l00580">list&lt; pair&lt; Key, Value &gt; &gt;::push_back()</a>, <a class="el" href="list_8hpp_source.html#l00420">list&lt; pair&lt; Key, Value &gt; &gt;::rbegin()</a>, <a class="el" href="list_8hpp_source.html#l00825">list&lt; pair&lt; Key, Value &gt; &gt;::remove_if()</a>, <a class="el" href="list_8hpp_source.html#l00851">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00964">list&lt; pair&lt; Key, Value &gt; &gt;::unique_if()</a>.</p>
+
+</div>
+</div>
+<a id="a7c05585b1f78fc3778098ec2d82929e0" name="a7c05585b1f78fc3778098ec2d82929e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c05585b1f78fc3778098ec2d82929e0">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classlist.html">list</a>&lt; T, Alloc &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classlist.html">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧链表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个链表大小相等且对应元素相等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01060">1060</a> 行定义.</p>
 
 </div>
 </div>
@@ -1407,7 +1447,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个被删除元素之后位置的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00747">747</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00764">764</a> 行定义.</p>
 
 </div>
 </div>
@@ -1445,9 +1485,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向被删除元素之后位置的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00729">729</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00746">746</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00747">list&lt; pair&lt; Key, Value &gt; &gt;::erase()</a>, <a class="el" href="list_8hpp_source.html#l00573">list&lt; pair&lt; Key, Value &gt; &gt;::pop_back()</a>, <a class="el" href="list_8hpp_source.html#l00568">list&lt; pair&lt; Key, Value &gt; &gt;::pop_front()</a>, <a class="el" href="list_8hpp_source.html#l00808">list&lt; pair&lt; Key, Value &gt; &gt;::remove_if()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00947">list&lt; pair&lt; Key, Value &gt; &gt;::unique_if()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00764">list&lt; pair&lt; Key, Value &gt; &gt;::erase()</a>, <a class="el" href="list_8hpp_source.html#l00590">list&lt; pair&lt; Key, Value &gt; &gt;::pop_back()</a>, <a class="el" href="list_8hpp_source.html#l00585">list&lt; pair&lt; Key, Value &gt; &gt;::pop_front()</a>, <a class="el" href="list_8hpp_source.html#l00825">list&lt; pair&lt; Key, Value &gt; &gt;::remove_if()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00964">list&lt; pair&lt; Key, Value &gt; &gt;::unique_if()</a>.</p>
 
 </div>
 </div>
@@ -1479,7 +1519,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>访问第一个常量元素 </p>
 <dl class="section return"><dt>返回</dt><dd>第一个元素的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00478">478</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00495">495</a> 行定义.</p>
 
 </div>
 </div>
@@ -1511,7 +1551,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>访问第一个元素 </p>
 <dl class="section return"><dt>返回</dt><dd>第一个元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00469">469</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00486">486</a> 行定义.</p>
 
 </div>
 </div>
@@ -1554,9 +1594,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00609">609</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00626">626</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00580">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00592">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00674">list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a>, <a class="el" href="list_8hpp_source.html#l00309">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a>, <a class="el" href="list_8hpp_source.html#l00557">list&lt; pair&lt; Key, Value &gt; &gt;::push_back()</a>, <a class="el" href="list_8hpp_source.html#l00563">list&lt; pair&lt; Key, Value &gt; &gt;::push_back()</a>, <a class="el" href="list_8hpp_source.html#l00545">list&lt; pair&lt; Key, Value &gt; &gt;::push_front()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00551">list&lt; pair&lt; Key, Value &gt; &gt;::push_front()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00597">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00609">list&lt; pair&lt; Key, Value &gt; &gt;::assign()</a>, <a class="el" href="list_8hpp_source.html#l00691">list&lt; pair&lt; Key, Value &gt; &gt;::insert()</a>, <a class="el" href="list_8hpp_source.html#l00326">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a>, <a class="el" href="list_8hpp_source.html#l00574">list&lt; pair&lt; Key, Value &gt; &gt;::push_back()</a>, <a class="el" href="list_8hpp_source.html#l00580">list&lt; pair&lt; Key, Value &gt; &gt;::push_back()</a>, <a class="el" href="list_8hpp_source.html#l00562">list&lt; pair&lt; Key, Value &gt; &gt;::push_front()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00568">list&lt; pair&lt; Key, Value &gt; &gt;::push_front()</a>.</p>
 
 </div>
 </div>
@@ -1613,7 +1653,7 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
 </dl>
 <p>将[first, last)范围内的元素插入到position之前。 如果插入过程中发生异常，会回滚已插入的元素。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00630">630</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00647">647</a> 行定义.</p>
 
 </div>
 </div>
@@ -1662,7 +1702,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <p>如果插入过程中发生异常，会回滚已插入的元素。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00686">686</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00703">703</a> 行定义.</p>
 
 </div>
 </div>
@@ -1704,7 +1744,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00674">674</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00691">691</a> 行定义.</p>
 
 </div>
 </div>
@@ -1747,7 +1787,45 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00617">617</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00634">634</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afb3279919d263d5fb8a729f3a5357d0c" name="afb3279919d263d5fb8a729f3a5357d0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb3279919d263d5fb8a729f3a5357d0c">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classlist.html">list</a>&lt; T, Alloc &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classlist.html">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧链表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01070">1070</a> 行定义.</p>
 
 </div>
 </div>
@@ -1779,7 +1857,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取最大可能大小 </p>
 <dl class="section return"><dt>返回</dt><dd>最大元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00457">457</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00474">474</a> 行定义.</p>
 
 </div>
 </div>
@@ -1816,7 +1894,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00923">923</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00940">940</a> 行定义.</p>
 
 </div>
 </div>
@@ -1867,47 +1945,9 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <p>将有序链表other合并到当前有序链表中，合并后仍保持有序。 使用pred作为比较准则。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00894">894</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00911">911</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00923">list&lt; pair&lt; Key, Value &gt; &gt;::merge()</a>.</p>
-
-</div>
-</div>
-<a id="a9dd270f1d4eeb84b3b87d757391c77ac" name="a9dd270f1d4eeb84b3b87d757391c77ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9dd270f1d4eeb84b3b87d757391c77ac">&#9670;&#160;</a></span>operator&lt;()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classlist.html">list</a>&lt; T, Alloc &gt;::operator&lt; </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classlist.html">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>小于比较操作符 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>右侧链表 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01053">1053</a> 行定义.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00940">list&lt; pair&lt; Key, Value &gt; &gt;::merge()</a>.</p>
 
 </div>
 </div>
@@ -1945,7 +1985,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00327">327</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00344">344</a> 行定义.</p>
 
 </div>
 </div>
@@ -1983,7 +2023,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00350">350</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00367">367</a> 行定义.</p>
 
 </div>
 </div>
@@ -2021,45 +2061,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00309">309</a> 行定义.</p>
-
-</div>
-</div>
-<a id="abb102f3d8cfee1756e4b6c03fe32b02f" name="abb102f3d8cfee1756e4b6c03fe32b02f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb102f3d8cfee1756e4b6c03fe32b02f">&#9670;&#160;</a></span>operator==()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classlist.html">list</a>&lt; T, Alloc &gt;::operator== </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classlist.html">list</a>&lt; T, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>相等比较操作符 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>右侧链表 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>如果两个链表大小相等且对应元素相等返回true </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01043">1043</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00326">326</a> 行定义.</p>
 
 </div>
 </div>
@@ -2097,7 +2099,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01036">1036</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01053">1053</a> 行定义.</p>
 
 </div>
 </div>
@@ -2135,7 +2137,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01029">1029</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l01046">1046</a> 行定义.</p>
 
 </div>
 </div>
@@ -2172,7 +2174,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00557">557</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00574">574</a> 行定义.</p>
 
 </div>
 </div>
@@ -2209,7 +2211,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00563">563</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00580">580</a> 行定义.</p>
 
 </div>
 </div>
@@ -2246,7 +2248,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00545">545</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00562">562</a> 行定义.</p>
 
 </div>
 </div>
@@ -2283,7 +2285,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00551">551</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00568">568</a> 行定义.</p>
 
 </div>
 </div>
@@ -2315,7 +2317,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取常量反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向无效元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00415">415</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00432">432</a> 行定义.</p>
 
 </div>
 </div>
@@ -2347,7 +2349,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向无效元素的反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00403">403</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00420">420</a> 行定义.</p>
 
 </div>
 </div>
@@ -2384,7 +2386,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00823">823</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00840">840</a> 行定义.</p>
 
 </div>
 </div>
@@ -2429,9 +2431,9 @@ template&lt;typename Pred&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00808">808</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00825">825</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00823">list&lt; pair&lt; Key, Value &gt; &gt;::remove()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00840">list&lt; pair&lt; Key, Value &gt; &gt;::remove()</a>.</p>
 
 </div>
 </div>
@@ -2463,7 +2465,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取常量反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00421">421</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00438">438</a> 行定义.</p>
 
 </div>
 </div>
@@ -2495,7 +2497,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00409">409</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00426">426</a> 行定义.</p>
 
 </div>
 </div>
@@ -2527,9 +2529,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 <p>获取当前元素数量 </p>
 <dl class="section return"><dt>返回</dt><dd>元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00451">451</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00468">468</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l01043">list&lt; pair&lt; Key, Value &gt; &gt;::operator==()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l01060">list&lt; pair&lt; Key, Value &gt; &gt;::equal_to()</a>.</p>
 
 </div>
 </div>
@@ -2575,9 +2577,9 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <p>使用插入排序算法对链表进行排序。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00976">976</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00993">993</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00996">list&lt; pair&lt; Key, Value &gt; &gt;::sort()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l01013">list&lt; pair&lt; Key, Value &gt; &gt;::sort()</a>.</p>
 
 </div>
 </div>
@@ -2620,7 +2622,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <p>将other链表的所有元素拼接到position之前，other变为空链表。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00834">834</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00851">851</a> 行定义.</p>
 
 </div>
 </div>
@@ -2675,7 +2677,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <p>将other链表中[first, last)范围内的元素拼接到position之前。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00871">871</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00888">888</a> 行定义.</p>
 
 </div>
 </div>
@@ -2724,7 +2726,7 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <p>将other链表中的iter指向的元素拼接到position之前。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00851">851</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00868">868</a> 行定义.</p>
 
 </div>
 </div>
@@ -2761,9 +2763,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00775">775</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00792">792</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00340">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>, <a class="el" href="list_8hpp_source.html#l00327">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00350">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00357">list&lt; pair&lt; Key, Value &gt; &gt;::list()</a>, <a class="el" href="list_8hpp_source.html#l00344">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00367">list&lt; pair&lt; Key, Value &gt; &gt;::operator=()</a>.</p>
 
 </div>
 </div>
@@ -2812,9 +2814,9 @@ template&lt;typename T, typename Alloc = allocator&lt;list_node&lt;T&gt;&gt;&gt;
 </dl>
 <p>将[first, last)范围内的元素从当前链表传输到position之前。 此操作为常数时间，不涉及元素构造和析构。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00789">789</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00806">806</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00894">list&lt; pair&lt; Key, Value &gt; &gt;::merge_if()</a>, <a class="el" href="list_8hpp_source.html#l00834">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a>, <a class="el" href="list_8hpp_source.html#l00871">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00851">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00911">list&lt; pair&lt; Key, Value &gt; &gt;::merge_if()</a>, <a class="el" href="list_8hpp_source.html#l00851">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a>, <a class="el" href="list_8hpp_source.html#l00888">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a> , 以及 <a class="el" href="list_8hpp_source.html#l00868">list&lt; pair&lt; Key, Value &gt; &gt;::splice()</a>.</p>
 
 </div>
 </div>
@@ -2860,9 +2862,9 @@ template&lt;typename Pred&gt; </div>
 </dl>
 <p>移除链表中所有连续重复的元素，只保留第一个。 </p>
 
-<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00947">947</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="list_8hpp_source.html">list.hpp</a> 第 <a class="el" href="list_8hpp_source.html#l00964">964</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00966">list&lt; pair&lt; Key, Value &gt; &gt;::unique()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="list_8hpp_source.html#l00983">list&lt; pair&lt; Key, Value &gt; &gt;::unique()</a>.</p>
 
 </div>
 </div>

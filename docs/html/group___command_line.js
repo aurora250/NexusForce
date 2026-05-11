@@ -16,7 +16,7 @@ var group___command_line =
       [ "get", "classcmdline.html#a24de4f54ac0cd7da9ce7bd1ec5859a7d", null ],
       [ "has", "classcmdline.html#a083090bc73cb8711d21510b48ee8be77", null ],
       [ "parse", "classcmdline.html#ac59ec7b99c5c40ad74ccbd4ef9da0ba9", null ],
-      [ "parse", "classcmdline.html#a3fbc4231ae124b2f828f447632e5ed5a", null ],
+      [ "parse", "classcmdline.html#a27f16ada740af51e1638aa0d058be9fe", null ],
       [ "parse_os_args", "classcmdline.html#ac80b5cbd5223c70096faa13c430d8b33", null ],
       [ "positional_args", "classcmdline.html#abb3f95a707384a9308aaad694a8cf169", null ],
       [ "print_help", "classcmdline.html#a720bda60aa8408775671e89ab7947df2", null ],

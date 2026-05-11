@@ -7,6 +7,5 @@ var searchData=
   ['environment_2ehpp_4',['environment.hpp',['../environment_8hpp.html',1,'']]],
   ['errc_2ehpp_5',['errc.hpp',['../errc_8hpp.html',1,'']]],
   ['exception_2ehpp_6',['exception.hpp',['../exception_8hpp.html',1,'']]],
-  ['exception_5fptr_2ehpp_7',['exception_ptr.hpp',['../exception__ptr_8hpp.html',1,'']]],
-  ['ext_5fsort_2ehpp_8',['ext_sort.hpp',['../ext__sort_8hpp.html',1,'']]]
+  ['exception_5fptr_2ehpp_7',['exception_ptr.hpp',['../exception__ptr_8hpp.html',1,'']]]
 ];

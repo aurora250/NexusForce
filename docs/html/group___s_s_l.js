@@ -9,6 +9,8 @@ var group___s_s_l =
     ] ],
     [ "ssl_context", "classssl__context.html", [
       [ "ssl_context", "classssl__context.html#a66547e0420877dfe3109b5c1ebab7437", null ],
+      [ "clone", "classssl__context.html#a10459f705e17d31675e237b26d1f1b2a", null ],
+      [ "clone_shared", "classssl__context.html#afd2628b66a19c8d6a89e94d21c297a16", null ],
       [ "is_valid", "classssl__context.html#a578442e1760cc9d136347c462611fedf", null ],
       [ "load_certificate", "classssl__context.html#a22215336ea11c5521366581dec47543f", null ],
       [ "load_certificate_from_memory", "classssl__context.html#aec13982e180a000537a06105e556ff28", null ],
@@ -40,7 +42,7 @@ var group___s_s_l =
       [ "ssl", "classssl__socket.html#aef4e77b2860d6c93a77742211a060d93", null ]
     ] ],
     [ "ssl_stream", "classssl__stream.html", [
-      [ "native_handle_type", "classssl__stream.html#afc24338af0bfb2d13cc9b8b900fadbae", null ],
+      [ "native_handle_type", "classssl__stream.html#ae051cc1c9f187ca1d0d7d6ed3bfbae11", null ],
       [ "ssl_stream", "classssl__stream.html#ab02e87e9e16e91897e6cff777bb29186", null ],
       [ "ssl_stream", "classssl__stream.html#a08bc78c38c699630bdfd08492fabadfd", null ],
       [ "accept", "classssl__stream.html#a8d50c0caaf302839aba7a8989a3fa875", null ],

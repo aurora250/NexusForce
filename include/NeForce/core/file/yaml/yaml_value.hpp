@@ -17,6 +17,30 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @defgroup Exceptions 异常类集
+ * @brief 异常类集
+ * @{
+ */
+
+/**
+ * @struct yaml_exception
+ * @brief YAML格式操作失败
+ */
+struct yaml_exception final : value_exception {
+    explicit yaml_exception(const char* info = "YAML Operation Failed.", const char* type = static_type,
+                            const int code = 0) noexcept :
+    value_exception(info, type, code) {}
+
+    explicit yaml_exception(const exception& e) :
+    value_exception(e) {}
+
+    ~yaml_exception() override = default;
+    static constexpr auto static_type = "yaml_exception";
+};
+
+/** @} */ // Exceptions
+
+/**
  * @addtogroup ConfigFormat 配置格式操作
  * @{
  */
@@ -164,8 +188,6 @@ NEFORCE_BEGIN_NAMESPACE__
  * @see https://www.rfc-editor.org/rfc/rfc8259
  * @{
  */
-
-NEFORCE_ERROR_BUILD_FINAL_CLASS(yaml_exception, value_exception, "YAML Operation Failed.")
 
 class yaml_value;
 class yaml_null;

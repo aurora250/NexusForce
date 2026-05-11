@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
+  ['条件变量_0',['条件变量',['../group___condition_variables.html',1,'']]]
 ];

@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classrepeat__view" kind="class" language="C++" prot="public">
+    <compoundname>repeat_view</compoundname>
+    <basecompoundref refid="structview__base" prot="public" virt="non-virtual">view_base&lt; repeat_view&lt; T &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrepeat__view_1af435c60591a74d2d50119b18a355a3c4" prot="public" static="no">
+        <type>repeat_iterator&lt; T &gt;</type>
+        <definition>using repeat_view&lt; T &gt;::iterator = repeat_iterator&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>repeat_view::iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1220" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1220" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrepeat__view_1ac4099efe941596da87fd91bebcdec582" prot="public" static="no">
+        <type>repeat_sentinel&lt; T &gt;</type>
+        <definition>using repeat_view&lt; T &gt;::sentinel = repeat_sentinel&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>sentinel</name>
+        <qualifiedname>repeat_view::sentinel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1221" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1221" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrepeat__view_1a9aec0d9471ec1813ab1e7a79666247d9" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref></type>
+        <definition>using repeat_view&lt; T &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>repeat_view::difference_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1222" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1222" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrepeat__view_1a68f96593a2af5d0db247f5cfc1791878" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T repeat_view&lt; T &gt;::value_</definition>
+        <argsstring></argsstring>
+        <name>value_</name>
+        <qualifiedname>repeat_view::value_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1238" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1238" bodyend="1238"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrepeat__view_1aa2633541e29ce2117ea32180b80027b5" prot="private" static="no" mutable="no">
+        <type>difference_type</type>
+        <definition>difference_type repeat_view&lt; T &gt;::count_</definition>
+        <argsstring></argsstring>
+        <name>count_</name>
+        <qualifiedname>repeat_view::count_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1239" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1239" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrepeat__view_1aa30a995790dab4da2ec69b101c20d805" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool repeat_view&lt; T &gt;::has_bound_</definition>
+        <argsstring></argsstring>
+        <name>has_bound_</name>
+        <qualifiedname>repeat_view::has_bound_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1240" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1240" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrepeat__view_1a60c00c1e5a6a7ff75b33ebf12598ac08" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>repeat_view&lt; T &gt;::repeat_view</definition>
+        <argsstring>()=default</argsstring>
+        <name>repeat_view</name>
+        <qualifiedname>repeat_view::repeat_view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1224" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classrepeat__view_1aaca92f379ff09deda9d0a8e4a7286dd9" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>repeat_view&lt; T &gt;::repeat_view</definition>
+        <argsstring>(T value)</argsstring>
+        <name>repeat_view</name>
+        <qualifiedname>repeat_view::repeat_view</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1226" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1226" bodyend="1227"/>
+      </memberdef>
+      <memberdef kind="function" id="classrepeat__view_1ab946f27733145f541faeb73639327e07" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>repeat_view&lt; T &gt;::repeat_view</definition>
+        <argsstring>(T value, const difference_type count)</argsstring>
+        <name>repeat_view</name>
+        <qualifiedname>repeat_view::repeat_view</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const difference_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1229" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1229" bodyend="1232"/>
+      </memberdef>
+      <memberdef kind="function" id="classrepeat__view_1a5feed98a76638f1176c33940c4bf4424" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator repeat_view&lt; T &gt;::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <qualifiedname>repeat_view::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1234" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1234" bodyend="1234"/>
+      </memberdef>
+      <memberdef kind="function" id="classrepeat__view_1ae251ec04b65f3e778a38507a3926fea9" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>sentinel</type>
+        <definition>sentinel repeat_view&lt; T &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <qualifiedname>repeat_view::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1235" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1235" bodyend="1235"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>repeat_view&lt; T &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>view_base&lt; repeat_view&lt; T &gt; &gt;</label>
+        <link refid="structview__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>repeat_view&lt; T &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>view_base&lt; repeat_view&lt; T &gt; &gt;</label>
+        <link refid="structview__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1218" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1218" bodyend="1241"/>
+    <listofallmembers>
+      <member refid="classrepeat__view_1a5feed98a76638f1176c33940c4bf4424" prot="public" virt="non-virtual"><scope>repeat_view</scope><name>begin</name></member>
+      <member refid="classrepeat__view_1aa2633541e29ce2117ea32180b80027b5" prot="private" virt="non-virtual"><scope>repeat_view</scope><name>count_</name></member>
+      <member refid="classrepeat__view_1a9aec0d9471ec1813ab1e7a79666247d9" prot="public" virt="non-virtual"><scope>repeat_view</scope><name>difference_type</name></member>
+      <member refid="classrepeat__view_1ae251ec04b65f3e778a38507a3926fea9" prot="public" virt="non-virtual"><scope>repeat_view</scope><name>end</name></member>
+      <member refid="classrepeat__view_1aa30a995790dab4da2ec69b101c20d805" prot="private" virt="non-virtual"><scope>repeat_view</scope><name>has_bound_</name></member>
+      <member refid="classrepeat__view_1af435c60591a74d2d50119b18a355a3c4" prot="public" virt="non-virtual"><scope>repeat_view</scope><name>iterator</name></member>
+      <member refid="classrepeat__view_1a60c00c1e5a6a7ff75b33ebf12598ac08" prot="public" virt="non-virtual"><scope>repeat_view</scope><name>repeat_view</name></member>
+      <member refid="classrepeat__view_1aaca92f379ff09deda9d0a8e4a7286dd9" prot="public" virt="non-virtual"><scope>repeat_view</scope><name>repeat_view</name></member>
+      <member refid="classrepeat__view_1ab946f27733145f541faeb73639327e07" prot="public" virt="non-virtual"><scope>repeat_view</scope><name>repeat_view</name></member>
+      <member refid="classrepeat__view_1ac4099efe941596da87fd91bebcdec582" prot="public" virt="non-virtual"><scope>repeat_view</scope><name>sentinel</name></member>
+      <member refid="classrepeat__view_1a68f96593a2af5d0db247f5cfc1791878" prot="private" virt="non-virtual"><scope>repeat_view</scope><name>value_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

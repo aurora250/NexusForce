@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="conceptassignable__from" kind="concept">
+    <compoundname>assignable_from</compoundname>
+    <includes refid="concepts_8hpp" local="no">concepts.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename To</type>
+      </param>
+      <param>
+        <type>typename From</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename To, typename From&gt;
+concept <ref refid="conceptassignable__from" kindref="compound">assignable_from</ref> =  <ref refid="group___base_type_qualifier_check_1gaa1b38d81ca00c1a6d966572161cf4484" kindref="member">is_lvalue_reference_v</ref>&lt;To&gt; &amp;&amp;
+                          <ref refid="conceptcommon__reference__with" kindref="compound">common_reference_with</ref>&lt;const <ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt;To&gt;&amp;, const <ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt;From&gt;&amp;&gt; &amp;&amp;
+                          requires(To x, From&amp;&amp; y) {
+                              { x = static_cast&lt;From&amp;&amp;&gt;(y) } -&gt; <ref refid="conceptsame__as" kindref="compound">same_as</ref>&lt;To&gt;;
+                          }</initializer>
+    <conceptparts>
+      <codepart line="142">    <programlisting>
+<codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>To,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>From&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">assignable_from<sp/>=<sp/><ref refid="group___base_type_qualifier_check_1gaa1b38d81ca00c1a6d966572161cf4484" kindref="member">is_lvalue_reference_v&lt;To&gt;</ref><sp/>&amp;&amp;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>common_reference_with&lt;const<sp/>remove_reference_t&lt;To&gt;&amp;,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t&lt;From&gt;</ref>&amp;&gt;<sp/>&amp;&amp;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(To<sp/>x,<sp/>From&amp;&amp;<sp/>y)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>x<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">From&amp;&amp;</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(y)<sp/>}<sp/>-&gt;<sp/>same_as&lt;To&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+<para>检查类型是否可以从另一个类型赋值 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>To</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>From</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+要求To是左值引用，并且可以将From的值赋给To。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="142" column="1"/>
+  </compounddef>
+</doxygen>

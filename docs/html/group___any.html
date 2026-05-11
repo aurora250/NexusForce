@@ -103,12 +103,9 @@ $(function(){initNavTree('group___any.html','',''); });
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:gaa10dc2f937bfc4efbd98234e71af0860" id="r_gaa10dc2f937bfc4efbd98234e71af0860"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_special_member_function_checks.html#gaa82283ddef45057333aca64ba0787874">is_constructible_v</a>&lt; <a class="el" href="classany.html">any</a>, <a class="el" href="structinplace__construct__tag.html">inplace_construct_tag</a>, Args... &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaa10dc2f937bfc4efbd98234e71af0860" id="r_gaa10dc2f937bfc4efbd98234e71af0860"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_special_member_function_checks.html#gaa82283ddef45057333aca64ba0787874">is_constructible_v</a>&lt; <a class="el" href="classany.html">any</a>, <a class="el" href="structpass__template__construct__tag.html">pass_template_construct_tag</a>&lt; T &gt;, Args... &gt;, int &gt; = 0&gt; </td></tr>
 <tr class="memitem:gaa10dc2f937bfc4efbd98234e71af0860 template"><td class="memItemLeft"><a class="el" href="classany.html">any</a>&#160;</td><td class="memItemRight"><a class="el" href="#gaa10dc2f937bfc4efbd98234e71af0860">make_any</a> (Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:gaa10dc2f937bfc4efbd98234e71af0860"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建any对象  <br /></td></tr>
-<tr class="memitem:ga183dcd85c0c0bf184c603ef4eb8cfeb9" id="r_ga183dcd85c0c0bf184c603ef4eb8cfeb9"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_special_member_function_checks.html#gaa82283ddef45057333aca64ba0787874">is_constructible_v</a>&lt; <a class="el" href="classany.html">any</a>, <a class="el" href="structinplace__construct__tag.html">inplace_construct_tag</a>, std::initializer_list&lt; U &gt; &amp;, Args... &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga183dcd85c0c0bf184c603ef4eb8cfeb9 template"><td class="memItemLeft"><a class="el" href="classany.html">any</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga183dcd85c0c0bf184c603ef4eb8cfeb9">make_any</a> (std::initializer_list&lt; U &gt; ilist, Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:ga183dcd85c0c0bf184c603ef4eb8cfeb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用初始化列表创建any对象  <br /></td></tr>
 <tr class="memitem:ga435372af463e628eb7e40e293d87c1da" id="r_ga435372af463e628eb7e40e293d87c1da"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga435372af463e628eb7e40e293d87c1da template"><td class="memItemLeft">const T *&#160;</td><td class="memItemRight"><a class="el" href="#ga435372af463e628eb7e40e293d87c1da">any_cast</a> (const <a class="el" href="classany.html">any</a> *value) noexcept</td></tr>
 <tr class="memdesc:ga435372af463e628eb7e40e293d87c1da"><td class="mdescLeft">&#160;</td><td class="mdescRight">从any对象转换常量值  <br /></td></tr>
@@ -162,9 +159,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向转换后值的指针，如果类型不匹配则返回nullptr </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="utility_2any_8hpp_source.html">utility/any.hpp</a> 第 <a class="el" href="utility_2any_8hpp_source.html#l00486">486</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="utility_2any_8hpp_source.html">utility/any.hpp</a> 第 <a class="el" href="utility_2any_8hpp_source.html#l00464">464</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="utility_2any_8hpp_source.html#l00475">any_cast()</a>.</p>
+<p class="reference">引用了 <a class="el" href="utility_2any_8hpp_source.html#l00453">any_cast()</a>.</p>
 
 </div>
 </div>
@@ -206,9 +203,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="utility_2any_8hpp_source.html">utility/any.hpp</a> 第 <a class="el" href="utility_2any_8hpp_source.html#l00498">498</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="utility_2any_8hpp_source.html">utility/any.hpp</a> 第 <a class="el" href="utility_2any_8hpp_source.html#l00476">476</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="utility_2any_8hpp_source.html#l00475">any_cast()</a>, <a class="el" href="type__traits_8hpp_source.html#l00282">disjunction_v</a> , 以及 <a class="el" href="breakpoint_8hpp_source.html#l00068">unreachable()</a>.</p>
+<p class="reference">引用了 <a class="el" href="utility_2any_8hpp_source.html#l00453">any_cast()</a>, <a class="el" href="type__traits_8hpp_source.html#l00282">disjunction_v</a> , 以及 <a class="el" href="breakpoint_8hpp_source.html#l00068">unreachable()</a>.</p>
 
 </div>
 </div>
@@ -252,19 +249,19 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向转换后值的常量指针，如果类型不匹配则返回nullptr </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="utility_2any_8hpp_source.html">utility/any.hpp</a> 第 <a class="el" href="utility_2any_8hpp_source.html#l00475">475</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="utility_2any_8hpp_source.html">utility/any.hpp</a> 第 <a class="el" href="utility_2any_8hpp_source.html#l00453">453</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="utility_2any_8hpp_source.html#l00486">any_cast()</a> , 以及 <a class="el" href="utility_2any_8hpp_source.html#l00498">any_cast()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="utility_2any_8hpp_source.html#l00464">any_cast()</a> , 以及 <a class="el" href="utility_2any_8hpp_source.html#l00476">any_cast()</a>.</p>
 
 </div>
 </div>
 <a id="gaa10dc2f937bfc4efbd98234e71af0860" name="gaa10dc2f937bfc4efbd98234e71af0860"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa10dc2f937bfc4efbd98234e71af0860">&#9670;&#160;</a></span>make_any() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa10dc2f937bfc4efbd98234e71af0860">&#9670;&#160;</a></span>make_any()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_special_member_function_checks.html#gaa82283ddef45057333aca64ba0787874">is_constructible_v</a>&lt; <a class="el" href="classany.html">any</a>, <a class="el" href="structinplace__construct__tag.html">inplace_construct_tag</a>, Args... &gt;, int &gt; = 0&gt; </div>
+template&lt;typename T, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_special_member_function_checks.html#gaa82283ddef45057333aca64ba0787874">is_constructible_v</a>&lt; <a class="el" href="classany.html">any</a>, <a class="el" href="structpass__template__construct__tag.html">pass_template_construct_tag</a>&lt; T &gt;, Args... &gt;, int &gt; = 0&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classany.html">any</a> make_any </td>
@@ -291,56 +288,11 @@ template&lt;typename T, typename... Args, <a class="el" href="group___type_trait
 </dl>
 <dl class="section return"><dt>返回</dt><dd>构造的any对象 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="utility_2any_8hpp_source.html">utility/any.hpp</a> 第 <a class="el" href="utility_2any_8hpp_source.html#l00410">410</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="utility_2any_8hpp_source.html">utility/any.hpp</a> 第 <a class="el" href="utility_2any_8hpp_source.html#l00403">403</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a> , 以及 <a class="el" href="utility_2any_8hpp_source.html#l00410">make_any()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a> , 以及 <a class="el" href="utility_2any_8hpp_source.html#l00403">make_any()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="utility_2any_8hpp_source.html#l00410">make_any()</a>.</p>
-
-</div>
-</div>
-<a id="ga183dcd85c0c0bf184c603ef4eb8cfeb9" name="ga183dcd85c0c0bf184c603ef4eb8cfeb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga183dcd85c0c0bf184c603ef4eb8cfeb9">&#9670;&#160;</a></span>make_any() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename U, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_special_member_function_checks.html#gaa82283ddef45057333aca64ba0787874">is_constructible_v</a>&lt; <a class="el" href="classany.html">any</a>, <a class="el" href="structinplace__construct__tag.html">inplace_construct_tag</a>, std::initializer_list&lt; U &gt; &amp;, Args... &gt;, int &gt; = 0&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classany.html">any</a> make_any </td>
-          <td>(</td>
-          <td class="paramtype">std::initializer_list&lt; U &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>使用初始化列表创建any对象 </p>
-<dl class="tparams"><dt>模板参数</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">T</td><td>值类型 </td></tr>
-    <tr><td class="paramname">U</td><td>初始化列表元素类型 </td></tr>
-    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
-    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>构造的any对象 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="utility_2any_8hpp_source.html">utility/any.hpp</a> 第 <a class="el" href="utility_2any_8hpp_source.html#l00425">425</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="utility_2any_8hpp_source.html#l00403">make_any()</a>.</p>
 
 </div>
 </div>

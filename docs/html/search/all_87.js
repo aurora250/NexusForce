@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['概念约束_0',['概念约束',['../group___concepts.html',1,'']]]
+  ['格式规范_0',['格式规范',['../group___date_time.html#format_specifications',1,'']]]
 ];

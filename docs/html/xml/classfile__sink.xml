@@ -1,0 +1,385 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classfile__sink" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>file_sink</compoundname>
+    <basecompoundref refid="classlog__sink" prot="public" virt="non-virtual">log_sink</basecompoundref>
+    <includes refid="file__sink_8hpp" local="no">file_sink.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfile__sink_1ad5653e6b4eba6e35ac5eade566c5308f" prot="private" static="no" mutable="no">
+        <type><ref refid="classfile" kindref="compound">file</ref></type>
+        <definition>file file_sink::file_</definition>
+        <argsstring></argsstring>
+        <name>file_</name>
+        <qualifiedname>file_sink::file_</qualifiedname>
+        <briefdescription>
+<para>当前日志文件 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="38" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__sink_1a9fe4251ac983f3c0bce84e4576a775a1" prot="private" static="no" mutable="no">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex file_sink::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>file_sink::mutex_</qualifiedname>
+        <briefdescription>
+<para>互斥锁，保证线程安全 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="39" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__sink_1a5e5c5b7e806814849d23aa9cc982d761" prot="private" static="no" mutable="no">
+        <type><ref refid="classpath" kindref="compound">path</ref></type>
+        <definition>path file_sink::base_filename_</definition>
+        <argsstring></argsstring>
+        <name>base_filename_</name>
+        <qualifiedname>file_sink::base_filename_</qualifiedname>
+        <briefdescription>
+<para>基础文件名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="40" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__sink_1a09674d26e6e74d4dc42a0ea8a42cb0e4" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string file_sink::current_date_</definition>
+        <argsstring></argsstring>
+        <name>current_date_</name>
+        <qualifiedname>file_sink::current_date_</qualifiedname>
+        <briefdescription>
+<para>当前日期 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="41" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__sink_1a385a8c6f8a1857d22ca8b2072b894219" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t file_sink::max_file_size_</definition>
+        <argsstring></argsstring>
+        <name>max_file_size_</name>
+        <qualifiedname>file_sink::max_file_size_</qualifiedname>
+        <briefdescription>
+<para>文件大小上限（字节） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="42" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__sink_1af1a912ac59db365f2b0c42e029d371d3" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t file_sink::current_size_</definition>
+        <argsstring></argsstring>
+        <name>current_size_</name>
+        <qualifiedname>file_sink::current_size_</qualifiedname>
+        <briefdescription>
+<para>当前文件大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="43" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__sink_1ae29b4d5769dbbb9a2438225eac32daf5" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int file_sink::file_index_</definition>
+        <argsstring></argsstring>
+        <name>file_index_</name>
+        <qualifiedname>file_sink::file_index_</qualifiedname>
+        <briefdescription>
+<para>当前文件索引 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="44" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__sink_1a1951c0f0c56c0b9679d79d22910f416e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool file_sink::enable_date_rotation_</definition>
+        <argsstring></argsstring>
+        <name>enable_date_rotation_</name>
+        <qualifiedname>file_sink::enable_date_rotation_</qualifiedname>
+        <briefdescription>
+<para>是否启用日期轮转 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="45" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfile__sink_1a3bfafbb6b3d3cc5b007b66f4e84c2816" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void file_sink::open_new_file</definition>
+        <argsstring>()</argsstring>
+        <name>open_new_file</name>
+        <qualifiedname>file_sink::open_new_file</qualifiedname>
+        <briefdescription>
+<para>打开新的日志文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>根据当前配置（日期、索引）构建文件名并打开文件。 如果文件已存在，以追加模式打开。</para>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfile__exception" kindref="compound">file_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件打开失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="55" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__sink_1a345e29ce4305a20a0fcea82c4010bda3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void file_sink::rotate_file</definition>
+        <argsstring>()</argsstring>
+        <name>rotate_file</name>
+        <qualifiedname>file_sink::rotate_file</qualifiedname>
+        <briefdescription>
+<para>按大小轮转日志文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>关闭当前文件，增加索引，创建新的日志文件。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="62" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__sink_1a52855b288855b86d89987623d05f58d7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void file_sink::rotate_by_date</definition>
+        <argsstring>(string today)</argsstring>
+        <name>rotate_by_date</name>
+        <qualifiedname>file_sink::rotate_by_date</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>today</declname>
+        </param>
+        <briefdescription>
+<para>按日期轮转日志文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>today</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前日期字符串</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+当日期变化时调用，重置索引，创建新日期的日志文件。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="70" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfile__sink_1aed99db6b438e9f70757f82f162779868" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>file_sink::file_sink</definition>
+        <argsstring>(path filename, size_t max_file_size=10 *1024 *1024, bool enable_date_rotation=true)</argsstring>
+        <name>file_sink</name>
+        <qualifiedname>file_sink::file_sink</qualifiedname>
+        <param>
+          <type><ref refid="classpath" kindref="compound">path</ref></type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>max_file_size</declname>
+          <defval>10 *1024 *1024</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>enable_date_rotation</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基础文件名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_file_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件大小上限（默认10MB） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>enable_date_rotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用日期轮转（默认true）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建文件日志输出目标，并立即打开日志文件。</para>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfile__exception" kindref="compound">file_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件创建失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="83" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__sink_1a5852a135e31a2e0d371d2c19729d052a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void file_sink::log</definition>
+        <argsstring>(const log_event &amp;event) override</argsstring>
+        <name>log</name>
+        <qualifiedname>file_sink::log</qualifiedname>
+        <reimplements refid="classlog__sink_1a23426545dd75dd433f3d5b7b0407faaf">log</reimplements>
+        <param>
+          <type>const <ref refid="structlog__event" kindref="compound">log_event</ref> &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>写入日志事件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的日志事件</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将格式化后的日志写入文件。如果文件大小超过限制或日期变化， 会自动进行轮转。线程安全。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="92" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__sink_1a664527322116a172e817afa7b0766fa6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void file_sink::flush</definition>
+        <argsstring>() override</argsstring>
+        <name>flush</name>
+        <qualifiedname>file_sink::flush</qualifiedname>
+        <reimplements refid="classlog__sink_1adb79b71ac6d34d43d31a708d9c46f599">flush</reimplements>
+        <briefdescription>
+<para>刷新文件缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>确保所有日志都被写入磁盘。线程安全。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="99" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>文件日志输出目标 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>将日志写入文件，支持以下特性：<itemizedlist>
+<listitem><para>按大小轮转：当文件达到指定大小时自动创建新文件</para>
+</listitem><listitem><para>按日期轮转：每天创建新的日志文件</para>
+</listitem><listitem><para>文件索引：轮转时自动增加文件索引</para>
+</listitem></itemizedlist>
+</para>
+<para>文件名格式：<itemizedlist>
+<listitem><para>基础文件名</para>
+</listitem><listitem><para>如果启用日期轮转：添加日期后缀</para>
+</listitem><listitem><para>如果启用大小轮转：添加文件索引 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>file_sink</label>
+        <link refid="classfile__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>log_sink</label>
+        <link refid="classlog__sink"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>file_sink</label>
+        <link refid="classfile__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>log_sink</label>
+        <link refid="classlog__sink"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>formatter_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>unique_ptr&lt; log_formatter &gt;</label>
+        <link refid="classunique__ptr"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" line="36" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp" bodystart="36" bodyend="100"/>
+    <listofallmembers>
+      <member refid="classfile__sink_1a5e5c5b7e806814849d23aa9cc982d761" prot="private" virt="non-virtual"><scope>file_sink</scope><name>base_filename_</name></member>
+      <member refid="classfile__sink_1a09674d26e6e74d4dc42a0ea8a42cb0e4" prot="private" virt="non-virtual"><scope>file_sink</scope><name>current_date_</name></member>
+      <member refid="classfile__sink_1af1a912ac59db365f2b0c42e029d371d3" prot="private" virt="non-virtual"><scope>file_sink</scope><name>current_size_</name></member>
+      <member refid="classfile__sink_1a1951c0f0c56c0b9679d79d22910f416e" prot="private" virt="non-virtual"><scope>file_sink</scope><name>enable_date_rotation_</name></member>
+      <member refid="classfile__sink_1ad5653e6b4eba6e35ac5eade566c5308f" prot="private" virt="non-virtual"><scope>file_sink</scope><name>file_</name></member>
+      <member refid="classfile__sink_1ae29b4d5769dbbb9a2438225eac32daf5" prot="private" virt="non-virtual"><scope>file_sink</scope><name>file_index_</name></member>
+      <member refid="classfile__sink_1aed99db6b438e9f70757f82f162779868" prot="public" virt="non-virtual"><scope>file_sink</scope><name>file_sink</name></member>
+      <member refid="classfile__sink_1a664527322116a172e817afa7b0766fa6" prot="public" virt="virtual"><scope>file_sink</scope><name>flush</name></member>
+      <member refid="classlog__sink_1a4ef9a9a7bd511f678816d4654ed1f9b0" prot="protected" virt="non-virtual"><scope>file_sink</scope><name>formatter_</name></member>
+      <member refid="classfile__sink_1a5852a135e31a2e0d371d2c19729d052a" prot="public" virt="virtual"><scope>file_sink</scope><name>log</name></member>
+      <member refid="classfile__sink_1a385a8c6f8a1857d22ca8b2072b894219" prot="private" virt="non-virtual"><scope>file_sink</scope><name>max_file_size_</name></member>
+      <member refid="classfile__sink_1a9fe4251ac983f3c0bce84e4576a775a1" prot="private" virt="non-virtual"><scope>file_sink</scope><name>mutex_</name></member>
+      <member refid="classfile__sink_1a3bfafbb6b3d3cc5b007b66f4e84c2816" prot="private" virt="non-virtual"><scope>file_sink</scope><name>open_new_file</name></member>
+      <member refid="classfile__sink_1a52855b288855b86d89987623d05f58d7" prot="private" virt="non-virtual"><scope>file_sink</scope><name>rotate_by_date</name></member>
+      <member refid="classfile__sink_1a345e29ce4305a20a0fcea82c4010bda3" prot="private" virt="non-virtual"><scope>file_sink</scope><name>rotate_file</name></member>
+      <member refid="classlog__sink_1a354978735401f7f31d9a4c9bcc97f398" prot="public" virt="non-virtual"><scope>file_sink</scope><name>set_formatter</name></member>
+      <member refid="classlog__sink_1a6d5597d2bc719df8f956f9d0a33ae584" prot="public" virt="virtual"><scope>file_sink</scope><name>~log_sink</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

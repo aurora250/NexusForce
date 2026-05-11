@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['险象指针_0',['险象指针',['../group___hazard_pointer.html',1,'']]]
+  ['量词算法_0',['量词算法',['../group___quantifier_algorithms.html',1,'']]]
 ];

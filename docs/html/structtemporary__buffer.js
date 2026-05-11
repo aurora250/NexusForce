@@ -16,7 +16,7 @@ var structtemporary__buffer =
     [ "cend", "structtemporary__buffer.html#ab3400cfecca0e1b147716ad9f44617cf", null ],
     [ "empty", "structtemporary__buffer.html#a45ca45ad03bab072a920035500e5c032", null ],
     [ "end", "structtemporary__buffer.html#a0dfe4ed9f200cc79df36240ab3098ea2", null ],
-    [ "operator=", "structtemporary__buffer.html#a2ff5f51dd9e1f6e682910ecab6d3fbc4", null ],
+    [ "operator=", "structtemporary__buffer.html#a5a8f901c1afaee45679f5cde1d556e15", null ],
     [ "requested_size", "structtemporary__buffer.html#a729a4373ddd0fe0a6be8d67a09b588c6", null ],
     [ "size", "structtemporary__buffer.html#acc99444b291842e815e249d0071b42fc", null ]
 ];

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___plugin" kind="group">
+    <compoundname>Plugin</compoundname>
+    <title>插件</title>
+    <innerclass refid="structplugin__info" prot="public">plugin_info</innerclass>
+    <innerclass refid="structiplugin" prot="public">iplugin</innerclass>
+    <innerclass refid="structplugin__deleter" prot="public">plugin_deleter</innerclass>
+    <innerclass refid="classplugin__manager" prot="public">plugin_manager</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___plugin_1gaf947f049a3822c8b84313e907b0ebb58" prot="public" static="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structiplugin" kindref="compound">iplugin</ref>, <ref refid="structplugin__deleter" kindref="compound">plugin_deleter</ref> &gt;</type>
+        <definition>using plugin_ptr = unique_ptr&lt;iplugin, plugin_deleter&gt;</definition>
+        <argsstring></argsstring>
+        <name>plugin_ptr</name>
+        <briefdescription>
+<para>插件唯一指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>使用自定义删除器管理插件对象生命周期， 确保插件从正确的动态库中卸载。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="155" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" bodystart="155" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___plugin_1ga410e53efc8f03f530c6794d60818d504" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiplugin" kindref="compound">iplugin</ref> *</type>
+        <definition>iplugin * create_plugin</definition>
+        <argsstring>()</argsstring>
+        <name>create_plugin</name>
+        <briefdescription>
+<para>创建插件实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向新创建的插件对象的指针</para>
+</simplesect>
+此函数必须由插件实现并导出，用于创建插件实例。 返回的指针将由 destroy_plugin 函数销毁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" line="45" column="20" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" declline="45" declcolumn="20"/>
+      </memberdef>
+      <memberdef kind="function" id="group___plugin_1ga74771a48a81e35febe1026112c62e1f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void destroy_plugin</definition>
+        <argsstring>(iplugin *p)</argsstring>
+        <name>destroy_plugin</name>
+        <param>
+          <type><ref refid="structiplugin" kindref="compound">iplugin</ref> *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>销毁插件实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要销毁的插件对象指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+此函数必须由插件实现并导出，用于销毁通过 create_plugin 创建的插件对象。释放所有相关资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" line="54" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" declline="54" declcolumn="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="group___plugin_1gaf25d3a0e4b54927bc59ad58466f31dcc" prot="public" static="no">
+        <name>NEFORCE_PLUGIN_CREATE_FUNC</name>
+        <initializer>&quot;create_plugin&quot;</initializer>
+        <briefdescription>
+<para>插件创建函数名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>插件必须导出的创建函数名，用于实例化插件对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" line="28" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___plugin_1gad609af93bddb00f7c05edb56b9dc08bf" prot="public" static="no">
+        <name>NEFORCE_PLUGIN_DESTROY_FUNC</name>
+        <initializer>&quot;destroy_plugin&quot;</initializer>
+        <briefdescription>
+<para>插件销毁函数名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>插件必须导出的销毁函数名，用于释放插件对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" line="36" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_entry.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>动态加载插件管理 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

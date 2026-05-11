@@ -1,0 +1,958 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structmysql__result" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>mysql_result</compoundname>
+    <basecompoundref refid="structidb__tb__result" prot="public" virt="non-virtual">idb_tb_result</basecompoundref>
+    <includes refid="mysql__result_8hpp" local="no">mysql_result.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structmysql__result_1a25c3ce28bce8a922d73adbdc82776222" prot="private" static="no" mutable="no">
+        <type>::MYSQL_RES *</type>
+        <definition>::MYSQL_RES* mysql_result::result_</definition>
+        <argsstring></argsstring>
+        <name>result_</name>
+        <qualifiedname>mysql_result::result_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>MySQL结果集句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="42" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmysql__result_1aa04865ffc6e03d93aefa8b952aced750" prot="private" static="no" mutable="no">
+        <type>::MYSQL_ROW</type>
+        <definition>::MYSQL_ROW mysql_result::cursor_</definition>
+        <argsstring></argsstring>
+        <name>cursor_</name>
+        <qualifiedname>mysql_result::cursor_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>当前行指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="43" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmysql__result_1a49b6d6d30d46336546edebc5dd682530" prot="private" static="no" mutable="no">
+        <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+        <definition>size_type mysql_result::rows_</definition>
+        <argsstring></argsstring>
+        <name>rows_</name>
+        <qualifiedname>mysql_result::rows_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>总行数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="44" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmysql__result_1a02e927aec9ab574b668d594f3236aa18" prot="private" static="no" mutable="no">
+        <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+        <definition>size_type mysql_result::columns_</definition>
+        <argsstring></argsstring>
+        <name>columns_</name>
+        <qualifiedname>mysql_result::columns_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>总列数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="45" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmysql__result_1a405149596cfbadf17ef76ea6e2712239" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref> &gt; &gt;</type>
+        <definition>unique_ptr&lt;vector&lt;string_view&gt; &gt; mysql_result::column_name_</definition>
+        <argsstring></argsstring>
+        <name>column_name_</name>
+        <qualifiedname>mysql_result::column_name_</qualifiedname>
+        <briefdescription>
+<para>列名列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="47" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmysql__result_1a2365115e675a5097de8f1a3aa5570325" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classvector" kindref="compound">vector</ref>&lt;::enum_field_types &gt; &gt;</type>
+        <definition>unique_ptr&lt;vector&lt;::enum_field_types&gt; &gt; mysql_result::column_types_</definition>
+        <argsstring></argsstring>
+        <name>column_types_</name>
+        <qualifiedname>mysql_result::column_types_</qualifiedname>
+        <briefdescription>
+<para>列类型列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="48" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structmysql__result_1a004e5eb68b62f2ea73761bf64a3f9e68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>mysql_result::mysql_result</definition>
+        <argsstring>()</argsstring>
+        <name>mysql_result</name>
+        <qualifiedname>mysql_result::mysql_result</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建空结果集。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="56" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1ad27cac26616b43733d40b513e8bb7218" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>mysql_result::mysql_result</definition>
+        <argsstring>(::MYSQL_RES *result)</argsstring>
+        <name>mysql_result</name>
+        <qualifiedname>mysql_result::mysql_result</qualifiedname>
+        <param>
+          <type>::MYSQL_RES *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MySQL结果集句柄</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+获取结果集元数据。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a835a01b9b0c05a7d39e8cc30d976dfaa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>mysql_result::~mysql_result</definition>
+        <argsstring>() override</argsstring>
+        <name>~mysql_result</name>
+        <qualifiedname>mysql_result::~mysql_result</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>释放结果集资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="71" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a835acf0617caca31a023af9ff8c05dfb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool mysql_result::empty</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>empty</name>
+        <qualifiedname>mysql_result::empty</qualifiedname>
+        <reimplements refid="structidb__result_1aa1c85e3b42031de74a7fb1f7a95e2754">empty</reimplements>
+        <briefdescription>
+<para>检查结果集是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>空结果集返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="77" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1ab0bc025d64deda866a13e2c49cacca96" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type mysql_result::row_count</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>row_count</name>
+        <qualifiedname>mysql_result::row_count</qualifiedname>
+        <reimplements refid="structidb__tb__result_1aabb704cab81e3fdae2849fcdd6d73c75">row_count</reimplements>
+        <briefdescription>
+<para>获取结果集行数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>总行数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="83" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1aa0c7b8c18b4f7a91d73ee3107a6553e5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type mysql_result::column_count</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>column_count</name>
+        <qualifiedname>mysql_result::column_count</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a15bba511bedb7883a9770516e60d0502">column_count</reimplements>
+        <briefdescription>
+<para>获取结果集列数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>总列数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="89" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1abc8618955760ea54fe1addb302c2340f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref> &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD const vector&lt; string_view &gt; &amp; mysql_result::column_names</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>column_names</name>
+        <qualifiedname>mysql_result::column_names</qualifiedname>
+        <reimplements refid="structidb__tb__result_1acf9e2cdb951dfadb26394addafd314bd">column_names</reimplements>
+        <briefdescription>
+<para>获取列名列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>列名视图列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="95" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a392ecf203dd6aa1ff4c9d8b795e0ed63" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classvector" kindref="compound">vector</ref>&lt;::enum_field_types &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD const vector&lt;::enum_field_types &gt; &amp; mysql_result::column_types</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>column_types</name>
+        <qualifiedname>mysql_result::column_types</qualifiedname>
+        <briefdescription>
+<para>获取列类型列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>MySQL字段类型列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="101" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a048f701eff7bb223f7766ec8e0452d91" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool mysql_result::next</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>next</name>
+        <qualifiedname>mysql_result::next</qualifiedname>
+        <reimplements refid="structidb__result_1a4ffe1b5d13e654c3cb99f000e7d4d093">next</reimplements>
+        <briefdescription>
+<para>移动到下一行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功移动返回true，到达末尾返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="107" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1af96b22d3dfbb38be85d8434a35dd584a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view mysql_result::get</definition>
+        <argsstring>(size_type n) const noexcept override</argsstring>
+        <name>get</name>
+        <qualifiedname>mysql_result::get</qualifiedname>
+        <reimplements refid="structidb__tb__result_1ae1bc5e789f06b1d381f8922dc0c5e9af">get</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="114" column="35"/>
+        <references refid="structmysql__result_1af96b22d3dfbb38be85d8434a35dd584a">get</references>
+        <referencedby refid="structmysql__result_1af96b22d3dfbb38be85d8434a35dd584a">get</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1abb1468a12955d0a3316f8babc2bfbf9a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool mysql_result::get_bool</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_bool</name>
+        <qualifiedname>mysql_result::get_bool</qualifiedname>
+        <reimplements refid="structidb__tb__result_1ad35689b23d23b40ed9fe12c425527c58">get_bool</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>布尔值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="122" column="28"/>
+        <references refid="structmysql__result_1abb1468a12955d0a3316f8babc2bfbf9a">get_bool</references>
+        <referencedby refid="structmysql__result_1abb1468a12955d0a3316f8babc2bfbf9a">get_bool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a47f435df1b10dc9c8cc8effe64c7c41c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga8b23aa936eec66c1c69ecd7b399ddf19" kindref="member">int16_t</ref></type>
+        <definition>NEFORCE_NODISCARD int16_t mysql_result::get_int16</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_int16</name>
+        <qualifiedname>mysql_result::get_int16</qualifiedname>
+        <reimplements refid="structidb__tb__result_1aed5fa0a878a1868a38db6b29308d5299">get_int16</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取16位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>16位整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="130" column="31"/>
+        <references refid="structmysql__result_1a47f435df1b10dc9c8cc8effe64c7c41c">get_int16</references>
+        <referencedby refid="structmysql__result_1a47f435df1b10dc9c8cc8effe64c7c41c">get_int16</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1ad6e470c3c3327b7d885a8b4fe0cca365" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
+        <definition>NEFORCE_NODISCARD int32_t mysql_result::get_int32</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_int32</name>
+        <qualifiedname>mysql_result::get_int32</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a30c2b4161d1197de423889027ae5272d">get_int32</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取32位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>32位整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="138" column="31"/>
+        <references refid="structmysql__result_1ad6e470c3c3327b7d885a8b4fe0cca365">get_int32</references>
+        <referencedby refid="structmysql__result_1ad6e470c3c3327b7d885a8b4fe0cca365">get_int32</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1aa5b04af6b06573445ca05f1b190b81c2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+        <definition>NEFORCE_NODISCARD int64_t mysql_result::get_int64</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_int64</name>
+        <qualifiedname>mysql_result::get_int64</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a313b404f40b06095313fdad5a71c36d9">get_int64</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取64位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>64位整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="146" column="31"/>
+        <references refid="structmysql__result_1aa5b04af6b06573445ca05f1b190b81c2">get_int64</references>
+        <referencedby refid="structmysql__result_1aa5b04af6b06573445ca05f1b190b81c2">get_int64</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a2fa9988c20c2d9208237c2b37559b953" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga3068631062aaf7da4cc0371da9e7a377" kindref="member">float32_t</ref></type>
+        <definition>NEFORCE_NODISCARD float32_t mysql_result::get_float32</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_float32</name>
+        <qualifiedname>mysql_result::get_float32</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a5ef4af6943ee76fadf05fc2989d56ebd">get_float32</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取32位浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>32位浮点数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="154" column="33"/>
+        <references refid="structmysql__result_1a2fa9988c20c2d9208237c2b37559b953">get_float32</references>
+        <referencedby refid="structmysql__result_1a2fa9988c20c2d9208237c2b37559b953">get_float32</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1ac59e799201e8d09dec3655e662c5b490" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref></type>
+        <definition>NEFORCE_NODISCARD float64_t mysql_result::get_float64</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_float64</name>
+        <qualifiedname>mysql_result::get_float64</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a1c4d6dcd48871d296845f934c8218cf9">get_float64</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取64位浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>64位浮点数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="162" column="33"/>
+        <references refid="structmysql__result_1ac59e799201e8d09dec3655e662c5b490">get_float64</references>
+        <referencedby refid="structmysql__result_1ac59e799201e8d09dec3655e662c5b490">get_float64</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a722676c0ccd8a02fbec9a9e0ba6c62fe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_NODISCARD decimal_t mysql_result::get_decimal</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_decimal</name>
+        <qualifiedname>mysql_result::get_decimal</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a3c7275cb280846f4d59fa4b78411493d">get_decimal</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取十进制值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>十进制数对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="170" column="33"/>
+        <references refid="structmysql__result_1a722676c0ccd8a02fbec9a9e0ba6c62fe">get_decimal</references>
+        <referencedby refid="structmysql__result_1a722676c0ccd8a02fbec9a9e0ba6c62fe">get_decimal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1afb58c96f2761eca692bf47ddcd462dc7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classvector" kindref="compound">vector</ref>&lt; char &gt;</type>
+        <definition>NEFORCE_NODISCARD vector&lt; char &gt; mysql_result::get_blob</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_blob</name>
+        <qualifiedname>mysql_result::get_blob</qualifiedname>
+        <reimplements refid="structidb__tb__result_1ac3feb428fffed8adfa41c28b64bae4ea">get_blob</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取BLOB二进制数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字节向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="178" column="30"/>
+        <references refid="structmysql__result_1afb58c96f2761eca692bf47ddcd462dc7">get_blob</references>
+        <referencedby refid="structmysql__result_1afb58c96f2761eca692bf47ddcd462dc7">get_blob</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a3917bd44ba46d2c58b8821a7bb96ac8c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_NODISCARD uint64_t mysql_result::get_bit</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_bit</name>
+        <qualifiedname>mysql_result::get_bit</qualifiedname>
+        <reimplements refid="structidb__tb__result_1ab2a5e423b358828cada7a8be14651196">get_bit</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取BIT位字段值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>位字段的整数值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="186" column="32"/>
+        <references refid="structmysql__result_1a3917bd44ba46d2c58b8821a7bb96ac8c">get_bit</references>
+        <referencedby refid="structmysql__result_1a3917bd44ba46d2c58b8821a7bb96ac8c">get_bit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a8ecda4af7d98428d7f46d4530598804b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdate" kindref="compound">date</ref></type>
+        <definition>NEFORCE_NODISCARD date mysql_result::get_date</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_date</name>
+        <qualifiedname>mysql_result::get_date</qualifiedname>
+        <reimplements refid="structidb__tb__result_1ac54604a476b6a85e5ff0892304adf0a3">get_date</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取日期值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>日期对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="194" column="28"/>
+        <references refid="structmysql__result_1a8ecda4af7d98428d7f46d4530598804b">get_date</references>
+        <referencedby refid="structmysql__result_1a8ecda4af7d98428d7f46d4530598804b">get_date</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a4060a3ef269e3dd2551ca2a2acdf92b2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classtime" kindref="compound">time</ref></type>
+        <definition>NEFORCE_NODISCARD time mysql_result::get_time</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_time</name>
+        <qualifiedname>mysql_result::get_time</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a0501bb1dba04138e9347c6685a8070d2">get_time</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取时间值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>时间对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="202" column="28"/>
+        <references refid="structmysql__result_1a4060a3ef269e3dd2551ca2a2acdf92b2">get_time</references>
+        <referencedby refid="structmysql__result_1a4060a3ef269e3dd2551ca2a2acdf92b2">get_time</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a743077ec5cc9de7d8418c9819568aebb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdatetime" kindref="compound">datetime</ref></type>
+        <definition>NEFORCE_NODISCARD datetime mysql_result::get_datetime</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_datetime</name>
+        <qualifiedname>mysql_result::get_datetime</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a0148e0ef2825f69afcbf37f1306b96cb">get_datetime</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取日期时间值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>日期时间对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="210" column="32"/>
+        <references refid="structmysql__result_1a743077ec5cc9de7d8418c9819568aebb">get_datetime</references>
+        <referencedby refid="structmysql__result_1a743077ec5cc9de7d8418c9819568aebb">get_datetime</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__result_1a5007e6295e9213c6aec92a9689f0f948" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classtimestamp" kindref="compound">timestamp</ref></type>
+        <definition>NEFORCE_NODISCARD timestamp mysql_result::get_timestamp</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>get_timestamp</name>
+        <qualifiedname>mysql_result::get_timestamp</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a25e41967e2cd971cb73a691092342f7e">get_timestamp</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取时间戳值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>时间戳对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__typecast__exception" kindref="compound">database_typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="218" column="33"/>
+        <references refid="structmysql__result_1a5007e6295e9213c6aec92a9689f0f948">get_timestamp</references>
+        <referencedby refid="structmysql__result_1a5007e6295e9213c6aec92a9689f0f948">get_timestamp</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MySQL查询结果集类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_tb_result接口，支持结果集遍历、列名获取和类型安全的数据读取。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>结果集元数据获取</para>
+</listitem><listitem><para>逐行遍历结果集</para>
+</listitem><listitem><para>支持多种数据类型转换</para>
+</listitem><listitem><para>自动处理NULL值和类型转换 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>idb_result</label>
+        <link refid="structidb__result"/>
+      </node>
+      <node id="2">
+        <label>idb_tb_result</label>
+        <link refid="structidb__tb__result"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>mysql_result</label>
+        <link refid="structmysql__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>idb_result</label>
+        <link refid="structidb__result"/>
+      </node>
+      <node id="2">
+        <label>idb_tb_result</label>
+        <link refid="structidb__tb__result"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>mysql_result</label>
+        <link refid="structmysql__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" line="40" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_result.hpp" bodystart="40" bodyend="219"/>
+    <listofallmembers>
+      <member refid="structmysql__result_1aa0c7b8c18b4f7a91d73ee3107a6553e5" prot="public" virt="virtual"><scope>mysql_result</scope><name>column_count</name></member>
+      <member refid="structmysql__result_1a405149596cfbadf17ef76ea6e2712239" prot="private" virt="non-virtual"><scope>mysql_result</scope><name>column_name_</name></member>
+      <member refid="structmysql__result_1abc8618955760ea54fe1addb302c2340f" prot="public" virt="virtual"><scope>mysql_result</scope><name>column_names</name></member>
+      <member refid="structmysql__result_1a392ecf203dd6aa1ff4c9d8b795e0ed63" prot="public" virt="non-virtual"><scope>mysql_result</scope><name>column_types</name></member>
+      <member refid="structmysql__result_1a2365115e675a5097de8f1a3aa5570325" prot="private" virt="non-virtual"><scope>mysql_result</scope><name>column_types_</name></member>
+      <member refid="structmysql__result_1a02e927aec9ab574b668d594f3236aa18" prot="private" virt="non-virtual"><scope>mysql_result</scope><name>columns_</name></member>
+      <member refid="structmysql__result_1aa04865ffc6e03d93aefa8b952aced750" prot="private" virt="non-virtual"><scope>mysql_result</scope><name>cursor_</name></member>
+      <member refid="structidb__result_1a679893315e15ca3a6009b495527a89d5" prot="public" virt="non-virtual"><scope>mysql_result</scope><name>difference_type</name></member>
+      <member refid="structmysql__result_1a835acf0617caca31a023af9ff8c05dfb" prot="public" virt="virtual"><scope>mysql_result</scope><name>empty</name></member>
+      <member refid="structmysql__result_1af96b22d3dfbb38be85d8434a35dd584a" prot="public" virt="virtual"><scope>mysql_result</scope><name>get</name></member>
+      <member refid="structmysql__result_1a3917bd44ba46d2c58b8821a7bb96ac8c" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_bit</name></member>
+      <member refid="structmysql__result_1afb58c96f2761eca692bf47ddcd462dc7" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_blob</name></member>
+      <member refid="structmysql__result_1abb1468a12955d0a3316f8babc2bfbf9a" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_bool</name></member>
+      <member refid="structmysql__result_1a8ecda4af7d98428d7f46d4530598804b" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_date</name></member>
+      <member refid="structmysql__result_1a743077ec5cc9de7d8418c9819568aebb" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_datetime</name></member>
+      <member refid="structmysql__result_1a722676c0ccd8a02fbec9a9e0ba6c62fe" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_decimal</name></member>
+      <member refid="structmysql__result_1a2fa9988c20c2d9208237c2b37559b953" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_float32</name></member>
+      <member refid="structmysql__result_1ac59e799201e8d09dec3655e662c5b490" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_float64</name></member>
+      <member refid="structmysql__result_1a47f435df1b10dc9c8cc8effe64c7c41c" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_int16</name></member>
+      <member refid="structmysql__result_1ad6e470c3c3327b7d885a8b4fe0cca365" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_int32</name></member>
+      <member refid="structmysql__result_1aa5b04af6b06573445ca05f1b190b81c2" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_int64</name></member>
+      <member refid="structmysql__result_1a4060a3ef269e3dd2551ca2a2acdf92b2" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_time</name></member>
+      <member refid="structmysql__result_1a5007e6295e9213c6aec92a9689f0f948" prot="public" virt="virtual"><scope>mysql_result</scope><name>get_timestamp</name></member>
+      <member refid="structmysql__result_1a004e5eb68b62f2ea73761bf64a3f9e68" prot="public" virt="non-virtual"><scope>mysql_result</scope><name>mysql_result</name></member>
+      <member refid="structmysql__result_1ad27cac26616b43733d40b513e8bb7218" prot="public" virt="non-virtual"><scope>mysql_result</scope><name>mysql_result</name></member>
+      <member refid="structmysql__result_1a048f701eff7bb223f7766ec8e0452d91" prot="public" virt="virtual"><scope>mysql_result</scope><name>next</name></member>
+      <member refid="structmysql__result_1a25c3ce28bce8a922d73adbdc82776222" prot="private" virt="non-virtual"><scope>mysql_result</scope><name>result_</name></member>
+      <member refid="structmysql__result_1ab0bc025d64deda866a13e2c49cacca96" prot="public" virt="virtual"><scope>mysql_result</scope><name>row_count</name></member>
+      <member refid="structmysql__result_1a49b6d6d30d46336546edebc5dd682530" prot="private" virt="non-virtual"><scope>mysql_result</scope><name>rows_</name></member>
+      <member refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" prot="public" virt="non-virtual"><scope>mysql_result</scope><name>size_type</name></member>
+      <member refid="structidb__result_1a0e439857c8563bcbaf6389388ce2fec1" prot="public" virt="virtual"><scope>mysql_result</scope><name>~idb_result</name></member>
+      <member refid="structidb__tb__result_1a7640d4b01e32ccdbfc12b807ef985343" prot="public" virt="non-virtual"><scope>mysql_result</scope><name>~idb_tb_result</name></member>
+      <member refid="structmysql__result_1a835a01b9b0c05a7d39e8cc30d976dfaa" prot="public" virt="non-virtual"><scope>mysql_result</scope><name>~mysql_result</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

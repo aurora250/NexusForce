@@ -1,0 +1,867 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classthread" kind="class" language="C++" prot="public">
+    <compoundname>thread</compoundname>
+    <includes refid="thread_8hpp" local="no">thread.hpp</includes>
+    <innerclass refid="structthread_1_1id" prot="public">thread::id</innerclass>
+    <innerclass refid="structthread_1_1hook" prot="public">thread::hook</innerclass>
+    <innerclass refid="structthread_1_1data__base" prot="private">thread::data_base</innerclass>
+    <innerclass refid="structthread_1_1thread__data" prot="private">thread::thread_data</innerclass>
+    <innerclass refid="structthread_1_1thread__startup__args" prot="private">thread::thread_startup_args</innerclass>
+    <innerclass refid="structthread_1_1thread__monitor" prot="private">thread::thread_monitor</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classthread_1ab0f36144127096e3bc2d614c5cf38ca5" prot="private" static="no" strong="no">
+        <type></type>
+        <name>state</name>
+        <qualifiedname>thread::state</qualifiedname>
+        <enumvalue id="classthread_1ab0f36144127096e3bc2d614c5cf38ca5a2ade25caee9d78b236c5e8b6c00a7e6e" prot="private">
+          <name>NOT_A_THREAD</name>
+          <briefdescription>
+<para>不是线程 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classthread_1ab0f36144127096e3bc2d614c5cf38ca5a7855a1744b7c5f1c555118cc26a19b1a" prot="private">
+          <name>CREATED</name>
+          <briefdescription>
+<para>已创建 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classthread_1ab0f36144127096e3bc2d614c5cf38ca5aba7f978995d94f770d7410f2fb6cc143" prot="private">
+          <name>JOINED</name>
+          <briefdescription>
+<para>已被等待 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classthread_1ab0f36144127096e3bc2d614c5cf38ca5aeb18a38483a186c8e7df17131ba56d2f" prot="private">
+          <name>DETACHED</name>
+          <briefdescription>
+<para>已分离 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>线程状态枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="183" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="183" bodyend="188"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classthread_1a64c16d44c53f6b7aaac118ec379ed0a4" prot="public" static="no">
+        <type>::HANDLE</type>
+        <definition>using thread::native_handle_type = 
+
+::HANDLE</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>thread::native_handle_type</qualifiedname>
+        <briefdescription>
+<para>系统线程句柄类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="255" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="255" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classthread_1a76ac95855c93b6b4d637366717eef537" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread_1a64c16d44c53f6b7aaac118ec379ed0a4" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type thread::handle_</definition>
+        <argsstring></argsstring>
+        <name>handle_</name>
+        <qualifiedname>thread::handle_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>线程句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="263" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="263" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread_1a564288bd02c07a822fc3cbdba0b114f4" prot="private" static="no" mutable="no">
+        <type><ref refid="structthread_1_1id" kindref="compound">id</ref></type>
+        <definition>id thread::id_</definition>
+        <argsstring></argsstring>
+        <name>id_</name>
+        <qualifiedname>thread::id_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>线程ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="264" column="8" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="264" bodyend="264"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread_1a83bf02c5e1151fe681efe5fdd301a856" prot="private" static="no" mutable="no">
+        <type>state</type>
+        <definition>state thread::state_</definition>
+        <argsstring></argsstring>
+        <name>state_</name>
+        <qualifiedname>thread::state_</qualifiedname>
+        <initializer>= NOT_A_THREAD</initializer>
+        <briefdescription>
+<para>线程状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="265" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="265" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classthread_1ab8054ac2f20386eba87118a5111e70ac" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int __stdcall</type>
+        <definition>static unsigned int __stdcall thread::thread_entry</definition>
+        <argsstring>(void *arg)</argsstring>
+        <name>thread_entry</name>
+        <qualifiedname>thread::thread_entry</qualifiedname>
+        <param>
+          <type>void *</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="268" column="35"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classthread_1a91a7af4596e2f7ad82ef4f2f8ba4021c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void thread::start_thread_impl</definition>
+        <argsstring>(thread_startup_args *args)</argsstring>
+        <name>start_thread_impl</name>
+        <qualifiedname>thread::start_thread_impl</qualifiedname>
+        <param>
+          <type>thread_startup_args *</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="273" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1ae1cb5d539a39aa725d844be4278ce751" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void thread::start_thread</definition>
+        <argsstring>(F &amp;&amp;f)</argsstring>
+        <name>start_thread</name>
+        <qualifiedname>thread::start_thread</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="276" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="276" bodyend="279"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classthread_1a1dde16c1af24bfef1e4484d5d805cb1d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>thread::thread</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>thread</name>
+        <qualifiedname>thread::thread</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个不表示任何线程的thread对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="287" column="5"/>
+        <references refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" compoundref="type__traits_8hpp" startline="188">is_same_v</references>
+        <references refid="classthread_1a1dde16c1af24bfef1e4484d5d805cb1d">thread</references>
+        <referencedby refid="classthread_1aa3c72628994c7bdd2eaf62ae547b6a10">operator=</referencedby>
+        <referencedby refid="classthread_1a4d4f770a1048122b6b9954f780e3640c">swap</referencedby>
+        <referencedby refid="classthread_1a1dde16c1af24bfef1e4484d5d805cb1d">thread</referencedby>
+        <referencedby refid="classthread_1adf1e800d8ae9a2a3fc18818fb88e32a7" compoundref="thread_8hpp" startline="302" endline="307">thread</referencedby>
+        <referencedby refid="classthread_1a81db94c6a1a6db93d805d7462b9fe758">thread</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1adf1e800d8ae9a2a3fc18818fb88e32a7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt;<ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt;F&gt;, <ref refid="classthread" kindref="compound">thread</ref>&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>thread::thread</definition>
+        <argsstring>(F &amp;&amp;f, Args &amp;&amp;... args)</argsstring>
+        <name>thread</name>
+        <qualifiedname>thread::thread</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>从可调用对象构造线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>传递给可调用对象的参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structthread__exception" kindref="compound">thread_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果线程创建失败</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建一个新线程，并在线程中执行带参数的可调用对象。</para>
+<para><simplesect kind="note"><para>线程的执行目标报错将导致进程终止 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="302" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="302" bodyend="307"/>
+        <references refid="group___tuple_1gaf1f69e67ec55772495eca5813b38070a" compoundref="apply_8hpp" startline="63" endline="66">apply</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___tuple_1ga5ed4cb761dbf974f5a60b613fdebb1bf" compoundref="tuple_8hpp" startline="746" endline="749">make_tuple</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classthread_1a1dde16c1af24bfef1e4484d5d805cb1d">thread</references>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1a73cafa43d0589c7e597bae4f0b7887c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>thread::thread</definition>
+        <argsstring>(const thread &amp;)=delete</argsstring>
+        <name>thread</name>
+        <qualifiedname>thread::thread</qualifiedname>
+        <param>
+          <type>const <ref refid="classthread" kindref="compound">thread</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="309" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1a658eff736eeab19561bbf83ff71371f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classthread" kindref="compound">thread</ref> &amp;</type>
+        <definition>thread &amp; thread::operator=</definition>
+        <argsstring>(const thread &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>thread::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classthread" kindref="compound">thread</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="310" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1a81db94c6a1a6db93d805d7462b9fe758" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>thread::thread</definition>
+        <argsstring>(thread &amp;&amp;other) noexcept</argsstring>
+        <name>thread</name>
+        <qualifiedname>thread::thread</qualifiedname>
+        <param>
+          <type><ref refid="classthread" kindref="compound">thread</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的线程对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="316" column="5"/>
+        <references refid="classthread_1a1dde16c1af24bfef1e4484d5d805cb1d">thread</references>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1aa3c72628994c7bdd2eaf62ae547b6a10" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classthread" kindref="compound">thread</ref> &amp;</type>
+        <definition>thread &amp; thread::operator=</definition>
+        <argsstring>(thread &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>thread::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classthread" kindref="compound">thread</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的线程对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="323" column="12"/>
+        <references refid="classthread_1a1dde16c1af24bfef1e4484d5d805cb1d">thread</references>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1a117e0892c1d1a90bece03424311676f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>thread::~thread</definition>
+        <argsstring>()</argsstring>
+        <name>~thread</name>
+        <qualifiedname>thread::~thread</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>如果线程处于可被等待状态则终止进程。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="329" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1ad74c6a1b7c5631e54eba313a5e53637e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void thread::start</definition>
+        <argsstring>(F &amp;&amp;f, Args &amp;&amp;... args)</argsstring>
+        <name>start</name>
+        <qualifiedname>thread::start</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>延迟启动线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>传递给可调用对象的参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structthread__exception" kindref="compound">thread_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果线程已启动或已结束/分离 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="340" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="340" bodyend="349"/>
+        <references refid="group___tuple_1gaf1f69e67ec55772495eca5813b38070a" compoundref="apply_8hpp" startline="63" endline="66">apply</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___tuple_1ga5ed4cb761dbf974f5a60b613fdebb1bf" compoundref="tuple_8hpp" startline="746" endline="749">make_tuple</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1a21249ff125493aa13fad2c9551dc85bb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structthread_1_1id" kindref="compound">id</ref></type>
+        <definition>NEFORCE_NODISCARD id thread::get_id</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_id</name>
+        <qualifiedname>thread::get_id</qualifiedname>
+        <briefdescription>
+<para>获取线程标识符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>线程标识符 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="355" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="355" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1a972490197894f12244e23509d79c969a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classthread_1a64c16d44c53f6b7aaac118ec379ed0a4" kindref="member">native_handle_type</ref></type>
+        <definition>NEFORCE_NODISCARD native_handle_type thread::native_handle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>thread::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取原生句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>平台特定的线程句柄 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="361" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="361" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1aa91102b5cd9db20963ffe2c13dde1666" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool thread::joinable</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>joinable</name>
+        <qualifiedname>thread::joinable</qualifiedname>
+        <briefdescription>
+<para>检查线程是否可被等待 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>线程是否处于可被等待状态</para>
+</simplesect>
+线程在创建后、被等待结束或分离前是可被等待的。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="369" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="369" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1ac77d974035148375cbcd0835d631b3d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void thread::join</definition>
+        <argsstring>()</argsstring>
+        <name>join</name>
+        <qualifiedname>thread::join</qualifiedname>
+        <briefdescription>
+<para>等待线程结束 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structthread__exception" kindref="compound">thread_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果线程不可被等待或等待失败</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+阻塞当前线程，直到目标线程执行完毕。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="377" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1af47e30f5736daa2ca26cbac3f3a3e2e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void thread::detach</definition>
+        <argsstring>()</argsstring>
+        <name>detach</name>
+        <qualifiedname>thread::detach</qualifiedname>
+        <briefdescription>
+<para>分离线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structthread__exception" kindref="compound">thread_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果线程不可被等待或分离失败</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使线程在后台独立运行，线程结束后自动释放资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="385" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1a11943219b9d0cef98e433e6663e8b000" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool thread::set_name</definition>
+        <argsstring>(const char *name)</argsstring>
+        <name>set_name</name>
+        <qualifiedname>thread::set_name</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>设置线程名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>线程名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否设置成功 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structthread__exception" kindref="compound">thread_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果线程不可被等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="393" column="10"/>
+        <references refid="classthread_1ac1c3666fcd10451cee601dec58c32c00">name</references>
+        <referencedby refid="group___thread_1ga303744653fe3bf181857637488927d28" compoundref="thread_8hpp" startline="484" endline="484">set_name</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1ac1c3666fcd10451cee601dec58c32c00" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool thread::name</definition>
+        <argsstring>(char *buffer, size_t size) const</argsstring>
+        <name>name</name>
+        <qualifiedname>thread::name</qualifiedname>
+        <param>
+          <type>char *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>获取线程名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>存储名称的缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓冲区大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否获取成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="401" column="10"/>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <referencedby refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</referencedby>
+        <referencedby refid="classthread_1a11943219b9d0cef98e433e6663e8b000">set_name</referencedby>
+        <referencedby refid="classthread_1ad7c681ee3c6085a87309f040467b19cb">set_name</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1a4d4f770a1048122b6b9954f780e3640c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void thread::swap</definition>
+        <argsstring>(thread &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>thread::swap</qualifiedname>
+        <param>
+          <type><ref refid="classthread" kindref="compound">thread</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个线程对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的线程对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="407" column="10"/>
+        <references refid="classthread_1a1dde16c1af24bfef1e4484d5d805cb1d">thread</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classthread_1ad7c681ee3c6085a87309f040467b19cb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool thread::set_name</definition>
+        <argsstring>(native_handle_type handle, const char *name)</argsstring>
+        <name>set_name</name>
+        <qualifiedname>thread::set_name</qualifiedname>
+        <param>
+          <type><ref refid="classthread_1a64c16d44c53f6b7aaac118ec379ed0a4" kindref="member">native_handle_type</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>设置指定线程的名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>线程句柄 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>线程名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否设置成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="415" column="17"/>
+        <references refid="group___thread_1ga9c11108611d4c65deb691d1b88f0dc07" compoundref="thread_8hpp" startline="461" endline="467">handle</references>
+        <references refid="classthread_1ac1c3666fcd10451cee601dec58c32c00">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classthread_1a4b2d684cd7193db5dfedf70fd705d5e6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool thread::name</definition>
+        <argsstring>(native_handle_type handle, char *buffer, size_t size)</argsstring>
+        <name>name</name>
+        <qualifiedname>thread::name</qualifiedname>
+        <param>
+          <type><ref refid="classthread_1a64c16d44c53f6b7aaac118ec379ed0a4" kindref="member">native_handle_type</ref></type>
+          <declname>handle</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>获取指定线程的名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>线程句柄 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>存储名称的缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓冲区大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否获取成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="424" column="17"/>
+        <references refid="group___thread_1ga9c11108611d4c65deb691d1b88f0dc07" compoundref="thread_8hpp" startline="461" endline="467">handle</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供跨平台的线程管理功能，支持线程创建、等待、分离、ID获取等操作。 线程对象可移动但不可复制。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="65" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="65" bodyend="425"/>
+    <listofallmembers>
+      <member refid="classthread_1ab0f36144127096e3bc2d614c5cf38ca5a7855a1744b7c5f1c555118cc26a19b1a" prot="private" virt="non-virtual"><scope>thread</scope><name>CREATED</name></member>
+      <member refid="classthread_1af47e30f5736daa2ca26cbac3f3a3e2e4" prot="public" virt="non-virtual"><scope>thread</scope><name>detach</name></member>
+      <member refid="classthread_1ab0f36144127096e3bc2d614c5cf38ca5aeb18a38483a186c8e7df17131ba56d2f" prot="private" virt="non-virtual"><scope>thread</scope><name>DETACHED</name></member>
+      <member refid="classthread_1a21249ff125493aa13fad2c9551dc85bb" prot="public" virt="non-virtual"><scope>thread</scope><name>get_id</name></member>
+      <member refid="classthread_1a76ac95855c93b6b4d637366717eef537" prot="private" virt="non-virtual"><scope>thread</scope><name>handle_</name></member>
+      <member refid="classthread_1a564288bd02c07a822fc3cbdba0b114f4" prot="private" virt="non-virtual"><scope>thread</scope><name>id_</name></member>
+      <member refid="classthread_1ac77d974035148375cbcd0835d631b3d0" prot="public" virt="non-virtual"><scope>thread</scope><name>join</name></member>
+      <member refid="classthread_1aa91102b5cd9db20963ffe2c13dde1666" prot="public" virt="non-virtual"><scope>thread</scope><name>joinable</name></member>
+      <member refid="classthread_1ab0f36144127096e3bc2d614c5cf38ca5aba7f978995d94f770d7410f2fb6cc143" prot="private" virt="non-virtual"><scope>thread</scope><name>JOINED</name></member>
+      <member refid="classthread_1ac1c3666fcd10451cee601dec58c32c00" prot="public" virt="non-virtual"><scope>thread</scope><name>name</name></member>
+      <member refid="classthread_1a4b2d684cd7193db5dfedf70fd705d5e6" prot="public" virt="non-virtual"><scope>thread</scope><name>name</name></member>
+      <member refid="classthread_1a972490197894f12244e23509d79c969a" prot="public" virt="non-virtual"><scope>thread</scope><name>native_handle</name></member>
+      <member refid="classthread_1a64c16d44c53f6b7aaac118ec379ed0a4" prot="public" virt="non-virtual"><scope>thread</scope><name>native_handle_type</name></member>
+      <member refid="classthread_1ab0f36144127096e3bc2d614c5cf38ca5a2ade25caee9d78b236c5e8b6c00a7e6e" prot="private" virt="non-virtual"><scope>thread</scope><name>NOT_A_THREAD</name></member>
+      <member refid="classthread_1a658eff736eeab19561bbf83ff71371f2" prot="public" virt="non-virtual"><scope>thread</scope><name>operator=</name></member>
+      <member refid="classthread_1aa3c72628994c7bdd2eaf62ae547b6a10" prot="public" virt="non-virtual"><scope>thread</scope><name>operator=</name></member>
+      <member refid="classthread_1a11943219b9d0cef98e433e6663e8b000" prot="public" virt="non-virtual"><scope>thread</scope><name>set_name</name></member>
+      <member refid="classthread_1ad7c681ee3c6085a87309f040467b19cb" prot="public" virt="non-virtual"><scope>thread</scope><name>set_name</name></member>
+      <member refid="classthread_1ad74c6a1b7c5631e54eba313a5e53637e" prot="public" virt="non-virtual"><scope>thread</scope><name>start</name></member>
+      <member refid="classthread_1ae1cb5d539a39aa725d844be4278ce751" prot="private" virt="non-virtual"><scope>thread</scope><name>start_thread</name></member>
+      <member refid="classthread_1a91a7af4596e2f7ad82ef4f2f8ba4021c" prot="private" virt="non-virtual"><scope>thread</scope><name>start_thread_impl</name></member>
+      <member refid="classthread_1ab0f36144127096e3bc2d614c5cf38ca5" prot="private" virt="non-virtual"><scope>thread</scope><name>state</name></member>
+      <member refid="classthread_1a83bf02c5e1151fe681efe5fdd301a856" prot="private" virt="non-virtual"><scope>thread</scope><name>state_</name></member>
+      <member refid="classthread_1a4d4f770a1048122b6b9954f780e3640c" prot="public" virt="non-virtual"><scope>thread</scope><name>swap</name></member>
+      <member refid="classthread_1a1dde16c1af24bfef1e4484d5d805cb1d" prot="public" virt="non-virtual"><scope>thread</scope><name>thread</name></member>
+      <member refid="classthread_1adf1e800d8ae9a2a3fc18818fb88e32a7" prot="public" virt="non-virtual"><scope>thread</scope><name>thread</name></member>
+      <member refid="classthread_1a73cafa43d0589c7e597bae4f0b7887c0" prot="public" virt="non-virtual"><scope>thread</scope><name>thread</name></member>
+      <member refid="classthread_1a81db94c6a1a6db93d805d7462b9fe758" prot="public" virt="non-virtual"><scope>thread</scope><name>thread</name></member>
+      <member refid="classthread_1ab8054ac2f20386eba87118a5111e70ac" prot="private" virt="non-virtual"><scope>thread</scope><name>thread_entry</name></member>
+      <member refid="classthread_1a117e0892c1d1a90bece03424311676f6" prot="public" virt="non-virtual"><scope>thread</scope><name>~thread</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

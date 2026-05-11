@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___byte_size" kind="group">
+    <compoundname>ByteSize</compoundname>
+    <title>字节大小</title>
+    <innerclass refid="classbyte__size" prot="public">byte_size</innerclass>
+    <innerclass refid="structunpackage_3_01byte__size_01_4" prot="public">unpackage&lt; byte_size &gt;</innerclass>
+    <briefdescription>
+<para>进制安全的字节大小表示实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>支持不同单位之间的转换、字符串解析和格式化输出。支持二进制和十进制两种标准。</para>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下数据存储单位与度量衡相关标准规范：</para>
+<para><bold>二进制前缀标准（IEC 标准）：</bold><itemizedlist>
+<listitem><para>**IEC 80000-13:2008**：量和单位 — 第13部分：信息科学与技术 <ulink url="https://www.iso.org/standard/31898.html">https://www.iso.org/standard/31898.html</ulink> （注：IEC 80000-13 已整合入 ISO/IEC 80000 系列）</para>
+</listitem><listitem><para>**ISO/IEC 80000-13:2008**：信息科学与技术中的量和单位 <ulink url="https://www.iso.org/standard/31898.html">https://www.iso.org/standard/31898.html</ulink></para>
+</listitem><listitem><para>**IEEE 1541-2021**：数字和电子设备中使用的二进制倍数前缀标准 <ulink url="https://standards.ieee.org/ieee/1541/10790/">https://standards.ieee.org/ieee/1541/10790/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>国际单位制（SI）十进制前缀标准：</bold><itemizedlist>
+<listitem><para>**BIPM SI Brochure (9th Edition, 2019)**：国际单位制（SI）前缀定义 <ulink url="https://www.bipm.org/en/publications/si-brochure">https://www.bipm.org/en/publications/si-brochure</ulink></para>
+</listitem><listitem><para>**ISO 80000-1:2009**：量和单位 — 第1部分：总则（含 SI 前缀） <ulink url="https://www.iso.org/standard/30669.html">https://www.iso.org/standard/30669.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>网络协议与数据大小表示标准：</bold><itemizedlist>
+<listitem><para>**IETF RFC 8949**：简明二进制对象表示（CBOR）中的字节大小约定 <ulink url="https://www.rfc-editor.org/rfc/rfc8949.html">https://www.rfc-editor.org/rfc/rfc8949.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>编程语言与系统标准：</bold><itemizedlist>
+<listitem><para>**POSIX.1-2017 (IEEE Std 1003.1)**：系统接口中的字节定义 <ulink url="https://pubs.opengroup.org/onlinepubs/9699919799/">https://pubs.opengroup.org/onlinepubs/9699919799/</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___byte_size_1binary_vs_decimal">
+<title>二进制与十进制前缀对比</title><para>根据 IEC 80000-13 和 IEEE 1541，字节单位存在两套并行的标准：</para>
+<para><table rows="7" cols="8"><row>
+<entry thead="yes"><para>二进制前缀  </para>
+</entry><entry thead="yes"><para>符号  </para>
+</entry><entry thead="yes"><para>2的幂  </para>
+</entry><entry thead="yes"><para>字节数（近似）  </para>
+</entry><entry thead="yes"><para>十进制前缀  </para>
+</entry><entry thead="yes"><para>符号  </para>
+</entry><entry thead="yes"><para>10的幂  </para>
+</entry><entry thead="yes"><para>字节数（精确）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>kibibyte  </para>
+</entry><entry thead="no"><para>KiB  </para>
+</entry><entry thead="no"><para>2^10  </para>
+</entry><entry thead="no"><para>1,024  </para>
+</entry><entry thead="no"><para>kilobyte  </para>
+</entry><entry thead="no"><para>kB  </para>
+</entry><entry thead="no"><para>10^3  </para>
+</entry><entry thead="no"><para>1,000  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>mebibyte  </para>
+</entry><entry thead="no"><para>MiB  </para>
+</entry><entry thead="no"><para>2^20  </para>
+</entry><entry thead="no"><para>1,048,576  </para>
+</entry><entry thead="no"><para>megabyte  </para>
+</entry><entry thead="no"><para>MB  </para>
+</entry><entry thead="no"><para>10^6  </para>
+</entry><entry thead="no"><para>1,000,000  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>gibibyte  </para>
+</entry><entry thead="no"><para>GiB  </para>
+</entry><entry thead="no"><para>2^30  </para>
+</entry><entry thead="no"><para>1,073,741,824  </para>
+</entry><entry thead="no"><para>gigabyte  </para>
+</entry><entry thead="no"><para>GB  </para>
+</entry><entry thead="no"><para>10^9  </para>
+</entry><entry thead="no"><para>1,000,000,000  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>tebibyte  </para>
+</entry><entry thead="no"><para>TiB  </para>
+</entry><entry thead="no"><para>2^40  </para>
+</entry><entry thead="no"><para>≈1.1×10^12  </para>
+</entry><entry thead="no"><para>terabyte  </para>
+</entry><entry thead="no"><para>TB  </para>
+</entry><entry thead="no"><para>10^12  </para>
+</entry><entry thead="no"><para>1,000,000,000,000  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>pebibyte  </para>
+</entry><entry thead="no"><para>PiB  </para>
+</entry><entry thead="no"><para>2^50  </para>
+</entry><entry thead="no"><para>≈1.13×10^15  </para>
+</entry><entry thead="no"><para>petabyte  </para>
+</entry><entry thead="no"><para>PB  </para>
+</entry><entry thead="no"><para>10^15  </para>
+</entry><entry thead="no"><para>1,000,000,000,000,000  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>exbibyte  </para>
+</entry><entry thead="no"><para>EiB  </para>
+</entry><entry thead="no"><para>2^60  </para>
+</entry><entry thead="no"><para>≈1.15×10^18  </para>
+</entry><entry thead="no"><para>exabyte  </para>
+</entry><entry thead="no"><para>EB  </para>
+</entry><entry thead="no"><para>10^18  </para>
+</entry><entry thead="no"><para>1,000,000,000,000,000,000  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___byte_size_1unit_suffixes">
+<title>单位后缀说明</title><para>本实现支持的单位字符串（不区分大小写）：</para>
+<para><table rows="8" cols="5"><row>
+<entry thead="yes"><para>单位  </para>
+</entry><entry thead="yes"><para>全名（二进制）  </para>
+</entry><entry thead="yes"><para>全名（十进制）  </para>
+</entry><entry thead="yes"><para>支持的别名  </para>
+</entry><entry thead="yes"><para>进制  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>B  </para>
+</entry><entry thead="no"><para>byte  </para>
+</entry><entry thead="no"><para>byte  </para>
+</entry><entry thead="no"><para>-  </para>
+</entry><entry thead="no"><para>1  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>KB/K  </para>
+</entry><entry thead="no"><para>kibibyte  </para>
+</entry><entry thead="no"><para>kilobyte  </para>
+</entry><entry thead="no"><para>K  </para>
+</entry><entry thead="no"><para>二进制/十进制  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>MB/M  </para>
+</entry><entry thead="no"><para>mebibyte  </para>
+</entry><entry thead="no"><para>megabyte  </para>
+</entry><entry thead="no"><para>M  </para>
+</entry><entry thead="no"><para>二进制/十进制  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>GB/G  </para>
+</entry><entry thead="no"><para>gibibyte  </para>
+</entry><entry thead="no"><para>gigabyte  </para>
+</entry><entry thead="no"><para>G  </para>
+</entry><entry thead="no"><para>二进制/十进制  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>TB/T  </para>
+</entry><entry thead="no"><para>tebibyte  </para>
+</entry><entry thead="no"><para>terabyte  </para>
+</entry><entry thead="no"><para>T  </para>
+</entry><entry thead="no"><para>二进制/十进制  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>PB/P  </para>
+</entry><entry thead="no"><para>pebibyte  </para>
+</entry><entry thead="no"><para>petabyte  </para>
+</entry><entry thead="no"><para>P  </para>
+</entry><entry thead="no"><para>二进制/十进制  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>EB/E  </para>
+</entry><entry thead="no"><para>exbibyte  </para>
+</entry><entry thead="no"><para>exabyte  </para>
+</entry><entry thead="no"><para>E  </para>
+</entry><entry thead="no"><para>二进制/十进制  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___byte_size_1ieee_1541">
+<title>IEEE 1541-2021 建议</title><para>IEEE 1541 标准建议：<itemizedlist>
+<listitem><para>使用明确的二进制前缀（KiB, MiB, GiB 等）表示 2 的幂</para>
+</listitem><listitem><para>使用 SI 前缀（kB, MB, GB 等）仅表示 10 的幂</para>
+</listitem><listitem><para>符号中 &quot;B&quot; 应为大写，前缀首字母大写（如 KiB、MiB）</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="8" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>内部存储  </para>
+</entry><entry thead="no"><para>uint64_t（最大约 16 EiB）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最大可表示值  </para>
+</entry><entry thead="no"><para>2^64 - 1 字节 ≈ 18.4 EB  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>二进制乘数表  </para>
+</entry><entry thead="no"><para>1, 1024, 1024², ..., 1024⁶  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>十进制乘数表  </para>
+</entry><entry thead="no"><para>1, 1000, 1000², ..., 1000⁶  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>自动单位选择  </para>
+</entry><entry thead="no"><para>选择使数值 &lt; 1024（二进制）或 &lt; 1000（十进制）的最大单位  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>解析容错  </para>
+</entry><entry thead="no"><para>忽略大小写，支持简写别名（K、M、G等）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>小数精度  </para>
+</entry><entry thead="no"><para>decimal_t（通常为 80 位扩展精度）  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>本实现默认使用二进制解释（<computeroutput>binary = true</computeroutput>），这符合计算机科学中的 传统惯例（1 KB = 1024 B）。如需使用十进制解释（1 KB = 1000 B）， 请在构造或解析时显式指定 <computeroutput>binary = false</computeroutput>。</para>
+</simplesect>
+<simplesect kind="warning"><para>存储容量制造商（如硬盘、SSD）通常使用十进制单位标注容量， 因此标称 &quot;1 TB&quot; 的硬盘实际约为 931 GiB。解析用户输入的存储大小时， 应注意区分这两种标准以避免混淆。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.bipm.org/en/measurement-units/prefixes.html">https://www.bipm.org/en/measurement-units/prefixes.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://physics.nist.gov/cuu/Units/binary.html">https://physics.nist.gov/cuu/Units/binary.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Binary_prefix">https://en.wikipedia.org/wiki/Binary_prefix</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,725 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classcmdline" kind="class" language="C++" prot="public">
+    <compoundname>cmdline</compoundname>
+    <includes refid="cmdline_8hpp" local="no">cmdline.hpp</includes>
+    <innerclass refid="structcmdline_1_1option" prot="public">cmdline::option</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcmdline_1a7236794a0a668f024cb73d6e1079eb5a" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string cmdline::program_name_</definition>
+        <argsstring></argsstring>
+        <name>program_name_</name>
+        <qualifiedname>cmdline::program_name_</qualifiedname>
+        <briefdescription>
+<para>程序名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="193" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcmdline_1a135a48a970192086c376ad23e4bf22a1" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structcmdline_1_1option" kindref="compound">option</ref> &gt;</type>
+        <definition>vector&lt;option&gt; cmdline::options_</definition>
+        <argsstring></argsstring>
+        <name>options_</name>
+        <qualifiedname>cmdline::options_</qualifiedname>
+        <briefdescription>
+<para>选项列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="194" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcmdline_1a3e01c929e3ebf4656509a7bfd1e335b9" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>unordered_map&lt;string, size_t&gt; cmdline::options_long_</definition>
+        <argsstring></argsstring>
+        <name>options_long_</name>
+        <qualifiedname>cmdline::options_long_</qualifiedname>
+        <briefdescription>
+<para>长选项名索引 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="195" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcmdline_1a56028e0b73b687da7867384c294606bb" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; char, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>unordered_map&lt;char, size_t&gt; cmdline::options_short_</definition>
+        <argsstring></argsstring>
+        <name>options_short_</name>
+        <qualifiedname>cmdline::options_short_</qualifiedname>
+        <briefdescription>
+<para>短选项字符索引 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="196" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcmdline_1ae7e9398f961620b0bdfaf03908ccd997" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt;string&gt; cmdline::positional_</definition>
+        <argsstring></argsstring>
+        <name>positional_</name>
+        <qualifiedname>cmdline::positional_</qualifiedname>
+        <briefdescription>
+<para>位置参数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="197" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="197" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classcmdline_1ad040b3e75f96f129bfa0a2aef70ab774" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structcmdline_1_1option" kindref="compound">option</ref> *</type>
+        <definition>option * cmdline::find_option_long</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>find_option_long</name>
+        <qualifiedname>cmdline::find_option_long</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>根据长选项名查找选项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>长选项名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>选项指针，未找到返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="204" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a20edb0b02229fc96b65bd67ab6ac9682" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structcmdline_1_1option" kindref="compound">option</ref> *</type>
+        <definition>option * cmdline::find_option_short</definition>
+        <argsstring>(char name)</argsstring>
+        <name>find_option_short</name>
+        <qualifiedname>cmdline::find_option_short</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>根据短选项字符查找选项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>短选项字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>选项指针，未找到返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="211" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a878aca154f5efa345707d73dbafbbc8f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::parse_long_option</definition>
+        <argsstring>(const string &amp;arg, const vector&lt; string &gt; &amp;args, size_t &amp;index)</argsstring>
+        <name>parse_long_option</name>
+        <qualifiedname>cmdline::parse_long_option</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>arg</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>args</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>解析长选项（<ndash/>option） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前参数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>所有参数列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="220" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a2fab650673a2bdf4dbe4d943fe402fd1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::parse_short_options</definition>
+        <argsstring>(const string &amp;arg, const vector&lt; string &gt; &amp;args, size_t &amp;index)</argsstring>
+        <name>parse_short_options</name>
+        <qualifiedname>cmdline::parse_short_options</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>arg</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>args</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &amp;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>解析短选项组合（-abc） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前参数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>所有参数列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="229" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcmdline_1a7c3bc45569cf890f4c0c754e52a9235a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::add_option</definition>
+        <argsstring>(const string &amp;long_name, char short_name, const string &amp;description, bool requires_value=false, bool allow_multiple=false, const string &amp;default_value=&quot;&quot;)</argsstring>
+        <name>add_option</name>
+        <qualifiedname>cmdline::add_option</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>long_name</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>short_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>description</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>requires_value</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>allow_multiple</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>default_value</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>添加选项定义 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>long_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>长选项名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>short_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>短选项字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项描述 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>requires_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否需要值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>allow_multiple</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否允许多次出现 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项名重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="242" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1ac80b5cbd5223c70096faa13c430d8b33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::parse_os_args</definition>
+        <argsstring>()</argsstring>
+        <name>parse_os_args</name>
+        <qualifiedname>cmdline::parse_os_args</qualifiedname>
+        <briefdescription>
+<para>解析操作系统提供的命令行参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="249" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a27f16ada740af51e1638aa0d058be9fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::parse</definition>
+        <argsstring>(int argc, const char *argv[])</argsstring>
+        <name>parse</name>
+        <qualifiedname>cmdline::parse</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>解析main函数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数个数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数数组 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="257" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1ac59ec7b99c5c40ad74ccbd4ef9da0ba9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::parse</definition>
+        <argsstring>(const vector&lt; string &gt; &amp;args)</argsstring>
+        <name>parse</name>
+        <qualifiedname>cmdline::parse</qualifiedname>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>解析字符串向量参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数字符串向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="264" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a24de4f54ac0cd7da9ce7bd1ec5859a7d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string cmdline::get</definition>
+        <argsstring>(const string &amp;long_name, size_t index=0) const</argsstring>
+        <name>get</name>
+        <qualifiedname>cmdline::get</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>long_name</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>index</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>获取选项值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>long_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>长选项名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对于多值选项，指定索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>选项值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项不存在或无值时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="273" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a083090bc73cb8711d21510b48ee8be77" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool cmdline::has</definition>
+        <argsstring>(const string &amp;name) const</argsstring>
+        <name>has</name>
+        <qualifiedname>cmdline::has</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>检查选项是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>长选项名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否在命令行中指定了该选项 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="280" column="28"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1ae81eb5f75cf46f384018328e3639c2d8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD size_t cmdline::count</definition>
+        <argsstring>(const string &amp;name) const</argsstring>
+        <name>count</name>
+        <qualifiedname>cmdline::count</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取选项出现的次数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>长选项名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>选项出现次数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="287" column="30"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1abb3f95a707384a9308aaad694a8cf169" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD const vector&lt; string &gt; &amp; cmdline::positional_args</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>positional_args</name>
+        <qualifiedname>cmdline::positional_args</qualifiedname>
+        <briefdescription>
+<para>获取位置参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>位置参数向量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="293" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="293" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a8b69353c01208025ed8472fefe0fe83b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const string &amp; cmdline::program_name</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>program_name</name>
+        <qualifiedname>cmdline::program_name</qualifiedname>
+        <briefdescription>
+<para>获取程序名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>程序名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="299" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="299" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a720bda60aa8408775671e89ab7947df2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::print_help</definition>
+        <argsstring>() const</argsstring>
+        <name>print_help</name>
+        <qualifiedname>cmdline::print_help</qualifiedname>
+        <briefdescription>
+<para>打印帮助信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>根据所有注册的选项自动生成格式化的帮助文本。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="306" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classcmdline_1a40952d15021c88b8fa3c97069a173cce" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>static NEFORCE_NODISCARD vector&lt; string &gt; cmdline::get_os_argv</definition>
+        <argsstring>()</argsstring>
+        <name>get_os_argv</name>
+        <qualifiedname>cmdline::get_os_argv</qualifiedname>
+        <briefdescription>
+<para>获取操作系统提供的命令行参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>参数字符串向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>获取失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="313" column="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>命令行参数解析器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>支持解析符合POSIX风格和GNU风格扩展的命令行参数。 特性：<itemizedlist>
+<listitem><para>长选项（<ndash/>option）和短选项（-o）</para>
+</listitem><listitem><para>选项值（<ndash/>option=value 或 -o value）</para>
+</listitem><listitem><para>多值选项</para>
+</listitem><listitem><para>默认值</para>
+</listitem><listitem><para>位置参数</para>
+</listitem><listitem><para>自动生成帮助信息 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="160" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="160" bodyend="314"/>
+    <listofallmembers>
+      <member refid="classcmdline_1a7c3bc45569cf890f4c0c754e52a9235a" prot="public" virt="non-virtual"><scope>cmdline</scope><name>add_option</name></member>
+      <member refid="classcmdline_1ae81eb5f75cf46f384018328e3639c2d8" prot="public" virt="non-virtual"><scope>cmdline</scope><name>count</name></member>
+      <member refid="classcmdline_1ad040b3e75f96f129bfa0a2aef70ab774" prot="private" virt="non-virtual"><scope>cmdline</scope><name>find_option_long</name></member>
+      <member refid="classcmdline_1a20edb0b02229fc96b65bd67ab6ac9682" prot="private" virt="non-virtual"><scope>cmdline</scope><name>find_option_short</name></member>
+      <member refid="classcmdline_1a24de4f54ac0cd7da9ce7bd1ec5859a7d" prot="public" virt="non-virtual"><scope>cmdline</scope><name>get</name></member>
+      <member refid="classcmdline_1a40952d15021c88b8fa3c97069a173cce" prot="public" virt="non-virtual"><scope>cmdline</scope><name>get_os_argv</name></member>
+      <member refid="classcmdline_1a083090bc73cb8711d21510b48ee8be77" prot="public" virt="non-virtual"><scope>cmdline</scope><name>has</name></member>
+      <member refid="classcmdline_1a135a48a970192086c376ad23e4bf22a1" prot="private" virt="non-virtual"><scope>cmdline</scope><name>options_</name></member>
+      <member refid="classcmdline_1a3e01c929e3ebf4656509a7bfd1e335b9" prot="private" virt="non-virtual"><scope>cmdline</scope><name>options_long_</name></member>
+      <member refid="classcmdline_1a56028e0b73b687da7867384c294606bb" prot="private" virt="non-virtual"><scope>cmdline</scope><name>options_short_</name></member>
+      <member refid="classcmdline_1a27f16ada740af51e1638aa0d058be9fe" prot="public" virt="non-virtual"><scope>cmdline</scope><name>parse</name></member>
+      <member refid="classcmdline_1ac59ec7b99c5c40ad74ccbd4ef9da0ba9" prot="public" virt="non-virtual"><scope>cmdline</scope><name>parse</name></member>
+      <member refid="classcmdline_1a878aca154f5efa345707d73dbafbbc8f" prot="private" virt="non-virtual"><scope>cmdline</scope><name>parse_long_option</name></member>
+      <member refid="classcmdline_1ac80b5cbd5223c70096faa13c430d8b33" prot="public" virt="non-virtual"><scope>cmdline</scope><name>parse_os_args</name></member>
+      <member refid="classcmdline_1a2fab650673a2bdf4dbe4d943fe402fd1" prot="private" virt="non-virtual"><scope>cmdline</scope><name>parse_short_options</name></member>
+      <member refid="classcmdline_1ae7e9398f961620b0bdfaf03908ccd997" prot="private" virt="non-virtual"><scope>cmdline</scope><name>positional_</name></member>
+      <member refid="classcmdline_1abb3f95a707384a9308aaad694a8cf169" prot="public" virt="non-virtual"><scope>cmdline</scope><name>positional_args</name></member>
+      <member refid="classcmdline_1a720bda60aa8408775671e89ab7947df2" prot="public" virt="non-virtual"><scope>cmdline</scope><name>print_help</name></member>
+      <member refid="classcmdline_1a8b69353c01208025ed8472fefe0fe83b" prot="public" virt="non-virtual"><scope>cmdline</scope><name>program_name</name></member>
+      <member refid="classcmdline_1a7236794a0a668f024cb73d6e1079eb5a" prot="private" virt="non-virtual"><scope>cmdline</scope><name>program_name_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

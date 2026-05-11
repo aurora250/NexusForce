@@ -3,10 +3,10 @@
 
 /**
  * @file env_builder.hpp
- * @brief env配置格式构建器
+ * @brief ENV配置格式构建器
  *
- * 此文件提供了env配置格式的流式构建器实现。
- * 支持链式调用方式构建env格式，
+ * 此文件提供了ENV配置格式的流式构建器实现。
+ * 支持链式调用方式构建ENV格式，
  * 包括变量定义、注释、引号类型和导出标记的设置。
  */
 
@@ -14,22 +14,20 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup ConfigFormat 配置格式操作
- * @brief env配置格式管理
+ * @addtogroup ConfigFormat 配置格式操作
  * @{
  */
 
 /**
- * @defgroup EnvConfig env配置
- * @brief env配置格式管理
+ * @addtogroup EnvConfig ENV配置
  * @{
  */
 
 /**
  * @class env_builder
- * @brief env配置格式构建器
+ * @brief ENV配置格式构建器
  *
- * 提供流式接口构建env配置格式，支持以下特性：
+ * 提供流式接口构建ENV配置格式，支持以下特性：
  * - 链式调用设置变量键值对
  * - 支持多种数据类型自动转换
  * - 可配置引号类型

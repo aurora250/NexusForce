@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['复杂度保证_0',['复杂度保证',['../group___r_b_tree.html#complexity_guarantees',1,'']]]
+  ['基本_20ansi_208_2016_20色_0',['基本 ANSI 8/16 色',['../group___color.html#basic_ansi_colors',1,'']]]
 ];

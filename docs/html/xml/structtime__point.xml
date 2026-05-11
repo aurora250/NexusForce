@@ -1,0 +1,601 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structtime__point" kind="class" language="C++" prot="public">
+    <compoundname>time_point</compoundname>
+    <includes refid="time__point_8hpp" local="no">time_point.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Clock</type>
+      </param>
+      <param>
+        <type>typename Dur</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structtime__point_1adf5e45aea1ca0cfe444a27b73e698db2" prot="public" static="no">
+        <type>Clock</type>
+        <definition>using time_point&lt; Clock, Dur &gt;::clock_type = Clock</definition>
+        <argsstring></argsstring>
+        <name>clock_type</name>
+        <qualifiedname>time_point::clock_type</qualifiedname>
+        <briefdescription>
+<para>时钟类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="87" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structtime__point_1af9810b7a137f3c6e7c54c4c9be51306b" prot="public" static="no">
+        <type>Dur</type>
+        <definition>using time_point&lt; Clock, Dur &gt;::duration_type = Dur</definition>
+        <argsstring></argsstring>
+        <name>duration_type</name>
+        <qualifiedname>time_point::duration_type</qualifiedname>
+        <briefdescription>
+<para>持续时间类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="88" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structtime__point_1ac36ae7984ddeb1d1408fddee0a9109a8" prot="public" static="no">
+        <type>typename duration_type::rep</type>
+        <definition>using time_point&lt; Clock, Dur &gt;::rep = typename duration_type::rep</definition>
+        <argsstring></argsstring>
+        <name>rep</name>
+        <qualifiedname>time_point::rep</qualifiedname>
+        <briefdescription>
+<para>数值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="89" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structtime__point_1a0a404aa692aacc730608d30d3a38d0d8" prot="public" static="no">
+        <type>typename duration_type::period</type>
+        <definition>using time_point&lt; Clock, Dur &gt;::period = typename duration_type::period</definition>
+        <argsstring></argsstring>
+        <name>period</name>
+        <qualifiedname>time_point::period</qualifiedname>
+        <briefdescription>
+<para>时间单位比例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="90" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structtime__point_1a2c0e0e59d14f13200c93233c4f0bf13a" prot="private" static="no" mutable="no">
+        <type><ref refid="structtime__point_1af9810b7a137f3c6e7c54c4c9be51306b" kindref="member">duration_type</ref></type>
+        <definition>duration_type time_point&lt; Clock, Dur &gt;::value_</definition>
+        <argsstring></argsstring>
+        <name>value_</name>
+        <qualifiedname>time_point::value_</qualifiedname>
+        <briefdescription>
+<para>持续时间 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="93" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>time_point&lt; Clock, Dur &gt;::time_point</definition>
+        <argsstring>()</argsstring>
+        <name>time_point</name>
+        <qualifiedname>time_point::time_point</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="99" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="99" bodyend="100"/>
+        <referencedby refid="structtime__point_1a9af636504604939da0543fd80d490b42" compoundref="time__point_8hpp" startline="186" endline="186">time_point&lt; Clock, Dur &gt;::max</referencedby>
+        <referencedby refid="structtime__point_1ae5c318ec3be209ef7050753f8a57bb28" compoundref="time__point_8hpp" startline="180" endline="180">time_point&lt; Clock, Dur &gt;::min</referencedby>
+        <referencedby refid="structtime__point_1a40fff05067788251c129b2f9fa814f59" compoundref="time__point_8hpp" startline="123" endline="126">time_point&lt; Clock, Dur &gt;::operator++</referencedby>
+        <referencedby refid="structtime__point_1a7fe53bc9331eb94b6ca6c196959cd024" compoundref="time__point_8hpp" startline="132" endline="132">time_point&lt; Clock, Dur &gt;::operator++</referencedby>
+        <referencedby refid="structtime__point_1a5782ca39069273c719b9c2f985809155" compoundref="time__point_8hpp" startline="155" endline="158">time_point&lt; Clock, Dur &gt;::operator+=</referencedby>
+        <referencedby refid="structtime__point_1af41eea96e9379a8b742fbd04a4aa1816" compoundref="time__point_8hpp" startline="138" endline="141">time_point&lt; Clock, Dur &gt;::operator--</referencedby>
+        <referencedby refid="structtime__point_1adf5f84c609f83c69ac67cc0440d74519" compoundref="time__point_8hpp" startline="147" endline="147">time_point&lt; Clock, Dur &gt;::operator--</referencedby>
+        <referencedby refid="structtime__point_1ac053dc43b03e120a50e65c9071c7b3d5" compoundref="time__point_8hpp" startline="165" endline="168">time_point&lt; Clock, Dur &gt;::operator-=</referencedby>
+        <referencedby refid="structtime__point_1a82f3a2c683542a2931873f6a774a4b69" compoundref="time__point_8hpp" startline="115" endline="116">time_point&lt; Clock, Dur &gt;::time_point</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a475b3ca4a21f376abc98727867256bda" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>time_point&lt; Clock, Dur &gt;::time_point</definition>
+        <argsstring>(const duration_type &amp;dur)</argsstring>
+        <name>time_point</name>
+        <qualifiedname>time_point::time_point</qualifiedname>
+        <param>
+          <type>const <ref refid="structtime__point_1af9810b7a137f3c6e7c54c4c9be51306b" kindref="member">duration_type</ref> &amp;</type>
+          <declname>dur</declname>
+        </param>
+        <briefdescription>
+<para>从持续时间构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>自纪元以来的持续时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="106" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="106" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a82f3a2c683542a2931873f6a774a4b69" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Dur2</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;<ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v</ref>&lt;Dur2, <ref refid="structtime__point_1af9810b7a137f3c6e7c54c4c9be51306b" kindref="member">duration_type</ref>&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>time_point&lt; Clock, Dur &gt;::time_point</definition>
+        <argsstring>(const time_point&lt; clock_type, Dur2 &gt; &amp;value)</argsstring>
+        <name>time_point</name>
+        <qualifiedname>time_point::time_point</qualifiedname>
+        <param>
+          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; <ref refid="structtime__point_1adf5e45aea1ca0cfe444a27b73e698db2" kindref="member">clock_type</ref>, Dur2 &gt; &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从其他时间点构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Dur2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源持续时间类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源时间点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="115" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="115" bodyend="116"/>
+        <references refid="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" compoundref="time__point_8hpp" startline="99" endline="100">time_point&lt; Clock, Dur &gt;::time_point</references>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a40fff05067788251c129b2f9fa814f59" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structtime__point" kindref="compound">time_point</ref> &amp;</type>
+        <definition>time_point &amp; time_point&lt; Clock, Dur &gt;::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>time_point::operator++</qualifiedname>
+        <briefdescription>
+<para>前置自增运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自增后的时间点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="123" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="123" bodyend="126"/>
+        <references refid="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" compoundref="time__point_8hpp" startline="99" endline="100">time_point&lt; Clock, Dur &gt;::time_point</references>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a7fe53bc9331eb94b6ca6c196959cd024" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structtime__point" kindref="compound">time_point</ref></type>
+        <definition>time_point time_point&lt; Clock, Dur &gt;::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <qualifiedname>time_point::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>后置自增运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自增前的时间点 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="132" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="132" bodyend="132"/>
+        <references refid="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" compoundref="time__point_8hpp" startline="99" endline="100">time_point&lt; Clock, Dur &gt;::time_point</references>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1af41eea96e9379a8b742fbd04a4aa1816" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structtime__point" kindref="compound">time_point</ref> &amp;</type>
+        <definition>time_point &amp; time_point&lt; Clock, Dur &gt;::operator--</definition>
+        <argsstring>()</argsstring>
+        <name>operator--</name>
+        <qualifiedname>time_point::operator--</qualifiedname>
+        <briefdescription>
+<para>前置自减运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自减后的时间点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="138" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="138" bodyend="141"/>
+        <references refid="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" compoundref="time__point_8hpp" startline="99" endline="100">time_point&lt; Clock, Dur &gt;::time_point</references>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1adf5f84c609f83c69ac67cc0440d74519" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structtime__point" kindref="compound">time_point</ref></type>
+        <definition>time_point time_point&lt; Clock, Dur &gt;::operator--</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator--</name>
+        <qualifiedname>time_point::operator--</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>后置自减运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自减前的时间点 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="147" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="147" bodyend="147"/>
+        <references refid="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" compoundref="time__point_8hpp" startline="99" endline="100">time_point&lt; Clock, Dur &gt;::time_point</references>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a5782ca39069273c719b9c2f985809155" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structtime__point" kindref="compound">time_point</ref> &amp;</type>
+        <definition>time_point &amp; time_point&lt; Clock, Dur &gt;::operator+=</definition>
+        <argsstring>(const duration_type &amp;dur)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>time_point::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="structtime__point_1af9810b7a137f3c6e7c54c4c9be51306b" kindref="member">duration_type</ref> &amp;</type>
+          <declname>dur</declname>
+        </param>
+        <briefdescription>
+<para>加法赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要加的持续时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="155" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="155" bodyend="158"/>
+        <references refid="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" compoundref="time__point_8hpp" startline="99" endline="100">time_point&lt; Clock, Dur &gt;::time_point</references>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1ac053dc43b03e120a50e65c9071c7b3d5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structtime__point" kindref="compound">time_point</ref> &amp;</type>
+        <definition>time_point &amp; time_point&lt; Clock, Dur &gt;::operator-=</definition>
+        <argsstring>(const duration_type &amp;dur)</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>time_point::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="structtime__point_1af9810b7a137f3c6e7c54c4c9be51306b" kindref="member">duration_type</ref> &amp;</type>
+          <declname>dur</declname>
+        </param>
+        <briefdescription>
+<para>减法赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要减的持续时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="165" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="165" bodyend="168"/>
+        <references refid="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" compoundref="time__point_8hpp" startline="99" endline="100">time_point&lt; Clock, Dur &gt;::time_point</references>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1aae4a3cc188324fca1339a16089fc3570" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structtime__point_1af9810b7a137f3c6e7c54c4c9be51306b" kindref="member">duration_type</ref></type>
+        <definition>duration_type time_point&lt; Clock, Dur &gt;::since_epoch</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>since_epoch</name>
+        <qualifiedname>time_point::since_epoch</qualifiedname>
+        <briefdescription>
+<para>获取自纪元以来的时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自纪元以来的持续时间 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="174" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="174" bodyend="174"/>
+        <referencedby refid="group___time_point_1ga46cab9ec3aaf10b1ee32ffcedc69e8a4" compoundref="time__point_8hpp" startline="242" endline="247">operator+</referencedby>
+        <referencedby refid="group___time_point_1gacc1b6615cddd0954c5fb964b47f1afe7" compoundref="time__point_8hpp" startline="223" endline="228">operator+</referencedby>
+        <referencedby refid="group___time_point_1gaba11e56f965e713fe1b9735ea24fe9dd" compoundref="time__point_8hpp" startline="261" endline="266">operator-</referencedby>
+        <referencedby refid="group___time_point_1ga57ede95c3942c5d64768e77ea259660f" compoundref="time__point_8hpp" startline="278" endline="280">operator-</referencedby>
+        <referencedby refid="group___time_point_1gad4a03446628f64e1da77ecaaecd80535" compoundref="time__point_8hpp" startline="320" endline="322">operator&lt;</referencedby>
+        <referencedby refid="group___time_point_1gaf55901d15e19a30b9303835c29252cc3" compoundref="time__point_8hpp" startline="292" endline="294">operator==</referencedby>
+        <referencedby refid="group___time_point_1gabe2c247aba14578a6a1ba5c2477ed6cf" compoundref="time__point_8hpp" startline="71" endline="73">time_cast</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1aa8452d4d4a9388c01d7de562d7ff1b94" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___duration_1ga9a8cc91104c0b0cceec0f8cf188bd19d" kindref="member">nanoseconds</ref> &gt;</type>
+        <definition>NEFORCE_ALWAYS_INLINE time_point&lt; Clock, nanoseconds &gt; time_point&lt; Clock, Dur &gt;::to_nano</definition>
+        <argsstring>() const</argsstring>
+        <name>to_nano</name>
+        <qualifiedname>time_point::to_nano</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="188" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="188" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1ad3439db9dce9f44af803255e1b961393" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___duration_1ga014446ec8cd4a3db5f57b3572f2844d4" kindref="member">microseconds</ref> &gt;</type>
+        <definition>NEFORCE_ALWAYS_INLINE time_point&lt; Clock, microseconds &gt; time_point&lt; Clock, Dur &gt;::to_micro</definition>
+        <argsstring>() const</argsstring>
+        <name>to_micro</name>
+        <qualifiedname>time_point::to_micro</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="191" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="191" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1ac82e27415de1d31e0109f92d5edb9da9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref> &gt;</type>
+        <definition>NEFORCE_ALWAYS_INLINE time_point&lt; Clock, milliseconds &gt; time_point&lt; Clock, Dur &gt;::to_milli</definition>
+        <argsstring>() const</argsstring>
+        <name>to_milli</name>
+        <qualifiedname>time_point::to_milli</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="194" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="194" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a6dc7cfa54ab03ac8e2d5b76d4cfb3977" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref> &gt;</type>
+        <definition>NEFORCE_ALWAYS_INLINE time_point&lt; Clock, seconds &gt; time_point&lt; Clock, Dur &gt;::to_sec</definition>
+        <argsstring>() const</argsstring>
+        <name>to_sec</name>
+        <qualifiedname>time_point::to_sec</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="197" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="197" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a3fe9e0855fc9ca924a4e7a0a7c6aafb0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___duration_1ga9e5521f8c307af553c2d7e25ed300429" kindref="member">minutes</ref> &gt;</type>
+        <definition>NEFORCE_ALWAYS_INLINE time_point&lt; Clock, minutes &gt; time_point&lt; Clock, Dur &gt;::to_minu</definition>
+        <argsstring>() const</argsstring>
+        <name>to_minu</name>
+        <qualifiedname>time_point::to_minu</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="198" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="198" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a5fc2a21aabffdf659996b6c10158f9b4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___duration_1ga27be873cb230f44273c9f3f7dbc72c9b" kindref="member">hours</ref> &gt;</type>
+        <definition>NEFORCE_ALWAYS_INLINE time_point&lt; Clock, hours &gt; time_point&lt; Clock, Dur &gt;::to_hour</definition>
+        <argsstring>() const</argsstring>
+        <name>to_hour</name>
+        <qualifiedname>time_point::to_hour</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="199" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="199" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a333a71c2c2694a46940c7f074efeeecf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___duration_1ga0e567c20a642391f8404044057c90e98" kindref="member">days</ref> &gt;</type>
+        <definition>NEFORCE_ALWAYS_INLINE time_point&lt; Clock, days &gt; time_point&lt; Clock, Dur &gt;::to_day</definition>
+        <argsstring>() const</argsstring>
+        <name>to_day</name>
+        <qualifiedname>time_point::to_day</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="200" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="200" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a4d980b3fe76064b07a64778e1b7672f2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___duration_1gae002e1b8f5eb4663baeb35336ed56d9b" kindref="member">weeks</ref> &gt;</type>
+        <definition>NEFORCE_ALWAYS_INLINE time_point&lt; Clock, weeks &gt; time_point&lt; Clock, Dur &gt;::to_week</definition>
+        <argsstring>() const</argsstring>
+        <name>to_week</name>
+        <qualifiedname>time_point::to_week</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="201" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="201" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1ad7e816dbce7dedf13485be1e8d275361" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___duration_1ga4693bd6c2e63adf45c114988dd30c99b" kindref="member">years</ref> &gt;</type>
+        <definition>NEFORCE_ALWAYS_INLINE time_point&lt; Clock, years &gt; time_point&lt; Clock, Dur &gt;::to_year</definition>
+        <argsstring>() const</argsstring>
+        <name>to_year</name>
+        <qualifiedname>time_point::to_year</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="202" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="202" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1aceadb7899ab4a9b0c2993550bbc1ebf6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, <ref refid="group___duration_1gaa86dd6948fa2f24d156ef787e45137db" kindref="member">months</ref> &gt;</type>
+        <definition>NEFORCE_ALWAYS_INLINE time_point&lt; Clock, months &gt; time_point&lt; Clock, Dur &gt;::to_month</definition>
+        <argsstring>() const</argsstring>
+        <name>to_month</name>
+        <qualifiedname>time_point::to_month</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="203" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="203" bodyend="203"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structtime__point_1ae5c318ec3be209ef7050753f8a57bb28" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structtime__point" kindref="compound">time_point</ref></type>
+        <definition>static constexpr time_point time_point&lt; Clock, Dur &gt;::min</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>min</name>
+        <qualifiedname>time_point::min</qualifiedname>
+        <briefdescription>
+<para>获取最小时间点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最小时间点 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="180" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="180" bodyend="180"/>
+        <references refid="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" compoundref="time__point_8hpp" startline="99" endline="100">time_point&lt; Clock, Dur &gt;::time_point</references>
+      </memberdef>
+      <memberdef kind="function" id="structtime__point_1a9af636504604939da0543fd80d490b42" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structtime__point" kindref="compound">time_point</ref></type>
+        <definition>static constexpr time_point time_point&lt; Clock, Dur &gt;::max</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>max</name>
+        <qualifiedname>time_point::max</qualifiedname>
+        <briefdescription>
+<para>获取最大时间点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大时间点 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="186" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="186" bodyend="186"/>
+        <references refid="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" compoundref="time__point_8hpp" startline="99" endline="100">time_point&lt; Clock, Dur &gt;::time_point</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>时间点类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Clock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时钟类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+表示特定时钟的一个时间点，支持时间算术运算和比较。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" line="76" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/time_point.hpp" bodystart="84" bodyend="204"/>
+    <listofallmembers>
+      <member refid="structtime__point_1adf5e45aea1ca0cfe444a27b73e698db2" prot="public" virt="non-virtual"><scope>time_point</scope><name>clock_type</name></member>
+      <member refid="structtime__point_1af9810b7a137f3c6e7c54c4c9be51306b" prot="public" virt="non-virtual"><scope>time_point</scope><name>duration_type</name></member>
+      <member refid="structtime__point_1a9af636504604939da0543fd80d490b42" prot="public" virt="non-virtual"><scope>time_point</scope><name>max</name></member>
+      <member refid="structtime__point_1ae5c318ec3be209ef7050753f8a57bb28" prot="public" virt="non-virtual"><scope>time_point</scope><name>min</name></member>
+      <member refid="structtime__point_1a40fff05067788251c129b2f9fa814f59" prot="public" virt="non-virtual"><scope>time_point</scope><name>operator++</name></member>
+      <member refid="structtime__point_1a7fe53bc9331eb94b6ca6c196959cd024" prot="public" virt="non-virtual"><scope>time_point</scope><name>operator++</name></member>
+      <member refid="structtime__point_1a5782ca39069273c719b9c2f985809155" prot="public" virt="non-virtual"><scope>time_point</scope><name>operator+=</name></member>
+      <member refid="structtime__point_1af41eea96e9379a8b742fbd04a4aa1816" prot="public" virt="non-virtual"><scope>time_point</scope><name>operator--</name></member>
+      <member refid="structtime__point_1adf5f84c609f83c69ac67cc0440d74519" prot="public" virt="non-virtual"><scope>time_point</scope><name>operator--</name></member>
+      <member refid="structtime__point_1ac053dc43b03e120a50e65c9071c7b3d5" prot="public" virt="non-virtual"><scope>time_point</scope><name>operator-=</name></member>
+      <member refid="structtime__point_1a0a404aa692aacc730608d30d3a38d0d8" prot="public" virt="non-virtual"><scope>time_point</scope><name>period</name></member>
+      <member refid="structtime__point_1ac36ae7984ddeb1d1408fddee0a9109a8" prot="public" virt="non-virtual"><scope>time_point</scope><name>rep</name></member>
+      <member refid="structtime__point_1aae4a3cc188324fca1339a16089fc3570" prot="public" virt="non-virtual"><scope>time_point</scope><name>since_epoch</name></member>
+      <member refid="structtime__point_1a2ed550e81870463021a70a0f03c9f79a" prot="public" virt="non-virtual"><scope>time_point</scope><name>time_point</name></member>
+      <member refid="structtime__point_1a475b3ca4a21f376abc98727867256bda" prot="public" virt="non-virtual"><scope>time_point</scope><name>time_point</name></member>
+      <member refid="structtime__point_1a82f3a2c683542a2931873f6a774a4b69" prot="public" virt="non-virtual"><scope>time_point</scope><name>time_point</name></member>
+      <member refid="structtime__point_1a333a71c2c2694a46940c7f074efeeecf" prot="public" virt="non-virtual"><scope>time_point</scope><name>to_day</name></member>
+      <member refid="structtime__point_1a5fc2a21aabffdf659996b6c10158f9b4" prot="public" virt="non-virtual"><scope>time_point</scope><name>to_hour</name></member>
+      <member refid="structtime__point_1ad3439db9dce9f44af803255e1b961393" prot="public" virt="non-virtual"><scope>time_point</scope><name>to_micro</name></member>
+      <member refid="structtime__point_1ac82e27415de1d31e0109f92d5edb9da9" prot="public" virt="non-virtual"><scope>time_point</scope><name>to_milli</name></member>
+      <member refid="structtime__point_1a3fe9e0855fc9ca924a4e7a0a7c6aafb0" prot="public" virt="non-virtual"><scope>time_point</scope><name>to_minu</name></member>
+      <member refid="structtime__point_1aceadb7899ab4a9b0c2993550bbc1ebf6" prot="public" virt="non-virtual"><scope>time_point</scope><name>to_month</name></member>
+      <member refid="structtime__point_1aa8452d4d4a9388c01d7de562d7ff1b94" prot="public" virt="non-virtual"><scope>time_point</scope><name>to_nano</name></member>
+      <member refid="structtime__point_1a6dc7cfa54ab03ac8e2d5b76d4cfb3977" prot="public" virt="non-virtual"><scope>time_point</scope><name>to_sec</name></member>
+      <member refid="structtime__point_1a4d980b3fe76064b07a64778e1b7672f2" prot="public" virt="non-virtual"><scope>time_point</scope><name>to_week</name></member>
+      <member refid="structtime__point_1ad7e816dbce7dedf13485be1e8d275361" prot="public" virt="non-virtual"><scope>time_point</scope><name>to_year</name></member>
+      <member refid="structtime__point_1a2c0e0e59d14f13200c93233c4f0bf13a" prot="private" virt="non-virtual"><scope>time_point</scope><name>value_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

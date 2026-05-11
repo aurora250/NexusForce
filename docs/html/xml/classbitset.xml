@@ -1,0 +1,1295 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classbitset" kind="class" language="C++" prot="public">
+    <compoundname>bitset</compoundname>
+    <basecompoundref refid="structicomparable" prot="public" virt="non-virtual">icomparable&lt; bitset&lt; N &gt; &gt;</basecompoundref>
+    <basecompoundref refid="structibinary" prot="public" virt="non-virtual">ibinary&lt; bitset&lt; N &gt; &gt;</basecompoundref>
+    <basecompoundref refid="structistringify" prot="public" virt="non-virtual">istringify&lt; bitset&lt; N &gt; &gt;</basecompoundref>
+    <includes refid="bitset_8hpp" local="no">bitset.hpp</includes>
+    <innerclass refid="classbitset_1_1reference" prot="public">bitset::reference</innerclass>
+    <templateparamlist>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <declname>N</declname>
+        <defname>N</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classbitset_1a45577dddb3a329ef0c0216d404d95aa2" prot="private" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>using bitset&lt; N &gt;::block_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>block_type</name>
+        <qualifiedname>bitset::block_type</qualifiedname>
+        <briefdescription>
+<para>底层存储单元类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="92" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classbitset_1a53875bc4c7535213e4042a54d1735d5f" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t bitset&lt; N &gt;::bits_per_block</definition>
+        <argsstring></argsstring>
+        <name>bits_per_block</name>
+        <qualifiedname>bitset::bits_per_block</qualifiedname>
+        <initializer>= sizeof(block_type) * 8</initializer>
+        <briefdescription>
+<para>每个存储单元的位数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="93" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classbitset_1a1ac3215245a81d6ad28d77173a03f4fd" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t bitset&lt; N &gt;::block_count</definition>
+        <argsstring></argsstring>
+        <name>block_count</name>
+        <qualifiedname>bitset::block_count</qualifiedname>
+        <initializer>= (N + bits_per_block - 1) / bits_per_block</initializer>
+        <briefdescription>
+<para>所需存储单元数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="94" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classbitset_1afb7ef047f8b8533a6cec5b670c24549d" prot="private" static="no" mutable="no">
+        <type><ref refid="classarray" kindref="compound">array</ref>&lt; block_type, block_count &gt;</type>
+        <definition>array&lt;block_type, block_count&gt; bitset&lt; N &gt;::blocks</definition>
+        <argsstring></argsstring>
+        <name>blocks</name>
+        <qualifiedname>bitset::blocks</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>存储单元的数组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="96" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="96" bodyend="96"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classbitset_1a533418e9d3d8967a90e454bdd49b5118" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>block_type</type>
+        <definition>static constexpr block_type bitset&lt; N &gt;::last_block_mask</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>last_block_mask</name>
+        <qualifiedname>bitset::last_block_mask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="99" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="99" bodyend="108"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classbitset_1ab2153a7545995088644262ba2e461e5b" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE constexpr void</type>
+        <definition>NEFORCE_ALWAYS_INLINE constexpr void bitset&lt; N &gt;::check_range</definition>
+        <argsstring>(const size_t pos) const noexcept</argsstring>
+        <name>check_range</name>
+        <qualifiedname>bitset::check_range</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="110" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="110" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a282d2caaf26a43dab4946af5dca15249" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_ALWAYS_INLINE constexpr size_t bitset&lt; N &gt;::block_index</definition>
+        <argsstring>(const size_t pos) const noexcept</argsstring>
+        <name>block_index</name>
+        <qualifiedname>bitset::block_index</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="114" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="114" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1ab426a7f70dc9c15dc901015fe2a524b8" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_ALWAYS_INLINE constexpr size_t bitset&lt; N &gt;::bit_index</definition>
+        <argsstring>(const size_t pos) const noexcept</argsstring>
+        <name>bit_index</name>
+        <qualifiedname>bitset::bit_index</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="116" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="116" bodyend="116"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classbitset_1ab16246976824c9e98702dc19300c4c9a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>bitset&lt; N &gt;::bitset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>bitset</name>
+        <qualifiedname>bitset::bitset</qualifiedname>
+        <briefdescription>
+<para>默认构造函数，所有位初始化为0 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="122" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="122" bodyend="122"/>
+        <referencedby refid="classbitset_1a00e1c47566819af1f9cf7e6b295def52" compoundref="bitset_8hpp" startline="191" endline="192">bitset&lt; N &gt;::bitset</referencedby>
+        <referencedby refid="classbitset_1a3e686ffe09704d4d875d5e8e32951017" compoundref="bitset_8hpp" startline="182" endline="183">bitset&lt; N &gt;::bitset</referencedby>
+        <referencedby refid="classbitset_1a03d027cd56abe05e827700d40342cdb8" compoundref="bitset_8hpp" startline="545" endline="545">bitset&lt; N &gt;::equal_to</referencedby>
+        <referencedby refid="classbitset_1af0eb313bce8198605ccfd534c3d8aebf" compoundref="bitset_8hpp" startline="250" endline="256">bitset&lt; N &gt;::flip</referencedby>
+        <referencedby refid="classbitset_1adf8f68fc0e6388cdef9d51933fdc1722" compoundref="bitset_8hpp" startline="263" endline="269">bitset&lt; N &gt;::flip</referencedby>
+        <referencedby refid="classbitset_1a1d7185ddc09436a486fb919642f37fcc" compoundref="bitset_8hpp" startline="552" endline="552">bitset&lt; N &gt;::less_than</referencedby>
+        <referencedby refid="classbitset_1a89feb12bee8f484f89329b53711b19c4" compoundref="bitset_8hpp" startline="317" endline="322">bitset&lt; N &gt;::operator&amp;=</referencedby>
+        <referencedby refid="classbitset_1a76e0355ce751d6838e400c3e0989a39c" compoundref="bitset_8hpp" startline="363" endline="388">bitset&lt; N &gt;::operator&lt;&lt;=</referencedby>
+        <referencedby refid="classbitset_1ac8e7f0b152b068e3b60921af66a3de36" compoundref="bitset_8hpp" startline="395" endline="419">bitset&lt; N &gt;::operator&gt;&gt;=</referencedby>
+        <referencedby refid="classbitset_1a53aae6e4e93f80c2d74da849a41c582e" compoundref="bitset_8hpp" startline="341" endline="346">bitset&lt; N &gt;::operator^=</referencedby>
+        <referencedby refid="classbitset_1af7b778d50be51e357718a6d110895392" compoundref="bitset_8hpp" startline="329" endline="334">bitset&lt; N &gt;::operator|=</referencedby>
+        <referencedby refid="classbitset_1a726ef9f171af6b720bd511bbe1667fc4" compoundref="bitset_8hpp" startline="352" endline="356">bitset&lt; N &gt;::operator~</referencedby>
+        <referencedby refid="classbitset_1_1reference_1a21f3b29e4e2a358e54be58c63740a23e" compoundref="bitset_8hpp" startline="54" endline="56">bitset&lt; N &gt;::reference::reference</referencedby>
+        <referencedby refid="classbitset_1a6cd50003c8edc802378c52913dfacd8a" compoundref="bitset_8hpp" startline="228" endline="231">bitset&lt; N &gt;::reset</referencedby>
+        <referencedby refid="classbitset_1a31d9bf02ae0c97f66c328c8caddcc1c8" compoundref="bitset_8hpp" startline="238" endline="244">bitset&lt; N &gt;::reset</referencedby>
+        <referencedby refid="classbitset_1a101b987ec642b2a8ac04d14cfaa9d3ff" compoundref="bitset_8hpp" startline="198" endline="204">bitset&lt; N &gt;::set</referencedby>
+        <referencedby refid="classbitset_1a45f8f9612121a78cb4145d4ac63d4bf5" compoundref="bitset_8hpp" startline="212" endline="222">bitset&lt; N &gt;::set</referencedby>
+        <referencedby refid="classbitset_1a1ee635508b4ac31cad039483dd655316" compoundref="bitset_8hpp" startline="579" endline="579">bitset&lt; N &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1abf8cfea060a20be99a6da06b3937f18a" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>bitset&lt; N &gt;::bitset</definition>
+        <argsstring>(unsigned long long value) noexcept</argsstring>
+        <name>bitset</name>
+        <qualifiedname>bitset::bitset</qualifiedname>
+        <param>
+          <type>unsigned long long</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>整数初始化 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号64位整数值，用于初始化低位</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将二进制位复制到bitset的低位，超出N的高位被忽略。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="130" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="130" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1aa16ab94f8ba20c24f9af61f32b887cac" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>bitset&lt; N &gt;::bitset</definition>
+        <argsstring>(const string_view str, const char zero=&apos;0&apos;, const char one=&apos;1&apos;)</argsstring>
+        <name>bitset</name>
+        <qualifiedname>bitset::bitset</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>zero</declname>
+          <defval>&apos;0&apos;</defval>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>one</declname>
+          <defval>&apos;1&apos;</defval>
+        </param>
+        <briefdescription>
+<para>用字符串初始化bitset </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zero</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表示0的字符，默认为&apos;0&apos; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>one</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表示1的字符，默认为&apos;1&apos; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果字符串包含无效字符</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+字符串从左到右对应从高位到低位。如果字符串长度小于N，高位补0； 如果长度大于N，只使用前N个字符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="158" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="158" bodyend="174"/>
+        <references refid="classbasic__string__view_1a0bfb38a60df541b1b22f24bc7d52abfc" compoundref="basic__string__view_8hpp" startline="317" endline="317">basic_string_view&lt; CharT, Traits &gt;::length</references>
+        <references refid="classbitset_1a6cd50003c8edc802378c52913dfacd8a" compoundref="bitset_8hpp" startline="228" endline="231">bitset&lt; N &gt;::reset</references>
+        <references refid="classbitset_1a101b987ec642b2a8ac04d14cfaa9d3ff" compoundref="bitset_8hpp" startline="198" endline="204">bitset&lt; N &gt;::set</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a3e686ffe09704d4d875d5e8e32951017" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>bitset&lt; N &gt;::bitset</definition>
+        <argsstring>(const string &amp;str, const char zero=&apos;0&apos;, const char one=&apos;1&apos;)</argsstring>
+        <name>bitset</name>
+        <qualifiedname>bitset::bitset</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>zero</declname>
+          <defval>&apos;0&apos;</defval>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>one</declname>
+          <defval>&apos;1&apos;</defval>
+        </param>
+        <briefdescription>
+<para>string初始化 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zero</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表示0的字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>one</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表示1的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="182" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="182" bodyend="183"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a00e1c47566819af1f9cf7e6b295def52" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>bitset&lt; N &gt;::bitset</definition>
+        <argsstring>(const char *str, const char zero=&apos;0&apos;, const char one=&apos;1&apos;)</argsstring>
+        <name>bitset</name>
+        <qualifiedname>bitset::bitset</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>zero</declname>
+          <defval>&apos;0&apos;</defval>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>one</declname>
+          <defval>&apos;1&apos;</defval>
+        </param>
+        <briefdescription>
+<para>C风格字符串初始化 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>C风格字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>zero</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表示0的字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>one</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表示1的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="191" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="191" bodyend="192"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a101b987ec642b2a8ac04d14cfaa9d3ff" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::set</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>set</name>
+        <qualifiedname>bitset::set</qualifiedname>
+        <briefdescription>
+<para>将所有位设置为1 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="198" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="198" bodyend="204"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+        <referencedby refid="classbitset_1aa16ab94f8ba20c24f9af61f32b887cac" compoundref="bitset_8hpp" startline="158" endline="174">bitset&lt; N &gt;::bitset</referencedby>
+        <referencedby refid="classbitset_1_1reference_1a21f3b29e4e2a358e54be58c63740a23e" compoundref="bitset_8hpp" startline="54" endline="56">bitset&lt; N &gt;::reference::reference</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a45f8f9612121a78cb4145d4ac63d4bf5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::set</definition>
+        <argsstring>(const size_t pos, const bool value=true) noexcept</argsstring>
+        <name>set</name>
+        <qualifiedname>bitset::set</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>将指定位置的位设置为指定值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的值，默认为true </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="212" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="212" bodyend="222"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a6cd50003c8edc802378c52913dfacd8a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>bitset::reset</qualifiedname>
+        <briefdescription>
+<para>将所有位重置为0 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="228" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="228" bodyend="231"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+        <referencedby refid="classbitset_1aa16ab94f8ba20c24f9af61f32b887cac" compoundref="bitset_8hpp" startline="158" endline="174">bitset&lt; N &gt;::bitset</referencedby>
+        <referencedby refid="classbitset_1a76e0355ce751d6838e400c3e0989a39c" compoundref="bitset_8hpp" startline="363" endline="388">bitset&lt; N &gt;::operator&lt;&lt;=</referencedby>
+        <referencedby refid="classbitset_1ac8e7f0b152b068e3b60921af66a3de36" compoundref="bitset_8hpp" startline="395" endline="419">bitset&lt; N &gt;::operator&gt;&gt;=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a31d9bf02ae0c97f66c328c8caddcc1c8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::reset</definition>
+        <argsstring>(const size_t pos) noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>bitset::reset</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>将指定位置的位重置为0 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="238" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="238" bodyend="244"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1af0eb313bce8198605ccfd534c3d8aebf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::flip</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>flip</name>
+        <qualifiedname>bitset::flip</qualifiedname>
+        <briefdescription>
+<para>翻转所有位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="250" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="250" bodyend="256"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+        <referencedby refid="classbitset_1a726ef9f171af6b720bd511bbe1667fc4" compoundref="bitset_8hpp" startline="352" endline="356">bitset&lt; N &gt;::operator~</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1adf8f68fc0e6388cdef9d51933fdc1722" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::flip</definition>
+        <argsstring>(const size_t pos) noexcept</argsstring>
+        <name>flip</name>
+        <qualifiedname>bitset::flip</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>翻转指定位置的位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="263" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="263" bodyend="269"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1af55ee246eada7f62e09f90db158e50ec" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool bitset&lt; N &gt;::operator[]</definition>
+        <argsstring>(const size_t pos) const noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>bitset::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>常量下标访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>该位的bool值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="276" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="276" bodyend="276"/>
+        <references refid="classbitset_1a9f8b218a668a1d0eef66ef1b810582f1" compoundref="bitset_8hpp" startline="305" endline="310">bitset&lt; N &gt;::test</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1af1f73b9e6760cba1be34242e6b373b92" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classbitset_1_1reference" kindref="compound">reference</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr reference bitset&lt; N &gt;::operator[]</definition>
+        <argsstring>(size_t pos) noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>bitset::operator[]</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>非常量下标访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>位引用对象，可用于修改 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="283" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="283" bodyend="286"/>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a68f334e9df5dc07c3d306c921d8cdb66" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr size_t bitset&lt; N &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>bitset::size</qualifiedname>
+        <briefdescription>
+<para>获取位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>模板参数N </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="292" column="62" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="292" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a8653d7861e4f5416dd0903f461650746" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool bitset&lt; N &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>bitset::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果N为0返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="298" column="60" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="298" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a9f8b218a668a1d0eef66ef1b810582f1" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool bitset&lt; N &gt;::test</definition>
+        <argsstring>(const size_t position) const noexcept</argsstring>
+        <name>test</name>
+        <qualifiedname>bitset::test</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>测试指定位置的位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>位的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="305" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="305" bodyend="310"/>
+        <referencedby refid="classbitset_1af55ee246eada7f62e09f90db158e50ec" compoundref="bitset_8hpp" startline="276" endline="276">bitset&lt; N &gt;::operator[]</referencedby>
+        <referencedby refid="classbitset_1a71af94b67719a0938f84217d37315976" compoundref="bitset_8hpp" startline="560" endline="567">bitset&lt; N &gt;::to_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a89feb12bee8f484f89329b53711b19c4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::operator&amp;=</definition>
+        <argsstring>(const bitset &amp;other) noexcept</argsstring>
+        <name>operator&amp;=</name>
+        <qualifiedname>bitset::operator&amp;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>按位与赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个bitset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="317" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="317" bodyend="322"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1af7b778d50be51e357718a6d110895392" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::operator|=</definition>
+        <argsstring>(const bitset &amp;other) noexcept</argsstring>
+        <name>operator|=</name>
+        <qualifiedname>bitset::operator|=</qualifiedname>
+        <param>
+          <type>const <ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>按位或赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个bitset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="329" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="329" bodyend="334"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a53aae6e4e93f80c2d74da849a41c582e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::operator^=</definition>
+        <argsstring>(const bitset &amp;other) noexcept</argsstring>
+        <name>operator^=</name>
+        <qualifiedname>bitset::operator^=</qualifiedname>
+        <param>
+          <type>const <ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>按位异或赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个bitset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="341" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="341" bodyend="346"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a726ef9f171af6b720bd511bbe1667fc4" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classbitset" kindref="compound">bitset</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr bitset bitset&lt; N &gt;::operator~</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator~</name>
+        <qualifiedname>bitset::operator~</qualifiedname>
+        <briefdescription>
+<para>按位取反 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>取反后的新bitset </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="352" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="352" bodyend="356"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+        <references refid="classbitset_1af0eb313bce8198605ccfd534c3d8aebf" compoundref="bitset_8hpp" startline="250" endline="256">bitset&lt; N &gt;::flip</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a76e0355ce751d6838e400c3e0989a39c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::operator&lt;&lt;=</definition>
+        <argsstring>(const uint32_t pos) noexcept</argsstring>
+        <name>operator&lt;&lt;=</name>
+        <qualifiedname>bitset::operator&lt;&lt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>左移赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左移位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="363" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="363" bodyend="388"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+        <references refid="classbitset_1a6cd50003c8edc802378c52913dfacd8a" compoundref="bitset_8hpp" startline="228" endline="231">bitset&lt; N &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1ac8e7f0b152b068e3b60921af66a3de36" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+        <definition>bitset &amp; bitset&lt; N &gt;::operator&gt;&gt;=</definition>
+        <argsstring>(const uint32_t pos) noexcept</argsstring>
+        <name>operator&gt;&gt;=</name>
+        <qualifiedname>bitset::operator&gt;&gt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+<para>右移赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右移位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="395" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="395" bodyend="419"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+        <references refid="classbitset_1a6cd50003c8edc802378c52913dfacd8a" compoundref="bitset_8hpp" startline="228" endline="231">bitset&lt; N &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1ad69258e3bf146d21b14bb7b4962c108e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr size_t bitset&lt; N &gt;::count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>count</name>
+        <qualifiedname>bitset::count</qualifiedname>
+        <briefdescription>
+<para>统计值为1的位的数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>1的位数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="425" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="425" bodyend="431"/>
+        <references refid="group___bit_manipulation_1ga7493eb3d8ac54b313025c16119a3e9df" compoundref="bit_8hpp" startline="160" endline="166">popcount</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a16384ef28db200c643e274f5b9f7c632" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool bitset&lt; N &gt;::all</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>all</name>
+        <qualifiedname>bitset::all</qualifiedname>
+        <briefdescription>
+<para>检查所有位是否都为1 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果所有位都是1返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="437" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="437" bodyend="445"/>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a4baba23f20b079cd68c9130762a11082" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool bitset&lt; N &gt;::any</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>any</name>
+        <qualifiedname>bitset::any</qualifiedname>
+        <briefdescription>
+<para>检查是否存在值为1的位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果至少有一个1返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="451" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="451" bodyend="458"/>
+        <referencedby refid="classbitset_1a38c96f8cc93fec84df9bb2a796d42444" compoundref="bitset_8hpp" startline="464" endline="464">bitset&lt; N &gt;::none</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a38c96f8cc93fec84df9bb2a796d42444" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool bitset&lt; N &gt;::none</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>none</name>
+        <qualifiedname>bitset::none</qualifiedname>
+        <briefdescription>
+<para>检查是否所有位都是0 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果没有1返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="464" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="464" bodyend="464"/>
+        <references refid="classbitset_1a4baba23f20b079cd68c9130762a11082" compoundref="bitset_8hpp" startline="451" endline="458">bitset&lt; N &gt;::any</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1adf6895ac189a0b0204641e4ec2458d8c" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr unsigned long</type>
+        <definition>NEFORCE_NODISCARD constexpr unsigned long bitset&lt; N &gt;::to_ulong</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_ulong</name>
+        <qualifiedname>bitset::to_ulong</qualifiedname>
+        <briefdescription>
+<para>转换为unsigned long </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>unsigned long表示的位值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值超出unsigned long范围 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="471" column="47" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="471" bodyend="503"/>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a718e2a90c8478f0c232372568ad5bb28" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr unsigned long long</type>
+        <definition>NEFORCE_NODISCARD constexpr unsigned long long bitset&lt; N &gt;::to_ullong</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_ullong</name>
+        <qualifiedname>bitset::to_ullong</qualifiedname>
+        <briefdescription>
+<para>转换为unsigned long long </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>unsigned long long表示的位值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值超出unsigned long long范围 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="510" column="52" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="510" bodyend="538"/>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a03d027cd56abe05e827700d40342cdb8" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool bitset&lt; N &gt;::equal_to</definition>
+        <argsstring>(const bitset &amp;other) const noexcept</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>bitset::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个bitset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果所有位相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="545" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="545" bodyend="545"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a1d7185ddc09436a486fb919642f37fcc" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool bitset&lt; N &gt;::less_than</definition>
+        <argsstring>(const bitset &amp;other) const noexcept</argsstring>
+        <name>less_than</name>
+        <qualifiedname>bitset::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符（按字典序） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个bitset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="552" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="552" bodyend="552"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a71af94b67719a0938f84217d37315976" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string bitset&lt; N &gt;::to_string</definition>
+        <argsstring>(const char zero, const char one) const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>bitset::to_string</qualifiedname>
+        <param>
+          <type>const char</type>
+          <declname>zero</declname>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>one</declname>
+        </param>
+        <briefdescription>
+<para>转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>zero</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表示0的字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>one</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表示1的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串表示，高位在左 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="560" column="50" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="560" bodyend="567"/>
+        <references refid="classbasic__string_1a72b1e63dfd1b7d0197f9e902d163b7f9" compoundref="basic__string_8hpp" startline="1532" endline="1532">basic_string&lt; CharT, Traits, Alloc &gt;::push_back</references>
+        <references refid="classbasic__string_1a0d34d73082a21b23f11df5bbf982c6d5" compoundref="basic__string_8hpp" startline="1262" endline="1289">basic_string&lt; CharT, Traits, Alloc &gt;::reserve</references>
+        <references refid="classbitset_1a9f8b218a668a1d0eef66ef1b810582f1" compoundref="bitset_8hpp" startline="305" endline="310">bitset&lt; N &gt;::test</references>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1acbdae3d48864f0a16e6f1400b4dfd431" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string bitset&lt; N &gt;::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>bitset::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为字符串（默认使用&apos;0&apos;和&apos;1&apos;） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="573" column="50" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="573" bodyend="573"/>
+        <references refid="classbitset_1acbdae3d48864f0a16e6f1400b4dfd431" compoundref="bitset_8hpp" startline="573" endline="573">bitset&lt; N &gt;::to_string</references>
+        <referencedby refid="classbitset_1acbdae3d48864f0a16e6f1400b4dfd431" compoundref="bitset_8hpp" startline="573" endline="573">bitset&lt; N &gt;::to_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbitset_1a1ee635508b4ac31cad039483dd655316" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void bitset&lt; N &gt;::swap</definition>
+        <argsstring>(bitset &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>bitset::swap</qualifiedname>
+        <param>
+          <type><ref refid="classbitset" kindref="compound">bitset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个bitset的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个bitset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="579" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="579" bodyend="579"/>
+        <references refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" compoundref="bitset_8hpp" startline="122" endline="122">bitset&lt; N &gt;::bitset</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>固定大小的位集 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数，在编译时确定</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+bitset表示一个固定大小的二进制位序列，提供对每个位的独立访问 以及常见的位操作（与、或、异或、移位等）。存储效率高，操作速度快。 位数N在编译时确定，因此不能动态改变大小。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>bitset&lt; N &gt;</label>
+        <link refid="classbitset"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ibinary&lt; bitset&lt; N &gt; &gt;</label>
+        <link refid="structibinary"/>
+      </node>
+      <node id="2">
+        <label>icomparable&lt; bitset&lt; N &gt; &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>istringify&lt; bitset&lt; N &gt; &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>bitset&lt; N &gt;</label>
+        <link refid="classbitset"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ibinary&lt; bitset&lt; N &gt; &gt;</label>
+        <link refid="structibinary"/>
+      </node>
+      <node id="2">
+        <label>icomparable&lt; bitset&lt; N &gt; &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>istringify&lt; bitset&lt; N &gt; &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" line="35" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitset.hpp" bodystart="35" bodyend="580"/>
+    <listofallmembers>
+      <member refid="classbitset_1a16384ef28db200c643e274f5b9f7c632" prot="public" virt="non-virtual"><scope>bitset</scope><name>all</name></member>
+      <member refid="classbitset_1a4baba23f20b079cd68c9130762a11082" prot="public" virt="non-virtual"><scope>bitset</scope><name>any</name></member>
+      <member refid="classbitset_1ab426a7f70dc9c15dc901015fe2a524b8" prot="private" virt="non-virtual"><scope>bitset</scope><name>bit_index</name></member>
+      <member refid="classbitset_1a53875bc4c7535213e4042a54d1735d5f" prot="private" virt="non-virtual"><scope>bitset</scope><name>bits_per_block</name></member>
+      <member refid="classbitset_1ab16246976824c9e98702dc19300c4c9a" prot="public" virt="non-virtual"><scope>bitset</scope><name>bitset</name></member>
+      <member refid="classbitset_1abf8cfea060a20be99a6da06b3937f18a" prot="public" virt="non-virtual"><scope>bitset</scope><name>bitset</name></member>
+      <member refid="classbitset_1aa16ab94f8ba20c24f9af61f32b887cac" prot="public" virt="non-virtual"><scope>bitset</scope><name>bitset</name></member>
+      <member refid="classbitset_1a3e686ffe09704d4d875d5e8e32951017" prot="public" virt="non-virtual"><scope>bitset</scope><name>bitset</name></member>
+      <member refid="classbitset_1a00e1c47566819af1f9cf7e6b295def52" prot="public" virt="non-virtual"><scope>bitset</scope><name>bitset</name></member>
+      <member refid="classbitset_1a1ac3215245a81d6ad28d77173a03f4fd" prot="private" virt="non-virtual"><scope>bitset</scope><name>block_count</name></member>
+      <member refid="classbitset_1a282d2caaf26a43dab4946af5dca15249" prot="private" virt="non-virtual"><scope>bitset</scope><name>block_index</name></member>
+      <member refid="classbitset_1a45577dddb3a329ef0c0216d404d95aa2" prot="private" virt="non-virtual"><scope>bitset</scope><name>block_type</name></member>
+      <member refid="classbitset_1afb7ef047f8b8533a6cec5b670c24549d" prot="private" virt="non-virtual"><scope>bitset</scope><name>blocks</name></member>
+      <member refid="classbitset_1ab2153a7545995088644262ba2e461e5b" prot="private" virt="non-virtual"><scope>bitset</scope><name>check_range</name></member>
+      <member refid="classbitset_1ad69258e3bf146d21b14bb7b4962c108e" prot="public" virt="non-virtual"><scope>bitset</scope><name>count</name></member>
+      <member refid="classbitset_1a8653d7861e4f5416dd0903f461650746" prot="public" virt="non-virtual"><scope>bitset</scope><name>empty</name></member>
+      <member refid="classbitset_1a03d027cd56abe05e827700d40342cdb8" prot="public" virt="non-virtual"><scope>bitset</scope><name>equal_to</name></member>
+      <member refid="classbitset_1af0eb313bce8198605ccfd534c3d8aebf" prot="public" virt="non-virtual"><scope>bitset</scope><name>flip</name></member>
+      <member refid="classbitset_1adf8f68fc0e6388cdef9d51933fdc1722" prot="public" virt="non-virtual"><scope>bitset</scope><name>flip</name></member>
+      <member refid="classbitset_1a533418e9d3d8967a90e454bdd49b5118" prot="private" virt="non-virtual"><scope>bitset</scope><name>last_block_mask</name></member>
+      <member refid="classbitset_1a1d7185ddc09436a486fb919642f37fcc" prot="public" virt="non-virtual"><scope>bitset</scope><name>less_than</name></member>
+      <member refid="classbitset_1a38c96f8cc93fec84df9bb2a796d42444" prot="public" virt="non-virtual"><scope>bitset</scope><name>none</name></member>
+      <member refid="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator!=</name></member>
+      <member refid="structibinary_1aff4944afc068fc40e48bf91557c60f3e" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator&amp;</name></member>
+      <member refid="classbitset_1a89feb12bee8f484f89329b53711b19c4" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator&amp;=</name></member>
+      <member refid="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator&lt;</name></member>
+      <member refid="structibinary_1aad201c38e0fb840e77475d6af01230bf" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator&lt;&lt;</name></member>
+      <member refid="classbitset_1a76e0355ce751d6838e400c3e0989a39c" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator&lt;&lt;=</name></member>
+      <member refid="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator&lt;=</name></member>
+      <member refid="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator&gt;=</name></member>
+      <member refid="structibinary_1a9ee6f064d8ed1c4d47fd0dd466f025b9" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator&gt;&gt;</name></member>
+      <member refid="classbitset_1ac8e7f0b152b068e3b60921af66a3de36" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator&gt;&gt;=</name></member>
+      <member refid="classbitset_1af55ee246eada7f62e09f90db158e50ec" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator[]</name></member>
+      <member refid="classbitset_1af1f73b9e6760cba1be34242e6b373b92" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator[]</name></member>
+      <member refid="structibinary_1ac28ee6d3a85bfa178d920a0803c3e28c" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator^</name></member>
+      <member refid="classbitset_1a53aae6e4e93f80c2d74da849a41c582e" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator^=</name></member>
+      <member refid="structibinary_1aa657b816ada15b3f28363a991c7daa30" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator|</name></member>
+      <member refid="classbitset_1af7b778d50be51e357718a6d110895392" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator|=</name></member>
+      <member refid="classbitset_1a726ef9f171af6b720bd511bbe1667fc4" prot="public" virt="non-virtual"><scope>bitset</scope><name>operator~</name></member>
+      <member refid="classbitset_1a6cd50003c8edc802378c52913dfacd8a" prot="public" virt="non-virtual"><scope>bitset</scope><name>reset</name></member>
+      <member refid="classbitset_1a31d9bf02ae0c97f66c328c8caddcc1c8" prot="public" virt="non-virtual"><scope>bitset</scope><name>reset</name></member>
+      <member refid="classbitset_1a101b987ec642b2a8ac04d14cfaa9d3ff" prot="public" virt="non-virtual"><scope>bitset</scope><name>set</name></member>
+      <member refid="classbitset_1a45f8f9612121a78cb4145d4ac63d4bf5" prot="public" virt="non-virtual"><scope>bitset</scope><name>set</name></member>
+      <member refid="classbitset_1a68f334e9df5dc07c3d306c921d8cdb66" prot="public" virt="non-virtual"><scope>bitset</scope><name>size</name></member>
+      <member refid="classbitset_1a1ee635508b4ac31cad039483dd655316" prot="public" virt="non-virtual"><scope>bitset</scope><name>swap</name></member>
+      <member refid="classbitset_1a9f8b218a668a1d0eef66ef1b810582f1" prot="public" virt="non-virtual"><scope>bitset</scope><name>test</name></member>
+      <member refid="classbitset_1a71af94b67719a0938f84217d37315976" prot="public" virt="non-virtual"><scope>bitset</scope><name>to_string</name></member>
+      <member refid="classbitset_1acbdae3d48864f0a16e6f1400b4dfd431" prot="public" virt="non-virtual"><scope>bitset</scope><name>to_string</name></member>
+      <member refid="classbitset_1a718e2a90c8478f0c232372568ad5bb28" prot="public" virt="non-virtual"><scope>bitset</scope><name>to_ullong</name></member>
+      <member refid="classbitset_1adf6895ac189a0b0204641e4ec2458d8c" prot="public" virt="non-virtual"><scope>bitset</scope><name>to_ulong</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

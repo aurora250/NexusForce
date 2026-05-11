@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structat__thread__exit__elt" kind="struct" language="C++" prot="public">
+    <compoundname>at_thread_exit_elt</compoundname>
+    <includes refid="at__thread__exit_8hpp" local="no">at_thread_exit.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structat__thread__exit__elt_1a692007f00c36108543837f724b973a2a" prot="public" static="no" mutable="no">
+        <type><ref refid="structat__thread__exit__elt" kindref="compound">at_thread_exit_elt</ref> *</type>
+        <definition>at_thread_exit_elt* at_thread_exit_elt::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <qualifiedname>at_thread_exit_elt::next</qualifiedname>
+        <briefdescription>
+<para>指向下一个回调元素的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/at_thread_exit.hpp" line="35" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/at_thread_exit.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structat__thread__exit__elt_1ac964432306e09d2aa975d7b9295a633c" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* at_thread_exit_elt::cb) (void *)</definition>
+        <argsstring>)(void *)</argsstring>
+        <name>cb</name>
+        <qualifiedname>at_thread_exit_elt::cb</qualifiedname>
+        <briefdescription>
+<para>回调函数指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/at_thread_exit.hpp" line="36" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/at_thread_exit.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程退出回调元素 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示一个线程退出回调，包含链表指针和回调函数。 使用链表结构存储所有注册的回调，按照注册的逆序执行。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>at_thread_exit_elt</label>
+        <link refid="structat__thread__exit__elt"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/at_thread_exit.hpp" line="34" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/at_thread_exit.hpp" bodystart="34" bodyend="37"/>
+    <listofallmembers>
+      <member refid="structat__thread__exit__elt_1ac964432306e09d2aa975d7b9295a633c" prot="public" virt="non-virtual"><scope>at_thread_exit_elt</scope><name>cb</name></member>
+      <member refid="structat__thread__exit__elt_1a692007f00c36108543837f724b973a2a" prot="public" virt="non-virtual"><scope>at_thread_exit_elt</scope><name>next</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -433,7 +433,7 @@ public:
         if (a_neg != b_neg) {
             return a_neg;
         }
-        return a_neg ? (hi > rhs.hi || (hi == rhs.hi && lo > rhs.lo)) : (hi < rhs.hi || (hi == rhs.hi && lo < rhs.lo));
+        return hi < rhs.hi || (hi == rhs.hi && lo < rhs.lo);
     }
 
     /**

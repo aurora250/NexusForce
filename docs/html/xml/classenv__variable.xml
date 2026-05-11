@@ -1,0 +1,543 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classenv__variable" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>env_variable</compoundname>
+    <basecompoundref refid="classenv__value" prot="public" virt="non-virtual">env_value</basecompoundref>
+    <includes refid="env__value_8hpp" local="no">env_value.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40" prot="public" static="no" strong="no">
+        <type></type>
+        <name>quote_type</name>
+        <qualifiedname>env_variable::quote_type</qualifiedname>
+        <enumvalue id="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21" prot="public">
+          <name>None</name>
+          <briefdescription>
+<para>无引号 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40a2d2dce90e9842b40d6d44a91e9aaa0b3" prot="public">
+          <name>Single</name>
+          <briefdescription>
+<para>单引号 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50" prot="public">
+          <name>Double</name>
+          <briefdescription>
+<para>双引号 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>引号类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="121" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="121" bodyend="125"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classenv__variable_1af92250fa58356b2870e6c5441af4ac6d" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string env_variable::value_</definition>
+        <argsstring></argsstring>
+        <name>value_</name>
+        <qualifiedname>env_variable::value_</qualifiedname>
+        <briefdescription>
+<para>变量值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="128" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classenv__variable_1a04bca5f2ac28d67c0dcd4e91545072ca" prot="private" static="no" mutable="no">
+        <type><ref refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40" kindref="member">quote_type</ref></type>
+        <definition>quote_type env_variable::quote_type_</definition>
+        <argsstring></argsstring>
+        <name>quote_type_</name>
+        <qualifiedname>env_variable::quote_type_</qualifiedname>
+        <initializer>= <ref refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21" kindref="member">None</ref></initializer>
+        <briefdescription>
+<para>引号类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="129" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classenv__variable_1ad26c7750262e33db3de36bf1583175fc" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool env_variable::is_exported_</definition>
+        <argsstring></argsstring>
+        <name>is_exported_</name>
+        <qualifiedname>env_variable::is_exported_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否导出 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="130" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classenv__variable_1a6046a654c4babe133b6e5b17ebc5438c" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>env_variable::env_variable</definition>
+        <argsstring>(string value, const quote_type quote=None, const bool exported=false) noexcept</argsstring>
+        <name>env_variable</name>
+        <qualifiedname>env_variable::env_variable</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40" kindref="member">quote_type</ref></type>
+          <declname>quote</declname>
+          <defval><ref refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21" kindref="member">None</ref></defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>exported</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>quote</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>引号类型，默认为无引号 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>exported</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否导出，默认为false </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="139" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="139" bodyend="142"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21" compoundref="env__value_8hpp" startline="122">None</references>
+        <referencedby refid="classenv__variable_1a1a5e57fad7ce03c29bfc7580eb1a9085" compoundref="env__value_8hpp" startline="154" endline="154">as_variable</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1a6b238f7727ab92f8b5eca7f797e9e1d0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classenv__value_1a4b7defaa2e38d393d76981919865b5af" kindref="member">types</ref></type>
+        <definition>NEFORCE_NODISCARD types env_variable::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>env_variable::type</qualifiedname>
+        <reimplements refid="classenv__value_1a61699803e9ea077a48ee2fc5f8cce019">type</reimplements>
+        <briefdescription>
+<para>获取类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>返回Variable类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="148" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="148" bodyend="148"/>
+        <references refid="classenv__value_1a4b7defaa2e38d393d76981919865b5afa1e3c8c240518ac48efec4b73b2f209be" compoundref="env__value_8hpp" startline="68">env_value::Variable</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1a1a5e57fad7ce03c29bfc7580eb1a9085" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classenv__variable" kindref="compound">env_variable</ref> *</type>
+        <definition>NEFORCE_NODISCARD const env_variable * env_variable::as_variable</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>as_variable</name>
+        <qualifiedname>env_variable::as_variable</qualifiedname>
+        <reimplements refid="classenv__value_1a01e05632f5314d3c2579f54a9dfd5828">as_variable</reimplements>
+        <briefdescription>
+<para>转换为环境变量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>返回自身指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="154" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="154" bodyend="154"/>
+        <references refid="classenv__variable_1a6046a654c4babe133b6e5b17ebc5438c" compoundref="env__value_8hpp" startline="139" endline="142">env_variable</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1a04204bb9786394af9be3a8c1a8f3cc3f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const string &amp; env_variable::get_value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_value</name>
+        <qualifiedname>env_variable::get_value</qualifiedname>
+        <briefdescription>
+<para>获取变量值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>变量值的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="160" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="160" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1ae71b8878e096f455f05f39d701ef86c8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void env_variable::set_value</definition>
+        <argsstring>(string value) noexcept</argsstring>
+        <name>set_value</name>
+        <qualifiedname>env_variable::set_value</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置变量值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的变量值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="166" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="166" bodyend="166"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1ac7e4e2b71981ae3657284838c5bd2e21" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40" kindref="member">quote_type</ref></type>
+        <definition>NEFORCE_NODISCARD quote_type env_variable::get_quote_type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_quote_type</name>
+        <qualifiedname>env_variable::get_quote_type</qualifiedname>
+        <briefdescription>
+<para>获取引号类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前引号类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="172" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="172" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1a670f0d2edf9af55cbfc1b8bcd8df7b9a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void env_variable::set_quote_type</definition>
+        <argsstring>(const quote_type quote) noexcept</argsstring>
+        <name>set_quote_type</name>
+        <qualifiedname>env_variable::set_quote_type</qualifiedname>
+        <param>
+          <type>const <ref refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40" kindref="member">quote_type</ref></type>
+          <declname>quote</declname>
+        </param>
+        <briefdescription>
+<para>设置引号类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>quote</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的引号类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="178" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="178" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1abcd9ee79f1c851d10a2af6e0b8ac83c7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool env_variable::is_exported</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_exported</name>
+        <qualifiedname>env_variable::is_exported</qualifiedname>
+        <briefdescription>
+<para>检查是否导出 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否导出 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="184" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="184" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1a1a663a5c216c5a30ee7a2d62396eb057" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void env_variable::set_exported</definition>
+        <argsstring>(const bool exported) noexcept</argsstring>
+        <name>set_exported</name>
+        <qualifiedname>env_variable::set_exported</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>exported</declname>
+        </param>
+        <briefdescription>
+<para>设置导出标记 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>exported</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的导出标记 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="190" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="190" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1a337711fc4af6e60ff01432aae04f0029" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD int</type>
+        <definition>NEFORCE_NODISCARD int env_variable::get_int</definition>
+        <argsstring>(int default_value=0) const noexcept</argsstring>
+        <name>get_int</name>
+        <qualifiedname>env_variable::get_int</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>default_value</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>获取整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时的默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析后的整数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="197" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1a8eea0ed10ff8c02802a87ffabbed5868" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+        <definition>NEFORCE_NODISCARD int64_t env_variable::get_int64</definition>
+        <argsstring>(int64_t default_value=0) const noexcept</argsstring>
+        <name>get_int64</name>
+        <qualifiedname>env_variable::get_int64</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>default_value</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>获取64位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时的默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析后的64位整数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="204" column="31"/>
+        <references refid="classenv__variable_1a8eea0ed10ff8c02802a87ffabbed5868">get_int64</references>
+        <referencedby refid="classenv__variable_1a8eea0ed10ff8c02802a87ffabbed5868">get_int64</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1ae4da71d27fb603fcf3ea1ad0808ddaea" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD double</type>
+        <definition>NEFORCE_NODISCARD double env_variable::get_double</definition>
+        <argsstring>(double default_value=0.0) const noexcept</argsstring>
+        <name>get_double</name>
+        <qualifiedname>env_variable::get_double</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>default_value</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+<para>获取双精度浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时的默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析后的双精度浮点值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="211" column="30"/>
+        <references refid="classenv__variable_1ae4da71d27fb603fcf3ea1ad0808ddaea">get_double</references>
+        <referencedby refid="classenv__variable_1ae4da71d27fb603fcf3ea1ad0808ddaea">get_double</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__variable_1a4af88206d532ba8d44c8c2b4232efd2d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool env_variable::get_bool</definition>
+        <argsstring>(bool default_value=false) const noexcept</argsstring>
+        <name>get_bool</name>
+        <qualifiedname>env_variable::get_bool</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>default_value</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>获取布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时的默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析后的布尔值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="218" column="28"/>
+        <references refid="classenv__variable_1a4af88206d532ba8d44c8c2b4232efd2d">get_bool</references>
+        <referencedby refid="classenv__variable_1a4af88206d532ba8d44c8c2b4232efd2d">get_bool</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>环境变量类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示一个具体的环境变量，包含变量值、引号类型和导出标记。 提供类型转换方法和值访问接口。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>env_value</label>
+        <link refid="classenv__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>env_variable</label>
+        <link refid="classenv__variable"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>istringify&lt; env_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>env_value</label>
+        <link refid="classenv__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>env_variable</label>
+        <link refid="classenv__variable"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>istringify&lt; env_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="115" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="115" bodyend="219"/>
+    <listofallmembers>
+      <member refid="classenv__variable_1a1a5e57fad7ce03c29bfc7580eb1a9085" prot="public" virt="virtual"><scope>env_variable</scope><name>as_variable</name></member>
+      <member refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50" prot="public" virt="non-virtual"><scope>env_variable</scope><name>Double</name></member>
+      <member refid="classenv__variable_1a6046a654c4babe133b6e5b17ebc5438c" prot="public" virt="non-virtual"><scope>env_variable</scope><name>env_variable</name></member>
+      <member refid="classenv__variable_1a4af88206d532ba8d44c8c2b4232efd2d" prot="public" virt="non-virtual"><scope>env_variable</scope><name>get_bool</name></member>
+      <member refid="classenv__variable_1ae4da71d27fb603fcf3ea1ad0808ddaea" prot="public" virt="non-virtual"><scope>env_variable</scope><name>get_double</name></member>
+      <member refid="classenv__variable_1a337711fc4af6e60ff01432aae04f0029" prot="public" virt="non-virtual"><scope>env_variable</scope><name>get_int</name></member>
+      <member refid="classenv__variable_1a8eea0ed10ff8c02802a87ffabbed5868" prot="public" virt="non-virtual"><scope>env_variable</scope><name>get_int64</name></member>
+      <member refid="classenv__variable_1ac7e4e2b71981ae3657284838c5bd2e21" prot="public" virt="non-virtual"><scope>env_variable</scope><name>get_quote_type</name></member>
+      <member refid="classenv__variable_1a04204bb9786394af9be3a8c1a8f3cc3f" prot="public" virt="non-virtual"><scope>env_variable</scope><name>get_value</name></member>
+      <member refid="classenv__variable_1abcd9ee79f1c851d10a2af6e0b8ac83c7" prot="public" virt="non-virtual"><scope>env_variable</scope><name>is_exported</name></member>
+      <member refid="classenv__variable_1ad26c7750262e33db3de36bf1583175fc" prot="private" virt="non-virtual"><scope>env_variable</scope><name>is_exported_</name></member>
+      <member refid="classenv__value_1aa874d0508a18550e5a332b26d4e919a9" prot="public" virt="non-virtual"><scope>env_variable</scope><name>is_variable</name></member>
+      <member refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21" prot="public" virt="non-virtual"><scope>env_variable</scope><name>None</name></member>
+      <member refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40" prot="public" virt="non-virtual"><scope>env_variable</scope><name>quote_type</name></member>
+      <member refid="classenv__variable_1a04bca5f2ac28d67c0dcd4e91545072ca" prot="private" virt="non-virtual"><scope>env_variable</scope><name>quote_type_</name></member>
+      <member refid="classenv__variable_1a1a663a5c216c5a30ee7a2d62396eb057" prot="public" virt="non-virtual"><scope>env_variable</scope><name>set_exported</name></member>
+      <member refid="classenv__variable_1a670f0d2edf9af55cbfc1b8bcd8df7b9a" prot="public" virt="non-virtual"><scope>env_variable</scope><name>set_quote_type</name></member>
+      <member refid="classenv__variable_1ae71b8878e096f455f05f39d701ef86c8" prot="public" virt="non-virtual"><scope>env_variable</scope><name>set_value</name></member>
+      <member refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40a2d2dce90e9842b40d6d44a91e9aaa0b3" prot="public" virt="non-virtual"><scope>env_variable</scope><name>Single</name></member>
+      <member refid="classenv__value_1a1a7397aae09bcd56c497a4bd7baa8ce5" prot="public" virt="non-virtual"><scope>env_variable</scope><name>to_document</name></member>
+      <member refid="classenv__value_1a9a425e6eafabe4e5e144f56e183df4da" prot="public" virt="non-virtual"><scope>env_variable</scope><name>to_string</name></member>
+      <member refid="classenv__variable_1a6b238f7727ab92f8b5eca7f797e9e1d0" prot="public" virt="virtual"><scope>env_variable</scope><name>type</name></member>
+      <member refid="classenv__value_1a4b7defaa2e38d393d76981919865b5af" prot="public" virt="non-virtual"><scope>env_variable</scope><name>types</name></member>
+      <member refid="classenv__variable_1af92250fa58356b2870e6c5441af4ac6d" prot="private" virt="non-virtual"><scope>env_variable</scope><name>value_</name></member>
+      <member refid="classenv__value_1a4b7defaa2e38d393d76981919865b5afa1e3c8c240518ac48efec4b73b2f209be" prot="public" virt="non-virtual"><scope>env_variable</scope><name>Variable</name></member>
+      <member refid="classenv__value_1aea8033fba4703a097fbcec974276dd45" prot="public" virt="virtual"><scope>env_variable</scope><name>~env_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

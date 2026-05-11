@@ -1,0 +1,451 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classlock__free__queue" kind="class" language="C++" prot="public">
+    <compoundname>lock_free_queue</compoundname>
+    <includes refid="lock__free__queue_8hpp" local="no">lock_free_queue.hpp</includes>
+    <innerclass refid="structlock__free__queue_1_1node__counter" prot="private">lock_free_queue::node_counter</innerclass>
+    <innerclass refid="structlock__free__queue_1_1counted__node__ptr" prot="private">lock_free_queue::counted_node_ptr</innerclass>
+    <innerclass refid="structlock__free__queue_1_1node" prot="private">lock_free_queue::node</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classlock__free__queue_1accaa20ee72abd0c2f14f0c18bf110d7c" prot="private" static="yes" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; int &gt;</type>
+        <definition>atomic&lt;int&gt; lock_free_queue&lt; T &gt;::destruct_count</definition>
+        <argsstring></argsstring>
+        <name>destruct_count</name>
+        <qualifiedname>lock_free_queue::destruct_count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="119" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlock__free__queue_1a17c54d79a0e5dbc61e15eec09f7fdda9" prot="private" static="yes" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; int &gt;</type>
+        <definition>atomic&lt;int&gt; lock_free_queue&lt; T &gt;::construct_count</definition>
+        <argsstring></argsstring>
+        <name>construct_count</name>
+        <qualifiedname>lock_free_queue::construct_count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="120" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classlock__free__queue_1a9db10f2c962b9324beeeb2bc5f2674f9" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; counted_node_ptr &gt;</type>
+        <definition>atomic&lt;counted_node_ptr&gt; lock_free_queue&lt; T &gt;::head</definition>
+        <argsstring></argsstring>
+        <name>head</name>
+        <qualifiedname>lock_free_queue::head</qualifiedname>
+        <briefdescription>
+<para>队列头指针原子变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="122" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlock__free__queue_1a1487bd0bc4f153a3b3aa2f4e8352e5ee" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; counted_node_ptr &gt;</type>
+        <definition>atomic&lt;counted_node_ptr&gt; lock_free_queue&lt; T &gt;::tail</definition>
+        <argsstring></argsstring>
+        <name>tail</name>
+        <qualifiedname>lock_free_queue::tail</qualifiedname>
+        <briefdescription>
+<para>队列尾指针原子变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="123" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlock__free__queue_1a5c4abc8243450c38ed9c95878c3c3000" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; lock_free_queue&lt; T &gt;::push_count_</definition>
+        <argsstring></argsstring>
+        <name>push_count_</name>
+        <qualifiedname>lock_free_queue::push_count_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>入队计数器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="124" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="124" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlock__free__queue_1a272217452a7e9076ef6e626d60fe923f" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; lock_free_queue&lt; T &gt;::pop_count_</definition>
+        <argsstring></argsstring>
+        <name>pop_count_</name>
+        <qualifiedname>lock_free_queue::pop_count_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>出队计数器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="125" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="125" bodyend="125"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classlock__free__queue_1a23c74054c525401dae5491f03c4bd9aa" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void lock_free_queue&lt; T &gt;::set_new_tail</definition>
+        <argsstring>(counted_node_ptr &amp;old_tail, counted_node_ptr const &amp;new_tail)</argsstring>
+        <name>set_new_tail</name>
+        <qualifiedname>lock_free_queue::set_new_tail</qualifiedname>
+        <param>
+          <type>counted_node_ptr &amp;</type>
+          <declname>old_tail</declname>
+        </param>
+        <param>
+          <type>counted_node_ptr const &amp;</type>
+          <declname>new_tail</declname>
+        </param>
+        <briefdescription>
+<para>设置新的尾节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>old_tail</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原尾节点引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>new_tail</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新尾节点</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+原子更新尾指针，并适当释放原节点的引用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="135" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="135" bodyend="145"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classlock__free__queue_1adf6e2bcfec59a8bd2d73ba4fde85a075" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void lock_free_queue&lt; T &gt;::free_external_counter</definition>
+        <argsstring>(counted_node_ptr &amp;old_node_ptr)</argsstring>
+        <name>free_external_counter</name>
+        <qualifiedname>lock_free_queue::free_external_counter</qualifiedname>
+        <param>
+          <type>counted_node_ptr &amp;</type>
+          <declname>old_node_ptr</declname>
+        </param>
+        <briefdescription>
+<para>释放外部计数器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>old_node_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待释放的节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>静态成员函数</para>
+</simplesect>
+减少外部计数器数量，如果引用完全归零则删除节点。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="154" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="154" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classlock__free__queue_1a7968e22fe1c80038cdd5b4ee17379eb6" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void lock_free_queue&lt; T &gt;::increase_external_count</definition>
+        <argsstring>(atomic&lt; counted_node_ptr &gt; &amp;counter, counted_node_ptr &amp;old_counter)</argsstring>
+        <name>increase_external_count</name>
+        <qualifiedname>lock_free_queue::increase_external_count</qualifiedname>
+        <param>
+          <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; counted_node_ptr &gt; &amp;</type>
+          <declname>counter</declname>
+        </param>
+        <param>
+          <type>counted_node_ptr &amp;</type>
+          <declname>old_counter</declname>
+        </param>
+        <briefdescription>
+<para>增加外部计数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>counter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>计数器原子变量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>old_counter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原计数器值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>静态成员函数</para>
+</simplesect>
+原子增加外部引用计数，防止ABA问题。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="179" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="179" bodyend="187"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlock__free__queue_1aacf6a1a5d605c1409c7cdcf13f41ec50" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>lock_free_queue&lt; T &gt;::lock_free_queue</definition>
+        <argsstring>()</argsstring>
+        <name>lock_free_queue</name>
+        <qualifiedname>lock_free_queue::lock_free_queue</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>初始化队列，创建哨兵节点作为初始的头尾节点。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="195" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="195" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="classlock__free__queue_1ad694f5f11345581b7cdced27bf9b7c91" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>lock_free_queue&lt; T &gt;::~lock_free_queue</definition>
+        <argsstring>()</argsstring>
+        <name>~lock_free_queue</name>
+        <qualifiedname>lock_free_queue::~lock_free_queue</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>清空队列并删除哨兵节点。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="208" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="208" bodyend="214"/>
+        <references refid="classlock__free__queue_1af4d602957128b5cd5e8f0edb30c48c09" compoundref="lock__free__queue_8hpp" startline="261" endline="279">lock_free_queue&lt; T &gt;::pop</references>
+      </memberdef>
+      <memberdef kind="function" id="classlock__free__queue_1a36f8cf27a02025a0e0bfbd3d24c6fbd0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void lock_free_queue&lt; T &gt;::push</definition>
+        <argsstring>(T new_value)</argsstring>
+        <name>push</name>
+        <qualifiedname>lock_free_queue::push</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>new_value</declname>
+        </param>
+        <briefdescription>
+<para>入队操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>new_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要入队的新值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将新值压入队列尾部，支持多线程并发入队。 使用CAS操作保证线程安全。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="223" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="223" bodyend="252"/>
+        <references refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" compoundref="atomic_8hpp" startline="207" endline="212">atomic&lt; T &gt;::compare_exchange_strong</references>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+        <references refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" compoundref="atomic_8hpp" startline="130" endline="132">atomic&lt; T &gt;::load</references>
+        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="classunique__ptr_1a372af837a21128e149811e6c53d97dc1" compoundref="unique__ptr_8hpp" startline="351" endline="351">unique_ptr&lt; T, Deleter &gt;::release</references>
+      </memberdef>
+      <memberdef kind="function" id="classlock__free__queue_1af4d602957128b5cd5e8f0edb30c48c09" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
+        <definition>unique_ptr&lt; T &gt; lock_free_queue&lt; T &gt;::pop</definition>
+        <argsstring>()</argsstring>
+        <name>pop</name>
+        <qualifiedname>lock_free_queue::pop</qualifiedname>
+        <briefdescription>
+<para>出队操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>出队元素的unique_ptr，如果队列为空则返回空指针</para>
+</simplesect>
+从队列头部弹出元素，支持多线程并发出队。 使用CAS操作保证线程安全。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="261" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="261" bodyend="279"/>
+        <references refid="structatomic_1a5e1fce92f531d784690897010e446d8d" compoundref="atomic_8hpp" startline="147" endline="149">atomic&lt; T &gt;::exchange</references>
+        <references refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" compoundref="atomic_8hpp" startline="130" endline="132">atomic&lt; T &gt;::load</references>
+        <references refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" compoundref="unique__ptr_8hpp" startline="973" endline="975">make_unique</references>
+        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <referencedby refid="classlock__free__queue_1aea072bf54bf6f6418b30f57209a844bc" compoundref="lock__free__queue_8hpp" startline="355" endline="359">lock_free_queue&lt; T &gt;::clear</referencedby>
+        <referencedby refid="classlock__free__queue_1ad694f5f11345581b7cdced27bf9b7c91" compoundref="lock__free__queue_8hpp" startline="208" endline="214">lock_free_queue&lt; T &gt;::~lock_free_queue</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classlock__free__queue_1a24c20d863075bbbcedc192df5625d1e3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
+        <definition>unique_ptr&lt; T &gt; lock_free_queue&lt; T &gt;::try_pop</definition>
+        <argsstring>()</argsstring>
+        <name>try_pop</name>
+        <qualifiedname>lock_free_queue::try_pop</qualifiedname>
+        <briefdescription>
+<para>尝试出队操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>出队元素的unique_ptr，如果队列为空或竞争失败则返回空指针</para>
+</simplesect>
+尝试从队列头部弹出元素，最多重试3次。 如果队列为空或多次CAS失败，则返回空指针。</para>
+<para><simplesect kind="note"><para>此方法不会自旋等待，适合在高竞争环境下使用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="290" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="290" bodyend="315"/>
+        <references refid="structatomic_1a5e1fce92f531d784690897010e446d8d" compoundref="atomic_8hpp" startline="147" endline="149">atomic&lt; T &gt;::exchange</references>
+        <references refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" compoundref="atomic_8hpp" startline="130" endline="132">atomic&lt; T &gt;::load</references>
+        <references refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" compoundref="unique__ptr_8hpp" startline="973" endline="975">make_unique</references>
+        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <references refid="group___coroutine_1ga79f854a5ada0083996d280c91b6cb2c1" compoundref="generator_8hpp" startline="863" endline="885">retry</references>
+      </memberdef>
+      <memberdef kind="function" id="classlock__free__queue_1a0407046c06b078c73f0972f7e2afb548" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool lock_free_queue&lt; T &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>lock_free_queue::empty</qualifiedname>
+        <briefdescription>
+<para>检查队列是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果队列为空返回true，否则返回false</para>
+</simplesect>
+<simplesect kind="note"><para>由于无锁队列的并发特性，此方法返回的结果可能瞬间失效。 仅用于监控和统计，不应用于同步控制。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="324" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="324" bodyend="328"/>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+      </memberdef>
+      <memberdef kind="function" id="classlock__free__queue_1aea52e2c7aa4d45917f8160f3d21eb54c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t lock_free_queue&lt; T &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>lock_free_queue::size</qualifiedname>
+        <briefdescription>
+<para>获取队列中元素的近似数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列中元素的近似数量</para>
+</simplesect>
+<simplesect kind="note"><para>由于无锁队列的并发特性，返回值可能不精确。 此方法通过维护入队和出队计数器来计算队列大小。 仅用于监控和统计，不应用于同步控制。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="338" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="338" bodyend="342"/>
+        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+      </memberdef>
+      <memberdef kind="function" id="classlock__free__queue_1aea072bf54bf6f6418b30f57209a844bc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void lock_free_queue&lt; T &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>lock_free_queue::clear</qualifiedname>
+        <briefdescription>
+<para>清空队列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>循环调用pop()直到队列为空，删除所有元素。</para>
+<para><simplesect kind="warning"><para>此方法不是线程安全的！ 调用clear()时，应确保没有其他线程同时进行push或pop操作。 如果有并发的push操作，clear可能永远无法完成。</para>
+</simplesect>
+<simplesect kind="note"><para>建议在单线程环境或确保独占访问时调用此方法。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="355" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="355" bodyend="359"/>
+        <references refid="classlock__free__queue_1af4d602957128b5cd5e8f0edb30c48c09" compoundref="lock__free__queue_8hpp" startline="261" endline="279">lock_free_queue&lt; T &gt;::pop</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>无锁队列类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+基于原子操作和引用计数实现的多生产者多消费者无锁队列。 使用Michael-Scott算法实现，支持并发push和pop操作。</para>
+<para><simplesect kind="note"><para>采用ABA问题预防机制 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="39" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="39" bodyend="360"/>
+    <listofallmembers>
+      <member refid="classlock__free__queue_1aea072bf54bf6f6418b30f57209a844bc" prot="public" virt="non-virtual"><scope>lock_free_queue</scope><name>clear</name></member>
+      <member refid="classlock__free__queue_1a17c54d79a0e5dbc61e15eec09f7fdda9" prot="private" virt="non-virtual"><scope>lock_free_queue</scope><name>construct_count</name></member>
+      <member refid="classlock__free__queue_1accaa20ee72abd0c2f14f0c18bf110d7c" prot="private" virt="non-virtual"><scope>lock_free_queue</scope><name>destruct_count</name></member>
+      <member refid="classlock__free__queue_1a0407046c06b078c73f0972f7e2afb548" prot="public" virt="non-virtual"><scope>lock_free_queue</scope><name>empty</name></member>
+      <member refid="classlock__free__queue_1adf6e2bcfec59a8bd2d73ba4fde85a075" prot="private" virt="non-virtual"><scope>lock_free_queue</scope><name>free_external_counter</name></member>
+      <member refid="classlock__free__queue_1a9db10f2c962b9324beeeb2bc5f2674f9" prot="private" virt="non-virtual"><scope>lock_free_queue</scope><name>head</name></member>
+      <member refid="classlock__free__queue_1a7968e22fe1c80038cdd5b4ee17379eb6" prot="private" virt="non-virtual"><scope>lock_free_queue</scope><name>increase_external_count</name></member>
+      <member refid="classlock__free__queue_1aacf6a1a5d605c1409c7cdcf13f41ec50" prot="public" virt="non-virtual"><scope>lock_free_queue</scope><name>lock_free_queue</name></member>
+      <member refid="classlock__free__queue_1af4d602957128b5cd5e8f0edb30c48c09" prot="public" virt="non-virtual"><scope>lock_free_queue</scope><name>pop</name></member>
+      <member refid="classlock__free__queue_1a272217452a7e9076ef6e626d60fe923f" prot="private" virt="non-virtual"><scope>lock_free_queue</scope><name>pop_count_</name></member>
+      <member refid="classlock__free__queue_1a36f8cf27a02025a0e0bfbd3d24c6fbd0" prot="public" virt="non-virtual"><scope>lock_free_queue</scope><name>push</name></member>
+      <member refid="classlock__free__queue_1a5c4abc8243450c38ed9c95878c3c3000" prot="private" virt="non-virtual"><scope>lock_free_queue</scope><name>push_count_</name></member>
+      <member refid="classlock__free__queue_1a23c74054c525401dae5491f03c4bd9aa" prot="private" virt="non-virtual"><scope>lock_free_queue</scope><name>set_new_tail</name></member>
+      <member refid="classlock__free__queue_1aea52e2c7aa4d45917f8160f3d21eb54c" prot="public" virt="non-virtual"><scope>lock_free_queue</scope><name>size</name></member>
+      <member refid="classlock__free__queue_1a1487bd0bc4f153a3b3aa2f4e8352e5ee" prot="private" virt="non-virtual"><scope>lock_free_queue</scope><name>tail</name></member>
+      <member refid="classlock__free__queue_1a24c20d863075bbbcedc192df5625d1e3" prot="public" virt="non-virtual"><scope>lock_free_queue</scope><name>try_pop</name></member>
+      <member refid="classlock__free__queue_1ad694f5f11345581b7cdced27bf9b7c91" prot="public" virt="non-virtual"><scope>lock_free_queue</scope><name>~lock_free_queue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

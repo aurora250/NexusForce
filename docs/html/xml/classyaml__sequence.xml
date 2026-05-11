@@ -1,0 +1,511 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classyaml__sequence" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>yaml_sequence</compoundname>
+    <basecompoundref refid="classyaml__value" prot="public" virt="non-virtual">yaml_value</basecompoundref>
+    <includes refid="yaml__value_8hpp" local="no">yaml_value.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39" prot="public" static="no" strong="no">
+        <type></type>
+        <name>sequence_style</name>
+        <qualifiedname>yaml_sequence::sequence_style</qualifiedname>
+        <enumvalue id="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39a018795c708a2a4628fc5c7b75a6d84ec" prot="public">
+          <name>Block</name>
+          <briefdescription>
+<para>块样式（- item） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39a83b4fef9556d32c7436d282bbfaae597" prot="public">
+          <name>Flow</name>
+          <briefdescription>
+<para>流样式（[item, ...]） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>序列集合样式枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="538" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="538" bodyend="541"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classyaml__sequence_1a6e991246dcfffebaa8aa9c053431d86a" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classyaml__value" kindref="compound">yaml_value</ref> &gt; &gt;</type>
+        <definition>vector&lt;shared_ptr&lt;yaml_value&gt; &gt; yaml_sequence::elements</definition>
+        <argsstring></argsstring>
+        <name>elements</name>
+        <qualifiedname>yaml_sequence::elements</qualifiedname>
+        <briefdescription>
+<para>元素列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="544" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="544" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classyaml__sequence_1a13956b5e5f1785f8a0f14cd533d84ebd" prot="private" static="no" mutable="no">
+        <type><ref refid="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39" kindref="member">sequence_style</ref></type>
+        <definition>sequence_style yaml_sequence::style</definition>
+        <argsstring></argsstring>
+        <name>style</name>
+        <qualifiedname>yaml_sequence::style</qualifiedname>
+        <briefdescription>
+<para>集合样式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="545" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="545" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classyaml__sequence_1afe3832ab286bc8572f0587c844a6ee36" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>yaml_sequence::yaml_sequence</definition>
+        <argsstring>(const sequence_style s=Block)</argsstring>
+        <name>yaml_sequence</name>
+        <qualifiedname>yaml_sequence::yaml_sequence</qualifiedname>
+        <param>
+          <type>const <ref refid="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39" kindref="member">sequence_style</ref></type>
+          <declname>s</declname>
+          <defval><ref refid="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39a018795c708a2a4628fc5c7b75a6d84ec" kindref="member">Block</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合样式，默认为块样式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="552" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="552" bodyend="553"/>
+        <references refid="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39a018795c708a2a4628fc5c7b75a6d84ec" compoundref="yaml__value_8hpp" startline="539">Block</references>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a33c44a2a131bbbc736e910e6461c29ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>yaml_sequence::yaml_sequence</definition>
+        <argsstring>(const yaml_sequence &amp;)=delete</argsstring>
+        <name>yaml_sequence</name>
+        <qualifiedname>yaml_sequence::yaml_sequence</qualifiedname>
+        <param>
+          <type>const <ref refid="classyaml__sequence" kindref="compound">yaml_sequence</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="555" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a6ae3171ee6cf68c2080a149ad3270eb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classyaml__sequence" kindref="compound">yaml_sequence</ref> &amp;</type>
+        <definition>yaml_sequence &amp; yaml_sequence::operator=</definition>
+        <argsstring>(const yaml_sequence &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>yaml_sequence::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classyaml__sequence" kindref="compound">yaml_sequence</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="556" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a35f408ec48f1e24e45da05e640b6d619" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>yaml_sequence::yaml_sequence</definition>
+        <argsstring>(yaml_sequence &amp;&amp;)=default</argsstring>
+        <name>yaml_sequence</name>
+        <qualifiedname>yaml_sequence::yaml_sequence</qualifiedname>
+        <param>
+          <type><ref refid="classyaml__sequence" kindref="compound">yaml_sequence</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="557" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a0b22d9e97dc1fe5f7c91595c7fd094b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classyaml__sequence" kindref="compound">yaml_sequence</ref> &amp;</type>
+        <definition>yaml_sequence &amp; yaml_sequence::operator=</definition>
+        <argsstring>(yaml_sequence &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>yaml_sequence::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classyaml__sequence" kindref="compound">yaml_sequence</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="558" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a1cf663bca50abb618c008aac93fb2c27" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633" kindref="member">types</ref></type>
+        <definition>NEFORCE_NODISCARD types yaml_sequence::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>yaml_sequence::type</qualifiedname>
+        <reimplements refid="classyaml__value_1a887865d133b23f6d5f8e0f8f322ba10e">type</reimplements>
+        <briefdescription>
+<para>获取值的具体类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>类型枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="560" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="560" bodyend="560"/>
+        <references refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a4e91bdc7df808a4e70247c0655588b65" compoundref="yaml__value_8hpp" startline="232">yaml_value::Sequence</references>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a5f8a81821e5a051ae4c132180841baaf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classyaml__sequence" kindref="compound">yaml_sequence</ref> *</type>
+        <definition>NEFORCE_NODISCARD const yaml_sequence * yaml_sequence::as_sequence</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>as_sequence</name>
+        <qualifiedname>yaml_sequence::as_sequence</qualifiedname>
+        <reimplements refid="classyaml__value_1a975b30caa749300aaa06efff1fdeffb8">as_sequence</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="561" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="561" bodyend="561"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a4937ac45a4d4b412367f0f63b29ce898" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void yaml_sequence::add_element</definition>
+        <argsstring>(shared_ptr&lt; yaml_value &gt; value)</argsstring>
+        <name>add_element</name>
+        <qualifiedname>yaml_sequence::add_element</qualifiedname>
+        <param>
+          <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classyaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加元素到序列末尾 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要添加的YAML值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="567" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="567" bodyend="567"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a29c319d4c40e0999f65bf16ad1898b83" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classyaml__value" kindref="compound">yaml_value</ref> *</type>
+        <definition>NEFORCE_NODISCARD const yaml_value * yaml_sequence::get_element</definition>
+        <argsstring>(const size_t index) const noexcept</argsstring>
+        <name>get_element</name>
+        <qualifiedname>yaml_sequence::get_element</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取指定索引的元素（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>元素指针，索引越界返回 nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="574" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="574" bodyend="579"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1aeb38da91019e4679124e410dc4c20274" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classyaml__value" kindref="compound">yaml_value</ref> *</type>
+        <definition>NEFORCE_NODISCARD yaml_value * yaml_sequence::get_element</definition>
+        <argsstring>(const size_t index) noexcept</argsstring>
+        <name>get_element</name>
+        <qualifiedname>yaml_sequence::get_element</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取指定索引的元素（可变版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>元素指针，索引越界返回 nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="586" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="586" bodyend="591"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a730d9528326019cda8c0f16794e90ecf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD size_t yaml_sequence::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>yaml_sequence::size</qualifiedname>
+        <briefdescription>
+<para>获取序列大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="597" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="597" bodyend="597"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a5269bb4beb2d128a9b80b5fb32a06744" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classyaml__value" kindref="compound">yaml_value</ref> &gt; &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD const vector&lt; shared_ptr&lt; yaml_value &gt; &gt; &amp; yaml_sequence::get_elements</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_elements</name>
+        <qualifiedname>yaml_sequence::get_elements</qualifiedname>
+        <briefdescription>
+<para>获取所有元素的常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素列表的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="603" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="603" bodyend="603"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1a6d0c215988bd0f15a770690ac898be97" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39" kindref="member">sequence_style</ref></type>
+        <definition>NEFORCE_NODISCARD sequence_style yaml_sequence::get_style</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_style</name>
+        <qualifiedname>yaml_sequence::get_style</qualifiedname>
+        <briefdescription>
+<para>获取集合样式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>序列样式枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="609" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="609" bodyend="609"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__sequence_1ac844aad27cbc3a10715d62417d39c90c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void yaml_sequence::set_style</definition>
+        <argsstring>(const sequence_style s) noexcept</argsstring>
+        <name>set_style</name>
+        <qualifiedname>yaml_sequence::set_style</qualifiedname>
+        <param>
+          <type>const <ref refid="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39" kindref="member">sequence_style</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>设置集合样式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的序列样式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="615" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="615" bodyend="615"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>YAML序列值类型（数组） </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示YAML中的有序值列表。支持两种集合样式：<itemizedlist>
+<listitem><para>**块样式**（Block）：每行以 - 开头的缩进列表</para>
+</listitem><listitem><para>**流样式**（Flow）：方括号内的逗号分隔列表 [a, b, c]</para>
+</listitem></itemizedlist>
+</para>
+<para>序列中的元素可以是任意YAML值类型（包括嵌套的序列和映射）。</para>
+<para><simplesect kind="note"><para>此类禁止拷贝，仅允许移动。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>istringify&lt; yaml_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>yaml_sequence</label>
+        <link refid="classyaml__sequence"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>yaml_value</label>
+        <link refid="classyaml__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="7">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="3">
+        <label>istringify&lt; yaml_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>yaml_sequence</label>
+        <link refid="classyaml__sequence"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>yaml_value</label>
+        <link refid="classyaml__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>anchor</edgelabel>
+          <edgelabel>tag</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="532" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="532" bodyend="616"/>
+    <listofallmembers>
+      <member refid="classyaml__sequence_1a4937ac45a4d4b412367f0f63b29ce898" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>add_element</name></member>
+      <member refid="classyaml__value_1ad86b30a51fa8bab180f21e485637140c" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>anchor</name></member>
+      <member refid="classyaml__value_1a4248647d13153a155d61b18deca6f672" prot="public" virt="virtual"><scope>yaml_sequence</scope><name>as_boolean</name></member>
+      <member refid="classyaml__value_1add697deac88248bfdf132df4dc9bde85" prot="public" virt="virtual"><scope>yaml_sequence</scope><name>as_float</name></member>
+      <member refid="classyaml__value_1a7b0819cc217250006bedfef4d967a1f9" prot="public" virt="virtual"><scope>yaml_sequence</scope><name>as_integer</name></member>
+      <member refid="classyaml__value_1a23a6ea0ffc69c0bcbc72ec5e57bb1293" prot="public" virt="virtual"><scope>yaml_sequence</scope><name>as_mapping</name></member>
+      <member refid="classyaml__value_1af6d64487661ed8ba454b326c762d9936" prot="public" virt="virtual"><scope>yaml_sequence</scope><name>as_null</name></member>
+      <member refid="classyaml__sequence_1a5f8a81821e5a051ae4c132180841baaf" prot="public" virt="virtual"><scope>yaml_sequence</scope><name>as_sequence</name></member>
+      <member refid="classyaml__value_1a13fa19f5135550db24a5ed6dafdb170f" prot="public" virt="virtual"><scope>yaml_sequence</scope><name>as_string</name></member>
+      <member refid="classyaml__value_1a4ac191237f5e14c8f701456d9f6349cd" prot="public" virt="virtual"><scope>yaml_sequence</scope><name>as_timestamp</name></member>
+      <member refid="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39a018795c708a2a4628fc5c7b75a6d84ec" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>Block</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a6be7945e897201a66071024da0900aa0" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>Boolean</name></member>
+      <member refid="classyaml__sequence_1a6e991246dcfffebaa8aa9c053431d86a" prot="private" virt="non-virtual"><scope>yaml_sequence</scope><name>elements</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a5db3a045c98baa2946cee0092e2ee286" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>Float</name></member>
+      <member refid="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39a83b4fef9556d32c7436d282bbfaae597" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>Flow</name></member>
+      <member refid="classyaml__sequence_1a29c319d4c40e0999f65bf16ad1898b83" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>get_element</name></member>
+      <member refid="classyaml__sequence_1aeb38da91019e4679124e410dc4c20274" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>get_element</name></member>
+      <member refid="classyaml__sequence_1a5269bb4beb2d128a9b80b5fb32a06744" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>get_elements</name></member>
+      <member refid="classyaml__sequence_1a6d0c215988bd0f15a770690ac898be97" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>get_style</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a0a3aafd59dc0cce142285be68230f2e5" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>Integer</name></member>
+      <member refid="classyaml__value_1adb94eae0f27f02945b314b5fb89a0e23" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>is_boolean</name></member>
+      <member refid="classyaml__value_1aacbe47dd95fc377f0a820b66b14c098c" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>is_float</name></member>
+      <member refid="classyaml__value_1ab915196f14362709fcec5e812110feeb" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>is_integer</name></member>
+      <member refid="classyaml__value_1a913ff68c95f29c041a0c59701263e767" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>is_mapping</name></member>
+      <member refid="classyaml__value_1a59c4bf787d27ff426488acd632efe2ff" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>is_null</name></member>
+      <member refid="classyaml__value_1a6f66d9eccc636779ff160fa1d022d34f" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>is_sequence</name></member>
+      <member refid="classyaml__value_1a856bad71ffd05c9894c248e674f2dc57" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>is_string</name></member>
+      <member refid="classyaml__value_1aa60602274cdfb832497945dff445d35d" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>is_timestamp</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a96d3ceb2cf8b297b6589107df8dd88df" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>Mapping</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633aa775a43cea16e807d355941f57dbf173" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>Null</name></member>
+      <member refid="classyaml__sequence_1a6ae3171ee6cf68c2080a149ad3270eb6" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>operator=</name></member>
+      <member refid="classyaml__sequence_1a0b22d9e97dc1fe5f7c91595c7fd094b4" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>operator=</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a4e91bdc7df808a4e70247c0655588b65" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>Sequence</name></member>
+      <member refid="classyaml__sequence_1ad6b43327651f8eb2c4b1ce3d326dee39" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>sequence_style</name></member>
+      <member refid="classyaml__value_1a47d57ba8446097c984e55f07d7fea7aa" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>set_anchor</name></member>
+      <member refid="classyaml__sequence_1ac844aad27cbc3a10715d62417d39c90c" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>set_style</name></member>
+      <member refid="classyaml__value_1a7407556dfb52984c3415db35ee112869" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>set_tag</name></member>
+      <member refid="classyaml__sequence_1a730d9528326019cda8c0f16794e90ecf" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>size</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a0240ab072a97f74032be8aa1ae913d8a" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>String</name></member>
+      <member refid="classyaml__sequence_1a13956b5e5f1785f8a0f14cd533d84ebd" prot="private" virt="non-virtual"><scope>yaml_sequence</scope><name>style</name></member>
+      <member refid="classyaml__value_1a0cdc7a438e67a2b66f10c0e7df489f21" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>tag</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633aa02528b3e15dc44e07229369b29eaa2b" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>Timestamp</name></member>
+      <member refid="classyaml__value_1a0c4328854eb893b5fe471e7fa05c8c32" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>to_document</name></member>
+      <member refid="classyaml__value_1afe768ac15954b26002a86197725d3b74" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>to_string</name></member>
+      <member refid="classyaml__sequence_1a1cf663bca50abb618c008aac93fb2c27" prot="public" virt="virtual"><scope>yaml_sequence</scope><name>type</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>types</name></member>
+      <member refid="classyaml__sequence_1afe3832ab286bc8572f0587c844a6ee36" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>yaml_sequence</name></member>
+      <member refid="classyaml__sequence_1a33c44a2a131bbbc736e910e6461c29ba" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>yaml_sequence</name></member>
+      <member refid="classyaml__sequence_1a35f408ec48f1e24e45da05e640b6d619" prot="public" virt="non-virtual"><scope>yaml_sequence</scope><name>yaml_sequence</name></member>
+      <member refid="classyaml__value_1a5219fdc77a0759f47f17818af2804afe" prot="public" virt="virtual"><scope>yaml_sequence</scope><name>~yaml_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

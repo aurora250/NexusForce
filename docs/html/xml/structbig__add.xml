@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structbig__add" kind="struct" language="C++" prot="public">
+    <compoundname>big_add</compoundname>
+    <includes refid="static__numeric_8hpp" local="no">static_numeric.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <declname>High1</declname>
+        <defname>High1</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <declname>Low1</declname>
+        <defname>Low1</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <declname>High2</declname>
+        <defname>High2</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <declname>Low2</declname>
+        <defname>Low2</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structbig__add_1ab00b896fa497d8985a91a75d4c820d7b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_add&lt; High1, Low1, High2, Low2 &gt;::result_low</definition>
+        <argsstring></argsstring>
+        <name>result_low</name>
+        <qualifiedname>big_add::result_low</qualifiedname>
+        <initializer>= Low1 + Low2</initializer>
+        <briefdescription>
+<para>加法结果的低位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="116" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__add_1ae6f4db23c09c91dda3296937386accff" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_add&lt; High1, Low1, High2, Low2 &gt;::result_high</definition>
+        <argsstring></argsstring>
+        <name>result_high</name>
+        <qualifiedname>big_add::result_high</qualifiedname>
+        <initializer>= (High1 + High2 + (Low1 + Low2 &lt; Low1))</initializer>
+        <briefdescription>
+<para>加法结果的高位，包含进位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="117" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>无符号大整数加法 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>High1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个加数的高位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Low1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个加数的低位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>High2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个加数的高位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Low2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个加数的低位</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+计算两个大整数的和，考虑低位相加产生的进位。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="115" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="115" bodyend="118"/>
+    <listofallmembers>
+      <member refid="structbig__add_1ae6f4db23c09c91dda3296937386accff" prot="public" virt="non-virtual"><scope>big_add</scope><name>result_high</name></member>
+      <member refid="structbig__add_1ab00b896fa497d8985a91a75d4c820d7b" prot="public" virt="non-virtual"><scope>big_add</scope><name>result_low</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

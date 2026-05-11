@@ -1,0 +1,508 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structmysql__connect" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>mysql_connect</compoundname>
+    <basecompoundref refid="structidb__tb__connect" prot="public" virt="non-virtual">idb_tb_connect</basecompoundref>
+    <includes refid="mysql__connect_8hpp" local="no">mysql_connect.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structmysql__connect_1a42d08327b676836ebdcb608eb1877245" prot="private" static="no" mutable="no">
+        <type>::MYSQL *</type>
+        <definition>::MYSQL* mysql_connect::link_</definition>
+        <argsstring></argsstring>
+        <name>link_</name>
+        <qualifiedname>mysql_connect::link_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>MySQL连接句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="43" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structmysql__connect_1a3b9a1a023281b5f8bf0b717feaf5895d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>mysql_connect::mysql_connect</definition>
+        <argsstring>()</argsstring>
+        <name>mysql_connect</name>
+        <qualifiedname>mysql_connect::mysql_connect</qualifiedname>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>初始化MySQL连接句柄。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="51" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a6333c19361bdf32e80b25af448ec874d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>mysql_connect::~mysql_connect</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>~mysql_connect</name>
+        <qualifiedname>mysql_connect::~mysql_connect</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>关闭数据库连接。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="58" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="58" bodyend="58"/>
+        <references refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19">idb_connect::close</references>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1ab5c25136bff3882cf88792623d8b3c8b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool mysql_connect::connect</definition>
+        <argsstring>(const db_config &amp;config) noexcept override</argsstring>
+        <name>connect</name>
+        <qualifiedname>mysql_connect::connect</qualifiedname>
+        <reimplements refid="structidb__connect_1a7ae3001e8ef72724b952fac4ea66cde7">connect</reimplements>
+        <param>
+          <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>建立数据库连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>连接成功返回true，失败返回false</para>
+</simplesect>
+使用配置建立连接，连接后自动设置字符集。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="67" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a0d4be02834cd55ae35f5cd9d29aa69f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool mysql_connect::reconnect</definition>
+        <argsstring>(const db_config &amp;config) override</argsstring>
+        <name>reconnect</name>
+        <qualifiedname>mysql_connect::reconnect</qualifiedname>
+        <reimplements refid="structidb__connect_1a5faaad097bbdc6d8e530eb9f3ec7af94">reconnect</reimplements>
+        <param>
+          <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>重新连接数据库 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>重连成功返回true，失败返回false</para>
+</simplesect>
+关闭当前连接，使用新配置重新连接。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="76" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a3eb1bfcd465e808514ef8b035e1f3ef5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void mysql_connect::close</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>close</name>
+        <qualifiedname>mysql_connect::close</qualifiedname>
+        <reimplements refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19">close</reimplements>
+        <briefdescription>
+<para>关闭数据库连接 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a11ac571c00e92f2f95c95d542b65701a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool mysql_connect::set_character_set</definition>
+        <argsstring>(const string &amp;encoding) const noexcept override</argsstring>
+        <name>set_character_set</name>
+        <qualifiedname>mysql_connect::set_character_set</qualifiedname>
+        <reimplements refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad">set_character_set</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>encoding</declname>
+        </param>
+        <briefdescription>
+<para>设置字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>encoding</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符集名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="88" column="28"/>
+        <references refid="structmysql__connect_1a11ac571c00e92f2f95c95d542b65701a">set_character_set</references>
+        <referencedby refid="structmysql__connect_1a11ac571c00e92f2f95c95d542b65701a">set_character_set</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a1549654c277aa59d42b6f60915d7859e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool mysql_connect::set_options</definition>
+        <argsstring>(::mysql_option option, const string &amp;str) const noexcept</argsstring>
+        <name>set_options</name>
+        <qualifiedname>mysql_connect::set_options</qualifiedname>
+        <param>
+          <type>::mysql_option</type>
+          <declname>option</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>设置MySQL连接选项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>option</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MySQL选项类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项值字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="96" column="28"/>
+        <references refid="structmysql__connect_1a1549654c277aa59d42b6f60915d7859e">set_options</references>
+        <referencedby refid="structmysql__connect_1a1549654c277aa59d42b6f60915d7859e">set_options</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a89fd3f85739f0ebf6ee71e539dea8bc5" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view mysql_connect::get_character_set</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_character_set</name>
+        <qualifiedname>mysql_connect::get_character_set</qualifiedname>
+        <reimplements refid="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767">get_character_set</reimplements>
+        <briefdescription>
+<para>获取当前字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="102" column="35"/>
+        <references refid="structmysql__connect_1a89fd3f85739f0ebf6ee71e539dea8bc5">get_character_set</references>
+        <referencedby refid="structmysql__connect_1a89fd3f85739f0ebf6ee71e539dea8bc5">get_character_set</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1aee6d307c20e88682483b098d4b30d611" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view mysql_connect::get_error</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_error</name>
+        <qualifiedname>mysql_connect::get_error</qualifiedname>
+        <reimplements refid="structidb__connect_1a128b6a7646a28e85e231beb150439c01">get_error</reimplements>
+        <briefdescription>
+<para>获取最后错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="108" column="35"/>
+        <references refid="structmysql__connect_1aee6d307c20e88682483b098d4b30d611">get_error</references>
+        <referencedby refid="structmysql__connect_1aee6d307c20e88682483b098d4b30d611">get_error</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a0835bd7e91557c25fb9b5c43af2a759a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_NODISCARD uint32_t mysql_connect::get_errno</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_errno</name>
+        <qualifiedname>mysql_connect::get_errno</qualifiedname>
+        <reimplements refid="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e">get_errno</reimplements>
+        <briefdescription>
+<para>获取最后错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>MySQL错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="114" column="32"/>
+        <references refid="structmysql__connect_1a0835bd7e91557c25fb9b5c43af2a759a">get_errno</references>
+        <referencedby refid="structmysql__connect_1a0835bd7e91557c25fb9b5c43af2a759a">get_errno</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a775c5bcf3e396a32a59f7a867749fb20" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool mysql_connect::update</definition>
+        <argsstring>(const string &amp;sql) const noexcept override</argsstring>
+        <name>update</name>
+        <qualifiedname>mysql_connect::update</qualifiedname>
+        <reimplements refid="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2">update</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>执行非查询SQL语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SQL语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>执行成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="121" column="28"/>
+        <references refid="structmysql__connect_1a775c5bcf3e396a32a59f7a867749fb20">update</references>
+        <referencedby refid="structmysql__connect_1a775c5bcf3e396a32a59f7a867749fb20">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a051baebdc9585491f709241f1bdb8a64" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD unique_ptr&lt; idb_tb_result &gt; mysql_connect::query</definition>
+        <argsstring>(const string &amp;sql) const noexcept override</argsstring>
+        <name>query</name>
+        <qualifiedname>mysql_connect::query</qualifiedname>
+        <reimplements refid="structidb__tb__connect_1abc6b0d8058de22758e6c33fa9212e31e">query</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>执行查询SQL语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SELECT语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>查询结果集，失败返回空指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="128" column="34"/>
+        <references refid="structmysql__connect_1a051baebdc9585491f709241f1bdb8a64">query</references>
+        <referencedby refid="structmysql__connect_1a051baebdc9585491f709241f1bdb8a64">query</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a8ebdf8fbfa1b212d524978e33f087cba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__statement" kindref="compound">idb_prepared_statement</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD unique_ptr&lt; idb_prepared_statement &gt; mysql_connect::prepare_statement</definition>
+        <argsstring>(const string &amp;sql) const override</argsstring>
+        <name>prepare_statement</name>
+        <qualifiedname>mysql_connect::prepare_statement</qualifiedname>
+        <reimplements refid="structidb__tb__connect_1a37513bfd22b7ea67498dbac6f98e8156">prepare_statement</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>创建预处理语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>带占位符的SQL语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>预处理语句对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__stmt__exception" kindref="compound">database_stmt_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="136" column="34"/>
+        <references refid="structmysql__connect_1a8ebdf8fbfa1b212d524978e33f087cba">prepare_statement</references>
+        <referencedby refid="structmysql__connect_1a8ebdf8fbfa1b212d524978e33f087cba">prepare_statement</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1ad550711135630dba12370bc7f45dc0a1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool mysql_connect::connected</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>connected</name>
+        <qualifiedname>mysql_connect::connected</qualifiedname>
+        <reimplements refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d">connected</reimplements>
+        <briefdescription>
+<para>检查连接是否已建立 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已连接返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="142" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="142" bodyend="142"/>
+        <references refid="structmysql__connect_1ad550711135630dba12370bc7f45dc0a1" compoundref="mysql__connect_8hpp" startline="142" endline="142">connected</references>
+        <referencedby refid="structmysql__connect_1ad550711135630dba12370bc7f45dc0a1" compoundref="mysql__connect_8hpp" startline="142" endline="142">connected</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a9ed7e3f772ebd094431c7a7a20c2a022" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool mysql_connect::is_valid</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>mysql_connect::is_valid</qualifiedname>
+        <reimplements refid="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0">is_valid</reimplements>
+        <briefdescription>
+<para>检查连接是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="148" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="148" bodyend="148"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MySQL数据库连接类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_tb_connect接口，提供MySQL数据库的连接和操作功能。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>MySQL连接建立和关闭</para>
+</listitem><listitem><para>字符集设置</para>
+</listitem><listitem><para>SQL语句执行</para>
+</listitem><listitem><para>查询结果获取</para>
+</listitem><listitem><para>预处理语句支持 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>idb_connect</label>
+        <link refid="structidb__connect"/>
+      </node>
+      <node id="2">
+        <label>idb_tb_connect</label>
+        <link refid="structidb__tb__connect"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>mysql_connect</label>
+        <link refid="structmysql__connect"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>idb_connect</label>
+        <link refid="structidb__connect"/>
+      </node>
+      <node id="2">
+        <label>idb_tb_connect</label>
+        <link refid="structidb__tb__connect"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>mysql_connect</label>
+        <link refid="structmysql__connect"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="41" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="41" bodyend="149"/>
+    <listofallmembers>
+      <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>clock_type</name></member>
+      <member refid="structmysql__connect_1a3eb1bfcd465e808514ef8b035e1f3ef5" prot="public" virt="virtual"><scope>mysql_connect</scope><name>close</name></member>
+      <member refid="structmysql__connect_1ab5c25136bff3882cf88792623d8b3c8b" prot="public" virt="virtual"><scope>mysql_connect</scope><name>connect</name></member>
+      <member refid="structmysql__connect_1ad550711135630dba12370bc7f45dc0a1" prot="public" virt="virtual"><scope>mysql_connect</scope><name>connected</name></member>
+      <member refid="structidb__connect_1affedca161dc65836d2ecd3ae76e9158d" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>get_alive</name></member>
+      <member refid="structmysql__connect_1a89fd3f85739f0ebf6ee71e539dea8bc5" prot="public" virt="virtual"><scope>mysql_connect</scope><name>get_character_set</name></member>
+      <member refid="structmysql__connect_1a0835bd7e91557c25fb9b5c43af2a759a" prot="public" virt="virtual"><scope>mysql_connect</scope><name>get_errno</name></member>
+      <member refid="structmysql__connect_1aee6d307c20e88682483b098d4b30d611" prot="public" virt="virtual"><scope>mysql_connect</scope><name>get_error</name></member>
+      <member refid="structmysql__connect_1a9ed7e3f772ebd094431c7a7a20c2a022" prot="public" virt="virtual"><scope>mysql_connect</scope><name>is_valid</name></member>
+      <member refid="structmysql__connect_1a42d08327b676836ebdcb608eb1877245" prot="private" virt="non-virtual"><scope>mysql_connect</scope><name>link_</name></member>
+      <member refid="structmysql__connect_1a3b9a1a023281b5f8bf0b717feaf5895d" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>mysql_connect</name></member>
+      <member refid="structmysql__connect_1a8ebdf8fbfa1b212d524978e33f087cba" prot="public" virt="virtual"><scope>mysql_connect</scope><name>prepare_statement</name></member>
+      <member refid="structmysql__connect_1a051baebdc9585491f709241f1bdb8a64" prot="public" virt="virtual"><scope>mysql_connect</scope><name>query</name></member>
+      <member refid="structmysql__connect_1a0d4be02834cd55ae35f5cd9d29aa69f7" prot="public" virt="virtual"><scope>mysql_connect</scope><name>reconnect</name></member>
+      <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>refresh_alive</name></member>
+      <member refid="structmysql__connect_1a11ac571c00e92f2f95c95d542b65701a" prot="public" virt="virtual"><scope>mysql_connect</scope><name>set_character_set</name></member>
+      <member refid="structmysql__connect_1a1549654c277aa59d42b6f60915d7859e" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>set_options</name></member>
+      <member refid="structmysql__connect_1a775c5bcf3e396a32a59f7a867749fb20" prot="public" virt="virtual"><scope>mysql_connect</scope><name>update</name></member>
+      <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>mysql_connect</scope><name>~idb_connect</name></member>
+      <member refid="structidb__tb__connect_1a4ba8618ecc342e6ddfc5c20d9f2297ad" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>~idb_tb_connect</name></member>
+      <member refid="structmysql__connect_1a6333c19361bdf32e80b25af448ec874d" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>~mysql_connect</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

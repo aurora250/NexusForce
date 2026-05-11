@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classcancellation__token" kind="class" language="C++" prot="public">
+    <compoundname>cancellation_token</compoundname>
+    <includes refid="generator_8hpp" local="no">generator.hpp</includes>
+    <innerclass refid="structcancellation__token_1_1check__awaiter" prot="public">cancellation_token::check_awaiter</innerclass>
+    <innerclass refid="structcancellation__token_1_1state" prot="private">cancellation_token::state</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classcancellation__token_1a66785872f26df2c8e5afce3bc6d76ee7" prot="private" static="no" mutable="no">
+        <type>state *</type>
+        <definition>state* cancellation_token::state_</definition>
+        <argsstring></argsstring>
+        <name>state_</name>
+        <qualifiedname>cancellation_token::state_</qualifiedname>
+        <briefdescription>
+<para>共享状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="74" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classcancellation__token_1afc185b3d6ca03d6a20864c957ad75431" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void cancellation_token::release</definition>
+        <argsstring>()</argsstring>
+        <name>release</name>
+        <qualifiedname>cancellation_token::release</qualifiedname>
+        <briefdescription>
+<para>释放状态引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="79" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="79" bodyend="83"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcancellation__token_1ab8b7df3b72290f339ea460e6f39fd641" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cancellation_token::cancellation_token</definition>
+        <argsstring>()</argsstring>
+        <name>cancellation_token</name>
+        <qualifiedname>cancellation_token::cancellation_token</qualifiedname>
+        <briefdescription>
+<para>默认构造函数，创建新的取消令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="89" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="89" bodyend="90"/>
+        <referencedby refid="classcancellation__token_1af58b901c45f45ac616d47ebd3dc56ea7" compoundref="generator_8hpp" startline="96" endline="101">cancellation_token</referencedby>
+        <referencedby refid="classcancellation__token_1a957e3f2937364b799e2a242cc5905ba9" compoundref="generator_8hpp" startline="108" endline="119">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classcancellation__token_1af58b901c45f45ac616d47ebd3dc56ea7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cancellation_token::cancellation_token</definition>
+        <argsstring>(const cancellation_token &amp;other)</argsstring>
+        <name>cancellation_token</name>
+        <qualifiedname>cancellation_token::cancellation_token</qualifiedname>
+        <param>
+          <type>const <ref refid="classcancellation__token" kindref="compound">cancellation_token</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数，共享状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个取消令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="96" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="96" bodyend="101"/>
+        <references refid="classcancellation__token_1ab8b7df3b72290f339ea460e6f39fd641" compoundref="generator_8hpp" startline="89" endline="90">cancellation_token</references>
+        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+      </memberdef>
+      <memberdef kind="function" id="classcancellation__token_1a957e3f2937364b799e2a242cc5905ba9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classcancellation__token" kindref="compound">cancellation_token</ref> &amp;</type>
+        <definition>cancellation_token &amp; cancellation_token::operator=</definition>
+        <argsstring>(const cancellation_token &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>cancellation_token::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classcancellation__token" kindref="compound">cancellation_token</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个取消令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="108" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="108" bodyend="119"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="classcancellation__token_1ab8b7df3b72290f339ea460e6f39fd641" compoundref="generator_8hpp" startline="89" endline="90">cancellation_token</references>
+        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+      </memberdef>
+      <memberdef kind="function" id="classcancellation__token_1a8e560556afc7e861711e374069764bfc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>cancellation_token::~cancellation_token</definition>
+        <argsstring>()</argsstring>
+        <name>~cancellation_token</name>
+        <qualifiedname>cancellation_token::~cancellation_token</qualifiedname>
+        <briefdescription>
+<para>析构函数，释放状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="124" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="124" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classcancellation__token_1a1c816b81662bc8177659073b145a9616" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void cancellation_token::cancel</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>cancel</name>
+        <qualifiedname>cancellation_token::cancel</qualifiedname>
+        <briefdescription>
+<para>请求取消 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="129" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="129" bodyend="133"/>
+        <references refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
+      </memberdef>
+      <memberdef kind="function" id="classcancellation__token_1ab7f18cffb62c36a8579967ed1763371d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool cancellation_token::is_cancelled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_cancelled</name>
+        <qualifiedname>cancellation_token::is_cancelled</qualifiedname>
+        <briefdescription>
+<para>检查是否已被取消 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已被取消 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="139" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="139" bodyend="139"/>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+      </memberdef>
+      <memberdef kind="function" id="classcancellation__token_1a52c484072d073e4d76ab6c8c3bf6cff5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structcancellation__token_1_1check__awaiter" kindref="compound">check_awaiter</ref></type>
+        <definition>check_awaiter cancellation_token::check</definition>
+        <argsstring>() const</argsstring>
+        <name>check</name>
+        <qualifiedname>cancellation_token::check</qualifiedname>
+        <briefdescription>
+<para>获取取消检查等待器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>检查等待器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="145" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="145" bodyend="145"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>取消令牌 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>用于协程的取消操作，支持多个副本共享同一个取消状态。 可以传递给协程，在适当的位置检查取消状态并抛出异常。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="35" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="35" bodyend="146"/>
+    <listofallmembers>
+      <member refid="classcancellation__token_1a1c816b81662bc8177659073b145a9616" prot="public" virt="non-virtual"><scope>cancellation_token</scope><name>cancel</name></member>
+      <member refid="classcancellation__token_1ab8b7df3b72290f339ea460e6f39fd641" prot="public" virt="non-virtual"><scope>cancellation_token</scope><name>cancellation_token</name></member>
+      <member refid="classcancellation__token_1af58b901c45f45ac616d47ebd3dc56ea7" prot="public" virt="non-virtual"><scope>cancellation_token</scope><name>cancellation_token</name></member>
+      <member refid="classcancellation__token_1a52c484072d073e4d76ab6c8c3bf6cff5" prot="public" virt="non-virtual"><scope>cancellation_token</scope><name>check</name></member>
+      <member refid="classcancellation__token_1ab7f18cffb62c36a8579967ed1763371d" prot="public" virt="non-virtual"><scope>cancellation_token</scope><name>is_cancelled</name></member>
+      <member refid="classcancellation__token_1a957e3f2937364b799e2a242cc5905ba9" prot="public" virt="non-virtual"><scope>cancellation_token</scope><name>operator=</name></member>
+      <member refid="classcancellation__token_1afc185b3d6ca03d6a20864c957ad75431" prot="private" virt="non-virtual"><scope>cancellation_token</scope><name>release</name></member>
+      <member refid="classcancellation__token_1a66785872f26df2c8e5afce3bc6d76ee7" prot="private" virt="non-virtual"><scope>cancellation_token</scope><name>state_</name></member>
+      <member refid="classcancellation__token_1a8e560556afc7e861711e374069764bfc" prot="public" virt="non-virtual"><scope>cancellation_token</scope><name>~cancellation_token</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

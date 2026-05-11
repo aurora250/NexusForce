@@ -1,0 +1,1356 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="unique__ptr_8hpp" kind="file" language="C++">
+    <compoundname>unique_ptr.hpp</compoundname>
+    <includes refid="functor_8hpp" local="yes">NeForce/core/functional/functor.hpp</includes>
+    <includes refid="invoke_8hpp" local="yes">NeForce/core/functional/invoke.hpp</includes>
+    <includes refid="compressed__pair_8hpp" local="yes">NeForce/core/utility/compressed_pair.hpp</includes>
+    <includes refid="deleter_8hpp" local="yes">NeForce/core/utility/deleter.hpp</includes>
+    <includedby refid="reflect_2any_8hpp" local="yes">any.hpp</includedby>
+    <includedby refid="db__interface_8hpp" local="yes">db_interface.hpp</includedby>
+    <includedby refid="env__value_8hpp" local="yes">env_value.hpp</includedby>
+    <includedby refid="exception__ptr_8hpp" local="yes">exception_ptr.hpp</includedby>
+    <includedby refid="file_8hpp" local="yes">file.hpp</includedby>
+    <includedby refid="http__filter_8hpp" local="yes">http_filter.hpp</includedby>
+    <includedby refid="ini__value_8hpp" local="yes">ini_value.hpp</includedby>
+    <includedby refid="iplugin_8hpp" local="yes">iplugin.hpp</includedby>
+    <includedby refid="json__value_8hpp" local="yes">json_value.hpp</includedby>
+    <includedby refid="lock__free__queue_8hpp" local="yes">lock_free_queue.hpp</includedby>
+    <includedby refid="regex_8hpp" local="yes">regex.hpp</includedby>
+    <includedby refid="shared__ptr_8hpp" local="yes">shared_ptr.hpp</includedby>
+    <includedby refid="sql__builder_8hpp" local="yes">sql_builder.hpp</includedby>
+    <includedby refid="system__event_8hpp" local="yes">system_event.hpp</includedby>
+    <includedby refid="thread_8hpp" local="yes">thread.hpp</includedby>
+    <includedby refid="toml__value_8hpp" local="yes">toml_value.hpp</includedby>
+    <incdepgraph>
+      <node id="5">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>NeForce/core/functional/functor.hpp</label>
+        <link refid="functor_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>NeForce/core/functional/hash.hpp</label>
+        <link refid="hash_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>NeForce/core/functional/invoke.hpp</label>
+        <link refid="invoke_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>NeForce/core/interface/icommon.hpp</label>
+        <link refid="icommon_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>unique_ptr.hpp</label>
+        <link refid="unique__ptr_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>NeForce/core/typeinfo/type_traits.hpp</label>
+        <link refid="type__traits_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="types_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>NeForce/core/utility/compressed_pair.hpp</label>
+        <link refid="compressed__pair_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>NeForce/core/utility/deleter.hpp</label>
+        <link refid="deleter_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>NeForce/core/utility/reference_wrapper.hpp</label>
+        <link refid="reference__wrapper_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>assert.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="8">
+        <label>NeForce.hpp</label>
+        <link refid="_ne_force_8hpp"/>
+      </node>
+      <node id="84">
+        <label>algorithm.hpp</label>
+        <link refid="algorithm_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>parallel.hpp</label>
+        <link refid="parallel_8hpp"/>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>async.hpp</label>
+        <link refid="async_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>barrier.hpp</label>
+        <link refid="barrier_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>future.hpp</label>
+        <link refid="future_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>generator.hpp</label>
+        <link refid="generator_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>lazy_thread.hpp</label>
+        <link refid="lazy__thread_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>lock_free_queue.hpp</label>
+        <link refid="lock__free__queue_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>packaged_task.hpp</label>
+        <link refid="packaged__task_8hpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>promise.hpp</label>
+        <link refid="promise_8hpp"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>scoped_thread.hpp</label>
+        <link refid="scoped__thread_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>signals.hpp</label>
+        <link refid="signals_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>stop_token.hpp</label>
+        <link refid="stop__token_8hpp"/>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>thread.hpp</label>
+        <link refid="thread_8hpp"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>thread_pool.hpp</label>
+        <link refid="thread__pool_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>timer.hpp</label>
+        <link refid="timer_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>ttl_cache.hpp</label>
+        <link refid="ttl__cache_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>exception_ptr.hpp</label>
+        <link refid="exception__ptr_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>env_builder.hpp</label>
+        <link refid="env__builder_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>env_parser.hpp</label>
+        <link refid="env__parser_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>env_value.hpp</label>
+        <link refid="env__value_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>file.hpp</label>
+        <link refid="file_8hpp"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>file_watcher.hpp</label>
+        <link refid="file__watcher_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>ini_builder.hpp</label>
+        <link refid="ini__builder_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>ini_parser.hpp</label>
+        <link refid="ini__parser_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>ini_value.hpp</label>
+        <link refid="ini__value_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>json_builder.hpp</label>
+        <link refid="json__builder_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>json_parser.hpp</label>
+        <link refid="json__parser_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>json_value.hpp</label>
+        <link refid="json__value_8hpp"/>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>path_tree.hpp</label>
+        <link refid="path__tree_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>temp_file.hpp</label>
+        <link refid="temp__file_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>toml_builder.hpp</label>
+        <link refid="toml__builder_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>toml_parser.hpp</label>
+        <link refid="toml__parser_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>toml_value.hpp</label>
+        <link refid="toml__value_8hpp"/>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>yaml_builder.hpp</label>
+        <link refid="yaml__builder_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>yaml_parser.hpp</label>
+        <link refid="yaml__parser_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>yaml_value.hpp</label>
+        <link refid="yaml__value_8hpp"/>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>shared_ptr.hpp</label>
+        <link refid="shared__ptr_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>unique_ptr.hpp</label>
+        <link refid="unique__ptr_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>weak_ptr.hpp</label>
+        <link refid="weak__ptr_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>any.hpp</label>
+        <link refid="reflect_2any_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>function.hpp</label>
+        <link refid="reflect_2function_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>property.hpp</label>
+        <link refid="property_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>reflect.hpp</label>
+        <link refid="reflect_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>registry.hpp</label>
+        <link refid="registry_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>type.hpp</label>
+        <link refid="type_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>json_serializer.hpp</label>
+        <link refid="json__serializer_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>regex.hpp</label>
+        <link refid="regex_8hpp"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>signal.hpp</label>
+        <link refid="signal_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>system_event.hpp</label>
+        <link refid="system__event_8hpp"/>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>database_pool.hpp</label>
+        <link refid="database__pool_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>db_interface.hpp</label>
+        <link refid="db__interface_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>mysql_connect.hpp</label>
+        <link refid="mysql__connect_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>mysql_prepared_result.hpp</label>
+        <link refid="mysql__prepared__result_8hpp"/>
+      </node>
+      <node id="14">
+        <label>mysql_prepared_statement.hpp</label>
+        <link refid="mysql__prepared__statement_8hpp"/>
+      </node>
+      <node id="15">
+        <label>mysql_result.hpp</label>
+        <link refid="mysql__result_8hpp"/>
+      </node>
+      <node id="16">
+        <label>pgsql_connect.hpp</label>
+        <link refid="pgsql__connect_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>pgsql_prepared_result.hpp</label>
+        <link refid="pgsql__prepared__result_8hpp"/>
+      </node>
+      <node id="17">
+        <label>pgsql_prepared_statement.hpp</label>
+        <link refid="pgsql__prepared__statement_8hpp"/>
+      </node>
+      <node id="18">
+        <label>pgsql_result.hpp</label>
+        <link refid="pgsql__result_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>redis_connect.hpp</label>
+        <link refid="redis__connect_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>redis_result.hpp</label>
+        <link refid="redis__result_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>sql_builder.hpp</label>
+        <link refid="sql__builder_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>sqlite_connect.hpp</label>
+        <link refid="sqlite__connect_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>sqlite_prepared_result.hpp</label>
+        <link refid="sqlite__prepared__result_8hpp"/>
+      </node>
+      <node id="24">
+        <label>sqlite_prepared_statement.hpp</label>
+        <link refid="sqlite__prepared__statement_8hpp"/>
+      </node>
+      <node id="25">
+        <label>sqlite_result.hpp</label>
+        <link refid="sqlite__result_8hpp"/>
+      </node>
+      <node id="44">
+        <label>file_sink.hpp</label>
+        <link refid="file__sink_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>log_event.hpp</label>
+        <link refid="log__event_8hpp"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>log_sink.hpp</label>
+        <link refid="log__sink_8hpp"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>logger.hpp</label>
+        <link refid="logger_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>dns_client.hpp</label>
+        <link refid="dns__client_8hpp"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>ftp_client.hpp</label>
+        <link refid="ftp__client_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>ftp_protocol.hpp</label>
+        <link refid="ftp__protocol_8hpp_source"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>ftp_server.hpp</label>
+        <link refid="ftp__server_8hpp_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>http_client.hpp</label>
+        <link refid="http__client_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>http_filter.hpp</label>
+        <link refid="http__filter_8hpp"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>http_router.hpp</label>
+        <link refid="http__router_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>websocket.hpp</label>
+        <link refid="websocket_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>smtp_socket.hpp</label>
+        <link refid="smtp__socket_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>ssl_acceptor.hpp</label>
+        <link refid="ssl__acceptor_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>ssl_context.hpp</label>
+        <link refid="ssl__context_8hpp"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>ssl_socket.hpp</label>
+        <link refid="ssl__socket_8hpp"/>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>ssl_stream.hpp</label>
+        <link refid="ssl__stream_8hpp"/>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>tcp_server.hpp</label>
+        <link refid="tcp__server_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>iplugin.hpp</label>
+        <link refid="iplugin_8hpp"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>plugin_entry.hpp</label>
+        <link refid="plugin__entry_8hpp"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>plugin_manager.hpp</label>
+        <link refid="plugin__manager_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classunique__ptr" prot="public">unique_ptr</innerclass>
+    <innerclass refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4" prot="public">unique_ptr&lt; T[], Deleter &gt;</innerclass>
+    <innerclass refid="structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4" prot="public">hash&lt; unique_ptr&lt; T, Deleter &gt; &gt;</innerclass>
+    <sectiondef kind="func">
+      <member refid="group___unique_pointer_1ga3def886ee466fc780671110b23c22e0d" kind="function"><name>swap</name></member>
+      <member refid="group___unique_pointer_1ga2e039c6b9e49d933db1ac1539445e924" kind="function"><name>operator==</name></member>
+      <member refid="group___unique_pointer_1gafd5d8431a973b7e88c2b83662ed5b553" kind="function"><name>operator==</name></member>
+      <member refid="group___unique_pointer_1ga5c5d88f05ed7eea2ba7cd8f22ae2c900" kind="function"><name>operator==</name></member>
+      <member refid="group___unique_pointer_1ga0d10eece7e529593dc6583c08d4aa0ba" kind="function"><name>operator!=</name></member>
+      <member refid="group___unique_pointer_1gaa81f43cac5be85f21cb5fc7aa8897a81" kind="function"><name>operator!=</name></member>
+      <member refid="group___unique_pointer_1ga9d36175d06f29041f3b87d1992eb9c82" kind="function"><name>operator!=</name></member>
+      <member refid="group___unique_pointer_1gac57ff1dd79c7a12174cfb51867d3b6b5" kind="function"><name>operator&lt;</name></member>
+      <member refid="group___unique_pointer_1gacb305365ebe27fa4b08f8366746d16e8" kind="function"><name>operator&lt;</name></member>
+      <member refid="group___unique_pointer_1ga62d95b48fc30554a8a17bae773cd28e9" kind="function"><name>operator&lt;</name></member>
+      <member refid="group___unique_pointer_1gaf4c9e805e471b53f0d1758160d98c075" kind="function"><name>operator&gt;</name></member>
+      <member refid="group___unique_pointer_1gaf24cc2d1dc41828a7dadc44989277be3" kind="function"><name>operator&gt;</name></member>
+      <member refid="group___unique_pointer_1ga641dcafc05495ad745fe78f409626369" kind="function"><name>operator&gt;</name></member>
+      <member refid="group___unique_pointer_1gad817ab15dc22c8dd18504afbbadb5073" kind="function"><name>operator&lt;=</name></member>
+      <member refid="group___unique_pointer_1gad41de667371a616e5aa51830795b25e6" kind="function"><name>operator&lt;=</name></member>
+      <member refid="group___unique_pointer_1gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d" kind="function"><name>operator&lt;=</name></member>
+      <member refid="group___unique_pointer_1ga366aeaf83540a81f667c532c781530e3" kind="function"><name>operator&gt;=</name></member>
+      <member refid="group___unique_pointer_1ga5ddd67c0ff52ee718fde2ce960b50f0c" kind="function"><name>operator&gt;=</name></member>
+      <member refid="group___unique_pointer_1ga9d125b022b79c38f6384b92692ebd2a1" kind="function"><name>operator&gt;=</name></member>
+      <member refid="group___unique_pointer_1gad594540a669260eea0cca34015b4653c" kind="function"><name>static_pointer_cast</name></member>
+      <member refid="group___unique_pointer_1gae2b923cda7dca9d7b9a3d7a0d8c36223" kind="function"><name>const_pointer_cast</name></member>
+      <member refid="group___unique_pointer_1ga76599839c521de4c36c0ab2813670317" kind="function"><name>reinterpret_pointer_cast</name></member>
+      <member refid="group___unique_pointer_1ga8466e5182516a72b5d5d667434dde851" kind="function"><name>dynamic_pointer_cast</name></member>
+      <member refid="group___unique_pointer_1ga8c4222e9004a639aac55ce24ec209c86" kind="function"><name>static_pointer_cast</name></member>
+      <member refid="group___unique_pointer_1gaff521462e36faa64ae1c49af9d3764b9" kind="function"><name>const_pointer_cast</name></member>
+      <member refid="group___unique_pointer_1ga5b7c0b0025c36f71ae411090dab937da" kind="function"><name>reinterpret_pointer_cast</name></member>
+      <member refid="group___unique_pointer_1ga2d8e39ee27f0bbb613490661597ad679" kind="function"><name>dynamic_pointer_cast</name></member>
+      <member refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kind="function"><name>make_unique</name></member>
+      <member refid="group___unique_pointer_1gab4d3b888298c124ec2952f99cf23ef9d" kind="function"><name>make_unique</name></member>
+      <member refid="group___unique_pointer_1gad7eab479e3aa31dc40743c1c0431cd0b" kind="function"><name>make_unique</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>独占智能指针 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>此文件提供了独占所有权智能指针的实现， 用于管理动态分配对象的生命周期，确保资源的唯一所有权和自动释放。 </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_MEMORY_UNIQUE_PTR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_MEMORY_UNIQUE_PTR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="functor_8hpp" kindref="compound">NeForce/core/functional/functor.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="invoke_8hpp" kindref="compound">NeForce/core/functional/invoke.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="compressed__pair_8hpp" kindref="compound">NeForce/core/utility/compressed_pair.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="deleter_8hpp" kindref="compound">NeForce/core/utility/deleter.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal">NEFORCE_BEGIN_INNER__</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter&gt;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">__unique_ptr_impl<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">inner_ptr<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>U*;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E&gt;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">inner_ptr&lt;U,<sp/>E,<sp/><ref refid="group___type_traits_utilities_1gab8ddf9531fc4ac7ce28574db20c8f20e" kindref="member">void_t</ref>&lt;typename<sp/><ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt;E&gt;::pointer&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>remove_reference&lt;E&gt;::type::pointer;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DeleterConstraint<sp/>=<sp/>enable_if&lt;is_default_constructible&lt;Deleter&gt;::value&gt;;<sp/></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">pointer<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>inner_ptr&lt;T,<sp/>Deleter&gt;::type;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>compressed_pair&lt;Deleter,<sp/>pointer&gt;<sp/>ptr_pair_{default_construct_tag{},<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};<sp/></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(!<ref refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" kindref="member">is_rvalue_reference&lt;Deleter&gt;::value</ref>,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;deleter<sp/>type<sp/>of<sp/>unique_ptr<sp/>must<sp/>be<sp/>a<sp/>function<sp/>object<sp/>type<sp/>or<sp/>an<sp/>lvalue<sp/>reference<sp/>type&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_impl()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_impl(pointer<sp/>ptr)<sp/>:</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_pair_(default_construct_tag{},<sp/>ptr)<sp/>{}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>Deleter,<sp/>enable_if_t&lt;is_constructible_v&lt;Deleter,<sp/>Del&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_impl(pointer<sp/>ptr,<sp/>Del&amp;&amp;<sp/>deleter)<sp/>:</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_pair_(exact_arg_construct_tag{},<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Del&gt;(deleter),<sp/>ptr)<sp/>{}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_impl(__unique_ptr_impl&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_pair_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other.ptr_pair_))<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.get_ptr()<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_impl&amp;<sp/>operator=(__unique_ptr_impl&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;reset(other.release());</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>pointer&amp;<sp/>get_ptr()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ptr_pair_.<ref refid="structcompressed__pair_1a85011ff9527606e2f8a5d97e7c5c3b68" kindref="member">value</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>pointer<sp/>get_ptr()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ptr_pair_.<ref refid="structcompressed__pair_1a85011ff9527606e2f8a5d97e7c5c3b68" kindref="member">value</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>Deleter&amp;<sp/>get_deleter()<sp/>&amp;<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ptr_pair_.<ref refid="structcompressed__pair_1a7e58c34bdf21e34dc82526441a650036" kindref="member">get_base</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Deleter&amp;<sp/>get_deleter()<sp/>const&amp;<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ptr_pair_.<ref refid="structcompressed__pair_1a7e58c34bdf21e34dc82526441a650036" kindref="member">get_base</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>Deleter&amp;&amp;<sp/>get_deleter()<sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ptr_pair_).get_base();<sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Deleter&amp;&amp;<sp/>get_deleter()<sp/>const&amp;&amp;<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ptr_pair_).get_base();<sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>reset(pointer<sp/>ptr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pointer<sp/>old<sp/>=<sp/>get_ptr();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_ptr()<sp/>=<sp/>ptr;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(old)<sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_pair_.<ref refid="structcompressed__pair_1a7e58c34bdf21e34dc82526441a650036" kindref="member">get_base</ref>()(old);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>pointer<sp/><ref refid="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4" kindref="member">release</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pointer<sp/>p<sp/>=<sp/>get_ptr();</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_ptr()<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>p;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(__unique_ptr_impl&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(ptr_pair_,<sp/>other.ptr_pair_);<sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal">template<sp/>&lt;typename<sp/>T,<sp/>typename<sp/>Deleter,<sp/>bool<sp/>MoveConstructible<sp/>=<sp/>is_move_constructible&lt;Deleter&gt;::value,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>MoveAssignable<sp/>=<sp/><ref refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" kindref="member">is_move_assignable&lt;Deleter&gt;::value</ref>&gt;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__unique_ptr_data<sp/>:<sp/>__unique_ptr_impl&lt;T,<sp/>Deleter&gt;<sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">base_type<sp/>=<sp/>__unique_ptr_impl&lt;T,<sp/>Deleter&gt;;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">pointer<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>base_type::pointer;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_data(pointer<sp/>ptr)<sp/>:</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>base_type(ptr)<sp/>{}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>Deleter,<sp/>enable_if_t&lt;is_constructible_v&lt;Deleter,<sp/>Del&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_data(pointer<sp/>ptr,<sp/>Del&amp;&amp;<sp/>deleter)<sp/>:</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>base_type(ptr,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Del&gt;(deleter))<sp/>{}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data(__unique_ptr_data&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data&amp;<sp/>operator=(__unique_ptr_data&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="comment">//<sp/>删除器可移动构造但不可移动赋值</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter&gt;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__unique_ptr_data&lt;T,<sp/>Deleter,<sp/>true,<sp/>false&gt;<sp/>:<sp/>__unique_ptr_impl&lt;T,<sp/>Deleter&gt;<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">base_type<sp/>=<sp/>__unique_ptr_impl&lt;T,<sp/>Deleter&gt;;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">pointer<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>base_type::pointer;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_data(pointer<sp/>ptr)<sp/>:</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>base_type(ptr)<sp/>{}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>Deleter,<sp/>enable_if_t&lt;is_constructible_v&lt;Deleter,<sp/>Del&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_data(pointer<sp/>ptr,<sp/>Del&amp;&amp;<sp/>deleter)<sp/>:</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>base_type(ptr,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Del&gt;(deleter))<sp/>{}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data(__unique_ptr_data&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data&amp;<sp/>operator=(__unique_ptr_data&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight><highlight class="comment">//<sp/>删除器可移动赋值但不可移动构造</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter&gt;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__unique_ptr_data&lt;T,<sp/>Deleter,<sp/>false,<sp/>true&gt;<sp/>:<sp/>__unique_ptr_impl&lt;T,<sp/>Deleter&gt;<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">base_type<sp/>=<sp/>__unique_ptr_impl&lt;T,<sp/>Deleter&gt;;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">pointer<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>base_type::pointer;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_data(pointer<sp/>ptr)<sp/>:</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>base_type(ptr)<sp/>{}</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>Deleter,<sp/>enable_if_t&lt;is_constructible_v&lt;Deleter,<sp/>Del&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_data(pointer<sp/>ptr,<sp/>Del&amp;&amp;<sp/>deleter)<sp/>:</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>base_type(ptr,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Del&gt;(deleter))<sp/>{}</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data(__unique_ptr_data&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data&amp;<sp/>operator=(__unique_ptr_data&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="comment">//<sp/>删除器既不可移动构造也不可移动赋值</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter&gt;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__unique_ptr_data&lt;T,<sp/>Deleter,<sp/>false,<sp/>false&gt;<sp/>:<sp/>__unique_ptr_impl&lt;T,<sp/>Deleter&gt;<sp/>{</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">base_type<sp/>=<sp/>__unique_ptr_impl&lt;T,<sp/>Deleter&gt;;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">pointer<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>base_type::pointer;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_data(pointer<sp/>ptr)<sp/>:</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>base_type(ptr)<sp/>{}</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>Deleter,<sp/>enable_if_t&lt;is_constructible_v&lt;Deleter,<sp/>Del&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/>__unique_ptr_data(pointer<sp/>ptr,<sp/>Del&amp;&amp;<sp/>deleter)<sp/>:</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>base_type(ptr,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Del&gt;(deleter))<sp/>{}</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data(__unique_ptr_data&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>__unique_ptr_data&amp;<sp/>operator=(__unique_ptr_data&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal">NEFORCE_END_INNER__</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter<sp/>=<sp/>default_deleter&lt;T&gt;&gt;</highlight></codeline>
+<codeline lineno="206" refid="classunique__ptr" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref><sp/>{</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DeleterConstraint<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>inner::__unique_ptr_impl&lt;T,<sp/>U&gt;::DeleterConstraint::type;<sp/></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>inner::__unique_ptr_data&lt;T,<sp/>Deleter&gt;<sp/>data_{};<sp/></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="214" refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>inner::__unique_ptr_impl&lt;T,<sp/>Deleter&gt;::pointer;<sp/></highlight></codeline>
+<codeline lineno="215" refid="classunique__ptr_1a5b0e52953588ac3a4d9bb65ca3ddfbc0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classunique__ptr_1a5b0e52953588ac3a4d9bb65ca3ddfbc0" kindref="member">element_type</ref><sp/>=<sp/>T;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="216" refid="classunique__ptr_1a4d0c960b47f45e09fa187a23e4e10204" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classunique__ptr_1a4d0c960b47f45e09fa187a23e4e10204" kindref="member">deleter_type</ref><sp/>=<sp/>Deleter;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E&gt;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">safe_conversion<sp/>=<sp/><ref refid="structconjunction" kindref="compound">conjunction&lt;is_convertible&lt;typename unique_ptr&lt;U, E&gt;::pointer</ref>,<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>&gt;,</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structnegation" kindref="compound">negation&lt;is_array&lt;U&gt;</ref>&gt;&gt;;<sp/></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>Deleter,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>=<sp/>DeleterConstra</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&lt;Del&gt;&gt;</highlight></codeline>
+<codeline lineno="229" refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>noexcept<sp/>{}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>Deleter,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>=<sp/>DeleterConstra</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&lt;Del&gt;&gt;</highlight></codeline>
+<codeline lineno="237" refid="classunique__ptr_1a37d8df72732fc43a9ae2b12a33d71cd5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a37d8df72732fc43a9ae2b12a33d71cd5" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref><sp/>ptr)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(ptr)<sp/>{}</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>Deleter,<sp/>enable_if_t&lt;is_constructible_v&lt;Deleter,<sp/>Del&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="246" refid="classunique__ptr_1a12732bc6d1164f91570b5afd56fdb80a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a12732bc6d1164f91570b5afd56fdb80a" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref><sp/>ptr,<sp/>Del&amp;&amp;<sp/>deleter)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(ptr,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Del&gt;</ref>(deleter))<sp/>{}</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249" refid="classunique__ptr_1a91d8da266b48e5b9704fbb2c3a5de2e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a91d8da266b48e5b9704fbb2c3a5de2e7" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E,</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;conjunction&lt;safe_conversion&lt;U, E&gt;</ref>,</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t&lt;is_reference&lt;Deleter&gt;::value</ref>,<sp/><ref refid="structis__same" kindref="compound">is_same&lt;E, Deleter&gt;</ref>,</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structis__convertible" kindref="compound">is_convertible&lt;E, Deleter&gt;</ref>&gt;&gt;::value,</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="262" refid="classunique__ptr_1ac76aab0320b12cf48ee7223aef959a11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1ac76aab0320b12cf48ee7223aef959a11" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr&lt;U, E&gt;</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(other.release(),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;E&gt;</ref>(other.get_deleter()))<sp/>{}</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="268" refid="classunique__ptr_1a031e2eb70a769560ba8d41719a2cde0a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a031e2eb70a769560ba8d41719a2cde0a" kindref="member">~unique_ptr</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ptr<sp/>=<sp/>data_.get_ptr();</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ptr<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>()(ptr);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr<sp/>=<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>();</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"></highlight></codeline>
+<codeline lineno="276" refid="classunique__ptr_1af142ef4ee5570389000944c5d9c94d3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_1af142ef4ee5570389000944c5d9c94d3f" kindref="member">operator=</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E,</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;conjunction&lt;safe_conversion&lt;U, E&gt;</ref>,<sp/><ref refid="structis__assignable" kindref="compound">is_assignable&lt;deleter_type&amp;, E&amp;&amp;&gt;</ref>&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="287" refid="classunique__ptr_1aa4d65bea3aaebd7a7b0d990ee7a30a78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_1aa4d65bea3aaebd7a7b0d990ee7a30a78" kindref="member">operator=</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr&lt;U, E&gt;</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" kindref="member">reset</ref>(other.release());</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>()<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;E&gt;</ref>(other.get_deleter());</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"></highlight></codeline>
+<codeline lineno="297" refid="classunique__ptr_1aaf3c2fe3b6799f61dcbbfa9b9f87d930" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_1aaf3c2fe3b6799f61dcbbfa9b9f87d930" kindref="member">operator=</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" kindref="member">reset</ref>();</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight></codeline>
+<codeline lineno="306" refid="classunique__ptr_1a73450603f460b996bb1847b2f536c0f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="group___add_qualifiers_1gac084a21f7a057df50ed3f436567e993f" kindref="member">add_lvalue_reference_t&lt;element_type&gt;</ref><sp/><ref refid="classunique__ptr_1a73450603f460b996bb1847b2f536c0f5" kindref="member">operator*</ref>()<sp/>const</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>noexcept(noexcept(*_NEFORCE<sp/><ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt;<ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>&gt;()))<sp/>{</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>();</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="315" refid="classunique__ptr_1adad9506f6921b78de331b68fccb8b1d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref><sp/><ref refid="classunique__ptr_1adad9506f6921b78de331b68fccb8b1d2" kindref="member">operator-&gt;</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="320" refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref><sp/><ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.get_ptr();<sp/>}</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight></codeline>
+<codeline lineno="325" refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a4d0c960b47f45e09fa187a23e4e10204" kindref="member">deleter_type</ref>&amp;<sp/><ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>()<sp/>&amp;<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.get_deleter();<sp/>}</highlight></codeline>
+<codeline lineno="329" refid="classunique__ptr_1a76bfcc1379a5139573e5510f0472c181" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1a4d0c960b47f45e09fa187a23e4e10204" kindref="member">deleter_type</ref>&amp;<sp/><ref refid="classunique__ptr_1a76bfcc1379a5139573e5510f0472c181" kindref="member">get_deleter</ref>()<sp/>const&amp;<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.get_deleter();<sp/>}</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight></codeline>
+<codeline lineno="334" refid="classunique__ptr_1ac6e3ad7db113f4beb124e6f584b15a83" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a4d0c960b47f45e09fa187a23e4e10204" kindref="member">deleter_type</ref>&amp;&amp;<sp/><ref refid="classunique__ptr_1ac6e3ad7db113f4beb124e6f584b15a83" kindref="member">get_deleter</ref>()<sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(data_).get_deleter();<sp/>}</highlight></codeline>
+<codeline lineno="338" refid="classunique__ptr_1ac82351ed5057520b9a608d192b7b2cb2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1a4d0c960b47f45e09fa187a23e4e10204" kindref="member">deleter_type</ref>&amp;&amp;<sp/><ref refid="classunique__ptr_1ac82351ed5057520b9a608d192b7b2cb2" kindref="member">get_deleter</ref>()<sp/>const&amp;&amp;<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(data_).get_deleter();</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight></codeline>
+<codeline lineno="346" refid="classunique__ptr_1a4840d18cb509de8bed78c676c64c27f4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>==<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>()<sp/>?<sp/>false<sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"></highlight></codeline>
+<codeline lineno="351" refid="classunique__ptr_1a372af837a21128e149811e6c53d97dc1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref><sp/><ref refid="classunique__ptr_1a372af837a21128e149811e6c53d97dc1" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.release();<sp/>}</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"></highlight></codeline>
+<codeline lineno="356" refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" kindref="member">reset</ref>(<ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref><sp/>ptr<sp/>=<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>())<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="structis__invocable" kindref="compound">is_invocable&lt;deleter_type&amp;, pointer&gt;::value</ref>,</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;deleter<sp/>of<sp/>unique_ptr<sp/>must<sp/>be<sp/>invocable<sp/>with<sp/>a<sp/>pointer&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.reset(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ptr));</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"></highlight></codeline>
+<codeline lineno="366" refid="classunique__ptr_1adb40e2b3a4e6594b17a1f660c290bc40" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1adb40e2b3a4e6594b17a1f660c290bc40" kindref="member">swap</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" kindref="member">is_swappable&lt;Deleter&gt;::value</ref>,<sp/></highlight><highlight class="stringliteral">&quot;deleter<sp/>must<sp/>be<sp/>swappable.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.swap(other.data_);</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="371" refid="classunique__ptr_1a04aa7a3fb6a443aa527817467d0529c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a04aa7a3fb6a443aa527817467d0529c4" kindref="member">unique_ptr</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="372" refid="classunique__ptr_1afbeafb2421d40f94c069e7b339164353" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_1afbeafb2421d40f94c069e7b339164353" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="373"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="374"><highlight class="normal"></highlight></codeline>
+<codeline lineno="380"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter&gt;</highlight></codeline>
+<codeline lineno="381" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>&lt;T[],<sp/>Deleter&gt;<sp/>{</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DeleterConstraint<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>inner::__unique_ptr_impl&lt;T,<sp/>U&gt;::DeleterConstraint::type;<sp/></highlight></codeline>
+<codeline lineno="384"><highlight class="normal"></highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/>inner::__unique_ptr_data&lt;T,<sp/>Deleter&gt;<sp/>data_{};<sp/></highlight></codeline>
+<codeline lineno="386"><highlight class="normal"></highlight></codeline>
+<codeline lineno="387"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="388" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>inner::__unique_ptr_impl&lt;T,<sp/>Deleter&gt;::pointer;<sp/></highlight></codeline>
+<codeline lineno="389" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" kindref="member">element_type</ref><sp/>=<sp/>T;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="390" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref><sp/>=<sp/>Deleter;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="391"><highlight class="normal"></highlight></codeline>
+<codeline lineno="392"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>UP<sp/>=<sp/>unique_ptr&lt;U,<sp/>E&gt;,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>UP_po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">er<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>UP::po</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">er,</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>UP_element_type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>UP::element_type&gt;</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">safe_conversion<sp/>=</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structconjunction" kindref="compound">conjunction&lt;is_array&lt;U&gt;</ref>,<sp/><ref refid="structis__same" kindref="compound">is_same&lt;pointer, element_type*&gt;</ref>,<sp/><ref refid="structis__same" kindref="compound">is_same&lt;UP_pointer, UP_element_type*&gt;</ref>,</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt;UP_element_type<sp/>(*)[],<sp/><ref refid="classunique__ptr_1a5b0e52953588ac3a4d9bb65ca3ddfbc0" kindref="member">element_type</ref><sp/>(*)[]&gt;&gt;;</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"></highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">safe_conversion_raw<sp/>=</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structconjunction" kindref="compound">conjunction&lt;disjunction&lt;disjunction&lt;is_same&lt;U, pointer&gt;</ref>,<sp/><ref refid="structis__same" kindref="compound">is_same&lt;U, nullptr_t&gt;</ref>&gt;,</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structconjunction" kindref="compound">conjunction&lt;is_pointer&lt;U&gt;</ref>,<sp/><ref refid="structis__same" kindref="compound">is_same&lt;pointer, element_type*&gt;</ref>,</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structis__convertible" kindref="compound">is_convertible&lt;remove_pointer_t&lt;U&gt;</ref><sp/>(*)[],<sp/><ref refid="classunique__ptr_1a5b0e52953588ac3a4d9bb65ca3ddfbc0" kindref="member">element_type</ref><sp/>(*)[]&gt;&gt;&gt;&gt;;</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"></highlight></codeline>
+<codeline lineno="405"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>Deleter,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>=<sp/>DeleterConstra</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&lt;Del&gt;,</highlight></codeline>
+<codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>enable_if_t&lt;safe_conversion_raw&lt;U&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="414" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>(U<sp/>ptr)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(ptr)<sp/>{}</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"></highlight></codeline>
+<codeline lineno="424"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/><ref refid="classunique__ptr_1a4d0c960b47f45e09fa187a23e4e10204" kindref="member">deleter_type</ref>,</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;conjunction&lt;safe_conversion_raw&lt;U&gt;</ref>,<sp/><ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible&lt;Del&gt;</ref>&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="426" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8e4e3f9349fad379cd3c58b8cf0c53dc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8e4e3f9349fad379cd3c58b8cf0c53dc" kindref="member">unique_ptr</ref>(U<sp/>ptr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref>&amp;<sp/>deleter)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(ptr,<sp/>deleter)<sp/>{}</highlight></codeline>
+<codeline lineno="428"><highlight class="normal"></highlight></codeline>
+<codeline lineno="436"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/><ref refid="classunique__ptr_1a4d0c960b47f45e09fa187a23e4e10204" kindref="member">deleter_type</ref>,</highlight></codeline>
+<codeline lineno="437"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;conjunction&lt;safe_conversion_raw&lt;U&gt;</ref>,<sp/><ref refid="structis__move__constructible" kindref="compound">is_move_constructible&lt;Del&gt;</ref>&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="438" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a007644845a7ac5df7d978b2d490b86b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a007644845a7ac5df7d978b2d490b86b4" kindref="member">unique_ptr</ref>(U<sp/>ptr,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" kindref="member">is_lvalue_reference&lt;Del&gt;::value</ref>,<sp/>Del&amp;&amp;&gt;<sp/>deleter)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="439"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ptr),<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(deleter))<sp/>{}</highlight></codeline>
+<codeline lineno="440"><highlight class="normal"></highlight></codeline>
+<codeline lineno="444"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>deleter_type,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DelMoveRef<sp/>=<sp/>remove_reference_t&lt;Del&gt;,</highlight></codeline>
+<codeline lineno="445"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>enable_if_t&lt;safe_conversion_raw&lt;U&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="446" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a2ee129da9363b6b3475290f1509a26da" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a2ee129da9363b6b3475290f1509a26da" kindref="member">unique_ptr</ref>(U,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;<ref refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" kindref="member">is_lvalue_reference&lt;Del&gt;::value</ref>,<sp/>DelMoveRef&amp;&amp;&gt;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="447"><highlight class="normal"></highlight></codeline>
+<codeline lineno="448" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a036c26c7881d6e934e2467c4094470f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a036c26c7881d6e934e2467c4094470f2" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="449"><highlight class="normal"></highlight></codeline>
+<codeline lineno="454"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Del<sp/>=<sp/>Deleter,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>=<sp/>DeleterConstra</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&lt;Del&gt;&gt;</highlight></codeline>
+<codeline lineno="455" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a730f845540bdebd23e29dbc5af946581" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a730f845540bdebd23e29dbc5af946581" kindref="member">unique_ptr</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>noexcept<sp/>{}</highlight></codeline>
+<codeline lineno="456"><highlight class="normal"></highlight></codeline>
+<codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E,</highlight></codeline>
+<codeline lineno="464"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;conjunction&lt;safe_conversion&lt;U, E&gt;</ref>,</highlight></codeline>
+<codeline lineno="465"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t&lt;is_reference&lt;Deleter&gt;::value</ref>,<sp/><ref refid="structis__same" kindref="compound">is_same&lt;E, Deleter&gt;</ref>,</highlight></codeline>
+<codeline lineno="466"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structis__convertible" kindref="compound">is_convertible&lt;E, Deleter&gt;</ref>&gt;&gt;::value,</highlight></codeline>
+<codeline lineno="467"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="468" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a73848629a27adffebcc5c8a47a330e6e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a73848629a27adffebcc5c8a47a330e6e" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr&lt;U, E&gt;</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="469"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(other.release(),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;E&gt;</ref>(other.get_deleter()))<sp/>{}</highlight></codeline>
+<codeline lineno="470"><highlight class="normal"></highlight></codeline>
+<codeline lineno="474" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a90cd8a46e18a6842ed8ed1d30c0d9e0a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a90cd8a46e18a6842ed8ed1d30c0d9e0a" kindref="member">~unique_ptr</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="475"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ptr<sp/>=<sp/>data_.get_ptr();</highlight></codeline>
+<codeline lineno="476"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ptr<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="477"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>()(ptr);</highlight></codeline>
+<codeline lineno="478"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="479"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr<sp/>=<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>();</highlight></codeline>
+<codeline lineno="480"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="481"><highlight class="normal"></highlight></codeline>
+<codeline lineno="482" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a2d549d3e328c2c71b7e13aa054887e49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a2d549d3e328c2c71b7e13aa054887e49" kindref="member">operator=</ref>(<ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="483"><highlight class="normal"></highlight></codeline>
+<codeline lineno="491"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E,</highlight></codeline>
+<codeline lineno="492"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;conjunction_v&lt;safe_conversion&lt;U, E&gt;</ref>,<sp/><ref refid="structis__assignable" kindref="compound">is_assignable&lt;deleter_type&amp;, E&amp;&amp;&gt;</ref>&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="493" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ad1f11fdde703e70ac712dfea679c0fc8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ad1f11fdde703e70ac712dfea679c0fc8" kindref="member">operator=</ref>(<ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr&lt;U, E&gt;</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="494"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" kindref="member">unique_ptr::reset</ref>(other.release());</highlight></codeline>
+<codeline lineno="495"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>()<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;E&gt;</ref>(other.get_deleter());</highlight></codeline>
+<codeline lineno="496"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="497"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="498"><highlight class="normal"></highlight></codeline>
+<codeline lineno="503" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1accad32a5dda96be9d8c9522ec1dc5dc3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1accad32a5dda96be9d8c9522ec1dc5dc3" kindref="member">operator=</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="504"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" kindref="member">reset</ref>();</highlight></codeline>
+<codeline lineno="505"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="506"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="507"><highlight class="normal"></highlight></codeline>
+<codeline lineno="513" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a419a6712835ceb63c2332d96fae3327e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="group___add_qualifiers_1gac084a21f7a057df50ed3f436567e993f" kindref="member">add_lvalue_reference_t&lt;element_type&gt;</ref><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a419a6712835ceb63c2332d96fae3327e" kindref="member">operator[]</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>idx)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="514"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>!=<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>(),<sp/></highlight><highlight class="stringliteral">&quot;_NEFORCE<sp/>add_lvalue_reference_t&lt;element_type&gt;<sp/>failed&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="515"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()[idx];</highlight></codeline>
+<codeline lineno="516"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="517"><highlight class="normal"></highlight></codeline>
+<codeline lineno="521" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a94f46cbb8e45deafbf4458282d9e3809" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a94f46cbb8e45deafbf4458282d9e3809" kindref="member">get</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.get_ptr();<sp/>}</highlight></codeline>
+<codeline lineno="522"><highlight class="normal"></highlight></codeline>
+<codeline lineno="526" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a555e3e95e5899d41276d58bf27d11462" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref>&amp;<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a555e3e95e5899d41276d58bf27d11462" kindref="member">get_deleter</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.get_deleter();<sp/>}</highlight></codeline>
+<codeline lineno="527"><highlight class="normal"></highlight></codeline>
+<codeline lineno="531" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a0397d22ea05cd43bc444504cd2a69597" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref>&amp;<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a0397d22ea05cd43bc444504cd2a69597" kindref="member">get_deleter</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.get_deleter();<sp/>}</highlight></codeline>
+<codeline lineno="532"><highlight class="normal"></highlight></codeline>
+<codeline lineno="537" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ab8c3eb74c61eed55b2ad0d82307e9b7e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>==<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>()<sp/>?<sp/>false<sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="538"><highlight class="normal"></highlight></codeline>
+<codeline lineno="542" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1afeb39ccd70dade8f8fb67c87701b490d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1afeb39ccd70dade8f8fb67c87701b490d" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.release();<sp/>}</highlight></codeline>
+<codeline lineno="543"><highlight class="normal"></highlight></codeline>
+<codeline lineno="549"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,</highlight></codeline>
+<codeline lineno="550"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;<ref refid="structconjunction" kindref="compound">conjunction</ref>&lt;<ref refid="structdisjunction" kindref="compound">disjunction</ref>&lt;</highlight></codeline>
+<codeline lineno="551"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structis__same" kindref="compound">is_same&lt;U, pointer&gt;</ref>,</highlight></codeline>
+<codeline lineno="552"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structconjunction" kindref="compound">conjunction&lt;is_same&lt;pointer, element_type*&gt;</ref>,<sp/><ref refid="structis__pointer" kindref="compound">is_pointer&lt;U&gt;</ref>,</highlight></codeline>
+<codeline lineno="553"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structis__convertible" kindref="compound">is_convertible&lt;remove_pointer_t&lt;U&gt;</ref><sp/>(*)[],<sp/><ref refid="classunique__ptr_1a5b0e52953588ac3a4d9bb65ca3ddfbc0" kindref="member">element_type</ref><sp/>(*)[]&gt;&gt;&gt;&gt;::value,</highlight></codeline>
+<codeline lineno="554"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="555" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9e16512f0f1ee0f05ccebe9fd4199d15" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9e16512f0f1ee0f05ccebe9fd4199d15" kindref="member">reset</ref>(U<sp/>ptr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="556"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.reset(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ptr));</highlight></codeline>
+<codeline lineno="557"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="558"><highlight class="normal"></highlight></codeline>
+<codeline lineno="562" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a3b9e3e5a15f0865eb7d104f9498d052c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a3b9e3e5a15f0865eb7d104f9498d052c" kindref="member">reset</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>noexcept<sp/>{<sp/><ref refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" kindref="member">unique_ptr::reset</ref>(<ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="563"><highlight class="normal"></highlight></codeline>
+<codeline lineno="568" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8a09e0389ccad830e6eb29f8b5333b57" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8a09e0389ccad830e6eb29f8b5333b57" kindref="member">swap</ref>(<ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>data_.swap(other.data_);<sp/>}</highlight></codeline>
+<codeline lineno="569"><highlight class="normal"></highlight></codeline>
+<codeline lineno="570" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af7b8378e519200606d28105970b6a595" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af7b8378e519200606d28105970b6a595" kindref="member">unique_ptr</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="571" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a811910b5dc18f52dd96f853c80f3f37a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a811910b5dc18f52dd96f853c80f3f37a" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" kindref="member">unique_ptr</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="572"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="573"><highlight class="normal"></highlight></codeline>
+<codeline lineno="581"><highlight class="normal">template<sp/>&lt;typename<sp/>T,<sp/>typename<sp/>Deleter,<sp/>enable_if_t&lt;is_swappable&lt;Deleter&gt;::value<sp/>&amp;&amp;<sp/><ref refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" kindref="member">is_swappable&lt;T&gt;::value</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="582" refid="group___unique_pointer_1ga3def886ee466fc780671110b23c22e0d" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(<ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, Deleter&gt;</ref>&amp;<sp/>lhs,<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, Deleter&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="583"><highlight class="normal"><sp/><sp/><sp/><sp/>lhs.swap(rhs);</highlight></codeline>
+<codeline lineno="584"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="585"><highlight class="normal"></highlight></codeline>
+<codeline lineno="596"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E&gt;</highlight></codeline>
+<codeline lineno="597" refid="group___unique_pointer_1ga2e039c6b9e49d933db1ac1539445e924" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1ga2e039c6b9e49d933db1ac1539445e924" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, E&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="598"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>==<sp/>rhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>();</highlight></codeline>
+<codeline lineno="599"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="600"><highlight class="normal"></highlight></codeline>
+<codeline lineno="608"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="609" refid="group___unique_pointer_1gafd5d8431a973b7e88c2b83662ed5b553" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1ga2e039c6b9e49d933db1ac1539445e924" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="610"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!lhs;</highlight></codeline>
+<codeline lineno="611"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="612"><highlight class="normal"></highlight></codeline>
+<codeline lineno="620"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="621" refid="group___unique_pointer_1ga5c5d88f05ed7eea2ba7cd8f22ae2c900" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1ga2e039c6b9e49d933db1ac1539445e924" kindref="member">operator==</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="622"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!rhs;</highlight></codeline>
+<codeline lineno="623"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="624"><highlight class="normal"></highlight></codeline>
+<codeline lineno="635"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E&gt;</highlight></codeline>
+<codeline lineno="636" refid="group___unique_pointer_1ga0d10eece7e529593dc6583c08d4aa0ba" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1ga0d10eece7e529593dc6583c08d4aa0ba" kindref="member">operator!=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, E&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="637"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>!=<sp/>rhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>();</highlight></codeline>
+<codeline lineno="638"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="639"><highlight class="normal"></highlight></codeline>
+<codeline lineno="647"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="648" refid="group___unique_pointer_1gaa81f43cac5be85f21cb5fc7aa8897a81" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1ga0d10eece7e529593dc6583c08d4aa0ba" kindref="member">operator!=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="649"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(lhs);</highlight></codeline>
+<codeline lineno="650"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="651"><highlight class="normal"></highlight></codeline>
+<codeline lineno="659"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="660" refid="group___unique_pointer_1ga9d36175d06f29041f3b87d1992eb9c82" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1ga0d10eece7e529593dc6583c08d4aa0ba" kindref="member">operator!=</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="661"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(rhs);</highlight></codeline>
+<codeline lineno="662"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="663"><highlight class="normal"></highlight></codeline>
+<codeline lineno="674"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E&gt;</highlight></codeline>
+<codeline lineno="675" refid="group___unique_pointer_1gac57ff1dd79c7a12174cfb51867d3b6b5" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1gac57ff1dd79c7a12174cfb51867d3b6b5" kindref="member">operator&lt;</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, E&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="676"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">common_t<sp/>=<sp/><ref refid="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" kindref="member">common_type_t&lt;typename unique_ptr&lt;T, D&gt;::pointer</ref>,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">unique_ptr&lt;U, E&gt;::pointer</ref>&gt;;</highlight></codeline>
+<codeline lineno="677"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="structless" kindref="compound">less&lt;common_t&gt;</ref>()(lhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>(),<sp/>rhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>());</highlight></codeline>
+<codeline lineno="678"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="679"><highlight class="normal"></highlight></codeline>
+<codeline lineno="687"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="688" refid="group___unique_pointer_1gacb305365ebe27fa4b08f8366746d16e8" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1gac57ff1dd79c7a12174cfb51867d3b6b5" kindref="member">operator&lt;</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="689"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="structless" kindref="compound">less&lt;typename unique_ptr&lt;T, D&gt;::pointer</ref>&gt;()(lhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>(),<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="690"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="691"><highlight class="normal"></highlight></codeline>
+<codeline lineno="699"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="700" refid="group___unique_pointer_1ga62d95b48fc30554a8a17bae773cd28e9" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1gac57ff1dd79c7a12174cfb51867d3b6b5" kindref="member">operator&lt;</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="701"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="structless" kindref="compound">less&lt;typename unique_ptr&lt;T, D&gt;::pointer</ref>&gt;()(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>rhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>());</highlight></codeline>
+<codeline lineno="702"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="703"><highlight class="normal"></highlight></codeline>
+<codeline lineno="714"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E&gt;</highlight></codeline>
+<codeline lineno="715" refid="group___unique_pointer_1gaf4c9e805e471b53f0d1758160d98c075" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1gaf4c9e805e471b53f0d1758160d98c075" kindref="member">operator&gt;</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, E&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="716"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>rhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>&lt;<sp/>lhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>();</highlight></codeline>
+<codeline lineno="717"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="718"><highlight class="normal"></highlight></codeline>
+<codeline lineno="726"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="727" refid="group___unique_pointer_1gaf24cc2d1dc41828a7dadc44989277be3" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1gaf4c9e805e471b53f0d1758160d98c075" kindref="member">operator&gt;</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="728"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="structless" kindref="compound">less&lt;typename unique_ptr&lt;T, D&gt;::pointer</ref>&gt;()(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>lhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>());</highlight></codeline>
+<codeline lineno="729"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="730"><highlight class="normal"></highlight></codeline>
+<codeline lineno="738"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="739" refid="group___unique_pointer_1ga641dcafc05495ad745fe78f409626369" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1gaf4c9e805e471b53f0d1758160d98c075" kindref="member">operator&gt;</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="740"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="structless" kindref="compound">less&lt;typename unique_ptr&lt;T, D&gt;::pointer</ref>&gt;()(rhs.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>(),<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="741"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="742"><highlight class="normal"></highlight></codeline>
+<codeline lineno="753"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E&gt;</highlight></codeline>
+<codeline lineno="754" refid="group___unique_pointer_1gad817ab15dc22c8dd18504afbbadb5073" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1gad817ab15dc22c8dd18504afbbadb5073" kindref="member">operator&lt;=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, E&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="755"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(lhs<sp/>&gt;<sp/>rhs);</highlight></codeline>
+<codeline lineno="756"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="757"><highlight class="normal"></highlight></codeline>
+<codeline lineno="765"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="766" refid="group___unique_pointer_1gad41de667371a616e5aa51830795b25e6" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1gad817ab15dc22c8dd18504afbbadb5073" kindref="member">operator&lt;=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="767"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(lhs<sp/>&gt;<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="768"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="769"><highlight class="normal"></highlight></codeline>
+<codeline lineno="777"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="778" refid="group___unique_pointer_1gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1gad817ab15dc22c8dd18504afbbadb5073" kindref="member">operator&lt;=</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="779"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>&gt;<sp/>rhs);</highlight></codeline>
+<codeline lineno="780"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="781"><highlight class="normal"></highlight></codeline>
+<codeline lineno="792"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E&gt;</highlight></codeline>
+<codeline lineno="793" refid="group___unique_pointer_1ga366aeaf83540a81f667c532c781530e3" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1ga366aeaf83540a81f667c532c781530e3" kindref="member">operator&gt;=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, E&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="794"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(lhs<sp/>&lt;<sp/>rhs);</highlight></codeline>
+<codeline lineno="795"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="796"><highlight class="normal"></highlight></codeline>
+<codeline lineno="804"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="805" refid="group___unique_pointer_1ga5ddd67c0ff52ee718fde2ce960b50f0c" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1ga366aeaf83540a81f667c532c781530e3" kindref="member">operator&gt;=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>lhs,<sp/><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="806"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(lhs<sp/>&lt;<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="807"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="808"><highlight class="normal"></highlight></codeline>
+<codeline lineno="816"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>D&gt;</highlight></codeline>
+<codeline lineno="817" refid="group___unique_pointer_1ga9d125b022b79c38f6384b92692ebd2a1" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1ga366aeaf83540a81f667c532c781530e3" kindref="member">operator&gt;=</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, D&gt;</ref>&amp;<sp/>rhs)<sp/>{</highlight></codeline>
+<codeline lineno="818"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>&lt;<sp/>rhs);</highlight></codeline>
+<codeline lineno="819"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="820"><highlight class="normal"></highlight></codeline>
+<codeline lineno="821"><highlight class="normal"></highlight></codeline>
+<codeline lineno="830"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter&gt;</highlight></codeline>
+<codeline lineno="831" refid="group___unique_pointer_1gad594540a669260eea0cca34015b4653c" refkind="member"><highlight class="normal"><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, Deleter&gt;</ref><sp/><ref refid="group___unique_pointer_1gad594540a669260eea0cca34015b4653c" kindref="member">static_pointer_cast</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, Deleter&gt;</ref>&amp;<sp/>ptr)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="832"><highlight class="normal"></highlight></codeline>
+<codeline lineno="841"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter&gt;</highlight></codeline>
+<codeline lineno="842" refid="group___unique_pointer_1gae2b923cda7dca9d7b9a3d7a0d8c36223" refkind="member"><highlight class="normal"><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, Deleter&gt;</ref><sp/><ref refid="group___unique_pointer_1gae2b923cda7dca9d7b9a3d7a0d8c36223" kindref="member">const_pointer_cast</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, Deleter&gt;</ref>&amp;<sp/>ptr)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="843"><highlight class="normal"></highlight></codeline>
+<codeline lineno="852"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter&gt;</highlight></codeline>
+<codeline lineno="853" refid="group___unique_pointer_1ga76599839c521de4c36c0ab2813670317" refkind="member"><highlight class="normal"><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, Deleter&gt;</ref><sp/><ref refid="group___unique_pointer_1ga76599839c521de4c36c0ab2813670317" kindref="member">reinterpret_pointer_cast</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, Deleter&gt;</ref>&amp;<sp/>ptr)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="854"><highlight class="normal"></highlight></codeline>
+<codeline lineno="863"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter&gt;</highlight></codeline>
+<codeline lineno="864" refid="group___unique_pointer_1ga8466e5182516a72b5d5d667434dde851" refkind="member"><highlight class="normal"><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, Deleter&gt;</ref><sp/><ref refid="group___unique_pointer_1ga8466e5182516a72b5d5d667434dde851" kindref="member">dynamic_pointer_cast</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, Deleter&gt;</ref>&amp;<sp/>ptr)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="865"><highlight class="normal"></highlight></codeline>
+<codeline lineno="866"><highlight class="normal"></highlight></codeline>
+<codeline lineno="877"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DeleterT,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DeleterU&gt;</highlight></codeline>
+<codeline lineno="878" refid="group___unique_pointer_1ga8c4222e9004a639aac55ce24ec209c86" refkind="member"><highlight class="normal">NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, DeleterT&gt;</ref><sp/><ref refid="group___unique_pointer_1gad594540a669260eea0cca34015b4653c" kindref="member">static_pointer_cast</ref>(<ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, DeleterU&gt;</ref>&amp;&amp;<sp/>ptr)<sp/>{</highlight></codeline>
+<codeline lineno="879"><highlight class="normal"><sp/><sp/><sp/><sp/>DeleterU&amp;&amp;<sp/>deleter<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ptr).<ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>();</highlight></codeline>
+<codeline lineno="880"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, DeleterT&gt;</ref>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(ptr.release()),<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(deleter).</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>rebind&lt;T&gt;());</highlight></codeline>
+<codeline lineno="881"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="882"><highlight class="normal"></highlight></codeline>
+<codeline lineno="893"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DeleterT,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DeleterU&gt;</highlight></codeline>
+<codeline lineno="894" refid="group___unique_pointer_1gaff521462e36faa64ae1c49af9d3764b9" refkind="member"><highlight class="normal">NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, DeleterT&gt;</ref><sp/><ref refid="group___unique_pointer_1gae2b923cda7dca9d7b9a3d7a0d8c36223" kindref="member">const_pointer_cast</ref>(<ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, DeleterU&gt;</ref>&amp;&amp;<sp/>ptr)<sp/>{</highlight></codeline>
+<codeline lineno="895"><highlight class="normal"><sp/><sp/><sp/><sp/>DeleterU&amp;&amp;<sp/>deleter<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ptr).<ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>();</highlight></codeline>
+<codeline lineno="896"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, DeleterT&gt;</ref>(</highlight><highlight class="keyword">const_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(ptr.release()),<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(deleter).</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>rebind&lt;T&gt;());</highlight></codeline>
+<codeline lineno="897"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="898"><highlight class="normal"></highlight></codeline>
+<codeline lineno="909"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DeleterT,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DeleterU&gt;</highlight></codeline>
+<codeline lineno="910" refid="group___unique_pointer_1ga5b7c0b0025c36f71ae411090dab937da" refkind="member"><highlight class="normal"><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, DeleterT&gt;</ref><sp/><ref refid="group___unique_pointer_1ga76599839c521de4c36c0ab2813670317" kindref="member">reinterpret_pointer_cast</ref>(<ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, DeleterU&gt;</ref>&amp;&amp;<sp/>ptr)<sp/>{</highlight></codeline>
+<codeline lineno="911"><highlight class="normal"><sp/><sp/><sp/><sp/>DeleterU&amp;&amp;<sp/>deleter<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ptr).<ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>();</highlight></codeline>
+<codeline lineno="912"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, DeleterT&gt;</ref>(</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(ptr.release()),<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(deleter).</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>rebind&lt;T&gt;());</highlight></codeline>
+<codeline lineno="913"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="914"><highlight class="normal"></highlight></codeline>
+<codeline lineno="925"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DeleterT,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DeleterU&gt;</highlight></codeline>
+<codeline lineno="926" refid="group___unique_pointer_1ga2d8e39ee27f0bbb613490661597ad679" refkind="member"><highlight class="normal"><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, DeleterT&gt;</ref><sp/><ref refid="group___unique_pointer_1ga8466e5182516a72b5d5d667434dde851" kindref="member">dynamic_pointer_cast</ref>(<ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;U, DeleterU&gt;</ref>&amp;&amp;<sp/>ptr)<sp/>{</highlight></codeline>
+<codeline lineno="927"><highlight class="normal"><sp/><sp/><sp/><sp/>T*<sp/>tmp<sp/>=<sp/></highlight><highlight class="keyword">dynamic_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(ptr.get());</highlight></codeline>
+<codeline lineno="928"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(tmp<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="929"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(void)<sp/>ptr.release();</highlight></codeline>
+<codeline lineno="930"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DeleterU&amp;&amp;<sp/>deleter<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ptr).get_deleter();</highlight></codeline>
+<codeline lineno="931"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{tmp,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(deleter).template<sp/>rebind&lt;T&gt;()};</highlight></codeline>
+<codeline lineno="932"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="933"><highlight class="normal"><sp/><sp/><sp/><sp/>DeleterU&amp;&amp;<sp/>deleter<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ptr).<ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>();</highlight></codeline>
+<codeline lineno="934"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(deleter).template<sp/>rebind&lt;T&gt;()};</highlight></codeline>
+<codeline lineno="935"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="936"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>UniquePointer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="938"><highlight class="normal"></highlight></codeline>
+<codeline lineno="943"><highlight class="normal"></highlight></codeline>
+<codeline lineno="949"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Deleter&gt;</highlight></codeline>
+<codeline lineno="950" refid="structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structhash" kindref="compound">hash</ref>&lt;<ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt;T,<sp/>Deleter&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="951"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>operator()(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T, Deleter&gt;</ref>&amp;<sp/>ptr)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="952"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(</highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="structhash" kindref="compound">hash&lt;T*&gt;</ref>()(ptr.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>())))<sp/>{</highlight></codeline>
+<codeline lineno="953"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhash" kindref="compound">hash&lt;T*&gt;</ref>()(ptr.<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>());</highlight></codeline>
+<codeline lineno="954"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="955"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="956"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>HashPrimary</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="958"><highlight class="normal"></highlight></codeline>
+<codeline lineno="964"><highlight class="normal"></highlight></codeline>
+<codeline lineno="972"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;!is_array&lt;T&gt;::value</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="973" refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" refkind="member"><highlight class="normal">NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T&gt;</ref><sp/><ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique</ref>(Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="974"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T&gt;</ref>(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>T(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Args&gt;</ref>(args)...));</highlight></codeline>
+<codeline lineno="975"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="976"><highlight class="normal"></highlight></codeline>
+<codeline lineno="983"><highlight class="normal">template<sp/>&lt;typename<sp/>T,<sp/>enable_if_t&lt;is_unbounded_array&lt;T&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="984" refid="group___unique_pointer_1gab4d3b888298c124ec2952f99cf23ef9d" refkind="member"><highlight class="normal">NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T&gt;</ref><sp/><ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len)<sp/>{</highlight></codeline>
+<codeline lineno="985"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T&gt;</ref>(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="group___remove_qualifiers_1gaff3a021106d8984e6a7283adfcae4117" kindref="member">remove_extent_t&lt;T&gt;</ref>[len]());</highlight></codeline>
+<codeline lineno="986"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="987"><highlight class="normal"></highlight></codeline>
+<codeline lineno="993"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;is_bounded_array&lt;T&gt;::value</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="994" refid="group___unique_pointer_1gad7eab479e3aa31dc40743c1c0431cd0b" refkind="member"><highlight class="normal"><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T&gt;</ref><sp/><ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique</ref>(Args&amp;&amp;...)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="995"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>UniquePointer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="997"><highlight class="normal"></highlight></codeline>
+<codeline lineno="998"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="999"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_MEMORY_UNIQUE_PTR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp"/>
+  </compounddef>
+</doxygen>

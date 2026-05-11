@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classstacktrace" kind="class" language="C++" prot="public">
+    <compoundname>stacktrace</compoundname>
+    <basecompoundref refid="structistringify" prot="public" virt="non-virtual">istringify&lt; stacktrace &gt;</basecompoundref>
+    <includes refid="stacktrace_8hpp" local="no">stacktrace.hpp</includes>
+    <innerclass refid="classstacktrace_1_1frame" prot="public">stacktrace::frame</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classstacktrace_1a061bc3e98790cbbe4ca730330b76bef2" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classstacktrace_1_1frame" kindref="compound">frame</ref> &gt;</type>
+        <definition>vector&lt;frame&gt; stacktrace::frames_</definition>
+        <argsstring></argsstring>
+        <name>frames_</name>
+        <qualifiedname>stacktrace::frames_</qualifiedname>
+        <briefdescription>
+<para>堆栈帧列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="92" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classstacktrace_1a813ed64b17ef7710a1cb83830c8c7285" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>stacktrace::stacktrace</definition>
+        <argsstring>(size_t skip=0, size_t max_depth=64)</argsstring>
+        <name>stacktrace</name>
+        <qualifiedname>stacktrace::stacktrace</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>skip</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>max_depth</declname>
+          <defval>64</defval>
+        </param>
+        <briefdescription>
+<para>构造函数，捕获当前堆栈 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>skip</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要跳过的帧数（包括当前函数） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_depth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大捕获深度</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+捕获当前线程的调用堆栈，跳过指定数量的顶层帧。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="102" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classstacktrace_1a1756b8f231b7f47d02d2fc4afb2edc67" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD size_t stacktrace::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>stacktrace::size</qualifiedname>
+        <briefdescription>
+<para>获取堆栈深度 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>堆栈帧数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="108" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classstacktrace_1af9fa2eed1377e56cabfd46b339769d37" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool stacktrace::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>stacktrace::empty</qualifiedname>
+        <briefdescription>
+<para>检查堆栈是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="114" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" bodystart="114" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classstacktrace_1aa85775ec20f9e2920cadbf6c4b1caa40" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classstacktrace_1_1frame" kindref="compound">frame</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const frame &amp; stacktrace::operator[]</definition>
+        <argsstring>(const size_t idx) const noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>stacktrace::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>常量索引访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应位置的堆栈帧常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="121" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" bodystart="121" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classstacktrace_1ae1c787a07f7a71bad575db38a8b2ab2b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classstacktrace_1_1frame" kindref="compound">frame</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD frame &amp; stacktrace::operator[]</definition>
+        <argsstring>(const size_t idx) noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>stacktrace::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>索引访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应位置的堆栈帧引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="128" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" bodystart="128" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="classstacktrace_1a8e0407e64b0790a2e00fb4b557307dfe" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD auto</type>
+        <definition>NEFORCE_NODISCARD auto stacktrace::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>stacktrace::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始常量迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="134" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" bodystart="134" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classstacktrace_1a3476bfbbd09c21a809651dc14ace3b13" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD auto</type>
+        <definition>NEFORCE_NODISCARD auto stacktrace::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>stacktrace::end</qualifiedname>
+        <briefdescription>
+<para>获取结束常量迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="140" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" bodystart="140" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classstacktrace_1af021a7962620aaec9e7c79816a7a791a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD auto</type>
+        <definition>NEFORCE_NODISCARD auto stacktrace::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>stacktrace::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取起始常量迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="146" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" bodystart="146" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classstacktrace_1ad21d0b9cac9ac8e0bdcaa76885806aba" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD auto</type>
+        <definition>NEFORCE_NODISCARD auto stacktrace::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>stacktrace::cend</qualifiedname>
+        <briefdescription>
+<para>获取结束常量迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="152" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" bodystart="152" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classstacktrace_1a033fa5d7619565f286d595bd86b4054e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string stacktrace::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>stacktrace::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式化的完整堆栈信息</para>
+</simplesect>
+每行格式：#索引 地址 [in 函数名] </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="160" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>堆栈跟踪类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>捕获当前线程的调用堆栈，并提供对堆栈帧的访问。 支持符号名称解析和格式化的堆栈输出。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>istringify&lt; stacktrace &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>stacktrace</label>
+        <link refid="classstacktrace"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>istringify&lt; stacktrace &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>stacktrace</label>
+        <link refid="classstacktrace"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" line="29" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/stacktrace.hpp" bodystart="29" bodyend="161"/>
+    <listofallmembers>
+      <member refid="classstacktrace_1a8e0407e64b0790a2e00fb4b557307dfe" prot="public" virt="non-virtual"><scope>stacktrace</scope><name>begin</name></member>
+      <member refid="classstacktrace_1af021a7962620aaec9e7c79816a7a791a" prot="public" virt="non-virtual"><scope>stacktrace</scope><name>cbegin</name></member>
+      <member refid="classstacktrace_1ad21d0b9cac9ac8e0bdcaa76885806aba" prot="public" virt="non-virtual"><scope>stacktrace</scope><name>cend</name></member>
+      <member refid="classstacktrace_1af9fa2eed1377e56cabfd46b339769d37" prot="public" virt="non-virtual"><scope>stacktrace</scope><name>empty</name></member>
+      <member refid="classstacktrace_1a3476bfbbd09c21a809651dc14ace3b13" prot="public" virt="non-virtual"><scope>stacktrace</scope><name>end</name></member>
+      <member refid="classstacktrace_1a061bc3e98790cbbe4ca730330b76bef2" prot="private" virt="non-virtual"><scope>stacktrace</scope><name>frames_</name></member>
+      <member refid="classstacktrace_1aa85775ec20f9e2920cadbf6c4b1caa40" prot="public" virt="non-virtual"><scope>stacktrace</scope><name>operator[]</name></member>
+      <member refid="classstacktrace_1ae1c787a07f7a71bad575db38a8b2ab2b" prot="public" virt="non-virtual"><scope>stacktrace</scope><name>operator[]</name></member>
+      <member refid="classstacktrace_1a1756b8f231b7f47d02d2fc4afb2edc67" prot="public" virt="non-virtual"><scope>stacktrace</scope><name>size</name></member>
+      <member refid="classstacktrace_1a813ed64b17ef7710a1cb83830c8c7285" prot="public" virt="non-virtual"><scope>stacktrace</scope><name>stacktrace</name></member>
+      <member refid="classstacktrace_1a033fa5d7619565f286d595bd86b4054e" prot="public" virt="non-virtual"><scope>stacktrace</scope><name>to_string</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

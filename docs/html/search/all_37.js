@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['典型应用场景_0',['典型应用场景',['../group___bloom_filter.html#applications',1,'']]]
+  ['元组_0',['元组',['../group___tuple.html',1,'']]]
 ];

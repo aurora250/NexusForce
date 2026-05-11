@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___m_s_v_c_compiler_intrinsics" kind="group">
+    <compoundname>MSVCCompilerIntrinsics</compoundname>
+    <title>MSVC内部函数替代实现</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___m_s_v_c_compiler_intrinsics_1gab4c7185568f88aa1b6c53eb768e6973b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uint8_t _addcarry_u64</definition>
+        <argsstring>(const uint8_t carry_in, const uint64_t a, const uint64_t b, uint64_t *out) noexcept</argsstring>
+        <name>_addcarry_u64</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+          <declname>carry_in</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> *</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>带进位的64位无符号加法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>carry_in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进位输入（0或1） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个加数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个加数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出结果（低64位） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>进位输出（0或1）</para>
+</simplesect>
+计算 a + b + carry_in，结果存入out，返回进位标志。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/config/msvc_intrinsic.hpp" line="36" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/config/msvc_intrinsic.hpp" bodystart="36" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="group___m_s_v_c_compiler_intrinsics_1ga390f113f6c4ce609f5a2119b1543deb9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uint8_t _subborrow_u64</definition>
+        <argsstring>(const uint8_t borrow_in, const uint64_t a, const uint64_t b, uint64_t *out) noexcept</argsstring>
+        <name>_subborrow_u64</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+          <declname>borrow_in</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> *</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>带借位的64位无符号减法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>borrow_in</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>借位输入（0或1） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被减数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>减数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出结果（低64位） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>借位输出（0或1）</para>
+</simplesect>
+计算 a - b - borrow_in，结果存入out，返回借位标志。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/config/msvc_intrinsic.hpp" line="60" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/config/msvc_intrinsic.hpp" bodystart="60" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="group___m_s_v_c_compiler_intrinsics_1ga9185eaeb22c3a505558c61664c132766" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uint64_t _umul128</definition>
+        <argsstring>(const uint64_t a, const uint64_t b, uint64_t *hi_out) noexcept</argsstring>
+        <name>_umul128</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> *</type>
+          <declname>hi_out</declname>
+        </param>
+        <briefdescription>
+<para>64位无符号乘法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个乘数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个乘数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hi_out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出结果的高64位 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>结果的低64位</para>
+</simplesect>
+计算 a * b 的128位结果，低64位作为返回值，高64位存入hi_out。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/config/msvc_intrinsic.hpp" line="86" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/config/msvc_intrinsic.hpp" bodystart="86" bodyend="103"/>
+        <referencedby refid="group___m_s_v_c_compiler_intrinsics_1ga6327e37e5117d9bcd0f3b58ff23f7669" compoundref="msvc__intrinsic_8hpp" startline="149" endline="236">_udiv128</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___m_s_v_c_compiler_intrinsics_1gaf35f7b48fb9f628df1ea781775838eac" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_BEGIN_INNER__ NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_BEGIN_INNER__ NEFORCE_CONSTEXPR14 uint32_t div_digit</definition>
+        <argsstring>(const uint64_t u_hi32_lo32, const uint32_t v_hi, const uint32_t v_lo, uint64_t *rem_out) noexcept</argsstring>
+        <name>div_digit</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>u_hi32_lo32</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>v_hi</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>v_lo</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> *</type>
+          <declname>rem_out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/config/msvc_intrinsic.hpp" line="106" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/config/msvc_intrinsic.hpp" bodystart="106" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="group___m_s_v_c_compiler_intrinsics_1ga6327e37e5117d9bcd0f3b58ff23f7669" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_END_INNER__ NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_END_INNER__ NEFORCE_CONSTEXPR14 uint64_t _udiv128</definition>
+        <argsstring>(const uint64_t dividend_hi, const uint64_t dividend_lo, uint64_t divisor, uint64_t *remainder) noexcept</argsstring>
+        <name>_udiv128</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>dividend_hi</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>dividend_lo</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>divisor</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> *</type>
+          <declname>remainder</declname>
+        </param>
+        <briefdescription>
+<para>128位无符号除法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dividend_hi</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被除数的高64位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dividend_lo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被除数的低64位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>divisor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数（64位） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>remainder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出余数（可为空） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>商（64位）</para>
+</simplesect>
+计算 (dividend_hi &lt;&lt; 64 | dividend_lo) / divisor，返回商，余数存入remainder。</para>
+<para>算法基于Knuth的D算法（长除法），支持任意64位除数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/config/msvc_intrinsic.hpp" line="149" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/config/msvc_intrinsic.hpp" bodystart="149" bodyend="236"/>
+        <references refid="group___m_s_v_c_compiler_intrinsics_1ga9185eaeb22c3a505558c61664c132766" compoundref="msvc__intrinsic_8hpp" startline="86" endline="103">_umul128</references>
+        <references refid="group___bit_manipulation_1ga29f6f826c8059121f269f3948a1542d4" compoundref="bit_8hpp" startline="74" endline="103">clz64</references>
+        <references refid="group___math_functions_1gabc4025ee1596355ee63d616923292504" compoundref="math_8hpp" startline="809" endline="814">remainder</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MSVC编译器内部函数的替代实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

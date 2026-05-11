@@ -1,0 +1,345 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___pair" kind="group">
+    <compoundname>Pair</compoundname>
+    <title>键值对</title>
+    <innerclass refid="structpair" prot="public">pair</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___pair_1ga1145f95a262f79865247b6744e474069" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>pair</definition>
+        <argsstring>(T1, T2) -&gt; pair&lt; T1, T2 &gt;</argsstring>
+        <name>pair</name>
+        <param>
+          <type>T1</type>
+        </param>
+        <param>
+          <type>T2</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="458" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" declline="458" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___pair_1ga3fc92626b5f2ddb8e7b4cd5f6ccde69e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="conjunction&lt; is_nothrow_constructible&lt; unwrap_ref_decay_t&lt; T1 &gt;, T1 &gt;, is_nothrow_constructible&lt; unwrap_ref_decay_t&lt; T2 &gt;, T2 &gt; &gt;::value" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="group___reference_wrapper_1gab50d469d33ed56a0ce32f87d03ac5f10" kindref="member">unwrap_ref_decay_t</ref>&lt; T1 &gt;, <ref refid="group___reference_wrapper_1gab50d469d33ed56a0ce32f87d03ac5f10" kindref="member">unwrap_ref_decay_t</ref>&lt; T2 &gt; &gt;</type>
+        <definition>pair&lt; unwrap_ref_decay_t&lt; T1 &gt;, unwrap_ref_decay_t&lt; T2 &gt; &gt; make_pair</definition>
+        <argsstring>(T1 &amp;&amp;x, T2 &amp;&amp;y)</argsstring>
+        <name>make_pair</name>
+        <param>
+          <type>T1 &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>T2 &amp;&amp;</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+<para>创建pair的辅助函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个元素的类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个元素的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个元素的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个元素的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>构造的pair对象</para>
+</simplesect>
+会自动解包reference_wrapper，支持完美转发 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="474" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="474" bodyend="478"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <referencedby refid="group___compare_algorithms_1ga396286e554573557c1781c8b3bae3860" compoundref="compare_8hpp" startline="98" endline="102">equal_range</referencedby>
+        <referencedby refid="group___compare_algorithms_1gaafcb422504addb63d771b9061f7533a9" compoundref="compare_8hpp" startline="337" endline="376">minmax_element</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga879896fd048c11390116bfa1701cdafa" compoundref="compare_8hpp" startline="529" endline="537">mismatch</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___pair_1ga88fcba61316d5dbeb48991ff865be0fb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt; Index, <ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr tuple_element_t&lt; Index, pair&lt; T1, T2 &gt; &gt; &amp; get</definition>
+        <argsstring>(pair&lt; T1, T2 &gt; &amp;pir) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type><ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &amp;</type>
+          <declname>pir</declname>
+        </param>
+        <briefdescription>
+<para>按索引获取pair元素的左值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="627" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="627" bodyend="633" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" declline="623" declcolumn="45"/>
+      </memberdef>
+      <memberdef kind="function" id="group___pair_1ga39af5e0919c9e49f70d13d0fa4556193" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr T1 &amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr T1 &amp; get</definition>
+        <argsstring>(pair&lt; T1, T2 &gt; &amp;pir) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type><ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &amp;</type>
+          <declname>pir</declname>
+        </param>
+        <briefdescription>
+<para>按类型获取pair第一个元素的左值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="645" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="645" bodyend="647"/>
+      </memberdef>
+      <memberdef kind="function" id="group___pair_1ga7504e56cb00aa8bf50b2f3df84f0d01d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr const <ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt; Index, <ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr const tuple_element_t&lt; Index, pair&lt; T1, T2 &gt; &gt; &amp; get</definition>
+        <argsstring>(const pair&lt; T1, T2 &gt; &amp;pir) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type>const <ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &amp;</type>
+          <declname>pir</declname>
+        </param>
+        <briefdescription>
+<para>按索引获取pair元素的const左值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="666" column="51" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="666" bodyend="672" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" declline="662" declcolumn="51"/>
+      </memberdef>
+      <memberdef kind="function" id="group___pair_1gab5327e29919e17ce4b26c71da53d8a5c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr const T1 &amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr const T1 &amp; get</definition>
+        <argsstring>(const pair&lt; T1, T2 &gt; &amp;pir) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type>const <ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &amp;</type>
+          <declname>pir</declname>
+        </param>
+        <briefdescription>
+<para>按类型获取pair第一个元素的const左值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="684" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="684" bodyend="686"/>
+      </memberdef>
+      <memberdef kind="function" id="group___pair_1ga19d4812e1367c3dbc437374e1a248a81" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt; Index, <ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &gt; &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr tuple_element_t&lt; Index, pair&lt; T1, T2 &gt; &gt; &amp;&amp; get</definition>
+        <argsstring>(pair&lt; T1, T2 &gt; &amp;&amp;pir) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type><ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &amp;&amp;</type>
+          <declname>pir</declname>
+        </param>
+        <briefdescription>
+<para>按索引获取pair元素的右值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="705" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="705" bodyend="711" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" declline="701" declcolumn="45"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="group___pair_1ga789fd348ab8adbec9c7d358d8235569a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr T1 &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr T1 &amp;&amp; get</definition>
+        <argsstring>(pair&lt; T1, T2 &gt; &amp;&amp;pir) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type><ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &amp;&amp;</type>
+          <declname>pir</declname>
+        </param>
+        <briefdescription>
+<para>按类型获取pair第一个元素的右值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="724" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="724" bodyend="726"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="group___pair_1gada00c2957a00f019178b6bee600e6d60" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr const <ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt; Index, <ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &gt; &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr const tuple_element_t&lt; Index, pair&lt; T1, T2 &gt; &gt; &amp;&amp; get</definition>
+        <argsstring>(const pair&lt; T1, T2 &gt; &amp;&amp;pir) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type>const <ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &amp;&amp;</type>
+          <declname>pir</declname>
+        </param>
+        <briefdescription>
+<para>按索引获取pair元素的const右值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="745" column="51" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="745" bodyend="751" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" declline="741" declcolumn="51"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="group___pair_1gab3e6c273c38a5c833056d092896966ba" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr const T1 &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr const T1 &amp;&amp; get</definition>
+        <argsstring>(const pair&lt; T1, T2 &gt; &amp;&amp;pir) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type>const <ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &amp;&amp;</type>
+          <declname>pir</declname>
+        </param>
+        <briefdescription>
+<para>按类型获取pair第一个元素的const右值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="764" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="764" bodyend="766"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>键值对及辅助函数实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

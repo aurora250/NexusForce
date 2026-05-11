@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structdecay" kind="struct" language="C++" prot="public">
+    <compoundname>decay</compoundname>
+    <includes refid="type__traits_8hpp" local="no">type_traits.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structdecay_1adba98dc339da4e2476e8db01ffedcf26" prot="private" static="no">
+        <type><ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt; T &gt;</type>
+        <definition>using decay&lt; T &gt;::remove_ref_t = remove_reference_t&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>remove_ref_t</name>
+        <qualifiedname>decay::remove_ref_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3539" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3539" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structdecay_1aec46a6fd43ba9043217455f88aea2802" prot="private" static="no">
+        <type><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt; <ref refid="structis__function" kindref="compound">is_function</ref>&lt; remove_ref_t &gt;::value, <ref refid="group___add_qualifiers_1ga895a26b8692afd426fdc2d82c36a9951" kindref="member">add_pointer_t</ref>&lt; remove_ref_t &gt;, <ref refid="group___remove_qualifiers_1gadb53d365fce2ddba102949e4ad3bf058" kindref="member">remove_cv_t</ref>&lt; remove_ref_t &gt; &gt;</type>
+        <definition>using decay&lt; T &gt;::check_func_t = 
+conditional_t&lt;is_function&lt;remove_ref_t&gt;::value, add_pointer_t&lt;remove_ref_t&gt;, remove_cv_t&lt;remove_ref_t&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>check_func_t</name>
+        <qualifiedname>decay::check_func_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3540" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3540" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structdecay_1a8e12aeff58d861b4c976b085e20432e9" prot="public" static="no">
+        <type><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt; <ref refid="structis__array" kindref="compound">is_array</ref>&lt; remove_ref_t &gt;::value, <ref refid="group___add_qualifiers_1ga895a26b8692afd426fdc2d82c36a9951" kindref="member">add_pointer_t</ref>&lt; <ref refid="group___remove_qualifiers_1gaff3a021106d8984e6a7283adfcae4117" kindref="member">remove_extent_t</ref>&lt; remove_ref_t &gt; &gt;, check_func_t &gt;</type>
+        <definition>using decay&lt; T &gt;::type = 
+conditional_t&lt;is_array&lt;remove_ref_t&gt;::value, add_pointer_t&lt;remove_extent_t&lt;remove_ref_t&gt;&gt;, check_func_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>decay::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3544" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3544" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>模拟函数参数传递中的类型退化 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+退化规则：<orderedlist>
+<listitem><para>移除引用和cv限定符</para>
+</listitem><listitem><para>数组类型转换为指针类型（除非用于初始化引用）</para>
+</listitem><listitem><para>函数类型转换为函数指针类型（除非用于初始化引用） </para>
+</listitem></orderedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3537" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3537" bodyend="3546"/>
+    <listofallmembers>
+      <member refid="structdecay_1aec46a6fd43ba9043217455f88aea2802" prot="private" virt="non-virtual"><scope>decay</scope><name>check_func_t</name></member>
+      <member refid="structdecay_1adba98dc339da4e2476e8db01ffedcf26" prot="private" virt="non-virtual"><scope>decay</scope><name>remove_ref_t</name></member>
+      <member refid="structdecay_1a8e12aeff58d861b4c976b085e20432e9" prot="public" virt="non-virtual"><scope>decay</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

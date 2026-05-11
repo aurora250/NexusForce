@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['函数包装器_0',['函数包装器',['../group___function_wrapper.html',1,'']]]
+  ['兼容性_0',['YAML 1.2 与 JSON 兼容性',['../group___yaml_config.html#yaml_vs_json',1,'']]]
 ];

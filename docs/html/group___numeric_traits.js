@@ -1,5 +1,7 @@
 var group___numeric_traits =
 [
+    [ "numeric_traits&lt; uint128_t &gt;", "classnumeric__traits_3_01uint128__t_01_4.html", null ],
+    [ "numeric_traits&lt; int128_t &gt;", "classnumeric__traits_3_01int128__t_01_4.html", null ],
     [ "numeric_traits&lt; T, Dummy &gt;", "classnumeric__traits.html", null ],
     [ "numeric_traits&lt; const T &gt;", "classnumeric__traits_3_01const_01_t_01_4.html", null ],
     [ "numeric_traits&lt; volatile T &gt;", "classnumeric__traits_3_01volatile_01_t_01_4.html", null ],
@@ -19,6 +21,7 @@ var group___numeric_traits =
     [ "numeric_traits&lt; char32_t &gt;", "classnumeric__traits_3_01char32__t_01_4.html", null ],
     [ "numeric_traits&lt; float32_t &gt;", "classnumeric__traits_3_01float32__t_01_4.html", null ],
     [ "numeric_traits&lt; float64_t &gt;", "classnumeric__traits_3_01float64__t_01_4.html", null ],
+    [ "numeric_traits&lt; decimal_t &gt;", "classnumeric__traits_3_01decimal__t_01_4.html", null ],
     [ "float_denorm_type", "group___numeric_traits.html#ga63f91b1b364d75519a3937e6852f5de2", [
       [ "float_denorm_type::INDETERMINATE", "group___numeric_traits.html#gga63f91b1b364d75519a3937e6852f5de2a717bb676b27571e4f5392a911194842a", null ],
       [ "float_denorm_type::ABSENT", "group___numeric_traits.html#gga63f91b1b364d75519a3937e6852f5de2ab2f1a4a4f2ef254af6be776168da6e6d", null ],

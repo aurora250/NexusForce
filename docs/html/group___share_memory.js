@@ -20,7 +20,7 @@ var group___share_memory =
       [ "flush", "classshare__memory.html#a6cfd0764176b9e974c0bcf0faad9ac61", null ],
       [ "is_mapped", "classshare__memory.html#ab4fb12c4190804f5c3b5ec8aab5e5cf3", null ],
       [ "is_open", "classshare__memory.html#ac8de73a5067bd855a89e5141a06ddefb", null ],
-      [ "map", "classshare__memory.html#a1879b969e5aa5b95fe42bb7e02af3ff2", null ],
+      [ "map", "classshare__memory.html#a7f93dd42e93a791947c3ef82d44b7c6f", null ],
       [ "mapped_size", "classshare__memory.html#a960e9ec371a81e229f8077c5ea361740", null ],
       [ "name", "classshare__memory.html#a8ee597725aa36e76003fbbbc8b151a3a", null ],
       [ "open", "classshare__memory.html#aae33eefe6b65765458dd5945a9acd0c9", null ],

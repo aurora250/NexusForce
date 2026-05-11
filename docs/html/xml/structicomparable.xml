@@ -1,0 +1,995 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structicomparable" kind="struct" language="C++" prot="public">
+    <compoundname>icomparable</compoundname>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; array&lt; T, Size &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; array&lt; T, 0 &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; deque&lt; T, allocator&lt; T &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; priority_queue&lt; T, vector&lt; T &gt;, less&lt; typename vector&lt; T &gt;::value_type &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; queue&lt; T, deque&lt; T &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; stack&lt; T, deque&lt; T &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; vector&lt; T, allocator&lt; T &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; hashtable&lt; pair&lt; const T *, stacktrace &gt;, T *, hash&lt; T * &gt;, select1st&lt; pair&lt; const T *, stacktrace &gt; &gt;, equal_to&lt; T * &gt;, allocator&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; hashtable&lt; pair&lt; const Key, T &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; compressed_pair&lt; IfEmpty, T, is_empty_v&lt; IfEmpty &gt; &amp;&amp;!is_final_v&lt; IfEmpty &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; compressed_pair&lt; IfEmpty, T, false &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; optional&lt; T &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; optional&lt; T &amp; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; T &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; T &gt;</derivedcompoundref>
+    <includes refid="icommon_8hpp" local="no">icommon.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structicomparable_1a8e4780d9a8556ece212378c820331ba2" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; icomparable&lt; T &gt;::derived</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>derived</name>
+        <qualifiedname>icomparable::derived</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="82" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(derived().equal_to(rhs))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool icomparable&lt; T &gt;::operator==</definition>
+        <argsstring>(const T &amp;rhs) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>icomparable::operator==</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否相等</para>
+</simplesect>
+调用派生类实现的operator ==进行相等性判断。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="92" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="92" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(!(derived().equal_to(rhs)))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool icomparable&lt; T &gt;::operator!=</definition>
+        <argsstring>(const T &amp;rhs) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>icomparable::operator!=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>不等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否不相等</para>
+</simplesect>
+基于operator ==的结果取反得到不等比较结果。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="103" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="103" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(derived().less_than(rhs))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool icomparable&lt; T &gt;::operator&lt;</definition>
+        <argsstring>(const T &amp;rhs) const</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>icomparable::operator&lt;</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否小于右操作数</para>
+</simplesect>
+调用派生类实现的operator &lt;进行小于比较。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="114" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="114" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(rhs.less_than(derived()))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool icomparable&lt; T &gt;::operator&gt;</definition>
+        <argsstring>(const T &amp;rhs) const</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>icomparable::operator&gt;</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>大于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否大于右操作数</para>
+</simplesect>
+通过交换操作数并调用operator &lt;来实现大于比较。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="125" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="125" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(!(rhs.less_than(derived())))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool icomparable&lt; T &gt;::operator&lt;=</definition>
+        <argsstring>(const T &amp;rhs) const</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>icomparable::operator&lt;=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于等于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否小于等于右操作数</para>
+</simplesect>
+通过取反operator &gt;的结果实现小于等于比较。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="136" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="136" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(!(derived().less_than(rhs)))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool icomparable&lt; T &gt;::operator&gt;=</definition>
+        <argsstring>(const T &amp;rhs) const</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>icomparable::operator&gt;=</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>大于等于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否大于等于右操作数</para>
+</simplesect>
+通过取反operator &lt;的结果实现大于等于比较。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="147" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="147" bodyend="149"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>可比较对象接口模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>派生类类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+通过CRTP模式实现，派生类只需实现 <ref refid="structequal__to" kindref="compound">equal_to(const T&amp;)</ref> 和 less_than(const T&amp;) 两个基本比较操作， 即可自动获得所有比较运算符的完整实现。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>array&lt; T, Size &gt;</label>
+        <link refid="classarray"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>array&lt; T, 0 &gt;</label>
+        <link refid="classarray_3_01_t_00_010_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="110">
+        <label>basic_string&lt; CharT, Traits, Alloc &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>basic_string&lt; char16_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>basic_string&lt; char32_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>basic_string&lt; char8_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>basic_string&lt; wchar_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>basic_string_view&lt; char &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>basic_string_view&lt; char16_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>basic_string_view&lt; char32_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>basic_string_view&lt; char8_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>basic_string_view&lt; typename Traits::char_type, Traits &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>basic_string_view&lt; wchar_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="114">
+        <label>character</label>
+        <link refid="structcharacter"/>
+        <childnode refid="113" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>compressed_pair&lt; Func, bool &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>compressed_pair&lt; Func, int &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>compressed_pair&lt; IfEmpty, T, false &gt;</label>
+        <link refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>compressed_pair&lt; allocator_type, float &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>compressed_pair&lt; allocator_type, pointer &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>compressed_pair&lt; allocator_type, size_t &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>compressed_pair&lt; allocator_type, size_type &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="111">
+        <label>compressed_pair&lt; IfEmpty, T, Compressed &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>compressed_pair&lt; map_allocator, map_pointer &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>compressed_pair&lt; standard_allocator, size_t &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="106">
+        <label>decimal</label>
+        <link refid="structdecimal"/>
+        <childnode refid="105" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>deque&lt; connection_entry &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>deque&lt; T, Alloc, BufSize &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>deque&lt; frame &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>deque&lt; log_event &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>float32</label>
+        <link refid="structfloat32"/>
+        <childnode refid="101" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="104">
+        <label>float64</label>
+        <link refid="structfloat64"/>
+        <childnode refid="103" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;</label>
+        <link refid="classhashtable"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;</label>
+        <link refid="classhashtable"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>hashtable&lt; pair&lt; const Key, T &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt;</label>
+        <link refid="classhashtable"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>hashtable&lt; pair&lt; const T *, stacktrace &gt;, T *, hash&lt; T * &gt;, select1st&lt; pair&lt; const T *, stacktrace &gt; &gt;, equal_to&lt; T * &gt;, allocator&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt; &gt;</label>
+        <link refid="classhashtable"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="108">
+        <label>icharacter&lt; T, CharT &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="107" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="113">
+        <label>icharacter&lt; character, char &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="112" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="119">
+        <label>icharacter&lt; u16character, char16_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="112" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="121">
+        <label>icharacter&lt; u32character, char32_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="112" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="117">
+        <label>icharacter&lt; u8character, char8_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="112" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="115">
+        <label>icharacter&lt; wcharacter, wchar_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="112" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>icollector&lt; array&lt; T, 0 &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>icollector&lt; array&lt; T, Size &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>icollector&lt; deque&lt; T, allocator&lt; T &gt; &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>icollector&lt; hashtable&lt; pair&lt; const Key, T &gt;, Key, hash&lt; Key &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, equal_to&lt; Key &gt;, allocator&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>icollector&lt; hashtable&lt; pair&lt; const T *, stacktrace &gt;, T *, hash&lt; T * &gt;, select1st&lt; pair&lt; const T *, stacktrace &gt; &gt;, equal_to&lt; T * &gt;, allocator&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt; &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>icollector&lt; priority_queue&lt; T, vector&lt; T &gt;, less&lt; typename vector&lt; T &gt;::value_type &gt; &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>icollector&lt; queue&lt; T, deque&lt; T &gt; &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>icollector&lt; rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>icollector&lt; stack&lt; T, deque&lt; T &gt; &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>icollector&lt; vector&lt; T, allocator&lt; T &gt; &gt; &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>icommon&lt; compressed_pair&lt; IfEmpty, T, false &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>icommon&lt; compressed_pair&lt; IfEmpty, T, is_empty_v&lt; IfEmpty &gt; &amp;&amp;!is_final_v&lt; IfEmpty &gt; &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>icommon&lt; optional&lt; T &amp; &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>icommon&lt; optional&lt; T &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="88">
+        <label>integer16</label>
+        <link refid="structinteger16"/>
+        <childnode refid="87" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>integer32</label>
+        <link refid="structinteger32"/>
+        <childnode refid="89" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>integer64</label>
+        <link refid="structinteger64"/>
+        <childnode refid="91" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>integer8</label>
+        <link refid="structinteger8"/>
+        <childnode refid="85" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="112">
+        <label>ipackage&lt; T, PackageT &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>ipackage&lt; T, CharT &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="105">
+        <label>ipackage&lt; decimal, decimal_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>ipackage&lt; float32, float32_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="103">
+        <label>ipackage&lt; float64, float64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>ipackage&lt; integer16, int16_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>ipackage&lt; integer32, int32_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>ipackage&lt; integer64, int64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>ipackage&lt; integer8, int8_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>ipackage&lt; uinteger16, uint16_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>ipackage&lt; uinteger32, uint32_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>ipackage&lt; uinteger64, uint64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>ipackage&lt; uinteger8, uint8_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>optional&lt; T &gt;</label>
+        <link refid="classoptional"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>optional&lt; T &amp; &gt;</label>
+        <link refid="classoptional_3_01_t_01_6_01_4"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>pair&lt; const Key, T &gt;</label>
+        <link refid="structpair"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>priority_queue&lt; T, Sequence, Compare &gt;</label>
+        <link refid="classpriority__queue"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>priority_queue&lt; priority_task &gt;</label>
+        <link refid="classpriority__queue"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>queue&lt; connection_entry &gt;</label>
+        <link refid="classqueue"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>queue&lt; log_event &gt;</label>
+        <link refid="classqueue"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>queue&lt; T, Sequence &gt;</label>
+        <link refid="classqueue"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>rb_tree&lt; Key, Key, identity&lt; Key &gt;, Compare, Alloc &gt;</label>
+        <link refid="classrb__tree"/>
+        <childnode refid="24" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;</label>
+        <link refid="classrb__tree"/>
+        <childnode refid="24" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, less&lt; Key &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt;</label>
+        <link refid="classrb__tree"/>
+        <childnode refid="11" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>stack&lt; frame &gt;</label>
+        <link refid="classstack"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>stack&lt; T, Sequence &gt;</label>
+        <link refid="classstack"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="120">
+        <label>u16character</label>
+        <link refid="structu16character"/>
+        <childnode refid="119" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="122">
+        <label>u32character</label>
+        <link refid="structu32character"/>
+        <childnode refid="121" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="118">
+        <label>u8character</label>
+        <link refid="structu8character"/>
+        <childnode refid="117" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="96">
+        <label>uinteger16</label>
+        <link refid="structuinteger16"/>
+        <childnode refid="95" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>uinteger32</label>
+        <link refid="structuinteger32"/>
+        <childnode refid="97" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>uinteger64</label>
+        <link refid="structuinteger64"/>
+        <childnode refid="99" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="94">
+        <label>uinteger8</label>
+        <link refid="structuinteger8"/>
+        <childnode refid="93" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>vector&lt; aiocb_type * &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>vector&lt; byte_t &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>vector&lt; char &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>vector&lt; cmdline::option &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>vector&lt; const char * &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>vector&lt; context &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>vector&lt; dns_record &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>vector&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>vector&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>vector&lt; http_cookie &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>vector&lt; indent_context &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>vector&lt; int &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>vector&lt; match_result &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>vector&lt; meta_type * &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>vector&lt; part &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>vector&lt; pending_signal &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>vector&lt; priority_task &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>vector&lt; ptr &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>vector&lt; route_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>vector&lt; slot_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>vector&lt; stacktrace::frame &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>const_iterator&lt; string &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>vector&lt; thread &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>vector&lt; T, Alloc &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>vector&lt;::MYSQL_BIND &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="24" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="116">
+        <label>wcharacter</label>
+        <link refid="structwcharacter"/>
+        <childnode refid="115" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="80" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="80" bodyend="150"/>
+    <listofallmembers>
+      <member refid="structicomparable_1a8e4780d9a8556ece212378c820331ba2" prot="private" virt="non-virtual"><scope>icomparable</scope><name>derived</name></member>
+      <member refid="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" virt="non-virtual"><scope>icomparable</scope><name>operator!=</name></member>
+      <member refid="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" virt="non-virtual"><scope>icomparable</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" virt="non-virtual"><scope>icomparable</scope><name>operator&lt;=</name></member>
+      <member refid="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" virt="non-virtual"><scope>icomparable</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" virt="non-virtual"><scope>icomparable</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" virt="non-virtual"><scope>icomparable</scope><name>operator&gt;=</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

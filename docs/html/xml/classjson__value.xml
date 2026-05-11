@@ -1,0 +1,488 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classjson__value" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>json_value</compoundname>
+    <basecompoundref refid="structistringify" prot="public" virt="non-virtual">istringify&lt; json_value &gt;</basecompoundref>
+    <derivedcompoundref refid="classjson__array" prot="public" virt="non-virtual">json_array</derivedcompoundref>
+    <derivedcompoundref refid="classjson__bool" prot="public" virt="non-virtual">json_bool</derivedcompoundref>
+    <derivedcompoundref refid="classjson__null" prot="public" virt="non-virtual">json_null</derivedcompoundref>
+    <derivedcompoundref refid="classjson__number" prot="public" virt="non-virtual">json_number</derivedcompoundref>
+    <derivedcompoundref refid="classjson__object" prot="public" virt="non-virtual">json_object</derivedcompoundref>
+    <derivedcompoundref refid="classjson__string" prot="public" virt="non-virtual">json_string</derivedcompoundref>
+    <includes refid="json__value_8hpp" local="no">json_value.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classjson__value_1a04fcd4c27b006cfc74a3204774a5805f" prot="public" static="no" strong="no">
+        <type></type>
+        <name>types</name>
+        <qualifiedname>json_value::types</qualifiedname>
+        <enumvalue id="classjson__value_1a04fcd4c27b006cfc74a3204774a5805faf3d38d2ee1fb610ab1344aa3910aaf2e" prot="public">
+          <name>Null</name>
+          <briefdescription>
+<para>null值类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classjson__value_1a04fcd4c27b006cfc74a3204774a5805facacb22ac27555e5c947ae9357071a60a" prot="public">
+          <name>Bool</name>
+          <briefdescription>
+<para>布尔值类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa0caaf5439c72e875abb005f577287514" prot="public">
+          <name>Number</name>
+          <briefdescription>
+<para>数字类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa7d584541a6eb62770239a72c9d8018ed" prot="public">
+          <name>String</name>
+          <briefdescription>
+<para>字符串类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa165488bba2a288d3579960130c52b74e" prot="public">
+          <name>Object</name>
+          <briefdescription>
+<para>对象类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa2c8079c21c277016efb88e4846e0384f" prot="public">
+          <name>Array</name>
+          <briefdescription>
+<para>数组类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>JSON值类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="147" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="147" bodyend="154"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classjson__value_1a6d8dcba262dc2a77ff0595b97b7dcb1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual json_value::~json_value</definition>
+        <argsstring>()=default</argsstring>
+        <name>~json_value</name>
+        <qualifiedname>json_value::~json_value</qualifiedname>
+        <briefdescription>
+<para>虚析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="159" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1a5e87488279236cfbc020f432d59c6bc6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805f" kindref="member">types</ref></type>
+        <definition>virtual NEFORCE_NODISCARD types json_value::type</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>type</name>
+        <qualifiedname>json_value::type</qualifiedname>
+        <reimplementedby refid="classjson__array_1a7729bc048279ae1a585733658d70716e">type</reimplementedby>
+        <reimplementedby refid="classjson__bool_1a9a3c2e27e7e766963a286b142907a65e">type</reimplementedby>
+        <reimplementedby refid="classjson__null_1a1758516788eb02142a3e67e340752c73">type</reimplementedby>
+        <reimplementedby refid="classjson__number_1a0ee34ec94ec692b0aede73659ca76036">type</reimplementedby>
+        <reimplementedby refid="classjson__object_1a693b50fddfa1bacb111082154f449610">type</reimplementedby>
+        <reimplementedby refid="classjson__string_1a86b8da25d5b823e9c7c11dfd081a6d26">type</reimplementedby>
+        <briefdescription>
+<para>获取JSON值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>类型枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="165" column="37"/>
+        <referencedby refid="classjson__value_1aa3d25ed160d4706cbc9e529c1308620a" compoundref="json__value_8hpp" startline="237" endline="237">is_array</referencedby>
+        <referencedby refid="classjson__value_1acfeb074a4cc8de2acdcd353f7a299304" compoundref="json__value_8hpp" startline="213" endline="213">is_bool</referencedby>
+        <referencedby refid="classjson__value_1a2d0258f720fbe2f068d29db91bcb1c36" compoundref="json__value_8hpp" startline="207" endline="207">is_null</referencedby>
+        <referencedby refid="classjson__value_1aaca5337ac8066cb481cb777186a1a366" compoundref="json__value_8hpp" startline="219" endline="219">is_number</referencedby>
+        <referencedby refid="classjson__value_1aa31cdc5e4d2503aba579b3ff3c59255d" compoundref="json__value_8hpp" startline="231" endline="231">is_object</referencedby>
+        <referencedby refid="classjson__value_1adca513d9dd56e4bddc8fd105c56545c9" compoundref="json__value_8hpp" startline="225" endline="225">is_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1a59b3c7013189589bced807b228a8d79c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classjson__null" kindref="compound">json_null</ref> *</type>
+        <definition>virtual NEFORCE_NODISCARD const json_null * json_value::as_null</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>as_null</name>
+        <qualifiedname>json_value::as_null</qualifiedname>
+        <reimplementedby refid="classjson__null_1a23ff7f449dfc02e2b9c72c0fb11aabf3">as_null</reimplementedby>
+        <briefdescription>
+<para>转换为null指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是null类型返回自身指针，否则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="171" column="47" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="171" bodyend="171"/>
+        <references refid="classjson__value_1a59b3c7013189589bced807b228a8d79c" compoundref="json__value_8hpp" startline="171" endline="171">as_null</references>
+        <referencedby refid="classjson__value_1a59b3c7013189589bced807b228a8d79c" compoundref="json__value_8hpp" startline="171" endline="171">as_null</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1abff1bfacff657023d168d7ad78fe81af" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classjson__bool" kindref="compound">json_bool</ref> *</type>
+        <definition>virtual NEFORCE_NODISCARD const json_bool * json_value::as_bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>as_bool</name>
+        <qualifiedname>json_value::as_bool</qualifiedname>
+        <reimplementedby refid="classjson__bool_1ab8f1df58eb1129296b00e290bc1a553f">as_bool</reimplementedby>
+        <briefdescription>
+<para>转换为布尔值指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是布尔类型返回自身指针，否则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="177" column="47" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="177" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1a11b5d0ff79bdf10d6100984f0f2eaf99" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classjson__number" kindref="compound">json_number</ref> *</type>
+        <definition>virtual NEFORCE_NODISCARD const json_number * json_value::as_number</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>as_number</name>
+        <qualifiedname>json_value::as_number</qualifiedname>
+        <reimplementedby refid="classjson__number_1a08da16aa0da1a9c9e2e2fc23f75fd42c">as_number</reimplementedby>
+        <briefdescription>
+<para>转换为数字指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是数字类型返回自身指针，否则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="183" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="183" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1a0e3e6904eeb1543f3adf8cc5c9e184a4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classjson__string" kindref="compound">json_string</ref> *</type>
+        <definition>virtual NEFORCE_NODISCARD const json_string * json_value::as_string</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>as_string</name>
+        <qualifiedname>json_value::as_string</qualifiedname>
+        <reimplementedby refid="classjson__string_1a874337bf02932e1ae3ea801f11f4582c">as_string</reimplementedby>
+        <briefdescription>
+<para>转换为字符串指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是字符串类型返回自身指针，否则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="189" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="189" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1a3ef320914be5e164360396a4bd782d6a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classjson__object" kindref="compound">json_object</ref> *</type>
+        <definition>virtual NEFORCE_NODISCARD const json_object * json_value::as_object</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>as_object</name>
+        <qualifiedname>json_value::as_object</qualifiedname>
+        <reimplementedby refid="classjson__object_1a50d6b85c69275d4c213005c82ca2aaf8">as_object</reimplementedby>
+        <briefdescription>
+<para>转换为对象指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是对象类型返回自身指针，否则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="195" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="195" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1a9414fdf940d1f93bd3c4ef27640019e4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classjson__array" kindref="compound">json_array</ref> *</type>
+        <definition>virtual NEFORCE_NODISCARD const json_array * json_value::as_array</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>as_array</name>
+        <qualifiedname>json_value::as_array</qualifiedname>
+        <reimplementedby refid="classjson__array_1ad7bdce4d7c4649160c21468d878ab107">as_array</reimplementedby>
+        <briefdescription>
+<para>转换为数组指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是数组类型返回自身指针，否则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="201" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="201" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1a2d0258f720fbe2f068d29db91bcb1c36" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool json_value::is_null</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_null</name>
+        <qualifiedname>json_value::is_null</qualifiedname>
+        <briefdescription>
+<para>判断是否为null类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是null类型返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="207" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="207" bodyend="207"/>
+        <references refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805faf3d38d2ee1fb610ab1344aa3910aaf2e" compoundref="json__value_8hpp" startline="148">Null</references>
+        <references refid="classjson__value_1a5e87488279236cfbc020f432d59c6bc6">type</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1acfeb074a4cc8de2acdcd353f7a299304" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool json_value::is_bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_bool</name>
+        <qualifiedname>json_value::is_bool</qualifiedname>
+        <briefdescription>
+<para>判断是否为布尔类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是布尔类型返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="213" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="213" bodyend="213"/>
+        <references refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805facacb22ac27555e5c947ae9357071a60a" compoundref="json__value_8hpp" startline="149">Bool</references>
+        <references refid="classjson__value_1a5e87488279236cfbc020f432d59c6bc6">type</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1aaca5337ac8066cb481cb777186a1a366" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool json_value::is_number</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_number</name>
+        <qualifiedname>json_value::is_number</qualifiedname>
+        <briefdescription>
+<para>判断是否为数字类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是数字类型返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="219" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="219" bodyend="219"/>
+        <references refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa0caaf5439c72e875abb005f577287514" compoundref="json__value_8hpp" startline="150">Number</references>
+        <references refid="classjson__value_1a5e87488279236cfbc020f432d59c6bc6">type</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1adca513d9dd56e4bddc8fd105c56545c9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool json_value::is_string</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_string</name>
+        <qualifiedname>json_value::is_string</qualifiedname>
+        <briefdescription>
+<para>判断是否为字符串类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是字符串类型返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="225" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="225" bodyend="225"/>
+        <references refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa7d584541a6eb62770239a72c9d8018ed" compoundref="json__value_8hpp" startline="151">String</references>
+        <references refid="classjson__value_1a5e87488279236cfbc020f432d59c6bc6">type</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1aa31cdc5e4d2503aba579b3ff3c59255d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool json_value::is_object</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_object</name>
+        <qualifiedname>json_value::is_object</qualifiedname>
+        <briefdescription>
+<para>判断是否为对象类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是对象类型返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="231" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="231" bodyend="231"/>
+        <references refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa165488bba2a288d3579960130c52b74e" compoundref="json__value_8hpp" startline="152">Object</references>
+        <references refid="classjson__value_1a5e87488279236cfbc020f432d59c6bc6">type</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1aa3d25ed160d4706cbc9e529c1308620a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool json_value::is_array</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_array</name>
+        <qualifiedname>json_value::is_array</qualifiedname>
+        <briefdescription>
+<para>判断是否为数组类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是数组类型返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="237" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="237" bodyend="237"/>
+        <references refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa2c8079c21c277016efb88e4846e0384f" compoundref="json__value_8hpp" startline="153">Array</references>
+        <references refid="classjson__value_1a5e87488279236cfbc020f432d59c6bc6">type</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1a15535d4046e675ccc6810fd1addc84f6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string json_value::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>json_value::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为紧凑格式字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>JSON值的紧凑格式字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="243" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__value_1aaf6c2cb66b8d4a35459f9d3609a78599" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string json_value::to_indent_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_indent_string</name>
+        <qualifiedname>json_value::to_indent_string</qualifiedname>
+        <briefdescription>
+<para>转换为缩进格式字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>JSON值的格式化字符串（默认2空格缩进） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="249" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>JSON值抽象基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供JSON值的统一接口，支持类型识别和字符串转换。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>istringify&lt; json_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="3">
+        <label>json_array</label>
+        <link refid="classjson__array"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>json_bool</label>
+        <link refid="classjson__bool"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>json_null</label>
+        <link refid="classjson__null"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>json_number</label>
+        <link refid="classjson__number"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>json_object</label>
+        <link refid="classjson__object"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>json_string</label>
+        <link refid="classjson__string"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>json_value</label>
+        <link refid="classjson__value"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>istringify&lt; json_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>json_value</label>
+        <link refid="classjson__value"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="141" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="141" bodyend="250"/>
+    <listofallmembers>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa2c8079c21c277016efb88e4846e0384f" prot="public" virt="non-virtual"><scope>json_value</scope><name>Array</name></member>
+      <member refid="classjson__value_1a9414fdf940d1f93bd3c4ef27640019e4" prot="public" virt="virtual"><scope>json_value</scope><name>as_array</name></member>
+      <member refid="classjson__value_1abff1bfacff657023d168d7ad78fe81af" prot="public" virt="virtual"><scope>json_value</scope><name>as_bool</name></member>
+      <member refid="classjson__value_1a59b3c7013189589bced807b228a8d79c" prot="public" virt="virtual"><scope>json_value</scope><name>as_null</name></member>
+      <member refid="classjson__value_1a11b5d0ff79bdf10d6100984f0f2eaf99" prot="public" virt="virtual"><scope>json_value</scope><name>as_number</name></member>
+      <member refid="classjson__value_1a3ef320914be5e164360396a4bd782d6a" prot="public" virt="virtual"><scope>json_value</scope><name>as_object</name></member>
+      <member refid="classjson__value_1a0e3e6904eeb1543f3adf8cc5c9e184a4" prot="public" virt="virtual"><scope>json_value</scope><name>as_string</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805facacb22ac27555e5c947ae9357071a60a" prot="public" virt="non-virtual"><scope>json_value</scope><name>Bool</name></member>
+      <member refid="classjson__value_1aa3d25ed160d4706cbc9e529c1308620a" prot="public" virt="non-virtual"><scope>json_value</scope><name>is_array</name></member>
+      <member refid="classjson__value_1acfeb074a4cc8de2acdcd353f7a299304" prot="public" virt="non-virtual"><scope>json_value</scope><name>is_bool</name></member>
+      <member refid="classjson__value_1a2d0258f720fbe2f068d29db91bcb1c36" prot="public" virt="non-virtual"><scope>json_value</scope><name>is_null</name></member>
+      <member refid="classjson__value_1aaca5337ac8066cb481cb777186a1a366" prot="public" virt="non-virtual"><scope>json_value</scope><name>is_number</name></member>
+      <member refid="classjson__value_1aa31cdc5e4d2503aba579b3ff3c59255d" prot="public" virt="non-virtual"><scope>json_value</scope><name>is_object</name></member>
+      <member refid="classjson__value_1adca513d9dd56e4bddc8fd105c56545c9" prot="public" virt="non-virtual"><scope>json_value</scope><name>is_string</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805faf3d38d2ee1fb610ab1344aa3910aaf2e" prot="public" virt="non-virtual"><scope>json_value</scope><name>Null</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa0caaf5439c72e875abb005f577287514" prot="public" virt="non-virtual"><scope>json_value</scope><name>Number</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa165488bba2a288d3579960130c52b74e" prot="public" virt="non-virtual"><scope>json_value</scope><name>Object</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa7d584541a6eb62770239a72c9d8018ed" prot="public" virt="non-virtual"><scope>json_value</scope><name>String</name></member>
+      <member refid="classjson__value_1aaf6c2cb66b8d4a35459f9d3609a78599" prot="public" virt="non-virtual"><scope>json_value</scope><name>to_indent_string</name></member>
+      <member refid="classjson__value_1a15535d4046e675ccc6810fd1addc84f6" prot="public" virt="non-virtual"><scope>json_value</scope><name>to_string</name></member>
+      <member refid="classjson__value_1a5e87488279236cfbc020f432d59c6bc6" prot="public" virt="pure-virtual"><scope>json_value</scope><name>type</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805f" prot="public" virt="non-virtual"><scope>json_value</scope><name>types</name></member>
+      <member refid="classjson__value_1a6d8dcba262dc2a77ff0595b97b7dcb1c" prot="public" virt="virtual"><scope>json_value</scope><name>~json_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

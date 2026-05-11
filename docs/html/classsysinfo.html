@@ -118,7 +118,11 @@ Public 类型</h2></td></tr>
 , <a class="el" href="#a5cb2bb37d607fada00bb5f2726727e63a47f45e65244c17ec9fa8771a5c6d60e1">ARM</a>
 , <br />
 &#160;&#160;<a class="el" href="#a5cb2bb37d607fada00bb5f2726727e63ab9b55c80d095761ac7757ced0fedadc4">ARM64</a>
-, <a class="el" href="#a5cb2bb37d607fada00bb5f2726727e63a4c2c294c51f3230d47a6bf0fb0cbe47a">IA64</a>
+, <a class="el" href="#a5cb2bb37d607fada00bb5f2726727e63a9fe8c36311da48049559d1e1f119f8ad">RISCV32</a>
+, <a class="el" href="#a5cb2bb37d607fada00bb5f2726727e63aafaf0bad004e6a71e15785a0e5089263">RISCV64</a>
+, <a class="el" href="#a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f">LOONGARCH64</a>
+, <br />
+&#160;&#160;<a class="el" href="#a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a">LOONGARCH32</a>
 <br />
  }</td></tr>
 <tr class="memdesc:a5cb2bb37d607fada00bb5f2726727e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">系统架构枚举  <a href="#a5cb2bb37d607fada00bb5f2726727e63">更多...</a><br /></td></tr>
@@ -158,7 +162,7 @@ Public 成员函数</h2></td></tr>
 <li>系统架构</li>
 <li>系统页面大小、分配粒度等底层信息</li>
 </ul>
-<p>使用单例模式，确保全局只有一个系统信息实例。 </p>
+<dl class="section note"><dt>注解</dt><dd>全局保持唯一的系统信息实例。 </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00035">35</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
@@ -194,7 +198,13 @@ Public 成员函数</h2></td></tr>
 </td></tr>
 <tr><td class="fieldname"><a id="a5cb2bb37d607fada00bb5f2726727e63ab9b55c80d095761ac7757ced0fedadc4" name="a5cb2bb37d607fada00bb5f2726727e63ab9b55c80d095761ac7757ced0fedadc4"></a>ARM64&#160;</td><td class="fielddoc"><p>64位ARM </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a5cb2bb37d607fada00bb5f2726727e63a4c2c294c51f3230d47a6bf0fb0cbe47a" name="a5cb2bb37d607fada00bb5f2726727e63a4c2c294c51f3230d47a6bf0fb0cbe47a"></a>IA64&#160;</td><td class="fielddoc"><p>Intel Itanium </p>
+<tr><td class="fieldname"><a id="a5cb2bb37d607fada00bb5f2726727e63a9fe8c36311da48049559d1e1f119f8ad" name="a5cb2bb37d607fada00bb5f2726727e63a9fe8c36311da48049559d1e1f119f8ad"></a>RISCV32&#160;</td><td class="fielddoc"><p>32位RISC-V </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5cb2bb37d607fada00bb5f2726727e63aafaf0bad004e6a71e15785a0e5089263" name="a5cb2bb37d607fada00bb5f2726727e63aafaf0bad004e6a71e15785a0e5089263"></a>RISCV64&#160;</td><td class="fielddoc"><p>64位RISC-V </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f" name="a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f"></a>LOONGARCH64&#160;</td><td class="fielddoc"><p>64位LoongArch </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a" name="a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a"></a>LOONGARCH32&#160;</td><td class="fielddoc"><p>32位LoongArch </p>
 </td></tr>
 </table>
 
@@ -257,7 +267,7 @@ Public 成员函数</h2></td></tr>
 <p>获取系统架构 </p>
 <dl class="section return"><dt>返回</dt><dd>架构枚举值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00215">215</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00218">218</a> 行定义.</p>
 
 </div>
 </div>
@@ -287,7 +297,7 @@ Public 成员函数</h2></td></tr>
 <p>获取CPU信息 </p>
 <dl class="section return"><dt>返回</dt><dd>CPU信息结构引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00203">203</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00206">206</a> 行定义.</p>
 
 </div>
 </div>
@@ -317,7 +327,7 @@ Public 成员函数</h2></td></tr>
 <p>获取内存信息 </p>
 <dl class="section return"><dt>返回</dt><dd>内存信息结构引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00197">197</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00200">200</a> 行定义.</p>
 
 </div>
 </div>
@@ -347,7 +357,7 @@ Public 成员函数</h2></td></tr>
 <p>获取操作系统版本信息 </p>
 <dl class="section return"><dt>返回</dt><dd>操作系统版本信息结构引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00209">209</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00212">212</a> 行定义.</p>
 
 </div>
 </div>
@@ -377,7 +387,7 @@ Public 成员函数</h2></td></tr>
 <p>获取系统底层信息 </p>
 <dl class="section return"><dt>返回</dt><dd>系统信息结构引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00191">191</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00194">194</a> 行定义.</p>
 
 </div>
 </div>
@@ -407,11 +417,11 @@ Public 成员函数</h2></td></tr>
 <p>获取单例实例 </p>
 <dl class="section return"><dt>返回</dt><dd>系统信息实例引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00170">170</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00173">173</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="sysinfo_8hpp_source.html#l00170">instance()</a>.</p>
+<p class="reference">引用了 <a class="el" href="sysinfo_8hpp_source.html#l00173">instance()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="sysinfo_8hpp_source.html#l00170">instance()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="sysinfo_8hpp_source.html#l00173">instance()</a>.</p>
 
 </div>
 </div>
@@ -441,9 +451,9 @@ Public 成员函数</h2></td></tr>
 <p>检查是否已初始化 </p>
 <dl class="section return"><dt>返回</dt><dd>是否已成功初始化 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00221">221</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00224">224</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00143">memory_order_acquire</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 
 </div>
 </div>

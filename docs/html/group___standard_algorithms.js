@@ -1,7 +1,6 @@
 var group___standard_algorithms =
 [
     [ "比较算法", "group___compare_algorithms.html", "group___compare_algorithms" ],
-    [ "排序算法", "group___sort_algorithms.html", "group___sort_algorithms" ],
     [ "堆算法", "group___heap_algorithms.html", "group___heap_algorithms" ],
     [ "莱昂纳多堆算法", "group___leonardo_heap.html", "group___leonardo_heap" ],
     [ "合并算法", "group___merge_algorithms.html", "group___merge_algorithms" ],
@@ -18,5 +17,6 @@ var group___standard_algorithms =
     [ "模式匹配算法", "group___pattern_matching_algorithms.html", "group___pattern_matching_algorithms" ],
     [ "集合算法", "group___set_algorithms.html", "group___set_algorithms" ],
     [ "修改算法", "group___shift_algorithms.html", "group___shift_algorithms" ],
-    [ "随机重排算法", "group___shuffle_algorithms.html", "group___shuffle_algorithms" ]
+    [ "随机重排算法", "group___shuffle_algorithms.html", "group___shuffle_algorithms" ],
+    [ "排序算法", "group___sort_algorithms.html", "group___sort_algorithms" ]
 ];

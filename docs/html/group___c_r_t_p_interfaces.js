@@ -9,19 +9,18 @@ var group___c_r_t_p_interfaces =
       [ "size", "structicollector.html#aa12122cd69ca1ec919297f84f0e4b0a4", null ]
     ] ],
     [ "ihashable&lt; T &gt;", "structihashable.html", [
-      [ "to_hash", "structihashable.html#a5782b4a58ffbfc375e2f4f6196077ebb", null ]
+      [ "to_ihash", "structihashable.html#a3bb793a19699c7ccd86fa5d7e91cb513", null ]
     ] ],
     [ "icomparable&lt; T &gt;", "structicomparable.html", [
-      [ "operator!=", "structicomparable.html#ac0cd953a7cf0c0650fc6879658b89d5e", null ],
-      [ "operator<", "structicomparable.html#a04e430f4d95a1ccfab6942d07643e678", null ],
-      [ "operator<=", "structicomparable.html#add55f8d3f204d6f7f15aecb743d04ee8", null ],
-      [ "operator==", "structicomparable.html#a83e6a26a179ca6ea50e76a3306a87659", null ],
-      [ "operator>", "structicomparable.html#a6fee1aeaa9887c5f006572ebb01c69d0", null ],
-      [ "operator>=", "structicomparable.html#a2e0f6d31baee674f80036e5fef0c210e", null ]
+      [ "operator!=", "structicomparable.html#ad134f4e53dc43901a6de1aa551d31499", null ],
+      [ "operator<", "structicomparable.html#a2339f5e686412b22a88642ec08ad7466", null ],
+      [ "operator<=", "structicomparable.html#a8e9a700d86faf563c96bcb27cd6e9593", null ],
+      [ "operator==", "structicomparable.html#aa689aadaf9cd384d7ab5bad5a848c966", null ],
+      [ "operator>", "structicomparable.html#a0f38100bba5ca8cf12b0828acb9a77e2", null ],
+      [ "operator>=", "structicomparable.html#a771a3b0634a0b38a5f92f2a40aaef3db", null ]
     ] ],
     [ "icommon&lt; T &gt;", "structicommon.html", null ],
     [ "iiterator&lt; Iterator &gt;", "structiiterator.html", [
-      [ "operator!=", "structiiterator.html#ae1d654e0bdebce5de93691c1521767ab", null ],
       [ "operator*", "structiiterator.html#a38542caf08064732ea33b4c4bada41cb", null ],
       [ "operator+", "structiiterator.html#a70c35e54eb9a283316a815aab00f2986", null ],
       [ "operator++", "structiiterator.html#a251522d2785c4415a0f74129315f75db", null ],
@@ -33,11 +32,6 @@ var group___c_r_t_p_interfaces =
       [ "operator--", "structiiterator.html#a8f20f2ea8cc4054292010754489850f7", null ],
       [ "operator-=", "structiiterator.html#a4aa2a32cfd3581b745db141b491723db", null ],
       [ "operator->", "structiiterator.html#a789b844bcb717b7bbdd8727e3f27a2f8", null ],
-      [ "operator<", "structiiterator.html#ae131b6da2b79f90e9c35f7c6e1e6e2ea", null ],
-      [ "operator<=", "structiiterator.html#acd45ddf410739b47f977be6ed1e964bb", null ],
-      [ "operator==", "structiiterator.html#a36a4df98fec0b13eb84e938feeb0d7d7", null ],
-      [ "operator>", "structiiterator.html#af75d4ca526effe8e955ef1f340f28440", null ],
-      [ "operator>=", "structiiterator.html#aa367239b9d38c3af07fa911f3b1af1ae", null ],
       [ "operator+", "structiiterator.html#aa72e9f33acae994f81c07eba411a693e", null ]
     ] ],
     [ "iarithmetic&lt; T &gt;", "structiarithmetic.html", [
@@ -77,6 +71,8 @@ var group___c_r_t_p_interfaces =
       [ "package_type", "structipackage.html#a9b67a2bdf72c87bb04bc1320af0f6816", null ],
       [ "ipackage", "structipackage.html#a549625561e81e554b6552a292cf69aea", null ],
       [ "~ipackage", "structipackage.html#aef48c710de7f2a81b1e238892b026f5f", null ],
+      [ "equal_to", "structipackage.html#a8804e6609f6c51bd877da24ba2f4691b", null ],
+      [ "less_than", "structipackage.html#a7f3697639b7508ccc1f76c0d6b8e31e5", null ],
       [ "operator package_type", "structipackage.html#a2070d73d6d864bd28fdb4fb21a557a2c", null ],
       [ "operator%=", "structipackage.html#a92ce2f75002df8eab6ade4cf29bc0b29", null ],
       [ "operator&=", "structipackage.html#a3ec6d843b7be2f992350939e1162cf42", null ],
@@ -87,9 +83,7 @@ var group___c_r_t_p_interfaces =
       [ "operator--", "structipackage.html#ae9caaebee49246b2dc19c1e657d1478a", null ],
       [ "operator-=", "structipackage.html#a52b642942569147d303a46bfd7e42fc4", null ],
       [ "operator/=", "structipackage.html#a2bce454349f18fe7cbc65c51c58f8e2c", null ],
-      [ "operator<", "structipackage.html#a2dc7aff12cc56305323a15dba56f8dd5", null ],
       [ "operator<<=", "structipackage.html#a07302e7c4ea610e490085bb9d074e967", null ],
-      [ "operator==", "structipackage.html#a05794b8047878569161bf530835ffdf3", null ],
       [ "operator>>=", "structipackage.html#a3a0b3a31597d9ef3b4a8857321fe6aac", null ],
       [ "operator^=", "structipackage.html#a525f7518065af3d6684c57b517f35350", null ],
       [ "operator|=", "structipackage.html#a73916d2f53368f67416f8139a71748a4", null ],

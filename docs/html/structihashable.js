@@ -1,4 +1,4 @@
 var structihashable =
 [
-    [ "to_hash", "structihashable.html#a5782b4a58ffbfc375e2f4f6196077ebb", null ]
+    [ "to_ihash", "structihashable.html#a3bb793a19699c7ccd86fa5d7e91cb513", null ]
 ];

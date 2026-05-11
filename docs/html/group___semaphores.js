@@ -10,6 +10,7 @@ var group___semaphores =
       [ "try_acquire_until", "classatomic__semaphore.html#aefde002d6314ac824dccb0b426fe1a20", null ]
     ] ],
     [ "semaphore", "classsemaphore.html", [
+      [ "native_handle_type", "classsemaphore.html#a83d575a008cf2880a797eb2a3b436524", null ],
       [ "semaphore", "classsemaphore.html#a6023fe3d87bccedd287a1f2244691f41", null ],
       [ "~semaphore", "classsemaphore.html#a91211aa51e970af200a5c7009371c4c5", null ],
       [ "acquire", "classsemaphore.html#af62e2cf5dd862a543a0d1b4f829b4b33", null ],

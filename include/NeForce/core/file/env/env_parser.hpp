@@ -3,10 +3,10 @@
 
 /**
  * @file env_parser.hpp
- * @brief env配置格式解析器
+ * @brief ENV配置格式解析器
  *
- * 此文件提供了env配置格式的解析器实现。
- * 支持解析env格式，包括变量定义、注释、引号处理和转义字符。
+ * 此文件提供了ENV配置格式的解析器实现。
+ * 支持解析ENV格式，包括变量定义、注释、引号处理和转义字符。
  * 提供完整的语法分析和错误处理机制。
  */
 
@@ -15,14 +15,12 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup ConfigFormat 配置格式操作
- * @brief env配置格式管理
+ * @addtogroup ConfigFormat 配置格式操作
  * @{
  */
 
 /**
- * @defgroup EnvConfig env配置
- * @brief env配置格式管理
+ * @addtogroup EnvConfig ENV配置
  * @{
  */
 
@@ -30,7 +28,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @class env_parser
  * @brief 环境变量文件解析器
  *
- * 解析env格式，支持以下特性：
+ * 解析ENV格式，支持以下特性：
  * - 变量定义（KEY=VALUE格式）
  * - 注释（以#开头的行）
  * - 引号处理（单引号、双引号）

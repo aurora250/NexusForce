@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___finding_algorithms" kind="group">
+    <compoundname>FindingAlgorithms</compoundname>
+    <title>查找元素算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___finding_algorithms_1gaf00ba933b64f438e9c32ebf9cb1d7c8d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr Iterator</type>
+        <definition>NEFORCE_NODISCARD constexpr Iterator find</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;value)</argsstring>
+        <name>find</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>查找范围内第一个等于指定值的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个等于value的元素的迭代器，或last如果未找到 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="413" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="413" bodyend="420"/>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="group___remove_algorithms_1gab60509ebaf6c33a45885638e30e9e9b2" compoundref="remove_8hpp" startline="102" endline="115">remove</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1ga9580524f56d452c88e066180e465af27" compoundref="search_8hpp" startline="539" endline="562">search_n</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___finding_algorithms_1gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Predicate</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator find_if</definition>
+        <argsstring>(Iterator first, Iterator last, Predicate pred)</argsstring>
+        <name>find_if</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Predicate</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>查找范围内第一个满足谓词的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型，需要满足输入迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Predicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个满足pred的元素的迭代器，或last如果未找到 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="432" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="432" bodyend="439"/>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" compoundref="remove_8hpp" startline="133" endline="146">remove_if</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___finding_algorithms_1ga3b3f143e3868c5b0779cd7253d1a0a8a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Predicate</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" kindref="member">is_ranges_input_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator find_if_not</definition>
+        <argsstring>(Iterator first, Iterator last, Predicate pred)</argsstring>
+        <name>find_if_not</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Predicate</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>查找范围内第一个不满足谓词的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型，需要满足输入迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Predicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不满足pred的元素的迭代器，或last如果未找到 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="451" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="451" bodyend="458"/>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>查找特定元素的算法 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🏗️_20编译步骤_0',['🏗️ 编译步骤',['../index.html#autotoc_md41',1,'']]]
+  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]],
+  ['颜色_1',['颜色',['../group___color.html',1,'']]]
 ];

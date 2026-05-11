@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___any" kind="group">
+    <compoundname>Any</compoundname>
+    <title>任意类</title>
+    <innerclass refid="classany" prot="public">any</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___any_1gaa10dc2f937bfc4efbd98234e71af0860" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; <ref refid="classany" kindref="compound">any</ref>, <ref refid="structpass__template__construct__tag" kindref="compound">pass_template_construct_tag</ref>&lt; T &gt;, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classany" kindref="compound">any</ref></type>
+        <definition>any make_any</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>make_any</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>创建any对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>构造的any对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="403" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="403" bodyend="405"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___any_1gaa10dc2f937bfc4efbd98234e71af0860" compoundref="utility_2any_8hpp" startline="403" endline="405">make_any</references>
+        <referencedby refid="group___any_1gaa10dc2f937bfc4efbd98234e71af0860" compoundref="utility_2any_8hpp" startline="403" endline="405">make_any</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___any_1ga435372af463e628eb7e40e293d87c1da" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const T *</type>
+        <definition>const T * any_cast</definition>
+        <argsstring>(const any *value) noexcept</argsstring>
+        <name>any_cast</name>
+        <param>
+          <type>const <ref refid="classany" kindref="compound">any</ref> *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从any对象转换常量值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向any的指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向转换后值的常量指针，如果类型不匹配则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="453" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="453" bodyend="455"/>
+        <referencedby refid="group___any_1ga5183df05b029494e00a3a6cfedeaeefc" compoundref="utility_2any_8hpp" startline="464" endline="466">any_cast</referencedby>
+        <referencedby refid="group___any_1gac77841c2785c6a7c7cf788160ffa9afb" compoundref="utility_2any_8hpp" startline="476" endline="487">any_cast</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___any_1ga5183df05b029494e00a3a6cfedeaeefc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * any_cast</definition>
+        <argsstring>(any *value) noexcept</argsstring>
+        <name>any_cast</name>
+        <param>
+          <type><ref refid="classany" kindref="compound">any</ref> *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从any对象转换值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向any的指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向转换后值的指针，如果类型不匹配则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="464" column="3" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="464" bodyend="466"/>
+        <references refid="group___any_1ga435372af463e628eb7e40e293d87c1da" compoundref="utility_2any_8hpp" startline="453" endline="455">any_cast</references>
+      </memberdef>
+      <memberdef kind="function" id="group___any_1gac77841c2785c6a7c7cf788160ffa9afb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T any_cast</definition>
+        <argsstring>(const any &amp;value)</argsstring>
+        <name>any_cast</name>
+        <param>
+          <type>const <ref refid="classany" kindref="compound">any</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从any对象转换值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>any对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structanycast__exception" kindref="compound">anycast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果类型转换失败 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="476" column="3" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="476" bodyend="487"/>
+        <references refid="group___any_1ga435372af463e628eb7e40e293d87c1da" compoundref="utility_2any_8hpp" startline="453" endline="455">any_cast</references>
+        <references refid="group___type_traits_utilities_1ga07b45a12528ab6274b3945b59508495d" compoundref="type__traits_8hpp" startline="282">disjunction_v</references>
+        <references refid="group___debug_breakpoints_and_assertions_1gaeb58751600e0fca687b84d898c191b4d" compoundref="breakpoint_8hpp" startline="68" endline="74">unreachable</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>任意类型及其工具函数的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,753 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classregex" kind="class" language="C++" prot="public">
+    <compoundname>regex</compoundname>
+    <includes refid="regex_8hpp" local="no">regex.hpp</includes>
+    <innerclass refid="structregex_1_1pcre2__code__deleter" prot="private">regex::pcre2_code_deleter</innerclass>
+    <innerclass refid="structregex_1_1pcre2__match__data__deleter" prot="private">regex::pcre2_match_data_deleter</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classregex_1a5e9707203d05c206395c19c51f92443c" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; pcre2_code, pcre2_code_deleter &gt;</type>
+        <definition>unique_ptr&lt;pcre2_code, pcre2_code_deleter&gt; regex::code_</definition>
+        <argsstring></argsstring>
+        <name>code_</name>
+        <qualifiedname>regex::code_</qualifiedname>
+        <briefdescription>
+<para>PCRE2编译后的正则表达式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="206" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classregex_1a4e7bde1b65ce8af2a8579e9495d5e5a3" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string regex::pattern_</definition>
+        <argsstring></argsstring>
+        <name>pattern_</name>
+        <qualifiedname>regex::pattern_</qualifiedname>
+        <briefdescription>
+<para>原始正则表达式模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="207" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classregex_1a85dff104b358a643f043bde140850f68" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t regex::options_</definition>
+        <argsstring></argsstring>
+        <name>options_</name>
+        <qualifiedname>regex::options_</qualifiedname>
+        <briefdescription>
+<para>编译选项 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="208" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classregex_1aa384cd05c0c15746b6d16f342da91aa7" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int regex::capture_count_</definition>
+        <argsstring></argsstring>
+        <name>capture_count_</name>
+        <qualifiedname>regex::capture_count_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>捕获组数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="209" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="209" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classregex_1a75574f98c2d8ab13860242a869ab1b85" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class regex_iterator</definition>
+        <argsstring></argsstring>
+        <name>regex_iterator</name>
+        <qualifiedname>regex::regex_iterator</qualifiedname>
+        <param>
+          <type><ref refid="classregex__iterator" kindref="compound">regex_iterator</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="211" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classregex_1a3c4cd74b0e744ae1ce26370721a872b9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class regex_token_iterator</definition>
+        <argsstring></argsstring>
+        <name>regex_token_iterator</name>
+        <qualifiedname>regex::regex_token_iterator</qualifiedname>
+        <param>
+          <type><ref refid="classregex__token__iterator" kindref="compound">regex_token_iterator</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="212" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="212" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classregex_1a24e9eff1234eae54d91720ddd60d0954" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void regex::compile</definition>
+        <argsstring>(const string &amp;pattern, uint32_t options=0)</argsstring>
+        <name>compile</name>
+        <qualifiedname>regex::compile</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>pattern</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>options</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="215" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1af3af858d39b5d98ad8cb021e0782b19f" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classmatch__result" kindref="compound">match_result</ref></type>
+        <definition>match_result regex::do_match</definition>
+        <argsstring>(PCRE2_SPTR subject, size_t length, size_t start_offset, uint32_t options, const string &amp;subject_str) const</argsstring>
+        <name>do_match</name>
+        <qualifiedname>regex::do_match</qualifiedname>
+        <param>
+          <type>PCRE2_SPTR</type>
+          <declname>subject</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>length</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start_offset</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>options</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>subject_str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="217" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classregex_1a9cc420382e161b3120f0c1fa2b96de1b" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>regex::regex</definition>
+        <argsstring>(const string &amp;pattern, uint32_t options=0)</argsstring>
+        <name>regex</name>
+        <qualifiedname>regex::regex</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>pattern</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>options</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>从字符串构造正则表达式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pattern</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>正则表达式模式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>编译选项（PCRE2选项标志） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structregex__exception" kindref="compound">regex_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>编译失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="227" column="14"/>
+        <references refid="classregex_1a645b32b78c0e4cee6759a8a851195274" compoundref="regex_8hpp" startline="308" endline="308">pattern</references>
+        <references refid="classregex_1a9cc420382e161b3120f0c1fa2b96de1b">regex</references>
+        <referencedby refid="classregex_1a9cc420382e161b3120f0c1fa2b96de1b">regex</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1ac235c60a1b1adfc5721c00f66b77c3c3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>regex::regex</definition>
+        <argsstring>(regex &amp;&amp;other) noexcept</argsstring>
+        <name>regex</name>
+        <qualifiedname>regex::regex</qualifiedname>
+        <param>
+          <type><ref refid="classregex" kindref="compound">regex</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="229" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1a96a6616e3fa26d1d2960c8b5462a7663" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classregex" kindref="compound">regex</ref> &amp;</type>
+        <definition>regex &amp; regex::operator=</definition>
+        <argsstring>(regex &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>regex::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classregex" kindref="compound">regex</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="230" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1ae8af80a81acc445b20fb1d23847ba025" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>regex::regex</definition>
+        <argsstring>(const regex &amp;)=delete</argsstring>
+        <name>regex</name>
+        <qualifiedname>regex::regex</qualifiedname>
+        <param>
+          <type>const <ref refid="classregex" kindref="compound">regex</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="232" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1a639f921dffd4fe49191df4a6f40608c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classregex" kindref="compound">regex</ref> &amp;</type>
+        <definition>regex &amp; regex::operator=</definition>
+        <argsstring>(const regex &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>regex::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classregex" kindref="compound">regex</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="233" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1a22fd50c40c009e6eb2f6296df34c51ee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmatch__result" kindref="compound">match_result</ref></type>
+        <definition>NEFORCE_NODISCARD match_result regex::do_match</definition>
+        <argsstring>(const string &amp;str) const</argsstring>
+        <name>do_match</name>
+        <qualifiedname>regex::do_match</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>执行完整匹配 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待匹配字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配结果</para>
+</simplesect>
+要求正则表达式完全匹配整个字符串。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="242" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1a12ff5ac4822ae3ac59184d7789458e0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool regex::match</definition>
+        <argsstring>(const string &amp;str) const</argsstring>
+        <name>match</name>
+        <qualifiedname>regex::match</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>检查是否完全匹配 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待匹配字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>完全匹配返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="249" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1ab4fb572da5f242f1f79d6b9959b15366" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmatch__result" kindref="compound">match_result</ref></type>
+        <definition>NEFORCE_NODISCARD match_result regex::search</definition>
+        <argsstring>(const string &amp;str, size_t pos=0) const</argsstring>
+        <name>search</name>
+        <qualifiedname>regex::search</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>在字符串中搜索第一个匹配 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待搜索字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始搜索位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>第一个匹配结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="257" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1a3283b7adca81d9857d025558167d6d23" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classmatch__result" kindref="compound">match_result</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD vector&lt; match_result &gt; regex::find_all</definition>
+        <argsstring>(const string &amp;str) const</argsstring>
+        <name>find_all</name>
+        <qualifiedname>regex::find_all</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>查找所有匹配 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待搜索字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>所有匹配结果列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="264" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1aa2b3e88047eddfa040a7bfc01a7a4e9b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string regex::replace_first</definition>
+        <argsstring>(const string &amp;str, string_view fmt) const</argsstring>
+        <name>replace_first</name>
+        <qualifiedname>regex::replace_first</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>fmt</declname>
+        </param>
+        <briefdescription>
+<para>替换第一个匹配 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>替换格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>替换后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="272" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1ad2d588837ecfbece42bb55ea2aff70de" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string regex::replace_all</definition>
+        <argsstring>(const string &amp;str, string_view fmt) const</argsstring>
+        <name>replace_all</name>
+        <qualifiedname>regex::replace_all</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>fmt</declname>
+        </param>
+        <briefdescription>
+<para>替换所有匹配 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>替换格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>替换后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="280" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1ab031f04f095a00bbc98dc343c1dd799e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string regex::replace_all_callback</definition>
+        <argsstring>(const string &amp;str, function&lt; string(const match_result &amp;)&gt; callback) const</argsstring>
+        <name>replace_all_callback</name>
+        <qualifiedname>regex::replace_all_callback</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>(const <ref refid="classmatch__result" kindref="compound">match_result</ref> &amp;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>使用回调函数替换所有匹配 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数，接收match_result返回替换字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>替换后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="288" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1ac260a2e47372181b6dbd4603d91bb247" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD vector&lt; string &gt; regex::split</definition>
+        <argsstring>(const string &amp;str, int max_splits=-1) const</argsstring>
+        <name>split</name>
+        <qualifiedname>regex::split</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>max_splits</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>使用正则表达式分割字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待分割字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_splits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大分割次数，-1表示无限制 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>分割后的字符串列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="296" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1ab6f3682c611875bfdaea39f3a9e66848" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD int</type>
+        <definition>NEFORCE_NODISCARD int regex::capture_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capture_count</name>
+        <qualifiedname>regex::capture_count</qualifiedname>
+        <briefdescription>
+<para>获取捕获组数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>正则表达式中定义的捕获组数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="302" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="302" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1a645b32b78c0e4cee6759a8a851195274" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const string &amp; regex::pattern</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>pattern</name>
+        <qualifiedname>regex::pattern</qualifiedname>
+        <briefdescription>
+<para>获取正则表达式模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>原始正则表达式字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="308" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="308" bodyend="308"/>
+        <referencedby refid="classregex_1a9cc420382e161b3120f0c1fa2b96de1b">regex</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1aae93fd06fc0780fc36d969a4708cf232" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool regex::valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>valid</name>
+        <qualifiedname>regex::valid</qualifiedname>
+        <briefdescription>
+<para>检查正则表达式是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已编译成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="314" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="314" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1a733cbc989acbbce57dcbe8f6e848631d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classregex__iterator" kindref="compound">regex_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD regex_iterator regex::begin</definition>
+        <argsstring>(const string &amp;str) const</argsstring>
+        <name>begin</name>
+        <qualifiedname>regex::begin</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>获取匹配结果迭代器起始位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待遍历的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配迭代器起始位置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="321" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classregex_1a2076e569e03e7a02b35bb058c77a93b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classregex__iterator" kindref="compound">regex_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD regex_iterator regex::end</definition>
+        <argsstring>(const string &amp;str) const</argsstring>
+        <name>end</name>
+        <qualifiedname>regex::end</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>获取匹配结果迭代器结束位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待遍历的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配迭代器结束位置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="328" column="38"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>正则表达式类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>PCRE2正则表达式引擎，提供编译、匹配、查找、替换、分割等操作。 支持正则表达式的完整功能，包括捕获组、向后引用、断言等。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="188" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="188" bodyend="329"/>
+    <listofallmembers>
+      <member refid="classregex_1a733cbc989acbbce57dcbe8f6e848631d" prot="public" virt="non-virtual"><scope>regex</scope><name>begin</name></member>
+      <member refid="classregex_1ab6f3682c611875bfdaea39f3a9e66848" prot="public" virt="non-virtual"><scope>regex</scope><name>capture_count</name></member>
+      <member refid="classregex_1aa384cd05c0c15746b6d16f342da91aa7" prot="private" virt="non-virtual"><scope>regex</scope><name>capture_count_</name></member>
+      <member refid="classregex_1a5e9707203d05c206395c19c51f92443c" prot="private" virt="non-virtual"><scope>regex</scope><name>code_</name></member>
+      <member refid="classregex_1a24e9eff1234eae54d91720ddd60d0954" prot="private" virt="non-virtual"><scope>regex</scope><name>compile</name></member>
+      <member refid="classregex_1af3af858d39b5d98ad8cb021e0782b19f" prot="private" virt="non-virtual"><scope>regex</scope><name>do_match</name></member>
+      <member refid="classregex_1a22fd50c40c009e6eb2f6296df34c51ee" prot="public" virt="non-virtual"><scope>regex</scope><name>do_match</name></member>
+      <member refid="classregex_1a2076e569e03e7a02b35bb058c77a93b3" prot="public" virt="non-virtual"><scope>regex</scope><name>end</name></member>
+      <member refid="classregex_1a3283b7adca81d9857d025558167d6d23" prot="public" virt="non-virtual"><scope>regex</scope><name>find_all</name></member>
+      <member refid="classregex_1a12ff5ac4822ae3ac59184d7789458e0b" prot="public" virt="non-virtual"><scope>regex</scope><name>match</name></member>
+      <member refid="classregex_1a96a6616e3fa26d1d2960c8b5462a7663" prot="public" virt="non-virtual"><scope>regex</scope><name>operator=</name></member>
+      <member refid="classregex_1a639f921dffd4fe49191df4a6f40608c4" prot="public" virt="non-virtual"><scope>regex</scope><name>operator=</name></member>
+      <member refid="classregex_1a85dff104b358a643f043bde140850f68" prot="private" virt="non-virtual"><scope>regex</scope><name>options_</name></member>
+      <member refid="classregex_1a645b32b78c0e4cee6759a8a851195274" prot="public" virt="non-virtual"><scope>regex</scope><name>pattern</name></member>
+      <member refid="classregex_1a4e7bde1b65ce8af2a8579e9495d5e5a3" prot="private" virt="non-virtual"><scope>regex</scope><name>pattern_</name></member>
+      <member refid="classregex_1a9cc420382e161b3120f0c1fa2b96de1b" prot="public" virt="non-virtual"><scope>regex</scope><name>regex</name></member>
+      <member refid="classregex_1ac235c60a1b1adfc5721c00f66b77c3c3" prot="public" virt="non-virtual"><scope>regex</scope><name>regex</name></member>
+      <member refid="classregex_1ae8af80a81acc445b20fb1d23847ba025" prot="public" virt="non-virtual"><scope>regex</scope><name>regex</name></member>
+      <member refid="classregex_1ad2d588837ecfbece42bb55ea2aff70de" prot="public" virt="non-virtual"><scope>regex</scope><name>replace_all</name></member>
+      <member refid="classregex_1ab031f04f095a00bbc98dc343c1dd799e" prot="public" virt="non-virtual"><scope>regex</scope><name>replace_all_callback</name></member>
+      <member refid="classregex_1aa2b3e88047eddfa040a7bfc01a7a4e9b" prot="public" virt="non-virtual"><scope>regex</scope><name>replace_first</name></member>
+      <member refid="classregex_1ab4fb572da5f242f1f79d6b9959b15366" prot="public" virt="non-virtual"><scope>regex</scope><name>search</name></member>
+      <member refid="classregex_1ac260a2e47372181b6dbd4603d91bb247" prot="public" virt="non-virtual"><scope>regex</scope><name>split</name></member>
+      <member refid="classregex_1aae93fd06fc0780fc36d969a4708cf232" prot="public" virt="non-virtual"><scope>regex</scope><name>valid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

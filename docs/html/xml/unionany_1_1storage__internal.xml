@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="unionany_1_1storage__internal" kind="union" language="C++" prot="private">
+    <compoundname>any::storage_internal</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="unionany_1_1storage__internal_1a42cd062b75b949efa024d625ed0970f3" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* any::storage_internal::ptr_</definition>
+        <argsstring></argsstring>
+        <name>ptr_</name>
+        <qualifiedname>any::storage_internal::ptr_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>堆存储指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="89" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionany_1_1storage__internal_1ab55f6dded7005e8754e96da34a7aeddf" prot="public" static="no" mutable="no">
+        <type><ref refid="group___alignment_1gae1bfcd9586bbb9936d7eb2d2ea32bc8e" kindref="member">aligned_storage_t</ref>&lt; sizeof(ptr_), alignof(void *)&gt;</type>
+        <definition>aligned_storage_t&lt;sizeof(ptr_), alignof(void*)&gt; any::storage_internal::buffer_</definition>
+        <argsstring></argsstring>
+        <name>buffer_</name>
+        <qualifiedname>any::storage_internal::buffer_</qualifiedname>
+        <briefdescription>
+<para>栈存储缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="90" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="unionany_1_1storage__internal_1ab5a11adcef585fcc3b3b1b7dab8f9885" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>any::storage_internal::storage_internal</definition>
+        <argsstring>()=default</argsstring>
+        <name>storage_internal</name>
+        <qualifiedname>any::storage_internal::storage_internal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="85" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="unionany_1_1storage__internal_1adbfd6367b0329f897405b7b96f79c9cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>any::storage_internal::storage_internal</definition>
+        <argsstring>(const storage_internal &amp;)=delete</argsstring>
+        <name>storage_internal</name>
+        <qualifiedname>any::storage_internal::storage_internal</qualifiedname>
+        <param>
+          <type>const storage_internal &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="86" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="unionany_1_1storage__internal_1a2550f927b56b277df6a3695d540c4e0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>storage_internal &amp;</type>
+        <definition>storage_internal &amp; any::storage_internal::operator=</definition>
+        <argsstring>(const storage_internal &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>any::storage_internal::operator=</qualifiedname>
+        <param>
+          <type>const storage_internal &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="87" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>内部存储联合体 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>用于存储值，可以是栈存储或堆存储。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="84" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="84" bodyend="91"/>
+    <listofallmembers>
+      <member refid="unionany_1_1storage__internal_1ab55f6dded7005e8754e96da34a7aeddf" prot="public" virt="non-virtual"><scope>any::storage_internal</scope><name>buffer_</name></member>
+      <member refid="unionany_1_1storage__internal_1a2550f927b56b277df6a3695d540c4e0e" prot="public" virt="non-virtual"><scope>any::storage_internal</scope><name>operator=</name></member>
+      <member refid="unionany_1_1storage__internal_1a42cd062b75b949efa024d625ed0970f3" prot="public" virt="non-virtual"><scope>any::storage_internal</scope><name>ptr_</name></member>
+      <member refid="unionany_1_1storage__internal_1ab5a11adcef585fcc3b3b1b7dab8f9885" prot="public" virt="non-virtual"><scope>any::storage_internal</scope><name>storage_internal</name></member>
+      <member refid="unionany_1_1storage__internal_1adbfd6367b0329f897405b7b96f79c9cc" prot="public" virt="non-virtual"><scope>any::storage_internal</scope><name>storage_internal</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

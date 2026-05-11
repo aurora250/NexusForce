@@ -8,7 +8,7 @@ var group___function_wrapper =
       [ "function", "classfunction_3_01_res_07_args_8_8_8_08_4.html#ae905461055606867ce67917e9147369f", null ],
       [ "function", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a30ca0f61d665ad17ae8514657e9c853f", null ],
       [ "operator bool", "classfunction_3_01_res_07_args_8_8_8_08_4.html#abdac020efb6e509d72cb4cc1df3a9e79", null ],
-      [ "operator()", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a740193b403ada7fd0d7103da53f0c32c", null ],
+      [ "operator()", "classfunction_3_01_res_07_args_8_8_8_08_4.html#ab05cff3a24c666c2bf8eaa12155dff28", null ],
       [ "operator=", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a91471278c4fc9bf19205cd4bd1c702cd", null ],
       [ "operator=", "classfunction_3_01_res_07_args_8_8_8_08_4.html#a185164751d1e41fb160dc6a9f7759045", null ],
       [ "operator=", "classfunction_3_01_res_07_args_8_8_8_08_4.html#ab876efdbe1a01c892970bb0234009bb7", null ],

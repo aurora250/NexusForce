@@ -34,7 +34,7 @@ var searchData=
   ['create_5ftime_31',['create_time',['../structhttp__session.html#a12e2341f1722bf4a406cfdc24ede7469',1,'http_session']]],
   ['csd_5fversion_32',['csd_version',['../structsysinfo_1_1os__version__info.html#a89f969c3030593ee73ee26fa9a09b55c',1,'sysinfo::os_version_info']]],
   ['currency_5fsymbol_33',['currency_symbol',['../structlocale_1_1monetary__info.html#a7925a9fb4b68116a4ba1f8fd900ed47e',1,'locale::monetary_info']]],
-  ['current_5fmhz_34',['current_MHZ',['../structsysinfo_1_1_c_p_u__info.html#a7ff7cd89432a692e8d9e5f802c9d3572',1,'sysinfo::CPU_info']]],
+  ['current_5fmhz_34',['current_MHz',['../structsysinfo_1_1_c_p_u__info.html#a1b737fae9977a80fdbcd3b5476d2c1ec',1,'sysinfo::CPU_info']]],
   ['current_5freconnect_5fattempt_5f_35',['current_reconnect_attempt_',['../classtcp__client__base.html#a6084cc447e8b87ae52079de26bcaf7da',1,'tcp_client_base']]],
   ['current_5fvalue_36',['current_value',['../structgenerator_1_1promise__type.html#a1703105ffebd308baa63d484212a96d4',1,'generator::promise_type']]],
   ['custom_5ffilter_37',['custom_filter',['../structpath__tree_1_1scan__options.html#a07189eb39976f22adf0b1ab5569735b3',1,'path_tree::scan_options']]]

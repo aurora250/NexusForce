@@ -1,0 +1,574 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classyaml__mapping" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>yaml_mapping</compoundname>
+    <basecompoundref refid="classyaml__value" prot="public" virt="non-virtual">yaml_value</basecompoundref>
+    <includes refid="yaml__value_8hpp" local="no">yaml_value.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390f" prot="public" static="no" strong="no">
+        <type></type>
+        <name>mapping_style</name>
+        <qualifiedname>yaml_mapping::mapping_style</qualifiedname>
+        <enumvalue id="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390fa9375185124623a3f2d911157a3127e60" prot="public">
+          <name>Block</name>
+          <briefdescription>
+<para>块样式（key: value） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390fa64425d141642e583f6af9feccdc01187" prot="public">
+          <name>Flow</name>
+          <briefdescription>
+<para>流样式（{key: value}） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>映射集合样式枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="638" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="638" bodyend="641"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classyaml__mapping_1ae9a75d3157560c44ddb5c0820ab16eff" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classyaml__value" kindref="compound">yaml_value</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;string, shared_ptr&lt;yaml_value&gt; &gt; yaml_mapping::members</definition>
+        <argsstring></argsstring>
+        <name>members</name>
+        <qualifiedname>yaml_mapping::members</qualifiedname>
+        <briefdescription>
+<para>键值对存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="644" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="644" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classyaml__mapping_1a2a7d7280b1ec39bbdb117351533433ec" prot="private" static="no" mutable="no">
+        <type><ref refid="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390f" kindref="member">mapping_style</ref></type>
+        <definition>mapping_style yaml_mapping::style</definition>
+        <argsstring></argsstring>
+        <name>style</name>
+        <qualifiedname>yaml_mapping::style</qualifiedname>
+        <briefdescription>
+<para>集合样式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="645" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="645" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classyaml__mapping_1af223fa31db626bda23d5600e858546ae" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>yaml_mapping::yaml_mapping</definition>
+        <argsstring>(const mapping_style s=Block)</argsstring>
+        <name>yaml_mapping</name>
+        <qualifiedname>yaml_mapping::yaml_mapping</qualifiedname>
+        <param>
+          <type>const <ref refid="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390f" kindref="member">mapping_style</ref></type>
+          <declname>s</declname>
+          <defval><ref refid="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390fa9375185124623a3f2d911157a3127e60" kindref="member">Block</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造映射 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合样式，默认为块样式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="652" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="652" bodyend="653"/>
+        <references refid="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390fa9375185124623a3f2d911157a3127e60" compoundref="yaml__value_8hpp" startline="639">Block</references>
+        <referencedby refid="classyaml__mapping_1a535ab4b16c2d165107d3d64315095ccd" compoundref="yaml__value_8hpp" startline="730" endline="739">merge_from</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1a3797a9f99ac11ae449a2ea4a9a84a0d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>yaml_mapping::yaml_mapping</definition>
+        <argsstring>(const yaml_mapping &amp;)=delete</argsstring>
+        <name>yaml_mapping</name>
+        <qualifiedname>yaml_mapping::yaml_mapping</qualifiedname>
+        <param>
+          <type>const <ref refid="classyaml__mapping" kindref="compound">yaml_mapping</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="655" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1acdbeee4d3a249771b14d931d3bc44b2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classyaml__mapping" kindref="compound">yaml_mapping</ref> &amp;</type>
+        <definition>yaml_mapping &amp; yaml_mapping::operator=</definition>
+        <argsstring>(const yaml_mapping &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>yaml_mapping::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classyaml__mapping" kindref="compound">yaml_mapping</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="656" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1abb7c1036438af2981c5c38ac93e7dbf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>yaml_mapping::yaml_mapping</definition>
+        <argsstring>(yaml_mapping &amp;&amp;)=default</argsstring>
+        <name>yaml_mapping</name>
+        <qualifiedname>yaml_mapping::yaml_mapping</qualifiedname>
+        <param>
+          <type><ref refid="classyaml__mapping" kindref="compound">yaml_mapping</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="657" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1abcafa7768ca8fd8e95b393ab34f7fb2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classyaml__mapping" kindref="compound">yaml_mapping</ref> &amp;</type>
+        <definition>yaml_mapping &amp; yaml_mapping::operator=</definition>
+        <argsstring>(yaml_mapping &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>yaml_mapping::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classyaml__mapping" kindref="compound">yaml_mapping</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="658" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1ab13cc7b8ed7a63b4551d22a958f35325" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633" kindref="member">types</ref></type>
+        <definition>NEFORCE_NODISCARD types yaml_mapping::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>yaml_mapping::type</qualifiedname>
+        <reimplements refid="classyaml__value_1a887865d133b23f6d5f8e0f8f322ba10e">type</reimplements>
+        <briefdescription>
+<para>获取值的具体类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>类型枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="660" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="660" bodyend="660"/>
+        <references refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a96d3ceb2cf8b297b6589107df8dd88df" compoundref="yaml__value_8hpp" startline="233">yaml_value::Mapping</references>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1a5a9c023faf734f7df97505d1e1015158" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classyaml__mapping" kindref="compound">yaml_mapping</ref> *</type>
+        <definition>NEFORCE_NODISCARD const yaml_mapping * yaml_mapping::as_mapping</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>as_mapping</name>
+        <qualifiedname>yaml_mapping::as_mapping</qualifiedname>
+        <reimplements refid="classyaml__value_1a23a6ea0ffc69c0bcbc72ec5e57bb1293">as_mapping</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="661" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="661" bodyend="661"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1ad3b3bb781334c9e5b289546e8789aefc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void yaml_mapping::add_member</definition>
+        <argsstring>(const string &amp;key, shared_ptr&lt; yaml_value &gt; value)</argsstring>
+        <name>add_member</name>
+        <qualifiedname>yaml_mapping::add_member</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classyaml__value" kindref="compound">yaml_value</ref> &gt;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加或覆盖键值对 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键名字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>关联的YAML值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="668" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="668" bodyend="668"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1ab3465e3ea7a1d29872d5610b2021d77f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classyaml__value" kindref="compound">yaml_value</ref> *</type>
+        <definition>NEFORCE_NODISCARD const yaml_value * yaml_mapping::get_member</definition>
+        <argsstring>(const string &amp;key) const</argsstring>
+        <name>get_member</name>
+        <qualifiedname>yaml_mapping::get_member</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取指定键名的成员（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键名字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值指针，键不存在返回 nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="675" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="675" bodyend="681"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1a8e74959541b2b838165b06aba3a7285f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classyaml__value" kindref="compound">yaml_value</ref> *</type>
+        <definition>NEFORCE_NODISCARD yaml_value * yaml_mapping::get_member</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>get_member</name>
+        <qualifiedname>yaml_mapping::get_member</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取指定键名的成员（可变版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键名字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值指针，键不存在返回 nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="688" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="688" bodyend="694"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1aab49e99041089d5e03b934b9d876cb00" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool yaml_mapping::has_member</definition>
+        <argsstring>(const string &amp;key) const</argsstring>
+        <name>has_member</name>
+        <qualifiedname>yaml_mapping::has_member</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>检查键名是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键名字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>键存在返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="701" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="701" bodyend="701"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1a012394c6e4f4c4dcd2c3910bcc0f89fc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classyaml__value" kindref="compound">yaml_value</ref> &gt; &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD const unordered_map&lt; string, shared_ptr&lt; yaml_value &gt; &gt; &amp; yaml_mapping::get_members</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_members</name>
+        <qualifiedname>yaml_mapping::get_members</qualifiedname>
+        <briefdescription>
+<para>获取所有成员的常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键值对映射表的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="707" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="707" bodyend="709"/>
+        <referencedby refid="classyaml__mapping_1a535ab4b16c2d165107d3d64315095ccd" compoundref="yaml__value_8hpp" startline="730" endline="739">merge_from</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1afc4f9e3f6694264e0a026e2471e991ec" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390f" kindref="member">mapping_style</ref></type>
+        <definition>NEFORCE_NODISCARD mapping_style yaml_mapping::get_style</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_style</name>
+        <qualifiedname>yaml_mapping::get_style</qualifiedname>
+        <briefdescription>
+<para>获取集合样式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>映射样式枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="715" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="715" bodyend="715"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1a6041ca95930055709be7050e940ddf61" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void yaml_mapping::set_style</definition>
+        <argsstring>(const mapping_style s) noexcept</argsstring>
+        <name>set_style</name>
+        <qualifiedname>yaml_mapping::set_style</qualifiedname>
+        <param>
+          <type>const <ref refid="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390f" kindref="member">mapping_style</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>设置集合样式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的映射样式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="721" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="721" bodyend="721"/>
+      </memberdef>
+      <memberdef kind="function" id="classyaml__mapping_1a535ab4b16c2d165107d3d64315095ccd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void yaml_mapping::merge_from</definition>
+        <argsstring>(const yaml_mapping *other)</argsstring>
+        <name>merge_from</name>
+        <qualifiedname>yaml_mapping::merge_from</qualifiedname>
+        <param>
+          <type>const <ref refid="classyaml__mapping" kindref="compound">yaml_mapping</ref> *</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>合并另一个映射的成员 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源映射指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将 other 中的键值对合并到当前映射中。 如果键名已存在，保留当前映射中的值（不覆盖）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="730" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="730" bodyend="739"/>
+        <references refid="structpair_1aed925258783c91efbc5432030709d54e" compoundref="pair_8hpp" startline="100">pair&lt; T1, T2 &gt;::first</references>
+        <references refid="classyaml__mapping_1a012394c6e4f4c4dcd2c3910bcc0f89fc" compoundref="yaml__value_8hpp" startline="707" endline="709">get_members</references>
+        <references refid="structpair_1a63ae1bbd5a6ce6bd6167b5359fa7a01f" compoundref="pair_8hpp" startline="101">pair&lt; T1, T2 &gt;::second</references>
+        <references refid="classyaml__mapping_1af223fa31db626bda23d5600e858546ae" compoundref="yaml__value_8hpp" startline="652" endline="653">yaml_mapping</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>YAML映射值类型（字典/对象） </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示YAML中的键值对集合。支持两种集合样式：<itemizedlist>
+<listitem><para>**块样式**（Block）：每行 key: value 的缩进格式</para>
+</listitem><listitem><para>**流样式**（Flow）：花括号内的逗号分隔格式 {key: value, ...}</para>
+</listitem></itemizedlist>
+</para>
+<para>映射中的键名为字符串类型，值可以是任意YAML值类型 （包括嵌套的序列和映射）。</para>
+<para><simplesect kind="note"><para>此类禁止拷贝，仅允许移动。 </para>
+</simplesect>
+<simplesect kind="note"><para>键名比较基于字符串相等，不区分YAML标量样式。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>istringify&lt; yaml_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>yaml_mapping</label>
+        <link refid="classyaml__mapping"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>yaml_value</label>
+        <link refid="classyaml__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="7">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="3">
+        <label>istringify&lt; yaml_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>yaml_mapping</label>
+        <link refid="classyaml__mapping"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>yaml_value</label>
+        <link refid="classyaml__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>anchor</edgelabel>
+          <edgelabel>tag</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" line="632" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_value.hpp" bodystart="632" bodyend="740"/>
+    <listofallmembers>
+      <member refid="classyaml__mapping_1ad3b3bb781334c9e5b289546e8789aefc" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>add_member</name></member>
+      <member refid="classyaml__value_1ad86b30a51fa8bab180f21e485637140c" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>anchor</name></member>
+      <member refid="classyaml__value_1a4248647d13153a155d61b18deca6f672" prot="public" virt="virtual"><scope>yaml_mapping</scope><name>as_boolean</name></member>
+      <member refid="classyaml__value_1add697deac88248bfdf132df4dc9bde85" prot="public" virt="virtual"><scope>yaml_mapping</scope><name>as_float</name></member>
+      <member refid="classyaml__value_1a7b0819cc217250006bedfef4d967a1f9" prot="public" virt="virtual"><scope>yaml_mapping</scope><name>as_integer</name></member>
+      <member refid="classyaml__mapping_1a5a9c023faf734f7df97505d1e1015158" prot="public" virt="virtual"><scope>yaml_mapping</scope><name>as_mapping</name></member>
+      <member refid="classyaml__value_1af6d64487661ed8ba454b326c762d9936" prot="public" virt="virtual"><scope>yaml_mapping</scope><name>as_null</name></member>
+      <member refid="classyaml__value_1a975b30caa749300aaa06efff1fdeffb8" prot="public" virt="virtual"><scope>yaml_mapping</scope><name>as_sequence</name></member>
+      <member refid="classyaml__value_1a13fa19f5135550db24a5ed6dafdb170f" prot="public" virt="virtual"><scope>yaml_mapping</scope><name>as_string</name></member>
+      <member refid="classyaml__value_1a4ac191237f5e14c8f701456d9f6349cd" prot="public" virt="virtual"><scope>yaml_mapping</scope><name>as_timestamp</name></member>
+      <member refid="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390fa9375185124623a3f2d911157a3127e60" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>Block</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a6be7945e897201a66071024da0900aa0" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>Boolean</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a5db3a045c98baa2946cee0092e2ee286" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>Float</name></member>
+      <member refid="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390fa64425d141642e583f6af9feccdc01187" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>Flow</name></member>
+      <member refid="classyaml__mapping_1ab3465e3ea7a1d29872d5610b2021d77f" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>get_member</name></member>
+      <member refid="classyaml__mapping_1a8e74959541b2b838165b06aba3a7285f" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>get_member</name></member>
+      <member refid="classyaml__mapping_1a012394c6e4f4c4dcd2c3910bcc0f89fc" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>get_members</name></member>
+      <member refid="classyaml__mapping_1afc4f9e3f6694264e0a026e2471e991ec" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>get_style</name></member>
+      <member refid="classyaml__mapping_1aab49e99041089d5e03b934b9d876cb00" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>has_member</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a0a3aafd59dc0cce142285be68230f2e5" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>Integer</name></member>
+      <member refid="classyaml__value_1adb94eae0f27f02945b314b5fb89a0e23" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>is_boolean</name></member>
+      <member refid="classyaml__value_1aacbe47dd95fc377f0a820b66b14c098c" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>is_float</name></member>
+      <member refid="classyaml__value_1ab915196f14362709fcec5e812110feeb" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>is_integer</name></member>
+      <member refid="classyaml__value_1a913ff68c95f29c041a0c59701263e767" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>is_mapping</name></member>
+      <member refid="classyaml__value_1a59c4bf787d27ff426488acd632efe2ff" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>is_null</name></member>
+      <member refid="classyaml__value_1a6f66d9eccc636779ff160fa1d022d34f" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>is_sequence</name></member>
+      <member refid="classyaml__value_1a856bad71ffd05c9894c248e674f2dc57" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>is_string</name></member>
+      <member refid="classyaml__value_1aa60602274cdfb832497945dff445d35d" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>is_timestamp</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a96d3ceb2cf8b297b6589107df8dd88df" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>Mapping</name></member>
+      <member refid="classyaml__mapping_1a44328ffa387eab3c55ecf4b79c1d390f" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>mapping_style</name></member>
+      <member refid="classyaml__mapping_1ae9a75d3157560c44ddb5c0820ab16eff" prot="private" virt="non-virtual"><scope>yaml_mapping</scope><name>members</name></member>
+      <member refid="classyaml__mapping_1a535ab4b16c2d165107d3d64315095ccd" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>merge_from</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633aa775a43cea16e807d355941f57dbf173" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>Null</name></member>
+      <member refid="classyaml__mapping_1acdbeee4d3a249771b14d931d3bc44b2f" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>operator=</name></member>
+      <member refid="classyaml__mapping_1abcafa7768ca8fd8e95b393ab34f7fb2e" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>operator=</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a4e91bdc7df808a4e70247c0655588b65" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>Sequence</name></member>
+      <member refid="classyaml__value_1a47d57ba8446097c984e55f07d7fea7aa" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>set_anchor</name></member>
+      <member refid="classyaml__mapping_1a6041ca95930055709be7050e940ddf61" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>set_style</name></member>
+      <member refid="classyaml__value_1a7407556dfb52984c3415db35ee112869" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>set_tag</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633a0240ab072a97f74032be8aa1ae913d8a" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>String</name></member>
+      <member refid="classyaml__mapping_1a2a7d7280b1ec39bbdb117351533433ec" prot="private" virt="non-virtual"><scope>yaml_mapping</scope><name>style</name></member>
+      <member refid="classyaml__value_1a0cdc7a438e67a2b66f10c0e7df489f21" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>tag</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633aa02528b3e15dc44e07229369b29eaa2b" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>Timestamp</name></member>
+      <member refid="classyaml__value_1a0c4328854eb893b5fe471e7fa05c8c32" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>to_document</name></member>
+      <member refid="classyaml__value_1afe768ac15954b26002a86197725d3b74" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>to_string</name></member>
+      <member refid="classyaml__mapping_1ab13cc7b8ed7a63b4551d22a958f35325" prot="public" virt="virtual"><scope>yaml_mapping</scope><name>type</name></member>
+      <member refid="classyaml__value_1a408d20891c27dc523f9ac6fa971c7633" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>types</name></member>
+      <member refid="classyaml__mapping_1af223fa31db626bda23d5600e858546ae" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>yaml_mapping</name></member>
+      <member refid="classyaml__mapping_1a3797a9f99ac11ae449a2ea4a9a84a0d4" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>yaml_mapping</name></member>
+      <member refid="classyaml__mapping_1abb7c1036438af2981c5c38ac93e7dbf9" prot="public" virt="non-virtual"><scope>yaml_mapping</scope><name>yaml_mapping</name></member>
+      <member refid="classyaml__value_1a5219fdc77a0759f47f17818af2804afe" prot="public" virt="virtual"><scope>yaml_mapping</scope><name>~yaml_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

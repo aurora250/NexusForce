@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structidb__tb__connect" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>idb_tb_connect</compoundname>
+    <basecompoundref refid="structidb__connect" prot="public" virt="non-virtual">idb_connect</basecompoundref>
+    <derivedcompoundref refid="structmysql__connect" prot="public" virt="non-virtual">mysql_connect</derivedcompoundref>
+    <derivedcompoundref refid="classpgsql__connect" prot="public" virt="non-virtual">pgsql_connect</derivedcompoundref>
+    <derivedcompoundref refid="structsqlite__connect" prot="public" virt="non-virtual">sqlite_connect</derivedcompoundref>
+    <includes refid="db__interface_8hpp" local="no">db_interface.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structidb__tb__connect_1a4ba8618ecc342e6ddfc5c20d9f2297ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>idb_tb_connect::~idb_tb_connect</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~idb_tb_connect</name>
+        <qualifiedname>idb_tb_connect::~idb_tb_connect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="263" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structidb__tb__connect_1abc6b0d8058de22758e6c33fa9212e31e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
+        <definition>virtual unique_ptr&lt; idb_tb_result &gt; idb_tb_connect::query</definition>
+        <argsstring>(const string &amp;sql) const =0</argsstring>
+        <name>query</name>
+        <qualifiedname>idb_tb_connect::query</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1a051baebdc9585491f709241f1bdb8a64">query</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a31806222a34e6b49b6ad4116130da7d4">query</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1ac3d41c38c171431a502fb21b023b281d">query</reimplementedby>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>执行查询SQL语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SELECT语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>查询结果集 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="270" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="structidb__tb__connect_1a37513bfd22b7ea67498dbac6f98e8156" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__statement" kindref="compound">idb_prepared_statement</ref> &gt;</type>
+        <definition>virtual unique_ptr&lt; idb_prepared_statement &gt; idb_tb_connect::prepare_statement</definition>
+        <argsstring>(const string &amp;sql) const =0</argsstring>
+        <name>prepare_statement</name>
+        <qualifiedname>idb_tb_connect::prepare_statement</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1a8ebdf8fbfa1b212d524978e33f087cba">prepare_statement</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a2b5a9bf1dac1e7b784ab3f07b90d8894">prepare_statement</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a195baffb5be8eeacc09f56ecbfb105e3">prepare_statement</reimplementedby>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>创建预处理语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>带占位符的SQL语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>预处理语句对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="277" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>关系型数据库连接抽象基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供表格数据查询和预处理语句功能。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>idb_connect</label>
+        <link refid="structidb__connect"/>
+      </node>
+      <node id="1">
+        <label>idb_tb_connect</label>
+        <link refid="structidb__tb__connect"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>mysql_connect</label>
+        <link refid="structmysql__connect"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>pgsql_connect</label>
+        <link refid="classpgsql__connect"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>sqlite_connect</label>
+        <link refid="structsqlite__connect"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>idb_connect</label>
+        <link refid="structidb__connect"/>
+      </node>
+      <node id="1">
+        <label>idb_tb_connect</label>
+        <link refid="structidb__tb__connect"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="262" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="262" bodyend="278"/>
+    <listofallmembers>
+      <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>idb_tb_connect</scope><name>clock_type</name></member>
+      <member refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>close</name></member>
+      <member refid="structidb__connect_1a7ae3001e8ef72724b952fac4ea66cde7" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>connect</name></member>
+      <member refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>connected</name></member>
+      <member refid="structidb__connect_1affedca161dc65836d2ecd3ae76e9158d" prot="public" virt="non-virtual"><scope>idb_tb_connect</scope><name>get_alive</name></member>
+      <member refid="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>get_character_set</name></member>
+      <member refid="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>get_errno</name></member>
+      <member refid="structidb__connect_1a128b6a7646a28e85e231beb150439c01" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>get_error</name></member>
+      <member refid="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>is_valid</name></member>
+      <member refid="structidb__tb__connect_1a37513bfd22b7ea67498dbac6f98e8156" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>prepare_statement</name></member>
+      <member refid="structidb__tb__connect_1abc6b0d8058de22758e6c33fa9212e31e" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>query</name></member>
+      <member refid="structidb__connect_1a5faaad097bbdc6d8e530eb9f3ec7af94" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>reconnect</name></member>
+      <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>idb_tb_connect</scope><name>refresh_alive</name></member>
+      <member refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>set_character_set</name></member>
+      <member refid="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>update</name></member>
+      <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>idb_tb_connect</scope><name>~idb_connect</name></member>
+      <member refid="structidb__tb__connect_1a4ba8618ecc342e6ddfc5c20d9f2297ad" prot="public" virt="non-virtual"><scope>idb_tb_connect</scope><name>~idb_tb_connect</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

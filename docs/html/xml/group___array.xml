@@ -1,0 +1,330 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___array" kind="group">
+    <compoundname>Array</compoundname>
+    <title>数组</title>
+    <innerclass refid="structarray__iterator" prot="public">array_iterator</innerclass>
+    <innerclass refid="classarray" prot="public">array</innerclass>
+    <innerclass refid="structempty__array__element__tag" prot="public">empty_array_element_tag</innerclass>
+    <innerclass refid="classarray_3_01_t_00_010_01_4" prot="public">array&lt; T, 0 &gt;</innerclass>
+    <innerclass refid="struct____array__same" prot="public">__array_same</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___array_1ga18c8a812fea773acaf6b0fcd8fbd529d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename First</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Rest</declname>
+            <defname>Rest</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_END_INNER__</type>
+        <definition>NEFORCE_END_INNER__ array</definition>
+        <argsstring>(First, Rest...) -&gt; array&lt; typename inner::__array_same&lt; First, Rest... &gt;::type, 1+sizeof...(Rest)&gt;</argsstring>
+        <name>array</name>
+        <param>
+          <type>First</type>
+        </param>
+        <param>
+          <type>Rest...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="557" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" declline="557" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___array_1ga448768beff061686ac9ddc514529ed06" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Size</declname>
+            <defname>Size</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr T &amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr T &amp; get</definition>
+        <argsstring>(array&lt; T, Size &gt; &amp;arr) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type><ref refid="classarray" kindref="compound">array</ref>&lt; T, Size &gt; &amp;</type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>获取左值数组指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="570" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="570" bodyend="573"/>
+      </memberdef>
+      <memberdef kind="function" id="group___array_1ga46f69db21df5c007e08ff757fb51c7d6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Size</declname>
+            <defname>Size</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr const T &amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr const T &amp; get</definition>
+        <argsstring>(const array&lt; T, Size &gt; &amp;arr) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type>const <ref refid="classarray" kindref="compound">array</ref>&lt; T, Size &gt; &amp;</type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>获取常量左值数组指定位置的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="584" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="584" bodyend="587"/>
+      </memberdef>
+      <memberdef kind="function" id="group___array_1ga8a8313c57f57b5d2105a20b87b30522d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Size</declname>
+            <defname>Size</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr T &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr T &amp;&amp; get</definition>
+        <argsstring>(array&lt; T, Size &gt; &amp;&amp;arr) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type><ref refid="classarray" kindref="compound">array</ref>&lt; T, Size &gt; &amp;&amp;</type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>获取右值数组指定位置的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的右值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="598" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="598" bodyend="601"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="group___array_1ga49ac9ed4278caf9d5e25fbe87fd6b018" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Size</declname>
+            <defname>Size</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr const T &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr const T &amp;&amp; get</definition>
+        <argsstring>(const array&lt; T, Size &gt; &amp;&amp;arr) noexcept</argsstring>
+        <name>get</name>
+        <param>
+          <type>const <ref refid="classarray" kindref="compound">array</ref>&lt; T, Size &gt; &amp;&amp;</type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>获取常量右值数组指定位置的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量右值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="612" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="612" bodyend="615"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>固定大小数组容器实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

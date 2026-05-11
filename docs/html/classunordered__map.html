@@ -257,10 +257,10 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
 <tr class="memdesc:ae5176604322251f545fc861cbafa4abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">带边界检查的访问  <br /></td></tr>
 <tr class="memitem:ad934b7ae487b45cd290c13fbf87c909f" id="r_ad934b7ae487b45cd290c13fbf87c909f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad934b7ae487b45cd290c13fbf87c909f">swap</a> (<a class="el" href="classunordered__map.html">unordered_map</a> &amp;other) noexcept(<a class="el" href="group___swap_utility.html#ga9cc217ccd3ddd28edc3ebfd181bba2f3">is_nothrow_swappable_v</a>&lt; base_type &gt;)</td></tr>
 <tr class="memdesc:ad934b7ae487b45cd290c13fbf87c909f"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个unordered_map的内容  <br /></td></tr>
-<tr class="memitem:a431807ac0d3ae5e38d8ec76288c3d60e" id="r_a431807ac0d3ae5e38d8ec76288c3d60e"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a431807ac0d3ae5e38d8ec76288c3d60e">operator==</a> (const <a class="el" href="classunordered__map.html">unordered_map</a> &amp;rhs) const noexcept(noexcept(ht_==rhs.ht_))</td></tr>
-<tr class="memdesc:a431807ac0d3ae5e38d8ec76288c3d60e"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
-<tr class="memitem:ac5381337305eac9271b5b00af3382a2e" id="r_ac5381337305eac9271b5b00af3382a2e"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#ac5381337305eac9271b5b00af3382a2e">operator&lt;</a> (const <a class="el" href="classunordered__map.html">unordered_map</a> &amp;rhs) const noexcept(noexcept(ht_&lt; rhs.ht_))</td></tr>
-<tr class="memdesc:ac5381337305eac9271b5b00af3382a2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
+<tr class="memitem:a662f6a23f16083090e01947b8ff43322" id="r_a662f6a23f16083090e01947b8ff43322"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a662f6a23f16083090e01947b8ff43322">equal_to</a> (const <a class="el" href="classunordered__map.html">unordered_map</a> &amp;rhs) const noexcept(noexcept(ht_==rhs.ht_))</td></tr>
+<tr class="memdesc:a662f6a23f16083090e01947b8ff43322"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:a39bcbbe1bb4233ea75f7a27b686fa709" id="r_a39bcbbe1bb4233ea75f7a27b686fa709"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a39bcbbe1bb4233ea75f7a27b686fa709">less_than</a> (const <a class="el" href="classunordered__map.html">unordered_map</a> &amp;rhs) const noexcept(noexcept(ht_&lt; rhs.ht_))</td></tr>
+<tr class="memdesc:a39bcbbe1bb4233ea75f7a27b686fa709"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt;<br />
@@ -307,7 +307,7 @@ template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typena
 <p>默认构造函数 </p>
 <p>构造一个空unordered_map。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="unordered__map_8hpp_source.html#l00518">operator&lt;()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00111">operator=()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00128">operator=()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00509">operator==()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00502">swap()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00103">unordered_map()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00191">unordered_map()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00199">unordered_map()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00208">unordered_map()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00218">unordered_map()</a> , 以及 <a class="el" href="unordered__map_8hpp_source.html#l00120">unordered_map()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="unordered__map_8hpp_source.html#l00509">equal_to()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00518">less_than()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00111">operator=()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00128">operator=()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00502">swap()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00103">unordered_map()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00191">unordered_map()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00199">unordered_map()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00208">unordered_map()</a>, <a class="el" href="unordered__map_8hpp_source.html#l00218">unordered_map()</a> , 以及 <a class="el" href="unordered__map_8hpp_source.html#l00120">unordered_map()</a>.</p>
 
 </div>
 </div>
@@ -512,7 +512,7 @@ template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typena
 
 <p class="definition">在文件 <a class="el" href="unordered__map_8hpp_source.html">unordered_map.hpp</a> 第 <a class="el" href="unordered__map_8hpp_source.html#l00120">120</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02841">is_nothrow_move_constructible_v</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="#a157c3410af9fb6d739ed8512f1f3c662">unordered_map()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02841">is_nothrow_move_constructible_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="#a157c3410af9fb6d739ed8512f1f3c662">unordered_map()</a>.</p>
 
 </div>
 </div>
@@ -1528,6 +1528,46 @@ template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typena
 
 </div>
 </div>
+<a id="a662f6a23f16083090e01947b8ff43322" name="a662f6a23f16083090e01947b8ff43322"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a662f6a23f16083090e01947b8ff43322">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classunordered__map.html">unordered_map</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunordered__map.html">unordered_map</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧unordered_map </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个unordered_map大小相等且对应元素相等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__map_8hpp_source.html">unordered_map.hpp</a> 第 <a class="el" href="unordered__map_8hpp_source.html#l00509">509</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a157c3410af9fb6d739ed8512f1f3c662">unordered_map()</a>.</p>
+
+</div>
+</div>
 <a id="a170fc53cfd9b179fd8908c6fa550ef13" name="a170fc53cfd9b179fd8908c6fa550ef13"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a170fc53cfd9b179fd8908c6fa550ef13">&#9670;&#160;</a></span>erase() <span class="overload">[1/5]</span></h2>
 
@@ -2004,6 +2044,46 @@ template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typena
 
 </div>
 </div>
+<a id="a39bcbbe1bb4233ea75f7a27b686fa709" name="a39bcbbe1bb4233ea75f7a27b686fa709"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39bcbbe1bb4233ea75f7a27b686fa709">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classunordered__map.html">unordered_map</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classunordered__map.html">unordered_map</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧unordered_map </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__map_8hpp_source.html">unordered_map.hpp</a> 第 <a class="el" href="unordered__map_8hpp_source.html#l00518">518</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a157c3410af9fb6d739ed8512f1f3c662">unordered_map()</a>.</p>
+
+</div>
+</div>
 <a id="ae792bcc9b1faa34c684c5c5600fe9423" name="ae792bcc9b1faa34c684c5c5600fe9423"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae792bcc9b1faa34c684c5c5600fe9423">&#9670;&#160;</a></span>load_factor()</h2>
 
@@ -2137,46 +2217,6 @@ template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typena
 
 </div>
 </div>
-<a id="ac5381337305eac9271b5b00af3382a2e" name="ac5381337305eac9271b5b00af3382a2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5381337305eac9271b5b00af3382a2e">&#9670;&#160;</a></span>operator&lt;()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classunordered__map.html">unordered_map</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator&lt; </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classunordered__map.html">unordered_map</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>小于比较操作符 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>右侧unordered_map </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="unordered__map_8hpp_source.html">unordered_map.hpp</a> 第 <a class="el" href="unordered__map_8hpp_source.html#l00518">518</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="#a157c3410af9fb6d739ed8512f1f3c662">unordered_map()</a>.</p>
-
-</div>
-</div>
 <a id="a10b0779142f68b123d3aedd35ba2e0f1" name="a10b0779142f68b123d3aedd35ba2e0f1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a10b0779142f68b123d3aedd35ba2e0f1">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
@@ -2253,47 +2293,7 @@ template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typena
 
 <p class="definition">在文件 <a class="el" href="unordered__map_8hpp_source.html">unordered_map.hpp</a> 第 <a class="el" href="unordered__map_8hpp_source.html#l00128">128</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02902">is_nothrow_move_assignable_v</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="#a157c3410af9fb6d739ed8512f1f3c662">unordered_map()</a>.</p>
-
-</div>
-</div>
-<a id="a431807ac0d3ae5e38d8ec76288c3d60e" name="a431807ac0d3ae5e38d8ec76288c3d60e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a431807ac0d3ae5e38d8ec76288c3d60e">&#9670;&#160;</a></span>operator==()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typename EqualKey = equal_to&lt;Key&gt;, typename Alloc = allocator&lt;hashtable_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classunordered__map.html">unordered_map</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator== </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classunordered__map.html">unordered_map</a>&lt; Key, T, HashFcn, EqualKey, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>相等比较操作符 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>右侧unordered_map </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>如果两个unordered_map大小相等且对应元素相等返回true </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="unordered__map_8hpp_source.html">unordered_map.hpp</a> 第 <a class="el" href="unordered__map_8hpp_source.html#l00509">509</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="#a157c3410af9fb6d739ed8512f1f3c662">unordered_map()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02902">is_nothrow_move_assignable_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="#a157c3410af9fb6d739ed8512f1f3c662">unordered_map()</a>.</p>
 
 </div>
 </div>
@@ -2480,7 +2480,7 @@ template&lt;typename Key, typename T, typename HashFcn = hash&lt;Key&gt;, typena
 
 <p class="definition">在文件 <a class="el" href="unordered__map_8hpp_source.html">unordered_map.hpp</a> 第 <a class="el" href="unordered__map_8hpp_source.html#l00502">502</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03951">is_nothrow_swappable_v</a> , 以及 <a class="el" href="#a157c3410af9fb6d739ed8512f1f3c662">unordered_map()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03946">is_nothrow_swappable_v</a> , 以及 <a class="el" href="#a157c3410af9fb6d739ed8512f1f3c662">unordered_map()</a>.</p>
 
 </div>
 </div>

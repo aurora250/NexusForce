@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['密码学与安全算法_0',['🔐 密码学与安全算法',['../index.html#autotoc_md12',1,'']]]
+  ['家族对比_0',['SHA-2 家族对比',['../group___s_h_a256.html#comparison',1,'']]]
 ];

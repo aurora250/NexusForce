@@ -1,0 +1,354 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___remove_qualifiers" kind="group">
+    <compoundname>RemoveQualifiers</compoundname>
+    <title>类型修饰移除</title>
+    <innerclass refid="structremove__const" prot="public">remove_const</innerclass>
+    <innerclass refid="structremove__volatile" prot="public">remove_volatile</innerclass>
+    <innerclass refid="structremove__cv" prot="public">remove_cv</innerclass>
+    <innerclass refid="structremove__reference" prot="public">remove_reference</innerclass>
+    <innerclass refid="structremove__cvref" prot="public">remove_cvref</innerclass>
+    <innerclass refid="structremove__extent" prot="public">remove_extent</innerclass>
+    <innerclass refid="structremove__all__extents" prot="public">remove_all_extents</innerclass>
+    <innerclass refid="structremove__pointer" prot="public">remove_pointer</innerclass>
+    <innerclass refid="structremove__function__qualifiers" prot="public">remove_function_qualifiers</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___remove_qualifiers_1ga75ab6c9a804ec997a6e8cb9c5b36c3e4" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__const" kindref="compound">remove_const</ref>&lt; T &gt;::type</type>
+        <definition>using remove_const_t = typename remove_const&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>remove_const_t</name>
+        <briefdescription>
+<para>remove_const的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="354" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="354" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__volatile" kindref="compound">remove_volatile</ref>&lt; T &gt;::type</type>
+        <definition>using remove_volatile_t = typename remove_volatile&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>remove_volatile_t</name>
+        <briefdescription>
+<para>remove_volatile的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="379" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="379" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1gadb53d365fce2ddba102949e4ad3bf058" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__cv" kindref="compound">remove_cv</ref>&lt; T &gt;::type</type>
+        <definition>using remove_cv_t = typename remove_cv&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>remove_cv_t</name>
+        <briefdescription>
+<para>remove_cv的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="432" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="432" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1ga48575034f70de8ecb579bdd55823cae7" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename From</type>
+          </param>
+          <param>
+            <type>typename To</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__cv" kindref="compound">remove_cv</ref>&lt; From &gt;::template bind_cv_t&lt; To &gt;</type>
+        <definition>using copy_cv_t = typename remove_cv&lt;From&gt;::template bind_cv_t&lt;To&gt;</definition>
+        <argsstring></argsstring>
+        <name>copy_cv_t</name>
+        <briefdescription>
+<para>复制cv限定符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>From</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型，提供cv限定符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>To</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型，接受cv限定符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="441" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="441" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__reference" kindref="compound">remove_reference</ref>&lt; T &gt;::type</type>
+        <definition>using remove_reference_t = typename remove_reference&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>remove_reference_t</name>
+        <briefdescription>
+<para>remove_reference的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="486" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="486" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1gaec29fe3d66b7f267e0480b2ca34af27c" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename From</type>
+          </param>
+          <param>
+            <type>typename To</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__reference" kindref="compound">remove_reference</ref>&lt; From &gt;::template bind_ref_t&lt; To &gt;</type>
+        <definition>using copy_ref_t = typename remove_reference&lt;From&gt;::template bind_ref_t&lt;To&gt;</definition>
+        <argsstring></argsstring>
+        <name>copy_ref_t</name>
+        <briefdescription>
+<para>复制引用限定符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>From</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型，提供引用限定符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>To</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型，接受引用限定符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="495" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="495" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1ga18e6fc85d59250885da998ea1d3d56ad" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename From</type>
+          </param>
+          <param>
+            <type>typename To</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___remove_qualifiers_1gaec29fe3d66b7f267e0480b2ca34af27c" kindref="member">copy_ref_t</ref>&lt; From, <ref refid="group___remove_qualifiers_1ga48575034f70de8ecb579bdd55823cae7" kindref="member">copy_cv_t</ref>&lt; From, To &gt; &gt;</type>
+        <definition>using copy_cvref_t = copy_ref_t&lt;From, copy_cv_t&lt;From, To&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>copy_cvref_t</name>
+        <briefdescription>
+<para>同时复制cv和引用限定符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>From</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型，提供cv和引用限定符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>To</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型，接受限定符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="504" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="504" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__cvref" kindref="compound">remove_cvref</ref>&lt; T &gt;::type</type>
+        <definition>using remove_cvref_t = typename remove_cvref&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>remove_cvref_t</name>
+        <briefdescription>
+<para>remove_cvref的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="522" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="522" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1gaff3a021106d8984e6a7283adfcae4117" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__extent" kindref="compound">remove_extent</ref>&lt; T &gt;::type</type>
+        <definition>using remove_extent_t = typename remove_extent&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>remove_extent_t</name>
+        <briefdescription>
+<para>remove_extent的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="552" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="552" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1ga0ffde65d0200b12233a0dff1979cc210" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__all__extents" kindref="compound">remove_all_extents</ref>&lt; T &gt;::type</type>
+        <definition>using remove_all_extents_t = typename remove_all_extents&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>remove_all_extents_t</name>
+        <briefdescription>
+<para>remove_all_extents的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="582" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="582" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1ga81cba9b583535ccfde0e7eb172bbec71" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__pointer" kindref="compound">remove_pointer</ref>&lt; T &gt;::type</type>
+        <definition>using remove_pointer_t = typename remove_pointer&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>remove_pointer_t</name>
+        <briefdescription>
+<para>remove_pointer的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="643" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="643" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1ga3658c92b3b71f7b938337e542dc016e5" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename From</type>
+          </param>
+          <param>
+            <type>typename To</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__pointer" kindref="compound">remove_pointer</ref>&lt; From &gt;::template bind_pointer_t&lt; To &gt;</type>
+        <definition>using copy_pointer_t = typename remove_pointer&lt;From&gt;::template bind_pointer_t&lt;To&gt;</definition>
+        <argsstring></argsstring>
+        <name>copy_pointer_t</name>
+        <briefdescription>
+<para>复制指针限定符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>From</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型，提供指针限定符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>To</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型，接受指针限定符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="652" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="652" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___remove_qualifiers_1ga37d7d9f34cc72f8e04c82c3c8c6f9db8" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structremove__function__qualifiers" kindref="compound">remove_function_qualifiers</ref>&lt; T &gt;::type</type>
+        <definition>using remove_function_qualifiers_t = typename remove_function_qualifiers&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>remove_function_qualifiers_t</name>
+        <briefdescription>
+<para>remove_function_qualifiers的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="692" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="692" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>移除类型限定符 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

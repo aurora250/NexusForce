@@ -1,0 +1,1235 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classsocket__base" kind="class" language="C++" prot="public">
+    <compoundname>socket_base</compoundname>
+    <derivedcompoundref refid="classicmp__socket" prot="public" virt="non-virtual">icmp_socket</derivedcompoundref>
+    <derivedcompoundref refid="classip__socket" prot="public" virt="non-virtual">ip_socket</derivedcompoundref>
+    <includes refid="socket__base_8hpp" local="no">socket_base.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" static="no">
+        <type>::UINT_PTR</type>
+        <definition>using socket_base::native_handle_type = 
+
+::UINT_PTR</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>socket_base::native_handle_type</qualifiedname>
+        <briefdescription>
+<para>平台原生句柄类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="101" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type socket_base::invalid_handle</definition>
+        <argsstring></argsstring>
+        <name>invalid_handle</name>
+        <qualifiedname>socket_base::invalid_handle</qualifiedname>
+        <initializer>                                           =
+
+<ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt;<ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref>&gt;<ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">::max</ref>()</initializer>
+        <briefdescription>
+<para>无效句柄常量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>无效句柄 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="111" column="41" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="111" bodyend="-1"/>
+        <referencedby refid="classsocket__base_1a6187ffba6859cc29fcf0c0b08916dcca" compoundref="socket__base_8hpp" startline="166" endline="166">is_open</referencedby>
+        <referencedby refid="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" compoundref="socket__base_8hpp" startline="334" endline="334">release</referencedby>
+        <referencedby refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" compoundref="socket__base_8hpp" startline="141" endline="142">socket_base</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" prot="protected" static="no" mutable="no">
+        <type><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type socket_base::fd_</definition>
+        <argsstring></argsstring>
+        <name>fd_</name>
+        <qualifiedname>socket_base::fd_</qualifiedname>
+        <initializer>= <ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref></initializer>
+        <briefdescription>
+<para>Socket句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="119" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="119" bodyend="-1"/>
+        <referencedby refid="classsocket__base_1a6187ffba6859cc29fcf0c0b08916dcca" compoundref="socket__base_8hpp" startline="166" endline="166">is_open</referencedby>
+        <referencedby refid="classsocket__base_1a7a733151fa76e8e33ebd6d637c06e0fd" compoundref="socket__base_8hpp" startline="160" endline="160">native_handle</referencedby>
+        <referencedby refid="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" compoundref="socket__base_8hpp" startline="334" endline="334">release</referencedby>
+        <referencedby refid="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" compoundref="socket__base_8hpp" startline="131" endline="132">socket_base</referencedby>
+        <referencedby refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" compoundref="socket__base_8hpp" startline="141" endline="142">socket_base</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>socket_base::socket_base</definition>
+        <argsstring>()</argsstring>
+        <name>socket_base</name>
+        <qualifiedname>socket_base::socket_base</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="125" column="5"/>
+        <referencedby refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c">operator=</referencedby>
+        <referencedby refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" compoundref="socket__base_8hpp" startline="141" endline="142">socket_base</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>socket_base::socket_base</definition>
+        <argsstring>(const native_handle_type fd) noexcept</argsstring>
+        <name>socket_base</name>
+        <qualifiedname>socket_base::socket_base</qualifiedname>
+        <param>
+          <type>const <ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref></type>
+          <declname>fd</declname>
+        </param>
+        <briefdescription>
+<para>从原生句柄构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原生socket句柄 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="131" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="131" bodyend="132"/>
+        <references refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" compoundref="socket__base_8hpp" startline="119">fd_</references>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a57db04b97c49aa2c123b8b4cb155ee9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>socket_base::socket_base</definition>
+        <argsstring>(const socket_base &amp;)=delete</argsstring>
+        <name>socket_base</name>
+        <qualifiedname>socket_base::socket_base</qualifiedname>
+        <param>
+          <type>const <ref refid="classsocket__base" kindref="compound">socket_base</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="134" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1af825fb2543e89b098bc9c1da47f09647" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classsocket__base" kindref="compound">socket_base</ref> &amp;</type>
+        <definition>socket_base &amp; socket_base::operator=</definition>
+        <argsstring>(const socket_base &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>socket_base::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classsocket__base" kindref="compound">socket_base</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="135" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>socket_base::socket_base</definition>
+        <argsstring>(socket_base &amp;&amp;other) noexcept</argsstring>
+        <name>socket_base</name>
+        <qualifiedname>socket_base::socket_base</qualifiedname>
+        <param>
+          <type><ref refid="classsocket__base" kindref="compound">socket_base</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="141" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="141" bodyend="142"/>
+        <references refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" compoundref="socket__base_8hpp" startline="119">fd_</references>
+        <references refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" compoundref="socket__base_8hpp" startline="111">invalid_handle</references>
+        <references refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027">socket_base</references>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsocket__base" kindref="compound">socket_base</ref> &amp;</type>
+        <definition>socket_base &amp; socket_base::operator=</definition>
+        <argsstring>(socket_base &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>socket_base::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classsocket__base" kindref="compound">socket_base</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="149" column="17"/>
+        <references refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027">socket_base</references>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual socket_base::~socket_base</definition>
+        <argsstring>()</argsstring>
+        <name>~socket_base</name>
+        <qualifiedname>socket_base::~socket_base</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="154" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="154" bodyend="154"/>
+        <references refid="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996">close</references>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a7a733151fa76e8e33ebd6d637c06e0fd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref></type>
+        <definition>NEFORCE_NODISCARD native_handle_type socket_base::native_handle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>socket_base::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取原生句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>原生socket句柄 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="160" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="160" bodyend="160"/>
+        <references refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" compoundref="socket__base_8hpp" startline="119">fd_</references>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a6187ffba6859cc29fcf0c0b08916dcca" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool socket_base::is_open</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_open</name>
+        <qualifiedname>socket_base::is_open</qualifiedname>
+        <briefdescription>
+<para>检查socket是否已打开 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已打开返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="166" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="166" bodyend="166"/>
+        <references refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" compoundref="socket__base_8hpp" startline="119">fd_</references>
+        <references refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" compoundref="socket__base_8hpp" startline="111">invalid_handle</references>
+        <referencedby refid="classsmtp__socket_1a47e5c2bb86d660d89f3bb4d06b95721d" compoundref="smtp__socket_8hpp" startline="260" endline="260">smtp_socket::is_connected</referencedby>
+        <referencedby refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" compoundref="socket__base_8hpp" startline="172" endline="172">operator bool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1ade45e5ade072d22d377f6582660a872e" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>socket_base::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>socket_base::operator bool</qualifiedname>
+        <briefdescription>
+<para>布尔转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已打开返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="172" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="172" bodyend="172"/>
+        <references refid="classsocket__base_1a6187ffba6859cc29fcf0c0b08916dcca" compoundref="socket__base_8hpp" startline="166" endline="166">is_open</references>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void socket_base::open</definition>
+        <argsstring>(int family, int type, int protocol)</argsstring>
+        <name>open</name>
+        <qualifiedname>socket_base::open</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>family</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>protocol</declname>
+        </param>
+        <briefdescription>
+<para>打开socket </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>family</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>地址族（AF_INET或AF_INET6） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket类型（SOCK_STREAM、SOCK_DGRAM等） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>protocol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协议（0为自动选择） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>地址族无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="182" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool socket_base::close</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>close</name>
+        <qualifiedname>socket_base::close</qualifiedname>
+        <reimplementedby refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1">close</reimplementedby>
+        <briefdescription>
+<para>关闭socket </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>关闭成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="188" column="18"/>
+        <referencedby refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" compoundref="ip__socket_8hpp" startline="136" endline="139">ip_socket::close</referencedby>
+        <referencedby refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" compoundref="socket__base_8hpp" startline="154" endline="154">~socket_base</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::try_open</definition>
+        <argsstring>(int family, int type, int protocol) noexcept</argsstring>
+        <name>try_open</name>
+        <qualifiedname>socket_base::try_open</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>family</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>protocol</declname>
+        </param>
+        <briefdescription>
+<para>尝试打开socket（不抛出异常） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>family</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>地址族 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>protocol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协议 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>打开成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="197" column="10"/>
+        <references refid="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c">try_open</references>
+        <referencedby refid="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c">try_open</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::set_nonblocking</definition>
+        <argsstring>(bool enable) noexcept</argsstring>
+        <name>set_nonblocking</name>
+        <qualifiedname>socket_base::set_nonblocking</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>设置非阻塞模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="204" column="10"/>
+        <references refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34">set_nonblocking</references>
+        <referencedby refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34">set_nonblocking</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::shutdown_send</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>shutdown_send</name>
+        <qualifiedname>socket_base::shutdown_send</qualifiedname>
+        <briefdescription>
+<para>关闭发送方向 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="210" column="10"/>
+        <references refid="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10">shutdown_send</references>
+        <referencedby refid="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10">shutdown_send</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::shutdown_receive</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>shutdown_receive</name>
+        <qualifiedname>socket_base::shutdown_receive</qualifiedname>
+        <briefdescription>
+<para>关闭接收方向 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="216" column="10"/>
+        <references refid="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d">shutdown_receive</references>
+        <referencedby refid="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d">shutdown_receive</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::shutdown_both</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>shutdown_both</name>
+        <qualifiedname>socket_base::shutdown_both</qualifiedname>
+        <briefdescription>
+<para>关闭双向通信 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="222" column="10"/>
+        <references refid="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9">shutdown_both</references>
+        <referencedby refid="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9">shutdown_both</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a243eecfa633156956f8eef37d642af6b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::set_option</definition>
+        <argsstring>(int level, int optname, const void *value, ::socklen_t len) noexcept</argsstring>
+        <name>set_option</name>
+        <qualifiedname>socket_base::set_option</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>optname</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>::socklen_t</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+<para>设置socket选项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协议层（SOL_SOCKET、IPPROTO_TCP等） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项值指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="232" column="10"/>
+        <references refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b">set_option</references>
+        <referencedby refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b">set_option</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::get_option</definition>
+        <argsstring>(int level, int optname, void *optval, ::socklen_t *optlen) const noexcept</argsstring>
+        <name>get_option</name>
+        <qualifiedname>socket_base::get_option</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>optname</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>optval</declname>
+        </param>
+        <param>
+          <type>::socklen_t *</type>
+          <declname>optlen</declname>
+        </param>
+        <briefdescription>
+<para>获取socket选项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协议层 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>optlen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入输出长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>获取成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="242" column="10"/>
+        <references refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c">get_option</references>
+        <referencedby refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c">get_option</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::set_reuse_address</definition>
+        <argsstring>(bool enable=true) noexcept</argsstring>
+        <name>set_reuse_address</name>
+        <qualifiedname>socket_base::set_reuse_address</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置地址重用（SO_REUSEADDR） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="249" column="10"/>
+        <references refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64">set_reuse_address</references>
+        <referencedby refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64">set_reuse_address</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::set_reuse_port</definition>
+        <argsstring>(bool enable=true) noexcept</argsstring>
+        <name>set_reuse_port</name>
+        <qualifiedname>socket_base::set_reuse_port</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置端口重用（SO_REUSEPORT） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true（Linux支持，Windows不支持） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="256" column="10"/>
+        <references refid="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a">set_reuse_port</references>
+        <referencedby refid="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a">set_reuse_port</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::set_keep_alive</definition>
+        <argsstring>(bool enable=true) noexcept</argsstring>
+        <name>set_keep_alive</name>
+        <qualifiedname>socket_base::set_keep_alive</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置TCP KeepAlive </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="263" column="10"/>
+        <references refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83">set_keep_alive</references>
+        <referencedby refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83">set_keep_alive</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::set_tcp_nodelay</definition>
+        <argsstring>(bool enable=true) noexcept</argsstring>
+        <name>set_tcp_nodelay</name>
+        <qualifiedname>socket_base::set_tcp_nodelay</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置TCP_NODELAY（禁用Nagle算法） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="270" column="10"/>
+        <references refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312">set_tcp_nodelay</references>
+        <referencedby refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312">set_tcp_nodelay</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::set_receive_buffer_size</definition>
+        <argsstring>(int size) noexcept</argsstring>
+        <name>set_receive_buffer_size</name>
+        <qualifiedname>socket_base::set_receive_buffer_size</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>设置接收缓冲区大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓冲区大小（字节） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="277" column="10"/>
+        <references refid="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48">set_receive_buffer_size</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <referencedby refid="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48">set_receive_buffer_size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a7126487c99a283ff1eb6b3475893e280" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::set_send_buffer_size</definition>
+        <argsstring>(int size) noexcept</argsstring>
+        <name>set_send_buffer_size</name>
+        <qualifiedname>socket_base::set_send_buffer_size</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>设置发送缓冲区大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓冲区大小（字节） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="284" column="10"/>
+        <references refid="classsocket__base_1a7126487c99a283ff1eb6b3475893e280">set_send_buffer_size</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <referencedby refid="classsocket__base_1a7126487c99a283ff1eb6b3475893e280">set_send_buffer_size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::set_send_timeout</definition>
+        <argsstring>(milliseconds timeout) noexcept</argsstring>
+        <name>set_send_timeout</name>
+        <qualifiedname>socket_base::set_send_timeout</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref></type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>设置发送超时时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="291" column="10"/>
+        <references refid="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408">set_send_timeout</references>
+        <referencedby refid="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408">set_send_timeout</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool socket_base::set_receive_timeout</definition>
+        <argsstring>(milliseconds timeout) noexcept</argsstring>
+        <name>set_receive_timeout</name>
+        <qualifiedname>socket_base::set_receive_timeout</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref></type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>设置接收超时时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="298" column="10"/>
+        <references refid="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15">set_receive_timeout</references>
+        <referencedby refid="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15">set_receive_timeout</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a698bf7147749c5f0bbfd0a906875eb5e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classip__address" kindref="compound">ip_address</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD optional&lt; ip_address &gt; socket_base::local_endpoint</definition>
+        <argsstring>() const</argsstring>
+        <name>local_endpoint</name>
+        <qualifiedname>socket_base::local_endpoint</qualifiedname>
+        <briefdescription>
+<para>获取本地端点地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>本地IP地址和端口，失败返回none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="304" column="32"/>
+        <references refid="classsocket__base_1a698bf7147749c5f0bbfd0a906875eb5e">local_endpoint</references>
+        <referencedby refid="classsocket__base_1a698bf7147749c5f0bbfd0a906875eb5e">local_endpoint</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a3af835aab3dbb6e477c9833184437b62" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classip__address" kindref="compound">ip_address</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD optional&lt; ip_address &gt; socket_base::remote_endpoint</definition>
+        <argsstring>() const</argsstring>
+        <name>remote_endpoint</name>
+        <qualifiedname>socket_base::remote_endpoint</qualifiedname>
+        <briefdescription>
+<para>获取远程端点地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>远程IP地址和端口，失败返回none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="310" column="32"/>
+        <references refid="classsocket__base_1a3af835aab3dbb6e477c9833184437b62">remote_endpoint</references>
+        <referencedby refid="classsocket__base_1a3af835aab3dbb6e477c9833184437b62">remote_endpoint</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void socket_base::bind</definition>
+        <argsstring>(const ip_address &amp;endpoint)</argsstring>
+        <name>bind</name>
+        <qualifiedname>socket_base::bind</qualifiedname>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <briefdescription>
+<para>绑定socket到本地地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要绑定的IP地址和端口 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开或端点无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="318" column="10"/>
+        <references refid="classsocket__base_1a576e748fadfec602f083eb35c602c003">bind</references>
+        <referencedby refid="classsocket__base_1a576e748fadfec602f083eb35c602c003">bind</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void socket_base::listen</definition>
+        <argsstring>(int backlog)</argsstring>
+        <name>listen</name>
+        <qualifiedname>socket_base::listen</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>backlog</declname>
+        </param>
+        <briefdescription>
+<para>开始监听连接（TCP） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>backlog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接队列大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>监听失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="326" column="10"/>
+        <references refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8">listen</references>
+        <referencedby refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8">listen</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref></type>
+        <definition>NEFORCE_NODISCARD native_handle_type socket_base::release</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>socket_base::release</qualifiedname>
+        <briefdescription>
+<para>释放socket所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>原生socket句柄</para>
+</simplesect>
+释放后当前对象不再管理该socket，调用者负责关闭。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="334" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="334" bodyend="334"/>
+        <references refid="group___swap_utility_1ga0c5a3fc6dc35e080dc7f316405327e6e">exchange</references>
+        <references refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" compoundref="socket__base_8hpp" startline="119">fd_</references>
+        <references refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" compoundref="socket__base_8hpp" startline="111">invalid_handle</references>
+        <references refid="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" compoundref="socket__base_8hpp" startline="334" endline="334">release</references>
+        <referencedby refid="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" compoundref="socket__base_8hpp" startline="334" endline="334">release</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Socket基础类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供跨平台的socket基础操作，是所有socket类的基类。 支持移动语义，不支持拷贝。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>Socket创建和关闭</para>
+</listitem><listitem><para>阻塞/非阻塞模式设置</para>
+</listitem><listitem><para>Socket选项配置（地址重用、端口重用、TCP_NODELAY、KeepAlive等）</para>
+</listitem><listitem><para>收发缓冲区大小设置</para>
+</listitem><listitem><para>超时设置</para>
+</listitem><listitem><para>本地/远程端点查询</para>
+</listitem><listitem><para>绑定和监听</para>
+</listitem><listitem><para>移动语义支持</para>
+</listitem></itemizedlist>
+</para>
+<para>使用示例： <programlisting><codeline><highlight class="comment">//<sp/>创建TCP<sp/>socket</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref><sp/>sock;</highlight></codeline>
+<codeline><highlight class="normal">sock.<ref refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" kindref="member">open</ref>(AF_INET,<sp/>SOCK_STREAM,<sp/>0);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>设置选项</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">sock.<ref refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64" kindref="member">set_reuse_address</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">sock.<ref refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312" kindref="member">set_tcp_nodelay</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">sock.<ref refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" kindref="member">set_nonblocking</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>绑定端口</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>addr<sp/>=<sp/><ref refid="classip__address_1a180ec03fa7dd1c0cca46fcbc2e1ded1c" kindref="member">ip_address::any</ref>(ports(8080));</highlight></codeline>
+<codeline><highlight class="normal">sock.<ref refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" kindref="member">bind</ref>(addr);</highlight></codeline>
+<codeline><highlight class="normal">sock.<ref refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" kindref="member">listen</ref>(128);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>获取本地地址</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>local<sp/>=<sp/>sock.<ref refid="classsocket__base_1a698bf7147749c5f0bbfd0a906875eb5e" kindref="member">local_endpoint</ref>();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(local)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(local);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>icmp_socket</label>
+        <link refid="classicmp__socket"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ip_socket</label>
+        <link refid="classip__socket"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>smtp_socket</label>
+        <link refid="classsmtp__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>socket_base</label>
+        <link refid="classsocket__base"/>
+      </node>
+      <node id="6">
+        <label>ssl_acceptor</label>
+        <link refid="classssl__acceptor"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ssl_socket</label>
+        <link refid="classssl__socket"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>tcp_acceptor</label>
+        <link refid="classtcp__acceptor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>tcp_socket</label>
+        <link refid="classtcp__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>udp_socket</label>
+        <link refid="classudp__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" line="99" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/socket_base.hpp" bodystart="99" bodyend="335"/>
+    <listofallmembers>
+      <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>socket_base</scope><name>bind</name></member>
+      <member refid="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996" prot="public" virt="virtual"><scope>socket_base</scope><name>close</name></member>
+      <member refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" prot="protected" virt="non-virtual"><scope>socket_base</scope><name>fd_</name></member>
+      <member refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" prot="public" virt="non-virtual"><scope>socket_base</scope><name>get_option</name></member>
+      <member refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" prot="public" virt="non-virtual"><scope>socket_base</scope><name>invalid_handle</name></member>
+      <member refid="classsocket__base_1a6187ffba6859cc29fcf0c0b08916dcca" prot="public" virt="non-virtual"><scope>socket_base</scope><name>is_open</name></member>
+      <member refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" virt="non-virtual"><scope>socket_base</scope><name>listen</name></member>
+      <member refid="classsocket__base_1a698bf7147749c5f0bbfd0a906875eb5e" prot="public" virt="non-virtual"><scope>socket_base</scope><name>local_endpoint</name></member>
+      <member refid="classsocket__base_1a7a733151fa76e8e33ebd6d637c06e0fd" prot="public" virt="non-virtual"><scope>socket_base</scope><name>native_handle</name></member>
+      <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>socket_base</scope><name>native_handle_type</name></member>
+      <member refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual"><scope>socket_base</scope><name>open</name></member>
+      <member refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" prot="public" virt="non-virtual"><scope>socket_base</scope><name>operator bool</name></member>
+      <member refid="classsocket__base_1af825fb2543e89b098bc9c1da47f09647" prot="public" virt="non-virtual"><scope>socket_base</scope><name>operator=</name></member>
+      <member refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" prot="public" virt="non-virtual"><scope>socket_base</scope><name>operator=</name></member>
+      <member refid="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" prot="public" virt="non-virtual"><scope>socket_base</scope><name>release</name></member>
+      <member refid="classsocket__base_1a3af835aab3dbb6e477c9833184437b62" prot="public" virt="non-virtual"><scope>socket_base</scope><name>remote_endpoint</name></member>
+      <member refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" prot="public" virt="non-virtual"><scope>socket_base</scope><name>set_keep_alive</name></member>
+      <member refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" prot="public" virt="non-virtual"><scope>socket_base</scope><name>set_nonblocking</name></member>
+      <member refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b" prot="public" virt="non-virtual"><scope>socket_base</scope><name>set_option</name></member>
+      <member refid="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48" prot="public" virt="non-virtual"><scope>socket_base</scope><name>set_receive_buffer_size</name></member>
+      <member refid="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15" prot="public" virt="non-virtual"><scope>socket_base</scope><name>set_receive_timeout</name></member>
+      <member refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64" prot="public" virt="non-virtual"><scope>socket_base</scope><name>set_reuse_address</name></member>
+      <member refid="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a" prot="public" virt="non-virtual"><scope>socket_base</scope><name>set_reuse_port</name></member>
+      <member refid="classsocket__base_1a7126487c99a283ff1eb6b3475893e280" prot="public" virt="non-virtual"><scope>socket_base</scope><name>set_send_buffer_size</name></member>
+      <member refid="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408" prot="public" virt="non-virtual"><scope>socket_base</scope><name>set_send_timeout</name></member>
+      <member refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312" prot="public" virt="non-virtual"><scope>socket_base</scope><name>set_tcp_nodelay</name></member>
+      <member refid="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9" prot="public" virt="non-virtual"><scope>socket_base</scope><name>shutdown_both</name></member>
+      <member refid="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d" prot="public" virt="non-virtual"><scope>socket_base</scope><name>shutdown_receive</name></member>
+      <member refid="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10" prot="public" virt="non-virtual"><scope>socket_base</scope><name>shutdown_send</name></member>
+      <member refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" prot="public" virt="non-virtual"><scope>socket_base</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" prot="public" virt="non-virtual"><scope>socket_base</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1a57db04b97c49aa2c123b8b4cb155ee9b" prot="public" virt="non-virtual"><scope>socket_base</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" prot="public" virt="non-virtual"><scope>socket_base</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c" prot="public" virt="non-virtual"><scope>socket_base</scope><name>try_open</name></member>
+      <member refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" prot="public" virt="virtual"><scope>socket_base</scope><name>~socket_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

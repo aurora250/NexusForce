@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___call_once" kind="group">
+    <compoundname>CallOnce</compoundname>
+    <title>单次调用</title>
+    <innerclass refid="classonce__flag" prot="public">once_flag</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___call_once_1ga6b72113ff3b073878b5fc971d6fe1026" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Callable</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void call_once</definition>
+        <argsstring>(once_flag &amp;flag, Callable &amp;&amp;func, Args &amp;&amp;... args)</argsstring>
+        <name>call_once</name>
+        <param>
+          <type><ref refid="classonce__flag" kindref="compound">once_flag</ref> &amp;</type>
+          <declname>flag</declname>
+        </param>
+        <param>
+          <type>Callable &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>单次调用函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Callable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>flag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一次性调用标志 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数的参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+确保函数在多线程环境中只被执行一次。 如果已经有线程正在执行该函数，其他线程将等待直到执行完成。 如果函数已成功执行，后续调用将立即返回。</para>
+<para><simplesect kind="note"><para>如果函数抛出异常，则视为未执行，后续线程将尝试重新执行 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="68" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="68" bodyend="106"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>确保函数在多线程环境中只执行一次 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

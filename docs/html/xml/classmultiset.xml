@@ -1,0 +1,1934 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classmultiset" kind="class" language="C++" prot="public">
+    <compoundname>multiset</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">icollector&lt; multiset&lt; Key, less&lt; Key &gt;, allocator&lt; rb_tree_node&lt; Key &gt; &gt; &gt; &gt;</basecompoundref>
+    <includes refid="multiset_8hpp" local="no">multiset.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename Compare</type>
+        <defval><ref refid="structless" kindref="compound">less</ref>&lt;Key&gt;</defval>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structrb__tree__node" kindref="compound">rb_tree_node</ref>&lt;Key&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classmultiset_1a51beb3fd11714783a919361897f0459a" prot="public" static="no">
+        <type>Key</type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::key_type = Key</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>multiset::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="41" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1a7e61456db2fdc491bffe489be54bf1c9" prot="public" static="no">
+        <type>Key</type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::value_type = Key</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>multiset::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="42" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1a3be2a9a4f027db94af7086883d23e7f0" prot="public" static="no">
+        <type>Compare</type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::key_compare = Compare</definition>
+        <argsstring></argsstring>
+        <name>key_compare</name>
+        <qualifiedname>multiset::key_compare</qualifiedname>
+        <briefdescription>
+<para>键比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="43" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1a530838a307b8b1e2442ea020b7913090" prot="public" static="no">
+        <type>Compare</type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::value_compare = Compare</definition>
+        <argsstring></argsstring>
+        <name>value_compare</name>
+        <qualifiedname>multiset::value_compare</qualifiedname>
+        <briefdescription>
+<para>值比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="44" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1a5a0227f0897e683ad9cee70f86a2858e" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1aee0ea092a682d33d8e1d2a8ce3c18673" kindref="member">base_type::size_type</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::size_type = typename base_type::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>multiset::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="50" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1a0f163b92a89e894297dff9cec6067f0a" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1a60390825c16e7b5f8155442d2486a6e4" kindref="member">base_type::difference_type</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::difference_type = typename base_type::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>multiset::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="51" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1ad78a855061af10e67fabd0b3df270bd6" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1ae4cf825e89c4768b58ed37f063c10ecf" kindref="member">base_type::pointer</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::pointer = typename base_type::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>multiset::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="52" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1a7bd55641e8749236e028cbe2ab397e2f" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1ab5f284eeec9f830a54913d1283d53ab2" kindref="member">base_type::const_pointer</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::const_pointer = typename base_type::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>multiset::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="53" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1a5ef2b30e6f27df930e538bce40800efd" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1ab88a6037629751726bb95b223b48e62a" kindref="member">base_type::reference</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::reference = typename base_type::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>multiset::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="54" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1a084cdedf92cae45c7c74c7064c1d27e3" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1a225425b29129200acd3f15781ae5ff38" kindref="member">base_type::const_reference</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::const_reference = typename base_type::const_reference</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>multiset::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="55" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1a040b35eb3ac455806de5a609296709a7" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">base_type::iterator</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::iterator = typename base_type::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>multiset::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="56" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">base_type::const_iterator</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::const_iterator = typename base_type::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>multiset::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="57" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1abbe3b95f64de3196a2f0139f16e8fea5" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1a27ceda79573b8b314e4e855fdd1903f0" kindref="member">base_type::reverse_iterator</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::reverse_iterator = typename base_type::reverse_iterator</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>multiset::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="58" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1afd7e92f7bc73b7ac9eb43f9637626a48" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1a188c3fb201ca2a878f6f3a4843956f34" kindref="member">base_type::const_reverse_iterator</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::const_reverse_iterator = typename base_type::const_reverse_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>multiset::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>常量反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="59" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmultiset_1affb889f0d0d5b1993c7ae4b04db182e0" prot="public" static="no">
+        <type>typename <ref refid="classrb__tree_1ab93a38a029b781c1f2c29216bfcf185c" kindref="member">base_type::allocator_type</ref></type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::allocator_type = typename base_type::allocator_type</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>multiset::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="60" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classmultiset_1ac1fdd818afe768036458e91aa57a4317" prot="private" static="no">
+        <type><ref refid="classrb__tree" kindref="compound">rb_tree</ref>&lt; Key, Key, <ref refid="structidentity" kindref="compound">identity</ref>&lt; Key &gt;, Compare, Alloc &gt;</type>
+        <definition>using multiset&lt; Key, Compare, Alloc &gt;::base_type = rb_tree&lt;Key, Key, identity&lt;Key&gt;, Compare, Alloc&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>multiset::base_type</qualifiedname>
+        <briefdescription>
+<para>底层红黑树类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="47" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmultiset_1a21104fed64c4ba611a1723796f8abb18" prot="private" static="no" mutable="no">
+        <type>base_type</type>
+        <definition>base_type multiset&lt; Key, Compare, Alloc &gt;::tree_</definition>
+        <argsstring></argsstring>
+        <name>tree_</name>
+        <qualifiedname>multiset::tree_</qualifiedname>
+        <briefdescription>
+<para>底层红黑树实例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="63" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>multiset&lt; Key, Compare, Alloc &gt;::multiset</definition>
+        <argsstring>()</argsstring>
+        <name>multiset</name>
+        <qualifiedname>multiset::multiset</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空multiset，使用默认的比较函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="71" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="71" bodyend="72"/>
+        <referencedby refid="classmultiset_1a81ae364c65ae93d08ae9bd994d2a5694" compoundref="multiset_8hpp" startline="440" endline="442">multiset&lt; Key, Compare, Alloc &gt;::equal_to</referencedby>
+        <referencedby refid="classmultiset_1ac9e0a33dd84cc77e9073464d7f45b0aa" compoundref="multiset_8hpp" startline="449" endline="451">multiset&lt; Key, Compare, Alloc &gt;::less_than</referencedby>
+        <referencedby refid="classmultiset_1a52492d1a0cebd50fbec757d59dca36f9" compoundref="multiset_8hpp" startline="85" endline="86">multiset&lt; Key, Compare, Alloc &gt;::multiset</referencedby>
+        <referencedby refid="classmultiset_1a725dc594b304b731e2ada82430e07ed3" compoundref="multiset_8hpp" startline="102" endline="103">multiset&lt; Key, Compare, Alloc &gt;::multiset</referencedby>
+        <referencedby refid="classmultiset_1a640ca8187c7ea9e1c4e909e70fbba1bd" compoundref="multiset_8hpp" startline="144" endline="145">multiset&lt; Key, Compare, Alloc &gt;::multiset</referencedby>
+        <referencedby refid="classmultiset_1ad741ff3d16206f366ea46277400bde8c" compoundref="multiset_8hpp" startline="152" endline="153">multiset&lt; Key, Compare, Alloc &gt;::multiset</referencedby>
+        <referencedby refid="classmultiset_1af3b25c641c307df28db6aa79e2e7df80" compoundref="multiset_8hpp" startline="93" endline="96">multiset&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classmultiset_1a9060b1ebe49911af723beb593c8f65dd" compoundref="multiset_8hpp" startline="110" endline="113">multiset&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classmultiset_1af47810fd8f6566e434a93137d28c25f9" compoundref="multiset_8hpp" startline="160" endline="164">multiset&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classmultiset_1a725d9e1b58995fc9c52b1329e46ed86a" compoundref="multiset_8hpp" startline="433" endline="433">multiset&lt; Key, Compare, Alloc &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a2dc58cdd6bc9f36ce5dafe758279ce48" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>multiset&lt; Key, Compare, Alloc &gt;::multiset</definition>
+        <argsstring>(const key_compare &amp;comp)</argsstring>
+        <name>multiset</name>
+        <qualifiedname>multiset::multiset</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a3be2a9a4f027db94af7086883d23e7f0" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="78" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="78" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a52492d1a0cebd50fbec757d59dca36f9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>multiset&lt; Key, Compare, Alloc &gt;::multiset</definition>
+        <argsstring>(const multiset &amp;other)</argsstring>
+        <name>multiset</name>
+        <qualifiedname>multiset::multiset</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset" kindref="compound">multiset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源multiset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="85" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="85" bodyend="86"/>
+        <references refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" compoundref="multiset_8hpp" startline="71" endline="72">multiset&lt; Key, Compare, Alloc &gt;::multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1af3b25c641c307df28db6aa79e2e7df80" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classmultiset" kindref="compound">multiset</ref> &amp;</type>
+        <definition>multiset &amp; multiset&lt; Key, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(const multiset &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>multiset::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset" kindref="compound">multiset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源multiset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="93" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="93" bodyend="96"/>
+        <references refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" compoundref="multiset_8hpp" startline="71" endline="72">multiset&lt; Key, Compare, Alloc &gt;::multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a725dc594b304b731e2ada82430e07ed3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; base_type &gt;" virt="non-virtual">
+        <type></type>
+        <definition>multiset&lt; Key, Compare, Alloc &gt;::multiset</definition>
+        <argsstring>(multiset &amp;&amp;other)</argsstring>
+        <name>multiset</name>
+        <qualifiedname>multiset::multiset</qualifiedname>
+        <param>
+          <type><ref refid="classmultiset" kindref="compound">multiset</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源multiset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="102" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="102" bodyend="103"/>
+        <references refid="group___type_special_member_function_checks_1gac3058b8518087cdea482055e5af4577a" compoundref="type__traits_8hpp" startline="2841">is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" compoundref="multiset_8hpp" startline="71" endline="72">multiset&lt; Key, Compare, Alloc &gt;::multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a9060b1ebe49911af723beb593c8f65dd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_assignable_v&lt; base_type &gt;" virt="non-virtual">
+        <type><ref refid="classmultiset" kindref="compound">multiset</ref> &amp;</type>
+        <definition>multiset &amp; multiset&lt; Key, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(multiset &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>multiset::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classmultiset" kindref="compound">multiset</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源multiset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="110" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="110" bodyend="113"/>
+        <references refid="group___type_special_member_function_checks_1ga4e71583e475165e891f9ea1e02c6b8e4" compoundref="type__traits_8hpp" startline="2902">is_nothrow_move_assignable_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" compoundref="multiset_8hpp" startline="71" endline="72">multiset&lt; Key, Compare, Alloc &gt;::multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a4f5203e10cfe5bb9220a0810cd636392" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>multiset&lt; Key, Compare, Alloc &gt;::multiset</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>multiset</name>
+        <qualifiedname>multiset::multiset</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="122" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="122" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a4179edfd548d6bd2c23157e97ed6ad64" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>multiset&lt; Key, Compare, Alloc &gt;::multiset</definition>
+        <argsstring>(Iterator first, Iterator last, const key_compare &amp;comp)</argsstring>
+        <name>multiset</name>
+        <qualifiedname>multiset::multiset</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classmultiset_1a3be2a9a4f027db94af7086883d23e7f0" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="135" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="135" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a640ca8187c7ea9e1c4e909e70fbba1bd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>multiset&lt; Key, Compare, Alloc &gt;::multiset</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>multiset</name>
+        <qualifiedname>multiset::multiset</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classmultiset_1a7e61456db2fdc491bffe489be54bf1c9" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="144" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="144" bodyend="145"/>
+        <references refid="classmultiset_1a6d9d2fa0d57acea1a96887b3dc6f6ec2" compoundref="multiset_8hpp" startline="175" endline="175">multiset&lt; Key, Compare, Alloc &gt;::begin</references>
+        <references refid="classmultiset_1a93f61a234048f7e1082c4eba14afc70c" compoundref="multiset_8hpp" startline="181" endline="181">multiset&lt; Key, Compare, Alloc &gt;::end</references>
+        <references refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" compoundref="multiset_8hpp" startline="71" endline="72">multiset&lt; Key, Compare, Alloc &gt;::multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1ad741ff3d16206f366ea46277400bde8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>multiset&lt; Key, Compare, Alloc &gt;::multiset</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, const key_compare &amp;comp)</argsstring>
+        <name>multiset</name>
+        <qualifiedname>multiset::multiset</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classmultiset_1a7e61456db2fdc491bffe489be54bf1c9" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classmultiset_1a3be2a9a4f027db94af7086883d23e7f0" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="152" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="152" bodyend="153"/>
+        <references refid="classmultiset_1a6d9d2fa0d57acea1a96887b3dc6f6ec2" compoundref="multiset_8hpp" startline="175" endline="175">multiset&lt; Key, Compare, Alloc &gt;::begin</references>
+        <references refid="classmultiset_1a93f61a234048f7e1082c4eba14afc70c" compoundref="multiset_8hpp" startline="181" endline="181">multiset&lt; Key, Compare, Alloc &gt;::end</references>
+        <references refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" compoundref="multiset_8hpp" startline="71" endline="72">multiset&lt; Key, Compare, Alloc &gt;::multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1af47810fd8f6566e434a93137d28c25f9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classmultiset" kindref="compound">multiset</ref> &amp;</type>
+        <definition>multiset &amp; multiset&lt; Key, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>multiset::operator=</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classmultiset_1a7e61456db2fdc491bffe489be54bf1c9" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="160" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="160" bodyend="164"/>
+        <references refid="classmultiset_1a635af099ea37905223212c7a3ac1baf2" compoundref="multiset_8hpp" startline="362" endline="362">multiset&lt; Key, Compare, Alloc &gt;::clear</references>
+        <references refid="classmultiset_1a601d5dd8e474188553e784d3a3f370d4" compoundref="multiset_8hpp" startline="289" endline="289">multiset&lt; Key, Compare, Alloc &gt;::insert</references>
+        <references refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" compoundref="multiset_8hpp" startline="71" endline="72">multiset&lt; Key, Compare, Alloc &gt;::multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a044754a3ae05643ec557cc3c1cf47dea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>multiset&lt; Key, Compare, Alloc &gt;::~multiset</definition>
+        <argsstring>()=default</argsstring>
+        <name>~multiset</name>
+        <qualifiedname>multiset::~multiset</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="169" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a6d9d2fa0d57acea1a96887b3dc6f6ec2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator multiset&lt; Key, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>multiset::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="175" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="175" bodyend="175"/>
+        <referencedby refid="classmultiset_1a640ca8187c7ea9e1c4e909e70fbba1bd" compoundref="multiset_8hpp" startline="144" endline="145">multiset&lt; Key, Compare, Alloc &gt;::multiset</referencedby>
+        <referencedby refid="classmultiset_1ad741ff3d16206f366ea46277400bde8c" compoundref="multiset_8hpp" startline="152" endline="153">multiset&lt; Key, Compare, Alloc &gt;::multiset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a93f61a234048f7e1082c4eba14afc70c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator multiset&lt; Key, Compare, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>multiset::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="181" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="181" bodyend="181"/>
+        <referencedby refid="classmultiset_1a640ca8187c7ea9e1c4e909e70fbba1bd" compoundref="multiset_8hpp" startline="144" endline="145">multiset&lt; Key, Compare, Alloc &gt;::multiset</referencedby>
+        <referencedby refid="classmultiset_1ad741ff3d16206f366ea46277400bde8c" compoundref="multiset_8hpp" startline="152" endline="153">multiset&lt; Key, Compare, Alloc &gt;::multiset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a0ac49194d2019ce2001b5103138a6f77" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator multiset&lt; Key, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>multiset::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="187" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="187" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a0fe2c4c202b8ca9825ba216a25928487" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator multiset&lt; Key, Compare, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>multiset::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="193" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="193" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1ad58d326825c097513a7b1a73739bef8e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator multiset&lt; Key, Compare, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>multiset::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="199" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="199" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a80cd911a666a646ead16ac3174b5d311" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator multiset&lt; Key, Compare, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>multiset::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="205" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="205" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a64e605d9026a2902fd30d3a05a8d666f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1abbe3b95f64de3196a2f0139f16e8fea5" kindref="member">reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD reverse_iterator multiset&lt; Key, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>multiset::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="211" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="211" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a3e13d836845167f42f281a951d1c8da3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1abbe3b95f64de3196a2f0139f16e8fea5" kindref="member">reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD reverse_iterator multiset&lt; Key, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>multiset::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="217" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="217" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a4b32b80cfd703885d73a46407930213d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1afd7e92f7bc73b7ac9eb43f9637626a48" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator multiset&lt; Key, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>multiset::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="223" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="223" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1abbbb07e5e158ec6ec958f96a8a957a03" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1afd7e92f7bc73b7ac9eb43f9637626a48" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator multiset&lt; Key, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>multiset::rend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="229" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="229" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1ab7c784dd1bc09d5dbfdcef7dad693c20" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1afd7e92f7bc73b7ac9eb43f9637626a48" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator multiset&lt; Key, Compare, Alloc &gt;::crbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crbegin</name>
+        <qualifiedname>multiset::crbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="235" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="235" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a537ea9ed19d378989aaa52295a87dccd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1afd7e92f7bc73b7ac9eb43f9637626a48" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator multiset&lt; Key, Compare, Alloc &gt;::crend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crend</name>
+        <qualifiedname>multiset::crend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="241" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="241" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a0fecc86c1897453cf654672dced5886c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a5a0227f0897e683ad9cee70f86a2858e" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type multiset&lt; Key, Compare, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>multiset::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>multiset中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="247" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="247" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a989d0fcb7a9a5b2de8454fc092ff794f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a5a0227f0897e683ad9cee70f86a2858e" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type multiset&lt; Key, Compare, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>multiset::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="253" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="253" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a5f989b5c04fc354620283c62e9e3ea1e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool multiset&lt; Key, Compare, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>multiset::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="259" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="259" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a17d2228fcfe802e7e459651db49456ee" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a3be2a9a4f027db94af7086883d23e7f0" kindref="member">key_compare</ref></type>
+        <definition>NEFORCE_NODISCARD key_compare multiset&lt; Key, Compare, Alloc &gt;::key_comp</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>key_comp</name>
+        <qualifiedname>multiset::key_comp</qualifiedname>
+        <briefdescription>
+<para>获取键比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="265" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="265" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1af27c2b5ee463718922d5f4fba26c9a5e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a530838a307b8b1e2442ea020b7913090" kindref="member">value_compare</ref></type>
+        <definition>NEFORCE_NODISCARD value_compare multiset&lt; Key, Compare, Alloc &gt;::value_comp</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>value_comp</name>
+        <qualifiedname>multiset::value_comp</qualifiedname>
+        <briefdescription>
+<para>获取值比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="271" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="271" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a896561a1b4ce4a6527453f1b5c13c82a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>iterator multiset&lt; Key, Compare, Alloc &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>multiset::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在multiset中就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="280" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="280" bodyend="282"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a601d5dd8e474188553e784d3a3f370d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>iterator multiset&lt; Key, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>multiset::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a7e61456db2fdc491bffe489be54bf1c9" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="289" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="289" bodyend="289"/>
+        <referencedby refid="classmultiset_1af47810fd8f6566e434a93137d28c25f9" compoundref="multiset_8hpp" startline="160" endline="164">multiset&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a17a247c23271aa04b591aaee775c53d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>iterator multiset&lt; Key, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>multiset::insert</qualifiedname>
+        <param>
+          <type><ref refid="classmultiset_1a7e61456db2fdc491bffe489be54bf1c9" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="296" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="296" bodyend="296"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a028b3406d96cea1065e531207df68cac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>iterator multiset&lt; Key, Compare, Alloc &gt;::emplace_hint</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace_hint</name>
+        <qualifiedname>multiset::emplace_hint</qualifiedname>
+        <param>
+          <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="306" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="306" bodyend="308"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1af1f889aea4be904a32bca0470435f08c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>iterator multiset&lt; Key, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>multiset::insert</qualifiedname>
+        <param>
+          <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classmultiset_1a7e61456db2fdc491bffe489be54bf1c9" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="316" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="316" bodyend="316"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1aebc5e2da85b737a44d92358476a4a8bd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>iterator multiset&lt; Key, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>multiset::insert</qualifiedname>
+        <param>
+          <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classmultiset_1a7e61456db2fdc491bffe489be54bf1c9" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="324" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="324" bodyend="326"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a4b45663a5dbd82b2af7595815ed8c1a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void multiset&lt; Key, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>multiset::insert</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="335" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="335" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a190755514f069ba48184aac37014615e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_.erase(position))" virt="non-virtual">
+        <type>void</type>
+        <definition>void multiset&lt; Key, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>multiset::erase</qualifiedname>
+        <param>
+          <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="343" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="343" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a31744b1d8d23d43b09c750736443ea3d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_.erase(key))" virt="non-virtual">
+        <type><ref refid="classmultiset_1a5a0227f0897e683ad9cee70f86a2858e" kindref="member">size_type</ref></type>
+        <definition>size_type multiset&lt; Key, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>erase</name>
+        <qualifiedname>multiset::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a51beb3fd11714783a919361897f0459a" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="350" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="350" bodyend="350"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a11782a02544032bcfda515f4da40d853" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_.erase(first, last))" virt="non-virtual">
+        <type>void</type>
+        <definition>void multiset&lt; Key, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>multiset::erase</qualifiedname>
+        <param>
+          <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="357" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="357" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a635af099ea37905223212c7a3ac1baf2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_.clear())" virt="non-virtual">
+        <type>void</type>
+        <definition>void multiset&lt; Key, Compare, Alloc &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>multiset::clear</qualifiedname>
+        <briefdescription>
+<para>清空multiset </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="362" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="362" bodyend="362"/>
+        <references refid="classmultiset_1a635af099ea37905223212c7a3ac1baf2" compoundref="multiset_8hpp" startline="362" endline="362">multiset&lt; Key, Compare, Alloc &gt;::clear</references>
+        <referencedby refid="classmultiset_1a635af099ea37905223212c7a3ac1baf2" compoundref="multiset_8hpp" startline="362" endline="362">multiset&lt; Key, Compare, Alloc &gt;::clear</referencedby>
+        <referencedby refid="classmultiset_1af47810fd8f6566e434a93137d28c25f9" compoundref="multiset_8hpp" startline="160" endline="164">multiset&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1ad20d816dd403911fddfd3a4a79f370b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator multiset&lt; Key, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>multiset::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a51beb3fd11714783a919361897f0459a" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回end() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="369" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="369" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a2de0c8bfb74778ee38918a276741edf7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator multiset&lt; Key, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>multiset::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a51beb3fd11714783a919361897f0459a" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回cend() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="376" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="376" bodyend="376"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1aebce9b9801f7ea7206adaa5cf83b06d0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a5a0227f0897e683ad9cee70f86a2858e" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type multiset&lt; Key, Compare, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>multiset::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a51beb3fd11714783a919361897f0459a" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="383" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="383" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a651bd34a2650bd9380cf6641d2a674d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator multiset&lt; Key, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>multiset::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a51beb3fd11714783a919361897f0459a" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="390" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="390" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1acc5854a1f2d468227777a7d0e97d7a94" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator multiset&lt; Key, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>multiset::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a51beb3fd11714783a919361897f0459a" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的常量元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="397" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="397" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a6494e737955a4e70b5a65993d2717aa1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator multiset&lt; Key, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>multiset::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a51beb3fd11714783a919361897f0459a" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="404" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="404" bodyend="404"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a8a3f8a079983be0578c74a657074c0a1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator multiset&lt; Key, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>multiset::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a51beb3fd11714783a919361897f0459a" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的常量元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="411" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="411" bodyend="411"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1abee92aeb423d7f679249fae4e3e9a452" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref>, <ref refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" kindref="member">iterator</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD pair&lt; iterator, iterator &gt; multiset&lt; Key, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>multiset::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a51beb3fd11714783a919361897f0459a" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="418" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="418" bodyend="418"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a03f4ed199946689cdc5493b96546ec63" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" kindref="member">const_iterator</ref>, <ref refid="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD pair&lt; const_iterator, const_iterator &gt; multiset&lt; Key, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>multiset::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset_1a51beb3fd11714783a919361897f0459a" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的常量元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="425" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="425" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a725d9e1b58995fc9c52b1329e46ed86a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; base_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void multiset&lt; Key, Compare, Alloc &gt;::swap</definition>
+        <argsstring>(multiset &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>multiset::swap</qualifiedname>
+        <param>
+          <type><ref refid="classmultiset" kindref="compound">multiset</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个multiset的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个multiset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="433" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="433" bodyend="433"/>
+        <references refid="group___swap_utility_1ga9cc217ccd3ddd28edc3ebfd181bba2f3" compoundref="type__traits_8hpp" startline="3946">is_nothrow_swappable_v</references>
+        <references refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" compoundref="multiset_8hpp" startline="71" endline="72">multiset&lt; Key, Compare, Alloc &gt;::multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1a81ae364c65ae93d08ae9bd994d2a5694" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_==rhs.tree_)" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool multiset&lt; Key, Compare, Alloc &gt;::equal_to</definition>
+        <argsstring>(const multiset &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>multiset::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset" kindref="compound">multiset</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧multiset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个multiset大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="440" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="440" bodyend="442"/>
+        <references refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" compoundref="multiset_8hpp" startline="71" endline="72">multiset&lt; Key, Compare, Alloc &gt;::multiset</references>
+      </memberdef>
+      <memberdef kind="function" id="classmultiset_1ac9e0a33dd84cc77e9073464d7f45b0aa" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_&lt; rhs.tree_)" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool multiset&lt; Key, Compare, Alloc &gt;::less_than</definition>
+        <argsstring>(const multiset &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>multiset::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classmultiset" kindref="compound">multiset</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧multiset </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="449" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="449" bodyend="451"/>
+        <references refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" compoundref="multiset_8hpp" startline="71" endline="72">multiset&lt; Key, Compare, Alloc &gt;::multiset</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>多重集合容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键比较函数类型，默认为less&lt;Key&gt; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+multiset是一种关联容器，存储唯一的键值，允许重复键。 元素按照键的顺序自动排序，排序标准由Compare函数对象指定。 支持快速的键查找，且允许重复键。底层使用红黑树实现。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="35" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" bodystart="35" bodyend="452"/>
+    <listofallmembers>
+      <member refid="classmultiset_1affb889f0d0d5b1993c7ae4b04db182e0" prot="public" virt="non-virtual"><scope>multiset</scope><name>allocator_type</name></member>
+      <member refid="classmultiset_1ac1fdd818afe768036458e91aa57a4317" prot="private" virt="non-virtual"><scope>multiset</scope><name>base_type</name></member>
+      <member refid="classmultiset_1a6d9d2fa0d57acea1a96887b3dc6f6ec2" prot="public" virt="non-virtual"><scope>multiset</scope><name>begin</name></member>
+      <member refid="classmultiset_1a0ac49194d2019ce2001b5103138a6f77" prot="public" virt="non-virtual"><scope>multiset</scope><name>begin</name></member>
+      <member refid="classmultiset_1ad58d326825c097513a7b1a73739bef8e" prot="public" virt="non-virtual"><scope>multiset</scope><name>cbegin</name></member>
+      <member refid="classmultiset_1a80cd911a666a646ead16ac3174b5d311" prot="public" virt="non-virtual"><scope>multiset</scope><name>cend</name></member>
+      <member refid="classmultiset_1a635af099ea37905223212c7a3ac1baf2" prot="public" virt="non-virtual"><scope>multiset</scope><name>clear</name></member>
+      <member refid="classmultiset_1a4c39d21a587f5f4d43a5f354d0f1d628" prot="public" virt="non-virtual"><scope>multiset</scope><name>const_iterator</name></member>
+      <member refid="classmultiset_1a7bd55641e8749236e028cbe2ab397e2f" prot="public" virt="non-virtual"><scope>multiset</scope><name>const_pointer</name></member>
+      <member refid="classmultiset_1a084cdedf92cae45c7c74c7064c1d27e3" prot="public" virt="non-virtual"><scope>multiset</scope><name>const_reference</name></member>
+      <member refid="classmultiset_1afd7e92f7bc73b7ac9eb43f9637626a48" prot="public" virt="non-virtual"><scope>multiset</scope><name>const_reverse_iterator</name></member>
+      <member refid="classmultiset_1aebce9b9801f7ea7206adaa5cf83b06d0" prot="public" virt="non-virtual"><scope>multiset</scope><name>count</name></member>
+      <member refid="classmultiset_1ab7c784dd1bc09d5dbfdcef7dad693c20" prot="public" virt="non-virtual"><scope>multiset</scope><name>crbegin</name></member>
+      <member refid="classmultiset_1a537ea9ed19d378989aaa52295a87dccd" prot="public" virt="non-virtual"><scope>multiset</scope><name>crend</name></member>
+      <member refid="classmultiset_1a0f163b92a89e894297dff9cec6067f0a" prot="public" virt="non-virtual"><scope>multiset</scope><name>difference_type</name></member>
+      <member refid="classmultiset_1a896561a1b4ce4a6527453f1b5c13c82a" prot="public" virt="non-virtual"><scope>multiset</scope><name>emplace</name></member>
+      <member refid="classmultiset_1a028b3406d96cea1065e531207df68cac" prot="public" virt="non-virtual"><scope>multiset</scope><name>emplace_hint</name></member>
+      <member refid="classmultiset_1a5f989b5c04fc354620283c62e9e3ea1e" prot="public" virt="non-virtual"><scope>multiset</scope><name>empty</name></member>
+      <member refid="classmultiset_1a93f61a234048f7e1082c4eba14afc70c" prot="public" virt="non-virtual"><scope>multiset</scope><name>end</name></member>
+      <member refid="classmultiset_1a0fe2c4c202b8ca9825ba216a25928487" prot="public" virt="non-virtual"><scope>multiset</scope><name>end</name></member>
+      <member refid="classmultiset_1abee92aeb423d7f679249fae4e3e9a452" prot="public" virt="non-virtual"><scope>multiset</scope><name>equal_range</name></member>
+      <member refid="classmultiset_1a03f4ed199946689cdc5493b96546ec63" prot="public" virt="non-virtual"><scope>multiset</scope><name>equal_range</name></member>
+      <member refid="classmultiset_1a81ae364c65ae93d08ae9bd994d2a5694" prot="public" virt="non-virtual"><scope>multiset</scope><name>equal_to</name></member>
+      <member refid="classmultiset_1a190755514f069ba48184aac37014615e" prot="public" virt="non-virtual"><scope>multiset</scope><name>erase</name></member>
+      <member refid="classmultiset_1a31744b1d8d23d43b09c750736443ea3d" prot="public" virt="non-virtual"><scope>multiset</scope><name>erase</name></member>
+      <member refid="classmultiset_1a11782a02544032bcfda515f4da40d853" prot="public" virt="non-virtual"><scope>multiset</scope><name>erase</name></member>
+      <member refid="classmultiset_1ad20d816dd403911fddfd3a4a79f370b6" prot="public" virt="non-virtual"><scope>multiset</scope><name>find</name></member>
+      <member refid="classmultiset_1a2de0c8bfb74778ee38918a276741edf7" prot="public" virt="non-virtual"><scope>multiset</scope><name>find</name></member>
+      <member refid="classmultiset_1a601d5dd8e474188553e784d3a3f370d4" prot="public" virt="non-virtual"><scope>multiset</scope><name>insert</name></member>
+      <member refid="classmultiset_1a17a247c23271aa04b591aaee775c53d8" prot="public" virt="non-virtual"><scope>multiset</scope><name>insert</name></member>
+      <member refid="classmultiset_1af1f889aea4be904a32bca0470435f08c" prot="public" virt="non-virtual"><scope>multiset</scope><name>insert</name></member>
+      <member refid="classmultiset_1aebc5e2da85b737a44d92358476a4a8bd" prot="public" virt="non-virtual"><scope>multiset</scope><name>insert</name></member>
+      <member refid="classmultiset_1a4b45663a5dbd82b2af7595815ed8c1a9" prot="public" virt="non-virtual"><scope>multiset</scope><name>insert</name></member>
+      <member refid="classmultiset_1a040b35eb3ac455806de5a609296709a7" prot="public" virt="non-virtual"><scope>multiset</scope><name>iterator</name></member>
+      <member refid="classmultiset_1a17d2228fcfe802e7e459651db49456ee" prot="public" virt="non-virtual"><scope>multiset</scope><name>key_comp</name></member>
+      <member refid="classmultiset_1a3be2a9a4f027db94af7086883d23e7f0" prot="public" virt="non-virtual"><scope>multiset</scope><name>key_compare</name></member>
+      <member refid="classmultiset_1a51beb3fd11714783a919361897f0459a" prot="public" virt="non-virtual"><scope>multiset</scope><name>key_type</name></member>
+      <member refid="classmultiset_1ac9e0a33dd84cc77e9073464d7f45b0aa" prot="public" virt="non-virtual"><scope>multiset</scope><name>less_than</name></member>
+      <member refid="classmultiset_1a651bd34a2650bd9380cf6641d2a674d4" prot="public" virt="non-virtual"><scope>multiset</scope><name>lower_bound</name></member>
+      <member refid="classmultiset_1acc5854a1f2d468227777a7d0e97d7a94" prot="public" virt="non-virtual"><scope>multiset</scope><name>lower_bound</name></member>
+      <member refid="classmultiset_1a989d0fcb7a9a5b2de8454fc092ff794f" prot="public" virt="non-virtual"><scope>multiset</scope><name>max_size</name></member>
+      <member refid="classmultiset_1a71a12fd8e4fb9ed3044165d5d4ca32b8" prot="public" virt="non-virtual"><scope>multiset</scope><name>multiset</name></member>
+      <member refid="classmultiset_1a2dc58cdd6bc9f36ce5dafe758279ce48" prot="public" virt="non-virtual"><scope>multiset</scope><name>multiset</name></member>
+      <member refid="classmultiset_1a52492d1a0cebd50fbec757d59dca36f9" prot="public" virt="non-virtual"><scope>multiset</scope><name>multiset</name></member>
+      <member refid="classmultiset_1a725dc594b304b731e2ada82430e07ed3" prot="public" virt="non-virtual"><scope>multiset</scope><name>multiset</name></member>
+      <member refid="classmultiset_1a4f5203e10cfe5bb9220a0810cd636392" prot="public" virt="non-virtual"><scope>multiset</scope><name>multiset</name></member>
+      <member refid="classmultiset_1a4179edfd548d6bd2c23157e97ed6ad64" prot="public" virt="non-virtual"><scope>multiset</scope><name>multiset</name></member>
+      <member refid="classmultiset_1a640ca8187c7ea9e1c4e909e70fbba1bd" prot="public" virt="non-virtual"><scope>multiset</scope><name>multiset</name></member>
+      <member refid="classmultiset_1ad741ff3d16206f366ea46277400bde8c" prot="public" virt="non-virtual"><scope>multiset</scope><name>multiset</name></member>
+      <member refid="classmultiset_1af3b25c641c307df28db6aa79e2e7df80" prot="public" virt="non-virtual"><scope>multiset</scope><name>operator=</name></member>
+      <member refid="classmultiset_1a9060b1ebe49911af723beb593c8f65dd" prot="public" virt="non-virtual"><scope>multiset</scope><name>operator=</name></member>
+      <member refid="classmultiset_1af47810fd8f6566e434a93137d28c25f9" prot="public" virt="non-virtual"><scope>multiset</scope><name>operator=</name></member>
+      <member refid="classmultiset_1ad78a855061af10e67fabd0b3df270bd6" prot="public" virt="non-virtual"><scope>multiset</scope><name>pointer</name></member>
+      <member refid="classmultiset_1a64e605d9026a2902fd30d3a05a8d666f" prot="public" virt="non-virtual"><scope>multiset</scope><name>rbegin</name></member>
+      <member refid="classmultiset_1a4b32b80cfd703885d73a46407930213d" prot="public" virt="non-virtual"><scope>multiset</scope><name>rbegin</name></member>
+      <member refid="classmultiset_1a5ef2b30e6f27df930e538bce40800efd" prot="public" virt="non-virtual"><scope>multiset</scope><name>reference</name></member>
+      <member refid="classmultiset_1a3e13d836845167f42f281a951d1c8da3" prot="public" virt="non-virtual"><scope>multiset</scope><name>rend</name></member>
+      <member refid="classmultiset_1abbbb07e5e158ec6ec958f96a8a957a03" prot="public" virt="non-virtual"><scope>multiset</scope><name>rend</name></member>
+      <member refid="classmultiset_1abbe3b95f64de3196a2f0139f16e8fea5" prot="public" virt="non-virtual"><scope>multiset</scope><name>reverse_iterator</name></member>
+      <member refid="classmultiset_1a0fecc86c1897453cf654672dced5886c" prot="public" virt="non-virtual"><scope>multiset</scope><name>size</name></member>
+      <member refid="classmultiset_1a5a0227f0897e683ad9cee70f86a2858e" prot="public" virt="non-virtual"><scope>multiset</scope><name>size_type</name></member>
+      <member refid="classmultiset_1a725d9e1b58995fc9c52b1329e46ed86a" prot="public" virt="non-virtual"><scope>multiset</scope><name>swap</name></member>
+      <member refid="classmultiset_1a21104fed64c4ba611a1723796f8abb18" prot="private" virt="non-virtual"><scope>multiset</scope><name>tree_</name></member>
+      <member refid="classmultiset_1a6494e737955a4e70b5a65993d2717aa1" prot="public" virt="non-virtual"><scope>multiset</scope><name>upper_bound</name></member>
+      <member refid="classmultiset_1a8a3f8a079983be0578c74a657074c0a1" prot="public" virt="non-virtual"><scope>multiset</scope><name>upper_bound</name></member>
+      <member refid="classmultiset_1af27c2b5ee463718922d5f4fba26c9a5e" prot="public" virt="non-virtual"><scope>multiset</scope><name>value_comp</name></member>
+      <member refid="classmultiset_1a530838a307b8b1e2442ea020b7913090" prot="public" virt="non-virtual"><scope>multiset</scope><name>value_compare</name></member>
+      <member refid="classmultiset_1a7e61456db2fdc491bffe489be54bf1c9" prot="public" virt="non-virtual"><scope>multiset</scope><name>value_type</name></member>
+      <member refid="classmultiset_1a044754a3ae05643ec557cc3c1cf47dea" prot="public" virt="non-virtual"><scope>multiset</scope><name>~multiset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

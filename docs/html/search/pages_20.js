@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['代理对编码规则_0',['UTF-16 代理对编码规则',['../group___code_point.html#utf16_surrogates',1,'']]]
+  ['二进制与十进制前缀对比_0',['二进制与十进制前缀对比',['../group___byte_size.html#binary_vs_decimal',1,'']]]
 ];

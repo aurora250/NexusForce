@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['错误码_0',['错误码',['../group___error_code.html',1,'']]]
+  ['量词算法_0',['量词算法',['../group___quantifier_algorithms.html',1,'']]]
 ];

@@ -1,0 +1,465 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structsqlite__connect" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>sqlite_connect</compoundname>
+    <basecompoundref refid="structidb__tb__connect" prot="public" virt="non-virtual">idb_tb_connect</basecompoundref>
+    <includes refid="sqlite__connect_8hpp" local="no">sqlite_connect.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structsqlite__connect_1acd145309c79e48c14d43b42788f2d459" prot="private" static="no" mutable="no">
+        <type>::sqlite3 *</type>
+        <definition>::sqlite3* sqlite_connect::link_</definition>
+        <argsstring></argsstring>
+        <name>link_</name>
+        <qualifiedname>sqlite_connect::link_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>SQLite数据库连接句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="47" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structsqlite__connect_1af9a42795e53f61b3729e5d64526f7112" prot="private" static="no" mutable="yes">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string sqlite_connect::last_error_</definition>
+        <argsstring></argsstring>
+        <name>last_error_</name>
+        <qualifiedname>sqlite_connect::last_error_</qualifiedname>
+        <briefdescription>
+<para>最后错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="48" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structsqlite__connect_1a7f13228bcda4e91b809481828881462a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>sqlite_connect::sqlite_connect</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>sqlite_connect</name>
+        <qualifiedname>sqlite_connect::sqlite_connect</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建内存数据库连接（临时数据库）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="56" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1a5f2a35ca8e5fdf3aad5700dde761706c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>sqlite_connect::~sqlite_connect</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>~sqlite_connect</name>
+        <qualifiedname>sqlite_connect::~sqlite_connect</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动关闭数据库连接。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="63" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="63" bodyend="63"/>
+        <references refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19">idb_connect::close</references>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1a9b8173a41fcdbe55b7af9fd0bd3223e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool sqlite_connect::connect</definition>
+        <argsstring>(const db_config &amp;config) override</argsstring>
+        <name>connect</name>
+        <qualifiedname>sqlite_connect::connect</qualifiedname>
+        <reimplements refid="structidb__connect_1a7ae3001e8ef72724b952fac4ea66cde7">connect</reimplements>
+        <param>
+          <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>建立数据库连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>连接成功返回true</para>
+</simplesect>
+打开config.database指定的数据库文件。 如果database为空，创建内存数据库。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="73" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1ab81c7556101e6bf9fab9b53c0ccb43ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool sqlite_connect::reconnect</definition>
+        <argsstring>(const db_config &amp;config) override</argsstring>
+        <name>reconnect</name>
+        <qualifiedname>sqlite_connect::reconnect</qualifiedname>
+        <reimplements refid="structidb__connect_1a5faaad097bbdc6d8e530eb9f3ec7af94">reconnect</reimplements>
+        <param>
+          <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>重新连接数据库 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>重连成功返回true</para>
+</simplesect>
+关闭当前连接，使用新配置重新连接。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="82" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1a60bba60200444b0b647d26e342144509" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>void</type>
+        <definition>void sqlite_connect::close</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>close</name>
+        <qualifiedname>sqlite_connect::close</qualifiedname>
+        <reimplements refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19">close</reimplements>
+        <briefdescription>
+<para>关闭数据库连接 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="87" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1add6f71f73c477e298ab3690c7fa2cb05" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool sqlite_connect::set_character_set</definition>
+        <argsstring>(const string &amp;encoding) const override</argsstring>
+        <name>set_character_set</name>
+        <qualifiedname>sqlite_connect::set_character_set</qualifiedname>
+        <reimplements refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad">set_character_set</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>encoding</declname>
+        </param>
+        <briefdescription>
+<para>设置字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>encoding</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符集名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="94" column="28"/>
+        <references refid="structsqlite__connect_1add6f71f73c477e298ab3690c7fa2cb05">set_character_set</references>
+        <referencedby refid="structsqlite__connect_1add6f71f73c477e298ab3690c7fa2cb05">set_character_set</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1a7e90df9d163fcbf9bb7a95603c5b3f83" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view sqlite_connect::get_character_set</definition>
+        <argsstring>() const override</argsstring>
+        <name>get_character_set</name>
+        <qualifiedname>sqlite_connect::get_character_set</qualifiedname>
+        <reimplements refid="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767">get_character_set</reimplements>
+        <briefdescription>
+<para>获取当前字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="100" column="35"/>
+        <references refid="structsqlite__connect_1a7e90df9d163fcbf9bb7a95603c5b3f83">get_character_set</references>
+        <referencedby refid="structsqlite__connect_1a7e90df9d163fcbf9bb7a95603c5b3f83">get_character_set</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1a2a07957e0fda099afdc678b46390e16b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view sqlite_connect::get_error</definition>
+        <argsstring>() const override</argsstring>
+        <name>get_error</name>
+        <qualifiedname>sqlite_connect::get_error</qualifiedname>
+        <reimplements refid="structidb__connect_1a128b6a7646a28e85e231beb150439c01">get_error</reimplements>
+        <briefdescription>
+<para>获取最后错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="106" column="35"/>
+        <references refid="structsqlite__connect_1a2a07957e0fda099afdc678b46390e16b">get_error</references>
+        <referencedby refid="structsqlite__connect_1a2a07957e0fda099afdc678b46390e16b">get_error</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1aaf26361fd2b411697712bed65d022e57" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_NODISCARD uint32_t sqlite_connect::get_errno</definition>
+        <argsstring>() const override</argsstring>
+        <name>get_errno</name>
+        <qualifiedname>sqlite_connect::get_errno</qualifiedname>
+        <reimplements refid="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e">get_errno</reimplements>
+        <briefdescription>
+<para>获取最后错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SQLite错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="112" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="112" bodyend="112"/>
+        <references refid="structsqlite__connect_1aaf26361fd2b411697712bed65d022e57" compoundref="sqlite__connect_8hpp" startline="112" endline="112">get_errno</references>
+        <referencedby refid="structsqlite__connect_1aaf26361fd2b411697712bed65d022e57" compoundref="sqlite__connect_8hpp" startline="112" endline="112">get_errno</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1a6658a0711918f65ddd98d8291881a7a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool sqlite_connect::update</definition>
+        <argsstring>(const string &amp;sql) const override</argsstring>
+        <name>update</name>
+        <qualifiedname>sqlite_connect::update</qualifiedname>
+        <reimplements refid="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2">update</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>执行非查询SQL语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SQL语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>执行成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="119" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1ac3d41c38c171431a502fb21b023b281d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD unique_ptr&lt; idb_tb_result &gt; sqlite_connect::query</definition>
+        <argsstring>(const string &amp;sql) const override</argsstring>
+        <name>query</name>
+        <qualifiedname>sqlite_connect::query</qualifiedname>
+        <reimplements refid="structidb__tb__connect_1abc6b0d8058de22758e6c33fa9212e31e">query</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>执行查询SQL语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SELECT语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>查询结果集，失败返回空指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="126" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1a195baffb5be8eeacc09f56ecbfb105e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__statement" kindref="compound">idb_prepared_statement</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD unique_ptr&lt; idb_prepared_statement &gt; sqlite_connect::prepare_statement</definition>
+        <argsstring>(const string &amp;sql) const override</argsstring>
+        <name>prepare_statement</name>
+        <qualifiedname>sqlite_connect::prepare_statement</qualifiedname>
+        <reimplements refid="structidb__tb__connect_1a37513bfd22b7ea67498dbac6f98e8156">prepare_statement</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>创建预处理语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>带占位符的SQL语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>预处理语句对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="133" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1abd4969015d139892338dd620b834eccd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool sqlite_connect::connected</definition>
+        <argsstring>() const override</argsstring>
+        <name>connected</name>
+        <qualifiedname>sqlite_connect::connected</qualifiedname>
+        <reimplements refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d">connected</reimplements>
+        <briefdescription>
+<para>检查连接是否已建立 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已连接返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="139" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="139" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1ac60f61740228e60f09580cea8e47ae78" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool sqlite_connect::is_valid</definition>
+        <argsstring>() const override</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>sqlite_connect::is_valid</qualifiedname>
+        <reimplements refid="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0">is_valid</reimplements>
+        <briefdescription>
+<para>检查连接是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="145" column="28"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>SQLite数据库连接类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_tb_connect接口，提供SQLite数据库的连接和操作功能。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>SQLite数据库连接建立和关闭</para>
+</listitem><listitem><para>字符集设置和查询</para>
+</listitem><listitem><para>SQL语句执行</para>
+</listitem><listitem><para>查询结果获取</para>
+</listitem><listitem><para>预处理语句支持</para>
+</listitem><listitem><para>连接健康检查</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>SQLite连接是文件级别的，database字段指定数据库文件路径。 支持内存数据库（&quot;:memory:&quot;）。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>idb_connect</label>
+        <link refid="structidb__connect"/>
+      </node>
+      <node id="2">
+        <label>idb_tb_connect</label>
+        <link refid="structidb__tb__connect"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>sqlite_connect</label>
+        <link refid="structsqlite__connect"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>idb_connect</label>
+        <link refid="structidb__connect"/>
+      </node>
+      <node id="2">
+        <label>idb_tb_connect</label>
+        <link refid="structidb__tb__connect"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>sqlite_connect</label>
+        <link refid="structsqlite__connect"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="45" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="45" bodyend="146"/>
+    <listofallmembers>
+      <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>clock_type</name></member>
+      <member refid="structsqlite__connect_1a60bba60200444b0b647d26e342144509" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>close</name></member>
+      <member refid="structsqlite__connect_1a9b8173a41fcdbe55b7af9fd0bd3223e2" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>connect</name></member>
+      <member refid="structsqlite__connect_1abd4969015d139892338dd620b834eccd" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>connected</name></member>
+      <member refid="structidb__connect_1affedca161dc65836d2ecd3ae76e9158d" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>get_alive</name></member>
+      <member refid="structsqlite__connect_1a7e90df9d163fcbf9bb7a95603c5b3f83" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>get_character_set</name></member>
+      <member refid="structsqlite__connect_1aaf26361fd2b411697712bed65d022e57" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>get_errno</name></member>
+      <member refid="structsqlite__connect_1a2a07957e0fda099afdc678b46390e16b" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>get_error</name></member>
+      <member refid="structsqlite__connect_1ac60f61740228e60f09580cea8e47ae78" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>is_valid</name></member>
+      <member refid="structsqlite__connect_1af9a42795e53f61b3729e5d64526f7112" prot="private" virt="non-virtual"><scope>sqlite_connect</scope><name>last_error_</name></member>
+      <member refid="structsqlite__connect_1acd145309c79e48c14d43b42788f2d459" prot="private" virt="non-virtual"><scope>sqlite_connect</scope><name>link_</name></member>
+      <member refid="structsqlite__connect_1a195baffb5be8eeacc09f56ecbfb105e3" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>prepare_statement</name></member>
+      <member refid="structsqlite__connect_1ac3d41c38c171431a502fb21b023b281d" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>query</name></member>
+      <member refid="structsqlite__connect_1ab81c7556101e6bf9fab9b53c0ccb43ab" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>reconnect</name></member>
+      <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>refresh_alive</name></member>
+      <member refid="structsqlite__connect_1add6f71f73c477e298ab3690c7fa2cb05" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>set_character_set</name></member>
+      <member refid="structsqlite__connect_1a7f13228bcda4e91b809481828881462a" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>sqlite_connect</name></member>
+      <member refid="structsqlite__connect_1a6658a0711918f65ddd98d8291881a7a2" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>update</name></member>
+      <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>~idb_connect</name></member>
+      <member refid="structidb__tb__connect_1a4ba8618ecc342e6ddfc5c20d9f2297ad" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>~idb_tb_connect</name></member>
+      <member refid="structsqlite__connect_1a5f2a35ca8e5fdf3aad5700dde761706c" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>~sqlite_connect</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,798 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classqueue" kind="class" language="C++" prot="public">
+    <compoundname>queue</compoundname>
+    <basecompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; queue&lt; T, deque&lt; T &gt; &gt; &gt;</basecompoundref>
+    <includes refid="queue_8hpp" local="no">queue.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Sequence</type>
+        <defval><ref refid="classdeque" kindref="compound">deque</ref>&lt;T&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classqueue_1a84297b2c5c5559a0ebc7a62d217ccdfc" prot="public" static="no">
+        <type>typename Sequence::value_type</type>
+        <definition>using queue&lt; T, Sequence &gt;::value_type = typename Sequence::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>queue::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="41" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classqueue_1a207dad29631b0914fa2c50e41c1ba15c" prot="public" static="no">
+        <type>typename Sequence::difference_type</type>
+        <definition>using queue&lt; T, Sequence &gt;::difference_type = typename Sequence::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>queue::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="42" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classqueue_1a5cef78d15b070baed6d6b1a9aac9c8b7" prot="public" static="no">
+        <type>typename Sequence::size_type</type>
+        <definition>using queue&lt; T, Sequence &gt;::size_type = typename Sequence::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>queue::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="43" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classqueue_1ae2a1f88eaf0b043db8570b242e703d8f" prot="public" static="no">
+        <type>typename Sequence::reference</type>
+        <definition>using queue&lt; T, Sequence &gt;::reference = typename Sequence::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>queue::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="44" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classqueue_1a5fb2bbd104915c2b810ab3e0b3024340" prot="public" static="no">
+        <type>typename Sequence::const_reference</type>
+        <definition>using queue&lt; T, Sequence &gt;::const_reference = typename Sequence::const_reference</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>queue::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="45" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classqueue_1a45ac5e048736212eb2cf577bfceef8da" prot="public" static="no">
+        <type>typename Sequence::iterator</type>
+        <definition>using queue&lt; T, Sequence &gt;::iterator = typename Sequence::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>queue::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="46" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classqueue_1ae8213ca697249cbfd4f828aac0c42752" prot="public" static="no">
+        <type>typename Sequence::const_iterator</type>
+        <definition>using queue&lt; T, Sequence &gt;::const_iterator = typename Sequence::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>queue::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="47" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classqueue_1abf0b1b1461a62fdead3fd65e4e61fec4" prot="private" static="no" mutable="no">
+        <type>Sequence</type>
+        <definition>Sequence queue&lt; T, Sequence &gt;::seq_</definition>
+        <argsstring></argsstring>
+        <name>seq_</name>
+        <qualifiedname>queue::seq_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>底层容器实例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="50" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classqueue_1abd7fed657dd05479bccc95dd81e59264" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>queue&lt; T, Sequence &gt;::queue</definition>
+        <argsstring>()=default</argsstring>
+        <name>queue</name>
+        <qualifiedname>queue::queue</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空队列。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="58" column="5"/>
+        <referencedby refid="classqueue_1a7839cc4145403170850df95620189727" compoundref="queue_8hpp" startline="196" endline="198">queue&lt; T, Sequence &gt;::equal_to</referencedby>
+        <referencedby refid="classqueue_1a5d69dcb94376665270d0854382c80861" compoundref="queue_8hpp" startline="205" endline="207">queue&lt; T, Sequence &gt;::less_than</referencedby>
+        <referencedby refid="classqueue_1ae27e3606a47a29de4d4c0554fbf03c82" compoundref="queue_8hpp" startline="189" endline="189">queue&lt; T, Sequence &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1af06e9f354859a955f0bad9f528230cdc" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>queue&lt; T, Sequence &gt;::queue</definition>
+        <argsstring>(const Sequence &amp;other)</argsstring>
+        <name>queue</name>
+        <qualifiedname>queue::queue</qualifiedname>
+        <param>
+          <type>const Sequence &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，使用指定的底层容器副本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底层容器副本 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="64" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="64" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a5ac89209ce88932a5ff9cc1c5ee8012d" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; Sequence &gt;" virt="non-virtual">
+        <type></type>
+        <definition>queue&lt; T, Sequence &gt;::queue</definition>
+        <argsstring>(Sequence &amp;&amp;other)</argsstring>
+        <name>queue</name>
+        <qualifiedname>queue::queue</qualifiedname>
+        <param>
+          <type>Sequence &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数，使用指定的底层容器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的底层容器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="71" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="71" bodyend="72"/>
+        <references refid="group___type_special_member_function_checks_1gac3058b8518087cdea482055e5af4577a" compoundref="type__traits_8hpp" startline="2841">is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1aa1467d64e54d75b31692363986f3ce4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>queue&lt; T, Sequence &gt;::~queue</definition>
+        <argsstring>()=default</argsstring>
+        <name>~queue</name>
+        <qualifiedname>queue::~queue</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="77" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1acd9bc6e9184668eef2f78b3c1100e025" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.size())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1a5cef78d15b070baed6d6b1a9aac9c8b7" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type queue&lt; T, Sequence &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>queue::size</qualifiedname>
+        <briefdescription>
+<para>获取队列大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="83" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="83" bodyend="83"/>
+        <references refid="classqueue_1acd9bc6e9184668eef2f78b3c1100e025" compoundref="queue_8hpp" startline="83" endline="83">queue&lt; T, Sequence &gt;::size</references>
+        <referencedby refid="classqueue_1acd9bc6e9184668eef2f78b3c1100e025" compoundref="queue_8hpp" startline="83" endline="83">queue&lt; T, Sequence &gt;::size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a4d3119b98ecd73f0a7ebf6f10ab2e1c4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.empty())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool queue&lt; T, Sequence &gt;::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>queue::empty</qualifiedname>
+        <briefdescription>
+<para>检查队列是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列为空返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="89" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="89" bodyend="89"/>
+        <references refid="classqueue_1a4d3119b98ecd73f0a7ebf6f10ab2e1c4" compoundref="queue_8hpp" startline="89" endline="89">queue&lt; T, Sequence &gt;::empty</references>
+        <referencedby refid="classqueue_1a4d3119b98ecd73f0a7ebf6f10ab2e1c4" compoundref="queue_8hpp" startline="89" endline="89">queue&lt; T, Sequence &gt;::empty</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a51c4a63e72073a73fc1d2f119937cc36" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.front())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1ae2a1f88eaf0b043db8570b242e703d8f" kindref="member">reference</ref></type>
+        <definition>NEFORCE_NODISCARD reference queue&lt; T, Sequence &gt;::front</definition>
+        <argsstring>()</argsstring>
+        <name>front</name>
+        <qualifiedname>queue::front</qualifiedname>
+        <briefdescription>
+<para>访问队首元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队首元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="95" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="95" bodyend="95"/>
+        <references refid="classqueue_1a51c4a63e72073a73fc1d2f119937cc36" compoundref="queue_8hpp" startline="95" endline="95">queue&lt; T, Sequence &gt;::front</references>
+        <referencedby refid="classqueue_1abbe690339a4b31c64d5bf5f1f5fd3d61" compoundref="queue_8hpp" startline="101" endline="101">queue&lt; T, Sequence &gt;::front</referencedby>
+        <referencedby refid="classqueue_1a51c4a63e72073a73fc1d2f119937cc36" compoundref="queue_8hpp" startline="95" endline="95">queue&lt; T, Sequence &gt;::front</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1abbe690339a4b31c64d5bf5f1f5fd3d61" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.front())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1a5fb2bbd104915c2b810ab3e0b3024340" kindref="member">const_reference</ref></type>
+        <definition>NEFORCE_NODISCARD const_reference queue&lt; T, Sequence &gt;::front</definition>
+        <argsstring>() const</argsstring>
+        <name>front</name>
+        <qualifiedname>queue::front</qualifiedname>
+        <briefdescription>
+<para>常量版本，访问队首元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队首元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="101" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="101" bodyend="101"/>
+        <references refid="classqueue_1a51c4a63e72073a73fc1d2f119937cc36" compoundref="queue_8hpp" startline="95" endline="95">queue&lt; T, Sequence &gt;::front</references>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a261306fd91d4c0f46636090d91779603" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.back())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1ae2a1f88eaf0b043db8570b242e703d8f" kindref="member">reference</ref></type>
+        <definition>NEFORCE_NODISCARD reference queue&lt; T, Sequence &gt;::back</definition>
+        <argsstring>()</argsstring>
+        <name>back</name>
+        <qualifiedname>queue::back</qualifiedname>
+        <briefdescription>
+<para>访问队尾元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队尾元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="107" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="107" bodyend="107"/>
+        <references refid="classqueue_1a261306fd91d4c0f46636090d91779603" compoundref="queue_8hpp" startline="107" endline="107">queue&lt; T, Sequence &gt;::back</references>
+        <referencedby refid="classqueue_1a15a761cd1e4dceb1b7c05080739edc3c" compoundref="queue_8hpp" startline="113" endline="113">queue&lt; T, Sequence &gt;::back</referencedby>
+        <referencedby refid="classqueue_1a261306fd91d4c0f46636090d91779603" compoundref="queue_8hpp" startline="107" endline="107">queue&lt; T, Sequence &gt;::back</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a15a761cd1e4dceb1b7c05080739edc3c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.back())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1a5fb2bbd104915c2b810ab3e0b3024340" kindref="member">const_reference</ref></type>
+        <definition>NEFORCE_NODISCARD const_reference queue&lt; T, Sequence &gt;::back</definition>
+        <argsstring>() const</argsstring>
+        <name>back</name>
+        <qualifiedname>queue::back</qualifiedname>
+        <briefdescription>
+<para>常量版本，访问队尾元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队尾元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="113" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="113" bodyend="113"/>
+        <references refid="classqueue_1a261306fd91d4c0f46636090d91779603" compoundref="queue_8hpp" startline="107" endline="107">queue&lt; T, Sequence &gt;::back</references>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a2304d0bb683f02ef4acd177ba56908a5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.begin())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1a45ac5e048736212eb2cf577bfceef8da" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator queue&lt; T, Sequence &gt;::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <qualifiedname>queue::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向队首的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="119" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="119" bodyend="119"/>
+        <references refid="classqueue_1a2304d0bb683f02ef4acd177ba56908a5" compoundref="queue_8hpp" startline="119" endline="119">queue&lt; T, Sequence &gt;::begin</references>
+        <referencedby refid="classqueue_1a2ba92fc5400ac475fe69a3cf4d718b4b" compoundref="queue_8hpp" startline="131" endline="131">queue&lt; T, Sequence &gt;::begin</referencedby>
+        <referencedby refid="classqueue_1a2304d0bb683f02ef4acd177ba56908a5" compoundref="queue_8hpp" startline="119" endline="119">queue&lt; T, Sequence &gt;::begin</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a50a5309089ebf3114483d317a51066f4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.end())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1a45ac5e048736212eb2cf577bfceef8da" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator queue&lt; T, Sequence &gt;::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <qualifiedname>queue::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向队尾之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="125" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="125" bodyend="125"/>
+        <references refid="classqueue_1a50a5309089ebf3114483d317a51066f4" compoundref="queue_8hpp" startline="125" endline="125">queue&lt; T, Sequence &gt;::end</references>
+        <referencedby refid="classqueue_1ab458da788022b3646730437f13a9d975" compoundref="queue_8hpp" startline="137" endline="137">queue&lt; T, Sequence &gt;::end</referencedby>
+        <referencedby refid="classqueue_1a50a5309089ebf3114483d317a51066f4" compoundref="queue_8hpp" startline="125" endline="125">queue&lt; T, Sequence &gt;::end</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a2ba92fc5400ac475fe69a3cf4d718b4b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.begin())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1ae8213ca697249cbfd4f828aac0c42752" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator queue&lt; T, Sequence &gt;::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <qualifiedname>queue::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向队首的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="131" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="131" bodyend="131"/>
+        <references refid="classqueue_1a2304d0bb683f02ef4acd177ba56908a5" compoundref="queue_8hpp" startline="119" endline="119">queue&lt; T, Sequence &gt;::begin</references>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1ab458da788022b3646730437f13a9d975" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.end())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1ae8213ca697249cbfd4f828aac0c42752" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator queue&lt; T, Sequence &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <qualifiedname>queue::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向队尾之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="137" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="137" bodyend="137"/>
+        <references refid="classqueue_1a50a5309089ebf3114483d317a51066f4" compoundref="queue_8hpp" startline="125" endline="125">queue&lt; T, Sequence &gt;::end</references>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1aee47f8a04e68e58588aa4bd84779c030" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.cbegin())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1ae8213ca697249cbfd4f828aac0c42752" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator queue&lt; T, Sequence &gt;::cbegin</definition>
+        <argsstring>() const</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>queue::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向队首的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="143" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="143" bodyend="143"/>
+        <references refid="classqueue_1aee47f8a04e68e58588aa4bd84779c030" compoundref="queue_8hpp" startline="143" endline="143">queue&lt; T, Sequence &gt;::cbegin</references>
+        <referencedby refid="classqueue_1aee47f8a04e68e58588aa4bd84779c030" compoundref="queue_8hpp" startline="143" endline="143">queue&lt; T, Sequence &gt;::cbegin</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a5723b53864204105554a32343b230e16" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.cend())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classqueue_1ae8213ca697249cbfd4f828aac0c42752" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator queue&lt; T, Sequence &gt;::cend</definition>
+        <argsstring>() const</argsstring>
+        <name>cend</name>
+        <qualifiedname>queue::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向队尾之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="149" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="149" bodyend="149"/>
+        <references refid="classqueue_1a5723b53864204105554a32343b230e16" compoundref="queue_8hpp" startline="149" endline="149">queue&lt; T, Sequence &gt;::cend</references>
+        <referencedby refid="classqueue_1a5723b53864204105554a32343b230e16" compoundref="queue_8hpp" startline="149" endline="149">queue&lt; T, Sequence &gt;::cend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1ac482c154382252dd4cce74f079b5e768" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void queue&lt; T, Sequence &gt;::push</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>push</name>
+        <qualifiedname>queue::push</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>入队操作（拷贝版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将元素添加到队尾。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="157" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="157" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a82e7b385e1efcc3617f3be907abcdc8e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void queue&lt; T, Sequence &gt;::push</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>push</name>
+        <qualifiedname>queue::push</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>入队操作（移动版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将元素移动到队尾。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="165" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="165" bodyend="165"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1aa9bb3e88aa7320ac05dd3c5d4e7f44ab" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_.pop_front())" virt="non-virtual">
+        <type>void</type>
+        <definition>void queue&lt; T, Sequence &gt;::pop</definition>
+        <argsstring>()</argsstring>
+        <name>pop</name>
+        <qualifiedname>queue::pop</qualifiedname>
+        <briefdescription>
+<para>出队操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>移除队首元素。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="172" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="172" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1addae0f3bd381e35f8860001b562543b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) queue&lt; T, Sequence &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>queue::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在队尾就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新构造元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="181" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="181" bodyend="183"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1ae27e3606a47a29de4d4c0554fbf03c82" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; Sequence &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void queue&lt; T, Sequence &gt;::swap</definition>
+        <argsstring>(queue &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>queue::swap</qualifiedname>
+        <param>
+          <type><ref refid="classqueue" kindref="compound">queue</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个队列的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="189" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="189" bodyend="189"/>
+        <references refid="group___swap_utility_1ga9cc217ccd3ddd28edc3ebfd181bba2f3" compoundref="type__traits_8hpp" startline="3946">is_nothrow_swappable_v</references>
+        <references refid="classqueue_1abd7fed657dd05479bccc95dd81e59264">queue&lt; T, Sequence &gt;::queue</references>
+        <references refid="classqueue_1ae27e3606a47a29de4d4c0554fbf03c82" compoundref="queue_8hpp" startline="189" endline="189">queue&lt; T, Sequence &gt;::swap</references>
+        <referencedby refid="classqueue_1ae27e3606a47a29de4d4c0554fbf03c82" compoundref="queue_8hpp" startline="189" endline="189">queue&lt; T, Sequence &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a7839cc4145403170850df95620189727" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_==rhs.seq_)" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool queue&lt; T, Sequence &gt;::equal_to</definition>
+        <argsstring>(const queue &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>queue::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classqueue" kindref="compound">queue</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个队列大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="196" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="196" bodyend="198"/>
+        <references refid="classqueue_1abd7fed657dd05479bccc95dd81e59264">queue&lt; T, Sequence &gt;::queue</references>
+      </memberdef>
+      <memberdef kind="function" id="classqueue_1a5d69dcb94376665270d0854382c80861" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(seq_&lt; rhs.seq_)" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool queue&lt; T, Sequence &gt;::less_than</definition>
+        <argsstring>(const queue &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>queue::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classqueue" kindref="compound">queue</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="205" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="205" bodyend="207"/>
+        <references refid="classqueue_1abd7fed657dd05479bccc95dd81e59264">queue&lt; T, Sequence &gt;::queue</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>队列容器适配器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Sequence</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底层容器类型，默认为deque&lt;T&gt;</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+队列是一种容器适配器，提供先进先出的数据结构特性。 元素只能在队尾插入，在队首删除。支持基本的队列操作： 入队（push）、出队（pop）、访问队首（front）和队尾（back）元素。</para>
+<para>默认使用deque作为底层容器，也可指定其他支持front、back、 push_back和pop_front操作的容器（如list）。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="1">
+        <label>queue&lt; T, Sequence &gt;</label>
+        <link refid="classqueue"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="1">
+        <label>queue&lt; T, Sequence &gt;</label>
+        <link refid="classqueue"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="36" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" bodystart="36" bodyend="208"/>
+    <listofallmembers>
+      <member refid="classqueue_1a261306fd91d4c0f46636090d91779603" prot="public" virt="non-virtual"><scope>queue</scope><name>back</name></member>
+      <member refid="classqueue_1a15a761cd1e4dceb1b7c05080739edc3c" prot="public" virt="non-virtual"><scope>queue</scope><name>back</name></member>
+      <member refid="classqueue_1a2304d0bb683f02ef4acd177ba56908a5" prot="public" virt="non-virtual"><scope>queue</scope><name>begin</name></member>
+      <member refid="classqueue_1a2ba92fc5400ac475fe69a3cf4d718b4b" prot="public" virt="non-virtual"><scope>queue</scope><name>begin</name></member>
+      <member refid="classqueue_1aee47f8a04e68e58588aa4bd84779c030" prot="public" virt="non-virtual"><scope>queue</scope><name>cbegin</name></member>
+      <member refid="classqueue_1a5723b53864204105554a32343b230e16" prot="public" virt="non-virtual"><scope>queue</scope><name>cend</name></member>
+      <member refid="classqueue_1ae8213ca697249cbfd4f828aac0c42752" prot="public" virt="non-virtual"><scope>queue</scope><name>const_iterator</name></member>
+      <member refid="classqueue_1a5fb2bbd104915c2b810ab3e0b3024340" prot="public" virt="non-virtual"><scope>queue</scope><name>const_reference</name></member>
+      <member refid="classqueue_1a207dad29631b0914fa2c50e41c1ba15c" prot="public" virt="non-virtual"><scope>queue</scope><name>difference_type</name></member>
+      <member refid="classqueue_1addae0f3bd381e35f8860001b562543b7" prot="public" virt="non-virtual"><scope>queue</scope><name>emplace</name></member>
+      <member refid="classqueue_1a4d3119b98ecd73f0a7ebf6f10ab2e1c4" prot="public" virt="non-virtual"><scope>queue</scope><name>empty</name></member>
+      <member refid="classqueue_1a50a5309089ebf3114483d317a51066f4" prot="public" virt="non-virtual"><scope>queue</scope><name>end</name></member>
+      <member refid="classqueue_1ab458da788022b3646730437f13a9d975" prot="public" virt="non-virtual"><scope>queue</scope><name>end</name></member>
+      <member refid="classqueue_1a7839cc4145403170850df95620189727" prot="public" virt="non-virtual"><scope>queue</scope><name>equal_to</name></member>
+      <member refid="classqueue_1a51c4a63e72073a73fc1d2f119937cc36" prot="public" virt="non-virtual"><scope>queue</scope><name>front</name></member>
+      <member refid="classqueue_1abbe690339a4b31c64d5bf5f1f5fd3d61" prot="public" virt="non-virtual"><scope>queue</scope><name>front</name></member>
+      <member refid="classqueue_1a45ac5e048736212eb2cf577bfceef8da" prot="public" virt="non-virtual"><scope>queue</scope><name>iterator</name></member>
+      <member refid="classqueue_1a5d69dcb94376665270d0854382c80861" prot="public" virt="non-virtual"><scope>queue</scope><name>less_than</name></member>
+      <member refid="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" virt="non-virtual"><scope>queue</scope><name>operator!=</name></member>
+      <member refid="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" virt="non-virtual"><scope>queue</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" virt="non-virtual"><scope>queue</scope><name>operator&lt;=</name></member>
+      <member refid="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" virt="non-virtual"><scope>queue</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" virt="non-virtual"><scope>queue</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" virt="non-virtual"><scope>queue</scope><name>operator&gt;=</name></member>
+      <member refid="classqueue_1aa9bb3e88aa7320ac05dd3c5d4e7f44ab" prot="public" virt="non-virtual"><scope>queue</scope><name>pop</name></member>
+      <member refid="classqueue_1ac482c154382252dd4cce74f079b5e768" prot="public" virt="non-virtual"><scope>queue</scope><name>push</name></member>
+      <member refid="classqueue_1a82e7b385e1efcc3617f3be907abcdc8e" prot="public" virt="non-virtual"><scope>queue</scope><name>push</name></member>
+      <member refid="classqueue_1abd7fed657dd05479bccc95dd81e59264" prot="public" virt="non-virtual"><scope>queue</scope><name>queue</name></member>
+      <member refid="classqueue_1af06e9f354859a955f0bad9f528230cdc" prot="public" virt="non-virtual"><scope>queue</scope><name>queue</name></member>
+      <member refid="classqueue_1a5ac89209ce88932a5ff9cc1c5ee8012d" prot="public" virt="non-virtual"><scope>queue</scope><name>queue</name></member>
+      <member refid="classqueue_1ae2a1f88eaf0b043db8570b242e703d8f" prot="public" virt="non-virtual"><scope>queue</scope><name>reference</name></member>
+      <member refid="classqueue_1abf0b1b1461a62fdead3fd65e4e61fec4" prot="private" virt="non-virtual"><scope>queue</scope><name>seq_</name></member>
+      <member refid="classqueue_1acd9bc6e9184668eef2f78b3c1100e025" prot="public" virt="non-virtual"><scope>queue</scope><name>size</name></member>
+      <member refid="classqueue_1a5cef78d15b070baed6d6b1a9aac9c8b7" prot="public" virt="non-virtual"><scope>queue</scope><name>size_type</name></member>
+      <member refid="classqueue_1ae27e3606a47a29de4d4c0554fbf03c82" prot="public" virt="non-virtual"><scope>queue</scope><name>swap</name></member>
+      <member refid="classqueue_1a84297b2c5c5559a0ebc7a62d217ccdfc" prot="public" virt="non-virtual"><scope>queue</scope><name>value_type</name></member>
+      <member refid="classqueue_1aa1467d64e54d75b31692363986f3ce4e" prot="public" virt="non-virtual"><scope>queue</scope><name>~queue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

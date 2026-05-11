@@ -1,0 +1,540 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___remove_algorithms" kind="group">
+    <compoundname>RemoveAlgorithms</compoundname>
+    <title>删除算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___remove_algorithms_1ga5962b7908ac4eea784e2872b03294a7e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 remove_copy</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result, const T &amp;value)</argsstring>
+        <name>remove_copy</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>复制范围中不等于指定值的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要排除的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器</para>
+</simplesect>
+将范围 [first, last) 中不等于 value 的所有元素复制到以 result 开始的范围。 原范围保持不变。</para>
+<para>如果 pred(*it) 返回 true，则该元素将被排除。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" line="45" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" bodystart="45" bodyend="56"/>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___remove_algorithms_1gab79933ba60a9e8d48147d15911fef58f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename Predicate</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 remove_copy_if</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred)</argsstring>
+        <name>remove_copy_if</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>Predicate</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>复制范围中不满足谓词的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Predicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一元谓词 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器</para>
+</simplesect>
+将范围 [first, last) 中不满足谓词 pred 的所有元素复制到以 result 开始的范围。 原范围保持不变。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" line="73" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" bodystart="73" bodyend="84"/>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___remove_algorithms_1gab60509ebaf6c33a45885638e30e9e9b2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator remove</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;value)</argsstring>
+        <name>remove</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移除范围中等于指定值的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移除的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新逻辑结束位置的迭代器</para>
+</simplesect>
+从范围 [first, last) 中移除所有等于 value 的元素。 被移除的元素会移动到范围的末尾，但不会被物理删除。 返回的迭代器指向移除操作后范围的新逻辑结束位置。</para>
+<para><simplesect kind="note"><para>算法保持剩余元素的相对顺序 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" line="102" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" bodystart="102" bodyend="115"/>
+        <references refid="group___finding_algorithms_1gaf00ba933b64f438e9c32ebf9cb1d7c8d" compoundref="search_8hpp" startline="413" endline="420">find</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Predicate</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator remove_if</definition>
+        <argsstring>(Iterator first, Iterator last, Predicate pred)</argsstring>
+        <name>remove_if</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Predicate</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>移除范围中满足谓词的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Predicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一元谓词 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新逻辑结束位置的迭代器</para>
+</simplesect>
+从范围 [first, last) 中移除所有满足谓词 pred 的元素。 谓词应接受元素类型的值并返回可转换为 bool 的类型。 如果 pred(*it) 返回 true，则该元素将被移除。</para>
+<para><simplesect kind="note"><para>算法保持剩余元素的相对顺序 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" line="133" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" bodystart="133" bodyend="146"/>
+        <references refid="group___finding_algorithms_1gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8" compoundref="search_8hpp" startline="432" endline="439">find_if</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <referencedby refid="structsignal_1a3763ae23e84f1c8a9c32717b8f83150a" compoundref="signals_8hpp" startline="485" endline="513">signal&lt; Types &gt;::emit</referencedby>
+        <referencedby refid="group___remove_algorithms_1ga80e72b34181ffb739e061b6dbe19a6b6" compoundref="remove_8hpp" startline="162" endline="170">erase</referencedby>
+        <referencedby refid="group___remove_algorithms_1ga5d86f8052a2e5759aeab543c23f3c861" compoundref="remove_8hpp" startline="187" endline="196">erase_if</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___remove_algorithms_1ga80e72b34181ffb739e061b6dbe19a6b6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Container</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t erase</definition>
+        <argsstring>(Container &amp;cont, const U &amp;value)</argsstring>
+        <name>erase</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <param>
+          <type>const U &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从容器中删除所有等于指定值的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Container</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>容器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型，必须与容器元素类型相同 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cont</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>容器引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量</para>
+</simplesect>
+从容器的所有元素中删除所有等于 value 的元素。 此操作会实际删除元素，容器大小会改变。</para>
+<para><simplesect kind="note"><para>要求容器提供 <ref refid="group___type_erasure_functions_1ga278da9db83e0ea0b3ba56d8dedf43d86" kindref="member">begin()</ref>, <ref refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" kindref="member">end()</ref>, <ref refid="group___remove_algorithms_1ga80e72b34181ffb739e061b6dbe19a6b6" kindref="member">erase()</ref> 方法 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" line="162" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" bodystart="162" bodyend="170"/>
+        <references refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
+        <references refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" compoundref="remove_8hpp" startline="133" endline="146">remove_if</references>
+        <referencedby refid="group___r_b_tree_1gad1daa78f4ed31af1fbc76e03d80a749a" compoundref="rb__tree_8hpp" startline="239" endline="410">rb_tree_erase_rebalance</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___remove_algorithms_1ga5d86f8052a2e5759aeab543c23f3c861" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Container</type>
+          </param>
+          <param>
+            <type>typename Predicate</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t erase_if</definition>
+        <argsstring>(Container &amp;cont, Predicate pred)</argsstring>
+        <name>erase_if</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <param>
+          <type>Predicate</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>从容器中删除所有满足谓词的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Container</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>容器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Predicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cont</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>容器引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一元谓词 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量</para>
+</simplesect>
+从容器中删除所有满足谓词 pred 的元素。 谓词应接受容器元素类型的值并返回可转换为 bool 的类型。 如果 pred(element) 返回 true，则该元素将被删除。</para>
+<para><simplesect kind="note"><para>要求容器提供 <ref refid="group___type_erasure_functions_1ga278da9db83e0ea0b3ba56d8dedf43d86" kindref="member">begin()</ref>, <ref refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" kindref="member">end()</ref>, <ref refid="group___remove_algorithms_1ga80e72b34181ffb739e061b6dbe19a6b6" kindref="member">erase()</ref> 方法 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" line="187" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/remove.hpp" bodystart="187" bodyend="196"/>
+        <references refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
+        <references refid="group___reference_wrapper_1ga65ec3600aa7a6390944677be016c5f77" compoundref="reference__wrapper_8hpp" startline="132" endline="134">ref</references>
+        <references refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" compoundref="remove_8hpp" startline="133" endline="146">remove_if</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>删除算法的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

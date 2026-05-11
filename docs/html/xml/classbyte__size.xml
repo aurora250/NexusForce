@@ -1,0 +1,853 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classbyte__size" kind="class" language="C++" prot="public">
+    <compoundname>byte_size</compoundname>
+    <basecompoundref refid="structiobject" prot="public" virt="non-virtual">iobject&lt; byte_size &gt;</basecompoundref>
+    <basecompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; byte_size &gt;</basecompoundref>
+    <includes refid="byte__size_8hpp" local="no">byte_size.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fda" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>unit</name>
+        <qualifiedname>byte_size::unit</qualifiedname>
+        <enumvalue id="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaa9d5ed678fe57bcca610140957afab571" prot="public">
+          <name>B</name>
+          <briefdescription>
+<para>字节 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaaab57fd0432e25d5b3013133a1c910d56" prot="public">
+          <name>KB</name>
+          <briefdescription>
+<para>千字节 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaa8d8fcc1abd550c5f25dbfaa57d59cb67" prot="public">
+          <name>MB</name>
+          <briefdescription>
+<para>兆字节 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaa79cba1185463850dedba31f172f1dc5b" prot="public">
+          <name>GB</name>
+          <briefdescription>
+<para>吉字节 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaaff88442a425c06d961f97bccb11ddf5d" prot="public">
+          <name>TB</name>
+          <briefdescription>
+<para>太字节 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaacd203ccd68b84de1c5df8fd890e104e0" prot="public">
+          <name>PB</name>
+          <briefdescription>
+<para>拍字节 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaa345e675f845309645d417f3544d9fa5a" prot="public">
+          <name>EB</name>
+          <briefdescription>
+<para>艾字节 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaae1f2d5134ed2543d38a0de9751cf75d9" prot="public">
+          <name>AUTO</name>
+          <briefdescription>
+<para>自动选择合适单位 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>字节大小单位枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="149" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="149" bodyend="158"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classbyte__size_1ab18eaad1ac0e835fc4dc30d7175c17ed" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t byte_size::bytes_</definition>
+        <argsstring></argsstring>
+        <name>bytes_</name>
+        <qualifiedname>byte_size::bytes_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>存储的字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="161" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="161" bodyend="161"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classbyte__size_1a7dd4c843b432054174d1691544eae961" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>byte_size::byte_size</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>byte_size</name>
+        <qualifiedname>byte_size::byte_size</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建大小为0的字节对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="169" column="15"/>
+        <referencedby refid="classbyte__size_1a94f0f5cd5b982661d04bf2928c68962a" compoundref="byte__size_8hpp" startline="175" endline="176">byte_size</referencedby>
+        <referencedby refid="classbyte__size_1a5929a064ea48c655c4be54747819bed3" compoundref="byte__size_8hpp" startline="196" endline="196">parse</referencedby>
+        <referencedby refid="classbyte__size_1ab7b7c961516a6f7d31a81a4bfcbfac22">parse</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1a94f0f5cd5b982661d04bf2928c68962a" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>byte_size::byte_size</definition>
+        <argsstring>(uint64_t bytes) noexcept</argsstring>
+        <name>byte_size</name>
+        <qualifiedname>byte_size::byte_size</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>bytes</declname>
+        </param>
+        <briefdescription>
+<para>从字节数构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="175" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="175" bodyend="176"/>
+        <references refid="classbyte__size_1a7dd4c843b432054174d1691544eae961">byte_size</references>
+        <references refid="classbyte__size_1acd052352757caa751a02adb2a78c6088" compoundref="byte__size_8hpp" startline="211" endline="211">bytes</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1a3b63c0bc72bbd360c42ca4fa1f2fe800" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>byte_size::byte_size</definition>
+        <argsstring>(decimal_t value, unit u, bool binary=true)</argsstring>
+        <name>byte_size</name>
+        <qualifiedname>byte_size::byte_size</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fda" kindref="member">unit</ref></type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>binary</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>从值和单位构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>u</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>单位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binary</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用二进制，默认true </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值为负数或超出范围时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="185" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1acd052352757caa751a02adb2a78c6088" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr uint64_t byte_size::bytes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>bytes</name>
+        <qualifiedname>byte_size::bytes</qualifiedname>
+        <briefdescription>
+<para>获取字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>原始字节数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="211" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="211" bodyend="211"/>
+        <referencedby refid="classbyte__size_1a94f0f5cd5b982661d04bf2928c68962a" compoundref="byte__size_8hpp" startline="175" endline="176">byte_size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1a2c6f0ebd5b9a3c0948e8679e15a4f621" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_NODISCARD decimal_t byte_size::as</definition>
+        <argsstring>(unit u, bool binary=true) const</argsstring>
+        <name>as</name>
+        <qualifiedname>byte_size::as</qualifiedname>
+        <param>
+          <type><ref refid="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fda" kindref="member">unit</ref></type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>binary</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>转换为指定单位的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>u</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标单位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binary</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用二进制 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的浮点值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unit为AUTO时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="220" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1af0d195e303f0eed195064e07e71cb3ba" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string byte_size::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>byte_size::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为可读字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式化字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="226" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="226" bodyend="226"/>
+        <references refid="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaae1f2d5134ed2543d38a0de9751cf75d9" compoundref="byte__size_8hpp" startline="157">AUTO</references>
+        <references refid="classbyte__size_1af0d195e303f0eed195064e07e71cb3ba" compoundref="byte__size_8hpp" startline="226" endline="226">to_string</references>
+        <referencedby refid="classbyte__size_1af0d195e303f0eed195064e07e71cb3ba" compoundref="byte__size_8hpp" startline="226" endline="226">to_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1ac4713a56c38e27db092ac3ba69aeef49" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string byte_size::to_string</definition>
+        <argsstring>(unit u, int precision=2, bool binary=true) const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>byte_size::to_string</qualifiedname>
+        <param>
+          <type><ref refid="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fda" kindref="member">unit</ref></type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>precision</declname>
+          <defval>2</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>binary</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>转换为指定单位的字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>u</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标单位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>precision</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>小数精度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binary</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用二进制 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式化字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="235" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1a965c1b790fd299f30d4ed490b88f4dc0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool byte_size::is_zero</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_zero</name>
+        <qualifiedname>byte_size::is_zero</qualifiedname>
+        <briefdescription>
+<para>检查是否为零 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果字节数为0返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="241" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="241" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1a229522d64e7ec634ce704b36c2ae275e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+        <definition>byte_size &amp; byte_size::operator+=</definition>
+        <argsstring>(const byte_size &amp;rhs) noexcept</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>byte_size::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="243" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="243" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1ade549f259c27041b5e15cf1dce4f8201" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+        <definition>byte_size &amp; byte_size::operator-=</definition>
+        <argsstring>(const byte_size &amp;rhs)</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>byte_size::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="248" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="248" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1acea43e109672c060710723118137af66" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+        <definition>byte_size &amp; byte_size::operator*=</definition>
+        <argsstring>(uint64_t factor) noexcept</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>byte_size::operator*=</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>factor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="256" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="256" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1a7e8bf3c8164755988641067746512c7d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+        <definition>byte_size &amp; byte_size::operator/=</definition>
+        <argsstring>(uint64_t divisor)</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>byte_size::operator/=</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>divisor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="261" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="261" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1a4c230c13782d2944384cca697cabdfd0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr byte_size byte_size::operator+</definition>
+        <argsstring>(const byte_size &amp;rhs) const noexcept</argsstring>
+        <name>operator+</name>
+        <qualifiedname>byte_size::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="269" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="269" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1ad0090f844805385274bbde6b330be645" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+        <definition>NEFORCE_NODISCARD byte_size byte_size::operator-</definition>
+        <argsstring>(const byte_size &amp;rhs) const</argsstring>
+        <name>operator-</name>
+        <qualifiedname>byte_size::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="273" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="273" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1a56121066b543681a825000ad3f571b5c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+        <definition>NEFORCE_NODISCARD byte_size byte_size::operator*</definition>
+        <argsstring>(uint64_t factor) const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>byte_size::operator*</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>factor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="280" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="280" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1a9d78d1ef7dd441d80566aa6ce86dcfe2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+        <definition>NEFORCE_NODISCARD byte_size byte_size::operator/</definition>
+        <argsstring>(uint64_t divisor) const</argsstring>
+        <name>operator/</name>
+        <qualifiedname>byte_size::operator/</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>divisor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="287" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="287" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1ab0a6ca78f387cd4df509692774e3bc22" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool byte_size::equal_to</definition>
+        <argsstring>(const byte_size &amp;rhs) const noexcept</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>byte_size::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="298" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="298" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1ac765180f6bdb8a83a8d3d6ec04e4f4a0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool byte_size::less_than</definition>
+        <argsstring>(const byte_size &amp;rhs) const noexcept</argsstring>
+        <name>less_than</name>
+        <qualifiedname>byte_size::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="299" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="299" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1a5b8b0e927b641f09d5d12494cb1f304e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD size_t byte_size::to_hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_hash</name>
+        <qualifiedname>byte_size::to_hash</qualifiedname>
+        <briefdescription>
+<para>计算哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="305" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="305" bodyend="305"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classbyte__size_1a5929a064ea48c655c4be54747819bed3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+        <definition>static NEFORCE_NODISCARD byte_size byte_size::parse</definition>
+        <argsstring>(string_view str)</argsstring>
+        <name>parse</name>
+        <qualifiedname>byte_size::parse</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>从字符串解析字节大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字节大小对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+支持的单位：B、KB/K、MB/M、GB/G、TB/T、PB/P、EB/E 示例：&quot;1024&quot;, &quot;1.5 MB&quot;, &quot;2G&quot;, &quot;500KB&quot; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="196" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="196" bodyend="196"/>
+        <references refid="classbyte__size_1a7dd4c843b432054174d1691544eae961">byte_size</references>
+        <references refid="classbyte__size_1a5929a064ea48c655c4be54747819bed3" compoundref="byte__size_8hpp" startline="196" endline="196">parse</references>
+        <referencedby refid="classbyte__size_1a5929a064ea48c655c4be54747819bed3" compoundref="byte__size_8hpp" startline="196" endline="196">parse</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__size_1ab7b7c961516a6f7d31a81a4bfcbfac22" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+        <definition>static NEFORCE_NODISCARD byte_size byte_size::parse</definition>
+        <argsstring>(string_view str, bool binary)</argsstring>
+        <name>parse</name>
+        <qualifiedname>byte_size::parse</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>binary</declname>
+        </param>
+        <briefdescription>
+<para>从字符串解析字节大小（指定进制） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binary</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用二进制 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字节大小对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="205" column="40"/>
+        <references refid="classbyte__size_1a7dd4c843b432054174d1691544eae961">byte_size</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classbyte__size_1a23fcd41ae3e128ee5130c50d468d3618" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD friend <ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+        <definition>NEFORCE_NODISCARD friend byte_size operator*</definition>
+        <argsstring>(uint64_t factor, const byte_size &amp;size) noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>byte_size::operator*</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>factor</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classbyte__size" kindref="compound">byte_size</ref> &amp;</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="294" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="294" bodyend="296"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>字节大小类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示一个字节大小值，支持多种单位之间的转换和运算。 提供类型安全的字节大小操作，避免原始整数带来的单位混淆问题。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>字节大小的单位表示</para>
+</listitem><listitem><para>从字符串解析字节大小</para>
+</listitem><listitem><para>格式化为可读字符串</para>
+</listitem><listitem><para>单位之间的算术运算</para>
+</listitem><listitem><para>支持二进制（IEC标准）和十进制（SI标准）</para>
+</listitem><listitem><para>哈希支持</para>
+</listitem></itemizedlist>
+</para>
+<para>使用示例： <programlisting><codeline><highlight class="comment">//<sp/>从字节数构造</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classbyte__size_1a7dd4c843b432054174d1691544eae961" kindref="member">byte_size</ref><sp/>size1(1024);</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(size1);<sp/><sp/></highlight><highlight class="comment">//<sp/>&quot;1<sp/>KB&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>从值和单位构造</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classbyte__size_1a7dd4c843b432054174d1691544eae961" kindref="member">byte_size</ref><sp/>size2(<ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref>(1.5),<sp/><ref refid="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaa8d8fcc1abd550c5f25dbfaa57d59cb67" kindref="member">byte_size::unit::MB</ref>);</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(size2.bytes());<sp/><sp/></highlight><highlight class="comment">//<sp/>1572864</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>从字符串解析</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>size3<sp/>=<sp/><ref refid="classbyte__size_1a5929a064ea48c655c4be54747819bed3" kindref="member">byte_size::parse</ref>(</highlight><highlight class="stringliteral">&quot;2.5<sp/>GB&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>size4<sp/>=<sp/><ref refid="classbyte__size_1a5929a064ea48c655c4be54747819bed3" kindref="member">byte_size::parse</ref>(</highlight><highlight class="stringliteral">&quot;1<sp/>MiB&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/><sp/></highlight><highlight class="comment">//<sp/>二进制模式</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>算术运算</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classbyte__size_1a7dd4c843b432054174d1691544eae961" kindref="member">byte_size</ref><sp/>total<sp/>=<sp/>size1<sp/>+<sp/>size2;</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classbyte__size_1a7dd4c843b432054174d1691544eae961" kindref="member">byte_size</ref><sp/>half<sp/>=<sp/>total<sp/>/<sp/>2;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>单位转换</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>in_mb<sp/>=<sp/>size2.<ref refid="classbyte__size_1a2c6f0ebd5b9a3c0948e8679e15a4f621" kindref="member">as</ref>(<ref refid="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaa8d8fcc1abd550c5f25dbfaa57d59cb67" kindref="member">byte_size::unit::MB</ref>);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>格式化输出</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(size2.to_string(<ref refid="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fdaaab57fd0432e25d5b3013133a1c910d56" kindref="member">byte_size::unit::KB</ref>,<sp/>0));<sp/><sp/></highlight><highlight class="comment">//<sp/>&quot;1536<sp/>KB&quot;</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>byte_size</label>
+        <link refid="classbyte__size"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>icommon&lt; byte_size &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>icomparable&lt; byte_size &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="6">
+        <label>ihashable&lt; byte_size &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="2">
+        <label>iobject&lt; byte_size &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>istringify&lt; byte_size &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>byte_size</label>
+        <link refid="classbyte__size"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>icommon&lt; byte_size &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>icomparable&lt; byte_size &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="6">
+        <label>ihashable&lt; byte_size &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="2">
+        <label>iobject&lt; byte_size &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>istringify&lt; byte_size &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" line="143" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/byte_size.hpp" bodystart="143" bodyend="306"/>
+    <listofallmembers>
+      <member refid="classbyte__size_1a2c6f0ebd5b9a3c0948e8679e15a4f621" prot="public" virt="non-virtual"><scope>byte_size</scope><name>as</name></member>
+      <member refid="classbyte__size_1a7dd4c843b432054174d1691544eae961" prot="public" virt="non-virtual"><scope>byte_size</scope><name>byte_size</name></member>
+      <member refid="classbyte__size_1a94f0f5cd5b982661d04bf2928c68962a" prot="public" virt="non-virtual"><scope>byte_size</scope><name>byte_size</name></member>
+      <member refid="classbyte__size_1a3b63c0bc72bbd360c42ca4fa1f2fe800" prot="public" virt="non-virtual"><scope>byte_size</scope><name>byte_size</name></member>
+      <member refid="classbyte__size_1acd052352757caa751a02adb2a78c6088" prot="public" virt="non-virtual"><scope>byte_size</scope><name>bytes</name></member>
+      <member refid="classbyte__size_1ab18eaad1ac0e835fc4dc30d7175c17ed" prot="private" virt="non-virtual"><scope>byte_size</scope><name>bytes_</name></member>
+      <member refid="classbyte__size_1ab0a6ca78f387cd4df509692774e3bc22" prot="public" virt="non-virtual"><scope>byte_size</scope><name>equal_to</name></member>
+      <member refid="classbyte__size_1a965c1b790fd299f30d4ed490b88f4dc0" prot="public" virt="non-virtual"><scope>byte_size</scope><name>is_zero</name></member>
+      <member refid="classbyte__size_1ac765180f6bdb8a83a8d3d6ec04e4f4a0" prot="public" virt="non-virtual"><scope>byte_size</scope><name>less_than</name></member>
+      <member refid="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator!=</name></member>
+      <member refid="classbyte__size_1a56121066b543681a825000ad3f571b5c" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator*</name></member>
+      <member refid="classbyte__size_1a23fcd41ae3e128ee5130c50d468d3618" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator*</name></member>
+      <member refid="classbyte__size_1acea43e109672c060710723118137af66" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator*=</name></member>
+      <member refid="classbyte__size_1a4c230c13782d2944384cca697cabdfd0" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator+</name></member>
+      <member refid="classbyte__size_1a229522d64e7ec634ce704b36c2ae275e" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator+=</name></member>
+      <member refid="classbyte__size_1ad0090f844805385274bbde6b330be645" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator-</name></member>
+      <member refid="classbyte__size_1ade549f259c27041b5e15cf1dce4f8201" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator-=</name></member>
+      <member refid="classbyte__size_1a9d78d1ef7dd441d80566aa6ce86dcfe2" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator/</name></member>
+      <member refid="classbyte__size_1a7e8bf3c8164755988641067746512c7d" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator/=</name></member>
+      <member refid="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator&lt;=</name></member>
+      <member refid="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" virt="non-virtual"><scope>byte_size</scope><name>operator&gt;=</name></member>
+      <member refid="classbyte__size_1a5929a064ea48c655c4be54747819bed3" prot="public" virt="non-virtual"><scope>byte_size</scope><name>parse</name></member>
+      <member refid="classbyte__size_1ab7b7c961516a6f7d31a81a4bfcbfac22" prot="public" virt="non-virtual"><scope>byte_size</scope><name>parse</name></member>
+      <member refid="classbyte__size_1a5b8b0e927b641f09d5d12494cb1f304e" prot="public" virt="non-virtual"><scope>byte_size</scope><name>to_hash</name></member>
+      <member refid="structihashable_1a3bb793a19699c7ccd86fa5d7e91cb513" prot="public" virt="non-virtual"><scope>byte_size</scope><name>to_ihash</name></member>
+      <member refid="classbyte__size_1af0d195e303f0eed195064e07e71cb3ba" prot="public" virt="non-virtual"><scope>byte_size</scope><name>to_string</name></member>
+      <member refid="classbyte__size_1ac4713a56c38e27db092ac3ba69aeef49" prot="public" virt="non-virtual"><scope>byte_size</scope><name>to_string</name></member>
+      <member refid="structiobject_1a6844b335224b3f1baddee0502c2dcc68" prot="public" virt="non-virtual"><scope>byte_size</scope><name>try_parse</name></member>
+      <member refid="classbyte__size_1a3d48fa60a0449f481fc2b23c0fc68fda" prot="public" virt="non-virtual"><scope>byte_size</scope><name>unit</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

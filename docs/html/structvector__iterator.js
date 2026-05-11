@@ -14,7 +14,7 @@ var structvector__iterator =
     [ "decrement", "structvector__iterator.html#a7da3f6e2937bda1e9f2079620df7c93e", null ],
     [ "dereference", "structvector__iterator.html#aa4903eac9511df9e79415dca7e3bd582", null ],
     [ "distance_to", "structvector__iterator.html#afbd5a39f1ab0cf57317ce24db5b7ad47", null ],
-    [ "equal", "structvector__iterator.html#a74c27197a963e5c802b1c33c9a9c8e95", null ],
+    [ "equal_to", "structvector__iterator.html#a986be6db8a6aa45a5063b2ad6846bfcd", null ],
     [ "increment", "structvector__iterator.html#a311c1991041dd442fde105f124e95ed0", null ],
     [ "less_than", "structvector__iterator.html#ad7ddd1ea1bc41813e0811780cffcb87e", null ],
     [ "operator[]", "structvector__iterator.html#af03867232032a7776773c5a7a9665eb5", null ]

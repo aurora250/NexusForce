@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['图形、色彩与数学_0',['🎨 图形、色彩与数学',['../index.html#autotoc_md16',1,'']]]
+  ['响应头_0',['CORS 响应头',['../group___h_t_t_p.html#cors_headers',1,'']]]
 ];

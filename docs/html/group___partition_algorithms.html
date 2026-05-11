@@ -106,23 +106,23 @@ $(function(){initNavTree('group___partition_algorithms.html','',''); });
 <tr class="memitem:ga165394317b9b3996c7a9b5cd4fdc32c8" id="r_ga165394317b9b3996c7a9b5cd4fdc32c8"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Predicate&gt; </td></tr>
 <tr class="memitem:ga165394317b9b3996c7a9b5cd4fdc32c8 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga165394317b9b3996c7a9b5cd4fdc32c8">partition</a> (Iterator first, Iterator last, Predicate pred)</td></tr>
 <tr class="memdesc:ga165394317b9b3996c7a9b5cd4fdc32c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">分区算法  <br /></td></tr>
-<tr class="memitem:gabf7e94ae4719b697cb1ee9a21caff522" id="r_gabf7e94ae4719b697cb1ee9a21caff522"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, typename Compare&gt; </td></tr>
-<tr class="memitem:gabf7e94ae4719b697cb1ee9a21caff522 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gabf7e94ae4719b697cb1ee9a21caff522">lomuto_partition</a> (Iterator first, Iterator last, const T &amp;pivot, Compare comp)</td></tr>
-<tr class="memdesc:gabf7e94ae4719b697cb1ee9a21caff522"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lomuto分区算法  <br /></td></tr>
-<tr class="memitem:ga86193efd157c615ae77826fa39f9e097" id="r_ga86193efd157c615ae77826fa39f9e097"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T&gt; </td></tr>
-<tr class="memitem:ga86193efd157c615ae77826fa39f9e097 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga86193efd157c615ae77826fa39f9e097">lomuto_partition</a> (Iterator first, Iterator last, const T &amp;pivot)</td></tr>
-<tr class="memdesc:ga86193efd157c615ae77826fa39f9e097"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lomuto分区算法  <br /></td></tr>
+<tr class="memitem:ga09ca7889019a50556c6f23810bf2de1d" id="r_ga09ca7889019a50556c6f23810bf2de1d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare&gt; </td></tr>
+<tr class="memitem:ga09ca7889019a50556c6f23810bf2de1d template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga09ca7889019a50556c6f23810bf2de1d">lomuto_partition</a> (Iterator first, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga09ca7889019a50556c6f23810bf2de1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lomuto 分区算法（基准值归位）  <br /></td></tr>
+<tr class="memitem:ga5f1b9f359ef3ff97439435a54b26f0e5" id="r_ga5f1b9f359ef3ff97439435a54b26f0e5"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ga5f1b9f359ef3ff97439435a54b26f0e5 template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#ga5f1b9f359ef3ff97439435a54b26f0e5">lomuto_partition</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ga5f1b9f359ef3ff97439435a54b26f0e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lomuto 分区算法（基准值归位）  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>分区算法的实现 </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga86193efd157c615ae77826fa39f9e097" name="ga86193efd157c615ae77826fa39f9e097"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga86193efd157c615ae77826fa39f9e097">&#9670;&#160;</a></span>lomuto_partition() <span class="overload">[1/2]</span></h2>
+<a id="ga5f1b9f359ef3ff97439435a54b26f0e5" name="ga5f1b9f359ef3ff97439435a54b26f0e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5f1b9f359ef3ff97439435a54b26f0e5">&#9670;&#160;</a></span>lomuto_partition() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename T&gt; </div>
+template&lt;typename Iterator&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -135,12 +135,7 @@ template&lt;typename Iterator, typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>pivot</em></span>&#160;)</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -150,11 +145,10 @@ template&lt;typename Iterator, typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Lomuto分区算法 </p>
+<p>Lomuto 分区算法（基准值归位） </p>
 <dl class="tparams"><dt>模板参数</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
-    <tr><td class="paramname">T</td><td>基准值类型 </td></tr>
   </table>
   </dd>
 </dl>
@@ -162,25 +156,24 @@ template&lt;typename Iterator, typename T&gt; </div>
   <table class="params">
     <tr><td class="paramname">first</td><td>范围起始 </td></tr>
     <tr><td class="paramname">last</td><td>范围结束 </td></tr>
-    <tr><td class="paramname">pivot</td><td>基准值 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>指向第一部分结束位置的迭代器 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>基准值最终的迭代器位置 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="partition_8hpp_source.html">partition.hpp</a> 第 <a class="el" href="partition_8hpp_source.html#l00133">133</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="partition_8hpp_source.html">partition.hpp</a> 第 <a class="el" href="partition_8hpp_source.html#l00155">155</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="partition_8hpp_source.html#l00102">lomuto_partition()</a>.</p>
+<p class="reference">引用了 <a class="el" href="partition_8hpp_source.html#l00119">lomuto_partition()</a>.</p>
 
 </div>
 </div>
-<a id="gabf7e94ae4719b697cb1ee9a21caff522" name="gabf7e94ae4719b697cb1ee9a21caff522"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabf7e94ae4719b697cb1ee9a21caff522">&#9670;&#160;</a></span>lomuto_partition() <span class="overload">[2/2]</span></h2>
+<a id="ga09ca7889019a50556c6f23810bf2de1d" name="ga09ca7889019a50556c6f23810bf2de1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga09ca7889019a50556c6f23810bf2de1d">&#9670;&#160;</a></span>lomuto_partition() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Iterator, typename T, typename Compare&gt; </div>
+template&lt;typename Iterator, typename Compare&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -194,11 +187,6 @@ template&lt;typename Iterator, typename T, typename Compare&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>pivot</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -213,11 +201,10 @@ template&lt;typename Iterator, typename T, typename Compare&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Lomuto分区算法 </p>
+<p>Lomuto 分区算法（基准值归位） </p>
 <dl class="tparams"><dt>模板参数</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Iterator</td><td>随机访问迭代器类型 </td></tr>
-    <tr><td class="paramname">T</td><td>基准值类型 </td></tr>
     <tr><td class="paramname">Compare</td><td>比较函数类型 </td></tr>
   </table>
   </dd>
@@ -226,26 +213,18 @@ template&lt;typename Iterator, typename T, typename Compare&gt; </div>
   <table class="params">
     <tr><td class="paramname">first</td><td>范围起始 </td></tr>
     <tr><td class="paramname">last</td><td>范围结束 </td></tr>
-    <tr><td class="paramname">pivot</td><td>基准值 </td></tr>
     <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>指向基准值最终位置的迭代器</dd></dl>
-<p>Lomuto分区算法，常用于快速排序。 将范围重新排列，使得所有小于基准值的元素出现在基准值之前或等于基准值的元素之前， 所有大于基准值的元素出现在基准值之后。</p>
-<p>算法步骤：</p><ol type="1">
-<li>从两端向中间扫描</li>
-<li>从左找到第一个不小于基准值的元素</li>
-<li>从右找到第一个不大于基准值的元素</li>
-<li>交换这两个元素</li>
-<li>重复直到指针相遇 </li>
-</ol>
+<dl class="section return"><dt>返回</dt><dd>基准值最终的迭代器位置</dd></dl>
+<p>选择 first、mid、last-1 的中位数作为基准值，将其交换到 first， 使用 Lomuto 方案分区，最后将基准值放置到正确位置并返回。 </p>
 
-<p class="definition">在文件 <a class="el" href="partition_8hpp_source.html">partition.hpp</a> 第 <a class="el" href="partition_8hpp_source.html#l00102">102</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="partition_8hpp_source.html">partition.hpp</a> 第 <a class="el" href="partition_8hpp_source.html#l00119">119</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="invoke_8hpp_source.html#l00396">is_invocable_v</a>, <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00440">iter_swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00601">is_ranges_rnd_iter_v</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00440">iter_swap()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00457">introspective_sort()</a>, <a class="el" href="partition_8hpp_source.html#l00133">lomuto_partition()</a>, <a class="el" href="sort_8hpp_source.html#l00634">nth_element()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00505">quick_sort()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="sort_8hpp_source.html#l00646">introspective_sort()</a>, <a class="el" href="partition_8hpp_source.html#l00155">lomuto_partition()</a>, <a class="el" href="sort_8hpp_source.html#l00894">nth_element()</a> , 以及 <a class="el" href="sort_8hpp_source.html#l00699">quick_sort()</a>.</p>
 
 </div>
 </div>

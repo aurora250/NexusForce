@@ -1,0 +1,466 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classunique__lock" kind="class" language="C++" prot="public">
+    <compoundname>unique_lock</compoundname>
+    <includes refid="mutex_8hpp" local="no">mutex.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Mutex</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" prot="public" static="no">
+        <type>Mutex</type>
+        <definition>using unique_lock&lt; Mutex &gt;::mutex_type = Mutex</definition>
+        <argsstring></argsstring>
+        <name>mutex_type</name>
+        <qualifiedname>unique_lock::mutex_type</qualifiedname>
+        <briefdescription>
+<para>互斥锁类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="258" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="258" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classunique__lock_1a15eb36d32e25269b0722465e71647702" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref> *</type>
+        <definition>mutex_type* unique_lock&lt; Mutex &gt;::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>unique_lock::mutex_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>指向互斥锁的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="261" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="261" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classunique__lock_1a73cf2b720d0d353a379c619b97f75299" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool unique_lock&lt; Mutex &gt;::owns_lock_</definition>
+        <argsstring></argsstring>
+        <name>owns_lock_</name>
+        <qualifiedname>unique_lock::owns_lock_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否拥有锁的所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="262" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="262" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classunique__lock_1adc02b595ecffdcaeee2cbb7ce22f3dcc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>unique_lock&lt; Mutex &gt;::unique_lock</definition>
+        <argsstring>()=default</argsstring>
+        <name>unique_lock</name>
+        <qualifiedname>unique_lock::unique_lock</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建不管理任何互斥锁的唯一锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="270" column="5"/>
+        <referencedby refid="classunique__lock_1af4e3bf904517122a7dea67c6cfc7d113" compoundref="mutex_8hpp" startline="328" endline="340">unique_lock&lt; Mutex &gt;::operator=</referencedby>
+        <referencedby refid="classunique__lock_1af9ba8cd379db40771df210a3987eb59d" compoundref="mutex_8hpp" startline="314" endline="319">unique_lock&lt; Mutex &gt;::unique_lock</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1a70e659a56502b1a01865c17ebd46b37a" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>unique_lock&lt; Mutex &gt;::unique_lock</definition>
+        <argsstring>(mutex_type &amp;m)</argsstring>
+        <name>unique_lock</name>
+        <qualifiedname>unique_lock::unique_lock</qualifiedname>
+        <param>
+          <type><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref> &amp;</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+<para>从互斥锁构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的互斥锁引用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造时立即锁定互斥锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="278" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="278" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1a9ad41a54cefe430bb2a9ace2a91a3805" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>unique_lock&lt; Mutex &gt;::unique_lock</definition>
+        <argsstring>(mutex_type &amp;m, defer_lock_tag tag) noexcept</argsstring>
+        <name>unique_lock</name>
+        <qualifiedname>unique_lock::unique_lock</qualifiedname>
+        <param>
+          <type><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref> &amp;</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type><ref refid="structdefer__lock__tag" kindref="compound">defer_lock_tag</ref></type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+<para>延迟锁定构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的互斥锁引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>延迟锁定标签</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造时不锁定互斥锁，稍后可以调用lock()锁定。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="291" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="291" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1a5a0a4f1190431a3365e2f4bf8cda50cb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>unique_lock&lt; Mutex &gt;::unique_lock</definition>
+        <argsstring>(mutex_type &amp;m, try_lock_tag tag) noexcept</argsstring>
+        <name>unique_lock</name>
+        <qualifiedname>unique_lock::unique_lock</qualifiedname>
+        <param>
+          <type><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref> &amp;</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type><ref refid="structtry__lock__tag" kindref="compound">try_lock_tag</ref></type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+<para>尝试锁定构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的互斥锁引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>尝试锁定标签</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造时尝试锁定互斥锁，如果失败则不会阻塞。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="301" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="301" bodyend="303"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1ac35affc797d38e55e30c995197d9f8a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>unique_lock&lt; Mutex &gt;::unique_lock</definition>
+        <argsstring>(const unique_lock &amp;)=delete</argsstring>
+        <name>unique_lock</name>
+        <qualifiedname>unique_lock::unique_lock</qualifiedname>
+        <param>
+          <type>const <ref refid="classunique__lock" kindref="compound">unique_lock</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="305" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1a2ffc4239f440e666db248ceb3da07741" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__lock" kindref="compound">unique_lock</ref> &amp;</type>
+        <definition>unique_lock &amp; unique_lock&lt; Mutex &gt;::operator=</definition>
+        <argsstring>(const unique_lock &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>unique_lock::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classunique__lock" kindref="compound">unique_lock</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="306" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1af9ba8cd379db40771df210a3987eb59d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>unique_lock&lt; Mutex &gt;::unique_lock</definition>
+        <argsstring>(unique_lock &amp;&amp;other) noexcept</argsstring>
+        <name>unique_lock</name>
+        <qualifiedname>unique_lock::unique_lock</qualifiedname>
+        <param>
+          <type><ref refid="classunique__lock" kindref="compound">unique_lock</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的唯一锁</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+转移互斥锁的所有权和锁定状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="314" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="314" bodyend="319"/>
+        <references refid="classunique__lock_1adc02b595ecffdcaeee2cbb7ce22f3dcc">unique_lock&lt; Mutex &gt;::unique_lock</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1af4e3bf904517122a7dea67c6cfc7d113" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classunique__lock" kindref="compound">unique_lock</ref> &amp;</type>
+        <definition>unique_lock &amp; unique_lock&lt; Mutex &gt;::operator=</definition>
+        <argsstring>(unique_lock &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>unique_lock::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classunique__lock" kindref="compound">unique_lock</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的唯一锁 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用</para>
+</simplesect>
+释放当前锁，然后转移所有权。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="328" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="328" bodyend="340"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="classunique__lock_1adc02b595ecffdcaeee2cbb7ce22f3dcc">unique_lock&lt; Mutex &gt;::unique_lock</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1a13eff43602002fe318715d71e929d342" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>unique_lock&lt; Mutex &gt;::~unique_lock</definition>
+        <argsstring>()</argsstring>
+        <name>~unique_lock</name>
+        <qualifiedname>unique_lock::~unique_lock</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果拥有锁的所有权，则解锁互斥锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="347" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="347" bodyend="351"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1ac9969c01f6fb36a11e1a811a909f3a7c" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD</type>
+        <definition>NEFORCE_NODISCARD unique_lock&lt; Mutex &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>unique_lock::operator bool</qualifiedname>
+        <briefdescription>
+<para>转换为布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否拥有锁的所有权 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="357" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="357" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1ace616792a495c421fbe42157cd4a89f9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool unique_lock&lt; Mutex &gt;::owns_lock</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>owns_lock</name>
+        <qualifiedname>unique_lock::owns_lock</qualifiedname>
+        <briefdescription>
+<para>检查是否拥有锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否拥有锁的所有权 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="363" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="363" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1a9732001877bf83c2d0cbd51c404a0bfb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref> *</type>
+        <definition>NEFORCE_NODISCARD mutex_type * unique_lock&lt; Mutex &gt;::mutex</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>mutex</name>
+        <qualifiedname>unique_lock::mutex</qualifiedname>
+        <briefdescription>
+<para>获取管理的互斥锁指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向管理的互斥锁的指针，如果没有管理则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="369" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="369" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1aa31d80f6bf8c45a5e30d075896e0426a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void unique_lock&lt; Mutex &gt;::lock_quiet</definition>
+        <argsstring>()</argsstring>
+        <name>lock_quiet</name>
+        <qualifiedname>unique_lock::lock_quiet</qualifiedname>
+        <briefdescription>
+<para>锁定互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果已拥有锁或未管理互斥锁，则不执行任何操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="376" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="376" bodyend="385"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1a0473323402bab23a6c89eb5a5ab58798" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void unique_lock&lt; Mutex &gt;::unlock_quiet</definition>
+        <argsstring>()</argsstring>
+        <name>unlock_quiet</name>
+        <qualifiedname>unique_lock::unlock_quiet</qualifiedname>
+        <briefdescription>
+<para>解锁互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果未拥有锁或未管理互斥锁，则不执行任何操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="392" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="392" bodyend="401"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1a0f7defd5ab0b7d85f7d8bbc7d7a712a9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool unique_lock&lt; Mutex &gt;::try_lock</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_lock</name>
+        <qualifiedname>unique_lock::try_lock</qualifiedname>
+        <briefdescription>
+<para>尝试锁定互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果成功获得锁则返回true，否则返回false</para>
+</simplesect>
+非阻塞地尝试锁定互斥锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="409" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="409" bodyend="418"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__lock_1a7e86a8f23cf3dc70f56fe36b988b4718" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref> *</type>
+        <definition>mutex_type * unique_lock&lt; Mutex &gt;::release</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>unique_lock::release</qualifiedname>
+        <briefdescription>
+<para>释放所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>之前管理的互斥锁指针</para>
+</simplesect>
+放弃对互斥锁的管理权，返回互斥锁指针但不解锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="426" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="426" bodyend="431"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>独占锁管理器模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Mutex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>互斥锁类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+独占锁，支持延迟锁定、尝试锁定、转移所有权等特性。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="256" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="256" bodyend="432"/>
+    <listofallmembers>
+      <member refid="classunique__lock_1aa31d80f6bf8c45a5e30d075896e0426a" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>lock_quiet</name></member>
+      <member refid="classunique__lock_1a9732001877bf83c2d0cbd51c404a0bfb" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>mutex</name></member>
+      <member refid="classunique__lock_1a15eb36d32e25269b0722465e71647702" prot="private" virt="non-virtual"><scope>unique_lock</scope><name>mutex_</name></member>
+      <member refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>mutex_type</name></member>
+      <member refid="classunique__lock_1ac9969c01f6fb36a11e1a811a909f3a7c" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>operator bool</name></member>
+      <member refid="classunique__lock_1a2ffc4239f440e666db248ceb3da07741" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>operator=</name></member>
+      <member refid="classunique__lock_1af4e3bf904517122a7dea67c6cfc7d113" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>operator=</name></member>
+      <member refid="classunique__lock_1ace616792a495c421fbe42157cd4a89f9" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>owns_lock</name></member>
+      <member refid="classunique__lock_1a73cf2b720d0d353a379c619b97f75299" prot="private" virt="non-virtual"><scope>unique_lock</scope><name>owns_lock_</name></member>
+      <member refid="classunique__lock_1a7e86a8f23cf3dc70f56fe36b988b4718" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>release</name></member>
+      <member refid="classunique__lock_1a0f7defd5ab0b7d85f7d8bbc7d7a712a9" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>try_lock</name></member>
+      <member refid="classunique__lock_1adc02b595ecffdcaeee2cbb7ce22f3dcc" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>unique_lock</name></member>
+      <member refid="classunique__lock_1a70e659a56502b1a01865c17ebd46b37a" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>unique_lock</name></member>
+      <member refid="classunique__lock_1a9ad41a54cefe430bb2a9ace2a91a3805" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>unique_lock</name></member>
+      <member refid="classunique__lock_1a5a0a4f1190431a3365e2f4bf8cda50cb" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>unique_lock</name></member>
+      <member refid="classunique__lock_1ac35affc797d38e55e30c995197d9f8a0" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>unique_lock</name></member>
+      <member refid="classunique__lock_1af9ba8cd379db40771df210a3987eb59d" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>unique_lock</name></member>
+      <member refid="classunique__lock_1a0473323402bab23a6c89eb5a5ab58798" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>unlock_quiet</name></member>
+      <member refid="classunique__lock_1a13eff43602002fe318715d71e929d342" prot="public" virt="non-virtual"><scope>unique_lock</scope><name>~unique_lock</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classscope__fail" kind="class" language="C++" prot="public">
+    <compoundname>scope_fail</compoundname>
+    <includes refid="scope_8hpp" local="no">scope.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Func</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classscope__fail_1ae27877376eb9ee5300d3eaa2bc5bd120" prot="private" static="no" mutable="no">
+        <type><ref refid="structcompressed__pair" kindref="compound">compressed_pair</ref>&lt; Func, int &gt;</type>
+        <definition>compressed_pair&lt;Func, int&gt; scope_fail&lt; Func &gt;::func_pair_</definition>
+        <argsstring></argsstring>
+        <name>func_pair_</name>
+        <qualifiedname>scope_fail::func_pair_</qualifiedname>
+        <briefdescription>
+<para>函数对象和异常计数快照 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="132" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; F &gt;, <ref refid="classscope__fail" kindref="compound">scope_fail</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; Func, F &gt; &amp;&amp;!<ref refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" kindref="member">is_nothrow_constructible_v</ref>&lt; Func, F &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>scope_fail&lt; Func &gt;::scope_fail</definition>
+        <argsstring>(F &amp;&amp;func)</argsstring>
+        <name>scope_fail</name>
+        <qualifiedname>scope_fail::scope_fail</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>构造函数（异常不安全） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+记录当前未捕获异常数量，用于析构时判断是否因异常退出。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="145" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="145" bodyend="149"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___exception_handling_1ga28496880d7de221739d7afa46a69059d">uncaught_exceptions</references>
+        <referencedby refid="classscope__fail_1a1778abb10d01a4053a4c28f60facd9d7" compoundref="scope_8hpp" startline="169" endline="172">scope_fail&lt; Func &gt;::scope_fail</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classscope__fail_1a4363a9e9f163a962fbcfdeb9b8387b8e" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; F &gt;, <ref refid="classscope__fail" kindref="compound">scope_fail</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; Func, F &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" kindref="member">is_nothrow_constructible_v</ref>&lt; Func, F &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>scope_fail&lt; Func &gt;::scope_fail</definition>
+        <argsstring>(F &amp;&amp;func) noexcept</argsstring>
+        <name>scope_fail</name>
+        <qualifiedname>scope_fail::scope_fail</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>构造函数（异常安全） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="159" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="159" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__fail_1a9bbb1a474e64818d73336fc33d771d1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>scope_fail&lt; Func &gt;::scope_fail</definition>
+        <argsstring>(const scope_fail &amp;)=delete</argsstring>
+        <name>scope_fail</name>
+        <qualifiedname>scope_fail::scope_fail</qualifiedname>
+        <param>
+          <type>const <ref refid="classscope__fail" kindref="compound">scope_fail</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="162" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__fail_1a73b6e99684631b510b4e3df18cda6780" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classscope__fail" kindref="compound">scope_fail</ref> &amp;</type>
+        <definition>scope_fail &amp; scope_fail&lt; Func &gt;::operator=</definition>
+        <argsstring>(const scope_fail &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>scope_fail::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classscope__fail" kindref="compound">scope_fail</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="163" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__fail_1a1778abb10d01a4053a4c28f60facd9d7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>scope_fail&lt; Func &gt;::scope_fail</definition>
+        <argsstring>(scope_fail &amp;&amp;rhs) noexcept</argsstring>
+        <name>scope_fail</name>
+        <qualifiedname>scope_fail::scope_fail</qualifiedname>
+        <param>
+          <type><ref refid="classscope__fail" kindref="compound">scope_fail</ref> &amp;&amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的守卫对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="169" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="169" bodyend="172"/>
+        <references refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" compoundref="scope_8hpp" startline="145" endline="149">scope_fail&lt; Func &gt;::scope_fail</references>
+      </memberdef>
+      <memberdef kind="function" id="classscope__fail_1a58381e51da86e05376455b356f839b11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classscope__fail" kindref="compound">scope_fail</ref> &amp;</type>
+        <definition>scope_fail &amp; scope_fail&lt; Func &gt;::operator=</definition>
+        <argsstring>(scope_fail &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>scope_fail::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classscope__fail" kindref="compound">scope_fail</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="174" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__fail_1a58fbdf72f42b141800d07ff5f328880c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>scope_fail&lt; Func &gt;::~scope_fail</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~scope_fail</name>
+        <qualifiedname>scope_fail::~scope_fail</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果当前未捕获异常数量大于构造时记录的值，说明因异常退出， 执行函数对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="182" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="182" bodyend="186"/>
+        <references refid="group___exception_handling_1ga28496880d7de221739d7afa46a69059d">uncaught_exceptions</references>
+      </memberdef>
+      <memberdef kind="function" id="classscope__fail_1ae3fff4410ea73092440aa346395df5ec" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void scope_fail&lt; Func &gt;::release</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>scope_fail::release</qualifiedname>
+        <briefdescription>
+<para>释放守卫 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>使守卫不再执行清理操作，通过将异常计数设置为最大值来实现。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="193" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="193" bodyend="193"/>
+        <references refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>作用域失败守卫 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+仅在作用域因异常退出时执行指定的函数。 用于实现事务回滚等异常安全机制。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="130" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="130" bodyend="194"/>
+    <listofallmembers>
+      <member refid="classscope__fail_1ae27877376eb9ee5300d3eaa2bc5bd120" prot="private" virt="non-virtual"><scope>scope_fail</scope><name>func_pair_</name></member>
+      <member refid="classscope__fail_1a73b6e99684631b510b4e3df18cda6780" prot="public" virt="non-virtual"><scope>scope_fail</scope><name>operator=</name></member>
+      <member refid="classscope__fail_1a58381e51da86e05376455b356f839b11" prot="public" virt="non-virtual"><scope>scope_fail</scope><name>operator=</name></member>
+      <member refid="classscope__fail_1ae3fff4410ea73092440aa346395df5ec" prot="public" virt="non-virtual"><scope>scope_fail</scope><name>release</name></member>
+      <member refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" prot="public" virt="non-virtual"><scope>scope_fail</scope><name>scope_fail</name></member>
+      <member refid="classscope__fail_1a4363a9e9f163a962fbcfdeb9b8387b8e" prot="public" virt="non-virtual"><scope>scope_fail</scope><name>scope_fail</name></member>
+      <member refid="classscope__fail_1a9bbb1a474e64818d73336fc33d771d1b" prot="public" virt="non-virtual"><scope>scope_fail</scope><name>scope_fail</name></member>
+      <member refid="classscope__fail_1a1778abb10d01a4053a4c28f60facd9d7" prot="public" virt="non-virtual"><scope>scope_fail</scope><name>scope_fail</name></member>
+      <member refid="classscope__fail_1a58fbdf72f42b141800d07ff5f328880c" prot="public" virt="non-virtual"><scope>scope_fail</scope><name>~scope_fail</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

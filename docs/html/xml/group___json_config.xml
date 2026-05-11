@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___json_config" kind="group">
+    <compoundname>JsonConfig</compoundname>
+    <title>JSON配置</title>
+    <innerclass refid="classjson__builder" prot="public">json_builder</innerclass>
+    <innerclass refid="classjson__parser" prot="public">json_parser</innerclass>
+    <innerclass refid="classjson__value" prot="public">json_value</innerclass>
+    <innerclass refid="classjson__null" prot="public">json_null</innerclass>
+    <innerclass refid="classjson__bool" prot="public">json_bool</innerclass>
+    <innerclass refid="classjson__number" prot="public">json_number</innerclass>
+    <innerclass refid="classjson__string" prot="public">json_string</innerclass>
+    <innerclass refid="classjson__object" prot="public">json_object</innerclass>
+    <innerclass refid="classjson__array" prot="public">json_array</innerclass>
+    <briefdescription>
+<para>JSON配置格式管理 </para>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下 JSON 相关标准规范：</para>
+<para><bold>JSON 数据格式标准：</bold><itemizedlist>
+<listitem><para>**IETF STD 90 / RFC 8259**：JavaScript Object Notation (JSON) 数据交换格式 <ulink url="https://www.rfc-editor.org/rfc/rfc8259.html">https://www.rfc-editor.org/rfc/rfc8259.html</ulink></para>
+</listitem><listitem><para>**ECMA-404:2017**：JSON 数据交换格式（第2版） <ulink url="https://ecma-international.org/publications-and-standards/standards/ecma-404/">https://ecma-international.org/publications-and-standards/standards/ecma-404/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>历史 JSON 规范（信息参考）：</bold><itemizedlist>
+<listitem><para>**IETF RFC 7159**：JSON 数据交换格式（已被 RFC 8259 废弃） <ulink url="https://www.rfc-editor.org/rfc/rfc7159.html">https://www.rfc-editor.org/rfc/rfc7159.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 7158**：JSON 文本序列化格式 <ulink url="https://www.rfc-editor.org/rfc/rfc7158.html">https://www.rfc-editor.org/rfc/rfc7158.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 4627**：JSON 原始规范（已被 RFC 7159 废弃） <ulink url="https://www.rfc-editor.org/rfc/rfc4627.html">https://www.rfc-editor.org/rfc/rfc4627.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>JSON Schema 验证标准（相关参考）：</bold><itemizedlist>
+<listitem><para>**IETF JSON Schema**：JSON 模式验证规范（Draft 2020-12） <ulink url="https://json-schema.org/specification.html">https://json-schema.org/specification.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 8927**：JSON 类型定义 <ulink url="https://www.rfc-editor.org/rfc/rfc8927.html">https://www.rfc-editor.org/rfc/rfc8927.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___json_config_1json_types">
+<title>JSON 值类型定义</title><para>根据 RFC 8259 §3，JSON 支持以下六种值类型：</para>
+<para><table rows="7" cols="4"><row>
+<entry thead="yes"><para>类型  </para>
+</entry><entry thead="yes"><para>RFC 8259 引用  </para>
+</entry><entry thead="yes"><para>本实现类  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>null  </para>
+</entry><entry thead="no"><para>§3  </para>
+</entry><entry thead="no"><para><ref refid="classjson__null" kindref="compound">json_null</ref>  </para>
+</entry><entry thead="no"><para>空值  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>boolean  </para>
+</entry><entry thead="no"><para>§3  </para>
+</entry><entry thead="no"><para><ref refid="classjson__bool" kindref="compound">json_bool</ref>  </para>
+</entry><entry thead="no"><para>布尔值（true 或 false）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>number  </para>
+</entry><entry thead="no"><para>§6  </para>
+</entry><entry thead="no"><para><ref refid="classjson__number" kindref="compound">json_number</ref>  </para>
+</entry><entry thead="no"><para>双精度浮点数（IEEE 754-2019）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>string  </para>
+</entry><entry thead="no"><para>§7  </para>
+</entry><entry thead="no"><para><ref refid="classjson__string" kindref="compound">json_string</ref>  </para>
+</entry><entry thead="no"><para>Unicode 字符串（UTF-8 编码）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>object  </para>
+</entry><entry thead="no"><para>§4  </para>
+</entry><entry thead="no"><para><ref refid="classjson__object" kindref="compound">json_object</ref>  </para>
+</entry><entry thead="no"><para>无序键值对集合  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>array  </para>
+</entry><entry thead="no"><para>§5  </para>
+</entry><entry thead="no"><para><ref refid="classjson__array" kindref="compound">json_array</ref>  </para>
+</entry><entry thead="no"><para>有序值列表  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="8" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>编码  </para>
+</entry><entry thead="no"><para>UTF-8（RFC 8259 §8.1）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>字符串转义  </para>
+</entry><entry thead="no"><para>RFC 8259 §7 定义的控制字符转义序列  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>数字范围  </para>
+</entry><entry thead="no"><para>IEEE 754-2019 双精度浮点数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>对象键唯一性  </para>
+</entry><entry thead="no"><para>RFC 8259 §4（键在对象中应唯一）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>对象键顺序  </para>
+</entry><entry thead="no"><para>无序（JSON 不保证键的顺序）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>数组顺序  </para>
+</entry><entry thead="no"><para>有序（保持插入顺序）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最大嵌套深度  </para>
+</entry><entry thead="no"><para>实现定义（建议不超过 1000 层）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___json_config_1escape_sequences">
+<title>字符串转义序列</title><para>根据 RFC 8259 §7，支持以下转义序列：</para>
+<para><table rows="10" cols="3"><row>
+<entry thead="yes"><para>转义序列  </para>
+</entry><entry thead="yes"><para>字符  </para>
+</entry><entry thead="yes"><para>Unicode 码点  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>\"  </para>
+</entry><entry thead="no"><para>引号  </para>
+</entry><entry thead="no"><para>U+0022  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>\\  </para>
+</entry><entry thead="no"><para>反斜杠  </para>
+</entry><entry thead="no"><para>U+005C  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>\/  </para>
+</entry><entry thead="no"><para>斜杠  </para>
+</entry><entry thead="no"><para>U+002F  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>\b  </para>
+</entry><entry thead="no"><para>退格  </para>
+</entry><entry thead="no"><para>U+0008  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>\f  </para>
+</entry><entry thead="no"><para>换页  </para>
+</entry><entry thead="no"><para>U+000C  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>\n  </para>
+</entry><entry thead="no"><para>换行  </para>
+</entry><entry thead="no"><para>U+000A  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>\r  </para>
+</entry><entry thead="no"><para>回车  </para>
+</entry><entry thead="no"><para>U+000D  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>\t  </para>
+</entry><entry thead="no"><para>制表符  </para>
+</entry><entry thead="no"><para>U+0009  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>\uXXXX  </para>
+</entry><entry thead="no"><para>Unicode 字符  </para>
+</entry><entry thead="no"><para>U+XXXX  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>JSON 规范要求有效的 JSON 文本必须是 UTF-8、UTF-16 或 UTF-32 编码。 本实现默认使用 UTF-8 编码处理所有字符串。 JSON 数字采用双精度浮点数存储，遵循 IEEE 754-2019 标准。</para>
+</simplesect>
+<simplesect kind="warning"><para>根据 RFC 8259 §9，JSON 解析器应拒绝无效的 UTF-8 序列。 对象中的重复键名虽然规范不禁止，但可能导致不可预测的行为。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.json.org/">https://www.json.org/</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc8259">https://www.rfc-editor.org/rfc/rfc8259</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://ecma-international.org/publications-and-standards/standards/ecma-404/">https://ecma-international.org/publications-and-standards/standards/ecma-404/</ulink></para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

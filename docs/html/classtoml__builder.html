@@ -89,11 +89,11 @@ $(function(){initNavTree('classtoml__builder.html','','classtoml__builder-member
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">toml_builder类 参考<div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___toml_config.html">toml配置</a></div></div></div>
+  <div class="headertitle"><div class="title">toml_builder类 参考<div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___toml_config.html">TOML配置</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>toml配置构建器  
+<p>TOML配置构建器  
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a>&gt;</code></p>
@@ -145,14 +145,14 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:ae7fb111f91e945fc17deb01b91202042" id="r_ae7fb111f91e945fc17deb01b91202042"><td class="memItemLeft"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae7fb111f91e945fc17deb01b91202042">value</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> value)</td></tr>
 <tr class="memdesc:ae7fb111f91e945fc17deb01b91202042"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符串视图值  <br /></td></tr>
 <tr class="memitem:a1ffd169c49f3dbc81c3bbc0a54ddf360" id="r_a1ffd169c49f3dbc81c3bbc0a54ddf360"><td class="memItemLeft"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1ffd169c49f3dbc81c3bbc0a54ddf360">value</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classtoml__value.html">toml_value</a> &gt; value)</td></tr>
-<tr class="memdesc:a1ffd169c49f3dbc81c3bbc0a54ddf360"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置已构建的toml值  <br /></td></tr>
+<tr class="memdesc:a1ffd169c49f3dbc81c3bbc0a54ddf360"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置已构建的TOML值  <br /></td></tr>
 <tr class="memitem:aad0b21a3709c9ea7c4ffe7630a2090ae" id="r_aad0b21a3709c9ea7c4ffe7630a2090ae"><td class="memItemLeft"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aad0b21a3709c9ea7c4ffe7630a2090ae">value_string</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="#a097b582702cca938c24659f346affa75">value</a>, <a class="el" href="classtoml__string.html#abbe190295df8b66da998a01531a4e431">toml_string::string_type</a> type)</td></tr>
 <tr class="memdesc:aad0b21a3709c9ea7c4ffe7630a2090ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置指定类型的字符串值  <br /></td></tr>
 <tr class="memitem:a9cb5cd365b9c93f4654f28795ff6aeef" id="r_a9cb5cd365b9c93f4654f28795ff6aeef"><td class="memItemLeft"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9cb5cd365b9c93f4654f28795ff6aeef">value_datetime</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="#a097b582702cca938c24659f346affa75">value</a>, <a class="el" href="classtoml__datetime.html#af54bbeae9035e016f518bf7c0030d581">toml_datetime::datetime_type</a> type)</td></tr>
 <tr class="memdesc:a9cb5cd365b9c93f4654f28795ff6aeef"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置指定类型的日期时间值  <br /></td></tr>
-<tr class="memitem:a871d3b8dec13ade7cbb6164deb7fa0c8" id="r_a871d3b8dec13ade7cbb6164deb7fa0c8"><td class="memTemplParams" colspan="2">template&lt;typename Iterable&gt; </td></tr>
-<tr class="memitem:a871d3b8dec13ade7cbb6164deb7fa0c8 template"><td class="memItemLeft"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a871d3b8dec13ade7cbb6164deb7fa0c8">value</a> (const Iterable &amp;iterable)</td></tr>
-<tr class="memdesc:a871d3b8dec13ade7cbb6164deb7fa0c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置可迭代对象的值  <br /></td></tr>
+<tr class="memitem:a2ad7425c6092660c2156fa60496fa21d" id="r_a2ad7425c6092660c2156fa60496fa21d"><td class="memTemplParams" colspan="2">template&lt;typename Iterable, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_action_check.html#ga97b8016a5394d04c7a2f3c1a99b037e9">is_iterable_v</a>&lt; Iterable &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a2ad7425c6092660c2156fa60496fa21d template"><td class="memItemLeft"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2ad7425c6092660c2156fa60496fa21d">value_iterable</a> (const Iterable &amp;iterable)</td></tr>
+<tr class="memdesc:a2ad7425c6092660c2156fa60496fa21d"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置可迭代对象的值  <br /></td></tr>
 <tr class="memitem:a13971996f0476380a61ee55adde14a80" id="r_a13971996f0476380a61ee55adde14a80"><td class="memItemLeft"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a13971996f0476380a61ee55adde14a80">value_table</a> (const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classtoml__builder.html">toml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
 <tr class="memdesc:a13971996f0476380a61ee55adde14a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建表格值  <br /></td></tr>
 <tr class="memitem:ad888cd532b3641f92f003b0cf869bb8d" id="r_ad888cd532b3641f92f003b0cf869bb8d"><td class="memItemLeft"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad888cd532b3641f92f003b0cf869bb8d">value_inline_table</a> (const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classtoml__builder.html">toml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
@@ -160,18 +160,18 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a8dba75c5b87fdd67695f896c9612fb43" id="r_a8dba75c5b87fdd67695f896c9612fb43"><td class="memItemLeft"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8dba75c5b87fdd67695f896c9612fb43">value_array</a> (const <a class="el" href="classfunction.html">function</a>&lt; void(<a class="el" href="classtoml__builder.html">toml_builder</a> &amp;)&gt; &amp;build_func)</td></tr>
 <tr class="memdesc:a8dba75c5b87fdd67695f896c9612fb43"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用函数式方式构建数组值  <br /></td></tr>
 <tr class="memitem:a1d71213ba5728d139fa4b362b0ff8037" id="r_a1d71213ba5728d139fa4b362b0ff8037"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classtoml__table.html">toml_table</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a1d71213ba5728d139fa4b362b0ff8037">build</a> ()</td></tr>
-<tr class="memdesc:a1d71213ba5728d139fa4b362b0ff8037"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建toml文档  <br /></td></tr>
+<tr class="memdesc:a1d71213ba5728d139fa4b362b0ff8037"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建TOML文档  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>toml配置构建器 </p>
-<p>提供流式接口构建toml配置格式，支持以下特性：</p><ul>
+<div class="textblock"><p>TOML配置构建器 </p>
+<p>提供流式接口构建TOML配置格式，支持以下特性：</p><ul>
 <li>链式调用构建表格和数组</li>
 <li>自动类型转换（整数、浮点数、布尔值、字符串）</li>
 <li>函数式构建嵌套结构</li>
 <li>集合类型自动转换（可迭代对象、映射表）</li>
 <li>上下文管理（自动维护当前表格/数组状态）</li>
-<li>支持所有toml字符串类型（Basic, Literal, Multi-line）</li>
-<li>支持所有toml日期时间类型 </li>
+<li>支持所有TOML字符串类型（Basic, Literal, Multi-line）</li>
+<li>支持所有TOML日期时间类型 </li>
 </ul>
 
 <p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00040">40</a> 行定义.</p>
@@ -196,7 +196,7 @@ Public 成员函数</h2></td></tr>
 
 <p class="reference">引用了 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a3d6040a05b020336ffe13d1d8d463092">begin_array()</a>, <a class="el" href="#a974fb3c69991d8ed2763fb67cc360a98">begin_array_table()</a>, <a class="el" href="#aefd3323cd3a5fc9a300ba584893ab434">begin_array_table()</a>, <a class="el" href="#a281d9cdcb806160033e0bef392fd64c2">begin_inline_table()</a>, <a class="el" href="#a738d1624f77ed33ab8aa325ab10d2287">begin_table()</a>, <a class="el" href="#afbff0feb5240d536a0f4c7b65156932a">begin_table()</a>, <a class="el" href="#a7056aad8be0c1311171145a03257f414">end_array()</a>, <a class="el" href="#a1c5192c927b530641c317d432e114c5b">end_array_table()</a>, <a class="el" href="#a5c78fcbb196ce7b02f3b15a53ffb2a10">end_inline_table()</a>, <a class="el" href="#a00d61ea962f5e15c61ef6d96120a28ce">end_table()</a>, <a class="el" href="#af147483ba25c54c5c90b3038b4e2601f">key()</a>, <a class="el" href="#a88fc68bc82765d785f917924e965a6a0">operator=()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>, <a class="el" href="#abea1624e871dfa7fc1bec945a3ad6e64">toml_builder()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00312">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00354">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00336">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00328">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00320">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00405">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00362">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00344">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00370">value()</a>, <a class="el" href="#a8dba75c5b87fdd67695f896c9612fb43">value_array()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00390">value_datetime()</a>, <a class="el" href="#ad888cd532b3641f92f003b0cf869bb8d">value_inline_table()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00379">value_string()</a> , 以及 <a class="el" href="#a13971996f0476380a61ee55adde14a80">value_table()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a3d6040a05b020336ffe13d1d8d463092">begin_array()</a>, <a class="el" href="#a974fb3c69991d8ed2763fb67cc360a98">begin_array_table()</a>, <a class="el" href="#aefd3323cd3a5fc9a300ba584893ab434">begin_array_table()</a>, <a class="el" href="#a281d9cdcb806160033e0bef392fd64c2">begin_inline_table()</a>, <a class="el" href="#a738d1624f77ed33ab8aa325ab10d2287">begin_table()</a>, <a class="el" href="#afbff0feb5240d536a0f4c7b65156932a">begin_table()</a>, <a class="el" href="#a7056aad8be0c1311171145a03257f414">end_array()</a>, <a class="el" href="#a1c5192c927b530641c317d432e114c5b">end_array_table()</a>, <a class="el" href="#a5c78fcbb196ce7b02f3b15a53ffb2a10">end_inline_table()</a>, <a class="el" href="#a00d61ea962f5e15c61ef6d96120a28ce">end_table()</a>, <a class="el" href="#af147483ba25c54c5c90b3038b4e2601f">key()</a>, <a class="el" href="#a88fc68bc82765d785f917924e965a6a0">operator=()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>, <a class="el" href="#abea1624e871dfa7fc1bec945a3ad6e64">toml_builder()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00301">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00343">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00325">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00317">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00309">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00351">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00333">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00359">value()</a>, <a class="el" href="#a8dba75c5b87fdd67695f896c9612fb43">value_array()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00379">value_datetime()</a>, <a class="el" href="#ad888cd532b3641f92f003b0cf869bb8d">value_inline_table()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00394">value_iterable()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00368">value_string()</a> , 以及 <a class="el" href="#a13971996f0476380a61ee55adde14a80">value_table()</a>.</p>
 
 </div>
 </div>
@@ -255,7 +255,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效或键名缺失时抛出</td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效或键名缺失时抛出</td></tr>
   </table>
   </dd>
 </dl>
@@ -290,7 +290,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当路径无效时抛出</td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当路径无效时抛出</td></tr>
   </table>
   </dd>
 </dl>
@@ -325,7 +325,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当路径无效时抛出</td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当路径无效时抛出</td></tr>
   </table>
   </dd>
 </dl>
@@ -354,7 +354,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效或键名缺失时抛出</td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效或键名缺失时抛出</td></tr>
   </table>
   </dd>
 </dl>
@@ -389,7 +389,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当路径无效时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当路径无效时抛出 </td></tr>
   </table>
   </dd>
 </dl>
@@ -423,7 +423,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当路径无效时抛出</td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当路径无效时抛出</td></tr>
   </table>
   </dd>
 </dl>
@@ -448,11 +448,11 @@ Public 成员函数</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>构建toml文档 </p>
+<p>构建TOML文档 </p>
 <dl class="section return"><dt>返回</dt><dd>构建完成的根表格 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当存在未闭合的上下文时抛出</td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当存在未闭合的上下文时抛出</td></tr>
   </table>
   </dd>
 </dl>
@@ -479,7 +479,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当不在数组上下文中时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当不在数组上下文中时抛出 </td></tr>
   </table>
   </dd>
 </dl>
@@ -530,7 +530,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当不在内联表格上下文中时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当不在内联表格上下文中时抛出 </td></tr>
   </table>
   </dd>
 </dl>
@@ -558,7 +558,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当没有表格可结束或试图结束根表格时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当没有表格可结束或试图结束根表格时抛出 </td></tr>
   </table>
   </dd>
 </dl>
@@ -592,7 +592,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当不在表格上下文中时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当不在表格上下文中时抛出 </td></tr>
   </table>
   </dd>
 </dl>
@@ -640,7 +640,7 @@ Public 成员函数</h2></td></tr>
 </div>
 </div>
 <a id="a3866f69977ff310570e6c4780ec938a4" name="a3866f69977ff310570e6c4780ec938a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3866f69977ff310570e6c4780ec938a4">&#9670;&#160;</a></span>value() <span class="overload">[1/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3866f69977ff310570e6c4780ec938a4">&#9670;&#160;</a></span>value() <span class="overload">[1/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -672,19 +672,19 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00312">312</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00301">301</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00963">make_unique()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>.</p>
 
 </div>
 </div>
 <a id="a027ba50effc8c753d0b05b4e9f599f39" name="a027ba50effc8c753d0b05b4e9f599f39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a027ba50effc8c753d0b05b4e9f599f39">&#9670;&#160;</a></span>value() <span class="overload">[2/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a027ba50effc8c753d0b05b4e9f599f39">&#9670;&#160;</a></span>value() <span class="overload">[2/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -716,21 +716,21 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00354">354</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00343">343</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00354">value()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00343">value()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="toml__builder_8hpp_source.html#l00354">value()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="toml__builder_8hpp_source.html#l00343">value()</a>.</p>
 
 </div>
 </div>
 <a id="ad2333a2825f4d46a714913bdbac97290" name="ad2333a2825f4d46a714913bdbac97290"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2333a2825f4d46a714913bdbac97290">&#9670;&#160;</a></span>value() <span class="overload">[3/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2333a2825f4d46a714913bdbac97290">&#9670;&#160;</a></span>value() <span class="overload">[3/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -762,19 +762,19 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00336">336</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00325">325</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00963">make_unique()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>.</p>
 
 </div>
 </div>
 <a id="a1aad9e5db24e9787d0c7b0099696f33c" name="a1aad9e5db24e9787d0c7b0099696f33c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1aad9e5db24e9787d0c7b0099696f33c">&#9670;&#160;</a></span>value() <span class="overload">[4/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aad9e5db24e9787d0c7b0099696f33c">&#9670;&#160;</a></span>value() <span class="overload">[4/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -806,21 +806,21 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00328">328</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00317">317</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00328">value()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00317">value()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="toml__builder_8hpp_source.html#l00328">value()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="toml__builder_8hpp_source.html#l00317">value()</a>.</p>
 
 </div>
 </div>
 <a id="a7a28424a203572063dd4a862581291e8" name="a7a28424a203572063dd4a862581291e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a28424a203572063dd4a862581291e8">&#9670;&#160;</a></span>value() <span class="overload">[5/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a28424a203572063dd4a862581291e8">&#9670;&#160;</a></span>value() <span class="overload">[5/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -852,69 +852,19 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00320">320</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00309">309</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00963">make_unique()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>.</p>
-
-</div>
-</div>
-<a id="a871d3b8dec13ade7cbb6164deb7fa0c8" name="a871d3b8dec13ade7cbb6164deb7fa0c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a871d3b8dec13ade7cbb6164deb7fa0c8">&#9670;&#160;</a></span>value() <span class="overload">[6/10]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Iterable&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp; toml_builder::value </td>
-          <td>(</td>
-          <td class="paramtype">const Iterable &amp;</td>          <td class="paramname"><span class="paramname"><em>iterable</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>设置可迭代对象的值 </p>
-<dl class="tparams"><dt>模板参数</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Iterable</td><td>可迭代类型 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">iterable</td><td>可迭代对象 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
-<p>根据类型自动转换为数组或内联表格：</p><ul>
-<li>映射表类型（如unordered_map）转换为内联表格</li>
-<li>其他可迭代类型转换为数组 </li>
-</ul>
-
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00405">405</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>.</p>
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>.</p>
 
 </div>
 </div>
 <a id="ae7fb111f91e945fc17deb01b91202042" name="ae7fb111f91e945fc17deb01b91202042"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7fb111f91e945fc17deb01b91202042">&#9670;&#160;</a></span>value() <span class="overload">[7/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7fb111f91e945fc17deb01b91202042">&#9670;&#160;</a></span>value() <span class="overload">[6/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -946,21 +896,21 @@ template&lt;typename Iterable&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00362">362</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00351">351</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00362">value()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00351">value()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="toml__builder_8hpp_source.html#l00362">value()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="toml__builder_8hpp_source.html#l00351">value()</a>.</p>
 
 </div>
 </div>
 <a id="a097b582702cca938c24659f346affa75" name="a097b582702cca938c24659f346affa75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a097b582702cca938c24659f346affa75">&#9670;&#160;</a></span>value() <span class="overload">[8/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a097b582702cca938c24659f346affa75">&#9670;&#160;</a></span>value() <span class="overload">[7/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -992,21 +942,21 @@ template&lt;typename Iterable&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00304">304</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00293">293</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00963">make_unique()</a> , 以及 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>.</p>
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a> , 以及 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="toml__builder_8hpp_source.html#l00312">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00354">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00336">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00328">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00320">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00362">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00344">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00370">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00390">value_datetime()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00379">value_string()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="toml__builder_8hpp_source.html#l00301">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00343">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00325">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00317">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00309">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00351">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00333">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00359">value()</a>, <a class="el" href="toml__builder_8hpp_source.html#l00379">value_datetime()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00368">value_string()</a>.</p>
 
 </div>
 </div>
 <a id="af5db5e76d289392d22d2b51bc238321f" name="af5db5e76d289392d22d2b51bc238321f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5db5e76d289392d22d2b51bc238321f">&#9670;&#160;</a></span>value() <span class="overload">[9/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af5db5e76d289392d22d2b51bc238321f">&#9670;&#160;</a></span>value() <span class="overload">[8/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1038,19 +988,19 @@ template&lt;typename Iterable&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00344">344</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00333">333</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="toml__value_8hpp_source.html#l00425">toml_string::Basic</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00963">make_unique()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="toml__value_8hpp_source.html#l00425">toml_string::Basic</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>.</p>
 
 </div>
 </div>
 <a id="a1ffd169c49f3dbc81c3bbc0a54ddf360" name="a1ffd169c49f3dbc81c3bbc0a54ddf360"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ffd169c49f3dbc81c3bbc0a54ddf360">&#9670;&#160;</a></span>value() <span class="overload">[10/10]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ffd169c49f3dbc81c3bbc0a54ddf360">&#9670;&#160;</a></span>value() <span class="overload">[9/9]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1072,24 +1022,24 @@ template&lt;typename Iterable&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>设置已构建的toml值 </p>
+<p>设置已构建的TOML值 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>toml值指针 </td></tr>
+    <tr><td class="paramname">value</td><td>TOML值指针 </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00370">370</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00359">359</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>.</p>
 
 </div>
 </div>
@@ -1160,14 +1110,14 @@ template&lt;typename Iterable&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00390">390</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00379">379</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00963">make_unique()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>.</p>
 
 </div>
 </div>
@@ -1195,6 +1145,56 @@ template&lt;typename Iterable&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
 <p>在独立的作用域内构建一个内联表格。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>.</p>
+
+</div>
+</div>
+<a id="a2ad7425c6092660c2156fa60496fa21d" name="a2ad7425c6092660c2156fa60496fa21d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad7425c6092660c2156fa60496fa21d">&#9670;&#160;</a></span>value_iterable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterable, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_action_check.html#ga97b8016a5394d04c7a2f3c1a99b037e9">is_iterable_v</a>&lt; Iterable &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtoml__builder.html">toml_builder</a> &amp; toml_builder::value_iterable </td>
+          <td>(</td>
+          <td class="paramtype">const Iterable &amp;</td>          <td class="paramname"><span class="paramname"><em>iterable</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置可迭代对象的值 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterable</td><td>可迭代类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iterable</td><td>可迭代对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用</dd></dl>
+<p>根据类型自动转换为数组或内联表格：</p><ul>
+<li>映射表类型（如unordered_map）转换为内联表格</li>
+<li>其他可迭代类型转换为数组 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00394">394</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a>.</p>
 
@@ -1238,14 +1238,14 @@ template&lt;typename Iterable&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00379">379</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="toml__builder_8hpp_source.html">toml_builder.hpp</a> 第 <a class="el" href="toml__builder_8hpp_source.html#l00368">368</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00963">make_unique()</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00304">value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="#a29098eb3845b0d02329b22aba8212765">toml_builder()</a> , 以及 <a class="el" href="toml__builder_8hpp_source.html#l00293">value()</a>.</p>
 
 </div>
 </div>
@@ -1274,7 +1274,7 @@ template&lt;typename Iterable&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>自身引用，支持链式调用 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="toml格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出</td></tr>
+    <tr><td class="paramname"><a class="el" href="structtoml__exception.html" title="TOML格式操作失败">toml_exception</a></td><td>当上下文无效、键名缺失或键重复时抛出</td></tr>
   </table>
   </dd>
 </dl>

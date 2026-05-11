@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structis__incrementible" kind="struct" language="C++" prot="public">
+    <compoundname>is_incrementible</compoundname>
+    <includes refid="type__traits_8hpp" local="no">type_traits.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Iterator</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structis__incrementible_1a3233ab90932929ad0e9eb63e0454a0f2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool is_incrementible&lt; Iterator &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>is_incrementible::value</qualifiedname>
+        <initializer>= decltype(__test&lt;Iterator&gt;(0))::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4122" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4122" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structis__incrementible_1a9cf1334908a4dde26790241346dfd520" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(++<ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; U &amp; &gt;(), <ref refid="group___type_traits_utilities_1gaa4e9c28fa52ab73ef48e5cbed20c66fd" kindref="member">true_type</ref>{})</type>
+        <definition>static decltype(++declval&lt; U &amp; &gt;(), true_type{}) is_incrementible&lt; Iterator &gt;::__test</definition>
+        <argsstring>(int)</argsstring>
+        <name>__test</name>
+        <qualifiedname>is_incrementible::__test</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4116" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="structis__incrementible_1a2a11d85f19a6bdec7172316545f20432" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gad15d3ff5d80b8c8c22e9ce862353ba55" kindref="member">false_type</ref></type>
+        <definition>static false_type is_incrementible&lt; Iterator &gt;::__test</definition>
+        <argsstring>(...)</argsstring>
+        <name>__test</name>
+        <qualifiedname>is_incrementible::__test</qualifiedname>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4119" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>判断类型是否可以递增 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4113" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4113" bodyend="4123"/>
+    <listofallmembers>
+      <member refid="structis__incrementible_1a9cf1334908a4dde26790241346dfd520" prot="private" virt="non-virtual"><scope>is_incrementible</scope><name>__test</name></member>
+      <member refid="structis__incrementible_1a2a11d85f19a6bdec7172316545f20432" prot="private" virt="non-virtual"><scope>is_incrementible</scope><name>__test</name></member>
+      <member refid="structis__incrementible_1a3233ab90932929ad0e9eb63e0454a0f2" prot="public" virt="non-virtual"><scope>is_incrementible</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structicollector" kind="struct" language="C++" prot="public">
+    <compoundname>icollector</compoundname>
+    <basecompoundref refid="structicomparable" prot="public" virt="non-virtual">icomparable&lt; T &gt;</basecompoundref>
+    <derivedcompoundref refid="classdeque" prot="public" virt="non-virtual">deque&lt; connection_entry &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classdeque" prot="public" virt="non-virtual">deque&lt; frame &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classdeque" prot="public" virt="non-virtual">deque&lt; log_event &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhashtable" prot="public" virt="non-virtual">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classhashtable" prot="public" virt="non-virtual">hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classpriority__queue" prot="public" virt="non-virtual">priority_queue&lt; priority_task &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classqueue" prot="public" virt="non-virtual">queue&lt; connection_entry &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classqueue" prot="public" virt="non-virtual">queue&lt; log_event &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrb__tree" prot="private" virt="non-virtual">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classrb__tree" prot="private" virt="non-virtual">rb_tree&lt; Key, Key, identity&lt; Key &gt;, Compare, Alloc &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classstack" prot="public" virt="non-virtual">stack&lt; frame &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; byte_t &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; ptr &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">const_iterator&lt; string &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; cmdline::option &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; dns_record &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; aiocb_type * &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; char &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; http_cookie &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; route_entry &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; part &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; meta_type * &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt;::MYSQL_BIND &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; const char * &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; int &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; match_result &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; slot_entry &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; stacktrace::frame &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; pending_signal &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; thread &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; priority_task &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; context &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; indent_context &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classdeque" prot="public" virt="non-virtual">deque&lt; T, Alloc, BufSize &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classpriority__queue" prot="public" virt="non-virtual">priority_queue&lt; T, Sequence, Compare &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classqueue" prot="public" virt="non-virtual">queue&lt; T, Sequence &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classstack" prot="public" virt="non-virtual">stack&lt; T, Sequence &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classvector" prot="public" virt="non-virtual">vector&lt; T, Alloc &gt;</derivedcompoundref>
+    <includes refid="icollector_8hpp" local="no">icollector.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structicollector_1a90b49f148b5cfbdd7009dfd15cd187d5" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; icollector&lt; T &gt;::derived</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>derived</name>
+        <qualifiedname>icollector::derived</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" line="30" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structicollector_1aa12122cd69ca1ec919297f84f0e4b0a4" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(derived().size())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr decltype(auto)</type>
+        <definition>NEFORCE_NODISCARD constexpr decltype(auto) icollector&lt; T &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>icollector::size</qualifiedname>
+        <briefdescription>
+<para>获取集合大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>集合中元素的数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" line="37" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" bodystart="37" bodyend="39"/>
+        <references refid="structicollector_1aa12122cd69ca1ec919297f84f0e4b0a4" compoundref="icollector_8hpp" startline="37" endline="39">icollector&lt; T &gt;::size</references>
+        <referencedby refid="structicollector_1aa12122cd69ca1ec919297f84f0e4b0a4" compoundref="icollector_8hpp" startline="37" endline="39">icollector&lt; T &gt;::size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structicollector_1ac33304ea8012621d7c00ebb1295425ca" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(derived().empty())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool icollector&lt; T &gt;::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>icollector::empty</qualifiedname>
+        <briefdescription>
+<para>检查集合是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" line="45" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" bodystart="45" bodyend="45"/>
+        <references refid="structicollector_1ac33304ea8012621d7c00ebb1295425ca" compoundref="icollector_8hpp" startline="45" endline="45">icollector&lt; T &gt;::empty</references>
+        <referencedby refid="structicollector_1ac33304ea8012621d7c00ebb1295425ca" compoundref="icollector_8hpp" startline="45" endline="45">icollector&lt; T &gt;::empty</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>集合器接口模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>派生类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+为集合类型提供统一的接口，包括大小查询、空检查和哈希计算。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>deque&lt; connection_entry &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>deque&lt; T, Alloc, BufSize &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>deque&lt; frame &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>deque&lt; log_event &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;</label>
+        <link refid="classhashtable"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;</label>
+        <link refid="classhashtable"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="39">
+        <label>priority_queue&lt; T, Sequence, Compare &gt;</label>
+        <link refid="classpriority__queue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>priority_queue&lt; priority_task &gt;</label>
+        <link refid="classpriority__queue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>queue&lt; connection_entry &gt;</label>
+        <link refid="classqueue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>queue&lt; log_event &gt;</label>
+        <link refid="classqueue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>queue&lt; T, Sequence &gt;</label>
+        <link refid="classqueue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>rb_tree&lt; Key, Key, identity&lt; Key &gt;, Compare, Alloc &gt;</label>
+        <link refid="classrb__tree"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;</label>
+        <link refid="classrb__tree"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>stack&lt; frame &gt;</label>
+        <link refid="classstack"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>stack&lt; T, Sequence &gt;</label>
+        <link refid="classstack"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>vector&lt; aiocb_type * &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>vector&lt; byte_t &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>vector&lt; char &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>vector&lt; cmdline::option &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>vector&lt; const char * &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>vector&lt; context &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>vector&lt; dns_record &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>vector&lt; hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>vector&lt; hashtable_node&lt; pair&lt; const T *, stacktrace &gt; &gt; &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>vector&lt; http_cookie &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>vector&lt; indent_context &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>vector&lt; int &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>vector&lt; match_result &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>vector&lt; meta_type * &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>vector&lt; part &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>vector&lt; pending_signal &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>vector&lt; priority_task &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>vector&lt; ptr &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>vector&lt; route_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>vector&lt; slot_entry &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>vector&lt; stacktrace::frame &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>const_iterator&lt; string &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>vector&lt; thread &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>vector&lt; T, Alloc &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>vector&lt;::MYSQL_BIND &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" line="28" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" bodystart="28" bodyend="46"/>
+    <listofallmembers>
+      <member refid="structicollector_1a90b49f148b5cfbdd7009dfd15cd187d5" prot="private" virt="non-virtual"><scope>icollector</scope><name>derived</name></member>
+      <member refid="structicollector_1ac33304ea8012621d7c00ebb1295425ca" prot="public" virt="non-virtual"><scope>icollector</scope><name>empty</name></member>
+      <member refid="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" virt="non-virtual"><scope>icollector</scope><name>operator!=</name></member>
+      <member refid="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" virt="non-virtual"><scope>icollector</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" virt="non-virtual"><scope>icollector</scope><name>operator&lt;=</name></member>
+      <member refid="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" virt="non-virtual"><scope>icollector</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" virt="non-virtual"><scope>icollector</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" virt="non-virtual"><scope>icollector</scope><name>operator&gt;=</name></member>
+      <member refid="structicollector_1aa12122cd69ca1ec919297f84f0e4b0a4" prot="public" virt="non-virtual"><scope>icollector</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

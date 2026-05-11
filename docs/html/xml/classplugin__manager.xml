@@ -1,0 +1,440 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classplugin__manager" kind="class" language="C++" prot="public">
+    <compoundname>plugin_manager</compoundname>
+    <includes refid="plugin__manager_8hpp" local="no">plugin_manager.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classplugin__manager_1a0814c10a16076c9d160da50950074b6a" prot="public" static="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classdynamic__library" kindref="compound">dynamic_library</ref> &gt;</type>
+        <definition>using plugin_manager::library_ptr = unique_ptr&lt;dynamic_library&gt;</definition>
+        <argsstring></argsstring>
+        <name>library_ptr</name>
+        <qualifiedname>plugin_manager::library_ptr</qualifiedname>
+        <briefdescription>
+<para>动态库指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="33" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classplugin__manager_1af9a9e993f052880a137574805b559318" prot="private" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex plugin_manager::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>plugin_manager::mutex_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="36" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="variable" id="classplugin__manager_1a3912049cb2e24b7761ff2e3be5f282a9" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___plugin_1gaf947f049a3822c8b84313e907b0ebb58" kindref="member">plugin_ptr</ref> &gt;</type>
+        <definition>unordered_map&lt;string, plugin_ptr&gt; plugin_manager::plugins_</definition>
+        <argsstring></argsstring>
+        <name>plugins_</name>
+        <qualifiedname>plugin_manager::plugins_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>插件名称到实例的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="37" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="variable" id="classplugin__manager_1a83a190e2dea06f54737b91041b79edfa" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="classplugin__manager_1a0814c10a16076c9d160da50950074b6a" kindref="member">library_ptr</ref> &gt;</type>
+        <definition>unordered_map&lt;string, library_ptr&gt; plugin_manager::libraries_</definition>
+        <argsstring></argsstring>
+        <name>libraries_</name>
+        <qualifiedname>plugin_manager::libraries_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>库路径到动态库的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="38" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="variable" id="classplugin__manager_1a9c5ddef94716ac2229a0eb4da4df9fc3" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>unordered_map&lt;string, string&gt; plugin_manager::plugin_to_library_</definition>
+        <argsstring></argsstring>
+        <name>plugin_to_library_</name>
+        <qualifiedname>plugin_manager::plugin_to_library_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>插件名称到库路径的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="39" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classplugin__manager_1a66df205093161ff224b918f6c699cd04" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>plugin_manager::plugin_manager</definition>
+        <argsstring>()=default</argsstring>
+        <name>plugin_manager</name>
+        <qualifiedname>plugin_manager::plugin_manager</qualifiedname>
+        <briefdescription>
+<para>私有构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="44" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classplugin__manager_1a213eba38d2f502eadd88e4bb0ca8dd3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>plugin_manager::plugin_manager</definition>
+        <argsstring>(const plugin_manager &amp;)=delete</argsstring>
+        <name>plugin_manager</name>
+        <qualifiedname>plugin_manager::plugin_manager</qualifiedname>
+        <param>
+          <type>const <ref refid="classplugin__manager" kindref="compound">plugin_manager</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="47" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1ac1d819ee3a97a82adb0bcdfb02c508b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classplugin__manager" kindref="compound">plugin_manager</ref> &amp;</type>
+        <definition>plugin_manager &amp; plugin_manager::operator=</definition>
+        <argsstring>(const plugin_manager &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>plugin_manager::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classplugin__manager" kindref="compound">plugin_manager</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="48" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1a7d7f7d8db1ca23b0d86c747b1faa9254" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>plugin_manager::plugin_manager</definition>
+        <argsstring>(plugin_manager &amp;&amp;)=delete</argsstring>
+        <name>plugin_manager</name>
+        <qualifiedname>plugin_manager::plugin_manager</qualifiedname>
+        <param>
+          <type><ref refid="classplugin__manager" kindref="compound">plugin_manager</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="49" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1a4258f323bbbb35b7c3dd3a81473a7954" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classplugin__manager" kindref="compound">plugin_manager</ref> &amp;</type>
+        <definition>plugin_manager &amp; plugin_manager::operator=</definition>
+        <argsstring>(plugin_manager &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>plugin_manager::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classplugin__manager" kindref="compound">plugin_manager</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="50" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1a531cd15ddab97272ca891f2b5bc748fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>plugin_manager::~plugin_manager</definition>
+        <argsstring>()</argsstring>
+        <name>~plugin_manager</name>
+        <qualifiedname>plugin_manager::~plugin_manager</qualifiedname>
+        <briefdescription>
+<para>析构函数，关闭所有插件 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="55" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1a051225a7c34fc2d4dc5a94f1e14207d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t plugin_manager::load_plugins</definition>
+        <argsstring>(const string &amp;pth)</argsstring>
+        <name>load_plugins</name>
+        <qualifiedname>plugin_manager::load_plugins</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>pth</declname>
+        </param>
+        <briefdescription>
+<para>从目录加载所有插件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插件目录路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功加载的插件数量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目录无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsystem__exception" kindref="compound">system_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插件已加载或加载失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+加载指定目录中所有符合条件的动态库文件。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="75" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1a6739effe7939146b9c9bcb196748f01d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plugin_manager::load_plugin</definition>
+        <argsstring>(string_view pth)</argsstring>
+        <name>load_plugin</name>
+        <qualifiedname>plugin_manager::load_plugin</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>pth</declname>
+        </param>
+        <briefdescription>
+<para>加载单个插件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插件库文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsystem__exception" kindref="compound">system_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插件已加载或加载失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+加载指定的动态库，获取插件的创建和销毁函数， 创建插件实例并注册到管理器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="85" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1a9beb1072652ecc2f9080f8a545a781ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool plugin_manager::unload_plugin</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>unload_plugin</name>
+        <qualifiedname>plugin_manager::unload_plugin</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>卸载插件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插件名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功卸载</para>
+</simplesect>
+关闭指定的插件，释放相关资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="94" column="10"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1a785b545933063abb5225b0a54cb016b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structiplugin" kindref="compound">iplugin</ref> *</type>
+        <definition>NEFORCE_NODISCARD iplugin * plugin_manager::get_plugin</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>get_plugin</name>
+        <qualifiedname>plugin_manager::get_plugin</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取插件实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插件名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插件指针，如果插件不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="101" column="31"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1a5128cb71a99ec357efbb85c6d501445b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD vector&lt; string &gt; plugin_manager::list_plugins</definition>
+        <argsstring>() const</argsstring>
+        <name>list_plugins</name>
+        <qualifiedname>plugin_manager::list_plugins</qualifiedname>
+        <briefdescription>
+<para>获取所有已加载插件名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>插件名称列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="107" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1a448552a566139683700bd74ddc8c303c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void plugin_manager::initialize_all</definition>
+        <argsstring>()</argsstring>
+        <name>initialize_all</name>
+        <qualifiedname>plugin_manager::initialize_all</qualifiedname>
+        <briefdescription>
+<para>初始化所有插件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>调用所有已加载插件的 initialize 方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="114" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classplugin__manager_1a1130feb332d99fa333e02f278c015789" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void plugin_manager::shutdown_all</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>shutdown_all</name>
+        <qualifiedname>plugin_manager::shutdown_all</qualifiedname>
+        <briefdescription>
+<para>关闭所有插件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>调用所有已加载插件的 shutdown 方法， 并清理所有资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="122" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classplugin__manager_1a737ae3ae9b83dea4f53e54d9c5232626" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classplugin__manager" kindref="compound">plugin_manager</ref> &amp;</type>
+        <definition>static plugin_manager &amp; plugin_manager::instance</definition>
+        <argsstring>()</argsstring>
+        <name>instance</name>
+        <qualifiedname>plugin_manager::instance</qualifiedname>
+        <briefdescription>
+<para>获取单例实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>插件管理器实例引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="61" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" bodystart="61" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>插件管理器单例类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>负责插件的加载、卸载和生命周期管理。 维护插件实例、动态库句柄和插件名称之间的映射关系。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" line="31" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/plugin_manager.hpp" bodystart="31" bodyend="123"/>
+    <listofallmembers>
+      <member refid="classplugin__manager_1a785b545933063abb5225b0a54cb016b2" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>get_plugin</name></member>
+      <member refid="classplugin__manager_1a448552a566139683700bd74ddc8c303c" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>initialize_all</name></member>
+      <member refid="classplugin__manager_1a737ae3ae9b83dea4f53e54d9c5232626" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>instance</name></member>
+      <member refid="classplugin__manager_1a83a190e2dea06f54737b91041b79edfa" prot="private" virt="non-virtual"><scope>plugin_manager</scope><name>libraries_</name></member>
+      <member refid="classplugin__manager_1a0814c10a16076c9d160da50950074b6a" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>library_ptr</name></member>
+      <member refid="classplugin__manager_1a5128cb71a99ec357efbb85c6d501445b" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>list_plugins</name></member>
+      <member refid="classplugin__manager_1a6739effe7939146b9c9bcb196748f01d" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>load_plugin</name></member>
+      <member refid="classplugin__manager_1a051225a7c34fc2d4dc5a94f1e14207d9" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>load_plugins</name></member>
+      <member refid="classplugin__manager_1af9a9e993f052880a137574805b559318" prot="private" virt="non-virtual"><scope>plugin_manager</scope><name>mutex_</name></member>
+      <member refid="classplugin__manager_1ac1d819ee3a97a82adb0bcdfb02c508b8" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>operator=</name></member>
+      <member refid="classplugin__manager_1a4258f323bbbb35b7c3dd3a81473a7954" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>operator=</name></member>
+      <member refid="classplugin__manager_1a66df205093161ff224b918f6c699cd04" prot="private" virt="non-virtual"><scope>plugin_manager</scope><name>plugin_manager</name></member>
+      <member refid="classplugin__manager_1a213eba38d2f502eadd88e4bb0ca8dd3d" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>plugin_manager</name></member>
+      <member refid="classplugin__manager_1a7d7f7d8db1ca23b0d86c747b1faa9254" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>plugin_manager</name></member>
+      <member refid="classplugin__manager_1a9c5ddef94716ac2229a0eb4da4df9fc3" prot="private" virt="non-virtual"><scope>plugin_manager</scope><name>plugin_to_library_</name></member>
+      <member refid="classplugin__manager_1a3912049cb2e24b7761ff2e3be5f282a9" prot="private" virt="non-virtual"><scope>plugin_manager</scope><name>plugins_</name></member>
+      <member refid="classplugin__manager_1a1130feb332d99fa333e02f278c015789" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>shutdown_all</name></member>
+      <member refid="classplugin__manager_1a9beb1072652ecc2f9080f8a545a781ae" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>unload_plugin</name></member>
+      <member refid="classplugin__manager_1a531cd15ddab97272ca891f2b5bc748fb" prot="public" virt="non-virtual"><scope>plugin_manager</scope><name>~plugin_manager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -130,6 +130,9 @@ $(function(){initNavTree('group___numeric_algorithms.html','',''); });
 <tr class="memitem:ga7b8f4bbfc29ee7484bd568455eef8520" id="r_ga7b8f4bbfc29ee7484bd568455eef8520"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T&gt; </td></tr>
 <tr class="memitem:ga7b8f4bbfc29ee7484bd568455eef8520 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga7b8f4bbfc29ee7484bd568455eef8520">sequence_fill</a> (Iterator first, Iterator last, T value)</td></tr>
 <tr class="memdesc:ga7b8f4bbfc29ee7484bd568455eef8520"><td class="mdescLeft">&#160;</td><td class="mdescRight">顺序填充递增序列  <br /></td></tr>
+<tr class="memitem:gace1bed9a63f6e8001fc72c74fbd579c9" id="r_gace1bed9a63f6e8001fc72c74fbd579c9"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T&gt; </td></tr>
+<tr class="memitem:gace1bed9a63f6e8001fc72c74fbd579c9 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#gace1bed9a63f6e8001fc72c74fbd579c9">NEFORCE_DEPRECATED_FOR</a> (&quot;using <a class="el" href="#ga7b8f4bbfc29ee7484bd568455eef8520">sequence_fill</a> instead of iota&quot;) NEFORCE_CONSTEXPR20 void iota(Iterator first</td></tr>
+<tr class="memdesc:gace1bed9a63f6e8001fc72c74fbd579c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">顺序填充递增序列（别名）  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>数值算法的实现 </p>
@@ -488,6 +491,45 @@ template&lt;typename Iterator1, typename Iterator2, typename T, typename BinaryO
 
 </div>
 </div>
+<a id="gace1bed9a63f6e8001fc72c74fbd579c9" name="gace1bed9a63f6e8001fc72c74fbd579c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gace1bed9a63f6e8001fc72c74fbd579c9">&#9670;&#160;</a></span>NEFORCE_DEPRECATED_FOR()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Iterator, typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_DEPRECATED_FOR </td>
+          <td>(</td>
+          <td class="paramtype">&quot;using <a class="el" href="#ga7b8f4bbfc29ee7484bd568455eef8520">sequence_fill</a> instead of iota&quot;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>顺序填充递增序列（别名） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>输出迭代器类型 </td></tr>
+    <tr><td class="paramname">T</td><td>值类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>范围起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>范围结束迭代器 </td></tr>
+    <tr><td class="paramname">value</td><td>起始值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>用从value开始的连续值填充范围 [first, last)。 </p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="numeric_8hpp_source.html#l00225">sequence_fill()</a>.</p>
+
+</div>
+</div>
 <a id="ga71e3a0a106a564257ca72805723c7756" name="ga71e3a0a106a564257ca72805723c7756"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga71e3a0a106a564257ca72805723c7756">&#9670;&#160;</a></span>partial_sum() <span class="overload">[1/2]</span></h2>
 
@@ -646,6 +688,8 @@ template&lt;typename Iterator, typename T&gt; </div>
 <p class="definition">在文件 <a class="el" href="numeric_8hpp_source.html">numeric.hpp</a> 第 <a class="el" href="numeric_8hpp_source.html#l00225">225</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00540">is_ranges_input_iter_v</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#gace1bed9a63f6e8001fc72c74fbd579c9">NEFORCE_DEPRECATED_FOR()</a>.</p>
 
 </div>
 </div>

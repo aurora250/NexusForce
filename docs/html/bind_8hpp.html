@@ -95,11 +95,12 @@ $(function(){initNavTree('bind_8hpp.html','',''); });
 
 <p>函数绑定工具  
 <a href="#details">更多...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="invoke_8hpp_source.html">NeForce/core/functional/invoke.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="functor_8hpp_source.html">NeForce/core/functional/functor.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="invoke_8hpp_source.html">NeForce/core/functional/invoke.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 bind.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="bind_8hpp__incl.svg" width="171" height="566"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="bind_8hpp__incl.svg" width="352" height="566"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="bind_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -110,6 +111,8 @@ bind.hpp 的引用(Include)关系图:</div>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否为绑定表达式  <a href="structis__bind__expression.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:placeholder_3C_20Num_20_3E" id="r_placeholder_3C_20Num_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structplaceholder.html">placeholder&lt; Num &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">占位符类型  <a href="structplaceholder.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:is_5Fplaceholder_3C_20T_20_3E" id="r_is_5Fplaceholder_3C_20T_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structis__placeholder.html">is_placeholder&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否为占位符  <a href="structis__placeholder.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:binder_3C_20Func_28BoundArgs_2E_2E_2E_29_3E" id="r_binder_3C_20Func_28BoundArgs_2E_2E_2E_29_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classbinder_3_01_func_07_bound_args_8_8_8_08_4.html">binder&lt; Func(BoundArgs...)&gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用函数绑定器的部分特化  <a href="classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:bindrer_3C_20Res_2C_20Func_28BoundArgs_2E_2E_2E_29_3E" id="r_bindrer_3C_20Res_2C_20Func_28BoundArgs_2E_2E_2E_29_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html">bindrer&lt; Res, Func(BoundArgs...)&gt;</a></td></tr>
@@ -158,14 +161,10 @@ template&lt;typename Res, typename Func, typename... BoundArgs&gt; </td></tr>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:gaf539c0518877c7c881ffffc03bee7a09 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_bind_expression_v</b> = <a class="el" href="structis__bind__expression.html">is_bind_expression</a>&lt;T&gt;::value</td></tr>
 <tr class="memdesc:gaf539c0518877c7c881ffffc03bee7a09"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_bind_expression的便捷变量模板 <br /></td></tr>
-<tr class="memitem:ga12321c38464d3c4cb1d25b160bd840cd" id="r_ga12321c38464d3c4cb1d25b160bd840cd"><td class="memTemplParams" colspan="2">
-template&lt;<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> Num&gt; </td></tr>
-<tr class="memitem:ga12321c38464d3c4cb1d25b160bd840cd template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><b>placeholder_v</b> = <a class="el" href="structplaceholder.html">placeholder</a>&lt;Num&gt;::value</td></tr>
-<tr class="memdesc:ga12321c38464d3c4cb1d25b160bd840cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">placeholder值的便捷变量模板 <br /></td></tr>
-<tr class="memitem:gab48a9793a158a3951a615bcb32c6430d" id="r_gab48a9793a158a3951a615bcb32c6430d"><td class="memTemplParams" colspan="2">
+<tr class="memitem:gafbb08120747a1676e781101cffe17643" id="r_gafbb08120747a1676e781101cffe17643"><td class="memTemplParams" colspan="2">
 template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gab48a9793a158a3951a615bcb32c6430d template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr bool&#160;</td><td class="memItemRight"><b>is_placeholder_v</b> = <a class="el" href="structis__placeholder.html">is_placeholder</a>&lt;T&gt;::value</td></tr>
-<tr class="memdesc:gab48a9793a158a3951a615bcb32c6430d"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_placeholder的便捷变量模板 <br /></td></tr>
+<tr class="memitem:gafbb08120747a1676e781101cffe17643 template"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><b>is_placeholder_v</b> = <a class="el" href="structis__placeholder.html">is_placeholder</a>&lt;T&gt;::value</td></tr>
+<tr class="memdesc:gafbb08120747a1676e781101cffe17643"><td class="mdescLeft">&#160;</td><td class="mdescRight">is_placeholder的便捷变量模板 <br /></td></tr>
 <tr class="memitem:a9fcf8f2fa0e0591d9df352bc625f06d9" id="r_a9fcf8f2fa0e0591d9df352bc625f06d9"><td class="memItemLeft"><a id="a9fcf8f2fa0e0591d9df352bc625f06d9" name="a9fcf8f2fa0e0591d9df352bc625f06d9"></a>
 NEFORCE_INLINE17 constexpr <a class="el" href="structplaceholder.html">placeholder</a>&lt; 1 &gt;&#160;</td><td class="memItemRight"><b>placeholders::p1</b> {}</td></tr>
 <tr class="memdesc:a9fcf8f2fa0e0591d9df352bc625f06d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">占位符1 <br /></td></tr>

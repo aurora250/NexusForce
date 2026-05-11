@@ -1,0 +1,2101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___unique_pointer" kind="group">
+    <compoundname>UniquePointer</compoundname>
+    <title>独占智能指针</title>
+    <innerclass refid="classunique__ptr" prot="public">unique_ptr</innerclass>
+    <innerclass refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4" prot="public">unique_ptr&lt; T[], Deleter &gt;</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___unique_pointer_1ga3def886ee466fc780671110b23c22e0d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Deleter</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__swappable" kindref="compound">is_swappable</ref>&lt; Deleter &gt;::value &amp;&amp;<ref refid="structis__swappable" kindref="compound">is_swappable</ref>&lt; T &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void swap</definition>
+        <argsstring>(unique_ptr&lt; T, Deleter &gt; &amp;lhs, unique_ptr&lt; T, Deleter &gt; &amp;rhs) noexcept</argsstring>
+        <name>swap</name>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>交换两个unique_ptr </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="582" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="582" bodyend="584"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga2e039c6b9e49d933db1ac1539445e924" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="597" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="597" bodyend="599"/>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gafd5d8431a973b7e88c2b83662ed5b553" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <briefdescription>
+<para>与nullptr的相等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="609" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="609" bodyend="611"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga5c5d88f05ed7eea2ba7cd8f22ae2c900" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==</definition>
+        <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>nullptr与unique_ptr的相等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="621" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="621" bodyend="623"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga0d10eece7e529593dc6583c08d4aa0ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator!=</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>不等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否不等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="636" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="636" bodyend="638"/>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gaa81f43cac5be85f21cb5fc7aa8897a81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator!=</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <briefdescription>
+<para>与nullptr的不等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否非空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="648" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="648" bodyend="650"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga9d36175d06f29041f3b87d1992eb9c82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator!=</definition>
+        <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>nullptr与unique_ptr的不等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否非空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="660" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="660" bodyend="662"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gac57ff1dd79c7a12174cfb51867d3b6b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否小于 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="675" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="675" bodyend="678"/>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gacb305365ebe27fa4b08f8366746d16e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <briefdescription>
+<para>与nullptr的小于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否小于nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="688" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="688" bodyend="690"/>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga62d95b48fc30554a8a17bae773cd28e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;</definition>
+        <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>nullptr与unique_ptr的小于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>nullptr是否小于 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="700" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="700" bodyend="702"/>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gaf4c9e805e471b53f0d1758160d98c075" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>大于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否大于 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="715" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="715" bodyend="717"/>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gaf24cc2d1dc41828a7dadc44989277be3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <briefdescription>
+<para>与nullptr的大于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否大于nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="727" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="727" bodyend="729"/>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga641dcafc05495ad745fe78f409626369" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;</definition>
+        <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>nullptr与unique_ptr的大于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>nullptr是否大于 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="739" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="739" bodyend="741"/>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gad817ab15dc22c8dd18504afbbadb5073" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;=</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于等于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否小于等于 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="754" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="754" bodyend="756"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gad41de667371a616e5aa51830795b25e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;=</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <briefdescription>
+<para>与nullptr的小于等于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否小于等于nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="766" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="766" bodyend="768"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gab7bd6d4abe90bbf0b31bc6ebaf1e4a3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&lt;=</definition>
+        <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>nullptr与unique_ptr的小于等于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>nullptr是否小于等于 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="778" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="778" bodyend="780"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga366aeaf83540a81f667c532c781530e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;=</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, const unique_ptr&lt; U, E &gt; &amp;rhs)</argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>大于等于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否大于等于 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="793" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="793" bodyend="795"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga5ddd67c0ff52ee718fde2ce960b50f0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;=</definition>
+        <argsstring>(const unique_ptr&lt; T, D &gt; &amp;lhs, nullptr_t)</argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <briefdescription>
+<para>与nullptr的大于等于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否大于等于nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="805" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="805" bodyend="807"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga9d125b022b79c38f6384b92692ebd2a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename D</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator&gt;=</definition>
+        <argsstring>(nullptr_t, const unique_ptr&lt; T, D &gt; &amp;rhs)</argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, D &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>nullptr与unique_ptr的大于等于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique_ptr对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>nullptr是否大于等于 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="817" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="817" bodyend="819"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gad594540a669260eea0cca34015b4653c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Deleter</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt;</type>
+        <definition>unique_ptr&lt; T, Deleter &gt; static_pointer_cast</definition>
+        <argsstring>(const unique_ptr&lt; U, Deleter &gt; &amp;ptr)=delete</argsstring>
+        <name>static_pointer_cast</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, Deleter &gt; &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>禁止的static_pointer_cast </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>由于unique_ptr是独占所有权，不能从const引用转换 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="831" column="12" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" declline="831" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gae2b923cda7dca9d7b9a3d7a0d8c36223" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Deleter</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt;</type>
+        <definition>unique_ptr&lt; T, Deleter &gt; const_pointer_cast</definition>
+        <argsstring>(const unique_ptr&lt; U, Deleter &gt; &amp;ptr)=delete</argsstring>
+        <name>const_pointer_cast</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, Deleter &gt; &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>禁止的const_pointer_cast </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>由于unique_ptr是独占所有权，不能从const引用转换 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="842" column="12" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" declline="842" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga76599839c521de4c36c0ab2813670317" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Deleter</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt;</type>
+        <definition>unique_ptr&lt; T, Deleter &gt; reinterpret_pointer_cast</definition>
+        <argsstring>(const unique_ptr&lt; U, Deleter &gt; &amp;ptr)=delete</argsstring>
+        <name>reinterpret_pointer_cast</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, Deleter &gt; &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>禁止的reinterpret_pointer_cast </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>由于unique_ptr是独占所有权，不能从const引用转换 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="853" column="12" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" declline="853" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga8466e5182516a72b5d5d667434dde851" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Deleter</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, Deleter &gt;</type>
+        <definition>unique_ptr&lt; T, Deleter &gt; dynamic_pointer_cast</definition>
+        <argsstring>(const unique_ptr&lt; U, Deleter &gt; &amp;ptr)=delete</argsstring>
+        <name>dynamic_pointer_cast</name>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, Deleter &gt; &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>禁止的dynamic_pointer_cast </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>由于unique_ptr是独占所有权，不能从const引用转换 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="864" column="12" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" declline="864" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga8c4222e9004a639aac55ce24ec209c86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename DeleterT</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename DeleterU</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, DeleterT &gt;</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr&lt; T, DeleterT &gt; static_pointer_cast</definition>
+        <argsstring>(unique_ptr&lt; U, DeleterU &gt; &amp;&amp;ptr)</argsstring>
+        <name>static_pointer_cast</name>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, DeleterU &gt; &amp;&amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>static_pointer_cast </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DeleterT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DeleterU</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的unique_ptr </para>
+</simplesect>
+<simplesect kind="note"><para>Deleter需要提供rebind<underline>函数 </underline></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="878" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="878" bodyend="881"/>
+        <references refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" compoundref="unique__ptr_8hpp" startline="325" endline="325">unique_ptr&lt; T, Deleter &gt;::get_deleter</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gaff521462e36faa64ae1c49af9d3764b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename DeleterT</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename DeleterU</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, DeleterT &gt;</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr&lt; T, DeleterT &gt; const_pointer_cast</definition>
+        <argsstring>(unique_ptr&lt; U, DeleterU &gt; &amp;&amp;ptr)</argsstring>
+        <name>const_pointer_cast</name>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, DeleterU &gt; &amp;&amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>const_pointer_cast </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DeleterT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DeleterU</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的unique_ptr </para>
+</simplesect>
+<simplesect kind="note"><para>Deleter需要提供rebind<underline>函数 </underline></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="894" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="894" bodyend="897"/>
+        <references refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" compoundref="unique__ptr_8hpp" startline="325" endline="325">unique_ptr&lt; T, Deleter &gt;::get_deleter</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga5b7c0b0025c36f71ae411090dab937da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename DeleterT</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename DeleterU</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, DeleterT &gt;</type>
+        <definition>unique_ptr&lt; T, DeleterT &gt; reinterpret_pointer_cast</definition>
+        <argsstring>(unique_ptr&lt; U, DeleterU &gt; &amp;&amp;ptr)</argsstring>
+        <name>reinterpret_pointer_cast</name>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, DeleterU &gt; &amp;&amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>const_pointer_cast </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DeleterT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DeleterU</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的unique_ptr </para>
+</simplesect>
+<simplesect kind="note"><para>Deleter需要提供rebind<underline>函数 </underline></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="910" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="910" bodyend="913"/>
+        <references refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" compoundref="unique__ptr_8hpp" startline="325" endline="325">unique_ptr&lt; T, Deleter &gt;::get_deleter</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga2d8e39ee27f0bbb613490661597ad679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename DeleterT</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename DeleterU</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T, DeleterT &gt;</type>
+        <definition>unique_ptr&lt; T, DeleterT &gt; dynamic_pointer_cast</definition>
+        <argsstring>(unique_ptr&lt; U, DeleterU &gt; &amp;&amp;ptr)</argsstring>
+        <name>dynamic_pointer_cast</name>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, DeleterU &gt; &amp;&amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>reinterpret_pointer_cast </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DeleterT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DeleterU</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的unique_ptr </para>
+</simplesect>
+<simplesect kind="note"><para>Deleter需要提供rebind<underline>函数 </underline></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="926" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="926" bodyend="935"/>
+        <references refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" compoundref="unique__ptr_8hpp" startline="325" endline="325">unique_ptr&lt; T, Deleter &gt;::get_deleter</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="structis__array" kindref="compound">is_array</ref>&lt; T &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr&lt; T &gt; make_unique</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>make_unique</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>创建unique_ptr </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造函数参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造函数参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>管理新对象的unique_ptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="973" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="973" bodyend="975"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <referencedby refid="classtyped__exception__wrapper_1a2973111a1bccf92fd924f6f6eb15c6de" compoundref="exception__ptr_8hpp" startline="97" endline="99">typed_exception_wrapper&lt; Ex &gt;::clone</referencedby>
+        <referencedby refid="classssl__client_1a8eb86cc4819094bb2f562bf63e871cc2" compoundref="tcp__client_8hpp" startline="444" endline="444">ssl_client::create_socket</referencedby>
+        <referencedby refid="classtcp__client_1a1c6ad9cebb50df86eb1a086cf9654a04" compoundref="tcp__client_8hpp" startline="395" endline="395">tcp_client::create_socket</referencedby>
+        <referencedby refid="classenv__parser_1a6c062ce0a6f2249b720688f2b86a9a74" compoundref="env__parser_8hpp" startline="161" endline="165">env_parser::env_parser</referencedby>
+        <referencedby refid="classmeta__type_1ad9dcf740d68c29e5e365c11398793476" compoundref="type_8hpp" startline="200" endline="203">meta_type::function</referencedby>
+        <referencedby refid="group___thread_pool_1ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group</referencedby>
+        <referencedby refid="classini__document_1a32fd6d1eb003f7a3971d90575f8cd0cc" compoundref="ini__value_8hpp" startline="372" endline="373">ini_document::ini_document</referencedby>
+        <referencedby refid="classini__parser_1a5becbf77ae74b693a87f2c39a1f026ea" compoundref="ini__parser_8hpp" startline="141" endline="146">ini_parser::ini_parser</referencedby>
+        <referencedby refid="classexception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" compoundref="exception__ptr_8hpp" startline="314" endline="324">exception_ptr::make_exception_ptr</referencedby>
+        <referencedby refid="classmeta__any_1af9faa6391511c99a6816e6c81c39994e" compoundref="reflect_2any_8hpp" startline="95" endline="96">meta_any::meta_any</referencedby>
+        <referencedby refid="classlock__free__queue_1af4d602957128b5cd5e8f0edb30c48c09" compoundref="lock__free__queue_8hpp" startline="261" endline="279">lock_free_queue&lt; T &gt;::pop</referencedby>
+        <referencedby refid="classmeta__type_1a9a585aabb217b278d7ee85188c99a758" compoundref="type_8hpp" startline="188" endline="192">meta_type::property</referencedby>
+        <referencedby refid="classregistry_1a80b07280b49b0e28ecc3f3a1b6c7cccc" compoundref="registry_8hpp" startline="56" endline="67">registry::register_type</referencedby>
+        <referencedby refid="classini__section_1aff20d7467b26968d562ebb85e2d5be84" compoundref="ini__value_8hpp" startline="265" endline="265">ini_section::set_property</referencedby>
+        <referencedby refid="classenv__document_1a81b7190ea0b57c461429b12ebe628dcb" compoundref="env__value_8hpp" startline="272" endline="275">env_document::set_variable</referencedby>
+        <referencedby refid="classtoml__parser_1a6ccef28c3e84966513f973f762eadf76" compoundref="toml__parser_8hpp" startline="351" endline="356">toml_parser::toml_parser</referencedby>
+        <referencedby refid="classtree__barrier_1a58cc248b4aeee58f81e06cc34a84bc24" compoundref="barrier_8hpp" startline="134" endline="141">tree_barrier&lt; CmplFunc &gt;::tree_barrier</referencedby>
+        <referencedby refid="classlock__free__queue_1a24c20d863075bbbcedc192df5625d1e3" compoundref="lock__free__queue_8hpp" startline="290" endline="315">lock_free_queue&lt; T &gt;::try_pop</referencedby>
+        <referencedby refid="classjson__builder_1a4fe5ea7a3f044eff8283e0445c9135bc" compoundref="json__builder_8hpp" startline="287" endline="287">json_builder::value</referencedby>
+        <referencedby refid="classjson__builder_1a373ac9793050a11087fd203e749a37ee" compoundref="json__builder_8hpp" startline="271" endline="271">json_builder::value</referencedby>
+        <referencedby refid="classjson__builder_1a70b6826772f8cce0872431dd92cbc74a" compoundref="json__builder_8hpp" startline="279" endline="279">json_builder::value</referencedby>
+        <referencedby refid="classjson__builder_1a15a2246641769184910e0eae719abe19" compoundref="json__builder_8hpp" startline="247" endline="247">json_builder::value</referencedby>
+        <referencedby refid="classjson__builder_1a08a2dee2721ab807b4b229ff236c0086" compoundref="json__builder_8hpp" startline="239" endline="239">json_builder::value</referencedby>
+        <referencedby refid="classtoml__builder_1a3866f69977ff310570e6c4780ec938a4" compoundref="toml__builder_8hpp" startline="301" endline="301">toml_builder::value</referencedby>
+        <referencedby refid="classtoml__builder_1ad2333a2825f4d46a714913bdbac97290" compoundref="toml__builder_8hpp" startline="325" endline="325">toml_builder::value</referencedby>
+        <referencedby refid="classtoml__builder_1a7a28424a203572063dd4a862581291e8" compoundref="toml__builder_8hpp" startline="309" endline="309">toml_builder::value</referencedby>
+        <referencedby refid="classtoml__builder_1a097b582702cca938c24659f346affa75" compoundref="toml__builder_8hpp" startline="293" endline="293">toml_builder::value</referencedby>
+        <referencedby refid="classtoml__builder_1af5db5e76d289392d22d2b51bc238321f" compoundref="toml__builder_8hpp" startline="333" endline="335">toml_builder::value</referencedby>
+        <referencedby refid="classtoml__builder_1a9cb5cd365b9c93f4654f28795ff6aeef" compoundref="toml__builder_8hpp" startline="379" endline="381">toml_builder::value_datetime</referencedby>
+        <referencedby refid="classtoml__builder_1aad0b21a3709c9ea7c4ffe7630a2090ae" compoundref="toml__builder_8hpp" startline="368" endline="370">toml_builder::value_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gab4d3b888298c124ec2952f99cf23ef9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__unbounded__array" kindref="compound">is_unbounded_array</ref>&lt; T &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr&lt; T &gt; make_unique</definition>
+        <argsstring>(const size_t len)</argsstring>
+        <name>make_unique</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+<para>创建unique_ptr </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>管理新数组的unique_ptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="984" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="984" bodyend="986"/>
+      </memberdef>
+      <memberdef kind="function" id="group___unique_pointer_1gad7eab479e3aa31dc40743c1c0431cd0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__bounded__array" kindref="compound">is_bounded_array</ref>&lt; T &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
+        <definition>unique_ptr&lt; T &gt; make_unique</definition>
+        <argsstring>(Args &amp;&amp;...)=delete</argsstring>
+        <name>make_unique</name>
+        <param>
+          <type>Args &amp;&amp;</type>
+          <declname>...</declname>
+        </param>
+        <briefdescription>
+<para>禁止创建已知边界数组的make_unique </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已知边界数组类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="994" column="12" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" declline="994" declcolumn="12"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>独占智能指针类和辅助工具 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

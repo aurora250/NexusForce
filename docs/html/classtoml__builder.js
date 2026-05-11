@@ -20,7 +20,6 @@ var classtoml__builder =
     [ "value", "classtoml__builder.html#ad2333a2825f4d46a714913bdbac97290", null ],
     [ "value", "classtoml__builder.html#a1aad9e5db24e9787d0c7b0099696f33c", null ],
     [ "value", "classtoml__builder.html#a7a28424a203572063dd4a862581291e8", null ],
-    [ "value", "classtoml__builder.html#a871d3b8dec13ade7cbb6164deb7fa0c8", null ],
     [ "value", "classtoml__builder.html#ae7fb111f91e945fc17deb01b91202042", null ],
     [ "value", "classtoml__builder.html#a097b582702cca938c24659f346affa75", null ],
     [ "value", "classtoml__builder.html#af5db5e76d289392d22d2b51bc238321f", null ],
@@ -28,6 +27,7 @@ var classtoml__builder =
     [ "value_array", "classtoml__builder.html#a8dba75c5b87fdd67695f896c9612fb43", null ],
     [ "value_datetime", "classtoml__builder.html#a9cb5cd365b9c93f4654f28795ff6aeef", null ],
     [ "value_inline_table", "classtoml__builder.html#ad888cd532b3641f92f003b0cf869bb8d", null ],
+    [ "value_iterable", "classtoml__builder.html#a2ad7425c6092660c2156fa60496fa21d", null ],
     [ "value_string", "classtoml__builder.html#aad0b21a3709c9ea7c4ffe7630a2090ae", null ],
     [ "value_table", "classtoml__builder.html#a13971996f0476380a61ee55adde14a80", null ]
 ];

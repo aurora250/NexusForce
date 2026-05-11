@@ -161,8 +161,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a651496a336ffaae1f7ee630d3a140787" id="r_a651496a336ffaae1f7ee630d3a140787"><td class="memItemLeft"><a id="a651496a336ffaae1f7ee630d3a140787" name="a651496a336ffaae1f7ee630d3a140787"></a>
 bool&#160;</td><td class="memItemRight"><b>is_lock_free</b> () const volatile noexcept</td></tr>
 <tr class="memdesc:a651496a336ffaae1f7ee630d3a140787"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的检查是否支持无锁操作 <br /></td></tr>
-<tr class="memitem:a3bb7cbe13ec8db0b8ba6f134eb31b1ab" id="r_a3bb7cbe13ec8db0b8ba6f134eb31b1ab"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a3bb7cbe13ec8db0b8ba6f134eb31b1ab">store</a> (const <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
-<tr class="memdesc:a3bb7cbe13ec8db0b8ba6f134eb31b1ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子存储指针操作  <br /></td></tr>
+<tr class="memitem:af64a00bcd805e76ccd7a07211cacc104" id="r_af64a00bcd805e76ccd7a07211cacc104"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#af64a00bcd805e76ccd7a07211cacc104">store</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memdesc:af64a00bcd805e76ccd7a07211cacc104"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子存储指针操作  <br /></td></tr>
 <tr class="memitem:a95b43b5cc705af7badc6d18dfc8b2431" id="r_a95b43b5cc705af7badc6d18dfc8b2431"><td class="memItemLeft"><a id="a95b43b5cc705af7badc6d18dfc8b2431" name="a95b43b5cc705af7badc6d18dfc8b2431"></a>
 NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><b>store</b> (const <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
 <tr class="memdesc:a95b43b5cc705af7badc6d18dfc8b2431"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子存储指针操作 <br /></td></tr>
@@ -238,7 +238,7 @@ struct atomic_base&lt; T * &gt;</div><p>指针类型的原子操作特化 </p>
 </dl>
 <p>提供指针类型的原子操作实现，支持指针算术运算。 </p>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01802">1802</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01901">1901</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a214f8e03498daef43ec6a2ba78ac9f05" name="a214f8e03498daef43ec6a2ba78ac9f05"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a214f8e03498daef43ec6a2ba78ac9f05">&#9670;&#160;</a></span>atomic_base()</h2>
@@ -273,7 +273,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01826">1826</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01925">1925</a> 行定义.</p>
 
 </div>
 </div>
@@ -323,9 +323,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02137">2137</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02260">2260</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00203">cmpexch_failure_order()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01646">atomic_base&lt; T &gt;::compare_exchange_strong()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00149">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00272">cmpexch_failure_order()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01745">atomic_base&lt; T &gt;::compare_exchange_strong()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a>.</p>
 
 </div>
 </div>
@@ -380,9 +380,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02111">2111</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02234">2234</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00978">atomic_cmpexch_strong_any()</a>, <a class="el" href="memory__order_8hpp_source.html#l00220">is_valid_cmpexch_failure_order()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00034">success</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01043">atomic_cmpexch_strong_any()</a>, <a class="el" href="memory__order_8hpp_source.html#l00296">is_valid_cmpexch_failure_order()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00034">success</a>.</p>
 
 </div>
 </div>
@@ -431,9 +431,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02090">2090</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02213">2213</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00203">cmpexch_failure_order()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01604">atomic_base&lt; T &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00149">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00272">cmpexch_failure_order()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01703">atomic_base&lt; T &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a>.</p>
 
 </div>
 </div>
@@ -488,9 +488,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否交换成功 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02065">2065</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02188">2188</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00857">atomic_cmpexch_weak_any()</a>, <a class="el" href="memory__order_8hpp_source.html#l00220">is_valid_cmpexch_failure_order()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00034">success</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00922">atomic_cmpexch_weak_any()</a>, <a class="el" href="memory__order_8hpp_source.html#l00296">is_valid_cmpexch_failure_order()</a>, <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00034">success</a>.</p>
 
 </div>
 </div>
@@ -533,9 +533,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>交换前的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02026">2026</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02149">2149</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00149">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a>.</p>
 
 </div>
 </div>
@@ -578,9 +578,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>添加前的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02175">2175</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02298">2298</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01086">atomic_fetch_add_any()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00149">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01151">atomic_fetch_add_any()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a>.</p>
 
 </div>
 </div>
@@ -621,7 +621,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>操作前的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01744">1744</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01843">1843</a> 行定义.</p>
 
 </div>
 </div>
@@ -662,7 +662,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>操作前的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01763">1763</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01862">1862</a> 行定义.</p>
 
 </div>
 </div>
@@ -705,9 +705,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>减去前的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02200">2200</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02323">2323</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01104">atomic_fetch_sub_any()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00149">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01169">atomic_fetch_sub_any()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a>.</p>
 
 </div>
 </div>
@@ -748,7 +748,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>操作前的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01781">1781</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01880">1880</a> 行定义.</p>
 
 </div>
 </div>
@@ -780,9 +780,9 @@ template&lt;typename T&gt; </div>
 <p>检查是否支持无锁操作 </p>
 <dl class="section return"><dt>返回</dt><dd>是否支持无锁 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01930">1930</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02029">2029</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01157">is_always_lock_free()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01222">is_always_lock_free()</a>.</p>
 
 </div>
 </div>
@@ -820,9 +820,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>加载的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01987">1987</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02098">2098</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00147">memory_order_acq_rel</a>, <a class="el" href="memory__order_8hpp_source.html#l00143">memory_order_acquire</a>, <a class="el" href="memory__order_8hpp_source.html#l00160">memory_order_mask</a>, <a class="el" href="memory__order_8hpp_source.html#l00145">memory_order_release</a>, <a class="el" href="memory__order_8hpp_source.html#l00149">memory_order_seq_cst</a> , 以及 <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00181">memory_order_acq_rel</a>, <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>, <a class="el" href="memory__order_8hpp_source.html#l00203">memory_order_mask</a>, <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a>, <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a> , 以及 <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a>.</p>
 
 </div>
 </div>
@@ -854,9 +854,9 @@ template&lt;typename T&gt; </div>
 <p>类型转换运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>当前指针值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01833">1833</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01932">1932</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01561">atomic_base&lt; T &gt;::load()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01650">atomic_base&lt; T &gt;::load()</a>.</p>
 
 </div>
 </div>
@@ -892,7 +892,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>与操作后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01478">1478</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01555">1555</a> 行定义.</p>
 
 </div>
 </div>
@@ -924,9 +924,9 @@ template&lt;typename T&gt; </div>
 <p>前置递增运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>递增后的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01884">1884</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01983">1983</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01706">atomic_base&lt; T &gt;::fetch_add()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01805">atomic_base&lt; T &gt;::fetch_add()</a>.</p>
 
 </div>
 </div>
@@ -958,9 +958,9 @@ template&lt;typename T&gt; </div>
 <p>后置递增运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>递增前的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01862">1862</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01961">1961</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01706">atomic_base&lt; T &gt;::fetch_add()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01805">atomic_base&lt; T &gt;::fetch_add()</a>.</p>
 
 </div>
 </div>
@@ -998,9 +998,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>增加后的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01907">1907</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02006">2006</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01706">atomic_base&lt; T &gt;::fetch_add()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01805">atomic_base&lt; T &gt;::fetch_add()</a>.</p>
 
 </div>
 </div>
@@ -1032,9 +1032,9 @@ template&lt;typename T&gt; </div>
 <p>前置递减运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>递减后的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01895">1895</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01994">1994</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01725">atomic_base&lt; T &gt;::fetch_sub()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01824">atomic_base&lt; T &gt;::fetch_sub()</a>.</p>
 
 </div>
 </div>
@@ -1066,9 +1066,9 @@ template&lt;typename T&gt; </div>
 <p>后置递减运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>递减前的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01873">1873</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01972">1972</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01725">atomic_base&lt; T &gt;::fetch_sub()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01824">atomic_base&lt; T &gt;::fetch_sub()</a>.</p>
 
 </div>
 </div>
@@ -1106,9 +1106,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>减少后的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01919">1919</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02018">2018</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01725">atomic_base&lt; T &gt;::fetch_sub()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01824">atomic_base&lt; T &gt;::fetch_sub()</a>.</p>
 
 </div>
 </div>
@@ -1146,9 +1146,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>设置后的指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01845">1845</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01944">1944</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01537">atomic_base&lt; T &gt;::store()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l01614">atomic_base&lt; T &gt;::store()</a>.</p>
 
 </div>
 </div>
@@ -1184,7 +1184,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>异或操作后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01510">1510</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01587">1587</a> 行定义.</p>
 
 </div>
 </div>
@@ -1220,12 +1220,12 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>或操作后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01494">1494</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01571">1571</a> 行定义.</p>
 
 </div>
 </div>
-<a id="a3bb7cbe13ec8db0b8ba6f134eb31b1ab" name="a3bb7cbe13ec8db0b8ba6f134eb31b1ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3bb7cbe13ec8db0b8ba6f134eb31b1ab">&#9670;&#160;</a></span>store()</h2>
+<a id="af64a00bcd805e76ccd7a07211cacc104" name="af64a00bcd805e76ccd7a07211cacc104"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af64a00bcd805e76ccd7a07211cacc104">&#9670;&#160;</a></span>store()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1238,7 +1238,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname">NEFORCE_ALWAYS_INLINE void <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::store </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a></td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
+          <td class="paramtype"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a></td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1262,9 +1262,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l01946">1946</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02045">2045</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00147">memory_order_acq_rel</a>, <a class="el" href="memory__order_8hpp_source.html#l00143">memory_order_acquire</a>, <a class="el" href="memory__order_8hpp_source.html#l00141">memory_order_consume</a>, <a class="el" href="memory__order_8hpp_source.html#l00160">memory_order_mask</a>, <a class="el" href="memory__order_8hpp_source.html#l00145">memory_order_release</a>, <a class="el" href="memory__order_8hpp_source.html#l00149">memory_order_seq_cst</a> , 以及 <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00181">memory_order_acq_rel</a>, <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>, <a class="el" href="memory__order_8hpp_source.html#l00175">memory_order_consume</a>, <a class="el" href="memory__order_8hpp_source.html#l00203">memory_order_mask</a>, <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a>, <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a> , 以及 <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a>.</p>
 
 </div>
 </div>
@@ -1306,9 +1306,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02155">2155</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="atomic__base_8hpp_source.html">atomic_base.hpp</a> 第 <a class="el" href="atomic__base_8hpp_source.html#l02278">2278</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__wait_8hpp_source.html#l00414">atomic_wait_address_v()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01561">atomic_base&lt; T &gt;::load()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00149">memory_order_seq_cst</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__wait_8hpp_source.html#l00414">atomic_wait_address_v()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01650">atomic_base&lt; T &gt;::load()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a>.</p>
 
 </div>
 </div>

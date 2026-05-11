@@ -5,8 +5,7 @@ var group___any =
       [ "any", "classany.html#a34a926505ba320df0e4ae2f001ed858f", null ],
       [ "any", "classany.html#a901fcf91bdb368a4b722f87193d60661", null ],
       [ "any", "classany.html#a3b2824e36b53a37792fc67315c866273", null ],
-      [ "any", "classany.html#ae00f2f63c5093eb8e7c2b92324067beb", null ],
-      [ "any", "classany.html#a5924cdc8356500e2d99fa65eb9348023", null ],
+      [ "any", "classany.html#af419c43ef848b665f2a381cdfa41e93a", null ],
       [ "~any", "classany.html#a2984bd733b273daa0a9ad72df9af4b21", null ],
       [ "emplace", "classany.html#a18e5610d000fc424d1a3f83dd2bd619c", null ],
       [ "emplace", "classany.html#aea9b89f1c3bc553cfd72245f42b9cf39", null ],
@@ -21,6 +20,5 @@ var group___any =
     [ "any_cast", "group___any.html#ga5183df05b029494e00a3a6cfedeaeefc", null ],
     [ "any_cast", "group___any.html#gac77841c2785c6a7c7cf788160ffa9afb", null ],
     [ "any_cast", "group___any.html#ga435372af463e628eb7e40e293d87c1da", null ],
-    [ "make_any", "group___any.html#gaa10dc2f937bfc4efbd98234e71af0860", null ],
-    [ "make_any", "group___any.html#ga183dcd85c0c0bf184c603ef4eb8cfeb9", null ]
+    [ "make_any", "group___any.html#gaa10dc2f937bfc4efbd98234e71af0860", null ]
 ];

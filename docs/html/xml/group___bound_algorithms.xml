@@ -1,0 +1,781 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___bound_algorithms" kind="group">
+    <compoundname>BoundAlgorithms</compoundname>
+    <title>边界查找算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___bound_algorithms_1ga752e4da223be382b51f4af020097beab" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator lower_bound</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;value, Compare comp)</argsstring>
+        <name>lower_bound</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>查找有序范围中第一个不小于指定值的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型，需要满足前向迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查找值的类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于value的元素的迭代器，或last如果未找到</para>
+</simplesect>
+在有序范围[first, last)中执行二分查找，返回第一个满足!comp(*it, value)的 元素位置。要求范围已按照comp排序。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="43" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="43" bodyend="63"/>
+        <references refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" compoundref="iterator_8hpp" startline="106" endline="129">advance</references>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <referencedby refid="group___bound_algorithms_1ga24ee998b1b95d1568e1c6674215a0159" compoundref="search_8hpp" startline="144" endline="147">binary_search</referencedby>
+        <referencedby refid="group___bound_algorithms_1gab3e48af102f10de7a152727a58aa8cb0" compoundref="search_8hpp" startline="161" endline="164">binary_search</referencedby>
+        <referencedby refid="group___compare_algorithms_1ga396286e554573557c1781c8b3bae3860" compoundref="compare_8hpp" startline="98" endline="102">equal_range</referencedby>
+        <referencedby refid="group___bound_algorithms_1gae8fcd0cdd4291f2092fab4f4451bf3c2" compoundref="search_8hpp" startline="77" endline="79">lower_bound</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bound_algorithms_1gae8fcd0cdd4291f2092fab4f4451bf3c2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator lower_bound</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;value)</argsstring>
+        <name>lower_bound</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>lower_bound的默认比较版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查找值的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于value的元素的迭代器，或last如果未找到</para>
+</simplesect>
+使用默认的less比较器执行lower_bound查找。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="77" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="77" bodyend="79"/>
+        <references refid="group___bound_algorithms_1ga752e4da223be382b51f4af020097beab" compoundref="search_8hpp" startline="43" endline="63">lower_bound</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bound_algorithms_1ga6b8b644144e4b0e5f0258c0b3018385e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator upper_bound</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;value, Compare comp)</argsstring>
+        <name>upper_bound</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>查找有序范围中第一个大于指定值的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型，需要满足前向迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查找值的类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于value的元素的迭代器，或last如果未找到</para>
+</simplesect>
+在有序范围[first, last)中执行二分查找，返回第一个满足comp(value, *it)的 元素位置。要求范围已按照comp排序。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="96" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="96" bodyend="116"/>
+        <references refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" compoundref="iterator_8hpp" startline="106" endline="129">advance</references>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <referencedby refid="group___compare_algorithms_1ga396286e554573557c1781c8b3bae3860" compoundref="compare_8hpp" startline="98" endline="102">equal_range</referencedby>
+        <referencedby refid="group___bound_algorithms_1ga6f6bb1298a0ac7a415fb627a1ef9d47f" compoundref="search_8hpp" startline="130" endline="132">upper_bound</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bound_algorithms_1ga6f6bb1298a0ac7a415fb627a1ef9d47f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator upper_bound</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;value)</argsstring>
+        <name>upper_bound</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>upper_bound的默认比较版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查找值的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于value的元素的迭代器，或last如果未找到</para>
+</simplesect>
+使用默认的less比较器执行upper_bound查找。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="130" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="130" bodyend="132"/>
+        <references refid="group___bound_algorithms_1ga6b8b644144e4b0e5f0258c0b3018385e" compoundref="search_8hpp" startline="96" endline="116">upper_bound</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bound_algorithms_1ga24ee998b1b95d1568e1c6674215a0159" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool binary_search</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;value)</argsstring>
+        <name>binary_search</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在有序范围内进行二分查找 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型，需要满足前向迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查找值的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果找到value则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="144" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="144" bodyend="147"/>
+        <references refid="group___bound_algorithms_1ga752e4da223be382b51f4af020097beab" compoundref="search_8hpp" startline="43" endline="63">lower_bound</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bound_algorithms_1gab3e48af102f10de7a152727a58aa8cb0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool binary_search</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;value, Compare comp)</argsstring>
+        <name>binary_search</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>binary_search的谓词版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型，需要满足前向迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查找值的类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果找到value则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="161" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="161" bodyend="164"/>
+        <references refid="group___bound_algorithms_1ga752e4da223be382b51f4af020097beab" compoundref="search_8hpp" startline="43" endline="63">lower_bound</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bound_algorithms_1gaf298d16e23f7d383c2433077142cd9a8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool includes</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp)</argsstring>
+        <name>includes</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>last2</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>检查一个有序范围是否包含另一个有序范围的所有元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列迭代器类型，需要满足输入迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列迭代器类型，需要满足输入迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果主序列包含子序列的所有元素则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="179" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="179" bodyend="194"/>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="group___bound_algorithms_1ga0c529451c3d9d93f8b4f2550519e0285" compoundref="search_8hpp" startline="207" endline="209">includes</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bound_algorithms_1ga0c529451c3d9d93f8b4f2550519e0285" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool includes</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)</argsstring>
+        <name>includes</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>last2</declname>
+        </param>
+        <briefdescription>
+<para>includes的默认比较版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果主序列包含子序列的所有元素则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="207" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="207" bodyend="209"/>
+        <references refid="group___bound_algorithms_1gaf298d16e23f7d383c2433077142cd9a8" compoundref="search_8hpp" startline="179" endline="194">includes</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>在有序范围内查找边界的二分查找算法 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

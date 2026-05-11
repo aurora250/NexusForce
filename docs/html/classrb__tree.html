@@ -256,10 +256,10 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept(<a class="el" h
 <tr class="memdesc:ac436d771e608eae4020af1d362525b1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的元素范围（常量版本）  <br /></td></tr>
 <tr class="memitem:ad580954ee75f0f3484d40a58407061bc" id="r_ad580954ee75f0f3484d40a58407061bc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad580954ee75f0f3484d40a58407061bc">swap</a> (<a class="el" href="classrb__tree.html">rb_tree</a> &amp;other) noexcept(<a class="el" href="group___swap_utility.html#ga9cc217ccd3ddd28edc3ebfd181bba2f3">is_nothrow_swappable_v</a>&lt; Compare &gt; &amp;&amp;<a class="el" href="group___swap_utility.html#ga9cc217ccd3ddd28edc3ebfd181bba2f3">is_nothrow_swappable_v</a>&lt; KeyOfValue &gt; &amp;&amp;<a class="el" href="group___swap_utility.html#ga9cc217ccd3ddd28edc3ebfd181bba2f3">is_nothrow_swappable_v</a>&lt; <a class="el" href="#ab93a38a029b781c1f2c29216bfcf185c">allocator_type</a> &gt;)</td></tr>
 <tr class="memdesc:ad580954ee75f0f3484d40a58407061bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个红黑树的内容  <br /></td></tr>
-<tr class="memitem:a11a44b4e9a5976175faaac92ac8f0633" id="r_a11a44b4e9a5976175faaac92ac8f0633"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a11a44b4e9a5976175faaac92ac8f0633">operator==</a> (const <a class="el" href="classrb__tree.html">rb_tree</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga682c1803a35a1de8b019d003138ae5dd">equal</a>(<a class="el" href="#a51db84fa478a7fff5e97e4755a1088b4">cbegin</a>(), <a class="el" href="#ac2fc860e4e3e46ed697bbc8e43bfb92c">cend</a>(), rhs.cbegin())))</td></tr>
-<tr class="memdesc:a11a44b4e9a5976175faaac92ac8f0633"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
-<tr class="memitem:af5162906b90e72a79f56ea96f46d626b" id="r_af5162906b90e72a79f56ea96f46d626b"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#af5162906b90e72a79f56ea96f46d626b">operator&lt;</a> (const <a class="el" href="classrb__tree.html">rb_tree</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga9b8af8f5da11c5b93627d6e5fb30f784">lexicographical_compare</a>(<a class="el" href="#a51db84fa478a7fff5e97e4755a1088b4">cbegin</a>(), <a class="el" href="#ac2fc860e4e3e46ed697bbc8e43bfb92c">cend</a>(), rhs.cbegin(), rhs.cend())))</td></tr>
-<tr class="memdesc:af5162906b90e72a79f56ea96f46d626b"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
+<tr class="memitem:aecca4c4ecd4db48cd306c4efe0167ebd" id="r_aecca4c4ecd4db48cd306c4efe0167ebd"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#aecca4c4ecd4db48cd306c4efe0167ebd">equal_to</a> (const <a class="el" href="classrb__tree.html">rb_tree</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga682c1803a35a1de8b019d003138ae5dd">equal</a>(<a class="el" href="#a51db84fa478a7fff5e97e4755a1088b4">cbegin</a>(), <a class="el" href="#ac2fc860e4e3e46ed697bbc8e43bfb92c">cend</a>(), rhs.cbegin())))</td></tr>
+<tr class="memdesc:aecca4c4ecd4db48cd306c4efe0167ebd"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:a36125806a8318855541ed4555c985dc0" id="r_a36125806a8318855541ed4555c985dc0"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a36125806a8318855541ed4555c985dc0">less_than</a> (const <a class="el" href="classrb__tree.html">rb_tree</a> &amp;rhs) const noexcept(noexcept(_NEFORCE <a class="el" href="group___compare_algorithms.html#ga9b8af8f5da11c5b93627d6e5fb30f784">lexicographical_compare</a>(<a class="el" href="#a51db84fa478a7fff5e97e4755a1088b4">cbegin</a>(), <a class="el" href="#ac2fc860e4e3e46ed697bbc8e43bfb92c">cend</a>(), rhs.cbegin(), rhs.cend())))</td></tr>
+<tr class="memdesc:a36125806a8318855541ed4555c985dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;rb_tree_node&lt;Value&gt;&gt;&gt;<br />
@@ -276,7 +276,7 @@ class rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;</div><p>红黑树�
 </dl>
 <p>红黑树是一种自平衡二叉搜索树，作为关联式容器的底层实现。 </p>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00609">609</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00610">610</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="af86e9e7c91ba11136d83dc5618b7ee62" name="af86e9e7c91ba11136d83dc5618b7ee62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af86e9e7c91ba11136d83dc5618b7ee62">&#9670;&#160;</a></span>rb_tree() <span class="overload">[1/3]</span></h2>
@@ -311,7 +311,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00946">946</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00947">947</a> 行定义.</p>
 
 </div>
 </div>
@@ -348,7 +348,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00955">955</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00956">956</a> 行定义.</p>
 
 </div>
 </div>
@@ -385,7 +385,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00981">981</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00982">982</a> 行定义.</p>
 
 </div>
 </div>
@@ -418,7 +418,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取常量起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01032">1032</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01033">1033</a> 行定义.</p>
 
 </div>
 </div>
@@ -450,9 +450,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01020">1020</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01021">1021</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01356">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01062">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rend()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01357">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01063">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rend()</a>.</p>
 
 </div>
 </div>
@@ -484,9 +484,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取常量起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01044">1044</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01045">1045</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01032">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::begin()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01086">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::crend()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01573">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator&lt;()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01563">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator==()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01033">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::begin()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01087">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::crend()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01564">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_to()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01574">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::less_than()</a>.</p>
 
 </div>
 </div>
@@ -518,9 +518,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取常量结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向头节点的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01050">1050</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01051">1051</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01080">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::crbegin()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01038">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::end()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01413">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::find()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01573">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator&lt;()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01563">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator==()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01081">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::crbegin()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01039">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::end()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01564">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_to()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01414">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::find()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01574">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::less_than()</a>.</p>
 
 </div>
 </div>
@@ -558,7 +558,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>匹配的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01438">1438</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01439">1439</a> 行定义.</p>
 
 </div>
 </div>
@@ -590,9 +590,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取常量反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最大元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01080">1080</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01081">1081</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01068">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rbegin()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01069">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rbegin()</a>.</p>
 
 </div>
 </div>
@@ -624,9 +624,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取常量反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01086">1086</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01087">1087</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01074">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rend()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01075">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rend()</a>.</p>
 
 </div>
 </div>
@@ -672,9 +672,9 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01229">1229</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01230">1230</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01239">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01246">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01240">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01247">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal()</a>.</p>
 
 </div>
 </div>
@@ -725,9 +725,9 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01256">1256</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01257">1257</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01301">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01311">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01302">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01312">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal()</a>.</p>
 
 </div>
 </div>
@@ -773,9 +773,9 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01121">1121</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01122">1122</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01131">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01138">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01132">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01139">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique()</a>.</p>
 
 </div>
 </div>
@@ -826,9 +826,9 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01148">1148</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01149">1149</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01195">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01205">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01196">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01206">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique()</a>.</p>
 
 </div>
 </div>
@@ -860,7 +860,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>检查是否为空 </p>
 <dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01104">1104</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01105">1105</a> 行定义.</p>
 
 </div>
 </div>
@@ -892,7 +892,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取常量结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向头节点的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01038">1038</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01039">1039</a> 行定义.</p>
 
 </div>
 </div>
@@ -924,9 +924,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向头节点的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01026">1026</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01027">1027</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01356">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01388">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::find()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01056">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rbegin()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01357">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01389">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::find()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01057">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rbegin()</a>.</p>
 
 </div>
 </div>
@@ -964,9 +964,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01533">1533</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01534">1534</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01438">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::count()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01333">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01439">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::count()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01334">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a>.</p>
 
 </div>
 </div>
@@ -1004,7 +1004,45 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01542">1542</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01543">1543</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aecca4c4ecd4db48cd306c4efe0167ebd" name="aecca4c4ecd4db48cd306c4efe0167ebd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecca4c4ecd4db48cd306c4efe0167ebd">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;rb_tree_node&lt;Value&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classrb__tree.html">rb_tree</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrb__tree.html">rb_tree</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧红黑树 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个红黑树大小相等且对应元素相等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01564">1564</a> 行定义.</p>
 
 </div>
 </div>
@@ -1042,9 +1080,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>删除的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01333">1333</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01334">1334</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01333">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01356">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01334">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01357">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase()</a>.</p>
 
 </div>
 </div>
@@ -1086,7 +1124,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01356">1356</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01357">1357</a> 行定义.</p>
 
 </div>
 </div>
@@ -1123,7 +1161,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01344">1344</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01345">1345</a> 行定义.</p>
 
 </div>
 </div>
@@ -1161,7 +1199,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的迭代器，未找到则返回end() </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01388">1388</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01389">1389</a> 行定义.</p>
 
 </div>
 </div>
@@ -1199,7 +1237,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的常量迭代器，未找到则返回cend() </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01413">1413</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01414">1414</a> 行定义.</p>
 
 </div>
 </div>
@@ -1237,7 +1275,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01239">1239</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01240">1240</a> 行定义.</p>
 
 </div>
 </div>
@@ -1287,7 +1325,7 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01322">1322</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01323">1323</a> 行定义.</p>
 
 </div>
 </div>
@@ -1330,7 +1368,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01301">1301</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01302">1302</a> 行定义.</p>
 
 </div>
 </div>
@@ -1373,7 +1411,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01311">1311</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01312">1312</a> 行定义.</p>
 
 </div>
 </div>
@@ -1411,7 +1449,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01246">1246</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01247">1247</a> 行定义.</p>
 
 </div>
 </div>
@@ -1449,7 +1487,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01131">1131</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01132">1132</a> 行定义.</p>
 
 </div>
 </div>
@@ -1499,7 +1537,7 @@ template&lt;typename Iterator, <a class="el" href="group___type_traits_utilities
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01216">1216</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01217">1217</a> 行定义.</p>
 
 </div>
 </div>
@@ -1542,7 +1580,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01195">1195</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01196">1196</a> 行定义.</p>
 
 </div>
 </div>
@@ -1585,7 +1623,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01205">1205</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01206">1206</a> 行定义.</p>
 
 </div>
 </div>
@@ -1623,7 +1661,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01138">1138</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01139">1139</a> 行定义.</p>
 
 </div>
 </div>
@@ -1655,7 +1693,45 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取键比较函数对象 </p>
 <dl class="section return"><dt>返回</dt><dd>键比较函数对象的副本 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01110">1110</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01111">1111</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a36125806a8318855541ed4555c985dc0" name="a36125806a8318855541ed4555c985dc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36125806a8318855541ed4555c985dc0">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;rb_tree_node&lt;Value&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classrb__tree.html">rb_tree</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classrb__tree.html">rb_tree</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧红黑树 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01574">1574</a> 行定义.</p>
 
 </div>
 </div>
@@ -1693,9 +1769,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01449">1449</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01450">1450</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01533">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01542">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01534">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01543">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range()</a>.</p>
 
 </div>
 </div>
@@ -1733,7 +1809,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01470">1470</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01471">1471</a> 行定义.</p>
 
 </div>
 </div>
@@ -1765,45 +1841,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取最大可能大小 </p>
 <dl class="section return"><dt>返回</dt><dd>最大元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01098">1098</a> 行定义.</p>
-
-</div>
-</div>
-<a id="af5162906b90e72a79f56ea96f46d626b" name="af5162906b90e72a79f56ea96f46d626b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5162906b90e72a79f56ea96f46d626b">&#9670;&#160;</a></span>operator&lt;()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;rb_tree_node&lt;Value&gt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classrb__tree.html">rb_tree</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::operator&lt; </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classrb__tree.html">rb_tree</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>小于比较操作符 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>右侧红黑树 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01573">1573</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01099">1099</a> 行定义.</p>
 
 </div>
 </div>
@@ -1841,7 +1879,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00968">968</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00969">969</a> 行定义.</p>
 
 </div>
 </div>
@@ -1879,45 +1917,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00997">997</a> 行定义.</p>
-
-</div>
-</div>
-<a id="a11a44b4e9a5976175faaac92ac8f0633" name="a11a44b4e9a5976175faaac92ac8f0633"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11a44b4e9a5976175faaac92ac8f0633">&#9670;&#160;</a></span>operator==()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare, typename Alloc = allocator&lt;rb_tree_node&lt;Value&gt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classrb__tree.html">rb_tree</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::operator== </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classrb__tree.html">rb_tree</a>&lt; Key, Value, KeyOfValue, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>相等比较操作符 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>右侧红黑树 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>如果两个红黑树大小相等且对应元素相等返回true </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01563">1563</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l00998">998</a> 行定义.</p>
 
 </div>
 </div>
@@ -1949,7 +1949,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取常量反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最大元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01068">1068</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01069">1069</a> 行定义.</p>
 
 </div>
 </div>
@@ -1981,7 +1981,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最大元素的反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01056">1056</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01057">1057</a> 行定义.</p>
 
 </div>
 </div>
@@ -2013,7 +2013,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取常量反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01074">1074</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01075">1075</a> 行定义.</p>
 
 </div>
 </div>
@@ -2045,7 +2045,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01062">1062</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01063">1063</a> 行定义.</p>
 
 </div>
 </div>
@@ -2077,9 +2077,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 <p>获取元素数量 </p>
 <dl class="section return"><dt>返回</dt><dd>树中元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01092">1092</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01093">1093</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01256">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::emplace_equal_hint()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01148">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::emplace_unique_hint()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01563">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator==()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01257">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::emplace_equal_hint()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01149">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::emplace_unique_hint()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01564">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_to()</a>.</p>
 
 </div>
 </div>
@@ -2116,9 +2116,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01550">1550</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01551">1551</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l00968">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00997">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l00969">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l00998">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=()</a>.</p>
 
 </div>
 </div>
@@ -2156,9 +2156,9 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01491">1491</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01492">1492</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01533">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01542">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="rb__tree_8hpp_source.html#l01534">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range()</a> , 以及 <a class="el" href="rb__tree_8hpp_source.html#l01543">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range()</a>.</p>
 
 </div>
 </div>
@@ -2196,7 +2196,7 @@ template&lt;typename Key, typename Value, typename KeyOfValue, typename Compare,
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01512">1512</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="rb__tree_8hpp_source.html">rb_tree.hpp</a> 第 <a class="el" href="rb__tree_8hpp_source.html#l01513">1513</a> 行定义.</p>
 
 </div>
 </div>

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___allocated_ptr" kind="group">
+    <compoundname>AllocatedPtr</compoundname>
+    <title>分配内存指针</title>
+    <innerclass refid="structallocated__ptr" prot="public">allocated_ptr</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___allocated_ptr_1ga3f77e08830ea228fc0e451c67c396ba7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structallocated__ptr" kindref="compound">allocated_ptr</ref>&lt; Alloc &gt;</type>
+        <definition>allocated_ptr&lt; Alloc &gt; allocate_guarded</definition>
+        <argsstring>(Alloc &amp;alloc)</argsstring>
+        <name>allocate_guarded</name>
+        <param>
+          <type>Alloc &amp;</type>
+          <declname>alloc</declname>
+        </param>
+        <briefdescription>
+<para>分配内存并创建allocated_ptr </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>管理分配内存的allocated_ptr</para>
+</simplesect>
+使用分配器分配单个元素内存，并返回管理该内存的allocated_ptr。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/allocated_ptr.hpp" line="111" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/allocated_ptr.hpp" bodystart="111" bodyend="113"/>
+        <references refid="structallocator__traits_1a5ebe4a0aa32948630951406b84d18bac" compoundref="allocator__traits_8hpp" startline="179" endline="181">allocator_traits&lt; Alloc &gt;::allocate</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>管理分配内存的智能指针工具 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

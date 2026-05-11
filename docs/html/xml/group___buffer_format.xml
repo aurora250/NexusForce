@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___buffer_format" kind="group">
+    <compoundname>BufferFormat</compoundname>
+    <title>缓冲区格式化</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___buffer_format_1ga6b753f9609726ddeb67461bc1213a1fb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API vsprintf</definition>
+        <argsstring>(char *buf, const char *fmt, std::va_list args) noexcept</argsstring>
+        <name>vsprintf</name>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>std::va_list</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>格式化到缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可变参数列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>写入缓冲区的字符数，不包括终止字符</para>
+</simplesect>
+不检查缓冲区大小。</para>
+<para><simplesect kind="note"><para>使用 MEMORY_BIG_ALLOC_THRESHHOLD 作为缓冲区大小限制 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/vsprintf.hpp" line="32" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/vsprintf.hpp" declline="32" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="group___buffer_format_1ga53abab34a25e74d4186f3d04083b6533" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API vsnprintf</definition>
+        <argsstring>(char *buf, size_t size, const char *fmt, std::va_list args) noexcept</argsstring>
+        <name>vsnprintf</name>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>std::va_list</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>安全格式化到缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓冲区大小 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可变参数列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>应该写入缓冲区的字符数，不包括终止空字符</para>
+</simplesect>
+确保不会写入超过size-1个字符。如果size为0，则返回应该写入的字符数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/vsprintf.hpp" line="44" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/vsprintf.hpp" declline="44" declcolumn="17"/>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="group___buffer_format_1ga956f5ada91bb688c39b4ac7ec4582a3b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API sprintf</definition>
+        <argsstring>(char *buf, const char *fmt,...) noexcept</argsstring>
+        <name>sprintf</name>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+<para>格式化到缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>...</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可变参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>写入缓冲区的字符数，不包括终止空字符</para>
+</simplesect>
+不检查缓冲区大小。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/vsprintf.hpp" line="55" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/vsprintf.hpp" declline="55" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="group___buffer_format_1gaa3dfd38220c9967f8d90345d2bcb8054" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API snprintf</definition>
+        <argsstring>(char *buf, size_t size, const char *fmt,...) noexcept</argsstring>
+        <name>snprintf</name>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+<para>安全格式化到缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓冲区大小 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>...</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可变参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>应该写入缓冲区的字符数，不包括终止空字符</para>
+</simplesect>
+确保不会写入超过size-1个字符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/vsprintf.hpp" line="67" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/vsprintf.hpp" declline="67" declcolumn="17"/>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <references refid="group___buffer_format_1gaa3dfd38220c9967f8d90345d2bcb8054">snprintf</references>
+        <referencedby refid="group___buffer_format_1gaa3dfd38220c9967f8d90345d2bcb8054">snprintf</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___buffer_format_1gad4597f4e0031597c36c928dbf5fa391e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API scprintf</definition>
+        <argsstring>(const char *fmt,...) noexcept</argsstring>
+        <name>scprintf</name>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+<para>计算格式化字符串所需缓冲区大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>...</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可变参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式化结果所需的字符数，不包括终止空字符</para>
+</simplesect>
+计算将格式字符串和参数格式化后所需的缓冲区大小。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/vsprintf.hpp" line="77" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/vsprintf.hpp" declline="77" declcolumn="17"/>
+        <references refid="group___buffer_format_1gad4597f4e0031597c36c928dbf5fa391e">scprintf</references>
+        <referencedby refid="group___buffer_format_1gad4597f4e0031597c36c928dbf5fa391e">scprintf</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>C风格缓冲区格式化功能 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

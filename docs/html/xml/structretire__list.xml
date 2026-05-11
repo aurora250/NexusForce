@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structretire__list" kind="struct" language="C++" prot="public">
+    <compoundname>retire_list</compoundname>
+    <includes refid="hazard__ptr_8hpp" local="no">hazard_ptr.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structretire__list_1a883604f763908f6360de2d705f8a1589" prot="public" static="no" mutable="no">
+        <type><ref refid="classhazard__pointer__obj__base" kindref="compound">hazard_pointer_obj_base</ref> *</type>
+        <definition>hazard_pointer_obj_base* retire_list::head</definition>
+        <argsstring></argsstring>
+        <name>head</name>
+        <qualifiedname>retire_list::head</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>链表头 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="128" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="128" bodyend="128"/>
+        <referencedby refid="structretire__list_1a33fc37aaad8e02fc7ab0c3d9a32a8113" compoundref="hazard__ptr_8hpp" startline="135" endline="139">add</referencedby>
+        <referencedby refid="structretire__list_1a661fc02d5203c1a70776d49173813cc9" compoundref="hazard__ptr_8hpp" startline="144" endline="152">clear</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structretire__list_1a15ffcee565539d025ab2894a6bad5c7d" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t retire_list::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <qualifiedname>retire_list::count</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>列表大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="129" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="129" bodyend="129"/>
+        <referencedby refid="structretire__list_1a33fc37aaad8e02fc7ab0c3d9a32a8113" compoundref="hazard__ptr_8hpp" startline="135" endline="139">add</referencedby>
+        <referencedby refid="structretire__list_1a661fc02d5203c1a70776d49173813cc9" compoundref="hazard__ptr_8hpp" startline="144" endline="152">clear</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structretire__list_1a33fc37aaad8e02fc7ab0c3d9a32a8113" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void retire_list::add</definition>
+        <argsstring>(hazard_pointer_obj_base *obj)</argsstring>
+        <name>add</name>
+        <qualifiedname>retire_list::add</qualifiedname>
+        <param>
+          <type><ref refid="classhazard__pointer__obj__base" kindref="compound">hazard_pointer_obj_base</ref> *</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>添加对象到退役列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要添加的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="135" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="135" bodyend="139"/>
+        <references refid="structretire__list_1a15ffcee565539d025ab2894a6bad5c7d" compoundref="hazard__ptr_8hpp" startline="129" endline="129">count</references>
+        <references refid="structretire__list_1a883604f763908f6360de2d705f8a1589" compoundref="hazard__ptr_8hpp" startline="128" endline="128">head</references>
+        <references refid="classhazard__pointer__obj__base_1ade76a3fc1006cff9269564b074937bf7" compoundref="hazard__ptr_8hpp" startline="86" endline="86">hazard_pointer_obj_base::next</references>
+      </memberdef>
+      <memberdef kind="function" id="structretire__list_1a661fc02d5203c1a70776d49173813cc9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void retire_list::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>retire_list::clear</qualifiedname>
+        <briefdescription>
+<para>清空并销毁所有对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="144" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="144" bodyend="152"/>
+        <references refid="structretire__list_1a15ffcee565539d025ab2894a6bad5c7d" compoundref="hazard__ptr_8hpp" startline="129" endline="129">count</references>
+        <references refid="structretire__list_1a883604f763908f6360de2d705f8a1589" compoundref="hazard__ptr_8hpp" startline="128" endline="128">head</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <referencedby refid="structretire__list_1ab8166a60fc5f971df18cf6e68ffe060e" compoundref="hazard__ptr_8hpp" startline="157" endline="157">~retire_list</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structretire__list_1ab8166a60fc5f971df18cf6e68ffe060e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>retire_list::~retire_list</definition>
+        <argsstring>()</argsstring>
+        <name>~retire_list</name>
+        <qualifiedname>retire_list::~retire_list</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="157" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="157" bodyend="157"/>
+        <references refid="structretire__list_1a661fc02d5203c1a70776d49173813cc9" compoundref="hazard__ptr_8hpp" startline="144" endline="152">clear</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程本地退役列表 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>每个线程维护一个退役对象列表，当列表大小达到阈值时触发扫描回收。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>hazard_pointer_obj_base</label>
+        <link refid="classhazard__pointer__obj__base"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>retire_list</label>
+        <link refid="structretire__list"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>head</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="127" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="127" bodyend="158"/>
+    <listofallmembers>
+      <member refid="structretire__list_1a33fc37aaad8e02fc7ab0c3d9a32a8113" prot="public" virt="non-virtual"><scope>retire_list</scope><name>add</name></member>
+      <member refid="structretire__list_1a661fc02d5203c1a70776d49173813cc9" prot="public" virt="non-virtual"><scope>retire_list</scope><name>clear</name></member>
+      <member refid="structretire__list_1a15ffcee565539d025ab2894a6bad5c7d" prot="public" virt="non-virtual"><scope>retire_list</scope><name>count</name></member>
+      <member refid="structretire__list_1a883604f763908f6360de2d705f8a1589" prot="public" virt="non-virtual"><scope>retire_list</scope><name>head</name></member>
+      <member refid="structretire__list_1ab8166a60fc5f971df18cf6e68ffe060e" prot="public" virt="non-virtual"><scope>retire_list</scope><name>~retire_list</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

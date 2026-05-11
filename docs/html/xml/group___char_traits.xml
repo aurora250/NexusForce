@@ -1,0 +1,1211 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___char_traits" kind="group">
+    <compoundname>CharTraits</compoundname>
+    <title>字符特征</title>
+    <innerclass refid="structbase__char__traits" prot="public">base_char_traits</innerclass>
+    <innerclass refid="structnarrow__char__traits" prot="public">narrow_char_traits</innerclass>
+    <innerclass refid="structchar__traits" prot="public">char_traits</innerclass>
+    <innerclass refid="structchar__traits_3_01char_01_4" prot="public">char_traits&lt; char &gt;</innerclass>
+    <innerclass refid="structchar__traits_3_01wchar__t_01_4" prot="public">char_traits&lt; wchar_t &gt;</innerclass>
+    <innerclass refid="structchar__traits_3_01char8__t_01_4" prot="public">char_traits&lt; char8_t &gt;</innerclass>
+    <innerclass refid="structchar__traits_3_01char16__t_01_4" prot="public">char_traits&lt; char16_t &gt;</innerclass>
+    <innerclass refid="structchar__traits_3_01char32__t_01_4" prot="public">char_traits&lt; char32_t &gt;</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___char_traits_1ga2cf769a14029d485dcf792d82d53d889" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+        </templateparamlist>
+        <type>typename Traits::char_type</type>
+        <definition>using char_traits_char_t = typename Traits::char_type</definition>
+        <argsstring></argsstring>
+        <name>char_traits_char_t</name>
+        <briefdescription>
+<para>获取字符特征中的字符类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="255" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="255" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+        </templateparamlist>
+        <type>const typename Traits::char_type *</type>
+        <definition>using char_traits_ptr_t = const typename Traits::char_type*</definition>
+        <argsstring></argsstring>
+        <name>char_traits_ptr_t</name>
+        <briefdescription>
+<para>获取字符特征中的字符指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="262" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="262" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___char_traits_1gaf865a3fe4fe8218ff4494e669b767131" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool char_traits_equal</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; lhs, const size_t lh_size, const char_traits_ptr_t&lt; Traits &gt; rhs, const size_t rh_size) noexcept</argsstring>
+        <name>char_traits_equal</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>lh_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>rhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>rh_size</declname>
+        </param>
+        <briefdescription>
+<para>比较两个字符序列是否相等 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lh_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rh_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右序列长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="324" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="324" bodyend="334"/>
+        <referencedby refid="classbasic__string_1a3765fe57352371adf61e5c5903b4a4ea" compoundref="basic__string_8hpp" startline="2740" endline="2742">basic_string&lt; char &gt;::equal_to</referencedby>
+        <referencedby refid="classbasic__string__view_1a0e1bc6e6834af21859a43023bde7732d" compoundref="basic__string__view_8hpp" startline="994" endline="996">basic_string_view&lt; typename Traits::char_type, Traits &gt;::equal_to</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1ga8f847c8aaf0df378c0a3b9a962313fcc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+        </templateparamlist>
+        <type>int</type>
+        <definition>int char_traits_compare</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; lhs, const size_t lh_size, const char_traits_ptr_t&lt; Traits &gt; rhs, const size_t rh_size) noexcept</argsstring>
+        <name>char_traits_compare</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>lh_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>rhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>rh_size</declname>
+        </param>
+        <briefdescription>
+<para>比较两个字符序列（三路比较） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lh_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rh_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右序列长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>负值（lhs &lt; rhs）、0（相等）、正值（lhs &gt; rhs） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="346" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="346" bodyend="360"/>
+        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
+        <referencedby refid="classbasic__string_1a9b1aec70f3e71c807bc92d570d779f18" compoundref="basic__string_8hpp" startline="2209" endline="2211">basic_string&lt; char &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1a1c4ef1f179b03450dc6f387a5b8d7a97" compoundref="basic__string__view_8hpp" startline="449" endline="451">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1ga9f6288d62cd9c734de8042499b513e23" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t char_traits_find</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; dest, const size_t dest_size, const size_t start, const char_traits_ptr_t&lt; Traits &gt; rsc, const size_t rsc_size) noexcept</argsstring>
+        <name>char_traits_find</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>dest_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>rsc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>rsc_size</declname>
+        </param>
+        <briefdescription>
+<para>在字符序列中查找子序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的子序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>子序列首次出现的位置，未找到则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="373" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="373" bodyend="393"/>
+        <referencedby refid="classbasic__string_1a1d7b55969fc7f2dcda1ec2432fecdfaf" compoundref="basic__string_8hpp" startline="2363" endline="2366">basic_string&lt; char &gt;::find</referencedby>
+        <referencedby refid="classbasic__string_1a2fbf69f7aff493266d7b4c330186abb1" compoundref="basic__string_8hpp" startline="2374" endline="2377">basic_string&lt; char &gt;::find</referencedby>
+        <referencedby refid="classbasic__string_1ab31ea70cd560d0e33d57e73e62f5fa55" compoundref="basic__string_8hpp" startline="2380" endline="2382">basic_string&lt; char &gt;::find</referencedby>
+        <referencedby refid="classbasic__string_1a5579ce15a74949df6fb0387c22a5f5d4" compoundref="basic__string_8hpp" startline="2385" endline="2388">basic_string&lt; char &gt;::find</referencedby>
+        <referencedby refid="classbasic__string_1a89b727ff32a54576831ad6d5ffb0b685" compoundref="basic__string_8hpp" startline="2391" endline="2394">basic_string&lt; char &gt;::find</referencedby>
+        <referencedby refid="classbasic__string__view_1ad0468a4f9d25f5cd285c1a066360d47c" compoundref="basic__string__view_8hpp" startline="550" endline="552">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find</referencedby>
+        <referencedby refid="classbasic__string__view_1a42de3ac84cee434c4c00edb62f4bf022" compoundref="basic__string__view_8hpp" startline="571" endline="574">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find</referencedby>
+        <referencedby refid="classbasic__string__view_1aae656f95acb8b15aab85ef142d333537" compoundref="basic__string__view_8hpp" startline="582" endline="584">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1gae4ffceb0cd69590535adddf92fff19cc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t char_traits_find_char</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; dest, const size_t dest_size, const size_t start, const char_traits_char_t&lt; Traits &gt; chr) noexcept</argsstring>
+        <name>char_traits_find_char</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>dest_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga2cf769a14029d485dcf792d82d53d889" kindref="member">char_traits_char_t</ref>&lt; Traits &gt;</type>
+          <declname>chr</declname>
+        </param>
+        <briefdescription>
+<para>在字符序列中查找单个字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>chr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符首次出现的位置，未找到则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="405" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="405" bodyend="414"/>
+        <referencedby refid="classbasic__string_1a0e4e6961115011826cddb1e1402abdd4" compoundref="basic__string_8hpp" startline="2369" endline="2371">basic_string&lt; char &gt;::find</referencedby>
+        <referencedby refid="classbasic__string__view_1a09ca327f547e8f50a7956a98dc7e679f" compoundref="basic__string__view_8hpp" startline="560" endline="562">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find</referencedby>
+        <referencedby refid="classbasic__string_1acd126adbeff70a29b483114c302f8818" compoundref="basic__string_8hpp" startline="2437" endline="2440">basic_string&lt; char &gt;::find_first_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a2bb4c6f605b65f8c9712e3929d2ba903" compoundref="basic__string__view_8hpp" startline="646" endline="648">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_first_of</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1ga3eb4093dc3b5bcc794105372bb1aa71f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t char_traits_rfind</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; dest, const size_t dest_size, const size_t start, const char_traits_ptr_t&lt; Traits &gt; rsc, const size_t rsc_size) noexcept</argsstring>
+        <name>char_traits_rfind</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>dest_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>rsc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>rsc_size</declname>
+        </param>
+        <briefdescription>
+<para>从后向前查找子序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的子序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>子序列最后一次出现的位置，未找到则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="427" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="427" bodyend="445"/>
+        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
+        <referencedby refid="classbasic__string_1af8315da3f479f84a837d68d4971ee9c6" compoundref="basic__string_8hpp" startline="2397" endline="2400">basic_string&lt; char &gt;::rfind</referencedby>
+        <referencedby refid="classbasic__string_1a5f0b6b9fdf7482f7375945257c9e318a" compoundref="basic__string_8hpp" startline="2408" endline="2411">basic_string&lt; char &gt;::rfind</referencedby>
+        <referencedby refid="classbasic__string_1ab3d81fe00c72c278895dde468162ff00" compoundref="basic__string_8hpp" startline="2414" endline="2416">basic_string&lt; char &gt;::rfind</referencedby>
+        <referencedby refid="classbasic__string_1a004651bbed50b3360106926f9830efb0" compoundref="basic__string_8hpp" startline="2419" endline="2422">basic_string&lt; char &gt;::rfind</referencedby>
+        <referencedby refid="classbasic__string_1a0ff632fdbe068bacfd36767f7019f52c" compoundref="basic__string_8hpp" startline="2425" endline="2428">basic_string&lt; char &gt;::rfind</referencedby>
+        <referencedby refid="classbasic__string__view_1a37723776fba7ea5965bfa05e6c06ec03" compoundref="basic__string__view_8hpp" startline="592" endline="595">basic_string_view&lt; typename Traits::char_type, Traits &gt;::rfind</referencedby>
+        <referencedby refid="classbasic__string__view_1a202c4b3ea5c845fa8bff4dc149a1439a" compoundref="basic__string__view_8hpp" startline="614" endline="617">basic_string_view&lt; typename Traits::char_type, Traits &gt;::rfind</referencedby>
+        <referencedby refid="classbasic__string__view_1a26d125d9efc0828dbae3a4c3e5078588" compoundref="basic__string__view_8hpp" startline="625" endline="627">basic_string_view&lt; typename Traits::char_type, Traits &gt;::rfind</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1ga6efdfa9709d06abac30062175a99820b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t char_traits_rfind_char</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; dest, const size_t dest_size, const size_t start, const char_traits_char_t&lt; Traits &gt; chr) noexcept</argsstring>
+        <name>char_traits_rfind_char</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>dest_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga2cf769a14029d485dcf792d82d53d889" kindref="member">char_traits_char_t</ref>&lt; Traits &gt;</type>
+          <declname>chr</declname>
+        </param>
+        <briefdescription>
+<para>从后向前查找单个字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>chr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符最后一次出现的位置，未找到则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="457" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="457" bodyend="471"/>
+        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
+        <referencedby refid="classbasic__string_1a0bce2475d6206ba0e4f50a276f942d04" compoundref="basic__string_8hpp" startline="2473" endline="2476">basic_string&lt; char &gt;::find_last_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a442a6ae5c95f97b6526602b6f2a45124" compoundref="basic__string__view_8hpp" startline="690" endline="692">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_last_of</referencedby>
+        <referencedby refid="classbasic__string_1a3d91492ba5d71693b31a9ba8df3b73d3" compoundref="basic__string_8hpp" startline="2403" endline="2405">basic_string&lt; char &gt;::rfind</referencedby>
+        <referencedby refid="classbasic__string__view_1a522830c86038c5f9c976e2c8ded908c7" compoundref="basic__string__view_8hpp" startline="603" endline="605">basic_string_view&lt; typename Traits::char_type, Traits &gt;::rfind</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1ga3a847048bdbab3079456c1adca643054" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_attribute_operations_1ga35203a7f9132c2f9c796f524bd5a8f69" kindref="member">is_specialization_v</ref>&lt; Traits, <ref refid="structchar__traits" kindref="compound">char_traits</ref> &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t char_traits_find_first_of</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; dest, const size_t dest_size, const size_t start, const char_traits_ptr_t&lt; Traits &gt; rsc, const size_t rsc_size) noexcept</argsstring>
+        <name>char_traits_find_first_of</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>dest_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>rsc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>rsc_size</declname>
+        </param>
+        <briefdescription>
+<para>查找第一个出现在给定集合中的字符（char_traits特化版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符集合 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>第一个匹配字符的位置，未找到则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="491" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="491" bodyend="507"/>
+        <references refid="group___char_traits_1ga3a847048bdbab3079456c1adca643054" compoundref="char__traits_8hpp" startline="491" endline="507">char_traits_find_first_of</references>
+        <references refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
+        <referencedby refid="group___char_traits_1ga3a847048bdbab3079456c1adca643054" compoundref="char__traits_8hpp" startline="491" endline="507">char_traits_find_first_of</referencedby>
+        <referencedby refid="classbasic__string_1a07cb2e7dba5a2534bbd70801bb48a42f" compoundref="basic__string_8hpp" startline="2431" endline="2434">basic_string&lt; char &gt;::find_first_of</referencedby>
+        <referencedby refid="classbasic__string_1ac67737b0fc04c1bad1a6f84def591640" compoundref="basic__string_8hpp" startline="2443" endline="2446">basic_string&lt; char &gt;::find_first_of</referencedby>
+        <referencedby refid="classbasic__string_1a80f8bb2e1a34194527a58f1fabee9fad" compoundref="basic__string_8hpp" startline="2449" endline="2452">basic_string&lt; char &gt;::find_first_of</referencedby>
+        <referencedby refid="classbasic__string_1a7e8861ea926f1425affbc4bfa972869b" compoundref="basic__string_8hpp" startline="2455" endline="2458">basic_string&lt; char &gt;::find_first_of</referencedby>
+        <referencedby refid="classbasic__string_1afb873772880ac3120fb0e3e1f5a16f43" compoundref="basic__string_8hpp" startline="2461" endline="2464">basic_string&lt; char &gt;::find_first_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a6c076b00c39126a89c484efaa20adb40" compoundref="basic__string__view_8hpp" startline="635" endline="638">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_first_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a58d178175b37cb54f2b529151aaada9c" compoundref="basic__string__view_8hpp" startline="657" endline="660">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_first_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a30ef46592b2c508a79b25ef5d257a54c" compoundref="basic__string__view_8hpp" startline="668" endline="671">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_first_of</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1ga4d643fe454e18581a72f36456aaa0dd4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_attribute_operations_1ga35203a7f9132c2f9c796f524bd5a8f69" kindref="member">is_specialization_v</ref>&lt; Traits, <ref refid="structchar__traits" kindref="compound">char_traits</ref> &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t char_traits_find_last_of</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; dest, const size_t dest_size, const size_t start, const char_traits_ptr_t&lt; Traits &gt; rsc, const size_t rsc_size) noexcept</argsstring>
+        <name>char_traits_find_last_of</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>dest_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>rsc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>rsc_size</declname>
+        </param>
+        <briefdescription>
+<para>查找最后一个出现在给定集合中的字符（char_traits特化版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符集合 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最后一个匹配字符的位置，未找到则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="559" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="559" bodyend="579"/>
+        <references refid="group___char_traits_1ga4d643fe454e18581a72f36456aaa0dd4" compoundref="char__traits_8hpp" startline="559" endline="579">char_traits_find_last_of</references>
+        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
+        <referencedby refid="group___char_traits_1ga4d643fe454e18581a72f36456aaa0dd4" compoundref="char__traits_8hpp" startline="559" endline="579">char_traits_find_last_of</referencedby>
+        <referencedby refid="classbasic__string_1a8b4e4cb23f971f43e7aa823d2438d0cc" compoundref="basic__string_8hpp" startline="2467" endline="2470">basic_string&lt; char &gt;::find_last_of</referencedby>
+        <referencedby refid="classbasic__string_1a2f17849df915312363659b53dbd60f28" compoundref="basic__string_8hpp" startline="2479" endline="2482">basic_string&lt; char &gt;::find_last_of</referencedby>
+        <referencedby refid="classbasic__string_1aabcd2dc5eb9c52e2d8fc77c8150cc342" compoundref="basic__string_8hpp" startline="2485" endline="2488">basic_string&lt; char &gt;::find_last_of</referencedby>
+        <referencedby refid="classbasic__string_1a6b2c6bc8250950f1d22e10305c827399" compoundref="basic__string_8hpp" startline="2491" endline="2494">basic_string&lt; char &gt;::find_last_of</referencedby>
+        <referencedby refid="classbasic__string_1a51275a0d9d1628f07746eddea81a3115" compoundref="basic__string_8hpp" startline="2497" endline="2500">basic_string&lt; char &gt;::find_last_of</referencedby>
+        <referencedby refid="classbasic__string__view_1abadfbb3d4e65be17a1ec4e5c3e31e491" compoundref="basic__string__view_8hpp" startline="679" endline="682">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_last_of</referencedby>
+        <referencedby refid="classbasic__string__view_1aa3d836a155bcf2c7a14648044e493cef" compoundref="basic__string__view_8hpp" startline="701" endline="704">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_last_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a1144da94f025f47571888a01e172208e" compoundref="basic__string__view_8hpp" startline="712" endline="715">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_last_of</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1gab1ce06699fd4682d598a72eb58721241" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_attribute_operations_1ga35203a7f9132c2f9c796f524bd5a8f69" kindref="member">is_specialization_v</ref>&lt; Traits, <ref refid="structchar__traits" kindref="compound">char_traits</ref> &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t char_traits_find_first_not_of</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; dest, const size_t dest_size, const size_t start, const char_traits_ptr_t&lt; Traits &gt; rsc, const size_t rsc_size) noexcept</argsstring>
+        <name>char_traits_find_first_not_of</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>dest_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>rsc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>rsc_size</declname>
+        </param>
+        <briefdescription>
+<para>查找第一个不在给定集合中的字符（char_traits特化版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符集合 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>第一个不匹配字符的位置，未找到则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="634" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="634" bodyend="651"/>
+        <references refid="group___char_traits_1gab1ce06699fd4682d598a72eb58721241" compoundref="char__traits_8hpp" startline="634" endline="651">char_traits_find_first_not_of</references>
+        <references refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
+        <referencedby refid="group___char_traits_1gab1ce06699fd4682d598a72eb58721241" compoundref="char__traits_8hpp" startline="634" endline="651">char_traits_find_first_not_of</referencedby>
+        <referencedby refid="classbasic__string_1a2685aa3545bf0c96ae6b4f18cf6e8b24" compoundref="basic__string_8hpp" startline="2503" endline="2506">basic_string&lt; char &gt;::find_first_not_of</referencedby>
+        <referencedby refid="classbasic__string_1af210a3be9d02098df5722cd4f018d402" compoundref="basic__string_8hpp" startline="2515" endline="2518">basic_string&lt; char &gt;::find_first_not_of</referencedby>
+        <referencedby refid="classbasic__string_1abe15ab4a2db4f265614b36996c09a377" compoundref="basic__string_8hpp" startline="2521" endline="2524">basic_string&lt; char &gt;::find_first_not_of</referencedby>
+        <referencedby refid="classbasic__string_1ae212494514eb19271e43aeef3f8c0b94" compoundref="basic__string_8hpp" startline="2527" endline="2530">basic_string&lt; char &gt;::find_first_not_of</referencedby>
+        <referencedby refid="classbasic__string_1a229e786629d9564e7ac3bdbffcad91c0" compoundref="basic__string_8hpp" startline="2533" endline="2536">basic_string&lt; char &gt;::find_first_not_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a93341c445c62d809a453619154eb7d35" compoundref="basic__string__view_8hpp" startline="723" endline="726">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_first_not_of</referencedby>
+        <referencedby refid="classbasic__string__view_1adb308c7551bf97efe7bb5f12d9400dc3" compoundref="basic__string__view_8hpp" startline="745" endline="748">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_first_not_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a40cf6ef4344b814ae0544e95eb77253f" compoundref="basic__string__view_8hpp" startline="756" endline="759">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_first_not_of</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1gaafc847a2dba13c3bc138b4e53dabea5e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t char_traits_find_not_char</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; dest, const size_t dest_size, const size_t start, const char_traits_char_t&lt; Traits &gt; chr) noexcept</argsstring>
+        <name>char_traits_find_not_char</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>dest_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga2cf769a14029d485dcf792d82d53d889" kindref="member">char_traits_char_t</ref>&lt; Traits &gt;</type>
+          <declname>chr</declname>
+        </param>
+        <briefdescription>
+<para>查找第一个不等于指定字符的位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>chr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指定字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>第一个不等于chr的位置，未找到则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="695" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="695" bodyend="706"/>
+        <references refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
+        <referencedby refid="classbasic__string_1abe4c077172151c9d87a491b3a7afbbdb" compoundref="basic__string_8hpp" startline="2509" endline="2512">basic_string&lt; char &gt;::find_first_not_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a2619b5463ed44bfdcb3c347353b8619d" compoundref="basic__string__view_8hpp" startline="734" endline="736">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_first_not_of</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1ga5ae883e1bfc078b9a88b7fcb2191de18" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_attribute_operations_1ga35203a7f9132c2f9c796f524bd5a8f69" kindref="member">is_specialization_v</ref>&lt; Traits, <ref refid="structchar__traits" kindref="compound">char_traits</ref> &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t char_traits_find_last_not_of</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; dest, const size_t dest_size, const size_t start, const char_traits_ptr_t&lt; Traits &gt; rsc, const size_t rsc_size) noexcept</argsstring>
+        <name>char_traits_find_last_not_of</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>dest_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>rsc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>rsc_size</declname>
+        </param>
+        <briefdescription>
+<para>查找最后一个不在给定集合中的字符（char_traits特化版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符集合 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rsc_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最后一个不匹配字符的位置，未找到则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="726" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="726" bodyend="746"/>
+        <references refid="group___char_traits_1ga5ae883e1bfc078b9a88b7fcb2191de18" compoundref="char__traits_8hpp" startline="726" endline="746">char_traits_find_last_not_of</references>
+        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
+        <referencedby refid="group___char_traits_1ga5ae883e1bfc078b9a88b7fcb2191de18" compoundref="char__traits_8hpp" startline="726" endline="746">char_traits_find_last_not_of</referencedby>
+        <referencedby refid="classbasic__string_1a30cd9fee6bc6b785b1fb7d9a92266958" compoundref="basic__string_8hpp" startline="2539" endline="2542">basic_string&lt; char &gt;::find_last_not_of</referencedby>
+        <referencedby refid="classbasic__string_1abc4aafbf1c921af854d7775bd40701c7" compoundref="basic__string_8hpp" startline="2551" endline="2554">basic_string&lt; char &gt;::find_last_not_of</referencedby>
+        <referencedby refid="classbasic__string_1a737b288d7d00198b85f08262a6ab6479" compoundref="basic__string_8hpp" startline="2557" endline="2560">basic_string&lt; char &gt;::find_last_not_of</referencedby>
+        <referencedby refid="classbasic__string_1a53f0a7fed8f8e8b4431353f96d0bfda2" compoundref="basic__string_8hpp" startline="2563" endline="2566">basic_string&lt; char &gt;::find_last_not_of</referencedby>
+        <referencedby refid="classbasic__string_1afad7f1e76798361eed3814dd2b0016c9" compoundref="basic__string_8hpp" startline="2569" endline="2572">basic_string&lt; char &gt;::find_last_not_of</referencedby>
+        <referencedby refid="classbasic__string__view_1ae7776a079072f979f03bbab609b6a4f1" compoundref="basic__string__view_8hpp" startline="767" endline="770">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_last_not_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a4173b086bea7a100f0deaeed4b758e3d" compoundref="basic__string__view_8hpp" startline="789" endline="792">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_last_not_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a149d8fa1cea46967ce794b6bd74c610c" compoundref="basic__string__view_8hpp" startline="800" endline="803">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_last_not_of</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_traits_1ga82ee877d8600c7c19db0058081b1fca9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Traits</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t char_traits_rfind_not_char</definition>
+        <argsstring>(const char_traits_ptr_t&lt; Traits &gt; dest, const size_t dest_size, const size_t start, const char_traits_char_t&lt; Traits &gt; chr) noexcept</argsstring>
+        <name>char_traits_rfind_not_char</name>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga288b36ae3d6183f3db9d626b46c748e1" kindref="member">char_traits_ptr_t</ref>&lt; Traits &gt;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>dest_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___char_traits_1ga2cf769a14029d485dcf792d82d53d889" kindref="member">char_traits_char_t</ref>&lt; Traits &gt;</type>
+          <declname>chr</declname>
+        </param>
+        <briefdescription>
+<para>查找最后一个不等于指定字符的位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Traits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符特征类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标序列长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>chr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指定字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最后一个不等于chr的位置，未找到则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" line="793" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_traits.hpp" bodystart="793" bodyend="807"/>
+        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
+        <referencedby refid="classbasic__string_1a6fad28347ff58d7c900089a34c32af01" compoundref="basic__string_8hpp" startline="2545" endline="2548">basic_string&lt; char &gt;::find_last_not_of</referencedby>
+        <referencedby refid="classbasic__string__view_1a9647e3609764958bc4001455bf4422b7" compoundref="basic__string__view_8hpp" startline="778" endline="780">basic_string_view&lt; typename Traits::char_type, Traits &gt;::find_last_not_of</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>字符类型的特征定义和操作 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

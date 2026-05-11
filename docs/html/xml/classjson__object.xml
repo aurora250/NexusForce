@@ -1,0 +1,352 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classjson__object" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>json_object</compoundname>
+    <basecompoundref refid="classjson__value" prot="public" virt="non-virtual">json_value</basecompoundref>
+    <includes refid="json__value_8hpp" local="no">json_value.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classjson__object_1a71a0a73c8dc6365e747aa4cedded0f36" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__value" kindref="compound">json_value</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;string, unique_ptr&lt;json_value&gt; &gt; json_object::members_</definition>
+        <argsstring></argsstring>
+        <name>members_</name>
+        <qualifiedname>json_object::members_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>成员映射表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="397" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="397" bodyend="397"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classjson__object_1ad9a95a4acf4f5f018fe613ec81dffcfd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>json_object::json_object</definition>
+        <argsstring>()=default</argsstring>
+        <name>json_object</name>
+        <qualifiedname>json_object::json_object</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="403" column="5"/>
+        <references refid="classjson__object_1ad9a95a4acf4f5f018fe613ec81dffcfd">json_object</references>
+        <referencedby refid="classjson__object_1a50d6b85c69275d4c213005c82ca2aaf8" compoundref="json__value_8hpp" startline="431" endline="431">as_object</referencedby>
+        <referencedby refid="classjson__object_1ad9a95a4acf4f5f018fe613ec81dffcfd">json_object</referencedby>
+        <referencedby refid="classjson__object_1a5882ab3a6155a41d21ceda546d9683a6">json_object</referencedby>
+        <referencedby refid="classjson__object_1a3f4f465fb0dee1d9d924304f241631bd">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classjson__object_1ad1d8d89c701dd86d8009d76381c6a818" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>json_object::json_object</definition>
+        <argsstring>(const json_object &amp;)=delete</argsstring>
+        <name>json_object</name>
+        <qualifiedname>json_object::json_object</qualifiedname>
+        <param>
+          <type>const <ref refid="classjson__object" kindref="compound">json_object</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="405" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__object_1addb9006c06d022565b1c3369d9288679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classjson__object" kindref="compound">json_object</ref> &amp;</type>
+        <definition>json_object &amp; json_object::operator=</definition>
+        <argsstring>(const json_object &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>json_object::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classjson__object" kindref="compound">json_object</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="406" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__object_1a5882ab3a6155a41d21ceda546d9683a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>json_object::json_object</definition>
+        <argsstring>(json_object &amp;&amp;other)=default</argsstring>
+        <name>json_object</name>
+        <qualifiedname>json_object::json_object</qualifiedname>
+        <param>
+          <type><ref refid="classjson__object" kindref="compound">json_object</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="412" column="5"/>
+        <references refid="classjson__object_1ad9a95a4acf4f5f018fe613ec81dffcfd">json_object</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__object_1a3f4f465fb0dee1d9d924304f241631bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classjson__object" kindref="compound">json_object</ref> &amp;</type>
+        <definition>json_object &amp; json_object::operator=</definition>
+        <argsstring>(json_object &amp;&amp;other)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>json_object::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classjson__object" kindref="compound">json_object</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="419" column="17"/>
+        <references refid="classjson__object_1ad9a95a4acf4f5f018fe613ec81dffcfd">json_object</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__object_1a693b50fddfa1bacb111082154f449610" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805f" kindref="member">types</ref></type>
+        <definition>NEFORCE_NODISCARD types json_object::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>json_object::type</qualifiedname>
+        <reimplements refid="classjson__value_1a5e87488279236cfbc020f432d59c6bc6">type</reimplements>
+        <briefdescription>
+<para>获取类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>返回Object类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="425" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="425" bodyend="425"/>
+        <references refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa165488bba2a288d3579960130c52b74e" compoundref="json__value_8hpp" startline="152">json_value::Object</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__object_1a50d6b85c69275d4c213005c82ca2aaf8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classjson__object" kindref="compound">json_object</ref> *</type>
+        <definition>NEFORCE_NODISCARD const json_object * json_object::as_object</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>as_object</name>
+        <qualifiedname>json_object::as_object</qualifiedname>
+        <reimplements refid="classjson__value_1a3ef320914be5e164360396a4bd782d6a">as_object</reimplements>
+        <briefdescription>
+<para>转换为对象指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>返回自身指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="431" column="41" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="431" bodyend="431"/>
+        <references refid="classjson__object_1ad9a95a4acf4f5f018fe613ec81dffcfd">json_object</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__object_1a7a562e502979635d49b219265cc8c014" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void json_object::add_member</definition>
+        <argsstring>(const string &amp;key, unique_ptr&lt; json_value &gt; value)</argsstring>
+        <name>add_member</name>
+        <qualifiedname>json_object::add_member</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__value" kindref="compound">json_value</ref> &gt;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加成员 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成员键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成员值指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="438" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="438" bodyend="438"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classjson__object_1ad833875d3bf9116dfb883d1941e9e650" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classjson__value" kindref="compound">json_value</ref> *</type>
+        <definition>NEFORCE_NODISCARD const json_value * json_object::get_member</definition>
+        <argsstring>(const string &amp;key) const</argsstring>
+        <name>get_member</name>
+        <qualifiedname>json_object::get_member</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取常量成员指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成员键名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成员的常量指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="445" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="445" bodyend="451"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__object_1a22dbfaa0409effc207ceafeb7cbdfd5e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__value" kindref="compound">json_value</ref> &gt; &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD const unordered_map&lt; string, unique_ptr&lt; json_value &gt; &gt; &amp; json_object::get_members</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_members</name>
+        <qualifiedname>json_object::get_members</qualifiedname>
+        <briefdescription>
+<para>获取所有成员的常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成员映射表的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="457" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="457" bodyend="459"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>JSON对象类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示JSON中的对象类型，包含多个键值对成员。 键为字符串，值为任意JSON类型。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>istringify&lt; json_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>json_object</label>
+        <link refid="classjson__object"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>json_value</label>
+        <link refid="classjson__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>istringify&lt; json_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>json_object</label>
+        <link refid="classjson__object"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>json_value</label>
+        <link refid="classjson__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" line="395" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_value.hpp" bodystart="395" bodyend="460"/>
+    <listofallmembers>
+      <member refid="classjson__object_1a7a562e502979635d49b219265cc8c014" prot="public" virt="non-virtual"><scope>json_object</scope><name>add_member</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa2c8079c21c277016efb88e4846e0384f" prot="public" virt="non-virtual"><scope>json_object</scope><name>Array</name></member>
+      <member refid="classjson__value_1a9414fdf940d1f93bd3c4ef27640019e4" prot="public" virt="virtual"><scope>json_object</scope><name>as_array</name></member>
+      <member refid="classjson__value_1abff1bfacff657023d168d7ad78fe81af" prot="public" virt="virtual"><scope>json_object</scope><name>as_bool</name></member>
+      <member refid="classjson__value_1a59b3c7013189589bced807b228a8d79c" prot="public" virt="virtual"><scope>json_object</scope><name>as_null</name></member>
+      <member refid="classjson__value_1a11b5d0ff79bdf10d6100984f0f2eaf99" prot="public" virt="virtual"><scope>json_object</scope><name>as_number</name></member>
+      <member refid="classjson__object_1a50d6b85c69275d4c213005c82ca2aaf8" prot="public" virt="virtual"><scope>json_object</scope><name>as_object</name></member>
+      <member refid="classjson__value_1a0e3e6904eeb1543f3adf8cc5c9e184a4" prot="public" virt="virtual"><scope>json_object</scope><name>as_string</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805facacb22ac27555e5c947ae9357071a60a" prot="public" virt="non-virtual"><scope>json_object</scope><name>Bool</name></member>
+      <member refid="classjson__object_1ad833875d3bf9116dfb883d1941e9e650" prot="public" virt="non-virtual"><scope>json_object</scope><name>get_member</name></member>
+      <member refid="classjson__object_1a22dbfaa0409effc207ceafeb7cbdfd5e" prot="public" virt="non-virtual"><scope>json_object</scope><name>get_members</name></member>
+      <member refid="classjson__value_1aa3d25ed160d4706cbc9e529c1308620a" prot="public" virt="non-virtual"><scope>json_object</scope><name>is_array</name></member>
+      <member refid="classjson__value_1acfeb074a4cc8de2acdcd353f7a299304" prot="public" virt="non-virtual"><scope>json_object</scope><name>is_bool</name></member>
+      <member refid="classjson__value_1a2d0258f720fbe2f068d29db91bcb1c36" prot="public" virt="non-virtual"><scope>json_object</scope><name>is_null</name></member>
+      <member refid="classjson__value_1aaca5337ac8066cb481cb777186a1a366" prot="public" virt="non-virtual"><scope>json_object</scope><name>is_number</name></member>
+      <member refid="classjson__value_1aa31cdc5e4d2503aba579b3ff3c59255d" prot="public" virt="non-virtual"><scope>json_object</scope><name>is_object</name></member>
+      <member refid="classjson__value_1adca513d9dd56e4bddc8fd105c56545c9" prot="public" virt="non-virtual"><scope>json_object</scope><name>is_string</name></member>
+      <member refid="classjson__object_1ad9a95a4acf4f5f018fe613ec81dffcfd" prot="public" virt="non-virtual"><scope>json_object</scope><name>json_object</name></member>
+      <member refid="classjson__object_1ad1d8d89c701dd86d8009d76381c6a818" prot="public" virt="non-virtual"><scope>json_object</scope><name>json_object</name></member>
+      <member refid="classjson__object_1a5882ab3a6155a41d21ceda546d9683a6" prot="public" virt="non-virtual"><scope>json_object</scope><name>json_object</name></member>
+      <member refid="classjson__object_1a71a0a73c8dc6365e747aa4cedded0f36" prot="private" virt="non-virtual"><scope>json_object</scope><name>members_</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805faf3d38d2ee1fb610ab1344aa3910aaf2e" prot="public" virt="non-virtual"><scope>json_object</scope><name>Null</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa0caaf5439c72e875abb005f577287514" prot="public" virt="non-virtual"><scope>json_object</scope><name>Number</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa165488bba2a288d3579960130c52b74e" prot="public" virt="non-virtual"><scope>json_object</scope><name>Object</name></member>
+      <member refid="classjson__object_1addb9006c06d022565b1c3369d9288679" prot="public" virt="non-virtual"><scope>json_object</scope><name>operator=</name></member>
+      <member refid="classjson__object_1a3f4f465fb0dee1d9d924304f241631bd" prot="public" virt="non-virtual"><scope>json_object</scope><name>operator=</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805fa7d584541a6eb62770239a72c9d8018ed" prot="public" virt="non-virtual"><scope>json_object</scope><name>String</name></member>
+      <member refid="classjson__value_1aaf6c2cb66b8d4a35459f9d3609a78599" prot="public" virt="non-virtual"><scope>json_object</scope><name>to_indent_string</name></member>
+      <member refid="classjson__value_1a15535d4046e675ccc6810fd1addc84f6" prot="public" virt="non-virtual"><scope>json_object</scope><name>to_string</name></member>
+      <member refid="classjson__object_1a693b50fddfa1bacb111082154f449610" prot="public" virt="virtual"><scope>json_object</scope><name>type</name></member>
+      <member refid="classjson__value_1a04fcd4c27b006cfc74a3204774a5805f" prot="public" virt="non-virtual"><scope>json_object</scope><name>types</name></member>
+      <member refid="classjson__value_1a6d8dcba262dc2a77ff0595b97b7dcb1c" prot="public" virt="virtual"><scope>json_object</scope><name>~json_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

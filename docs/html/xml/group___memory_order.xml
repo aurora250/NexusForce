@@ -1,0 +1,1067 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___memory_order" kind="group">
+    <compoundname>MemoryOrder</compoundname>
+    <title>原子内存序</title>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
+        <name>memory_order</name>
+        <enumvalue id="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4a81f32be24a2a62fc472cc43edc97e65b" prot="public">
+          <name>relaxed</name>
+          <briefdescription>
+<para>最宽松的内存顺序，只保证原子性 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4af0ef8c72418989a4bb20243ccb61eeb0" prot="public">
+          <name>consume</name>
+          <briefdescription>
+<para>数据依赖顺序，用于依赖读取的场景 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4a86a4fa105ff51b8c3be84734797d8144" prot="public">
+          <name>acquire</name>
+          <briefdescription>
+<para>获取操作，确保后续读写不会被重排到前面 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4" prot="public">
+          <name>release</name>
+          <briefdescription>
+<para>释放操作，确保前面的读写不会被重排到后面 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4af3e0f4fa6020c4a1b19d21f32f42020c" prot="public">
+          <name>acq_rel</name>
+          <briefdescription>
+<para>获取-释放组合操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4a14cede869a7aee57588ab47066432604" prot="public">
+          <name>seq_cst</name>
+          <briefdescription>
+<para>顺序一致性，最严格的内存顺序 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>内存顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义原子操作的内存顺序语义，控制不同线程间的内存可见性顺序。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="163" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="163" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___memory_order_1gaf6c9980cf35b938ee765508ef4dc6d42" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+        <name>memory_order_modifier</name>
+        <enumvalue id="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42a509d28f8e83d10baaf4bcd31a54783c6" prot="public">
+          <name>memory_order_none</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>无修饰符 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42a20cf99181cfd78cead0f8ae1994c17c8" prot="public">
+          <name>memory_order_mask</name>
+          <initializer>= 0x0000ffff</initializer>
+          <briefdescription>
+<para>内存顺序掩码 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42a834c94b6d984318439c48a75a9d20fb2" prot="public">
+          <name>memory_order_modifier_mask</name>
+          <initializer>= 0xffff0000</initializer>
+          <briefdescription>
+<para>修饰符掩码 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42adee853427a8a845e55317c88dd81f69c" prot="public">
+          <name>memory_order_hle_acquire</name>
+          <initializer>= 0x10000</initializer>
+          <briefdescription>
+<para>HLE获取修饰符 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42ae41498315a4b0285e15db4840674f783" prot="public">
+          <name>memory_order_hle_release</name>
+          <initializer>= 0x20000</initializer>
+          <briefdescription>
+<para>HLE释放修饰符 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42a1448c9da7f402a82605f5f800a237f72" prot="public">
+          <name>memory_order_rtm_begin</name>
+          <initializer>= 0x40000</initializer>
+          <briefdescription>
+<para>RTM事务开始修饰符 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42a3e3f544148eec2a66642e83388992154" prot="public">
+          <name>memory_order_rtm_end</name>
+          <initializer>= 0x80000</initializer>
+          <briefdescription>
+<para>RTM事务结束修饰符 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42a70c8c53d496319cb8f372dd140582345" prot="public">
+          <name>memory_order_rtm_abort</name>
+          <initializer>= 0x100000</initializer>
+          <briefdescription>
+<para>RTM事务中止修饰符 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>内存顺序修饰符枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>用于扩展memory_order的功能，支持硬件锁消除（HLE）等高级特性。</para>
+<para><simplesect kind="warning"><para>根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE 功能，并在运行时做好fallback 处理。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html">https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="201" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="201" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___memory_order_1gae82e0aa93c3ecd9dd220fd45ae4ab659" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <name>rtm_status_flag</name>
+        <enumvalue id="group___memory_order_1ggae82e0aa93c3ecd9dd220fd45ae4ab659a72008fe62c2b45840fcefcdc46155de7" prot="public">
+          <name>xabort_explicit</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+<para>由XABORT指令显式中止 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggae82e0aa93c3ecd9dd220fd45ae4ab659aa1f2c9edd829f3e66c5ffec8c58d0c0f" prot="public">
+          <name>retry_possible</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+<para>重试可能成功 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggae82e0aa93c3ecd9dd220fd45ae4ab659a867fd9305815918f2a46c7a18f25ee76" prot="public">
+          <name>memory_conflict</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+<para>与其他逻辑处理器内存冲突 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggae82e0aa93c3ecd9dd220fd45ae4ab659a0d998bc644f3d7bb85b68137d2bd62c2" prot="public">
+          <name>buffer_overflow</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+<para>事务缓冲区溢出 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggae82e0aa93c3ecd9dd220fd45ae4ab659a7883f5453d7c449a0fff7711f781efc8" prot="public">
+          <name>debug_hit</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+<para>调试断点命中 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___memory_order_1ggae82e0aa93c3ecd9dd220fd45ae4ab659afa83625b7855b43a3ae771fd01db298f" prot="public">
+          <name>nested_abort</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
+          <briefdescription>
+<para>嵌套事务中止 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>RTM事务状态标志位定义 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE 功能，并在运行时做好fallback 处理。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html">https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html</ulink> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="248" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="248" bodyend="255"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr auto</type>
+        <definition>NEFORCE_INLINE17 constexpr auto memory_order_relaxed</definition>
+        <argsstring></argsstring>
+        <name>memory_order_relaxed</name>
+        <initializer>= <ref refid="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4a81f32be24a2a62fc472cc43edc97e65b" kindref="member">memory_order::relaxed</ref></initializer>
+        <briefdescription>
+<para>宽松内存顺序常量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="173" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="173" bodyend="-1"/>
+        <referencedby refid="classhazard__pointer__domain_1a54909fb9e1d5f81cb50df2dfc67607bc" compoundref="hazard__ptr_8hpp" startline="250" endline="268">hazard_pointer_domain::acquire_record</referencedby>
+        <referencedby refid="structexception__ptr_1_1ecb_1a38e94338fa3c2c5d554aa924b4893cd9" compoundref="exception__ptr_8hpp" startline="131" endline="131">exception_ptr::ecb::add_ref</referencedby>
+        <referencedby refid="classtree__barrier_1ae391881271d8ace6e3c03f8186aa42a4" compoundref="barrier_8hpp" startline="151" endline="169">tree_barrier&lt; CmplFunc &gt;::arrive</referencedby>
+        <referencedby refid="classtree__barrier_1aa5b50d3a3120a3164ca07e9941279418" compoundref="barrier_8hpp" startline="188" endline="191">tree_barrier&lt; CmplFunc &gt;::arrive_and_drop</referencedby>
+        <referencedby refid="group___atomic_operations_1ga43ed57e1ebca17af575e229a1d6e333e" compoundref="atomic__base_8hpp" startline="1187" endline="1194">atomic_add_fetch_any</referencedby>
+        <referencedby refid="group___atomic_operations_1gaf15a5ea63f7851db21ec52e31b494700" compoundref="atomic__base_8hpp" startline="1126" endline="1140">atomic_exchange_any</referencedby>
+        <referencedby refid="group___atomic_operations_1ga16d757b1decbe603c6648b7f7853cc4f" compoundref="atomic__base_8hpp" startline="1151" endline="1158">atomic_fetch_add_any</referencedby>
+        <referencedby refid="group___atomic_operations_1ga4361b2cbe5710b778f5600a57d667850" compoundref="atomic__base_8hpp" startline="1169" endline="1176">atomic_fetch_sub_any</referencedby>
+        <referencedby refid="group___atomic_operations_1ga68dc6572818e290f920ee64fad9f0d62" compoundref="atomic__base_8hpp" startline="69" endline="77">atomic_signal_fence</referencedby>
+        <referencedby refid="group___atomic_operations_1ga235411e03936c4aa90f209ab38cab492" compoundref="atomic__base_8hpp" startline="1080" endline="1089">atomic_store_any</referencedby>
+        <referencedby refid="group___atomic_operations_1ga5f06a2fdc01cfa5e7180cdd87b8444d2" compoundref="atomic__base_8hpp" startline="1205" endline="1212">atomic_sub_fetch_any</referencedby>
+        <referencedby refid="group___atomic_operations_1gad09904472351069bf4052ca1aa2cef7b" compoundref="atomic__base_8hpp" startline="37" endline="61">atomic_thread_fence</referencedby>
+        <referencedby refid="classonce__flag_1a6b72113ff3b073878b5fc971d6fe1026" compoundref="call__once_8hpp" startline="68" endline="106">once_flag::call_once</referencedby>
+        <referencedby refid="classcancellation__token_1af58b901c45f45ac616d47ebd3dc56ea7" compoundref="generator_8hpp" startline="96" endline="101">cancellation_token::cancellation_token</referencedby>
+        <referencedby refid="group___memory_order_1gafda3e5c6834532546b1eaef81affc2b2" compoundref="memory__order_8hpp" startline="272" endline="288">cmpexch_failure_order</referencedby>
+        <referencedby refid="group___thread_pool_1ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group</referencedby>
+        <referencedby refid="structtask__group_1aaece5444af599c96006158a557d2e5a9" compoundref="thread__pool_8hpp" startline="49" endline="49">task_group::increment</referencedby>
+        <referencedby refid="classcancellation__token_1a957e3f2937364b799e2a242cc5905ba9" compoundref="generator_8hpp" startline="108" endline="119">cancellation_token::operator=</referencedby>
+        <referencedby refid="classlock__free__queue_1af4d602957128b5cd5e8f0edb30c48c09" compoundref="lock__free__queue_8hpp" startline="261" endline="279">lock_free_queue&lt; T &gt;::pop</referencedby>
+        <referencedby refid="classhazard__pointer_1acfcdb6919991d37c13da23616f6a74d9" compoundref="hazard__ptr_8hpp" startline="382" endline="396">hazard_pointer::protect</referencedby>
+        <referencedby refid="classlock__free__queue_1a36f8cf27a02025a0e0bfbd3d24c6fbd0" compoundref="lock__free__queue_8hpp" startline="223" endline="252">lock_free_queue&lt; T &gt;::push</referencedby>
+        <referencedby refid="classlocal__queue_1a70e2ab3d3d65f423ffe571788f3ca816" compoundref="thread__pool_8hpp" startline="175" endline="179">local_queue::push_back</referencedby>
+        <referencedby refid="classlock__free__queue_1aea52e2c7aa4d45917f8160f3d21eb54c" compoundref="lock__free__queue_8hpp" startline="338" endline="342">lock_free_queue&lt; T &gt;::size</referencedby>
+        <referencedby refid="structatomic__flag_1a8420f9460c7acd15c67815a8d3baad09" compoundref="atomic__base_8hpp" startline="1302" endline="1314">atomic_flag::test</referencedby>
+        <referencedby refid="structatomic__flag_1a18b408717e06b18e4246bb8009b15ed2" compoundref="atomic__base_8hpp" startline="1319" endline="1331">atomic_flag::test</referencedby>
+        <referencedby refid="structhazard__pointer__record_1ab365c8bb8d47f7ed2d17c3d2b8dbb0a0" compoundref="hazard__ptr_8hpp" startline="51" endline="54">hazard_pointer_record::try_acquire</referencedby>
+        <referencedby refid="classlock__free__queue_1a24c20d863075bbbcedc192df5625d1e3" compoundref="lock__free__queue_8hpp" startline="290" endline="315">lock_free_queue&lt; T &gt;::try_pop</referencedby>
+        <referencedby refid="classhazard__pointer_1aa38f51f61e281a11a70d80dbeb3e5840" compoundref="hazard__ptr_8hpp" startline="406" endline="421">hazard_pointer::try_protect</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="group___memory_order_1ga5f22a1191ac5d936f9fc1c7b3b72eddd" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr auto</type>
+        <definition>NEFORCE_INLINE17 constexpr auto memory_order_consume</definition>
+        <argsstring></argsstring>
+        <name>memory_order_consume</name>
+        <initializer>= <ref refid="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4af0ef8c72418989a4bb20243ccb61eeb0" kindref="member">memory_order::consume</ref></initializer>
+        <briefdescription>
+<para>数据依赖内存顺序常量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="175" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="175" bodyend="-1"/>
+        <referencedby refid="group___atomic_operations_1gad09904472351069bf4052ca1aa2cef7b" compoundref="atomic__base_8hpp" startline="37" endline="61">atomic_thread_fence</referencedby>
+        <referencedby refid="structatomic__flag_1a482380fc8a9add7bbdc779a601b63444" compoundref="atomic__base_8hpp" startline="1368" endline="1385">atomic_flag::clear</referencedby>
+        <referencedby refid="structatomic__flag_1a9bad570d55fe97eb579d9f73ec6e78c9" compoundref="atomic__base_8hpp" startline="1390" endline="1407">atomic_flag::clear</referencedby>
+        <referencedby refid="structatomic__base_1a4c12cae12a0f6bf002f8fcedce9cdbb5" compoundref="atomic__base_8hpp" startline="1614" endline="1626">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_1a9cd7bc0d2ccf4dfd26c8ee64b5a8ee26" compoundref="atomic__base_8hpp" startline="1631" endline="1643">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a95b43b5cc705af7badc6d18dfc8b2431" compoundref="atomic__base_8hpp" startline="2070" endline="2091">atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1af64a00bcd805e76ccd7a07211cacc104" compoundref="atomic__base_8hpp" startline="2045" endline="2065">atomic_base&lt; T * &gt;::store</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr auto</type>
+        <definition>NEFORCE_INLINE17 constexpr auto memory_order_acquire</definition>
+        <argsstring></argsstring>
+        <name>memory_order_acquire</name>
+        <initializer>= <ref refid="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4a86a4fa105ff51b8c3be84734797d8144" kindref="member">memory_order::acquire</ref></initializer>
+        <briefdescription>
+<para>获取内存顺序常量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="177" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="177" bodyend="-1"/>
+        <referencedby refid="classhazard__pointer__domain_1a54909fb9e1d5f81cb50df2dfc67607bc" compoundref="hazard__ptr_8hpp" startline="250" endline="268">hazard_pointer_domain::acquire_record</referencedby>
+        <referencedby refid="group___atomic_operations_1gae881b9b04d18e6f5dd4f5d7311bb48c9" compoundref="atomic__base_8hpp" startline="477" endline="488">atomic_load</referencedby>
+        <referencedby refid="group___atomic_operations_1ga4066975858c891b3012f41c4f33073b3" compoundref="atomic__base_8hpp" startline="1100" endline="1114">atomic_load_any</referencedby>
+        <referencedby refid="group___atomic_operations_1gad09904472351069bf4052ca1aa2cef7b" compoundref="atomic__base_8hpp" startline="37" endline="61">atomic_thread_fence</referencedby>
+        <referencedby refid="classonce__flag_1a6b72113ff3b073878b5fc971d6fe1026" compoundref="call__once_8hpp" startline="68" endline="106">once_flag::call_once</referencedby>
+        <referencedby refid="structatomic__flag_1a482380fc8a9add7bbdc779a601b63444" compoundref="atomic__base_8hpp" startline="1368" endline="1385">atomic_flag::clear</referencedby>
+        <referencedby refid="structatomic__flag_1a9bad570d55fe97eb579d9f73ec6e78c9" compoundref="atomic__base_8hpp" startline="1390" endline="1407">atomic_flag::clear</referencedby>
+        <referencedby refid="group___memory_order_1gafda3e5c6834532546b1eaef81affc2b2" compoundref="memory__order_8hpp" startline="272" endline="288">cmpexch_failure_order</referencedby>
+        <referencedby refid="classlock__free__queue_1a0407046c06b078c73f0972f7e2afb548" compoundref="lock__free__queue_8hpp" startline="324" endline="328">lock_free_queue&lt; T &gt;::empty</referencedby>
+        <referencedby refid="structhazard__pointer__record_1ae03e1630afad7e8ceb0ee028f932dac4" compoundref="hazard__ptr_8hpp" startline="74" endline="74">hazard_pointer_record::get_protected</referencedby>
+        <referencedby refid="classcancellation__token_1ab7f18cffb62c36a8579967ed1763371d" compoundref="generator_8hpp" startline="139" endline="139">cancellation_token::is_cancelled</referencedby>
+        <referencedby refid="structtask__info_1a41b52cd02dff638ccf5ee23320a17e65" compoundref="thread__pool_8hpp" startline="260" endline="263">task_info::is_finished</referencedby>
+        <referencedby refid="classsysinfo_1ab9331206875e9553e338c5a34d601498" compoundref="sysinfo_8hpp" startline="224" endline="224">sysinfo::is_initialized</referencedby>
+        <referencedby refid="classdatabase__pool_1ac3cd4dc274c371f558c62ca353702490" compoundref="database__pool_8hpp" startline="166" endline="166">database_pool::is_running</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aa119b562899473202f03f0ee12d334f7" compoundref="atomic__base_8hpp" startline="2098" endline="2117">atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a658b7958e9e1ded49d703c6b20d54a7c" compoundref="atomic__base_8hpp" startline="2122" endline="2141">atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="classhazard__pointer_1acfcdb6919991d37c13da23616f6a74d9" compoundref="hazard__ptr_8hpp" startline="382" endline="396">hazard_pointer::protect</referencedby>
+        <referencedby refid="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" compoundref="exception__ptr_8hpp" startline="137" endline="141">exception_ptr::ecb::release</referencedby>
+        <referencedby refid="classlocal__queue_1af84b6ab5fed4a7fac3b1ae7ead50bcf6" compoundref="thread__pool_8hpp" startline="141" endline="148">local_queue::remain_size</referencedby>
+        <referencedby refid="classlocal__queue_1a479ae3faa9c13754d8af5121e659e854" compoundref="thread__pool_8hpp" startline="154" endline="159">local_queue::size</referencedby>
+        <referencedby refid="structatomic__base_1a4c12cae12a0f6bf002f8fcedce9cdbb5" compoundref="atomic__base_8hpp" startline="1614" endline="1626">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_1a9cd7bc0d2ccf4dfd26c8ee64b5a8ee26" compoundref="atomic__base_8hpp" startline="1631" endline="1643">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a95b43b5cc705af7badc6d18dfc8b2431" compoundref="atomic__base_8hpp" startline="2070" endline="2091">atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1af64a00bcd805e76ccd7a07211cacc104" compoundref="atomic__base_8hpp" startline="2045" endline="2065">atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="structhazard__pointer__record_1ab365c8bb8d47f7ed2d17c3d2b8dbb0a0" compoundref="hazard__ptr_8hpp" startline="51" endline="54">hazard_pointer_record::try_acquire</referencedby>
+        <referencedby refid="classhazard__pointer_1aa38f51f61e281a11a70d80dbeb3e5840" compoundref="hazard__ptr_8hpp" startline="406" endline="421">hazard_pointer::try_protect</referencedby>
+        <referencedby refid="classlatch_1a6cfd32999e758550d70919819991edcd" compoundref="latch_8hpp" startline="82" endline="84">latch::try_wait</referencedby>
+        <referencedby refid="structtask__group_1aedc47e03d42c0117ef6634cec9e4466d" compoundref="thread__pool_8hpp" startline="65" endline="71">task_group::wait</referencedby>
+        <referencedby refid="classtree__barrier_1a0cabbf16a0b5532fd54ed41be40babc2" compoundref="barrier_8hpp" startline="177" endline="181">tree_barrier&lt; CmplFunc &gt;::wait</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr auto</type>
+        <definition>NEFORCE_INLINE17 constexpr auto memory_order_release</definition>
+        <argsstring></argsstring>
+        <name>memory_order_release</name>
+        <initializer>= <ref refid="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4a123fead50246387983ee340507115ef4" kindref="member">memory_order::release</ref></initializer>
+        <briefdescription>
+<para>释放内存顺序常量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="179" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="179" bodyend="-1"/>
+        <referencedby refid="classhazard__pointer__domain_1a54909fb9e1d5f81cb50df2dfc67607bc" compoundref="hazard__ptr_8hpp" startline="250" endline="268">hazard_pointer_domain::acquire_record</referencedby>
+        <referencedby refid="classtree__barrier_1ae391881271d8ace6e3c03f8186aa42a4" compoundref="barrier_8hpp" startline="151" endline="169">tree_barrier&lt; CmplFunc &gt;::arrive</referencedby>
+        <referencedby refid="group___atomic_operations_1gaaa5c14a3bfaac1bdcf93e2292ba1608f" compoundref="atomic__base_8hpp" startline="455" endline="466">atomic_store</referencedby>
+        <referencedby refid="classonce__flag_1a6b72113ff3b073878b5fc971d6fe1026" compoundref="call__once_8hpp" startline="68" endline="106">once_flag::call_once</referencedby>
+        <referencedby refid="classcancellation__token_1a1c816b81662bc8177659073b145a9616" compoundref="generator_8hpp" startline="129" endline="133">cancellation_token::cancel</referencedby>
+        <referencedby refid="group___memory_order_1gafda3e5c6834532546b1eaef81affc2b2" compoundref="memory__order_8hpp" startline="272" endline="288">cmpexch_failure_order</referencedby>
+        <referencedby refid="classlatch_1af97b3e7f872dacf234135f65508ff964" compoundref="latch_8hpp" startline="69" endline="74">latch::count_down</referencedby>
+        <referencedby refid="structtask__group_1af957b2f16052c7bcc23e368b8fbaaaf0" compoundref="thread__pool_8hpp" startline="56" endline="60">task_group::decrement</referencedby>
+        <referencedby refid="group___thread_pool_1ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group</referencedby>
+        <referencedby refid="group___memory_order_1ga0ebbd1fbd5cee109f313d7ef89dd257f" compoundref="memory__order_8hpp" startline="296" endline="303">is_valid_cmpexch_failure_order</referencedby>
+        <referencedby refid="structatomic__base_1af024d40b0357b05a72df587152b2f4a5" compoundref="atomic__base_8hpp" startline="1650" endline="1660">atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_1a364965b7b7d5d8c1ad0a1a523b48cde9" compoundref="atomic__base_8hpp" startline="1665" endline="1675">atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aa119b562899473202f03f0ee12d334f7" compoundref="atomic__base_8hpp" startline="2098" endline="2117">atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a658b7958e9e1ded49d703c6b20d54a7c" compoundref="atomic__base_8hpp" startline="2122" endline="2141">atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structhazard__pointer__record_1a442f3b96c8298e3d907f63487b0b7ae0" compoundref="hazard__ptr_8hpp" startline="68" endline="68">hazard_pointer_record::protect</referencedby>
+        <referencedby refid="classlocal__queue_1a70e2ab3d3d65f423ffe571788f3ca816" compoundref="thread__pool_8hpp" startline="175" endline="179">local_queue::push_back</referencedby>
+        <referencedby refid="classatomic__semaphore_1a8716205f263f66c4d7d4e23a4ac8170d" compoundref="semaphore_8hpp" startline="99" endline="104">atomic_semaphore&lt; 1 &gt;::release</referencedby>
+        <referencedby refid="structhazard__pointer__record_1a93d2746d339d50d3e596c66521829024" compoundref="hazard__ptr_8hpp" startline="59" endline="62">hazard_pointer_record::release</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a95b43b5cc705af7badc6d18dfc8b2431" compoundref="atomic__base_8hpp" startline="2070" endline="2091">atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1af64a00bcd805e76ccd7a07211cacc104" compoundref="atomic__base_8hpp" startline="2045" endline="2065">atomic_base&lt; T * &gt;::store</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr auto</type>
+        <definition>NEFORCE_INLINE17 constexpr auto memory_order_acq_rel</definition>
+        <argsstring></argsstring>
+        <name>memory_order_acq_rel</name>
+        <initializer>= <ref refid="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4af3e0f4fa6020c4a1b19d21f32f42020c" kindref="member">memory_order::acq_rel</ref></initializer>
+        <briefdescription>
+<para>获取-释放内存顺序常量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="181" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="181" bodyend="-1"/>
+        <referencedby refid="classonce__flag_1a6b72113ff3b073878b5fc971d6fe1026" compoundref="call__once_8hpp" startline="68" endline="106">once_flag::call_once</referencedby>
+        <referencedby refid="structatomic__flag_1a482380fc8a9add7bbdc779a601b63444" compoundref="atomic__base_8hpp" startline="1368" endline="1385">atomic_flag::clear</referencedby>
+        <referencedby refid="structatomic__flag_1a9bad570d55fe97eb579d9f73ec6e78c9" compoundref="atomic__base_8hpp" startline="1390" endline="1407">atomic_flag::clear</referencedby>
+        <referencedby refid="group___memory_order_1gafda3e5c6834532546b1eaef81affc2b2" compoundref="memory__order_8hpp" startline="272" endline="288">cmpexch_failure_order</referencedby>
+        <referencedby refid="group___memory_order_1ga0ebbd1fbd5cee109f313d7ef89dd257f" compoundref="memory__order_8hpp" startline="296" endline="303">is_valid_cmpexch_failure_order</referencedby>
+        <referencedby refid="structatomic__base_1af024d40b0357b05a72df587152b2f4a5" compoundref="atomic__base_8hpp" startline="1650" endline="1660">atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_1a364965b7b7d5d8c1ad0a1a523b48cde9" compoundref="atomic__base_8hpp" startline="1665" endline="1675">atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aa119b562899473202f03f0ee12d334f7" compoundref="atomic__base_8hpp" startline="2098" endline="2117">atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a658b7958e9e1ded49d703c6b20d54a7c" compoundref="atomic__base_8hpp" startline="2122" endline="2141">atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" compoundref="exception__ptr_8hpp" startline="137" endline="141">exception_ptr::ecb::release</referencedby>
+        <referencedby refid="structatomic__base_1a4c12cae12a0f6bf002f8fcedce9cdbb5" compoundref="atomic__base_8hpp" startline="1614" endline="1626">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_1a9cd7bc0d2ccf4dfd26c8ee64b5a8ee26" compoundref="atomic__base_8hpp" startline="1631" endline="1643">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a95b43b5cc705af7badc6d18dfc8b2431" compoundref="atomic__base_8hpp" startline="2070" endline="2091">atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1af64a00bcd805e76ccd7a07211cacc104" compoundref="atomic__base_8hpp" startline="2045" endline="2065">atomic_base&lt; T * &gt;::store</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr auto</type>
+        <definition>NEFORCE_INLINE17 constexpr auto memory_order_seq_cst</definition>
+        <argsstring></argsstring>
+        <name>memory_order_seq_cst</name>
+        <initializer>= <ref refid="group___memory_order_1ggad658351bedece1752acbd72886a7e0e4a14cede869a7aee57588ab47066432604" kindref="member">memory_order::seq_cst</ref></initializer>
+        <briefdescription>
+<para>顺序一致性内存顺序常量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="183" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="183" bodyend="-1"/>
+        <referencedby refid="group___atomic_operations_1gafc070ab9d97fede6cb57cfd8074219e1" compoundref="atomic__base_8hpp" startline="1043" endline="1069">atomic_cmpexch_strong_any</referencedby>
+        <referencedby refid="group___atomic_operations_1gac0e1e634abfd1bb68c905b25576eb5d4" compoundref="atomic__base_8hpp" startline="527" endline="653">atomic_cmpexch_weak</referencedby>
+        <referencedby refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="922" endline="1029">atomic_cmpexch_weak_any</referencedby>
+        <referencedby refid="group___atomic_operations_1ga580e126483f4df7a80c529027735df8c" compoundref="atomic__base_8hpp" startline="500" endline="512">atomic_exchange</referencedby>
+        <referencedby refid="group___atomic_operations_1ga2c2c8cbfcae01cfa2bf198fd831c62b2" compoundref="atomic__base_8hpp" startline="703" endline="715">atomic_fetch_add</referencedby>
+        <referencedby refid="group___atomic_operations_1gad486ba655d266410a9282d207b75f097" compoundref="atomic__base_8hpp" startline="747" endline="759">atomic_fetch_and</referencedby>
+        <referencedby refid="group___atomic_operations_1ga9fb54274efe6570a0a2014b6a47cc5ff" compoundref="atomic__base_8hpp" startline="771" endline="783">atomic_fetch_or</referencedby>
+        <referencedby refid="group___atomic_operations_1ga6738b7ff1fe873ce293f75bd96fdd3bc" compoundref="atomic__base_8hpp" startline="795" endline="807">atomic_fetch_xor</referencedby>
+        <referencedby refid="group___atomic_operations_1gae881b9b04d18e6f5dd4f5d7311bb48c9" compoundref="atomic__base_8hpp" startline="477" endline="488">atomic_load</referencedby>
+        <referencedby refid="group___atomic_operations_1ga4066975858c891b3012f41c4f33073b3" compoundref="atomic__base_8hpp" startline="1100" endline="1114">atomic_load_any</referencedby>
+        <referencedby refid="group___atomic_operations_1gaaa5c14a3bfaac1bdcf93e2292ba1608f" compoundref="atomic__base_8hpp" startline="455" endline="466">atomic_store</referencedby>
+        <referencedby refid="group___atomic_operations_1gad09904472351069bf4052ca1aa2cef7b" compoundref="atomic__base_8hpp" startline="37" endline="61">atomic_thread_fence</referencedby>
+        <referencedby refid="structatomic__flag_1a482380fc8a9add7bbdc779a601b63444" compoundref="atomic__base_8hpp" startline="1368" endline="1385">atomic_flag::clear</referencedby>
+        <referencedby refid="structatomic__flag_1a9bad570d55fe97eb579d9f73ec6e78c9" compoundref="atomic__base_8hpp" startline="1390" endline="1407">atomic_flag::clear</referencedby>
+        <referencedby refid="structatomic_1a05cfc9ce0a0085fe9021f15ca4c88aba" compoundref="atomic_8hpp" startline="231" endline="233">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_1ad148d550ce43e0430492133202e7fd2f" compoundref="atomic_8hpp" startline="238" endline="240">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1a31bf6af0372736220cf5373a7ba550ea" compoundref="atomic_8hpp" startline="456" endline="459">atomic&lt; bool &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1a83b1d45e7e7de56004d29c3721e52160" compoundref="atomic_8hpp" startline="464" endline="467">atomic&lt; bool &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1ae0de324cc41d1e487c731e06704c26c6" compoundref="shared__ptr_8hpp" startline="1283" endline="1286">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aacadb2fa1d554474257755ab8c057360" compoundref="weak__ptr_8hpp" startline="530" endline="533">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_1aef4cb4a2afdca20af1d2ffbe5199593f" compoundref="atomic__base_8hpp" startline="1767" endline="1770">atomic_base&lt; char &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_1a72943d7d79772a97f98f658ea385c623" compoundref="atomic__base_8hpp" startline="1775" endline="1778">atomic_base&lt; char &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aa89f6a67049327e2a73e817f49e1d563" compoundref="atomic__base_8hpp" startline="2260" endline="2263">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a3d319536f3f30ad9d1cd8ab83f8b25e5" compoundref="atomic__base_8hpp" startline="2268" endline="2271">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__float__base_1a1ec5c1b3b2ce106bfa742e8817a784c4" compoundref="atomic__base_8hpp" startline="2506" endline="2508">atomic_float_base&lt; Float &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__float__base_1ad27ddb4634a4860ec1bb28e305fe6d61" compoundref="atomic__base_8hpp" startline="2513" endline="2516">atomic_float_base&lt; Float &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1aba18c20d49a4cefd49ca7b767b298c27" compoundref="atomic__base_8hpp" startline="3146" endline="3148">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a222193895c6947fe1f5746f559053580" compoundref="atomic__base_8hpp" startline="2740" endline="2742">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1afed11c1ee7b8f9d123ae6cd8b6684c11" compoundref="atomic__base_8hpp" startline="2888" endline="2890">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_1a82a0ce202848a592e7e52785da522cea" compoundref="atomic_8hpp" startline="188" endline="190">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_1a921ec051487115429b38c02e72f1c0e1" compoundref="atomic_8hpp" startline="195" endline="197">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1ac43fb607724d291f88b571aba97c9285" compoundref="atomic_8hpp" startline="416" endline="418">atomic&lt; bool &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1a8ef2a73c2c446ef08e0c6e78e05f2624" compoundref="atomic_8hpp" startline="423" endline="426">atomic&lt; bool &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1ae958e8a545126195ecbb9dd3945a64d6" compoundref="shared__ptr_8hpp" startline="1298" endline="1301">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a28ef35af31202c69a499f7c15f418f38" compoundref="weak__ptr_8hpp" startline="545" endline="548">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_1a2fc9ca139571c508ebaa2780330ce25e" compoundref="atomic__base_8hpp" startline="1724" endline="1727">atomic_base&lt; char &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_1aac294bfd16a2423bb5f998386218d170" compoundref="atomic__base_8hpp" startline="1732" endline="1735">atomic_base&lt; char &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a9b6c962dcded8b4c747e1d696a5c8bc9" compoundref="atomic__base_8hpp" startline="2213" endline="2216">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a268b098e6f9eb8676313f293742f4ff2" compoundref="atomic__base_8hpp" startline="2221" endline="2224">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__float__base_1af9f9c93088d40b86e249d5fb49898440" compoundref="atomic__base_8hpp" startline="2491" endline="2493">atomic_float_base&lt; Float &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__float__base_1ad8e18ff8750432a7f4a78211fbcc20d2" compoundref="atomic__base_8hpp" startline="2498" endline="2501">atomic_float_base&lt; Float &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1ad76ade2a7e14851707b5016ff77cd7c1" compoundref="atomic__base_8hpp" startline="3135" endline="3137">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a7a3b62ca9907f922a07d75fe3badcc41" compoundref="atomic__base_8hpp" startline="2729" endline="2731">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a3e4027d7518e305c234397aa90622092" compoundref="atomic__base_8hpp" startline="2877" endline="2879">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_1a5e1fce92f531d784690897010e446d8d" compoundref="atomic_8hpp" startline="147" endline="149">atomic&lt; T &gt;::exchange</referencedby>
+        <referencedby refid="structatomic_1a948ef15c05d5a3e24a6aba173b4ee7e8" compoundref="atomic_8hpp" startline="154" endline="156">atomic&lt; T &gt;::exchange</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1a72c342e0993d855242bbc2c6aef73444" compoundref="atomic_8hpp" startline="377" endline="379">atomic&lt; bool &gt;::exchange</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1aad5eaaf9aa5ba43096913fe16ef8e10f" compoundref="atomic_8hpp" startline="384" endline="386">atomic&lt; bool &gt;::exchange</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1a4732d6cab3e2bf8b1ed78f71a188190c" compoundref="shared__ptr_8hpp" startline="1268" endline="1271">atomic&lt; shared_ptr&lt; T &gt; &gt;::exchange</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a7a5ee316f303544615f232915fc8f0d8" compoundref="weak__ptr_8hpp" startline="515" endline="518">atomic&lt; weak_ptr&lt; T &gt; &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__base_1abd661841a0ab304f74cfa73b0e6f4f2a" compoundref="atomic__base_8hpp" startline="1683" endline="1685">atomic_base&lt; char &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__base_1abcb256b7451192e4ebc4ecfd18bca5d5" compoundref="atomic__base_8hpp" startline="1690" endline="1693">atomic_base&lt; char &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a625b63d444dd4cde20e92fbb22eadf71" compoundref="atomic__base_8hpp" startline="2149" endline="2161">atomic_base&lt; T * &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1ac3487ed2892b49df0a2691d07117c03e" compoundref="atomic__base_8hpp" startline="2166" endline="2178">atomic_base&lt; T * &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__float__base_1aab85e64411670551b86ccac41700989d" compoundref="atomic__base_8hpp" startline="2445" endline="2447">atomic_float_base&lt; Float &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__float__base_1adf86fd62a846a2f843f33af1e4ede237" compoundref="atomic__base_8hpp" startline="2452" endline="2454">atomic_float_base&lt; Float &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a1c606b766bc4952cc43dd879436375dc" compoundref="atomic__base_8hpp" startline="3098" endline="3100">atomic_ref_base&lt; Float, false, true &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aef376483a69ffd1f77af18704b3cffd3" compoundref="atomic__base_8hpp" startline="2693" endline="2695">atomic_ref_base&lt; T, false, false &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a644f31f7d25877a6c5fe646130a8b405" compoundref="atomic__base_8hpp" startline="2841" endline="2843">atomic_ref_base&lt; T, true, false &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__base_1a037a6cb21e04aae4c4118501c75e9209" compoundref="atomic__base_8hpp" startline="1805" endline="1808">atomic_base&lt; char &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__base_1a0c6ef22b446684de7cb4ac985123c90d" compoundref="atomic__base_8hpp" startline="1813" endline="1816">atomic_base&lt; char &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a79f6c71df297317114e0948c53b44bbc" compoundref="atomic__base_8hpp" startline="2298" endline="2304">atomic_base&lt; T * &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a0aaefe0adc6c5815cd01bf8c0e7f6a65" compoundref="atomic__base_8hpp" startline="2309" endline="2315">atomic_base&lt; T * &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__float__base_1a00883969339dafc807382196142d99d2" compoundref="atomic__base_8hpp" startline="2543" endline="2545">atomic_float_base&lt; Float &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__float__base_1aa2bce04ca3567dd2c7e87b42a76d6987" compoundref="atomic__base_8hpp" startline="2550" endline="2552">atomic_float_base&lt; Float &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a8065485c88d98d95f67ed562517212eb" compoundref="atomic__base_8hpp" startline="3175" endline="3177">atomic_ref_base&lt; Float, false, true &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a76f71f1cafde30c6558171e0d4f7e505" compoundref="atomic__base_8hpp" startline="2917" endline="2919">atomic_ref_base&lt; T, true, false &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__base_1a32e791fa7d1611859e8db698a7ee88c3" compoundref="atomic__base_8hpp" startline="1843" endline="1846">atomic_base&lt; char &gt;::fetch_and</referencedby>
+        <referencedby refid="structatomic__base_1aae8366d26051d947d6625dd9cf85c97d" compoundref="atomic__base_8hpp" startline="1851" endline="1854">atomic_base&lt; char &gt;::fetch_and</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a4de19daeb658ff3fc49161bd15cab367" compoundref="atomic__base_8hpp" startline="2937" endline="2939">atomic_ref_base&lt; T, true, false &gt;::fetch_and</referencedby>
+        <referencedby refid="structatomic__base_1ad8dadd88a6d0b99071f9df7c49ae885e" compoundref="atomic__base_8hpp" startline="1862" endline="1864">atomic_base&lt; char &gt;::fetch_or</referencedby>
+        <referencedby refid="structatomic__base_1af209a4d88c96ac938122167f644bb8f7" compoundref="atomic__base_8hpp" startline="1869" endline="1872">atomic_base&lt; char &gt;::fetch_or</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ad01ba25dbc69dc0d0affae7d0d409563" compoundref="atomic__base_8hpp" startline="2947" endline="2949">atomic_ref_base&lt; T, true, false &gt;::fetch_or</referencedby>
+        <referencedby refid="structatomic__base_1aeec5242a6376e0fb2684e88ca98c5fe5" compoundref="atomic__base_8hpp" startline="1824" endline="1827">atomic_base&lt; char &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__base_1a2aafd96d7cb3b4c2b5ad0138246d2c8a" compoundref="atomic__base_8hpp" startline="1832" endline="1835">atomic_base&lt; char &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aed7f4507bc1d0652f6e387c4ba9cfceb" compoundref="atomic__base_8hpp" startline="2323" endline="2329">atomic_base&lt; T * &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1ad8d5eb0586e5ee1030019955086563a3" compoundref="atomic__base_8hpp" startline="2334" endline="2340">atomic_base&lt; T * &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__float__base_1a112fcfb6ef70dc2534ae60fbdc7a8305" compoundref="atomic__base_8hpp" startline="2560" endline="2562">atomic_float_base&lt; Float &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__float__base_1a77a0872204ea3809970be5c7f24b0b5e" compoundref="atomic__base_8hpp" startline="2567" endline="2569">atomic_float_base&lt; Float &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1adb450547460e550bac73301a28e89e1a" compoundref="atomic__base_8hpp" startline="3185" endline="3187">atomic_ref_base&lt; Float, false, true &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ab23344df478740ad2a8d1e707f421f2d" compoundref="atomic__base_8hpp" startline="2927" endline="2929">atomic_ref_base&lt; T, true, false &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__base_1a949e0b9639cec434570a5945530dea9e" compoundref="atomic__base_8hpp" startline="1880" endline="1883">atomic_base&lt; char &gt;::fetch_xor</referencedby>
+        <referencedby refid="structatomic__base_1ae02db7144af4c5926f43259550fc1d3c" compoundref="atomic__base_8hpp" startline="1888" endline="1891">atomic_base&lt; char &gt;::fetch_xor</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a0fd54b7a21a85ca87bb53cd56851b94f" compoundref="atomic__base_8hpp" startline="2957" endline="2959">atomic_ref_base&lt; T, true, false &gt;::fetch_xor</referencedby>
+        <referencedby refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" compoundref="atomic_8hpp" startline="130" endline="132">atomic&lt; T &gt;::load</referencedby>
+        <referencedby refid="structatomic_1aadd78cd51f71ca453d8364b3ddd3ee54" compoundref="atomic_8hpp" startline="137" endline="139">atomic&lt; T &gt;::load</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1aeae9779b073a62cb0f9dd744433e405f" compoundref="atomic_8hpp" startline="364" endline="364">atomic&lt; bool &gt;::load</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1a71ba710ab34217a567e3ef81b1a52df1" compoundref="atomic_8hpp" startline="369" endline="369">atomic&lt; bool &gt;::load</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1aaf333f43b0cd465cad9ace09d56849a6" compoundref="shared__ptr_8hpp" startline="1238" endline="1238">atomic&lt; shared_ptr&lt; T &gt; &gt;::load</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1adbe257302df56da163cea95ccb7e67dd" compoundref="weak__ptr_8hpp" startline="490" endline="490">atomic&lt; weak_ptr&lt; T &gt; &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_1af024d40b0357b05a72df587152b2f4a5" compoundref="atomic__base_8hpp" startline="1650" endline="1660">atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_1a364965b7b7d5d8c1ad0a1a523b48cde9" compoundref="atomic__base_8hpp" startline="1665" endline="1675">atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aa119b562899473202f03f0ee12d334f7" compoundref="atomic__base_8hpp" startline="2098" endline="2117">atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a658b7958e9e1ded49d703c6b20d54a7c" compoundref="atomic__base_8hpp" startline="2122" endline="2141">atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structatomic__float__base_1a29b2baabe03baf61591b9678f3bce0b5" compoundref="atomic__base_8hpp" startline="2421" endline="2423">atomic_float_base&lt; Float &gt;::load</referencedby>
+        <referencedby refid="structatomic__float__base_1af3f2740586f78d8519bbc2d50c94b368" compoundref="atomic__base_8hpp" startline="2428" endline="2430">atomic_float_base&lt; Float &gt;::load</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a20649a71b96b780d8567e7a7657994ed" compoundref="atomic__base_8hpp" startline="3088" endline="3090">atomic_ref_base&lt; Float, false, true &gt;::load</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a3ee7a02a97f4eefeb616b14b5b9cbc25" compoundref="atomic__base_8hpp" startline="2685" endline="2685">atomic_ref_base&lt; T, false, false &gt;::load</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ac559392b872ff974b5acffcb4802ba2c" compoundref="atomic__base_8hpp" startline="2833" endline="2833">atomic_ref_base&lt; T, true, false &gt;::load</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1a6b6f0eebf007e1aad169632de570c690" compoundref="shared__ptr_8hpp" startline="1243" endline="1243">atomic&lt; shared_ptr&lt; T &gt; &gt;::operator value_type</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a4e588d1334e81ff00a762a3099aa5db4" compoundref="weak__ptr_8hpp" startline="495" endline="495">atomic&lt; weak_ptr&lt; T &gt; &gt;::operator value_type</referencedby>
+        <referencedby refid="structatomic__base_1ae41d2f732c768cde2a57e1c38db270d0" compoundref="atomic__base_8hpp" startline="1555" endline="1557">atomic_base&lt; char &gt;::operator&amp;=</referencedby>
+        <referencedby refid="structatomic__base_1ae97de88deb06b177b35cab72df769185" compoundref="atomic__base_8hpp" startline="1562" endline="1564">atomic_base&lt; char &gt;::operator&amp;=</referencedby>
+        <referencedby refid="structatomic__base_1ab840d0663013df0bafabdb21d6df83e9" compoundref="atomic__base_8hpp" startline="1500" endline="1500">atomic_base&lt; char &gt;::operator++</referencedby>
+        <referencedby refid="structatomic__base_1ad9e0a8a245e365f6b4e34b762b48b6c8" compoundref="atomic__base_8hpp" startline="1505" endline="1505">atomic_base&lt; char &gt;::operator++</referencedby>
+        <referencedby refid="structatomic__base_1a8e12a5d2a54e20a66d78c0692f448d7b" compoundref="atomic__base_8hpp" startline="1523" endline="1525">atomic_base&lt; char &gt;::operator+=</referencedby>
+        <referencedby refid="structatomic__base_1abc5e076164a556f6753cb12f31447a5b" compoundref="atomic__base_8hpp" startline="1530" endline="1532">atomic_base&lt; char &gt;::operator+=</referencedby>
+        <referencedby refid="structatomic__float__base_1adc25a99309d0c060ac7a8e1b29aa1561" compoundref="atomic__base_8hpp" startline="2576" endline="2578">atomic_float_base&lt; Float &gt;::operator+=</referencedby>
+        <referencedby refid="structatomic__float__base_1a51da39f7f525d22b1e2816efc99b2766" compoundref="atomic__base_8hpp" startline="2583" endline="2585">atomic_float_base&lt; Float &gt;::operator+=</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a65d9db4cf47968ce6d8662c6a4e96330" compoundref="atomic__base_8hpp" startline="3194" endline="3196">atomic_ref_base&lt; Float, false, true &gt;::operator+=</referencedby>
+        <referencedby refid="structatomic__base_1a446d13ba6fc92732a473c880858b5c48" compoundref="atomic__base_8hpp" startline="1511" endline="1511">atomic_base&lt; char &gt;::operator--</referencedby>
+        <referencedby refid="structatomic__base_1a699b49ea43cbc1a285a9e920b387a669" compoundref="atomic__base_8hpp" startline="1516" endline="1516">atomic_base&lt; char &gt;::operator--</referencedby>
+        <referencedby refid="structatomic__base_1a770e35f9bf4afb1f943eea189a226a18" compoundref="atomic__base_8hpp" startline="1539" endline="1541">atomic_base&lt; char &gt;::operator-=</referencedby>
+        <referencedby refid="structatomic__base_1a70c65e39dfb5c8a5629583d86b9c51cb" compoundref="atomic__base_8hpp" startline="1546" endline="1548">atomic_base&lt; char &gt;::operator-=</referencedby>
+        <referencedby refid="structatomic__float__base_1ab7f780a7ebad10829a44c764f0208b43" compoundref="atomic__base_8hpp" startline="2592" endline="2594">atomic_float_base&lt; Float &gt;::operator-=</referencedby>
+        <referencedby refid="structatomic__float__base_1a20cff0645f8f9d85e22aa658bc4cddac" compoundref="atomic__base_8hpp" startline="2599" endline="2601">atomic_float_base&lt; Float &gt;::operator-=</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a6ddc1843039d1e2e195c96cc52384edd" compoundref="atomic__base_8hpp" startline="3203" endline="3205">atomic_ref_base&lt; Float, false, true &gt;::operator-=</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1a285db5ce0ebff658cc465bddc8873c7b" compoundref="shared__ptr_8hpp" startline="1255" endline="1255">atomic&lt; shared_ptr&lt; T &gt; &gt;::operator=</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aa90dd118d771d663d05ece8cfeef4941" compoundref="weak__ptr_8hpp" startline="507" endline="507">atomic&lt; weak_ptr&lt; T &gt; &gt;::operator=</referencedby>
+        <referencedby refid="structatomic__base_1a7c87e16ad9de16b216977ef1f35a40ca" compoundref="atomic__base_8hpp" startline="1587" endline="1589">atomic_base&lt; char &gt;::operator^=</referencedby>
+        <referencedby refid="structatomic__base_1ace28285ad3c8593de6acc02794ac2106" compoundref="atomic__base_8hpp" startline="1594" endline="1596">atomic_base&lt; char &gt;::operator^=</referencedby>
+        <referencedby refid="structatomic__base_1acee86a43dd988ca37d0c1a319903eaeb" compoundref="atomic__base_8hpp" startline="1571" endline="1573">atomic_base&lt; char &gt;::operator|=</referencedby>
+        <referencedby refid="structatomic__base_1a30243fff2ecac9462b49a3c2aec513e8" compoundref="atomic__base_8hpp" startline="1578" endline="1580">atomic_base&lt; char &gt;::operator|=</referencedby>
+        <referencedby refid="structatomic_1a3e1268f8d4abb49382c713740a13234a" compoundref="atomic_8hpp" startline="114" endline="116">atomic&lt; T &gt;::store</referencedby>
+        <referencedby refid="structatomic_1a18eba15397edb4001c242550849dab9c" compoundref="atomic_8hpp" startline="121" endline="123">atomic&lt; T &gt;::store</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1a62c07fee296a5aa40abf8b8560541de8" compoundref="atomic_8hpp" startline="350" endline="350">atomic&lt; bool &gt;::store</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1a5ca3e33c26bffe6f2b45660c57f4facb" compoundref="atomic_8hpp" startline="355" endline="357">atomic&lt; bool &gt;::store</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1a8c33de01cdb49a1a88a788a928e703a6" compoundref="shared__ptr_8hpp" startline="1250" endline="1250">atomic&lt; shared_ptr&lt; T &gt; &gt;::store</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a97a5a243370ca7412b063a9b461fc015" compoundref="weak__ptr_8hpp" startline="502" endline="502">atomic&lt; weak_ptr&lt; T &gt; &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_1a4c12cae12a0f6bf002f8fcedce9cdbb5" compoundref="atomic__base_8hpp" startline="1614" endline="1626">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_1a9cd7bc0d2ccf4dfd26c8ee64b5a8ee26" compoundref="atomic__base_8hpp" startline="1631" endline="1643">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a95b43b5cc705af7badc6d18dfc8b2431" compoundref="atomic__base_8hpp" startline="2070" endline="2091">atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1af64a00bcd805e76ccd7a07211cacc104" compoundref="atomic__base_8hpp" startline="2045" endline="2065">atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="structatomic__float__base_1ad2b5a33f24780146bb9f19778ad73ef8" compoundref="atomic__base_8hpp" startline="2407" endline="2409">atomic_float_base&lt; Float &gt;::store</referencedby>
+        <referencedby refid="structatomic__float__base_1a6308fb3482a27cce1f042199cd411c96" compoundref="atomic__base_8hpp" startline="2414" endline="2416">atomic_float_base&lt; Float &gt;::store</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a1cfbc9ed4cee59c6aafcf3bd75b78617" compoundref="atomic__base_8hpp" startline="3079" endline="3081">atomic_ref_base&lt; Float, false, true &gt;::store</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a8328eb11898c8b08ef22bc8453f9fe5b" compoundref="atomic__base_8hpp" startline="2676" endline="2678">atomic_ref_base&lt; T, false, false &gt;::store</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a91339a67a8560b0761d8c01a4dd2dc82" compoundref="atomic__base_8hpp" startline="2824" endline="2826">atomic_ref_base&lt; T, true, false &gt;::store</referencedby>
+        <referencedby refid="structatomic__flag_1a8420f9460c7acd15c67815a8d3baad09" compoundref="atomic__base_8hpp" startline="1302" endline="1314">atomic_flag::test</referencedby>
+        <referencedby refid="structatomic__flag_1a18b408717e06b18e4246bb8009b15ed2" compoundref="atomic__base_8hpp" startline="1319" endline="1331">atomic_flag::test</referencedby>
+        <referencedby refid="structatomic__flag_1a9028b6a6209eeac4f097bc69486b2ef3" compoundref="atomic__base_8hpp" startline="1270" endline="1280">atomic_flag::test_and_set</referencedby>
+        <referencedby refid="structatomic__flag_1a87b77532cdb900afeb061fa35fd8ee73" compoundref="atomic__base_8hpp" startline="1285" endline="1295">atomic_flag::test_and_set</referencedby>
+        <referencedby refid="structatomic_3_01bool_01_4_1a92ee46904966e34ef163f20a0c1c5ae8" compoundref="atomic_8hpp" startline="474" endline="474">atomic&lt; bool &gt;::wait</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1a0c34a6fd73272f0c83e423f4e07e2079" compoundref="shared__ptr_8hpp" startline="1306" endline="1306">atomic&lt; shared_ptr&lt; T &gt; &gt;::wait</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a0cb23fed0831e23e16dc5c0f590dc3cb" compoundref="weak__ptr_8hpp" startline="553" endline="553">atomic&lt; weak_ptr&lt; T &gt; &gt;::wait</referencedby>
+        <referencedby refid="structatomic__base_1a84fa55635b031bc4416e05ec142991b5" compoundref="atomic__base_8hpp" startline="1785" endline="1787">atomic_base&lt; char &gt;::wait</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1af7379fe6e4ea83d93fab90faed67c15a" compoundref="atomic__base_8hpp" startline="2278" endline="2280">atomic_base&lt; T * &gt;::wait</referencedby>
+        <referencedby refid="structatomic__flag_1ac76b1f66f833c41195886ce1fd8860c1" compoundref="atomic__base_8hpp" startline="1338" endline="1342">atomic_flag::wait</referencedby>
+        <referencedby refid="structatomic__flag_1a2e813aa5941477fd297d8320f6d5960b" compoundref="atomic__base_8hpp" startline="1347" endline="1352">atomic_flag::wait</referencedby>
+        <referencedby refid="structatomic__float__base_1a66cdf2efe9764bb6ebee8356b15b780d" compoundref="atomic__base_8hpp" startline="2523" endline="2525">atomic_float_base&lt; Float &gt;::wait</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1aafa9406edb191fe58fdf629ec03606c2" compoundref="atomic__base_8hpp" startline="3155" endline="3157">atomic_ref_base&lt; Float, false, true &gt;::wait</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a4d2db5ae6c534d2fc0ba144899eaf6a3" compoundref="atomic__base_8hpp" startline="2749" endline="2751">atomic_ref_base&lt; T, false, false &gt;::wait</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1acc2044a07bd295da4530442b62c179a0" compoundref="atomic__base_8hpp" startline="2897" endline="2899">atomic_ref_base&lt; T, true, false &gt;::wait</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___memory_order_1ga4d9a876d4d53afcbc2b20efdf7f0d170" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
+        <definition>memory_order operator|</definition>
+        <argsstring>(memory_order mo, memory_order_modifier mod) noexcept</argsstring>
+        <name>operator|</name>
+        <param>
+          <type><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_order_1gaf6c9980cf35b938ee765508ef4dc6d42" kindref="member">memory_order_modifier</ref></type>
+          <declname>mod</declname>
+        </param>
+        <briefdescription>
+<para>内存顺序与修饰符的或操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mod</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序修饰符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>组合后的内存顺序</para>
+</simplesect>
+<simplesect kind="note"><para>用于将内存顺序与修饰符组合使用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="220" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="220" bodyend="222"/>
+        <references refid="group___math_functions_1ga584831cb7db02edb5d37b30a050b5736" compoundref="math_8hpp" startline="346" endline="357">mod</references>
+      </memberdef>
+      <memberdef kind="function" id="group___memory_order_1gaa412d48215ac5173e7fc457a4e9443e6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
+        <definition>memory_order operator&amp;</definition>
+        <argsstring>(memory_order mo, memory_order_modifier mod) noexcept</argsstring>
+        <name>operator&amp;</name>
+        <param>
+          <type><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_order_1gaf6c9980cf35b938ee765508ef4dc6d42" kindref="member">memory_order_modifier</ref></type>
+          <declname>mod</declname>
+        </param>
+        <briefdescription>
+<para>内存顺序与修饰符的与操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mod</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序修饰符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>提取后的内存顺序</para>
+</simplesect>
+<simplesect kind="note"><para>用于从组合值中提取特定的内存顺序或修饰符 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="232" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="232" bodyend="234"/>
+        <references refid="group___math_functions_1ga584831cb7db02edb5d37b30a050b5736" compoundref="math_8hpp" startline="346" endline="357">mod</references>
+      </memberdef>
+      <memberdef kind="function" id="group___memory_order_1gafda3e5c6834532546b1eaef81affc2b2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
+        <definition>memory_order cmpexch_failure_order</definition>
+        <argsstring>(const memory_order mo) noexcept</argsstring>
+        <name>cmpexch_failure_order</name>
+        <param>
+          <type>const <ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <briefdescription>
+<para>获取原子比较交换操作失败时的内存顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>对于原子比较交换（compare-exchange）操作，成功和失败的内存顺序可以不同。 此函数根据给定的内存顺序，返回对应的失败内存顺序。</para>
+<para>转换规则：<itemizedlist>
+<listitem><para>如果基础内存顺序为 <computeroutput><ref refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" kindref="member">memory_order_acq_rel</ref></computeroutput>，失败顺序为 <computeroutput><ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref></computeroutput></para>
+</listitem><listitem><para>如果基础内存顺序为 <computeroutput><ref refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" kindref="member">memory_order_release</ref></computeroutput>，失败顺序为 <computeroutput><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref></computeroutput></para>
+</listitem><listitem><para>其他基础内存顺序保持不变</para>
+</listitem><listitem><para>保留原始内存顺序中的所有修饰符 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="272" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="272" bodyend="288"/>
+        <references refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" compoundref="memory__order_8hpp" startline="181">memory_order_acq_rel</references>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42a20cf99181cfd78cead0f8ae1994c17c8" compoundref="memory__order_8hpp" startline="203">memory_order_mask</references>
+        <references refid="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42a834c94b6d984318439c48a75a9d20fb2" compoundref="memory__order_8hpp" startline="204">memory_order_modifier_mask</references>
+        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
+        <referencedby refid="structatomic_1a05cfc9ce0a0085fe9021f15ca4c88aba" compoundref="atomic_8hpp" startline="231" endline="233">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_1ad148d550ce43e0430492133202e7fd2f" compoundref="atomic_8hpp" startline="238" endline="240">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1ae0de324cc41d1e487c731e06704c26c6" compoundref="shared__ptr_8hpp" startline="1283" endline="1286">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aacadb2fa1d554474257755ab8c057360" compoundref="weak__ptr_8hpp" startline="530" endline="533">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_1aef4cb4a2afdca20af1d2ffbe5199593f" compoundref="atomic__base_8hpp" startline="1767" endline="1770">atomic_base&lt; char &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_1a72943d7d79772a97f98f658ea385c623" compoundref="atomic__base_8hpp" startline="1775" endline="1778">atomic_base&lt; char &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aa89f6a67049327e2a73e817f49e1d563" compoundref="atomic__base_8hpp" startline="2260" endline="2263">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a3d319536f3f30ad9d1cd8ab83f8b25e5" compoundref="atomic__base_8hpp" startline="2268" endline="2271">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__float__base_1a1ec5c1b3b2ce106bfa742e8817a784c4" compoundref="atomic__base_8hpp" startline="2506" endline="2508">atomic_float_base&lt; Float &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__float__base_1ad27ddb4634a4860ec1bb28e305fe6d61" compoundref="atomic__base_8hpp" startline="2513" endline="2516">atomic_float_base&lt; Float &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1aba18c20d49a4cefd49ca7b767b298c27" compoundref="atomic__base_8hpp" startline="3146" endline="3148">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a222193895c6947fe1f5746f559053580" compoundref="atomic__base_8hpp" startline="2740" endline="2742">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1afed11c1ee7b8f9d123ae6cd8b6684c11" compoundref="atomic__base_8hpp" startline="2888" endline="2890">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_1a82a0ce202848a592e7e52785da522cea" compoundref="atomic_8hpp" startline="188" endline="190">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_1a921ec051487115429b38c02e72f1c0e1" compoundref="atomic_8hpp" startline="195" endline="197">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_1a2fc9ca139571c508ebaa2780330ce25e" compoundref="atomic__base_8hpp" startline="1724" endline="1727">atomic_base&lt; char &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_1aac294bfd16a2423bb5f998386218d170" compoundref="atomic__base_8hpp" startline="1732" endline="1735">atomic_base&lt; char &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a9b6c962dcded8b4c747e1d696a5c8bc9" compoundref="atomic__base_8hpp" startline="2213" endline="2216">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a268b098e6f9eb8676313f293742f4ff2" compoundref="atomic__base_8hpp" startline="2221" endline="2224">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__float__base_1af9f9c93088d40b86e249d5fb49898440" compoundref="atomic__base_8hpp" startline="2491" endline="2493">atomic_float_base&lt; Float &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__float__base_1ad8e18ff8750432a7f4a78211fbcc20d2" compoundref="atomic__base_8hpp" startline="2498" endline="2501">atomic_float_base&lt; Float &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1ad76ade2a7e14851707b5016ff77cd7c1" compoundref="atomic__base_8hpp" startline="3135" endline="3137">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a7a3b62ca9907f922a07d75fe3badcc41" compoundref="atomic__base_8hpp" startline="2729" endline="2731">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a3e4027d7518e305c234397aa90622092" compoundref="atomic__base_8hpp" startline="2877" endline="2879">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___memory_order_1ga0ebbd1fbd5cee109f313d7ef89dd257f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool is_valid_cmpexch_failure_order</definition>
+        <argsstring>(const memory_order mo) noexcept</argsstring>
+        <name>is_valid_cmpexch_failure_order</name>
+        <param>
+          <type>const <ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <briefdescription>
+<para>检查比较交换失败内存顺序是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待检查的内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否有效 </para>
+</simplesect>
+<simplesect kind="note"><para>失败内存顺序不能是release或acq_rel </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" line="296" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/memory_order.hpp" bodystart="296" bodyend="303"/>
+        <references refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" compoundref="memory__order_8hpp" startline="181">memory_order_acq_rel</references>
+        <references refid="group___memory_order_1ggaf6c9980cf35b938ee765508ef4dc6d42a20cf99181cfd78cead0f8ae1994c17c8" compoundref="memory__order_8hpp" startline="203">memory_order_mask</references>
+        <references refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
+        <referencedby refid="group___atomic_operations_1ga53e71ce4980e49652fa2787d1b3a7375" compoundref="atomic__base_8hpp" startline="668" endline="691">atomic_cmpexch_strong</referencedby>
+        <referencedby refid="group___atomic_operations_1gafc070ab9d97fede6cb57cfd8074219e1" compoundref="atomic__base_8hpp" startline="1043" endline="1069">atomic_cmpexch_strong_any</referencedby>
+        <referencedby refid="group___atomic_operations_1gac0e1e634abfd1bb68c905b25576eb5d4" compoundref="atomic__base_8hpp" startline="527" endline="653">atomic_cmpexch_weak</referencedby>
+        <referencedby refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="922" endline="1029">atomic_cmpexch_weak_any</referencedby>
+        <referencedby refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" compoundref="atomic_8hpp" startline="207" endline="212">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_1a986a7b48409d105ffb9c70ff3942db1c" compoundref="atomic_8hpp" startline="217" endline="222">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1afa68bbb346cae3e468cbb225d9a5da40" compoundref="atomic__base_8hpp" startline="2234" endline="2240">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1ad646d547e215185837af3cfa8bdfe4ee" compoundref="atomic__base_8hpp" startline="2245" endline="2251">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_1aae3c3ec7b287a0fc7d98db21be55f066" compoundref="atomic_8hpp" startline="166" endline="170">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_1a8c37e4a198018c0a0d174d7775f467a7" compoundref="atomic_8hpp" startline="175" endline="179">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a50c59c5bfcc109952946968caf0d1002" compoundref="atomic__base_8hpp" startline="2188" endline="2193">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1add6adc9a5802894b30bee42d2952a7d9" compoundref="atomic__base_8hpp" startline="2198" endline="2204">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>原子内存顺序行为 </para>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下并发编程与内存模型相关标准规范：</para>
+<para><bold>硬件架构规范（内存屏障与指令集参考）：</bold><itemizedlist>
+<listitem><para>**Intel® 64 and IA-32 Architectures Software Developer&apos;s Manual**：x86/x64 内存排序 <ulink url="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html">https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html</ulink></para>
+</listitem><listitem><para>**ARM Architecture Reference Manual (Armv8-A)**：ARM 弱内存序模型 <ulink url="https://developer.arm.com/documentation/ddi0487/latest/">https://developer.arm.com/documentation/ddi0487/latest/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>事务内存扩展规范：</bold><itemizedlist>
+<listitem><para>**Intel® Transactional Synchronization Extensions (TSX)**：硬件锁消除（HLE）规范 <ulink url="https://www.intel.com/content/www/us/en/docs/programmable/683364/current/transactional-synchronization-extensions.html">https://www.intel.com/content/www/us/en/docs/programmable/683364/current/transactional-synchronization-extensions.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___memory_order_1memory_order_semantics">
+<title>内存顺序语义</title><para>根据 ISO/IEC 14882:2020 §31.4，六种内存顺序语义如下：</para>
+<para><table rows="7" cols="3"><row>
+<entry thead="yes"><para>内存顺序  </para>
+</entry><entry thead="yes"><para>枚举值  </para>
+</entry><entry thead="yes"><para>语义说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>relaxed  </para>
+</entry><entry thead="no"><para>0  </para>
+</entry><entry thead="no"><para>最宽松：仅保证原子性，无同步或顺序约束  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>consume  </para>
+</entry><entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>数据依赖：依赖该值的操作不会被重排到前面（通常由编译器优化为 acquire）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>acquire  </para>
+</entry><entry thead="no"><para>2  </para>
+</entry><entry thead="no"><para>获取语义：后续读写不会被重排到该操作之前  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>release  </para>
+</entry><entry thead="no"><para>3  </para>
+</entry><entry thead="no"><para>释放语义：之前的读写不会被重排到该操作之后  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>acq_rel  </para>
+</entry><entry thead="no"><para>4  </para>
+</entry><entry thead="no"><para>获取-释放组合：兼具 acquire 和 release 语义  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>seq_cst  </para>
+</entry><entry thead="no"><para>5  </para>
+</entry><entry thead="no"><para>顺序一致性：全局单一总顺序，最严格的同步  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___memory_order_1synchronization_patterns">
+<title>同步模式</title><para>根据 C++ 内存模型，不同内存顺序构成以下同步关系：</para>
+<para><table rows="5" cols="4"><row>
+<entry thead="yes"><para>模式  </para>
+</entry><entry thead="yes"><para>存储操作  </para>
+</entry><entry thead="yes"><para>加载操作  </para>
+</entry><entry thead="yes"><para>同步效果  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Relaxed  </para>
+</entry><entry thead="no"><para>relaxed  </para>
+</entry><entry thead="no"><para>relaxed  </para>
+</entry><entry thead="no"><para>无同步，仅保证原子性  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Release-Acquire  </para>
+</entry><entry thead="no"><para>release  </para>
+</entry><entry thead="no"><para>acquire  </para>
+</entry><entry thead="no"><para>释放-获取同步，构成 happens-before  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Release-Consume  </para>
+</entry><entry thead="no"><para>release  </para>
+</entry><entry thead="no"><para>consume  </para>
+</entry><entry thead="no"><para>释放-消费同步（依赖排序）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Sequential  </para>
+</entry><entry thead="no"><para>seq_cst  </para>
+</entry><entry thead="no"><para>seq_cst  </para>
+</entry><entry thead="no"><para>全局顺序一致性  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___memory_order_1fence_equivalents">
+<title>内存屏障等价</title><para>各内存顺序在不同硬件架构上的内存屏障指令等价：</para>
+<para><table rows="6" cols="4"><row>
+<entry thead="yes"><para>内存顺序  </para>
+</entry><entry thead="yes"><para>x86/x64 指令  </para>
+</entry><entry thead="yes"><para>ARMv8 指令  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>relaxed  </para>
+</entry><entry thead="no"><para>无（mov）  </para>
+</entry><entry thead="no"><para>无（ldr/str）  </para>
+</entry><entry thead="no"><para>无屏障  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>acquire  </para>
+</entry><entry thead="no"><para>编译器屏障（mov + 约束）  </para>
+</entry><entry thead="no"><para>LDAR  </para>
+</entry><entry thead="no"><para>加载-获取  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>release  </para>
+</entry><entry thead="no"><para>编译器屏障（mov + 约束）  </para>
+</entry><entry thead="no"><para>STLR  </para>
+</entry><entry thead="no"><para>存储-释放  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>acq_rel  </para>
+</entry><entry thead="no"><para>mfence（或 lock xchg）  </para>
+</entry><entry thead="no"><para>LDAR + STLR 组合  </para>
+</entry><entry thead="no"><para>完全屏障  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>seq_cst  </para>
+</entry><entry thead="no"><para>mfence（或 lock xadd）  </para>
+</entry><entry thead="no"><para>DMB ISH  </para>
+</entry><entry thead="no"><para>顺序一致性屏障  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>x86/x64 架构提供相对强的内存模型（TSO），load 自带 acquire 语义， store 自带 release 语义，因此 relaxed、acquire、release 通常仅需编译器屏障。</para>
+</simplesect>
+</para>
+</sect1>
+<sect1 id="group___memory_order_1cmpexch_failure_order">
+<title>比较交换失败顺序规则</title><para>根据 ISO/IEC 14882:2020 §31.8.2，compare_exchange 操作的失败内存顺序必须满足：<itemizedlist>
+<listitem><para>不能为 <computeroutput>release</computeroutput> 或 <computeroutput>acq_rel</computeroutput>（失败时不执行存储操作）</para>
+</listitem><listitem><para>不能强于成功时的内存顺序</para>
+</listitem></itemizedlist>
+</para>
+<para>本实现提供的转换规则：<itemizedlist>
+<listitem><para><computeroutput>acq_rel</computeroutput> 失败 → <computeroutput>acquire</computeroutput></para>
+</listitem><listitem><para><computeroutput>release</computeroutput> 失败 → <computeroutput>relaxed</computeroutput></para>
+</listitem><listitem><para>其他情况保持不变</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___memory_order_1hle_modifiers">
+<title>硬件锁消除（HLE）修饰符</title><para>HLE 是 Intel TSX 扩展的一部分，允许将锁前缀的原子操作转换为事务执行：</para>
+<para><table rows="3" cols="3"><row>
+<entry thead="yes"><para>修饰符  </para>
+</entry><entry thead="yes"><para>值  </para>
+</entry><entry thead="yes"><para>语义  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>memory_order_hle_acquire  </para>
+</entry><entry thead="no"><para>0x10000  </para>
+</entry><entry thead="no"><para>事务开始（相当于 XACQUIRE 前缀）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>memory_order_hle_release  </para>
+</entry><entry thead="no"><para>0x20000  </para>
+</entry><entry thead="no"><para>事务结束（相当于 XRELEASE 前缀）  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>HLE 修饰符仅在支持 Intel TSX 的处理器上有效，在不支持的平台上自动退化为普通原子操作。 </para>
+</simplesect>
+<simplesect kind="warning"><para>**已弃用声明**：根据 Intel 的安全公告与软件开发者手册更新， Intel® TSX 指令集扩展（包括 HLE 和 RTM）已在后续处理器中被弃用或默认禁用。 使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE 功能，并在运行时做好 fallback 处理。</para>
+</simplesect>
+</para>
+</sect1>
+<sect1 id="group___memory_order_1rtm_instructions">
+<title>RTM指令集</title><para>RTM（Restricted Transactional Memory）是Intel TSX扩展的另一种事务内存模式， 通过XBEGIN/XEND/XABORT指令提供显式的事务控制。</para>
+<para>与HLE的区别：<itemizedlist>
+<listitem><para>HLE：硬件自动处理，对程序员透明，使用锁前缀触发</para>
+</listitem><listitem><para>RTM：程序员显式控制事务边界，需提供fallback路径</para>
+</listitem></itemizedlist>
+</para>
+<para><table rows="5" cols="3"><row>
+<entry thead="yes"><para>指令  </para>
+</entry><entry thead="yes"><para>操作码  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>XBEGIN  </para>
+</entry><entry thead="no"><para>C7 F8  </para>
+</entry><entry thead="no"><para>开始事务，失败时跳转到fallback地址  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>XEND  </para>
+</entry><entry thead="no"><para>0F 01 D5  </para>
+</entry><entry thead="no"><para>结束事务  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>XABORT  </para>
+</entry><entry thead="no"><para>C6 F8  </para>
+</entry><entry thead="no"><para>显式中止事务，可附带8位状态码  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>XTEST  </para>
+</entry><entry thead="no"><para>0F 01 D6  </para>
+</entry><entry thead="no"><para>检测是否在事务中  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="warning"><para>根据Intel的安全公告与软件开发者手册更新，Intel® TSX指令集扩展（包括HLE和RTM） 已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过CPUID检查处理器是否支持 RTM功能，并在运行时做好fallback处理。</para>
+</simplesect>
+</para>
+</sect1>
+<sect1 id="group___memory_order_1rtm_abort_codes">
+<title>事务中止状态码</title><para>通过XABORT指令和事务中止时EAX寄存器的值可以判断中止原因：</para>
+<para><table rows="7" cols="2"><row>
+<entry thead="yes"><para>状态位  </para>
+</entry><entry thead="yes"><para>含义  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>EAX[0]  </para>
+</entry><entry thead="no"><para>XABORT显式中止  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>EAX[1]  </para>
+</entry><entry thead="no"><para>可能重试成功  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>EAX[2]  </para>
+</entry><entry thead="no"><para>内存冲突引起的中止  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>EAX[3]  </para>
+</entry><entry thead="no"><para>缓冲区溢出  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>EAX[4]  </para>
+</entry><entry thead="no"><para>调试断点命中  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>EAX[5]  </para>
+</entry><entry thead="no"><para>嵌套事务中止  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>内存顺序基类型  </para>
+</entry><entry thead="no"><para>int32_t（与 C 标准兼容）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>修饰符基类型  </para>
+</entry><entry thead="no"><para>int64_t（预留扩展空间）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>顺序掩码  </para>
+</entry><entry thead="no"><para>0x0000ffff（低 16 位）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>修饰符掩码  </para>
+</entry><entry thead="no"><para>0xffff0000（高 16 位）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>修饰符位宽  </para>
+</entry><entry thead="no"><para>16 位（支持最多 65536 种修饰符）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___memory_order_1usage_guidelines">
+<title>使用指南</title><para><itemizedlist>
+<listitem><para>**性能优先**：使用 <computeroutput>relaxed</computeroutput> 进行简单计数</para>
+</listitem><listitem><para>**生产者-消费者**：生产者使用 <computeroutput>release</computeroutput>，消费者使用 <computeroutput>acquire</computeroutput></para>
+</listitem><listitem><para>**引用计数**：增加计数使用 <computeroutput>relaxed</computeroutput>，减少计数使用 <computeroutput>acq_rel</computeroutput></para>
+</listitem><listitem><para>**互斥锁实现**：获取锁使用 <computeroutput>acquire</computeroutput>，释放锁使用 <computeroutput>release</computeroutput></para>
+</listitem><listitem><para>**全局顺序要求**：使用 <computeroutput>seq_cst</computeroutput>（默认且最安全，但性能代价最大）</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="warning"><para>错误使用内存顺序可能导致：<itemizedlist>
+<listitem><para>数据竞争（未定义行为）</para>
+</listitem><listitem><para>死锁或活锁</para>
+</listitem><listitem><para>内存可见性问题（读旧值）</para>
+</listitem><listitem><para>平台间移植性问题（强/弱内存模型差异）</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/atomic/memory_order">https://en.cppreference.com/w/cpp/atomic/memory_order</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.intel.com/content/www/us/en/docs/programmable/683364/current/transactional-synchronization-extensions.html">https://www.intel.com/content/www/us/en/docs/programmable/683364/current/transactional-synchronization-extensions.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://developer.arm.com/documentation/100941/0101/Memory-ordering">https://developer.arm.com/documentation/100941/0101/Memory-ordering</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

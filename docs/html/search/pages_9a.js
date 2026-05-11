@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🗄️_20数据库_20db_0',['🗄️ 数据库 (DB)',['../index.html#autotoc_md24',1,'']]]
+  ['🔧_20编译指南_0',['🔧 编译指南',['../index.html#autotoc_md39',1,'']]]
 ];

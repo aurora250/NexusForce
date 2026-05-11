@@ -1,0 +1,775 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="struct_a_e_s256" kind="struct" language="C++" prot="public">
+    <compoundname>AES256</compoundname>
+    <includes refid="aes256_8hpp" local="no">aes256.hpp</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="struct_a_e_s256_1a8bd9c3b711151948a9d5a7de33db3b8a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector AES256::encrypt_ecb</definition>
+        <argsstring>(cbyte_view data, cbyte_view key)</argsstring>
+        <name>encrypt_ecb</name>
+        <qualifiedname>AES256::encrypt_ecb</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-ECB 加密 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要加密的数据（长度必须是16的倍数） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节的密钥 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加密后的数据 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当密钥长度不是32字节或数据长度不是16的倍数时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="87" column="24"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1ad47feff2d480811005d2d3b779c6396d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector AES256::decrypt_ecb</definition>
+        <argsstring>(cbyte_view data, cbyte_view key)</argsstring>
+        <name>decrypt_ecb</name>
+        <qualifiedname>AES256::decrypt_ecb</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-ECB 解密 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要解密的数据（长度必须是16的倍数） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节的密钥 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解密后的数据 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当密钥长度不是32字节或数据长度不是16的倍数时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="96" column="24"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1a48ee09802dd0e0b5b323b8147863e693" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector AES256::encrypt_ecb_pkcs7</definition>
+        <argsstring>(cbyte_view data, cbyte_view key)</argsstring>
+        <name>encrypt_ecb_pkcs7</name>
+        <qualifiedname>AES256::encrypt_ecb_pkcs7</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-ECB 加密（PKCS7填充） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要加密的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节的密钥 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加密后的数据（自动添加PKCS7填充） </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当密钥长度不是32字节时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="105" column="24"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1a8de44a3e6786f7c47a94292d48affbb8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector AES256::decrypt_ecb_pkcs7</definition>
+        <argsstring>(cbyte_view data, cbyte_view key)</argsstring>
+        <name>decrypt_ecb_pkcs7</name>
+        <qualifiedname>AES256::decrypt_ecb_pkcs7</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-ECB 解密（PKCS7填充） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要解密的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节的密钥 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解密后的数据（自动移除PKCS7填充） </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当密钥长度不是32字节或填充无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="114" column="24"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1a11f36fe7fd451fae910f46e0bca0f5f8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static string AES256::encrypt_ecb_hex</definition>
+        <argsstring>(string_view data, string_view key_hex)</argsstring>
+        <name>encrypt_ecb_hex</name>
+        <qualifiedname>AES256::encrypt_ecb_hex</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>key_hex</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-ECB 加密（十六进制接口） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要加密的字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_hex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>十六进制表示的密钥（64字符，表示32字节） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加密后的十六进制字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="122" column="19"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <referencedby refid="group___a_e_s256_1ga6a7655483ee3a05db117c933ff31e693" compoundref="aes256_8hpp" startline="206" endline="208">aes256_encrypt</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1ab9b876bf44e3bcb77a601dedb98b2424" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static string AES256::decrypt_ecb_hex</definition>
+        <argsstring>(string_view encrypted_hex, string_view key_hex)</argsstring>
+        <name>decrypt_ecb_hex</name>
+        <qualifiedname>AES256::decrypt_ecb_hex</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>encrypted_hex</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>key_hex</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-ECB 解密（十六进制接口） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>encrypted_hex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>加密数据的十六进制表示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_hex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>十六进制表示的密钥（64字符，表示32字节） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解密后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="130" column="19"/>
+        <referencedby refid="group___a_e_s256_1gab30ade9f206d486a6853c282c0c591de" compoundref="aes256_8hpp" startline="228" endline="230">aes256_decrypt</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1a612da7af87568bb2b958d6582e013991" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector AES256::encrypt_cbc</definition>
+        <argsstring>(cbyte_view data, cbyte_view key, cbyte_view iv)</argsstring>
+        <name>encrypt_cbc</name>
+        <qualifiedname>AES256::encrypt_cbc</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>iv</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-CBC 加密 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要加密的数据（长度必须是16的倍数） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节密钥 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>16字节初始化向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加密后的数据 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数长度不符时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="140" column="24"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1a36becc66de5931df90f6e10e0fe08293" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector AES256::decrypt_cbc</definition>
+        <argsstring>(cbyte_view data, cbyte_view key, cbyte_view iv)</argsstring>
+        <name>decrypt_cbc</name>
+        <qualifiedname>AES256::decrypt_cbc</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>iv</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-CBC 解密 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要解密的数据（长度必须是16的倍数） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节密钥 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>16字节初始化向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解密后的数据 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数长度不符时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="150" column="24"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1a4194c537fdf76924ce410d39f078e489" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector AES256::encrypt_cbc_pkcs7</definition>
+        <argsstring>(cbyte_view data, cbyte_view key, cbyte_view iv)</argsstring>
+        <name>encrypt_cbc_pkcs7</name>
+        <qualifiedname>AES256::encrypt_cbc_pkcs7</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>iv</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-CBC 加密（PKCS7填充） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要加密的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节密钥 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>16字节初始化向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加密后的数据 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="159" column="24"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1a076d54b08d3da5c2eef82dd0b522e0ea" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector AES256::decrypt_cbc_pkcs7</definition>
+        <argsstring>(cbyte_view data, cbyte_view key, cbyte_view iv)</argsstring>
+        <name>decrypt_cbc_pkcs7</name>
+        <qualifiedname>AES256::decrypt_cbc_pkcs7</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>iv</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-CBC 解密（PKCS7填充） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要解密的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节密钥 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>16字节初始化向量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解密后的数据 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="168" column="24"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1ace428efb039ec6c99f829589aeb6e894" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector AES256::encrypt_gcm</definition>
+        <argsstring>(cbyte_view data, cbyte_view key, cbyte_view iv, cbyte_view aad, byte_t *tag, size_t tag_len)</argsstring>
+        <name>encrypt_gcm</name>
+        <qualifiedname>AES256::encrypt_gcm</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>iv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>aad</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+          <declname>tag</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>tag_len</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-GCM 加密 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要加密的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节密钥 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化向量（推荐12字节） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>aad</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>附加认证数据（可为空） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出认证标签缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tag_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>标签长度（通常为12、13、14、15、16字节） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加密后的密文（长度与明文相同） </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="181" column="24"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_a_e_s256_1a942abb246e050416f1f375584c661201" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector AES256::decrypt_gcm</definition>
+        <argsstring>(cbyte_view data, cbyte_view key, cbyte_view iv, cbyte_view aad, cbyte_view tag, size_t tag_len)</argsstring>
+        <name>decrypt_gcm</name>
+        <qualifiedname>AES256::decrypt_gcm</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>iv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>aad</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>tag</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>tag_len</declname>
+        </param>
+        <briefdescription>
+<para>AES-256-GCM 解密并验证标签 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>密文数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32字节密钥 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化向量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>aad</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>附加认证数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待验证的认证标签 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tag_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>标签长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解密后的明文 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解密失败或标签验证失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="195" column="24"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>AES-256加密算法结构体 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供静态方法进行AES-256加密和解密操作。 支持 ECB / CBC / GCM 模式和PKCS7填充。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" line="79" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/encrypt/aes256.hpp" bodystart="79" bodyend="197"/>
+    <listofallmembers>
+      <member refid="struct_a_e_s256_1a36becc66de5931df90f6e10e0fe08293" prot="public" virt="non-virtual"><scope>AES256</scope><name>decrypt_cbc</name></member>
+      <member refid="struct_a_e_s256_1a076d54b08d3da5c2eef82dd0b522e0ea" prot="public" virt="non-virtual"><scope>AES256</scope><name>decrypt_cbc_pkcs7</name></member>
+      <member refid="struct_a_e_s256_1ad47feff2d480811005d2d3b779c6396d" prot="public" virt="non-virtual"><scope>AES256</scope><name>decrypt_ecb</name></member>
+      <member refid="struct_a_e_s256_1ab9b876bf44e3bcb77a601dedb98b2424" prot="public" virt="non-virtual"><scope>AES256</scope><name>decrypt_ecb_hex</name></member>
+      <member refid="struct_a_e_s256_1a8de44a3e6786f7c47a94292d48affbb8" prot="public" virt="non-virtual"><scope>AES256</scope><name>decrypt_ecb_pkcs7</name></member>
+      <member refid="struct_a_e_s256_1a942abb246e050416f1f375584c661201" prot="public" virt="non-virtual"><scope>AES256</scope><name>decrypt_gcm</name></member>
+      <member refid="struct_a_e_s256_1a612da7af87568bb2b958d6582e013991" prot="public" virt="non-virtual"><scope>AES256</scope><name>encrypt_cbc</name></member>
+      <member refid="struct_a_e_s256_1a4194c537fdf76924ce410d39f078e489" prot="public" virt="non-virtual"><scope>AES256</scope><name>encrypt_cbc_pkcs7</name></member>
+      <member refid="struct_a_e_s256_1a8bd9c3b711151948a9d5a7de33db3b8a" prot="public" virt="non-virtual"><scope>AES256</scope><name>encrypt_ecb</name></member>
+      <member refid="struct_a_e_s256_1a11f36fe7fd451fae910f46e0bca0f5f8" prot="public" virt="non-virtual"><scope>AES256</scope><name>encrypt_ecb_hex</name></member>
+      <member refid="struct_a_e_s256_1a48ee09802dd0e0b5b323b8147863e693" prot="public" virt="non-virtual"><scope>AES256</scope><name>encrypt_ecb_pkcs7</name></member>
+      <member refid="struct_a_e_s256_1ace428efb039ec6c99f829589aeb6e894" prot="public" virt="non-virtual"><scope>AES256</scope><name>encrypt_gcm</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

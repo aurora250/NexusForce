@@ -3,12 +3,12 @@
 
 /**
  * @file toml_parser.hpp
- * @brief toml配置文件解析器
+ * @brief TOML配置文件解析器
  *
- * 此文件提供了toml格式配置的解析器实现。
+ * 此文件提供了TOML格式配置的解析器实现。
  * 提供完整的语法分析和错误处理机制。
  *
- * 支持toml v1.0.0规范的所有特性：
+ * 支持TOML v1.0.0规范的所有特性：
  * - 键值对（Key/Value pairs）
  * - 字符串（Basic, Literal, Multi-line）
  * - 数字（Integer, Float, Special floats）
@@ -31,13 +31,13 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
- * @addtogroup TomlConfig toml配置
+ * @addtogroup TomlConfig TOML配置
  * @{
  */
 
 /**
  * @class toml_parser
- * @brief toml配置解析器
+ * @brief TOML配置解析器
  *
  * 采用递归下降解析算法。
  * 解析过程会维护行号和列号信息，便于错误定位。
@@ -58,7 +58,7 @@ private:
     vector<context> context_stack_;  ///< 上下文栈
     bool is_in_array_table_ = false; ///< 是否在表格数组中
 
-    string text_;       ///< 待解析的toml文本
+    string text_;       ///< 待解析的TOML文本
     size_t len_;        ///< 文本长度
     size_t pos_ = 0;    ///< 当前解析位置
     size_t line_ = 1;   ///< 当前行号
@@ -344,7 +344,7 @@ private:
 public:
     /**
      * @brief 构造函数
-     * @param text 待解析的toml文本
+     * @param text 待解析的TOML文本
      *
      * 初始化解析器，创建空的根表格。
      */
@@ -360,7 +360,7 @@ public:
      * @return 解析完成的根表格
      * @throws toml_exception 当解析过程中遇到语法错误时抛出
      *
-     * 解析整个toml文档，构建完整的表格结构。
+     * 解析整个TOML文档，构建完整的表格结构。
      */
     unique_ptr<toml_table> parse();
 

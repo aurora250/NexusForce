@@ -1,0 +1,1165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classsystem__signal__manager" kind="class" language="C++" prot="public">
+    <compoundname>system_signal_manager</compoundname>
+    <includes refid="signal_8hpp" local="no">signal.hpp</includes>
+    <innerclass refid="structsystem__signal__manager_1_1signal__result" prot="private">system_signal_manager::signal_result</innerclass>
+    <innerclass refid="structsystem__signal__manager_1_1pending__signal" prot="private">system_signal_manager::pending_signal</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>event</name>
+        <qualifiedname>system_signal_manager::event</qualifiedname>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a81b7fe15c43052525db74111aa314cc9" prot="public">
+          <name>INTERRUPT</name>
+          <initializer>= CTRL_C_EVENT</initializer>
+          <briefdescription>
+<para>Ctrl+C中断信号 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a9175815a9c51c1fcc8991882eaea42ec" prot="public">
+          <name>CTRL_BREAK</name>
+          <initializer>= CTRL_BREAK_EVENT</initializer>
+          <briefdescription>
+<para>Ctrl+Break信号 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a7286293c9125ac7d7bace94c190bc16d" prot="public">
+          <name>CLOSE</name>
+          <initializer>= CTRL_CLOSE_EVENT</initializer>
+          <briefdescription>
+<para>关闭控制台窗口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616aa5ddcf1c01f56182e72d5b0183aefb5f" prot="public">
+          <name>LOGOFF</name>
+          <initializer>= CTRL_LOGOFF_EVENT</initializer>
+          <briefdescription>
+<para>用户注销 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616ab9984206799a7f9fe4bd1b6c18db8112" prot="public">
+          <name>SHUTDOWN</name>
+          <initializer>= CTRL_SHUTDOWN_EVENT</initializer>
+          <briefdescription>
+<para>系统关机 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a1b52d4a7cbbcb87a81515c443453a2d5" prot="public">
+          <name>TERMINATE</name>
+          <initializer>= 1000</initializer>
+          <briefdescription>
+<para>终止信号（模拟SIGTERM） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a8d12a2ca7e5a64036d7251a3eda51a38" prot="public">
+          <name>ABORT</name>
+          <initializer>= 1001</initializer>
+          <briefdescription>
+<para>中止信号（模拟SIGABRT） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a76c0aa657d92e01e7fa3f00d58358442" prot="public">
+          <name>ILLEGAL_INSTR</name>
+          <initializer>= 1002</initializer>
+          <briefdescription>
+<para>非法指令（模拟SIGILL） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a30ccd51223e55d0a8ce2bd253733f579" prot="public">
+          <name>FLOATING_POINT</name>
+          <initializer>= 1003</initializer>
+          <briefdescription>
+<para>浮点异常（模拟SIGFPE） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a907ea32dba92b4a59a49709afe59e4e3" prot="public">
+          <name>SEGMENT_FAULT</name>
+          <initializer>= 1004</initializer>
+          <briefdescription>
+<para>段错误（模拟SIGSEGV） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a57316c450c6d8fc7887052ee0ad78edb" prot="public">
+          <name>BUS_ERROR</name>
+          <initializer>= 1005</initializer>
+          <briefdescription>
+<para>总线错误（模拟SIGBUS） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a599897092d5308ab3e843cf959a30b73" prot="public">
+          <name>PIPE_BROKEN</name>
+          <initializer>= 1006</initializer>
+          <briefdescription>
+<para>管道破裂（模拟SIGPIPE） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a9de6d0a670ae5a0dee31a6318aa00e8d" prot="public">
+          <name>ALARM</name>
+          <initializer>= 1007</initializer>
+          <briefdescription>
+<para>定时器信号（模拟SIGALRM） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a435097b29b587b710f5d8fb706588faa" prot="public">
+          <name>HANGUP</name>
+          <initializer>= 1008</initializer>
+          <briefdescription>
+<para>挂起信号（模拟SIGHUP） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a9f693771ca12c43759045cdf4295e9f5" prot="public">
+          <name>USER1</name>
+          <initializer>= 1009</initializer>
+          <briefdescription>
+<para>用户自定义信号1（模拟SIGUSR1） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a009ab43667ea90b50b741d89cbf76f1b" prot="public">
+          <name>USER2</name>
+          <initializer>= 1010</initializer>
+          <briefdescription>
+<para>用户自定义信号2（模拟SIGUSR2） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a070a0fb40f6c308ab544b227660aadff" prot="public">
+          <name>TIMEOUT</name>
+          <initializer>= 2000</initializer>
+          <briefdescription>
+<para>超时事件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616a96b4626bc47f80957508b5ec42ee5f27" prot="public">
+          <name>CUSTOM_1</name>
+          <initializer>= 2001</initializer>
+          <briefdescription>
+<para>自定义事件1 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616ab7654b1a285c20934afe66059eb48cc0" prot="public">
+          <name>CUSTOM_2</name>
+          <initializer>= 2002</initializer>
+          <briefdescription>
+<para>自定义事件2 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616ae0c9af36ecdf6234e3375848ba086f0c" prot="public">
+          <name>FORCE_EXIT</name>
+          <initializer>= 9999</initializer>
+          <briefdescription>
+<para>强制退出信号 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>信号事件枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>统一的信号事件定义。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="57" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="57" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsystem__signal__manager_1a6cab2729128ccd63d0eebed73f0904fc" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; bool(<ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref>, void *)&gt;</type>
+        <definition>using system_signal_manager::signal_handler = function&lt;bool(event, void*)&gt;</definition>
+        <argsstring></argsstring>
+        <name>signal_handler</name>
+        <qualifiedname>system_signal_manager::signal_handler</qualifiedname>
+        <briefdescription>
+<para>信号处理函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>收到的信号事件 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>上下文指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true 继续运行；false 请求退出 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="113" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="113" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classsystem__signal__manager_1a76a913d26d76cefdb1ee508fc83e5ed7" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; system_signal_manager::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>system_signal_manager::running_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="140" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="140" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__signal__manager_1a1b0f51c39e1ce9da499929c133f52ea3" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; system_signal_manager::force_exit_</definition>
+        <argsstring></argsstring>
+        <name>force_exit_</name>
+        <qualifiedname>system_signal_manager::force_exit_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>强制退出标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="141" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="141" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__signal__manager_1ab89e69739b69cd3f58e2fda0ad58e77a" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; int &gt;</type>
+        <definition>atomic&lt;int&gt; system_signal_manager::force_exit_timeout_</definition>
+        <argsstring></argsstring>
+        <name>force_exit_timeout_</name>
+        <qualifiedname>system_signal_manager::force_exit_timeout_</qualifiedname>
+        <initializer>{5000}</initializer>
+        <briefdescription>
+<para>强制退出超时（毫秒） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="142" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="142" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__signal__manager_1abc5e94965eaec0c0fe7d7265b84bdf46" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; int &gt;</type>
+        <definition>atomic&lt;int&gt; system_signal_manager::guard_count_</definition>
+        <argsstring></argsstring>
+        <name>guard_count_</name>
+        <qualifiedname>system_signal_manager::guard_count_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="144" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="144" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__signal__manager_1a7895575f57933d815a2194a53c75a72a" prot="private" static="no" mutable="no">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex system_signal_manager::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>system_signal_manager::mutex_</qualifiedname>
+        <briefdescription>
+<para>保护共享数据的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="146" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__signal__manager_1a5868d4acd692b7005f10426df1cad5f4" prot="private" static="no" mutable="no">
+        <type><ref refid="classcondition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable system_signal_manager::cv_</definition>
+        <argsstring></argsstring>
+        <name>cv_</name>
+        <qualifiedname>system_signal_manager::cv_</qualifiedname>
+        <briefdescription>
+<para>信号等待条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="147" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__signal__manager_1ad8a750de67e35f577f0acfd975f9228e" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref>, <ref refid="classsystem__signal__manager_1a6cab2729128ccd63d0eebed73f0904fc" kindref="member">signal_handler</ref> &gt;</type>
+        <definition>unordered_map&lt;event, signal_handler&gt; system_signal_manager::handlers_</definition>
+        <argsstring></argsstring>
+        <name>handlers_</name>
+        <qualifiedname>system_signal_manager::handlers_</qualifiedname>
+        <briefdescription>
+<para>信号处理函数映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="149" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__signal__manager_1a8927c694a0a99b12a039811443ca0a39" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; pending_signal &gt;</type>
+        <definition>vector&lt;pending_signal&gt; system_signal_manager::pending_signals_</definition>
+        <argsstring></argsstring>
+        <name>pending_signals_</name>
+        <qualifiedname>system_signal_manager::pending_signals_</qualifiedname>
+        <briefdescription>
+<para>待处理信号队列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="150" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__signal__manager_1ac31d94c45b89377154fe4bc928232cf0" prot="private" static="no" mutable="no">
+        <type><ref refid="classsystem__event" kindref="compound">system_event</ref></type>
+        <definition>system_event system_signal_manager::notify_event_</definition>
+        <argsstring></argsstring>
+        <name>notify_event_</name>
+        <qualifiedname>system_signal_manager::notify_event_</qualifiedname>
+        <briefdescription>
+<para>事件对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="153" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__signal__manager_1ab2b3dd5035a719fd6390e16829d36834" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread system_signal_manager::signal_thread_</definition>
+        <argsstring></argsstring>
+        <name>signal_thread_</name>
+        <qualifiedname>system_signal_manager::signal_thread_</qualifiedname>
+        <briefdescription>
+<para>信号处理线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="158" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__signal__manager_1a57ec735feb3f63fbc3c35344ab866654" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread system_signal_manager::timeout_thread_</definition>
+        <argsstring></argsstring>
+        <name>timeout_thread_</name>
+        <qualifiedname>system_signal_manager::timeout_thread_</qualifiedname>
+        <briefdescription>
+<para>超时监控线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="159" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="159" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classsystem__signal__manager_1a6900f57dd011c35fa5004af1ca793a1a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class signal_guard</definition>
+        <argsstring></argsstring>
+        <name>signal_guard</name>
+        <qualifiedname>system_signal_manager::signal_guard</qualifiedname>
+        <param>
+          <type><ref refid="classsignal__guard" kindref="compound">signal_guard</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="161" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="161" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classsystem__signal__manager_1ab0884bc3de0ab54f528a483edb976860" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>system_signal_manager::system_signal_manager</definition>
+        <argsstring>()</argsstring>
+        <name>system_signal_manager</name>
+        <qualifiedname>system_signal_manager::system_signal_manager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="163" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a0fad889afdc1e8da3429176b690ce410" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::add_guard_ref</definition>
+        <argsstring>()</argsstring>
+        <name>add_guard_ref</name>
+        <qualifiedname>system_signal_manager::add_guard_ref</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="165" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="165" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a9452422d318d8993eb23a1b4795cccf4" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::remove_guard_ref</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>remove_guard_ref</name>
+        <qualifiedname>system_signal_manager::remove_guard_ref</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="171" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="171" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a6a571e6eb761c013bd25c372e51f1d65" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::initialize</definition>
+        <argsstring>()</argsstring>
+        <name>initialize</name>
+        <qualifiedname>system_signal_manager::initialize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="177" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a3c7a10d0a0e9a20db3795578552c671b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::cleanup</definition>
+        <argsstring>()</argsstring>
+        <name>cleanup</name>
+        <qualifiedname>system_signal_manager::cleanup</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="178" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a39eba1c3a6c92a918c36f98d11adf753" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::signal_thread_func</definition>
+        <argsstring>()</argsstring>
+        <name>signal_thread_func</name>
+        <qualifiedname>system_signal_manager::signal_thread_func</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="180" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a16481aaee67adf0f178bcecc3fc169ef" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::timeout_monitor_thread</definition>
+        <argsstring>()</argsstring>
+        <name>timeout_monitor_thread</name>
+        <qualifiedname>system_signal_manager::timeout_monitor_thread</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="181" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a5a53635e80f58f16af335ffa4c9751df" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::process_signal</definition>
+        <argsstring>(event event, void *context)</argsstring>
+        <name>process_signal</name>
+        <qualifiedname>system_signal_manager::process_signal</qualifiedname>
+        <param>
+          <type><ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="183" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1af790c9c8b1b7b19fe01ba81e9e18eac6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::trigger_force_exit</definition>
+        <argsstring>()</argsstring>
+        <name>trigger_force_exit</name>
+        <qualifiedname>system_signal_manager::trigger_force_exit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="184" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1ac91499a4d95a43d8c03bdece7eaf83d1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>signal_result</type>
+        <definition>signal_result system_signal_manager::wait_for_signal_internal</definition>
+        <argsstring>(int timeout_ms=-1)</argsstring>
+        <name>wait_for_signal_internal</name>
+        <qualifiedname>system_signal_manager::wait_for_signal_internal</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="185" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a9630808c2a4e3a0e0fc91905b3123e80" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::send_signal_nolock</definition>
+        <argsstring>(event event, void *context)</argsstring>
+        <name>send_signal_nolock</name>
+        <qualifiedname>system_signal_manager::send_signal_nolock</qualifiedname>
+        <param>
+          <type><ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="186" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsystem__signal__manager_1ac531a404dde4563b1f85848296c08652" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>system_signal_manager::system_signal_manager</definition>
+        <argsstring>(const system_signal_manager &amp;)=delete</argsstring>
+        <name>system_signal_manager</name>
+        <qualifiedname>system_signal_manager::system_signal_manager</qualifiedname>
+        <param>
+          <type>const <ref refid="classsystem__signal__manager" kindref="compound">system_signal_manager</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="189" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a6b4085e516c49148850e981a139583a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classsystem__signal__manager" kindref="compound">system_signal_manager</ref> &amp;</type>
+        <definition>system_signal_manager &amp; system_signal_manager::operator=</definition>
+        <argsstring>(const system_signal_manager &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>system_signal_manager::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classsystem__signal__manager" kindref="compound">system_signal_manager</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="190" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a938410941bc03336f784c3ef6f5c4c4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>system_signal_manager::system_signal_manager</definition>
+        <argsstring>(const system_signal_manager &amp;&amp;)=delete</argsstring>
+        <name>system_signal_manager</name>
+        <qualifiedname>system_signal_manager::system_signal_manager</qualifiedname>
+        <param>
+          <type>const <ref refid="classsystem__signal__manager" kindref="compound">system_signal_manager</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="191" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1ab4c7c39968b6666d21fee9560e8b45d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classsystem__signal__manager" kindref="compound">system_signal_manager</ref> &amp;</type>
+        <definition>system_signal_manager &amp; system_signal_manager::operator=</definition>
+        <argsstring>(const system_signal_manager &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>system_signal_manager::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classsystem__signal__manager" kindref="compound">system_signal_manager</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="192" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a7d3e255f26f45e27eef40a5aedfc1e34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>system_signal_manager::~system_signal_manager</definition>
+        <argsstring>()</argsstring>
+        <name>~system_signal_manager</name>
+        <qualifiedname>system_signal_manager::~system_signal_manager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="194" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1aff87adac772e9afc0e4cccba963ab388" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::register_handler</definition>
+        <argsstring>(event event, signal_handler handler)</argsstring>
+        <name>register_handler</name>
+        <qualifiedname>system_signal_manager::register_handler</qualifiedname>
+        <param>
+          <type><ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type><ref refid="classsystem__signal__manager_1a6cab2729128ccd63d0eebed73f0904fc" kindref="member">signal_handler</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>注册信号处理函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号事件 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsystem__exception" kindref="compound">system_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>handler为空时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="211" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1aa01b3037c1b3d2b8437afe65f3674abb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::register_handlers</definition>
+        <argsstring>(const vector&lt; event &gt; &amp;events, const signal_handler &amp;handler)</argsstring>
+        <name>register_handlers</name>
+        <qualifiedname>system_signal_manager::register_handlers</qualifiedname>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref> &gt; &amp;</type>
+          <declname>events</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classsystem__signal__manager_1a6cab2729128ccd63d0eebed73f0904fc" kindref="member">signal_handler</ref> &amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>批量注册信号处理函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>events</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号事件列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="218" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a885408c015803c747c139cc64d31d9b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::remove_handler</definition>
+        <argsstring>(event event)</argsstring>
+        <name>remove_handler</name>
+        <qualifiedname>system_signal_manager::remove_handler</qualifiedname>
+        <param>
+          <type><ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref></type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>移除信号处理函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号事件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="224" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1ae50c359f88af410b04e3d5886917bfc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref></type>
+        <definition>event system_signal_manager::wait_for_signal</definition>
+        <argsstring>(int timeout_ms=-1)</argsstring>
+        <name>wait_for_signal</name>
+        <qualifiedname>system_signal_manager::wait_for_signal</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>等待信号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间（毫秒），-1表示无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>收到的信号事件</para>
+</simplesect>
+阻塞当前线程直到收到信号或超时。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="233" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1aaa0563e7b5365dbe2c0d415da8ba1a42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::send_signal</definition>
+        <argsstring>(event event, void *context=nullptr)</argsstring>
+        <name>send_signal</name>
+        <qualifiedname>system_signal_manager::send_signal</qualifiedname>
+        <param>
+          <type><ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>context</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>发送信号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号事件 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>上下文数据（可选） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="240" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a097f87820129e87e4722f5e9cef721aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::set_force_exit_timeout</definition>
+        <argsstring>(int timeout_ms)</argsstring>
+        <name>set_force_exit_timeout</name>
+        <qualifiedname>system_signal_manager::set_force_exit_timeout</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+        </param>
+        <briefdescription>
+<para>设置强制退出超时时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间（毫秒）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+超过此时间未处理的信号将被丢弃。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="248" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a9d6cbbdabf23c452972f9f0160e56ef9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::start_monitoring</definition>
+        <argsstring>()</argsstring>
+        <name>start_monitoring</name>
+        <qualifiedname>system_signal_manager::start_monitoring</qualifiedname>
+        <briefdescription>
+<para>启动信号监控 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="253" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1ab5edcf264e39e14234d6f1d3a4206d4c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::stop_monitoring</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>stop_monitoring</name>
+        <qualifiedname>system_signal_manager::stop_monitoring</qualifiedname>
+        <briefdescription>
+<para>停止信号监控 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="258" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1ac01b5f7de2fa61d633b14d09d0ed0f44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_signal_manager::reset_force</definition>
+        <argsstring>()</argsstring>
+        <name>reset_force</name>
+        <qualifiedname>system_signal_manager::reset_force</qualifiedname>
+        <briefdescription>
+<para>强制重置信号管理器状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>生产环境中不应使用此方法。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="264" column="10"/>
+        <references refid="classsystem__signal__manager_1ac01b5f7de2fa61d633b14d09d0ed0f44">reset_force</references>
+        <referencedby refid="classsystem__signal__manager_1ac01b5f7de2fa61d633b14d09d0ed0f44">reset_force</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a84099c3f7f5034925d3b6e01cc0c7d4b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool system_signal_manager::is_running</definition>
+        <argsstring>() const</argsstring>
+        <name>is_running</name>
+        <qualifiedname>system_signal_manager::is_running</qualifiedname>
+        <briefdescription>
+<para>检查是否正在运行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>正在运行返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="270" column="28"/>
+        <references refid="classsystem__signal__manager_1a84099c3f7f5034925d3b6e01cc0c7d4b">is_running</references>
+        <referencedby refid="classsystem__signal__manager_1a84099c3f7f5034925d3b6e01cc0c7d4b">is_running</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a3af6e2356781fec0f0a9384eeccf0dd7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool system_signal_manager::block_signals</definition>
+        <argsstring>(const vector&lt; event &gt; &amp;signals_to_block) const</argsstring>
+        <name>block_signals</name>
+        <qualifiedname>system_signal_manager::block_signals</qualifiedname>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref> &gt; &amp;</type>
+          <declname>signals_to_block</declname>
+        </param>
+        <briefdescription>
+<para>阻塞指定信号（仅Linux） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>signals_to_block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要阻塞的信号集合 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="277" column="10"/>
+        <references refid="classsystem__signal__manager_1a3af6e2356781fec0f0a9384eeccf0dd7">block_signals</references>
+        <referencedby refid="classsystem__signal__manager_1a3af6e2356781fec0f0a9384eeccf0dd7">block_signals</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1abd9ec9c46beb3eec8ed1eac1090a4e11" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool system_signal_manager::unblock_signals</definition>
+        <argsstring>(const vector&lt; event &gt; &amp;signals_to_unblock) const</argsstring>
+        <name>unblock_signals</name>
+        <qualifiedname>system_signal_manager::unblock_signals</qualifiedname>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref> &gt; &amp;</type>
+          <declname>signals_to_unblock</declname>
+        </param>
+        <briefdescription>
+<para>解除阻塞指定信号（仅Linux） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>signals_to_unblock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要解除的信号集合 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="284" column="10"/>
+        <references refid="classsystem__signal__manager_1abd9ec9c46beb3eec8ed1eac1090a4e11">unblock_signals</references>
+        <referencedby refid="classsystem__signal__manager_1abd9ec9c46beb3eec8ed1eac1090a4e11">unblock_signals</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classsystem__signal__manager_1ad3e12c1c30e2e92d4f858859e68affa5" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsystem__signal__manager" kindref="compound">system_signal_manager</ref> &amp;</type>
+        <definition>static system_signal_manager &amp; system_signal_manager::instance</definition>
+        <argsstring>()</argsstring>
+        <name>instance</name>
+        <qualifiedname>system_signal_manager::instance</qualifiedname>
+        <briefdescription>
+<para>获取单例实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>信号管理器实例引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="200" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="200" bodyend="203"/>
+        <references refid="classsystem__signal__manager_1ad3e12c1c30e2e92d4f858859e68affa5" compoundref="signal_8hpp" startline="200" endline="203">instance</references>
+        <referencedby refid="classsystem__signal__manager_1ad3e12c1c30e2e92d4f858859e68affa5" compoundref="signal_8hpp" startline="200" endline="203">instance</referencedby>
+        <referencedby refid="classsignal__guard_1a12a16d4492336495a2142f67eac4ba4c" compoundref="signal_8hpp" startline="314" endline="314">signal_guard::signal_guard</referencedby>
+        <referencedby refid="classsignal__guard_1aee7ddbf38b97c0e1b73e3babe81a9177" compoundref="signal_8hpp" startline="321" endline="321">signal_guard::~signal_guard</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1a58bfe44234b37e238b482a267b4e5817" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>static NEFORCE_NODISCARD bool system_signal_manager::is_platform_signal</definition>
+        <argsstring>(event event)</argsstring>
+        <name>is_platform_signal</name>
+        <qualifiedname>system_signal_manager::is_platform_signal</qualifiedname>
+        <param>
+          <type><ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref></type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>判断事件是否为平台原生信号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>事件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否平台原生信号 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="291" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="291" bodyend="298"/>
+        <references refid="classsystem__signal__manager_1a58bfe44234b37e238b482a267b4e5817" compoundref="signal_8hpp" startline="291" endline="298">is_platform_signal</references>
+        <referencedby refid="classsystem__signal__manager_1a58bfe44234b37e238b482a267b4e5817" compoundref="signal_8hpp" startline="291" endline="298">is_platform_signal</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>信号管理器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>统一管理跨平台的信号处理，提供异步信号安全的分发机制。</para>
+<para>特性：<itemizedlist>
+<listitem><para>异步信号安全</para>
+</listitem><listitem><para>线程安全</para>
+</listitem><listitem><para>信号队列与超时清理</para>
+</listitem><listitem><para>自定义事件与强制退出 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="49" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="49" bodyend="299"/>
+    <listofallmembers>
+      <member refid="classsystem__signal__manager_1a0fad889afdc1e8da3429176b690ce410" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>add_guard_ref</name></member>
+      <member refid="classsystem__signal__manager_1a3af6e2356781fec0f0a9384eeccf0dd7" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>block_signals</name></member>
+      <member refid="classsystem__signal__manager_1a3c7a10d0a0e9a20db3795578552c671b" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>cleanup</name></member>
+      <member refid="classsystem__signal__manager_1a5868d4acd692b7005f10426df1cad5f4" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>cv_</name></member>
+      <member refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>event</name></member>
+      <member refid="classsystem__signal__manager_1a1b0f51c39e1ce9da499929c133f52ea3" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>force_exit_</name></member>
+      <member refid="classsystem__signal__manager_1ab89e69739b69cd3f58e2fda0ad58e77a" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>force_exit_timeout_</name></member>
+      <member refid="classsystem__signal__manager_1abc5e94965eaec0c0fe7d7265b84bdf46" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>guard_count_</name></member>
+      <member refid="classsystem__signal__manager_1ad8a750de67e35f577f0acfd975f9228e" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>handlers_</name></member>
+      <member refid="classsystem__signal__manager_1a6a571e6eb761c013bd25c372e51f1d65" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>initialize</name></member>
+      <member refid="classsystem__signal__manager_1ad3e12c1c30e2e92d4f858859e68affa5" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>instance</name></member>
+      <member refid="classsystem__signal__manager_1a58bfe44234b37e238b482a267b4e5817" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>is_platform_signal</name></member>
+      <member refid="classsystem__signal__manager_1a84099c3f7f5034925d3b6e01cc0c7d4b" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>is_running</name></member>
+      <member refid="classsystem__signal__manager_1a7895575f57933d815a2194a53c75a72a" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>mutex_</name></member>
+      <member refid="classsystem__signal__manager_1ac31d94c45b89377154fe4bc928232cf0" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>notify_event_</name></member>
+      <member refid="classsystem__signal__manager_1a6b4085e516c49148850e981a139583a2" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>operator=</name></member>
+      <member refid="classsystem__signal__manager_1ab4c7c39968b6666d21fee9560e8b45d7" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>operator=</name></member>
+      <member refid="classsystem__signal__manager_1a8927c694a0a99b12a039811443ca0a39" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>pending_signals_</name></member>
+      <member refid="classsystem__signal__manager_1a5a53635e80f58f16af335ffa4c9751df" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>process_signal</name></member>
+      <member refid="classsystem__signal__manager_1aff87adac772e9afc0e4cccba963ab388" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>register_handler</name></member>
+      <member refid="classsystem__signal__manager_1aa01b3037c1b3d2b8437afe65f3674abb" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>register_handlers</name></member>
+      <member refid="classsystem__signal__manager_1a9452422d318d8993eb23a1b4795cccf4" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>remove_guard_ref</name></member>
+      <member refid="classsystem__signal__manager_1a885408c015803c747c139cc64d31d9b0" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>remove_handler</name></member>
+      <member refid="classsystem__signal__manager_1ac01b5f7de2fa61d633b14d09d0ed0f44" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>reset_force</name></member>
+      <member refid="classsystem__signal__manager_1a76a913d26d76cefdb1ee508fc83e5ed7" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>running_</name></member>
+      <member refid="classsystem__signal__manager_1aaa0563e7b5365dbe2c0d415da8ba1a42" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>send_signal</name></member>
+      <member refid="classsystem__signal__manager_1a9630808c2a4e3a0e0fc91905b3123e80" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>send_signal_nolock</name></member>
+      <member refid="classsystem__signal__manager_1a097f87820129e87e4722f5e9cef721aa" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>set_force_exit_timeout</name></member>
+      <member refid="classsystem__signal__manager_1a6cab2729128ccd63d0eebed73f0904fc" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>signal_handler</name></member>
+      <member refid="classsystem__signal__manager_1ab2b3dd5035a719fd6390e16829d36834" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>signal_thread_</name></member>
+      <member refid="classsystem__signal__manager_1a39eba1c3a6c92a918c36f98d11adf753" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>signal_thread_func</name></member>
+      <member refid="classsystem__signal__manager_1a9d6cbbdabf23c452972f9f0160e56ef9" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>start_monitoring</name></member>
+      <member refid="classsystem__signal__manager_1ab5edcf264e39e14234d6f1d3a4206d4c" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>stop_monitoring</name></member>
+      <member refid="classsystem__signal__manager_1ab0884bc3de0ab54f528a483edb976860" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>system_signal_manager</name></member>
+      <member refid="classsystem__signal__manager_1ac531a404dde4563b1f85848296c08652" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>system_signal_manager</name></member>
+      <member refid="classsystem__signal__manager_1a938410941bc03336f784c3ef6f5c4c4f" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>system_signal_manager</name></member>
+      <member refid="classsystem__signal__manager_1a16481aaee67adf0f178bcecc3fc169ef" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>timeout_monitor_thread</name></member>
+      <member refid="classsystem__signal__manager_1a57ec735feb3f63fbc3c35344ab866654" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>timeout_thread_</name></member>
+      <member refid="classsystem__signal__manager_1af790c9c8b1b7b19fe01ba81e9e18eac6" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>trigger_force_exit</name></member>
+      <member refid="classsystem__signal__manager_1abd9ec9c46beb3eec8ed1eac1090a4e11" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>unblock_signals</name></member>
+      <member refid="classsystem__signal__manager_1ae50c359f88af410b04e3d5886917bfc5" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>wait_for_signal</name></member>
+      <member refid="classsystem__signal__manager_1ac91499a4d95a43d8c03bdece7eaf83d1" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>wait_for_signal_internal</name></member>
+      <member refid="classsystem__signal__manager_1a7d3e255f26f45e27eef40a5aedfc1e34" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>~system_signal_manager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

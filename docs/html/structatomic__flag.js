@@ -1,6 +1,6 @@
 var structatomic__flag =
 [
-    [ "value_type", "structatomic__flag.html#a0ee7fe7ade0ba0b479ace7103fac2574", null ],
+    [ "value_type", "structatomic__flag.html#ac590d5ad311c8cb717b408eac1494cd4", null ],
     [ "atomic_flag", "structatomic__flag.html#a11a7b130034df6600578d54f8bfaf7ec", null ],
     [ "clear", "structatomic__flag.html#a482380fc8a9add7bbdc779a601b63444", null ],
     [ "clear", "structatomic__flag.html#a9bad570d55fe97eb579d9f73ec6e78c9", null ],

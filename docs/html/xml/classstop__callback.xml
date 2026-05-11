@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classstop__callback" kind="class" language="C++" prot="public">
+    <compoundname>stop_callback</compoundname>
+    <includes refid="stop__token_8hpp" local="no">stop_token.hpp</includes>
+    <innerclass refid="structstop__callback_1_1callback__impl" prot="private">stop_callback::callback_impl</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Callback</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classstop__callback_1a3cd3524bacac20f224581815c5f61cd2" prot="public" static="no">
+        <type>Callback</type>
+        <definition>using stop_callback&lt; Callback &gt;::callback_type = Callback</definition>
+        <argsstring></argsstring>
+        <name>callback_type</name>
+        <qualifiedname>stop_callback::callback_type</qualifiedname>
+        <briefdescription>
+<para>回调函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="577" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="577" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classstop__callback_1a105ade2c6d988fa18bbe4e369c24ec60" prot="private" static="no" mutable="no">
+        <type>callback_impl</type>
+        <definition>callback_impl stop_callback&lt; Callback &gt;::callback_impl</definition>
+        <argsstring></argsstring>
+        <name>callback_impl</name>
+        <qualifiedname>stop_callback::callback_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="594" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="594" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstop__callback_1a393052b8005d3cef73502ebc91e1b00f" prot="private" static="no" mutable="no">
+        <type>stop_token::stop_state_reference</type>
+        <definition>stop_token::stop_state_reference stop_callback&lt; Callback &gt;::state_ref_</definition>
+        <argsstring></argsstring>
+        <name>state_ref_</name>
+        <qualifiedname>stop_callback::state_ref_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="595" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="595" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classstop__callback_1ab404dcce69bb1444fb3945f08edb87cf" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; Callback, Cb &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Cb</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; Callback, Cb &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>stop_callback&lt; Callback &gt;::stop_callback</definition>
+        <argsstring>(const stop_token &amp;token, Cb &amp;&amp;callback)</argsstring>
+        <name>stop_callback</name>
+        <qualifiedname>stop_callback::stop_callback</qualifiedname>
+        <param>
+          <type>const <ref refid="classstop__token" kindref="compound">stop_token</ref> &amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>Cb &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>左值构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>停止令牌 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="605" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="605" bodyend="612"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <referencedby refid="classstop__callback_1a3329d487406a6a3c806d7ad3a8c11683">stop_callback&lt; Callback &gt;::operator=</referencedby>
+        <referencedby refid="classstop__callback_1ae764635f1a58dcb717e0b2bd050c6a8b">stop_callback&lt; Callback &gt;::operator=</referencedby>
+        <referencedby refid="classstop__callback_1a0c175e5a531c658fa6ded6c5d6aa466c">stop_callback&lt; Callback &gt;::stop_callback</referencedby>
+        <referencedby refid="classstop__callback_1aa43add54714e6020d4d4511ee4ea403e">stop_callback&lt; Callback &gt;::stop_callback</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classstop__callback_1ac3c81fc59e5a7e26f00ce293c9dc305a" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; Callback, Cb &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Cb</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; Callback, Cb &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>stop_callback&lt; Callback &gt;::stop_callback</definition>
+        <argsstring>(stop_token &amp;&amp;token, Cb &amp;&amp;callback)</argsstring>
+        <name>stop_callback</name>
+        <qualifiedname>stop_callback::stop_callback</qualifiedname>
+        <param>
+          <type><ref refid="classstop__token" kindref="compound">stop_token</ref> &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>Cb &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>右值构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>停止令牌 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="621" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="621" bodyend="628"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classstop__callback_1a0c175e5a531c658fa6ded6c5d6aa466c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>stop_callback&lt; Callback &gt;::stop_callback</definition>
+        <argsstring>(const stop_callback &amp;)=delete</argsstring>
+        <name>stop_callback</name>
+        <qualifiedname>stop_callback::stop_callback</qualifiedname>
+        <param>
+          <type>const <ref refid="classstop__callback" kindref="compound">stop_callback</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="630" column="5"/>
+        <references refid="classstop__callback_1ab404dcce69bb1444fb3945f08edb87cf" compoundref="stop__token_8hpp" startline="605" endline="612">stop_callback&lt; Callback &gt;::stop_callback</references>
+      </memberdef>
+      <memberdef kind="function" id="classstop__callback_1a3329d487406a6a3c806d7ad3a8c11683" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classstop__callback" kindref="compound">stop_callback</ref> &amp;</type>
+        <definition>stop_callback &amp; stop_callback&lt; Callback &gt;::operator=</definition>
+        <argsstring>(const stop_callback &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>stop_callback::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classstop__callback" kindref="compound">stop_callback</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="631" column="19"/>
+        <references refid="classstop__callback_1ab404dcce69bb1444fb3945f08edb87cf" compoundref="stop__token_8hpp" startline="605" endline="612">stop_callback&lt; Callback &gt;::stop_callback</references>
+      </memberdef>
+      <memberdef kind="function" id="classstop__callback_1aa43add54714e6020d4d4511ee4ea403e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>stop_callback&lt; Callback &gt;::stop_callback</definition>
+        <argsstring>(stop_callback &amp;&amp;)=delete</argsstring>
+        <name>stop_callback</name>
+        <qualifiedname>stop_callback::stop_callback</qualifiedname>
+        <param>
+          <type><ref refid="classstop__callback" kindref="compound">stop_callback</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止移动构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="632" column="5"/>
+        <references refid="classstop__callback_1ab404dcce69bb1444fb3945f08edb87cf" compoundref="stop__token_8hpp" startline="605" endline="612">stop_callback&lt; Callback &gt;::stop_callback</references>
+      </memberdef>
+      <memberdef kind="function" id="classstop__callback_1ae764635f1a58dcb717e0b2bd050c6a8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classstop__callback" kindref="compound">stop_callback</ref> &amp;</type>
+        <definition>stop_callback &amp; stop_callback&lt; Callback &gt;::operator=</definition>
+        <argsstring>(stop_callback &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>stop_callback::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classstop__callback" kindref="compound">stop_callback</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止移动赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="633" column="19"/>
+        <references refid="classstop__callback_1ab404dcce69bb1444fb3945f08edb87cf" compoundref="stop__token_8hpp" startline="605" endline="612">stop_callback&lt; Callback &gt;::stop_callback</references>
+      </memberdef>
+      <memberdef kind="function" id="classstop__callback_1a453b7ad9d27ae2fc8c5601488bd8e9ea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>stop_callback&lt; Callback &gt;::~stop_callback</definition>
+        <argsstring>()</argsstring>
+        <name>~stop_callback</name>
+        <qualifiedname>stop_callback::~stop_callback</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动从停止令牌注销回调。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="640" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="640" bodyend="644"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>停止回调类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在停止令牌上注册回调函数，当停止请求发生时自动执行。 回调函数在析构时自动注销。</para>
+<para><simplesect kind="note"><para>回调函数应该不抛异常 </para>
+</simplesect>
+<simplesect kind="note"><para>回调函数应该快速执行，避免阻塞 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="572" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="572" bodyend="645"/>
+    <listofallmembers>
+      <member refid="classstop__callback_1a105ade2c6d988fa18bbe4e369c24ec60" prot="private" virt="non-virtual"><scope>stop_callback</scope><name>callback_impl</name></member>
+      <member refid="classstop__callback_1a3cd3524bacac20f224581815c5f61cd2" prot="public" virt="non-virtual"><scope>stop_callback</scope><name>callback_type</name></member>
+      <member refid="classstop__callback_1a3329d487406a6a3c806d7ad3a8c11683" prot="public" virt="non-virtual"><scope>stop_callback</scope><name>operator=</name></member>
+      <member refid="classstop__callback_1ae764635f1a58dcb717e0b2bd050c6a8b" prot="public" virt="non-virtual"><scope>stop_callback</scope><name>operator=</name></member>
+      <member refid="classstop__callback_1a393052b8005d3cef73502ebc91e1b00f" prot="private" virt="non-virtual"><scope>stop_callback</scope><name>state_ref_</name></member>
+      <member refid="classstop__callback_1ab404dcce69bb1444fb3945f08edb87cf" prot="public" virt="non-virtual"><scope>stop_callback</scope><name>stop_callback</name></member>
+      <member refid="classstop__callback_1ac3c81fc59e5a7e26f00ce293c9dc305a" prot="public" virt="non-virtual"><scope>stop_callback</scope><name>stop_callback</name></member>
+      <member refid="classstop__callback_1a0c175e5a531c658fa6ded6c5d6aa466c" prot="public" virt="non-virtual"><scope>stop_callback</scope><name>stop_callback</name></member>
+      <member refid="classstop__callback_1aa43add54714e6020d4d4511ee4ea403e" prot="public" virt="non-virtual"><scope>stop_callback</scope><name>stop_callback</name></member>
+      <member refid="classstop__callback_1a453b7ad9d27ae2fc8c5601488bd8e9ea" prot="public" virt="non-virtual"><scope>stop_callback</scope><name>~stop_callback</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

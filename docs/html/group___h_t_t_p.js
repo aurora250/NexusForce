@@ -213,7 +213,7 @@ var group___h_t_t_p =
     ] ],
     [ "http_server_request", "structhttp__server__request.html", [
       [ "clear", "structhttp__server__request.html#a09337e6553a67b96eb6bd829e19a8092", null ],
-      [ "client_ip", "structhttp__server__request.html#a0f2376788712521bd5198e41e78ce118", null ],
+      [ "client_ip", "structhttp__server__request.html#a879b58a2eb48aaaf1428eb1338c568de", null ],
       [ "content_type", "structhttp__server__request.html#aca66ea091edd845f23751f10e73c85b8", null ],
       [ "cookie", "structhttp__server__request.html#a2188745229b5c8798fbd883ceedcf77b", null ],
       [ "has_cookie", "structhttp__server__request.html#a5d93c1b2f2b6d1d53a828067e0af17a1", null ],

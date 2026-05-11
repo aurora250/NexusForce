@@ -1,7 +1,7 @@
 var group___mutex =
 [
     [ "mutex", "classmutex.html", [
-      [ "native_handle_type", "classmutex.html#a315305f6740f0e8f0de6fa419149ddee", null ],
+      [ "native_handle_type", "classmutex.html#a9283a31887fb04d3a3a4f4a21cf32c5e", null ],
       [ "mutex", "classmutex.html#a6b7350155befa79a8c6ad27c4c794b1e", null ],
       [ "~mutex", "classmutex.html#ae30185d87a48c5451a04c2861ba3d034", null ],
       [ "lock", "classmutex.html#a760ba333c299e9b27730051c4c794f50", null ],
@@ -11,7 +11,7 @@ var group___mutex =
       [ "unlock", "classmutex.html#a362d78bead80c2899d89444380cab1bd", null ]
     ] ],
     [ "recursive_mutex", "classrecursive__mutex.html", [
-      [ "native_handle_type", "classrecursive__mutex.html#a1400b2593091502543ab3b392103325c", null ],
+      [ "native_handle_type", "classrecursive__mutex.html#a5b1a25d45bfb24cbbd002d8e90b2b4cc", null ],
       [ "recursive_mutex", "classrecursive__mutex.html#a1a208c1e6122fda628bdba8e3230edef", null ],
       [ "~recursive_mutex", "classrecursive__mutex.html#a0212c8018621e9952f5670c38b917753", null ],
       [ "lock", "classrecursive__mutex.html#aee55fc137f714e2ddd184c54a06e4615", null ],
@@ -45,7 +45,7 @@ var group___mutex =
       [ "unlock_quiet", "classunique__lock.html#a0473323402bab23a6c89eb5a5ab58798", null ]
     ] ],
     [ "shared_mutex", "classshared__mutex.html", [
-      [ "native_handle_type", "classshared__mutex.html#a6a64da225b115ba0c204cc67894ae5bc", null ],
+      [ "native_handle_type", "classshared__mutex.html#a938a2b5b49b9f9525b0d32e6efc55787", null ],
       [ "shared_mutex", "classshared__mutex.html#a7e1f8ffdf08b615e34c87302dc500eea", null ],
       [ "~shared_mutex", "classshared__mutex.html#a5259f863bc290cdfcaaaf88de24eb7ac", null ],
       [ "lock", "classshared__mutex.html#a884fce8e4110970b8c63b1be978b5939", null ],

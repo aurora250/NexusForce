@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['并发与异步_20async_0',['🔄 并发与异步 (Async)',['../index.html#autotoc_md19',1,'']]],
-  ['并行算法_1',['并行算法',['../group___parallel_algorithms.html',1,'']]]
+  ['布尔值同义词_0',['布尔值同义词',['../group___yaml_config.html#boolean_synonyms',1,'']]],
+  ['布隆过滤器原理_1',['布隆过滤器原理',['../group___bloom_filter.html#bloom_filter_principles',1,'']]],
+  ['布隆过滤器_2',['布隆过滤器',['../group___bloom_filter.html',1,'']]]
 ];

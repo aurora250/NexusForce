@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structsubmit__result" kind="struct" language="C++" prot="public">
+    <compoundname>submit_result</compoundname>
+    <includes refid="thread__pool_8hpp" local="no">thread_pool.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structsubmit__result_1a2aec5dabd1e7c8f5aa51c4aa01faaf09" prot="public" static="no" mutable="no">
+        <type>_NEFORCE <ref refid="classfuture" kindref="compound">future</ref>&lt; T &gt;</type>
+        <definition>_NEFORCE future&lt;T&gt; submit_result&lt; T &gt;::future</definition>
+        <argsstring></argsstring>
+        <name>future</name>
+        <qualifiedname>submit_result::future</qualifiedname>
+        <briefdescription>
+<para>任务的future </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="286" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="286" bodyend="-1"/>
+        <referencedby refid="structsubmit__result_1a1e7d1255b5e726d50bc742e63cdd4769" compoundref="thread__pool_8hpp" startline="293" endline="293">submit_result&lt; T &gt;::operator bool</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structsubmit__result_1a936d7685d45adfd0eb8b2b820766047b" prot="public" static="no" mutable="no">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; _NEFORCE <ref refid="structtask__info" kindref="compound">task_info</ref> &gt;</type>
+        <definition>shared_ptr&lt;_NEFORCE task_info&gt; submit_result&lt; T &gt;::task_info</definition>
+        <argsstring></argsstring>
+        <name>task_info</name>
+        <qualifiedname>submit_result::task_info</qualifiedname>
+        <briefdescription>
+<para>任务信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="287" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="287" bodyend="-1"/>
+        <referencedby refid="structsubmit__result_1a1e7d1255b5e726d50bc742e63cdd4769" compoundref="thread__pool_8hpp" startline="293" endline="293">submit_result&lt; T &gt;::operator bool</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structsubmit__result_1a1e7d1255b5e726d50bc742e63cdd4769" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD</type>
+        <definition>NEFORCE_NODISCARD submit_result&lt; T &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>submit_result::operator bool</qualifiedname>
+        <briefdescription>
+<para>检查提交是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="293" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="293" bodyend="293"/>
+        <references refid="structsubmit__result_1a2aec5dabd1e7c8f5aa51c4aa01faaf09" compoundref="thread__pool_8hpp" startline="286">submit_result&lt; T &gt;::future</references>
+        <references refid="structsubmit__result_1a936d7685d45adfd0eb8b2b820766047b" compoundref="thread__pool_8hpp" startline="287">submit_result&lt; T &gt;::task_info</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>任务提交结果 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务返回值类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+包含任务的future和任务信息，用于跟踪任务执行状态。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>future&lt; T &gt;</label>
+        <link refid="classfuture"/>
+      </node>
+      <node id="3">
+        <label>shared_ptr&lt; _NEFORCE task_info &gt;</label>
+        <link refid="classshared__ptr"/>
+      </node>
+      <node id="1">
+        <label>submit_result&lt; T &gt;</label>
+        <link refid="structsubmit__result"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>future</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>task_info</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="285" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="285" bodyend="294"/>
+    <listofallmembers>
+      <member refid="structsubmit__result_1a2aec5dabd1e7c8f5aa51c4aa01faaf09" prot="public" virt="non-virtual"><scope>submit_result</scope><name>future</name></member>
+      <member refid="structsubmit__result_1a1e7d1255b5e726d50bc742e63cdd4769" prot="public" virt="non-virtual"><scope>submit_result</scope><name>operator bool</name></member>
+      <member refid="structsubmit__result_1a936d7685d45adfd0eb8b2b820766047b" prot="public" virt="non-virtual"><scope>submit_result</scope><name>task_info</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,353 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___r_b_tree" kind="group">
+    <compoundname>RBTree</compoundname>
+    <title>红黑树</title>
+    <innerclass refid="structrb__tree__node__base" prot="public">rb_tree_node_base</innerclass>
+    <innerclass refid="structrb__tree__node" prot="public">rb_tree_node</innerclass>
+    <innerclass refid="structrb__tree__base__iterator" prot="public">rb_tree_base_iterator</innerclass>
+    <innerclass refid="structrb__tree__iterator" prot="public">rb_tree_iterator</innerclass>
+    <innerclass refid="classrb__tree" prot="public">rb_tree</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___r_b_tree_1ga14c563e0ae0299dde136bbc7cba64ea7" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr bool</type>
+        <definition>NEFORCE_INLINE17 constexpr bool RB_TREE_RED</definition>
+        <argsstring></argsstring>
+        <name>RB_TREE_RED</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>红黑树节点颜色常量：红色 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="76" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="76" bodyend="-1"/>
+        <referencedby refid="structrb__tree__base__iterator_1a3f9d5bf07a42b00e841de5eb311eefa2" compoundref="rb__tree_8hpp" startline="471" endline="488">rb_tree_base_iterator::decrement</referencedby>
+        <referencedby refid="group___r_b_tree_1gad1daa78f4ed31af1fbc76e03d80a749a" compoundref="rb__tree_8hpp" startline="239" endline="410">rb_tree_erase_rebalance</referencedby>
+        <referencedby refid="group___r_b_tree_1gae4e5a3a27860178db64263879e189c7f" compoundref="rb__tree_8hpp" startline="186" endline="227">rb_tree_insert_rebalance</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="group___r_b_tree_1gaeb8d38b66113db3fd1b0971d134d8dc4" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr bool</type>
+        <definition>NEFORCE_INLINE17 constexpr bool RB_TREE_BLACK</definition>
+        <argsstring></argsstring>
+        <name>RB_TREE_BLACK</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>红黑树节点颜色常量：黑色 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="79" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="79" bodyend="-1"/>
+        <referencedby refid="group___r_b_tree_1gad1daa78f4ed31af1fbc76e03d80a749a" compoundref="rb__tree_8hpp" startline="239" endline="410">rb_tree_erase_rebalance</referencedby>
+        <referencedby refid="group___r_b_tree_1gae4e5a3a27860178db64263879e189c7f" compoundref="rb__tree_8hpp" startline="186" endline="227">rb_tree_insert_rebalance</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___r_b_tree_1gaf0c3f9313dd1fc2ceda622b1ca050b77" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE void rb_tree_rotate_left</definition>
+        <argsstring>(rb_tree_node_base *axis, rb_tree_node_base *&amp;root) noexcept</argsstring>
+        <name>rb_tree_rotate_left</name>
+        <param>
+          <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *&amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>红黑树左旋转 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>axis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旋转轴节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>树根节点引用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行左旋转操作，保持红黑树性质。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="131" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="131" bodyend="150"/>
+        <references refid="structrb__tree__node__base_1a330204b51f4af7422c07f0b7abc99043" compoundref="rb__tree_8hpp" startline="95">rb_tree_node_base::left_</references>
+        <references refid="structrb__tree__node__base_1a15f152821043540c3936ec5813e188f3" compoundref="rb__tree_8hpp" startline="94">rb_tree_node_base::parent_</references>
+        <references refid="structrb__tree__node__base_1a3c4cbe716acae5e7e3d5fe812fd2a0ba" compoundref="rb__tree_8hpp" startline="96">rb_tree_node_base::right_</references>
+        <referencedby refid="group___r_b_tree_1gad1daa78f4ed31af1fbc76e03d80a749a" compoundref="rb__tree_8hpp" startline="239" endline="410">rb_tree_erase_rebalance</referencedby>
+        <referencedby refid="group___r_b_tree_1gae4e5a3a27860178db64263879e189c7f" compoundref="rb__tree_8hpp" startline="186" endline="227">rb_tree_insert_rebalance</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___r_b_tree_1gadcd9fade8376a485afbc07c9d2797a63" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE void rb_tree_rotate_right</definition>
+        <argsstring>(rb_tree_node_base *axis, rb_tree_node_base *&amp;root) noexcept</argsstring>
+        <name>rb_tree_rotate_right</name>
+        <param>
+          <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *&amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>红黑树右旋转 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>axis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旋转轴节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>树根节点引用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行右旋转操作，保持红黑树性质。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="159" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="159" bodyend="177"/>
+        <references refid="structrb__tree__node__base_1a330204b51f4af7422c07f0b7abc99043" compoundref="rb__tree_8hpp" startline="95">rb_tree_node_base::left_</references>
+        <references refid="structrb__tree__node__base_1a15f152821043540c3936ec5813e188f3" compoundref="rb__tree_8hpp" startline="94">rb_tree_node_base::parent_</references>
+        <references refid="structrb__tree__node__base_1a3c4cbe716acae5e7e3d5fe812fd2a0ba" compoundref="rb__tree_8hpp" startline="96">rb_tree_node_base::right_</references>
+        <referencedby refid="group___r_b_tree_1gad1daa78f4ed31af1fbc76e03d80a749a" compoundref="rb__tree_8hpp" startline="239" endline="410">rb_tree_erase_rebalance</referencedby>
+        <referencedby refid="group___r_b_tree_1gae4e5a3a27860178db64263879e189c7f" compoundref="rb__tree_8hpp" startline="186" endline="227">rb_tree_insert_rebalance</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___r_b_tree_1gae4e5a3a27860178db64263879e189c7f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE void rb_tree_insert_rebalance</definition>
+        <argsstring>(rb_tree_node_base *insert, rb_tree_node_base *&amp;root) noexcept</argsstring>
+        <name>rb_tree_insert_rebalance</name>
+        <param>
+          <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *</type>
+          <declname>insert</declname>
+        </param>
+        <param>
+          <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *&amp;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>插入节点后重新平衡红黑树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>insert</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新插入的节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>树根节点引用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+通过旋转和重新着色恢复红黑树的平衡性质。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="186" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="186" bodyend="227"/>
+        <references refid="structrb__tree__node__base_1a4d5e0bb6fec2463fc7635857655db6af" compoundref="rb__tree_8hpp" startline="93">rb_tree_node_base::color_</references>
+        <references refid="structrb__tree__node__base_1a330204b51f4af7422c07f0b7abc99043" compoundref="rb__tree_8hpp" startline="95">rb_tree_node_base::left_</references>
+        <references refid="structrb__tree__node__base_1a15f152821043540c3936ec5813e188f3" compoundref="rb__tree_8hpp" startline="94">rb_tree_node_base::parent_</references>
+        <references refid="group___r_b_tree_1gaeb8d38b66113db3fd1b0971d134d8dc4" compoundref="rb__tree_8hpp" startline="79">RB_TREE_BLACK</references>
+        <references refid="group___r_b_tree_1ga14c563e0ae0299dde136bbc7cba64ea7" compoundref="rb__tree_8hpp" startline="76">RB_TREE_RED</references>
+        <references refid="group___r_b_tree_1gaf0c3f9313dd1fc2ceda622b1ca050b77" compoundref="rb__tree_8hpp" startline="131" endline="150">rb_tree_rotate_left</references>
+        <references refid="group___r_b_tree_1gadcd9fade8376a485afbc07c9d2797a63" compoundref="rb__tree_8hpp" startline="159" endline="177">rb_tree_rotate_right</references>
+        <references refid="structrb__tree__node__base_1a3c4cbe716acae5e7e3d5fe812fd2a0ba" compoundref="rb__tree_8hpp" startline="96">rb_tree_node_base::right_</references>
+      </memberdef>
+      <memberdef kind="function" id="group___r_b_tree_1gad1daa78f4ed31af1fbc76e03d80a749a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE rb_tree_node_base * rb_tree_erase_rebalance</definition>
+        <argsstring>(rb_tree_node_base *erase, rb_tree_node_base *&amp;root, rb_tree_node_base *&amp;leftmost, rb_tree_node_base *&amp;rightmost) noexcept</argsstring>
+        <name>rb_tree_erase_rebalance</name>
+        <param>
+          <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *</type>
+          <declname>erase</declname>
+        </param>
+        <param>
+          <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *&amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *&amp;</type>
+          <declname>leftmost</declname>
+        </param>
+        <param>
+          <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref> *&amp;</type>
+          <declname>rightmost</declname>
+        </param>
+        <briefdescription>
+<para>删除节点后重新平衡红黑树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>erase</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>树根节点引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>leftmost</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最左节点引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rightmost</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最右节点引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实际被删除的节点</para>
+</simplesect>
+执行节点删除后的重新平衡操作，并更新最左最右节点。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="239" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="239" bodyend="410"/>
+        <references refid="structrb__tree__node__base_1a4d5e0bb6fec2463fc7635857655db6af" compoundref="rb__tree_8hpp" startline="93">rb_tree_node_base::color_</references>
+        <references refid="group___remove_algorithms_1ga80e72b34181ffb739e061b6dbe19a6b6" compoundref="remove_8hpp" startline="162" endline="170">erase</references>
+        <references refid="structrb__tree__node__base_1a330204b51f4af7422c07f0b7abc99043" compoundref="rb__tree_8hpp" startline="95">rb_tree_node_base::left_</references>
+        <references refid="structrb__tree__node__base_1a0c3b8c4a5e42781154aa67a6f71da1aa" compoundref="rb__tree_8hpp" startline="115" endline="120">rb_tree_node_base::maximum</references>
+        <references refid="structrb__tree__node__base_1a4ab51d5adfba1ef287bb56d7b86f7870" compoundref="rb__tree_8hpp" startline="103" endline="108">rb_tree_node_base::minimum</references>
+        <references refid="structrb__tree__node__base_1a15f152821043540c3936ec5813e188f3" compoundref="rb__tree_8hpp" startline="94">rb_tree_node_base::parent_</references>
+        <references refid="group___r_b_tree_1gaeb8d38b66113db3fd1b0971d134d8dc4" compoundref="rb__tree_8hpp" startline="79">RB_TREE_BLACK</references>
+        <references refid="group___r_b_tree_1ga14c563e0ae0299dde136bbc7cba64ea7" compoundref="rb__tree_8hpp" startline="76">RB_TREE_RED</references>
+        <references refid="group___r_b_tree_1gaf0c3f9313dd1fc2ceda622b1ca050b77" compoundref="rb__tree_8hpp" startline="131" endline="150">rb_tree_rotate_left</references>
+        <references refid="group___r_b_tree_1gadcd9fade8376a485afbc07c9d2797a63" compoundref="rb__tree_8hpp" startline="159" endline="177">rb_tree_rotate_right</references>
+        <references refid="structrb__tree__node__base_1a3c4cbe716acae5e7e3d5fe812fd2a0ba" compoundref="rb__tree_8hpp" startline="96">rb_tree_node_base::right_</references>
+        <references refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df">swap</references>
+        <referencedby refid="classrb__tree_1a829d8c8538a72807c1961bd5ee93511d" compoundref="rb__tree_8hpp" startline="1345" endline="1350">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>自平衡二叉搜索树实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下计算机科学文献：</para>
+<para><itemizedlist>
+<listitem><para>**Rudolf Bayer (1972)**：&quot;Symmetric Binary B-Trees: Data Structure and Maintenance Algorithms&quot; Acta Informatica, Vol. 1, pp. 290–306. <ulink url="https://doi.org/10.1007/BF00289509">https://doi.org/10.1007/BF00289509</ulink></para>
+</listitem><listitem><para>**Leo J. Guibas &amp; Robert Sedgewick (1978)**：&quot;A Dichromatic Framework for Balanced Trees&quot; Proceedings of the 19th Annual Symposium on Foundations of Computer Science, pp. 8–21. <ulink url="https://doi.org/10.1109/SFCS.1978.3">https://doi.org/10.1109/SFCS.1978.3</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___r_b_tree_1rb_tree_properties">
+<title>红黑树性质</title><para>根据 Guibas &amp; Sedgewick (1978) 的定义，红黑树满足以下五条性质：</para>
+<para><orderedlist>
+<listitem><para>**节点颜色**：每个节点要么是红色，要么是黑色。</para>
+</listitem><listitem><para>**根节点颜色**：根节点是黑色的。</para>
+</listitem><listitem><para>**叶子节点颜色**：每个叶子节点（NIL）是黑色的。</para>
+</listitem><listitem><para>**红色节点限制**：如果一个节点是红色的，则它的两个子节点都是黑色的。</para>
+</listitem><listitem><para>**黑色高度**：对于每个节点，从该节点到其所有后代叶子节点的简单路径上， 包含相同数量的黑色节点。</para>
+</listitem></orderedlist>
+</para>
+</sect1>
+<sect1 id="group___r_b_tree_1complexity_guarantees">
+<title>复杂度保证</title><para>根据红黑树性质，最坏情况下的时间复杂度保证：</para>
+<para><table rows="7" cols="3"><row>
+<entry thead="yes"><para>操作  </para>
+</entry><entry thead="yes"><para>时间复杂度  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>插入  </para>
+</entry><entry thead="no"><para>O(log n)  </para>
+</entry><entry thead="no"><para>最多 2 次旋转  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>删除  </para>
+</entry><entry thead="no"><para>O(log n)  </para>
+</entry><entry thead="no"><para>最多 3 次旋转  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>查找  </para>
+</entry><entry thead="no"><para>O(log n)  </para>
+</entry><entry thead="no"><para>二叉搜索树查找  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最小/最大  </para>
+</entry><entry thead="no"><para>O(log n)  </para>
+</entry><entry thead="no"><para>沿最左/最右路径查找  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>前驱/后继  </para>
+</entry><entry thead="no"><para>O(log n)  </para>
+</entry><entry thead="no"><para>中序遍历相邻节点  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>范围迭代  </para>
+</entry><entry thead="no"><para>O(k)  </para>
+</entry><entry thead="no"><para>k 为范围内元素数量  </para>
+</entry></row>
+</table>
+</para>
+<para>树的高度上界：<computeroutput>h ≤ 2 log₂(n + 1)</computeroutput>。</para>
+<para><simplesect kind="note"><para>本实现提供了两个插入策略：<itemizedlist>
+<listitem><para><computeroutput>insert_unique</computeroutput>：键必须唯一，重复键插入失败并返回已存在元素迭代器</para>
+</listitem><listitem><para><computeroutput>insert_equal</computeroutput>：允许重复键，按插入顺序存储</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="warning"><para>根据 ISO/IEC 14882:2020 §22.2.6：<itemizedlist>
+<listitem><para>对关联容器的修改操作不会使任何迭代器失效，除非删除该迭代器指向的元素</para>
+</listitem><listitem><para>比较函数对象（Compare）必须提供严格的弱序关系</para>
+</listitem><listitem><para>键的不可变性：修改已插入元素的键会导致未定义行为</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/container/map">https://en.cppreference.com/w/cpp/container/map</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/container/set">https://en.cppreference.com/w/cpp/container/set</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://doi.org/10.1109/SFCS.1978.3">https://doi.org/10.1109/SFCS.1978.3</ulink> (Guibas &amp; Sedgewick) </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

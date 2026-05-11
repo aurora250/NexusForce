@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['部分排序_0',['部分排序',['../group___sort_algorithms.html#partial_sorting',1,'']]]
+  ['适用场景_0',['适用场景',['../group___s_h_a256.html#usage',1,'']]]
 ];

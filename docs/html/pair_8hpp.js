@@ -19,5 +19,6 @@ var pair_8hpp =
     [ "get", "group___tuple.html#gafb82fa7d5b36f063ae7e53522e2cbdc6", null ],
     [ "get", "group___tuple.html#gaeacfc405517ebd850c9a45a1b00f014e", null ],
     [ "make_pair", "group___pair.html#ga3fc92626b5f2ddb8e7b4cd5f6ccde69e", null ],
+    [ "NEFORCE_MACRO_RANGES_CV", "group___tuple.html#ga7b9b44ad424931d74c85fa2580bcb512", null ],
     [ "tuple_size_v", "group___tuple.html#ga91606fbeba25897597ab46313b6764d7", null ]
 ];

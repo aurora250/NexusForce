@@ -1,0 +1,808 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___futex" kind="group">
+    <compoundname>Futex</compoundname>
+    <title>FUTEX</title>
+    <innerclass refid="classatomic__futex" prot="public">atomic_futex</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group___futex_1gab7057283120da679629ce8fb1238219b" prot="public" static="no" strong="yes">
+        <type><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref></type>
+        <name>futex_wait_flags</name>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219ba1a2fe3bfe4c2f8ec2f7118ceff8dab75" prot="public">
+          <name>private_flag</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>私有标志位 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219ba49256b9819abacbb8e6e031a03abe81b" prot="public">
+          <name>wait</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>等待操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae" prot="public">
+          <name>wake</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>唤醒操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219baba62e015262aac8b508140444f3ac63a" prot="public">
+          <name>requeue</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>将等待队列转移到另一个FUTEX </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219baac34d3706b83e5a5b876777ae191ed05" prot="public">
+          <name>cmp_requeue</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+<para>带比较的转移 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219ba0f74829cda07f2751c17564ecfb39a41" prot="public">
+          <name>wake_op</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+<para>唤醒并原子修改另一个FUTEX </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219ba7f5377fce9aa415d46efbd06ceca0e07" prot="public">
+          <name>lock_pi</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+<para>优先级继承锁（加锁） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219baaa891c420b8323aa9003519e265d1533" prot="public">
+          <name>unlock_pi</name>
+          <initializer>= 7</initializer>
+          <briefdescription>
+<para>优先级继承锁（解锁） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219bafcf2a7517345ac467b45eda1c297f736" prot="public">
+          <name>trylock_pi</name>
+          <initializer>= 8</initializer>
+          <briefdescription>
+<para>尝试加锁（非阻塞） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219bad28ae7946917a61756d30abcdd4dcc6d" prot="public">
+          <name>wait_bitset</name>
+          <initializer>= 9</initializer>
+          <briefdescription>
+<para>位集等待操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219bac43179e11291c51aed29d76c682c5ddc" prot="public">
+          <name>wake_bitset</name>
+          <initializer>= 10</initializer>
+          <briefdescription>
+<para>位集唤醒操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219ba9cdb886c12fde5237565800cedbf0cc1" prot="public">
+          <name>wait_requeue_pi</name>
+          <initializer>= 11</initializer>
+          <briefdescription>
+<para>等待并转移到PI FUTEX </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219baf9cbd5a03c57406d4e6bb2527b816240" prot="public">
+          <name>cmp_requeue_pi</name>
+          <initializer>= 12</initializer>
+          <briefdescription>
+<para>带比较的等待并转移 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219bafac08f1435194cbda68ea4cd29f5cfef" prot="public">
+          <name>wait_private</name>
+          <initializer>= wait | private_flag</initializer>
+          <briefdescription>
+<para>私有等待操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219baafd70d970ca714dc5ad2ebab8f059c95" prot="public">
+          <name>wake_private</name>
+          <initializer>= wake | private_flag</initializer>
+          <briefdescription>
+<para>私有唤醒操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219ba6b5efe44031b6db509c1e76da2f7c945" prot="public">
+          <name>wait_bitset_private</name>
+          <initializer>= wait_bitset | private_flag</initializer>
+          <briefdescription>
+<para>私有位集等待操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49" prot="public">
+          <name>wake_bitset_private</name>
+          <initializer>= wake_bitset | private_flag</initializer>
+          <briefdescription>
+<para>私有位集唤醒操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___futex_1ggab7057283120da679629ce8fb1238219ba28fb4c528a4d49af012e73bc2807c4a8" prot="public">
+          <name>bitset_match_any</name>
+          <initializer>= -1</initializer>
+          <briefdescription>
+<para>匹配任何等待集合的位掩码 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>FUTEX操作标志枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义FUTEX系统调用的操作标志。这些标志对应于Linux内核的FUTEX操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="46" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" bodystart="46" bodyend="65"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___futex_1ga4ae42858521c6114207203888569da88" prot="public" static="no">
+        <type>long</type>
+        <definition>using platform_wait_t = 
+
+long</definition>
+        <argsstring></argsstring>
+        <name>platform_wait_t</name>
+        <briefdescription>
+<para>平台等待类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>用于FUTEX操作的等待类型 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="32" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___futex_1ga7045b616751b8d5fec67f1a27f9c60e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Clock</type>
+          </param>
+          <param>
+            <type>typename Dur</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool futex_wait_until</definition>
+        <argsstring>(const platform_wait_t *addr, platform_wait_t old, const time_point&lt; Clock, Dur &gt; &amp;timeout)</argsstring>
+        <name>futex_wait_until</name>
+        <param>
+          <type>const <ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref> *</type>
+          <declname>addr</declname>
+        </param>
+        <param>
+          <type><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref></type>
+          <declname>old</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur &gt; &amp;</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+<para>FUTEX定时等待函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Clock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时钟类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>等待地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>old</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>等待是否成功</para>
+</simplesect>
+公共的FUTEX定时等待接口，支持任意时钟类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" line="140" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" bodystart="140" bodyend="142"/>
+        <references refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc" compoundref="condition__variable_8hpp" startline="35">timeout</references>
+      </memberdef>
+      <memberdef kind="function" id="group___futex_1ga26f36b601d9ad2d293b3345e1eaf5306" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void NEFORCE_API</type>
+        <definition>void NEFORCE_API futex_wait</definition>
+        <argsstring>(void *addr, platform_wait_t value) noexcept</argsstring>
+        <name>futex_wait</name>
+        <param>
+          <type>void *</type>
+          <declname>addr</declname>
+        </param>
+        <param>
+          <type><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>无限期等待FUTEX </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>FUTEX变量的地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的值，只有当地址处的值等于此值时才等待</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+阻塞当前线程，直到addr处的值不等于value或收到通知。 这是最基本的FUTEX等待操作，没有超时限制。</para>
+<para><simplesect kind="warning"><para>调用者必须确保 addr 在等待期间保持有效且可访问 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="78" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" declline="78" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group___futex_1ga48d2abd213cbed922449fad6f05638ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool NEFORCE_API</type>
+        <definition>bool NEFORCE_API futex_wait_until</definition>
+        <argsstring>(void *addr, platform_wait_t value, bool has_timeout, int64_t sec, int64_t ns, bool is_monotonic=false)</argsstring>
+        <name>futex_wait_until</name>
+        <param>
+          <type>void *</type>
+          <declname>addr</declname>
+        </param>
+        <param>
+          <type><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>has_timeout</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>sec</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>ns</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_monotonic</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>等待FUTEX直到指定时间点或条件满足 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>FUTEX地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>has_timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否启用超时。如果为false，则忽略时间参数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间的秒数部分 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ns</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间的纳秒数部分 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>is_monotonic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用单调时钟 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool 等待结果：<itemizedlist>
+<listitem><para>true: 等待成功结束（被唤醒或值已改变）</para>
+</listitem><listitem><para>false: 等待超时（仅当has_timeout为true时可能）</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+阻塞当前线程，直到以下条件之一满足：<orderedlist>
+<listitem><para>addr 处的值不等于期望的 value</para>
+</listitem><listitem><para>达到指定的超时时间</para>
+</listitem><listitem><para>被其他线程唤醒</para>
+</listitem></orderedlist>
+</para>
+<para><simplesect kind="note"><para>函数可能因系统信号等原因返回，即使条件未满足，产生虚假唤醒。调用者需要循环检查条件 </para>
+</simplesect>
+<simplesect kind="note"><para>实际超时精度受系统调度器和时钟精度限制 </para>
+</simplesect>
+<simplesect kind="warning"><para>调用者必须确保 addr 在等待期间保持有效且可访问 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="102" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" declline="102" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group___futex_1ga05f2a678e4c7a16ecc3ba93dba798e19" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void NEFORCE_API</type>
+        <definition>void NEFORCE_API futex_notify</definition>
+        <argsstring>(void *addr, bool all) noexcept</argsstring>
+        <name>futex_notify</name>
+        <param>
+          <type>void *</type>
+          <declname>addr</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>all</declname>
+        </param>
+        <briefdescription>
+<para>通知等待的线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>FUTEX变量的地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>all</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否通知所有等待线程</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+唤醒正在等待addr处值变化的线程。 如果all为true，唤醒所有等待线程；否则只唤醒一个等待线程。</para>
+<para><simplesect kind="warning"><para>调用者必须确保 addr 在等待期间保持有效且可访问 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="115" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" declline="115" declcolumn="18"/>
+        <referencedby refid="classatomic__futex_1a16976104dbc96caf0c1856045d3e5715" compoundref="atomic__futex_8hpp" startline="273" endline="278">atomic_futex&lt; WaiterBit &gt;::store_notify_all</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___futex_1ga937d6b0a20c2ed652cbe64673400515c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int futex</definition>
+        <argsstring>(void *wait_addr, futex_wait_flags flags, int wake_count, void *requeue_addr, int requeue_count, int cmp_value) noexcept</argsstring>
+        <name>futex</name>
+        <param>
+          <type>void *</type>
+          <declname>wait_addr</declname>
+        </param>
+        <param>
+          <type><ref refid="group___futex_1gab7057283120da679629ce8fb1238219b" kindref="member">futex_wait_flags</ref></type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>wake_count</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>requeue_addr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>requeue_count</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cmp_value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="120" column="5" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" declline="120" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="group___futex_1gab69b11c4c6a89ae5908e07b57d892833" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API futex_requeue</definition>
+        <argsstring>(void *wait_addr, int wake_count, void *requeue_addr, int requeue_count) noexcept</argsstring>
+        <name>futex_requeue</name>
+        <param>
+          <type>void *</type>
+          <declname>wait_addr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>wake_count</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>requeue_addr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>requeue_count</declname>
+        </param>
+        <briefdescription>
+<para>将部分等待线程转移到另一个 futex </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>wait_addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源 futex 地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>wake_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>唤醒的线程数（从队列头部） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>requeue_addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标 futex 地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>requeue_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转移的线程数（唤醒后剩余队列中转移） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 成功；负值错误码（如 -EINVAL） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="131" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" declline="131" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="group___futex_1ga7122cfebb7d17bf73cee0472ae48ddec" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API futex_wake_op</definition>
+        <argsstring>(void *addr, int wake_count, void *op_addr, int op_arg, int op, int cmp, int cmp_arg) noexcept</argsstring>
+        <name>futex_wake_op</name>
+        <param>
+          <type>void *</type>
+          <declname>addr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>wake_count</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>op_addr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>op_arg</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cmp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cmp_arg</declname>
+        </param>
+        <briefdescription>
+<para>唤醒线程的同时原子修改另一个 futex 的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要唤醒的 futex 地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>wake_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>唤醒线程数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>op_addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要操作的 futex 地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>op_arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>操作参数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>操作码（FUTEX_OP_* 常量） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cmp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较操作（FUTEX_OP_CMP_* 常量） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cmp_arg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 成功；负值错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="144" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" declline="144" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="group___futex_1ga85a3bfdf3aaa401eee8a569eafa2d2f4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API futex_lock_pi</definition>
+        <argsstring>(void *addr) noexcept</argsstring>
+        <name>futex_lock_pi</name>
+        <param>
+          <type>void *</type>
+          <declname>addr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="147" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" declline="147" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="group___futex_1ga3eeab7b90280626fcd0944228040d48b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API futex_trylock_pi</definition>
+        <argsstring>(void *addr) noexcept</argsstring>
+        <name>futex_trylock_pi</name>
+        <param>
+          <type>void *</type>
+          <declname>addr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="148" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" declline="148" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="group___futex_1ga17ddd76eba445e31f4d8b69a3292d8a8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API futex_unlock_pi</definition>
+        <argsstring>(void *addr) noexcept</argsstring>
+        <name>futex_unlock_pi</name>
+        <param>
+          <type>void *</type>
+          <declname>addr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="149" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" declline="149" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="group___futex_1ga563dcc9c60dd5a3e7006e4227b0221ab" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API futex_wait_requeue_pi</definition>
+        <argsstring>(void *wait_addr, int value, void *requeue_addr) noexcept</argsstring>
+        <name>futex_wait_requeue_pi</name>
+        <param>
+          <type>void *</type>
+          <declname>wait_addr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>requeue_addr</declname>
+        </param>
+        <briefdescription>
+<para>等待并转移到 PI futex（用于条件变量与 PI 锁配合） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>wait_addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>等待的 futex 地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>requeue_addr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标 PI futex 地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 成功；负值错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="158" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" declline="158" declcolumn="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="group___futex_1gacd0f1354cfb4e69ad888d09495eca626" prot="public" static="no">
+        <name>NEFORCE_FUTEX_HAS_ADVANCED</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" line="118" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/futex.hpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>FUTEX同步原语的跨平台封装 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

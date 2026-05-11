@@ -1,0 +1,2195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___math_functions" kind="group">
+    <compoundname>MathFunctions</compoundname>
+    <title>数学函数</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___math_functions_1ga8689dd4e6cd2dd4597d4e46601d1f333" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION constexpr <ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION constexpr int64_t safe_trunc</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>safe_trunc</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="148" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="148" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gae024fad97dddef0a805c6966bfa3944b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 uint64_t safe_decimal_to_uint64</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>safe_decimal_to_uint64</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>将非负 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref> 安全转换为 uint64_t（避免 &gt;= 2^63 时的 UB） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>对应的 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> 值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="161" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="161" bodyend="168"/>
+        <referencedby refid="group___math_functions_1gaa0653fb095511a5bb2f135a246995fbc" compoundref="math_8hpp" startline="620" endline="644">ceil</referencedby>
+        <referencedby refid="group___math_functions_1ga20282c137d87af7a972c11f03f022c82" compoundref="math_8hpp" startline="574" endline="597">floor</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga55829b9b67398c4682967ec5d5ccfa33" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 uint64_t fibonacci</definition>
+        <argsstring>(const uint32_t n) noexcept</argsstring>
+        <name>fibonacci</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>计算斐波那契数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>第n个斐波那契数</para>
+</simplesect>
+如果n小于预计算的数量，直接返回预计算结果； 否则递归计算。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="178" column="52" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="178" bodyend="190"/>
+        <referencedby refid="group___math_functions_1ga26007f8cd6027cb5ac19933049de833b" compoundref="math_8hpp" startline="199" endline="201">leonardo</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga26007f8cd6027cb5ac19933049de833b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 uint64_t leonardo</definition>
+        <argsstring>(const uint32_t n) noexcept</argsstring>
+        <name>leonardo</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>计算莱昂纳多数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>第n个莱昂纳多数</para>
+</simplesect>
+莱昂纳多数：L(n) = 2 * F(n+1) - 1 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="199" column="52" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="199" bodyend="201"/>
+        <references refid="group___math_functions_1ga55829b9b67398c4682967ec5d5ccfa33" compoundref="math_8hpp" startline="178" endline="190">fibonacci</references>
+        <referencedby refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1ga136d8080ad6127b70845b45e199e2c5d" compoundref="leonardo__heap_8hpp" startline="236" endline="267">pop_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1ga30b3db79677a6fbb9e3b71a62b48933f" compoundref="leonardo__heap_8hpp" startline="278" endline="316">sort_leonardo_heap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gaee802bdfb24880a8a3d3075578dfb571" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr T</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr T angular2radian</definition>
+        <argsstring>(const T angular) noexcept</argsstring>
+        <name>angular2radian</name>
+        <param>
+          <type>const T</type>
+          <declname>angular</declname>
+        </param>
+        <briefdescription>
+<para>角度转弧度 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>运算类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>angular</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>角度值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应的弧度值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="210" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="210" bodyend="213"/>
+        <references refid="group___base_type_properties_1gacba9ef87cf785618c5aa0ac0c49eff38" compoundref="type__traits_8hpp" startline="927">is_arithmetic_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga426b44878c637a7acfaf303d117e2507" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr T</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr T radian2angular</definition>
+        <argsstring>(const T radian) noexcept</argsstring>
+        <name>radian2angular</name>
+        <param>
+          <type>const T</type>
+          <declname>radian</declname>
+        </param>
+        <briefdescription>
+<para>弧度转角度 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>运算类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>radian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>弧度值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应的角度值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="222" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="222" bodyend="225"/>
+        <references refid="group___base_type_properties_1gacba9ef87cf785618c5aa0ac0c49eff38" compoundref="type__traits_8hpp" startline="927">is_arithmetic_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION constexpr <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1gaacd632d0f1e06e58693fd5a8959d764f" kindref="member">is_signed_v</ref>&lt; T &gt;, T &gt;</type>
+        <definition>NEFORCE_CONST_FUNCTION constexpr enable_if_t&lt; is_signed_v&lt; T &gt;, T &gt; absolute</definition>
+        <argsstring>(const T x) noexcept</argsstring>
+        <name>absolute</name>
+        <param>
+          <type>const T</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>取绝对值（有符号数版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绝对值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="234" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="234" bodyend="236"/>
+        <referencedby refid="group___math_functions_1gabf45a8b174ac3f17964a04c1b22bffd3" compoundref="math_8hpp" startline="1083" endline="1097">arccosine</referencedby>
+        <referencedby refid="group___math_functions_1ga43376d1b397c6fc80783a6d386670762" compoundref="math_8hpp" startline="1062" endline="1076">arcsine</referencedby>
+        <referencedby refid="group___math_functions_1ga3d2b251acab308cc0da5d8849af846ae" compoundref="math_8hpp" startline="1017" endline="1055">arctangent</referencedby>
+        <referencedby refid="group___math_functions_1ga7525db58acda774a68cf13ac9ac95314" compoundref="math_8hpp" startline="771" endline="778">around_multiple</referencedby>
+        <referencedby refid="group___math_functions_1gaf313321f06cd95a726535eb9ba171e51" compoundref="math_8hpp" startline="796" endline="798">around_zero</referencedby>
+        <referencedby refid="group___math_functions_1gaa0653fb095511a5bb2f135a246995fbc" compoundref="math_8hpp" startline="620" endline="644">ceil</referencedby>
+        <referencedby refid="group___math_functions_1gad8bc333dfd3170bbd6fd1649e43510d5" compoundref="math_8hpp" startline="532" endline="554">cube_root</referencedby>
+        <referencedby refid="group___math_functions_1ga20282c137d87af7a972c11f03f022c82" compoundref="math_8hpp" startline="574" endline="597">floor</referencedby>
+        <referencedby refid="group___math_functions_1gab7cc7a2171e920109e6180b2360a78dd" compoundref="math_8hpp" startline="314" endline="323">gcd</referencedby>
+        <referencedby refid="group___math_functions_1ga5d5d2b89486ad0b478c3b1b45a63f6af" compoundref="math_8hpp" startline="418" endline="461">logarithm_e</referencedby>
+        <referencedby refid="group___math_functions_1gab243e63879ead7aa619c79b50e53faa1" compoundref="math_8hpp" startline="662" endline="683">round</referencedby>
+        <referencedby refid="group___math_functions_1ga3e1661aadeb32478031c64533ca48b9c" compoundref="math_8hpp" startline="500" endline="521">square_root</referencedby>
+        <referencedby refid="group___math_functions_1ga1b7b9f4c4d8b78b086a6f81d789e652b" compoundref="math_8hpp" startline="746" endline="749">truncate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga5d870a03a23071f49bf709e3efb8d0e5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION constexpr const T &amp;</type>
+        <definition>NEFORCE_CONST_FUNCTION constexpr const T &amp; sum</definition>
+        <argsstring>(const T &amp;x) noexcept</argsstring>
+        <name>sum</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>单参数求和 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>唯一参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>参数本身</para>
+</simplesect>
+递归sum的终止位置 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="259" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="259" bodyend="261"/>
+        <referencedby refid="group___math_functions_1ga743363ff679412699ab9b01b052cba93" compoundref="math_8hpp" startline="283" endline="285">average</referencedby>
+        <referencedby refid="group___math_functions_1ga3c4715923b8f3d77ce1826e960a405dc" compoundref="math_8hpp" startline="272" endline="274">sum</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga3c4715923b8f3d77ce1826e960a405dc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename First</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Rests</declname>
+            <defname>Rests</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(sizeof...(Rests) &gt; 0), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) sum</definition>
+        <argsstring>(First first, Rests... args)</argsstring>
+        <name>sum</name>
+        <param>
+          <type>First</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Rests...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>多参数求和 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>First</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个参数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Rests</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>剩余参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个参数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>剩余参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>所有参数的和 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="272" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="272" bodyend="274"/>
+        <references refid="group___math_functions_1ga5d870a03a23071f49bf709e3efb8d0e5" compoundref="math_8hpp" startline="259" endline="261">sum</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga743363ff679412699ab9b01b052cba93" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(sizeof...(Args) &gt; 0), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) average</definition>
+        <argsstring>(Args... args)</argsstring>
+        <name>average</name>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>计算平均值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要求平均值的参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>平均值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="283" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="283" bodyend="285"/>
+        <references refid="group___math_functions_1ga5d870a03a23071f49bf709e3efb8d0e5" compoundref="math_8hpp" startline="259" endline="261">sum</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gaf10f4f48e95d20eaf9968bb3b0be5fae" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR14 int</type>
+        <definition>NEFORCE_CONSTEXPR14 int sign</definition>
+        <argsstring>(const T &amp;value) noexcept</argsstring>
+        <name>sign</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>获取数值的符号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>符号值：正数返回1，负数返回-1，零返回0 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="294" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="294" bodyend="304"/>
+        <references refid="group___base_type_properties_1gacba9ef87cf785618c5aa0ac0c49eff38" compoundref="type__traits_8hpp" startline="927">is_arithmetic_v</references>
+        <referencedby refid="classdatetime_1afcfdba9d03f6a0a724b012fa0d75819b" compoundref="datetime_8hpp" startline="1233" endline="1274">datetime::parse_RFC3339</referencedby>
+        <referencedby refid="classdatetime_1ab17998782a98d4b6b25c2dec87484959" compoundref="datetime_8hpp" startline="1167" endline="1180">datetime::to_offset_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gab7cc7a2171e920109e6180b2360a78dd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T</type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T gcd</definition>
+        <argsstring>(const T &amp;m, const T &amp;n) noexcept</argsstring>
+        <name>gcd</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>计算最大公约数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最大公约数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="314" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="314" bodyend="323"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <referencedby refid="group___math_functions_1ga769be3a4c0a8bfb669df02028a2900b2" compoundref="math_8hpp" startline="333" endline="335">lcm</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga769be3a4c0a8bfb669df02028a2900b2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T</type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T lcm</definition>
+        <argsstring>(const T &amp;m, const T &amp;n) noexcept</argsstring>
+        <name>lcm</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>计算最小公倍数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最小公倍数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="333" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="333" bodyend="335"/>
+        <references refid="group___math_functions_1gab7cc7a2171e920109e6180b2360a78dd" compoundref="math_8hpp" startline="314" endline="323">gcd</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga584831cb7db02edb5d37b30a050b5736" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga1233851ade7c3f53dc6b9b0ae01cf978" kindref="member">is_floating_point_v</ref>&lt; T &gt;, T &gt;</type>
+        <definition>NEFORCE_CONSTEXPR14 enable_if_t&lt; is_floating_point_v&lt; T &gt;, T &gt; mod</definition>
+        <argsstring>(const T x, const T y)</argsstring>
+        <name>mod</name>
+        <param>
+          <type>const T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const T</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+<para>浮点数取模运算 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被除数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x除以y的余数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数为0时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="346" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="346" bodyend="357"/>
+        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="classnumeric__traits_1a0abaea37c2a8dd2fde7eb71af99edf07" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <referencedby refid="structipackage_1a92ce2f75002df8eab6ade4cf29bc0b29" compoundref="ipackage_8hpp" startline="188" endline="191">ipackage&lt; integer8, int8_t &gt;::operator%=</referencedby>
+        <referencedby refid="group___memory_order_1gaa412d48215ac5173e7fc457a4e9443e6" compoundref="memory__order_8hpp" startline="232" endline="234">operator&amp;</referencedby>
+        <referencedby refid="group___memory_order_1ga4d9a876d4d53afcbc2b20efdf7f0d170" compoundref="memory__order_8hpp" startline="220" endline="222">operator|</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga9ddd9ce58a4bfcad8c97c856569f306c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T</type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T power</definition>
+        <argsstring>(const T &amp;x, uint32_t n) noexcept</argsstring>
+        <name>power</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>幂运算 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x的n次幂</para>
+</simplesect>
+使用快速幂算法实现。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="385" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="385" bodyend="400"/>
+        <references refid="group___base_type_properties_1gacba9ef87cf785618c5aa0ac0c49eff38" compoundref="type__traits_8hpp" startline="927">is_arithmetic_v</references>
+        <referencedby refid="group___math_functions_1ga3b9223f480e439381ade70b9b7201342" compoundref="math_8hpp" startline="652" endline="655">ceil</referencedby>
+        <referencedby refid="group___math_functions_1ga2a1c4130d3ff2c974d132ffa406bf12e" compoundref="math_8hpp" startline="703" endline="706">ceil_bit</referencedby>
+        <referencedby refid="group___math_functions_1gad6437c4092894e2d64564b195c35773e" compoundref="math_8hpp" startline="407" endline="409">exponential</referencedby>
+        <referencedby refid="classbloom__filter_1a3f36f72545a84d271b37c9077d7cd216" compoundref="bloom__filter_8hpp" startline="337" endline="346">bloom_filter&lt; T, Hash &gt;::false_positive_rate</referencedby>
+        <referencedby refid="group___math_functions_1ga8809e40b284a18595243d6af7d985b73" compoundref="math_8hpp" startline="605" endline="608">floor</referencedby>
+        <referencedby refid="group___math_functions_1ga24afbed71642680ca35406514c41ed32" compoundref="math_8hpp" startline="692" endline="695">floor_bit</referencedby>
+        <referencedby refid="group___math_functions_1ga4f31baacdc47be86650df4bc21429587" compoundref="math_8hpp" startline="735" endline="738">round</referencedby>
+        <referencedby refid="group___math_functions_1gadf701a1b02dacb8f1a93d6419619c9c2" compoundref="math_8hpp" startline="714" endline="716">round_bit</referencedby>
+        <referencedby refid="group___math_functions_1ga1b7b9f4c4d8b78b086a6f81d789e652b" compoundref="math_8hpp" startline="746" endline="749">truncate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gad6437c4092894e2d64564b195c35773e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t exponential</definition>
+        <argsstring>(const uint32_t n) noexcept</argsstring>
+        <name>exponential</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>计算e的n次幂 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>e^n </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="407" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="407" bodyend="409"/>
+        <references refid="group___math_functions_1ga9ddd9ce58a4bfcad8c97c856569f306c" compoundref="math_8hpp" startline="385" endline="400">power</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga5d5d2b89486ad0b478c3b1b45a63f6af" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_e</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>logarithm_e</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算自然对数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>真数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>ln(x)</para>
+</simplesect>
+使用反正切泰勒展开计算。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="418" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="418" bodyend="461"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="classnumeric__traits_1ac3b99f25020a5bc72aa22dffa82aaad4" compoundref="numeric__traits_8hpp" startline="183" endline="183">numeric_traits&lt; T, Dummy &gt;::infinity</references>
+        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="classnumeric__traits_1a0abaea37c2a8dd2fde7eb71af99edf07" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <referencedby refid="classbloom__filter_1a0b5aada339e890e8506b8324e7a4f7ed" compoundref="bloom__filter_8hpp" startline="320" endline="329">bloom_filter&lt; T, Hash &gt;::approximate_count</referencedby>
+        <referencedby refid="classbloom__filter_1a3d4ba7c3c4c739fc822022bc2feef7bb" compoundref="bloom__filter_8hpp" startline="285" endline="287">bloom_filter&lt; T, Hash &gt;::capacity</referencedby>
+        <referencedby refid="group___math_functions_1gadf32bc15f8dc7bb17e2467baf3b10fcf" compoundref="math_8hpp" startline="469" endline="475">logarithm</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gadf32bc15f8dc7bb17e2467baf3b10fcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 decimal_t logarithm</definition>
+        <argsstring>(const decimal_t x, const uint32_t base)</argsstring>
+        <name>logarithm</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>base</declname>
+        </param>
+        <briefdescription>
+<para>计算任意底数的对数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>真数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>以base为底x的对数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="469" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="469" bodyend="475"/>
+        <references refid="group___math_functions_1ga5d5d2b89486ad0b478c3b1b45a63f6af" compoundref="math_8hpp" startline="418" endline="461">logarithm_e</references>
+        <referencedby refid="group___math_functions_1ga6631c330e7cd6b205e9d2be8d4c634cc" compoundref="math_8hpp" startline="489" endline="489">logarithm_10</referencedby>
+        <referencedby refid="group___math_functions_1gace48fe289aecfcd412d7a89ad7f7d451" compoundref="math_8hpp" startline="482" endline="482">logarithm_2</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gace48fe289aecfcd412d7a89ad7f7d451" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 decimal_t logarithm_2</definition>
+        <argsstring>(const decimal_t x)</argsstring>
+        <name>logarithm_2</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算以2为底的对数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>真数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>log₂(x) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="482" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="482" bodyend="482"/>
+        <references refid="group___math_functions_1gadf32bc15f8dc7bb17e2467baf3b10fcf" compoundref="math_8hpp" startline="469" endline="475">logarithm</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga6631c330e7cd6b205e9d2be8d4c634cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 decimal_t logarithm_10</definition>
+        <argsstring>(const decimal_t x)</argsstring>
+        <name>logarithm_10</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算以10为底的对数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>真数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>log₁₀(x) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="489" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="489" bodyend="489"/>
+        <references refid="group___math_functions_1gadf32bc15f8dc7bb17e2467baf3b10fcf" compoundref="math_8hpp" startline="469" endline="475">logarithm</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga3e1661aadeb32478031c64533ca48b9c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t square_root</definition>
+        <argsstring>(const decimal_t x, const decimal_t precise=constants::DEFAULT_TOLERANCE) noexcept</argsstring>
+        <name>square_root</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>precise</declname>
+          <defval><ref refid="group___math_constants_1ga6b2f5fadae8acf971067aaf9edc78c6f" kindref="member">constants::DEFAULT_TOLERANCE</ref></defval>
+        </param>
+        <briefdescription>
+<para>计算平方根 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被开方数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>precise</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>精度要求 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>√x</para>
+</simplesect>
+使用牛顿迭代法计算。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="500" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="500" bodyend="521"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="group___iterator_operation_1gaf4cd040af11ff6b9b0fc0f4d70a7eb5e" compoundref="iterator_8hpp" startline="141" endline="145">prev</references>
+        <references refid="classnumeric__traits_1a0abaea37c2a8dd2fde7eb71af99edf07" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <referencedby refid="group___math_functions_1ga43376d1b397c6fc80783a6d386670762" compoundref="math_8hpp" startline="1062" endline="1076">arcsine</referencedby>
+        <referencedby refid="group___math_functions_1ga3d2b251acab308cc0da5d8849af846ae" compoundref="math_8hpp" startline="1017" endline="1055">arctangent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gad8bc333dfd3170bbd6fd1649e43510d5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t cube_root</definition>
+        <argsstring>(const decimal_t x, const decimal_t precise=constants::DEFAULT_TOLERANCE) noexcept</argsstring>
+        <name>cube_root</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>precise</declname>
+          <defval><ref refid="group___math_constants_1ga6b2f5fadae8acf971067aaf9edc78c6f" kindref="member">constants::DEFAULT_TOLERANCE</ref></defval>
+        </param>
+        <briefdescription>
+<para>计算立方根 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被开方数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>precise</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>精度要求 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>³√x</para>
+</simplesect>
+使用牛顿迭代法计算。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="532" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="532" bodyend="554"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="group___iterator_operation_1gaf4cd040af11ff6b9b0fc0f4d70a7eb5e" compoundref="iterator_8hpp" startline="141" endline="145">prev</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga81971d1ee4ff7104a6f2dd10e5ca2b7c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 uint64_t factorial</definition>
+        <argsstring>(const uint32_t n) noexcept</argsstring>
+        <name>factorial</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>计算阶乘 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>非负整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>n! </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="561" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="561" bodyend="567"/>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga20282c137d87af7a972c11f03f022c82" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>floor</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>向下取整 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>向下取整后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="574" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="574" bodyend="597"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="102" endline="104">is_finite</references>
+        <references refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="group___math_functions_1gae024fad97dddef0a805c6966bfa3944b" compoundref="math_8hpp" startline="161" endline="168">safe_decimal_to_uint64</references>
+        <referencedby refid="group___bit_manipulation_1gac832844ba0a5424f07b316752a6cbc7f" compoundref="bit_8hpp" startline="307" endline="313">bit_ceil</referencedby>
+        <referencedby refid="group___math_functions_1ga8809e40b284a18595243d6af7d985b73" compoundref="math_8hpp" startline="605" endline="608">floor</referencedby>
+        <referencedby refid="group___math_functions_1ga24afbed71642680ca35406514c41ed32" compoundref="math_8hpp" startline="692" endline="695">floor_bit</referencedby>
+        <referencedby refid="group___math_functions_1gab243e63879ead7aa619c79b50e53faa1" compoundref="math_8hpp" startline="662" endline="683">round</referencedby>
+        <referencedby refid="group___math_functions_1ga1b7b9f4c4d8b78b086a6f81d789e652b" compoundref="math_8hpp" startline="746" endline="749">truncate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga8809e40b284a18595243d6af7d985b73" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor</definition>
+        <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
+        <name>floor</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>bit</declname>
+        </param>
+        <briefdescription>
+<para>向下取整到指定位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>向下取整后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="605" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="605" bodyend="608"/>
+        <references refid="group___math_functions_1ga20282c137d87af7a972c11f03f022c82" compoundref="math_8hpp" startline="574" endline="597">floor</references>
+        <references refid="group___math_functions_1ga9ddd9ce58a4bfcad8c97c856569f306c" compoundref="math_8hpp" startline="385" endline="400">power</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga7aeb83ef7071d3e8d252cf99bc2bfc8e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_even_integer</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>is_even_integer</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="610" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="610" bodyend="613"/>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gaa0653fb095511a5bb2f135a246995fbc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t ceil</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>ceil</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>向上取整 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>向上取整后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="620" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="620" bodyend="644"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="102" endline="104">is_finite</references>
+        <references refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="group___math_functions_1gae024fad97dddef0a805c6966bfa3944b" compoundref="math_8hpp" startline="161" endline="168">safe_decimal_to_uint64</references>
+        <referencedby refid="group___math_functions_1ga3b9223f480e439381ade70b9b7201342" compoundref="math_8hpp" startline="652" endline="655">ceil</referencedby>
+        <referencedby refid="group___math_functions_1ga2a1c4130d3ff2c974d132ffa406bf12e" compoundref="math_8hpp" startline="703" endline="706">ceil_bit</referencedby>
+        <referencedby refid="classatomic__futex_1a81d70ce4efcfa781ee605bd938c8220b" compoundref="atomic__futex_8hpp" startline="197" endline="201">atomic_futex&lt; WaiterBit &gt;::load_when_equal_for</referencedby>
+        <referencedby refid="classatomic__futex_1ac33c79141a3d638c6e825b823f07063d" compoundref="atomic__futex_8hpp" startline="215" endline="226">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
+        <referencedby refid="classhashtable_1af78667277f9f62e843dcc636c5f39cfb" compoundref="hashtable_8hpp" startline="1092" endline="1124">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash</referencedby>
+        <referencedby refid="classhashtable_1aade225b3d610a99390047417b93fc8bc" compoundref="hashtable_8hpp" startline="1132" endline="1143">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
+        <referencedby refid="group___math_functions_1ga1b7b9f4c4d8b78b086a6f81d789e652b" compoundref="math_8hpp" startline="746" endline="749">truncate</referencedby>
+        <referencedby refid="classcondition__variable_1a9caf38ad7eec6460fbca1bb971b3837c" compoundref="condition__variable_8hpp" startline="302" endline="305">condition_variable::wait_for</referencedby>
+        <referencedby refid="classcondition__variable_1a315ef6f2b9eb7625826b045b429326c5" compoundref="condition__variable_8hpp" startline="318" endline="321">condition_variable::wait_for</referencedby>
+        <referencedby refid="classcondition__variable_1a216086e8b7e905fb379cfd99ea41eb14" compoundref="condition__variable_8hpp" startline="258" endline="269">condition_variable::wait_until</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga3b9223f480e439381ade70b9b7201342" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t ceil</definition>
+        <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
+        <name>ceil</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>bit</declname>
+        </param>
+        <briefdescription>
+<para>向上取整到指定位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>向上取整后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="652" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="652" bodyend="655"/>
+        <references refid="group___math_functions_1gaa0653fb095511a5bb2f135a246995fbc" compoundref="math_8hpp" startline="620" endline="644">ceil</references>
+        <references refid="group___math_functions_1ga9ddd9ce58a4bfcad8c97c856569f306c" compoundref="math_8hpp" startline="385" endline="400">power</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gab243e63879ead7aa619c79b50e53faa1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t round</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>round</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>四舍五入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>四舍五入后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="662" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="662" bodyend="683"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="group___math_functions_1ga20282c137d87af7a972c11f03f022c82" compoundref="math_8hpp" startline="574" endline="597">floor</references>
+        <references refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="102" endline="104">is_finite</references>
+        <referencedby refid="group___math_functions_1ga7525db58acda774a68cf13ac9ac95314" compoundref="math_8hpp" startline="771" endline="778">around_multiple</referencedby>
+        <referencedby refid="classcolor_1abfbe831b605aee870b3481dd2628cf84" compoundref="color_8hpp" startline="583" endline="610">color::blend</referencedby>
+        <referencedby refid="classcolor_1a1be8b70927011419fd814874fcde5cc9" compoundref="color_8hpp" startline="771" endline="778">color::from_premultiplied</referencedby>
+        <referencedby refid="classcolor_1a9b6198cac504ba87c2bc32193b8600c1" compoundref="color_8hpp" startline="496" endline="499">color::operator*</referencedby>
+        <referencedby refid="classcolor_1a8c35ffb5d5ae4168eab6aa477a5480d1" compoundref="color_8hpp" startline="541" endline="547">color::operator*=</referencedby>
+        <referencedby refid="group___math_functions_1gabc4025ee1596355ee63d616923292504" compoundref="math_8hpp" startline="809" endline="814">remainder</referencedby>
+        <referencedby refid="group___math_functions_1ga4f31baacdc47be86650df4bc21429587" compoundref="math_8hpp" startline="735" endline="738">round</referencedby>
+        <referencedby refid="classcolor_1a1b52a006d08508c7882ed9edd6129998" compoundref="color_8hpp" startline="449" endline="457">color::set_opacity</referencedby>
+        <referencedby refid="classcolor_1a3b446145882d50c135344a34fbfd8de9" compoundref="color_8hpp" startline="760" endline="764">color::to_premultiplied</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga24afbed71642680ca35406514c41ed32" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor_bit</definition>
+        <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
+        <name>floor_bit</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>bit</declname>
+        </param>
+        <briefdescription>
+<para>向下舍入到指定位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数，&gt;0表示小数位，0表示整数位 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>向下舍入后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="692" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="692" bodyend="695"/>
+        <references refid="group___math_functions_1ga20282c137d87af7a972c11f03f022c82" compoundref="math_8hpp" startline="574" endline="597">floor</references>
+        <references refid="group___math_functions_1ga9ddd9ce58a4bfcad8c97c856569f306c" compoundref="math_8hpp" startline="385" endline="400">power</references>
+        <referencedby refid="group___math_functions_1gadf701a1b02dacb8f1a93d6419619c9c2" compoundref="math_8hpp" startline="714" endline="716">round_bit</referencedby>
+        <referencedby refid="group___math_functions_1gaf2ed0c4bdfb6ca56fa1474192ac1dcb9" compoundref="math_8hpp" startline="724" endline="726">truncate_bit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga2a1c4130d3ff2c974d132ffa406bf12e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t ceil_bit</definition>
+        <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
+        <name>ceil_bit</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>bit</declname>
+        </param>
+        <briefdescription>
+<para>向上舍入到指定位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>向上舍入后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="703" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="703" bodyend="706"/>
+        <references refid="group___math_functions_1gaa0653fb095511a5bb2f135a246995fbc" compoundref="math_8hpp" startline="620" endline="644">ceil</references>
+        <references refid="group___math_functions_1ga9ddd9ce58a4bfcad8c97c856569f306c" compoundref="math_8hpp" startline="385" endline="400">power</references>
+        <referencedby refid="group___math_functions_1gadf701a1b02dacb8f1a93d6419619c9c2" compoundref="math_8hpp" startline="714" endline="716">round_bit</referencedby>
+        <referencedby refid="group___math_functions_1gaf2ed0c4bdfb6ca56fa1474192ac1dcb9" compoundref="math_8hpp" startline="724" endline="726">truncate_bit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gadf701a1b02dacb8f1a93d6419619c9c2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t round_bit</definition>
+        <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
+        <name>round_bit</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>bit</declname>
+        </param>
+        <briefdescription>
+<para>四舍五入到指定位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>四舍五入后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="714" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="714" bodyend="716"/>
+        <references refid="group___math_functions_1ga2a1c4130d3ff2c974d132ffa406bf12e" compoundref="math_8hpp" startline="703" endline="706">ceil_bit</references>
+        <references refid="group___math_functions_1ga24afbed71642680ca35406514c41ed32" compoundref="math_8hpp" startline="692" endline="695">floor_bit</references>
+        <references refid="group___math_functions_1ga9ddd9ce58a4bfcad8c97c856569f306c" compoundref="math_8hpp" startline="385" endline="400">power</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gaf2ed0c4bdfb6ca56fa1474192ac1dcb9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate_bit</definition>
+        <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
+        <name>truncate_bit</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>bit</declname>
+        </param>
+        <briefdescription>
+<para>截断到指定位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>截断后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="724" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="724" bodyend="726"/>
+        <references refid="group___math_functions_1ga2a1c4130d3ff2c974d132ffa406bf12e" compoundref="math_8hpp" startline="703" endline="706">ceil_bit</references>
+        <references refid="group___math_functions_1ga24afbed71642680ca35406514c41ed32" compoundref="math_8hpp" startline="692" endline="695">floor_bit</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga4f31baacdc47be86650df4bc21429587" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t round</definition>
+        <argsstring>(const decimal_t x, const uint32_t bit) noexcept</argsstring>
+        <name>round</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>bit</declname>
+        </param>
+        <briefdescription>
+<para>四舍五入到指定位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>四舍五入后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="735" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="735" bodyend="738"/>
+        <references refid="group___math_functions_1ga9ddd9ce58a4bfcad8c97c856569f306c" compoundref="math_8hpp" startline="385" endline="400">power</references>
+        <references refid="group___math_functions_1gab243e63879ead7aa619c79b50e53faa1" compoundref="math_8hpp" startline="662" endline="683">round</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga1b7b9f4c4d8b78b086a6f81d789e652b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate</definition>
+        <argsstring>(const decimal_t x, const int bit) noexcept</argsstring>
+        <name>truncate</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>bit</declname>
+        </param>
+        <briefdescription>
+<para>截断 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>截断后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="746" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="746" bodyend="749"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="group___math_functions_1gaa0653fb095511a5bb2f135a246995fbc" compoundref="math_8hpp" startline="620" endline="644">ceil</references>
+        <references refid="group___math_functions_1ga20282c137d87af7a972c11f03f022c82" compoundref="math_8hpp" startline="574" endline="597">floor</references>
+        <references refid="group___math_functions_1ga9ddd9ce58a4bfcad8c97c856569f306c" compoundref="math_8hpp" startline="385" endline="400">power</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga941de5a90405aca3b46b970f36cd82e2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t truncate</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>truncate</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>截断到整数位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>截断后的整数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="756" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="756" bodyend="761"/>
+        <references refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="102" endline="104">is_finite</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga7525db58acda774a68cf13ac9ac95314" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONSTEXPR14 bool around_multiple</definition>
+        <argsstring>(const decimal_t x, const decimal_t axis, const decimal_t toler=constants::DEFAULT_TOLERANCE)</argsstring>
+        <name>around_multiple</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>toler</declname>
+          <defval><ref refid="group___math_constants_1ga6b2f5fadae8acf971067aaf9edc78c6f" kindref="member">constants::DEFAULT_TOLERANCE</ref></defval>
+        </param>
+        <briefdescription>
+<para>判断是否接近某个倍数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待判断值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>axis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基准值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>toler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>容差 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果x接近axis的整数倍则返回true </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当axis为0时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="771" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="771" bodyend="778"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="group___math_functions_1gab243e63879ead7aa619c79b50e53faa1" compoundref="math_8hpp" startline="662" endline="683">round</references>
+        <referencedby refid="group___math_functions_1gab6c2f0feca645599aa61301b20d66772" compoundref="math_8hpp" startline="786" endline="788">around_pi</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gab6c2f0feca645599aa61301b20d66772" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONSTEXPR14 bool around_pi</definition>
+        <argsstring>(const decimal_t x, const decimal_t toler=constants::LOOSE_TOLERANCE)</argsstring>
+        <name>around_pi</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>toler</declname>
+          <defval><ref refid="group___math_constants_1ga2036acdefc1770536397367e313b3f8e" kindref="member">constants::LOOSE_TOLERANCE</ref></defval>
+        </param>
+        <briefdescription>
+<para>判断是否接近π的整数倍 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待判断值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>toler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>容差 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果x接近π的整数倍则返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="786" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="786" bodyend="788"/>
+        <references refid="group___math_functions_1ga7525db58acda774a68cf13ac9ac95314" compoundref="math_8hpp" startline="771" endline="778">around_multiple</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gaf313321f06cd95a726535eb9ba171e51" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONSTEXPR14 bool around_zero</definition>
+        <argsstring>(const decimal_t x, const decimal_t toler=constants::LOOSE_TOLERANCE) noexcept</argsstring>
+        <name>around_zero</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>toler</declname>
+          <defval><ref refid="group___math_constants_1ga2036acdefc1770536397367e313b3f8e" kindref="member">constants::LOOSE_TOLERANCE</ref></defval>
+        </param>
+        <briefdescription>
+<para>判断是否接近零 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待判断值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>toler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>容差 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果|x| &lt; toler则返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="796" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="796" bodyend="798"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <referencedby refid="group___math_functions_1gad23db56cc1fdd2ab37cac9755c137abd" compoundref="math_8hpp" startline="965" endline="1000">tangent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gabc4025ee1596355ee63d616923292504" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t remainder</definition>
+        <argsstring>(const decimal_t x, const decimal_t y) noexcept</argsstring>
+        <name>remainder</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+<para>计算余数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被除数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x除以y的余数</para>
+</simplesect>
+使用对称舍入规则 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="809" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="809" bodyend="814"/>
+        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="classnumeric__traits_1a0abaea37c2a8dd2fde7eb71af99edf07" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <references refid="group___math_functions_1gab243e63879ead7aa619c79b50e53faa1" compoundref="math_8hpp" startline="662" endline="683">round</references>
+        <referencedby refid="group___m_s_v_c_compiler_intrinsics_1ga6327e37e5117d9bcd0f3b58ff23f7669" compoundref="msvc__intrinsic_8hpp" startline="149" endline="236">_udiv128</referencedby>
+        <referencedby refid="structuint128__t_1aed23e948c74e06bda0c6454e82dfeec5">uint128_t::div64</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga1cc3e49b9f10e69c056e4761ad721d8e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION constexpr <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION constexpr decimal_t float_part</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>float_part</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>获取小数部分 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x的小数部分 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="821" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="821" bodyend="823"/>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga6f01b0b547176b0914a163f94071dbc1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t float_apart</definition>
+        <argsstring>(decimal_t x, int64_t *int_ptr) noexcept</argsstring>
+        <name>float_apart</name>
+        <param>
+          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref> *</type>
+          <declname>int_ptr</declname>
+        </param>
+        <briefdescription>
+<para>分离整数和小数部分 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>int_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向整数部分的指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>小数部分</para>
+</simplesect>
+将x的整数部分存入int_ptr，返回小数部分。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="833" column="54" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="833" bodyend="836"/>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga16b11dff64ee3fff1b1c4e8d70a3f64d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t sine</definition>
+        <argsstring>(decimal_t x) noexcept</argsstring>
+        <name>sine</name>
+        <param>
+          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算正弦值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>弧度值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>sin(x)</para>
+</simplesect>
+使用泰勒展开计算，先进行周期性处理。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="907" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="907" bodyend="928"/>
+        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="classnumeric__traits_1a0abaea37c2a8dd2fde7eb71af99edf07" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga58bf0477c47c3280cf9f8f97a2499cd2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t cosine</definition>
+        <argsstring>(decimal_t x) noexcept</argsstring>
+        <name>cosine</name>
+        <param>
+          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算余弦值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>弧度值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>cos(x)</para>
+</simplesect>
+利用恒等式 cos(x) = sin(π/2 - x) 计算。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="937" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="937" bodyend="957"/>
+        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="classnumeric__traits_1a0abaea37c2a8dd2fde7eb71af99edf07" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gad23db56cc1fdd2ab37cac9755c137abd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t tangent</definition>
+        <argsstring>(decimal_t x) noexcept</argsstring>
+        <name>tangent</name>
+        <param>
+          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算正切值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>弧度值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>tan(x) </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当x接近π/2的奇数倍时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="965" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="965" bodyend="1000"/>
+        <references refid="group___math_functions_1gaf313321f06cd95a726535eb9ba171e51" compoundref="math_8hpp" startline="796" endline="798">around_zero</references>
+        <references refid="classnumeric__traits_1ac3b99f25020a5bc72aa22dffa82aaad4" compoundref="numeric__traits_8hpp" startline="183" endline="183">numeric_traits&lt; T, Dummy &gt;::infinity</references>
+        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="classnumeric__traits_1a0abaea37c2a8dd2fde7eb71af99edf07" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <referencedby refid="group___math_functions_1ga56687255d0f9d7dee0f997466b08fb54" compoundref="math_8hpp" startline="1008" endline="1008">cotangent</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga56687255d0f9d7dee0f997466b08fb54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t cotangent</definition>
+        <argsstring>(const decimal_t x)</argsstring>
+        <name>cotangent</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算余切值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>弧度值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>cot(x) </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmath__exception" kindref="compound">math_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当x接近π的整数倍时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="1008" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="1008" bodyend="1008"/>
+        <references refid="group___math_functions_1gad23db56cc1fdd2ab37cac9755c137abd" compoundref="math_8hpp" startline="965" endline="1000">tangent</references>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga3d2b251acab308cc0da5d8849af846ae" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arctangent</definition>
+        <argsstring>(decimal_t x) noexcept</argsstring>
+        <name>arctangent</name>
+        <param>
+          <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算反正切值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>arctan(x)（弧度值，范围(-π/2, π/2)）</para>
+</simplesect>
+当|x|&gt;1时，利用恒等式 arctan(x) = π/2 - arctan(1/x)。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="1017" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="1017" bodyend="1055"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="group___math_functions_1ga3e1661aadeb32478031c64533ca48b9c" compoundref="math_8hpp" startline="500" endline="521">square_root</references>
+        <referencedby refid="group___math_functions_1ga43376d1b397c6fc80783a6d386670762" compoundref="math_8hpp" startline="1062" endline="1076">arcsine</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1ga43376d1b397c6fc80783a6d386670762" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arcsine</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>arcsine</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算反正弦值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数（|x| ≤ 1） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>arcsin(x)（弧度值，范围[-π/2, π/2]） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="1062" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="1062" bodyend="1076"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="group___math_functions_1ga3d2b251acab308cc0da5d8849af846ae" compoundref="math_8hpp" startline="1017" endline="1055">arctangent</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="classnumeric__traits_1a0abaea37c2a8dd2fde7eb71af99edf07" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+        <references refid="group___math_functions_1ga3e1661aadeb32478031c64533ca48b9c" compoundref="math_8hpp" startline="500" endline="521">square_root</references>
+        <referencedby refid="group___math_functions_1gabf45a8b174ac3f17964a04c1b22bffd3" compoundref="math_8hpp" startline="1083" endline="1097">arccosine</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___math_functions_1gabf45a8b174ac3f17964a04c1b22bffd3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t arccosine</definition>
+        <argsstring>(const decimal_t x) noexcept</argsstring>
+        <name>arccosine</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算反余弦值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数（|x| ≤ 1） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>arccos(x)（弧度值，范围[0, π]） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" line="1083" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/math.hpp" bodystart="1083" bodyend="1097"/>
+        <references refid="group___math_functions_1ga3c934cc001bc8bf68503deb41b65f782" compoundref="math_8hpp" startline="234" endline="236">absolute</references>
+        <references refid="group___math_functions_1ga43376d1b397c6fc80783a6d386670762" compoundref="math_8hpp" startline="1062" endline="1076">arcsine</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <references refid="classnumeric__traits_1a0abaea37c2a8dd2fde7eb71af99edf07" compoundref="numeric__traits_8hpp" startline="193" endline="193">numeric_traits&lt; T, Dummy &gt;::quiet_nan</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>基本数学运算函数 </para>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下数学计算相关标准规范：</para>
+<para><bold>浮点数算术标准：</bold><itemizedlist>
+<listitem><para>**IEEE 754-2019**：浮点数算术标准（NaN、无穷大、舍入模式、机器精度） <ulink url="https://standards.ieee.org/ieee/754/6210/">https://standards.ieee.org/ieee/754/6210/</ulink></para>
+</listitem><listitem><para>**ISO/IEC 60559:2020**：信息技术 — 微处理器系统 — 浮点算术（等同于 IEEE 754） <ulink url="https://www.iso.org/standard/80985.html">https://www.iso.org/standard/80985.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>数学函数规范：</bold><itemizedlist>
+<listitem><para>**ISO/IEC 10967-2:2001**：信息技术 — 语言独立算术 — 第2部分：初等数值函数 <ulink url="https://www.iso.org/standard/24417.html">https://www.iso.org/standard/24417.html</ulink></para>
+</listitem><listitem><para>**POSIX.1-2017 (IEEE Std 1003.1)**：数学函数接口定义 <ulink url="https://pubs.opengroup.org/onlinepubs/9699919799/">https://pubs.opengroup.org/onlinepubs/9699919799/</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___math_functions_1trigonometric_functions">
+<title>三角函数实现</title><para>本实现采用泰勒级数展开与参数归约相结合的方法：</para>
+<para>**参数归约**（根据 Cody &amp; Waite 方法）：<orderedlist>
+<listitem><para>将输入 x 映射到 [-π/2, π/2] 区间</para>
+</listitem><listitem><para>使用高精度 π/2 值（高位 + 低位）减少舍入误差</para>
+</listitem><listitem><para>记录象限信息以确定最终符号</para>
+</listitem></orderedlist>
+</para>
+<para>**泰勒级数展开**：<itemizedlist>
+<listitem><para>sin(x) = x - x³/3! + x⁵/5! - x⁷/7! + ...</para>
+</listitem><listitem><para>cos(x) = 1 - x²/2! + x⁴/4! - x⁶/6! + ...</para>
+</listitem><listitem><para>arctan(x) = x - x³/3 + x⁵/5 - x⁷/7 + ... (|x| ≤ 1)</para>
+</listitem></itemizedlist>
+</para>
+<para>迭代终止条件：当前项小于 <computeroutput><ref refid="group___math_constants_1gae4a3ecb8f42c396c0a68075d1e496637" kindref="member">MACHINE_EPSILON</ref> × 当前和</computeroutput>。</para>
+</sect1>
+<sect1 id="group___math_functions_1logarithm_implementation">
+<title>对数函数实现</title><para>**自然对数 ln(x)**：<itemizedlist>
+<listitem><para>使用恒等式：ln(x) = 2 × arctanh((x-1)/(x+1))</para>
+</listitem><listitem><para>arctanh(y) = y + y³/3 + y⁵/5 + ... (|y| &lt; 1)</para>
+</listitem></itemizedlist>
+</para>
+<para>**任意底对数**：<itemizedlist>
+<listitem><para>log_base(x) = ln(x) / ln(base)</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___math_functions_1root_functions">
+<title>方根函数实现</title><para>**平方根 √x**（牛顿迭代法）：<itemizedlist>
+<listitem><para>初始猜测：guess = x × 0.5</para>
+</listitem><listitem><para>迭代公式：guess = 0.5 × (guess + x / guess)</para>
+</listitem><listitem><para>终止条件：|guess - prev| ≤ tolerance × |guess|</para>
+</listitem></itemizedlist>
+</para>
+<para>**立方根 ³√x**（牛顿迭代法）：<itemizedlist>
+<listitem><para>迭代公式：guess = (2×prev + x / prev²) / 3</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___math_functions_1special_values">
+<title>特殊值处理</title><para>根据 IEEE 754-2019 §6，特殊值处理规则：</para>
+<para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>输入情况  </para>
+</entry><entry thead="yes"><para>返回值  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>输入为 NaN  </para>
+</entry><entry thead="no"><para>返回 NaN  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>输入为 ±∞  </para>
+</entry><entry thead="no"><para>根据函数语义返回 ±∞ 或 NaN  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>负数的平方根  </para>
+</entry><entry thead="no"><para>返回 NaN  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>除数为零  </para>
+</entry><entry thead="no"><para>返回 NaN 或抛出异常  </para>
+</entry></row>
+</table>
+| |x| &gt; 1 的反正弦/反余弦| 返回 NaN |</para>
+</sect1>
+<sect1 id="group___math_functions_1performance_notes">
+<title>性能与精度说明</title><para><itemizedlist>
+<listitem><para>三角函数使用参数归约减少大输入值的误差</para>
+</listitem><listitem><para>泰勒级数迭代次数由机器精度自适应确定</para>
+</listitem><listitem><para>预计算的斐波那契数列加速小索引值的查询</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="see"><para><ulink url="https://standards.ieee.org/ieee/754/6210/">https://standards.ieee.org/ieee/754/6210/</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://dlmf.nist.gov/">https://dlmf.nist.gov/</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/numeric/math">https://en.cppreference.com/w/cpp/numeric/math</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

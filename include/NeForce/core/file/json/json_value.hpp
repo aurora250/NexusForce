@@ -23,7 +23,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct json_exception
- * @brief json格式操作失败
+ * @brief JSON格式操作失败
  */
 struct json_exception final : value_exception {
     explicit json_exception(const char* info = "JSON Operation Failed.", const char* type = static_type,
@@ -41,13 +41,13 @@ struct json_exception final : value_exception {
 
 /**
  * @defgroup ConfigFormat 配置格式操作
- * @brief env配置格式管理
+ * @brief 配置格式管理
  * @{
  */
 
 /**
- * @defgroup JsonConfig json配置
- * @brief json配置格式管理
+ * @defgroup JsonConfig JSON配置
+ * @brief JSON配置格式管理
  *
  * @section standards 遵循的国际标准
  * 本实现严格遵循以下 JSON 相关标准规范：
@@ -134,15 +134,15 @@ class json_array;
 
 /**
  * @class json_value
- * @brief json值抽象基类
+ * @brief JSON值抽象基类
  *
- * 提供json值的统一接口，支持类型识别和字符串转换。
+ * 提供JSON值的统一接口，支持类型识别和字符串转换。
  */
 class NEFORCE_API json_value : public istringify<json_value> {
 public:
     /**
      * @enum types
-     * @brief json值类型枚举
+     * @brief JSON值类型枚举
      */
     enum types {
         Null,   ///< null值类型
@@ -159,7 +159,7 @@ public:
     virtual ~json_value() = default;
 
     /**
-     * @brief 获取json值类型
+     * @brief 获取JSON值类型
      * @return 类型枚举值
      */
     NEFORCE_NODISCARD virtual types type() const noexcept = 0;
@@ -238,13 +238,13 @@ public:
 
     /**
      * @brief 转换为紧凑格式字符串
-     * @return json值的紧凑格式字符串
+     * @return JSON值的紧凑格式字符串
      */
     NEFORCE_NODISCARD string to_string() const;
 
     /**
      * @brief 转换为缩进格式字符串
-     * @return json值的格式化字符串（默认2空格缩进）
+     * @return JSON值的格式化字符串（默认2空格缩进）
      */
     NEFORCE_NODISCARD string to_indent_string() const;
 };
@@ -252,9 +252,9 @@ public:
 
 /**
  * @class json_null
- * @brief json null值类
+ * @brief JSON null值类
  *
- * 表示json中的null值。
+ * 表示JSON中的null值。
  * 采用单例模式设计，所有null值共享同一个实例。
  */
 class NEFORCE_API json_null final : public json_value {
@@ -274,9 +274,9 @@ public:
 
 /**
  * @class json_bool
- * @brief json布尔值类
+ * @brief JSON布尔值类
  *
- * 表示json中的true或false值。
+ * 表示JSON中的true或false值。
  */
 class NEFORCE_API json_bool final : public json_value {
 private:
@@ -311,9 +311,9 @@ public:
 
 /**
  * @class json_number
- * @brief json数字值类
+ * @brief JSON数字值类
  *
- * 表示json中的数字类型。
+ * 表示JSON中的数字类型。
  * 内部使用double存储，支持整数和浮点数。
  */
 class NEFORCE_API json_number final : public json_value {
@@ -349,9 +349,9 @@ public:
 
 /**
  * @class json_string
- * @brief json字符串值类
+ * @brief JSON字符串值类
  *
- * 表示json中的字符串类型。
+ * 表示JSON中的字符串类型。
  * 存储原始的字符串值（不包含转义）。
  */
 class NEFORCE_API json_string final : public json_value {
@@ -387,10 +387,10 @@ public:
 
 /**
  * @class json_object
- * @brief json对象类
+ * @brief JSON对象类
  *
- * 表示json中的对象类型，包含多个键值对成员。
- * 键为字符串，值为任意json类型。
+ * 表示JSON中的对象类型，包含多个键值对成员。
+ * 键为字符串，值为任意JSON类型。
  */
 class NEFORCE_API json_object final : public json_value {
 private:
@@ -461,10 +461,10 @@ public:
 
 /**
  * @class json_array
- * @brief json数组类
+ * @brief JSON数组类
  *
- * 表示json中的数组类型，包含有序的元素列表。
- * 每个元素可以是任意json类型。
+ * 表示JSON中的数组类型，包含有序的元素列表。
+ * 每个元素可以是任意JSON类型。
  */
 class NEFORCE_API json_array final : public json_value {
 private:

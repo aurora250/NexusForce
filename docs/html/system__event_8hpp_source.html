@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: system_event.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('system__event_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">system_event.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="system__event_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_SYSTEM_SYSTEM_EVENT_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_SYSTEM_SYSTEM_EVENT_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="numeric__traits_8hpp.html">NeForce/core/numeric/numeric_traits.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_LINUX</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#    include &quot;<a class="code" href="unique__ptr_8hpp.html">NeForce/core/memory/unique_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#    include &lt;pthread.h&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classsystem__event.html">   33</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">system_event</a> {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classsystem__event.html#a836fe1a751b10858f44697fdd940aa9f">   39</a></span>    <span class="keyword">enum class</span> <a class="code hl_enumeration" href="classsystem__event.html#a836fe1a751b10858f44697fdd940aa9f">type</a> {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classsystem__event.html#a836fe1a751b10858f44697fdd940aa9fae24e926926861449731fb9418399a53d">   40</a></span>        manual_reset, </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classsystem__event.html#a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794">   41</a></span>        auto_reset    </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    };</div>
+</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_LINUX</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">struct </span>mutex_deleter {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordtype">void</span> operator()(::pthread_mutex_t* m)<span class="keyword"> const </span>{ ::pthread_mutex_destroy(m); }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    };</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">struct </span>cond_deleter {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">void</span> operator()(::pthread_cond_t* d)<span class="keyword"> const </span>{ ::pthread_cond_destroy(d); }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    };</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span>* handle_; </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    unique_ptr&lt;::pthread_mutex_t, mutex_deleter&gt; mutex_; </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    unique_ptr&lt;::pthread_cond_t, cond_deleter&gt; cond_;    </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">bool</span> signaled_;                                      </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    type type_; </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">   71</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">system_event</a>(<span class="keywordtype">bool</span> initial_state = <span class="keyword">false</span>, <a class="code hl_enumeration" href="classsystem__event.html#a836fe1a751b10858f44697fdd940aa9f">type</a> <a class="code hl_enumeration" href="classsystem__event.html#a836fe1a751b10858f44697fdd940aa9f">type</a> = <a class="code hl_enumvalue" href="classsystem__event.html#a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794">type::auto_reset</a>);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classsystem__event.html#aa16f20c9949030b16ca0b787f63572f4">   76</a></span>    <a class="code hl_function" href="classsystem__event.html#aa16f20c9949030b16ca0b787f63572f4">~system_event</a>();</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_function" href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">system_event</a>(<span class="keyword">const</span> <a class="code hl_function" href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">system_event</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_function" href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">system_event</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_function" href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">system_event</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classsystem__event.html#aa56bde5789679822d91883a97f323128">   85</a></span>    <a class="code hl_function" href="classsystem__event.html#aa56bde5789679822d91883a97f323128">system_event</a>(<a class="code hl_function" href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">system_event</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classsystem__event.html#a998f73cdf1659d029a1abcace0c0c3aa">   92</a></span>    <a class="code hl_function" href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">system_event</a>&amp; <a class="code hl_function" href="classsystem__event.html#a998f73cdf1659d029a1abcace0c0c3aa">operator=</a>(<a class="code hl_function" href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">system_event</a>&amp;&amp; other) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classsystem__event.html#a8e6d8bfe1aecd567b1916e8d1b68815c">   99</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsystem__event.html#a8e6d8bfe1aecd567b1916e8d1b68815c">set</a>() noexcept;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="classsystem__event.html#a7c349b939fea1a128c803d1035ee76f8">  104</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsystem__event.html#a7c349b939fea1a128c803d1035ee76f8">reset</a>() noexcept;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classsystem__event.html#a88a8392cfe11e8ca599f429e60e4eea7">  115</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classsystem__event.html#a88a8392cfe11e8ca599f429e60e4eea7">wait</a>(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> timeout_ms = <a class="code hl_class" href="classnumeric__traits.html">numeric_traits</a>&lt;<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&gt;::<a class="code hl_function" href="group___compare_algorithms.html#ga01c48c11cc5d3222cb2e3adf0f843f3e">max</a>()) noexcept;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classsystem__event.html#af3914964c19a58d549eec0587b8fac1f">  121</a></span>    <a class="code hl_enumeration" href="classsystem__event.html#a836fe1a751b10858f44697fdd940aa9f">type</a> <a class="code hl_function" href="classsystem__event.html#af3914964c19a58d549eec0587b8fac1f">event_type</a>() const noexcept { <span class="keywordflow">return</span> type_; }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>};</div>
+</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> <span class="comment">// SystemEvent</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SYSTEM_SYSTEM_EVENT_HPP__</span></div>
+<div class="ttc" id="aclassnumeric__traits_html"><div class="ttname"><a href="classnumeric__traits.html">numeric_traits</a></div><div class="ttdoc">数值类型极限特性主模板</div><div class="ttdef"><b>定义</b> <a href="numeric__traits_8hpp_source.html#l00141">numeric_traits.hpp:141</a></div></div>
+<div class="ttc" id="aclasssystem__event_html_a7c349b939fea1a128c803d1035ee76f8"><div class="ttname"><a href="classsystem__event.html#a7c349b939fea1a128c803d1035ee76f8">system_event::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">重置事件为无信号状态</div></div>
+<div class="ttc" id="aclasssystem__event_html_a836fe1a751b10858f44697fdd940aa9f"><div class="ttname"><a href="classsystem__event.html#a836fe1a751b10858f44697fdd940aa9f">system_event::type</a></div><div class="ttdeci">type</div><div class="ttdoc">事件类型枚举</div><div class="ttdef"><b>定义</b> <a href="#l00039">system_event.hpp:39</a></div></div>
+<div class="ttc" id="aclasssystem__event_html_a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794"><div class="ttname"><a href="classsystem__event.html#a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794">system_event::type::auto_reset</a></div><div class="ttdeci">@ auto_reset</div><div class="ttdoc">自动重置，只唤醒一个等待线程，之后自动重置为无信号</div><div class="ttdef"><b>定义</b> <a href="#l00041">system_event.hpp:41</a></div></div>
+<div class="ttc" id="aclasssystem__event_html_a88a8392cfe11e8ca599f429e60e4eea7"><div class="ttname"><a href="classsystem__event.html#a88a8392cfe11e8ca599f429e60e4eea7">system_event::wait</a></div><div class="ttdeci">bool wait(uint32_t timeout_ms=numeric_traits&lt; uint32_t &gt;::max()) noexcept</div><div class="ttdoc">等待事件变为有信号状态</div></div>
+<div class="ttc" id="aclasssystem__event_html_a8e6d8bfe1aecd567b1916e8d1b68815c"><div class="ttname"><a href="classsystem__event.html#a8e6d8bfe1aecd567b1916e8d1b68815c">system_event::set</a></div><div class="ttdeci">void set() noexcept</div><div class="ttdoc">设置事件为有信号状态</div></div>
+<div class="ttc" id="aclasssystem__event_html_a998f73cdf1659d029a1abcace0c0c3aa"><div class="ttname"><a href="classsystem__event.html#a998f73cdf1659d029a1abcace0c0c3aa">system_event::operator=</a></div><div class="ttdeci">system_event &amp; operator=(system_event &amp;&amp;other) noexcept</div><div class="ttdoc">移动赋值运算符</div></div>
+<div class="ttc" id="aclasssystem__event_html_aa16f20c9949030b16ca0b787f63572f4"><div class="ttname"><a href="classsystem__event.html#aa16f20c9949030b16ca0b787f63572f4">system_event::~system_event</a></div><div class="ttdeci">~system_event()</div><div class="ttdoc">析构函数</div></div>
+<div class="ttc" id="aclasssystem__event_html_aa56bde5789679822d91883a97f323128"><div class="ttname"><a href="classsystem__event.html#aa56bde5789679822d91883a97f323128">system_event::system_event</a></div><div class="ttdeci">system_event(system_event &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div></div>
+<div class="ttc" id="aclasssystem__event_html_aaffbccb71e65565978b0a320143debd9"><div class="ttname"><a href="classsystem__event.html#aaffbccb71e65565978b0a320143debd9">system_event::system_event</a></div><div class="ttdeci">system_event(bool initial_state=false, type type=type::auto_reset)</div><div class="ttdoc">构造函数</div></div>
+<div class="ttc" id="aclasssystem__event_html_af3914964c19a58d549eec0587b8fac1f"><div class="ttname"><a href="classsystem__event.html#af3914964c19a58d549eec0587b8fac1f">system_event::event_type</a></div><div class="ttdeci">type event_type() const noexcept</div><div class="ttdoc">获取事件类型</div><div class="ttdef"><b>定义</b> <a href="#l00121">system_event.hpp:121</a></div></div>
+<div class="ttc" id="agroup___compare_algorithms_html_ga01c48c11cc5d3222cb2e3adf0f843f3e"><div class="ttname"><a href="group___compare_algorithms.html#ga01c48c11cc5d3222cb2e3adf0f843f3e">max</a></div><div class="ttdeci">constexpr const T &amp; max(const T &amp;a, const T &amp;b, Compare comp) noexcept(noexcept(comp(a, b)))</div><div class="ttdoc">返回两个值中的较大者</div><div class="ttdef"><b>定义</b> <a href="compare_8hpp_source.html#l00133">compare.hpp:133</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
+<div class="ttc" id="anumeric__traits_8hpp_html"><div class="ttname"><a href="numeric__traits_8hpp.html">numeric_traits.hpp</a></div><div class="ttdoc">数值特征</div></div>
+<div class="ttc" id="aunique__ptr_8hpp_html"><div class="ttname"><a href="unique__ptr_8hpp.html">unique_ptr.hpp</a></div><div class="ttdoc">独占智能指针</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>system</b></li><li class="navelem"><a href="system__event_8hpp.html">system_event.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

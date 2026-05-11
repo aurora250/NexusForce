@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="terminate_8hpp" kind="file" language="C++">
+    <compoundname>terminate.hpp</compoundname>
+    <includes refid="c_09_09config_8hpp" local="yes">NeForce/core/config/c++config.hpp</includes>
+    <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>terminate.hpp</label>
+        <link refid="terminate_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>assert.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>NeForce.hpp</label>
+        <link refid="_ne_force_8hpp"/>
+      </node>
+      <node id="1">
+        <label>terminate.hpp</label>
+        <link refid="terminate_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="typedef">
+      <member refid="group___termination_functions_1ga2f0beb685fa0b492d4bcdde89255ee6a" kind="typedef"><name>terminate_handler</name></member>
+      <member refid="group___termination_functions_1ga028f53de40f9115f4f089cacceddce73" kind="typedef"><name>exit_handler</name></member>
+    </sectiondef>
+    <sectiondef kind="func">
+      <member refid="group___termination_functions_1gaa390ea32581b8f7c7394ae3751b982f1" kind="function"><name>set_terminate</name></member>
+      <member refid="group___termination_functions_1ga4030f40bf85ee2fb43e78ec1f2b34b63" kind="function"><name>terminate</name></member>
+      <member refid="group___termination_functions_1gac2df434e484126f003d8ad56f699b7a2" kind="function"><name>abort</name></member>
+      <member refid="group___termination_functions_1ga0427d28f8b01f028440ad61b57c35ca4" kind="function"><name>set_exit</name></member>
+      <member refid="group___termination_functions_1ga71b7d8bbc81e3efd65f0aee05b89ce50" kind="function"><name>exit</name></member>
+      <member refid="group___termination_functions_1gac4b6ba26d96168e202d2228e2d0926f1" kind="function"><name>immediate_exit</name></member>
+      <member refid="group___termination_functions_1gafbd334b2819679ad18c262637d0317a4" kind="function"><name>set_quick_exit</name></member>
+      <member refid="group___termination_functions_1ga913eb6779b9e9d8b47307cf75ac7dfc7" kind="function"><name>quick_exit</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>程序终止处理 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>此文件提供了程序终止相关的函数声明， 用于处理未捕获的异常和程序异常终止。 </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_CONFIG_TERMINATE_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_CONFIG_TERMINATE_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="c_09_09config_8hpp" kindref="compound">NeForce/core/config/c++config.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="group___termination_functions_1ga2f0beb685fa0b492d4bcdde89255ee6a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___termination_functions_1ga2f0beb685fa0b492d4bcdde89255ee6a" kindref="member">terminate_handler</ref><sp/>=<sp/>void<sp/>(*)();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="group___termination_functions_1gaa390ea32581b8f7c7394ae3751b982f1" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="group___termination_functions_1gaa390ea32581b8f7c7394ae3751b982f1" kindref="member">set_terminate</ref>(<ref refid="group___termination_functions_1ga2f0beb685fa0b492d4bcdde89255ee6a" kindref="member">terminate_handler</ref><sp/>handler)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="group___termination_functions_1ga4030f40bf85ee2fb43e78ec1f2b34b63" refkind="member"><highlight class="normal">NEFORCE_NORETURN<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="group___termination_functions_1ga4030f40bf85ee2fb43e78ec1f2b34b63" kindref="member">terminate</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="group___termination_functions_1gac2df434e484126f003d8ad56f699b7a2" refkind="member"><highlight class="normal">NEFORCE_NORETURN<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="group___termination_functions_1gac2df434e484126f003d8ad56f699b7a2" kindref="member">abort</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="group___termination_functions_1ga028f53de40f9115f4f089cacceddce73" refkind="member"><highlight class="normal">using<sp/><ref refid="group___termination_functions_1ga028f53de40f9115f4f089cacceddce73" kindref="member">exit_handler</ref><sp/>=<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(*)();</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="group___termination_functions_1ga0427d28f8b01f028440ad61b57c35ca4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="group___termination_functions_1ga0427d28f8b01f028440ad61b57c35ca4" kindref="member">set_exit</ref>(<ref refid="group___termination_functions_1ga028f53de40f9115f4f089cacceddce73" kindref="member">exit_handler</ref><sp/>handler)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87" refid="group___termination_functions_1ga71b7d8bbc81e3efd65f0aee05b89ce50" refkind="member"><highlight class="normal">NEFORCE_NORETURN<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="group___termination_functions_1ga71b7d8bbc81e3efd65f0aee05b89ce50" kindref="member">exit</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>status);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="group___termination_functions_1gac4b6ba26d96168e202d2228e2d0926f1" refkind="member"><highlight class="normal">NEFORCE_NORETURN<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="group___termination_functions_1gac4b6ba26d96168e202d2228e2d0926f1" kindref="member">immediate_exit</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>status)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108" refid="group___termination_functions_1gafbd334b2819679ad18c262637d0317a4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="group___termination_functions_1gafbd334b2819679ad18c262637d0317a4" kindref="member">set_quick_exit</ref>(<ref refid="group___termination_functions_1ga028f53de40f9115f4f089cacceddce73" kindref="member">exit_handler</ref><sp/>handler)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="group___termination_functions_1ga913eb6779b9e9d8b47307cf75ac7dfc7" refkind="member"><highlight class="normal">NEFORCE_NORETURN<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="group___termination_functions_1ga913eb6779b9e9d8b47307cf75ac7dfc7" kindref="member">quick_exit</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>status)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>TerminationFunctions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_CONFIG_TERMINATE_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/terminate.hpp"/>
+  </compounddef>
+</doxygen>

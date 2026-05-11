@@ -65,10 +65,10 @@ var classbasic__string__view =
     [ "find_last_of", "classbasic__string__view.html#a1144da94f025f47571888a01e172208e", null ],
     [ "find_last_of", "classbasic__string__view.html#a442a6ae5c95f97b6526602b6f2a45124", null ],
     [ "front", "classbasic__string__view.html#a0d2a0fa6ecf8f38dee5f6f443772e376", null ],
+    [ "head", "classbasic__string__view.html#ae95d8159e1690abd68146ae445bb87db", null ],
     [ "length", "classbasic__string__view.html#a0bfb38a60df541b1b22f24bc7d52abfc", null ],
+    [ "less_than", "classbasic__string__view.html#a0658722e67fbb97a23d72380bf2ba01b", null ],
     [ "max_size", "classbasic__string__view.html#a7bbca573b5ec7b932fc08a61bdb805fa", null ],
-    [ "operator<", "classbasic__string__view.html#ae6fd4d8f4874d61666ed5bac46c2fcbd", null ],
-    [ "operator==", "classbasic__string__view.html#a6993e739ace9240dc89ef1835327eeb0", null ],
     [ "operator[]", "classbasic__string__view.html#acb6b203727e8a5b1e74bf0a9c25713c1", null ],
     [ "rbegin", "classbasic__string__view.html#ab043b8fc40039a11ad3529a19b231e01", null ],
     [ "remove_prefix", "classbasic__string__view.html#adc713d81f06283342592f8db5b7c3a48", null ],
@@ -82,8 +82,9 @@ var classbasic__string__view =
     [ "starts_with", "classbasic__string__view.html#a9a2f5f9bfffd0b1dc662d73d3b70e068", null ],
     [ "starts_with", "classbasic__string__view.html#a3bd6d2195547db16eee717a1e592078e", null ],
     [ "starts_with", "classbasic__string__view.html#a2017da6b258f2209465de3caac5ffa52", null ],
-    [ "substr", "classbasic__string__view.html#a91794acfc11c70b463316317cbe68034", null ],
+    [ "substr", "classbasic__string__view.html#a18b62ddd963ac92a255c3cf2a6213c84", null ],
     [ "swap", "classbasic__string__view.html#ae210d27764b62c8f93c3cf65c6b9471d", null ],
+    [ "tail", "classbasic__string__view.html#a05fcb1878f92fe6c29df03dce70a41ce", null ],
     [ "to_hash", "classbasic__string__view.html#ac5b48469669704fbec45234198a14e17", null ],
     [ "trim", "classbasic__string__view.html#a8d02cf849652c9ca5791a8b4acf57a2e", null ],
     [ "trim_if", "classbasic__string__view.html#aa0e9d77a17d676cf4e4272613cc190d6", null ],
@@ -91,5 +92,5 @@ var classbasic__string__view =
     [ "trim_left_if", "classbasic__string__view.html#afaf0f8f6ce1996edf4ab40e78859c50b", null ],
     [ "trim_right", "classbasic__string__view.html#afcce609453ec42173773c45f27d5004e", null ],
     [ "trim_right_if", "classbasic__string__view.html#a1da0027681736ece491b8bfe89c2b649", null ],
-    [ "view", "classbasic__string__view.html#a42a33f8ceb4ba017cb2ddf7ab64588f2", null ]
+    [ "view", "classbasic__string__view.html#a859a0a299a008f84cd9647cecce3a865", null ]
 ];

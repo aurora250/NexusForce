@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___alignment" kind="group">
+    <compoundname>Alignment</compoundname>
+    <title>对齐操作</title>
+    <innerclass refid="structalignment__of" prot="public">alignment_of</innerclass>
+    <innerclass refid="structaligned__storage" prot="public">aligned_storage</innerclass>
+    <innerclass refid="structaligned__union" prot="public">aligned_union</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___alignment_1gae1bfcd9586bbb9936d7eb2d2ea32bc8e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Len</declname>
+            <defname>Len</defname>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Align</declname>
+            <defname>Align</defname>
+            <defval>alignof(_NEFORCE <ref refid="group___core_types_1ga682e63d2daefd96d4e75e4239210e233" kindref="member">max_align_t</ref>)</defval>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structaligned__storage" kindref="compound">aligned_storage</ref>&lt; Len, Align &gt;::type</type>
+        <definition>using aligned_storage_t = typename aligned_storage&lt;Len, Align&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>aligned_storage_t</name>
+        <briefdescription>
+<para>aligned_storage的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3448" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3448" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___alignment_1gaaf5f392ace63d0a89352f050a2104edc" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Len</declname>
+            <defname>Len</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structaligned__union" kindref="compound">aligned_union</ref>&lt; Len, Types... &gt;::type</type>
+        <definition>using aligned_union_t = typename aligned_union&lt;Len, Types...&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>aligned_union_t</name>
+        <briefdescription>
+<para>aligned_union的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3507" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3507" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___alignment_1gae7fde4c1b709be147fc5d8f4efc0c605" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t alignment_of_v</definition>
+        <argsstring></argsstring>
+        <name>alignment_of_v</name>
+        <initializer>= <ref refid="structalignment__of" kindref="compound">alignment_of</ref>&lt;T&gt;::value</initializer>
+        <briefdescription>
+<para>alignment_of的便捷变量模板 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3420" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3420" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___alignment_1ga76c6f8991a30f9a97fc11ec55cdb8887" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Len</declname>
+            <defname>Len</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t aligned_union_v</definition>
+        <argsstring></argsstring>
+        <name>aligned_union_v</name>
+        <initializer>= <ref refid="structaligned__union" kindref="compound">aligned_union</ref>&lt;Len, Types...&gt;::align_value</initializer>
+        <briefdescription>
+<para>获取aligned_union的对齐要求值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3515" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3515" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>类型的对齐操作和查询 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

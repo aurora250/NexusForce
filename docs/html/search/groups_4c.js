@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['查找元素算法_0',['查找元素算法',['../group___finding_algorithms.html',1,'']]]
+  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
 ];

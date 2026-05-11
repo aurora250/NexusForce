@@ -1,0 +1,980 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___tuple" kind="group">
+    <compoundname>Tuple</compoundname>
+    <title>元组</title>
+    <innerclass refid="structtuple__size_3_01array_3_01_t_00_01_size_01_4_01_4" prot="public">tuple_size&lt; array&lt; T, Size &gt; &gt;</innerclass>
+    <innerclass refid="structtuple__element_3_01_idx_00_01array_3_01_t_00_01_size_01_4_01_4" prot="public">tuple_element&lt; Idx, array&lt; T, Size &gt; &gt;</innerclass>
+    <innerclass refid="structtuple" prot="public">tuple</innerclass>
+    <innerclass refid="structtuple__size" prot="public">tuple_size</innerclass>
+    <innerclass refid="structtuple__element" prot="public">tuple_element</innerclass>
+    <innerclass refid="structtuple__size_3_01tuple_3_01_types_8_8_8_01_4_01_4" prot="public">tuple_size&lt; tuple&lt; Types... &gt; &gt;</innerclass>
+    <innerclass refid="structtuple__element_3_010_00_01tuple_3_01_this_00_01_rest_8_8_8_01_4_01_4" prot="public">tuple_element&lt; 0, tuple&lt; This, Rest... &gt; &gt;</innerclass>
+    <innerclass refid="structtuple__element_3_01_index_00_01tuple_3_01_this_00_01_rest_8_8_8_01_4_01_4" prot="public">tuple_element&lt; Index, tuple&lt; This, Rest... &gt; &gt;</innerclass>
+    <innerclass refid="structtuple__size_3_01pair_3_01_t1_00_01_t2_01_4_01_4" prot="public">tuple_size&lt; pair&lt; T1, T2 &gt; &gt;</innerclass>
+    <innerclass refid="structtuple__element_3_01_index_00_01pair_3_01_t1_00_01_t2_01_4_01_4" prot="public">tuple_element&lt; Index, pair&lt; T1, T2 &gt; &gt;</innerclass>
+    <innerclass refid="structtuple_3_4" prot="public">tuple&lt;&gt;</innerclass>
+    <innerclass refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4" prot="public">tuple&lt; This, Rest... &gt;</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt; Index, Types... &gt;::type</type>
+        <definition>using tuple_element_t = typename tuple_element&lt;Index, Types...&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>tuple_element_t</name>
+        <briefdescription>
+<para>tuple_element的类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tuple的元素类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+tuple_element的类型别名，便于获取tuple元素类型 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="52" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___tuple_1ga88deda623c2c661df6d0b5514e1bcbc2" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structtuple__element" kindref="compound">tuple_element</ref>&lt; Index, Types... &gt;::tuple_type</type>
+        <definition>using tuple_extract_base_t = typename tuple_element&lt;Index, Types...&gt;::tuple_type</definition>
+        <argsstring></argsstring>
+        <name>tuple_extract_base_t</name>
+        <briefdescription>
+<para>获取tuple元素基类型的类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tuple的元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="60" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___tuple_1gadf1f3edb9115acb0a1e04209b7a9937b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>T</definition>
+        <argsstring></argsstring>
+        <name>T</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="646" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="646" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___tuple_1ga168cedcfbcb26262cf9bbb55780056b2" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Size</declname>
+            <defname>Size</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_INLINE17 constexpr size_t tuple_size_v&lt; array&lt; T, Size &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>tuple_size_v&lt; array&lt; T, Size &gt; &gt;</name>
+        <initializer>= Size</initializer>
+        <briefdescription>
+<para>元组大小值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="653" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="653" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___tuple_1ga8b08602bae05890a8ca5ae872ed78ed4" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Size</declname>
+            <defname>Size</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_INLINE17 constexpr size_t tuple_size_v&lt; const array&lt; T, Size &gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>tuple_size_v&lt; const array&lt; T, Size &gt; &gt;</name>
+        <initializer>= Size</initializer>
+        <briefdescription>
+<para>常量数组的元组大小值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="656" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="656" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___tuple_1ga91606fbeba25897597ab46313b6764d7" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t tuple_size_v</definition>
+        <argsstring></argsstring>
+        <name>tuple_size_v</name>
+        <initializer>= <ref refid="structtuple__size" kindref="compound">tuple_size</ref>&lt;<ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;T&gt;&gt;::value</initializer>
+        <briefdescription>
+<para>tuple_size的类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tuple类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+tuple_size的类型别名，便于获取tuple大小 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="37" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___tuple_1ga155c51da3493a0647b4e1a3b695b1c56" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>tuple</definition>
+        <argsstring></argsstring>
+        <name>tuple</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="499" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="509" bodyend="509"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___tuple_1gaa7255c4bc0e9fa663f62fbafe1026daa" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>T1</definition>
+        <argsstring></argsstring>
+        <name>T1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="561" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="561" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___tuple_1ga918953b35d8d4d56c7c5b5c2125e822b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>NEFORCE_MACRO_RANGES_CV</definition>
+        <argsstring>(__NEFORCE_BUILD_ARRAY_TUPLE_SIZE) template&lt; size_t Idx</argsstring>
+        <name>NEFORCE_MACRO_RANGES_CV</name>
+        <param>
+          <type>__NEFORCE_BUILD_ARRAY_TUPLE_SIZE</type>
+        </param>
+        <briefdescription>
+<para>数组的元组元素类型特化 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="637" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1gaf1f69e67ec55772495eca5813b38070a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="inner::__apply_unpack_tuple&lt; _NEFORCE is_nothrow_invocable, Func, Tuple &gt;::value" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename Tuple</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) apply</definition>
+        <argsstring>(Func &amp;&amp;f, Tuple &amp;&amp;t)</argsstring>
+        <name>apply</name>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>Tuple &amp;&amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>将元组元素解包作为参数调用函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Tuple</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数调用结果</para>
+</simplesect>
+将元组中的元素解包，作为参数调用函数。 支持完美转发，可以处理元组的不同引用和常量限定。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/apply.hpp" line="63" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/apply.hpp" bodystart="63" bodyend="66"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <referencedby refid="structsignal_1adbc2cde66647502a24e5b3f675bf7ae6" compoundref="signals_8hpp" startline="524" endline="536">signal&lt; Types &gt;::emit_executor</referencedby>
+        <referencedby refid="group___thread_pool_1ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group</referencedby>
+        <referencedby refid="classlazy__thread_1a79f5dcfdf332aa22a250383562636bc9" compoundref="lazy__thread_8hpp" startline="67" endline="71">lazy_thread::lazy_thread</referencedby>
+        <referencedby refid="classthread_1ad74c6a1b7c5631e54eba313a5e53637e" compoundref="thread_8hpp" startline="340" endline="349">thread::start</referencedby>
+        <referencedby refid="classthread_1adf1e800d8ae9a2a3fc18818fb88e32a7" compoundref="thread_8hpp" startline="302" endline="307">thread::thread</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1gaeacfc405517ebd850c9a45a1b00f014e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt; Index, Types... &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr tuple_element_t&lt; Index, Types... &gt; &amp; get</definition>
+        <argsstring>(tuple&lt; Types... &gt; &amp;t)</argsstring>
+        <name>get</name>
+        <param>
+          <type>tuple&lt; Types... &gt; &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>获取元组中指定位置的元素引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="666" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" bodystart="666" bodyend="670" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" declline="63" declcolumn="45"/>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1ga58eef8c58ec92f7c4da1d54c885bb9a7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr const <ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt; Index, Types... &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr const tuple_element_t&lt; Index, Types... &gt; &amp; get</definition>
+        <argsstring>(const tuple&lt; Types... &gt; &amp;t)</argsstring>
+        <name>get</name>
+        <param>
+          <type>const tuple&lt; Types... &gt; &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>获取元组中指定位置的元素常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="680" column="51" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" bodystart="680" bodyend="684" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" declline="65" declcolumn="51"/>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1gafb82fa7d5b36f063ae7e53522e2cbdc6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt; Index, Types... &gt; &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr tuple_element_t&lt; Index, Types... &gt; &amp;&amp; get</definition>
+        <argsstring>(tuple&lt; Types... &gt; &amp;&amp;t)</argsstring>
+        <name>get</name>
+        <param>
+          <type>tuple&lt; Types... &gt; &amp;&amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>获取元组中指定位置的元素右值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的右值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="694" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" bodystart="694" bodyend="698" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" declline="67" declcolumn="45"/>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1gaecf2593fe870a134f51a05cff344769f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr const <ref refid="group___tuple_1gab7cc5fe4490aa895e6951dfc9b174c66" kindref="member">tuple_element_t</ref>&lt; Index, Types... &gt; &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr const tuple_element_t&lt; Index, Types... &gt; &amp;&amp; get</definition>
+        <argsstring>(const tuple&lt; Types... &gt; &amp;&amp;t)</argsstring>
+        <name>get</name>
+        <param>
+          <type>const tuple&lt; Types... &gt; &amp;&amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>获取元组中指定位置的元素常量右值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量右值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="708" column="51" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" bodystart="708" bodyend="712" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" declline="69" declcolumn="51"/>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1ga7b9b44ad424931d74c85fa2580bcb512" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>NEFORCE_MACRO_RANGES_CV</definition>
+        <argsstring>(__NEFORCE_BUILD_PAIR_TUPLE_SIZE) template&lt; size_t Index</argsstring>
+        <name>NEFORCE_MACRO_RANGES_CV</name>
+        <param>
+          <type>__NEFORCE_BUILD_PAIR_TUPLE_SIZE</type>
+        </param>
+        <briefdescription>
+<para>pair的tuple_element特化 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素索引，0或1 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个元素的类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个元素的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="552" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1gab19a0f6b25d99bee45ff6cc2262a6772" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>tuple</definition>
+        <argsstring>(Types...) -&gt; tuple&lt; Types... &gt;</argsstring>
+        <name>tuple</name>
+        <param>
+          <type>Types...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="651" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" declline="651" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1ga0d8903cf9e3888320b1d94d2fa2506ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>tuple</definition>
+        <argsstring>(pair&lt; T1, T2 &gt;) -&gt; tuple&lt; T1, T2 &gt;</argsstring>
+        <name>tuple</name>
+        <param>
+          <type><ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="654" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" declline="654" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1ga5ed4cb761dbf974f5a60b613fdebb1bf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr tuple&lt; <ref refid="group___reference_wrapper_1gab50d469d33ed56a0ce32f87d03ac5f10" kindref="member">unwrap_ref_decay_t</ref>&lt; Types &gt;... &gt;</type>
+        <definition>NEFORCE_NODISCARD constexpr tuple&lt; unwrap_ref_decay_t&lt; Types &gt;... &gt; make_tuple</definition>
+        <argsstring>(Types &amp;&amp;... args)</argsstring>
+        <name>make_tuple</name>
+        <param>
+          <type>Types &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>从参数创建元组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>创建的元组 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="746" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" bodystart="746" bodyend="749"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <referencedby refid="structsignal_1adbc2cde66647502a24e5b3f675bf7ae6" compoundref="signals_8hpp" startline="524" endline="536">signal&lt; Types &gt;::emit_executor</referencedby>
+        <referencedby refid="group___thread_pool_1ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group</referencedby>
+        <referencedby refid="classlazy__thread_1a79f5dcfdf332aa22a250383562636bc9" compoundref="lazy__thread_8hpp" startline="67" endline="71">lazy_thread::lazy_thread</referencedby>
+        <referencedby refid="classthread_1ad74c6a1b7c5631e54eba313a5e53637e" compoundref="thread_8hpp" startline="340" endline="349">thread::start</referencedby>
+        <referencedby refid="classthread_1adf1e800d8ae9a2a3fc18818fb88e32a7" compoundref="thread_8hpp" startline="302" endline="307">thread::thread</referencedby>
+        <referencedby refid="classthread__pool_1a0ad4266eb8f6c017cf635c837c9096d2" compoundref="thread__pool_8hpp" startline="600" endline="602">thread_pool::wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1gab54ee4c01a84cbd2aa161749ed2a04bc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr tuple&lt; Types &amp;... &gt;</type>
+        <definition>NEFORCE_NODISCARD constexpr tuple&lt; Types &amp;... &gt; tie</definition>
+        <argsstring>(Types &amp;... args) noexcept</argsstring>
+        <name>tie</name>
+        <param>
+          <type>Types &amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>创建引用元组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>引用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>引用参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>创建的引用元组 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="758" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" bodystart="758" bodyend="761"/>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1gab4c17a8aa555027fca3b1d2888decfc7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr tuple&lt; Types &amp;&amp;... &gt;</type>
+        <definition>NEFORCE_NODISCARD constexpr tuple&lt; Types &amp;&amp;... &gt; forward_as_tuple</definition>
+        <argsstring>(Types &amp;&amp;... args) noexcept</argsstring>
+        <name>forward_as_tuple</name>
+        <param>
+          <type>Types &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>创建转发引用元组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转发引用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转发引用参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>创建的转发引用元组 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="770" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" bodystart="770" bodyend="773"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <referencedby refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a4b93585b1bd2955bab445c5b9a4c0aa0" compoundref="bind_8hpp" startline="534" endline="537">binder&lt; Func(BoundArgs...)&gt;::operator()</referencedby>
+        <referencedby refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a8923e33c1ccf96324d98f9491c14d99b" compoundref="bind_8hpp" startline="546" endline="549">binder&lt; Func(BoundArgs...)&gt;::operator()</referencedby>
+        <referencedby refid="classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4_1acebad430f663cac8783998b36ebfb46c" compoundref="bind_8hpp" startline="636" endline="638">bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()</referencedby>
+        <referencedby refid="classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4_1af8b0dc48cde65c786950abb3b8e001e8" compoundref="bind_8hpp" startline="647" endline="649">bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()</referencedby>
+        <referencedby refid="group___tuple_1ga9e6784003126d5f538ce419b9b2d9a14" compoundref="tuple_8hpp" startline="870" endline="877">tuple_cat</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1ga8d3a8b2ed782f185549367fa33cda70d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(inner::__broaden_make_from_tuple&lt; T &gt;(_NEFORCE forward&lt; Tuple &gt;(tup), make_index_sequence&lt; tuple_size&lt; remove_reference_t&lt; Tuple &gt; &gt;::value &gt;{}))" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Tuple</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; inner::constructible_from_tuple&lt; T, Tuple &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr T</type>
+        <definition>NEFORCE_NODISCARD constexpr T make_from_tuple</definition>
+        <argsstring>(Tuple &amp;&amp;tup)</argsstring>
+        <name>make_from_tuple</name>
+        <param>
+          <type>Tuple &amp;&amp;</type>
+          <declname>tup</declname>
+        </param>
+        <briefdescription>
+<para>从元组构造对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Tuple</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源元组类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源元组 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>构造的对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="812" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" bodystart="812" bodyend="816"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="group___tuple_1ga9e6784003126d5f538ce419b9b2d9a14" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Tuples</declname>
+            <defname>Tuples</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr inner::tuple_cat_bind_t&lt; Tuples... &gt;::Ret</type>
+        <definition>NEFORCE_NODISCARD constexpr inner::tuple_cat_bind_t&lt; Tuples... &gt;::Ret tuple_cat</definition>
+        <argsstring>(Tuples &amp;&amp;... tuples)</argsstring>
+        <name>tuple_cat</name>
+        <param>
+          <type>Tuples &amp;&amp;...</type>
+          <declname>tuples</declname>
+        </param>
+        <briefdescription>
+<para>连接多个元组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Tuples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要连接的元组类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tuples</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要连接的元组 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>连接后的元组 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" line="870" column="68" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/tuple.hpp" bodystart="870" bodyend="877"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___tuple_1gab4c17a8aa555027fca3b1d2888decfc7" compoundref="tuple_8hpp" startline="770" endline="773">forward_as_tuple</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="group___tuple_1gadbcee5317ac11e3ae58b7a3e91d9e977" prot="public" static="no">
+        <name>__NEFORCE_BUILD_ARRAY_TUPLE_SIZE</name>
+        <param><defname>CV</defname></param>
+        <initializer>template &lt;typename T, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> Size&gt;       \
+struct <ref refid="structtuple__size" kindref="compound">tuple_size</ref>&lt;<ref refid="classarray" kindref="compound">array</ref>&lt;T, Size&gt; CV&gt; : <ref refid="structintegral__constant" kindref="compound">integral_constant</ref>&lt;<ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, Size&gt; {};</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" line="634" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/array.hpp" bodystart="634" bodyend="636"/>
+      </memberdef>
+      <memberdef kind="define" id="group___tuple_1gaa3ba22d3703cbcc210a458505e9b8844" prot="public" static="no">
+        <name>__NEFORCE_BUILD_TUPLE_TUPLE_SIZE</name>
+        <param><defname>CV</defname></param>
+        <initializer>template &lt;typename... Types&gt;             \
+struct <ref refid="structtuple__size" kindref="compound">tuple_size</ref>&lt;tuple&lt;Types...&gt; CV&gt; : <ref refid="structintegral__constant" kindref="compound">integral_constant</ref>&lt;<ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, sizeof...(Types)&gt; {};</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="496" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="496" bodyend="498"/>
+      </memberdef>
+      <memberdef kind="define" id="group___tuple_1ga2aeea659cb7a74a796db51d56f271e55" prot="public" static="no">
+        <name>__NEFORCE_BUILD_PAIR_TUPLE_SIZE</name>
+        <param><defname>CV</defname></param>
+        <initializer>template &lt;typename T1, typename T2&gt;     \
+struct <ref refid="structtuple__size" kindref="compound">tuple_size</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;T1, T2&gt; CV&gt; : <ref refid="structintegral__constant" kindref="compound">integral_constant</ref>&lt;<ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, 2&gt; {};</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" line="549" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/pair.hpp" bodystart="549" bodyend="551"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>元组的主模板、特化实现和辅助函数 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

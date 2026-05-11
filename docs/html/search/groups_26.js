@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['协程_0',['协程',['../group___coroutine.html',1,'']]]
+  ['区域设置_0',['区域设置',['../group___locale.html',1,'']]]
 ];

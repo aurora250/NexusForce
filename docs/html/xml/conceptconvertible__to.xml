@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="conceptconvertible__to" kind="concept">
+    <compoundname>convertible_to</compoundname>
+    <includes refid="type__traits_8hpp" local="no">type_traits.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename From</type>
+      </param>
+      <param>
+        <type>typename To</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename From, typename To&gt;
+concept <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref> =  <ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v</ref>&lt;From, To&gt; &amp;&amp; requires { static_cast&lt;To&gt;(_NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt;From&gt;()); }</initializer>
+    <conceptparts>
+      <codepart line="3150">    <programlisting>
+<codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>From,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>To&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">convertible_to<sp/>=<sp/><ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v&lt;From, To&gt;</ref><sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">To</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(_NEFORCE<sp/><ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval&lt;From&gt;</ref>());<sp/>}</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+<para>检查类型From是否可以转换为类型To </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>From</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>To</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3150" column="1"/>
+  </compounddef>
+</doxygen>

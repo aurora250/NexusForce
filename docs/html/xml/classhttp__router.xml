@@ -1,0 +1,1060 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classhttp__router" kind="class" language="C++" prot="public">
+    <compoundname>http_router</compoundname>
+    <includes refid="http__router_8hpp" local="no">http_router.hpp</includes>
+    <innerclass refid="structhttp__router_1_1route__entry" prot="private">http_router::route_entry</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;, <ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;)&gt;</type>
+        <definition>using http_router::http_handler_t = function&lt;void(http_request&amp;, http_response&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>http_handler_t</name>
+        <qualifiedname>http_router::http_handler_t</qualifiedname>
+        <briefdescription>
+<para>HTTP处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="79" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classhttp__router_1a5cfba66b8e36d8d7417e71365b5a8cee" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;, <ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;, const <ref refid="structexception" kindref="compound">exception</ref> &amp;)&gt;</type>
+        <definition>using http_router::exception_handler_t = function&lt;void(http_request&amp;, http_response&amp;, const exception&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>exception_handler_t</name>
+        <qualifiedname>http_router::exception_handler_t</qualifiedname>
+        <briefdescription>
+<para>异常处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="80" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhttp__router_1a4c3f2583d3c7449138c8e24c96f317de" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="classvector" kindref="compound">vector</ref>&lt; route_entry &gt; &gt;</type>
+        <definition>unordered_map&lt;string, vector&lt;route_entry&gt; &gt; http_router::routes_</definition>
+        <argsstring></argsstring>
+        <name>routes_</name>
+        <qualifiedname>http_router::routes_</qualifiedname>
+        <briefdescription>
+<para>HTTP方法到路由条目的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="91" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__router_1a18678870f7d355fbfb2c9725a1b64b80" prot="private" static="no" mutable="no">
+        <type><ref refid="classhttp__filter__chain" kindref="compound">http_filter_chain</ref></type>
+        <definition>http_filter_chain http_router::middleware_chain_</definition>
+        <argsstring></argsstring>
+        <name>middleware_chain_</name>
+        <qualifiedname>http_router::middleware_chain_</qualifiedname>
+        <briefdescription>
+<para>中间件链 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="92" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__router_1a4034ef7cbe61efa0df12b414af8a27cf" prot="private" static="no" mutable="no">
+        <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+        <definition>http_handler_t http_router::not_found_handler_</definition>
+        <argsstring></argsstring>
+        <name>not_found_handler_</name>
+        <qualifiedname>http_router::not_found_handler_</qualifiedname>
+        <briefdescription>
+<para>404处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="94" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__router_1ae6ce36ce6733151f881640a1efd6b13d" prot="private" static="no" mutable="no">
+        <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+        <definition>http_handler_t http_router::method_not_allowed_handler_</definition>
+        <argsstring></argsstring>
+        <name>method_not_allowed_handler_</name>
+        <qualifiedname>http_router::method_not_allowed_handler_</qualifiedname>
+        <briefdescription>
+<para>405处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="95" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__router_1a7a3f10ce9fea4281297bd52dfb821d25" prot="private" static="no" mutable="no">
+        <type><ref refid="classhttp__router_1a5cfba66b8e36d8d7417e71365b5a8cee" kindref="member">exception_handler_t</ref></type>
+        <definition>exception_handler_t http_router::exception_handler_</definition>
+        <argsstring></argsstring>
+        <name>exception_handler_</name>
+        <qualifiedname>http_router::exception_handler_</qualifiedname>
+        <briefdescription>
+<para>异常处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="96" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classhttp__router_1a915e4b938ee823f831cf0b0a0e34b13c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool http_router::case_sensitive</definition>
+        <argsstring></argsstring>
+        <name>case_sensitive</name>
+        <qualifiedname>http_router::case_sensitive</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否大小写敏感 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="99" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__router_1a19499f292b04da972452a28271bcd055" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool http_router::strict_routing</definition>
+        <argsstring></argsstring>
+        <name>strict_routing</name>
+        <qualifiedname>http_router::strict_routing</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否严格匹配尾部斜杠 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="100" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhttp__router_1ac2dc015a8a2082a1624b7e1d1da47fd5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>route_entry *</type>
+        <definition>route_entry * http_router::find_handler</definition>
+        <argsstring>(const http_method &amp;method, const string &amp;path, http_request &amp;request)</argsstring>
+        <name>find_handler</name>
+        <qualifiedname>http_router::find_handler</qualifiedname>
+        <param>
+          <type>const <ref refid="structhttp__method" kindref="compound">http_method</ref> &amp;</type>
+          <declname>method</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="103" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1ab4a210f499231cd47d14b75d2ca0d513" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::setup_default_handlers</definition>
+        <argsstring>()</argsstring>
+        <name>setup_default_handlers</name>
+        <qualifiedname>http_router::setup_default_handlers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="105" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhttp__router_1ad09ce7054a7cde27b00ffc608e029226" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http_router::http_router</definition>
+        <argsstring>()</argsstring>
+        <name>http_router</name>
+        <qualifiedname>http_router::http_router</qualifiedname>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>初始化默认的404、405和异常处理器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="113" column="5"/>
+        <references refid="classhttp__router_1ad09ce7054a7cde27b00ffc608e029226">http_router</references>
+        <referencedby refid="classhttp__router_1ad09ce7054a7cde27b00ffc608e029226">http_router</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a5c1a6c135c5ffb3c8fe1594b01882c29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http_router::~http_router</definition>
+        <argsstring>()=default</argsstring>
+        <name>~http_router</name>
+        <qualifiedname>http_router::~http_router</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="115" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1ad4c07467f29978bfa395e4967a3ea6cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http_router::http_router</definition>
+        <argsstring>(const http_router &amp;)=delete</argsstring>
+        <name>http_router</name>
+        <qualifiedname>http_router::http_router</qualifiedname>
+        <param>
+          <type>const <ref refid="classhttp__router" kindref="compound">http_router</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="117" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a731c5f8fd41a3232c8fa862fda09fdcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhttp__router" kindref="compound">http_router</ref> &amp;</type>
+        <definition>http_router &amp; http_router::operator=</definition>
+        <argsstring>(const http_router &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>http_router::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classhttp__router" kindref="compound">http_router</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="118" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a81bdd425f76f308affa1d05ad690cd3a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>http_router::http_router</definition>
+        <argsstring>(http_router &amp;&amp;) noexcept=default</argsstring>
+        <name>http_router</name>
+        <qualifiedname>http_router::http_router</qualifiedname>
+        <param>
+          <type><ref refid="classhttp__router" kindref="compound">http_router</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="119" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a3fc7e695175f93fd952a026e5aeeb142" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhttp__router" kindref="compound">http_router</ref> &amp;</type>
+        <definition>http_router &amp; http_router::operator=</definition>
+        <argsstring>(http_router &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>http_router::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classhttp__router" kindref="compound">http_router</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="120" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a2f6816a6e60ac6a32747a7eee13fd21c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::get</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>get</name>
+        <qualifiedname>http_router::get</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>GET请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="122" column="10"/>
+        <references refid="classhttp__router_1a2f6816a6e60ac6a32747a7eee13fd21c">get</references>
+        <referencedby refid="classhttp__router_1a2f6816a6e60ac6a32747a7eee13fd21c">get</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a56bb9054e59ab201914b333b597c190c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::post</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>post</name>
+        <qualifiedname>http_router::post</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>POST请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="123" column="10"/>
+        <references refid="classhttp__router_1a56bb9054e59ab201914b333b597c190c">post</references>
+        <referencedby refid="classhttp__router_1a56bb9054e59ab201914b333b597c190c">post</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1ac3f85294d109154d3c64795fd3dd4814" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::put</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>put</name>
+        <qualifiedname>http_router::put</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>PUT请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="124" column="10"/>
+        <references refid="classhttp__router_1ac3f85294d109154d3c64795fd3dd4814">put</references>
+        <referencedby refid="classhttp__router_1ac3f85294d109154d3c64795fd3dd4814">put</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a290568323f14d2fe713e5c412af933ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::del</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>del</name>
+        <qualifiedname>http_router::del</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>DELETE请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="125" column="10"/>
+        <references refid="classhttp__router_1a290568323f14d2fe713e5c412af933ae">del</references>
+        <referencedby refid="classhttp__router_1a290568323f14d2fe713e5c412af933ae">del</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a6f83d5604379f641fba1916188e8037d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::head</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>head</name>
+        <qualifiedname>http_router::head</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>HEAD请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="126" column="10"/>
+        <references refid="classhttp__router_1a6f83d5604379f641fba1916188e8037d">head</references>
+        <referencedby refid="classhttp__router_1a6f83d5604379f641fba1916188e8037d">head</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a379b15207a8e383d3294fb63e7ec53c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::options</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>options</name>
+        <qualifiedname>http_router::options</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>OPTIONS请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="127" column="10"/>
+        <references refid="classhttp__router_1a379b15207a8e383d3294fb63e7ec53c3">options</references>
+        <referencedby refid="classhttp__router_1a379b15207a8e383d3294fb63e7ec53c3">options</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a48e037f5859ff13c2e077e6b98839971" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::trace</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>trace</name>
+        <qualifiedname>http_router::trace</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>TRACE请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="128" column="10"/>
+        <references refid="classhttp__router_1a48e037f5859ff13c2e077e6b98839971">trace</references>
+        <referencedby refid="classhttp__router_1a48e037f5859ff13c2e077e6b98839971">trace</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a9b9e73dc6d7fe5d0ba5ef0fedc7ec190" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::connect</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>connect</name>
+        <qualifiedname>http_router::connect</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>CONNECT请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="129" column="10"/>
+        <references refid="classhttp__router_1a9b9e73dc6d7fe5d0ba5ef0fedc7ec190">connect</references>
+        <referencedby refid="classhttp__router_1a9b9e73dc6d7fe5d0ba5ef0fedc7ec190">connect</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1af41999d8b475728cca153085d776440f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::patch</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>patch</name>
+        <qualifiedname>http_router::patch</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>PATCH请求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="130" column="10"/>
+        <references refid="classhttp__router_1af41999d8b475728cca153085d776440f">patch</references>
+        <referencedby refid="classhttp__router_1af41999d8b475728cca153085d776440f">patch</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1aa9300afd808ed56d627f0f6193183751" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::get_post</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>get_post</name>
+        <qualifiedname>http_router::get_post</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>同时注册GET和POST </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="137" column="10"/>
+        <references refid="classhttp__router_1aa9300afd808ed56d627f0f6193183751">get_post</references>
+        <referencedby refid="classhttp__router_1aa9300afd808ed56d627f0f6193183751">get_post</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a14d66ff5bb1da8592787ad86b290ef7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::post_delete</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>post_delete</name>
+        <qualifiedname>http_router::post_delete</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>同时注册POST和DELETE </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="144" column="10"/>
+        <references refid="classhttp__router_1a14d66ff5bb1da8592787ad86b290ef7d">post_delete</references>
+        <referencedby refid="classhttp__router_1a14d66ff5bb1da8592787ad86b290ef7d">post_delete</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1ace3fec35999306c12e055b43276dc75d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::all</definition>
+        <argsstring>(const string &amp;path, http_handler_t handler)</argsstring>
+        <name>all</name>
+        <qualifiedname>http_router::all</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>注册所有HTTP方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="151" column="10"/>
+        <references refid="classhttp__router_1ace3fec35999306c12e055b43276dc75d">all</references>
+        <referencedby refid="classhttp__router_1ace3fec35999306c12e055b43276dc75d">all</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1ae112aa20dbc7e6d9871e468edec912f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::route</definition>
+        <argsstring>(const http_method &amp;method, const string &amp;path, const http_handler_t &amp;handler)</argsstring>
+        <name>route</name>
+        <qualifiedname>http_router::route</qualifiedname>
+        <param>
+          <type>const <ref refid="structhttp__method" kindref="compound">http_method</ref> &amp;</type>
+          <declname>method</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref> &amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>通用路由注册 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>method</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP方法 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+路由模式语法：<itemizedlist>
+<listitem><para><computeroutput>/users/:<ref refid="group___thread_1ga505a22091b6fb9a4a8e147bf2258e47a" kindref="member">id</ref></computeroutput> - 路径参数，匹配<computeroutput>/users/123</computeroutput>，提取id=123</para>
+</listitem><listitem><para><computeroutput>/files/ *</computeroutput> - 通配符，匹配<computeroutput>/files/a/b/c</computeroutput>，提取*=a/b/c</para>
+</listitem><listitem><para><computeroutput>/user/([0-9]+)</computeroutput> - 正则表达式，匹配数字ID </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="164" column="10"/>
+        <references refid="classhttp__router_1ae112aa20dbc7e6d9871e468edec912f7">route</references>
+        <referencedby refid="classhttp__router_1ae112aa20dbc7e6d9871e468edec912f7">route</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1af60c787026b4bd8e9b089cbb4c72b828" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::use</definition>
+        <argsstring>(unique_ptr&lt; http_filter &gt; middleware)</argsstring>
+        <name>use</name>
+        <qualifiedname>http_router::use</qualifiedname>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classhttp__filter" kindref="compound">http_filter</ref> &gt;</type>
+          <declname>middleware</declname>
+        </param>
+        <briefdescription>
+<para>添加中间件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>middleware</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>中间件对象（转移所有权） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="170" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="170" bodyend="170"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classhttp__router_1af60c787026b4bd8e9b089cbb4c72b828" compoundref="http__router_8hpp" startline="170" endline="170">use</references>
+        <referencedby refid="classhttp__router_1af60c787026b4bd8e9b089cbb4c72b828" compoundref="http__router_8hpp" startline="170" endline="170">use</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1af4a1efb46e263f19fc1bf85d26d7fa33" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhttp__filter__chain" kindref="compound">http_filter_chain</ref> &amp;</type>
+        <definition>http_filter_chain &amp; http_router::middleware_chain</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>middleware_chain</name>
+        <qualifiedname>http_router::middleware_chain</qualifiedname>
+        <briefdescription>
+<para>获取中间件链引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>中间件链引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="176" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="176" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a52034927b8262bc14e15ec07b6c69b36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::set_not_found_handler</definition>
+        <argsstring>(http_handler_t handler)</argsstring>
+        <name>set_not_found_handler</name>
+        <qualifiedname>http_router::set_not_found_handler</qualifiedname>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置404处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="182" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="182" bodyend="182"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1aafe7293aa94b5942436c7a30133ebf1c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::set_method_not_allowed_handler</definition>
+        <argsstring>(http_handler_t handler)</argsstring>
+        <name>set_method_not_allowed_handler</name>
+        <qualifiedname>http_router::set_method_not_allowed_handler</qualifiedname>
+        <param>
+          <type><ref refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" kindref="member">http_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置405处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="188" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="188" bodyend="190"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a64a676e246e9c6e3764e54fbb696dff0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::set_exception_handler</definition>
+        <argsstring>(exception_handler_t handler)</argsstring>
+        <name>set_exception_handler</name>
+        <qualifiedname>http_router::set_exception_handler</qualifiedname>
+        <param>
+          <type><ref refid="classhttp__router_1a5cfba66b8e36d8d7417e71365b5a8cee" kindref="member">exception_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置异常处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="196" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="196" bodyend="196"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a88c708f785f83f8cdb693de55c782d0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref></type>
+        <definition>http_response http_router::handle_request</definition>
+        <argsstring>(http_request &amp;request)</argsstring>
+        <name>handle_request</name>
+        <qualifiedname>http_router::handle_request</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+<para>处理HTTP请求 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>HTTP响应对象</para>
+</simplesect>
+处理流程：<orderedlist>
+<listitem><para>执行预过滤器</para>
+</listitem><listitem><para>执行核心过滤器</para>
+</listitem><listitem><para>查找匹配的路由处理器</para>
+</listitem><listitem><para>执行处理器</para>
+</listitem><listitem><para>执行后过滤器</para>
+</listitem><listitem><para>返回响应 </para>
+</listitem></orderedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="211" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a572d9be1db9ebc4f67abcb7038f0957c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool http_router::has_route</definition>
+        <argsstring>(const http_method &amp;method, const string &amp;path) const</argsstring>
+        <name>has_route</name>
+        <qualifiedname>http_router::has_route</qualifiedname>
+        <param>
+          <type>const <ref refid="structhttp__method" kindref="compound">http_method</ref> &amp;</type>
+          <declname>method</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>检查是否存在指定路由 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>method</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP方法 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>存在返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="219" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1a2627592847065fda03873bf406ab6c82" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD size_t http_router::route_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>route_count</name>
+        <qualifiedname>http_router::route_count</qualifiedname>
+        <briefdescription>
+<para>获取路由总数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>路由数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="225" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__router_1aa0600f3913b99ff441dca29841c13fe9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_router::clear_routes</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear_routes</name>
+        <qualifiedname>http_router::clear_routes</qualifiedname>
+        <briefdescription>
+<para>清空所有路由 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="230" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="230" bodyend="230"/>
+        <references refid="classhttp__router_1aa0600f3913b99ff441dca29841c13fe9" compoundref="http__router_8hpp" startline="230" endline="230">clear_routes</references>
+        <referencedby refid="classhttp__router_1aa0600f3913b99ff441dca29841c13fe9" compoundref="http__router_8hpp" startline="230" endline="230">clear_routes</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP路由器类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供HTTP请求路由功能，将请求分发到对应的处理函数。 支持路径参数、正则表达式匹配和中间件链。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>RESTful风格路由注册</para>
+</listitem><listitem><para>路径参数提取</para>
+</listitem><listitem><para>通配符匹配</para>
+</listitem><listitem><para>正则表达式路由支持</para>
+</listitem><listitem><para>中间件链支持</para>
+</listitem><listitem><para>自定义异常处理器</para>
+</listitem><listitem><para>大小写敏感/不敏感路由</para>
+</listitem></itemizedlist>
+</para>
+<para>使用示例： <programlisting><codeline><highlight class="normal"><ref refid="classhttp__router_1ad09ce7054a7cde27b00ffc608e029226" kindref="member">http_router</ref><sp/>router;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>静态路由</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.<ref refid="classhttp__router_1a2f6816a6e60ac6a32747a7eee13fd21c" kindref="member">get</ref>(</highlight><highlight class="stringliteral">&quot;/&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>res.<ref refid="structhttp__server__response_1a7eb8d64f75162d65e089ab24654ffb33" kindref="member">body</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Hello<sp/>World&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>路径参数</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.<ref refid="classhttp__router_1a2f6816a6e60ac6a32747a7eee13fd21c" kindref="member">get</ref>(</highlight><highlight class="stringliteral">&quot;/users/:id&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/>req.<ref refid="structhttp__server__request_1a88f012be69e60bf4282c045bf0238bc3" kindref="member">parameter</ref>(</highlight><highlight class="stringliteral">&quot;id&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>res.<ref refid="structhttp__server__response_1a7eb8d64f75162d65e089ab24654ffb33" kindref="member">body</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;User<sp/>ID:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/><ref refid="group___thread_1ga505a22091b6fb9a4a8e147bf2258e47a" kindref="member">id</ref>;</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>通配符</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.<ref refid="classhttp__router_1a2f6816a6e60ac6a32747a7eee13fd21c" kindref="member">get</ref>(</highlight><highlight class="stringliteral">&quot;/files\<sp/>*&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>path<sp/>=<sp/>req.<ref refid="structhttp__server__request_1a88f012be69e60bf4282c045bf0238bc3" kindref="member">parameter</ref>(</highlight><highlight class="stringliteral">&quot;*&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>处理文件请求</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>正则表达式路由</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.<ref refid="classhttp__router_1ae112aa20dbc7e6d9871e468edec912f7" kindref="member">route</ref>(</highlight><highlight class="stringliteral">&quot;GET&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;/user/([0-9]+)&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/>req.<ref refid="structhttp__server__request_1a88f012be69e60bf4282c045bf0238bc3" kindref="member">parameter</ref>(</highlight><highlight class="stringliteral">&quot;0&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>添加中间件</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.<ref refid="classhttp__router_1af60c787026b4bd8e9b089cbb4c72b828" kindref="member">use</ref>(<ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique&lt;logging_filter&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal">router.<ref refid="classhttp__router_1af60c787026b4bd8e9b089cbb4c72b828" kindref="member">use</ref>(<ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique&lt;cors_filter&gt;</ref>());</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>自定义404处理器</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.<ref refid="classhttp__router_1a52034927b8262bc14e15ec07b6c69b36" kindref="member">set_not_found_handler</ref>([](<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>res.<ref refid="structhttp__server__response_1a7eb8d64f75162d65e089ab24654ffb33" kindref="member">body</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Custom<sp/>404<sp/>Page&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>处理请求</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>response<sp/>=<sp/>router.<ref refid="classhttp__router_1a88c708f785f83f8cdb693de55c782d0f" kindref="member">handle_request</ref>(request);</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" line="77" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_router.hpp" bodystart="77" bodyend="231"/>
+    <listofallmembers>
+      <member refid="classhttp__router_1ace3fec35999306c12e055b43276dc75d" prot="public" virt="non-virtual"><scope>http_router</scope><name>all</name></member>
+      <member refid="classhttp__router_1a915e4b938ee823f831cf0b0a0e34b13c" prot="public" virt="non-virtual"><scope>http_router</scope><name>case_sensitive</name></member>
+      <member refid="classhttp__router_1aa0600f3913b99ff441dca29841c13fe9" prot="public" virt="non-virtual"><scope>http_router</scope><name>clear_routes</name></member>
+      <member refid="classhttp__router_1a9b9e73dc6d7fe5d0ba5ef0fedc7ec190" prot="public" virt="non-virtual"><scope>http_router</scope><name>connect</name></member>
+      <member refid="classhttp__router_1a290568323f14d2fe713e5c412af933ae" prot="public" virt="non-virtual"><scope>http_router</scope><name>del</name></member>
+      <member refid="classhttp__router_1a7a3f10ce9fea4281297bd52dfb821d25" prot="private" virt="non-virtual"><scope>http_router</scope><name>exception_handler_</name></member>
+      <member refid="classhttp__router_1a5cfba66b8e36d8d7417e71365b5a8cee" prot="public" virt="non-virtual"><scope>http_router</scope><name>exception_handler_t</name></member>
+      <member refid="classhttp__router_1ac2dc015a8a2082a1624b7e1d1da47fd5" prot="private" virt="non-virtual"><scope>http_router</scope><name>find_handler</name></member>
+      <member refid="classhttp__router_1a2f6816a6e60ac6a32747a7eee13fd21c" prot="public" virt="non-virtual"><scope>http_router</scope><name>get</name></member>
+      <member refid="classhttp__router_1aa9300afd808ed56d627f0f6193183751" prot="public" virt="non-virtual"><scope>http_router</scope><name>get_post</name></member>
+      <member refid="classhttp__router_1a88c708f785f83f8cdb693de55c782d0f" prot="public" virt="non-virtual"><scope>http_router</scope><name>handle_request</name></member>
+      <member refid="classhttp__router_1a572d9be1db9ebc4f67abcb7038f0957c" prot="public" virt="non-virtual"><scope>http_router</scope><name>has_route</name></member>
+      <member refid="classhttp__router_1a6f83d5604379f641fba1916188e8037d" prot="public" virt="non-virtual"><scope>http_router</scope><name>head</name></member>
+      <member refid="classhttp__router_1a5824807da6ebfaf083555960aa957b1d" prot="public" virt="non-virtual"><scope>http_router</scope><name>http_handler_t</name></member>
+      <member refid="classhttp__router_1ad09ce7054a7cde27b00ffc608e029226" prot="public" virt="non-virtual"><scope>http_router</scope><name>http_router</name></member>
+      <member refid="classhttp__router_1ad4c07467f29978bfa395e4967a3ea6cd" prot="public" virt="non-virtual"><scope>http_router</scope><name>http_router</name></member>
+      <member refid="classhttp__router_1a81bdd425f76f308affa1d05ad690cd3a" prot="public" virt="non-virtual"><scope>http_router</scope><name>http_router</name></member>
+      <member refid="classhttp__router_1ae6ce36ce6733151f881640a1efd6b13d" prot="private" virt="non-virtual"><scope>http_router</scope><name>method_not_allowed_handler_</name></member>
+      <member refid="classhttp__router_1af4a1efb46e263f19fc1bf85d26d7fa33" prot="public" virt="non-virtual"><scope>http_router</scope><name>middleware_chain</name></member>
+      <member refid="classhttp__router_1a18678870f7d355fbfb2c9725a1b64b80" prot="private" virt="non-virtual"><scope>http_router</scope><name>middleware_chain_</name></member>
+      <member refid="classhttp__router_1a4034ef7cbe61efa0df12b414af8a27cf" prot="private" virt="non-virtual"><scope>http_router</scope><name>not_found_handler_</name></member>
+      <member refid="classhttp__router_1a731c5f8fd41a3232c8fa862fda09fdcf" prot="public" virt="non-virtual"><scope>http_router</scope><name>operator=</name></member>
+      <member refid="classhttp__router_1a3fc7e695175f93fd952a026e5aeeb142" prot="public" virt="non-virtual"><scope>http_router</scope><name>operator=</name></member>
+      <member refid="classhttp__router_1a379b15207a8e383d3294fb63e7ec53c3" prot="public" virt="non-virtual"><scope>http_router</scope><name>options</name></member>
+      <member refid="classhttp__router_1af41999d8b475728cca153085d776440f" prot="public" virt="non-virtual"><scope>http_router</scope><name>patch</name></member>
+      <member refid="classhttp__router_1a56bb9054e59ab201914b333b597c190c" prot="public" virt="non-virtual"><scope>http_router</scope><name>post</name></member>
+      <member refid="classhttp__router_1a14d66ff5bb1da8592787ad86b290ef7d" prot="public" virt="non-virtual"><scope>http_router</scope><name>post_delete</name></member>
+      <member refid="classhttp__router_1ac3f85294d109154d3c64795fd3dd4814" prot="public" virt="non-virtual"><scope>http_router</scope><name>put</name></member>
+      <member refid="classhttp__router_1ae112aa20dbc7e6d9871e468edec912f7" prot="public" virt="non-virtual"><scope>http_router</scope><name>route</name></member>
+      <member refid="classhttp__router_1a2627592847065fda03873bf406ab6c82" prot="public" virt="non-virtual"><scope>http_router</scope><name>route_count</name></member>
+      <member refid="classhttp__router_1a4c3f2583d3c7449138c8e24c96f317de" prot="private" virt="non-virtual"><scope>http_router</scope><name>routes_</name></member>
+      <member refid="classhttp__router_1a64a676e246e9c6e3764e54fbb696dff0" prot="public" virt="non-virtual"><scope>http_router</scope><name>set_exception_handler</name></member>
+      <member refid="classhttp__router_1aafe7293aa94b5942436c7a30133ebf1c" prot="public" virt="non-virtual"><scope>http_router</scope><name>set_method_not_allowed_handler</name></member>
+      <member refid="classhttp__router_1a52034927b8262bc14e15ec07b6c69b36" prot="public" virt="non-virtual"><scope>http_router</scope><name>set_not_found_handler</name></member>
+      <member refid="classhttp__router_1ab4a210f499231cd47d14b75d2ca0d513" prot="private" virt="non-virtual"><scope>http_router</scope><name>setup_default_handlers</name></member>
+      <member refid="classhttp__router_1a19499f292b04da972452a28271bcd055" prot="public" virt="non-virtual"><scope>http_router</scope><name>strict_routing</name></member>
+      <member refid="classhttp__router_1a48e037f5859ff13c2e077e6b98839971" prot="public" virt="non-virtual"><scope>http_router</scope><name>trace</name></member>
+      <member refid="classhttp__router_1af60c787026b4bd8e9b089cbb4c72b828" prot="public" virt="non-virtual"><scope>http_router</scope><name>use</name></member>
+      <member refid="classhttp__router_1a5c1a6c135c5ffb3c8fe1594b01882c29" prot="public" virt="non-virtual"><scope>http_router</scope><name>~http_router</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

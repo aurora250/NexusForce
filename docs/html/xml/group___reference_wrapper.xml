@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___reference_wrapper" kind="group">
+    <compoundname>ReferenceWrapper</compoundname>
+    <title>引用包装</title>
+    <innerclass refid="classreference__wrapper" prot="public">reference_wrapper</innerclass>
+    <innerclass refid="structunwrap__reference" prot="public">unwrap_reference</innerclass>
+    <innerclass refid="structunwrap__reference_3_01reference__wrapper_3_01_t_01_4_01_4" prot="public">unwrap_reference&lt; reference_wrapper&lt; T &gt; &gt;</innerclass>
+    <innerclass refid="structunwrap__ref__decay" prot="public">unwrap_ref_decay</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___reference_wrapper_1ga27b1c76a744b6271a4733a39e4717bda" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structunwrap__reference" kindref="compound">unwrap_reference</ref>&lt; T &gt;::type</type>
+        <definition>using unwrap_reference_t = typename unwrap_reference&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>unwrap_reference_t</name>
+        <briefdescription>
+<para>unwrap_reference的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="215" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___reference_wrapper_1gab50d469d33ed56a0ce32f87d03ac5f10" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structunwrap__ref__decay" kindref="compound">unwrap_ref_decay</ref>&lt; T &gt;::type</type>
+        <definition>using unwrap_ref_decay_t = typename unwrap_ref_decay&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>unwrap_ref_decay_t</name>
+        <briefdescription>
+<para>unwrap_ref_decay的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="233" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="233" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___reference_wrapper_1ga1ffcd97e84a642fa9f9f3297692d128e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>reference_wrapper</definition>
+        <argsstring>(T &amp;) -&gt; reference_wrapper&lt; T &gt;</argsstring>
+        <name>reference_wrapper</name>
+        <param>
+          <type>T &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="120" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" declline="120" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___reference_wrapper_1ga65ec3600aa7a6390944677be016c5f77" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; T &gt;</type>
+        <definition>NEFORCE_NODISCARD constexpr reference_wrapper&lt; T &gt; ref</definition>
+        <argsstring>(T &amp;val) noexcept</argsstring>
+        <name>ref</name>
+        <param>
+          <type>T &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+<para>创建引用包装器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>引用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要包装的左值引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classreference__wrapper" kindref="compound">reference_wrapper&lt;T&gt;</ref>包装器 </para>
+</simplesect>
+<simplesect kind="note"><para>禁止对右值使用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="132" column="47" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="132" bodyend="134"/>
+        <referencedby refid="group___remove_algorithms_1ga5d86f8052a2e5759aeab543c23f3c861" compoundref="remove_8hpp" startline="187" endline="196">erase_if</referencedby>
+        <referencedby refid="structpointer__traits_3_01_t_01_5_01_4_1ae58ffd1017a30df68918e27eee40b3fe" compoundref="iterator__traits_8hpp" startline="283" endline="283">pointer_traits&lt; T * &gt;::pointer_to</referencedby>
+        <referencedby refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</referencedby>
+        <referencedby refid="classreference__wrapper_1a0b259e361592069c71bd65f5baad8822" compoundref="reference__wrapper_8hpp" startline="84" endline="87">reference_wrapper&lt; T &gt;::reference_wrapper</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___reference_wrapper_1ga12d1119fac701ece51a17517244bfb60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void ref</definition>
+        <argsstring>(const T &amp;&amp;)=delete</argsstring>
+        <name>ref</name>
+        <param>
+          <type>const T &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>删除const右值的ref重载 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>防止对const右值创建引用包装器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="142" column="6" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" declline="142" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group___reference_wrapper_1ga1fbb26b4219a6347fa32c68071ed43c2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; T &gt;</type>
+        <definition>NEFORCE_NODISCARD constexpr reference_wrapper&lt; T &gt; ref</definition>
+        <argsstring>(reference_wrapper&lt; T &gt; wrapper) noexcept</argsstring>
+        <name>ref</name>
+        <param>
+          <type><ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; T &gt;</type>
+          <declname>wrapper</declname>
+        </param>
+        <briefdescription>
+<para>重新包装已存在的引用包装器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>引用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>wrapper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已存在的引用包装器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>相同的引用包装器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="151" column="47" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="151" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="group___reference_wrapper_1gadc2564741b2fcb0ad66c95dd43623fbe" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; const T &gt;</type>
+        <definition>NEFORCE_NODISCARD constexpr reference_wrapper&lt; const T &gt; cref</definition>
+        <argsstring>(const T &amp;val) noexcept</argsstring>
+        <name>cref</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+<para>创建const引用包装器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>引用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要包装的const左值引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classreference__wrapper" kindref="compound">reference_wrapper&lt;const T&gt;</ref>包装器 </para>
+</simplesect>
+<simplesect kind="note"><para>禁止对右值使用</para>
+</simplesect>
+用于创建只读引用包装 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="165" column="47" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="165" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="group___reference_wrapper_1ga4d14f03ea79098b6ea528ecb151ee661" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void cref</definition>
+        <argsstring>(const T &amp;&amp;)=delete</argsstring>
+        <name>cref</name>
+        <param>
+          <type>const T &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>删除const右值的cref重载 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>防止对const右值创建只读引用包装器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="175" column="6" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" declline="175" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group___reference_wrapper_1ga860a1b5b05e49c9ae53a0afe2db3daf6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; const T &gt;</type>
+        <definition>NEFORCE_NODISCARD constexpr reference_wrapper&lt; const T &gt; cref</definition>
+        <argsstring>(reference_wrapper&lt; T &gt; wrapper) noexcept</argsstring>
+        <name>cref</name>
+        <param>
+          <type><ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; T &gt;</type>
+          <declname>wrapper</declname>
+        </param>
+        <briefdescription>
+<para>重新包装为const引用包装器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>引用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>wrapper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已存在的引用包装器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>const版本的引用包装器</para>
+</simplesect>
+将非const引用包装器转换为const版本。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="186" column="47" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="186" bodyend="188"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>引用包装相关的类和辅助函数的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

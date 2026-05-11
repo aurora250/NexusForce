@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___date_time" kind="group">
+    <compoundname>DateTime</compoundname>
+    <title>日期时间</title>
+    <innerclass refid="classdate" prot="public">date</innerclass>
+    <innerclass refid="classtime" prot="public">time</innerclass>
+    <innerclass refid="classdatetime" prot="public">datetime</innerclass>
+    <innerclass refid="classtimestamp" prot="public">timestamp</innerclass>
+    <briefdescription>
+<para>日期时间处理功能 </para>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下日期时间相关标准规范：</para>
+<para><bold>公历与日期计算标准：</bold><itemizedlist>
+<listitem><para>**ISO 8601-1:2019**：日期和时间 — 信息交换的表示法 — 第1部分：基本规则 <ulink url="https://www.iso.org/standard/70907.html">https://www.iso.org/standard/70907.html</ulink></para>
+</listitem><listitem><para>**ISO 8601-2:2019**：日期和时间 — 信息交换的表示法 — 第2部分：扩展 <ulink url="https://www.iso.org/standard/70908.html">https://www.iso.org/standard/70908.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>互联网时间格式标准：</bold><itemizedlist>
+<listitem><para>**IETF RFC 3339**：互联网上的日期和时间格式（ISO 8601 配置文件） <ulink url="https://www.rfc-editor.org/rfc/rfc3339.html">https://www.rfc-editor.org/rfc/rfc3339.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 1123**：互联网主机要求 — 应用和支持（§5.2.14 日期时间格式） <ulink url="https://www.rfc-editor.org/rfc/rfc1123.html#section-5.2.14">https://www.rfc-editor.org/rfc/rfc1123.html#section-5.2.14</ulink></para>
+</listitem><listitem><para>**IETF RFC 2616**：HTTP/1.1（§3.3.1 完整日期，已由 RFC 7231 更新） <ulink url="https://www.rfc-editor.org/rfc/rfc2616.html#section-3.3.1">https://www.rfc-editor.org/rfc/rfc2616.html#section-3.3.1</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>时间戳与系统时钟标准：</bold><itemizedlist>
+<listitem><para>**POSIX.1-2017 (IEEE Std 1003.1)**：Unix 时间戳定义 <ulink url="https://pubs.opengroup.org/onlinepubs/9699919799/">https://pubs.opengroup.org/onlinepubs/9699919799/</ulink></para>
+</listitem><listitem><para>**ISO/IEC 9899:2018**：C 语言标准（time_t 类型定义） <ulink url="https://www.iso.org/standard/74528.html">https://www.iso.org/standard/74528.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>儒略日计算标准：</bold><itemizedlist>
+<listitem><para>**国际天文学联合会 (IAU) 标准**：儒略日计算公式（Fliegel &amp; Van Flandern, 1968）</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___date_time_1format_specifications">
+<title>格式规范</title><para><table rows="7" cols="3"><row>
+<entry thead="yes"><para>格式类型  </para>
+</entry><entry thead="yes"><para>示例  </para>
+</entry><entry thead="yes"><para>标准引用  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>ISO 8601 基本  </para>
+</entry><entry thead="no"><para>2024-01-15T14:30:00  </para>
+</entry><entry thead="no"><para>ISO 8601-1:2019 §5.4  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>ISO 8601 UTC  </para>
+</entry><entry thead="no"><para>2024-01-15T14:30:00Z  </para>
+</entry><entry thead="no"><para>ISO 8601-1:2019 §5.4  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>ISO 8601 带时区  </para>
+</entry><entry thead="no"><para>2024-01-15T14:30:00+08:00  </para>
+</entry><entry thead="no"><para>ISO 8601-1:2019 §5.4  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>RFC 3339  </para>
+</entry><entry thead="no"><para>2024-01-15T14:30:00+08:00  </para>
+</entry><entry thead="no"><para>RFC 3339 §5.6  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>RFC 1123 (GMT)  </para>
+</entry><entry thead="no"><para>Mon, 15 Jan 2024 14:30:00 GMT  </para>
+</entry><entry thead="no"><para>RFC 1123 §5.2.14  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>简单格式  </para>
+</entry><entry thead="no"><para>2024-01-15 14:30:00  </para>
+</entry><entry thead="no"><para>非标准（用于内部表示）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="7" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>纪元起始  </para>
+</entry><entry thead="no"><para>1970-01-01 00:00:00 UTC (Unix 纪元)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>年份范围  </para>
+</entry><entry thead="no"><para>1900-9999  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>闰年规则  </para>
+</entry><entry thead="no"><para>公历闰年（能被4整除但不能被100整除，或能被400整除）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>儒略日基准  </para>
+</entry><entry thead="no"><para>公元前4713年1月1日中午12点  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>时区偏移范围  </para>
+</entry><entry thead="no"><para>±12:00  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>时间戳精度  </para>
+</entry><entry thead="no"><para>秒级  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___date_time_1date_calculation">
+<title>日期计算参考</title><para><itemizedlist>
+<listitem><para>**星期计算**：采用 Zeller 同余式变体</para>
+</listitem><listitem><para>**儒略日转换**：采用 Fliegel &amp; Van Flandern 算法</para>
+</listitem><listitem><para>**闰年判断**：公历规则（1582年后）</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>所有日期验证符合公历规则，年份范围限制为 1900-9999。 儒略日转换算法支持公元纪年，结果与 IAU 标准一致。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.iso.org/iso-8601-date-and-time-format.html">https://www.iso.org/iso-8601-date-and-time-format.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.ietf.org/rfc/rfc3339.txt">https://www.ietf.org/rfc/rfc3339.txt</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16">https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_16</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

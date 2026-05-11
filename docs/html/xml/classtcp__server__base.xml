@@ -1,0 +1,768 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classtcp__server__base" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>tcp_server_base</compoundname>
+    <derivedcompoundref refid="classssl__server" prot="public" virt="non-virtual">ssl_server</derivedcompoundref>
+    <derivedcompoundref refid="classtcp__server" prot="public" virt="non-virtual">tcp_server</derivedcompoundref>
+    <includes refid="tcp__server_8hpp" local="no">tcp_server.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classtcp__server__base_1a32641f5767778e30b8c31b3d32441295" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(<ref refid="classtcp__socket" kindref="compound">tcp_socket</ref>)&gt;</type>
+        <definition>using tcp_server_base::client_handler_t = function&lt;void(tcp_socket)&gt;</definition>
+        <argsstring></argsstring>
+        <name>client_handler_t</name>
+        <qualifiedname>tcp_server_base::client_handler_t</qualifiedname>
+        <briefdescription>
+<para>客户端处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="37" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtcp__server__base_1a5f608ddaffbd9596fd27cdfc6401a27b" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(const <ref refid="structexception" kindref="compound">exception</ref> &amp;)&gt;</type>
+        <definition>using tcp_server_base::exception_handler_t = function&lt;void(const exception&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>exception_handler_t</name>
+        <qualifiedname>tcp_server_base::exception_handler_t</qualifiedname>
+        <briefdescription>
+<para>异常处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="38" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classtcp__server__base_1aff2d84f5024c7b4e2bda393c213bf2c7" prot="protected" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__acceptor" kindref="compound">tcp_acceptor</ref> &gt;</type>
+        <definition>unique_ptr&lt;tcp_acceptor&gt; tcp_server_base::acceptor_</definition>
+        <argsstring></argsstring>
+        <name>acceptor_</name>
+        <qualifiedname>tcp_server_base::acceptor_</qualifiedname>
+        <briefdescription>
+<para>TCP接受器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="41" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1aa38767b5f095b470707df772b5cb0107" prot="protected" static="no" mutable="no">
+        <type><ref refid="structports" kindref="compound">ports</ref></type>
+        <definition>ports tcp_server_base::port_</definition>
+        <argsstring></argsstring>
+        <name>port_</name>
+        <qualifiedname>tcp_server_base::port_</qualifiedname>
+        <briefdescription>
+<para>监听端口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="42" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="42" bodyend="-1"/>
+        <referencedby refid="classtcp__server__base_1a38f2920e77b02963aace50a3b055ac84" compoundref="tcp__server_8hpp" startline="164" endline="164">port</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1ae598f3ebdc396f44146ba8da6bed8f67" prot="protected" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; tcp_server_base::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>tcp_server_base::running_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="43" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="43" bodyend="43"/>
+        <referencedby refid="classtcp__server__base_1a74e32d45acd9ce5a61ce1a6ace256607" compoundref="tcp__server_8hpp" startline="158" endline="158">is_running</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1aa8d9f9a53edb4699d0825cf499baba0c" prot="protected" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classthread" kindref="compound">thread</ref> &gt;</type>
+        <definition>vector&lt;thread&gt; tcp_server_base::worker_threads_</definition>
+        <argsstring></argsstring>
+        <name>worker_threads_</name>
+        <qualifiedname>tcp_server_base::worker_threads_</qualifiedname>
+        <briefdescription>
+<para>工作线程列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="44" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1a2d72c2c3af83d0bc20fcd5effaf05874" prot="protected" static="no" mutable="no">
+        <type><ref refid="classthread__pool" kindref="compound">thread_pool</ref></type>
+        <definition>thread_pool tcp_server_base::client_pool_</definition>
+        <argsstring></argsstring>
+        <name>client_pool_</name>
+        <qualifiedname>tcp_server_base::client_pool_</qualifiedname>
+        <briefdescription>
+<para>客户端处理线程池 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="45" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1af6dd3d7553c83b5c22e63790a189996f" prot="protected" static="no" mutable="no">
+        <type>::WSAEVENT</type>
+        <definition>::WSAEVENT tcp_server_base::wake_event_</definition>
+        <argsstring></argsstring>
+        <name>wake_event_</name>
+        <qualifiedname>tcp_server_base::wake_event_</qualifiedname>
+        <initializer>{WSA_INVALID_EVENT}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="48" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1ade73ba8bbe4053f6f29d41cb2a34aba5" prot="protected" static="no" mutable="yes">
+        <type><ref refid="classshared__mutex" kindref="compound">shared_mutex</ref></type>
+        <definition>shared_mutex tcp_server_base::handler_mutex_</definition>
+        <argsstring></argsstring>
+        <name>handler_mutex_</name>
+        <qualifiedname>tcp_server_base::handler_mutex_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="52" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1a5e6ff6717c9972d255c9bee34975594e" prot="protected" static="no" mutable="no">
+        <type><ref refid="classtcp__server__base_1a32641f5767778e30b8c31b3d32441295" kindref="member">client_handler_t</ref></type>
+        <definition>client_handler_t tcp_server_base::client_handler_</definition>
+        <argsstring></argsstring>
+        <name>client_handler_</name>
+        <qualifiedname>tcp_server_base::client_handler_</qualifiedname>
+        <briefdescription>
+<para>客户端处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="54" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="54" bodyend="-1"/>
+        <referencedby refid="classtcp__server__base_1a24bf1c8ad6716a8348518f48fad88eb2" compoundref="tcp__server_8hpp" startline="75" endline="79">handle_client</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1a831cef70165579b406d091ded06b6a19" prot="protected" static="no" mutable="no">
+        <type><ref refid="classtcp__server__base_1a5f608ddaffbd9596fd27cdfc6401a27b" kindref="member">exception_handler_t</ref></type>
+        <definition>exception_handler_t tcp_server_base::exception_handler_</definition>
+        <argsstring></argsstring>
+        <name>exception_handler_</name>
+        <qualifiedname>tcp_server_base::exception_handler_</qualifiedname>
+        <briefdescription>
+<para>异常处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="55" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtcp__server__base_1a1a7e1de9c6df5ba9aa1a12feb06023b8" prot="protected" static="no" mutable="no">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex tcp_server_base::acceptor_mutex_</definition>
+        <argsstring></argsstring>
+        <name>acceptor_mutex_</name>
+        <qualifiedname>tcp_server_base::acceptor_mutex_</qualifiedname>
+        <briefdescription>
+<para>TCP接受器互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="56" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classtcp__server__base_1a6cfadb556ef18b029e0c510f143e833b" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_server_base::notify_stop</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>notify_stop</name>
+        <qualifiedname>tcp_server_base::notify_stop</qualifiedname>
+        <briefdescription>
+<para>向 wake_pipe_ 写端写入一个字节，唤醒 accept_loop </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="61" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1a339fb280765125ff0e63bb3cb89bcb15" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_server_base::accept_loop</definition>
+        <argsstring>()</argsstring>
+        <name>accept_loop</name>
+        <qualifiedname>tcp_server_base::accept_loop</qualifiedname>
+        <briefdescription>
+<para>接受连接的主循环 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="66" column="10"/>
+        <references refid="classtcp__server__base_1a339fb280765125ff0e63bb3cb89bcb15">accept_loop</references>
+        <referencedby refid="classtcp__server__base_1a339fb280765125ff0e63bb3cb89bcb15">accept_loop</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1a24bf1c8ad6716a8348518f48fad88eb2" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void tcp_server_base::handle_client</definition>
+        <argsstring>(tcp_socket client)</argsstring>
+        <name>handle_client</name>
+        <qualifiedname>tcp_server_base::handle_client</qualifiedname>
+        <param>
+          <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref></type>
+          <declname>client</declname>
+        </param>
+        <briefdescription>
+<para>处理单个客户端连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>client</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已建立连接的 socket</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+调用客户端处理器处理连接。 派生类可重写此方法以自定义处理逻辑。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="75" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="75" bodyend="79"/>
+        <references refid="classtcp__server__base_1a5e6ff6717c9972d255c9bee34975594e" compoundref="tcp__server_8hpp" startline="54">client_handler_</references>
+        <references refid="classtcp__server__base_1a24bf1c8ad6716a8348518f48fad88eb2" compoundref="tcp__server_8hpp" startline="75" endline="79">handle_client</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <referencedby refid="classtcp__server__base_1a24bf1c8ad6716a8348518f48fad88eb2" compoundref="tcp__server_8hpp" startline="75" endline="79">handle_client</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1adba355ecdbc0013f1172b368c30107e1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
+        <definition>virtual optional&lt; tcp_socket &gt; tcp_server_base::accept_one</definition>
+        <argsstring>()=0</argsstring>
+        <name>accept_one</name>
+        <qualifiedname>tcp_server_base::accept_one</qualifiedname>
+        <reimplementedby refid="classssl__server_1a1f9f07638f0cb6bb7fa552ce73c29b41">accept_one</reimplementedby>
+        <reimplementedby refid="classtcp__server_1a208f12b7ca522eca2a609764409b5db9">accept_one</reimplementedby>
+        <briefdescription>
+<para>创建一个客户端连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>客户端socket，无连接返回none</para>
+</simplesect>
+派生类实现具体的连接接受逻辑。 支持阻塞和非阻塞模式。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="88" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1ab04f76ce60e358af3452ca403ad8c2c3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void tcp_server_base::create_acceptor</definition>
+        <argsstring>(const ip_address &amp;endpoint, int backlog)=0</argsstring>
+        <name>create_acceptor</name>
+        <qualifiedname>tcp_server_base::create_acceptor</qualifiedname>
+        <reimplementedby refid="classssl__server_1a77ddd9e4f1baf16db48d0967084acaa7">create_acceptor</reimplementedby>
+        <reimplementedby refid="classtcp__server_1af1b99d7667e6fe8458ba8514330d3326">create_acceptor</reimplementedby>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>backlog</declname>
+        </param>
+        <briefdescription>
+<para>创建并配置acceptor </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>监听地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>backlog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接队列大小</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+派生类实现具体的acceptor创建和配置。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="97" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtcp__server__base_1afd3f0bf8e207d844dbedb1b8c6720e5c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>tcp_server_base::tcp_server_base</definition>
+        <argsstring>(ports port, size_t worker_count=thread_pool::max_thread_threshhold())</argsstring>
+        <name>tcp_server_base</name>
+        <qualifiedname>tcp_server_base::tcp_server_base</qualifiedname>
+        <param>
+          <type><ref refid="structports" kindref="compound">ports</ref></type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>worker_count</declname>
+          <defval>thread_pool::max_thread_threshhold()</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>监听端口 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>worker_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>工作线程数（默认最大） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>worker_count为0时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="106" column="14"/>
+        <references refid="classtcp__server__base_1a38f2920e77b02963aace50a3b055ac84" compoundref="tcp__server_8hpp" startline="164" endline="164">port</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1ae8163e7386fbe9d18a798e5a6e1f1b3e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual tcp_server_base::~tcp_server_base</definition>
+        <argsstring>()</argsstring>
+        <name>~tcp_server_base</name>
+        <qualifiedname>tcp_server_base::~tcp_server_base</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动停止服务器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="113" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="113" bodyend="113"/>
+        <references refid="classtcp__server__base_1a77bb0334985546f7b3b27f7ebbcbb902">stop</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1a7dbdc38039a593e363a0ecb0eee2bbbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>tcp_server_base::tcp_server_base</definition>
+        <argsstring>(const tcp_server_base &amp;)=delete</argsstring>
+        <name>tcp_server_base</name>
+        <qualifiedname>tcp_server_base::tcp_server_base</qualifiedname>
+        <param>
+          <type>const <ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="115" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1a817e76551150298c61eefe51d88e45f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> &amp;</type>
+        <definition>tcp_server_base &amp; tcp_server_base::operator=</definition>
+        <argsstring>(const tcp_server_base &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>tcp_server_base::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="116" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1aff23675d9f2b7e6b8f269e68eda0c8df" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>tcp_server_base::tcp_server_base</definition>
+        <argsstring>(tcp_server_base &amp;&amp;other) noexcept=delete</argsstring>
+        <name>tcp_server_base</name>
+        <qualifiedname>tcp_server_base::tcp_server_base</qualifiedname>
+        <param>
+          <type><ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="118" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1adb02246758504d817229562eabeb262a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> &amp;</type>
+        <definition>tcp_server_base &amp; tcp_server_base::operator=</definition>
+        <argsstring>(tcp_server_base &amp;&amp;other) noexcept=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>tcp_server_base::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="119" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1a49f2008a2bc05e9f00c51e6098bb5a6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool tcp_server_base::set_client_handler</definition>
+        <argsstring>(client_handler_t handler)</argsstring>
+        <name>set_client_handler</name>
+        <qualifiedname>tcp_server_base::set_client_handler</qualifiedname>
+        <param>
+          <type><ref refid="classtcp__server__base_1a32641f5767778e30b8c31b3d32441295" kindref="member">client_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置客户端处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true</para>
+</simplesect>
+必须在服务器启动前设置。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="128" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1aa7a0567cb6f4b407b8f2afb1a82d90b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool tcp_server_base::set_exception_handler</definition>
+        <argsstring>(exception_handler_t handler)</argsstring>
+        <name>set_exception_handler</name>
+        <qualifiedname>tcp_server_base::set_exception_handler</qualifiedname>
+        <param>
+          <type><ref refid="classtcp__server__base_1a5f608ddaffbd9596fd27cdfc6401a27b" kindref="member">exception_handler_t</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置异常处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理器函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="135" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1ab1957c65d507878b7d376b3433f1aabf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool tcp_server_base::start</definition>
+        <argsstring>(int backlog=SOMAXCONN) noexcept</argsstring>
+        <name>start</name>
+        <qualifiedname>tcp_server_base::start</qualifiedname>
+        <reimplementedby refid="classssl__server_1ac4fa071e7d0bd04844671436657fb0a5">start</reimplementedby>
+        <param>
+          <type>int</type>
+          <declname>backlog</declname>
+          <defval>SOMAXCONN</defval>
+        </param>
+        <briefdescription>
+<para>启动服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>backlog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接队列大小（默认SOMAXCONN） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>启动成功返回true</para>
+</simplesect>
+创建acceptor，开始接受连接。 需要先设置客户端处理器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="145" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1a77bb0334985546f7b3b27f7ebbcbb902" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_server_base::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>tcp_server_base::stop</qualifiedname>
+        <briefdescription>
+<para>停止服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>停止接受新连接，等待现有连接处理完成。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="152" column="10"/>
+        <referencedby refid="classtcp__server__base_1ae8163e7386fbe9d18a798e5a6e1f1b3e" compoundref="tcp__server_8hpp" startline="113" endline="113">~tcp_server_base</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1a74e32d45acd9ce5a61ce1a6ace256607" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool tcp_server_base::is_running</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_running</name>
+        <qualifiedname>tcp_server_base::is_running</qualifiedname>
+        <briefdescription>
+<para>检查服务器是否运行中 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>运行中返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="158" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="158" bodyend="158"/>
+        <references refid="classtcp__server__base_1ae598f3ebdc396f44146ba8da6bed8f67" compoundref="tcp__server_8hpp" startline="43" endline="43">running_</references>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__server__base_1a38f2920e77b02963aace50a3b055ac84" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structports" kindref="compound">ports</ref></type>
+        <definition>NEFORCE_NODISCARD ports tcp_server_base::port</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>port</name>
+        <qualifiedname>tcp_server_base::port</qualifiedname>
+        <briefdescription>
+<para>获取监听端口 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>端口号 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="164" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="164" bodyend="164"/>
+        <references refid="classtcp__server__base_1aa38767b5f095b470707df772b5cb0107" compoundref="tcp__server_8hpp" startline="42">port_</references>
+        <referencedby refid="classssl__server_1ae975999b59c678bdf7e16867ecdd1d31">ssl_server::ssl_server</referencedby>
+        <referencedby refid="classtcp__server__base_1afd3f0bf8e207d844dbedb1b8c6720e5c">tcp_server_base</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>TCP服务器基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供TCP服务器的核心功能，包括连接接受、线程池管理、 客户端处理和异常处理。派生类实现具体的接受器创建。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>ssl_server</label>
+        <link refid="classssl__server"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>tcp_server</label>
+        <link refid="classtcp__server"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>tcp_server_base</label>
+        <link refid="classtcp__server__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="6">
+        <label>atomic&lt; bool &gt;</label>
+        <link refid="structatomic_3_01bool_01_4"/>
+      </node>
+      <node id="13">
+        <label>function&lt; void(const exception &amp;)&gt;</label>
+        <link refid="classfunction"/>
+      </node>
+      <node id="12">
+        <label>function&lt; void(tcp_socket)&gt;</label>
+        <link refid="classfunction"/>
+      </node>
+      <node id="8">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>iobject&lt; ports &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>istringify&lt; ports &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="14">
+        <label>mutex</label>
+        <link refid="classmutex"/>
+      </node>
+      <node id="3">
+        <label>ports</label>
+        <link refid="structports"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>shared_mutex</label>
+        <link refid="classshared__mutex"/>
+      </node>
+      <node id="1">
+        <label>tcp_server_base</label>
+        <link refid="classtcp__server__base"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>acceptor_</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>port_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>running_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>worker_threads_</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>client_pool_</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>handler_mutex_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>client_handler_</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>exception_handler_</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>acceptor_mutex_</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>thread_pool</label>
+        <link refid="classthread__pool"/>
+      </node>
+      <node id="2">
+        <label>unique_ptr&lt; tcp_acceptor &gt;</label>
+        <link refid="classunique__ptr"/>
+      </node>
+      <node id="7">
+        <label>vector&lt; thread &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" line="35" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_server.hpp" bodystart="35" bodyend="165"/>
+    <listofallmembers>
+      <member refid="classtcp__server__base_1a339fb280765125ff0e63bb3cb89bcb15" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>accept_loop</name></member>
+      <member refid="classtcp__server__base_1adba355ecdbc0013f1172b368c30107e1" prot="protected" virt="pure-virtual"><scope>tcp_server_base</scope><name>accept_one</name></member>
+      <member refid="classtcp__server__base_1aff2d84f5024c7b4e2bda393c213bf2c7" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>acceptor_</name></member>
+      <member refid="classtcp__server__base_1a1a7e1de9c6df5ba9aa1a12feb06023b8" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>acceptor_mutex_</name></member>
+      <member refid="classtcp__server__base_1a5e6ff6717c9972d255c9bee34975594e" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>client_handler_</name></member>
+      <member refid="classtcp__server__base_1a32641f5767778e30b8c31b3d32441295" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>client_handler_t</name></member>
+      <member refid="classtcp__server__base_1a2d72c2c3af83d0bc20fcd5effaf05874" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>client_pool_</name></member>
+      <member refid="classtcp__server__base_1ab04f76ce60e358af3452ca403ad8c2c3" prot="protected" virt="pure-virtual"><scope>tcp_server_base</scope><name>create_acceptor</name></member>
+      <member refid="classtcp__server__base_1a831cef70165579b406d091ded06b6a19" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>exception_handler_</name></member>
+      <member refid="classtcp__server__base_1a5f608ddaffbd9596fd27cdfc6401a27b" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>exception_handler_t</name></member>
+      <member refid="classtcp__server__base_1a24bf1c8ad6716a8348518f48fad88eb2" prot="protected" virt="virtual"><scope>tcp_server_base</scope><name>handle_client</name></member>
+      <member refid="classtcp__server__base_1ade73ba8bbe4053f6f29d41cb2a34aba5" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>handler_mutex_</name></member>
+      <member refid="classtcp__server__base_1a74e32d45acd9ce5a61ce1a6ace256607" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>is_running</name></member>
+      <member refid="classtcp__server__base_1a6cfadb556ef18b029e0c510f143e833b" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>notify_stop</name></member>
+      <member refid="classtcp__server__base_1a817e76551150298c61eefe51d88e45f6" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>operator=</name></member>
+      <member refid="classtcp__server__base_1adb02246758504d817229562eabeb262a" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>operator=</name></member>
+      <member refid="classtcp__server__base_1a38f2920e77b02963aace50a3b055ac84" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>port</name></member>
+      <member refid="classtcp__server__base_1aa38767b5f095b470707df772b5cb0107" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>port_</name></member>
+      <member refid="classtcp__server__base_1ae598f3ebdc396f44146ba8da6bed8f67" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>running_</name></member>
+      <member refid="classtcp__server__base_1a49f2008a2bc05e9f00c51e6098bb5a6e" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>set_client_handler</name></member>
+      <member refid="classtcp__server__base_1aa7a0567cb6f4b407b8f2afb1a82d90b8" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>set_exception_handler</name></member>
+      <member refid="classtcp__server__base_1ab1957c65d507878b7d376b3433f1aabf" prot="public" virt="virtual"><scope>tcp_server_base</scope><name>start</name></member>
+      <member refid="classtcp__server__base_1a77bb0334985546f7b3b27f7ebbcbb902" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>stop</name></member>
+      <member refid="classtcp__server__base_1afd3f0bf8e207d844dbedb1b8c6720e5c" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>tcp_server_base</name></member>
+      <member refid="classtcp__server__base_1a7dbdc38039a593e363a0ecb0eee2bbbf" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>tcp_server_base</name></member>
+      <member refid="classtcp__server__base_1aff23675d9f2b7e6b8f269e68eda0c8df" prot="public" virt="non-virtual"><scope>tcp_server_base</scope><name>tcp_server_base</name></member>
+      <member refid="classtcp__server__base_1af6dd3d7553c83b5c22e63790a189996f" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>wake_event_</name></member>
+      <member refid="classtcp__server__base_1aa8d9f9a53edb4699d0825cf499baba0c" prot="protected" virt="non-virtual"><scope>tcp_server_base</scope><name>worker_threads_</name></member>
+      <member refid="classtcp__server__base_1ae8163e7386fbe9d18a798e5a6e1f1b3e" prot="public" virt="virtual"><scope>tcp_server_base</scope><name>~tcp_server_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

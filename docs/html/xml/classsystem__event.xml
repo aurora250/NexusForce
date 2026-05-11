@@ -1,0 +1,357 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classsystem__event" kind="class" language="C++" prot="public">
+    <compoundname>system_event</compoundname>
+    <includes refid="system__event_8hpp" local="no">system_event.hpp</includes>
+    <innerclass refid="structsystem__event_1_1mutex__deleter" prot="private">system_event::mutex_deleter</innerclass>
+    <innerclass refid="structsystem__event_1_1cond__deleter" prot="private">system_event::cond_deleter</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>type</name>
+        <qualifiedname>system_event::type</qualifiedname>
+        <enumvalue id="classsystem__event_1a836fe1a751b10858f44697fdd940aa9fae24e926926861449731fb9418399a53d" prot="public">
+          <name>manual_reset</name>
+          <briefdescription>
+<para>手动重置，多个等待线程都会被唤醒，需要手动reset </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classsystem__event_1a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794" prot="public">
+          <name>auto_reset</name>
+          <briefdescription>
+<para>自动重置，只唤醒一个等待线程，之后自动重置为无信号 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>事件类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="39" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="39" bodyend="42"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classsystem__event_1af02e041ae9a6184ea35906f3c38c182e" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* system_event::handle_</definition>
+        <argsstring></argsstring>
+        <name>handle_</name>
+        <qualifiedname>system_event::handle_</qualifiedname>
+        <briefdescription>
+<para>事件句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="56" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsystem__event_1a4a744bf4cbc914d2b0607f48c9aa8017" prot="private" static="no" mutable="no">
+        <type><ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" kindref="member">type</ref></type>
+        <definition>type system_event::type_</definition>
+        <argsstring></argsstring>
+        <name>type_</name>
+        <qualifiedname>system_event::type_</qualifiedname>
+        <briefdescription>
+<para>事件类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="62" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsystem__event_1aaffbccb71e65565978b0a320143debd9" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>system_event::system_event</definition>
+        <argsstring>(bool initial_state=false, type type=type::auto_reset)</argsstring>
+        <name>system_event</name>
+        <qualifiedname>system_event::system_event</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>initial_state</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type><ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" kindref="member">type</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794" kindref="member">type::auto_reset</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>initial_state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始信号状态 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>事件类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsystem__exception" kindref="compound">system_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="71" column="14"/>
+        <references refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794" compoundref="system__event_8hpp" startline="41">auto_reset</references>
+        <referencedby refid="classsystem__event_1a998f73cdf1659d029a1abcace0c0c3aa">operator=</referencedby>
+        <referencedby refid="classsystem__event_1aa56bde5789679822d91883a97f323128">system_event</referencedby>
+        <referencedby refid="classsystem__event_1aa16f20c9949030b16ca0b787f63572f4">~system_event</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__event_1aa16f20c9949030b16ca0b787f63572f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>system_event::~system_event</definition>
+        <argsstring>()</argsstring>
+        <name>~system_event</name>
+        <qualifiedname>system_event::~system_event</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="76" column="5"/>
+        <references refid="classsystem__event_1aaffbccb71e65565978b0a320143debd9">system_event</references>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__event_1acd4c7016816d6bda0b3d80c915fbd5a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>system_event::system_event</definition>
+        <argsstring>(const system_event &amp;)=delete</argsstring>
+        <name>system_event</name>
+        <qualifiedname>system_event::system_event</qualifiedname>
+        <param>
+          <type>const <ref refid="classsystem__event" kindref="compound">system_event</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="78" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__event_1ae0a6c81228cd98f64461e71ee03d7549" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classsystem__event" kindref="compound">system_event</ref> &amp;</type>
+        <definition>system_event &amp; system_event::operator=</definition>
+        <argsstring>(const system_event &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>system_event::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classsystem__event" kindref="compound">system_event</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="79" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__event_1aa56bde5789679822d91883a97f323128" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>system_event::system_event</definition>
+        <argsstring>(system_event &amp;&amp;other) noexcept</argsstring>
+        <name>system_event</name>
+        <qualifiedname>system_event::system_event</qualifiedname>
+        <param>
+          <type><ref refid="classsystem__event" kindref="compound">system_event</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="85" column="5"/>
+        <references refid="classsystem__event_1aaffbccb71e65565978b0a320143debd9">system_event</references>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__event_1a998f73cdf1659d029a1abcace0c0c3aa" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsystem__event" kindref="compound">system_event</ref> &amp;</type>
+        <definition>system_event &amp; system_event::operator=</definition>
+        <argsstring>(system_event &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>system_event::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classsystem__event" kindref="compound">system_event</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="92" column="18"/>
+        <references refid="classsystem__event_1aaffbccb71e65565978b0a320143debd9">system_event</references>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__event_1a8e6d8bfe1aecd567b1916e8d1b68815c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_event::set</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>set</name>
+        <qualifiedname>system_event::set</qualifiedname>
+        <briefdescription>
+<para>设置事件为有信号状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>唤醒等待该事件的线程。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="99" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__event_1a7c349b939fea1a128c803d1035ee76f8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void system_event::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>system_event::reset</qualifiedname>
+        <briefdescription>
+<para>重置事件为无信号状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="104" column="10"/>
+        <references refid="classsystem__event_1a7c349b939fea1a128c803d1035ee76f8">reset</references>
+        <referencedby refid="classsystem__event_1a7c349b939fea1a128c803d1035ee76f8">reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool system_event::wait</definition>
+        <argsstring>(uint32_t timeout_ms=numeric_traits&lt; uint32_t &gt;::max()) noexcept</argsstring>
+        <name>wait</name>
+        <qualifiedname>system_event::wait</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>timeout_ms</declname>
+          <defval><ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt; <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &gt;<ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">::max</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>等待事件变为有信号状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间（毫秒），默认无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>等待是否成功</para>
+</simplesect>
+阻塞当前线程直到事件被设置或超时。 对于自动重置事件，唤醒后事件自动重置。 对于手动重置事件，唤醒后事件保持有信号状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="115" column="10"/>
+        <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="compare_8hpp" startline="133" endline="135">max</references>
+        <references refid="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7">wait</references>
+        <referencedby refid="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7">wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" kindref="member">type</ref></type>
+        <definition>type system_event::event_type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>event_type</name>
+        <qualifiedname>system_event::event_type</qualifiedname>
+        <briefdescription>
+<para>获取事件类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>事件类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="121" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="121" bodyend="121"/>
+        <references refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" compoundref="system__event_8hpp" startline="121" endline="121">event_type</references>
+        <referencedby refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" compoundref="system__event_8hpp" startline="121" endline="121">event_type</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>系统事件类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供线程同步的事件对象，使用场景：<itemizedlist>
+<listitem><para>线程间通知</para>
+</listitem><listitem><para>生产者-消费者模式</para>
+</listitem><listitem><para>工作队列通知 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="33" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="33" bodyend="122"/>
+    <listofallmembers>
+      <member refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" prot="public" virt="non-virtual"><scope>system_event</scope><name>event_type</name></member>
+      <member refid="classsystem__event_1af02e041ae9a6184ea35906f3c38c182e" prot="private" virt="non-virtual"><scope>system_event</scope><name>handle_</name></member>
+      <member refid="classsystem__event_1ae0a6c81228cd98f64461e71ee03d7549" prot="public" virt="non-virtual"><scope>system_event</scope><name>operator=</name></member>
+      <member refid="classsystem__event_1a998f73cdf1659d029a1abcace0c0c3aa" prot="public" virt="non-virtual"><scope>system_event</scope><name>operator=</name></member>
+      <member refid="classsystem__event_1a7c349b939fea1a128c803d1035ee76f8" prot="public" virt="non-virtual"><scope>system_event</scope><name>reset</name></member>
+      <member refid="classsystem__event_1a8e6d8bfe1aecd567b1916e8d1b68815c" prot="public" virt="non-virtual"><scope>system_event</scope><name>set</name></member>
+      <member refid="classsystem__event_1aaffbccb71e65565978b0a320143debd9" prot="public" virt="non-virtual"><scope>system_event</scope><name>system_event</name></member>
+      <member refid="classsystem__event_1acd4c7016816d6bda0b3d80c915fbd5a7" prot="public" virt="non-virtual"><scope>system_event</scope><name>system_event</name></member>
+      <member refid="classsystem__event_1aa56bde5789679822d91883a97f323128" prot="public" virt="non-virtual"><scope>system_event</scope><name>system_event</name></member>
+      <member refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" prot="public" virt="non-virtual"><scope>system_event</scope><name>type</name></member>
+      <member refid="classsystem__event_1a4a744bf4cbc914d2b0607f48c9aa8017" prot="private" virt="non-virtual"><scope>system_event</scope><name>type_</name></member>
+      <member refid="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7" prot="public" virt="non-virtual"><scope>system_event</scope><name>wait</name></member>
+      <member refid="classsystem__event_1aa16f20c9949030b16ca0b787f63572f4" prot="public" virt="non-virtual"><scope>system_event</scope><name>~system_event</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

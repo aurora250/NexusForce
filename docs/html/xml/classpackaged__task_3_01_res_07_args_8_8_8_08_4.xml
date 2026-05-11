@@ -1,0 +1,462 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classpackaged__task_3_01_res_07_args_8_8_8_08_4" kind="class" language="C++" prot="public">
+    <compoundname>packaged_task&lt; Res(Args...)&gt;</compoundname>
+    <includes refid="packaged__task_8hpp" local="no">packaged_task.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Res</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a481158a0784a247c08645972988a88d8" prot="private" static="no">
+        <type>inner::__future_base::task_state_base&lt; Res(Args...)&gt;</type>
+        <definition>using packaged_task&lt; Res(Args...)&gt;::StateType = inner::__future_base::task_state_base&lt;Res(Args...)&gt;</definition>
+        <argsstring></argsstring>
+        <name>StateType</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::StateType</qualifiedname>
+        <briefdescription>
+<para>状态类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="37" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a1f73f492b79235fe3a2ffc20751e60cf" prot="private" static="no" mutable="no">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; StateType &gt;</type>
+        <definition>shared_ptr&lt;StateType&gt; packaged_task&lt; Res(Args...)&gt;::state_ptr</definition>
+        <argsstring></argsstring>
+        <name>state_ptr</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::state_ptr</qualifiedname>
+        <briefdescription>
+<para>任务状态共享指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="39" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>packaged_task&lt; Res(Args...)&gt;::packaged_task</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>packaged_task</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::packaged_task</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建空的packaged_task对象，不关联任何任务。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="47" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="47" bodyend="47"/>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a32c746c6407f06616b1c2eead52151">operator=</referencedby>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1acdf07176055889ad21430d63393c1fc3" compoundref="packaged__task_8hpp" startline="86" endline="89">operator=</referencedby>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a474623a4049c9013b4b948e1f100d0">packaged_task</referencedby>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a78e3200ea269e7f873e946b362315ff8" compoundref="packaged__task_8hpp" startline="79" endline="79">packaged_task</referencedby>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a13ff349103d61896e17b7afed6947cec" compoundref="packaged__task_8hpp" startline="142" endline="147">reset</referencedby>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1aa6f152cd498d6f799acdeafdbf183616" compoundref="packaged__task_8hpp" startline="95" endline="95">swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a1e138c21753a8bef3af52ab548884825" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt;<ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>, <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;Func&gt;&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>packaged_task&lt; Res(Args...)&gt;::packaged_task</definition>
+        <argsstring>(Func &amp;&amp;function)</argsstring>
+        <name>packaged_task</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::packaged_task</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>function</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>function</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要包装的可调用对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建包装指定函数的packaged_task对象。 函数签名必须与模板参数Res Args...兼容。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="58" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="58" bodyend="59"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a94bb0b76b969c5a71970777406a2b768" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>packaged_task&lt; Res(Args...)&gt;::~packaged_task</definition>
+        <argsstring>()</argsstring>
+        <name>~packaged_task</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::~packaged_task</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果存在关联的future且任务未执行，会自动设置broken_promise异常。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="66" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="66" bodyend="70"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a474623a4049c9013b4b948e1f100d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>packaged_task&lt; Res(Args...)&gt;::packaged_task</definition>
+        <argsstring>(const packaged_task &amp;)=delete</argsstring>
+        <name>packaged_task</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::packaged_task</qualifiedname>
+        <param>
+          <type>const packaged_task &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="72" column="5"/>
+        <references refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" compoundref="packaged__task_8hpp" startline="47" endline="47">packaged_task</references>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a32c746c6407f06616b1c2eead52151" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref> &amp;</type>
+        <definition>packaged_task &amp; packaged_task&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(const packaged_task &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="73" column="19"/>
+        <references refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" compoundref="packaged__task_8hpp" startline="47" endline="47">packaged_task</references>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a78e3200ea269e7f873e946b362315ff8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>packaged_task&lt; Res(Args...)&gt;::packaged_task</definition>
+        <argsstring>(packaged_task &amp;&amp;other) noexcept</argsstring>
+        <name>packaged_task</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::packaged_task</qualifiedname>
+        <param>
+          <type>packaged_task &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的packaged_task对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="79" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="79" bodyend="79"/>
+        <references refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" compoundref="packaged__task_8hpp" startline="47" endline="47">packaged_task</references>
+        <references refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df">swap</references>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1acdf07176055889ad21430d63393c1fc3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref> &amp;</type>
+        <definition>packaged_task &amp; packaged_task&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(packaged_task &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的packaged_task对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="86" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="86" bodyend="89"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" compoundref="packaged__task_8hpp" startline="47" endline="47">packaged_task</references>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1aa6f152cd498d6f799acdeafdbf183616" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void packaged_task&lt; Res(Args...)&gt;::swap</definition>
+        <argsstring>(packaged_task &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::swap</qualifiedname>
+        <param>
+          <type><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个packaged_task对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的packaged_task对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="95" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="95" bodyend="95"/>
+        <references refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" compoundref="packaged__task_8hpp" startline="47" endline="47">packaged_task</references>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a7cd09ddad944479f2a571e124afe79b4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool packaged_task&lt; Res(Args...)&gt;::valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>valid</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::valid</qualifiedname>
+        <briefdescription>
+<para>检查任务是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否关联了有效的可调用对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="101" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a41f6eea0c7672b66b7bcae8096460d4a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfuture" kindref="compound">future</ref>&lt; Res &gt;</type>
+        <definition>future&lt; Res &gt; packaged_task&lt; Res(Args...)&gt;::get_future</definition>
+        <argsstring>()</argsstring>
+        <name>get_future</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::get_future</qualifiedname>
+        <briefdescription>
+<para>获取关联的future对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>future对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfuture__exception" kindref="compound">future_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果future已被获取 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="108" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1adb6b72da7146d018b37b4374f66109f6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void packaged_task&lt; Res(Args...)&gt;::operator()</definition>
+        <argsstring>(Args... args)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::operator()</qualifiedname>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>执行任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfuture__exception" kindref="compound">future_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果任务无效</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+同步执行包装的任务，结果或异常会传递给关联的future。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="117" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="117" bodyend="120"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a7d75a082c1163b3d71f5bfa88ff616ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void packaged_task&lt; Res(Args...)&gt;::make_ready_at_thread_exit</definition>
+        <argsstring>(Args... args)</argsstring>
+        <name>make_ready_at_thread_exit</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::make_ready_at_thread_exit</qualifiedname>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在线程退出时标记任务完成 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfuture__exception" kindref="compound">future_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果任务无效</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行任务但延迟结果设置，直到当前线程退出时才将结果传递给future。 适用于需要保证某些资源在结果设置前有效的场景。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="130" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="130" bodyend="133"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a13ff349103d61896e17b7afed6947cec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void packaged_task&lt; Res(Args...)&gt;::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <qualifiedname>packaged_task&lt; Res(Args...)&gt;::reset</qualifiedname>
+        <briefdescription>
+<para>重置任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfuture__exception" kindref="compound">future_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果任务无效</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+重置任务状态，可以重新关联新的future。 原有任务函数保持不变，但会创建新的共享状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="142" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="142" bodyend="147"/>
+        <references refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" compoundref="packaged__task_8hpp" startline="47" endline="47">packaged_task</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异步任务包装类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结果类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+包装可调用对象，提供异步执行能力，并将执行结果或异常传递给关联的future。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" line="36" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp" bodystart="36" bodyend="148"/>
+    <listofallmembers>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a41f6eea0c7672b66b7bcae8096460d4a" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>get_future</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a7d75a082c1163b3d71f5bfa88ff616ab" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>make_ready_at_thread_exit</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1adb6b72da7146d018b37b4374f66109f6" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>operator()</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a32c746c6407f06616b1c2eead52151" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1acdf07176055889ad21430d63393c1fc3" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>packaged_task</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a1e138c21753a8bef3af52ab548884825" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>packaged_task</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a474623a4049c9013b4b948e1f100d0" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>packaged_task</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a78e3200ea269e7f873e946b362315ff8" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>packaged_task</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a13ff349103d61896e17b7afed6947cec" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>reset</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a1f73f492b79235fe3a2ffc20751e60cf" prot="private" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>state_ptr</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a481158a0784a247c08645972988a88d8" prot="private" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>StateType</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1aa6f152cd498d6f799acdeafdbf183616" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>swap</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a7cd09ddad944479f2a571e124afe79b4" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>valid</name></member>
+      <member refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a94bb0b76b969c5a71970777406a2b768" prot="public" virt="non-virtual"><scope>packaged_task&lt; Res(Args...)&gt;</scope><name>~packaged_task</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

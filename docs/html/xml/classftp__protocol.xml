@@ -1,0 +1,561 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classftp__protocol" kind="class" language="C++" prot="public">
+    <compoundname>ftp_protocol</compoundname>
+    <basecompoundref refid="classip__socket" prot="public" virt="non-virtual">ip_socket</basecompoundref>
+    <derivedcompoundref refid="classftp__client" prot="public" virt="non-virtual">ftp_client</derivedcompoundref>
+    <derivedcompoundref refid="classftp__session" prot="public" virt="non-virtual">ftp_session</derivedcompoundref>
+    <innerclass refid="structftp__protocol_1_1response" prot="public">ftp_protocol::response</innerclass>
+    <innerclass refid="structftp__protocol_1_1tls__info" prot="public">ftp_protocol::tls_info</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classftp__protocol_1affc6ca6c676b899b16e4a17cbf92c08c" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>transfer_mode</name>
+        <qualifiedname>ftp_protocol::transfer_mode</qualifiedname>
+        <enumvalue id="classftp__protocol_1affc6ca6c676b899b16e4a17cbf92c08ca5b7f33be48f19c25e1af2f96cffc569f" prot="public">
+          <name>ascii</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classftp__protocol_1affc6ca6c676b899b16e4a17cbf92c08ca9d7183f16acce70658f686ae7f1a4d20" prot="public">
+          <name>binary</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="26" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="26" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="enum" id="classftp__protocol_1a99e84d642f2d300bc5ac4f8731b1930c" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>passive_mode</name>
+        <qualifiedname>ftp_protocol::passive_mode</qualifiedname>
+        <enumvalue id="classftp__protocol_1a99e84d642f2d300bc5ac4f8731b1930cac76a5e84e4bdee527e274ea30c680d79" prot="public">
+          <name>active</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classftp__protocol_1a99e84d642f2d300bc5ac4f8731b1930ca831996cebc6c9bf7687e922c3437be69" prot="public">
+          <name>passive</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="31" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="31" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="enum" id="classftp__protocol_1ab7b496230f8cd35d918bfb58a74f812b" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>tls_mode</name>
+        <qualifiedname>ftp_protocol::tls_mode</qualifiedname>
+        <enumvalue id="classftp__protocol_1ab7b496230f8cd35d918bfb58a74f812ba334c4a4c42fdb79d7ebc3e73b517e6f8" prot="public">
+          <name>none</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classftp__protocol_1ab7b496230f8cd35d918bfb58a74f812bafcb28c9e5790f736e565156a8d8fcb6a" prot="public">
+          <name>implicit_</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classftp__protocol_1ab7b496230f8cd35d918bfb58a74f812bac9c45ac5595e1bb329ad8e26396d93c5" prot="public">
+          <name>explicit_</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="36" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="36" bodyend="40"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classftp__protocol_1aa325cada368fa0b7cf048cc58739258a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t ftp_protocol::kBufferSize</definition>
+        <argsstring></argsstring>
+        <name>kBufferSize</name>
+        <qualifiedname>ftp_protocol::kBufferSize</qualifiedname>
+        <initializer>= 8192</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="58" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classftp__protocol_1a865aa79f334348430dfa25c8d0d52e5b" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ftp_protocol::tls_active_</definition>
+        <argsstring></argsstring>
+        <name>tls_active_</name>
+        <qualifiedname>ftp_protocol::tls_active_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="61" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classftp__protocol_1aee22ad4423b94f9f1bec3a3c9c455645" prot="protected" static="no" mutable="no">
+        <type><ref refid="classssl__stream" kindref="compound">ssl_stream</ref></type>
+        <definition>ssl_stream ftp_protocol::ctrl_ssl_</definition>
+        <argsstring></argsstring>
+        <name>ctrl_ssl_</name>
+        <qualifiedname>ftp_protocol::ctrl_ssl_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="62" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classftp__protocol_1afcac628ebd4e478e646de9d19b4661fd" prot="protected" static="no" mutable="no">
+        <type><ref refid="classssl__context" kindref="compound">ssl_context</ref> *</type>
+        <definition>ssl_context* ftp_protocol::ssl_ctx_</definition>
+        <argsstring></argsstring>
+        <name>ssl_ctx_</name>
+        <qualifiedname>ftp_protocol::ssl_ctx_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="63" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classftp__protocol_1a6889b4d924d79037a6fa4a4048adbb59" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ftp_protocol::data_tls_</definition>
+        <argsstring></argsstring>
+        <name>data_tls_</name>
+        <qualifiedname>ftp_protocol::data_tls_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="64" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classftp__protocol_1a366dcd324caa60a9da49e6e45d75ab68" prot="protected" static="no" mutable="no">
+        <type>char</type>
+        <definition>char ftp_protocol::buffer_[kBufferSize]</definition>
+        <argsstring>[kBufferSize]</argsstring>
+        <name>buffer_</name>
+        <qualifiedname>ftp_protocol::buffer_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="66" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="variable" id="classftp__protocol_1af4a0774cb082df6d1a080210f49a5ded" prot="protected" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t ftp_protocol::buffer_pos_</definition>
+        <argsstring></argsstring>
+        <name>buffer_pos_</name>
+        <qualifiedname>ftp_protocol::buffer_pos_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="67" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classftp__protocol_1a86eb31771f8e9cac298514b11b2b4a24" prot="protected" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t ftp_protocol::buffer_size_</definition>
+        <argsstring></argsstring>
+        <name>buffer_size_</name>
+        <qualifiedname>ftp_protocol::buffer_size_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="68" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classftp__protocol_1a8ab4545b280b33b15bde7bba2b0de98f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ftp_protocol::ftp_protocol</definition>
+        <argsstring>()=default</argsstring>
+        <name>ftp_protocol</name>
+        <qualifiedname>ftp_protocol::ftp_protocol</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="70" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1a09b2d6249620578579de3888b0c82f6e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ftp_protocol::~ftp_protocol</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~ftp_protocol</name>
+        <qualifiedname>ftp_protocol::~ftp_protocol</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="71" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1a2f5f8c70d4567d89d27d5b0092804280" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ftp_protocol::ftp_protocol</definition>
+        <argsstring>(ftp_protocol &amp;&amp;other) noexcept</argsstring>
+        <name>ftp_protocol</name>
+        <qualifiedname>ftp_protocol::ftp_protocol</qualifiedname>
+        <param>
+          <type>ftp_protocol &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="73" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1a36fad194d0e80a087572651bcc082eb6" prot="protected" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>ftp_protocol &amp;</type>
+        <definition>ftp_protocol &amp; ftp_protocol::operator=</definition>
+        <argsstring>(ftp_protocol &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>ftp_protocol::operator=</qualifiedname>
+        <param>
+          <type>ftp_protocol &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="74" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1a7b5bdda9943e4d417b07fb9da612c030" prot="protected" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ftp_protocol::ftp_protocol</definition>
+        <argsstring>(native_handle_type fd)</argsstring>
+        <name>ftp_protocol</name>
+        <qualifiedname>ftp_protocol::ftp_protocol</qualifiedname>
+        <param>
+          <type><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref></type>
+          <declname>fd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="76" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="76" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1abdd2a9a3be458d6704c918b3e42e8aa6" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t ftp_protocol::ctrl_send</definition>
+        <argsstring>(const char *data, size_t len)</argsstring>
+        <name>ctrl_send</name>
+        <qualifiedname>ftp_protocol::ctrl_send</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="79" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1a1d32e950bab66be738f50ed07bc8b286" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t ftp_protocol::ctrl_recv</definition>
+        <argsstring>(char *buf, size_t len)</argsstring>
+        <name>ctrl_recv</name>
+        <qualifiedname>ftp_protocol::ctrl_recv</qualifiedname>
+        <param>
+          <type>char *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="80" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1a10bf575aa01a5e1364af25fcb269b890" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ftp_protocol::ctrl_read_line</definition>
+        <argsstring>(string &amp;out)</argsstring>
+        <name>ctrl_read_line</name>
+        <qualifiedname>ftp_protocol::ctrl_read_line</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1a49fa0e7b2a6854b527b29a0012967d03" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>response</type>
+        <definition>response ftp_protocol::read_response</definition>
+        <argsstring>()</argsstring>
+        <name>read_response</name>
+        <qualifiedname>ftp_protocol::read_response</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="83" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1aa4f4a47015cde0f9b369c069b51c29d3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ftp_protocol::send_response</definition>
+        <argsstring>(int code, const string &amp;msg)</argsstring>
+        <name>send_response</name>
+        <qualifiedname>ftp_protocol::send_response</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>code</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="84" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1a07ae234e7b65fa19d007b132a6fdaa85" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ftp_protocol::send_response</definition>
+        <argsstring>(const response &amp;resp)</argsstring>
+        <name>send_response</name>
+        <qualifiedname>ftp_protocol::send_response</qualifiedname>
+        <param>
+          <type>const response &amp;</type>
+          <declname>resp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="85" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classftp__protocol_1a51630da2c06b20c753685f7507fb243c" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ftp_protocol::clear_buffer</definition>
+        <argsstring>()</argsstring>
+        <name>clear_buffer</name>
+        <qualifiedname>ftp_protocol::clear_buffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="87" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="87" bodyend="90"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ftp_protocol</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ip_socket</label>
+        <link refid="classip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>socket_base</label>
+        <link refid="classsocket__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ftp_protocol</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ctrl_ssl_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>ssl_ctx_</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ip_socket</label>
+        <link refid="classip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>socket_base</label>
+        <link refid="classsocket__base"/>
+      </node>
+      <node id="5">
+        <label>ssl_context</label>
+        <link refid="classssl__context"/>
+      </node>
+      <node id="4">
+        <label>ssl_stream</label>
+        <link refid="classssl__stream"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" line="24" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp" bodystart="24" bodyend="91"/>
+    <listofallmembers>
+      <member refid="classip__socket_1a981aa1544d7794182f65c1764fc83443" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>address_family</name></member>
+      <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>bind</name></member>
+      <member refid="classftp__protocol_1a366dcd324caa60a9da49e6e45d75ab68" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>buffer_</name></member>
+      <member refid="classftp__protocol_1af4a0774cb082df6d1a080210f49a5ded" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>buffer_pos_</name></member>
+      <member refid="classftp__protocol_1a86eb31771f8e9cac298514b11b2b4a24" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>buffer_size_</name></member>
+      <member refid="classftp__protocol_1a51630da2c06b20c753685f7507fb243c" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>clear_buffer</name></member>
+      <member refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" prot="public" virt="virtual"><scope>ftp_protocol</scope><name>close</name></member>
+      <member refid="classip__socket_1a50186a110e9b4e5c67aac5a23e021ace" prot="public" virt="virtual"><scope>ftp_protocol</scope><name>connect</name></member>
+      <member refid="classftp__protocol_1a10bf575aa01a5e1364af25fcb269b890" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>ctrl_read_line</name></member>
+      <member refid="classftp__protocol_1a1d32e950bab66be738f50ed07bc8b286" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>ctrl_recv</name></member>
+      <member refid="classftp__protocol_1abdd2a9a3be458d6704c918b3e42e8aa6" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>ctrl_send</name></member>
+      <member refid="classftp__protocol_1aee22ad4423b94f9f1bec3a3c9c455645" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>ctrl_ssl_</name></member>
+      <member refid="classftp__protocol_1a6889b4d924d79037a6fa4a4048adbb59" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>data_tls_</name></member>
+      <member refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>family_</name></member>
+      <member refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>fd_</name></member>
+      <member refid="classftp__protocol_1a8ab4545b280b33b15bde7bba2b0de98f" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>ftp_protocol</name></member>
+      <member refid="classftp__protocol_1a2f5f8c70d4567d89d27d5b0092804280" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>ftp_protocol</name></member>
+      <member refid="classftp__protocol_1a7b5bdda9943e4d417b07fb9da612c030" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>ftp_protocol</name></member>
+      <member refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>get_option</name></member>
+      <member refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>invalid_handle</name></member>
+      <member refid="classip__socket_1aaae0820ef1814fdd2299e646e7ce0b88" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1a8a478205847df7ca0529f15ca8ce50b8" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1a00d8e53e5b1c1d7dc6de2fe45e50ffc4" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1aae6b6a8b9b8bea4d66dba690c8222980" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1a84a515031395f20e2365e46cfabd9fdb" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>is_ipv4</name></member>
+      <member refid="classip__socket_1a33e8a286462c74c4c4eb4df045dac507" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>is_ipv6</name></member>
+      <member refid="classsocket__base_1a6187ffba6859cc29fcf0c0b08916dcca" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>is_open</name></member>
+      <member refid="classftp__protocol_1aa325cada368fa0b7cf048cc58739258a" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>kBufferSize</name></member>
+      <member refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>listen</name></member>
+      <member refid="classsocket__base_1a698bf7147749c5f0bbfd0a906875eb5e" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>local_endpoint</name></member>
+      <member refid="classsocket__base_1a7a733151fa76e8e33ebd6d637c06e0fd" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>native_handle</name></member>
+      <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>native_handle_type</name></member>
+      <member refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>open</name></member>
+      <member refid="classip__socket_1af46a0c10c0c23ab91a8445c16733ed61" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>open_ip</name></member>
+      <member refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>operator bool</name></member>
+      <member refid="classftp__protocol_1a36fad194d0e80a087572651bcc082eb6" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>operator=</name></member>
+      <member refid="classip__socket_1a5df14bf84d50bdad66ab775ad2c5cbba" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>ftp_protocol</scope><name>operator=</name></member>
+      <member refid="classip__socket_1a73fbebcb7a962895a5943597b9d3d6d8" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>ftp_protocol</scope><name>operator=</name></member>
+      <member refid="classsocket__base_1af825fb2543e89b098bc9c1da47f09647" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>ftp_protocol</scope><name>operator=</name></member>
+      <member refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>ftp_protocol</scope><name>operator=</name></member>
+      <member refid="classftp__protocol_1a99e84d642f2d300bc5ac4f8731b1930c" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>passive_mode</name></member>
+      <member refid="classftp__protocol_1a49fa0e7b2a6854b527b29a0012967d03" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>read_response</name></member>
+      <member refid="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>release</name></member>
+      <member refid="classsocket__base_1a3af835aab3dbb6e477c9833184437b62" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>remote_endpoint</name></member>
+      <member refid="classftp__protocol_1aa4f4a47015cde0f9b369c069b51c29d3" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>send_response</name></member>
+      <member refid="classftp__protocol_1a07ae234e7b65fa19d007b132a6fdaa85" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>send_response</name></member>
+      <member refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>set_keep_alive</name></member>
+      <member refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>set_nonblocking</name></member>
+      <member refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>set_option</name></member>
+      <member refid="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>set_receive_buffer_size</name></member>
+      <member refid="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>set_receive_timeout</name></member>
+      <member refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>set_reuse_address</name></member>
+      <member refid="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>set_reuse_port</name></member>
+      <member refid="classsocket__base_1a7126487c99a283ff1eb6b3475893e280" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>set_send_buffer_size</name></member>
+      <member refid="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>set_send_timeout</name></member>
+      <member refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>set_tcp_nodelay</name></member>
+      <member refid="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>shutdown_both</name></member>
+      <member refid="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>shutdown_receive</name></member>
+      <member refid="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>shutdown_send</name></member>
+      <member refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1a57db04b97c49aa2c123b8b4cb155ee9b" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>socket_base</name></member>
+      <member refid="classftp__protocol_1afcac628ebd4e478e646de9d19b4661fd" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>ssl_ctx_</name></member>
+      <member refid="classftp__protocol_1a865aa79f334348430dfa25c8d0d52e5b" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>tls_active_</name></member>
+      <member refid="classftp__protocol_1ab7b496230f8cd35d918bfb58a74f812b" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>tls_mode</name></member>
+      <member refid="classftp__protocol_1affc6ca6c676b899b16e4a17cbf92c08c" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>transfer_mode</name></member>
+      <member refid="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>try_open</name></member>
+      <member refid="classftp__protocol_1a09b2d6249620578579de3888b0c82f6e" prot="protected" virt="non-virtual"><scope>ftp_protocol</scope><name>~ftp_protocol</name></member>
+      <member refid="classip__socket_1a4a1d2bcfb15b0d319defef1c9da3c0d4" prot="public" virt="non-virtual"><scope>ftp_protocol</scope><name>~ip_socket</name></member>
+      <member refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" prot="public" virt="virtual"><scope>ftp_protocol</scope><name>~socket_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

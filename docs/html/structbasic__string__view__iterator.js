@@ -13,7 +13,7 @@ var structbasic__string__view__iterator =
     [ "decrement", "structbasic__string__view__iterator.html#a0f5adb2d5e7734841371e326868cc95e", null ],
     [ "dereference", "structbasic__string__view__iterator.html#afcdaa98d58ba0f6cb4955e26a4caccb4", null ],
     [ "distance_to", "structbasic__string__view__iterator.html#ad3fba5c98c78d83144266c1226a0bb1c", null ],
-    [ "equal", "structbasic__string__view__iterator.html#a162f77de742f668c59f33d1067f001dc", null ],
+    [ "equal_to", "structbasic__string__view__iterator.html#a69e4deb2bec1e2282a319924bfb9b70d", null ],
     [ "increment", "structbasic__string__view__iterator.html#a2ca01ec63f16df94c17dd6568300d2f7", null ],
     [ "less_than", "structbasic__string__view__iterator.html#a50b193c809417b7eba1af8826dd92756", null ],
     [ "operator[]", "structbasic__string__view__iterator.html#afdd322cb01157c8d24869b32be305451", null ]

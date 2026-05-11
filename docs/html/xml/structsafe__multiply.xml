@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structsafe__multiply" kind="struct" language="C++" prot="public">
+    <compoundname>safe_multiply</compoundname>
+    <includes refid="static__numeric_8hpp" local="no">static_numeric.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref></type>
+        <declname>A</declname>
+        <defname>A</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref></type>
+        <declname>B</declname>
+        <defname>B</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="structsafe__multiply_1a6c4ea9442245cc28b6778fe42f8465c7" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t safe_multiply&lt; A, B &gt;::half_range</definition>
+        <argsstring></argsstring>
+        <name>half_range</name>
+        <qualifiedname>safe_multiply::half_range</qualifiedname>
+        <initializer>= static_cast&lt;<ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref>&gt;(1) &lt;&lt; (sizeof(<ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref>) * 4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="74" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structsafe__multiply_1a868be858a4c3bd84c3c961a1d5424889" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>const uintmax_t safe_multiply&lt; A, B &gt;::a_low</definition>
+        <argsstring></argsstring>
+        <name>a_low</name>
+        <qualifiedname>safe_multiply::a_low</qualifiedname>
+        <initializer>= <ref refid="structstatic__abs" kindref="compound">static_abs</ref>&lt;A&gt;::value % half_range</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="76" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structsafe__multiply_1a1975c29db6cba1f9f0540903531e52ab" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>const uintmax_t safe_multiply&lt; A, B &gt;::a_high</definition>
+        <argsstring></argsstring>
+        <name>a_high</name>
+        <qualifiedname>safe_multiply::a_high</qualifiedname>
+        <initializer>= <ref refid="structstatic__abs" kindref="compound">static_abs</ref>&lt;A&gt;::value / half_range</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="77" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structsafe__multiply_1a3e5dea82dab65b71fd7a03076e7cd83d" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>const uintmax_t safe_multiply&lt; A, B &gt;::b_low</definition>
+        <argsstring></argsstring>
+        <name>b_low</name>
+        <qualifiedname>safe_multiply::b_low</qualifiedname>
+        <initializer>= <ref refid="structstatic__abs" kindref="compound">static_abs</ref>&lt;B&gt;::value % half_range</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="78" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structsafe__multiply_1ae0524150a5c261932c6e476fcd710899" prot="private" static="yes" mutable="no">
+        <type>const <ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>const uintmax_t safe_multiply&lt; A, B &gt;::b_high</definition>
+        <argsstring></argsstring>
+        <name>b_high</name>
+        <qualifiedname>safe_multiply::b_high</qualifiedname>
+        <initializer>= <ref refid="structstatic__abs" kindref="compound">static_abs</ref>&lt;B&gt;::value / half_range</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="79" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structsafe__multiply_1aabb13c63bbc73fb7bb3ee250e2970b79" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref></type>
+        <definition>const intmax_t safe_multiply&lt; A, B &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>safe_multiply::value</qualifiedname>
+        <initializer>= A * B</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="88" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>安全的编译期乘法，检查溢出 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个乘数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个乘数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在编译期检查乘法是否会导致溢出，如果会溢出则触发静态断言。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="72" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="72" bodyend="89"/>
+    <listofallmembers>
+      <member refid="structsafe__multiply_1a1975c29db6cba1f9f0540903531e52ab" prot="private" virt="non-virtual"><scope>safe_multiply</scope><name>a_high</name></member>
+      <member refid="structsafe__multiply_1a868be858a4c3bd84c3c961a1d5424889" prot="private" virt="non-virtual"><scope>safe_multiply</scope><name>a_low</name></member>
+      <member refid="structsafe__multiply_1ae0524150a5c261932c6e476fcd710899" prot="private" virt="non-virtual"><scope>safe_multiply</scope><name>b_high</name></member>
+      <member refid="structsafe__multiply_1a3e5dea82dab65b71fd7a03076e7cd83d" prot="private" virt="non-virtual"><scope>safe_multiply</scope><name>b_low</name></member>
+      <member refid="structsafe__multiply_1a6c4ea9442245cc28b6778fe42f8465c7" prot="private" virt="non-virtual"><scope>safe_multiply</scope><name>half_range</name></member>
+      <member refid="structsafe__multiply_1aabb13c63bbc73fb7bb3ee250e2970b79" prot="public" virt="non-virtual"><scope>safe_multiply</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

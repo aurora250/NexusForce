@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['引用包装_0',['引用包装',['../group___reference_wrapper.html',1,'']]]
+  ['异常处理_0',['异常处理',['../group___exception_handling.html',1,'']]],
+  ['异常类集_1',['异常类集',['../group___exceptions.html',1,'']]],
+  ['异步组件_2',['异步组件',['../group___async_components.html',1,'']]],
+  ['异步调用_3',['异步调用',['../group___async.html',1,'']]]
 ];

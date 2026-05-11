@@ -1,0 +1,614 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classdatabase__pool" kind="class" language="C++" prot="public">
+    <compoundname>database_pool</compoundname>
+    <includes refid="database__pool_8hpp" local="no">database_pool.hpp</includes>
+    <innerclass refid="structdatabase__pool_1_1pool__config" prot="public">database_pool::pool_config</innerclass>
+    <innerclass refid="structdatabase__pool_1_1connection__entry" prot="private">database_pool::connection_entry</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdatabase__pool_1a278cbca11a15ce8756ea66f3547fecae" prot="private" static="no" mutable="no">
+        <type><ref refid="structdb__config" kindref="compound">db_config</ref></type>
+        <definition>db_config database_pool::config_</definition>
+        <argsstring></argsstring>
+        <name>config_</name>
+        <qualifiedname>database_pool::config_</qualifiedname>
+        <briefdescription>
+<para>数据库连接配置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="72" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdatabase__pool_1a7c9fe7abb8a15a3819dbcb1b645fb4c0" prot="private" static="no" mutable="no">
+        <type><ref refid="structdatabase__pool_1_1pool__config" kindref="compound">pool_config</ref></type>
+        <definition>pool_config database_pool::pool_cfg_</definition>
+        <argsstring></argsstring>
+        <name>pool_cfg_</name>
+        <qualifiedname>database_pool::pool_cfg_</qualifiedname>
+        <briefdescription>
+<para>连接池配置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="73" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdatabase__pool_1aa030e79ac0a4d7e224f8e4016b24a2ea" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classidb__factory" kindref="compound">idb_factory</ref> &gt;</type>
+        <definition>unique_ptr&lt;idb_factory&gt; database_pool::factory_</definition>
+        <argsstring></argsstring>
+        <name>factory_</name>
+        <qualifiedname>database_pool::factory_</qualifiedname>
+        <briefdescription>
+<para>数据库连接工厂 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="74" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdatabase__pool_1a6a7551ec0ecd93e8f49b487120756047" prot="private" static="no" mutable="no">
+        <type><ref refid="classqueue" kindref="compound">queue</ref>&lt; connection_entry &gt;</type>
+        <definition>queue&lt;connection_entry&gt; database_pool::idle_queue_</definition>
+        <argsstring></argsstring>
+        <name>idle_queue_</name>
+        <qualifiedname>database_pool::idle_queue_</qualifiedname>
+        <briefdescription>
+<para>空闲连接队列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="76" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdatabase__pool_1a33d402d8d1456e8b23f80a74996f1d67" prot="private" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex database_pool::queue_mtx_</definition>
+        <argsstring></argsstring>
+        <name>queue_mtx_</name>
+        <qualifiedname>database_pool::queue_mtx_</qualifiedname>
+        <briefdescription>
+<para>保护空闲队列的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="77" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdatabase__pool_1a230410f389abd37525ce49ec42a88f5f" prot="private" static="no" mutable="no">
+        <type><ref refid="classcondition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable database_pool::cv_</definition>
+        <argsstring></argsstring>
+        <name>cv_</name>
+        <qualifiedname>database_pool::cv_</qualifiedname>
+        <briefdescription>
+<para>条件变量（用于等待连接） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="78" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdatabase__pool_1a65c546a73e268080c8a88da254b1c6a5" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; database_pool::total_count_</definition>
+        <argsstring></argsstring>
+        <name>total_count_</name>
+        <qualifiedname>database_pool::total_count_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>总连接数（包括使用中和空闲） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="80" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdatabase__pool_1a14780489bdc10395134dc94096b7e826" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; database_pool::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>database_pool::running_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>连接池运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="81" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdatabase__pool_1ac253a9a97eae564fff68ae172ae68798" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread database_pool::replenish_thread_</definition>
+        <argsstring></argsstring>
+        <name>replenish_thread_</name>
+        <qualifiedname>database_pool::replenish_thread_</qualifiedname>
+        <briefdescription>
+<para>连接补充线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="83" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdatabase__pool_1a12bda01bf05e6b6f34788fb604928a71" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread database_pool::scanner_thread_</definition>
+        <argsstring></argsstring>
+        <name>scanner_thread_</name>
+        <qualifiedname>database_pool::scanner_thread_</qualifiedname>
+        <briefdescription>
+<para>空闲连接回收线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="84" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classdatabase__pool_1ae8c5715f6a457a5454ac2b25b6e5d0d7" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structidb__connect" kindref="compound">idb_connect</ref> *</type>
+        <definition>idb_connect * database_pool::try_create_connect</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_create_connect</name>
+        <qualifiedname>database_pool::try_create_connect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="86" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1abf9a03bd0bf716fe9e95d3a3b036dac8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void database_pool::return_connect</definition>
+        <argsstring>(idb_connect *conn)</argsstring>
+        <name>return_connect</name>
+        <qualifiedname>database_pool::return_connect</qualifiedname>
+        <param>
+          <type><ref refid="structidb__connect" kindref="compound">idb_connect</ref> *</type>
+          <declname>conn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="88" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a68a6e2ae5bdbedb1e986e5ebfdf2afb0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void database_pool::replenish_task</definition>
+        <argsstring>()</argsstring>
+        <name>replenish_task</name>
+        <qualifiedname>database_pool::replenish_task</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="90" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a1e90945a855eeb266843f35a895450f2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void database_pool::scanner_task</definition>
+        <argsstring>()</argsstring>
+        <name>scanner_task</name>
+        <qualifiedname>database_pool::scanner_task</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="91" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1ae309ce6dd40974a95019b5aa9ea7288e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; T &gt;</type>
+        <definition>shared_ptr&lt; T &gt; database_pool::acquire_impl</definition>
+        <argsstring>()</argsstring>
+        <name>acquire_impl</name>
+        <qualifiedname>database_pool::acquire_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="94" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdatabase__pool_1a262a1c859c11ecbfdf03d0ceb5d5beb6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>database_pool::database_pool</definition>
+        <argsstring>(db_type type, const db_config &amp;config)</argsstring>
+        <name>database_pool</name>
+        <qualifiedname>database_pool::database_pool</qualifiedname>
+        <param>
+          <type><ref refid="group___database_1ga80fcb4d728eaac384a3edc19d9ad20c6" kindref="member">db_type</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据库类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据库连接配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="102" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="102" bodyend="103"/>
+        <references refid="classdatabase__pool_1a262a1c859c11ecbfdf03d0ceb5d5beb6" compoundref="database__pool_8hpp" startline="102" endline="103">database_pool</references>
+        <referencedby refid="classdatabase__pool_1a262a1c859c11ecbfdf03d0ceb5d5beb6" compoundref="database__pool_8hpp" startline="102" endline="103">database_pool</referencedby>
+        <referencedby refid="classdatabase__pool_1af1c193fefa6d542e3e2e0b654734cc05">~database_pool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1ade5bdda89c4a9369ee5cb19cde8fade0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>database_pool::database_pool</definition>
+        <argsstring>(db_type type, const db_config &amp;config, const pool_config &amp;pool_config)</argsstring>
+        <name>database_pool</name>
+        <qualifiedname>database_pool::database_pool</qualifiedname>
+        <param>
+          <type><ref refid="group___database_1ga80fcb4d728eaac384a3edc19d9ad20c6" kindref="member">db_type</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structdatabase__pool_1_1pool__config" kindref="compound">pool_config</ref> &amp;</type>
+          <declname>pool_config</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据库类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据库连接配置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__pool_1_1pool__config" kindref="compound">pool_config</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接池配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdatabase__exception" kindref="compound">database_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化连接失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="112" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1af1c193fefa6d542e3e2e0b654734cc05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>database_pool::~database_pool</definition>
+        <argsstring>()</argsstring>
+        <name>~database_pool</name>
+        <qualifiedname>database_pool::~database_pool</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>停止所有后台线程，释放所有连接资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="119" column="5"/>
+        <references refid="classdatabase__pool_1a262a1c859c11ecbfdf03d0ceb5d5beb6" compoundref="database__pool_8hpp" startline="102" endline="103">database_pool</references>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a2552a1397f540f7b82eb72075b83113b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>database_pool::database_pool</definition>
+        <argsstring>(const database_pool &amp;)=delete</argsstring>
+        <name>database_pool</name>
+        <qualifiedname>database_pool::database_pool</qualifiedname>
+        <param>
+          <type>const <ref refid="classdatabase__pool" kindref="compound">database_pool</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="121" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a233ecec1a2ca86a150759b48691010ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classdatabase__pool" kindref="compound">database_pool</ref> &amp;</type>
+        <definition>database_pool &amp; database_pool::operator=</definition>
+        <argsstring>(const database_pool &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>database_pool::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classdatabase__pool" kindref="compound">database_pool</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="122" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1ab75d55756cb7a810b365cab7be48a38f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>database_pool::database_pool</definition>
+        <argsstring>(database_pool &amp;&amp;)=delete</argsstring>
+        <name>database_pool</name>
+        <qualifiedname>database_pool::database_pool</qualifiedname>
+        <param>
+          <type><ref refid="classdatabase__pool" kindref="compound">database_pool</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="123" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a0c41d831ac40b236d5e6f3e7318e6c98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classdatabase__pool" kindref="compound">database_pool</ref> &amp;</type>
+        <definition>database_pool &amp; database_pool::operator=</definition>
+        <argsstring>(database_pool &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>database_pool::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classdatabase__pool" kindref="compound">database_pool</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="124" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a8ee69804050e504438cd86805fbd32f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="structidb__connect" kindref="compound">idb_connect</ref> &gt;</type>
+        <definition>shared_ptr&lt; idb_connect &gt; database_pool::get_connect</definition>
+        <argsstring>()</argsstring>
+        <name>get_connect</name>
+        <qualifiedname>database_pool::get_connect</qualifiedname>
+        <briefdescription>
+<para>获取通用数据库连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>共享指针管理的连接对象</para>
+</simplesect>
+返回基类idb_connect指针，适用于不需要特定类型操作的场景。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="132" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a8dfcfdfde1930667868c535548303b11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="structidb__tb__connect" kindref="compound">idb_tb_connect</ref> &gt;</type>
+        <definition>shared_ptr&lt; idb_tb_connect &gt; database_pool::get_tb_connect</definition>
+        <argsstring>()</argsstring>
+        <name>get_tb_connect</name>
+        <qualifiedname>database_pool::get_tb_connect</qualifiedname>
+        <briefdescription>
+<para>获取关系型数据库连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>共享指针管理的连接对象</para>
+</simplesect>
+返回idb_tb_connect指针，支持SQL查询操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="140" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a9231bb1c7d553a38a23f835310d309b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="structidb__kv__connect" kindref="compound">idb_kv_connect</ref> &gt;</type>
+        <definition>shared_ptr&lt; idb_kv_connect &gt; database_pool::get_kv_connect</definition>
+        <argsstring>()</argsstring>
+        <name>get_kv_connect</name>
+        <qualifiedname>database_pool::get_kv_connect</qualifiedname>
+        <briefdescription>
+<para>获取键值存储连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>共享指针管理的连接对象</para>
+</simplesect>
+返回idb_kv_connect指针，支持键值操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="148" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a44cf9a5381a8a4deb4c9c2996557895c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t database_pool::idle_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>idle_count</name>
+        <qualifiedname>database_pool::idle_count</qualifiedname>
+        <briefdescription>
+<para>获取空闲连接数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前空闲队列中的连接数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="154" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a47817942eeea79eff60c40aac98a2b24" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t database_pool::total_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>total_count</name>
+        <qualifiedname>database_pool::total_count</qualifiedname>
+        <briefdescription>
+<para>获取总连接数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前总连接数（包括使用中和空闲） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="160" column="12"/>
+        <references refid="classdatabase__pool_1a47817942eeea79eff60c40aac98a2b24">total_count</references>
+        <referencedby refid="classdatabase__pool_1a47817942eeea79eff60c40aac98a2b24">total_count</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1ac3cd4dc274c371f558c62ca353702490" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool database_pool::is_running</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_running</name>
+        <qualifiedname>database_pool::is_running</qualifiedname>
+        <briefdescription>
+<para>检查连接池是否正在运行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>运行中返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="166" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="166" bodyend="166"/>
+        <references refid="classdatabase__pool_1ac3cd4dc274c371f558c62ca353702490" compoundref="database__pool_8hpp" startline="166" endline="166">is_running</references>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <referencedby refid="classdatabase__pool_1ac3cd4dc274c371f558c62ca353702490" compoundref="database__pool_8hpp" startline="166" endline="166">is_running</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdatabase__pool_1a1ab7c90200d7334d1ad83e4d44899786" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void database_pool::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>database_pool::stop</qualifiedname>
+        <briefdescription>
+<para>停止连接池 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>停止所有后台线程，等待当前使用中的连接归还后释放资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="173" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>数据库连接池类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理数据库连接的生命周期，提供连接的获取和归还功能。 内部维护一个空闲连接队列，支持多线程安全访问。</para>
+<para>主要特性：<itemizedlist>
+<listitem><para>连接复用，减少连接创建开销</para>
+</listitem><listitem><para>最小/最大连接数配置</para>
+</listitem><listitem><para>空闲连接超时回收</para>
+</listitem><listitem><para>连接健康检查</para>
+</listitem><listitem><para>自动补充连接</para>
+</listitem><listitem><para>获取连接超时控制</para>
+</listitem><listitem><para>支持关系型数据库和键值存储 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" line="42" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/database_pool.hpp" bodystart="42" bodyend="174"/>
+    <listofallmembers>
+      <member refid="classdatabase__pool_1ae309ce6dd40974a95019b5aa9ea7288e" prot="private" virt="non-virtual"><scope>database_pool</scope><name>acquire_impl</name></member>
+      <member refid="classdatabase__pool_1a278cbca11a15ce8756ea66f3547fecae" prot="private" virt="non-virtual"><scope>database_pool</scope><name>config_</name></member>
+      <member refid="classdatabase__pool_1a230410f389abd37525ce49ec42a88f5f" prot="private" virt="non-virtual"><scope>database_pool</scope><name>cv_</name></member>
+      <member refid="classdatabase__pool_1a262a1c859c11ecbfdf03d0ceb5d5beb6" prot="public" virt="non-virtual"><scope>database_pool</scope><name>database_pool</name></member>
+      <member refid="classdatabase__pool_1ade5bdda89c4a9369ee5cb19cde8fade0" prot="public" virt="non-virtual"><scope>database_pool</scope><name>database_pool</name></member>
+      <member refid="classdatabase__pool_1a2552a1397f540f7b82eb72075b83113b" prot="public" virt="non-virtual"><scope>database_pool</scope><name>database_pool</name></member>
+      <member refid="classdatabase__pool_1ab75d55756cb7a810b365cab7be48a38f" prot="public" virt="non-virtual"><scope>database_pool</scope><name>database_pool</name></member>
+      <member refid="classdatabase__pool_1aa030e79ac0a4d7e224f8e4016b24a2ea" prot="private" virt="non-virtual"><scope>database_pool</scope><name>factory_</name></member>
+      <member refid="classdatabase__pool_1a8ee69804050e504438cd86805fbd32f8" prot="public" virt="non-virtual"><scope>database_pool</scope><name>get_connect</name></member>
+      <member refid="classdatabase__pool_1a9231bb1c7d553a38a23f835310d309b7" prot="public" virt="non-virtual"><scope>database_pool</scope><name>get_kv_connect</name></member>
+      <member refid="classdatabase__pool_1a8dfcfdfde1930667868c535548303b11" prot="public" virt="non-virtual"><scope>database_pool</scope><name>get_tb_connect</name></member>
+      <member refid="classdatabase__pool_1a44cf9a5381a8a4deb4c9c2996557895c" prot="public" virt="non-virtual"><scope>database_pool</scope><name>idle_count</name></member>
+      <member refid="classdatabase__pool_1a6a7551ec0ecd93e8f49b487120756047" prot="private" virt="non-virtual"><scope>database_pool</scope><name>idle_queue_</name></member>
+      <member refid="classdatabase__pool_1ac3cd4dc274c371f558c62ca353702490" prot="public" virt="non-virtual"><scope>database_pool</scope><name>is_running</name></member>
+      <member refid="classdatabase__pool_1a233ecec1a2ca86a150759b48691010ef" prot="public" virt="non-virtual"><scope>database_pool</scope><name>operator=</name></member>
+      <member refid="classdatabase__pool_1a0c41d831ac40b236d5e6f3e7318e6c98" prot="public" virt="non-virtual"><scope>database_pool</scope><name>operator=</name></member>
+      <member refid="classdatabase__pool_1a7c9fe7abb8a15a3819dbcb1b645fb4c0" prot="private" virt="non-virtual"><scope>database_pool</scope><name>pool_cfg_</name></member>
+      <member refid="classdatabase__pool_1a33d402d8d1456e8b23f80a74996f1d67" prot="private" virt="non-virtual"><scope>database_pool</scope><name>queue_mtx_</name></member>
+      <member refid="classdatabase__pool_1a68a6e2ae5bdbedb1e986e5ebfdf2afb0" prot="private" virt="non-virtual"><scope>database_pool</scope><name>replenish_task</name></member>
+      <member refid="classdatabase__pool_1ac253a9a97eae564fff68ae172ae68798" prot="private" virt="non-virtual"><scope>database_pool</scope><name>replenish_thread_</name></member>
+      <member refid="classdatabase__pool_1abf9a03bd0bf716fe9e95d3a3b036dac8" prot="private" virt="non-virtual"><scope>database_pool</scope><name>return_connect</name></member>
+      <member refid="classdatabase__pool_1a14780489bdc10395134dc94096b7e826" prot="private" virt="non-virtual"><scope>database_pool</scope><name>running_</name></member>
+      <member refid="classdatabase__pool_1a1e90945a855eeb266843f35a895450f2" prot="private" virt="non-virtual"><scope>database_pool</scope><name>scanner_task</name></member>
+      <member refid="classdatabase__pool_1a12bda01bf05e6b6f34788fb604928a71" prot="private" virt="non-virtual"><scope>database_pool</scope><name>scanner_thread_</name></member>
+      <member refid="classdatabase__pool_1a1ab7c90200d7334d1ad83e4d44899786" prot="public" virt="non-virtual"><scope>database_pool</scope><name>stop</name></member>
+      <member refid="classdatabase__pool_1a47817942eeea79eff60c40aac98a2b24" prot="public" virt="non-virtual"><scope>database_pool</scope><name>total_count</name></member>
+      <member refid="classdatabase__pool_1a65c546a73e268080c8a88da254b1c6a5" prot="private" virt="non-virtual"><scope>database_pool</scope><name>total_count_</name></member>
+      <member refid="classdatabase__pool_1ae8c5715f6a457a5454ac2b25b6e5d0d7" prot="private" virt="non-virtual"><scope>database_pool</scope><name>try_create_connect</name></member>
+      <member refid="classdatabase__pool_1af1c193fefa6d542e3e2e0b654734cc05" prot="public" virt="non-virtual"><scope>database_pool</scope><name>~database_pool</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

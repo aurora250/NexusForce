@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['并行算法_0',['并行算法',['../group___parallel_algorithms.html',1,'']]]
+  ['平台检测_0',['平台检测',['../group___platform_detection.html',1,'']]],
+  ['平台相关类型_1',['平台相关类型',['../group___platform_dependent_types.html',1,'']]]
 ];

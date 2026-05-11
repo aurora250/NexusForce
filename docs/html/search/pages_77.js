@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['负载因子管理_0',['负载因子管理',['../group___hash_table.html#load_factor_management',1,'']]]
+  ['误报率估算_0',['误报率估算',['../group___bloom_filter.html#false_positive_estimation',1,'']]]
 ];

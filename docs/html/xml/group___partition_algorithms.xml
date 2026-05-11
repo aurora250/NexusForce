@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___partition_algorithms" kind="group">
+    <compoundname>PartitionAlgorithms</compoundname>
+    <title>分区算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___partition_algorithms_1ga165394317b9b3996c7a9b5cd4fdc32c8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Predicate</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator partition</definition>
+        <argsstring>(Iterator first, Iterator last, Predicate pred)</argsstring>
+        <name>partition</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Predicate</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>分区算法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Predicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一元谓词 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第二部分第一个元素的迭代器</para>
+</simplesect>
+将范围 [first, last) 重新排列，使得所有满足谓词 pred 的元素都出现在不满足谓词的元素之前。 不保证相同类别的元素保持原始相对顺序。</para>
+<para>算法使用双向迭代器，从两端向中间扫描：<orderedlist>
+<listitem><para>从前向后找到第一个不满足谓词的元素</para>
+</listitem><listitem><para>从后向前找到第一个满足谓词的元素</para>
+</listitem><listitem><para>交换这两个元素</para>
+</listitem><listitem><para>重复直到两个扫描指针相遇 </para>
+</listitem></orderedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/partition.hpp" line="46" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/partition.hpp" bodystart="46" bodyend="77"/>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga56f3ab178cee74039e73463d63a71658" compoundref="concepts_8hpp" startline="581">is_ranges_bid_iter_v</references>
+        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
+      </memberdef>
+      <memberdef kind="function" id="group___partition_algorithms_1ga09ca7889019a50556c6f23810bf2de1d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator lomuto_partition</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>lomuto_partition</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>Lomuto 分区算法（基准值归位） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>基准值最终的迭代器位置</para>
+</simplesect>
+选择 first、mid、last-1 的中位数作为基准值，将其交换到 first， 使用 Lomuto 方案分区，最后将基准值放置到正确位置并返回。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/partition.hpp" line="119" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/partition.hpp" bodystart="119" bodyend="145"/>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
+        <referencedby refid="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" compoundref="sort_8hpp" startline="646" endline="665">introspective_sort</referencedby>
+        <referencedby refid="group___partition_algorithms_1ga5f1b9f359ef3ff97439435a54b26f0e5" compoundref="partition_8hpp" startline="155" endline="157">lomuto_partition</referencedby>
+        <referencedby refid="group___sort_algorithms_1gac44c6ef290cec1428f3ac65b21eefbca" compoundref="sort_8hpp" startline="894" endline="904">nth_element</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga7bb66b56d5311bd5f64e0d65abd153fc" compoundref="sort_8hpp" startline="699" endline="705">quick_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___partition_algorithms_1ga5f1b9f359ef3ff97439435a54b26f0e5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator lomuto_partition</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>lomuto_partition</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>Lomuto 分区算法（基准值归位） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>基准值最终的迭代器位置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/partition.hpp" line="155" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/partition.hpp" bodystart="155" bodyend="157"/>
+        <references refid="group___partition_algorithms_1ga09ca7889019a50556c6f23810bf2de1d" compoundref="partition_8hpp" startline="119" endline="145">lomuto_partition</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>分区算法的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

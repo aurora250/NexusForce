@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___convertible_checks" kind="group">
+    <compoundname>ConvertibleChecks</compoundname>
+    <title>可转换性检查</title>
+    <innerclass refid="structis__convertible" prot="public">is_convertible</innerclass>
+    <innerclass refid="structis__nothrow__convertible" prot="public">is_nothrow_convertible</innerclass>
+    <innerclass refid="structis__nothrow__arrow" prot="public">is_nothrow_arrow</innerclass>
+    <innerconcept refid="conceptconvertible__to">convertible_to</innerconcept>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___convertible_checks_1gab8efd424ae29f19c10d54d62118c763f" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename ToElement</type>
+          </param>
+          <param>
+            <type>typename FromElement</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt; FromElement(*)[], ToElement(*)[]&gt;</type>
+        <definition>using is_array_convertible = is_convertible&lt;FromElement (*)[], ToElement (*)[]&gt;</definition>
+        <argsstring></argsstring>
+        <name>is_array_convertible</name>
+        <briefdescription>
+<para>判断数组元素类型FromElement是否可以转换为ToElement </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ToElement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>FromElement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源元素类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+通过检查指向未知大小数组的指针的转换性来实现。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3163" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3163" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename From</type>
+          </param>
+          <param>
+            <type>typename To</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr bool</type>
+        <definition>NEFORCE_INLINE17 constexpr bool is_convertible_v</definition>
+        <argsstring></argsstring>
+        <name>is_convertible_v</name>
+        <initializer>= <ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt;From, To&gt;::value</initializer>
+        <briefdescription>
+<para>is_convertible的便捷变量模板 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3139" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___convertible_checks_1gaedc6d8dc4b28b51190d3ad7d0ea5195d" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename ToElement</type>
+          </param>
+          <param>
+            <type>typename FromElement</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr bool</type>
+        <definition>NEFORCE_INLINE17 constexpr bool is_array_convertible_v</definition>
+        <argsstring></argsstring>
+        <name>is_array_convertible_v</name>
+        <initializer>= <ref refid="group___convertible_checks_1gab8efd424ae29f19c10d54d62118c763f" kindref="member">is_array_convertible</ref>&lt;ToElement, FromElement&gt;::value</initializer>
+        <briefdescription>
+<para>is_array_convertible的便捷变量模板 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3171" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3171" bodyend="-1"/>
+        <referencedby refid="classmemory__view_1a7eb1bd51c6a73fd238b61576361493cb">memory_view&lt; byte_t &gt;::memory_view</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="group___convertible_checks_1ga50712f600f437f1f09f8bad5f88d7ba3" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename From</type>
+          </param>
+          <param>
+            <type>typename To</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr bool</type>
+        <definition>NEFORCE_INLINE17 constexpr bool is_nothrow_convertible_v</definition>
+        <argsstring></argsstring>
+        <name>is_nothrow_convertible_v</name>
+        <initializer>= <ref refid="structis__nothrow__convertible" kindref="compound">is_nothrow_convertible</ref>&lt;From, To&gt;::value</initializer>
+        <briefdescription>
+<para>is_nothrow_convertible的便捷变量模板 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3201" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3201" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___convertible_checks_1gae285e74e4b2e698591c6d5fdb73bcb1c" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Ptr</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr bool</type>
+        <definition>NEFORCE_INLINE17 constexpr bool is_nothrow_arrow_v</definition>
+        <argsstring></argsstring>
+        <name>is_nothrow_arrow_v</name>
+        <initializer>= <ref refid="structis__nothrow__arrow" kindref="compound">is_nothrow_arrow</ref>&lt;Iterator, Ptr&gt;::value</initializer>
+        <briefdescription>
+<para>is_nothrow_arrow的便捷变量模板 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3227" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3227" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>检查类型之间的转换能力 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

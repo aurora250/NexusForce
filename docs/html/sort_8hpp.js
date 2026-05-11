@@ -1,5 +1,9 @@
 var sort_8hpp =
 [
+    [ "bubble_sort", "group___sort_algorithms.html#ga38b39d6d4265a3a7e829bdf9219b8b30", null ],
+    [ "bubble_sort", "group___sort_algorithms.html#gaf5532cf5c44d6eb963b5f105e5190d39", null ],
+    [ "cocktail_sort", "group___sort_algorithms.html#gab4370b27a1fe63f986c990d6d24ce1ca", null ],
+    [ "cocktail_sort", "group___sort_algorithms.html#ga2e5e13816a5ba6e0b7d7b7a8ca330c74", null ],
     [ "insertion_sort", "group___sort_algorithms.html#ga8a0aec613c2b702a0f34cf6299b7b190", null ],
     [ "insertion_sort", "group___sort_algorithms.html#gad75649c2b023f9d65025c2623f049b59", null ],
     [ "introspective_sort", "group___sort_algorithms.html#gaffb3fd567cdefa23e2ab6a1a5a6e6947", null ],
@@ -18,6 +22,12 @@ var sort_8hpp =
     [ "partial_sort_copy", "group___sort_algorithms.html#ga7604c36909710fbc4e92db0d66ad5054", null ],
     [ "quick_sort", "group___sort_algorithms.html#ga5daa37ac5f6fc132c53c076b24ce6163", null ],
     [ "quick_sort", "group___sort_algorithms.html#ga7bb66b56d5311bd5f64e0d65abd153fc", null ],
+    [ "select_sort", "group___sort_algorithms.html#gaa914cf59e17489231832a5f5353d9e2e", null ],
+    [ "select_sort", "group___sort_algorithms.html#ga08dba41cc540351140973e676d80fd72", null ],
+    [ "shell_sort", "group___sort_algorithms.html#ga449b0e936d1bec8d1953ec623db36263", null ],
+    [ "shell_sort", "group___sort_algorithms.html#gad58219b25c336c59023f210a295514d5", null ],
     [ "sort", "group___sort_algorithms.html#ga7a4fdc8969bfed2d02cdd1941044a8d9", null ],
-    [ "sort", "group___sort_algorithms.html#ga3d93e28bad28595d49e09ec5e08a7895", null ]
+    [ "sort", "group___sort_algorithms.html#ga3d93e28bad28595d49e09ec5e08a7895", null ],
+    [ "tim_sort", "group___sort_algorithms.html#ga72746fd9d7faa395313fcf685cb12677", null ],
+    [ "tim_sort", "group___sort_algorithms.html#gac0a8a9e872d1a63a5bbb6754b3915e07", null ]
 ];

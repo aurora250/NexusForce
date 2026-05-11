@@ -1,0 +1,437 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___merge_algorithms" kind="group">
+    <compoundname>MergeAlgorithms</compoundname>
+    <title>合并算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___merge_algorithms_1ga0b9cd2bc635fe355dff2344b03e0b7bb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename Iterator3</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator3</type>
+        <definition>Iterator3 merge</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result, Compare comp)</argsstring>
+        <name>merge</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>last2</declname>
+        </param>
+        <param>
+          <type>Iterator3</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>合并两个已排序序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator3</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器</para>
+</simplesect>
+将两个已排序的范围 [first1, last1) 和 [first2, last2) 合并到以 result 开始的范围。 结果范围包含来自两个输入范围的所有元素，并保持排序顺序。</para>
+<para>前提条件：<orderedlist>
+<listitem><para>两个输入范围都已按照 comp 排序</para>
+</listitem><listitem><para>输出范围不与任一输入范围重叠</para>
+</listitem><listitem><para>输出范围有足够的空间容纳所有元素 </para>
+</listitem></orderedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/merge.hpp" line="51" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/merge.hpp" bodystart="51" bodyend="68"/>
+        <references refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" compoundref="shift_8hpp" startline="90" endline="98">copy</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="group___merge_algorithms_1ga91839cd96c2e631f63fabfb72bd70482" compoundref="merge_8hpp" startline="83" endline="85">merge</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___merge_algorithms_1ga91839cd96c2e631f63fabfb72bd70482" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename Iterator3</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator3</type>
+        <definition>Iterator3 merge</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result)</argsstring>
+        <name>merge</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>last2</declname>
+        </param>
+        <param>
+          <type>Iterator3</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>合并两个已排序序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator3</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/merge.hpp" line="83" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/merge.hpp" bodystart="83" bodyend="85"/>
+        <references refid="group___merge_algorithms_1ga0b9cd2bc635fe355dff2344b03e0b7bb" compoundref="merge_8hpp" startline="51" endline="68">merge</references>
+      </memberdef>
+      <memberdef kind="function" id="group___merge_algorithms_1ga55d7862a1ac8f26c6d17ad4d9e12489d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void inplace_merge</definition>
+        <argsstring>(Iterator first, Iterator middle, Iterator last, Compare comp)</argsstring>
+        <name>inplace_merge</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>middle</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>原地合并两个已排序的连续范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>middle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围中间分割点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将两个已排序的连续子范围 [first, middle) 和 [middle, last) 原地合并， 使得整个范围 [first, last) 成为有序的。</para>
+<para>算法尝试分配临时缓冲区以提高性能，如果分配失败则使用无缓冲区的算法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/merge.hpp" line="294" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/merge.hpp" bodystart="294" bodyend="303"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1ga56f3ab178cee74039e73463d63a71658" compoundref="concepts_8hpp" startline="581">is_ranges_bid_iter_v</references>
+        <referencedby refid="group___merge_algorithms_1gab19c5ed5eb001e8a69501fa739605fd0" compoundref="merge_8hpp" startline="313" endline="315">inplace_merge</referencedby>
+        <referencedby refid="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" compoundref="sort_8hpp" startline="432" endline="443">merge_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1gac0a8a9e872d1a63a5bbb6754b3915e07" compoundref="sort_8hpp" startline="833" endline="867">tim_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___merge_algorithms_1gab19c5ed5eb001e8a69501fa739605fd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void inplace_merge</definition>
+        <argsstring>(Iterator first, Iterator middle, Iterator last)</argsstring>
+        <name>inplace_merge</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>middle</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>原地合并两个已排序的连续范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>middle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围中间分割点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/merge.hpp" line="313" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/merge.hpp" bodystart="313" bodyend="315"/>
+        <references refid="group___merge_algorithms_1ga55d7862a1ac8f26c6d17ad4d9e12489d" compoundref="merge_8hpp" startline="294" endline="303">inplace_merge</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>合并算法的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

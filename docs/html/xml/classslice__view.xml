@@ -1,0 +1,307 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classslice__view" kind="class" language="C++" prot="public">
+    <compoundname>slice_view</compoundname>
+    <basecompoundref refid="structview__base" prot="public" virt="non-virtual">view_base&lt; slice_view&lt; V &gt; &gt;</basecompoundref>
+    <innerclass refid="structslice__view_1_1cache__t" prot="private">slice_view::cache_t</innerclass>
+    <templateparamlist>
+      <param>
+        <type>View</type>
+        <declname>V</declname>
+        <defname>V</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classslice__view_1ad073de9b23a63fb39ae921f6fdbbc467" prot="private" static="no">
+        <type>decltype(_NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; <ref refid="group___remove_qualifiers_1ga75ab6c9a804ec997a6e8cb9c5b36c3e4" kindref="member">remove_const_t</ref>&lt; V &gt; &gt;().begin())</type>
+        <definition>using slice_view&lt; V &gt;::base_iterator = decltype(_NEFORCE declval&lt;remove_const_t&lt;V&gt;&gt;().begin())</definition>
+        <argsstring></argsstring>
+        <name>base_iterator</name>
+        <qualifiedname>slice_view::base_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1764" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1764" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classslice__view_1a0402a6806fac245c6b7e5c660232bcb1" prot="private" static="no">
+        <type>decltype(_NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; <ref refid="group___add_qualifiers_1ga9c558ffe7355932ea12b66ec6bcf06db" kindref="member">add_const_t</ref>&lt; V &gt; &gt;().begin())</type>
+        <definition>using slice_view&lt; V &gt;::const_base_iterator = decltype(_NEFORCE declval&lt;add_const_t&lt;V&gt;&gt;().begin())</definition>
+        <argsstring></argsstring>
+        <name>const_base_iterator</name>
+        <qualifiedname>slice_view::const_base_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1765" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1765" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classslice__view_1acf49ec17d5960e069a4737563f8f973a" prot="private" static="no">
+        <type><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga6b799734e6d6a4258cb1fb79ac2551f3" kindref="member">is_const_v</ref>&lt; V &gt;, const_base_iterator, base_iterator &gt;</type>
+        <definition>using slice_view&lt; V &gt;::iterator = conditional_t&lt;is_const_v&lt;V&gt;, const_base_iterator, base_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>slice_view::iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1766" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1766" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classslice__view_1a91240274f1e4387ea563dd06e700240a" prot="private" static="no">
+        <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; base_iterator &gt;</type>
+        <definition>using slice_view&lt; V &gt;::difference_type = iter_difference_t&lt;base_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>slice_view::difference_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1767" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1767" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classslice__view_1a82aedd93224f9fe56682553a3c6343cb" prot="private" static="no" mutable="no">
+        <type>V</type>
+        <definition>V slice_view&lt; V &gt;::base_</definition>
+        <argsstring></argsstring>
+        <name>base_</name>
+        <qualifiedname>slice_view::base_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1774" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1774" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classslice__view_1af66b8cfbbf6b626e1463af958d5f9d6b" prot="private" static="no" mutable="no">
+        <type>difference_type</type>
+        <definition>difference_type slice_view&lt; V &gt;::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <qualifiedname>slice_view::start_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1775" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1775" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classslice__view_1a18c2ee4227e066a4cc582c286af9e5d8" prot="private" static="no" mutable="no">
+        <type>difference_type</type>
+        <definition>difference_type slice_view&lt; V &gt;::end_</definition>
+        <argsstring></argsstring>
+        <name>end_</name>
+        <qualifiedname>slice_view::end_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1776" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1776" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classslice__view_1ac96c5caf8d960f605a54baa7dd1ef518" prot="private" static="no" mutable="yes">
+        <type>cache_t</type>
+        <definition>cache_t slice_view&lt; V &gt;::cache_</definition>
+        <argsstring></argsstring>
+        <name>cache_</name>
+        <qualifiedname>slice_view::cache_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1777" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1777" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classslice__view_1a4fe298d5672b87304910879ae6301005" prot="private" static="no" mutable="yes">
+        <type>bool</type>
+        <definition>bool slice_view&lt; V &gt;::has_value_</definition>
+        <argsstring></argsstring>
+        <name>has_value_</name>
+        <qualifiedname>slice_view::has_value_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1778" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1778" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classslice__view_1a7c4ee8579db9d52382655e784ac0a47b" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void slice_view&lt; V &gt;::ensure_cache</definition>
+        <argsstring>() const</argsstring>
+        <name>ensure_cache</name>
+        <qualifiedname>slice_view::ensure_cache</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1780" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1780" bodyend="1799"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classslice__view_1ad65d40896e8a5af5eb17f56186185bae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>slice_view&lt; V &gt;::slice_view</definition>
+        <argsstring>()=default</argsstring>
+        <name>slice_view</name>
+        <qualifiedname>slice_view::slice_view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1802" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classslice__view_1acfd65f393d489b7faf66e96b02e40c11" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>slice_view&lt; V &gt;::slice_view</definition>
+        <argsstring>(V base, difference_type start, difference_type end)</argsstring>
+        <name>slice_view</name>
+        <qualifiedname>slice_view::slice_view</qualifiedname>
+        <param>
+          <type>V</type>
+          <declname>base</declname>
+        </param>
+        <param>
+          <type>difference_type</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>difference_type</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1804" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1804" bodyend="1807"/>
+      </memberdef>
+      <memberdef kind="function" id="classslice__view_1a81d36c1ea2d1c30ea6515aa7f7192476" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator slice_view&lt; V &gt;::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <qualifiedname>slice_view::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1809" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1809" bodyend="1812"/>
+      </memberdef>
+      <memberdef kind="function" id="classslice__view_1a52bd54c8b5dea3fee75ad082e65e7ad4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator slice_view&lt; V &gt;::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <qualifiedname>slice_view::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1813" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1813" bodyend="1816"/>
+      </memberdef>
+      <memberdef kind="function" id="classslice__view_1a4befd335ad3d4a1960f74a759f76bceb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator slice_view&lt; V &gt;::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <qualifiedname>slice_view::begin</qualifiedname>
+    <requiresclause>Range&lt;const V&gt;    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1818" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1818" bodyend="1823"/>
+      </memberdef>
+      <memberdef kind="function" id="classslice__view_1ab98f274fc99f9ea0b977bf9a81390c27" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator slice_view&lt; V &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <qualifiedname>slice_view::end</qualifiedname>
+    <requiresclause>Range&lt;const V&gt;    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1824" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1824" bodyend="1829"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>slice_view&lt; V &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>view_base&lt; slice_view&lt; V &gt; &gt;</label>
+        <link refid="structview__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>slice_view&lt; V &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>view_base&lt; slice_view&lt; V &gt; &gt;</label>
+        <link refid="structview__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1763" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1763" bodyend="1830"/>
+    <listofallmembers>
+      <member refid="classslice__view_1a82aedd93224f9fe56682553a3c6343cb" prot="private" virt="non-virtual"><scope>slice_view</scope><name>base_</name></member>
+      <member refid="classslice__view_1ad073de9b23a63fb39ae921f6fdbbc467" prot="private" virt="non-virtual"><scope>slice_view</scope><name>base_iterator</name></member>
+      <member refid="classslice__view_1a81d36c1ea2d1c30ea6515aa7f7192476" prot="public" virt="non-virtual"><scope>slice_view</scope><name>begin</name></member>
+      <member refid="classslice__view_1a4befd335ad3d4a1960f74a759f76bceb" prot="public" virt="non-virtual"><scope>slice_view</scope><name>begin</name></member>
+      <member refid="classslice__view_1ac96c5caf8d960f605a54baa7dd1ef518" prot="private" virt="non-virtual"><scope>slice_view</scope><name>cache_</name></member>
+      <member refid="classslice__view_1a0402a6806fac245c6b7e5c660232bcb1" prot="private" virt="non-virtual"><scope>slice_view</scope><name>const_base_iterator</name></member>
+      <member refid="classslice__view_1a91240274f1e4387ea563dd06e700240a" prot="private" virt="non-virtual"><scope>slice_view</scope><name>difference_type</name></member>
+      <member refid="classslice__view_1a52bd54c8b5dea3fee75ad082e65e7ad4" prot="public" virt="non-virtual"><scope>slice_view</scope><name>end</name></member>
+      <member refid="classslice__view_1ab98f274fc99f9ea0b977bf9a81390c27" prot="public" virt="non-virtual"><scope>slice_view</scope><name>end</name></member>
+      <member refid="classslice__view_1a18c2ee4227e066a4cc582c286af9e5d8" prot="private" virt="non-virtual"><scope>slice_view</scope><name>end_</name></member>
+      <member refid="classslice__view_1a7c4ee8579db9d52382655e784ac0a47b" prot="private" virt="non-virtual"><scope>slice_view</scope><name>ensure_cache</name></member>
+      <member refid="classslice__view_1a4fe298d5672b87304910879ae6301005" prot="private" virt="non-virtual"><scope>slice_view</scope><name>has_value_</name></member>
+      <member refid="classslice__view_1acf49ec17d5960e069a4737563f8f973a" prot="private" virt="non-virtual"><scope>slice_view</scope><name>iterator</name></member>
+      <member refid="classslice__view_1ad65d40896e8a5af5eb17f56186185bae" prot="public" virt="non-virtual"><scope>slice_view</scope><name>slice_view</name></member>
+      <member refid="classslice__view_1acfd65f393d489b7faf66e96b02e40c11" prot="public" virt="non-virtual"><scope>slice_view</scope><name>slice_view</name></member>
+      <member refid="classslice__view_1af66b8cfbbf6b626e1463af958d5f9d6b" prot="private" virt="non-virtual"><scope>slice_view</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,775 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classssl__client" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>ssl_client</compoundname>
+    <basecompoundref refid="classtcp__client__base" prot="public" virt="non-virtual">tcp_client_base</basecompoundref>
+    <includes refid="tcp__client_8hpp" local="no">tcp_client.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classssl__client_1a7f6e80f95f17bfdbe3b8efb6be43c874" prot="private" static="no" mutable="no">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classssl__context" kindref="compound">ssl_context</ref> &gt;</type>
+        <definition>optional&lt;ssl_context&gt; ssl_client::ssl_ctx_</definition>
+        <argsstring></argsstring>
+        <name>ssl_ctx_</name>
+        <qualifiedname>ssl_client::ssl_ctx_</qualifiedname>
+        <briefdescription>
+<para>SSL上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="438" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="438" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classssl__client_1af6fa99d37e8b043061bc858a2913260e" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string ssl_client::sni_hostname_</definition>
+        <argsstring></argsstring>
+        <name>sni_hostname_</name>
+        <qualifiedname>ssl_client::sni_hostname_</qualifiedname>
+        <briefdescription>
+<para>SNI主机名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="439" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="439" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classssl__client_1ae2247bb3603abc879fd1e12b8761f4f4" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ssl_client::verify_peer_</definition>
+        <argsstring></argsstring>
+        <name>verify_peer_</name>
+        <qualifiedname>ssl_client::verify_peer_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否验证对等方证书 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="440" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="440" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classssl__client_1a8adf7fa185cb276e8723e4900a76fb08" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ssl_client::ssl_initialized_</definition>
+        <argsstring></argsstring>
+        <name>ssl_initialized_</name>
+        <qualifiedname>ssl_client::ssl_initialized_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>SSL是否已初始化 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="441" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="441" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classssl__client_1a8eb86cc4819094bb2f562bf63e871cc2" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
+        <definition>unique_ptr&lt; tcp_socket &gt; ssl_client::create_socket</definition>
+        <argsstring>() override</argsstring>
+        <name>create_socket</name>
+        <qualifiedname>ssl_client::create_socket</qualifiedname>
+        <reimplements refid="classtcp__client__base_1a4aa3eb851f96deeb6286b6cd782c9be7">create_socket</reimplements>
+        <briefdescription>
+<para>创建新的socket对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>socket智能指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="444" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="444" bodyend="444"/>
+        <references refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" compoundref="unique__ptr_8hpp" startline="973" endline="975">make_unique</references>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1a5fbd0e9862f7eaa89c627cd6c3a0da50" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool ssl_client::post_connect</definition>
+        <argsstring>() override</argsstring>
+        <name>post_connect</name>
+        <qualifiedname>ssl_client::post_connect</qualifiedname>
+        <reimplements refid="classtcp__client__base_1a97c21cec9d599cc696f26f7b27981827">post_connect</reimplements>
+        <briefdescription>
+<para>连接建立后的额外处理 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>处理成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="446" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1a32501cfd4a2a76da017fc443c1bc2155" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void ssl_client::pre_disconnect</definition>
+        <argsstring>() override</argsstring>
+        <name>pre_disconnect</name>
+        <qualifiedname>ssl_client::pre_disconnect</qualifiedname>
+        <reimplements refid="classtcp__client__base_1a151253188e7d17a9a85f657c24445ca8">pre_disconnect</reimplements>
+        <briefdescription>
+<para>连接断开前的清理工作 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="447" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="447" bodyend="447"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classssl__client_1a0a92947bec6a11a871d0ef09365dd2ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ssl_client::ssl_client</definition>
+        <argsstring>()=default</argsstring>
+        <name>ssl_client</name>
+        <qualifiedname>ssl_client::ssl_client</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="453" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1a5c5233c0a6e5a94cf4739d774f258296" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ssl_client::ssl_client</definition>
+        <argsstring>(ssl_context ctx)</argsstring>
+        <name>ssl_client</name>
+        <qualifiedname>ssl_client::ssl_client</qualifiedname>
+        <param>
+          <type><ref refid="classssl__context" kindref="compound">ssl_context</ref></type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>构造函数（带SSL上下文） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="459" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1aa40be6b9d5093ea63514630c59f063f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_client::set_ssl_context</definition>
+        <argsstring>(ssl_context ctx)</argsstring>
+        <name>set_ssl_context</name>
+        <qualifiedname>ssl_client::set_ssl_context</qualifiedname>
+        <param>
+          <type><ref refid="classssl__context" kindref="compound">ssl_context</ref></type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>设置SSL上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已连接或上下文无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="466" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1aede4617d79e85f87567d4647cd63f3ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_client::set_verify_peer</definition>
+        <argsstring>(bool verify)</argsstring>
+        <name>set_verify_peer</name>
+        <qualifiedname>ssl_client::set_verify_peer</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>verify</declname>
+        </param>
+        <briefdescription>
+<para>设置是否验证对等方证书 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>verify</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否验证 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已连接时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="473" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1aac8d8ba7408c7a06e4d9f0425e3cd4e1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ssl_client::get_verify_peer</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_verify_peer</name>
+        <qualifiedname>ssl_client::get_verify_peer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="474" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="474" bodyend="474"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1a9fc706ad38b7f40efa21d1806a122389" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_client::set_sni_hostname</definition>
+        <argsstring>(string hostname)</argsstring>
+        <name>set_sni_hostname</name>
+        <qualifiedname>ssl_client::set_sni_hostname</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>hostname</declname>
+        </param>
+        <briefdescription>
+<para>设置SNI主机名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主机名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已连接时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="481" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1af5e99fbd7555bf69dc23860010c9824b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const string &amp; ssl_client::sni_hostname</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>sni_hostname</name>
+        <qualifiedname>ssl_client::sni_hostname</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="482" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="482" bodyend="482"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1ab63f76a3d3fd9f179598c22d747668da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ssl_client::load_ca_file</definition>
+        <argsstring>(const string &amp;ca_file)</argsstring>
+        <name>load_ca_file</name>
+        <qualifiedname>ssl_client::load_ca_file</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>ca_file</declname>
+        </param>
+        <briefdescription>
+<para>加载CA证书文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ca_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CA证书文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="489" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1a277e03d41b0e9a0c62318a8c70a4b862" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ssl_client::load_ca_path</definition>
+        <argsstring>(const string &amp;ca_path)</argsstring>
+        <name>load_ca_path</name>
+        <qualifiedname>ssl_client::load_ca_path</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>ca_path</declname>
+        </param>
+        <briefdescription>
+<para>加载CA证书目录 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ca_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CA证书目录路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="496" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1addf5ff79681127bcfa2d9b90a86776e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view ssl_client::peer_certificate_info</definition>
+        <argsstring>() const</argsstring>
+        <name>peer_certificate_info</name>
+        <qualifiedname>ssl_client::peer_certificate_info</qualifiedname>
+        <briefdescription>
+<para>获取对等方证书信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>证书信息字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="502" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1a38cf7d6d25778279a9ac5023794a6a25" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view ssl_client::cipher_name</definition>
+        <argsstring>() const</argsstring>
+        <name>cipher_name</name>
+        <qualifiedname>ssl_client::cipher_name</qualifiedname>
+        <briefdescription>
+<para>获取当前密码套件名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>密码套件名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="508" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1a94fc10cb8adb236d70bbd91a8ac68743" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view ssl_client::protocol_version</definition>
+        <argsstring>() const</argsstring>
+        <name>protocol_version</name>
+        <qualifiedname>ssl_client::protocol_version</qualifiedname>
+        <briefdescription>
+<para>获取当前协议版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>协议版本字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="514" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1acdf910c18a4543d058686bb9e36b82f4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ssl_client::has_ssl_context</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_ssl_context</name>
+        <qualifiedname>ssl_client::has_ssl_context</qualifiedname>
+        <briefdescription>
+<para>检查是否有SSL上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="520" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="520" bodyend="520"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1a426b3ccaec32e247f58160c26363ae0a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ssl_client::is_ssl_initialized</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_ssl_initialized</name>
+        <qualifiedname>ssl_client::is_ssl_initialized</qualifiedname>
+        <briefdescription>
+<para>检查SSL是否已初始化 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已初始化返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="526" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="526" bodyend="526"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1aec7078dcec88266cf040ed04019c9351" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classssl__socket" kindref="compound">ssl_socket</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD ssl_socket &amp; ssl_client::ssl_socket_ref</definition>
+        <argsstring>()</argsstring>
+        <name>ssl_socket_ref</name>
+        <qualifiedname>ssl_client::ssl_socket_ref</qualifiedname>
+        <briefdescription>
+<para>获取SSL socket引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SSL socket引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL未就绪时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="533" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__client_1aa636769f1b8e97f92fdd39d992eca715" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classssl__socket" kindref="compound">ssl_socket</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const ssl_socket &amp; ssl_client::ssl_socket_ref</definition>
+        <argsstring>() const</argsstring>
+        <name>ssl_socket_ref</name>
+        <qualifiedname>ssl_client::ssl_socket_ref</qualifiedname>
+        <briefdescription>
+<para>获取SSL socket常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SSL socket常量引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL未就绪时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="540" column="40"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>SSL/TLS客户端类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现SSL/TLS加密的TCP客户端，支持证书验证和SNI。</para>
+<para>使用示例： <programlisting><codeline><highlight class="comment">//<sp/>创建SSL客户端</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classssl__client_1a0a92947bec6a11a871d0ef09365dd2ce" kindref="member">ssl_client</ref><sp/>client;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>加载CA证书（可选）</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">client.<ref refid="classssl__client_1ab63f76a3d3fd9f179598c22d747668da" kindref="member">load_ca_file</ref>(</highlight><highlight class="stringliteral">&quot;ca-bundle.crt&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>设置SNI主机名</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">client.<ref refid="classssl__client_1a9fc706ad38b7f40efa21d1806a122389" kindref="member">set_sni_hostname</ref>(</highlight><highlight class="stringliteral">&quot;example.com&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>设置验证模式</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">client.<ref refid="classssl__client_1aede4617d79e85f87567d4647cd63f3ce" kindref="member">set_verify_peer</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>连接HTTPS服务器</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(client.<ref refid="classtcp__client__base_1aff2ce3b983291c2d894d6077b0882d5a" kindref="member">connect</ref>(</highlight><highlight class="stringliteral">&quot;example.com&quot;</highlight><highlight class="normal">,<sp/>443))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>发送HTTPS请求</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>client.<ref refid="classtcp__client__base_1a80790a2a3798f6e591107ccec2bf4809" kindref="member">send_all</ref>(</highlight><highlight class="stringliteral">&quot;GET<sp/>/<sp/>HTTP/1.1\r\nHost:<sp/>example.com\r\n\r\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>获取证书信息</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Cipher:<sp/>&quot;</highlight><highlight class="normal">,<sp/>client.<ref refid="classssl__client_1a38cf7d6d25778279a9ac5023794a6a25" kindref="member">cipher_name</ref>());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Protocol:<sp/>&quot;</highlight><highlight class="normal">,<sp/>client.<ref refid="classssl__client_1a94fc10cb8adb236d70bbd91a8ac68743" kindref="member">protocol_version</ref>());</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ssl_client</label>
+        <link refid="classssl__client"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tcp_client_base</label>
+        <link refid="classtcp__client__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="15">
+        <label>atomic&lt; bool &gt;</label>
+        <link refid="structatomic_3_01bool_01_4"/>
+      </node>
+      <node id="12">
+        <label>atomic&lt; int &gt;</label>
+        <link refid="structatomic_3_01int_01_4"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>atomic_base&lt; int &gt;</label>
+        <link refid="structatomic__base"/>
+      </node>
+      <node id="5">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>dns_client</label>
+        <link refid="classdns__client"/>
+      </node>
+      <node id="14">
+        <label>duration&lt; int64_t, milli &gt;</label>
+        <link refid="structduration"/>
+      </node>
+      <node id="17">
+        <label>function&lt; void()&gt;</label>
+        <link refid="classfunction"/>
+      </node>
+      <node id="18">
+        <label>function&lt; void(const exception &amp;)&gt;</label>
+        <link refid="classfunction"/>
+      </node>
+      <node id="16">
+        <label>function&lt; void(const string &amp;, ports)&gt;</label>
+        <link refid="classfunction"/>
+      </node>
+      <node id="6">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="8">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="10">
+        <label>iobject&lt; ports &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>istringify&lt; ports &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="9">
+        <label>ports</label>
+        <link refid="structports"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ssl_client</label>
+        <link refid="classssl__client"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>tcp_client_base</label>
+        <link refid="classtcp__client__base"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>dns_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>socket_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>connected_host_</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>connected_port_</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>current_reconnect_attempt_</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>connect_timeout_</edgelabel>
+          <edgelabel>reconnect_delay_</edgelabel>
+          <edgelabel>recv_timeout_</edgelabel>
+          <edgelabel>send_timeout_</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>is_reconnecting_</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>connect_callback_</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>disconnect_callback_</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>exception_handler_</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>unique_ptr&lt; tcp_socket &gt;</label>
+        <link refid="classunique__ptr"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="436" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="436" bodyend="541"/>
+    <listofallmembers>
+      <member refid="classtcp__client__base_1acf721307adb69e3f6a6c9d18f295170e" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>auto_reconnect_</name></member>
+      <member refid="classssl__client_1a38cf7d6d25778279a9ac5023794a6a25" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>cipher_name</name></member>
+      <member refid="classtcp__client__base_1aff2ce3b983291c2d894d6077b0882d5a" prot="public" virt="virtual"><scope>ssl_client</scope><name>connect</name></member>
+      <member refid="classtcp__client__base_1a075da50abfe240fcf1722b34eb715297" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>connect_callback_</name></member>
+      <member refid="classtcp__client__base_1ad09db647aea484d8b3fa32368c41da67" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>connect_callback_t</name></member>
+      <member refid="classtcp__client__base_1ac9f7a0c0e90e96e15b24c281e2d98f4f" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>connect_timeout</name></member>
+      <member refid="classtcp__client__base_1af6fc164073d83b5229ddc400865b15a3" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>connect_timeout_</name></member>
+      <member refid="classtcp__client__base_1aa3899d6ba07fea1fe4d89f5b962f787e" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>connected_host</name></member>
+      <member refid="classtcp__client__base_1a7d2d1a53ec558a06102823e38a18be74" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>connected_host_</name></member>
+      <member refid="classtcp__client__base_1a4076544741ebf84139c45eaa105bfde0" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>connected_port</name></member>
+      <member refid="classtcp__client__base_1a73bde0cc117b889468d6d90f8a185270" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>connected_port_</name></member>
+      <member refid="classssl__client_1a8eb86cc4819094bb2f562bf63e871cc2" prot="protected" virt="virtual"><scope>ssl_client</scope><name>create_socket</name></member>
+      <member refid="classtcp__client__base_1a4c2371c71b6c950a3fa9f2cc83fad52d" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>current_reconnect_attempt</name></member>
+      <member refid="classtcp__client__base_1a6084cc447e8b87ae52079de26bcaf7da" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>current_reconnect_attempt_</name></member>
+      <member refid="classtcp__client__base_1ad668ea445e32510902c22e6fc378e58b" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>disconnect</name></member>
+      <member refid="classtcp__client__base_1a7b8f7559db533ecff45f052ad4352803" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>disconnect_callback_</name></member>
+      <member refid="classtcp__client__base_1adb8a5f228722c6db09638ab34761236a" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>disconnect_callback_t</name></member>
+      <member refid="classtcp__client__base_1ab8584da06a5e778efd18bbd35a08a425" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>dns_</name></member>
+      <member refid="classtcp__client__base_1a43b7dfb431c521c2cba6daa833efe6eb" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>exception_handler_</name></member>
+      <member refid="classtcp__client__base_1ae623bfbec50de5d6d23c4ab5e92c9264" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>exception_handler_t</name></member>
+      <member refid="classtcp__client__base_1a38cccfd0727c229c39422c0d92233694" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>get_dns_client</name></member>
+      <member refid="classtcp__client__base_1a9d32205948f3438493ddf192f3563301" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>get_dns_client</name></member>
+      <member refid="classssl__client_1aac8d8ba7408c7a06e4d9f0425e3cd4e1" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>get_verify_peer</name></member>
+      <member refid="classtcp__client__base_1a8f37f7991aee0a91ae4078f60446ff12" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>handle_exception</name></member>
+      <member refid="classssl__client_1acdf910c18a4543d058686bb9e36b82f4" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>has_ssl_context</name></member>
+      <member refid="classtcp__client__base_1a9940a605bbff2145e0a220080b1660dc" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>is_auto_reconnect</name></member>
+      <member refid="classtcp__client__base_1a32b3945937b1f70cb9bceb2cad417d05" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>is_connected</name></member>
+      <member refid="classtcp__client__base_1a33d7454cccff7e88e3dedf116d59910b" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>is_reconnecting</name></member>
+      <member refid="classtcp__client__base_1a46713f7e7056ef28662b6f3cb2337018" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>is_reconnecting_</name></member>
+      <member refid="classssl__client_1a426b3ccaec32e247f58160c26363ae0a" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>is_ssl_initialized</name></member>
+      <member refid="classssl__client_1ab63f76a3d3fd9f179598c22d747668da" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>load_ca_file</name></member>
+      <member refid="classssl__client_1a277e03d41b0e9a0c62318a8c70a4b862" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>load_ca_path</name></member>
+      <member refid="classtcp__client__base_1a88a7fbdf7d1bc6b7b4fcb3034dc702a8" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>operator=</name></member>
+      <member refid="classtcp__client__base_1ac11d52316cf92d98d71114462dfe0dfd" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>operator=</name></member>
+      <member refid="classssl__client_1addf5ff79681127bcfa2d9b90a86776e3" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>peer_certificate_info</name></member>
+      <member refid="classssl__client_1a5fbd0e9862f7eaa89c627cd6c3a0da50" prot="protected" virt="virtual"><scope>ssl_client</scope><name>post_connect</name></member>
+      <member refid="classssl__client_1a32501cfd4a2a76da017fc443c1bc2155" prot="protected" virt="virtual"><scope>ssl_client</scope><name>pre_disconnect</name></member>
+      <member refid="classtcp__client__base_1aa5accb1dc9ed4cad96d5d3eafeda31cd" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>prefer_ipv6</name></member>
+      <member refid="classtcp__client__base_1adc606871aad1d2ecc27dc92fbdbb3eaa" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>prefer_ipv6_</name></member>
+      <member refid="classssl__client_1a94fc10cb8adb236d70bbd91a8ac68743" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>protocol_version</name></member>
+      <member refid="classtcp__client__base_1a728e996ae56a5d407649463d9d49bcb3" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>receive</name></member>
+      <member refid="classtcp__client__base_1a018c24813fbccad0045b4eb6404ee725" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>receive_all</name></member>
+      <member refid="classtcp__client__base_1aea78ea646c0739b73700dc5916f79174" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>receive_exact</name></member>
+      <member refid="classtcp__client__base_1a42885668defcd03eb61f5cc8da19d058" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>receive_line</name></member>
+      <member refid="classtcp__client__base_1a96c9be0f37fd6cf689d80567367ce50d" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>reconnect_attempts</name></member>
+      <member refid="classtcp__client__base_1a01cf950d1d8bcfba1225dc9b90992bbd" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>reconnect_attempts_</name></member>
+      <member refid="classtcp__client__base_1a3b61e041a3f5b1c55119d69627631dd5" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>reconnect_delay</name></member>
+      <member refid="classtcp__client__base_1a2e711aeb58408fe79f3234a137ef15f7" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>reconnect_delay_</name></member>
+      <member refid="classtcp__client__base_1a8e8daee93857653ebe71413cd72b94e8" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>reconnect_if_needed</name></member>
+      <member refid="classtcp__client__base_1aa387738fb13cfdd0fc217a2695f7f252" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>recv_timeout</name></member>
+      <member refid="classtcp__client__base_1a560e938b392471264bfe53ef587cd2c3" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>recv_timeout_</name></member>
+      <member refid="classtcp__client__base_1ab82d9541a6e63484559c1d4af9daf45b" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>send</name></member>
+      <member refid="classtcp__client__base_1a0437808975f8def1d0715cbd435b0f76" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>send</name></member>
+      <member refid="classtcp__client__base_1a80790a2a3798f6e591107ccec2bf4809" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>send_all</name></member>
+      <member refid="classtcp__client__base_1a7615d24c8dcdc3146d02525cc5421608" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>send_all</name></member>
+      <member refid="classtcp__client__base_1a4eff17012fac02e68690e63f36c34b48" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>send_timeout</name></member>
+      <member refid="classtcp__client__base_1af0a5d66000060e7af7f1294b95154800" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>send_timeout_</name></member>
+      <member refid="classtcp__client__base_1a931464775f1cdd1f17846fa43bc8c090" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_auto_reconnect</name></member>
+      <member refid="classtcp__client__base_1a492a80d5437b81e4aff2c0c25f5505ef" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_connect_callback</name></member>
+      <member refid="classtcp__client__base_1a354774a0fd2b9eaebefdd8e7d31bf902" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_connect_timeout</name></member>
+      <member refid="classtcp__client__base_1ae3a863e0ff3966b4da4af6ea23cc87c0" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_disconnect_callback</name></member>
+      <member refid="classtcp__client__base_1ac94e9cb80fb0db0d5c142da213811a0e" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_dns_server</name></member>
+      <member refid="classtcp__client__base_1a90666e1622d3694ce3465251bfd994e1" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_exception_handler</name></member>
+      <member refid="classtcp__client__base_1a27bca1156f14a8e17cfe4edf6420b0aa" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_prefer_ipv6</name></member>
+      <member refid="classtcp__client__base_1a22a71f422f46e0ebd3f190b84f90c80a" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_reconnect_delay</name></member>
+      <member refid="classtcp__client__base_1aad18c6f111cd198e33c7634ba6950dd9" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_recv_timeout</name></member>
+      <member refid="classtcp__client__base_1ad9d43d91b7a30b89aef97521588ae402" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_send_timeout</name></member>
+      <member refid="classssl__client_1a9fc706ad38b7f40efa21d1806a122389" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_sni_hostname</name></member>
+      <member refid="classssl__client_1aa40be6b9d5093ea63514630c59f063f4" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_ssl_context</name></member>
+      <member refid="classssl__client_1aede4617d79e85f87567d4647cd63f3ce" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>set_verify_peer</name></member>
+      <member refid="classssl__client_1af5e99fbd7555bf69dc23860010c9824b" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>sni_hostname</name></member>
+      <member refid="classssl__client_1af6fa99d37e8b043061bc858a2913260e" prot="private" virt="non-virtual"><scope>ssl_client</scope><name>sni_hostname_</name></member>
+      <member refid="classtcp__client__base_1aabe3dcb7d46b2e6a01b5524efa6db9cb" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>socket</name></member>
+      <member refid="classtcp__client__base_1a3259c489209999a1b1d045f12e508043" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>socket</name></member>
+      <member refid="classtcp__client__base_1ae3f0cb8189dc0880404cdb1c331197a8" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>socket_</name></member>
+      <member refid="classssl__client_1a0a92947bec6a11a871d0ef09365dd2ce" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>ssl_client</name></member>
+      <member refid="classssl__client_1a5c5233c0a6e5a94cf4739d774f258296" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>ssl_client</name></member>
+      <member refid="classssl__client_1a7f6e80f95f17bfdbe3b8efb6be43c874" prot="private" virt="non-virtual"><scope>ssl_client</scope><name>ssl_ctx_</name></member>
+      <member refid="classssl__client_1a8adf7fa185cb276e8723e4900a76fb08" prot="private" virt="non-virtual"><scope>ssl_client</scope><name>ssl_initialized_</name></member>
+      <member refid="classssl__client_1aec7078dcec88266cf040ed04019c9351" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>ssl_socket_ref</name></member>
+      <member refid="classssl__client_1aa636769f1b8e97f92fdd39d992eca715" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>ssl_socket_ref</name></member>
+      <member refid="classtcp__client__base_1a5f445fbc003f62fbec15cf13422eaf5d" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>tcp_client_base</name></member>
+      <member refid="classtcp__client__base_1ae871291551e7990a0716bb07ce8aa850" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>tcp_client_base</name></member>
+      <member refid="classtcp__client__base_1af887f41cf05a9c8eb1fbe4633b544b4e" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>tcp_client_base</name></member>
+      <member refid="classtcp__client__base_1a748111cebf2c812f1e9b2a709d24196a" prot="public" virt="non-virtual"><scope>ssl_client</scope><name>tcp_client_base</name></member>
+      <member refid="classtcp__client__base_1a1f61b161f3a5771e1a03e59dc3783dde" prot="protected" virt="non-virtual"><scope>ssl_client</scope><name>try_connect_to_ip</name></member>
+      <member refid="classssl__client_1ae2247bb3603abc879fd1e12b8761f4f4" prot="private" virt="non-virtual"><scope>ssl_client</scope><name>verify_peer_</name></member>
+      <member refid="classtcp__client__base_1a81d04e7bbfd939b65c6a3bbb394f148c" prot="public" virt="virtual"><scope>ssl_client</scope><name>~tcp_client_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___random_generators" kind="group">
+    <compoundname>RandomGenerators</compoundname>
+    <title>随机数生成器</title>
+    <innerclass refid="classrandom__lcd" prot="public">random_lcd</innerclass>
+    <innerclass refid="classrandom__mt" prot="public">random_mt</innerclass>
+    <innerclass refid="classsecret" prot="public">secret</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___random_generators_1ga078e1517fcc2443f164c1a0b7243b8db" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(gen())" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Generator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t lemire_bounded</definition>
+        <argsstring>(Generator &amp;&amp;gen, const uint64_t max)</argsstring>
+        <name>lemire_bounded</name>
+        <param>
+          <type>Generator &amp;&amp;</type>
+          <declname>gen</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="67" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="67" bodyend="80"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线性同余法、梅森旋转算法和硬件真随机数生成器实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下密码学与随机数生成相关标准规范：</para>
+<para><bold>伪随机数生成器 (PRNG) 标准：</bold><itemizedlist>
+<listitem><para>ISO/IEC 18031:2011：信息技术 — 安全技术 — 随机比特生成 <ulink url="https://www.iso.org/standard/54945.html">https://www.iso.org/standard/54945.html</ulink></para>
+</listitem><listitem><para>NIST SP 800-90A Rev. 1：确定性随机比特生成器的建议 <ulink url="https://csrc.nist.gov/pubs/sp/800/90/a/r1/final">https://csrc.nist.gov/pubs/sp/800/90/a/r1/final</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>真随机数生成器 (TRNG) 标准：</bold><itemizedlist>
+<listitem><para>ISO/IEC 20543:2019：信息技术 — 安全技术 — 熵源评估与验证 <ulink url="https://www.iso.org/standard/68338.html">https://www.iso.org/standard/68338.html</ulink></para>
+</listitem><listitem><para>NIST SP 800-90B：熵源验证建议 <ulink url="https://csrc.nist.gov/pubs/sp/800/90/b/final">https://csrc.nist.gov/pubs/sp/800/90/b/final</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>算法规范参考：</bold><itemizedlist>
+<listitem><para>线性同余生成器 (LCG)：遵循 POSIX.1-2001 rand() 规范 <ulink url="https://pubs.opengroup.org/onlinepubs/009695399/functions/rand.html">https://pubs.opengroup.org/onlinepubs/009695399/functions/rand.html</ulink></para>
+</listitem><listitem><para>梅森旋转算法 (MT19937)：遵循松本真、西村拓士 1998 年原始论文 <ulink url="http://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/ARTICLES/mt.pdf">http://www.math.sci.hiroshima-u.ac.jp/m-mat/MT/ARTICLES/mt.pdf</ulink></para>
+</listitem><listitem><para>无偏整数映射算法：Daniel Lemire, 2019 <ulink url="https://arxiv.org/abs/1805.10941">https://arxiv.org/abs/1805.10941</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="4" cols="4"><row>
+<entry thead="yes"><para>生成器  </para>
+</entry><entry thead="yes"><para>算法  </para>
+</entry><entry thead="yes"><para>周期长度  </para>
+</entry><entry thead="yes"><para>适用场景  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><ref refid="classrandom__lcd" kindref="compound">random_lcd</ref>  </para>
+</entry><entry thead="no"><para>线性同余法 (glibc 兼容)  </para>
+</entry><entry thead="no"><para>2^31  </para>
+</entry><entry thead="no"><para>简单模拟、非安全场景  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><ref refid="classrandom__mt" kindref="compound">random_mt</ref>  </para>
+</entry><entry thead="no"><para>MT19937 梅森旋转  </para>
+</entry><entry thead="no"><para>2^19937 - 1  </para>
+</entry><entry thead="no"><para>科学计算、统计分析  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>secret  </para>
+</entry><entry thead="no"><para>操作系统熵源  </para>
+</entry><entry thead="no"><para>不可预测  </para>
+</entry><entry thead="no"><para>加密密钥、安全令牌  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___random_generators_1next_int_algorithm">
+<title>next_int 无偏映射算法</title><para>使用 Lemire 算法将均匀分布的 64 位随机数无偏映射到 [0, max)：</para>
+<para>设 r 为 64 位随机数，计算 m = r * max（128 位中间结果） 取 m 的高 64 位作为结果候选值 若 m 的低 64 位 &lt; max，则进行拒绝采样消除边界偏差</para>
+<para>相比简单取模（% max），此算法：<orderedlist>
+<listitem><para>避免了取模操作引入的分布偏差</para>
+</listitem><listitem><para>期望拒绝次数 &lt; 1 次，性能接近无拒绝情况</para>
+</listitem></orderedlist>
+</para>
+<para><simplesect kind="see"><para><ulink url="https://www.iso.org/standard/54945.html">https://www.iso.org/standard/54945.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://csrc.nist.gov/projects/random-bit-generation">https://csrc.nist.gov/projects/random-bit-generation</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

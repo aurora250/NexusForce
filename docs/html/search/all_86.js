@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['桶大小策略_0',['桶大小策略',['../group___hash_table.html#bucket_size_strategy',1,'']]]
+  ['核心类型_0',['核心类型',['../group___core_types.html',1,'']]]
 ];

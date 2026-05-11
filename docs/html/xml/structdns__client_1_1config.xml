@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structdns__client_1_1config" kind="struct" language="C++" prot="public">
+    <compoundname>dns_client::config</compoundname>
+    <includes refid="dns__client_8hpp" local="no">dns_client.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structdns__client_1_1config_1a73732155d4d146b70fc866a6bfd10eb4" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string dns_client::config::server</definition>
+        <argsstring></argsstring>
+        <name>server</name>
+        <qualifiedname>dns_client::config::server</qualifiedname>
+        <initializer>{&quot;8.8.8.8&quot;}</initializer>
+        <briefdescription>
+<para>DNS服务器地址 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="52" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="variable" id="structdns__client_1_1config_1aa384fb64dfaca7d0a77b5afd4a4f9a3f" prot="public" static="no" mutable="no">
+        <type><ref refid="structports" kindref="compound">ports</ref></type>
+        <definition>ports dns_client::config::port</definition>
+        <argsstring></argsstring>
+        <name>port</name>
+        <qualifiedname>dns_client::config::port</qualifiedname>
+        <initializer>{<ref refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a305d7a53eafabf042067c988c705cd93" kindref="member">ports::DNS</ref>}</initializer>
+        <briefdescription>
+<para>DNS服务器端口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="53" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="variable" id="structdns__client_1_1config_1a639baddffaa46d95c4efc6a81ae0dda1" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref></type>
+        <definition>milliseconds dns_client::config::timeout</definition>
+        <argsstring></argsstring>
+        <name>timeout</name>
+        <qualifiedname>dns_client::config::timeout</qualifiedname>
+        <initializer>{5000}</initializer>
+        <briefdescription>
+<para>查询超时时间 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="54" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>DNS客户端配置 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>dns_client::config</label>
+        <link refid="structdns__client_1_1config"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>server</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>port</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>timeout</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>duration&lt; int64_t, milli &gt;</label>
+        <link refid="structduration"/>
+      </node>
+      <node id="3">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="5">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="7">
+        <label>iobject&lt; ports &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>istringify&lt; ports &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="6">
+        <label>ports</label>
+        <link refid="structports"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="51" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="51" bodyend="55"/>
+    <listofallmembers>
+      <member refid="structdns__client_1_1config_1aa384fb64dfaca7d0a77b5afd4a4f9a3f" prot="public" virt="non-virtual"><scope>dns_client::config</scope><name>port</name></member>
+      <member refid="structdns__client_1_1config_1a73732155d4d146b70fc866a6bfd10eb4" prot="public" virt="non-virtual"><scope>dns_client::config</scope><name>server</name></member>
+      <member refid="structdns__client_1_1config_1a639baddffaa46d95c4efc6a81ae0dda1" prot="public" virt="non-virtual"><scope>dns_client::config</scope><name>timeout</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

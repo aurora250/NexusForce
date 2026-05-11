@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___integer_sequence" kind="group">
+    <compoundname>IntegerSequence</compoundname>
+    <title>整数序列</title>
+    <innerclass refid="structinteger__sequence" prot="public">integer_sequence</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___integer_sequence_1gae14972f12d071bc9049d55d724413f32" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>T</type>
+            <declname>Size</declname>
+            <defname>Size</defname>
+          </param>
+        </templateparamlist>
+        <type>__make_integer_seq&lt; <ref refid="structinteger__sequence" kindref="compound">integer_sequence</ref>, T, Size &gt;</type>
+        <definition>using make_integer_sequence = 
+
+__make_integer_seq&lt;integer_sequence, T, Size&gt;</definition>
+        <argsstring></argsstring>
+        <name>make_integer_sequence</name>
+        <briefdescription>
+<para>生成指定长度的整数序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列长度</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+生成一个从0到Size-1的整数序列。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" line="53" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>size_t...</type>
+            <declname>Values</declname>
+            <defname>Values</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structinteger__sequence" kindref="compound">integer_sequence</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, Values... &gt;</type>
+        <definition>using index_sequence = integer_sequence&lt;size_t, Values...&gt;</definition>
+        <argsstring></argsstring>
+        <name>index_sequence</name>
+        <briefdescription>
+<para>索引序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引值序列</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用size_t作为整数类型的integer_sequence特化，专门用于索引操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" line="68" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___integer_sequence_1gaed583aed5d1c7a45292dc4dbc51d6493" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Size</declname>
+            <defname>Size</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___integer_sequence_1gae14972f12d071bc9049d55d724413f32" kindref="member">make_integer_sequence</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>, Size &gt;</type>
+        <definition>using make_index_sequence = make_integer_sequence&lt;size_t, Size&gt;</definition>
+        <argsstring></argsstring>
+        <name>make_index_sequence</name>
+        <briefdescription>
+<para>生成指定长度的索引序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列长度</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+生成一个从0到Size-1的size_t索引序列。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" line="78" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___integer_sequence_1ga7b762cc05183be4d9e4f4f271add4c1e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___integer_sequence_1gaed583aed5d1c7a45292dc4dbc51d6493" kindref="member">make_index_sequence</ref>&lt; sizeof...(Types)&gt;</type>
+        <definition>using index_sequence_for = make_index_sequence&lt;sizeof...(Types)&gt;</definition>
+        <argsstring></argsstring>
+        <name>index_sequence_for</name>
+        <briefdescription>
+<para>根据类型参数包生成索引序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型参数包</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+生成一个长度等于Types参数包大小的索引序列。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" line="88" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/integer_sequence.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>编译时整数序列的定义和操作 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

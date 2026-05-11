@@ -129,8 +129,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:aca66ea091edd845f23751f10e73c85b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取Content-Type  <br /></td></tr>
 <tr class="memitem:a6a446b15fedd208ed8ac9bc8134ad2d5" id="r_a6a446b15fedd208ed8ac9bc8134ad2d5"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a6a446b15fedd208ed8ac9bc8134ad2d5">is_keep_alive</a> () const noexcept</td></tr>
 <tr class="memdesc:a6a446b15fedd208ed8ac9bc8134ad2d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为Keep-Alive连接  <br /></td></tr>
-<tr class="memitem:a0f2376788712521bd5198e41e78ce118" id="r_a0f2376788712521bd5198e41e78ce118"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0f2376788712521bd5198e41e78ce118">client_ip</a> () const noexcept</td></tr>
-<tr class="memdesc:a0f2376788712521bd5198e41e78ce118"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取客户端真实IP  <br /></td></tr>
+<tr class="memitem:a879b58a2eb48aaaf1428eb1338c568de" id="r_a879b58a2eb48aaaf1428eb1338c568de"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a879b58a2eb48aaaf1428eb1338c568de">client_ip</a> () const</td></tr>
+<tr class="memdesc:a879b58a2eb48aaaf1428eb1338c568de"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取客户端真实IP  <br /></td></tr>
 <tr class="memitem:a556e01075430652e69d1113febd51d0d" id="r_a556e01075430652e69d1113febd51d0d"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a556e01075430652e69d1113febd51d0d">user_agent</a> () const noexcept</td></tr>
 <tr class="memdesc:a556e01075430652e69d1113febd51d0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取User-Agent  <br /></td></tr>
 <tr class="memitem:a85eec81b36fd068a401040e40b14ab0e" id="r_a85eec81b36fd068a401040e40b14ab0e"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a85eec81b36fd068a401040e40b14ab0e">referer</a> () const noexcept</td></tr>
@@ -210,7 +210,7 @@ Public 属性</h2></td></tr>
 <div class="line"><span class="keywordtype">string</span> session_id = request.cookie(<span class="stringliteral">&quot;session&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 获取客户端IP（支持代理）</span></div>
-<div class="line"><span class="keywordtype">string</span> <a class="code hl_function" href="#a0f2376788712521bd5198e41e78ce118">client_ip</a> = request.client_ip();</div>
+<div class="line"><span class="keywordtype">string</span> <a class="code hl_function" href="#a879b58a2eb48aaaf1428eb1338c568de">client_ip</a> = request.client_ip();</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 检查是否为AJAX请求</span></div>
 <div class="line"><span class="keywordflow">if</span> (request.is_ajax()) {</div>
@@ -223,20 +223,17 @@ Public 属性</h2></td></tr>
 <div class="line">    <a class="code hl_variable" href="#a85aba71f17c96739e2661bb1d3fdac30">session</a>-&gt;touch();</div>
 <div class="line">}</div>
 <div class="ttc" id="astructhttp__method_html_af6c7fde8159a02d5c0db0200d3e88264"><div class="ttname"><a href="structhttp__method.html#af6c7fde8159a02d5c0db0200d3e88264">http_method::GET</a></div><div class="ttdeci">static const http_method &amp; GET()</div><div class="ttdoc">GET方法</div></div>
-<div class="ttc" id="astructhttp__server__request_html_a0f2376788712521bd5198e41e78ce118"><div class="ttname"><a href="#a0f2376788712521bd5198e41e78ce118">http_server_request::client_ip</a></div><div class="ttdeci">NEFORCE_NODISCARD string_view client_ip() const noexcept</div><div class="ttdoc">获取客户端真实IP</div></div>
 <div class="ttc" id="astructhttp__server__request_html_a31a2ce9e1840e0387a679f04dcf712b0"><div class="ttname"><a href="#a31a2ce9e1840e0387a679f04dcf712b0">http_server_request::parse</a></div><div class="ttdeci">static NEFORCE_NODISCARD http_server_request parse(string_view str)</div><div class="ttdoc">从字符串解析HTTP请求</div></div>
 <div class="ttc" id="astructhttp__server__request_html_a85aba71f17c96739e2661bb1d3fdac30"><div class="ttname"><a href="#a85aba71f17c96739e2661bb1d3fdac30">http_server_request::session</a></div><div class="ttdeci">http_session * session</div><div class="ttdoc">会话对象</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00083">http_server_message.hpp:83</a></div></div>
+<div class="ttc" id="astructhttp__server__request_html_a879b58a2eb48aaaf1428eb1338c568de"><div class="ttname"><a href="#a879b58a2eb48aaaf1428eb1338c568de">http_server_request::client_ip</a></div><div class="ttdeci">NEFORCE_NODISCARD string_view client_ip() const</div><div class="ttdoc">获取客户端真实IP</div></div>
 </div><!-- fragment --> 
 <p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00071">71</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="a0f2376788712521bd5198e41e78ce118" name="a0f2376788712521bd5198e41e78ce118"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f2376788712521bd5198e41e78ce118">&#9670;&#160;</a></span>client_ip()</h2>
+<a id="a879b58a2eb48aaaf1428eb1338c568de" name="a879b58a2eb48aaaf1428eb1338c568de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a879b58a2eb48aaaf1428eb1338c568de">&#9670;&#160;</a></span>client_ip()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> http_server_request::client_ip </td>
@@ -245,11 +242,6 @@ Public 属性</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>获取客户端真实IP </p>
@@ -728,7 +720,7 @@ Public 属性</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00126">126</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00079">cookies</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00079">cookies</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
 
 </div>
 </div>
@@ -770,7 +762,7 @@ Public 属性</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00150">150</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00078">headers</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00078">headers</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
 
 </div>
 </div>
@@ -812,7 +804,7 @@ Public 属性</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00100">100</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>, <a class="el" href="thread_8hpp_source.html#l00475">name()</a> , 以及 <a class="el" href="http__server__message_8hpp_source.html#l00080">parameters</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="thread_8hpp_source.html#l00475">name()</a> , 以及 <a class="el" href="http__server__message_8hpp_source.html#l00080">parameters</a>.</p>
 
 </div>
 </div>
@@ -864,9 +856,7 @@ Public 属性</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00193">193</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00140">header()</a> , 以及 <a class="el" href="http__server__message_8hpp_source.html#l00193">user_agent()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="http__server__message_8hpp_source.html#l00193">user_agent()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00140">header()</a>.</p>
 
 </div>
 </div>

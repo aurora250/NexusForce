@@ -1,0 +1,2774 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classrb__tree" kind="class" language="C++" prot="public">
+    <compoundname>rb_tree</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">icollector&lt; rb_tree&lt; Key, Value, KeyOfValue, Compare, allocator&lt; rb_tree_node&lt; Value &gt; &gt; &gt; &gt;</basecompoundref>
+    <includes refid="rb__tree_8hpp" local="no">rb_tree.hpp</includes>
+    <innerclass refid="structrb__tree_1_1node__guard" prot="private">rb_tree::node_guard</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename Value</type>
+      </param>
+      <param>
+        <type>typename KeyOfValue</type>
+      </param>
+      <param>
+        <type>typename Compare</type>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structrb__tree__node" kindref="compound">rb_tree_node</ref>&lt;Value&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrb__tree_1afc85badd7713017ac36d240da732ac03" prot="public" static="no">
+        <type>Key</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_type = Key</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>rb_tree::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="616" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="616" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1a76030ed39e771c8e84bbd78c561c2c53" prot="public" static="no">
+        <type>bool</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::color_type = bool</definition>
+        <argsstring></argsstring>
+        <name>color_type</name>
+        <qualifiedname>rb_tree::color_type</qualifiedname>
+        <briefdescription>
+<para>颜色类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="617" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="617" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1a359c6010e818e57652e801891914ea5e" prot="public" static="no">
+        <type>Value</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::value_type = Value</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>rb_tree::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="619" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="619" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1ae4cf825e89c4768b58ed37f063c10ecf" prot="public" static="no">
+        <type>Value *</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::pointer = Value*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>rb_tree::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="620" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="620" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1ab88a6037629751726bb95b223b48e62a" prot="public" static="no">
+        <type>Value &amp;</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::reference = Value&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>rb_tree::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="621" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="621" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1ab5f284eeec9f830a54913d1283d53ab2" prot="public" static="no">
+        <type>const Value *</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_pointer = const Value*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>rb_tree::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="622" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="622" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1a225425b29129200acd3f15781ae5ff38" prot="public" static="no">
+        <type>const Value &amp;</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_reference = const Value&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>rb_tree::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="623" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="623" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1aee0ea092a682d33d8e1d2a8ce3c18673" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::size_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>rb_tree::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="624" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="624" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1a60390825c16e7b5f8155442d2486a6e4" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref></type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>rb_tree::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="625" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="625" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" prot="public" static="no">
+        <type><ref refid="structrb__tree__iterator" kindref="compound">rb_tree_iterator</ref>&lt; false, <ref refid="classrb__tree" kindref="compound">rb_tree</ref> &gt;</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::iterator = rb_tree_iterator&lt;false, rb_tree&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>rb_tree::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="626" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="626" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" prot="public" static="no">
+        <type><ref refid="structrb__tree__iterator" kindref="compound">rb_tree_iterator</ref>&lt; true, <ref refid="classrb__tree" kindref="compound">rb_tree</ref> &gt;</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_iterator = rb_tree_iterator&lt;true, rb_tree&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>rb_tree::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="627" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="627" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1a27ceda79573b8b314e4e855fdd1903f0" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classrb__tree_1a27ceda79573b8b314e4e855fdd1903f0" kindref="member">reverse_iterator</ref>&lt; <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref> &gt;</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::reverse_iterator = _NEFORCE reverse_iterator&lt;iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>rb_tree::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="628" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="628" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1a188c3fb201ca2a878f6f3a4843956f34" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classrb__tree_1a27ceda79573b8b314e4e855fdd1903f0" kindref="member">reverse_iterator</ref>&lt; <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::const_reverse_iterator = _NEFORCE reverse_iterator&lt;const_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>rb_tree::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>常量反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="629" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="629" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1ab93a38a029b781c1f2c29216bfcf185c" prot="public" static="no">
+        <type>Alloc</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::allocator_type = Alloc</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>rb_tree::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="630" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="630" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classrb__tree_1a844a794f2f0cb5f024278b55a3c8991f" prot="private" static="no">
+        <type><ref refid="structrb__tree__node__base" kindref="compound">rb_tree_node_base</ref></type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::base_node = rb_tree_node_base</definition>
+        <argsstring></argsstring>
+        <name>base_node</name>
+        <qualifiedname>rb_tree::base_node</qualifiedname>
+        <briefdescription>
+<para>节点基类类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="633" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="633" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1a3e463eddf529d925517a9142554199fb" prot="private" static="no">
+        <type><ref refid="structrb__tree__node" kindref="compound">rb_tree_node</ref>&lt; Value &gt;</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::link_node = rb_tree_node&lt;Value&gt;</definition>
+        <argsstring></argsstring>
+        <name>link_node</name>
+        <qualifiedname>rb_tree::link_node</qualifiedname>
+        <briefdescription>
+<para>数据节点类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="634" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="634" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1ac37e6c2a60f94b1e0f1ab42e9f8e504b" prot="private" static="no">
+        <type>base_node *</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::base_ptr = base_node*</definition>
+        <argsstring></argsstring>
+        <name>base_ptr</name>
+        <qualifiedname>rb_tree::base_ptr</qualifiedname>
+        <briefdescription>
+<para>基类指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="635" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="635" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classrb__tree_1a98596efee95f350359bd2fb57eb4187b" prot="private" static="no">
+        <type>link_node *</type>
+        <definition>using rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::link_type = link_node*</definition>
+        <argsstring></argsstring>
+        <name>link_type</name>
+        <qualifiedname>rb_tree::link_type</qualifiedname>
+        <briefdescription>
+<para>数据节点指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="636" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="636" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrb__tree_1a0059a8d008a3e9f08d84722b6777da33" prot="private" static="no" mutable="no">
+        <type>link_type</type>
+        <definition>link_type rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::header_</definition>
+        <argsstring></argsstring>
+        <name>header_</name>
+        <qualifiedname>rb_tree::header_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>头节点 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="638" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="638" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrb__tree_1a110d0640e3c5a929d488cafc1d4374fd" prot="private" static="no" mutable="no">
+        <type>Compare</type>
+        <definition>Compare rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_compare_</definition>
+        <argsstring></argsstring>
+        <name>key_compare_</name>
+        <qualifiedname>rb_tree::key_compare_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>键比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="639" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="639" bodyend="639"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrb__tree_1a6360a8706d8700f26319e788f097a926" prot="private" static="no" mutable="no">
+        <type>KeyOfValue</type>
+        <definition>KeyOfValue rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::extracter_</definition>
+        <argsstring></argsstring>
+        <name>extracter_</name>
+        <qualifiedname>rb_tree::extracter_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>值提取键函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="640" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="640" bodyend="640"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrb__tree_1a832b7b49bd9be7a62fe8e2cb1d8a7150" prot="private" static="no" mutable="no">
+        <type><ref refid="structcompressed__pair" kindref="compound">compressed_pair</ref>&lt; <ref refid="classrb__tree_1ab93a38a029b781c1f2c29216bfcf185c" kindref="member">allocator_type</ref>, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>compressed_pair&lt;allocator_type, size_t&gt; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::size_pair_</definition>
+        <argsstring></argsstring>
+        <name>size_pair_</name>
+        <qualifiedname>rb_tree::size_pair_</qualifiedname>
+        <initializer>{<ref refid="structdefault__construct__tag" kindref="compound">default_construct_tag</ref>{}, 0}</initializer>
+        <briefdescription>
+<para>压缩存储分配器和大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="641" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="641" bodyend="641"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classrb__tree_1a8a8537a37bd8ea794d47cc1ba300daec" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+          </param>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>struct</type>
+        <definition>friend struct rb_tree_iterator</definition>
+        <argsstring></argsstring>
+        <name>rb_tree_iterator</name>
+        <qualifiedname>rb_tree::rb_tree_iterator</qualifiedname>
+        <param>
+          <type><ref refid="structrb__tree__iterator" kindref="compound">rb_tree_iterator</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="644" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="644" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrb__tree_1aa7809830eaa7910625aa86192ff2f24a" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>link_type &amp; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::root</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>root</name>
+        <qualifiedname>rb_tree::root</qualifiedname>
+        <briefdescription>
+<para>获取根节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>根节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="674" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="674" bodyend="674"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a5f14ff2da8358f99246ab51f9947f4fa" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>link_type &amp; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::leftmost</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>leftmost</name>
+        <qualifiedname>rb_tree::leftmost</qualifiedname>
+        <briefdescription>
+<para>获取最左节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最左节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="680" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="680" bodyend="680"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a331611d50082b8b6cf8f12cd7dcc8ed8" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>link_type &amp; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rightmost</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rightmost</name>
+        <qualifiedname>rb_tree::rightmost</qualifiedname>
+        <briefdescription>
+<para>获取最右节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最右节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="686" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="686" bodyend="686"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a3c65f399de634b3610a945b7e9496b8b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>link_type</type>
+        <definition>link_type rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::create_node</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>create_node</name>
+        <qualifiedname>rb_tree::create_node</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>创建节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新创建的节点指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="744" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="744" bodyend="753"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a19fe7c12ea141adb289016d34b6d004b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>link_type</type>
+        <definition>link_type rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::copy_node</definition>
+        <argsstring>(link_type ptr)</argsstring>
+        <name>copy_node</name>
+        <qualifiedname>rb_tree::copy_node</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>拷贝节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新拷贝的节点指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="760" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="760" bodyend="766"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1abdae72acf8f26b441fe77cdb74979793" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::destroy_node</definition>
+        <argsstring>(link_type ptr)</argsstring>
+        <name>destroy_node</name>
+        <qualifiedname>rb_tree::destroy_node</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>销毁节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要销毁的节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="772" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="772" bodyend="778"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a8e0bb34dbdd97a10bb616c1bbb03fd7d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_into</definition>
+        <argsstring>(base_ptr child, base_ptr parent, link_type ptr)</argsstring>
+        <name>insert_into</name>
+        <qualifiedname>rb_tree::insert_into</qualifiedname>
+        <param>
+          <type>base_ptr</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>base_ptr</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>将节点插入到指定位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>child</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置的子节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置的父节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="787" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="787" bodyend="811"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a2672f776b2bc23d9d1eb5a3eea519c4d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>link_type</type>
+        <definition>link_type rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::copy_under</definition>
+        <argsstring>(link_type src_root, link_type parent)</argsstring>
+        <name>copy_under</name>
+        <qualifiedname>rb_tree::copy_under</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>src_root</declname>
+        </param>
+        <param>
+          <type>link_type</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>递归拷贝子树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>src_root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源子树根节点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>parent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>父节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>拷贝得到的子树根节点 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="819" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="819" bodyend="843"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aadcf2b9648cbdc5e84f62c596ee83093" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase_under</definition>
+        <argsstring>(link_type root)</argsstring>
+        <name>erase_under</name>
+        <qualifiedname>rb_tree::erase_under</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+<para>递归销毁子树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子树根节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="849" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="849" bodyend="856"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1ae8a7cac9bd0f110b49840848ecdd7bde" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::header_init</definition>
+        <argsstring>()</argsstring>
+        <name>header_init</name>
+        <qualifiedname>rb_tree::header_init</qualifiedname>
+        <briefdescription>
+<para>初始化头节点 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="861" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="861" bodyend="867"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1af4ba1779596da4c4173d4af4c2a55198" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::copy_from</definition>
+        <argsstring>(const rb_tree &amp;other)</argsstring>
+        <name>copy_from</name>
+        <qualifiedname>rb_tree::copy_from</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree" kindref="compound">rb_tree</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从另一个红黑树拷贝 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="873" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="873" bodyend="890"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a0ded698d6aab4502f68481b372c29aa3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(link_type node)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+<para>插入唯一键节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="897" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="897" bodyend="920"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a12d7afe962564848dc31d9b974e6df54" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(link_type node)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+<para>插入允许重复键的节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>node</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="927" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="927" bodyend="935"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classrb__tree_1a19281f0916fcc45d30adf1043ed5a47c" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>static link_type &amp; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::left</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>left</name>
+        <qualifiedname>rb_tree::left</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>获取节点的左子节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>左子节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="693" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="693" bodyend="693"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a931d1867bb8971a2465448a211c5bb8f" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>static link_type &amp; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::right</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>right</name>
+        <qualifiedname>rb_tree::right</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>获取节点的右子节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>右子节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="700" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="700" bodyend="700"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a417e294a5c9e50dc210d097fd82c74a4" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type &amp;</type>
+        <definition>static link_type &amp; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::parent</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>parent</name>
+        <qualifiedname>rb_tree::parent</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>获取节点的父节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>父节点引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="707" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="707" bodyend="707"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1ae9df319daed9630259f2feb513a475a5" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const Key &amp;</type>
+        <definition>static const Key &amp; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>key</name>
+        <qualifiedname>rb_tree::key</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>从节点提取键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节点指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>节点的键 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="714" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="714" bodyend="714"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a5528c8542b864e123cfc0135ea1a4303" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const Key &amp;</type>
+        <definition>static const Key &amp; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key</definition>
+        <argsstring>(base_ptr ptr) noexcept</argsstring>
+        <name>key</name>
+        <qualifiedname>rb_tree::key</qualifiedname>
+        <param>
+          <type>base_ptr</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>从基类指针节点提取键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基类指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>节点的键 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="721" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="721" bodyend="721"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aa5ef084436b6eb5ff5339495e3b8ecf8" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type</type>
+        <definition>static link_type rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::minimum</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>minimum</name>
+        <qualifiedname>rb_tree::minimum</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>获取子树的最小节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子树根节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最小节点指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="728" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="728" bodyend="728"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aca4344fe21a807fb3e23087a613471d4" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>link_type</type>
+        <definition>static link_type rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::maximum</definition>
+        <argsstring>(link_type ptr) noexcept</argsstring>
+        <name>maximum</name>
+        <qualifiedname>rb_tree::maximum</qualifiedname>
+        <param>
+          <type>link_type</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>获取子树的最大节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子树根节点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最大节点指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="735" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="735" bodyend="735"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrb__tree_1ade5a9df48735868b019e0fc38f3848e7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rb_tree</definition>
+        <argsstring>()</argsstring>
+        <name>rb_tree</name>
+        <qualifiedname>rb_tree::rb_tree</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="941" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="941" bodyend="941"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1af86e9e7c91ba11136d83dc5618b7ee62" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rb_tree</definition>
+        <argsstring>(const Compare &amp;comp)</argsstring>
+        <name>rb_tree</name>
+        <qualifiedname>rb_tree::rb_tree</qualifiedname>
+        <param>
+          <type>const Compare &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="947" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="947" bodyend="950"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aaa455643dbfa6b68103a7353615d2e7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rb_tree</definition>
+        <argsstring>(const rb_tree &amp;other)</argsstring>
+        <name>rb_tree</name>
+        <qualifiedname>rb_tree::rb_tree</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree" kindref="compound">rb_tree</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="956" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="956" bodyend="962"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1ae8747e3d3c46c22428e2c96e005177d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrb__tree" kindref="compound">rb_tree</ref> &amp;</type>
+        <definition>rb_tree &amp; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(const rb_tree &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>rb_tree::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree" kindref="compound">rb_tree</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="969" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="969" bodyend="976"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a1ccf0d772181c43fe5bb175d273657b9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; Compare &gt; &amp;&amp;is_nothrow_move_constructible_v&lt; KeyOfValue &gt; &amp;&amp;is_nothrow_move_constructible_v&lt; allocator_type &gt;" virt="non-virtual">
+        <type></type>
+        <definition>rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rb_tree</definition>
+        <argsstring>(rb_tree &amp;&amp;other)</argsstring>
+        <name>rb_tree</name>
+        <qualifiedname>rb_tree::rb_tree</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree" kindref="compound">rb_tree</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="982" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="982" bodyend="991"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a9e29029b278954caf4e4ee6b6a5c53fd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; rb_tree &gt;" virt="non-virtual">
+        <type><ref refid="classrb__tree" kindref="compound">rb_tree</ref> &amp;</type>
+        <definition>rb_tree &amp; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(rb_tree &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>rb_tree::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree" kindref="compound">rb_tree</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="998" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="998" bodyend="1005"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aeec39687b82ecd534d288076c9431bbc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::~rb_tree</definition>
+        <argsstring>()</argsstring>
+        <name>~rb_tree</name>
+        <qualifiedname>rb_tree::~rb_tree</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1010" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1010" bodyend="1015"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a4f30d432e477dbd186f2d79465367860" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>rb_tree::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1021" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1021" bodyend="1021"/>
+        <referencedby refid="classrb__tree_1a08208b96925a9ddb2dd49f85a843eb96" compoundref="rb__tree_8hpp" startline="1357" endline="1365">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classrb__tree_1a818c44ab122562e4d1e1dc190090a9f2" compoundref="rb__tree_8hpp" startline="1063" endline="1063">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a6aa8451f6f3625cef594b17c9ffb53bf" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>rb_tree::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向头节点的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1027" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1027" bodyend="1027"/>
+        <referencedby refid="classrb__tree_1a08208b96925a9ddb2dd49f85a843eb96" compoundref="rb__tree_8hpp" startline="1357" endline="1365">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classrb__tree_1a575bc96d5d480dd95f7c28229cbb6f06" compoundref="rb__tree_8hpp" startline="1389" endline="1407">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::find</referencedby>
+        <referencedby refid="classrb__tree_1a51a157505b4a3459b5110e50a88f6470" compoundref="rb__tree_8hpp" startline="1057" endline="1057">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rbegin</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aa237d4a5217efcc88e3e85003242e446" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>rb_tree::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1033" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1033" bodyend="1033"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a1498adcbae6c7ec39be51be1de263d6e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>rb_tree::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向头节点的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1039" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1039" bodyend="1039"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a51db84fa478a7fff5e97e4755a1088b4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>rb_tree::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1045" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1045" bodyend="1045"/>
+        <referencedby refid="classrb__tree_1aa237d4a5217efcc88e3e85003242e446" compoundref="rb__tree_8hpp" startline="1033" endline="1033">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::begin</referencedby>
+        <referencedby refid="classrb__tree_1a989de0200fadc4d10d36631676189e2e" compoundref="rb__tree_8hpp" startline="1087" endline="1087">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::crend</referencedby>
+        <referencedby refid="classrb__tree_1aecca4c4ecd4db48cd306c4efe0167ebd" compoundref="rb__tree_8hpp" startline="1564" endline="1567">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_to</referencedby>
+        <referencedby refid="classrb__tree_1a36125806a8318855541ed4555c985dc0" compoundref="rb__tree_8hpp" startline="1574" endline="1577">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::less_than</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1ac2fc860e4e3e46ed697bbc8e43bfb92c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>rb_tree::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向头节点的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1051" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1051" bodyend="1051"/>
+        <referencedby refid="classrb__tree_1a3ff3dc4a65c8cdcc0cc7b7bdcbf42219" compoundref="rb__tree_8hpp" startline="1081" endline="1081">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::crbegin</referencedby>
+        <referencedby refid="classrb__tree_1a1498adcbae6c7ec39be51be1de263d6e" compoundref="rb__tree_8hpp" startline="1039" endline="1039">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::end</referencedby>
+        <referencedby refid="classrb__tree_1aecca4c4ecd4db48cd306c4efe0167ebd" compoundref="rb__tree_8hpp" startline="1564" endline="1567">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_to</referencedby>
+        <referencedby refid="classrb__tree_1a18ca15cc2f77684edf1cf563871ec3a1" compoundref="rb__tree_8hpp" startline="1414" endline="1432">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::find</referencedby>
+        <referencedby refid="classrb__tree_1a36125806a8318855541ed4555c985dc0" compoundref="rb__tree_8hpp" startline="1574" endline="1577">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::less_than</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a51a157505b4a3459b5110e50a88f6470" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a27ceda79573b8b314e4e855fdd1903f0" kindref="member">reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD reverse_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>rb_tree::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1057" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1057" bodyend="1057"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a818c44ab122562e4d1e1dc190090a9f2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a27ceda79573b8b314e4e855fdd1903f0" kindref="member">reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD reverse_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>rb_tree::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1063" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1063" bodyend="1063"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a702674747e6fd79eb71a91164081f5c9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a188c3fb201ca2a878f6f3a4843956f34" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>rb_tree::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1069" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1069" bodyend="1069"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1ac08d00a59b76d5440fe1cb3b605f2786" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a188c3fb201ca2a878f6f3a4843956f34" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>rb_tree::rend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1075" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1075" bodyend="1075"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a3ff3dc4a65c8cdcc0cc7b7bdcbf42219" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a188c3fb201ca2a878f6f3a4843956f34" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::crbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crbegin</name>
+        <qualifiedname>rb_tree::crbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1081" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1081" bodyend="1081"/>
+        <referencedby refid="classrb__tree_1a702674747e6fd79eb71a91164081f5c9" compoundref="rb__tree_8hpp" startline="1069" endline="1069">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rbegin</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a989de0200fadc4d10d36631676189e2e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a188c3fb201ca2a878f6f3a4843956f34" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::crend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crend</name>
+        <qualifiedname>rb_tree::crend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1087" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1087" bodyend="1087"/>
+        <referencedby refid="classrb__tree_1ac08d00a59b76d5440fe1cb3b605f2786" compoundref="rb__tree_8hpp" startline="1075" endline="1075">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a2021eed4ed841942e4e82a4b5db7a421" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1aee0ea092a682d33d8e1d2a8ce3c18673" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>rb_tree::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>树中元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1093" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1093" bodyend="1093"/>
+        <referencedby refid="classrb__tree_1a990e94a13c9c67b16de2ed65734db6d1" compoundref="rb__tree_8hpp" startline="1257" endline="1294">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::emplace_equal_hint</referencedby>
+        <referencedby refid="classrb__tree_1a2d25955f8bf32e3736ac4c8345a796a0" compoundref="rb__tree_8hpp" startline="1149" endline="1188">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::emplace_unique_hint</referencedby>
+        <referencedby refid="classrb__tree_1aecca4c4ecd4db48cd306c4efe0167ebd" compoundref="rb__tree_8hpp" startline="1564" endline="1567">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_to</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aeab19e53dc2649cc06b15cd211f3e23f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1aee0ea092a682d33d8e1d2a8ce3c18673" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>rb_tree::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1099" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1099" bodyend="1099"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a04bfd0a59e22d6342b24fa23c1356194" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>rb_tree::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1105" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1105" bodyend="1105"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a96e2095897a17c3cda0e676bf1315233" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; Compare &gt;" virt="non-virtual">
+        <type>NEFORCE_NODISCARD Compare</type>
+        <definition>NEFORCE_NODISCARD Compare rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::key_compare</definition>
+        <argsstring>() const</argsstring>
+        <name>key_compare</name>
+        <qualifiedname>rb_tree::key_compare</qualifiedname>
+        <briefdescription>
+<para>获取键比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1111" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1111" bodyend="1113"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a764899e55affb00dcb3d112a749d08ea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_unique</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_unique</name>
+        <qualifiedname>rb_tree::emplace_unique</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在树中构造元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1122" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1122" bodyend="1125"/>
+        <referencedby refid="classrb__tree_1a6b2cb69469c3542b8f58ecb83ba6120a" compoundref="rb__tree_8hpp" startline="1132" endline="1132">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classrb__tree_1ab45d7f59433be8f9253e1b8e481e59a7" compoundref="rb__tree_8hpp" startline="1139" endline="1139">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a6b2cb69469c3542b8f58ecb83ba6120a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1a359c6010e818e57652e801891914ea5e" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1132" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1132" bodyend="1132"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1ab45d7f59433be8f9253e1b8e481e59a7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree_1a359c6010e818e57652e801891914ea5e" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1139" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1139" bodyend="1139"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a2d25955f8bf32e3736ac4c8345a796a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_unique_hint</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace_unique_hint</name>
+        <qualifiedname>rb_tree::emplace_unique_hint</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近构造元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1149" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1149" bodyend="1188"/>
+        <referencedby refid="classrb__tree_1a19ab880a4578025d20b7348b26c86921" compoundref="rb__tree_8hpp" startline="1196" endline="1198">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classrb__tree_1af13cf406308e18b832c9d6471fbdf21d" compoundref="rb__tree_8hpp" startline="1206" endline="1208">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a19ab880a4578025d20b7348b26c86921" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(iterator position, const value_type &amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrb__tree_1a359c6010e818e57652e801891914ea5e" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1196" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1196" bodyend="1198"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1af13cf406308e18b832c9d6471fbdf21d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(iterator position, value_type &amp;&amp;value)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classrb__tree_1a359c6010e818e57652e801891914ea5e" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近移动插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1206" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1206" bodyend="1208"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aa2204e84e6522f37bea2bb1aa6ac979a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_unique</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_unique</name>
+        <qualifiedname>rb_tree::insert_unique</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素（唯一键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1217" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1217" bodyend="1221"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a0c2cf31984fc359683e87a30273f8017" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_equal</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_equal</name>
+        <qualifiedname>rb_tree::emplace_equal</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在树中构造元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1230" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1230" bodyend="1233"/>
+        <referencedby refid="classrb__tree_1a6c0bca21511ef07a1386730858708997" compoundref="rb__tree_8hpp" startline="1240" endline="1240">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classrb__tree_1a197c7b169baff44f741edae87f1f5741" compoundref="rb__tree_8hpp" startline="1247" endline="1247">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a6c0bca21511ef07a1386730858708997" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1a359c6010e818e57652e801891914ea5e" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1240" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1240" bodyend="1240"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a197c7b169baff44f741edae87f1f5741" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree_1a359c6010e818e57652e801891914ea5e" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1247" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1247" bodyend="1247"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a990e94a13c9c67b16de2ed65734db6d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::emplace_equal_hint</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace_equal_hint</name>
+        <qualifiedname>rb_tree::emplace_equal_hint</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近构造元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1257" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1257" bodyend="1294"/>
+        <referencedby refid="classrb__tree_1a2328a4dd998e2551ffb5e13df71ec94c" compoundref="rb__tree_8hpp" startline="1302" endline="1304">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classrb__tree_1a2450a133deae01803d5c24d5f735f270" compoundref="rb__tree_8hpp" startline="1312" endline="1314">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a2328a4dd998e2551ffb5e13df71ec94c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(iterator position, const value_type &amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classrb__tree_1a359c6010e818e57652e801891914ea5e" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1302" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1302" bodyend="1304"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a2450a133deae01803d5c24d5f735f270" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(iterator position, value_type &amp;&amp;value)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classrb__tree_1a359c6010e818e57652e801891914ea5e" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近移动插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1312" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1312" bodyend="1314"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a2a63402925a819348a5fc8525786ca0d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::insert_equal</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert_equal</name>
+        <qualifiedname>rb_tree::insert_equal</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素（允许重复键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1323" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1323" bodyend="1327"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a79de846348690d31fcd35c4624e04a05" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type><ref refid="classrb__tree_1aee0ea092a682d33d8e1d2a8ce3c18673" kindref="member">size_type</ref></type>
+        <definition>size_type rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>erase</name>
+        <qualifiedname>rb_tree::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1334" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1334" bodyend="1339"/>
+        <referencedby refid="classrb__tree_1a79de846348690d31fcd35c4624e04a05" compoundref="rb__tree_8hpp" startline="1334" endline="1339">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classrb__tree_1a08208b96925a9ddb2dd49f85a843eb96" compoundref="rb__tree_8hpp" startline="1357" endline="1365">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a829d8c8538a72807c1961bd5ee93511d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>rb_tree::erase</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1345" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1345" bodyend="1350"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a08208b96925a9ddb2dd49f85a843eb96" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>rb_tree::erase</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1357" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1357" bodyend="1365"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aa42f7f90084918152bf219435eb8c7e7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; link_node &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>rb_tree::clear</qualifiedname>
+        <briefdescription>
+<para>清空树 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1370" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1370" bodyend="1382"/>
+        <referencedby refid="classrb__tree_1a08208b96925a9ddb2dd49f85a843eb96" compoundref="rb__tree_8hpp" startline="1357" endline="1365">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classrb__tree_1aeec39687b82ecd534d288076c9431bbc" compoundref="rb__tree_8hpp" startline="1010" endline="1015">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::~rb_tree</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a575bc96d5d480dd95f7c28229cbb6f06" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>rb_tree::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回end() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1389" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1389" bodyend="1407"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a18ca15cc2f77684edf1cf563871ec3a1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>rb_tree::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回cend() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1414" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1414" bodyend="1432"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a23e33ef4af25c0de4ddae340b48ad9b5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1aee0ea092a682d33d8e1d2a8ce3c18673" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>rb_tree::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1439" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1439" bodyend="1443"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a15964b6488ae6c7b02435d8de591c82f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>rb_tree::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1450" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1450" bodyend="1464"/>
+        <referencedby refid="classrb__tree_1a11ae0573f10fbccc64703b3e26f90cb0" compoundref="rb__tree_8hpp" startline="1534" endline="1536">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range</referencedby>
+        <referencedby refid="classrb__tree_1ac436d771e608eae4020af1d362525b1c" compoundref="rb__tree_8hpp" startline="1543" endline="1545">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aa23b1f723299d9f1b629b9681b8cefe8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>rb_tree::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的元素位置（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1471" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1471" bodyend="1485"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a086f07d41a723e933fcce9b0211bf592" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>rb_tree::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1492" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1492" bodyend="1506"/>
+        <referencedby refid="classrb__tree_1a11ae0573f10fbccc64703b3e26f90cb0" compoundref="rb__tree_8hpp" startline="1534" endline="1536">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range</referencedby>
+        <referencedby refid="classrb__tree_1ac436d771e608eae4020af1d362525b1c" compoundref="rb__tree_8hpp" startline="1543" endline="1545">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_range</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1af489ab4f4b0bb588d2e52c2230bf07e7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>rb_tree::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的元素位置（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1513" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1513" bodyend="1527"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a11ae0573f10fbccc64703b3e26f90cb0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref>, <ref refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" kindref="member">iterator</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD pair&lt; iterator, iterator &gt; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>rb_tree::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1534" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1534" bodyend="1536"/>
+        <referencedby refid="classrb__tree_1a23e33ef4af25c0de4ddae340b48ad9b5" compoundref="rb__tree_8hpp" startline="1439" endline="1443">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::count</referencedby>
+        <referencedby refid="classrb__tree_1a79de846348690d31fcd35c4624e04a05" compoundref="rb__tree_8hpp" startline="1334" endline="1339">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::erase</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1ac436d771e608eae4020af1d362525b1c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">const_iterator</ref>, <ref refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD pair&lt; const_iterator, const_iterator &gt; rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>rb_tree::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围（常量版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1543" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1543" bodyend="1545"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1ad580954ee75f0f3484d40a58407061bc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; Compare &gt; &amp;&amp;is_nothrow_swappable_v&lt; KeyOfValue &gt; &amp;&amp;is_nothrow_swappable_v&lt; allocator_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::swap</definition>
+        <argsstring>(rb_tree &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>rb_tree::swap</qualifiedname>
+        <param>
+          <type><ref refid="classrb__tree" kindref="compound">rb_tree</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个红黑树的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1551" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1551" bodyend="1557"/>
+        <referencedby refid="classrb__tree_1ae8747e3d3c46c22428e2c96e005177d1" compoundref="rb__tree_8hpp" startline="969" endline="976">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classrb__tree_1a9e29029b278954caf4e4ee6b6a5c53fd" compoundref="rb__tree_8hpp" startline="998" endline="1005">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1aecca4c4ecd4db48cd306c4efe0167ebd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::equal_to</definition>
+        <argsstring>(const rb_tree &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>rb_tree::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree" kindref="compound">rb_tree</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个红黑树大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1564" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1564" bodyend="1567"/>
+      </memberdef>
+      <memberdef kind="function" id="classrb__tree_1a36125806a8318855541ed4555c985dc0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool rb_tree&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;::less_than</definition>
+        <argsstring>(const rb_tree &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>rb_tree::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classrb__tree" kindref="compound">rb_tree</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧红黑树 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="1574" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="1574" bodyend="1577"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>红黑树容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>KeyOfValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>从值中提取键的函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+红黑树是一种自平衡二叉搜索树，作为关联式容器的底层实现。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" line="610" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/rb_tree.hpp" bodystart="610" bodyend="1578"/>
+    <listofallmembers>
+      <member refid="classrb__tree_1ab93a38a029b781c1f2c29216bfcf185c" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>allocator_type</name></member>
+      <member refid="classrb__tree_1a844a794f2f0cb5f024278b55a3c8991f" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>base_node</name></member>
+      <member refid="classrb__tree_1ac37e6c2a60f94b1e0f1ab42e9f8e504b" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>base_ptr</name></member>
+      <member refid="classrb__tree_1a4f30d432e477dbd186f2d79465367860" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>begin</name></member>
+      <member refid="classrb__tree_1aa237d4a5217efcc88e3e85003242e446" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>begin</name></member>
+      <member refid="classrb__tree_1a51db84fa478a7fff5e97e4755a1088b4" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>cbegin</name></member>
+      <member refid="classrb__tree_1ac2fc860e4e3e46ed697bbc8e43bfb92c" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>cend</name></member>
+      <member refid="classrb__tree_1aa42f7f90084918152bf219435eb8c7e7" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>clear</name></member>
+      <member refid="classrb__tree_1a76030ed39e771c8e84bbd78c561c2c53" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>color_type</name></member>
+      <member refid="classrb__tree_1a4df9d34f6c2de3dba7462d84c593c380" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>const_iterator</name></member>
+      <member refid="classrb__tree_1ab5f284eeec9f830a54913d1283d53ab2" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>const_pointer</name></member>
+      <member refid="classrb__tree_1a225425b29129200acd3f15781ae5ff38" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>const_reference</name></member>
+      <member refid="classrb__tree_1a188c3fb201ca2a878f6f3a4843956f34" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>const_reverse_iterator</name></member>
+      <member refid="classrb__tree_1af4ba1779596da4c4173d4af4c2a55198" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>copy_from</name></member>
+      <member refid="classrb__tree_1a19fe7c12ea141adb289016d34b6d004b" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>copy_node</name></member>
+      <member refid="classrb__tree_1a2672f776b2bc23d9d1eb5a3eea519c4d" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>copy_under</name></member>
+      <member refid="classrb__tree_1a23e33ef4af25c0de4ddae340b48ad9b5" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>count</name></member>
+      <member refid="classrb__tree_1a3ff3dc4a65c8cdcc0cc7b7bdcbf42219" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>crbegin</name></member>
+      <member refid="classrb__tree_1a3c65f399de634b3610a945b7e9496b8b" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>create_node</name></member>
+      <member refid="classrb__tree_1a989de0200fadc4d10d36631676189e2e" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>crend</name></member>
+      <member refid="classrb__tree_1abdae72acf8f26b441fe77cdb74979793" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>destroy_node</name></member>
+      <member refid="classrb__tree_1a60390825c16e7b5f8155442d2486a6e4" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>difference_type</name></member>
+      <member refid="classrb__tree_1a0c2cf31984fc359683e87a30273f8017" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>emplace_equal</name></member>
+      <member refid="classrb__tree_1a990e94a13c9c67b16de2ed65734db6d1" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>emplace_equal_hint</name></member>
+      <member refid="classrb__tree_1a764899e55affb00dcb3d112a749d08ea" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>emplace_unique</name></member>
+      <member refid="classrb__tree_1a2d25955f8bf32e3736ac4c8345a796a0" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>emplace_unique_hint</name></member>
+      <member refid="classrb__tree_1a04bfd0a59e22d6342b24fa23c1356194" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>empty</name></member>
+      <member refid="classrb__tree_1a6aa8451f6f3625cef594b17c9ffb53bf" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>end</name></member>
+      <member refid="classrb__tree_1a1498adcbae6c7ec39be51be1de263d6e" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>end</name></member>
+      <member refid="classrb__tree_1a11ae0573f10fbccc64703b3e26f90cb0" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>equal_range</name></member>
+      <member refid="classrb__tree_1ac436d771e608eae4020af1d362525b1c" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>equal_range</name></member>
+      <member refid="classrb__tree_1aecca4c4ecd4db48cd306c4efe0167ebd" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>equal_to</name></member>
+      <member refid="classrb__tree_1a79de846348690d31fcd35c4624e04a05" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>erase</name></member>
+      <member refid="classrb__tree_1a829d8c8538a72807c1961bd5ee93511d" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>erase</name></member>
+      <member refid="classrb__tree_1a08208b96925a9ddb2dd49f85a843eb96" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>erase</name></member>
+      <member refid="classrb__tree_1aadcf2b9648cbdc5e84f62c596ee83093" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>erase_under</name></member>
+      <member refid="classrb__tree_1a6360a8706d8700f26319e788f097a926" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>extracter_</name></member>
+      <member refid="classrb__tree_1a575bc96d5d480dd95f7c28229cbb6f06" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>find</name></member>
+      <member refid="classrb__tree_1a18ca15cc2f77684edf1cf563871ec3a1" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>find</name></member>
+      <member refid="classrb__tree_1a0059a8d008a3e9f08d84722b6777da33" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>header_</name></member>
+      <member refid="classrb__tree_1ae8a7cac9bd0f110b49840848ecdd7bde" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>header_init</name></member>
+      <member refid="classrb__tree_1a12d7afe962564848dc31d9b974e6df54" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classrb__tree_1a6c0bca21511ef07a1386730858708997" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classrb__tree_1a197c7b169baff44f741edae87f1f5741" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classrb__tree_1a2328a4dd998e2551ffb5e13df71ec94c" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classrb__tree_1a2450a133deae01803d5c24d5f735f270" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classrb__tree_1a2a63402925a819348a5fc8525786ca0d" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>insert_equal</name></member>
+      <member refid="classrb__tree_1a8e0bb34dbdd97a10bb616c1bbb03fd7d" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>insert_into</name></member>
+      <member refid="classrb__tree_1a0ded698d6aab4502f68481b372c29aa3" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classrb__tree_1a6b2cb69469c3542b8f58ecb83ba6120a" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classrb__tree_1ab45d7f59433be8f9253e1b8e481e59a7" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classrb__tree_1a19ab880a4578025d20b7348b26c86921" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classrb__tree_1af13cf406308e18b832c9d6471fbdf21d" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classrb__tree_1aa2204e84e6522f37bea2bb1aa6ac979a" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>insert_unique</name></member>
+      <member refid="classrb__tree_1aa4161fdc742ab41d0141078d2748b246" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>iterator</name></member>
+      <member refid="classrb__tree_1ae9df319daed9630259f2feb513a475a5" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>key</name></member>
+      <member refid="classrb__tree_1a5528c8542b864e123cfc0135ea1a4303" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>key</name></member>
+      <member refid="classrb__tree_1a96e2095897a17c3cda0e676bf1315233" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>key_compare</name></member>
+      <member refid="classrb__tree_1a110d0640e3c5a929d488cafc1d4374fd" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>key_compare_</name></member>
+      <member refid="classrb__tree_1afc85badd7713017ac36d240da732ac03" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>key_type</name></member>
+      <member refid="classrb__tree_1a19281f0916fcc45d30adf1043ed5a47c" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>left</name></member>
+      <member refid="classrb__tree_1a5f14ff2da8358f99246ab51f9947f4fa" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>leftmost</name></member>
+      <member refid="classrb__tree_1a36125806a8318855541ed4555c985dc0" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>less_than</name></member>
+      <member refid="classrb__tree_1a3e463eddf529d925517a9142554199fb" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>link_node</name></member>
+      <member refid="classrb__tree_1a98596efee95f350359bd2fb57eb4187b" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>link_type</name></member>
+      <member refid="classrb__tree_1a15964b6488ae6c7b02435d8de591c82f" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>lower_bound</name></member>
+      <member refid="classrb__tree_1aa23b1f723299d9f1b629b9681b8cefe8" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>lower_bound</name></member>
+      <member refid="classrb__tree_1aeab19e53dc2649cc06b15cd211f3e23f" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>max_size</name></member>
+      <member refid="classrb__tree_1aca4344fe21a807fb3e23087a613471d4" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>maximum</name></member>
+      <member refid="classrb__tree_1aa5ef084436b6eb5ff5339495e3b8ecf8" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>minimum</name></member>
+      <member refid="classrb__tree_1ae8747e3d3c46c22428e2c96e005177d1" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>operator=</name></member>
+      <member refid="classrb__tree_1a9e29029b278954caf4e4ee6b6a5c53fd" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>operator=</name></member>
+      <member refid="classrb__tree_1a417e294a5c9e50dc210d097fd82c74a4" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>parent</name></member>
+      <member refid="classrb__tree_1ae4cf825e89c4768b58ed37f063c10ecf" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>pointer</name></member>
+      <member refid="classrb__tree_1ade5a9df48735868b019e0fc38f3848e7" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>rb_tree</name></member>
+      <member refid="classrb__tree_1af86e9e7c91ba11136d83dc5618b7ee62" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>rb_tree</name></member>
+      <member refid="classrb__tree_1aaa455643dbfa6b68103a7353615d2e7e" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>rb_tree</name></member>
+      <member refid="classrb__tree_1a1ccf0d772181c43fe5bb175d273657b9" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>rb_tree</name></member>
+      <member refid="classrb__tree_1a51a157505b4a3459b5110e50a88f6470" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>rbegin</name></member>
+      <member refid="classrb__tree_1a702674747e6fd79eb71a91164081f5c9" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>rbegin</name></member>
+      <member refid="classrb__tree_1ab88a6037629751726bb95b223b48e62a" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>reference</name></member>
+      <member refid="classrb__tree_1a818c44ab122562e4d1e1dc190090a9f2" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>rend</name></member>
+      <member refid="classrb__tree_1ac08d00a59b76d5440fe1cb3b605f2786" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>rend</name></member>
+      <member refid="classrb__tree_1a27ceda79573b8b314e4e855fdd1903f0" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>reverse_iterator</name></member>
+      <member refid="classrb__tree_1a931d1867bb8971a2465448a211c5bb8f" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>right</name></member>
+      <member refid="classrb__tree_1a331611d50082b8b6cf8f12cd7dcc8ed8" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>rightmost</name></member>
+      <member refid="classrb__tree_1aa7809830eaa7910625aa86192ff2f24a" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>root</name></member>
+      <member refid="classrb__tree_1a2021eed4ed841942e4e82a4b5db7a421" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>size</name></member>
+      <member refid="classrb__tree_1a832b7b49bd9be7a62fe8e2cb1d8a7150" prot="private" virt="non-virtual"><scope>rb_tree</scope><name>size_pair_</name></member>
+      <member refid="classrb__tree_1aee0ea092a682d33d8e1d2a8ce3c18673" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>size_type</name></member>
+      <member refid="classrb__tree_1ad580954ee75f0f3484d40a58407061bc" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>swap</name></member>
+      <member refid="classrb__tree_1a086f07d41a723e933fcce9b0211bf592" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>upper_bound</name></member>
+      <member refid="classrb__tree_1af489ab4f4b0bb588d2e52c2230bf07e7" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>upper_bound</name></member>
+      <member refid="classrb__tree_1a359c6010e818e57652e801891914ea5e" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>value_type</name></member>
+      <member refid="classrb__tree_1aeec39687b82ecd534d288076c9431bbc" prot="public" virt="non-virtual"><scope>rb_tree</scope><name>~rb_tree</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

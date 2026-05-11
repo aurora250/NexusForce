@@ -93,15 +93,15 @@ $(function(){initNavTree('classpipe.html','','classpipe-members'); });
 </div><!--header-->
 <div class="contents">
 
-<p>管道类  
+<p>阻塞式匿名管道类  
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="pipe_8hpp_source.html">pipe.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a13721299e6bfd0e1b9e1a9fefbf050ea" id="r_a13721299e6bfd0e1b9e1a9fefbf050ea"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a13721299e6bfd0e1b9e1a9fefbf050ea">pipe</a> () noexcept</td></tr>
-<tr class="memdesc:a13721299e6bfd0e1b9e1a9fefbf050ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:ac5d9d07c3c3e62c20eea26bbb9ed3cd1" id="r_ac5d9d07c3c3e62c20eea26bbb9ed3cd1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac5d9d07c3c3e62c20eea26bbb9ed3cd1">pipe</a> () noexcept=default</td></tr>
+<tr class="memdesc:ac5d9d07c3c3e62c20eea26bbb9ed3cd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
 <tr class="memitem:a3b8b6a7669b8d4d3ed101459ffac070f" id="r_a3b8b6a7669b8d4d3ed101459ffac070f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3b8b6a7669b8d4d3ed101459ffac070f">pipe</a> (bool inheritable)</td></tr>
 <tr class="memdesc:a3b8b6a7669b8d4d3ed101459ffac070f"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建管道  <br /></td></tr>
 <tr class="memitem:ab46b67e9dc7bf3134a6f6db0fedcc63a" id="r_ab46b67e9dc7bf3134a6f6db0fedcc63a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab46b67e9dc7bf3134a6f6db0fedcc63a">~pipe</a> ()</td></tr>
@@ -141,15 +141,20 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
 <tr class="memitem:a8f19c0042cb447d2912f74e0132470c0" id="r_a8f19c0042cb447d2912f74e0132470c0"><td class="memItemLeft"><a id="a8f19c0042cb447d2912f74e0132470c0" name="a8f19c0042cb447d2912f74e0132470c0"></a>
 NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detach_write_handle</b> () noexcept</td></tr>
 <tr class="memdesc:a8f19c0042cb447d2912f74e0132470c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">分离写端句柄（调用者负责关闭） <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a8e117ee0b2cb2b6d56b20d0ef577ea0d" id="r_a8e117ee0b2cb2b6d56b20d0ef577ea0d"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a8e117ee0b2cb2b6d56b20d0ef577ea0d">ignore_sigpipe</a> () noexcept</td></tr>
+<tr class="memdesc:a8e117ee0b2cb2b6d56b20d0ef577ea0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">忽略 SIGPIPE 信号  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>管道类 </p>
+<div class="textblock"><p>阻塞式匿名管道类 </p>
 <p>支持管道的创建、读写和关闭。 </p>
 
 <p class="definition">在文件 <a class="el" href="pipe_8hpp_source.html">pipe.hpp</a> 第 <a class="el" href="pipe_8hpp_source.html#l00050">50</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="a13721299e6bfd0e1b9e1a9fefbf050ea" name="a13721299e6bfd0e1b9e1a9fefbf050ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13721299e6bfd0e1b9e1a9fefbf050ea">&#9670;&#160;</a></span>pipe() <span class="overload">[1/2]</span></h2>
+<a id="ac5d9d07c3c3e62c20eea26bbb9ed3cd1" name="ac5d9d07c3c3e62c20eea26bbb9ed3cd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5d9d07c3c3e62c20eea26bbb9ed3cd1">&#9670;&#160;</a></span>pipe() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +171,7 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -174,9 +179,7 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
 <p>默认构造函数 </p>
 <p>创建一个未初始化的管道对象。 </p>
 
-<p class="definition">在文件 <a class="el" href="pipe_8hpp_source.html">pipe.hpp</a> 第 <a class="el" href="pipe_8hpp_source.html#l00068">68</a> 行定义.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="#a700d9f262f874c54517b8903fdb131a6">operator=()</a>, <a class="el" href="#a59aa4a3973bc2d4501e02e773d3c59ed">pipe()</a> , 以及 <a class="el" href="#ab46b67e9dc7bf3134a6f6db0fedcc63a">~pipe()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a700d9f262f874c54517b8903fdb131a6">operator=()</a>, <a class="el" href="#a3b8b6a7669b8d4d3ed101459ffac070f">pipe()</a>, <a class="el" href="#a59aa4a3973bc2d4501e02e773d3c59ed">pipe()</a> , 以及 <a class="el" href="#ab46b67e9dc7bf3134a6f6db0fedcc63a">~pipe()</a>.</p>
 
 </div>
 </div>
@@ -217,6 +220,8 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
   </dd>
 </dl>
 
+<p class="reference">引用了 <a class="el" href="#ac5d9d07c3c3e62c20eea26bbb9ed3cd1">pipe()</a>.</p>
+
 </div>
 </div>
 <a id="ab46b67e9dc7bf3134a6f6db0fedcc63a" name="ab46b67e9dc7bf3134a6f6db0fedcc63a"></a>
@@ -237,11 +242,43 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
 <p>析构函数 </p>
 <p>自动关闭管道句柄。 </p>
 
-<p class="reference">引用了 <a class="el" href="pipe_8hpp_source.html#l00068">pipe()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#ac5d9d07c3c3e62c20eea26bbb9ed3cd1">pipe()</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a8e117ee0b2cb2b6d56b20d0ef577ea0d" name="a8e117ee0b2cb2b6d56b20d0ef577ea0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e117ee0b2cb2b6d56b20d0ef577ea0d">&#9670;&#160;</a></span>ignore_sigpipe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pipe::ignore_sigpipe </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>忽略 SIGPIPE 信号 </p>
+<dl class="section note"><dt>注解</dt><dd>在 POSIX 系统上，向没有读端的管道写入会触发 SIGPIPE 信号，默认行为是终止进程。 调用此函数后，系统将忽略该信号，改为由 <a class="el" href="#a6834b8e2df04604f490e8eef1e63b148" title="向管道写入数据">write()</a> 返回 -1 并设置 errno = EPIPE。 此操作是进程全局的，但也是线程安全的传统做法。 在 Windows 上该函数无任何效果。 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a8e117ee0b2cb2b6d56b20d0ef577ea0d">ignore_sigpipe()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a8e117ee0b2cb2b6d56b20d0ef577ea0d">ignore_sigpipe()</a>.</p>
+
+</div>
+</div>
 <a id="a6e95e2a9525ba03f7f4a97eeb5b2c08d" name="a6e95e2a9525ba03f7f4a97eeb5b2c08d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6e95e2a9525ba03f7f4a97eeb5b2c08d">&#9670;&#160;</a></span>is_valid()</h2>
 
@@ -311,7 +348,9 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
 </dl>
 <dl class="section return"><dt>返回</dt><dd>实际读取的字节数，-1表示错误 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a16c487e5806079fbfd62005d8bffe0e5">read()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a16c487e5806079fbfd62005d8bffe0e5">read()</a>.</p>
 
 </div>
 </div>
@@ -332,6 +371,10 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
 
 <p>从管道读取所有可用数据（非阻塞） </p>
 <dl class="section return"><dt>返回</dt><dd>读取的数据字符串 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ab6f770ac312b5bcb647020d16cc56c9c">read_available()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ab6f770ac312b5bcb647020d16cc56c9c">read_available()</a>.</p>
 
 </div>
 </div>
@@ -372,7 +415,9 @@ NEFORCE_NODISCARD native_handle_type&#160;</td><td class="memItemRight"><b>detac
 </dl>
 <dl class="section return"><dt>返回</dt><dd>实际写入的字节数，-1表示错误 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>, <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a> , 以及 <a class="el" href="#a6834b8e2df04604f490e8eef1e63b148">write()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a6834b8e2df04604f490e8eef1e63b148">write()</a>.</p>
 
 </div>
 </div>

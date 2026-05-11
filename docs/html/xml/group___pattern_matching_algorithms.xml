@@ -1,0 +1,738 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___pattern_matching_algorithms" kind="group">
+    <compoundname>PatternMatchingAlgorithms</compoundname>
+    <title>模式匹配算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___pattern_matching_algorithms_1ga07db4eea0c988d493904052c4839973e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename BinaryPredicate</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator1</type>
+        <definition>Iterator1 search</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPredicate binary_pred)</argsstring>
+        <name>search</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>last2</declname>
+        </param>
+        <param>
+          <type>BinaryPredicate</type>
+          <declname>binary_pred</declname>
+        </param>
+        <briefdescription>
+<para>在范围内查找子序列的第一次出现 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列迭代器类型，需要满足前向迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列迭代器类型，需要满足前向迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BinaryPredicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元谓词函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binary_pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元谓词函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向子序列第一次出现位置的迭代器，或last1如果未找到 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="481" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="481" bodyend="511"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <referencedby refid="group___pattern_matching_algorithms_1ga9997e6a5ac3609fc198d306e328229f4" compoundref="search_8hpp" startline="666" endline="703">find_end</referencedby>
+        <referencedby refid="group___pattern_matching_algorithms_1gab41c0b2c56fb167b4a8677560491b3c3" compoundref="search_8hpp" startline="524" endline="526">search</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___pattern_matching_algorithms_1gab41c0b2c56fb167b4a8677560491b3c3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator1</type>
+        <definition>Iterator1 search</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)</argsstring>
+        <name>search</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>last2</declname>
+        </param>
+        <briefdescription>
+<para>search的默认比较版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向子序列第一次出现位置的迭代器，或last1如果未找到 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="524" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="524" bodyend="526"/>
+        <references refid="group___pattern_matching_algorithms_1ga07db4eea0c988d493904052c4839973e" compoundref="search_8hpp" startline="481" endline="511">search</references>
+      </memberdef>
+      <memberdef kind="function" id="group___pattern_matching_algorithms_1ga9580524f56d452c88e066180e465af27" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator search_n</definition>
+        <argsstring>(Iterator first, Iterator last, const size_t count, const T &amp;value)</argsstring>
+        <name>search_n</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>查找范围内连续n个等于指定值的子序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型，需要满足前向迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连续出现的次数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向连续n个value的子序列起始位置的迭代器，或last如果未找到 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="539" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="539" bodyend="562"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+        <references refid="group___finding_algorithms_1gaf00ba933b64f438e9c32ebf9cb1d7c8d" compoundref="search_8hpp" startline="413" endline="420">find</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___pattern_matching_algorithms_1ga2f70389e3338d4062ffc0dcccd619383" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename BinaryPredicate</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator search_n</definition>
+        <argsstring>(Iterator first, Iterator last, const size_t count, const T &amp;value, BinaryPredicate binary_pred)</argsstring>
+        <name>search_n</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>BinaryPredicate</type>
+          <declname>binary_pred</declname>
+        </param>
+        <briefdescription>
+<para>search_n的谓词版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型，需要满足前向迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BinaryPredicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元谓词函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连续出现的次数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binary_pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元谓词函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向连续n个满足谓词的子序列起始位置的迭代器，或last如果未找到 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="577" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="577" bodyend="614"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___pattern_matching_algorithms_1ga9997e6a5ac3609fc198d306e328229f4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator1</type>
+        <definition>Iterator1 find_end</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)</argsstring>
+        <name>find_end</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>last2</declname>
+        </param>
+        <briefdescription>
+<para>在范围内查找子序列的最后一次出现 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列迭代器类型，需要满足前向迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列迭代器类型，需要满足前向迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向子序列最后一次出现位置的迭代器，或last1如果未找到 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="666" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="666" bodyend="703"/>
+        <references refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" compoundref="iterator_8hpp" startline="106" endline="129">advance</references>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1ga56f3ab178cee74039e73463d63a71658" compoundref="concepts_8hpp" startline="581">is_ranges_bid_iter_v</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <references refid="group___pattern_matching_algorithms_1ga07db4eea0c988d493904052c4839973e" compoundref="search_8hpp" startline="481" endline="511">search</references>
+      </memberdef>
+      <memberdef kind="function" id="group___pattern_matching_algorithms_1ga1753228dbceb869e6fd58b39f1b2853d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename BinaryPredicate</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator1</type>
+        <definition>Iterator1 find_first_of</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPredicate comp)</argsstring>
+        <name>find_first_of</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>last2</declname>
+        </param>
+        <param>
+          <type>BinaryPredicate</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>查找范围内第一个出现在指定集合中的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列迭代器类型，需要满足输入迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合序列迭代器类型，需要满足输入迭代器要求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BinaryPredicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元谓词函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元谓词函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个出现在集合中的元素的迭代器，或last1如果未找到 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="718" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="718" bodyend="731"/>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="group___pattern_matching_algorithms_1ga6f541ef8f79986ada39f65ec055de358" compoundref="search_8hpp" startline="744" endline="746">find_first_of</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___pattern_matching_algorithms_1ga6f541ef8f79986ada39f65ec055de358" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator1</type>
+        <definition>Iterator1 find_first_of</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)</argsstring>
+        <name>find_first_of</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>last2</declname>
+        </param>
+        <briefdescription>
+<para>find_first_of的默认比较版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合序列迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>集合序列终止迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个出现在集合中的元素的迭代器，或last1如果未找到 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" line="744" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/search.hpp" bodystart="744" bodyend="746"/>
+        <references refid="group___pattern_matching_algorithms_1ga1753228dbceb869e6fd58b39f1b2853d" compoundref="search_8hpp" startline="718" endline="731">find_first_of</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>在范围内查找子序列的算法 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

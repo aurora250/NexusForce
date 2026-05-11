@@ -1,0 +1,567 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classfile__watcher" kind="class" language="C++" prot="public">
+    <compoundname>file_watcher</compoundname>
+    <includes refid="file__watcher_8hpp" local="no">file_watcher.hpp</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classfile__watcher_1af07f0f654b758e102cb093a45fca7221" prot="private" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(const <ref refid="classpath" kindref="compound">path</ref> &amp;, <ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref>)&gt;</type>
+        <definition>using file_watcher::callback_t = function&lt;void(const path&amp;, file_watch_event)&gt;</definition>
+        <argsstring></argsstring>
+        <name>callback_t</name>
+        <qualifiedname>file_watcher::callback_t</qualifiedname>
+        <briefdescription>
+<para>事件回调类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="35" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfile__watcher_1a841795b12651bcf5584e17d4a65702ed" prot="private" static="no" mutable="no">
+        <type><ref refid="classpath" kindref="compound">path</ref></type>
+        <definition>path file_watcher::watch_path_</definition>
+        <argsstring></argsstring>
+        <name>watch_path_</name>
+        <qualifiedname>file_watcher::watch_path_</qualifiedname>
+        <briefdescription>
+<para>监视的目录路径 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="37" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1a777e14b6fe314ba1f56e828555efd453" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool file_watcher::recursive_</definition>
+        <argsstring></argsstring>
+        <name>recursive_</name>
+        <qualifiedname>file_watcher::recursive_</qualifiedname>
+        <briefdescription>
+<para>是否递归监视子目录 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="38" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1a33ca2eaec7576c8a085811ec6065b0a6" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; file_watcher::watching_</definition>
+        <argsstring></argsstring>
+        <name>watching_</name>
+        <qualifiedname>file_watcher::watching_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否正在监视 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="39" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1a081c1fec8946eaa1b3c756ea71b018e0" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; file_watcher::stopping_</definition>
+        <argsstring></argsstring>
+        <name>stopping_</name>
+        <qualifiedname>file_watcher::stopping_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否正在停止 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="40" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1af8c4840046cfd2be98a18e85891db133" prot="private" static="no" mutable="no">
+        <type>callback_t</type>
+        <definition>callback_t file_watcher::callback_</definition>
+        <argsstring></argsstring>
+        <name>callback_</name>
+        <qualifiedname>file_watcher::callback_</qualifiedname>
+        <briefdescription>
+<para>事件回调函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="41" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1a0be9ef9dc202fd6a9b056b190d7ebe4e" prot="private" static="no" mutable="no">
+        <type><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref></type>
+        <definition>file_watch_event file_watcher::current_events_</definition>
+        <argsstring></argsstring>
+        <name>current_events_</name>
+        <qualifiedname>file_watcher::current_events_</qualifiedname>
+        <initializer>{<ref refid="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a5fb1f955b45e38e31789286a1790398d" kindref="member">file_watch_event::ALL</ref>}</initializer>
+        <briefdescription>
+<para>当前监视的事件类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="42" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1a7676dc832f122e7ae02085ba8f780074" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; char &gt;</type>
+        <definition>vector&lt;char&gt; file_watcher::buffer_</definition>
+        <argsstring></argsstring>
+        <name>buffer_</name>
+        <qualifiedname>file_watcher::buffer_</qualifiedname>
+        <briefdescription>
+<para>事件数据缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="43" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1ae66e053f4f2d16ddbcd331ecb4977225" prot="private" static="no" mutable="no">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex file_watcher::callback_mutex_</definition>
+        <argsstring></argsstring>
+        <name>callback_mutex_</name>
+        <qualifiedname>file_watcher::callback_mutex_</qualifiedname>
+        <briefdescription>
+<para>回调函数互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="44" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1a7e82b37a0920f528e314ad1441b2d7ff" prot="private" static="no" mutable="no">
+        <type>::HANDLE</type>
+        <definition>::HANDLE file_watcher::dir_handle_</definition>
+        <argsstring></argsstring>
+        <name>dir_handle_</name>
+        <qualifiedname>file_watcher::dir_handle_</qualifiedname>
+        <initializer>= INVALID_HANDLE_VALUE</initializer>
+        <briefdescription>
+<para>目录句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="47" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1adf76bfb9bc88e1a522c3fd01074d0a05" prot="private" static="no" mutable="no">
+        <type>::HANDLE</type>
+        <definition>::HANDLE file_watcher::completion_port_</definition>
+        <argsstring></argsstring>
+        <name>completion_port_</name>
+        <qualifiedname>file_watcher::completion_port_</qualifiedname>
+        <initializer>= INVALID_HANDLE_VALUE</initializer>
+        <briefdescription>
+<para>I/O完成端口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="48" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1ad50132efb2058b708ea4f4c22ac980c3" prot="private" static="no" mutable="no">
+        <type>::OVERLAPPED</type>
+        <definition>::OVERLAPPED file_watcher::overlapped_</definition>
+        <argsstring></argsstring>
+        <name>overlapped_</name>
+        <qualifiedname>file_watcher::overlapped_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>重叠I/O结构 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="49" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__watcher_1a99f24db2955f8600cf6cdecff96f4812" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread file_watcher::watch_thread_</definition>
+        <argsstring></argsstring>
+        <name>watch_thread_</name>
+        <qualifiedname>file_watcher::watch_thread_</qualifiedname>
+        <briefdescription>
+<para>监视线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="56" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfile__watcher_1a8954f9c2f190a4eb493d65c7b52beb1b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void file_watcher::watch_thread_func</definition>
+        <argsstring>()</argsstring>
+        <name>watch_thread_func</name>
+        <qualifiedname>file_watcher::watch_thread_func</qualifiedname>
+        <briefdescription>
+<para>监视线程函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>阻塞等待文件系统事件，当事件发生时调用回调函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="63" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>file_watcher::file_watcher</definition>
+        <argsstring>(path watch_path, bool recursive=false)</argsstring>
+        <name>file_watcher</name>
+        <qualifiedname>file_watcher::file_watcher</qualifiedname>
+        <param>
+          <type><ref refid="classpath" kindref="compound">path</ref></type>
+          <declname>watch_path</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>recursive</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>watch_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要监视的目录路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>recursive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否递归监视子目录 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsystem__exception" kindref="compound">system_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路径不存在或不是目录时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="72" column="14"/>
+        <references refid="classfile__watcher_1a360ac515e0d01a6829d99dce0491bd50" compoundref="file__watcher_8hpp" startline="106" endline="106">watch_path</references>
+        <referencedby refid="classfile__watcher_1a1cfab722bf2385f8154c4e4040a73d16">~file_watcher</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1a1cfab722bf2385f8154c4e4040a73d16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>file_watcher::~file_watcher</definition>
+        <argsstring>()</argsstring>
+        <name>~file_watcher</name>
+        <qualifiedname>file_watcher::~file_watcher</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>停止监视并清理资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="79" column="5"/>
+        <references refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471">file_watcher</references>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1af4501fbbf35fd7ce154c4f1fcbf4e468" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>file_watcher::file_watcher</definition>
+        <argsstring>(const file_watcher &amp;)=delete</argsstring>
+        <name>file_watcher</name>
+        <qualifiedname>file_watcher::file_watcher</qualifiedname>
+        <param>
+          <type>const <ref refid="classfile__watcher" kindref="compound">file_watcher</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="81" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1a1741fe5eca3d81a722d59b579734657b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classfile__watcher" kindref="compound">file_watcher</ref> &amp;</type>
+        <definition>file_watcher &amp; file_watcher::operator=</definition>
+        <argsstring>(const file_watcher &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>file_watcher::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classfile__watcher" kindref="compound">file_watcher</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="82" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1a6e0fdafaa416021b7a8641712f44c33f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_watcher::start</definition>
+        <argsstring>(callback_t callback, file_watch_event events=file_watch_event::ALL)</argsstring>
+        <name>start</name>
+        <qualifiedname>file_watcher::start</qualifiedname>
+        <param>
+          <type>callback_t</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref></type>
+          <declname>events</declname>
+          <defval><ref refid="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a5fb1f955b45e38e31789286a1790398d" kindref="member">file_watch_event::ALL</ref></defval>
+        </param>
+        <briefdescription>
+<para>开始监视 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>事件回调函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>events</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要监视的事件类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功启动</para>
+</simplesect>
+启动一个后台线程开始监视文件系统事件。 当指定的事件发生时，回调函数会被调用，参数为文件路径和事件类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="93" column="10"/>
+        <references refid="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a5fb1f955b45e38e31789286a1790398d" compoundref="file__constants_8hpp" startline="251">ALL</references>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1a6540e99efd23e8b52d78019871d52c04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void file_watcher::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>file_watcher::stop</qualifiedname>
+        <briefdescription>
+<para>停止监视 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>停止监视线程并清理相关资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="100" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1a360ac515e0d01a6829d99dce0491bd50" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classpath" kindref="compound">path</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const path &amp; file_watcher::watch_path</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>watch_path</name>
+        <qualifiedname>file_watcher::watch_path</qualifiedname>
+        <briefdescription>
+<para>获取监视的目录路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>目录路径 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="106" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="106" bodyend="106"/>
+        <referencedby refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471">file_watcher</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1a2e24a676b2e7fafeee8a2d7f628fa6a4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref></type>
+        <definition>NEFORCE_NODISCARD file_watch_event file_watcher::current_events</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>current_events</name>
+        <qualifiedname>file_watcher::current_events</qualifiedname>
+        <briefdescription>
+<para>获取当前监视的事件类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>事件类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="112" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1a4cec770ffe6dac4559783c12dfc5b00e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool file_watcher::is_watching</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_watching</name>
+        <qualifiedname>file_watcher::is_watching</qualifiedname>
+        <briefdescription>
+<para>检查是否正在监视 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否正在监视 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="118" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="118" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1af490b718f07aa8c285280a050c52e902" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool file_watcher::is_recursive</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_recursive</name>
+        <qualifiedname>file_watcher::is_recursive</qualifiedname>
+        <briefdescription>
+<para>检查是否递归监视子目录 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否递归 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="124" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="124" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1a9d34c9236ac414aa01fb2072dcce6756" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_watcher::update_watch</definition>
+        <argsstring>(file_watch_event events)</argsstring>
+        <name>update_watch</name>
+        <qualifiedname>file_watcher::update_watch</qualifiedname>
+        <param>
+          <type><ref refid="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" kindref="member">file_watch_event</ref></type>
+          <declname>events</declname>
+        </param>
+        <briefdescription>
+<para>更新监视的事件类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>events</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的事件类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功更新</para>
+</simplesect>
+如果正在监视中，会重启监视器以应用新的事件类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="133" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__watcher_1a3f9a8e33c3225c12b8ee6b9f00d0bb7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_watcher::update_recursive</definition>
+        <argsstring>(bool recursive)</argsstring>
+        <name>update_recursive</name>
+        <qualifiedname>file_watcher::update_recursive</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>recursive</declname>
+        </param>
+        <briefdescription>
+<para>更新递归设置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>recursive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的递归设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功更新</para>
+</simplesect>
+如果正在监视中，会重启监视器以应用新的递归设置。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="142" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>文件系统监视器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>监视指定目录中的文件变化事件，支持递归监视子目录。 当文件被创建、删除、修改、重命名或访问时，触发回调函数。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" line="33" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_watcher.hpp" bodystart="33" bodyend="143"/>
+    <listofallmembers>
+      <member refid="classfile__watcher_1a7676dc832f122e7ae02085ba8f780074" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>buffer_</name></member>
+      <member refid="classfile__watcher_1af8c4840046cfd2be98a18e85891db133" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>callback_</name></member>
+      <member refid="classfile__watcher_1ae66e053f4f2d16ddbcd331ecb4977225" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>callback_mutex_</name></member>
+      <member refid="classfile__watcher_1af07f0f654b758e102cb093a45fca7221" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>callback_t</name></member>
+      <member refid="classfile__watcher_1adf76bfb9bc88e1a522c3fd01074d0a05" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>completion_port_</name></member>
+      <member refid="classfile__watcher_1a2e24a676b2e7fafeee8a2d7f628fa6a4" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>current_events</name></member>
+      <member refid="classfile__watcher_1a0be9ef9dc202fd6a9b056b190d7ebe4e" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>current_events_</name></member>
+      <member refid="classfile__watcher_1a7e82b37a0920f528e314ad1441b2d7ff" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>dir_handle_</name></member>
+      <member refid="classfile__watcher_1ae2be249c59f4c853b1953a549fc4d471" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>file_watcher</name></member>
+      <member refid="classfile__watcher_1af4501fbbf35fd7ce154c4f1fcbf4e468" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>file_watcher</name></member>
+      <member refid="classfile__watcher_1af490b718f07aa8c285280a050c52e902" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>is_recursive</name></member>
+      <member refid="classfile__watcher_1a4cec770ffe6dac4559783c12dfc5b00e" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>is_watching</name></member>
+      <member refid="classfile__watcher_1a1741fe5eca3d81a722d59b579734657b" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>operator=</name></member>
+      <member refid="classfile__watcher_1ad50132efb2058b708ea4f4c22ac980c3" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>overlapped_</name></member>
+      <member refid="classfile__watcher_1a777e14b6fe314ba1f56e828555efd453" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>recursive_</name></member>
+      <member refid="classfile__watcher_1a6e0fdafaa416021b7a8641712f44c33f" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>start</name></member>
+      <member refid="classfile__watcher_1a6540e99efd23e8b52d78019871d52c04" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>stop</name></member>
+      <member refid="classfile__watcher_1a081c1fec8946eaa1b3c756ea71b018e0" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>stopping_</name></member>
+      <member refid="classfile__watcher_1a3f9a8e33c3225c12b8ee6b9f00d0bb7c" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>update_recursive</name></member>
+      <member refid="classfile__watcher_1a9d34c9236ac414aa01fb2072dcce6756" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>update_watch</name></member>
+      <member refid="classfile__watcher_1a360ac515e0d01a6829d99dce0491bd50" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>watch_path</name></member>
+      <member refid="classfile__watcher_1a841795b12651bcf5584e17d4a65702ed" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>watch_path_</name></member>
+      <member refid="classfile__watcher_1a99f24db2955f8600cf6cdecff96f4812" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>watch_thread_</name></member>
+      <member refid="classfile__watcher_1a8954f9c2f190a4eb493d65c7b52beb1b" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>watch_thread_func</name></member>
+      <member refid="classfile__watcher_1a33ca2eaec7576c8a085811ec6065b0a6" prot="private" virt="non-virtual"><scope>file_watcher</scope><name>watching_</name></member>
+      <member refid="classfile__watcher_1a1cfab722bf2385f8154c4e4040a73d16" prot="public" virt="non-virtual"><scope>file_watcher</scope><name>~file_watcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

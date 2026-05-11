@@ -3,9 +3,9 @@
 
 /**
  * @file ini_value.hpp
- * @brief ini配置变量
+ * @brief INI配置变量
  *
- * 此文件提供了ini配置格式的抽象基类和具体实现类。
+ * 此文件提供了INI配置格式的抽象基类和具体实现类。
  */
 
 #include "NeForce/core/container/unordered_map.hpp"
@@ -21,7 +21,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct ini_exception
- * @brief ini格式操作失败
+ * @brief INI格式操作失败
  */
 struct ini_exception final : value_exception {
     explicit ini_exception(const char* info = "INI Operation Failed.", const char* type = static_type,
@@ -39,13 +39,13 @@ struct ini_exception final : value_exception {
 
 /**
  * @defgroup ConfigFormat 配置格式操作
- * @brief env配置格式管理
+ * @brief 配置格式管理
  * @{
  */
 
 /**
- * @defgroup IniConfig ini配置
- * @brief ini配置格式管理
+ * @defgroup IniConfig INI配置
+ * @brief INI配置格式管理
  * @{
  */
 
@@ -56,15 +56,15 @@ class ini_property;
 
 /**
  * @class ini_value
- * @brief ini值抽象基类
+ * @brief INI值抽象基类
  *
- * 提供ini配置元素的统一接口，支持类型识别和字符串转换。
+ * 提供INI配置元素的统一接口，支持类型识别和字符串转换。
  */
 class NEFORCE_API ini_value : public istringify<ini_value> {
 public:
     /**
      * @enum types
-     * @brief ini值类型枚举
+     * @brief INI值类型枚举
      */
     enum types {
         Section, ///< 节类型
@@ -77,7 +77,7 @@ public:
     virtual ~ini_value() = default;
 
     /**
-     * @brief 获取ini值类型
+     * @brief 获取INI值类型
      * @return 类型枚举值
      */
     NEFORCE_NODISCARD virtual types type() const noexcept = 0;
@@ -108,13 +108,13 @@ public:
 
     /**
      * @brief 转换为字符串
-     * @return ini值的字符串表示
+     * @return INI值的字符串表示
      */
     NEFORCE_NODISCARD string to_string() const;
 
     /**
      * @brief 转换为文档字符串
-     * @return ini值的文档格式字符串
+     * @return INI值的文档格式字符串
      */
     NEFORCE_NODISCARD string to_document() const;
 };
@@ -122,9 +122,9 @@ public:
 
 /**
  * @class ini_property
- * @brief ini属性类
+ * @brief INI属性类
  *
- * 表示ini配置文件中的一个键值对属性。
+ * 表示INI配置文件中的一个键值对属性。
  * 提供类型转换方法和值访问接口。
  */
 class NEFORCE_API ini_property final : public ini_value {
@@ -188,9 +188,9 @@ public:
 
 /**
  * @class ini_section
- * @brief ini节类
+ * @brief INI节类
  *
- * 表示ini配置文件中的一个节(section)，包含多个属性。
+ * 表示INI配置文件中的一个节(section)，包含多个属性。
  * 节可以有名（如[database]）或无名（全局节）。
  */
 class NEFORCE_API ini_section final : public ini_value {
@@ -353,9 +353,9 @@ public:
 
 /**
  * @class ini_document
- * @brief ini文档类
+ * @brief INI文档类
  *
- * 管理整个ini配置文件，包含多个节(section)和一个全局节。
+ * 管理整个INI配置文件，包含多个节(section)和一个全局节。
  * 提供节的增删改查操作和类型安全的属性访问接口。
  */
 class NEFORCE_API ini_document final : public istringify<ini_document> {

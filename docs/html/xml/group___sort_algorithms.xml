@@ -1,0 +1,2524 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___sort_algorithms" kind="group">
+    <compoundname>SortAlgorithms</compoundname>
+    <title>排序算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___sort_algorithms_1gac47db5825225d750719417a44e89876c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void smooth_sort</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>smooth_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>平滑排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+时间复杂度：O(N log N) 空间复杂度：O(1) 稳定性：不稳定</para>
+<para>基于莱昂纳多堆的排序算法，是堆排序的改进版本， 在部分有序的序列上表现优异。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="373" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="373" bodyend="376"/>
+        <references refid="group___leonardo_heap_1gaeccafcd2bf9df72de2f4a7ec6ff469fa" compoundref="leonardo__heap_8hpp" startline="327" endline="350">make_leonardo_heap</references>
+        <references refid="group___leonardo_heap_1ga30b3db79677a6fbb9e3b71a62b48933f" compoundref="leonardo__heap_8hpp" startline="278" endline="316">sort_leonardo_heap</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga0b0349f7dec1fb2baa425eab3e0ea498" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool is_sorted</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>is_sorted</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>检查范围是否已排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果范围已按comp排序则返回true，否则返回false</para>
+</simplesect>
+检查范围 [first, last) 是否按照比较函数 comp 排序。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="137" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="137" bodyend="151"/>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <referencedby refid="group___sort_algorithms_1ga54b0b59c4c05a63c1b96fdad1d71e61e" compoundref="sort_8hpp" startline="161" endline="163">is_sorted</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga54b0b59c4c05a63c1b96fdad1d71e61e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool is_sorted</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>is_sorted</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>检查范围是否已排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果范围已排序则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="161" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="161" bodyend="163"/>
+        <references refid="group___sort_algorithms_1ga0b0349f7dec1fb2baa425eab3e0ea498" compoundref="sort_8hpp" startline="137" endline="151">is_sorted</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga402909e515a44301eba22c4a98dc9e9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator is_sorted_until</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>is_sorted_until</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>查找首个破坏排序的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向首个破坏排序的元素的迭代器，如果整个范围已排序则返回last</para>
+</simplesect>
+在范围 [first, last) 中查找第一个使得序列不满足排序条件的位置。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="177" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="177" bodyend="191"/>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <referencedby refid="group___sort_algorithms_1ga1364d104f129566eaea032b500fbb87a" compoundref="sort_8hpp" startline="201" endline="203">is_sorted_until</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga1364d104f129566eaea032b500fbb87a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator is_sorted_until</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>is_sorted_until</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>查找首个破坏排序的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向首个破坏排序的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="201" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="201" bodyend="203"/>
+        <references refid="group___sort_algorithms_1ga402909e515a44301eba22c4a98dc9e9a" compoundref="sort_8hpp" startline="177" endline="191">is_sorted_until</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gaf5532cf5c44d6eb963b5f105e5190d39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void bubble_sort</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>bubble_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>冒泡排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>双向迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+时间复杂度：平均O(N²)，最优O(N)，最差O(N²) 空间复杂度：O(1) 稳定性：稳定</para>
+<para>通过重复交换相邻的逆序元素将最大元素冒泡到末尾。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="220" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="220" bodyend="245"/>
+        <references refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
+        <references refid="group___reverse_iterator_1gad063eb64aebb24b59e51d3f37dd66685" compoundref="reverse__iterator_8hpp" startline="388" endline="390">make_reverse_iterator</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <referencedby refid="group___sort_algorithms_1ga38b39d6d4265a3a7e829bdf9219b8b30" compoundref="sort_8hpp" startline="254" endline="256">bubble_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga38b39d6d4265a3a7e829bdf9219b8b30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void bubble_sort</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>bubble_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>冒泡排序（默认升序） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>双向迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="254" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="254" bodyend="256"/>
+        <references refid="group___sort_algorithms_1gaf5532cf5c44d6eb963b5f105e5190d39" compoundref="sort_8hpp" startline="220" endline="245">bubble_sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga2e5e13816a5ba6e0b7d7b7a8ca330c74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void cocktail_sort</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>cocktail_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>鸡尾酒排序（双向冒泡排序） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>双向迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+时间复杂度：平均O(N²)，最优O(N)，最差O(N²) 空间复杂度：O(1) 稳定性：稳定</para>
+<para>冒泡排序的改进版本，同时从两端进行冒泡，减少循环次数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="273" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="273" bodyend="309"/>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga56f3ab178cee74039e73463d63a71658" compoundref="concepts_8hpp" startline="581">is_ranges_bid_iter_v</references>
+        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <references refid="group___iterator_operation_1gaf4cd040af11ff6b9b0fc0f4d70a7eb5e" compoundref="iterator_8hpp" startline="141" endline="145">prev</references>
+        <referencedby refid="group___sort_algorithms_1gab4370b27a1fe63f986c990d6d24ce1ca" compoundref="sort_8hpp" startline="318" endline="320">cocktail_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gab4370b27a1fe63f986c990d6d24ce1ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void cocktail_sort</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>cocktail_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>鸡尾酒排序（默认升序） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>双向迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="318" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="318" bodyend="320"/>
+        <references refid="group___sort_algorithms_1ga2e5e13816a5ba6e0b7d7b7a8ca330c74" compoundref="sort_8hpp" startline="273" endline="309">cocktail_sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga08dba41cc540351140973e676d80fd72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void select_sort</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>select_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>选择排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>前向迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+时间复杂度：O(N²) 空间复杂度：O(1) 稳定性：不稳定</para>
+<para>每次从未排序部分选择元素放到已排序部分的末尾。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="337" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="337" bodyend="355"/>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
+        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
+        <referencedby refid="group___sort_algorithms_1gaa914cf59e17489231832a5f5353d9e2e" compoundref="sort_8hpp" startline="364" endline="366">select_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gaa914cf59e17489231832a5f5353d9e2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void select_sort</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>select_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>选择排序（默认升序） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>前向迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="364" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="364" bodyend="366"/>
+        <references refid="group___sort_algorithms_1ga08dba41cc540351140973e676d80fd72" compoundref="sort_8hpp" startline="337" endline="355">select_sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gad58219b25c336c59023f210a295514d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" kindref="member">is_ranges_rnd_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void shell_sort</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>shell_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>希尔排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+时间复杂度：平均O(N log N)，最差O(N²) 空间复杂度：O(1) 稳定性：不稳定</para>
+<para>插入排序的改进版本，通过比较相距一定间隔的元素来工作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="383" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="383" bodyend="401"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <referencedby refid="group___sort_algorithms_1ga449b0e936d1bec8d1953ec623db36263" compoundref="sort_8hpp" startline="410" endline="412">shell_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga449b0e936d1bec8d1953ec623db36263" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void shell_sort</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>shell_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>希尔排序（默认升序） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="410" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="410" bodyend="412"/>
+        <references refid="group___sort_algorithms_1gad58219b25c336c59023f210a295514d5" compoundref="sort_8hpp" startline="383" endline="401">shell_sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void merge_sort</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>merge_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>归并排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用分治策略的稳定排序算法：<orderedlist>
+<listitem><para>递归地将序列分成两半</para>
+</listitem><listitem><para>分别对两半进行排序</para>
+</listitem><listitem><para>合并两个已排序的子序列</para>
+</listitem></orderedlist>
+</para>
+<para>时间复杂度：O(N log N) 空间复杂度：O(N) 稳定性：稳定 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="432" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="432" bodyend="443"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___merge_algorithms_1ga55d7862a1ac8f26c6d17ad4d9e12489d" compoundref="merge_8hpp" startline="294" endline="303">inplace_merge</references>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" compoundref="sort_8hpp" startline="432" endline="443">merge_sort</references>
+        <referencedby refid="group___sort_algorithms_1ga121f4d074409e1a9fa7d105543adae87" compoundref="sort_8hpp" startline="452" endline="454">merge_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" compoundref="sort_8hpp" startline="432" endline="443">merge_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga121f4d074409e1a9fa7d105543adae87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void merge_sort</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>merge_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>归并排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="452" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="452" bodyend="454"/>
+        <references refid="group___sort_algorithms_1gac4e6fa13122e50c09e865328c3ab7af2" compoundref="sort_8hpp" startline="432" endline="443">merge_sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gab24fbf7b9775bd8334e5f592a8edf5f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void partial_sort</definition>
+        <argsstring>(Iterator first, Iterator middle, Iterator last, Compare comp)</argsstring>
+        <name>partial_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>middle</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>部分排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>middle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>部分排序的边界 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+对范围 [first, last) 进行部分排序，使得 [first, middle) 包含整个范围中最小的元素， 并且这个子范围是已排序的。使用堆排序算法实现。 适用只需要前k个最小（或最大）元素的情况。</para>
+<para>时间复杂度：O(N log k)，其中k = middle - first </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="472" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="472" bodyend="483"/>
+        <references refid="group___heap_algorithms_1ga8beeb5a9c17ae71c242c05a60f312ea2" compoundref="heap_8hpp" startline="392" endline="406">make_heap</references>
+        <references refid="group___heap_algorithms_1ga6261d7e0da24fa3675dd248b9da5334f" compoundref="heap_8hpp" startline="366" endline="370">sort_heap</references>
+        <referencedby refid="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" compoundref="sort_8hpp" startline="646" endline="665">introspective_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga93c3ca069ff13f30369021482848ccc8" compoundref="sort_8hpp" startline="493" endline="495">partial_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga93c3ca069ff13f30369021482848ccc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void partial_sort</definition>
+        <argsstring>(Iterator first, Iterator middle, Iterator last)</argsstring>
+        <name>partial_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>middle</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>部分排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>middle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>部分排序的边界 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="493" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="493" bodyend="495"/>
+        <references refid="group___sort_algorithms_1gab24fbf7b9775bd8334e5f592a8edf5f6" compoundref="sort_8hpp" startline="472" endline="483">partial_sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga7604c36909710fbc4e92db0d66ad5054" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 partial_sort_copy</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last, Compare comp)</argsstring>
+        <name>partial_sort_copy</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result_first</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result_last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>部分排序并复制到另一个范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result_first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result_last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围的实际结束位置</para>
+</simplesect>
+从输入范围中选取最小的元素，部分排序后复制到输出范围。</para>
+<para>时间复杂度：O(N log M)，其中M = result_last - result_first </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="514" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="514" bodyend="536"/>
+        <references refid="group___heap_algorithms_1ga36c69d89ab0434ee867f42a56a075e7d" compoundref="heap_8hpp" startline="264" endline="280">adjust_heap</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <references refid="group___heap_algorithms_1ga8beeb5a9c17ae71c242c05a60f312ea2" compoundref="heap_8hpp" startline="392" endline="406">make_heap</references>
+        <references refid="group___heap_algorithms_1ga6261d7e0da24fa3675dd248b9da5334f" compoundref="heap_8hpp" startline="366" endline="370">sort_heap</references>
+        <referencedby refid="group___sort_algorithms_1ga29e746c754c35147ebf13ab20c9a7ce2" compoundref="sort_8hpp" startline="549" endline="551">partial_sort_copy</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga29e746c754c35147ebf13ab20c9a7ce2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 partial_sort_copy</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result_first, Iterator2 result_last)</argsstring>
+        <name>partial_sort_copy</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result_first</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result_last</declname>
+        </param>
+        <briefdescription>
+<para>部分排序并复制 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result_first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result_last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围的实际结束位置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="549" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="549" bodyend="551"/>
+        <references refid="group___sort_algorithms_1ga7604c36909710fbc4e92db0d66ad5054" compoundref="sort_8hpp" startline="514" endline="536">partial_sort_copy</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void insertion_sort</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>insertion_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>插入排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+简单的稳定排序算法，适用于小规模或基本有序的数据。 将每个元素插入到前面已排序子序列的正确位置。</para>
+<para>时间复杂度：最优O(N)，最差O(N²) 空间复杂度：O(1) 稳定性：稳定 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="598" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="598" bodyend="614"/>
+        <references refid="group___shift_algorithms_1ga4d3adeb0c2f00c00929d912671c22729" compoundref="shift_8hpp" startline="245" endline="254">copy_backward</references>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <referencedby refid="group___sort_algorithms_1ga8a0aec613c2b702a0f34cf6299b7b190" compoundref="sort_8hpp" startline="623" endline="625">insertion_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1gac44c6ef290cec1428f3ac65b21eefbca" compoundref="sort_8hpp" startline="894" endline="904">nth_element</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga3d93e28bad28595d49e09ec5e08a7895" compoundref="sort_8hpp" startline="789" endline="805">sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1gac0a8a9e872d1a63a5bbb6754b3915e07" compoundref="sort_8hpp" startline="833" endline="867">tim_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga8a0aec613c2b702a0f34cf6299b7b190" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void insertion_sort</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insertion_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>插入排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="623" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="623" bodyend="625"/>
+        <references refid="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" compoundref="sort_8hpp" startline="598" endline="614">insertion_sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void introspective_sort</definition>
+        <argsstring>(Iterator first, Iterator last, int depth_limit, Compare comp)</argsstring>
+        <name>introspective_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>depth_limit</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>内省排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>depth_limit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>递归深度限制 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+结合了快速排序、堆排序和插入排序的混合排序算法：<orderedlist>
+<listitem><para>使用快速排序递归分区</para>
+</listitem><listitem><para>当递归深度过大时切换到堆排序，避免快速排序的最坏情况</para>
+</listitem><listitem><para>对小规模子序列使用插入排序</para>
+</listitem></orderedlist>
+</para>
+<para>时间复杂度：O(N log N) 空间复杂度：O(log N) 稳定性：不稳定 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="646" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="646" bodyend="665"/>
+        <references refid="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" compoundref="sort_8hpp" startline="646" endline="665">introspective_sort</references>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___partition_algorithms_1ga09ca7889019a50556c6f23810bf2de1d" compoundref="partition_8hpp" startline="119" endline="145">lomuto_partition</references>
+        <references refid="group___sort_algorithms_1gab24fbf7b9775bd8334e5f592a8edf5f6" compoundref="sort_8hpp" startline="472" endline="483">partial_sort</references>
+        <referencedby refid="group___sort_algorithms_1gaffb3fd567cdefa23e2ab6a1a5a6e6947" compoundref="sort_8hpp" startline="675" endline="677">introspective_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" compoundref="sort_8hpp" startline="646" endline="665">introspective_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gaffb3fd567cdefa23e2ab6a1a5a6e6947" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void introspective_sort</definition>
+        <argsstring>(Iterator first, Iterator last, int depth_limit)</argsstring>
+        <name>introspective_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>depth_limit</declname>
+        </param>
+        <briefdescription>
+<para>内省排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>depth_limit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>递归深度限制 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="675" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="675" bodyend="677"/>
+        <references refid="group___sort_algorithms_1ga2f3b7969dca0dcebd278ec8b44149329" compoundref="sort_8hpp" startline="646" endline="665">introspective_sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga7bb66b56d5311bd5f64e0d65abd153fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void quick_sort</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>quick_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>快速排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+经典的分治排序算法：<orderedlist>
+<listitem><para>选择基准值，这里选择最后一个元素</para>
+</listitem><listitem><para>分区：将小于基准值的放在左边，大于等于的放在右边</para>
+</listitem><listitem><para>递归排序左右两部分</para>
+</listitem></orderedlist>
+</para>
+<para>时间复杂度：平均O(N log N)，最差O(N²) 空间复杂度：O(log N)（递归栈） 稳定性：不稳定</para>
+<para><simplesect kind="note"><para>此实现容易在已排序数据上出现最坏情况。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="699" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="699" bodyend="705"/>
+        <references refid="group___partition_algorithms_1ga09ca7889019a50556c6f23810bf2de1d" compoundref="partition_8hpp" startline="119" endline="145">lomuto_partition</references>
+        <references refid="group___sort_algorithms_1ga7bb66b56d5311bd5f64e0d65abd153fc" compoundref="sort_8hpp" startline="699" endline="705">quick_sort</references>
+        <referencedby refid="group___sort_algorithms_1ga5daa37ac5f6fc132c53c076b24ce6163" compoundref="sort_8hpp" startline="714" endline="716">quick_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga7bb66b56d5311bd5f64e0d65abd153fc" compoundref="sort_8hpp" startline="699" endline="705">quick_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga5daa37ac5f6fc132c53c076b24ce6163" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void quick_sort</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>quick_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>快速排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="714" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="714" bodyend="716"/>
+        <references refid="group___sort_algorithms_1ga7bb66b56d5311bd5f64e0d65abd153fc" compoundref="sort_8hpp" startline="699" endline="705">quick_sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga3d93e28bad28595d49e09ec5e08a7895" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void sort</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>标准排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+标准排序算法，基于内省排序实现：<orderedlist>
+<listitem><para>对大规模数据使用内省排序（快速排序+堆排序）</para>
+</listitem><listitem><para>对阈值内的小规模数据使用插入排序</para>
+</listitem><listitem><para>对大规模数据中的小尾部使用优化的插入排序</para>
+</listitem></orderedlist>
+</para>
+<para>时间复杂度：O(N log N) 空间复杂度：O(log N) 稳定性：不稳定 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="789" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="789" bodyend="805"/>
+        <references refid="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" compoundref="sort_8hpp" startline="598" endline="614">insertion_sort</references>
+        <referencedby refid="group___sort_algorithms_1ga7a4fdc8969bfed2d02cdd1941044a8d9" compoundref="sort_8hpp" startline="814" endline="816">sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga7a4fdc8969bfed2d02cdd1941044a8d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void sort</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>标准排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="814" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="814" bodyend="816"/>
+        <references refid="group___sort_algorithms_1ga3d93e28bad28595d49e09ec5e08a7895" compoundref="sort_8hpp" startline="789" endline="805">sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gac0a8a9e872d1a63a5bbb6754b3915e07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void tim_sort</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>tim_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>Tim排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+时间复杂度：O(N log N) 空间复杂度：O(N) 稳定性：稳定</para>
+<para>混合排序算法，结合了归并排序和插入排序。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="833" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="833" bodyend="867"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
+        <references refid="group___merge_algorithms_1ga55d7862a1ac8f26c6d17ad4d9e12489d" compoundref="merge_8hpp" startline="294" endline="303">inplace_merge</references>
+        <references refid="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" compoundref="sort_8hpp" startline="598" endline="614">insertion_sort</references>
+        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <referencedby refid="group___sort_algorithms_1ga72746fd9d7faa395313fcf685cb12677" compoundref="sort_8hpp" startline="876" endline="878">tim_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1ga72746fd9d7faa395313fcf685cb12677" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void tim_sort</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>tim_sort</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>Tim排序（默认升序） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="876" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="876" bodyend="878"/>
+        <references refid="group___sort_algorithms_1gac0a8a9e872d1a63a5bbb6754b3915e07" compoundref="sort_8hpp" startline="833" endline="867">tim_sort</references>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gac44c6ef290cec1428f3ac65b21eefbca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void nth_element</definition>
+        <argsstring>(Iterator first, Iterator nth, Iterator last, Compare comp)</argsstring>
+        <name>nth_element</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>nth</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>第n个元素选择 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标位置（0-based） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+重新排列范围 [first, last)，使得位置 nth 的元素是排序后的正确元素， 并且 nth 之前的元素都不大于它，之后的元素都不小于它。 使用快速选择算法实现。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="894" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="894" bodyend="904"/>
+        <references refid="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" compoundref="sort_8hpp" startline="598" endline="614">insertion_sort</references>
+        <references refid="group___partition_algorithms_1ga09ca7889019a50556c6f23810bf2de1d" compoundref="partition_8hpp" startline="119" endline="145">lomuto_partition</references>
+        <referencedby refid="group___sort_algorithms_1gaf843abe1431e912979c95e0052a24a79" compoundref="sort_8hpp" startline="914" endline="916">nth_element</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___sort_algorithms_1gaf843abe1431e912979c95e0052a24a79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void nth_element</definition>
+        <argsstring>(Iterator first, Iterator nth, Iterator last)</argsstring>
+        <name>nth_element</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>nth</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>第n个元素选择 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" line="914" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/sort.hpp" bodystart="914" bodyend="916"/>
+        <references refid="group___sort_algorithms_1gac44c6ef290cec1428f3ac65b21eefbca" compoundref="sort_8hpp" startline="894" endline="904">nth_element</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>排序算法的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>本模块提供了多种排序算法的完整实现，涵盖基础排序、高级排序、线性时间排序以及 具有特殊用途或教学价值的排序算法。</para>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本模块中的算法实现参考以下学术文献：</para>
+<para><bold>经典排序算法学术文献：</bold><itemizedlist>
+<listitem><para>**C.A.R. Hoare (1961)**：Algorithm 64 — Quicksort Communications of the ACM, 4(7): 321</para>
+</listitem><listitem><para>**Donald E. Knuth (1998)**：The Art of Computer Programming, Volume 3 — Sorting and Searching ISBN: 978-0201896855</para>
+</listitem><listitem><para>**Robert Sedgewick (1978)**：Implementing Quicksort programs Communications of the ACM, 21(10): 847-857</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>现代混合排序算法文献：</bold><itemizedlist>
+<listitem><para>**David R. Musser (1997)**：Introspective Sorting and Selection Algorithms Software: Practice and Experience, 27(8): 983-993 <ulink url="https://doi.org/10.1002/(SICI)1097-024X(199708)27:8">https://doi.org/10.1002/(SICI)1097-024X(199708)27:8</ulink>&lt;983::AID-SPE117&gt;3.0.CO;2-%23</para>
+</listitem><listitem><para>**Tim Peters (2002)**：Timsort — Python list sort <ulink url="https://svn.python.org/projects/python/trunk/Objects/listsort.txt">https://svn.python.org/projects/python/trunk/Objects/listsort.txt</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>平滑排序学术文献：</bold><itemizedlist>
+<listitem><para>**Edsger W. Dijkstra (1981)**：Smoothsort, an alternative for sorting in situ EWD796a, Burroughs Corporation <ulink url="https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html">https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___sort_algorithms_1algorithm_classification">
+<title>算法分类</title><para><table rows="7" cols="5"><row>
+<entry thead="yes"><para>类别  </para>
+</entry><entry thead="yes"><para>算法  </para>
+</entry><entry thead="yes"><para>时间复杂度（平均）  </para>
+</entry><entry thead="yes"><para>空间复杂度  </para>
+</entry><entry thead="yes"><para>稳定性  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>基础排序  </para>
+</entry><entry thead="no"><para>bubble_sort, cocktail_sort, select_sort  </para>
+</entry><entry thead="no"><para>O(N²)  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>部分稳定  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>插入排序  </para>
+</entry><entry thead="no"><para>insertion_sort, shell_sort  </para>
+</entry><entry thead="no"><para>O(N²) / O(N log N)  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>稳定/不稳定  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>分治排序  </para>
+</entry><entry thead="no"><para>merge_sort, quick_sort  </para>
+</entry><entry thead="no"><para>O(N log N)  </para>
+</entry><entry thead="no"><para>O(N) / O(log N)  </para>
+</entry><entry thead="no"><para>稳定/不稳定  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>混合排序  </para>
+</entry><entry thead="no"><para>introspective_sort, tim_sort, smooth_sort  </para>
+</entry><entry thead="no"><para>O(N log N)  </para>
+</entry><entry thead="no"><para>O(log N) / O(N)  </para>
+</entry><entry thead="no"><para>不稳定/稳定  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>部分排序  </para>
+</entry><entry thead="no"><para>partial_sort, nth_element  </para>
+</entry><entry thead="no"><para>O(N log k) / O(N)  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>不稳定  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>娱乐/教学排序  </para>
+</entry><entry thead="no"><para>monkey_sort  </para>
+</entry><entry thead="no"><para>O((N+1)!)  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>不稳定  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___sort_algorithms_1hybrid_algorithms">
+<title>混合排序算法详解</title><para>**内省排序（Introspective Sort）**：<itemizedlist>
+<listitem><para>结合快速排序、堆排序和插入排序</para>
+</listitem><listitem><para>默认递归深度限制：2 × ⌊log₂(N)⌋</para>
+</listitem><listitem><para>超过深度限制时切换到堆排序，避免 O(N²) 最坏情况</para>
+</listitem><listitem><para>小规模子序列（≤阈值）使用插入排序</para>
+</listitem></itemizedlist>
+</para>
+<para>**TimSort**：<itemizedlist>
+<listitem><para>结合归并排序和插入排序</para>
+</listitem><listitem><para>识别并利用数据中的自然有序片段（run）</para>
+</listitem><listitem><para>最小归并片段大小（minrun）：32</para>
+</listitem><listitem><para>Python 和 Java 默认排序算法</para>
+</listitem></itemizedlist>
+</para>
+<para>**平滑排序（Smoothsort）**：<itemizedlist>
+<listitem><para>基于莱昂纳多堆（Leonardo Heap）</para>
+</listitem><listitem><para>在接近有序的序列上达到 O(N) 时间复杂度</para>
+</listitem><listitem><para>由 Edsger W. Dijkstra 设计</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___sort_algorithms_1partial_sorting">
+<title>部分排序</title><para>**partial_sort**：<itemizedlist>
+<listitem><para>找出前 k 个最小（或最大）元素并排序</para>
+</listitem><listitem><para>使用堆排序实现，时间复杂度 O(N log k)</para>
+</listitem><listitem><para>适用于&quot;Top K&quot;问题</para>
+</listitem></itemizedlist>
+</para>
+<para>**nth_element**：<itemizedlist>
+<listitem><para>找出第 n 个顺序统计量</para>
+</listitem><listitem><para>使用快速选择算法，平均时间复杂度 O(N)</para>
+</listitem><listitem><para>nth 之前元素 ≤ nth ≤ nth 之后元素</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___sort_algorithms_1stability_notes">
+<title>稳定性说明</title><para><table rows="12" cols="3"><row>
+<entry thead="yes"><para>算法  </para>
+</entry><entry thead="yes"><para>稳定性  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>bubble_sort  </para>
+</entry><entry thead="no"><para>稳定  </para>
+</entry><entry thead="no"><para>相邻元素相等时不交换  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>cocktail_sort  </para>
+</entry><entry thead="no"><para>稳定  </para>
+</entry><entry thead="no"><para>双向冒泡，保持相等元素相对顺序  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>select_sort  </para>
+</entry><entry thead="no"><para>不稳定  </para>
+</entry><entry thead="no"><para>交换可能破坏相等元素的相对顺序  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>insertion_sort  </para>
+</entry><entry thead="no"><para>稳定  </para>
+</entry><entry thead="no"><para>相等元素不移动  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>merge_sort  </para>
+</entry><entry thead="no"><para>稳定  </para>
+</entry><entry thead="no"><para>合并时优先取左侧元素  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>quick_sort  </para>
+</entry><entry thead="no"><para>不稳定  </para>
+</entry><entry thead="no"><para>分区交换破坏相对顺序  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>shell_sort  </para>
+</entry><entry thead="no"><para>不稳定  </para>
+</entry><entry thead="no"><para>间隔插入排序破坏顺序  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>heap_sort  </para>
+</entry><entry thead="no"><para>不稳定  </para>
+</entry><entry thead="no"><para>堆操作不保持相对顺序  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>introspective_sort  </para>
+</entry><entry thead="no"><para>不稳定  </para>
+</entry><entry thead="no"><para>结合快速排序和堆排序，均不稳定  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>tim_sort  </para>
+</entry><entry thead="no"><para>稳定  </para>
+</entry><entry thead="no"><para>插入排序和归并排序均稳定  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>smooth_sort  </para>
+</entry><entry thead="no"><para>不稳定  </para>
+</entry><entry thead="no"><para>基于堆结构，不保持相对顺序  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>迭代器要求  </para>
+</entry><entry thead="no"><para>各算法要求不同，见各函数文档  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>比较器要求  </para>
+</entry><entry thead="no"><para>严格弱序（Strict Weak Ordering）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>小序列优化  </para>
+</entry><entry thead="no"><para>默认阈值 MEMORY_ALIGN_THRESHHOLD  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>递归深度限制  </para>
+</entry><entry thead="no"><para>2 × ⌊log₂(N)⌋（内省排序）  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>对于大多数应用场景，推荐使用标准排序 <computeroutput><ref refid="group___sort_algorithms_1ga3d93e28bad28595d49e09ec5e08a7895" kindref="member">sort</ref></computeroutput>（内省排序）， 它在平均和最坏情况下均表现良好，且经过了充分测试。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/algorithm/sort">https://en.cppreference.com/w/cpp/algorithm/sort</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Sorting_algorithm">https://en.wikipedia.org/wiki/Sorting_algorithm</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html">https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html</ulink></para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

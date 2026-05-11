@@ -1,0 +1,477 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___leonardo_heap" kind="group">
+    <compoundname>LeonardoHeap</compoundname>
+    <title>莱昂纳多堆算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void adjust_leonardo_heap</definition>
+        <argsstring>(Iterator first, size_t current_heap, int level_index, vector&lt; int &gt; &amp;levels)</argsstring>
+        <name>adjust_leonardo_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>current_heap</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>level_index</declname>
+        </param>
+        <param>
+          <type><ref refid="classvector" kindref="compound">vector</ref>&lt; int &gt; &amp;</type>
+          <declname>levels</declname>
+        </param>
+        <briefdescription>
+<para>调整莱昂纳多堆 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向堆起始的迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>current_heap</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前堆的根位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前层级索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>levels</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>层级数组</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+调整指定位置的莱昂纳多堆，确保堆性质得以维护。 如果父节点小于子节点，则进行交换并递归调整。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="128" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="128" bodyend="178"/>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
+        <references refid="group___math_functions_1ga26007f8cd6027cb5ac19933049de833b" compoundref="math_8hpp" startline="199" endline="201">leonardo</references>
+        <referencedby refid="group___leonardo_heap_1gaeccafcd2bf9df72de2f4a7ec6ff469fa" compoundref="leonardo__heap_8hpp" startline="327" endline="350">make_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1ga136d8080ad6127b70845b45e199e2c5d" compoundref="leonardo__heap_8hpp" startline="236" endline="267">pop_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1ga339f8c175e964064f8d7e8e2676591fa" compoundref="leonardo__heap_8hpp" startline="189" endline="225">push_leonardo_heap</referencedby>
+        <referencedby refid="group___leonardo_heap_1ga30b3db79677a6fbb9e3b71a62b48933f" compoundref="leonardo__heap_8hpp" startline="278" endline="316">sort_leonardo_heap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___leonardo_heap_1ga339f8c175e964064f8d7e8e2676591fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void push_leonardo_heap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>push_leonardo_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>向莱昂纳多堆中推入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向堆起始的迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向堆末尾的迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将最后一个元素插入到莱昂纳多堆中，并调整堆以维持堆性质。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="189" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="189" bodyend="225"/>
+        <references refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</references>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="classvector_1a1add9f846ce2128c0702d803961a2685" compoundref="vector_8hpp" startline="887" endline="887">vector&lt; T, Alloc &gt;::push_back</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="group___leonardo_heap_1ga136d8080ad6127b70845b45e199e2c5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void pop_leonardo_heap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>pop_leonardo_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>从莱昂纳多堆中弹出最大元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向堆起始的迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向堆末尾的迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+移除堆顶元素，并重新调整堆。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="236" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="236" bodyend="267"/>
+        <references refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</references>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="group___math_functions_1ga26007f8cd6027cb5ac19933049de833b" compoundref="math_8hpp" startline="199" endline="201">leonardo</references>
+        <references refid="classvector_1a1add9f846ce2128c0702d803961a2685" compoundref="vector_8hpp" startline="887" endline="887">vector&lt; T, Alloc &gt;::push_back</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="group___leonardo_heap_1ga30b3db79677a6fbb9e3b71a62b48933f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void sort_leonardo_heap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>sort_leonardo_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>使用莱昂纳多堆进行排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向序列起始的迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向序列末尾的迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+实现平滑排序算法，时间复杂度O(n log n)，在接近有序的序列上表现优异。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="278" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="278" bodyend="316"/>
+        <references refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</references>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="group___math_functions_1ga26007f8cd6027cb5ac19933049de833b" compoundref="math_8hpp" startline="199" endline="201">leonardo</references>
+        <references refid="classvector_1a1add9f846ce2128c0702d803961a2685" compoundref="vector_8hpp" startline="887" endline="887">vector&lt; T, Alloc &gt;::push_back</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <referencedby refid="group___sort_algorithms_1gac47db5825225d750719417a44e89876c" compoundref="leonardo__heap_8hpp" startline="373" endline="376">smooth_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___leonardo_heap_1gaeccafcd2bf9df72de2f4a7ec6ff469fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void make_leonardo_heap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>make_leonardo_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>构建莱昂纳多堆 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向序列起始的迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向序列末尾的迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将指定范围内的元素构建成一个莱昂纳多堆。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" line="327" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp" bodystart="327" bodyend="350"/>
+        <references refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</references>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="classvector_1a1add9f846ce2128c0702d803961a2685" compoundref="vector_8hpp" startline="887" endline="887">vector&lt; T, Alloc &gt;::push_back</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <referencedby refid="group___sort_algorithms_1gac47db5825225d750719417a44e89876c" compoundref="leonardo__heap_8hpp" startline="373" endline="376">smooth_sort</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>莱昂纳多堆算法实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>莱昂纳多堆基于莱昂纳多数（Leonardo Numbers），由 Edsger W. Dijkstra 设计， 具有自平衡特性，在接近有序的序列上表现出接近线性的时间复杂度。</para>
+<sect1 id="group___bloom_filter_1references">
+<title>学术文献与算法来源</title><para>本实现基于以下原创学术论文和算法出版物：</para>
+<para><bold>平滑排序（Smoothsort）原始论文：</bold><itemizedlist>
+<listitem><para>**Edsger W. Dijkstra (1981)**：Smoothsort, an alternative for sorting in situ EWD796a, Burroughs Corporation <ulink url="https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html">https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>算法分析与实现参考：</bold><itemizedlist>
+<listitem><para>**Edsger W. Dijkstra (1982)**：Smoothsort, an alternative for sorting in situ Science of Computer Programming, Volume 1, Issue 3, Pages 223-233 <ulink url="https://doi.org/10.1016/0167-6423(82)90016-8">https://doi.org/10.1016/0167-6423(82)90016-8</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>莱昂纳多数（Leonardo Numbers）定义：</bold><itemizedlist>
+<listitem><para>**Keith Schwarz (2010)**：Smoothsort Demystified Stanford CS166 Lecture Notes <ulink url="https://www.keithschwarz.com/smoothsort/">https://www.keithschwarz.com/smoothsort/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>现代算法描述：</bold><itemizedlist>
+<listitem><para>**Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein**： Introduction to Algorithms (3rd Edition), Problem 6-2 (Smoothsort)</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___leonardo_heap_1leonardo_numbers">
+<title>莱昂纳多数列</title><para>莱昂纳多数由 Dijkstra 为平滑排序专门设计，定义如下：</para>
+<para><table rows="2" cols="3"><row>
+<entry thead="yes"><para>索引 n  </para>
+</entry><entry thead="yes"><para>递推公式  </para>
+</entry><entry thead="yes"><para>前几项  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>n  </para>
+</entry><entry thead="no"><para>L(0) = 1, L(1) = 1, L(n) = L(n-1) + L(n-2) + 1  </para>
+</entry><entry thead="no"><para>1, 1, 3, 5, 9, 15, 25, 41, 67  </para>
+</entry></row>
+</table>
+</para>
+<para>**递推公式**：L(n) = L(n-1) + L(n-2) + 1</para>
+<para>**闭式表示**：L(n) = 2 × F(n+1) - 1，其中 F 为斐波那契数</para>
+</sect1>
+<sect1 id="group___leonardo_heap_1heap_structure">
+<title>莱昂纳多堆结构</title><para>莱昂纳多堆是一系列满足堆性质的二叉树的集合，每棵树的大小均为莱昂纳多数：</para>
+<para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>描述  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>堆性质  </para>
+</entry><entry thead="no"><para>父节点 ≥ 子节点（最大堆）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>树大小  </para>
+</entry><entry thead="no"><para>每棵树的大小为 L(n)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>树结构  </para>
+</entry><entry thead="no"><para>根节点左子树大小为 L(n-1)，右子树大小为 L(n-2)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>多树组合  </para>
+</entry><entry thead="no"><para>堆由多棵大小递减的莱昂纳多树组成  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>大小约束  </para>
+</entry><entry thead="no"><para>相邻树的大小差至少为 2  </para>
+</entry></row>
+</table>
+</para>
+<para>**树结构示意**（L(4) = 9）： <programlisting><codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>root</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>/<sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>L(3)=5<sp/><sp/>L(2)=3</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>/<sp/><sp/><sp/>\<sp/><sp/><sp/><sp/>/<sp/><sp/>\</highlight></codeline>
+<codeline><highlight class="normal">L(2)<sp/>L(1)<sp/>L(1)<sp/>L(0)</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="group___leonardo_heap_1comparison_with_heapsort">
+<title>与堆排序对比</title><para><table rows="6" cols="3"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>平滑排序（Smoothsort）  </para>
+</entry><entry thead="yes"><para>堆排序（Heapsort）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最坏时间复杂度  </para>
+</entry><entry thead="no"><para>O(n log n)  </para>
+</entry><entry thead="no"><para>O(n log n)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最优时间复杂度  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>O(n log n)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>自适应  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry><entry thead="no"><para>否  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>代码复杂度  </para>
+</entry><entry thead="no"><para>较高  </para>
+</entry><entry thead="no"><para>较低  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>实现难度  </para>
+</entry><entry thead="no"><para>困难  </para>
+</entry><entry thead="no"><para>简单  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___leonardo_heap_1tree_merging">
+<title>树的合并规则</title><para>莱昂纳多堆中的树合并遵循以下规则：</para>
+<para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>条件  </para>
+</entry><entry thead="yes"><para>操作  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最后两棵树大小分别为 L(k+1) 和 L(k)  </para>
+</entry><entry thead="no"><para>合并为大小为 L(k+2) 的树  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最后两棵树大小不满足 L(k+1) 和 L(k) 关系  </para>
+</entry><entry thead="no"><para>添加大小为 L(1) 或 L(0) 的新树  </para>
+</entry></row>
+</table>
+</para>
+<para>**合并后结构**：<itemizedlist>
+<listitem><para>新根节点：原第二棵树的根</para>
+</listitem><listitem><para>左子树：原第一棵树（大小为 L(k+1)）</para>
+</listitem><listitem><para>右子树：原第二棵树的右子树（大小为 L(k)）</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>平滑排序是 Edsger W. Dijkstra（图灵奖得主，结构化程序设计倡导者） 在 1981 年设计的算法，旨在证明原地排序算法可以具有自适应性。 尽管代码复杂，但其在理论上的优雅性使其成为算法教材中的经典案例。</para>
+</simplesect>
+<simplesect kind="warning"><para>对于大多数应用场景，推荐使用 <computeroutput><ref refid="group___sort_algorithms_1ga3d93e28bad28595d49e09ec5e08a7895" kindref="member">sort</ref></computeroutput>。 平滑排序的常数因子较大，在随机数据上通常慢于快速排序。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html">https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.keithschwarz.com/smoothsort/">https://www.keithschwarz.com/smoothsort/</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

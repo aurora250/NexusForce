@@ -100,21 +100,19 @@ $(function(){initNavTree('breakpoint_8hpp_source.html','',''); });
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>NEFORCE_BEGIN_NAMESPACE__</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#if defined(NEFORCE_STATE_DEBUG) || defined(NEXUSFORCE_ENABLE_DOXYGEN)</span><span class="preprocessor"></span></div>
-<div class="foldopen" id="foldopen00028" data-start="" data-end="">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group___debug_breakpoints_and_assertions.html#ga2e66375a1cbe4c9de4100dc4a0dd7e6f">   28</a></span><span class="preprocessor">#    define NEFORCE_DEBUG_VERIFY(CON, MESG) \</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#ifdef NEFORCE_STATE_DEBUG</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#    define NEFORCE_DEBUG_VERIFY(CON, MESG) \</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">        {                                   \</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">            if (CON) {                      \</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">            } else {                        \</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">                assert(false &amp;&amp; MESG);      \</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">            }                               \</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">        }</span></div>
-</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#    define NEFORCE_DEBUG_VERIFY(CON, MESG)</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_20</span><span class="preprocessor"></span></div>
 <div class="foldopen" id="foldopen00047" data-start="" data-end="">
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="group___debug_breakpoints_and_assertions.html#gaeb5cd7dd15c349020f35d669e0e7dd73">   47</a></span><span class="preprocessor">#    define NEFORCE_CONSTEXPR_ASSERT(COND)                         \</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">        do {                                                       \</span></div>
@@ -138,7 +136,7 @@ $(function(){initNavTree('breakpoint_8hpp_source.html','',''); });
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
 </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#if defined(NEFORCE_STANDARD_17) || defined(NEXUSFORCE_ENABLE_DOXYGEN)</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_17</span><span class="preprocessor"></span></div>
 <div class="foldopen" id="foldopen00083" data-start="{" data-end="}">
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="group___debug_breakpoints_and_assertions.html#gab65500ce348116b824d6cd6b0a4314bb">   83</a></span>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___debug_breakpoints_and_assertions.html#gab65500ce348116b824d6cd6b0a4314bb">is_constant_evaluated</a>() noexcept {</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">return</span> __builtin_is_constant_evaluated();</div>

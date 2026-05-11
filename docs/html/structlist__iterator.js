@@ -12,6 +12,7 @@ var structlist__iterator =
     [ "container", "structlist__iterator.html#a4407a8ddd0aefa184880fb624a869157", null ],
     [ "decrement", "structlist__iterator.html#a093b46d019ca6c4b30529cb1991196ed", null ],
     [ "dereference", "structlist__iterator.html#a3ce4fbde4675903df6ec25101073c86b", null ],
-    [ "equal", "structlist__iterator.html#a824a5eb849f691f66192b425db104bcb", null ],
+    [ "distance_to", "structlist__iterator.html#adf14eb5b3fc1140853c8f614fb027944", null ],
+    [ "equal_to", "structlist__iterator.html#a4100a25ccf28345612d828599d24c1a2", null ],
     [ "increment", "structlist__iterator.html#a25e8db8f604219196f7948b1ba35b6fd", null ]
 ];

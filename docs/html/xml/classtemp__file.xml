@@ -1,0 +1,623 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classtemp__file" kind="class" language="C++" prot="public">
+    <compoundname>temp_file</compoundname>
+    <includes refid="temp__file_8hpp" local="no">temp_file.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classtemp__file_1ac86ed045081faf78d794374e6dca922a" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>delete_policy</name>
+        <qualifiedname>temp_file::delete_policy</qualifiedname>
+        <enumvalue id="classtemp__file_1ac86ed045081faf78d794374e6dca922aa0b50bc869285e32ee020adfb4bbf6be3" prot="public">
+          <name>AUTO_DELETE</name>
+          <briefdescription>
+<para>析构自动删除 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classtemp__file_1ac86ed045081faf78d794374e6dca922aa826068b2bd64b20514626d0163dd5d9e" prot="public">
+          <name>MANUAL_DELETE</name>
+          <briefdescription>
+<para>手动删除 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classtemp__file_1ac86ed045081faf78d794374e6dca922aa7c9e034a3c48134bebebc66e362a6221" prot="public">
+          <name>KEEP_ON_EXIT</name>
+          <briefdescription>
+<para>程序退出时保留 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>临时文件删除策略 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="34" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" bodystart="34" bodyend="38"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classtemp__file_1a14d73b63b4e8bdb1dd519c66c8265121" prot="private" static="no" mutable="no">
+        <type>_NEFORCE <ref refid="classfile" kindref="compound">file</ref></type>
+        <definition>_NEFORCE file temp_file::file_</definition>
+        <argsstring></argsstring>
+        <name>file_</name>
+        <qualifiedname>temp_file::file_</qualifiedname>
+        <briefdescription>
+<para>内部文件对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="41" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtemp__file_1a0daa2bff864ba79551b962bd02faff5a" prot="private" static="no" mutable="no">
+        <type><ref refid="classtemp__file_1ac86ed045081faf78d794374e6dca922a" kindref="member">delete_policy</ref></type>
+        <definition>delete_policy temp_file::delete_policy_</definition>
+        <argsstring></argsstring>
+        <name>delete_policy_</name>
+        <qualifiedname>temp_file::delete_policy_</qualifiedname>
+        <initializer>= <ref refid="classtemp__file_1ac86ed045081faf78d794374e6dca922aa0b50bc869285e32ee020adfb4bbf6be3" kindref="member">delete_policy::AUTO_DELETE</ref></initializer>
+        <briefdescription>
+<para>删除策略 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="42" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtemp__file_1accbc6dd9c82fe1f93704408afc7cf718" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>temp_file::temp_file</definition>
+        <argsstring>(const string &amp;prefix=&quot;tmp&quot;, const string &amp;suffix=&quot;.tmp&quot;, file_creation mode=file_creation::CREATE_FORCE, delete_policy policy=delete_policy::AUTO_DELETE)</argsstring>
+        <name>temp_file</name>
+        <qualifiedname>temp_file::temp_file</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>prefix</declname>
+          <defval>&quot;tmp&quot;</defval>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>suffix</declname>
+          <defval>&quot;.tmp&quot;</defval>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga90f3ddb67118cfb6f47aba25fbe6af40" kindref="member">file_creation</ref></type>
+          <declname>mode</declname>
+          <defval><ref refid="group___file_1gga90f3ddb67118cfb6f47aba25fbe6af40a2f44c48596198fcb93b5224b0d1d1e80" kindref="member">file_creation::CREATE_FORCE</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="classtemp__file_1ac86ed045081faf78d794374e6dca922a" kindref="member">delete_policy</ref></type>
+          <declname>policy</declname>
+          <defval><ref refid="classtemp__file_1ac86ed045081faf78d794374e6dca922aa0b50bc869285e32ee020adfb4bbf6be3" kindref="member">delete_policy::AUTO_DELETE</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造函数：创建新的临时文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>prefix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件名前缀（默认 &quot;tmp&quot;） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>suffix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件名后缀（默认 &quot;.tmp&quot;） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件创建模式（默认 CREATE_FORCE） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>policy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除策略（默认 AUTO_DELETE） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsystem__exception" kindref="compound">system_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件创建失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在系统临时目录中生成一个唯一文件名，并打开文件。 生成规则：{prefix}_{纳秒时间}_{进程ID}_{线程ID}_{随机数}{suffix} </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="56" column="14"/>
+        <references refid="classtemp__file_1ac86ed045081faf78d794374e6dca922aa0b50bc869285e32ee020adfb4bbf6be3" compoundref="temp__file_8hpp" startline="35">AUTO_DELETE</references>
+        <references refid="group___file_1gga90f3ddb67118cfb6f47aba25fbe6af40a2f44c48596198fcb93b5224b0d1d1e80" compoundref="file__constants_8hpp" startline="119">CREATE_FORCE</references>
+        <references refid="classtemp__file_1ad62f2c7f18a482383090bc40997f81d9" compoundref="temp__file_8hpp" startline="128" endline="128">policy</references>
+        <referencedby refid="classtemp__file_1ac3839794aef9c8305fa6da30f84d2614">create_temp_file</referencedby>
+        <referencedby refid="classtemp__file_1acf979a8ed5ce55511ac3332f0a6dc918">operator=</referencedby>
+        <referencedby refid="classtemp__file_1ac61cc2c5c24611c45369f4751c4c3893">temp_file</referencedby>
+        <referencedby refid="classtemp__file_1a5e71e19b7818d0c1f0a5702b5bf525ed">~temp_file</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1ac79257e814c5714583e4c2b3b312a8ea" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>temp_file::temp_file</definition>
+        <argsstring>(const path &amp;existing_path, delete_policy policy=delete_policy::AUTO_DELETE)</argsstring>
+        <name>temp_file</name>
+        <qualifiedname>temp_file::temp_file</qualifiedname>
+        <param>
+          <type>const <ref refid="classpath" kindref="compound">path</ref> &amp;</type>
+          <declname>existing_path</declname>
+        </param>
+        <param>
+          <type><ref refid="classtemp__file_1ac86ed045081faf78d794374e6dca922a" kindref="member">delete_policy</ref></type>
+          <declname>policy</declname>
+          <defval><ref refid="classtemp__file_1ac86ed045081faf78d794374e6dca922aa0b50bc869285e32ee020adfb4bbf6be3" kindref="member">delete_policy::AUTO_DELETE</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造函数：接管已有的文件作为临时文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>existing_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已有文件的路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>policy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除策略（默认 AUTO_DELETE） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsystem__exception" kindref="compound">system_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件打开失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将指定的现有文件作为临时文件管理，不会生成新文件。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="68" column="14"/>
+        <references refid="classtemp__file_1ac86ed045081faf78d794374e6dca922aa0b50bc869285e32ee020adfb4bbf6be3" compoundref="temp__file_8hpp" startline="35">AUTO_DELETE</references>
+        <references refid="classtemp__file_1ad62f2c7f18a482383090bc40997f81d9" compoundref="temp__file_8hpp" startline="128" endline="128">policy</references>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1a5e71e19b7818d0c1f0a5702b5bf525ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>temp_file::~temp_file</definition>
+        <argsstring>()</argsstring>
+        <name>~temp_file</name>
+        <qualifiedname>temp_file::~temp_file</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>根据删除策略决定是否删除临时文件：<itemizedlist>
+<listitem><para>AUTO_DELETE: 立即删除文件并从全局注册表中移除</para>
+</listitem><listitem><para>MANUAL_DELETE/KEEP_ON_EXIT: 仅关闭文件，不删除 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="77" column="5"/>
+        <references refid="classtemp__file_1accbc6dd9c82fe1f93704408afc7cf718">temp_file</references>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1a7af88917246722e3dc8fd4f49f8a479b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>temp_file::temp_file</definition>
+        <argsstring>(const temp_file &amp;)=delete</argsstring>
+        <name>temp_file</name>
+        <qualifiedname>temp_file::temp_file</qualifiedname>
+        <param>
+          <type>const <ref refid="classtemp__file" kindref="compound">temp_file</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="79" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1af0a732459e3ae3e0e3061d5ca4a07913" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtemp__file" kindref="compound">temp_file</ref> &amp;</type>
+        <definition>temp_file &amp; temp_file::operator=</definition>
+        <argsstring>(const temp_file &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>temp_file::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classtemp__file" kindref="compound">temp_file</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="80" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1ac61cc2c5c24611c45369f4751c4c3893" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>temp_file::temp_file</definition>
+        <argsstring>(temp_file &amp;&amp;other) noexcept</argsstring>
+        <name>temp_file</name>
+        <qualifiedname>temp_file::temp_file</qualifiedname>
+        <param>
+          <type><ref refid="classtemp__file" kindref="compound">temp_file</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被移动的对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+转移文件所有权，原对象的删除策略被设置为 KEEP_ON_EXIT。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="88" column="5"/>
+        <references refid="classtemp__file_1accbc6dd9c82fe1f93704408afc7cf718">temp_file</references>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1acf979a8ed5ce55511ac3332f0a6dc918" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classtemp__file" kindref="compound">temp_file</ref> &amp;</type>
+        <definition>temp_file &amp; temp_file::operator=</definition>
+        <argsstring>(temp_file &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>temp_file::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classtemp__file" kindref="compound">temp_file</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用</para>
+</simplesect>
+先清理当前资源，再转移所有权。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="97" column="15"/>
+        <references refid="classtemp__file_1accbc6dd9c82fe1f93704408afc7cf718">temp_file</references>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1a8e53a3a42f779ec8476ad5c012f8ec0e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD _NEFORCE <ref refid="classfile" kindref="compound">file</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD _NEFORCE file &amp; temp_file::file</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>file</name>
+        <qualifiedname>temp_file::file</qualifiedname>
+        <briefdescription>
+<para>获取内部文件对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>文件对象引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="103" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" bodystart="103" bodyend="103"/>
+        <references refid="classtemp__file_1a8e53a3a42f779ec8476ad5c012f8ec0e" compoundref="temp__file_8hpp" startline="103" endline="103">file</references>
+        <referencedby refid="classtemp__file_1a3965a72bf4a72e60c8b2554aff8e5365" compoundref="temp__file_8hpp" startline="109" endline="109">file</referencedby>
+        <referencedby refid="classtemp__file_1a8e53a3a42f779ec8476ad5c012f8ec0e" compoundref="temp__file_8hpp" startline="103" endline="103">file</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1a3965a72bf4a72e60c8b2554aff8e5365" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const _NEFORCE <ref refid="classfile" kindref="compound">file</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const _NEFORCE file &amp; temp_file::file</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>file</name>
+        <qualifiedname>temp_file::file</qualifiedname>
+        <briefdescription>
+<para>获取内部常量文件对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>文件对象常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="109" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" bodystart="109" bodyend="109"/>
+        <references refid="classtemp__file_1a8e53a3a42f779ec8476ad5c012f8ec0e" compoundref="temp__file_8hpp" startline="103" endline="103">file</references>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1aa8d10e724bc565b27dd71e44d38a30e6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void temp_file::keep</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>keep</name>
+        <qualifiedname>temp_file::keep</qualifiedname>
+        <briefdescription>
+<para>设置删除策略为 KEEP_ON_EXIT </para>
+        </briefdescription>
+        <detaileddescription>
+<para>调用后，析构时不会删除文件，也不从全局注册表中移除。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="116" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" bodystart="116" bodyend="116"/>
+        <references refid="classtemp__file_1ac86ed045081faf78d794374e6dca922aa7c9e034a3c48134bebebc66e362a6221" compoundref="temp__file_8hpp" startline="37">KEEP_ON_EXIT</references>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1a3f7ac3b078b81bae11e2cd63957cca11" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void temp_file::set_delete_policy</definition>
+        <argsstring>(const delete_policy policy) noexcept</argsstring>
+        <name>set_delete_policy</name>
+        <qualifiedname>temp_file::set_delete_policy</qualifiedname>
+        <param>
+          <type>const <ref refid="classtemp__file_1ac86ed045081faf78d794374e6dca922a" kindref="member">delete_policy</ref></type>
+          <declname>policy</declname>
+        </param>
+        <briefdescription>
+<para>设置删除策略 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>policy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的删除策略 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="122" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" bodystart="122" bodyend="122"/>
+        <references refid="classtemp__file_1ad62f2c7f18a482383090bc40997f81d9" compoundref="temp__file_8hpp" startline="128" endline="128">policy</references>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1ad62f2c7f18a482383090bc40997f81d9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classtemp__file_1ac86ed045081faf78d794374e6dca922a" kindref="member">delete_policy</ref></type>
+        <definition>NEFORCE_NODISCARD delete_policy temp_file::policy</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>policy</name>
+        <qualifiedname>temp_file::policy</qualifiedname>
+        <briefdescription>
+<para>获取当前删除策略 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>删除策略 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="128" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" bodystart="128" bodyend="128"/>
+        <referencedby refid="classtemp__file_1a3f7ac3b078b81bae11e2cd63957cca11" compoundref="temp__file_8hpp" startline="122" endline="122">set_delete_policy</referencedby>
+        <referencedby refid="classtemp__file_1ac79257e814c5714583e4c2b3b312a8ea">temp_file</referencedby>
+        <referencedby refid="classtemp__file_1accbc6dd9c82fe1f93704408afc7cf718">temp_file</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1ab09ff42e5d8867b3115ef10268a4c955" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void temp_file::cleanup</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>cleanup</name>
+        <qualifiedname>temp_file::cleanup</qualifiedname>
+        <briefdescription>
+<para>手动清理临时文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>根据当前删除策略执行清理：<itemizedlist>
+<listitem><para>如果策略为 AUTO_DELETE，则删除文件并从注册表中移除</para>
+</listitem><listitem><para>其他策略仅关闭文件 此操作后文件对象将处于关闭状态。 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="138" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1a6bd876203a19428fb3113c30e8ee8269" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void temp_file::release</definition>
+        <argsstring>()</argsstring>
+        <name>release</name>
+        <qualifiedname>temp_file::release</qualifiedname>
+        <briefdescription>
+<para>释放临时文件的所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>将删除策略设置为 MANUAL_DELETE，并从全局注册表中移除， 但保持文件打开状态，析构时不会自动删除。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="146" column="10"/>
+        <references refid="classtemp__file_1a6bd876203a19428fb3113c30e8ee8269">release</references>
+        <referencedby refid="classtemp__file_1a6bd876203a19428fb3113c30e8ee8269">release</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classtemp__file_1ac3839794aef9c8305fa6da30f84d2614" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classtemp__file" kindref="compound">temp_file</ref></type>
+        <definition>static NEFORCE_NODISCARD temp_file temp_file::create_temp_file</definition>
+        <argsstring>(const string &amp;prefix=&quot;tmp&quot;, const string &amp;suffix=&quot;.tmp&quot;, file_creation mode=file_creation::CREATE_FORCE)</argsstring>
+        <name>create_temp_file</name>
+        <qualifiedname>temp_file::create_temp_file</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>prefix</declname>
+          <defval>&quot;tmp&quot;</defval>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>suffix</declname>
+          <defval>&quot;.tmp&quot;</defval>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga90f3ddb67118cfb6f47aba25fbe6af40" kindref="member">file_creation</ref></type>
+          <declname>mode</declname>
+          <defval><ref refid="group___file_1gga90f3ddb67118cfb6f47aba25fbe6af40a2f44c48596198fcb93b5224b0d1d1e80" kindref="member">file_creation::CREATE_FORCE</ref></defval>
+        </param>
+        <briefdescription>
+<para>创建临时文件（工厂函数） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>prefix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件名前缀（默认 &quot;tmp&quot;） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>suffix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件名后缀（默认 &quot;.tmp&quot;） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件创建模式（默认 CREATE_FORCE） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新创建的临时文件对象</para>
+</simplesect>
+等价于调用带 AUTO_DELETE 策略的构造函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="157" column="40"/>
+        <references refid="classtemp__file_1ac3839794aef9c8305fa6da30f84d2614">create_temp_file</references>
+        <references refid="classtemp__file_1accbc6dd9c82fe1f93704408afc7cf718">temp_file</references>
+        <referencedby refid="classtemp__file_1ac3839794aef9c8305fa6da30f84d2614">create_temp_file</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1aaf92eee44863689f8e5b39c74ce35570" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void temp_file::cleanup_all_temp_files</definition>
+        <argsstring>()</argsstring>
+        <name>cleanup_all_temp_files</name>
+        <qualifiedname>temp_file::cleanup_all_temp_files</qualifiedname>
+        <briefdescription>
+<para>清理所有已注册的临时文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>遍历全局注册表，删除所有记录的临时文件。 通常在程序退出时由atexit注册的函数调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="166" column="17"/>
+        <references refid="classtemp__file_1aaf92eee44863689f8e5b39c74ce35570">cleanup_all_temp_files</references>
+        <referencedby refid="classtemp__file_1aaf92eee44863689f8e5b39c74ce35570">cleanup_all_temp_files</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtemp__file_1a578d30264589dde27c8837eac175e4e0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void temp_file::register_for_cleanup</definition>
+        <argsstring>(const path &amp;temp_path)</argsstring>
+        <name>register_for_cleanup</name>
+        <qualifiedname>temp_file::register_for_cleanup</qualifiedname>
+        <param>
+          <type>const <ref refid="classpath" kindref="compound">path</ref> &amp;</type>
+          <declname>temp_path</declname>
+        </param>
+        <briefdescription>
+<para>注册一个路径以供程序退出时清理 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>temp_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>临时文件路径</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将路径添加到全局注册表，在 cleanup_all_temp_files 中被清理。 通常由 <ref refid="classtemp__file" kindref="compound">temp_file</ref> 构造函数自动调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="175" column="17"/>
+        <references refid="classtemp__file_1a578d30264589dde27c8837eac175e4e0">register_for_cleanup</references>
+        <referencedby refid="classtemp__file_1a578d30264589dde27c8837eac175e4e0">register_for_cleanup</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>临时文件管理类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>自动创建和销毁临时文件。 所有创建的临时文件会在程序退出时通过全局清理函数尝试删除。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" line="28" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/temp_file.hpp" bodystart="28" bodyend="176"/>
+    <listofallmembers>
+      <member refid="classtemp__file_1ab09ff42e5d8867b3115ef10268a4c955" prot="public" virt="non-virtual"><scope>temp_file</scope><name>cleanup</name></member>
+      <member refid="classtemp__file_1aaf92eee44863689f8e5b39c74ce35570" prot="public" virt="non-virtual"><scope>temp_file</scope><name>cleanup_all_temp_files</name></member>
+      <member refid="classtemp__file_1ac3839794aef9c8305fa6da30f84d2614" prot="public" virt="non-virtual"><scope>temp_file</scope><name>create_temp_file</name></member>
+      <member refid="classtemp__file_1ac86ed045081faf78d794374e6dca922a" prot="public" virt="non-virtual"><scope>temp_file</scope><name>delete_policy</name></member>
+      <member refid="classtemp__file_1a0daa2bff864ba79551b962bd02faff5a" prot="private" virt="non-virtual"><scope>temp_file</scope><name>delete_policy_</name></member>
+      <member refid="classtemp__file_1a8e53a3a42f779ec8476ad5c012f8ec0e" prot="public" virt="non-virtual"><scope>temp_file</scope><name>file</name></member>
+      <member refid="classtemp__file_1a3965a72bf4a72e60c8b2554aff8e5365" prot="public" virt="non-virtual"><scope>temp_file</scope><name>file</name></member>
+      <member refid="classtemp__file_1a14d73b63b4e8bdb1dd519c66c8265121" prot="private" virt="non-virtual"><scope>temp_file</scope><name>file_</name></member>
+      <member refid="classtemp__file_1aa8d10e724bc565b27dd71e44d38a30e6" prot="public" virt="non-virtual"><scope>temp_file</scope><name>keep</name></member>
+      <member refid="classtemp__file_1af0a732459e3ae3e0e3061d5ca4a07913" prot="public" virt="non-virtual"><scope>temp_file</scope><name>operator=</name></member>
+      <member refid="classtemp__file_1acf979a8ed5ce55511ac3332f0a6dc918" prot="public" virt="non-virtual"><scope>temp_file</scope><name>operator=</name></member>
+      <member refid="classtemp__file_1ad62f2c7f18a482383090bc40997f81d9" prot="public" virt="non-virtual"><scope>temp_file</scope><name>policy</name></member>
+      <member refid="classtemp__file_1a578d30264589dde27c8837eac175e4e0" prot="public" virt="non-virtual"><scope>temp_file</scope><name>register_for_cleanup</name></member>
+      <member refid="classtemp__file_1a6bd876203a19428fb3113c30e8ee8269" prot="public" virt="non-virtual"><scope>temp_file</scope><name>release</name></member>
+      <member refid="classtemp__file_1a3f7ac3b078b81bae11e2cd63957cca11" prot="public" virt="non-virtual"><scope>temp_file</scope><name>set_delete_policy</name></member>
+      <member refid="classtemp__file_1accbc6dd9c82fe1f93704408afc7cf718" prot="public" virt="non-virtual"><scope>temp_file</scope><name>temp_file</name></member>
+      <member refid="classtemp__file_1ac79257e814c5714583e4c2b3b312a8ea" prot="public" virt="non-virtual"><scope>temp_file</scope><name>temp_file</name></member>
+      <member refid="classtemp__file_1a7af88917246722e3dc8fd4f49f8a479b" prot="public" virt="non-virtual"><scope>temp_file</scope><name>temp_file</name></member>
+      <member refid="classtemp__file_1ac61cc2c5c24611c45369f4751c4c3893" prot="public" virt="non-virtual"><scope>temp_file</scope><name>temp_file</name></member>
+      <member refid="classtemp__file_1a5e71e19b7818d0c1f0a5702b5bf525ed" prot="public" virt="non-virtual"><scope>temp_file</scope><name>~temp_file</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

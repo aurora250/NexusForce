@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structis___a_d_l__swappable" kind="struct" language="C++" prot="public">
+    <compoundname>is_ADL_swappable</compoundname>
+    <basecompoundref refid="structintegral__constant" prot="public" virt="non-virtual">integral_constant&lt; bool, Value &gt;&lt; false &gt;</basecompoundref>
+    <includes refid="type__traits_8hpp" local="no">type_traits.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Dummy</type>
+        <defval>void</defval>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>判断类型是否支持通过ADL查找的swap </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dummy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SFINAE参数，默认为void</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+参数依赖查找 ADL 是一种函数查找机制， 具体来说，当调用函数时，除了全局和局部作用域外， 编译器还会在参数类型所属的命名空间中查找函数声明。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>false_type</label>
+        <link refid="structintegral__constant"/>
+      </node>
+      <node id="1">
+        <label>is_ADL_swappable&lt; T, Dummy &gt;</label>
+        <link refid="structis___a_d_l__swappable"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>false_type</label>
+        <link refid="structintegral__constant"/>
+      </node>
+      <node id="1">
+        <label>is_ADL_swappable&lt; T, Dummy &gt;</label>
+        <link refid="structis___a_d_l__swappable"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3961" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3961" bodyend="3961"/>
+    <listofallmembers>
+      <member refid="structintegral__constant_1a4ff4207945e493620ae49f128339f711" prot="public" virt="non-virtual"><scope>is_ADL_swappable</scope><name>operator value_type</name></member>
+      <member refid="structintegral__constant_1a62cd9041cda773b67755080c2e7f919d" prot="public" virt="non-virtual"><scope>is_ADL_swappable</scope><name>operator()</name></member>
+      <member refid="structintegral__constant_1a24446c10796b5f7a335245fa783edb29" prot="public" virt="non-virtual"><scope>is_ADL_swappable</scope><name>type</name></member>
+      <member refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" prot="public" virt="non-virtual"><scope>is_ADL_swappable</scope><name>value</name></member>
+      <member refid="structintegral__constant_1a6bc197dec912ffb591ae56c78832e531" prot="public" virt="non-virtual"><scope>is_ADL_swappable</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

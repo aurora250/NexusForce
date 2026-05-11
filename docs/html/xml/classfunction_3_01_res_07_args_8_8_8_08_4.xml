@@ -1,0 +1,734 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classfunction_3_01_res_07_args_8_8_8_08_4" kind="class" language="C++" prot="public">
+    <compoundname>function&lt; Res(Args...)&gt;</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">inner::__function_base</basecompoundref>
+    <includes refid="functional_2function_8hpp" local="no">function.hpp</includes>
+    <innerclass refid="structfunction_3_01_res_07_args_8_8_8_08_4_1_1callable__t" prot="private">function&lt; Res(Args...)&gt;::callable_t</innerclass>
+    <innerclass refid="structfunction_3_01_res_07_args_8_8_8_08_4_1_1callable__t_3_01_f_00_01enable__if__t_3_9is__same_c802a9f103425f8fff8972c0117bca4f" prot="private">function&lt; Res(Args...)&gt;::callable_t&lt; F, enable_if_t&lt;!is_same_v&lt; remove_cvref_t&lt; F &gt;, function &gt; &amp;&amp;is_invocable_r_v&lt; Res, decay_t&lt; F &gt; &amp;, Args... &gt; &gt; &gt;</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Res</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Args</declname>
+        <defname>Args</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classfunction_3_01_res_07_args_8_8_8_08_4_1a0822b0358a77c9b85c71bdd915f418f8" prot="private" static="no">
+        <type>Res(*)(const inner::storage_data &amp;, Args...)</type>
+        <definition>using function&lt; Res(Args...)&gt;::invoker_type = Res (*)(const inner::storage_data&amp;, Args...)</definition>
+        <argsstring></argsstring>
+        <name>invoker_type</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::invoker_type</qualifiedname>
+        <briefdescription>
+<para>调用器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="279" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="279" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classfunction_3_01_res_07_args_8_8_8_08_4_1acee130dec2574029064618940a232b4c" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>IsSelf</declname>
+            <defname>IsSelf</defname>
+            <defval><ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt;<ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;F&gt;, <ref refid="classfunction" kindref="compound">function</ref>&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!IsSelf, <ref refid="structdecay" kindref="compound">decay</ref>&lt; F &gt; &gt;::type</type>
+        <definition>using function&lt; Res(Args...)&gt;::enable_decay_t = typename enable_if_t&lt;!IsSelf, decay&lt;F&gt;&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>enable_decay_t</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::enable_decay_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="286" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="286" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classfunction_3_01_res_07_args_8_8_8_08_4_1a62c7886996f2a5eafa7ff72e8f48b726" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>inner::__function_manage_handler&lt; Res(Args...), <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; F &gt; &gt;</type>
+        <definition>using function&lt; Res(Args...)&gt;::handler_t = inner::__function_manage_handler&lt;Res(Args...), decay_t&lt;F&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>handler_t</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::handler_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="297" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="297" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classfunction_3_01_res_07_args_8_8_8_08_4_1a31c65b4bba8c6e7beffc751b9ea42119" prot="public" static="no">
+        <type>Res</type>
+        <definition>using function&lt; Res(Args...)&gt;::result_type = Res</definition>
+        <argsstring></argsstring>
+        <name>result_type</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::result_type</qualifiedname>
+        <briefdescription>
+<para>返回类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="315" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="315" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfunction_3_01_res_07_args_8_8_8_08_4_1a91c9236a483cc85996d5567268edad36" prot="private" static="no" mutable="no">
+        <type>invoker_type</type>
+        <definition>invoker_type function&lt; Res(Args...)&gt;::invoker_</definition>
+        <argsstring></argsstring>
+        <name>invoker_</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::invoker_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>调用器函数指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="282" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="282" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1abccc3d583378d0120dcffb8d3b0d8df5" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1gad26e8608af957d4388fa3029f2394b6e" kindref="member">is_object_v</ref>&lt; F &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_ALWAYS_INLINE const F *</type>
+        <definition>NEFORCE_ALWAYS_INLINE const F * function&lt; Res(Args...)&gt;::__target_impl</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>__target_impl</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::__target_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="300" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="300" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1abccc3d583378d0120dcffb8d3b0d8df5" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_qualifier_check_1gad26e8608af957d4388fa3029f2394b6e" kindref="member">is_object_v</ref>&lt; F &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_ALWAYS_INLINE const F *</type>
+        <definition>NEFORCE_ALWAYS_INLINE const F * function&lt; Res(Args...)&gt;::__target_impl</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>__target_impl</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::__target_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="310" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="310" bodyend="312"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>function&lt; Res(Args...)&gt;::function</definition>
+        <argsstring>(nullptr_t np=nullptr) noexcept</argsstring>
+        <name>function</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::function</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <declname>np</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>np</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空指针字面量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="321" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="321" bodyend="322"/>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ad6d4c98e1921df21868d3bbb1b61f1ec" compoundref="functional_2function_8hpp" startline="328" endline="335">function</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ae905461055606867ce67917e9147369f" compoundref="functional_2function_8hpp" startline="341" endline="348">function</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a91471278c4fc9bf19205cd4bd1c702cd" compoundref="functional_2function_8hpp" startline="374" endline="377">operator=</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a185164751d1e41fb160dc6a9f7759045" compoundref="functional_2function_8hpp" startline="410" endline="413">operator=</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab876efdbe1a01c892970bb0234009bb7" compoundref="functional_2function_8hpp" startline="384" endline="387">operator=</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a87e5ea5638aa1ea7b2aff1fc190694b2" compoundref="functional_2function_8hpp" startline="394" endline="401">operator=</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a22cb1a2760d0fa709ae19aaf26e545b7" compoundref="functional_2function_8hpp" startline="422" endline="425">operator=</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a1dd1e66ea2513b1b20722101ef909e03" compoundref="functional_2function_8hpp" startline="431" endline="435">swap</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ac79c561099903e52b9d9f73858642020" compoundref="functional_2function_8hpp" startline="487" endline="490">target</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1ad6d4c98e1921df21868d3bbb1b61f1ec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>function&lt; Res(Args...)&gt;::function</definition>
+        <argsstring>(const function &amp;other)</argsstring>
+        <name>function</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::function</qualifiedname>
+        <param>
+          <type>const <ref refid="classfunction" kindref="compound">function</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要复制的function对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="328" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="328" bodyend="335"/>
+        <references refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" compoundref="functional_2function_8hpp" startline="321" endline="322">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1ae905461055606867ce67917e9147369f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>function&lt; Res(Args...)&gt;::function</definition>
+        <argsstring>(function &amp;&amp;other) noexcept</argsstring>
+        <name>function</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::function</qualifiedname>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的function对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="341" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="341" bodyend="348"/>
+        <references refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" compoundref="functional_2function_8hpp" startline="321" endline="322">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1a30ca0f61d665ad17ae8514657e9c853f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="handler_t&lt; F &gt;::template nothrow_init&lt; F &gt;()" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; callable_t&lt; F &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>function&lt; Res(Args...)&gt;::function</definition>
+        <argsstring>(F &amp;&amp;callable)</argsstring>
+        <name>function</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::function</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>callable</declname>
+        </param>
+        <briefdescription>
+<para>从任意可调用对象构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="356" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="356" bodyend="367"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" compoundref="type__traits_8hpp" startline="2353">is_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1ga27b6602d2b9da1cb2daf37f7c15f9bf2" compoundref="type__traits_8hpp" startline="2371">is_copy_constructible_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1a91471278c4fc9bf19205cd4bd1c702cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfunction" kindref="compound">function</ref> &amp;</type>
+        <definition>function &amp; function&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(const function &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classfunction" kindref="compound">function</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要赋值的function对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="374" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="374" bodyend="377"/>
+        <references refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" compoundref="functional_2function_8hpp" startline="321" endline="322">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1ab876efdbe1a01c892970bb0234009bb7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classfunction" kindref="compound">function</ref> &amp;</type>
+        <definition>function &amp; function&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(function &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的function对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="384" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="384" bodyend="387"/>
+        <references refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" compoundref="functional_2function_8hpp" startline="321" endline="322">function</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1a87e5ea5638aa1ea7b2aff1fc190694b2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classfunction" kindref="compound">function</ref> &amp;</type>
+        <definition>function &amp; function&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(nullptr_t np) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <declname>np</declname>
+        </param>
+        <briefdescription>
+<para>空指针赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>np</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空指针字面量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="394" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="394" bodyend="401"/>
+        <references refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" compoundref="functional_2function_8hpp" startline="321" endline="322">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1a185164751d1e41fb160dc6a9f7759045" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="handler_t&lt; F &gt;::template nothrow_init&lt; F &gt;()" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; callable_t&lt; F &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classfunction" kindref="compound">function</ref> &amp;</type>
+        <definition>function &amp; function&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(F &amp;&amp;callable)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>callable</declname>
+        </param>
+        <briefdescription>
+<para>从任意可调用对象赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="410" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="410" bodyend="413"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" compoundref="functional_2function_8hpp" startline="321" endline="322">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1a22cb1a2760d0fa709ae19aaf26e545b7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classfunction" kindref="compound">function</ref> &amp;</type>
+        <definition>function &amp; function&lt; Res(Args...)&gt;::operator=</definition>
+        <argsstring>(reference_wrapper&lt; F &gt; wrapper) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref>&lt; F &gt;</type>
+          <declname>wrapper</declname>
+        </param>
+        <briefdescription>
+<para>从引用包装器赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>wrapper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>引用包装器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="422" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="422" bodyend="425"/>
+        <references refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" compoundref="functional_2function_8hpp" startline="321" endline="322">function</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1a1dd1e66ea2513b1b20722101ef909e03" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void function&lt; Res(Args...)&gt;::swap</definition>
+        <argsstring>(function &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::swap</qualifiedname>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个function对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的function对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="431" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="431" bodyend="435"/>
+        <references refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" compoundref="functional_2function_8hpp" startline="321" endline="322">function</references>
+        <references refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df">swap</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1abdac020efb6e509d72cb4cc1df3a9e79" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>function&lt; Res(Args...)&gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::operator bool</qualifiedname>
+        <briefdescription>
+<para>转换为布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否非空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="441" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="441" bodyend="441"/>
+        <references refid="group___type_erasure_functions_1ga57a416f9c003e19a8fae0edc3f0902bb" compoundref="type__erase_8hpp" startline="362" endline="364">empty</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1ab05cff3a24c666c2bf8eaa12155dff28" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Res</type>
+        <definition>Res function&lt; Res(Args...)&gt;::operator()</definition>
+        <argsstring>(Args... args) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::operator()</qualifiedname>
+        <param>
+          <type>Args...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>函数调用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>调用结果 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果function为空 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="449" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="449" bodyend="454"/>
+        <references refid="group___type_erasure_functions_1ga57a416f9c003e19a8fae0edc3f0902bb" compoundref="type__erase_8hpp" startline="362" endline="364">empty</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1add1fb2ba776265e08571d0d399904af6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const std::type_info &amp;</type>
+        <definition>NEFORCE_NODISCARD const std::type_info &amp; function&lt; Res(Args...)&gt;::target_type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>target_type</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::target_type</qualifiedname>
+        <briefdescription>
+<para>获取目标类型信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>目标类型信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="460" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="460" bodyend="469"/>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1abf41cd8f894b26ca15f60ca767ca54ae" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>const F *</type>
+        <definition>const F * function&lt; Res(Args...)&gt;::target</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>target</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::target</qualifiedname>
+        <briefdescription>
+<para>获取目标对象的常量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标对象的常量指针，如果类型不匹配则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="477" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="477" bodyend="479"/>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ac79c561099903e52b9d9f73858642020" compoundref="functional_2function_8hpp" startline="487" endline="490">target</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfunction_3_01_res_07_args_8_8_8_08_4_1ac79c561099903e52b9d9f73858642020" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>F *</type>
+        <definition>F * function&lt; Res(Args...)&gt;::target</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>target</name>
+        <qualifiedname>function&lt; Res(Args...)&gt;::target</qualifiedname>
+        <briefdescription>
+<para>获取目标对象的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标对象的指针，如果类型不匹配则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="487" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="487" bodyend="490"/>
+        <references refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" compoundref="functional_2function_8hpp" startline="321" endline="322">function</references>
+        <references refid="classfunction_3_01_res_07_args_8_8_8_08_4_1abf41cd8f894b26ca15f60ca767ca54ae" compoundref="functional_2function_8hpp" startline="477" endline="479">target</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>通用函数包装器类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+提供类型安全的函数包装，支持存储、复制和调用任意可调用对象。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" line="277" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/function.hpp" bodystart="277" bodyend="491"/>
+    <listofallmembers>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1abccc3d583378d0120dcffb8d3b0d8df5" prot="private" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>__target_impl</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1abccc3d583378d0120dcffb8d3b0d8df5" prot="private" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>__target_impl</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1acee130dec2574029064618940a232b4c" prot="private" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>enable_decay_t</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>function</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ad6d4c98e1921df21868d3bbb1b61f1ec" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>function</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ae905461055606867ce67917e9147369f" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>function</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a30ca0f61d665ad17ae8514657e9c853f" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>function</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a62c7886996f2a5eafa7ff72e8f48b726" prot="private" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>handler_t</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a91c9236a483cc85996d5567268edad36" prot="private" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>invoker_</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a0822b0358a77c9b85c71bdd915f418f8" prot="private" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>invoker_type</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1abdac020efb6e509d72cb4cc1df3a9e79" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>operator bool</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab05cff3a24c666c2bf8eaa12155dff28" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>operator()</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a91471278c4fc9bf19205cd4bd1c702cd" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab876efdbe1a01c892970bb0234009bb7" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a87e5ea5638aa1ea7b2aff1fc190694b2" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a185164751d1e41fb160dc6a9f7759045" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a22cb1a2760d0fa709ae19aaf26e545b7" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>operator=</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a31c65b4bba8c6e7beffc751b9ea42119" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>result_type</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a1dd1e66ea2513b1b20722101ef909e03" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>swap</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1abf41cd8f894b26ca15f60ca767ca54ae" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>target</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ac79c561099903e52b9d9f73858642020" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>target</name></member>
+      <member refid="classfunction_3_01_res_07_args_8_8_8_08_4_1add1fb2ba776265e08571d0d399904af6" prot="public" virt="non-virtual"><scope>function&lt; Res(Args...)&gt;</scope><name>target_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

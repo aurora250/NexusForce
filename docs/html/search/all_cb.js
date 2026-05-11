@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['💾_20内存管理_20memory_0',['💾 内存管理 (Memory)',['../index.html#autotoc_md32',1,'']]]
+  ['🏗️_20编译步骤_0',['🏗️ 编译步骤',['../index.html#autotoc_md41',1,'']]]
 ];

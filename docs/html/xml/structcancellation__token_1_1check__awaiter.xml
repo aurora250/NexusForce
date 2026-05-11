@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structcancellation__token_1_1check__awaiter" kind="struct" language="C++" prot="public">
+    <compoundname>cancellation_token::check_awaiter</compoundname>
+    <includes refid="generator_8hpp" local="no">generator.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structcancellation__token_1_1check__awaiter_1a6b7a548a0164dca499a1aa75cccba7d2" prot="public" static="no" mutable="no">
+        <type>const <ref refid="classcancellation__token" kindref="compound">cancellation_token</ref> *</type>
+        <definition>const cancellation_token* cancellation_token::check_awaiter::token</definition>
+        <argsstring></argsstring>
+        <name>token</name>
+        <qualifiedname>cancellation_token::check_awaiter::token</qualifiedname>
+        <briefdescription>
+<para>令牌指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="44" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="44" bodyend="-1"/>
+        <referencedby refid="structcancellation__token_1_1check__awaiter_1a37b0c4e38de746e7ca7dca8354aed798" compoundref="generator_8hpp" startline="50" endline="50">await_ready</referencedby>
+        <referencedby refid="structcancellation__token_1_1check__awaiter_1ab9f45a67e46515646ca6b302a64b7b5d" compoundref="generator_8hpp" startline="62" endline="66">await_resume</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structcancellation__token_1_1check__awaiter_1a37b0c4e38de746e7ca7dca8354aed798" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool cancellation_token::check_awaiter::await_ready</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>await_ready</name>
+        <qualifiedname>cancellation_token::check_awaiter::await_ready</qualifiedname>
+        <briefdescription>
+<para>检查是否可立即恢复 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果已取消则返回true，表示可以立即恢复（并抛出异常） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="50" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="50" bodyend="50"/>
+        <references refid="structcancellation__token_1_1check__awaiter_1a6b7a548a0164dca499a1aa75cccba7d2" compoundref="generator_8hpp" startline="44">token</references>
+      </memberdef>
+      <memberdef kind="function" id="structcancellation__token_1_1check__awaiter_1af127c8ef34d7e722eac42f8633cedcab" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void cancellation_token::check_awaiter::await_suspend</definition>
+        <argsstring>(coroutine_handle&lt;&gt; h) const noexcept</argsstring>
+        <name>await_suspend</name>
+        <qualifiedname>cancellation_token::check_awaiter::await_suspend</qualifiedname>
+        <param>
+          <type><ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle</ref>&lt;&gt;</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+<para>暂停协程（实际上从不暂停） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>h</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协程句柄 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="56" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="structcancellation__token_1_1check__awaiter_1ab9f45a67e46515646ca6b302a64b7b5d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void cancellation_token::check_awaiter::await_resume</definition>
+        <argsstring>() const</argsstring>
+        <name>await_resume</name>
+        <qualifiedname>cancellation_token::check_awaiter::await_resume</qualifiedname>
+        <briefdescription>
+<para>恢复时执行的操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structexception" kindref="compound">exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果已取消则抛出异常 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="62" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="62" bodyend="66"/>
+        <references refid="structcancellation__token_1_1check__awaiter_1a6b7a548a0164dca499a1aa75cccba7d2" compoundref="generator_8hpp" startline="44">token</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>取消检查等待器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>可在协程中等待此对象，如果已取消则抛出异常。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>cancellation_token</label>
+        <link refid="classcancellation__token"/>
+      </node>
+      <node id="1">
+        <label>cancellation_token::check_awaiter</label>
+        <link refid="structcancellation__token_1_1check__awaiter"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>token</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="43" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="43" bodyend="67"/>
+    <listofallmembers>
+      <member refid="structcancellation__token_1_1check__awaiter_1a37b0c4e38de746e7ca7dca8354aed798" prot="public" virt="non-virtual"><scope>cancellation_token::check_awaiter</scope><name>await_ready</name></member>
+      <member refid="structcancellation__token_1_1check__awaiter_1ab9f45a67e46515646ca6b302a64b7b5d" prot="public" virt="non-virtual"><scope>cancellation_token::check_awaiter</scope><name>await_resume</name></member>
+      <member refid="structcancellation__token_1_1check__awaiter_1af127c8ef34d7e722eac42f8633cedcab" prot="public" virt="non-virtual"><scope>cancellation_token::check_awaiter</scope><name>await_suspend</name></member>
+      <member refid="structcancellation__token_1_1check__awaiter_1a6b7a548a0164dca499a1aa75cccba7d2" prot="public" virt="non-virtual"><scope>cancellation_token::check_awaiter</scope><name>token</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,12 +1,26 @@
 var file__constants_8hpp =
 [
-    [ "fud_t", "group___file.html#ga7629ed37340e93203c1f0c100a479b33", null ],
+    [ "fud_t", "group___file.html#ga20cb70020500f32f8c015c7a044a4dfe", null ],
+    [ "file_access", "group___file.html#ga9df1cddbb19e649f9e9603e4f8ed4cfe", [
+      [ "READ", "group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfea3466fab4975481651940ed328aa990e4", null ],
+      [ "WRITE", "group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfead4b9e47f65b6e79b010582f15785867e", null ],
+      [ "READ_WRITE", "group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfeaa7b843fb734e3b3fea8e5f902d3f4144", null ],
+      [ "APPEND", "group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfea375ffb668aa90f1c7fcae55e9734a752", null ]
+    ] ],
     [ "file_attri", "group___file.html#gadd0b8478c8ee0d6b05880ca087016c9e", [
       [ "NORMAL", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea1e23852820b9154316c7c06e2b7ba051", null ],
       [ "READONLY", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea34db6698cff32ac89724758fdaa5512e", null ],
+      [ "HIDDEN", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea347e628a8f72626a0611ef842fe9d304", null ],
+      [ "SYSTEM", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9eafa177138f94a7ea01f549b1aa7893d03", null ],
       [ "DIRECTORY", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48", null ],
+      [ "ARCHIVE", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea71f01f32e90440fd6039511dde69e995", null ],
       [ "DEVICE", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d", null ],
+      [ "TEMPORARY", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea39e02cdeda38ebf7d4a898b900cf0776", null ],
       [ "REPARSE_POINT", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea3102e1ef56da08a1f6f199b6f8cb472d", null ],
+      [ "COMPRESSED", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea724ba27218714b182f22d5b24b5e4317", null ],
+      [ "OFFLINE", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea7ed929f45ba34eff59d81d74d4f80a58", null ],
+      [ "ENCRYPTED", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea3fe1c5068682cdee737d379207ab631f", null ],
+      [ "VIRTUAL", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea05470727787aa721cf53222b5d3d40f3", null ],
       [ "OVERLAPPED", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4", null ],
       [ "NO_BUFFERING", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea63c5a1202e435a488d11461119c447fe", null ],
       [ "WRITE_THROUGH", "group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1", null ],

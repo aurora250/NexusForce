@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classlatch" kind="class" language="C++" prot="public">
+    <compoundname>latch</compoundname>
+    <includes refid="latch_8hpp" local="no">latch.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classlatch_1a8284a362f6c4949e56be1eb61a083c52" prot="private" static="no" mutable="no">
+        <type><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref></type>
+        <definition>platform_wait_t latch::counter_</definition>
+        <argsstring></argsstring>
+        <name>counter_</name>
+        <qualifiedname>latch::counter_</qualifiedname>
+        <briefdescription>
+<para>计数器值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="37" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classlatch_1aefa9e036b3465180cff7ca28d1f37905" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref></type>
+        <definition>static constexpr platform_wait_t latch::max</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>max</name>
+        <qualifiedname>latch::max</qualifiedname>
+        <briefdescription>
+<para>获取闩锁的最大计数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大可能的计数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="44" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="44" bodyend="44"/>
+        <references refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlatch_1a50bee6b3588a817ac476fe217741cc67" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>latch::latch</definition>
+        <argsstring>(const platform_wait_t expected) noexcept</argsstring>
+        <name>latch</name>
+        <qualifiedname>latch::latch</qualifiedname>
+        <param>
+          <type>const <ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref></type>
+          <declname>expected</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始计数值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建闩锁并设置初始计数值。计数值必须为非负。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="52" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="52" bodyend="55"/>
+        <references refid="group___debug_breakpoints_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="breakpoint_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
+        <referencedby refid="classlatch_1a00355a36c48695412e0ae6e8634f534f">latch</referencedby>
+        <referencedby refid="classlatch_1a33b76e8739418ed6b0ffffc7811b7ccd">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classlatch_1a65fbf24cb0b126f05d13f8242a4f96bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>latch::~latch</definition>
+        <argsstring>()=default</argsstring>
+        <name>~latch</name>
+        <qualifiedname>latch::~latch</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="57" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classlatch_1a00355a36c48695412e0ae6e8634f534f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>latch::latch</definition>
+        <argsstring>(const latch &amp;)=delete</argsstring>
+        <name>latch</name>
+        <qualifiedname>latch::latch</qualifiedname>
+        <param>
+          <type>const <ref refid="classlatch" kindref="compound">latch</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="58" column="5"/>
+        <references refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" compoundref="latch_8hpp" startline="52" endline="55">latch</references>
+      </memberdef>
+      <memberdef kind="function" id="classlatch_1a33b76e8739418ed6b0ffffc7811b7ccd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classlatch" kindref="compound">latch</ref> &amp;</type>
+        <definition>latch &amp; latch::operator=</definition>
+        <argsstring>(const latch &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>latch::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classlatch" kindref="compound">latch</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="59" column="11"/>
+        <references refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" compoundref="latch_8hpp" startline="52" endline="55">latch</references>
+      </memberdef>
+      <memberdef kind="function" id="classlatch_1af97b3e7f872dacf234135f65508ff964" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE void latch::count_down</definition>
+        <argsstring>(const platform_wait_t update=1)</argsstring>
+        <name>count_down</name>
+        <qualifiedname>latch::count_down</qualifiedname>
+        <param>
+          <type>const <ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref></type>
+          <declname>update</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>减少计数器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>减少的数量，默认为1</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+原子地减少闩锁的计数器。如果计数器减为零，则通知所有等待线程。</para>
+<para><simplesect kind="note"><para>如果计数器变为负值，行为未定义 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="69" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="69" bodyend="74"/>
+        <references refid="group___atomic_operations_1ga021ba5336034625fe4ca4af59bc779da" compoundref="atomic__base_8hpp" startline="727" endline="735">atomic_fetch_sub</references>
+        <references refid="group___atomic_operations_1ga5c5949e5e1c0b7d9c13b91322f47f79d" compoundref="atomic__wait_8hpp" startline="444" endline="447">atomic_notify_address</references>
+        <references refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
+        <referencedby refid="classlatch_1ad43a11355c2e90bba7ada9dd81d14acd" compoundref="latch_8hpp" startline="107" endline="110">arrive_and_wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classlatch_1a6cfd32999e758550d70919819991edcd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE bool</type>
+        <definition>NEFORCE_ALWAYS_INLINE bool latch::try_wait</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>try_wait</name>
+        <qualifiedname>latch::try_wait</qualifiedname>
+        <briefdescription>
+<para>尝试等待 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>计数器是否为零</para>
+</simplesect>
+非阻塞地检查闩锁的计数器是否为零。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="82" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="82" bodyend="84"/>
+        <references refid="group___atomic_operations_1gae881b9b04d18e6f5dd4f5d7311bb48c9" compoundref="atomic__base_8hpp" startline="477" endline="488">atomic_load</references>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <referencedby refid="classlatch_1a08842ebccf3f250756b4807998f5fdff" compoundref="latch_8hpp" startline="93" endline="96">wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classlatch_1a08842ebccf3f250756b4807998f5fdff" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE void latch::wait</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>wait</name>
+        <qualifiedname>latch::wait</qualifiedname>
+        <briefdescription>
+<para>等待计数器为零 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>阻塞当前线程，直到闩锁的计数器减为零。</para>
+<para><simplesect kind="note"><para>如果计数器已经为零，则立即返回 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="93" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="93" bodyend="96"/>
+        <references refid="group___atomic_operations_1ga04b378083d850b094555357ea10e17ef" compoundref="atomic__wait_8hpp" startline="429" endline="432">atomic_wait_address</references>
+        <references refid="classlatch_1a6cfd32999e758550d70919819991edcd" compoundref="latch_8hpp" startline="82" endline="84">try_wait</references>
+        <referencedby refid="classlatch_1ad43a11355c2e90bba7ada9dd81d14acd" compoundref="latch_8hpp" startline="107" endline="110">arrive_and_wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classlatch_1ad43a11355c2e90bba7ada9dd81d14acd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE void latch::arrive_and_wait</definition>
+        <argsstring>(const platform_wait_t update=1) noexcept</argsstring>
+        <name>arrive_and_wait</name>
+        <qualifiedname>latch::arrive_and_wait</qualifiedname>
+        <param>
+          <type>const <ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref></type>
+          <declname>update</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>减少计数器并等待 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>减少的数量，默认为1</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+原子地减少计数器，然后等待计数器变为零。 这是一个组合操作，等价于先调用count_down()再调用wait()。</para>
+<para><simplesect kind="note"><para>如果计数器变为负值，行为未定义 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="107" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="107" bodyend="110"/>
+        <references refid="classlatch_1af97b3e7f872dacf234135f65508ff964" compoundref="latch_8hpp" startline="69" endline="74">count_down</references>
+        <references refid="classlatch_1a08842ebccf3f250756b4807998f5fdff" compoundref="latch_8hpp" startline="93" endline="96">wait</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>闩锁类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>闩锁是一种同步原语，用于协调多个线程的执行。 线程可以等待闩锁的计数器减为零，或者减少计数器并等待。 闩锁是一次性的，计数器减为零后不能被重置。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="35" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="35" bodyend="111"/>
+    <listofallmembers>
+      <member refid="classlatch_1ad43a11355c2e90bba7ada9dd81d14acd" prot="public" virt="non-virtual"><scope>latch</scope><name>arrive_and_wait</name></member>
+      <member refid="classlatch_1af97b3e7f872dacf234135f65508ff964" prot="public" virt="non-virtual"><scope>latch</scope><name>count_down</name></member>
+      <member refid="classlatch_1a8284a362f6c4949e56be1eb61a083c52" prot="private" virt="non-virtual"><scope>latch</scope><name>counter_</name></member>
+      <member refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" prot="public" virt="non-virtual"><scope>latch</scope><name>latch</name></member>
+      <member refid="classlatch_1a00355a36c48695412e0ae6e8634f534f" prot="public" virt="non-virtual"><scope>latch</scope><name>latch</name></member>
+      <member refid="classlatch_1aefa9e036b3465180cff7ca28d1f37905" prot="public" virt="non-virtual"><scope>latch</scope><name>max</name></member>
+      <member refid="classlatch_1a33b76e8739418ed6b0ffffc7811b7ccd" prot="public" virt="non-virtual"><scope>latch</scope><name>operator=</name></member>
+      <member refid="classlatch_1a6cfd32999e758550d70919819991edcd" prot="public" virt="non-virtual"><scope>latch</scope><name>try_wait</name></member>
+      <member refid="classlatch_1a08842ebccf3f250756b4807998f5fdff" prot="public" virt="non-virtual"><scope>latch</scope><name>wait</name></member>
+      <member refid="classlatch_1a65fbf24cb0b126f05d13f8242a4f96bb" prot="public" virt="non-virtual"><scope>latch</scope><name>~latch</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

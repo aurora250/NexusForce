@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structyaml__parser_1_1indent__context" kind="struct" language="C++" prot="private">
+    <compoundname>yaml_parser::indent_context</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structyaml__parser_1_1indent__context_1a0ae2191d2b8fdb597d02ed0d582c9432" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t yaml_parser::indent_context::level</definition>
+        <argsstring></argsstring>
+        <name>level</name>
+        <qualifiedname>yaml_parser::indent_context::level</qualifiedname>
+        <briefdescription>
+<para>当前缩进级别（空格数） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="125" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structyaml__parser_1_1indent__context_1a5c328a5a2d08f55b9a375d1f1c8f3776" prot="public" static="no" mutable="no">
+        <type><ref refid="classyaml__mapping" kindref="compound">yaml_mapping</ref> *</type>
+        <definition>yaml_mapping* yaml_parser::indent_context::mapping</definition>
+        <argsstring></argsstring>
+        <name>mapping</name>
+        <qualifiedname>yaml_parser::indent_context::mapping</qualifiedname>
+        <briefdescription>
+<para>当前映射指针（在映射上下文中） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="126" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structyaml__parser_1_1indent__context_1a9d5dabc5f8603252b692de99b057dc1c" prot="public" static="no" mutable="no">
+        <type><ref refid="classyaml__sequence" kindref="compound">yaml_sequence</ref> *</type>
+        <definition>yaml_sequence* yaml_parser::indent_context::sequence</definition>
+        <argsstring></argsstring>
+        <name>sequence</name>
+        <qualifiedname>yaml_parser::indent_context::sequence</qualifiedname>
+        <briefdescription>
+<para>当前序列指针（在序列上下文中） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="127" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structyaml__parser_1_1indent__context_1a15c37641f8989d25874187f89286a254" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string yaml_parser::indent_context::key</definition>
+        <argsstring></argsstring>
+        <name>key</name>
+        <qualifiedname>yaml_parser::indent_context::key</qualifiedname>
+        <briefdescription>
+<para>当前键名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="128" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structyaml__parser_1_1indent__context_1ae5c648893ea21b973f80a8e40ba89271" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool yaml_parser::indent_context::is_sequence</definition>
+        <argsstring></argsstring>
+        <name>is_sequence</name>
+        <qualifiedname>yaml_parser::indent_context::is_sequence</qualifiedname>
+        <briefdescription>
+<para>是否为序列上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="129" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="129" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>缩进上下文结构 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>记录当前嵌套层级的状态信息，用于处理YAML的缩进敏感语法。 当缩进增大时压入新上下文，缩进减小时弹出上下文。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="8">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="4">
+        <label>istringify&lt; yaml_value &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="2">
+        <label>yaml_mapping</label>
+        <link refid="classyaml__mapping"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>yaml_parser::indent_context</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>mapping</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>sequence</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>key</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>yaml_sequence</label>
+        <link refid="classyaml__sequence"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>yaml_value</label>
+        <link refid="classyaml__value"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>anchor</edgelabel>
+          <edgelabel>tag</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="124" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="124" bodyend="130"/>
+    <listofallmembers>
+      <member refid="structyaml__parser_1_1indent__context_1ae5c648893ea21b973f80a8e40ba89271" prot="public" virt="non-virtual"><scope>yaml_parser::indent_context</scope><name>is_sequence</name></member>
+      <member refid="structyaml__parser_1_1indent__context_1a15c37641f8989d25874187f89286a254" prot="public" virt="non-virtual"><scope>yaml_parser::indent_context</scope><name>key</name></member>
+      <member refid="structyaml__parser_1_1indent__context_1a0ae2191d2b8fdb597d02ed0d582c9432" prot="public" virt="non-virtual"><scope>yaml_parser::indent_context</scope><name>level</name></member>
+      <member refid="structyaml__parser_1_1indent__context_1a5c328a5a2d08f55b9a375d1f1c8f3776" prot="public" virt="non-virtual"><scope>yaml_parser::indent_context</scope><name>mapping</name></member>
+      <member refid="structyaml__parser_1_1indent__context_1a9d5dabc5f8603252b692de99b057dc1c" prot="public" virt="non-virtual"><scope>yaml_parser::indent_context</scope><name>sequence</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -16,8 +16,8 @@ var structdeque__iterator =
     [ "decrement", "structdeque__iterator.html#a693f9a64f3bbe821ded31f86a154f605", null ],
     [ "dereference", "structdeque__iterator.html#a6d6d3ac4b70a52fb8ae3a12cf49b8415", null ],
     [ "distance_to", "structdeque__iterator.html#a30be858c825593d0655db9e5ac9bd041", null ],
-    [ "equal", "structdeque__iterator.html#a0fab3c17038d2bc19861475603bc6f8f", null ],
+    [ "equal_to", "structdeque__iterator.html#a5aa2fd65a2eb0db97487246db2a5e326", null ],
     [ "increment", "structdeque__iterator.html#a56ab54f3151c02a2836f094cbc0222d7", null ],
     [ "less_than", "structdeque__iterator.html#a2b84b2fea420f3307ad4a5abc50a4aef", null ],
-    [ "operator[]", "structdeque__iterator.html#a49e5a97ebaa66d5198dc9fc0fd8f4ceb", null ]
+    [ "operator[]", "structdeque__iterator.html#adc0e3f29e96552bfe1dbf3960a1513a4", null ]
 ];

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___u_u_i_d" kind="group">
+    <compoundname>UUID</compoundname>
+    <title>UUID</title>
+    <innerclass refid="classuuid" prot="public">uuid</innerclass>
+    <briefdescription>
+<para>UUID生成与解析工具实现。 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>UUID是一个128位的唯一标识符，广泛用于分布式系统中的标识生成。</para>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下标准规范：</para>
+<para><itemizedlist>
+<listitem><para>**IETF RFC 4122**：UUID 版本 4 的定义（基于随机数） <ulink url="https://www.rfc-editor.org/rfc/rfc4122.html">https://www.rfc-editor.org/rfc/rfc4122.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 9562**：UUID 版本 7 的定义（基于 Unix 时间戳排序） <ulink url="https://www.rfc-editor.org/rfc/rfc9562.html">https://www.rfc-editor.org/rfc/rfc9562.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para>此外，UUID 的结构与编码方式也符合以下 ISO 标准：<itemizedlist>
+<listitem><para>**ISO/IEC 9834-8:2014**：信息技术 — 对象标识符解析系统 — 第8部分：UUID 的生成与注册 <ulink url="https://www.iso.org/standard/62795.html">https://www.iso.org/standard/62795.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___u_u_i_d_1version_details">
+<title>版本细节</title><para><itemizedlist>
+<listitem><para>**版本 4**：变体位为 10（0b10），版本位为 4（0b0100）</para>
+</listitem><listitem><para>**版本 7**：变体位为 10（0b10），版本位为 7（0b0111） 时间戳为 Unix 毫秒（占高 48 位），后跟 12 位随机计数器与 62 位随机数 </para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

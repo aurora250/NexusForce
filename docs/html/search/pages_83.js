@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🎨_20图形、色彩与数学_0',['🎨 图形、色彩与数学',['../index.html#autotoc_md16',1,'']]]
+  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]]
 ];

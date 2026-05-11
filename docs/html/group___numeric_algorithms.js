@@ -6,6 +6,7 @@ var group___numeric_algorithms =
     [ "adjacent_difference", "group___numeric_algorithms.html#ga96aae86b6990ecbfd7752e6f04cc4c27", null ],
     [ "inner_product", "group___numeric_algorithms.html#gad2f9bb087aba832a9f91798d9e2a3a17", null ],
     [ "inner_product", "group___numeric_algorithms.html#gafce15241ff676514e8cede70c934907b", null ],
+    [ "NEFORCE_DEPRECATED_FOR", "group___numeric_algorithms.html#gace1bed9a63f6e8001fc72c74fbd579c9", null ],
     [ "partial_sum", "group___numeric_algorithms.html#ga71e3a0a106a564257ca72805723c7756", null ],
     [ "partial_sum", "group___numeric_algorithms.html#gaaf385e276285867982a8f965a78b4b82", null ],
     [ "sequence_fill", "group___numeric_algorithms.html#ga7b8f4bbfc29ee7484bd568455eef8520", null ]

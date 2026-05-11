@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structbig__mul" kind="struct" language="C++" prot="public">
+    <compoundname>big_mul</compoundname>
+    <includes refid="static__numeric_8hpp" local="no">static_numeric.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <declname>X</declname>
+        <defname>X</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <declname>Y</declname>
+        <defname>Y</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structbig__mul_1a8f2958016685eeba3b8b624be82ea653" prot="private" static="no">
+        <type><ref refid="structbig__add" kindref="compound">big_add</ref>&lt; cross_sum_high, cross_sum_low, x_high *y_high, low_product &gt;</type>
+        <definition>using big_mul&lt; X, Y &gt;::result_type = big_add&lt;cross_sum_high, cross_sum_low, x_high * y_high, low_product&gt;</definition>
+        <argsstring></argsstring>
+        <name>result_type</name>
+        <qualifiedname>big_mul::result_type</qualifiedname>
+        <briefdescription>
+<para>最终结果类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="160" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="160" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="structbig__mul_1a5342af583bde090d34882004bb6ea95f" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::half_range</definition>
+        <argsstring></argsstring>
+        <name>half_range</name>
+        <qualifiedname>big_mul::half_range</qualifiedname>
+        <initializer>= static_cast&lt;<ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref>&gt;(1) &lt;&lt; (sizeof(<ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref>) * 4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="148" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1a8af62ce4ff1aec02a1123adb926324d3" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::x_low</definition>
+        <argsstring></argsstring>
+        <name>x_low</name>
+        <qualifiedname>big_mul::x_low</qualifiedname>
+        <initializer>= X % half_range</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="149" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1a391ac0bf3efad8c67757952da8c0a369" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::x_high</definition>
+        <argsstring></argsstring>
+        <name>x_high</name>
+        <qualifiedname>big_mul::x_high</qualifiedname>
+        <initializer>= X / half_range</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="150" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1a3de64748d9075908d468ab92569f673b" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::y_low</definition>
+        <argsstring></argsstring>
+        <name>y_low</name>
+        <qualifiedname>big_mul::y_low</qualifiedname>
+        <initializer>= Y % half_range</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="151" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1a16048b12a7b5823766769d7345c61ef3" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::y_high</definition>
+        <argsstring></argsstring>
+        <name>y_high</name>
+        <qualifiedname>big_mul::y_high</qualifiedname>
+        <initializer>= Y / half_range</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="152" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1a922cb04cbe76a9254a97fdffed4813c9" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::low_product</definition>
+        <argsstring></argsstring>
+        <name>low_product</name>
+        <qualifiedname>big_mul::low_product</qualifiedname>
+        <initializer>= x_low * y_low</initializer>
+        <briefdescription>
+<para>低位乘积 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="153" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1a6a3a3e4d20723bc6000f5e8d13266756" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::cross_product1</definition>
+        <argsstring></argsstring>
+        <name>cross_product1</name>
+        <qualifiedname>big_mul::cross_product1</qualifiedname>
+        <initializer>= x_low * y_high</initializer>
+        <briefdescription>
+<para>交叉乘积1 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="154" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1a212a4db62a7ce54bbb9cd095f3faa499" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::cross_product2</definition>
+        <argsstring></argsstring>
+        <name>cross_product2</name>
+        <qualifiedname>big_mul::cross_product2</qualifiedname>
+        <initializer>= x_high * y_low</initializer>
+        <briefdescription>
+<para>交叉乘积2 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="155" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1a4a213d5533a8ef35094701e098737485" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::cross_sum</definition>
+        <argsstring></argsstring>
+        <name>cross_sum</name>
+        <qualifiedname>big_mul::cross_sum</qualifiedname>
+        <initializer>= cross_product1 + cross_product2</initializer>
+        <briefdescription>
+<para>交叉和 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="156" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1a97cb25ff5e2d55da9500b17d14730f86" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::cross_sum_low</definition>
+        <argsstring></argsstring>
+        <name>cross_sum_low</name>
+        <qualifiedname>big_mul::cross_sum_low</qualifiedname>
+        <initializer>= cross_sum * half_range</initializer>
+        <briefdescription>
+<para>交叉和的低位部分 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="157" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1ae7d1176e4752293e79689bcd933eed7b" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::cross_sum_high</definition>
+        <argsstring></argsstring>
+        <name>cross_sum_high</name>
+        <qualifiedname>big_mul::cross_sum_high</qualifiedname>
+        <initializer>                                  =
+cross_sum / half_range + ((cross_sum &lt; cross_product1) ? half_range : 0)</initializer>
+        <briefdescription>
+<para>交叉和的高位部分 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="158" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structbig__mul_1a86419bd4f1e7e0fab1d35233096c563f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::result_high</definition>
+        <argsstring></argsstring>
+        <name>result_high</name>
+        <qualifiedname>big_mul::result_high</qualifiedname>
+        <initializer>= <ref refid="structbig__add_1ae6f4db23c09c91dda3296937386accff" kindref="member">result_type::result_high</ref></initializer>
+        <briefdescription>
+<para>乘法结果的高位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="162" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__mul_1ab83f9c42fa2ab969bb87833444ff8670" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_mul&lt; X, Y &gt;::result_low</definition>
+        <argsstring></argsstring>
+        <name>result_low</name>
+        <qualifiedname>big_mul::result_low</qualifiedname>
+        <initializer>= <ref refid="structbig__add_1ab00b896fa497d8985a91a75d4c820d7b" kindref="member">result_type::result_low</ref></initializer>
+        <briefdescription>
+<para>乘法结果的低位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="163" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="163" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>无符号大整数乘法 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>X</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个乘数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个乘数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用分治策略计算两个大整数的乘积，防止溢出。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="146" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="146" bodyend="164"/>
+    <listofallmembers>
+      <member refid="structbig__mul_1a6a3a3e4d20723bc6000f5e8d13266756" prot="private" virt="non-virtual"><scope>big_mul</scope><name>cross_product1</name></member>
+      <member refid="structbig__mul_1a212a4db62a7ce54bbb9cd095f3faa499" prot="private" virt="non-virtual"><scope>big_mul</scope><name>cross_product2</name></member>
+      <member refid="structbig__mul_1a4a213d5533a8ef35094701e098737485" prot="private" virt="non-virtual"><scope>big_mul</scope><name>cross_sum</name></member>
+      <member refid="structbig__mul_1ae7d1176e4752293e79689bcd933eed7b" prot="private" virt="non-virtual"><scope>big_mul</scope><name>cross_sum_high</name></member>
+      <member refid="structbig__mul_1a97cb25ff5e2d55da9500b17d14730f86" prot="private" virt="non-virtual"><scope>big_mul</scope><name>cross_sum_low</name></member>
+      <member refid="structbig__mul_1a5342af583bde090d34882004bb6ea95f" prot="private" virt="non-virtual"><scope>big_mul</scope><name>half_range</name></member>
+      <member refid="structbig__mul_1a922cb04cbe76a9254a97fdffed4813c9" prot="private" virt="non-virtual"><scope>big_mul</scope><name>low_product</name></member>
+      <member refid="structbig__mul_1a86419bd4f1e7e0fab1d35233096c563f" prot="public" virt="non-virtual"><scope>big_mul</scope><name>result_high</name></member>
+      <member refid="structbig__mul_1ab83f9c42fa2ab969bb87833444ff8670" prot="public" virt="non-virtual"><scope>big_mul</scope><name>result_low</name></member>
+      <member refid="structbig__mul_1a8f2958016685eeba3b8b624be82ea653" prot="private" virt="non-virtual"><scope>big_mul</scope><name>result_type</name></member>
+      <member refid="structbig__mul_1a391ac0bf3efad8c67757952da8c0a369" prot="private" virt="non-virtual"><scope>big_mul</scope><name>x_high</name></member>
+      <member refid="structbig__mul_1a8af62ce4ff1aec02a1123adb926324d3" prot="private" virt="non-virtual"><scope>big_mul</scope><name>x_low</name></member>
+      <member refid="structbig__mul_1a16048b12a7b5823766769d7345c61ef3" prot="private" virt="non-virtual"><scope>big_mul</scope><name>y_high</name></member>
+      <member refid="structbig__mul_1a3de64748d9075908d468ab92569f673b" prot="private" virt="non-virtual"><scope>big_mul</scope><name>y_low</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

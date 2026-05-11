@@ -1,0 +1,580 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classprocess" kind="class" language="C++" prot="public">
+    <compoundname>process</compoundname>
+    <includes refid="process_8hpp" local="no">process.hpp</includes>
+    <innerclass refid="structprocess_1_1state__info" prot="public">process::state_info</innerclass>
+    <innerclass refid="structprocess_1_1memory__info" prot="public">process::memory_info</innerclass>
+    <innerclass refid="structprocess_1_1time__info" prot="public">process::time_info</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classprocess_1acfd865e47b9c3a8b63da86bc85f11242" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>permission</name>
+        <qualifiedname>process::permission</qualifiedname>
+        <enumvalue id="classprocess_1acfd865e47b9c3a8b63da86bc85f11242aecae13117d6f0584c25a9da6c8f8415e" prot="public">
+          <name>read</name>
+          <initializer>= 0x01</initializer>
+          <briefdescription>
+<para>读取权限 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classprocess_1acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee" prot="public">
+          <name>write</name>
+          <initializer>= 0x02</initializer>
+          <briefdescription>
+<para>写入权限 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classprocess_1acfd865e47b9c3a8b63da86bc85f11242aec0cd3cb91fe82b9501f62a528eb07a9" prot="public">
+          <name>execute</name>
+          <initializer>= 0x04</initializer>
+          <briefdescription>
+<para>执行权限 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classprocess_1acfd865e47b9c3a8b63da86bc85f11242a1459e53d3fbaa95cebaf90860dd7a259" prot="public">
+          <name>terminate</name>
+          <initializer>= 0x08</initializer>
+          <briefdescription>
+<para>终止权限 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classprocess_1acfd865e47b9c3a8b63da86bc85f11242ae62cad8f38445bfffefe4b944d257350" prot="public">
+          <name>query_info</name>
+          <initializer>= 0x10</initializer>
+          <briefdescription>
+<para>查询信息权限 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classprocess_1acfd865e47b9c3a8b63da86bc85f11242aa181a603769c1f98ad927e7367c7aa51" prot="public">
+          <name>all</name>
+          <initializer>= 0xFF</initializer>
+          <briefdescription>
+<para>所有权限 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>进程权限枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>用于检查对进程的访问权限。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="116" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="116" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="enum" id="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>state</name>
+        <qualifiedname>process::state</qualifiedname>
+        <enumvalue id="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1a75101dcdfc88455bcafc9e53e0b06689" prot="public">
+          <name>running</name>
+          <briefdescription>
+<para>进程正在运行 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd" prot="public">
+          <name>suspended</name>
+          <briefdescription>
+<para>进程被挂起 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1af0a0bfe6bc7d2c58d2989034f83183e0" prot="public">
+          <name>stopped</name>
+          <briefdescription>
+<para>进程被停止 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae" prot="public">
+          <name>exited</name>
+          <briefdescription>
+<para>进程已退出 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a" prot="public">
+          <name>unknown</name>
+          <briefdescription>
+<para>未知状态 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>进程状态枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="129" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="129" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classprocess_1ab91bd774333ce8998d5100bb41be1da8" prot="public" static="no">
+        <type>unsigned long</type>
+        <definition>using process::native_id_type = 
+
+unsigned long</definition>
+        <argsstring></argsstring>
+        <name>native_id_type</name>
+        <qualifiedname>process::native_id_type</qualifiedname>
+        <briefdescription>
+<para>进程ID类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="57" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classprocess_1a5293a15b99a555c843daafde097ccbff" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref></type>
+        <definition>static NEFORCE_NODISCARD state_info process::create</definition>
+        <argsstring>(const string &amp;executable, const vector&lt; string &gt; &amp;args={}, bool capture_output=false)</argsstring>
+        <name>create</name>
+        <qualifiedname>process::create</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>executable</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>args</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>capture_output</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>创建新进程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>executable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可执行文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>命令行参数列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>capture_output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否捕获标准输出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>进程信息结构 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structprocess__exception" kindref="compound">process_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="145" column="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classprocess_1af035e1cfd992aecc99e4a76b1b859e7b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int process::wait_for</definition>
+        <argsstring>(state_info &amp;info, int timeout_ms=-1)</argsstring>
+        <name>wait_for</name>
+        <qualifiedname>process::wait_for</qualifiedname>
+        <param>
+          <type><ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>等待进程结束 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进程信息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间（毫秒），-1表示无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>进程退出码，-1表示超时或错误 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structprocess__exception" kindref="compound">process_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>等待失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="155" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classprocess_1a3860ef0f7524625536545c099a011041" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool process::terminate</definition>
+        <argsstring>(const state_info &amp;info) noexcept</argsstring>
+        <name>terminate</name>
+        <qualifiedname>process::terminate</qualifiedname>
+        <param>
+          <type>const <ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>终止进程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进程信息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功终止 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="162" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classprocess_1a80739bcf05a7757d16cbb04f8586b839" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool process::suspend</definition>
+        <argsstring>(const state_info &amp;info) noexcept</argsstring>
+        <name>suspend</name>
+        <qualifiedname>process::suspend</qualifiedname>
+        <param>
+          <type>const <ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>挂起进程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进程信息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功挂起 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="169" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classprocess_1a2ab519914a1937c2a8208c46ab401068" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool process::resume</definition>
+        <argsstring>(const state_info &amp;info) noexcept</argsstring>
+        <name>resume</name>
+        <qualifiedname>process::resume</qualifiedname>
+        <param>
+          <type>const <ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>恢复进程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进程信息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功恢复 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="176" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classprocess_1a2f50399387287cda14650c65e43c2a69" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>static NEFORCE_NODISCARD bool process::is_running</definition>
+        <argsstring>(const state_info &amp;info) noexcept</argsstring>
+        <name>is_running</name>
+        <qualifiedname>process::is_running</qualifiedname>
+        <param>
+          <type>const <ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>检查进程是否正在运行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进程信息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否正在运行 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="183" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classprocess_1a9cf9ba18dd5084bb8999b3a16862f6a1" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classprocess_1ab91bd774333ce8998d5100bb41be1da8" kindref="member">native_id_type</ref></type>
+        <definition>static NEFORCE_NODISCARD native_id_type process::current_id</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>current_id</name>
+        <qualifiedname>process::current_id</qualifiedname>
+        <briefdescription>
+<para>获取当前进程ID </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前进程ID </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="189" column="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classprocess_1a89285e10cf3d54bba043207c206f5077" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structprocess_1_1memory__info" kindref="compound">memory_info</ref></type>
+        <definition>static NEFORCE_NODISCARD memory_info process::get_memory_info</definition>
+        <argsstring>(const state_info &amp;info)</argsstring>
+        <name>get_memory_info</name>
+        <qualifiedname>process::get_memory_info</qualifiedname>
+        <param>
+          <type>const <ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>获取进程内存信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进程信息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>内存信息结构 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="196" column="42"/>
+        <references refid="classprocess_1a89285e10cf3d54bba043207c206f5077">get_memory_info</references>
+        <referencedby refid="classprocess_1a89285e10cf3d54bba043207c206f5077">get_memory_info</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classprocess_1ad66b80c9ed81eda16bb517a0a191d380" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1" kindref="member">state</ref></type>
+        <definition>static NEFORCE_NODISCARD state process::get_state</definition>
+        <argsstring>(const state_info &amp;info)</argsstring>
+        <name>get_state</name>
+        <qualifiedname>process::get_state</qualifiedname>
+        <param>
+          <type>const <ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>获取进程状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进程信息 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>进程状态枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="203" column="36"/>
+        <references refid="classprocess_1ad66b80c9ed81eda16bb517a0a191d380">get_state</references>
+        <referencedby refid="classprocess_1ad66b80c9ed81eda16bb517a0a191d380">get_state</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classprocess_1af9e7fffa87574903b2f26774a1f8e524" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>static NEFORCE_NODISCARD bool process::check_permission</definition>
+        <argsstring>(const state_info &amp;info, permission permission)</argsstring>
+        <name>check_permission</name>
+        <qualifiedname>process::check_permission</qualifiedname>
+        <param>
+          <type>const <ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref> &amp;</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type><ref refid="classprocess_1acfd865e47b9c3a8b63da86bc85f11242" kindref="member">permission</ref></type>
+          <declname>permission</declname>
+        </param>
+        <briefdescription>
+<para>检查进程权限 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进程信息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>permission</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的权限 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否拥有指定权限 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="211" column="35"/>
+        <references refid="classprocess_1af9e7fffa87574903b2f26774a1f8e524">check_permission</references>
+        <referencedby refid="classprocess_1af9e7fffa87574903b2f26774a1f8e524">check_permission</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classprocess_1a8cd77c6e2a5b2e08f5254f85a5c213fc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static NEFORCE_NODISCARD string process::name</definition>
+        <argsstring>(native_id_type process_id)</argsstring>
+        <name>name</name>
+        <qualifiedname>process::name</qualifiedname>
+        <param>
+          <type><ref refid="classprocess_1ab91bd774333ce8998d5100bb41be1da8" kindref="member">native_id_type</ref></type>
+          <declname>process_id</declname>
+        </param>
+        <briefdescription>
+<para>根据进程ID获取进程名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>process_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进程ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>进程名称，失败返回空字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="218" column="37"/>
+        <references refid="classprocess_1a8cd77c6e2a5b2e08f5254f85a5c213fc">name</references>
+        <referencedby refid="classprocess_1a8cd77c6e2a5b2e08f5254f85a5c213fc">name</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>进程管理类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供静态方法用于创建和管理进程。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="52" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="52" bodyend="219"/>
+    <listofallmembers>
+      <member refid="classprocess_1af9e7fffa87574903b2f26774a1f8e524" prot="public" virt="non-virtual"><scope>process</scope><name>check_permission</name></member>
+      <member refid="classprocess_1a5293a15b99a555c843daafde097ccbff" prot="public" virt="non-virtual"><scope>process</scope><name>create</name></member>
+      <member refid="classprocess_1a9cf9ba18dd5084bb8999b3a16862f6a1" prot="public" virt="non-virtual"><scope>process</scope><name>current_id</name></member>
+      <member refid="classprocess_1a89285e10cf3d54bba043207c206f5077" prot="public" virt="non-virtual"><scope>process</scope><name>get_memory_info</name></member>
+      <member refid="classprocess_1ad66b80c9ed81eda16bb517a0a191d380" prot="public" virt="non-virtual"><scope>process</scope><name>get_state</name></member>
+      <member refid="classprocess_1a2f50399387287cda14650c65e43c2a69" prot="public" virt="non-virtual"><scope>process</scope><name>is_running</name></member>
+      <member refid="classprocess_1a8cd77c6e2a5b2e08f5254f85a5c213fc" prot="public" virt="non-virtual"><scope>process</scope><name>name</name></member>
+      <member refid="classprocess_1ab91bd774333ce8998d5100bb41be1da8" prot="public" virt="non-virtual"><scope>process</scope><name>native_id_type</name></member>
+      <member refid="classprocess_1acfd865e47b9c3a8b63da86bc85f11242" prot="public" virt="non-virtual"><scope>process</scope><name>permission</name></member>
+      <member refid="classprocess_1a2ab519914a1937c2a8208c46ab401068" prot="public" virt="non-virtual"><scope>process</scope><name>resume</name></member>
+      <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1" prot="public" virt="non-virtual"><scope>process</scope><name>state</name></member>
+      <member refid="classprocess_1a80739bcf05a7757d16cbb04f8586b839" prot="public" virt="non-virtual"><scope>process</scope><name>suspend</name></member>
+      <member refid="classprocess_1a3860ef0f7524625536545c099a011041" prot="public" virt="non-virtual"><scope>process</scope><name>terminate</name></member>
+      <member refid="classprocess_1af035e1cfd992aecc99e4a76b1b859e7b" prot="public" virt="non-virtual"><scope>process</scope><name>wait_for</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

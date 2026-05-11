@@ -1,0 +1,2833 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___shift_algorithms" kind="group">
+    <compoundname>ShiftAlgorithms</compoundname>
+    <title>修改算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(inner::__copy_aux(first, last, result))" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 copy</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
+        <name>copy</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>复制范围元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器</para>
+</simplesect>
+将范围 [first, last) 的元素复制到以 result 开始的位置。 对连续迭代器使用内存移动优化，非连续迭代器使用循环复制。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="90" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="90" bodyend="98"/>
+        <references refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" compoundref="concepts_8hpp" startline="525">is_iter_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="classarray_1a5a5b850de31d988493d755c830cdbe86" compoundref="array_8hpp" startline="205" endline="208">array&lt; byte_t, MAC_LEN &gt;::array</referencedby>
+        <referencedby refid="classdeque_1a94792822506120513940582f2ac1ec10" compoundref="deque_8hpp" startline="1313" endline="1333">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+        <referencedby refid="classdeque_1a52338e7ad6f3a127e8f7baeb4d80246a" compoundref="deque_8hpp" startline="1294" endline="1305">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+        <referencedby refid="classmac__address_1a71cc5e117db9c63945c421ee6d49a2e8" compoundref="mac__address_8hpp" startline="59" endline="59">mac_address::mac_address</referencedby>
+        <referencedby refid="group___merge_algorithms_1ga0b9cd2bc635fe355dff2344b03e0b7bb" compoundref="merge_8hpp" startline="51" endline="68">merge</referencedby>
+        <referencedby refid="classdeque_1afc8aee0b6ed56366dc9f34ee46107a25" compoundref="deque_8hpp" startline="863" endline="877">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classvector_1a8398c5493767d15226937f8322d7369d" compoundref="vector_8hpp" startline="557" endline="574">vector&lt; byte_t &gt;::operator=</referencedby>
+        <referencedby refid="group___shift_algorithms_1gad4f517c485a71519d0c5dcb58d887fa7" compoundref="shift_8hpp" startline="862" endline="864">rotate_copy</referencedby>
+        <referencedby refid="group___set_algorithms_1gadd4f2d1801981f832e0d1cc5c0d8d0dc" compoundref="algorithm_2set_8hpp" startline="122" endline="141">set_difference</referencedby>
+        <referencedby refid="group___set_algorithms_1gad923c656ec1822d18d888992718b9cbc" compoundref="algorithm_2set_8hpp" startline="160" endline="181">set_symmetric_difference</referencedby>
+        <referencedby refid="group___set_algorithms_1ga9cabd9953c61fc5a9367a050d9e08b85" compoundref="algorithm_2set_8hpp" startline="47" endline="67">set_union</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga185a883f89f616f4d54214d52604a13c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 copy_n</definition>
+        <argsstring>(Iterator1 first, iter_difference_t&lt; Iterator1 &gt; count, Iterator2 result)</argsstring>
+        <name>copy_n</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator1 &gt;</type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>复制指定数量的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要复制的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器</para>
+</simplesect>
+从 first 开始复制 count 个元素到 result。 返回复制后的输入和输出结束迭代器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="151" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="151" bodyend="155"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+        <references refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" compoundref="concepts_8hpp" startline="525">is_iter_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga67989ef667ba7bc077104bcbd66957f0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename Pred</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 copy_if</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result, Pred pred)</argsstring>
+        <name>copy_if</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>Pred</type>
+          <declname>pred</declname>
+        </param>
+        <briefdescription>
+<para>复制满足谓词的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一元谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一元谓词 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器</para>
+</simplesect>
+复制范围 [first, last) 中满足谓词 unary_pred 的所有元素。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="171" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="171" bodyend="181"/>
+        <references refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" compoundref="concepts_8hpp" startline="525">is_iter_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga4d3adeb0c2f00c00929d912671c22729" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(inner::__copy_backward_aux(first, last, result))" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 copy_backward</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
+        <name>copy_backward</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>反向复制范围元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围起始</para>
+</simplesect>
+将范围 [first, last) 的元素反向复制到以 result-1 开始向前的位置。 用于处理目标范围与源范围重叠的情况。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="245" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="245" bodyend="254"/>
+        <references refid="group___iterator_category_checks_1ga56f3ab178cee74039e73463d63a71658" compoundref="concepts_8hpp" startline="581">is_ranges_bid_iter_v</references>
+        <referencedby refid="classdeque_1a94792822506120513940582f2ac1ec10" compoundref="deque_8hpp" startline="1313" endline="1333">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+        <referencedby refid="classdeque_1a52338e7ad6f3a127e8f7baeb4d80246a" compoundref="deque_8hpp" startline="1294" endline="1305">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+        <referencedby refid="group___sort_algorithms_1gad75649c2b023f9d65025c2623f049b59" compoundref="sort_8hpp" startline="598" endline="614">insertion_sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(inner::__move_aux(first, last, result))" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 move</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
+        <name>move</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>移动范围元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器</para>
+</simplesect>
+将范围 [first, last) 的元素移动到以 result 开始的位置。 移动后源位置的对象状态是未定义的。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="312" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="312" bodyend="321"/>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="classenv__builder_1a0e88403d4e3a8350b7f270d9e0eaa05e" compoundref="env__builder_8hpp" startline="201" endline="201">env_builder::add</referencedby>
+        <referencedby refid="classenv__builder_1a8f2991c5ec63a3f821d64e72f92db081" compoundref="env__builder_8hpp" startline="193" endline="193">env_builder::add</referencedby>
+        <referencedby refid="classenv__document_1a5dd5d74e5cec10f278e290be98fddca9" compoundref="env__value_8hpp" startline="328" endline="328">env_document::add_comment</referencedby>
+        <referencedby refid="classjson__array_1a88bfc2fd28a6ecf4fadc06f9e1bf959f" compoundref="json__value_8hpp" startline="511" endline="511">json_array::add_element</referencedby>
+        <referencedby refid="classtoml__array_1a63fcefb59e7274ae83876dc38f658a1c" compoundref="toml__value_8hpp" startline="636" endline="636">toml_array::add_element</referencedby>
+        <referencedby refid="classyaml__sequence_1a4937ac45a4d4b412367f0f63b29ce898" compoundref="yaml__value_8hpp" startline="567" endline="567">yaml_sequence::add_element</referencedby>
+        <referencedby refid="classauthentication__filter_1a8883aed5fc163d03c953466355eedc5c" compoundref="http__filter_8hpp" startline="341" endline="341">authentication_filter::add_excluded_path</referencedby>
+        <referencedby refid="classjson__object_1a7a562e502979635d49b219265cc8c014" compoundref="json__value_8hpp" startline="438" endline="438">json_object::add_member</referencedby>
+        <referencedby refid="classtoml__table_1ad4b4af48f6a7c484381ef1a674930810" compoundref="toml__value_8hpp" startline="721" endline="721">toml_table::add_member</referencedby>
+        <referencedby refid="classyaml__mapping_1ad3b3bb781334c9e5b289546e8789aefc" compoundref="yaml__value_8hpp" startline="668" endline="668">yaml_mapping::add_member</referencedby>
+        <referencedby refid="classini__section_1afe373c9c751b4810ffaff7e2d2412dd8" compoundref="ini__value_8hpp" startline="256" endline="258">ini_section::add_property</referencedby>
+        <referencedby refid="structhttp__client__request_1a90dce73bbdfb97511433ddacb7603e7b" compoundref="http__client__message_8hpp" startline="173" endline="173">http_client_request::add_query_param</referencedby>
+        <referencedby refid="classini__document_1adf0d69636ff1a6c09b8191eda8164ddf" compoundref="ini__value_8hpp" startline="398" endline="404">ini_document::add_section</referencedby>
+        <referencedby refid="classtimer__scheduler_1ad7e2861340ab12370ceaec61a82c9129" compoundref="timer_8hpp" startline="172" endline="189">timer_scheduler&lt; Clock &gt;::add_task</referencedby>
+        <referencedby refid="classenv__document_1af9134380fc056f1a9605a35ec0ef8a9b" compoundref="env__value_8hpp" startline="261" endline="263">env_document::add_variable</referencedby>
+        <referencedby refid="classtrace__allocator_1a8db0e5d032811ed7662c0ad9e81d2d03" compoundref="trace__memory_8hpp" startline="121" endline="126">trace_allocator&lt; U &gt;::allocate</referencedby>
+        <referencedby refid="classoptional_1a0dea507fd84e53a8c39a877ffad352cf" compoundref="optional_8hpp" startline="639" endline="644">optional&lt; T &gt;::and_then</referencedby>
+        <referencedby refid="classoptional_1abfe8f092a2604a3a5978963c4be33767" compoundref="optional_8hpp" startline="625" endline="630">optional&lt; T &gt;::and_then</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1ab7fd11c1383c824c0eb11d7fe6f152b6" compoundref="optional_8hpp" startline="1152" endline="1157">optional&lt; T &amp; &gt;::and_then</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1af09b582b71c726be5aba776f7056eed2" compoundref="optional_8hpp" startline="1138" endline="1143">optional&lt; T &amp; &gt;::and_then</referencedby>
+        <referencedby refid="classbasic__string_1a4d39d50b6b28d31c219a4e5966fa0df5" compoundref="basic__string_8hpp" startline="1663" endline="1666">basic_string&lt; char &gt;::append</referencedby>
+        <referencedby refid="classbasic__string_1a7e31e0d39632f5602984d1698a710b85" compoundref="basic__string_8hpp" startline="1674" endline="1677">basic_string&lt; char &gt;::append</referencedby>
+        <referencedby refid="classbasic__string_1abce1eb10ef2078b5e4296a865863a946" compoundref="basic__string_8hpp" startline="1842" endline="1842">basic_string&lt; char &gt;::assign</referencedby>
+        <referencedby refid="group___async_1gacb2c2756930195cd969cc14a06c437bf" compoundref="async_8hpp" startline="43" endline="56">async</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a8418d6f39ab56c0ecb47f955dbf49baa" compoundref="weak__ptr_8hpp" startline="479" endline="480">atomic&lt; weak_ptr&lt; T &gt; &gt;::atomic</referencedby>
+        <referencedby refid="classauthentication__filter_1a8d2be4f5bae81720d8f10cfc0a918597" compoundref="http__filter_8hpp" startline="326" endline="327">authentication_filter::authentication_filter</referencedby>
+        <referencedby refid="structtask_1_1awaiter_1a9dd1df2703e550a5dd2759dd453eac51" compoundref="generator_8hpp" startline="578" endline="583">task&lt; T &gt;::awaiter::await_resume</referencedby>
+        <referencedby refid="classbarrier_1ae15bef6ea846f718e16a574b368bb90a" compoundref="barrier_8hpp" startline="241" endline="242">barrier&lt; CmplFunc &gt;::barrier</referencedby>
+        <referencedby refid="classbasic__string_1a1afcfd37a4323f9835b8adedfedb131a" compoundref="basic__string_8hpp" startline="882" endline="909">basic_string&lt; char &gt;::basic_string</referencedby>
+        <referencedby refid="classbitmap_1a3b01206957d776e10b1f7bc2fc78926c" compoundref="bitmap_8hpp" startline="762" endline="775">bitmap::bitmap</referencedby>
+        <referencedby refid="group___check_type_1ga2ff4638295cf450f48ea25fc07551853" compoundref="check__type_8hpp" startline="389" endline="393">check_type</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1ae0de324cc41d1e487c731e06704c26c6" compoundref="shared__ptr_8hpp" startline="1283" endline="1286">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aacadb2fa1d554474257755ab8c057360" compoundref="weak__ptr_8hpp" startline="530" endline="533">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1a1ee5dee4964e79ba3f47bed914ec5eb5" compoundref="shared__ptr_8hpp" startline="1291" endline="1293">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1ae958e8a545126195ecbb9dd3945a64d6" compoundref="shared__ptr_8hpp" startline="1298" endline="1301">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1ad4869b2612cf0d38f5735d05d7cf3844" compoundref="weak__ptr_8hpp" startline="538" endline="540">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a28ef35af31202c69a499f7c15f418f38" compoundref="weak__ptr_8hpp" startline="545" endline="548">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structcompressed__pair_1a20a79204295041e8362d4028b107e899" compoundref="compressed__pair_8hpp" startline="63" endline="64">compressed_pair&lt; IfEmpty, T, Compressed &gt;::compressed_pair</referencedby>
+        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a7946014fbf11ea355936e2d13b0cdea5" compoundref="compressed__pair_8hpp" startline="208" endline="211">compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
+        <referencedby refid="structsignal_1acfa41147426f9bde3e4de17b5c766188" compoundref="signals_8hpp" startline="444" endline="448">signal&lt; Types &gt;::connect</referencedby>
+        <referencedby refid="structsignal_1a3dba4fb9c54309c5510e961e0c28dee7" compoundref="signals_8hpp" startline="462" endline="476">signal&lt; Types &gt;::connect</referencedby>
+        <referencedby refid="structsignal_1ae82c7101e0d85081fc6da463a4686140" compoundref="signals_8hpp" startline="432" endline="434">signal&lt; Types &gt;::connect</referencedby>
+        <referencedby refid="structsignal_1a41ddbcc2553c833fc43305379fa4ac08" compoundref="signals_8hpp" startline="659" endline="676">signal&lt; Types &gt;::connect_filtered</referencedby>
+        <referencedby refid="structsignal_1aa9277d30b26d90895c1b47f89be50e3c" compoundref="signals_8hpp" startline="602" endline="614">signal&lt; Types &gt;::connect_if</referencedby>
+        <referencedby refid="structsignal_1a8f761800f9a11daf0a1360a176920811" compoundref="signals_8hpp" startline="630" endline="645">signal&lt; Types &gt;::connect_if</referencedby>
+        <referencedby refid="structsignal_1a1785833d435f019073036ac417ba6aae" compoundref="signals_8hpp" startline="690" endline="699">signal&lt; Types &gt;::connect_transformed</referencedby>
+        <referencedby refid="group___unique_pointer_1gaff521462e36faa64ae1c49af9d3764b9" compoundref="unique__ptr_8hpp" startline="894" endline="897">const_pointer_cast</referencedby>
+        <referencedby refid="classmeta__type_1a12e13b823b3ef85cba64d44f5c4ca618" compoundref="type_8hpp" startline="210" endline="213">meta_type::constructor</referencedby>
+        <referencedby refid="structhttp__content_1ae73da740c2d805fe25ad1b80f97e5beb" compoundref="http__constants_8hpp" startline="454" endline="454">http_content::content</referencedby>
+        <referencedby refid="structhttp__cookie__name_1a080ac27165967ac2e615d3515a9e94c5" compoundref="http__constants_8hpp" startline="672" endline="672">http_cookie_name::cookie_name</referencedby>
+        <referencedby refid="classcors__filter_1ad6ccd918c9811bdb5ea1bf7c9ff6a9d8" compoundref="http__filter_8hpp" startline="189" endline="190">cors_filter::cors_filter</referencedby>
+        <referencedby refid="classlogger_1aaead4684c8116a6976c782b91184ee00" compoundref="logger_8hpp" startline="198" endline="200">logger::debug</referencedby>
+        <referencedby refid="group___unique_pointer_1ga2d8e39ee27f0bbb613490661597ad679" compoundref="unique__ptr_8hpp" startline="926" endline="935">dynamic_pointer_cast</referencedby>
+        <referencedby refid="structexception__ptr_1_1ecb_1ae25e38edd19bb95d42b7a6b91276f2ea" compoundref="exception__ptr_8hpp" startline="125" endline="126">exception_ptr::ecb::ecb</referencedby>
+        <referencedby refid="structsignal_1adbc2cde66647502a24e5b3f675bf7ae6" compoundref="signals_8hpp" startline="524" endline="536">signal&lt; Types &gt;::emit_executor</referencedby>
+        <referencedby refid="classvector_1ac2d72346ddff3cf4b6e9b98003c6d0f2" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; byte_t &gt;::emplace</referencedby>
+        <referencedby refid="classenv__variable_1a6046a654c4babe133b6e5b17ebc5438c" compoundref="env__value_8hpp" startline="139" endline="142">env_variable::env_variable</referencedby>
+        <referencedby refid="classvector_1a62008239a97d10f04d73ea720c72c7a7" compoundref="vector_8hpp" startline="1092" endline="1100">vector&lt; byte_t &gt;::erase</referencedby>
+        <referencedby refid="classlogger_1a0a005d9efecd9deb6bb5660e9a241adf" compoundref="logger_8hpp" startline="231" endline="233">logger::error</referencedby>
+        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1a633be9b06953115660abbca5f620e333">tuple&lt; This, Rest... &gt;::explicit</referencedby>
+        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1abf4df8230b41bd752c7f1ee26f4dc56d" compoundref="tuple_8hpp" startline="339" endline="341">tuple&lt; This, Rest... &gt;::explicit</referencedby>
+        <referencedby refid="classlogger_1accda3e202af750cbc4750ac8ddb7c91e" compoundref="logger_8hpp" startline="242" endline="244">logger::fatal</referencedby>
+        <referencedby refid="classgenerator_1aa4f9b8c2bbf7ade48a1c22232388bdac" compoundref="generator_8hpp" startline="448" endline="454">generator&lt; T &gt;::fold</referencedby>
+        <referencedby refid="classmeta__type_1ad9dcf740d68c29e5e365c11398793476" compoundref="type_8hpp" startline="200" endline="203">meta_type::function</referencedby>
+        <referencedby refid="classtype__builder_1a379d14c7df5dc9c0e4d8d8b812829d9a" compoundref="reflect_8hpp" startline="122" endline="129">type_builder&lt; T &gt;::function</referencedby>
+        <referencedby refid="classtype__builder_1ab3f4880362e3f86773b612e9e84ee24e" compoundref="reflect_8hpp" startline="104" endline="111">type_builder&lt; T &gt;::function</referencedby>
+        <referencedby refid="classfuture_1a5c06db6e4a9055b83db367db0d402b4a" compoundref="future_8hpp" startline="914" endline="917">future&lt; Res &gt;::get</referencedby>
+        <referencedby refid="group___array_1ga8a8313c57f57b5d2105a20b87b30522d" compoundref="array_8hpp" startline="598" endline="601">get</referencedby>
+        <referencedby refid="group___array_1ga49ac9ed4278caf9d5e25fbe87fd6b018" compoundref="array_8hpp" startline="612" endline="615">get</referencedby>
+        <referencedby refid="classmeta__property_1a9e9f36a88503885ce332a0f45e5c5e68" compoundref="property_8hpp" startline="70" endline="75">meta_property::get</referencedby>
+        <referencedby refid="classtask_1a58502672d9bef3a69f89611e79483c31" compoundref="generator_8hpp" startline="662" endline="670">task&lt; T &gt;::get</referencedby>
+        <referencedby refid="structcompressed__pair_1abfe23fb40c7ae8149d6a540577f8b0b9" compoundref="compressed__pair_8hpp" startline="121" endline="121">compressed_pair&lt; IfEmpty, T, Compressed &gt;::get_base</referencedby>
+        <referencedby refid="structcompressed__pair_1a1616d64ca40d078f1aea4d979a8028dd" compoundref="compressed__pair_8hpp" startline="127" endline="127">compressed_pair&lt; IfEmpty, T, Compressed &gt;::get_base</referencedby>
+        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a870718233b4921b29487f279eb833123" compoundref="compressed__pair_8hpp" startline="265" endline="265">compressed_pair&lt; IfEmpty, T, false &gt;::get_base</referencedby>
+        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1af67536c98848ef51885703dabf1fdd69" compoundref="compressed__pair_8hpp" startline="271" endline="271">compressed_pair&lt; IfEmpty, T, false &gt;::get_base</referencedby>
+        <referencedby refid="group___thread_pool_1ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group</referencedby>
+        <referencedby refid="classunique__ptr_1ac6e3ad7db113f4beb124e6f584b15a83" compoundref="unique__ptr_8hpp" startline="334" endline="334">unique_ptr&lt;::X509, x509_deleter &gt;::get_deleter</referencedby>
+        <referencedby refid="classunique__ptr_1ac82351ed5057520b9a608d192b7b2cb2" compoundref="unique__ptr_8hpp" startline="338" endline="340">unique_ptr&lt;::X509, x509_deleter &gt;::get_deleter</referencedby>
+        <referencedby refid="classtcp__server__base_1a24bf1c8ad6716a8348518f48fad88eb2" compoundref="tcp__server_8hpp" startline="75" endline="79">tcp_server_base::handle_client</referencedby>
+        <referencedby refid="classhashtable_1a5701eccb1a509c8aee25af4ab2685a94" compoundref="hashtable_8hpp" startline="920" endline="928">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::hashtable</referencedby>
+        <referencedby refid="classhazard__pointer__obj_1a8737ba02a9fa052b09177db2d6afb229" compoundref="hazard__ptr_8hpp" startline="111" endline="113">hazard_pointer_obj&lt; T, Deleter &gt;::hazard_pointer_obj</referencedby>
+        <referencedby refid="structhttp__method_1aee9258836d49397301afe94751ebdf43" compoundref="http__constants_8hpp" startline="524" endline="525">http_method::http_method</referencedby>
+        <referencedby refid="classidb__factory_1ad680ec3a992a6a696e3cff3e7f0b34e1" compoundref="db__interface_8hpp" startline="331" endline="332">idb_factory::idb_factory</referencedby>
+        <referencedby refid="classlogger_1ada300819bc418a229e937e04b24e5603" compoundref="logger_8hpp" startline="209" endline="211">logger::info</referencedby>
+        <referencedby refid="classini__parser_1a5becbf77ae74b693a87f2c39a1f026ea" compoundref="ini__parser_8hpp" startline="141" endline="146">ini_parser::ini_parser</referencedby>
+        <referencedby refid="classdeque_1a57f96fda19136ccb3e5ee50afac92711" compoundref="deque_8hpp" startline="1234" endline="1244">deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+        <referencedby refid="classlist_1a1842ce15953a5b665620fd99e2b35f05" compoundref="list_8hpp" startline="634" endline="634">list&lt; pair&lt; Key, Value &gt; &gt;::insert</referencedby>
+        <referencedby refid="classmap_1af86fa932993a81c78de36912132e49d1" compoundref="map_8hpp" startline="359" endline="361">map&lt; Key, T, Compare, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classmap_1a4f494166bff49c85b5e04df587088f48" compoundref="map_8hpp" startline="331" endline="331">map&lt; Key, T, Compare, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classmultimap_1a73bb911e17a942653e92d1d0058bab45" compoundref="multimap_8hpp" startline="354" endline="356">multimap&lt; Key, T, Compare, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classmultimap_1ad0ff0756318bf7907996f3f018b6ac0c" compoundref="multimap_8hpp" startline="326" endline="326">multimap&lt; Key, T, Compare, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classmultiset_1aebc5e2da85b737a44d92358476a4a8bd" compoundref="multiset_8hpp" startline="324" endline="326">multiset&lt; Key, Compare, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classmultiset_1a17a247c23271aa04b591aaee775c53d8" compoundref="multiset_8hpp" startline="296" endline="296">multiset&lt; Key, Compare, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classset_1a0ca9880bc7414c40f09741532b9c2a7c" compoundref="container_2set_8hpp" startline="325" endline="327">set&lt; Key, Compare, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classset_1ac4a4fefd7241d2f7e87e328ef76d81e5" compoundref="container_2set_8hpp" startline="297" endline="297">set&lt; Key, Compare, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classunordered__multimap_1a5377c211e163e4839921694fb7ec4697" compoundref="unordered__multimap_8hpp" startline="371" endline="371">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classunordered__multiset_1a4d56e2347e46f541363335a5b5250ee0" compoundref="unordered__multiset_8hpp" startline="369" endline="369">unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classvector_1a2805495c39ea05c20bb2075be82064ca" compoundref="vector_8hpp" startline="986" endline="990">vector&lt; byte_t &gt;::insert</referencedby>
+        <referencedby refid="classhashtable_1aa9731fd141acd2ba2dbf9a6075e848ce" compoundref="hashtable_8hpp" startline="1201" endline="1201">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classrb__tree_1a2450a133deae01803d5c24d5f735f270" compoundref="rb__tree_8hpp" startline="1312" endline="1314">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classrb__tree_1a197c7b169baff44f741edae87f1f5741" compoundref="rb__tree_8hpp" startline="1247" endline="1247">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_equal</referencedby>
+        <referencedby refid="classhashtable_1a06fcc6747a09e507cb8b58706bdabd7d" compoundref="hashtable_8hpp" startline="1187" endline="1187">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classrb__tree_1af13cf406308e18b832c9d6471fbdf21d" compoundref="rb__tree_8hpp" startline="1206" endline="1208">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classrb__tree_1ab45d7f59433be8f9253e1b8e481e59a7" compoundref="rb__tree_8hpp" startline="1139" endline="1139">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::insert_unique</referencedby>
+        <referencedby refid="classmeta__function_1a3e8ab2f65758f418b86198b3fd8d4c88" compoundref="reflect_2function_8hpp" startline="61" endline="70">meta_function::invoke</referencedby>
+        <referencedby refid="classlazy__thread_1a79f5dcfdf332aa22a250383562636bc9" compoundref="lazy__thread_8hpp" startline="67" endline="71">lazy_thread::lazy_thread</referencedby>
+        <referencedby refid="classexception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" compoundref="exception__ptr_8hpp" startline="314" endline="324">exception_ptr::make_exception_ptr</referencedby>
+        <referencedby refid="group___reverse_iterator_1gad063eb64aebb24b59e51d3f37dd66685" compoundref="reverse__iterator_8hpp" startline="388" endline="390">make_reverse_iterator</referencedby>
+        <referencedby refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" compoundref="shared__ptr_8hpp" startline="835" endline="863">make_shared</referencedby>
+        <referencedby refid="classmap_1a149bd63228343b421ce2bdc4c3b85a70" compoundref="map_8hpp" startline="135" endline="136">map&lt; Key, T, Compare, Alloc &gt;::map</referencedby>
+        <referencedby refid="classmeta__function_1a4817663ff1c14bf96768c7ede3eba82e" compoundref="reflect_2function_8hpp" startline="45" endline="47">meta_function::meta_function</referencedby>
+        <referencedby refid="classmeta__property_1a484ebd413342d16a826e1ec81fdb93af" compoundref="property_8hpp" startline="47" endline="51">meta_property::meta_property</referencedby>
+        <referencedby refid="structhttp__method_1a300845b11abb25ee3c6c80ac196abdc7" compoundref="http__constants_8hpp" startline="560" endline="560">http_method::method</referencedby>
+        <referencedby refid="classmultimap_1af629ba77888a949a21f6648bf6d0a510" compoundref="multimap_8hpp" startline="132" endline="133">multimap&lt; Key, T, Compare, Alloc &gt;::multimap</referencedby>
+        <referencedby refid="classmultiset_1a725dc594b304b731e2ada82430e07ed3" compoundref="multiset_8hpp" startline="102" endline="103">multiset&lt; Key, Compare, Alloc &gt;::multiset</referencedby>
+        <referencedby refid="classmysql__factory_1a829285da35bc7de72dcbb4d63ea0ddc7" compoundref="mysql__connect_8hpp" startline="163" endline="164">mysql_factory::mysql_factory</referencedby>
+        <referencedby refid="group___numeric_algorithms_1gace1bed9a63f6e8001fc72c74fbd579c9">NEFORCE_DEPRECATED_FOR</referencedby>
+        <referencedby refid="classpath__tree_1_1node_1adfe2c7bca934a373dc8f69215b95cea0" compoundref="path__tree_8hpp" startline="88" endline="91">path_tree::node::node</referencedby>
+        <referencedby refid="structbinder__front_1a4a3b59d14733820d5bc9bdd35a5587b7" compoundref="bind_8hpp" startline="886" endline="888">binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()</referencedby>
+        <referencedby refid="structbinder__front_1af0ce7ca469c35179e0d35ec0059f17ad" compoundref="bind_8hpp" startline="897" endline="900">binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()</referencedby>
+        <referencedby refid="structformatter_3_01_t_00_01enable__if__t_3_01is__floating__point__v_3_01_t_01_4_01_4_01_4_1ac2103c0369fd4a5333925d60c0f9ff2a" compoundref="format_8hpp" startline="404" endline="439">formatter&lt; T, enable_if_t&lt; is_floating_point_v&lt; T &gt; &gt; &gt;::operator()</referencedby>
+        <referencedby refid="classoptional_1a33c9fedca69cbfb61020b8b861349c23" compoundref="optional_8hpp" startline="736" endline="736">optional&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classoptional_1a6481bff58e0229162073501a9a47ee7f" compoundref="optional_8hpp" startline="730" endline="730">optional&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classbasic__string_1a8f381e49ed8a445e2e56a82168b0b070" compoundref="basic__string_8hpp" startline="1812" endline="1814">basic_string&lt; char &gt;::operator+=</referencedby>
+        <referencedby refid="classback__insert__iterator_1a8f48cefb3eab86ebb5117e3eaa80f96a" compoundref="insert__iterator_8hpp" startline="62" endline="65">back_insert_iterator&lt; Container &gt;::operator=</referencedby>
+        <referencedby refid="classbasic__string_1a72c228ed767a46da8cc0574040a0fa18" compoundref="basic__string_8hpp" startline="916" endline="956">basic_string&lt; char &gt;::operator=</referencedby>
+        <referencedby refid="structcompressed__pair_1a5e78f10dca21412fe20f4c386e573609" compoundref="compressed__pair_8hpp" startline="71" endline="74">compressed_pair&lt; IfEmpty, T, Compressed &gt;::operator=</referencedby>
+        <referencedby refid="structcompressed__pair_1a60ed0cc00d9fb36627f970cf83cb2b8f" compoundref="compressed__pair_8hpp" startline="54" endline="57">compressed_pair&lt; IfEmpty, T, Compressed &gt;::operator=</referencedby>
+        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1aa99537d612cec11a835e219e26b3d683" compoundref="compressed__pair_8hpp" startline="218" endline="223">compressed_pair&lt; IfEmpty, T, false &gt;::operator=</referencedby>
+        <referencedby refid="classexception__ptr_1ace99322177809035a72b74ef9fb9411a" compoundref="exception__ptr_8hpp" startline="228" endline="235">exception_ptr::operator=</referencedby>
+        <referencedby refid="classfront__insert__iterator_1adb2346168749793792e6648dfa3cbb1b" compoundref="insert__iterator_8hpp" startline="134" endline="137">front_insert_iterator&lt; Container &gt;::operator=</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab876efdbe1a01c892970bb0234009bb7" compoundref="functional_2function_8hpp" startline="384" endline="387">function&lt; Res(Args...)&gt;::operator=</referencedby>
+        <referencedby refid="classfuture_1a7b033bcdcafd506b5b415441e42d6c30" compoundref="future_8hpp" startline="904" endline="907">future&lt; Res &gt;::operator=</referencedby>
+        <referencedby refid="structhttp__content_1a10fc7658505f1c91c2cada2ddbb8e6f7" compoundref="http__constants_8hpp" startline="381" endline="387">http_content::operator=</referencedby>
+        <referencedby refid="structhttp__cookie__name_1a737a6543ba07aa1535a87ffc94e3409e" compoundref="http__constants_8hpp" startline="630" endline="636">http_cookie_name::operator=</referencedby>
+        <referencedby refid="structhttp__method_1aec76de6e24c9cf874ceefbd17b0c15c6" compoundref="http__constants_8hpp" startline="495" endline="501">http_method::operator=</referencedby>
+        <referencedby refid="structhttp__method_1a8ad4ed3c03d34df7e21dde1c08633085" compoundref="http__constants_8hpp" startline="532" endline="535">http_method::operator=</referencedby>
+        <referencedby refid="classinsert__iterator_1ab79f303a11e9b6e08eb7c7fb96cae944" compoundref="insert__iterator_8hpp" startline="210" endline="214">insert_iterator&lt; Container &gt;::operator=</referencedby>
+        <referencedby refid="classmap_1a58f0054d0bacbf9cb364c8b6ad8597b8" compoundref="map_8hpp" startline="143" endline="149">map&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classmultimap_1a4d0e3e812ef242912dca474af1149972" compoundref="multimap_8hpp" startline="140" endline="143">multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classmultiset_1a9060b1ebe49911af723beb593c8f65dd" compoundref="multiset_8hpp" startline="110" endline="113">multiset&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a7bdb21471e17d42870e0e9b49677940e" compoundref="optional_8hpp" startline="353" endline="371">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a9337a4681c7ea5fe34015263ec1a332f" compoundref="optional_8hpp" startline="321" endline="334">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1ae6b4f027dfec1fdb05b7fa8e0296573a" compoundref="optional_8hpp" startline="179" endline="189">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1acdf07176055889ad21430d63393c1fc3" compoundref="packaged__task_8hpp" startline="86" endline="89">packaged_task&lt; Res(Args...)&gt;::operator=</referencedby>
+        <referencedby refid="classpromise_1a0b28670f46097ce539ac1349fc6bdf69" compoundref="promise_8hpp" startline="87" endline="90">promise&lt; Res &gt;::operator=</referencedby>
+        <referencedby refid="classpromise_3_01_res_01_6_01_4_1a24d5d7c00e15ebe697092d7038d77f35" compoundref="promise_8hpp" startline="197" endline="200">promise&lt; Res &amp; &gt;::operator=</referencedby>
+        <referencedby refid="classpromise_3_01void_01_4_1a0543dd01a3e38815590bbfeb7f4a33b1" compoundref="promise_8hpp" startline="301" endline="304">promise&lt; void &gt;::operator=</referencedby>
+        <referencedby refid="classrb__tree_1a9e29029b278954caf4e4ee6b6a5c53fd" compoundref="rb__tree_8hpp" startline="998" endline="1005">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classscoped__connection_1a9f568a791b9bc293e07b7d65897086d8" compoundref="signals_8hpp" startline="149" endline="156">scoped_connection::operator=</referencedby>
+        <referencedby refid="classscoped__thread_1a214ea3238403c6fbef2ee13eb906608c" compoundref="scoped__thread_8hpp" startline="108" endline="111">scoped_thread::operator=</referencedby>
+        <referencedby refid="classunordered__map_1a7761055f058e6d0a1e916a8c761c89bb" compoundref="unordered__map_8hpp" startline="128" endline="131">unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classunordered__multimap_1a6ee24848260b936f04522634cef7705e" compoundref="unordered__multimap_8hpp" startline="129" endline="132">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classunordered__multiset_1afcfe7f9dfa7226fb19f87b4c1531547b" compoundref="unordered__multiset_8hpp" startline="127" endline="130">unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classunordered__set_1a8227646e7b26babd5b0214ac435df9f2" compoundref="unordered__set_8hpp" startline="127" endline="130">unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classmap_1a6e304ddf4d1c6c2677b9ae1a4bdf596f" compoundref="map_8hpp" startline="486" endline="492">map&lt; Key, T, Compare, Alloc &gt;::operator[]</referencedby>
+        <referencedby refid="classoptional_1afec68e13603a5f09d86ae5afa6a65497" compoundref="optional_8hpp" startline="340" endline="346">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1a7335825238f1b9b85700f6a36af8c7d0" compoundref="optional_8hpp" startline="289" endline="294">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1acbf62cc039f245a4492081f72527d0d2" compoundref="optional_8hpp" startline="164" endline="167">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1aa0c1885ebcf0bbcc9db52fd5b3cc3b76" compoundref="optional_8hpp" startline="583" endline="588">optional&lt; T &gt;::or_else</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1adc22169e5ba923e6565fd5ab101c578b" compoundref="optional_8hpp" startline="1096" endline="1101">optional&lt; T &amp; &gt;::or_else</referencedby>
+        <referencedby refid="structpair_1a1165835f93274f3d06671688adcff8cc" compoundref="pair_8hpp" startline="321" endline="323">pair&lt; const Key, T &gt;::pair</referencedby>
+        <referencedby refid="classpath__tree_1a6b12d9137c8b7d2f75447971a434ad8f" compoundref="path__tree_8hpp" startline="211" endline="212">path_tree::path_tree</referencedby>
+        <referencedby refid="classpgsql__factory_1a620346410a9812c2f21c9a458855ce2c" compoundref="pgsql__connect_8hpp" startline="159" endline="160">pgsql_factory::pgsql_factory</referencedby>
+        <referencedby refid="classvector_1ac39457c2185d74c729b2487d528473f8" compoundref="vector_8hpp" startline="908" endline="914">vector&lt; byte_t &gt;::pop_back_v</referencedby>
+        <referencedby refid="classpriority__queue_1a59d76e897e28ec3af7ea993b0a98add8" compoundref="priority__queue_8hpp" startline="90" endline="94">priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</referencedby>
+        <referencedby refid="classpriority__queue_1a7de58168a484c11de440c9fe74db738d" compoundref="priority__queue_8hpp" startline="159" endline="163">priority_queue&lt; T, Sequence, Compare &gt;::priority_queue</referencedby>
+        <referencedby refid="classmeta__type_1a9a585aabb217b278d7ee85188c99a758" compoundref="type_8hpp" startline="188" endline="192">meta_type::property</referencedby>
+        <referencedby refid="classtype__builder_1a7dfee419346f930acb6252545de97b55" compoundref="reflect_8hpp" startline="77" endline="93">type_builder&lt; T &gt;::property</referencedby>
+        <referencedby refid="classpriority__queue_1aef059fdad8a64085b8132d0512e2faf6" compoundref="priority__queue_8hpp" startline="208" endline="211">priority_queue&lt; T, Sequence, Compare &gt;::push</referencedby>
+        <referencedby refid="classqueue_1a82e7b385e1efcc3617f3be907abcdc8e" compoundref="queue_8hpp" startline="165" endline="165">queue&lt; T, Sequence &gt;::push</referencedby>
+        <referencedby refid="classstack_1acdb80edf321b2a992339a2347cb1d860" compoundref="stack_8hpp" startline="125" endline="125">stack&lt; T, Sequence &gt;::push</referencedby>
+        <referencedby refid="classdeque_1ad35c524de02a4fdb5b89f57f1c474ca6" compoundref="deque_8hpp" startline="1142" endline="1142">deque&lt; T, Alloc, BufSize &gt;::push_back</referencedby>
+        <referencedby refid="classlocal__queue_1a70e2ab3d3d65f423ffe571788f3ca816" compoundref="thread__pool_8hpp" startline="175" endline="179">local_queue::push_back</referencedby>
+        <referencedby refid="classvector_1a7dab898c4deecb0aff9fd0f529e522c4" compoundref="vector_8hpp" startline="893" endline="893">vector&lt; byte_t &gt;::push_back</referencedby>
+        <referencedby refid="classdeque_1a6b3765ff861ba1af72b0f3ac76b983e2" compoundref="deque_8hpp" startline="1148" endline="1148">deque&lt; T, Alloc, BufSize &gt;::push_front</referencedby>
+        <referencedby refid="classqueue_1a5ac89209ce88932a5ff9cc1c5ee8012d" compoundref="queue_8hpp" startline="71" endline="72">queue&lt; T, Sequence &gt;::queue</referencedby>
+        <referencedby refid="classrb__tree_1a1ccf0d772181c43fe5bb175d273657b9" compoundref="rb__tree_8hpp" startline="982" endline="991">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::rb_tree</referencedby>
+        <referencedby refid="structplugin__deleter_1a41b7c48f4f89afe74821e7d3106576be" compoundref="iplugin_8hpp" startline="146" endline="146">plugin_deleter::rebind</referencedby>
+        <referencedby refid="classredis__factory_1afcb386b318af23c88490153675e69dfd" compoundref="redis__connect_8hpp" startline="169" endline="170">redis_factory::redis_factory</referencedby>
+        <referencedby refid="group___unique_pointer_1ga5b7c0b0025c36f71ae411090dab937da" compoundref="unique__ptr_8hpp" startline="910" endline="913">reinterpret_pointer_cast</referencedby>
+        <referencedby refid="classscoped__connection_1a0dca2a8da2a5a59ceae89cd254515dc2" compoundref="signals_8hpp" startline="175" endline="175">scoped_connection::release</referencedby>
+        <referencedby refid="group___remove_algorithms_1gab60509ebaf6c33a45885638e30e9e9b2" compoundref="remove_8hpp" startline="102" endline="115">remove</referencedby>
+        <referencedby refid="group___remove_algorithms_1ga02dd5101700733210a677808983ebfcc" compoundref="remove_8hpp" startline="133" endline="146">remove_if</referencedby>
+        <referencedby refid="classbasic__string_1a27b87777e65658d9acfd3cd7a034284c" compoundref="basic__string_8hpp" startline="2090" endline="2097">basic_string&lt; char &gt;::repeat</referencedby>
+        <referencedby refid="classbitmap_1a5762bfe8f7a5a6a7799d6668f31887e3" compoundref="bitmap_8hpp" startline="982" endline="993">bitmap::reserve</referencedby>
+        <referencedby refid="classshared__ptr_1aaa2b90e688580eb3ae5650dab45137ab" compoundref="shared__ptr_8hpp" startline="541" endline="550">shared_ptr&lt; periodic_task_state &gt;::reset</referencedby>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9e16512f0f1ee0f05ccebe9fd4199d15" compoundref="unique__ptr_8hpp" startline="555" endline="557">unique_ptr&lt; T[], Deleter &gt;::reset</referencedby>
+        <referencedby refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" compoundref="unique__ptr_8hpp" startline="356" endline="360">unique_ptr&lt;::X509, x509_deleter &gt;::reset</referencedby>
+        <referencedby refid="classhazard__pointer__domain_1a4697b38a56cf669c3a1f0a95e8d33a72" compoundref="hazard__ptr_8hpp" startline="280" endline="291">hazard_pointer_domain::retire</referencedby>
+        <referencedby refid="structtask_1_1promise__type_1a4b2240e1afadcea4b4f98414914cc002" compoundref="generator_8hpp" startline="543" endline="543">task&lt; T &gt;::promise_type::return_value</referencedby>
+        <referencedby refid="classreverse__iterator_1a1b4a53a881b865c58c11278dd9b99990" compoundref="reverse__iterator_8hpp" startline="52" endline="53">reverse_iterator&lt; base_iterator &gt;::reverse_iterator</referencedby>
+        <referencedby refid="classwebsocket__server_1a1ef3d7d2914ea79ef7826d1c7bb2769b" compoundref="websocket_8hpp" startline="156" endline="156">websocket_server::route</referencedby>
+        <referencedby refid="classscope__exit_1a280152cc8d0de57c323ecbdbf30463a6" compoundref="scope_8hpp" startline="88" endline="91">scope_exit&lt; Func &gt;::scope_exit</referencedby>
+        <referencedby refid="classscope__success_1ad8e5cfea5c3d816a051aa600a994c6a9" compoundref="scope_8hpp" startline="250" endline="253">scope_success&lt; Func &gt;::scope_success</referencedby>
+        <referencedby refid="classmeta__property_1a0d7f05d04207d8d1546c9fd932e075bc" compoundref="property_8hpp" startline="83" endline="93">meta_property::set</referencedby>
+        <referencedby refid="classset_1aa43aaccc943662fe38148b42e04c7a51" compoundref="container_2set_8hpp" startline="102" endline="103">set&lt; Key, Compare, Alloc &gt;::set</referencedby>
+        <referencedby refid="classauthentication__filter_1a89830261400e85ced9bb558b44e5d213" compoundref="http__filter_8hpp" startline="333" endline="335">authentication_filter::set_auth_validator</referencedby>
+        <referencedby refid="classwebsocket__session_1af77e313e481b77c5a125ef3c9819dcd6" compoundref="websocket_8hpp" startline="326" endline="326">websocket_session::set_close_handler</referencedby>
+        <referencedby refid="classdns__client_1a6402a25f9372f93624db6eaf0970113c" compoundref="dns__client_8hpp" startline="92" endline="92">dns_client::set_config</referencedby>
+        <referencedby refid="classhttp__client_1ab91bcc15568273a955d9f6b5824455b1" compoundref="http__client_8hpp" startline="163" endline="166">http_client::set_config</referencedby>
+        <referencedby refid="classtcp__client__base_1a492a80d5437b81e4aff2c0c25f5505ef" compoundref="tcp__client_8hpp" startline="240" endline="240">tcp_client_base::set_connect_callback</referencedby>
+        <referencedby refid="structhttp__server__response_1a283b6cd33f07f80eb2024694dbff6c01" compoundref="http__server__message_8hpp" startline="315" endline="315">http_server_response::set_content_type</referencedby>
+        <referencedby refid="structhttp__server__response_1ad374366962f14690d3ae7b996e9171cf" compoundref="http__server__message_8hpp" startline="321" endline="321">http_server_response::set_content_type</referencedby>
+        <referencedby refid="structhttp__server__request_1ab4124dd7efb3fa2c92fa000f2dc484a8" compoundref="http__server__message_8hpp" startline="126" endline="126">http_server_request::set_cookie</referencedby>
+        <referencedby refid="classhttp__server_1a8ae0b82bc4ef2d1ff3288b0689c82256" compoundref="http__server_8hpp" startline="192" endline="192">http_server::set_cookie_name</referencedby>
+        <referencedby refid="classhttp__client_1a199472be2066385ee41ea3cda7c38132" compoundref="http__client_8hpp" startline="186" endline="189">http_client::set_default_header</referencedby>
+        <referencedby refid="classtcp__client__base_1ae3a863e0ff3966b4da4af6ea23cc87c0" compoundref="tcp__client_8hpp" startline="246" endline="246">tcp_client_base::set_disconnect_callback</referencedby>
+        <referencedby refid="classtcp__client__base_1ac94e9cb80fb0db0d5c142da213811a0e" compoundref="tcp__client_8hpp" startline="228" endline="228">tcp_client_base::set_dns_server</referencedby>
+        <referencedby refid="classhttp__client_1a1549047ce29a1b955e9c07aab2a255d2" compoundref="http__client_8hpp" startline="250" endline="250">http_client::set_error_callback</referencedby>
+        <referencedby refid="classwebsocket__session_1a40df249d0e94b96b4a736c8ff752f5ea" compoundref="websocket_8hpp" startline="332" endline="332">websocket_session::set_error_handler</referencedby>
+        <referencedby refid="classhttp__router_1a64a676e246e9c6e3764e54fbb696dff0" compoundref="http__router_8hpp" startline="196" endline="196">http_router::set_exception_handler</referencedby>
+        <referencedby refid="classtcp__client__base_1a90666e1622d3694ce3465251bfd994e1" compoundref="tcp__client_8hpp" startline="234" endline="234">tcp_client_base::set_exception_handler</referencedby>
+        <referencedby refid="structhttp__client__request_1a52ab872f0ecd9d37e4f366b96712dcff" compoundref="http__client__message_8hpp" startline="166" endline="166">http_client_request::set_header</referencedby>
+        <referencedby refid="structhttp__server__request_1afa656852407ef8175e4e7669dd867133" compoundref="http__server__message_8hpp" startline="150" endline="150">http_server_request::set_header</referencedby>
+        <referencedby refid="structhttp__server__response_1a65d53ed69d5a6533432d3bf81c2503e3" compoundref="http__server__message_8hpp" startline="302" endline="302">http_server_response::set_header</referencedby>
+        <referencedby refid="classwebsocket__session_1aaebbcc5d2e0a943226e6d53d95066cca" compoundref="websocket_8hpp" startline="320" endline="320">websocket_session::set_message_handler</referencedby>
+        <referencedby refid="classhttp__router_1aafe7293aa94b5942436c7a30133ebf1c" compoundref="http__router_8hpp" startline="188" endline="190">http_router::set_method_not_allowed_handler</referencedby>
+        <referencedby refid="classini__section_1a4e0fd26ecdb47cf9d234c97765297193" compoundref="ini__value_8hpp" startline="249" endline="249">ini_section::set_name</referencedby>
+        <referencedby refid="classhttp__router_1a52034927b8262bc14e15ec07b6c69b36" compoundref="http__router_8hpp" startline="182" endline="182">http_router::set_not_found_handler</referencedby>
+        <referencedby refid="structhttp__server__request_1a1fb643d94f981de49d14aee2c575a663" compoundref="http__server__message_8hpp" startline="100" endline="100">http_server_request::set_parameter</referencedby>
+        <referencedby refid="classhttp__client_1acc7e2158707a32efa7bd67cbf1c86932" compoundref="http__client_8hpp" startline="244" endline="244">http_client::set_progress_callback</referencedby>
+        <referencedby refid="classini__section_1aff20d7467b26968d562ebb85e2d5be84" compoundref="ini__value_8hpp" startline="265" endline="265">ini_section::set_property</referencedby>
+        <referencedby refid="classhttp__client_1a8fbfac0ce0aec7e72a981e49d92f805c" compoundref="http__client_8hpp" startline="227" endline="230">http_client::set_proxy</referencedby>
+        <referencedby refid="classenv__variable_1ae71b8878e096f455f05f39d701ef86c8" compoundref="env__value_8hpp" startline="166" endline="166">env_variable::set_value</referencedby>
+        <referencedby refid="classini__property_1abd2d7fd6a4392725d6572047132fcf60" compoundref="ini__value_8hpp" startline="164" endline="164">ini_property::set_value</referencedby>
+        <referencedby refid="classenv__document_1a81b7190ea0b57c461429b12ebe628dcb" compoundref="env__value_8hpp" startline="272" endline="275">env_document::set_variable</referencedby>
+        <referencedby refid="group___sort_algorithms_1gad58219b25c336c59023f210a295514d5" compoundref="sort_8hpp" startline="383" endline="401">shell_sort</referencedby>
+        <referencedby refid="group___shift_algorithms_1gac89d00221baafa7cde725ffcfe292aeb" compoundref="shift_8hpp" startline="880" endline="895">shift_left</referencedby>
+        <referencedby refid="classsqlite__factory_1a29a3eea918e06eff27ccd34ccd99d1b6" compoundref="sqlite__connect_8hpp" startline="160" endline="161">sqlite_factory::sqlite_factory</referencedby>
+        <referencedby refid="classssl__socket_1ac28d7742ab7ed2ac7386598c872b7615" compoundref="ssl__socket_8hpp" startline="102" endline="103">ssl_socket::ssl_socket</referencedby>
+        <referencedby refid="classstack_1a7f9135bc4ce629829fab4cddf9ea8af5" compoundref="stack_8hpp" startline="68" endline="69">stack&lt; T, Sequence &gt;::stack</referencedby>
+        <referencedby refid="classthread_1ad74c6a1b7c5631e54eba313a5e53637e" compoundref="thread_8hpp" startline="340" endline="349">thread::start</referencedby>
+        <referencedby refid="classtype__builder_1a489b86bfa65620b9180104c3739d1e49" compoundref="reflect_8hpp" startline="140" endline="145">type_builder&lt; T &gt;::static_function</referencedby>
+        <referencedby refid="group___unique_pointer_1ga8c4222e9004a639aac55ce24ec209c86" compoundref="unique__ptr_8hpp" startline="878" endline="881">static_pointer_cast</referencedby>
+        <referencedby refid="classcolor_1a62b81861ea6a2e1350d26d8ba06287e0" compoundref="color_8hpp" startline="805" endline="809">color::swap</referencedby>
+        <referencedby refid="classoptional_1ae336a413c95399231aaa0adaf3d0e4e0" compoundref="optional_8hpp" startline="791" endline="805">optional&lt; T &gt;::swap</referencedby>
+        <referencedby refid="classtcp__client__base_1ae871291551e7990a0716bb07ce8aa850" compoundref="tcp__client_8hpp" startline="121" endline="122">tcp_client_base::tcp_client_base</referencedby>
+        <referencedby refid="classthread_1adf1e800d8ae9a2a3fc18818fb88e32a7" compoundref="thread_8hpp" startline="302" endline="307">thread::thread</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gad5698b72220289bfb51e3451dcbc0d8c" compoundref="icharacter_8hpp" startline="169" endline="171">to_string&lt; char &gt;</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga52128258412667136a88578404038752" compoundref="icharacter_8hpp" startline="368" endline="370">to_u16string&lt; char16_t &gt;</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gad4578acd201621d372fd4e8be4f29153" compoundref="icharacter_8hpp" startline="433" endline="435">to_u32string&lt; char32_t &gt;</referencedby>
+        <referencedby refid="group___u_t_f_converts_1ga4cb835deb525ccffd97789c90ede19b4" compoundref="icharacter_8hpp" startline="301" endline="303">to_u8string&lt; char8_t &gt;</referencedby>
+        <referencedby refid="group___u_t_f_converts_1gaf2d0b3f893049512f91617c933dceb39" compoundref="icharacter_8hpp" startline="234" endline="236">to_wstring&lt; wchar_t &gt;</referencedby>
+        <referencedby refid="classlogger_1add2ab5e5a609ed985fea57f08c5339c0" compoundref="logger_8hpp" startline="187" endline="189">logger::trace</referencedby>
+        <referencedby refid="classoptional_1a77ed37ffe6ec605e614597787ae700e9" compoundref="optional_8hpp" startline="695" endline="700">optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classoptional_1a25ac37b8912546addfee273122f8f9a1" compoundref="optional_8hpp" startline="681" endline="686">optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1ace5cbb59bc64e50328b68d4469961d9f" compoundref="optional_8hpp" startline="1208" endline="1213">optional&lt; T &amp; &gt;::transform</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1a513c860b86c725b2ca0b79a8ca27b5ea" compoundref="optional_8hpp" startline="1194" endline="1199">optional&lt; T &amp; &gt;::transform</referencedby>
+        <referencedby refid="classtree__barrier_1a58cc248b4aeee58f81e06cc34a84bc24" compoundref="barrier_8hpp" startline="134" endline="141">tree_barrier&lt; CmplFunc &gt;::tree_barrier</referencedby>
+        <referencedby refid="structiobject_1a6844b335224b3f1baddee0502c2dcc68" compoundref="iobject_8hpp" startline="50" endline="59">iobject&lt; T &gt;::try_parse</referencedby>
+        <referencedby refid="group___shift_algorithms_1gaae1f913170be43fcce7426f8b2761686" compoundref="shift_8hpp" startline="1055" endline="1068">unique</referencedby>
+        <referencedby refid="classunordered__map_1a5b82aa607467b4a5750ebc4b477f6486" compoundref="unordered__map_8hpp" startline="120" endline="121">unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_map</referencedby>
+        <referencedby refid="classunordered__multimap_1a2ea94f6df51bf05246851aadc312cfe8" compoundref="unordered__multimap_8hpp" startline="121" endline="122">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::unordered_multimap</referencedby>
+        <referencedby refid="classunordered__multiset_1abd1af0581b147d63d25099ba3225b690" compoundref="unordered__multiset_8hpp" startline="119" endline="120">unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::unordered_multiset</referencedby>
+        <referencedby refid="classunordered__set_1a6eb0d1ccb6e89f04291ee907dc55f279" compoundref="unordered__set_8hpp" startline="119" endline="120">unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::unordered_set</referencedby>
+        <referencedby refid="classhttp__router_1af60c787026b4bd8e9b089cbb4c72b828" compoundref="http__router_8hpp" startline="170" endline="170">http_router::use</referencedby>
+        <referencedby refid="classjson__builder_1a70896afbe5b4768759a4d233eb2db145" compoundref="json__builder_8hpp" startline="295" endline="295">json_builder::value</referencedby>
+        <referencedby refid="classoptional_1a9c01bf3af575250aeb483cae64cd953c" compoundref="optional_8hpp" startline="531" endline="536">optional&lt; T &gt;::value</referencedby>
+        <referencedby refid="classoptional_1ae9e0f9341adb6c06332a2bbeaae23f06" compoundref="optional_8hpp" startline="519" endline="524">optional&lt; T &gt;::value</referencedby>
+        <referencedby refid="classtoml__builder_1af5db5e76d289392d22d2b51bc238321f" compoundref="toml__builder_8hpp" startline="333" endline="335">toml_builder::value</referencedby>
+        <referencedby refid="classtoml__builder_1a1ffd169c49f3dbc81c3bbc0a54ddf360" compoundref="toml__builder_8hpp" startline="359" endline="359">toml_builder::value</referencedby>
+        <referencedby refid="classyaml__builder_1ae6e9b387a6cf7f7046ba11d3aa61e157" compoundref="yaml__builder_8hpp" startline="271" endline="271">yaml_builder::value</referencedby>
+        <referencedby refid="classyaml__builder_1aaf3b9351b58c7dbf82d33e4046467be2" compoundref="yaml__builder_8hpp" startline="250" endline="250">yaml_builder::value</referencedby>
+        <referencedby refid="classoptional_1a8e0ac6844bffd9e68ad2ee106ade6291" compoundref="optional_8hpp" startline="555" endline="560">optional&lt; T &gt;::value_or</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1a511d504bcc667c7a356eafc8b6577d4c" compoundref="optional_8hpp" startline="1068" endline="1073">optional&lt; T &amp; &gt;::value_or</referencedby>
+        <referencedby refid="classtoml__builder_1aad0b21a3709c9ea7c4ffe7630a2090ae" compoundref="toml__builder_8hpp" startline="368" endline="370">toml_builder::value_string</referencedby>
+        <referencedby refid="structatomic_3_01shared__ptr_3_01_t_01_4_01_4_1a0c34a6fd73272f0c83e423f4e07e2079" compoundref="shared__ptr_8hpp" startline="1306" endline="1306">atomic&lt; shared_ptr&lt; T &gt; &gt;::wait</referencedby>
+        <referencedby refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a0cb23fed0831e23e16dc5c0f590dc3cb" compoundref="weak__ptr_8hpp" startline="553" endline="553">atomic&lt; weak_ptr&lt; T &gt; &gt;::wait</referencedby>
+        <referencedby refid="classbarrier_1a32a869c7fbe9dde1d551bb86a9d3bc2b" compoundref="barrier_8hpp" startline="258" endline="258">barrier&lt; CmplFunc &gt;::wait</referencedby>
+        <referencedby refid="classcondition__variable_1a315ef6f2b9eb7625826b045b429326c5" compoundref="condition__variable_8hpp" startline="318" endline="321">condition_variable::wait_for</referencedby>
+        <referencedby refid="classlogger_1a4c7c282cf9a88235db72a7804c377e8c" compoundref="logger_8hpp" startline="220" endline="222">logger::warn</referencedby>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a94bb0b76b969c5a71970777406a2b768" compoundref="packaged__task_8hpp" startline="66" endline="70">packaged_task&lt; Res(Args...)&gt;::~packaged_task</referencedby>
+        <referencedby refid="classpromise_1a42de93529f3ded56619ec146e701c556" compoundref="promise_8hpp" startline="100" endline="104">promise&lt; Res &gt;::~promise</referencedby>
+        <referencedby refid="classpromise_3_01_res_01_6_01_4_1ab04a7e93ed3482b404e6ceda9242c6ea" compoundref="promise_8hpp" startline="208" endline="212">promise&lt; Res &amp; &gt;::~promise</referencedby>
+        <referencedby refid="classpromise_3_01void_01_4_1aeeeb02e8e3d6fdcd36d8b2f16a10e113" compoundref="promise_8hpp" startline="312" endline="316">promise&lt; void &gt;::~promise</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gaa743a8f01eb9828a1fe0ad25f8026c46" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 move_backward</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
+        <name>move_backward</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>反向移动范围元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围起始</para>
+</simplesect>
+将范围 [first, last) 的元素反向移动到以 result-1 开始向前的位置。 用于处理目标范围与源范围重叠的情况。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="377" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="377" bodyend="384"/>
+        <references refid="group___iterator_category_checks_1ga56f3ab178cee74039e73463d63a71658" compoundref="concepts_8hpp" startline="581">is_ranges_bid_iter_v</references>
+        <referencedby refid="classvector_1ac2d72346ddff3cf4b6e9b98003c6d0f2" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; byte_t &gt;::emplace</referencedby>
+        <referencedby refid="classvector_1a83ad8d11141abdf80ea09847f1925dfe" compoundref="vector_8hpp" startline="1071" endline="1085">vector&lt; byte_t &gt;::erase</referencedby>
+        <referencedby refid="classvector_1a2d2774255d5dfb2e579494c7888b6348" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; byte_t &gt;::insert</referencedby>
+        <referencedby refid="group___shift_algorithms_1ga0c7b083fbce6e6870933f3fceb8519e4" compoundref="shift_8hpp" startline="911" endline="926">shift_right</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga2a7148c0cf9921ebf254675a15cb03e3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_assignable_v&lt; iter_value_t&lt; Iterator &gt;, T &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fill</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;value)</argsstring>
+        <name>fill</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>填充范围元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要填充的值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将范围 [first, last) 的所有元素设置为 value。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="398" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="398" bodyend="406"/>
+        <references refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" compoundref="type__traits_8hpp" startline="2460">is_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1ga167e1b8821cb4036a356540e940cbe08" compoundref="type__traits_8hpp" startline="2865">is_nothrow_assignable_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="classvector_1aa76db4c30b9208cd181ec0072df57927" compoundref="vector_8hpp" startline="921" endline="947">vector&lt; byte_t &gt;::assign</referencedby>
+        <referencedby refid="classbitmap_1a2e96622b39f2d0134027e6d28ae8480c" compoundref="bitmap_8hpp" startline="719" endline="726">bitmap::bitmap</referencedby>
+        <referencedby refid="classbitmap_1a1f81644d0032e7a8869aeeed04168503" compoundref="bitmap_8hpp" startline="733" endline="740">bitmap::bitmap</referencedby>
+        <referencedby refid="classbloom__filter_1a830ba24d1ec93b142643cd119f2e0b15" compoundref="bloom__filter_8hpp" startline="386" endline="386">bloom_filter&lt; T, Hash &gt;::clear</referencedby>
+        <referencedby refid="classbitmap_1aa112d23f302a0f098101ac2844bfba8d" compoundref="bitmap_8hpp" startline="1061" endline="1072">bitmap::insert</referencedby>
+        <referencedby refid="classvector_1a2d2774255d5dfb2e579494c7888b6348" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; byte_t &gt;::insert</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gaf7073d1fd2edd9c564d1b7859f096194" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_assignable_v&lt; iter_value_t&lt; Iterator &gt;, T &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator fill_n</definition>
+        <argsstring>(Iterator first, iter_difference_t&lt; Iterator &gt; n, const T &amp;value)</argsstring>
+        <name>fill_n</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>填充指定数量的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要填充的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要填充的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>填充后的结束迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="418" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="418" bodyend="427"/>
+        <references refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" compoundref="type__traits_8hpp" startline="2460">is_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1ga167e1b8821cb4036a356540e940cbe08" compoundref="type__traits_8hpp" startline="2865">is_nothrow_assignable_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="classvector_1aa76db4c30b9208cd181ec0072df57927" compoundref="vector_8hpp" startline="921" endline="947">vector&lt; byte_t &gt;::assign</referencedby>
+        <referencedby refid="classarray_1a5fe74a27d7795c1752f5c9e9ea34989e" compoundref="array_8hpp" startline="384" endline="384">array&lt; byte_t, MAC_LEN &gt;::fill</referencedby>
+        <referencedby refid="classvector_1a2d2774255d5dfb2e579494c7888b6348" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; byte_t &gt;::insert</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE swap(*a, *b))" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iter_swap</definition>
+        <argsstring>(Iterator1 a, Iterator2 b)</argsstring>
+        <name>iter_swap</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>交换迭代器指向的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+交换两个迭代器指向的元素的值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="440" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="440" bodyend="444"/>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <references refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df">swap</references>
+        <referencedby refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" compoundref="leonardo__heap_8hpp" startline="128" endline="178">adjust_leonardo_heap</referencedby>
+        <referencedby refid="group___sort_algorithms_1gaf5532cf5c44d6eb963b5f105e5190d39" compoundref="sort_8hpp" startline="220" endline="245">bubble_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga2e5e13816a5ba6e0b7d7b7a8ca330c74" compoundref="sort_8hpp" startline="273" endline="309">cocktail_sort</referencedby>
+        <referencedby refid="group___partition_algorithms_1ga09ca7889019a50556c6f23810bf2de1d" compoundref="partition_8hpp" startline="119" endline="145">lomuto_partition</referencedby>
+        <referencedby refid="group___permutation_algorithms_1gaf560848588f7231ccb6f7b7e418c8364" compoundref="permutation_8hpp" startline="131" endline="160">next_permutation</referencedby>
+        <referencedby refid="group___partition_algorithms_1ga165394317b9b3996c7a9b5cd4fdc32c8" compoundref="partition_8hpp" startline="46" endline="77">partition</referencedby>
+        <referencedby refid="group___permutation_algorithms_1ga9ebc19acb4e093d3117f45942d689a8c" compoundref="permutation_8hpp" startline="193" endline="222">prev_permutation</referencedby>
+        <referencedby refid="classbasic__string_1abc79736a9816c8f63be811eee1e337bd" compoundref="basic__string_8hpp" startline="2352" endline="2360">basic_string&lt; char &gt;::reverse</referencedby>
+        <referencedby refid="group___shift_algorithms_1gac99c8df19a722dfd3abb231742d8e2a2" compoundref="shift_8hpp" startline="711" endline="730">reverse</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga08dba41cc540351140973e676d80fd72" compoundref="sort_8hpp" startline="337" endline="355">select_sort</referencedby>
+        <referencedby refid="group___shuffle_algorithms_1ga3bcbde813bd43737ddaf4c106caac469" compoundref="shuffle_8hpp" startline="40" endline="52">shuffle</referencedby>
+        <referencedby refid="group___shuffle_algorithms_1ga7d0bd6e732e8ea782985610e8276d3ce" compoundref="shuffle_8hpp" startline="73" endline="83">shuffle</referencedby>
+        <referencedby refid="group___shift_algorithms_1gae27cba9db15b15b6661d18892eaab6a9" compoundref="shift_8hpp" startline="458" endline="463">swap_ranges</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gae27cba9db15b15b6661d18892eaab6a9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 swap_ranges</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2)</argsstring>
+        <name>swap_ranges</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <briefdescription>
+<para>交换两个范围的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个范围迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个范围迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个范围起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>第二个范围结束迭代器</para>
+</simplesect>
+交换范围 [first1, last1) 和以 first2 开始的范围的对应元素。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="458" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="458" bodyend="463"/>
+        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga530922ef49896e64a83a39ca9bfe402d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Function</type>
+          </param>
+        </templateparamlist>
+        <type>Function</type>
+        <definition>Function for_each</definition>
+        <argsstring>(Iterator first, Iterator last, Function f)</argsstring>
+        <name>for_each</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Function</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>对范围元素应用函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Function</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要应用的函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>传入的函数对象</para>
+</simplesect>
+对范围 [first, last) 的每个元素应用函数 f。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="478" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="478" bodyend="486"/>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga300a18e436a38ca8585e2d174ce30a8b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Function</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator for_each_n</definition>
+        <argsstring>(Iterator first, iter_difference_t&lt; Iterator &gt; n, Function f)</argsstring>
+        <name>for_each_n</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>Function</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>对指定数量的元素应用函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Function</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要处理的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要应用的函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>处理后的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="498" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="498" bodyend="507"/>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gad0b532388a6235965ae2562b1f8d66d8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Generator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void generate</definition>
+        <argsstring>(Iterator first, Iterator last, Generator gen)</argsstring>
+        <name>generate</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Generator</type>
+          <declname>gen</declname>
+        </param>
+        <briefdescription>
+<para>用生成器的值填充范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Generator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>生成器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>生成器函数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+对范围 [first, last) 的每个元素调用 gen() 并赋值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="521" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="521" bodyend="530"/>
+        <references refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" compoundref="type__traits_8hpp" startline="2460">is_assignable_v</references>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="classrandom__lcd_1a93b607b6466f1afd05d309258bb4311c" compoundref="random_8hpp" startline="195" endline="200">random_lcd::next_float</referencedby>
+        <referencedby refid="classrandom__mt_1a4ddd979b24a93752c932b939899979ac" compoundref="random_8hpp" startline="349" endline="354">random_mt::next_float</referencedby>
+        <referencedby refid="classrandom__lcd_1a120c22f0946ee1533dfbaa16e02cb338" compoundref="random_8hpp" startline="166" endline="169">random_lcd::next_int</referencedby>
+        <referencedby refid="classrandom__mt_1aaab18ba803326933c9736f5d04dfa0c6" compoundref="random_8hpp" startline="320" endline="323">random_mt::next_int</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga901149b24c5b7875f92f94964cc66327" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Generator</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator generate_n</definition>
+        <argsstring>(Iterator first, iter_difference_t&lt; Iterator &gt; n, Generator gen)</argsstring>
+        <name>generate_n</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>Generator</type>
+          <declname>gen</declname>
+        </param>
+        <briefdescription>
+<para>用生成器的值填充指定数量的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Generator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>生成器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要填充的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>gen</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>生成器函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>填充后的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="542" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="542" bodyend="552"/>
+        <references refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" compoundref="type__traits_8hpp" startline="2460">is_assignable_v</references>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gae2c97a16277f3977ca27699123e3f936" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 replace_copy</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result, const T &amp;old_value, const T &amp;new_value)</argsstring>
+        <name>replace_copy</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>old_value</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>new_value</declname>
+        </param>
+        <briefdescription>
+<para>替换并复制元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>old_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要替换的旧值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>new_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要替换的新值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束</para>
+</simplesect>
+将范围 [first, last) 的元素复制到 result，同时将等于 old_value 的元素替换为 new_value。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="570" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="570" bodyend="580"/>
+        <references refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" compoundref="type__traits_8hpp" startline="2460">is_assignable_v</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gafa87f88f20272f80ac48216df55818a3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename Predicate</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 replace_copy_if</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result, Predicate pred, const T &amp;new_value)</argsstring>
+        <name>replace_copy_if</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>Predicate</type>
+          <declname>pred</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>new_value</declname>
+        </param>
+        <briefdescription>
+<para>根据谓词替换并复制元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Predicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>替换谓词 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>new_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要替换的新值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束</para>
+</simplesect>
+将范围 [first, last) 的元素复制到 result，同时将满足 pred 的元素替换为 new_value。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="598" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="598" bodyend="609"/>
+        <references refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" compoundref="type__traits_8hpp" startline="2460">is_assignable_v</references>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga28ebd75930fa85d6fbf02dbf7d4abd9a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void replace</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;old_value, const T &amp;new_value)</argsstring>
+        <name>replace</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>old_value</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>new_value</declname>
+        </param>
+        <briefdescription>
+<para>替换范围元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>old_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要替换的旧值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>new_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要替换的新值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将范围 [first, last) 中等于 old_value 的所有元素替换为 new_value。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="623" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="623" bodyend="632"/>
+        <references refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" compoundref="type__traits_8hpp" startline="2460">is_assignable_v</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gab6555bd06efad9501cf4a3408cc54d88" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Predicate</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void replace_if</definition>
+        <argsstring>(Iterator first, Iterator last, Predicate pred, const T &amp;new_value)</argsstring>
+        <name>replace_if</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Predicate</type>
+          <declname>pred</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>new_value</declname>
+        </param>
+        <briefdescription>
+<para>根据谓词替换范围元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Predicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>替换谓词 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>new_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要替换的新值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将范围 [first, last) 中满足 pred 的所有元素替换为 new_value。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="647" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="647" bodyend="657"/>
+        <references refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" compoundref="type__traits_8hpp" startline="2460">is_assignable_v</references>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gac99c8df19a722dfd3abb231742d8e2a2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void reverse</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>reverse</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>反转范围元素顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将范围 [first, last) 的元素顺序反转。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="711" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="711" bodyend="730"/>
+        <references refid="group___iterator_category_checks_1ga56f3ab178cee74039e73463d63a71658" compoundref="concepts_8hpp" startline="581">is_ranges_bid_iter_v</references>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga3011e9c1ea124cbb3dfed724ee9e7624" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator rotate</definition>
+        <argsstring>(Iterator first, Iterator middle, Iterator last)</argsstring>
+        <name>rotate</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>middle</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>旋转范围元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>middle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旋转中心 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>旋转后原 first 所在位置的迭代器</para>
+</simplesect>
+将范围 [first, last) 旋转，使 middle 成为新的第一个元素。 旋转后范围变为 [middle, last) + [first, middle)。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="834" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="834" bodyend="847"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gad4f517c485a71519d0c5dcb58d887fa7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 rotate_copy</definition>
+        <argsstring>(Iterator1 first, Iterator1 middle, Iterator1 last, Iterator2 result)</argsstring>
+        <name>rotate_copy</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>middle</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>旋转并复制元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>middle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旋转中心 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束</para>
+</simplesect>
+将旋转后的范围 [first, last) 复制到 result。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="862" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="862" bodyend="864"/>
+        <references refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" compoundref="shift_8hpp" startline="90" endline="98">copy</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gac89d00221baafa7cde725ffcfe292aeb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator shift_left</definition>
+        <argsstring>(Iterator first, Iterator last, iter_difference_t&lt; Iterator &gt; n)</argsstring>
+        <name>shift_left</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>向左移位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>移位数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新逻辑末尾迭代器</para>
+</simplesect>
+将范围 [first, last) 的元素向左移动 n 个位置。 移出的元素被移动，剩余末尾元素处于合法但未指定状态。 如果 n &gt;= distance(first, last)，则返回 first（空范围）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="880" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="880" bodyend="895"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga0c7b083fbce6e6870933f3fceb8519e4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator shift_right</definition>
+        <argsstring>(Iterator first, Iterator last, iter_difference_t&lt; Iterator &gt; n)</argsstring>
+        <name>shift_right</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>向右移位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>移位数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新逻辑起始迭代器</para>
+</simplesect>
+将范围 [first, last) 的元素向右移动 n 个位置。 移出的元素被移动，前部元素处于合法但未指定状态。 如果 n &gt;= distance(first, last)，则返回 last（空范围）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="911" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="911" bodyend="926"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1ga56f3ab178cee74039e73463d63a71658" compoundref="concepts_8hpp" startline="581">is_ranges_bid_iter_v</references>
+        <references refid="group___shift_algorithms_1gaa743a8f01eb9828a1fe0ad25f8026c46" compoundref="shift_8hpp" startline="377" endline="384">move_backward</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga08e72453e12c29254c5a5d45e58d648f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(++first) &amp;&amp;noexcept(++result) &amp;&amp;noexcept(*result=op(*first))" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename UnaryOperation</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 transform</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result, UnaryOperation op)</argsstring>
+        <name>transform</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>UnaryOperation</type>
+          <declname>op</declname>
+        </param>
+        <briefdescription>
+<para>对范围元素应用一元变换 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>UnaryOperation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一元操作类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一元操作函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束</para>
+</simplesect>
+对范围 [first, last) 的每个元素应用 op，结果存储到 result。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="943" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="943" bodyend="956"/>
+        <references refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" compoundref="type__traits_8hpp" startline="2460">is_assignable_v</references>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga327cf7ce32d1150f27c039171a7edaa2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(++first1) &amp;&amp;noexcept(first2) &amp;&amp;noexcept(++result) &amp;&amp;noexcept(*result=binary_op(*first1, *first2))" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename Iterator3</type>
+          </param>
+          <param>
+            <type>typename BinaryOperation</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator3</type>
+        <definition>Iterator3 transform</definition>
+        <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator3 result, BinaryOperation binary_op)</argsstring>
+        <name>transform</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first1</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last1</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>first2</declname>
+        </param>
+        <param>
+          <type>Iterator3</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>BinaryOperation</type>
+          <declname>binary_op</declname>
+        </param>
+        <briefdescription>
+<para>对两个范围元素应用二元变换 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator3</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BinaryOperation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元操作类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binary_op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元操作函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束</para>
+</simplesect>
+对范围 [first1, last1) 和以 first2 开始的范围的对应元素应用 binary_op， 结果存储到 result。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="975" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="975" bodyend="991"/>
+        <references refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" compoundref="type__traits_8hpp" startline="2460">is_assignable_v</references>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga23e2ec35ee3354bb5b33e6e32fcdcef9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type>typename BinaryPredicate</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 unique_copy</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result, BinaryPredicate binary_pred)</argsstring>
+        <name>unique_copy</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>BinaryPredicate</type>
+          <declname>binary_pred</declname>
+        </param>
+        <briefdescription>
+<para>复制唯一元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BinaryPredicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binary_pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>相等性谓词 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束</para>
+</simplesect>
+复制范围 [first, last) 中的元素到 result，跳过连续的重复元素。 只有与前一个元素不重复的元素才会被复制。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="1009" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="1009" bodyend="1027"/>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <referencedby refid="group___shift_algorithms_1gabb53c1ce754dcdb62ab7891781a7bd81" compoundref="shift_8hpp" startline="1039" endline="1041">unique_copy</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gabb53c1ce754dcdb62ab7891781a7bd81" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator2</type>
+        <definition>Iterator2 unique_copy</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
+        <name>unique_copy</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>复制唯一元素（使用相等比较） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="1039" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="1039" bodyend="1041"/>
+        <references refid="group___shift_algorithms_1ga23e2ec35ee3354bb5b33e6e32fcdcef9" compoundref="shift_8hpp" startline="1009" endline="1027">unique_copy</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1gaae1f913170be43fcce7426f8b2761686" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename BinaryPredicate</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator unique</definition>
+        <argsstring>(Iterator first, Iterator last, BinaryPredicate binary_pred)</argsstring>
+        <name>unique</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>BinaryPredicate</type>
+          <declname>binary_pred</declname>
+        </param>
+        <briefdescription>
+<para>根据谓词移除连续重复元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BinaryPredicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元谓词类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binary_pred</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>相等性谓词 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新逻辑结束迭代器</para>
+</simplesect>
+使用指定的二元谓词判断元素是否相等，移除连续的重复元素。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="1055" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="1055" bodyend="1068"/>
+        <references refid="group___adjacent_algorithms_1ga13ada6eb80186e1a77c9c378a3e917be" compoundref="search_8hpp" startline="300" endline="314">adjacent_find</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <referencedby refid="group___shift_algorithms_1ga21a2b6b10e2d879232ed816f5ab84afb" compoundref="shift_8hpp" startline="1080" endline="1082">unique</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___shift_algorithms_1ga21a2b6b10e2d879232ed816f5ab84afb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>Iterator</type>
+        <definition>Iterator unique</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>unique</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>移除连续重复元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新逻辑结束迭代器</para>
+</simplesect>
+移除范围 [first, last) 中连续的重复元素，保留每个重复组的第一个元素。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" line="1080" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shift.hpp" bodystart="1080" bodyend="1082"/>
+        <references refid="group___shift_algorithms_1gaae1f913170be43fcce7426f8b2761686" compoundref="shift_8hpp" startline="1055" endline="1068">unique</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>移位和修改算法的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

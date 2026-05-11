@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___type_attribute_operations" kind="group">
+    <compoundname>TypeAttributeOperations</compoundname>
+    <title>类型属性操作</title>
+    <innerclass refid="structdecay" prot="public">decay</innerclass>
+    <innerclass refid="structcommon__type" prot="public">common_type</innerclass>
+    <innerclass refid="structcommon__reference" prot="public">common_reference</innerclass>
+    <innerclass refid="structis__specialization" prot="public">is_specialization</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structdecay" kindref="compound">decay</ref>&lt; T &gt;::type</type>
+        <definition>using decay_t = typename decay&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>decay_t</name>
+        <briefdescription>
+<para>decay的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3553" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3553" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___type_attribute_operations_1ga999daadde7e6033d617ad91266fcfd7c" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Default</type>
+          </param>
+          <param>
+            <type>template&lt; typename... &gt; class</type>
+            <declname>Op</declname>
+            <defname>Op</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>inner::__detector&lt; Default, void, Op, Args... &gt;</type>
+        <definition>using detected_or = inner::__detector&lt;Default, void, Op, Args...&gt;</definition>
+        <argsstring></argsstring>
+        <name>detected_or</name>
+        <briefdescription>
+<para>检测Op&lt;Args...&gt;是否有效，如果无效则使用Default类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Default</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检测的模板 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>模板参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3579" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3579" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___type_attribute_operations_1ga80f94c5a0b73ffc291247f406ee7e3b2" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Default</type>
+          </param>
+          <param>
+            <type>template&lt; typename... &gt; class</type>
+            <declname>Op</declname>
+            <defname>Op</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="group___type_attribute_operations_1ga999daadde7e6033d617ad91266fcfd7c" kindref="member">detected_or</ref>&lt; Default, Op, Args... &gt;::type</type>
+        <definition>using detected_or_t = typename detected_or&lt;Default, Op, Args...&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>detected_or_t</name>
+        <briefdescription>
+<para>detected_or的便捷别名，返回检测到的类型或默认类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3586" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3586" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___type_attribute_operations_1ga6f7624c2711c293f19f15c71febeaeb0" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(true ? _NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; T1 &gt;() :_NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; T2 &gt;())</type>
+        <definition>using common_ternary_operator_t = decltype(true ? _NEFORCE declval&lt;T1&gt;() : _NEFORCE declval&lt;T2&gt;())</definition>
+        <argsstring></argsstring>
+        <name>common_ternary_operator_t</name>
+        <briefdescription>
+<para>三目运算符的公共类型推导 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+三目运算符的类型推导规则：<orderedlist>
+<listitem><para>如果T1和T2是相同类型，则整个表达式的类型是该类型</para>
+</listitem><listitem><para>如果T1和T2是不同的类型，编译器会尝试找到一个公共类型</para>
+</listitem><listitem><para>转换规则通常基于标准的隐式类型转换规则 </para>
+</listitem></orderedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3601" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3601" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structcommon__type" kindref="compound">common_type</ref>&lt; Types... &gt;::type</type>
+        <definition>using common_type_t = typename common_type&lt;Types...&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>common_type_t</name>
+        <briefdescription>
+<para>common_type的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3628" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3628" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___type_attribute_operations_1ga9159a6bfe7317dea917d34d2a9798fde" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structcommon__reference" kindref="compound">common_reference</ref>&lt; Types... &gt;::type</type>
+        <definition>using common_reference_t = typename common_reference&lt;Types...&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>common_reference_t</name>
+        <briefdescription>
+<para>common_reference的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3660" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3660" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___type_attribute_operations_1ga35203a7f9132c2f9c796f524bd5a8f69" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>template&lt; typename... &gt; class</type>
+            <declname>Template</declname>
+            <defname>Template</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr bool</type>
+        <definition>NEFORCE_INLINE17 constexpr bool is_specialization_v</definition>
+        <argsstring></argsstring>
+        <name>is_specialization_v</name>
+        <initializer>= <ref refid="structis__specialization" kindref="compound">is_specialization</ref>&lt;T, Template&gt;::value</initializer>
+        <briefdescription>
+<para>is_specialization的便捷变量模板 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3793" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3793" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>进行类型退化、公共化等操作 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

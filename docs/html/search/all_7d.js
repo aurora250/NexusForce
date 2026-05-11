@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['未初始化内存操作_0',['未初始化内存操作',['../group___uninitialized_memory_operations.html',1,'']]]
+  ['更新日志_0',['📝 更新日志',['../index.html#autotoc_md49',1,'']]]
 ];

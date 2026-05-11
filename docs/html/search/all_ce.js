@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📋_20前置依赖_0',['📋 前置依赖',['../index.html#autotoc_md40',1,'']]]
+  ['💾_20内存管理_20memory_0',['💾 内存管理 (Memory)',['../index.html#autotoc_md32',1,'']]]
 ];

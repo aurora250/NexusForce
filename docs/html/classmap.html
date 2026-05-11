@@ -271,10 +271,10 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept(noexcept(tree_.
 <tr class="memdesc:af4c05a1bdefec7feb46614745a2c07e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">带边界检查的访问  <br /></td></tr>
 <tr class="memitem:a31a22302ef97c4bd2ee56642a682ff38" id="r_a31a22302ef97c4bd2ee56642a682ff38"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a31a22302ef97c4bd2ee56642a682ff38">swap</a> (<a class="el" href="classmap.html">map</a> &amp;other) noexcept(noexcept(tree_.swap(other.tree_)))</td></tr>
 <tr class="memdesc:a31a22302ef97c4bd2ee56642a682ff38"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个map的内容  <br /></td></tr>
-<tr class="memitem:a185c95e66dbcd401ecb8240698498193" id="r_a185c95e66dbcd401ecb8240698498193"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a185c95e66dbcd401ecb8240698498193">operator==</a> (const <a class="el" href="classmap.html">map</a> &amp;rhs) const noexcept(noexcept(tree_==rhs.tree_))</td></tr>
-<tr class="memdesc:a185c95e66dbcd401ecb8240698498193"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
-<tr class="memitem:a6bf2f26e6618e11d8477239cb2ff8028" id="r_a6bf2f26e6618e11d8477239cb2ff8028"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a6bf2f26e6618e11d8477239cb2ff8028">operator&lt;</a> (const <a class="el" href="classmap.html">map</a> &amp;rhs) const noexcept(noexcept(tree_&lt; rhs.tree_))</td></tr>
-<tr class="memdesc:a6bf2f26e6618e11d8477239cb2ff8028"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
+<tr class="memitem:a2d70fc70a030ae4f7c67355c20f2c412" id="r_a2d70fc70a030ae4f7c67355c20f2c412"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a2d70fc70a030ae4f7c67355c20f2c412">equal_to</a> (const <a class="el" href="classmap.html">map</a> &amp;rhs) const noexcept(noexcept(tree_==rhs.tree_))</td></tr>
+<tr class="memdesc:a2d70fc70a030ae4f7c67355c20f2c412"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:a226898ba24e128ac1a4fd362e11197d1" id="r_a226898ba24e128ac1a4fd362e11197d1"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a226898ba24e128ac1a4fd362e11197d1">less_than</a> (const <a class="el" href="classmap.html">map</a> &amp;rhs) const noexcept(noexcept(tree_&lt; rhs.tree_))</td></tr>
+<tr class="memdesc:a226898ba24e128ac1a4fd362e11197d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt;<br />
@@ -320,9 +320,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>默认构造函数 </p>
 <p>构造一个空map，使用默认的比较函数。 </p>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00098">98</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00101">101</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="map_8hpp_source.html#l00112">map()</a>, <a class="el" href="map_8hpp_source.html#l00132">map()</a>, <a class="el" href="map_8hpp_source.html#l00176">map()</a>, <a class="el" href="map_8hpp_source.html#l00184">map()</a>, <a class="el" href="map_8hpp_source.html#l00539">operator&lt;()</a>, <a class="el" href="map_8hpp_source.html#l00120">operator=()</a>, <a class="el" href="map_8hpp_source.html#l00140">operator=()</a>, <a class="el" href="map_8hpp_source.html#l00192">operator=()</a>, <a class="el" href="map_8hpp_source.html#l00530">operator==()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00523">swap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="map_8hpp_source.html#l00533">equal_to()</a>, <a class="el" href="map_8hpp_source.html#l00542">less_than()</a>, <a class="el" href="map_8hpp_source.html#l00115">map()</a>, <a class="el" href="map_8hpp_source.html#l00135">map()</a>, <a class="el" href="map_8hpp_source.html#l00179">map()</a>, <a class="el" href="map_8hpp_source.html#l00187">map()</a>, <a class="el" href="map_8hpp_source.html#l00123">operator=()</a>, <a class="el" href="map_8hpp_source.html#l00143">operator=()</a>, <a class="el" href="map_8hpp_source.html#l00195">operator=()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00526">swap()</a>.</p>
 
 </div>
 </div>
@@ -359,7 +359,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00105">105</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00108">108</a> 行定义.</p>
 
 </div>
 </div>
@@ -396,9 +396,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00112">112</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00115">115</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00098">map()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00101">map()</a>.</p>
 
 </div>
 </div>
@@ -435,9 +435,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00132">132</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00135">135</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02841">is_nothrow_move_constructible_v</a>, <a class="el" href="map_8hpp_source.html#l00098">map()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02841">is_nothrow_move_constructible_v</a>, <a class="el" href="map_8hpp_source.html#l00101">map()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -487,7 +487,7 @@ template&lt;typename Iterator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00155">155</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00158">158</a> 行定义.</p>
 
 </div>
 </div>
@@ -542,7 +542,7 @@ template&lt;typename Iterator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00167">167</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00170">170</a> 行定义.</p>
 
 </div>
 </div>
@@ -579,9 +579,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00176">176</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00179">179</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00207">begin()</a>, <a class="el" href="map_8hpp_source.html#l00213">end()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00098">map()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00210">begin()</a>, <a class="el" href="map_8hpp_source.html#l00216">end()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00101">map()</a>.</p>
 
 </div>
 </div>
@@ -623,9 +623,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00184">184</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00187">187</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00207">begin()</a>, <a class="el" href="map_8hpp_source.html#l00213">end()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00098">map()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00210">begin()</a>, <a class="el" href="map_8hpp_source.html#l00216">end()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00101">map()</a>.</p>
 
 </div>
 </div>
@@ -670,9 +670,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00511">511</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00514">514</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00213">end()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00297">key_comp()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00216">end()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00300">key_comp()</a>.</p>
 
 </div>
 </div>
@@ -716,9 +716,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00497">497</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00500">500</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00213">end()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00297">key_comp()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00216">end()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00300">key_comp()</a>.</p>
 
 </div>
 </div>
@@ -750,7 +750,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00219">219</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00222">222</a> 行定义.</p>
 
 </div>
 </div>
@@ -782,9 +782,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00207">207</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00210">210</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="map_8hpp_source.html#l00176">map()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00184">map()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="map_8hpp_source.html#l00179">map()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00187">map()</a>.</p>
 
 </div>
 </div>
@@ -816,7 +816,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00231">231</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00234">234</a> 行定义.</p>
 
 </div>
 </div>
@@ -848,7 +848,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00237">237</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00240">240</a> 行定义.</p>
 
 </div>
 </div>
@@ -886,7 +886,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>匹配的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00415">415</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00418">418</a> 行定义.</p>
 
 </div>
 </div>
@@ -918,7 +918,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00267">267</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00270">270</a> 行定义.</p>
 
 </div>
 </div>
@@ -950,7 +950,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素之前位置的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00273">273</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00276">276</a> 行定义.</p>
 
 </div>
 </div>
@@ -996,7 +996,7 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00312">312</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00315">315</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
 
@@ -1049,7 +1049,7 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00338">338</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00341">341</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
 
@@ -1083,7 +1083,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取元素数量 </p>
 <dl class="section return"><dt>返回</dt><dd>map中的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00291">291</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00294">294</a> 行定义.</p>
 
 </div>
 </div>
@@ -1115,7 +1115,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00225">225</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00228">228</a> 行定义.</p>
 
 </div>
 </div>
@@ -1147,9 +1147,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00213">213</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00216">216</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="map_8hpp_source.html#l00511">at()</a>, <a class="el" href="map_8hpp_source.html#l00497">at()</a>, <a class="el" href="map_8hpp_source.html#l00176">map()</a>, <a class="el" href="map_8hpp_source.html#l00184">map()</a>, <a class="el" href="map_8hpp_source.html#l00468">operator[]()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00483">operator[]()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="map_8hpp_source.html#l00514">at()</a>, <a class="el" href="map_8hpp_source.html#l00500">at()</a>, <a class="el" href="map_8hpp_source.html#l00179">map()</a>, <a class="el" href="map_8hpp_source.html#l00187">map()</a>, <a class="el" href="map_8hpp_source.html#l00471">operator[]()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00486">operator[]()</a>.</p>
 
 </div>
 </div>
@@ -1187,7 +1187,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00450">450</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00453">453</a> 行定义.</p>
 
 </div>
 </div>
@@ -1225,7 +1225,47 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00457">457</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00460">460</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2d70fc70a030ae4f7c67355c20f2c412" name="a2d70fc70a030ae4f7c67355c20f2c412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d70fc70a030ae4f7c67355c20f2c412">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmap.html">map</a>&lt; Key, T, Compare, Alloc &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmap.html">map</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧map </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个map大小相等且对应元素相等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00533">533</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00101">map()</a>.</p>
 
 </div>
 </div>
@@ -1263,7 +1303,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>删除的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00382">382</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00385">385</a> 行定义.</p>
 
 </div>
 </div>
@@ -1305,7 +1345,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00389">389</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00392">392</a> 行定义.</p>
 
 </div>
 </div>
@@ -1342,7 +1382,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00375">375</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00378">378</a> 行定义.</p>
 
 </div>
 </div>
@@ -1380,7 +1420,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的迭代器，未找到则返回end() </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00401">401</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00404">404</a> 行定义.</p>
 
 </div>
 </div>
@@ -1418,7 +1458,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的常量迭代器，未找到则返回cend() </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00408">408</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00411">411</a> 行定义.</p>
 
 </div>
 </div>
@@ -1456,9 +1496,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00321">321</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00324">324</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="map_8hpp_source.html#l00192">operator=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="map_8hpp_source.html#l00195">operator=()</a>.</p>
 
 </div>
 </div>
@@ -1508,7 +1548,7 @@ template&lt;typename Iterator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00367">367</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00370">370</a> 行定义.</p>
 
 </div>
 </div>
@@ -1551,7 +1591,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00348">348</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00351">351</a> 行定义.</p>
 
 </div>
 </div>
@@ -1594,9 +1634,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00356">356</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00359">359</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -1634,9 +1674,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>插入结果（迭代器和是否成功） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00328">328</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00331">331</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -1668,9 +1708,49 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取键比较函数对象 </p>
 <dl class="section return"><dt>返回</dt><dd>键比较函数对象的副本 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00297">297</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00300">300</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="map_8hpp_source.html#l00511">at()</a>, <a class="el" href="map_8hpp_source.html#l00497">at()</a>, <a class="el" href="map_8hpp_source.html#l00468">operator[]()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00483">operator[]()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="map_8hpp_source.html#l00514">at()</a>, <a class="el" href="map_8hpp_source.html#l00500">at()</a>, <a class="el" href="map_8hpp_source.html#l00471">operator[]()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00486">operator[]()</a>.</p>
+
+</div>
+</div>
+<a id="a226898ba24e128ac1a4fd362e11197d1" name="a226898ba24e128ac1a4fd362e11197d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a226898ba24e128ac1a4fd362e11197d1">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmap.html">map</a>&lt; Key, T, Compare, Alloc &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmap.html">map</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧map </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00542">542</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00101">map()</a>.</p>
 
 </div>
 </div>
@@ -1708,7 +1788,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00422">422</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00425">425</a> 行定义.</p>
 
 </div>
 </div>
@@ -1746,7 +1826,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00429">429</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00432">432</a> 行定义.</p>
 
 </div>
 </div>
@@ -1778,47 +1858,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取元素数量 </p>
 <dl class="section return"><dt>返回</dt><dd>map中的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00285">285</a> 行定义.</p>
-
-</div>
-</div>
-<a id="a6bf2f26e6618e11d8477239cb2ff8028" name="a6bf2f26e6618e11d8477239cb2ff8028"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6bf2f26e6618e11d8477239cb2ff8028">&#9670;&#160;</a></span>operator&lt;()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmap.html">map</a>&lt; Key, T, Compare, Alloc &gt;::operator&lt; </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classmap.html">map</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>小于比较操作符 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>右侧map </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00539">539</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00098">map()</a>.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00288">288</a> 行定义.</p>
 
 </div>
 </div>
@@ -1856,9 +1896,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00120">120</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00123">123</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00098">map()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00101">map()</a>.</p>
 
 </div>
 </div>
@@ -1896,9 +1936,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00140">140</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00143">143</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a>, <a class="el" href="type__traits_8hpp_source.html#l02902">is_nothrow_move_assignable_v</a>, <a class="el" href="map_8hpp_source.html#l00098">map()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a>, <a class="el" href="type__traits_8hpp_source.html#l02902">is_nothrow_move_assignable_v</a>, <a class="el" href="map_8hpp_source.html#l00101">map()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -1936,49 +1976,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00192">192</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00195">195</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00394">clear()</a>, <a class="el" href="map_8hpp_source.html#l00321">insert()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00098">map()</a>.</p>
-
-</div>
-</div>
-<a id="a185c95e66dbcd401ecb8240698498193" name="a185c95e66dbcd401ecb8240698498193"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a185c95e66dbcd401ecb8240698498193">&#9670;&#160;</a></span>operator==()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmap.html">map</a>&lt; Key, T, Compare, Alloc &gt;::operator== </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classmap.html">map</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>相等比较操作符 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>右侧map </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>如果两个map大小相等且对应元素相等返回true </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00530">530</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00098">map()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00397">clear()</a>, <a class="el" href="map_8hpp_source.html#l00324">insert()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00101">map()</a>.</p>
 
 </div>
 </div>
@@ -2017,9 +2017,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <dl class="section return"><dt>返回</dt><dd>对应键的值的引用</dd></dl>
 <p>如果键不存在，则插入一个默认构造的值并返回其引用。 </p>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00468">468</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00471">471</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00213">end()</a>, <a class="el" href="type__traits_8hpp_source.html#l04323">initialize()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00297">key_comp()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00216">end()</a>, <a class="el" href="type__traits_8hpp_source.html#l04318">initialize()</a> , 以及 <a class="el" href="map_8hpp_source.html#l00300">key_comp()</a>.</p>
 
 </div>
 </div>
@@ -2058,9 +2058,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <dl class="section return"><dt>返回</dt><dd>对应键的值的引用</dd></dl>
 <p>如果键不存在，则插入一个默认构造的值并返回其引用。 </p>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00483">483</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00486">486</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00213">end()</a>, <a class="el" href="type__traits_8hpp_source.html#l04323">initialize()</a>, <a class="el" href="map_8hpp_source.html#l00297">key_comp()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00216">end()</a>, <a class="el" href="type__traits_8hpp_source.html#l04318">initialize()</a>, <a class="el" href="map_8hpp_source.html#l00300">key_comp()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -2092,7 +2092,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00255">255</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00258">258</a> 行定义.</p>
 
 </div>
 </div>
@@ -2124,7 +2124,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素的反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00243">243</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00246">246</a> 行定义.</p>
 
 </div>
 </div>
@@ -2156,7 +2156,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素之前位置的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00261">261</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00264">264</a> 行定义.</p>
 
 </div>
 </div>
@@ -2188,7 +2188,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向第一个元素之前位置的反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00249">249</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00252">252</a> 行定义.</p>
 
 </div>
 </div>
@@ -2220,7 +2220,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取元素数量 </p>
 <dl class="section return"><dt>返回</dt><dd>map中的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00279">279</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00282">282</a> 行定义.</p>
 
 </div>
 </div>
@@ -2257,9 +2257,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00523">523</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00526">526</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00098">map()</a>.</p>
+<p class="reference">引用了 <a class="el" href="map_8hpp_source.html#l00101">map()</a>.</p>
 
 </div>
 </div>
@@ -2297,7 +2297,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00436">436</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00439">439</a> 行定义.</p>
 
 </div>
 </div>
@@ -2335,7 +2335,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00443">443</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00446">446</a> 行定义.</p>
 
 </div>
 </div>
@@ -2367,7 +2367,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取值比较函数对象 </p>
 <dl class="section return"><dt>返回</dt><dd>值比较函数对象的副本 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00303">303</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="map_8hpp_source.html">map.hpp</a> 第 <a class="el" href="map_8hpp_source.html#l00306">306</a> 行定义.</p>
 
 </div>
 </div>

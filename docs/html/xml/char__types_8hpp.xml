@@ -1,0 +1,1256 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="char__types_8hpp" kind="file" language="C++">
+    <compoundname>char_types.hpp</compoundname>
+    <includes refid="type__traits_8hpp" local="yes">NeForce/core/typeinfo/type_traits.hpp</includes>
+    <includedby refid="basic__string__view_8hpp" local="yes">basic_string_view.hpp</includedby>
+    <incdepgraph>
+      <node id="4">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>char_types.hpp</label>
+        <link refid="char__types_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>NeForce/core/typeinfo/type_traits.hpp</label>
+        <link refid="type__traits_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="types_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>assert.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="10">
+        <label>NeForce.hpp</label>
+        <link refid="_ne_force_8hpp"/>
+      </node>
+      <node id="123">
+        <label>lz4_compress.hpp</label>
+        <link refid="lz4__compress_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="138">
+        <label>zlib_compress.hpp</label>
+        <link refid="zlib__compress_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>thread_pool.hpp</label>
+        <link refid="thread__pool_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>bitmap.hpp</label>
+        <link refid="bitmap_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>bitset.hpp</label>
+        <link refid="bitset_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>bloom_filter.hpp</label>
+        <link refid="bloom__filter_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>aes256.hpp</label>
+        <link refid="aes256_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>base64.hpp</label>
+        <link refid="base64_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="124">
+        <label>md5.hpp</label>
+        <link refid="md5_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="128">
+        <label>sha1.hpp</label>
+        <link refid="sha1_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="129">
+        <label>sha256.hpp</label>
+        <link refid="sha256_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="137">
+        <label>xor.hpp</label>
+        <link refid="xor_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>error_category.hpp</label>
+        <link refid="error__category_8hpp_source"/>
+        <childnode refid="77" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>error_code.hpp</label>
+        <link refid="error__code_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>error_condition.hpp</label>
+        <link refid="error__condition_8hpp_source"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>env_builder.hpp</label>
+        <link refid="env__builder_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>env_parser.hpp</label>
+        <link refid="env__parser_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>env_value.hpp</label>
+        <link refid="env__value_8hpp"/>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>file.hpp</label>
+        <link refid="file_8hpp"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>file_async.hpp</label>
+        <link refid="file__async_8hpp"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="117">
+        <label>file_diff.hpp</label>
+        <link refid="file__diff_8hpp"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>file_info.hpp</label>
+        <link refid="file__info_8hpp"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="118">
+        <label>file_watcher.hpp</label>
+        <link refid="file__watcher_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="96">
+        <label>filesystem.hpp</label>
+        <link refid="filesystem_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>ini_builder.hpp</label>
+        <link refid="ini__builder_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>ini_parser.hpp</label>
+        <link refid="ini__parser_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>ini_value.hpp</label>
+        <link refid="ini__value_8hpp"/>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+      </node>
+      <node id="114">
+        <label>json_builder.hpp</label>
+        <link refid="json__builder_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="115">
+        <label>json_parser.hpp</label>
+        <link refid="json__parser_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="113">
+        <label>json_value.hpp</label>
+        <link refid="json__value_8hpp"/>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="115" relation="include">
+        </childnode>
+      </node>
+      <node id="116">
+        <label>path.hpp</label>
+        <link refid="path_8hpp"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="117" relation="include">
+        </childnode>
+        <childnode refid="118" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="119" relation="include">
+        </childnode>
+      </node>
+      <node id="119">
+        <label>path_tree.hpp</label>
+        <link refid="path__tree_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>temp_file.hpp</label>
+        <link refid="temp__file_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>toml_builder.hpp</label>
+        <link refid="toml__builder_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>toml_parser.hpp</label>
+        <link refid="toml__parser_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>toml_value.hpp</label>
+        <link refid="toml__value_8hpp"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>yaml_builder.hpp</label>
+        <link refid="yaml__builder_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>yaml_parser.hpp</label>
+        <link refid="yaml__parser_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>yaml_value.hpp</label>
+        <link refid="yaml__value_8hpp"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>icharacter.hpp</label>
+        <link refid="icharacter_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="94">
+        <label>iobject.hpp</label>
+        <link refid="iobject_8hpp"/>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>istringify.hpp</label>
+        <link refid="istringify_8hpp"/>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="113" relation="include">
+        </childnode>
+        <childnode refid="116" relation="include">
+        </childnode>
+        <childnode refid="120" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>trace_memory.hpp</label>
+        <link refid="trace__memory_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>int128.hpp</label>
+        <link refid="int128_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>any.hpp</label>
+        <link refid="reflect_2any_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>function.hpp</label>
+        <link refid="reflect_2function_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>property.hpp</label>
+        <link refid="property_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>reflect.hpp</label>
+        <link refid="reflect_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>registry.hpp</label>
+        <link refid="registry_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>type.hpp</label>
+        <link refid="type_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>json_serializer.hpp</label>
+        <link refid="json__serializer_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>basic_string.hpp</label>
+        <link refid="basic__string_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>basic_string_view.hpp</label>
+        <link refid="basic__string__view_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>char_types.hpp</label>
+        <link refid="char__types_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>codepoint.hpp</label>
+        <link refid="codepoint_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>format.hpp</label>
+        <link refid="format_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="127">
+        <label>regex.hpp</label>
+        <link refid="regex_8hpp"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>string.hpp</label>
+        <link refid="string_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="122" relation="include">
+        </childnode>
+        <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="124" relation="include">
+        </childnode>
+        <childnode refid="125" relation="include">
+        </childnode>
+        <childnode refid="127" relation="include">
+        </childnode>
+        <childnode refid="128" relation="include">
+        </childnode>
+        <childnode refid="129" relation="include">
+        </childnode>
+        <childnode refid="130" relation="include">
+        </childnode>
+        <childnode refid="131" relation="include">
+        </childnode>
+        <childnode refid="132" relation="include">
+        </childnode>
+        <childnode refid="135" relation="include">
+        </childnode>
+        <childnode refid="136" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="137" relation="include">
+        </childnode>
+        <childnode refid="138" relation="include">
+        </childnode>
+      </node>
+      <node id="135">
+        <label>string_util.hpp</label>
+        <link refid="string__util_8hpp"/>
+      </node>
+      <node id="3">
+        <label>string_view.hpp</label>
+        <link refid="string__view_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="139" relation="include">
+        </childnode>
+      </node>
+      <node id="139">
+        <label>to_numerics.hpp</label>
+        <link refid="to__numerics_8hpp"/>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>to_string.hpp</label>
+        <link refid="to__string_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>utf.hpp</label>
+        <link refid="utf_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>cmdline.hpp</label>
+        <link refid="cmdline_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>console.hpp</label>
+        <link refid="console_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>dynamic_library.hpp</label>
+        <link refid="dynamic__library_8hpp"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>environment.hpp</label>
+        <link refid="environment_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="122">
+        <label>locale.hpp</label>
+        <link refid="locale_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="125">
+        <label>pipe.hpp</label>
+        <link refid="pipe_8hpp"/>
+        <childnode refid="126" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+      </node>
+      <node id="126">
+        <label>process.hpp</label>
+        <link refid="process_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="130">
+        <label>share_memory.hpp</label>
+        <link refid="share__memory_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="120">
+        <label>stacktrace.hpp</label>
+        <link refid="stacktrace_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="136">
+        <label>sysinfo.hpp</label>
+        <link refid="sysinfo_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>datetime.hpp</label>
+        <link refid="datetime_8hpp"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>check_type.hpp</label>
+        <link refid="check__type_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>byte_size.hpp</label>
+        <link refid="byte__size_8hpp"/>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>color.hpp</label>
+        <link refid="color_8hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>hexadecimal.hpp</label>
+        <link refid="hexadecimal_8hpp"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>packages.hpp</label>
+        <link refid="packages_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="121">
+        <label>uuid.hpp</label>
+        <link refid="uuid_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>database_pool.hpp</label>
+        <link refid="database__pool_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>db_config.hpp</label>
+        <link refid="db__config_8hpp"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>db_interface.hpp</label>
+        <link refid="db__interface_8hpp"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>mysql_connect.hpp</label>
+        <link refid="mysql__connect_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>mysql_prepared_result.hpp</label>
+        <link refid="mysql__prepared__result_8hpp"/>
+      </node>
+      <node id="32">
+        <label>mysql_prepared_statement.hpp</label>
+        <link refid="mysql__prepared__statement_8hpp"/>
+      </node>
+      <node id="33">
+        <label>mysql_result.hpp</label>
+        <link refid="mysql__result_8hpp"/>
+      </node>
+      <node id="34">
+        <label>pgsql_connect.hpp</label>
+        <link refid="pgsql__connect_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>pgsql_prepared_result.hpp</label>
+        <link refid="pgsql__prepared__result_8hpp"/>
+      </node>
+      <node id="35">
+        <label>pgsql_prepared_statement.hpp</label>
+        <link refid="pgsql__prepared__statement_8hpp"/>
+      </node>
+      <node id="36">
+        <label>pgsql_result.hpp</label>
+        <link refid="pgsql__result_8hpp"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>redis_connect.hpp</label>
+        <link refid="redis__connect_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>redis_result.hpp</label>
+        <link refid="redis__result_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="131">
+        <label>sql_builder.hpp</label>
+        <link refid="sql__builder_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>sqlite_connect.hpp</label>
+        <link refid="sqlite__connect_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>sqlite_prepared_result.hpp</label>
+        <link refid="sqlite__prepared__result_8hpp"/>
+      </node>
+      <node id="42">
+        <label>sqlite_prepared_statement.hpp</label>
+        <link refid="sqlite__prepared__statement_8hpp"/>
+      </node>
+      <node id="43">
+        <label>sqlite_result.hpp</label>
+        <link refid="sqlite__result_8hpp"/>
+      </node>
+      <node id="46">
+        <label>file_sink.hpp</label>
+        <link refid="file__sink_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>log_event.hpp</label>
+        <link refid="log__event_8hpp"/>
+        <childnode refid="57" relation="include">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>log_sink.hpp</label>
+        <link refid="log__sink_8hpp"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>logger.hpp</label>
+        <link refid="logger_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>dns_client.hpp</label>
+        <link refid="dns__client_8hpp"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>dns_message.hpp</label>
+        <link refid="dns__message_8hpp"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>ftp_client.hpp</label>
+        <link refid="ftp__client_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="105">
+        <label>ftp_protocol.hpp</label>
+        <link refid="ftp__protocol_8hpp_source"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+      </node>
+      <node id="106">
+        <label>ftp_server.hpp</label>
+        <link refid="ftp__server_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>http_client.hpp</label>
+        <link refid="http__client_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>http_client_message.hpp</label>
+        <link refid="http__client__message_8hpp"/>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>http_constants.hpp</label>
+        <link refid="http__constants_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>http_filter.hpp</label>
+        <link refid="http__filter_8hpp"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>http_router.hpp</label>
+        <link refid="http__router_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>http_server_message.hpp</label>
+        <link refid="http__server__message_8hpp"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>http_session.hpp</label>
+        <link refid="http__session_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>websocket.hpp</label>
+        <link refid="websocket_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="103">
+        <label>icmp_socket.hpp</label>
+        <link refid="icmp__socket_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="104">
+        <label>ip_socket.hpp</label>
+        <link refid="ip__socket_8hpp"/>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="107" relation="include">
+        </childnode>
+        <childnode refid="111" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>smtp_socket.hpp</label>
+        <link refid="smtp__socket_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>socket_base.hpp</label>
+        <link refid="socket__base_8hpp"/>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="104" relation="include">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>ssl_acceptor.hpp</label>
+        <link refid="ssl__acceptor_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+      </node>
+      <node id="133">
+        <label>ssl_context.hpp</label>
+        <link refid="ssl__context_8hpp"/>
+        <childnode refid="134" relation="include">
+        </childnode>
+      </node>
+      <node id="132">
+        <label>ssl_exception.hpp</label>
+        <link refid="ssl__exception_8hpp_source"/>
+        <childnode refid="133" relation="include">
+        </childnode>
+      </node>
+      <node id="108">
+        <label>ssl_socket.hpp</label>
+        <link refid="ssl__socket_8hpp"/>
+        <childnode refid="109" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="134">
+        <label>ssl_stream.hpp</label>
+        <link refid="ssl__stream_8hpp"/>
+        <childnode refid="105" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+      </node>
+      <node id="110">
+        <label>tcp_acceptor.hpp</label>
+        <link refid="tcp__acceptor_8hpp"/>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>tcp_server.hpp</label>
+        <link refid="tcp__server_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>tcp_socket.hpp</label>
+        <link refid="tcp__socket_8hpp"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="110" relation="include">
+        </childnode>
+      </node>
+      <node id="111">
+        <label>udp_socket.hpp</label>
+        <link refid="udp__socket_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>arp.hpp</label>
+        <link refid="arp_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>ip_address.hpp</label>
+        <link refid="ip__address_8hpp"/>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>mac_address.hpp</label>
+        <link refid="mac__address_8hpp"/>
+        <childnode refid="101" relation="include">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>ports.hpp</label>
+        <link refid="ports_8hpp"/>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+      </node>
+      <node id="112">
+        <label>url.hpp</label>
+        <link refid="url_8hpp"/>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>iplugin.hpp</label>
+        <link refid="iplugin_8hpp"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>plugin_entry.hpp</label>
+        <link refid="plugin__entry_8hpp"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>plugin_manager.hpp</label>
+        <link refid="plugin__manager_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="func">
+      <member refid="group___char_type_checking_1ga1afb55a61d64e71fd0c5387a19df3636" kind="function"><name>is_ctype</name></member>
+      <member refid="group___char_type_checking_1ga6fce84ff259aeb98e8edb4935af8a5e8" kind="function"><name>is_punct</name></member>
+      <member refid="group___char_type_checking_1ga54ee4b379a3b5f3200b577804db90b16" kind="function"><name>is_cntrl</name></member>
+      <member refid="group___char_type_checking_1gaf10ab6b530f7a08d45e446b947225d89" kind="function"><name>is_print</name></member>
+      <member refid="group___char_type_checking_1ga70252cadeb097c48b5e6edae58406356" kind="function"><name>is_blank</name></member>
+      <member refid="group___char_type_checking_1gaf29ecd4deceb511e0e3eb324ccde1802" kind="function"><name>is_graph</name></member>
+      <member refid="group___char_type_checking_1gadbad0104b10841cc70a92d335ec34d35" kind="function"><name>is_ascii</name></member>
+      <member refid="group___char_type_checking_1gafd3abf02df46318e1997fe03c2d44909" kind="function"><name>is_space</name></member>
+      <member refid="group___char_type_checking_1ga9647036e3fd4889c43245603af6de72f" kind="function"><name>is_alpha</name></member>
+      <member refid="group___char_type_checking_1ga4879a0699b90eecc609283c6f61a7847" kind="function"><name>is_digit</name></member>
+      <member refid="group___char_type_checking_1ga24b05557f8930a4066566d0da18ec4b5" kind="function"><name>is_xdigit</name></member>
+      <member refid="group___char_type_checking_1ga6ae6e4975250f3f08822bf7130285d57" kind="function"><name>is_alpha_or_digit</name></member>
+      <member refid="group___char_type_checking_1ga2bc419a3d1d9b1423d519b667295df6c" kind="function"><name>is_digit_or_alpha</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>字符类型分类和转换函数 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>此文件提供了字符分类和转换函数的实现，包括ASCII字符检查、 字符类型判断、大小写转换等功能。使用位掩码技术高效实现。 </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_STRING_CHAR_TYPES_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_STRING_CHAR_TYPES_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="type__traits_8hpp" kindref="compound">NeForce/core/typeinfo/type_traits.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal">NEFORCE_BEGIN_CONSTANTS__</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal">NEFORCE_INLINE17<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>BLANK_MASK<sp/>=<sp/>(1ULL<sp/>&lt;&lt;<sp/>9)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>\t</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>32);<sp/></highlight><highlight class="comment">//<sp/>space</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal">NEFORCE_INLINE17<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>SPACE_MASK<sp/>=<sp/>BLANK_MASK<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>10)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>\n</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>11)<sp/>|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>\v</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>12)<sp/>|<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>\f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>13);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>\r</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal">NEFORCE_INLINE17<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>PUNCT_MASK_LOW<sp/>=</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>33)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>34)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>35)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>36)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>!&quot;#$<sp/>(33~36<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>37)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>38)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>39)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>40)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>%&amp;&apos;()<sp/>(37~40<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>41)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>42)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>43)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>44)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>*+,-<sp/>(41~44<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>45)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>46)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>47)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>58)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>./:<sp/>(45~47,58<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>59)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>60)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>61)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>62)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>;&lt;=&gt;<sp/>(59~62<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>63);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>?</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal">NEFORCE_INLINE17<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>PUNCT_MASK_HIGH<sp/>=<sp/>(1ULL<sp/>&lt;&lt;<sp/>(64<sp/>-<sp/>64))<sp/>|<sp/><sp/></highlight><highlight class="comment">//<sp/>@(64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>(91<sp/>-<sp/>64))<sp/>|<sp/><sp/></highlight><highlight class="comment">//<sp/>[(91)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>(92<sp/>-<sp/>64))<sp/>|<sp/><sp/></highlight><highlight class="comment">//<sp/>\(92)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>(93<sp/>-<sp/>64))<sp/>|<sp/><sp/></highlight><highlight class="comment">//<sp/>](93)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>(94<sp/>-<sp/>64))<sp/>|<sp/><sp/></highlight><highlight class="comment">//<sp/>^(94)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>(95<sp/>-<sp/>64))<sp/>|<sp/><sp/></highlight><highlight class="comment">//<sp/>_(95)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>(96<sp/>-<sp/>64))<sp/>|<sp/><sp/></highlight><highlight class="comment">//<sp/>`(96)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>(123<sp/>-<sp/>64))<sp/>|<sp/></highlight><highlight class="comment">//<sp/>{(123)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>(124<sp/>-<sp/>64))<sp/>|<sp/></highlight><highlight class="comment">//<sp/>|(124)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>(125<sp/>-<sp/>64))<sp/>|<sp/></highlight><highlight class="comment">//<sp/>}(125)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>(126<sp/>-<sp/>64));<sp/><sp/></highlight><highlight class="comment">//<sp/>~(126)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal">NEFORCE_INLINE17<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>CNTRL_MASK_LOW<sp/>=</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>0)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>1)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>2)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>3)<sp/>|<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>0-3<sp/>(0~3<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>4)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>5)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>6)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>7)<sp/>|<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>4-7<sp/>(4~7<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>8)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>9)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>10)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>11)<sp/>|<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>8-11<sp/>(8~11<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>12)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>13)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>14)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>15)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>12-15<sp/>(12~15<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>16)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>17)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>18)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>19)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>16-19<sp/>(16~19<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>20)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>21)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>22)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>23)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>20-23<sp/>(20~23<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>24)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>25)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>26)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>27)<sp/>|<sp/></highlight><highlight class="comment">//<sp/>24-27<sp/>(24~27<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1ULL<sp/>&lt;&lt;<sp/>28)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>29)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>30)<sp/>|<sp/>(1ULL<sp/>&lt;&lt;<sp/>31);<sp/><sp/></highlight><highlight class="comment">//<sp/>30-31<sp/>(30~31<sp/>&lt;<sp/>64)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal">NEFORCE_INLINE17<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>CNTRL_MASK_HIGH<sp/>=<sp/>(1ULL<sp/>&lt;&lt;<sp/>(127<sp/>-<sp/>64));<sp/></highlight><highlight class="comment">//<sp/>DEL(127)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal">NEFORCE_END_CONSTANTS__</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="115" refid="group___char_type_checking_1ga1afb55a61d64e71fd0c5387a19df3636" refkind="member"><highlight class="normal">NEFORCE_PURE_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1ga1afb55a61d64e71fd0c5387a19df3636" kindref="member">is_ctype</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c,<sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>mask_low,<sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>mask_high)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" kindref="member">is_character_v&lt;CharT&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;character<sp/>required&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>uc<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___sign_manipulation_1gaabeda2fce2dea6fa29533488400dd386" kindref="member">make_unsigned_t&lt;CharT&gt;</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(c);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(uc<sp/>&gt;<sp/>127)<sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(uc<sp/>&lt;=<sp/>63)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(mask_low<sp/>&amp;<sp/>(1ULL<sp/>&lt;&lt;<sp/>uc))<sp/>!=<sp/>0;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>offset<sp/>=<sp/>uc<sp/>-<sp/>64;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(mask_high<sp/>&amp;<sp/>(1ULL<sp/>&lt;&lt;<sp/>offset))<sp/>!=<sp/>0;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="135" refid="group___char_type_checking_1ga6fce84ff259aeb98e8edb4935af8a5e8" refkind="member"><highlight class="normal">NEFORCE_PURE_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1ga6fce84ff259aeb98e8edb4935af8a5e8" kindref="member">is_punct</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___char_type_checking_1ga1afb55a61d64e71fd0c5387a19df3636" kindref="member">is_ctype</ref>(c,<sp/>constants::PUNCT_MASK_LOW,<sp/>constants::PUNCT_MASK_HIGH);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="148" refid="group___char_type_checking_1ga54ee4b379a3b5f3200b577804db90b16" refkind="member"><highlight class="normal">NEFORCE_PURE_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1ga54ee4b379a3b5f3200b577804db90b16" kindref="member">is_cntrl</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___char_type_checking_1ga1afb55a61d64e71fd0c5387a19df3636" kindref="member">is_ctype</ref>(c,<sp/>constants::CNTRL_MASK_LOW,<sp/>constants::CNTRL_MASK_HIGH);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="161" refid="group___char_type_checking_1gaf10ab6b530f7a08d45e446b947225d89" refkind="member"><highlight class="normal">NEFORCE_PURE_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1gaf10ab6b530f7a08d45e446b947225d89" kindref="member">is_print</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>uc<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___sign_manipulation_1gaabeda2fce2dea6fa29533488400dd386" kindref="member">make_unsigned_t&lt;CharT&gt;</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(c);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>uc<sp/>&lt;=<sp/>127<sp/>&amp;&amp;<sp/>!_NEFORCE<sp/><ref refid="group___char_type_checking_1ga54ee4b379a3b5f3200b577804db90b16" kindref="member">is_cntrl</ref>(c);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="175" refid="group___char_type_checking_1ga70252cadeb097c48b5e6edae58406356" refkind="member"><highlight class="normal">NEFORCE_PURE_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1ga70252cadeb097c48b5e6edae58406356" kindref="member">is_blank</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" kindref="member">is_character_v&lt;CharT&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;character<sp/>required&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>uc<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___sign_manipulation_1gaabeda2fce2dea6fa29533488400dd386" kindref="member">make_unsigned_t&lt;CharT&gt;</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(c);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>uc<sp/>&lt;<sp/>64<sp/>&amp;&amp;<sp/>(constants::BLANK_MASK<sp/>&amp;<sp/>(1ULL<sp/>&lt;&lt;<sp/>uc))<sp/>!=<sp/>0;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="190" refid="group___char_type_checking_1gaf29ecd4deceb511e0e3eb324ccde1802" refkind="member"><highlight class="normal">NEFORCE_PURE_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1gaf29ecd4deceb511e0e3eb324ccde1802" kindref="member">is_graph</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___char_type_checking_1gaf10ab6b530f7a08d45e446b947225d89" kindref="member">is_print</ref>(c)<sp/>&amp;&amp;<sp/>!_NEFORCE<sp/><ref refid="group___char_type_checking_1ga70252cadeb097c48b5e6edae58406356" kindref="member">is_blank</ref>(c);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="203" refid="group___char_type_checking_1gadbad0104b10841cc70a92d335ec34d35" refkind="member"><highlight class="normal">NEFORCE_CONST_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1gadbad0104b10841cc70a92d335ec34d35" kindref="member">is_ascii</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" kindref="member">is_character_v&lt;CharT&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;character<sp/>required&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>uc<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___sign_manipulation_1gaabeda2fce2dea6fa29533488400dd386" kindref="member">make_unsigned_t&lt;CharT&gt;</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(c);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>uc<sp/>&lt;=<sp/>127;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="218" refid="group___char_type_checking_1gafd3abf02df46318e1997fe03c2d44909" refkind="member"><highlight class="normal">NEFORCE_PURE_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1gafd3abf02df46318e1997fe03c2d44909" kindref="member">is_space</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" kindref="member">is_character_v&lt;CharT&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;character<sp/>required&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>uc<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___sign_manipulation_1gaabeda2fce2dea6fa29533488400dd386" kindref="member">make_unsigned_t&lt;CharT&gt;</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(c);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>uc<sp/>&lt;<sp/>64<sp/>&amp;&amp;<sp/>(constants::SPACE_MASK<sp/>&amp;<sp/>(1ULL<sp/>&lt;&lt;<sp/>uc))<sp/>!=<sp/>0;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="233" refid="group___char_type_checking_1ga9647036e3fd4889c43245603af6de72f" refkind="member"><highlight class="normal">NEFORCE_CONST_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1ga9647036e3fd4889c43245603af6de72f" kindref="member">is_alpha</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" kindref="member">is_character_v&lt;CharT&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;character<sp/>required&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>uc<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___sign_manipulation_1gaabeda2fce2dea6fa29533488400dd386" kindref="member">make_unsigned_t&lt;CharT&gt;</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(c);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(uc<sp/>&gt;<sp/>127)<sp/>{</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(uc<sp/>&amp;<sp/>0xDF)<sp/>&gt;=<sp/></highlight><highlight class="charliteral">&apos;A&apos;</highlight><highlight class="normal"><sp/>&amp;&amp;<sp/>(uc<sp/>&amp;<sp/>0xDF)<sp/>&lt;=<sp/></highlight><highlight class="charliteral">&apos;Z&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="251" refid="group___char_type_checking_1ga4879a0699b90eecc609283c6f61a7847" refkind="member"><highlight class="normal">NEFORCE_CONST_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1ga4879a0699b90eecc609283c6f61a7847" kindref="member">is_digit</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" kindref="member">is_character_v&lt;CharT&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;character<sp/>required&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>uc<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___sign_manipulation_1gaabeda2fce2dea6fa29533488400dd386" kindref="member">make_unsigned_t&lt;CharT&gt;</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(c);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(uc<sp/>&gt;<sp/>127)<sp/>{</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(uc<sp/>&amp;<sp/>0xF0)<sp/>==<sp/>0x30<sp/>&amp;&amp;<sp/>(uc<sp/>&amp;<sp/>0x0F)<sp/>&lt;=<sp/>9;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="269" refid="group___char_type_checking_1ga24b05557f8930a4066566d0da18ec4b5" refkind="member"><highlight class="normal">NEFORCE_CONST_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1ga24b05557f8930a4066566d0da18ec4b5" kindref="member">is_xdigit</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" kindref="member">is_character_v&lt;CharT&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;character<sp/>required&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>uc<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___sign_manipulation_1gaabeda2fce2dea6fa29533488400dd386" kindref="member">make_unsigned_t&lt;CharT&gt;</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(c);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(uc<sp/>&gt;<sp/>127)<sp/>{</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_09<sp/>=<sp/>(uc<sp/>&amp;<sp/>0xF0)<sp/>==<sp/>0x30<sp/>&amp;&amp;<sp/>(uc<sp/>&amp;<sp/>0x0F)<sp/>&lt;=<sp/>0x09;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_AF<sp/>=<sp/>(uc<sp/>&amp;<sp/>0xF0)<sp/>==<sp/>0x40<sp/>&amp;&amp;<sp/>(uc<sp/>&amp;<sp/>0x0F)<sp/>&gt;=<sp/>0x01<sp/>&amp;&amp;<sp/>(uc<sp/>&amp;<sp/>0x0F)<sp/>&lt;=<sp/>0x06;</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_af<sp/>=<sp/>(uc<sp/>&amp;<sp/>0xF0)<sp/>==<sp/>0x60<sp/>&amp;&amp;<sp/>(uc<sp/>&amp;<sp/>0x0F)<sp/>&gt;=<sp/>0x01<sp/>&amp;&amp;<sp/>(uc<sp/>&amp;<sp/>0x0F)<sp/>&lt;=<sp/>0x06;</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>is_09<sp/>||<sp/>is_AF<sp/>||<sp/>is_af;</highlight></codeline>
+<codeline lineno="279"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="288" refid="group___char_type_checking_1ga6ae6e4975250f3f08822bf7130285d57" refkind="member"><highlight class="normal">NEFORCE_CONST_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1ga6ae6e4975250f3f08822bf7130285d57" kindref="member">is_alpha_or_digit</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___char_type_checking_1ga9647036e3fd4889c43245603af6de72f" kindref="member">is_alpha</ref>(c)<sp/>||<sp/>_NEFORCE<sp/><ref refid="group___char_type_checking_1ga4879a0699b90eecc609283c6f61a7847" kindref="member">is_digit</ref>(c);</highlight></codeline>
+<codeline lineno="290"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CharT&gt;</highlight></codeline>
+<codeline lineno="299" refid="group___char_type_checking_1ga2bc419a3d1d9b1423d519b667295df6c" refkind="member"><highlight class="normal">NEFORCE_CONST_FUNCTION<sp/>NEFORCE_CONSTEXPR14<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___char_type_checking_1ga2bc419a3d1d9b1423d519b667295df6c" kindref="member">is_digit_or_alpha</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CharT<sp/>c)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___char_type_checking_1ga4879a0699b90eecc609283c6f61a7847" kindref="member">is_digit</ref>(c)<sp/>||<sp/>_NEFORCE<sp/><ref refid="group___char_type_checking_1ga9647036e3fd4889c43245603af6de72f" kindref="member">is_alpha</ref>(c);</highlight></codeline>
+<codeline lineno="301"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>CharTypeChecking</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_STRING_CHAR_TYPES_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp"/>
+  </compounddef>
+</doxygen>

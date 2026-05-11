@@ -302,7 +302,7 @@ var group___atomic_operations =
       [ "store", "structatomic.html#a3e1268f8d4abb49382c713740a13234a", null ]
     ] ],
     [ "atomic_flag", "structatomic__flag.html", [
-      [ "value_type", "structatomic__flag.html#a0ee7fe7ade0ba0b479ace7103fac2574", null ],
+      [ "value_type", "structatomic__flag.html#ac590d5ad311c8cb717b408eac1494cd4", null ],
       [ "atomic_flag", "structatomic__flag.html#a11a7b130034df6600578d54f8bfaf7ec", null ],
       [ "clear", "structatomic__flag.html#a482380fc8a9add7bbdc779a601b63444", null ],
       [ "clear", "structatomic__flag.html#a9bad570d55fe97eb579d9f73ec6e78c9", null ],
@@ -418,8 +418,8 @@ var group___atomic_operations =
       [ "operator=", "structatomic__base_3_01_t_01_5_01_4.html#ac6c0cacce2cdb0043b03411aadfea473", null ],
       [ "operator^=", "structatomic__base.html#a7c87e16ad9de16b216977ef1f35a40ca", null ],
       [ "operator|=", "structatomic__base.html#acee86a43dd988ca37d0c1a319903eaeb", null ],
-      [ "store", "structatomic__base_3_01_t_01_5_01_4.html#a3bb7cbe13ec8db0b8ba6f134eb31b1ab", null ],
       [ "store", "structatomic__base_3_01_t_01_5_01_4.html#a95b43b5cc705af7badc6d18dfc8b2431", null ],
+      [ "store", "structatomic__base_3_01_t_01_5_01_4.html#af64a00bcd805e76ccd7a07211cacc104", null ],
       [ "wait", "structatomic__base_3_01_t_01_5_01_4.html#af7379fe6e4ea83d93fab90faed67c15a", null ]
     ] ],
     [ "atomic_float_base&lt; Float &gt;", "structatomic__float__base.html", [

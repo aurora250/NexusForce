@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="insert__iterator_8hpp" kind="file" language="C++">
+    <compoundname>insert_iterator.hpp</compoundname>
+    <includes refid="type__traits_8hpp" local="yes">NeForce/core/typeinfo/type_traits.hpp</includes>
+    <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
+    <incdepgraph>
+      <node id="4">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>insert_iterator.hpp</label>
+        <link refid="insert__iterator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>NeForce/core/typeinfo/type_traits.hpp</label>
+        <link refid="type__traits_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="types_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>assert.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>NeForce.hpp</label>
+        <link refid="_ne_force_8hpp"/>
+      </node>
+      <node id="1">
+        <label>insert_iterator.hpp</label>
+        <link refid="insert__iterator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classback__insert__iterator" prot="public">back_insert_iterator</innerclass>
+    <innerclass refid="classfront__insert__iterator" prot="public">front_insert_iterator</innerclass>
+    <innerclass refid="classinsert__iterator" prot="public">insert_iterator</innerclass>
+    <sectiondef kind="func">
+      <member refid="group___insert_iterators_1ga8c8756a9a8367a3d7cdfdf2b6051d824" kind="function"><name>make_back_inserter</name></member>
+      <member refid="group___insert_iterators_1gac83e7b658dcaebba57f70221a1e7cff1" kind="function"><name>make_front_inserter</name></member>
+      <member refid="group___insert_iterators_1ga8a7f93aba64786512d1679e6812a62bb" kind="function"><name>make_inserter</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>插入迭代器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>此文件提供了插入迭代器的实现，用于将元素插入到容器中。 </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_ITERATOR_INSERT_ITERATOR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_ITERATOR_INSERT_ITERATOR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="type__traits_8hpp" kindref="compound">NeForce/core/typeinfo/type_traits.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container&gt;</highlight></codeline>
+<codeline lineno="28" refid="classback__insert__iterator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classback__insert__iterator_1ae484d91da808bfe16852543100c7d648" kindref="member">back_insert_iterator</ref><sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="30" refid="classback__insert__iterator_1a77b75526f6e91326d6e3a1b27be13291" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classback__insert__iterator_1a77b75526f6e91326d6e3a1b27be13291" kindref="member">iterator_category</ref><sp/>=<sp/><ref refid="structoutput__iterator__tag" kindref="compound">output_iterator_tag</ref>;<sp/></highlight></codeline>
+<codeline lineno="31" refid="classback__insert__iterator_1acd6f2cff30db234a76ad73f5df08e4ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classback__insert__iterator_1acd6f2cff30db234a76ad73f5df08e4ff" kindref="member">value_type</ref><sp/>=<sp/>void;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32" refid="classback__insert__iterator_1a918b56fbccafe9a8202047a14508d923" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classback__insert__iterator_1a918b56fbccafe9a8202047a14508d923" kindref="member">difference_type</ref><sp/>=<sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="33" refid="classback__insert__iterator_1a47b5a40e6b1c8923d27a938e385531b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classback__insert__iterator_1a47b5a40e6b1c8923d27a938e385531b9" kindref="member">pointer</ref><sp/>=<sp/>void;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34" refid="classback__insert__iterator_1a85196bc846c8fa2796596a896d9071c6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classback__insert__iterator_1a85196bc846c8fa2796596a896d9071c6" kindref="member">reference</ref><sp/>=<sp/>void;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>Container*<sp/>container;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="44" refid="classback__insert__iterator_1ae484d91da808bfe16852543100c7d648" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classback__insert__iterator_1ae484d91da808bfe16852543100c7d648" kindref="member">back_insert_iterator</ref>(Container&amp;<sp/>x)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>container(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" kindref="member">addressof</ref>(x))<sp/>{}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="classback__insert__iterator_1a0d7ab8d506c6543bf2aae98e75bcc4c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classback__insert__iterator_1ae484d91da808bfe16852543100c7d648" kindref="member">back_insert_iterator</ref>&amp;<sp/><ref refid="classback__insert__iterator_1a0d7ab8d506c6543bf2aae98e75bcc4c7" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::value_type&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>container-&gt;push_back(value);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="classback__insert__iterator_1a8f48cefb3eab86ebb5117e3eaa80f96a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classback__insert__iterator_1ae484d91da808bfe16852543100c7d648" kindref="member">back_insert_iterator</ref>&amp;<sp/><ref refid="classback__insert__iterator_1a8f48cefb3eab86ebb5117e3eaa80f96a" kindref="member">operator=</ref>(</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::value_type&amp;&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>container-&gt;push_back(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(value));</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="classback__insert__iterator_1ad420e647277c00dcc00146ef4b5e55ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classback__insert__iterator_1ad420e647277c00dcc00146ef4b5e55ec" kindref="member">~back_insert_iterator</ref>()<sp/>noexcept<sp/>=<sp/>default;<sp/></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69" refid="classback__insert__iterator_1ad19393c9b2436af640a7e3392d0bc6ef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>constexpr<sp/><ref refid="classback__insert__iterator_1ae484d91da808bfe16852543100c7d648" kindref="member">back_insert_iterator</ref>&amp;<sp/>operator*()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}<sp/></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>前置自增操作符</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classback__insert__iterator" kindref="compound">back_insert_iterator</ref>&amp;<sp/>operator++()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>后置自增操作符</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classback__insert__iterator_1ae484d91da808bfe16852543100c7d648" kindref="member">back_insert_iterator</ref><sp/>operator++(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classback__insert__iterator_1ae484d91da808bfe16852543100c7d648" kindref="member">back_insert_iterator</ref><sp/>tmp<sp/>=<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tmp;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container&gt;</highlight></codeline>
+<codeline lineno="87" refid="group___insert_iterators_1ga8c8756a9a8367a3d7cdfdf2b6051d824" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classback__insert__iterator" kindref="compound">back_insert_iterator&lt;Container&gt;</ref><sp/><ref refid="group___insert_iterators_1ga8c8756a9a8367a3d7cdfdf2b6051d824" kindref="member">make_back_inserter</ref>(Container&amp;<sp/>x)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classback__insert__iterator" kindref="compound">back_insert_iterator&lt;Container&gt;</ref>(x);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container&gt;</highlight></codeline>
+<codeline lineno="100" refid="classfront__insert__iterator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classfront__insert__iterator_1a5ec0f6fb3fea4163ea7bb72f3cbd62b1" kindref="member">front_insert_iterator</ref><sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="102" refid="classfront__insert__iterator_1a2d87545fb7b38deefa3b41c5b3214c3a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfront__insert__iterator_1a2d87545fb7b38deefa3b41c5b3214c3a" kindref="member">iterator_category</ref><sp/>=<sp/><ref refid="structoutput__iterator__tag" kindref="compound">output_iterator_tag</ref>;<sp/></highlight></codeline>
+<codeline lineno="103" refid="classfront__insert__iterator_1a078dfb5a3585b87ec59f12a0640508f0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfront__insert__iterator_1a078dfb5a3585b87ec59f12a0640508f0" kindref="member">value_type</ref><sp/>=<sp/>void;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="104" refid="classfront__insert__iterator_1abc763d979313456e8ab6066f7780ce4e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfront__insert__iterator_1abc763d979313456e8ab6066f7780ce4e" kindref="member">difference_type</ref><sp/>=<sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="105" refid="classfront__insert__iterator_1a71027d63e9c05cf0c81cb4dc7bc15cca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfront__insert__iterator_1a71027d63e9c05cf0c81cb4dc7bc15cca" kindref="member">pointer</ref><sp/>=<sp/>void;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="106" refid="classfront__insert__iterator_1aece34bdafce08024a65eea3483eea36c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfront__insert__iterator_1aece34bdafce08024a65eea3483eea36c" kindref="member">reference</ref><sp/>=<sp/>void;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>Container*<sp/>container;<sp/></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="116" refid="classfront__insert__iterator_1a5ec0f6fb3fea4163ea7bb72f3cbd62b1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classfront__insert__iterator_1a5ec0f6fb3fea4163ea7bb72f3cbd62b1" kindref="member">front_insert_iterator</ref>(Container&amp;<sp/>x)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>container(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" kindref="member">addressof</ref>(x))<sp/>{}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124" refid="classfront__insert__iterator_1a934a8c5c3edc03960c94e7174e635e78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classfront__insert__iterator_1a5ec0f6fb3fea4163ea7bb72f3cbd62b1" kindref="member">front_insert_iterator</ref>&amp;<sp/><ref refid="classfront__insert__iterator_1a934a8c5c3edc03960c94e7174e635e78" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::value_type&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>container-&gt;push_front(value);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="classfront__insert__iterator_1adb2346168749793792e6648dfa3cbb1b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classfront__insert__iterator_1a5ec0f6fb3fea4163ea7bb72f3cbd62b1" kindref="member">front_insert_iterator</ref>&amp;<sp/><ref refid="classfront__insert__iterator_1adb2346168749793792e6648dfa3cbb1b" kindref="member">operator=</ref>(</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::value_type&amp;&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>container-&gt;push_front(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(value));</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139" refid="classfront__insert__iterator_1a683cb8fa843f181b187107ae544bd94f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classfront__insert__iterator_1a683cb8fa843f181b187107ae544bd94f" kindref="member">~front_insert_iterator</ref>()<sp/>noexcept<sp/>=<sp/>default;<sp/></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141" refid="classfront__insert__iterator_1a5fb60ef3dd95955b98f13c5838cfc750" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>constexpr<sp/><ref refid="classfront__insert__iterator_1a5ec0f6fb3fea4163ea7bb72f3cbd62b1" kindref="member">front_insert_iterator</ref>&amp;<sp/>operator*()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}<sp/></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>前置自增操作符</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classfront__insert__iterator" kindref="compound">front_insert_iterator</ref>&amp;<sp/>operator++()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>后置自增操作符</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classfront__insert__iterator_1a5ec0f6fb3fea4163ea7bb72f3cbd62b1" kindref="member">front_insert_iterator</ref><sp/>operator++(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfront__insert__iterator_1a5ec0f6fb3fea4163ea7bb72f3cbd62b1" kindref="member">front_insert_iterator</ref><sp/>tmp<sp/>=<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tmp;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container&gt;</highlight></codeline>
+<codeline lineno="159" refid="group___insert_iterators_1gac83e7b658dcaebba57f70221a1e7cff1" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classfront__insert__iterator" kindref="compound">front_insert_iterator&lt;Container&gt;</ref><sp/><ref refid="group___insert_iterators_1gac83e7b658dcaebba57f70221a1e7cff1" kindref="member">make_front_inserter</ref>(Container&amp;<sp/>x)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classfront__insert__iterator" kindref="compound">front_insert_iterator&lt;Container&gt;</ref>(x);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container&gt;</highlight></codeline>
+<codeline lineno="172" refid="classinsert__iterator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classinsert__iterator_1a1bdd337d8d62fc767e320c734a6ab23e" kindref="member">insert_iterator</ref><sp/>{</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="174" refid="classinsert__iterator_1a348ec5d595761c3fe5c5d369faaf79d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classinsert__iterator_1a348ec5d595761c3fe5c5d369faaf79d5" kindref="member">iterator_category</ref><sp/>=<sp/><ref refid="structoutput__iterator__tag" kindref="compound">output_iterator_tag</ref>;<sp/></highlight></codeline>
+<codeline lineno="175" refid="classinsert__iterator_1aab449edda27fad0a591b99377734fbff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classinsert__iterator_1aab449edda27fad0a591b99377734fbff" kindref="member">value_type</ref><sp/>=<sp/>void;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="176" refid="classinsert__iterator_1af6b569047898ad76de16d209e63048ac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classinsert__iterator_1af6b569047898ad76de16d209e63048ac" kindref="member">difference_type</ref><sp/>=<sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="177" refid="classinsert__iterator_1af58e437b4be8df0ba2aaf1b3fd79ad12" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classinsert__iterator_1af58e437b4be8df0ba2aaf1b3fd79ad12" kindref="member">pointer</ref><sp/>=<sp/>void;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="178" refid="classinsert__iterator_1a43b9cd7914b6610c2ad74cf9e494a4e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classinsert__iterator_1a43b9cd7914b6610c2ad74cf9e494a4e9" kindref="member">reference</ref><sp/>=<sp/>void;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>Container*<sp/>container;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::iterator<sp/>iter;<sp/></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="190" refid="classinsert__iterator_1a1bdd337d8d62fc767e320c734a6ab23e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classinsert__iterator_1a1bdd337d8d62fc767e320c734a6ab23e" kindref="member">insert_iterator</ref>(Container&amp;<sp/>x,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::iterator<sp/>it)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>container(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" kindref="member">addressof</ref>(x)),</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>iter(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(it))<sp/>{}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199" refid="classinsert__iterator_1a11f95f2947d9824c0c8910697996cacf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classinsert__iterator_1a1bdd337d8d62fc767e320c734a6ab23e" kindref="member">insert_iterator</ref>&amp;<sp/><ref refid="classinsert__iterator_1a11f95f2947d9824c0c8910697996cacf" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::value_type&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>iter<sp/>=<sp/>container-&gt;insert(iter,<sp/>value);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++iter;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210" refid="classinsert__iterator_1ab79f303a11e9b6e08eb7c7fb96cae944" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classinsert__iterator_1a1bdd337d8d62fc767e320c734a6ab23e" kindref="member">insert_iterator</ref>&amp;<sp/><ref refid="classinsert__iterator_1ab79f303a11e9b6e08eb7c7fb96cae944" kindref="member">operator=</ref>(</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::value_type&amp;&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>iter<sp/>=<sp/>container-&gt;insert(iter,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(value));</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++iter;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216" refid="classinsert__iterator_1a20c66f6d25c6d984a9f18877af2af093" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classinsert__iterator_1a20c66f6d25c6d984a9f18877af2af093" kindref="member">~insert_iterator</ref>()<sp/>noexcept<sp/>=<sp/>default;<sp/></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218" refid="classinsert__iterator_1a3d2b3eccfe52a91b364999dcbadf52dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>constexpr<sp/><ref refid="classinsert__iterator_1a1bdd337d8d62fc767e320c734a6ab23e" kindref="member">insert_iterator</ref>&amp;<sp/>operator*()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}<sp/></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>前置自增操作符</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classinsert__iterator" kindref="compound">insert_iterator</ref>&amp;<sp/>operator++()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>后置自增操作符</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classinsert__iterator_1a1bdd337d8d62fc767e320c734a6ab23e" kindref="member">insert_iterator</ref><sp/>operator++(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classinsert__iterator_1a1bdd337d8d62fc767e320c734a6ab23e" kindref="member">insert_iterator</ref><sp/>tmp<sp/>=<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tmp;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="227"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container&gt;</highlight></codeline>
+<codeline lineno="237" refid="group___insert_iterators_1ga8a7f93aba64786512d1679e6812a62bb" refkind="member"><highlight class="normal">NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classinsert__iterator" kindref="compound">insert_iterator&lt;Container&gt;</ref><sp/><ref refid="group___insert_iterators_1ga8a7f93aba64786512d1679e6812a62bb" kindref="member">make_inserter</ref>(Container&amp;<sp/>x,</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Container::iterator<sp/>it)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classinsert__iterator" kindref="compound">insert_iterator&lt;Container&gt;</ref>(x,<sp/>it);</highlight></codeline>
+<codeline lineno="240"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>InsertIterators</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ITERATOR_INSERT_ITERATOR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/insert_iterator.hpp"/>
+  </compounddef>
+</doxygen>

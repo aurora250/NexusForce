@@ -1,0 +1,521 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structbit__reference" kind="struct" language="C++" prot="public">
+    <compoundname>bit_reference</compoundname>
+    <basecompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; bit_reference &gt;</basecompoundref>
+    <basecompoundref refid="structistringify" prot="public" virt="non-virtual">istringify&lt; bit_reference &gt;</basecompoundref>
+    <includes refid="bitmap_8hpp" local="no">bitmap.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structbit__reference_1a691f4c4829894cb7407952516bd23a69" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> *</type>
+        <definition>uint32_t* bit_reference::ptr_</definition>
+        <argsstring></argsstring>
+        <name>ptr_</name>
+        <qualifiedname>bit_reference::ptr_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>指向包含该位的字 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="35" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbit__reference_1a685004a889e020d0024b486c8845be20" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t bit_reference::mask_</definition>
+        <argsstring></argsstring>
+        <name>mask_</name>
+        <qualifiedname>bit_reference::mask_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>掩码，用于定位特定位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="36" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structbit__reference_1a45f3e35a04f3809a74b4f0f48168e39b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 bit_reference::bit_reference</definition>
+        <argsstring>()=default</argsstring>
+        <name>bit_reference</name>
+        <qualifiedname>bit_reference::bit_reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="39" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1a6f7549a327b60ebf2720fbcbca766382" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 bit_reference::~bit_reference</definition>
+        <argsstring>()=default</argsstring>
+        <name>~bit_reference</name>
+        <qualifiedname>bit_reference::~bit_reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="40" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1a51db9f045f8eea120210790efa1ce281" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 bit_reference::bit_reference</definition>
+        <argsstring>(uint32_t *ptr, const uint32_t mask) noexcept</argsstring>
+        <name>bit_reference</name>
+        <qualifiedname>bit_reference::bit_reference</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>mask</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指向字的指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位掩码 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="47" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="47" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1aa8e273273ccea1e9f00f7af38665d293" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 bit_reference::bit_reference</definition>
+        <argsstring>(const bit_reference &amp;other) noexcept</argsstring>
+        <name>bit_reference</name>
+        <qualifiedname>bit_reference::bit_reference</qualifiedname>
+        <param>
+          <type>const <ref refid="structbit__reference" kindref="compound">bit_reference</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源位引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="55" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="55" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1a2bcdbd2e403f71ccc9682e59a615b0c9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="structbit__reference" kindref="compound">bit_reference</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 bit_reference &amp; bit_reference::operator=</definition>
+        <argsstring>(const bit_reference &amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>bit_reference::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structbit__reference" kindref="compound">bit_reference</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源位引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="64" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="64" bodyend="69"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1a89c95221a05d3d75a320fb81f4261766" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 bit_reference::bit_reference</definition>
+        <argsstring>(bit_reference &amp;&amp;other) noexcept</argsstring>
+        <name>bit_reference</name>
+        <qualifiedname>bit_reference::bit_reference</qualifiedname>
+        <param>
+          <type><ref refid="structbit__reference" kindref="compound">bit_reference</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源位引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="75" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="75" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1a8dab7f9d36b8b3fcc6b75c489ac74c1c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="structbit__reference" kindref="compound">bit_reference</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 bit_reference &amp; bit_reference::operator=</definition>
+        <argsstring>(bit_reference &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>bit_reference::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structbit__reference" kindref="compound">bit_reference</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源位引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="87" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="87" bodyend="95"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1a9a1f8ac3bb19fdaa4787fc45243b6823" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="structbit__reference" kindref="compound">bit_reference</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 bit_reference &amp; bit_reference::operator=</definition>
+        <argsstring>(const bool value) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>bit_reference::operator=</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>赋值布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要赋的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="102" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="102" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1a00f44c611c627bae03453ae075dde1a6" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 bit_reference::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>bit_reference::operator bool</qualifiedname>
+        <briefdescription>
+<para>转换为布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>位的布尔值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="118" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="118" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1af782fd1a6070d9dfd6e00018498f75b2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void bit_reference::flip</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>flip</name>
+        <qualifiedname>bit_reference::flip</qualifiedname>
+        <briefdescription>
+<para>翻转位值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="128" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="128" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1af12b329e708124df9665d76838886b1b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void bit_reference::swap</definition>
+        <argsstring>(bit_reference &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>bit_reference::swap</qualifiedname>
+        <param>
+          <type><ref refid="structbit__reference" kindref="compound">bit_reference</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个位引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个位引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="139" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="139" bodyend="146"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1a6895cc373297e8195e00655e965e3f01" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool bit_reference::equal_to</definition>
+        <argsstring>(const bit_reference &amp;rhs) const noexcept</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>bit_reference::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="structbit__reference" kindref="compound">bit_reference</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧位引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>两个位是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="153" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="153" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1ad14abcf7655e16de78572e5e4ccb6c56" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool bit_reference::less_than</definition>
+        <argsstring>(const bit_reference &amp;rhs) const noexcept</argsstring>
+        <name>less_than</name>
+        <qualifiedname>bit_reference::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="structbit__reference" kindref="compound">bit_reference</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧位引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>比较结果（false &lt; true） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="162" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="162" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1a87cccc85c15cb811c77dbeade6b8b9fd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_t bit_reference::to_hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_hash</name>
+        <qualifiedname>bit_reference::to_hash</qualifiedname>
+        <briefdescription>
+<para>计算哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="170" column="50" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="170" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="structbit__reference_1ad6df6bcda45b97ce43c6e05ac77d4a6a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string bit_reference::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>bit_reference::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>&quot;1&quot;或&quot;0&quot;的字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="178" column="50" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="178" bodyend="178"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>位引用类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供对位图中单个位的引用语义，支持赋值、转换和翻转操作。 模拟布尔引用的行为，允许直接操作位图中的位。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>bit_reference</label>
+        <link refid="structbit__reference"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>icommon&lt; bit_reference &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; bit_reference &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>ihashable&lt; bit_reference &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="5">
+        <label>istringify&lt; bit_reference &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>bit_reference</label>
+        <link refid="structbit__reference"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>icommon&lt; bit_reference &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; bit_reference &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>ihashable&lt; bit_reference &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="5">
+        <label>istringify&lt; bit_reference &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="33" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="33" bodyend="179"/>
+    <listofallmembers>
+      <member refid="structbit__reference_1a45f3e35a04f3809a74b4f0f48168e39b" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>bit_reference</name></member>
+      <member refid="structbit__reference_1a51db9f045f8eea120210790efa1ce281" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>bit_reference</name></member>
+      <member refid="structbit__reference_1aa8e273273ccea1e9f00f7af38665d293" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>bit_reference</name></member>
+      <member refid="structbit__reference_1a89c95221a05d3d75a320fb81f4261766" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>bit_reference</name></member>
+      <member refid="structbit__reference_1a6895cc373297e8195e00655e965e3f01" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>equal_to</name></member>
+      <member refid="structbit__reference_1af782fd1a6070d9dfd6e00018498f75b2" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>flip</name></member>
+      <member refid="structbit__reference_1ad14abcf7655e16de78572e5e4ccb6c56" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>less_than</name></member>
+      <member refid="structbit__reference_1a685004a889e020d0024b486c8845be20" prot="private" virt="non-virtual"><scope>bit_reference</scope><name>mask_</name></member>
+      <member refid="structbit__reference_1a00f44c611c627bae03453ae075dde1a6" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>operator bool</name></member>
+      <member refid="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>operator!=</name></member>
+      <member refid="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>operator&lt;=</name></member>
+      <member refid="structbit__reference_1a2bcdbd2e403f71ccc9682e59a615b0c9" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>operator=</name></member>
+      <member refid="structbit__reference_1a8dab7f9d36b8b3fcc6b75c489ac74c1c" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>operator=</name></member>
+      <member refid="structbit__reference_1a9a1f8ac3bb19fdaa4787fc45243b6823" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>operator=</name></member>
+      <member refid="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>operator&gt;=</name></member>
+      <member refid="structbit__reference_1a691f4c4829894cb7407952516bd23a69" prot="private" virt="non-virtual"><scope>bit_reference</scope><name>ptr_</name></member>
+      <member refid="structbit__reference_1af12b329e708124df9665d76838886b1b" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>swap</name></member>
+      <member refid="structbit__reference_1a87cccc85c15cb811c77dbeade6b8b9fd" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>to_hash</name></member>
+      <member refid="structihashable_1a3bb793a19699c7ccd86fa5d7e91cb513" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>to_ihash</name></member>
+      <member refid="structbit__reference_1ad6df6bcda45b97ce43c6e05ac77d4a6a" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>to_string</name></member>
+      <member refid="structbit__reference_1a6f7549a327b60ebf2720fbcbca766382" prot="public" virt="non-virtual"><scope>bit_reference</scope><name>~bit_reference</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

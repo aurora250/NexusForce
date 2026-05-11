@@ -1,0 +1,565 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___args_forward_functions" kind="group">
+    <compoundname>ArgsForwardFunctions</compoundname>
+    <title>参数转发函数</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr T &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr T &amp;&amp; forward</definition>
+        <argsstring>(remove_reference_t&lt; T &gt; &amp;x) noexcept</argsstring>
+        <name>forward</name>
+        <param>
+          <type><ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt; T &gt; &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>完美转发左值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转发的左值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转发后的引用</para>
+</simplesect>
+用于实现完美转发，保持值的类别 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3007" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3007" bodyend="3009"/>
+        <referencedby refid="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" compoundref="shared__ptr_8hpp" startline="899" endline="939">allocate_shared</referencedby>
+        <referencedby refid="classoptional_1aaa107fb1965c0bf4a4e15e5064d0cc52" compoundref="optional_8hpp" startline="611" endline="616">optional&lt; T &gt;::and_then</referencedby>
+        <referencedby refid="classoptional_1a0dea507fd84e53a8c39a877ffad352cf" compoundref="optional_8hpp" startline="639" endline="644">optional&lt; T &gt;::and_then</referencedby>
+        <referencedby refid="classoptional_1a4ef174e179532fe9fd89ae7e825565d9" compoundref="optional_8hpp" startline="597" endline="602">optional&lt; T &gt;::and_then</referencedby>
+        <referencedby refid="classoptional_1abfe8f092a2604a3a5978963c4be33767" compoundref="optional_8hpp" startline="625" endline="630">optional&lt; T &gt;::and_then</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1aefbf71c1614c67c79caff386831ef8bb" compoundref="optional_8hpp" startline="1124" endline="1129">optional&lt; T &amp; &gt;::and_then</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1ab7fd11c1383c824c0eb11d7fe6f152b6" compoundref="optional_8hpp" startline="1152" endline="1157">optional&lt; T &amp; &gt;::and_then</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1ae18bcf508873c1d6095dbea823836fcc" compoundref="optional_8hpp" startline="1110" endline="1115">optional&lt; T &amp; &gt;::and_then</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1af09b582b71c726be5aba776f7056eed2" compoundref="optional_8hpp" startline="1138" endline="1143">optional&lt; T &amp; &gt;::and_then</referencedby>
+        <referencedby refid="classany_1af419c43ef848b665f2a381cdfa41e93a" compoundref="utility_2any_8hpp" startline="314" endline="317">any::any</referencedby>
+        <referencedby refid="classany_1a3b2824e36b53a37792fc67315c866273" compoundref="utility_2any_8hpp" startline="288" endline="291">any::any</referencedby>
+        <referencedby refid="group___tuple_1gaf1f69e67ec55772495eca5813b38070a" compoundref="apply_8hpp" startline="63" endline="66">apply</referencedby>
+        <referencedby refid="group___async_1gaf02db8c05cbd8fd9ea17355adcc164f0" compoundref="async_8hpp" startline="70" endline="73">async</referencedby>
+        <referencedby refid="group___async_1gacb2c2756930195cd969cc14a06c437bf" compoundref="async_8hpp" startline="43" endline="56">async</referencedby>
+        <referencedby refid="classbasic__timer_1a223b9bed7f0b3230435522c57d87f09e" compoundref="timer_8hpp" startline="347" endline="350">basic_timer&lt; steady_clock &gt;::async_wait</referencedby>
+        <referencedby refid="group___function_binders_1gae7e8b424e5e9e6f6d873383b66e23c60" compoundref="bind_8hpp" startline="923" endline="926">bind_front</referencedby>
+        <referencedby refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a53f02d4eebc749aa7d1399681fbf68f5" compoundref="bind_8hpp" startline="520" endline="522">binder&lt; Func(BoundArgs...)&gt;::binder</referencedby>
+        <referencedby refid="structbinder__front_1ac2fd8cffb820530e3afacb78fe357a9f" compoundref="bind_8hpp" startline="840" endline="845">binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::binder_front</referencedby>
+        <referencedby refid="classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4_1ad669acab046288975f19c63c0d9f455b" compoundref="bind_8hpp" startline="622" endline="624">bindrer&lt; Res, Func(BoundArgs...)&gt;::bindrer</referencedby>
+        <referencedby refid="classonce__flag_1a6b72113ff3b073878b5fc971d6fe1026" compoundref="call__once_8hpp" startline="68" endline="106">once_flag::call_once</referencedby>
+        <referencedby refid="structcall__wrapper_1ad2f83ad37934eec521e51c9faa81a8e7" compoundref="call__wrapper_8hpp" startline="63" endline="64">call_wrapper&lt; Types &gt;::call_wrapper</referencedby>
+        <referencedby refid="classgenerator_1a5105f0069374425b8a26c1201dc6f13d" compoundref="generator_8hpp" startline="418" endline="425">generator&lt; T &gt;::chain</referencedby>
+        <referencedby refid="structcompressed__pair_1a2ba7ac68c7608add03bf06884137d025" compoundref="compressed__pair_8hpp" startline="84" endline="87">compressed_pair&lt; IfEmpty, T, Compressed &gt;::compressed_pair</referencedby>
+        <referencedby refid="structcompressed__pair_1ab85d19125753bd46848488e994d3c87f" compoundref="compressed__pair_8hpp" startline="100" endline="103">compressed_pair&lt; IfEmpty, T, Compressed &gt;::compressed_pair</referencedby>
+        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a5c8db83ab8883642c2865e9be2c4f6b6" compoundref="compressed__pair_8hpp" startline="231" endline="234">compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
+        <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a8ffb35c6ff6379021776b3983787f372" compoundref="compressed__pair_8hpp" startline="244" endline="247">compressed_pair&lt; IfEmpty, T, false &gt;::compressed_pair</referencedby>
+        <referencedby refid="structallocator__traits_1ae806a2a73a74220974021200268db645" compoundref="allocator__traits_8hpp" startline="200" endline="203">allocator_traits&lt; rebind_alloc&lt; T &gt; &gt;::construct</referencedby>
+        <referencedby refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</referencedby>
+        <referencedby refid="structsignal_1adbc2cde66647502a24e5b3f675bf7ae6" compoundref="signals_8hpp" startline="524" endline="536">signal&lt; Types &gt;::emit_executor</referencedby>
+        <referencedby refid="classany_1a18e5610d000fc424d1a3f83dd2bd619c" compoundref="utility_2any_8hpp" startline="342" endline="345">any::emplace</referencedby>
+        <referencedby refid="classany_1aea9b89f1c3bc553cfd72245f42b9cf39" compoundref="utility_2any_8hpp" startline="360" endline="363">any::emplace</referencedby>
+        <referencedby refid="classdeque_1ab7d884944fc917015465c84380a2b13e" compoundref="deque_8hpp" startline="1080" endline="1090">deque&lt; T, Alloc, BufSize &gt;::emplace</referencedby>
+        <referencedby refid="classlist_1ae19e41a3dbd45950a42bfca7846a22d6" compoundref="list_8hpp" startline="526" endline="534">list&lt; pair&lt; Key, Value &gt; &gt;::emplace</referencedby>
+        <referencedby refid="classmap_1ae0e6c5fe7a2ba9cc12891330f051623a" compoundref="map_8hpp" startline="315" endline="317">map&lt; Key, T, Compare, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="classmultimap_1a5eb34cc11bd291040e5eb4b93cf0c6e1" compoundref="multimap_8hpp" startline="310" endline="312">multimap&lt; Key, T, Compare, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="classmultiset_1a896561a1b4ce4a6527453f1b5c13c82a" compoundref="multiset_8hpp" startline="280" endline="282">multiset&lt; Key, Compare, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="classoptional_1ab0a09753080dd8b7077eb877929417fc" compoundref="optional_8hpp" startline="461" endline="466">optional&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classoptional_1a7588aac7e19170413ac887d4dd97127d" compoundref="optional_8hpp" startline="445" endline="449">optional&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classpriority__queue_1a91ca4e01d1e1eade8797e7938a8e6863" compoundref="priority__queue_8hpp" startline="231" endline="234">priority_queue&lt; T, Sequence, Compare &gt;::emplace</referencedby>
+        <referencedby refid="classqueue_1addae0f3bd381e35f8860001b562543b7" compoundref="queue_8hpp" startline="181" endline="183">queue&lt; T, Sequence &gt;::emplace</referencedby>
+        <referencedby refid="classset_1a87f08446a75a32a4f1acd5a9e36854af" compoundref="container_2set_8hpp" startline="281" endline="283">set&lt; Key, Compare, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="classstack_1ad72926b7717b3721dd3062d558a14f92" compoundref="stack_8hpp" startline="107" endline="109">stack&lt; T, Sequence &gt;::emplace</referencedby>
+        <referencedby refid="classunordered__map_1a118336924453f1387cde03f059bfb8a2" compoundref="unordered__map_8hpp" startline="354" endline="356">unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="classunordered__multimap_1aee0eaa558b6df5d8a1e63c17e828be73" compoundref="unordered__multimap_8hpp" startline="355" endline="357">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="classunordered__multiset_1ae490eb8cbebde0c9492c9bd1ee05fd80" compoundref="unordered__multiset_8hpp" startline="353" endline="355">unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="classunordered__set_1adcfdeac16563b1b343e4332d13277845" compoundref="unordered__set_8hpp" startline="353" endline="355">unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::emplace</referencedby>
+        <referencedby refid="structvariant_1a59bbee929aeb1fe81072126e1d4fb0b0" compoundref="variant_8hpp" startline="561" endline="563">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::emplace</referencedby>
+        <referencedby refid="structvariant_1a75e79aea57c57e1839964470249c4d3b" compoundref="variant_8hpp" startline="546" endline="550">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::emplace</referencedby>
+        <referencedby refid="classvector_1ac2d72346ddff3cf4b6e9b98003c6d0f2" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; byte_t &gt;::emplace</referencedby>
+        <referencedby refid="classdeque_1a5100707179dde9adc98257e8124a89ae" compoundref="deque_8hpp" startline="1098" endline="1107">deque&lt; T, Alloc, BufSize &gt;::emplace_back</referencedby>
+        <referencedby refid="classlist_1a3a9463b748cf180f9946442541ae3a66" compoundref="list_8hpp" startline="543" endline="545">list&lt; pair&lt; Key, Value &gt; &gt;::emplace_back</referencedby>
+        <referencedby refid="classvector_1ac9b2196b578d67665350cfb6e6ebf568" compoundref="vector_8hpp" startline="874" endline="881">vector&lt; byte_t &gt;::emplace_back</referencedby>
+        <referencedby refid="classhashtable_1a394993e79d2908cdea83bc0f5505603b" compoundref="hashtable_8hpp" startline="1167" endline="1173">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_equal</referencedby>
+        <referencedby refid="classrb__tree_1a0c2cf31984fc359683e87a30273f8017" compoundref="rb__tree_8hpp" startline="1230" endline="1233">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::emplace_equal</referencedby>
+        <referencedby refid="classrb__tree_1a990e94a13c9c67b16de2ed65734db6d1" compoundref="rb__tree_8hpp" startline="1257" endline="1294">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::emplace_equal_hint</referencedby>
+        <referencedby refid="classdeque_1adf16fcef6659022e90368edfa08c5309" compoundref="deque_8hpp" startline="1115" endline="1124">deque&lt; T, Alloc, BufSize &gt;::emplace_front</referencedby>
+        <referencedby refid="classlist_1a3277fc14c17ed458c24eb93ca70acf69" compoundref="list_8hpp" startline="554" endline="556">list&lt; pair&lt; Key, Value &gt; &gt;::emplace_front</referencedby>
+        <referencedby refid="classmap_1ab6155147c9e85fe1138dfb2387ed4e72" compoundref="map_8hpp" startline="341" endline="343">map&lt; Key, T, Compare, Alloc &gt;::emplace_hint</referencedby>
+        <referencedby refid="classmultimap_1a26a0d8866a5123bdfb585b732595da8e" compoundref="multimap_8hpp" startline="336" endline="338">multimap&lt; Key, T, Compare, Alloc &gt;::emplace_hint</referencedby>
+        <referencedby refid="classmultiset_1a028b3406d96cea1065e531207df68cac" compoundref="multiset_8hpp" startline="306" endline="308">multiset&lt; Key, Compare, Alloc &gt;::emplace_hint</referencedby>
+        <referencedby refid="classset_1a25f7ada78a49cb9086c7694d073cc846" compoundref="container_2set_8hpp" startline="307" endline="309">set&lt; Key, Compare, Alloc &gt;::emplace_hint</referencedby>
+        <referencedby refid="classhashtable_1a412c7b832d9bc7fb5296029f6a76265f" compoundref="hashtable_8hpp" startline="1152" endline="1158">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::emplace_unique</referencedby>
+        <referencedby refid="classrb__tree_1a764899e55affb00dcb3d112a749d08ea" compoundref="rb__tree_8hpp" startline="1122" endline="1125">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::emplace_unique</referencedby>
+        <referencedby refid="classrb__tree_1a2d25955f8bf32e3736ac4c8345a796a0" compoundref="rb__tree_8hpp" startline="1149" endline="1188">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::emplace_unique_hint</referencedby>
+        <referencedby refid="structpair_1aa65af58e68bbce68442ec36a51507123">pair&lt; const Key, T &gt;::explicit</referencedby>
+        <referencedby refid="structpair_1ac327bc1e8450f3b3f54eb8b5d18f1875">pair&lt; const Key, T &gt;::explicit</referencedby>
+        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1abf9912c8c5cc9d83c3e7c1bf75fe7ff6">tuple&lt; This, Rest... &gt;::explicit</referencedby>
+        <referencedby refid="classgenerator_1ab1f5a6a5b71d484d89a8198e9a2c50dc" compoundref="generator_8hpp" startline="373" endline="379">generator&lt; T &gt;::filter</referencedby>
+        <referencedby refid="classgenerator_1aa4f9b8c2bbf7ade48a1c22232388bdac" compoundref="generator_8hpp" startline="448" endline="454">generator&lt; T &gt;::fold</referencedby>
+        <referencedby refid="classgenerator_1a84a424f19a10b9aa131ab3a41a96cec8" compoundref="generator_8hpp" startline="433" endline="437">generator&lt; T &gt;::for_each</referencedby>
+        <referencedby refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" compoundref="format_8hpp" startline="702" endline="708">format</referencedby>
+        <referencedby refid="group___tuple_1gab4c17a8aa555027fca3b1d2888decfc7" compoundref="tuple_8hpp" startline="770" endline="773">forward_as_tuple</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a30ca0f61d665ad17ae8514657e9c853f" compoundref="functional_2function_8hpp" startline="356" endline="367">function&lt; Res(Args...)&gt;::function</referencedby>
+        <referencedby refid="group___pair_1gada00c2957a00f019178b6bee600e6d60" compoundref="pair_8hpp" startline="745" endline="751">get</referencedby>
+        <referencedby refid="group___pair_1ga19d4812e1367c3dbc437374e1a248a81" compoundref="pair_8hpp" startline="705" endline="711">get</referencedby>
+        <referencedby refid="group___thread_pool_1ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group</referencedby>
+        <referencedby refid="classunordered__map_1a9c6a2d48bbc98152dda38310d90858a9" compoundref="unordered__map_8hpp" startline="370" endline="370">unordered_map&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::insert</referencedby>
+        <referencedby refid="classunordered__set_1ae82f27e897e64369272e38af75388214" compoundref="unordered__set_8hpp" startline="369" endline="369">unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::insert</referencedby>
+        <referencedby refid="group___invoke_function_1ga529f4a5476de9eb8ed295cb17c719c96" compoundref="invoke_8hpp" startline="538" endline="543">invoke</referencedby>
+        <referencedby refid="group___invoke_function_1ga2112b65ec3b25190db36ea014f65503e" compoundref="invoke_8hpp" startline="579" endline="585">invoke_r</referencedby>
+        <referencedby refid="classlazy__thread_1a79f5dcfdf332aa22a250383562636bc9" compoundref="lazy__thread_8hpp" startline="67" endline="71">lazy_thread::lazy_thread</referencedby>
+        <referencedby refid="structlist__node_1acc339ee2bba52f303ae124038471792f" compoundref="list_8hpp" startline="55" endline="56">list_node&lt; value_type &gt;::list_node</referencedby>
+        <referencedby refid="group___any_1gaa10dc2f937bfc4efbd98234e71af0860" compoundref="utility_2any_8hpp" startline="403" endline="405">make_any</referencedby>
+        <referencedby refid="classexception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" compoundref="exception__ptr_8hpp" startline="314" endline="324">exception_ptr::make_exception_ptr</referencedby>
+        <referencedby refid="group___tuple_1ga8d3a8b2ed782f185549367fa33cda70d" compoundref="tuple_8hpp" startline="812" endline="816">make_from_tuple</referencedby>
+        <referencedby refid="group___optional_1ga055e10186ceebff052851474f0006a95" compoundref="optional_8hpp" startline="1313" endline="1315">make_optional</referencedby>
+        <referencedby refid="group___optional_1ga10bb28edf47aad45dd721e37c9104bab" compoundref="optional_8hpp" startline="1328" endline="1331">make_optional</referencedby>
+        <referencedby refid="group___pair_1ga3fc92626b5f2ddb8e7b4cd5f6ccde69e" compoundref="pair_8hpp" startline="474" endline="478">make_pair</referencedby>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a7d75a082c1163b3d71f5bfa88ff616ab" compoundref="packaged__task_8hpp" startline="130" endline="133">packaged_task&lt; Res(Args...)&gt;::make_ready_at_thread_exit</referencedby>
+        <referencedby refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" compoundref="shared__ptr_8hpp" startline="835" endline="863">make_shared</referencedby>
+        <referencedby refid="group___tuple_1ga5ed4cb761dbf974f5a60b613fdebb1bf" compoundref="tuple_8hpp" startline="746" endline="749">make_tuple</referencedby>
+        <referencedby refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" compoundref="unique__ptr_8hpp" startline="973" endline="975">make_unique</referencedby>
+        <referencedby refid="classgenerator_1a78f3cce891b72e1fbe4c095c60853277" compoundref="generator_8hpp" startline="360" endline="364">generator&lt; T &gt;::map</referencedby>
+        <referencedby refid="classmeta__any_1af9faa6391511c99a6816e6c81c39994e" compoundref="reflect_2any_8hpp" startline="95" endline="96">meta_any::meta_any</referencedby>
+        <referencedby refid="group___function_binders_1gac88a3a275337035d2202a893204c9909">NEFORCE_DEPRECATED_FOR</referencedby>
+        <referencedby refid="group___function_binders_1ga5b24c8c877b5a64a99ff339d33f27032">NEFORCE_DEPRECATED_FOR</referencedby>
+        <referencedby refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a4b93585b1bd2955bab445c5b9a4c0aa0" compoundref="bind_8hpp" startline="534" endline="537">binder&lt; Func(BoundArgs...)&gt;::operator()</referencedby>
+        <referencedby refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a8923e33c1ccf96324d98f9491c14d99b" compoundref="bind_8hpp" startline="546" endline="549">binder&lt; Func(BoundArgs...)&gt;::operator()</referencedby>
+        <referencedby refid="structbinder__front_1a4a3b59d14733820d5bc9bdd35a5587b7" compoundref="bind_8hpp" startline="886" endline="888">binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()</referencedby>
+        <referencedby refid="structbinder__front_1a5bc180c34aa584a508726829bf172718" compoundref="bind_8hpp" startline="862" endline="864">binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()</referencedby>
+        <referencedby refid="structbinder__front_1af0ce7ca469c35179e0d35ec0059f17ad" compoundref="bind_8hpp" startline="897" endline="900">binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()</referencedby>
+        <referencedby refid="structbinder__front_1ab4631f7b9f886a14d4cc6a44bd0d0868" compoundref="bind_8hpp" startline="873" endline="876">binder_front&lt; decay_t&lt; Func &gt;, decay_t&lt; Args &gt;... &gt;::operator()</referencedby>
+        <referencedby refid="classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4_1acebad430f663cac8783998b36ebfb46c" compoundref="bind_8hpp" startline="636" endline="638">bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()</referencedby>
+        <referencedby refid="classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4_1af8b0dc48cde65c786950abb3b8e001e8" compoundref="bind_8hpp" startline="647" endline="649">bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab05cff3a24c666c2bf8eaa12155dff28" compoundref="functional_2function_8hpp" startline="449" endline="454">function&lt; Res(Args...)&gt;::operator()</referencedby>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1adb6b72da7146d018b37b4374f66109f6" compoundref="packaged__task_8hpp" startline="117" endline="120">packaged_task&lt; Res(Args...)&gt;::operator()</referencedby>
+        <referencedby refid="classreference__wrapper_1a5c43b0f9a2ddd66bcc8f0096b9dfe63b" compoundref="reference__wrapper_8hpp" startline="112" endline="115">reference_wrapper&lt; T &gt;::operator()</referencedby>
+        <referencedby refid="structsignal_1a83d13f3b756231ec0333a4d8e790d1f6" compoundref="signals_8hpp" startline="543" endline="545">signal&lt; Types &gt;::operator()</referencedby>
+        <referencedby refid="classany_1ad804fa85a2aa3246403e58906a8c0e63" compoundref="utility_2any_8hpp" startline="301" endline="304">any::operator=</referencedby>
+        <referencedby refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a185164751d1e41fb160dc6a9f7759045" compoundref="functional_2function_8hpp" startline="410" endline="413">function&lt; Res(Args...)&gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1ae6b4f027dfec1fdb05b7fa8e0296573a" compoundref="optional_8hpp" startline="179" endline="189">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="structpair_1a3eabace47576a435446d9adce4e04529" compoundref="pair_8hpp" startline="399" endline="404">pair&lt; const Key, T &gt;::operator=</referencedby>
+        <referencedby refid="structpair_1a477b1300b3654fbf8610173294d9ebab" compoundref="pair_8hpp" startline="363" endline="368">pair&lt; const Key, T &gt;::operator=</referencedby>
+        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1a6976dc812518b45a02891cbaa0a0a14c" compoundref="tuple_8hpp" startline="570" endline="574">tuple&lt; This, Rest... &gt;::operator=</referencedby>
+        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1ad9773aea82b05d04d51b41a4de4a79f2" compoundref="tuple_8hpp" startline="539" endline="543">tuple&lt; This, Rest... &gt;::operator=</referencedby>
+        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1a00036c31cc71fde2272b05a178bb7d0e" compoundref="tuple_8hpp" startline="505" endline="510">tuple&lt; This, Rest... &gt;::operator=</referencedby>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ad1f11fdde703e70ac712dfea679c0fc8" compoundref="unique__ptr_8hpp" startline="493" endline="497">unique_ptr&lt; T[], Deleter &gt;::operator=</referencedby>
+        <referencedby refid="classunique__ptr_1aa4d65bea3aaebd7a7b0d990ee7a30a78" compoundref="unique__ptr_8hpp" startline="287" endline="291">unique_ptr&lt;::X509, x509_deleter &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a367f3dcab5d414d45b159f4a8d3bb8c1" compoundref="optional_8hpp" startline="428" endline="432">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1aa3a97d2669c23714f449b9f25c3ba2fd" compoundref="optional_8hpp" startline="413" endline="417">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1a561bd099e03ae8fe48321b49613c7eba" compoundref="optional_8hpp" startline="133" endline="136">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1aa0c1885ebcf0bbcc9db52fd5b3cc3b76" compoundref="optional_8hpp" startline="583" endline="588">optional&lt; T &gt;::or_else</referencedby>
+        <referencedby refid="classoptional_1a94d5cf81292f41e1fb109154ce982cea" compoundref="optional_8hpp" startline="569" endline="574">optional&lt; T &gt;::or_else</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1adc22169e5ba923e6565fd5ab101c578b" compoundref="optional_8hpp" startline="1096" endline="1101">optional&lt; T &amp; &gt;::or_else</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1af599c2b8b8ff943fb686f4ffb5a054be" compoundref="optional_8hpp" startline="1082" endline="1087">optional&lt; T &amp; &gt;::or_else</referencedby>
+        <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a1e138c21753a8bef3af52ab548884825" compoundref="packaged__task_8hpp" startline="58" endline="59">packaged_task&lt; Res(Args...)&gt;::packaged_task</referencedby>
+        <referencedby refid="group___console_i_o_1ga9f7ee8aaf17d6a59f5fce3710fd1dce9" compoundref="console_8hpp" startline="598" endline="600">print</referencedby>
+        <referencedby refid="classsys__console_1a84916ebeddb2d36af5165f29f8254243" compoundref="console_8hpp" startline="196" endline="199">sys_console::print</referencedby>
+        <referencedby refid="group___console_i_o_1ga60055762362801db865b6b02b6d690ae" compoundref="console_8hpp" startline="606" endline="608">printc</referencedby>
+        <referencedby refid="classsys__console_1a5aae6ea9c8a40a30b1060cc2ebfa94e9" compoundref="console_8hpp" startline="220" endline="225">sys_console::printc</referencedby>
+        <referencedby refid="group___console_i_o_1ga418e291ec9c66c2917331cdb598a94e5" compoundref="console_8hpp" startline="646" endline="648">printcf</referencedby>
+        <referencedby refid="classsys__console_1af284a03104105d1db6b62dc9ebddbe1f" compoundref="console_8hpp" startline="235" endline="240">sys_console::printcf</referencedby>
+        <referencedby refid="group___console_i_o_1gab304b4f3d1f37795c26d0db9121a8165" compoundref="console_8hpp" startline="654" endline="656">printcfln</referencedby>
+        <referencedby refid="classsys__console_1a4d1162e568c0d075c8ab9ca77b3099d2" compoundref="console_8hpp" startline="293" endline="298">sys_console::printcfln</referencedby>
+        <referencedby refid="group___console_i_o_1gaea72c83ef34f2c17a4df39bb41308eb9" compoundref="console_8hpp" startline="622" endline="624">printcln</referencedby>
+        <referencedby refid="classsys__console_1aefcb792ac58903b47bcfbbd3d447f8e1" compoundref="console_8hpp" startline="278" endline="283">sys_console::printcln</referencedby>
+        <referencedby refid="group___console_i_o_1gaa9133c8d4e2b1ea9cc0b8c6e4b915a06" compoundref="console_8hpp" startline="630" endline="632">printf</referencedby>
+        <referencedby refid="classsys__console_1a196fe641205aeb89fd4ac4827bc1c02c" compoundref="console_8hpp" startline="208" endline="211">sys_console::printf</referencedby>
+        <referencedby refid="group___console_i_o_1ga448be22c9c28101c7e56b54a6432827c" compoundref="console_8hpp" startline="638" endline="640">printfln</referencedby>
+        <referencedby refid="classsys__console_1a0fc7cb0725a464551c739c19c829016b" compoundref="console_8hpp" startline="265" endline="269">sys_console::printfln</referencedby>
+        <referencedby refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" compoundref="console_8hpp" startline="614" endline="616">println</referencedby>
+        <referencedby refid="classsys__console_1af72351fee58499d664c1d9f37e9cddfc" compoundref="console_8hpp" startline="252" endline="256">sys_console::println</referencedby>
+        <referencedby refid="classlist_1a66e01be4d92378cd237effc7cfd3e83d" compoundref="list_8hpp" startline="580" endline="580">list&lt; pair&lt; Key, Value &gt; &gt;::push_back</referencedby>
+        <referencedby refid="classlist_1a106ac1aaf8550320f39c00271b5e4153" compoundref="list_8hpp" startline="568" endline="568">list&lt; pair&lt; Key, Value &gt; &gt;::push_front</referencedby>
+        <referencedby refid="classscope__exit_1acb4a7a473f0f26ce6cf9149260d93b9f" compoundref="scope_8hpp" startline="60" endline="64">scope_exit&lt; Func &gt;::scope_exit</referencedby>
+        <referencedby refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" compoundref="scope_8hpp" startline="145" endline="149">scope_fail&lt; Func &gt;::scope_fail</referencedby>
+        <referencedby refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" compoundref="scope_8hpp" startline="226" endline="230">scope_success&lt; Func &gt;::scope_success</referencedby>
+        <referencedby refid="classscoped__thread_1a4b4982c79ece8c71a780c9dd581bf81b" compoundref="scoped__thread_8hpp" startline="91" endline="92">scoped_thread::scoped_thread</referencedby>
+        <referencedby refid="classmeta__property_1a9dd9c836263dc55a047f8549fd6a903e" compoundref="property_8hpp" startline="103" endline="105">meta_property::set</referencedby>
+        <referencedby refid="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" compoundref="promise_8hpp" startline="127" endline="127">promise&lt; Res &gt;::set_value</referencedby>
+        <referencedby refid="classpromise_1ae5d2f35b49c5f86a4e695ab8e5ae77f1" compoundref="promise_8hpp" startline="142" endline="144">promise&lt; Res &gt;::set_value_at_thread_exit</referencedby>
+        <referencedby refid="classshared__ptr_1a98a639fa55aace07c033c96501f740dd" compoundref="shared__ptr_8hpp" startline="336" endline="340">shared_ptr&lt; periodic_task_state &gt;::shared_ptr</referencedby>
+        <referencedby refid="classgenerator_1a309904d7d8382a112f6367f880698b28" compoundref="generator_8hpp" startline="402" endline="411">generator&lt; T &gt;::skip</referencedby>
+        <referencedby refid="classthread_1ad74c6a1b7c5631e54eba313a5e53637e" compoundref="thread_8hpp" startline="340" endline="349">thread::start</referencedby>
+        <referencedby refid="classvirtual__thread_1a93b4388447ef55e5758820188474f161" compoundref="virtual__thread_8hpp" startline="305" endline="309">virtual_thread::start</referencedby>
+        <referencedby refid="classstop__callback_1ab404dcce69bb1444fb3945f08edb87cf" compoundref="stop__token_8hpp" startline="605" endline="612">stop_callback&lt; Callback &gt;::stop_callback</referencedby>
+        <referencedby refid="classstop__callback_1ac3c81fc59e5a7e26f00ce293c9dc305a" compoundref="stop__token_8hpp" startline="621" endline="628">stop_callback&lt; Callback &gt;::stop_callback</referencedby>
+        <referencedby refid="classthread__pool_1a3b33992c58dbd64f6c397fbc7092406c" compoundref="thread__pool_8hpp" startline="550" endline="553">thread_pool::submit_after</referencedby>
+        <referencedby refid="classthread__pool_1a4119fc5a49cda3741698ae66c653894d" compoundref="thread__pool_8hpp" startline="578" endline="581">thread_pool::submit_every</referencedby>
+        <referencedby refid="classthread__pool_1a1a93d040b178d96b993dffc135a52fb2" compoundref="thread__pool_8hpp" startline="521" endline="524">thread_pool::submit_task</referencedby>
+        <referencedby refid="classgenerator_1a46d368ae7fd0d8678a0a704aa92bd397" compoundref="generator_8hpp" startline="386" endline="395">generator&lt; T &gt;::take</referencedby>
+        <referencedby refid="classthread_1adf1e800d8ae9a2a3fc18818fb88e32a7" compoundref="thread_8hpp" startline="302" endline="307">thread::thread</referencedby>
+        <referencedby refid="group___string_converts_1gaaea09a977e7aca90ca8a7932146302c4" compoundref="to__string_8hpp" startline="241" endline="247">to_string</referencedby>
+        <referencedby refid="classoptional_1a77ed37ffe6ec605e614597787ae700e9" compoundref="optional_8hpp" startline="695" endline="700">optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classoptional_1a3a3328cd01e092a196867e5d8053fbe0" compoundref="optional_8hpp" startline="667" endline="672">optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classoptional_1a25ac37b8912546addfee273122f8f9a1" compoundref="optional_8hpp" startline="681" endline="686">optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classoptional_1a7f37ac002b8cb8a9d7edc2984cc02dd3" compoundref="optional_8hpp" startline="653" endline="658">optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1ace5cbb59bc64e50328b68d4469961d9f" compoundref="optional_8hpp" startline="1208" endline="1213">optional&lt; T &amp; &gt;::transform</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1a462ff2753e1d065dd7fad0ca6d702874" compoundref="optional_8hpp" startline="1180" endline="1185">optional&lt; T &amp; &gt;::transform</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1a513c860b86c725b2ca0b79a8ca27b5ea" compoundref="optional_8hpp" startline="1194" endline="1199">optional&lt; T &amp; &gt;::transform</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1ae4139d875aae7cd14767bf771cafc65a" compoundref="optional_8hpp" startline="1166" endline="1171">optional&lt; T &amp; &gt;::transform</referencedby>
+        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1a373da127c566755526a5be15c515caa4" compoundref="tuple_8hpp" startline="271" endline="273">tuple&lt; This, Rest... &gt;::tuple</referencedby>
+        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1a97fb8657e8709050085443a03d9efaf4" compoundref="tuple_8hpp" startline="248" endline="250">tuple&lt; This, Rest... &gt;::tuple</referencedby>
+        <referencedby refid="group___tuple_1ga9e6784003126d5f538ce419b9b2d9a14" compoundref="tuple_8hpp" startline="870" endline="877">tuple_cat</referencedby>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a73848629a27adffebcc5c8a47a330e6e" compoundref="unique__ptr_8hpp" startline="468" endline="469">unique_ptr&lt; T[], Deleter &gt;::unique_ptr</referencedby>
+        <referencedby refid="classunique__ptr_1a12732bc6d1164f91570b5afd56fdb80a" compoundref="unique__ptr_8hpp" startline="246" endline="247">unique_ptr&lt;::X509, x509_deleter &gt;::unique_ptr</referencedby>
+        <referencedby refid="classunique__ptr_1ac76aab0320b12cf48ee7223aef959a11" compoundref="unique__ptr_8hpp" startline="262" endline="263">unique_ptr&lt;::X509, x509_deleter &gt;::unique_ptr</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1a511d504bcc667c7a356eafc8b6577d4c" compoundref="optional_8hpp" startline="1068" endline="1073">optional&lt; T &amp; &gt;::value_or</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1a73d41ffb5f4342fa7f1d9cf01891c778" compoundref="optional_8hpp" startline="1055" endline="1060">optional&lt; T &amp; &gt;::value_or</referencedby>
+        <referencedby refid="structvariant_1a0fd76fb818a40962de64253f549aa09b" compoundref="variant_8hpp" startline="380" endline="385">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::variant</referencedby>
+        <referencedby refid="structvariant_1a004ff35cd3d00f9270b554e0e6e70739" compoundref="variant_8hpp" startline="345" endline="349">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::variant</referencedby>
+        <referencedby refid="structvariant_1ab014599a230d86a7bab87bd9fd3e238c" compoundref="variant_8hpp" startline="364" endline="370">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::variant</referencedby>
+        <referencedby refid="structvariant_1a31be628d0436c7a04d7f69d7e6395aa4" compoundref="variant_8hpp" startline="275" endline="279">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::variant</referencedby>
+        <referencedby refid="structvariant_1ac6a8cc8f4f78b46dd5404c3d77d0bcaa" compoundref="variant_8hpp" startline="417" endline="420">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::visit</referencedby>
+        <referencedby refid="structvariant_1aa499bd63eb09b8f7e92fcab6971395da" compoundref="variant_8hpp" startline="404" endline="406">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::visit</referencedby>
+        <referencedby refid="group___coroutine_1ga8c72fd92de476361237939b98f6a450c" compoundref="generator_8hpp" startline="844" endline="848">when_all</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___args_forward_functions_1ga33f11005b290cd06edf4e565fd06e536" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr T &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr T &amp;&amp; forward</definition>
+        <argsstring>(remove_reference_t&lt; T &gt; &amp;&amp;x) noexcept</argsstring>
+        <name>forward</name>
+        <param>
+          <type><ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt; T &gt; &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>完美转发右值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转发的右值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转发后的引用 </para>
+</simplesect>
+<simplesect kind="note"><para>如果T是左值引用类型，触发静态断言</para>
+</simplesect>
+用于实现完美转发，保持值的类别 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3021" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3021" bodyend="3024"/>
+        <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="group___args_forward_functions_1ga3e073ec2f144ac4eb2b91218a41475c5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt; T &gt; &amp;&amp;</type>
+        <definition>NEFORCE_NODISCARD constexpr remove_reference_t&lt; T &gt; &amp;&amp; move</definition>
+        <argsstring>(T &amp;&amp;x) noexcept</argsstring>
+        <name>move</name>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>无条件转换为右值引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的右值引用</para>
+</simplesect>
+用于实现移动语义 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3035" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3035" bodyend="3037"/>
+        <referencedby refid="group___args_forward_functions_1gab1987cd6a0bf086cdf73aaf77c7e447c" compoundref="type__traits_8hpp" startline="3050" endline="3052">move_if_noexcept</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___args_forward_functions_1gab1987cd6a0bf086cdf73aaf77c7e447c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt;!<ref refid="structis__nothrow__move__constructible" kindref="compound">is_nothrow_move_constructible</ref>&lt; T &gt;::value &amp;&amp;<ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; T &gt;::value, const T &amp;, T &amp;&amp; &gt;</type>
+        <definition>NEFORCE_NODISCARD constexpr conditional_t&lt;!is_nothrow_move_constructible&lt; T &gt;::value &amp;&amp;is_copy_constructible&lt; T &gt;::value, const T &amp;, T &amp;&amp; &gt; move_if_noexcept</definition>
+        <argsstring>(T &amp;x) noexcept</argsstring>
+        <name>move_if_noexcept</name>
+        <param>
+          <type>T &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>在安全的情况下执行移动操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果可以安全移动则返回右值引用，否则返回const左值引用</para>
+</simplesect>
+如果类型不可无异常移动构造但可复制构造，则返回const引用以避免潜在异常 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3050" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3050" bodyend="3052"/>
+        <references refid="group___args_forward_functions_1ga3e073ec2f144ac4eb2b91218a41475c5" compoundref="type__traits_8hpp" startline="3035" endline="3037">move</references>
+      </memberdef>
+      <memberdef kind="function" id="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr T *</type>
+        <definition>NEFORCE_NODISCARD constexpr T * addressof</definition>
+        <argsstring>(T &amp;x) noexcept</argsstring>
+        <name>addressof</name>
+        <param>
+          <type>T &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>获取对象的地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对象引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对象的指针</para>
+</simplesect>
+可避免重载的operator&amp;干扰 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3063" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3063" bodyend="3065"/>
+        <referencedby refid="structallocated__ptr_1a6fdae2691305f4444a372e81168d1b66" compoundref="allocated__ptr_8hpp" startline="58" endline="60">allocated_ptr&lt; Alloc &gt;::allocated_ptr</referencedby>
+        <referencedby refid="group___atomic_operations_1gaf15a5ea63f7851db21ec52e31b494700" compoundref="atomic__base_8hpp" startline="1126" endline="1140">atomic_exchange_any</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aa0d58511f41e15fe4b0dcded86705b91" compoundref="atomic__base_8hpp" startline="2641" endline="2644">atomic_ref_base&lt; T, false, false &gt;::atomic_ref_base</referencedby>
+        <referencedby refid="group___atomic_operations_1ga235411e03936c4aa90f209ab38cab492" compoundref="atomic__base_8hpp" startline="1080" endline="1089">atomic_store_any</referencedby>
+        <referencedby refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" compoundref="atomic_8hpp" startline="207" endline="212">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_1a986a7b48409d105ffb9c70ff3942db1c" compoundref="atomic_8hpp" startline="217" endline="222">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1afa68bbb346cae3e468cbb225d9a5da40" compoundref="atomic__base_8hpp" startline="2234" endline="2240">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1ad646d547e215185837af3cfa8bdfe4ee" compoundref="atomic__base_8hpp" startline="2245" endline="2251">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_1aae3c3ec7b287a0fc7d98db21be55f066" compoundref="atomic_8hpp" startline="166" endline="170">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_1a8c37e4a198018c0a0d174d7775f467a7" compoundref="atomic_8hpp" startline="175" endline="179">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a50c59c5bfcc109952946968caf0d1002" compoundref="atomic__base_8hpp" startline="2188" endline="2193">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1add6adc9a5802894b30bee42d2952a7d9" compoundref="atomic__base_8hpp" startline="2198" endline="2204">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1a924389ba4e0ec7a68058e1aacdb14784" compoundref="optional_8hpp" startline="968" endline="971">optional&lt; T &amp; &gt;::emplace</referencedby>
+        <referencedby refid="structatomic_1a5e1fce92f531d784690897010e446d8d" compoundref="atomic_8hpp" startline="147" endline="149">atomic&lt; T &gt;::exchange</referencedby>
+        <referencedby refid="structatomic_1a948ef15c05d5a3e24a6aba173b4ee7e8" compoundref="atomic_8hpp" startline="154" endline="156">atomic&lt; T &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a79f6c71df297317114e0948c53b44bbc" compoundref="atomic__base_8hpp" startline="2298" endline="2304">atomic_base&lt; T * &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a0aaefe0adc6c5815cd01bf8c0e7f6a65" compoundref="atomic__base_8hpp" startline="2309" endline="2315">atomic_base&lt; T * &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aed7f4507bc1d0652f6e387c4ba9cfceb" compoundref="atomic__base_8hpp" startline="2323" endline="2329">atomic_base&lt; T * &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1ad8d5eb0586e5ee1030019955086563a3" compoundref="atomic__base_8hpp" startline="2334" endline="2340">atomic_base&lt; T * &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" compoundref="atomic_8hpp" startline="130" endline="132">atomic&lt; T &gt;::load</referencedby>
+        <referencedby refid="structatomic_1aadd78cd51f71ca453d8364b3ddd3ee54" compoundref="atomic_8hpp" startline="137" endline="139">atomic&lt; T &gt;::load</referencedby>
+        <referencedby refid="classbasic__string_1a72c228ed767a46da8cc0574040a0fa18" compoundref="basic__string_8hpp" startline="916" endline="956">basic_string&lt; char &gt;::operator=</referencedby>
+        <referencedby refid="classbasic__string_1a96795bbfe38e47750498cae6ee0a72d0" compoundref="basic__string_8hpp" startline="836" endline="876">basic_string&lt; char &gt;::operator=</referencedby>
+        <referencedby refid="classbasic__timer_1a795e2f0ee98918bdef6fd545a3ce7df9" compoundref="timer_8hpp" startline="285" endline="296">basic_timer&lt; steady_clock &gt;::operator=</referencedby>
+        <referencedby refid="structbit__reference_1a8dab7f9d36b8b3fcc6b75c489ac74c1c" compoundref="bitmap_8hpp" startline="87" endline="95">bit_reference::operator=</referencedby>
+        <referencedby refid="structbit__reference_1a2bcdbd2e403f71ccc9682e59a615b0c9" compoundref="bitmap_8hpp" startline="64" endline="69">bit_reference::operator=</referencedby>
+        <referencedby refid="classbitmap_1a760a67b31187319d5d1d4133eaae42bf" compoundref="bitmap_8hpp" startline="808" endline="814">bitmap::operator=</referencedby>
+        <referencedby refid="classbitmap_1a00e1a4d391e6a260636403b94b005b40" compoundref="bitmap_8hpp" startline="782" endline="789">bitmap::operator=</referencedby>
+        <referencedby refid="classcancellation__token_1a957e3f2937364b799e2a242cc5905ba9" compoundref="generator_8hpp" startline="108" endline="119">cancellation_token::operator=</referencedby>
+        <referencedby refid="classcolor_1ada2ef63cecfcfdfc128a50319d1f36a0" compoundref="color_8hpp" startline="320" endline="333">color::operator=</referencedby>
+        <referencedby refid="classdeque_1afc8aee0b6ed56366dc9f34ee46107a25" compoundref="deque_8hpp" startline="863" endline="877">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1a798490221ab73e7d691fe4a115de05af" compoundref="deque_8hpp" startline="890" endline="897">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" compoundref="exception_8hpp" startline="112" endline="122">exception::operator=</referencedby>
+        <referencedby refid="structexception_1a709d705f97cbad7d531dfb5023107536" compoundref="exception_8hpp" startline="137" endline="149">exception::operator=</referencedby>
+        <referencedby refid="classexception__ptr_1a6285f3410fcac0e871ed0b061719ba3b" compoundref="exception__ptr_8hpp" startline="214" endline="221">exception_ptr::operator=</referencedby>
+        <referencedby refid="classexception__ptr_1ace99322177809035a72b74ef9fb9411a" compoundref="exception__ptr_8hpp" startline="228" endline="235">exception_ptr::operator=</referencedby>
+        <referencedby refid="classgenerator_1a74c79ed421adae0f2c9100a32fef7d25" compoundref="generator_8hpp" startline="304" endline="316">generator&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classhashtable_1a621a896e8af89bb12485201325ccb106" compoundref="hashtable_8hpp" startline="904" endline="914">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classhashtable_1a9e1b16edd19ff7b6a4f6f5066685e245" compoundref="hashtable_8hpp" startline="935" endline="942">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="structhttp__content_1a10fc7658505f1c91c2cada2ddbb8e6f7" compoundref="http__constants_8hpp" startline="381" endline="387">http_content::operator=</referencedby>
+        <referencedby refid="structhttp__cookie__name_1a737a6543ba07aa1535a87ffc94e3409e" compoundref="http__constants_8hpp" startline="630" endline="636">http_cookie_name::operator=</referencedby>
+        <referencedby refid="structhttp__method_1aec76de6e24c9cf874ceefbd17b0c15c6" compoundref="http__constants_8hpp" startline="495" endline="501">http_method::operator=</referencedby>
+        <referencedby refid="classlist_1a84666b1efe830082b8d0e5a89dc8757c" compoundref="list_8hpp" startline="344" endline="351">list&lt; pair&lt; Key, Value &gt; &gt;::operator=</referencedby>
+        <referencedby refid="classlist_1a2b5b7c9b7c38fe95b546a8d0427add7b" compoundref="list_8hpp" startline="367" endline="375">list&lt; pair&lt; Key, Value &gt; &gt;::operator=</referencedby>
+        <referencedby refid="classmap_1aaacdc156ac603db1decedf6f5d1555f2" compoundref="map_8hpp" startline="123" endline="129">map&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classmap_1a58f0054d0bacbf9cb364c8b6ad8597b8" compoundref="map_8hpp" startline="143" endline="149">map&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classmeta__any_1ab42569e6c4a5b7ef7ccaa65035e0975c" compoundref="reflect_2any_8hpp" startline="116" endline="128">meta_any::operator=</referencedby>
+        <referencedby refid="classoptional_1a93a78e86c5412d5a4b217f2424645b22" compoundref="optional_8hpp" startline="264" endline="279">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a7bdb21471e17d42870e0e9b49677940e" compoundref="optional_8hpp" startline="353" endline="371">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1a37530e30f0abf5d5a672d6f35fccb140" compoundref="optional_8hpp" startline="916" endline="921">optional&lt; T &amp; &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_3_01_t_01_6_01_4_1a8a6a3cd0eddc7d475c0a4814d8bf7436" compoundref="optional_8hpp" startline="904" endline="907">optional&lt; T &amp; &gt;::operator=</referencedby>
+        <referencedby refid="classrb__tree_1ae8747e3d3c46c22428e2c96e005177d1" compoundref="rb__tree_8hpp" startline="969" endline="976">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classrb__tree_1a9e29029b278954caf4e4ee6b6a5c53fd" compoundref="rb__tree_8hpp" startline="998" endline="1005">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classscoped__connection_1a9f568a791b9bc293e07b7d65897086d8" compoundref="signals_8hpp" startline="149" endline="156">scoped_connection::operator=</referencedby>
+        <referencedby refid="classshared__lock_1a4c66a9c5c30d81a6e1b170dde4028a82" compoundref="shared__mutex_8hpp" startline="204" endline="216">shared_lock&lt; SharedMutex &gt;::operator=</referencedby>
+        <referencedby refid="classshared__ptr_1afe9c01b80231ffdb6a583b9bd039338b" compoundref="shared__ptr_8hpp" startline="369" endline="382">shared_ptr&lt; periodic_task_state &gt;::operator=</referencedby>
+        <referencedby refid="classshared__ptr_1afdb658aae4338f3ba204a58c40861081" compoundref="shared__ptr_8hpp" startline="414" endline="426">shared_ptr&lt; periodic_task_state &gt;::operator=</referencedby>
+        <referencedby refid="classtask_1a20d669386e15b25103aee3212ae684ad" compoundref="generator_8hpp" startline="611" endline="623">task&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classtrace__allocator_1a8db9dfa54a28c70465250376b1c4f9fe" compoundref="trace__memory_8hpp" startline="79" endline="85">trace_allocator&lt; U &gt;::operator=</referencedby>
+        <referencedby refid="classunique__lock_1af4e3bf904517122a7dea67c6cfc7d113" compoundref="mutex_8hpp" startline="328" endline="340">unique_lock&lt; Mutex &gt;::operator=</referencedby>
+        <referencedby refid="structvariant_1a16f22ecbc982b07727870ddd4bc8ab4f" compoundref="variant_8hpp" startline="299" endline="306">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::operator=</referencedby>
+        <referencedby refid="structvariant_1a2f68a0ae10a54232af9328d6de44ed34" compoundref="variant_8hpp" startline="326" endline="333">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::operator=</referencedby>
+        <referencedby refid="classvector_1a21c9e6e171418df5b7324ac842531f5c" compoundref="vector_8hpp" startline="481" endline="489">vector&lt; byte_t &gt;::operator=</referencedby>
+        <referencedby refid="classvector_1a2314904dc463f70a95368fd51705efd3" compoundref="vector_8hpp" startline="506" endline="515">vector&lt; byte_t &gt;::operator=</referencedby>
+        <referencedby refid="structvirtual__thread__task_1ae6a8baf3cd9bb4fe8f972b031248e957" compoundref="virtual__thread_8hpp" startline="110" endline="119">virtual_thread_task::operator=</referencedby>
+        <referencedby refid="classweak__ptr_1a06b6595a7fa7840264a2f96a042962d5" compoundref="weak__ptr_8hpp" startline="144" endline="157">weak_ptr&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classweak__ptr_1a66b64743332e92f4bc225376a599cfab" compoundref="weak__ptr_8hpp" startline="202" endline="214">weak_ptr&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="structpointer__traits_3_01_t_01_5_01_4_1ae58ffd1017a30df68918e27eee40b3fe" compoundref="iterator__traits_8hpp" startline="283" endline="283">pointer_traits&lt; T * &gt;::pointer_to</referencedby>
+        <referencedby refid="classreference__wrapper_1a0b259e361592069c71bd65f5baad8822" compoundref="reference__wrapper_8hpp" startline="84" endline="87">reference_wrapper&lt; T &gt;::reference_wrapper</referencedby>
+        <referencedby refid="structatomic_1a3e1268f8d4abb49382c713740a13234a" compoundref="atomic_8hpp" startline="114" endline="116">atomic&lt; T &gt;::store</referencedby>
+        <referencedby refid="structatomic_1a18eba15397edb4001c242550849dab9c" compoundref="atomic_8hpp" startline="121" endline="123">atomic&lt; T &gt;::store</referencedby>
+        <referencedby refid="classbasic__string_1a2b7d0b9c6308042d8097fd975eab689a" compoundref="basic__string_8hpp" startline="2775" endline="2787">basic_string&lt; char &gt;::swap</referencedby>
+        <referencedby refid="structbit__reference_1af12b329e708124df9665d76838886b1b" compoundref="bitmap_8hpp" startline="139" endline="146">bit_reference::swap</referencedby>
+        <referencedby refid="classbitmap_1a9b6059e655d966a84a74b07dd4656e11" compoundref="bitmap_8hpp" startline="1145" endline="1156">bitmap::swap</referencedby>
+        <referencedby refid="classdeque_1a2bc9e5114adc88054d962dd466a18920" compoundref="deque_8hpp" startline="1410" endline="1419">deque&lt; T, Alloc, BufSize &gt;::swap</referencedby>
+        <referencedby refid="classhashtable_1ad4653c3ae73acfeb1f22cee7b8796691" compoundref="hashtable_8hpp" startline="1551" endline="1562">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::swap</referencedby>
+        <referencedby refid="classoptional_1ae336a413c95399231aaa0adaf3d0e4e0" compoundref="optional_8hpp" startline="791" endline="805">optional&lt; T &gt;::swap</referencedby>
+        <referencedby refid="classshared__ptr_1ace405e1a458c9e2a95c60b3626fcd20d" compoundref="shared__ptr_8hpp" startline="568" endline="574">shared_ptr&lt; periodic_task_state &gt;::swap</referencedby>
+        <referencedby refid="structvariant_1aa6ac13b545ec10e7c444157d69db3bd1" compoundref="variant_8hpp" startline="571" endline="589">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::swap</referencedby>
+        <referencedby refid="classvector_1a58ed5cc2b747b15398211cb57221c38b" compoundref="vector_8hpp" startline="1193" endline="1201">vector&lt; byte_t &gt;::swap</referencedby>
+        <referencedby refid="classweak__ptr_1ab6ce65d0fac958b888c5d52c029efbc2" compoundref="weak__ptr_8hpp" startline="251" endline="257">weak_ptr&lt; T &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___args_forward_functions_1ga47995fab432306dd7e4e0a2a76064b0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const T *</type>
+        <definition>const T * addressof</definition>
+        <argsstring>(const T &amp;&amp;)=delete</argsstring>
+        <name>addressof</name>
+        <param>
+          <type>const T &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止获取const右值的地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>删除const右值重载以防止悬垂引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3073" column="9" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3073" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="group___args_forward_functions_1ga86d419c37ec68599dafb6b5926c1824a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t offset_of</definition>
+        <argsstring>(U T::*member)</argsstring>
+        <name>offset_of</name>
+        <param>
+          <type>U T::*</type>
+          <declname>member</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3077" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3077" bodyend="3079"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>参数转发函数实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

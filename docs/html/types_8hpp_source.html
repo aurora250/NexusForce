@@ -108,14 +108,14 @@ $(function(){initNavTree('types_8hpp_source.html','',''); });
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">   37</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> = <span class="keywordtype">unsigned</span> char;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___core_types.html#gae12925f783932054294ff08f52ff0124">   44</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___core_types.html#gae12925f783932054294ff08f52ff0124">native_size_type</a> =</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="group___core_types.html#ga9074d04984ece997514aed9268a34c52">   44</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___core_types.html#ga9074d04984ece997514aed9268a34c52">native_size_type</a> =</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">unsigned</span> long;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        int;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___core_types.html#gae2333730750b4450551f71afd3bb2182">   55</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___core_types.html#gae2333730750b4450551f71afd3bb2182">native_handle_type</a> =</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="group___core_types.html#gae7d45d137d006d241206598ec95eb28b">   55</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___core_types.html#gae7d45d137d006d241206598ec95eb28b">native_handle_type</a> =</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">void</span>*;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#else</span></div>
@@ -286,24 +286,36 @@ $(function(){initNavTree('types_8hpp_source.html','',''); });
 <div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>};</div>
 </div>
 <div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span></div>
-<div class="foldopen" id="foldopen00505" data-start="{" data-end="};">
-<div class="line"><a id="l00505" name="l00505"></a><span class="lineno"><a class="line" href="structunpack__utility__construct__tag.html">  505</a></span><span class="keyword">struct </span>unpack_utility_construct_tag {</div>
-<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> unpack_utility_construct_tag() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>};</div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="foldopen" id="foldopen00506" data-start="{" data-end="};">
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno"><a class="line" href="structpass__template__construct__tag.html">  506</a></span><span class="keyword">struct </span>pass_template_construct_tag {</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> pass_template_construct_tag() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>};</div>
 </div>
-<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span> <span class="comment">// ConstructionTags</span></div>
-<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span> </div>
-<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span><span class="keyword">struct </span>ignore_t {</div>
-<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>    NEFORCE_CONSTEXPR14 <span class="keyword">const</span> ignore_t&amp; operator=(<span class="keyword">const</span> T&amp;) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>    }</div>
-<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>};</div>
-<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span> </div>
-<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>NEFORCE_INLINE17 <span class="keyword">constexpr</span> ignore_t ignore{};</div>
-<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span> </div>
-<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_TYPEINFO_TYPES_HPP__</span></div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span> </div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span><span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> Size&gt;</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span><span class="keyword">struct </span>pass_size_construct_tag {</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> pass_size_construct_tag() noexcept = default;</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>};</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span></div>
+<div class="foldopen" id="foldopen00521" data-start="{" data-end="};">
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno"><a class="line" href="structunpack__utility__construct__tag.html">  521</a></span>struct unpack_utility_construct_tag {</div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>    <span class="keyword">constexpr</span> <span class="keyword">explicit</span> unpack_utility_construct_tag() <span class="keyword">noexcept</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>};</div>
+</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span> <span class="comment">// ConstructionTags</span></div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span> </div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span><span class="keyword">struct </span>ignore_t {</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>    NEFORCE_CONSTEXPR14 <span class="keyword">const</span> ignore_t&amp; operator=(<span class="keyword">const</span> T&amp;) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>    }</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>};</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span> </div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>NEFORCE_INLINE17 <span class="keyword">constexpr</span> ignore_t ignore{};</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span> </div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_TYPEINFO_TYPES_HPP__</span></div>
 <div class="ttc" id="ac_09_09config_8hpp_html"><div class="ttname"><a href="c_09_09config_8hpp.html">c++config.hpp</a></div><div class="ttdoc">核心配置头文件</div></div>
 <div class="ttc" id="agroup___core_types_html_ga0ba18cab9bd5513695cbe748e9bb4879"><div class="ttname"><a href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdoc">8位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="#l00098">types.hpp:98</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga18a5de45c0adec9c9e545674cc14755f"><div class="ttname"><a href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a></div><div class="ttdeci">unsigned char byte_t</div><div class="ttdoc">字节类型，定义为无符号字符</div><div class="ttdef"><b>定义</b> <a href="#l00037">types.hpp:37</a></div></div>
@@ -316,9 +328,9 @@ $(function(){initNavTree('types_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___core_types_html_ga682e63d2daefd96d4e75e4239210e233"><div class="ttname"><a href="group___core_types.html#ga682e63d2daefd96d4e75e4239210e233">max_align_t</a></div><div class="ttdeci">double max_align_t</div><div class="ttdoc">最大对齐类型</div><div class="ttdef"><b>定义</b> <a href="#l00031">types.hpp:31</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="#l00118">types.hpp:118</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga8b23aa936eec66c1c69ecd7b399ddf19"><div class="ttname"><a href="group___core_types.html#ga8b23aa936eec66c1c69ecd7b399ddf19">int16_t</a></div><div class="ttdeci">short int16_t</div><div class="ttdoc">16位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="#l00073">types.hpp:73</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga9074d04984ece997514aed9268a34c52"><div class="ttname"><a href="group___core_types.html#ga9074d04984ece997514aed9268a34c52">native_size_type</a></div><div class="ttdeci">unsigned long native_size_type</div><div class="ttdoc">系统ID类型</div><div class="ttdef"><b>定义</b> <a href="#l00044">types.hpp:44</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga9f99c01571d1afadb9d8d2e48ec532bb"><div class="ttname"><a href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a></div><div class="ttdeci">int int32_t</div><div class="ttdoc">32位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="#l00079">types.hpp:79</a></div></div>
-<div class="ttc" id="agroup___core_types_html_gae12925f783932054294ff08f52ff0124"><div class="ttname"><a href="group___core_types.html#gae12925f783932054294ff08f52ff0124">native_size_type</a></div><div class="ttdeci">int native_size_type</div><div class="ttdoc">系统ID类型</div><div class="ttdef"><b>定义</b> <a href="#l00044">types.hpp:44</a></div></div>
-<div class="ttc" id="agroup___core_types_html_gae2333730750b4450551f71afd3bb2182"><div class="ttname"><a href="group___core_types.html#gae2333730750b4450551f71afd3bb2182">native_handle_type</a></div><div class="ttdeci">int native_handle_type</div><div class="ttdoc">系统句柄类型</div><div class="ttdef"><b>定义</b> <a href="#l00055">types.hpp:55</a></div></div>
+<div class="ttc" id="agroup___core_types_html_gae7d45d137d006d241206598ec95eb28b"><div class="ttname"><a href="group___core_types.html#gae7d45d137d006d241206598ec95eb28b">native_handle_type</a></div><div class="ttdeci">void * native_handle_type</div><div class="ttdoc">系统句柄类型</div><div class="ttdef"><b>定义</b> <a href="#l00055">types.hpp:55</a></div></div>
 <div class="ttc" id="agroup___core_types_html_gaef0a181fd471ee04962c9ce581a83ca0"><div class="ttname"><a href="group___core_types.html#gaef0a181fd471ee04962c9ce581a83ca0">int8_t</a></div><div class="ttdeci">signed char int8_t</div><div class="ttdoc">8位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="#l00067">types.hpp:67</a></div></div>
 <div class="ttc" id="agroup___core_types_html_gafb2c9350d32e78a0e4c960b9859ccb40"><div class="ttname"><a href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></div><div class="ttdeci">decltype(nullptr) nullptr_t</div><div class="ttdoc">空指针类型</div><div class="ttdef"><b>定义</b> <a href="#l00025">types.hpp:25</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_ga15858ce0654f9494ed560fca6ad62a24"><div class="ttname"><a href="group___platform_dependent_types.html#ga15858ce0654f9494ed560fca6ad62a24">int_fast16_t</a></div><div class="ttdeci">ssize_t int_fast16_t</div><div class="ttdoc">快速16位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="#l00289">types.hpp:289</a></div></div>

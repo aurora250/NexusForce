@@ -1,0 +1,470 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classudp__socket" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>udp_socket</compoundname>
+    <basecompoundref refid="classip__socket" prot="public" virt="non-virtual">ip_socket</basecompoundref>
+    <includes refid="udp__socket_8hpp" local="no">udp_socket.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classudp__socket_1a328c2c1a4f87834a2f7648274d9eb77c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>udp_socket::udp_socket</definition>
+        <argsstring>()=default</argsstring>
+        <name>udp_socket</name>
+        <qualifiedname>udp_socket::udp_socket</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="42" column="5"/>
+        <references refid="classudp__socket_1a328c2c1a4f87834a2f7648274d9eb77c">udp_socket</references>
+        <referencedby refid="classudp__socket_1a328c2c1a4f87834a2f7648274d9eb77c">udp_socket</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1ab36c8d891aa1e0aadaf41124b1302fd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>udp_socket::udp_socket</definition>
+        <argsstring>(udp_socket &amp;&amp;)=default</argsstring>
+        <name>udp_socket</name>
+        <qualifiedname>udp_socket::udp_socket</qualifiedname>
+        <param>
+          <type><ref refid="classudp__socket" kindref="compound">udp_socket</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="44" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a0927dc1f70a754e70eb3f0f68a9bf1bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classudp__socket" kindref="compound">udp_socket</ref> &amp;</type>
+        <definition>udp_socket &amp; udp_socket::operator=</definition>
+        <argsstring>(udp_socket &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>udp_socket::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classudp__socket" kindref="compound">udp_socket</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="45" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1ac897a23f580e28d04846182d9bf8a54d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void udp_socket::open</definition>
+        <argsstring>(int family=AF_INET)</argsstring>
+        <name>open</name>
+        <qualifiedname>udp_socket::open</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>family</declname>
+          <defval>AF_INET</defval>
+        </param>
+        <briefdescription>
+<para>打开UDP socket </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>family</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>地址族（AF_INET或AF_INET6），默认IPv4 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建UDP协议的socket，使用SOCK_DGRAM类型和IPPROTO_UDP协议。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="54" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a1c4454c1ec0b9d3038cce20e6f308c2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t udp_socket::send_to</definition>
+        <argsstring>(memory_view&lt; const char &gt; data, const ip_address &amp;endpoint, int flags=0)</argsstring>
+        <name>send_to</name>
+        <qualifiedname>udp_socket::send_to</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>向指定端点发送数据报 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送标志（通常为0） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实际发送的字节数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开或端点无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+向指定的远程端点发送UDP数据报，不需要socket处于连接状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="67" column="13"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1ab322f003a3a5ffaa2bf3e07fcbf8e79c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t udp_socket::send</definition>
+        <argsstring>(memory_view&lt; const char &gt; data, int flags=0)</argsstring>
+        <name>send</name>
+        <qualifiedname>udp_socket::send</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; const char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>向已连接的端点发送数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送标志（通常为0） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实际发送的字节数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发送失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+向connect()关联的远程端点发送数据，需要先调用connect()。 性能优于send_to()，因为不需要每次指定目标地址。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="80" column="13"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a37b55826566b881ef590f3e80c24bcb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref>, <ref refid="classip__address" kindref="compound">ip_address</ref> &gt;</type>
+        <definition>pair&lt; ssize_t, ip_address &gt; udp_socket::receive_from</definition>
+        <argsstring>(memory_view&lt; char &gt; buffer, int flags=0)</argsstring>
+        <name>receive_from</name>
+        <qualifiedname>udp_socket::receive_from</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>接收数据报并获取发送方地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收标志（通常为0） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>接收的字节数和发送方地址的pair </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开或缓冲区为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+接收UDP数据报，同时返回发送方的IP地址和端口。 适用于无连接模式的UDP服务器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="93" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classudp__socket_1a4410530e9e9c734eff53bc64617eeefb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t udp_socket::receive</definition>
+        <argsstring>(memory_view&lt; char &gt; buffer, int flags=0)</argsstring>
+        <name>receive</name>
+        <qualifiedname>udp_socket::receive</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; char &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>从已连接的端点接收数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收标志（通常为0） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实际接收的字节数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开或缓冲区为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从connect()关联的远程端点接收数据，需要先调用connect()。 只能接收来自该端点的数据。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="106" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>UDP Socket类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现UDP协议的数据报socket，支持无连接和已连接两种模式。 UDP是面向数据报的协议，提供不可靠、无连接的服务。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>UDP socket创建和打开</para>
+</listitem><listitem><para>向指定端点发送数据报（send_to）</para>
+</listitem><listitem><para>从任意端点接收数据报（receive_from）</para>
+</listitem><listitem><para>已连接UDP socket的发送（send）和接收（receive）</para>
+</listitem><listitem><para>获取发送方地址信息</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>数据报大小受MTU限制，通常建议不超过65507字节。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>ip_socket</label>
+        <link refid="classip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>socket_base</label>
+        <link refid="classsocket__base"/>
+      </node>
+      <node id="1">
+        <label>udp_socket</label>
+        <link refid="classudp__socket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>ip_socket</label>
+        <link refid="classip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>socket_base</label>
+        <link refid="classsocket__base"/>
+      </node>
+      <node id="1">
+        <label>udp_socket</label>
+        <link refid="classudp__socket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" line="37" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/udp_socket.hpp" bodystart="37" bodyend="107"/>
+    <listofallmembers>
+      <member refid="classip__socket_1a981aa1544d7794182f65c1764fc83443" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>address_family</name></member>
+      <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>bind</name></member>
+      <member refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" prot="public" virt="virtual"><scope>udp_socket</scope><name>close</name></member>
+      <member refid="classip__socket_1a50186a110e9b4e5c67aac5a23e021ace" prot="public" virt="virtual"><scope>udp_socket</scope><name>connect</name></member>
+      <member refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" prot="protected" virt="non-virtual"><scope>udp_socket</scope><name>family_</name></member>
+      <member refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" prot="protected" virt="non-virtual"><scope>udp_socket</scope><name>fd_</name></member>
+      <member refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>get_option</name></member>
+      <member refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>invalid_handle</name></member>
+      <member refid="classip__socket_1aaae0820ef1814fdd2299e646e7ce0b88" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1a8a478205847df7ca0529f15ca8ce50b8" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1a00d8e53e5b1c1d7dc6de2fe45e50ffc4" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1aae6b6a8b9b8bea4d66dba690c8222980" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1a84a515031395f20e2365e46cfabd9fdb" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>is_ipv4</name></member>
+      <member refid="classip__socket_1a33e8a286462c74c4c4eb4df045dac507" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>is_ipv6</name></member>
+      <member refid="classsocket__base_1a6187ffba6859cc29fcf0c0b08916dcca" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>is_open</name></member>
+      <member refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>listen</name></member>
+      <member refid="classsocket__base_1a698bf7147749c5f0bbfd0a906875eb5e" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>local_endpoint</name></member>
+      <member refid="classsocket__base_1a7a733151fa76e8e33ebd6d637c06e0fd" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>native_handle</name></member>
+      <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>native_handle_type</name></member>
+      <member refid="classudp__socket_1ac897a23f580e28d04846182d9bf8a54d" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>open</name></member>
+      <member refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>udp_socket</scope><name>open</name></member>
+      <member refid="classip__socket_1af46a0c10c0c23ab91a8445c16733ed61" prot="protected" virt="non-virtual"><scope>udp_socket</scope><name>open_ip</name></member>
+      <member refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>operator bool</name></member>
+      <member refid="classudp__socket_1a0927dc1f70a754e70eb3f0f68a9bf1bf" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>operator=</name></member>
+      <member refid="classip__socket_1a5df14bf84d50bdad66ab775ad2c5cbba" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>udp_socket</scope><name>operator=</name></member>
+      <member refid="classip__socket_1a73fbebcb7a962895a5943597b9d3d6d8" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>udp_socket</scope><name>operator=</name></member>
+      <member refid="classsocket__base_1af825fb2543e89b098bc9c1da47f09647" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>udp_socket</scope><name>operator=</name></member>
+      <member refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>udp_socket</scope><name>operator=</name></member>
+      <member refid="classudp__socket_1a4410530e9e9c734eff53bc64617eeefb" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>receive</name></member>
+      <member refid="classudp__socket_1a37b55826566b881ef590f3e80c24bcb5" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>receive_from</name></member>
+      <member refid="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>release</name></member>
+      <member refid="classsocket__base_1a3af835aab3dbb6e477c9833184437b62" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>remote_endpoint</name></member>
+      <member refid="classudp__socket_1ab322f003a3a5ffaa2bf3e07fcbf8e79c" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>send</name></member>
+      <member refid="classudp__socket_1a1c4454c1ec0b9d3038cce20e6f308c2e" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>send_to</name></member>
+      <member refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>set_keep_alive</name></member>
+      <member refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>set_nonblocking</name></member>
+      <member refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>set_option</name></member>
+      <member refid="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>set_receive_buffer_size</name></member>
+      <member refid="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>set_receive_timeout</name></member>
+      <member refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>set_reuse_address</name></member>
+      <member refid="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>set_reuse_port</name></member>
+      <member refid="classsocket__base_1a7126487c99a283ff1eb6b3475893e280" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>set_send_buffer_size</name></member>
+      <member refid="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>set_send_timeout</name></member>
+      <member refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>set_tcp_nodelay</name></member>
+      <member refid="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>shutdown_both</name></member>
+      <member refid="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>shutdown_receive</name></member>
+      <member refid="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>shutdown_send</name></member>
+      <member refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1a57db04b97c49aa2c123b8b4cb155ee9b" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>try_open</name></member>
+      <member refid="classudp__socket_1a328c2c1a4f87834a2f7648274d9eb77c" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>udp_socket</name></member>
+      <member refid="classudp__socket_1ab36c8d891aa1e0aadaf41124b1302fd9" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>udp_socket</name></member>
+      <member refid="classip__socket_1a4a1d2bcfb15b0d319defef1c9da3c0d4" prot="public" virt="non-virtual"><scope>udp_socket</scope><name>~ip_socket</name></member>
+      <member refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" prot="public" virt="virtual"><scope>udp_socket</scope><name>~socket_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

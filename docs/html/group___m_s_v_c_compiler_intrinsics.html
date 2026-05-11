@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: MSVC内部函数替代实现</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___m_s_v_c_compiler_intrinsics.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">MSVC内部函数替代实现 </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>MSVC编译器内部函数的替代实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gab4c7185568f88aa1b6c53eb768e6973b" id="r_gab4c7185568f88aa1b6c53eb768e6973b"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gab4c7185568f88aa1b6c53eb768e6973b">_addcarry_u64</a> (const <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> carry_in, const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> a, const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> b, <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *out) noexcept</td></tr>
+<tr class="memdesc:gab4c7185568f88aa1b6c53eb768e6973b"><td class="mdescLeft">&#160;</td><td class="mdescRight">带进位的64位无符号加法  <br /></td></tr>
+<tr class="memitem:ga390f113f6c4ce609f5a2119b1543deb9" id="r_ga390f113f6c4ce609f5a2119b1543deb9"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga390f113f6c4ce609f5a2119b1543deb9">_subborrow_u64</a> (const <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> borrow_in, const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> a, const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> b, <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *out) noexcept</td></tr>
+<tr class="memdesc:ga390f113f6c4ce609f5a2119b1543deb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">带借位的64位无符号减法  <br /></td></tr>
+<tr class="memitem:ga9185eaeb22c3a505558c61664c132766" id="r_ga9185eaeb22c3a505558c61664c132766"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga9185eaeb22c3a505558c61664c132766">_umul128</a> (const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> a, const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> b, <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *hi_out) noexcept</td></tr>
+<tr class="memdesc:ga9185eaeb22c3a505558c61664c132766"><td class="mdescLeft">&#160;</td><td class="mdescRight">64位无符号乘法  <br /></td></tr>
+<tr class="memitem:ga6327e37e5117d9bcd0f3b58ff23f7669" id="r_ga6327e37e5117d9bcd0f3b58ff23f7669"><td class="memItemLeft">NEFORCE_END_INNER__ NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga6327e37e5117d9bcd0f3b58ff23f7669">_udiv128</a> (const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> dividend_hi, const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> dividend_lo, <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> divisor, <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *<a class="el" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a>) noexcept</td></tr>
+<tr class="memdesc:ga6327e37e5117d9bcd0f3b58ff23f7669"><td class="mdescLeft">&#160;</td><td class="mdescRight">128位无符号除法  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>MSVC编译器内部函数的替代实现 </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="gab4c7185568f88aa1b6c53eb768e6973b" name="gab4c7185568f88aa1b6c53eb768e6973b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab4c7185568f88aa1b6c53eb768e6973b">&#9670;&#160;</a></span>_addcarry_u64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> _addcarry_u64 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>carry_in</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *</td>          <td class="paramname"><span class="paramname"><em>out</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>带进位的64位无符号加法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">carry_in</td><td>进位输入（0或1） </td></tr>
+    <tr><td class="paramname">a</td><td>第一个加数 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个加数 </td></tr>
+    <tr><td class="paramname">out</td><td>输出结果（低64位） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>进位输出（0或1）</dd></dl>
+<p>计算 a + b + carry_in，结果存入out，返回进位标志。 </p>
+
+<p class="definition">在文件 <a class="el" href="msvc__intrinsic_8hpp_source.html">msvc_intrinsic.hpp</a> 第 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00036">36</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga390f113f6c4ce609f5a2119b1543deb9" name="ga390f113f6c4ce609f5a2119b1543deb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga390f113f6c4ce609f5a2119b1543deb9">&#9670;&#160;</a></span>_subborrow_u64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> _subborrow_u64 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></td>          <td class="paramname"><span class="paramname"><em>borrow_in</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *</td>          <td class="paramname"><span class="paramname"><em>out</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>带借位的64位无符号减法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">borrow_in</td><td>借位输入（0或1） </td></tr>
+    <tr><td class="paramname">a</td><td>被减数 </td></tr>
+    <tr><td class="paramname">b</td><td>减数 </td></tr>
+    <tr><td class="paramname">out</td><td>输出结果（低64位） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>借位输出（0或1）</dd></dl>
+<p>计算 a - b - borrow_in，结果存入out，返回借位标志。 </p>
+
+<p class="definition">在文件 <a class="el" href="msvc__intrinsic_8hpp_source.html">msvc_intrinsic.hpp</a> 第 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00060">60</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga6327e37e5117d9bcd0f3b58ff23f7669" name="ga6327e37e5117d9bcd0f3b58ff23f7669"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6327e37e5117d9bcd0f3b58ff23f7669">&#9670;&#160;</a></span>_udiv128()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_END_INNER__ NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> _udiv128 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>dividend_hi</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>dividend_lo</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>divisor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *</td>          <td class="paramname"><span class="paramname"><em>remainder</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>128位无符号除法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dividend_hi</td><td>被除数的高64位 </td></tr>
+    <tr><td class="paramname">dividend_lo</td><td>被除数的低64位 </td></tr>
+    <tr><td class="paramname">divisor</td><td>除数（64位） </td></tr>
+    <tr><td class="paramname">remainder</td><td>输出余数（可为空） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>商（64位）</dd></dl>
+<p>计算 (dividend_hi &lt;&lt; 64 | dividend_lo) / divisor，返回商，余数存入remainder。</p>
+<p>算法基于Knuth的D算法（长除法），支持任意64位除数。 </p>
+
+<p class="definition">在文件 <a class="el" href="msvc__intrinsic_8hpp_source.html">msvc_intrinsic.hpp</a> 第 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00149">149</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00086">_umul128()</a>, <a class="el" href="bit_8hpp_source.html#l00074">clz64()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00809">remainder()</a>.</p>
+
+</div>
+</div>
+<a id="ga9185eaeb22c3a505558c61664c132766" name="ga9185eaeb22c3a505558c61664c132766"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9185eaeb22c3a505558c61664c132766">&#9670;&#160;</a></span>_umul128()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> _umul128 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hi_out</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>64位无符号乘法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>第一个乘数 </td></tr>
+    <tr><td class="paramname">b</td><td>第二个乘数 </td></tr>
+    <tr><td class="paramname">hi_out</td><td>输出结果的高64位 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>结果的低64位</dd></dl>
+<p>计算 a * b 的128位结果，低64位作为返回值，高64位存入hi_out。 </p>
+
+<p class="definition">在文件 <a class="el" href="msvc__intrinsic_8hpp_source.html">msvc_intrinsic.hpp</a> 第 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00086">86</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00149">_udiv128()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

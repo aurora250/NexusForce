@@ -1,0 +1,466 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classshared__lock" kind="class" language="C++" prot="public">
+    <compoundname>shared_lock</compoundname>
+    <includes refid="shared__mutex_8hpp" local="no">shared_mutex.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename SharedMutex</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classshared__lock_1a0dcaaf18ba7b622310b1977eeb7f940d" prot="public" static="no">
+        <type>SharedMutex</type>
+        <definition>using shared_lock&lt; SharedMutex &gt;::mutex_type = SharedMutex</definition>
+        <argsstring></argsstring>
+        <name>mutex_type</name>
+        <qualifiedname>shared_lock::mutex_type</qualifiedname>
+        <briefdescription>
+<para>共享互斥锁类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="134" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classshared__lock_1a0e28fa1d235beb351241a3a46ece785d" prot="private" static="no" mutable="no">
+        <type><ref refid="classshared__lock_1a0dcaaf18ba7b622310b1977eeb7f940d" kindref="member">mutex_type</ref> *</type>
+        <definition>mutex_type* shared_lock&lt; SharedMutex &gt;::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>shared_lock::mutex_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>指向共享互斥锁的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="137" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshared__lock_1ae91183fed6e2104b8046884506279848" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool shared_lock&lt; SharedMutex &gt;::owns_lock_</definition>
+        <argsstring></argsstring>
+        <name>owns_lock_</name>
+        <qualifiedname>shared_lock::owns_lock_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否拥有共享锁的所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="138" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="138" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classshared__lock_1a54df05d7997d6de8dcabfa916773934b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>shared_lock&lt; SharedMutex &gt;::shared_lock</definition>
+        <argsstring>()=default</argsstring>
+        <name>shared_lock</name>
+        <qualifiedname>shared_lock::shared_lock</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建不管理任何共享互斥锁的共享锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="146" column="5"/>
+        <referencedby refid="classshared__lock_1a4c66a9c5c30d81a6e1b170dde4028a82" compoundref="shared__mutex_8hpp" startline="204" endline="216">shared_lock&lt; SharedMutex &gt;::operator=</referencedby>
+        <referencedby refid="classshared__lock_1a1177948b8f2cd8cad8fe9e18b543747b" compoundref="shared__mutex_8hpp" startline="190" endline="195">shared_lock&lt; SharedMutex &gt;::shared_lock</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1afc9a15f2802f37810eb955782c5bc56d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>shared_lock&lt; SharedMutex &gt;::shared_lock</definition>
+        <argsstring>(mutex_type &amp;m)</argsstring>
+        <name>shared_lock</name>
+        <qualifiedname>shared_lock::shared_lock</qualifiedname>
+        <param>
+          <type><ref refid="classshared__lock_1a0dcaaf18ba7b622310b1977eeb7f940d" kindref="member">mutex_type</ref> &amp;</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+<para>从共享互斥锁构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的共享互斥锁引用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造时立即获取共享互斥锁的读锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="154" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="154" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a5457fcedef9bfee60164ca07f4fb4de1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>shared_lock&lt; SharedMutex &gt;::shared_lock</definition>
+        <argsstring>(mutex_type &amp;m, defer_lock_tag tag) noexcept</argsstring>
+        <name>shared_lock</name>
+        <qualifiedname>shared_lock::shared_lock</qualifiedname>
+        <param>
+          <type><ref refid="classshared__lock_1a0dcaaf18ba7b622310b1977eeb7f940d" kindref="member">mutex_type</ref> &amp;</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type><ref refid="structdefer__lock__tag" kindref="compound">defer_lock_tag</ref></type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+<para>延迟锁定构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的共享互斥锁引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>延迟锁定标签</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造时不锁定共享互斥锁，稍后可以手动获取读锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="167" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="167" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1afe149c809800ac2ab99c6140a8c46490" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>shared_lock&lt; SharedMutex &gt;::shared_lock</definition>
+        <argsstring>(mutex_type &amp;m, try_lock_tag tag) noexcept</argsstring>
+        <name>shared_lock</name>
+        <qualifiedname>shared_lock::shared_lock</qualifiedname>
+        <param>
+          <type><ref refid="classshared__lock_1a0dcaaf18ba7b622310b1977eeb7f940d" kindref="member">mutex_type</ref> &amp;</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type><ref refid="structtry__lock__tag" kindref="compound">try_lock_tag</ref></type>
+          <declname>tag</declname>
+        </param>
+        <briefdescription>
+<para>尝试锁定构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的共享互斥锁引用 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>尝试锁定标签</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造时尝试获取共享互斥锁的读锁，如果失败不会阻塞。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="177" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="177" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a131a168989aa279bce1997c492cd3bad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>shared_lock&lt; SharedMutex &gt;::shared_lock</definition>
+        <argsstring>(const shared_lock &amp;)=delete</argsstring>
+        <name>shared_lock</name>
+        <qualifiedname>shared_lock::shared_lock</qualifiedname>
+        <param>
+          <type>const <ref refid="classshared__lock" kindref="compound">shared_lock</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="181" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1ad0b337fc4b9a6a7ba2929345c3d483d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classshared__lock" kindref="compound">shared_lock</ref> &amp;</type>
+        <definition>shared_lock &amp; shared_lock&lt; SharedMutex &gt;::operator=</definition>
+        <argsstring>(const shared_lock &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>shared_lock::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classshared__lock" kindref="compound">shared_lock</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="182" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a1177948b8f2cd8cad8fe9e18b543747b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>shared_lock&lt; SharedMutex &gt;::shared_lock</definition>
+        <argsstring>(shared_lock &amp;&amp;other) noexcept</argsstring>
+        <name>shared_lock</name>
+        <qualifiedname>shared_lock::shared_lock</qualifiedname>
+        <param>
+          <type><ref refid="classshared__lock" kindref="compound">shared_lock</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的共享锁</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+转移共享互斥锁的所有权和锁定状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="190" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="190" bodyend="195"/>
+        <references refid="classshared__lock_1a54df05d7997d6de8dcabfa916773934b">shared_lock&lt; SharedMutex &gt;::shared_lock</references>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a4c66a9c5c30d81a6e1b170dde4028a82" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classshared__lock" kindref="compound">shared_lock</ref> &amp;</type>
+        <definition>shared_lock &amp; shared_lock&lt; SharedMutex &gt;::operator=</definition>
+        <argsstring>(shared_lock &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>shared_lock::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classshared__lock" kindref="compound">shared_lock</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的共享锁 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用</para>
+</simplesect>
+释放当前锁，然后转移所有权。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="204" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="204" bodyend="216"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="classshared__lock_1a54df05d7997d6de8dcabfa916773934b">shared_lock&lt; SharedMutex &gt;::shared_lock</references>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a09cd913ffb52b9607316cf60610d98ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>shared_lock&lt; SharedMutex &gt;::~shared_lock</definition>
+        <argsstring>()</argsstring>
+        <name>~shared_lock</name>
+        <qualifiedname>shared_lock::~shared_lock</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果拥有共享锁的所有权，则释放读锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="223" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="223" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a6eae6df07ed587161a3e6d28a0527a9c" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD</type>
+        <definition>NEFORCE_NODISCARD shared_lock&lt; SharedMutex &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>shared_lock::operator bool</qualifiedname>
+        <briefdescription>
+<para>转换为布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否拥有共享锁的所有权 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="233" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="233" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a82fc8d66a9615845125dbf93e40ba856" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool shared_lock&lt; SharedMutex &gt;::owns_lock</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>owns_lock</name>
+        <qualifiedname>shared_lock::owns_lock</qualifiedname>
+        <briefdescription>
+<para>检查是否拥有共享锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否拥有共享锁的所有权 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="239" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="239" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a839809cd7bc530f7da8ea551c8f78056" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classshared__lock_1a0dcaaf18ba7b622310b1977eeb7f940d" kindref="member">mutex_type</ref> *</type>
+        <definition>NEFORCE_NODISCARD mutex_type * shared_lock&lt; SharedMutex &gt;::mutex</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>mutex</name>
+        <qualifiedname>shared_lock::mutex</qualifiedname>
+        <briefdescription>
+<para>获取管理的共享互斥锁指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向管理的共享互斥锁的指针，如果没有管理则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="245" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="245" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a6f23f530fdf0db5d46479d3aea0f2b06" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void shared_lock&lt; SharedMutex &gt;::lock</definition>
+        <argsstring>()</argsstring>
+        <name>lock</name>
+        <qualifiedname>shared_lock::lock</qualifiedname>
+        <briefdescription>
+<para>获取读锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果已拥有锁或未管理共享互斥锁，则不执行任何操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="252" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="252" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a790e469cdff391b2ecea7b2f3bea4a08" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void shared_lock&lt; SharedMutex &gt;::unlock</definition>
+        <argsstring>()</argsstring>
+        <name>unlock</name>
+        <qualifiedname>shared_lock::unlock</qualifiedname>
+        <briefdescription>
+<para>释放读锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果未拥有锁或未管理共享互斥锁，则不执行任何操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="268" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="268" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a65cab5e791cfcc07c95fa0a3e1ae92d2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool shared_lock&lt; SharedMutex &gt;::try_lock</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_lock</name>
+        <qualifiedname>shared_lock::try_lock</qualifiedname>
+        <briefdescription>
+<para>尝试获取读锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果成功获得读锁则返回true，否则返回false</para>
+</simplesect>
+非阻塞地尝试获取共享互斥锁的读锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="285" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="285" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__lock_1a510931a6627f2dcb9ac52e687546800b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classshared__lock_1a0dcaaf18ba7b622310b1977eeb7f940d" kindref="member">mutex_type</ref> *</type>
+        <definition>mutex_type * shared_lock&lt; SharedMutex &gt;::release</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>shared_lock::release</qualifiedname>
+        <briefdescription>
+<para>释放所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>之前管理的共享互斥锁指针</para>
+</simplesect>
+放弃对共享互斥锁的管理权，返回互斥锁指针但不释放锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="302" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="302" bodyend="307"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>共享锁类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>SharedMutex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>共享互斥锁类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+RAII共享锁管理器，专门用于管理共享互斥锁的读锁。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" line="132" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/shared_mutex.hpp" bodystart="132" bodyend="308"/>
+    <listofallmembers>
+      <member refid="classshared__lock_1a6f23f530fdf0db5d46479d3aea0f2b06" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>lock</name></member>
+      <member refid="classshared__lock_1a839809cd7bc530f7da8ea551c8f78056" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>mutex</name></member>
+      <member refid="classshared__lock_1a0e28fa1d235beb351241a3a46ece785d" prot="private" virt="non-virtual"><scope>shared_lock</scope><name>mutex_</name></member>
+      <member refid="classshared__lock_1a0dcaaf18ba7b622310b1977eeb7f940d" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>mutex_type</name></member>
+      <member refid="classshared__lock_1a6eae6df07ed587161a3e6d28a0527a9c" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>operator bool</name></member>
+      <member refid="classshared__lock_1ad0b337fc4b9a6a7ba2929345c3d483d1" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>operator=</name></member>
+      <member refid="classshared__lock_1a4c66a9c5c30d81a6e1b170dde4028a82" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>operator=</name></member>
+      <member refid="classshared__lock_1a82fc8d66a9615845125dbf93e40ba856" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>owns_lock</name></member>
+      <member refid="classshared__lock_1ae91183fed6e2104b8046884506279848" prot="private" virt="non-virtual"><scope>shared_lock</scope><name>owns_lock_</name></member>
+      <member refid="classshared__lock_1a510931a6627f2dcb9ac52e687546800b" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>release</name></member>
+      <member refid="classshared__lock_1a54df05d7997d6de8dcabfa916773934b" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>shared_lock</name></member>
+      <member refid="classshared__lock_1afc9a15f2802f37810eb955782c5bc56d" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>shared_lock</name></member>
+      <member refid="classshared__lock_1a5457fcedef9bfee60164ca07f4fb4de1" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>shared_lock</name></member>
+      <member refid="classshared__lock_1afe149c809800ac2ab99c6140a8c46490" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>shared_lock</name></member>
+      <member refid="classshared__lock_1a131a168989aa279bce1997c492cd3bad" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>shared_lock</name></member>
+      <member refid="classshared__lock_1a1177948b8f2cd8cad8fe9e18b543747b" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>shared_lock</name></member>
+      <member refid="classshared__lock_1a65cab5e791cfcc07c95fa0a3e1ae92d2" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>try_lock</name></member>
+      <member refid="classshared__lock_1a790e469cdff391b2ecea7b2f3bea4a08" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>unlock</name></member>
+      <member refid="classshared__lock_1a09cd913ffb52b9607316cf60610d98ed" prot="public" virt="non-virtual"><scope>shared_lock</scope><name>~shared_lock</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

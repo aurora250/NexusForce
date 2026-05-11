@@ -1,0 +1,345 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___exception_handling" kind="group">
+    <compoundname>ExceptionHandling</compoundname>
+    <title>异常处理</title>
+    <innerclass refid="classexception__wrapper" prot="public">exception_wrapper</innerclass>
+    <innerclass refid="classtyped__exception__wrapper" prot="public">typed_exception_wrapper</innerclass>
+    <innerclass refid="classexception__ptr" prot="public">exception_ptr</innerclass>
+    <innergroup refid="group___exceptions">异常类集</innergroup>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___exception_handling_1ga28496880d7de221739d7afa46a69059d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API uncaught_exceptions</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>uncaught_exceptions</name>
+        <briefdescription>
+<para>未捕获的异常数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前线程中未捕获的异常数量</para>
+</simplesect>
+该函数返回在当前线程中已经抛出但尚未被捕获的异常数量。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="262" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" declline="262" declcolumn="17"/>
+        <references refid="group___exception_handling_1ga28496880d7de221739d7afa46a69059d">uncaught_exceptions</references>
+        <referencedby refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" compoundref="scope_8hpp" startline="145" endline="149">scope_fail&lt; Func &gt;::scope_fail</referencedby>
+        <referencedby refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" compoundref="scope_8hpp" startline="226" endline="230">scope_success&lt; Func &gt;::scope_success</referencedby>
+        <referencedby refid="group___exception_handling_1ga28496880d7de221739d7afa46a69059d">uncaught_exceptions</referencedby>
+        <referencedby refid="classscope__fail_1a58fbdf72f42b141800d07ff5f328880c" compoundref="scope_8hpp" startline="182" endline="186">scope_fail&lt; Func &gt;::~scope_fail</referencedby>
+        <referencedby refid="classscope__success_1a310ca7b0aef05c30c2a102a6f81a63ec" compoundref="scope_8hpp" startline="263" endline="267">scope_success&lt; Func &gt;::~scope_success</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___exception_handling_1gafcaf017f48e0577f063b54671e2a06ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void NEFORCE_API</type>
+        <definition>void NEFORCE_API throw_with_stack</definition>
+        <argsstring>(const exception &amp;err)</argsstring>
+        <name>throw_with_stack</name>
+        <param>
+          <type>const <ref refid="structexception" kindref="compound">exception</ref> &amp;</type>
+          <declname>err</declname>
+        </param>
+        <briefdescription>
+<para>抛出异常并打印堆栈信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>err</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要抛出的异常对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="268" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" declline="268" declcolumn="18"/>
+        <references refid="group___exception_handling_1gafcaf017f48e0577f063b54671e2a06ec">throw_with_stack</references>
+        <referencedby refid="group___exception_handling_1gafcaf017f48e0577f063b54671e2a06ec">throw_with_stack</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___exception_handling_1gac43ce5d8fc82090c24f3088e37cc2d89" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Ex</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classexception__ptr" kindref="compound">exception_ptr</ref></type>
+        <definition>exception_ptr make_exception_ptr</definition>
+        <argsstring>(Ex ex)</argsstring>
+        <name>make_exception_ptr</name>
+        <param>
+          <type>Ex</type>
+          <declname>ex</declname>
+        </param>
+        <briefdescription>
+<para>创建异常指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Ex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>异常指针</para>
+</simplesect>
+创建引用指定异常的异常指针。 如果内存分配失败，返回空的异常指针。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="314" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="314" bodyend="324"/>
+      </memberdef>
+      <memberdef kind="function" id="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classexception__ptr" kindref="compound">exception_ptr</ref> NEFORCE_API</type>
+        <definition>exception_ptr NEFORCE_API current_exception</definition>
+        <argsstring>()</argsstring>
+        <name>current_exception</name>
+        <briefdescription>
+<para>获取当前异常 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前异常的异常指针</para>
+</simplesect>
+捕获当前异常并创建异常指针。 如果当前没有异常被捕获，返回空的异常指针。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="333" column="27" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" declline="333" declcolumn="27"/>
+        <referencedby refid="group___coroutine_1ga79f854a5ada0083996d280c91b6cb2c1" compoundref="generator_8hpp" startline="863" endline="885">retry</referencedby>
+        <referencedby refid="structgenerator_1_1promise__type_1adae56dfd455e63193f90202e9fd67e52" compoundref="generator_8hpp" startline="204" endline="204">generator&lt; T &gt;::promise_type::unhandled_exception</referencedby>
+        <referencedby refid="structtask_1_1promise__type_1a367a255980a9849de883c314ffd5f644" compoundref="generator_8hpp" startline="548" endline="548">task&lt; T &gt;::promise_type::unhandled_exception</referencedby>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1aa0fe2e55596d0c95a0886310f400fb28" compoundref="virtual__thread_8hpp" startline="72" endline="72">virtual_thread_task::promise_type::unhandled_exception</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void NEFORCE_API</type>
+        <definition>void NEFORCE_API rethrow_exception</definition>
+        <argsstring>(const exception_ptr &amp;p)</argsstring>
+        <name>rethrow_exception</name>
+        <param>
+          <type>const <ref refid="classexception__ptr" kindref="compound">exception_ptr</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>重新抛出异常 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+重新抛出异常指针引用的异常。</para>
+<para><simplesect kind="note"><para>如果异常指针为空，进程将被终止。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="343" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" declline="343" declcolumn="18"/>
+        <references refid="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32">rethrow_exception</references>
+        <referencedby refid="structtask_1_1awaiter_1a9dd1df2703e550a5dd2759dd453eac51" compoundref="generator_8hpp" startline="578" endline="583">task&lt; T &gt;::awaiter::await_resume</referencedby>
+        <referencedby refid="classgenerator_1a93d1141d7d23880142c7c76ebccd9b72" compoundref="generator_8hpp" startline="334" endline="345">generator&lt; T &gt;::begin</referencedby>
+        <referencedby refid="classtask_1a58502672d9bef3a69f89611e79483c31" compoundref="generator_8hpp" startline="662" endline="670">task&lt; T &gt;::get</referencedby>
+        <referencedby refid="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32">rethrow_exception</referencedby>
+        <referencedby refid="group___coroutine_1ga79f854a5ada0083996d280c91b6cb2c1" compoundref="generator_8hpp" startline="863" endline="885">retry</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="group___exception_handling_1gabaa410456b4618365a3b0a636da66270" prot="public" static="no">
+        <name>__NEFORCE_ERROR_CONSTRUCTOR</name>
+        <param><defname>THIS</defname></param>
+        <param><defname>BASE</defname></param>
+        <param><defname>INFO</defname></param>
+        <initializer>explicit THIS(const char* info = INFO, const char* type = static_type, const int code = 0) noexcept : \
+BASE(info, type, code) {}                                                                             \
+                                                                                                      \
+explicit THIS(const <ref refid="structexception" kindref="compound">exception</ref>&amp; e) :                                                                   \
+BASE(e) {}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="21" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="21" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="define" id="group___exception_handling_1gad1d1f545fb56f3b3894f8661dda823a1" prot="public" static="no">
+        <name>__NEFORCE_ERROR_DERIVED_DESTRUCTOR</name>
+        <param><defname>CLASS</defname></param>
+        <initializer>virtual ~CLASS() = default;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="28" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___exception_handling_1ga7812a0cd7056aa5f2b533278b85c93e5" prot="public" static="no">
+        <name>__NEFORCE_ERROR_FINAL_DESTRUCTOR</name>
+        <param><defname>CLASS</defname></param>
+        <initializer>~CLASS() override = default;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="30" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___exception_handling_1ga7b9007b6051e7998c5ca452e1ac91d8a" prot="public" static="no">
+        <name>__NEFORCE_ERROR_TYPE</name>
+        <param><defname>CLASS</defname></param>
+        <initializer>static constexpr auto static_type = #CLASS;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="32" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___exception_handling_1gae678474841c27ba5f9d8215c812fefae" prot="public" static="no">
+        <name>NEFORCE_ERROR_BUILD_DERIVED_CLASS</name>
+        <param><defname>THIS</defname></param>
+        <param><defname>BASE</defname></param>
+        <param><defname>INFO</defname></param>
+        <initializer>struct THIS : BASE {                                    \
+    __NEFORCE_ERROR_CONSTRUCTOR(THIS, BASE, INFO)       \
+    __NEFORCE_ERROR_DERIVED_DESTRUCTOR(THIS)            \
+    __NEFORCE_ERROR_TYPE(THIS)                          \
+};</initializer>
+        <briefdescription>
+<para>构建可派生的异常类宏 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>THIS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前类名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BASE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基类名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>INFO</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认错误信息</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+快速定义可进一步派生的异常类。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="43" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="43" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="define" id="group___exception_handling_1ga438313508830676344f6ccbfad172758" prot="public" static="no">
+        <name>NEFORCE_ERROR_BUILD_FINAL_CLASS</name>
+        <param><defname>THIS</defname></param>
+        <param><defname>BASE</defname></param>
+        <param><defname>INFO</defname></param>
+        <initializer>struct THIS final : BASE {                            \
+    __NEFORCE_ERROR_CONSTRUCTOR(THIS, BASE, INFO)     \
+    __NEFORCE_ERROR_FINAL_DESTRUCTOR(THIS)            \
+    __NEFORCE_ERROR_TYPE(THIS)                        \
+};</initializer>
+        <briefdescription>
+<para>构建最终异常类宏 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>THIS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当前类名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BASE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基类名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>INFO</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认错误信息</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+快速定义不可派生的异常类。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="59" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="59" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="define" id="group___exception_handling_1ga68249361ffc8d150053285c070c426b9" prot="public" static="no">
+        <name>NEFORCE_THROW_EXCEPTION</name>
+        <param><defname>err</defname></param>
+        <initializer>throw err</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="273" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="273" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___exception_handling_1gab8d2a61217d1d4200f90aefe0e99a813" prot="public" static="no">
+        <name>NEFORCE_ASSERTION</name>
+        <param><defname>COND</defname></param>
+        <initializer>if (!(COND)) {              \
+    _NEFORCE <ref refid="group___termination_functions_1ga4030f40bf85ee2fb43e78ec1f2b34b63" kindref="member">terminate</ref>();   \
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="276" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="276" bodyend="279"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异常处理类与工具 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1156 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___bit_manipulation" kind="group">
+    <compoundname>BitManipulation</compoundname>
+    <title>位操作</title>
+    <innerclass refid="structbit__reference" prot="public">bit_reference</innerclass>
+    <innerclass refid="structbitmap__iterator" prot="public">bitmap_iterator</innerclass>
+    <innerclass refid="classbitmap" prot="public">bitmap</innerclass>
+    <innerclass refid="classbitset" prot="public">bitset</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___bit_manipulation_1gafba370ed4270e4741f6a79f49582b081" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_INLINE17 constexpr uint32_t BITMAP_WORD_SIZE</definition>
+        <argsstring></argsstring>
+        <name>BITMAP_WORD_SIZE</name>
+        <initializer>= 8 * sizeof(<ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref>)</initializer>
+        <briefdescription>
+<para>每个字的位数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" line="24" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/bitmap.hpp" bodystart="24" bodyend="-1"/>
+        <referencedby refid="structbitmap__iterator_1ac9f73cbd8af4266f23c70a7078a2c61e" compoundref="bitmap_8hpp" startline="296" endline="308">bitmap_iterator&lt; false, bitmap &gt;::advance</referencedby>
+        <referencedby refid="classbitmap_1a7bc61e154e68c258cf68b781ae697c5a" compoundref="bitmap_8hpp" startline="930" endline="932">bitmap::capacity</referencedby>
+        <referencedby refid="structbitmap__iterator_1a8540584a3b179dfdc82f7c37590459ad" compoundref="bitmap_8hpp" startline="284" endline="290">bitmap_iterator&lt; false, bitmap &gt;::decrement</referencedby>
+        <referencedby refid="structbitmap__iterator_1a923c725a4d8cade74ef973886b707077" compoundref="bitmap_8hpp" startline="315" endline="319">bitmap_iterator&lt; false, bitmap &gt;::distance_to</referencedby>
+        <referencedby refid="structbitmap__iterator_1a5d07aa9cd236ae6185f0ce7b56ecb57a" compoundref="bitmap_8hpp" startline="273" endline="279">bitmap_iterator&lt; false, bitmap &gt;::increment</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="group___bit_manipulation_1ga9d407777ef6c13fd950d17144fcf93d8" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+        <definition>NEFORCE_INLINE17 constexpr byte_t POPCOUNT_TABLE[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>POPCOUNT_TABLE</name>
+        <initializer>                                         = {
+0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 1, 2, 2, 3, 2,
+3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3,
+3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5,
+6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4,
+3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4,
+5, 5, 6, 5, 6, 6, 7, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6,
+6, 7, 3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7, 4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8}</initializer>
+        <briefdescription>
+<para>popcount查找表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>预计算的popcount表，用于快速计算字节中1的个数。 包含0-255所有可能字节值的popcount值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="30" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="30" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___bit_manipulation_1ga824e509947a5b48a2eb51434220ac36c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int popcount64</definition>
+        <argsstring>(const uint64_t x) noexcept</argsstring>
+        <name>popcount64</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算64位整数中1的个数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>64位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x中1的个数</para>
+</simplesect>
+使用查表法分别计算8个字节的popcount，然后求和。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="56" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="56" bodyend="65"/>
+        <referencedby refid="group___bit_manipulation_1ga7493eb3d8ac54b313025c16119a3e9df" compoundref="bit_8hpp" startline="160" endline="166">popcount</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga29f6f826c8059121f269f3948a1542d4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 int</type>
+        <definition>NEFORCE_CONSTEXPR14 int clz64</definition>
+        <argsstring>(uint64_t x) noexcept</argsstring>
+        <name>clz64</name>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算64位整数前导零的个数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>64位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x中前导零的个数，如果x为0则返回64</para>
+</simplesect>
+使用二分查找法优化前导零计数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="74" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="74" bodyend="103"/>
+        <referencedby refid="group___m_s_v_c_compiler_intrinsics_1ga6327e37e5117d9bcd0f3b58ff23f7669" compoundref="msvc__intrinsic_8hpp" startline="149" endline="236">_udiv128</referencedby>
+        <referencedby refid="group___bit_manipulation_1gaccd54859db374262f5c36034b8669abb" compoundref="bit_8hpp" startline="175" endline="181">countl_zero</referencedby>
+        <referencedby refid="group___bit_manipulation_1ga4bdc65d39ae6ee2a96635db35ef668ad" compoundref="bit_8hpp" startline="223" endline="232">highest_set_bit_pos</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga2e8de9ca6e14827b422486dc3ed35706" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int popcount32</definition>
+        <argsstring>(const uint32_t x) noexcept</argsstring>
+        <name>popcount32</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算32位整数中1的个数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x中1的个数</para>
+</simplesect>
+使用查表法分别计算4个字节的popcount，然后求和。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="112" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="112" bodyend="117"/>
+        <referencedby refid="group___bit_manipulation_1ga7493eb3d8ac54b313025c16119a3e9df" compoundref="bit_8hpp" startline="160" endline="166">popcount</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga7eab8660ce57f82d76864c980f77a087" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 int</type>
+        <definition>NEFORCE_CONSTEXPR14 int clz32</definition>
+        <argsstring>(uint32_t x) noexcept</argsstring>
+        <name>clz32</name>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算32位整数前导零的个数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x中前导零的个数，如果x为0则返回32</para>
+</simplesect>
+使用二分查找法优化前导零计数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="126" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="126" bodyend="151"/>
+        <referencedby refid="group___bit_manipulation_1gaccd54859db374262f5c36034b8669abb" compoundref="bit_8hpp" startline="175" endline="181">countl_zero</referencedby>
+        <referencedby refid="group___bit_manipulation_1ga4bdc65d39ae6ee2a96635db35ef668ad" compoundref="bit_8hpp" startline="223" endline="232">highest_set_bit_pos</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga7493eb3d8ac54b313025c16119a3e9df" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int popcount</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>popcount</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算整数中1的个数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x中1的个数</para>
+</simplesect>
+根据平台位数调用相应的popcount函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="160" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="160" bodyend="166"/>
+        <references refid="group___bit_manipulation_1ga2e8de9ca6e14827b422486dc3ed35706" compoundref="bit_8hpp" startline="112" endline="117">popcount32</references>
+        <references refid="group___bit_manipulation_1ga824e509947a5b48a2eb51434220ac36c" compoundref="bit_8hpp" startline="56" endline="65">popcount64</references>
+        <referencedby refid="classbitset_1ad69258e3bf146d21b14bb7b4962c108e" compoundref="bitset_8hpp" startline="425" endline="431">bitset&lt; N &gt;::count</referencedby>
+        <referencedby refid="group___bit_manipulation_1gaf2706acea69cb92b45211c361b3cd40b" compoundref="bit_8hpp" startline="199" endline="199">countr_zero</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gaccd54859db374262f5c36034b8669abb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int countl_zero</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>countl_zero</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算整数前导零的个数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x中前导零的个数</para>
+</simplesect>
+根据平台位数调用相应的clz函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="175" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="175" bodyend="181"/>
+        <references refid="group___bit_manipulation_1ga7eab8660ce57f82d76864c980f77a087" compoundref="bit_8hpp" startline="126" endline="151">clz32</references>
+        <references refid="group___bit_manipulation_1ga29f6f826c8059121f269f3948a1542d4" compoundref="bit_8hpp" startline="74" endline="103">clz64</references>
+        <referencedby refid="group___bit_manipulation_1gae781ff6a7fad2bc8db38b0c3b371658e" compoundref="bit_8hpp" startline="287" endline="293">bit_width</referencedby>
+        <referencedby refid="group___bit_manipulation_1ga1da158bf3815ab2e7503f8cd52d9ca96" compoundref="bit_8hpp" startline="190" endline="190">countl_one</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga1da158bf3815ab2e7503f8cd52d9ca96" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int countl_one</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>countl_one</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算整数前导1的个数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x中前导1的个数</para>
+</simplesect>
+通过对x按位取反后计算前导零个数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="190" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="190" bodyend="190"/>
+        <references refid="group___bit_manipulation_1gaccd54859db374262f5c36034b8669abb" compoundref="bit_8hpp" startline="175" endline="181">countl_zero</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gaf2706acea69cb92b45211c361b3cd40b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int countr_zero</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>countr_zero</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算整数尾随零的个数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x中尾随零的个数</para>
+</simplesect>
+使用位运算技巧得到最低有效位的掩码。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="199" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="199" bodyend="199"/>
+        <references refid="group___bit_manipulation_1ga7493eb3d8ac54b313025c16119a3e9df" compoundref="bit_8hpp" startline="160" endline="166">popcount</references>
+        <referencedby refid="group___bit_manipulation_1gab8f133d4b23b52b75fd0c952d85af189" compoundref="bit_8hpp" startline="208" endline="208">countr_one</referencedby>
+        <referencedby refid="group___bit_manipulation_1ga68513d991c2a3a4be5f5d3bbd9827913" compoundref="bit_8hpp" startline="216" endline="216">lowest_set_bit_pos</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gab8f133d4b23b52b75fd0c952d85af189" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int countr_one</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>countr_one</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算整数尾随1的个数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>x中尾随1的个数</para>
+</simplesect>
+通过对x按位取反后计算尾随零个数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="208" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="208" bodyend="208"/>
+        <references refid="group___bit_manipulation_1gaf2706acea69cb92b45211c361b3cd40b" compoundref="bit_8hpp" startline="199" endline="199">countr_zero</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga68513d991c2a3a4be5f5d3bbd9827913" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int lowest_set_bit_pos</definition>
+        <argsstring>(const intptr_t x) noexcept</argsstring>
+        <name>lowest_set_bit_pos</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga39d546efc0e36ab5e76470c42e646552" kindref="member">intptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>获取最低设置位的位置，从0开始 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>有符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最低设置位的位置，如果没有设置位则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="216" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="216" bodyend="216"/>
+        <references refid="group___bit_manipulation_1gaf2706acea69cb92b45211c361b3cd40b" compoundref="bit_8hpp" startline="199" endline="199">countr_zero</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga4bdc65d39ae6ee2a96635db35ef668ad" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 int</type>
+        <definition>NEFORCE_CONSTEXPR14 int highest_set_bit_pos</definition>
+        <argsstring>(const intptr_t x) noexcept</argsstring>
+        <name>highest_set_bit_pos</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga39d546efc0e36ab5e76470c42e646552" kindref="member">intptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>获取最高设置位的位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>有符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>最高设置位的位置，如果没有设置位则返回-1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="223" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="223" bodyend="232"/>
+        <references refid="group___bit_manipulation_1ga7eab8660ce57f82d76864c980f77a087" compoundref="bit_8hpp" startline="126" endline="151">clz32</references>
+        <references refid="group___bit_manipulation_1ga29f6f826c8059121f269f3948a1542d4" compoundref="bit_8hpp" startline="74" endline="103">clz64</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga2bfc6542da7cf0106ecf09fbd4394fa8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONSTEXPR14 bool parity32</definition>
+        <argsstring>(uint32_t x) noexcept</argsstring>
+        <name>parity32</name>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算32位整数的奇偶性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果x中1的个数为奇数返回true，否则返回false</para>
+</simplesect>
+使用分治法计算奇偶性。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="242" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="242" bodyend="249"/>
+        <referencedby refid="group___bit_manipulation_1ga1a1649ec9d3f0fb2aad2df2550467318" compoundref="bit_8hpp" startline="273" endline="279">parity</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga5533effa2954e4696a041839f22d7d9e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONSTEXPR14 bool parity64</definition>
+        <argsstring>(uint64_t x) noexcept</argsstring>
+        <name>parity64</name>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算64位整数的奇偶性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>64位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果x中1的个数为奇数返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="256" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="256" bodyend="264"/>
+        <referencedby refid="group___bit_manipulation_1ga1a1649ec9d3f0fb2aad2df2550467318" compoundref="bit_8hpp" startline="273" endline="279">parity</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga1a1649ec9d3f0fb2aad2df2550467318" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool parity</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>parity</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算整数的奇偶性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果x中1的个数为奇数返回true，否则返回false</para>
+</simplesect>
+根据平台位数调用相应的奇偶性计算函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="273" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="273" bodyend="279"/>
+        <references refid="group___bit_manipulation_1ga2bfc6542da7cf0106ecf09fbd4394fa8" compoundref="bit_8hpp" startline="242" endline="249">parity32</references>
+        <references refid="group___bit_manipulation_1ga5533effa2954e4696a041839f22d7d9e" compoundref="bit_8hpp" startline="256" endline="264">parity64</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gae781ff6a7fad2bc8db38b0c3b371658e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int bit_width</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>bit_width</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>计算表示整数所需的最小位宽 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>表示x所需的最小位数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="287" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="287" bodyend="293"/>
+        <references refid="group___bit_manipulation_1gaccd54859db374262f5c36034b8669abb" compoundref="bit_8hpp" startline="175" endline="181">countl_zero</references>
+        <referencedby refid="group___bit_manipulation_1gace6550d923413b36d07c574320cff214" compoundref="bit_8hpp" startline="300" endline="300">bit_floor</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gace6550d923413b36d07c574320cff214" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+        <definition>uintptr_t bit_floor</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>bit_floor</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>获取不大于x的最大2的幂 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>不大于x的最大2的幂，如果x为0则返回0 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="300" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="300" bodyend="300"/>
+        <references refid="group___bit_manipulation_1gae781ff6a7fad2bc8db38b0c3b371658e" compoundref="bit_8hpp" startline="287" endline="293">bit_width</references>
+        <referencedby refid="group___bit_manipulation_1gac832844ba0a5424f07b316752a6cbc7f" compoundref="bit_8hpp" startline="307" endline="313">bit_ceil</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gac832844ba0a5424f07b316752a6cbc7f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uint64_t bit_ceil</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>bit_ceil</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>获取不小于x的最小2的幂 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>不小于x的最小2的幂，如果x为0则返回1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="307" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="307" bodyend="313"/>
+        <references refid="group___bit_manipulation_1gace6550d923413b36d07c574320cff214" compoundref="bit_8hpp" startline="300" endline="300">bit_floor</references>
+        <references refid="group___math_functions_1ga20282c137d87af7a972c11f03f022c82" compoundref="math_8hpp" startline="574" endline="597">floor</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gaca7d03246c48e209e00c3355d632e1da" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool has_single_bit</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>has_single_bit</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>检查整数是否为2的幂 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果x是2的幂则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="320" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="320" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga7ffc0b6cc2b91ee7a9c02fecd46da794" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uint32_t rotate_l32</definition>
+        <argsstring>(const uint32_t x, const int s) noexcept</argsstring>
+        <name>rotate_l32</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>32位整数循环左移 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旋转位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>循环左移后的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="328" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="328" bodyend="335"/>
+        <referencedby refid="group___bit_manipulation_1ga52770304fafa610d5bd1cc1b2934e04b" compoundref="bit_8hpp" startline="376" endline="382">rotate_l</referencedby>
+        <referencedby refid="group___bit_manipulation_1ga4af877bc0364692757d58127e24750a8" compoundref="bit_8hpp" startline="343" endline="343">rotate_r32</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga4af877bc0364692757d58127e24750a8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uint32_t rotate_r32</definition>
+        <argsstring>(const uint32_t x, const int s) noexcept</argsstring>
+        <name>rotate_r32</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>32位整数循环右移 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旋转位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>循环右移后的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="343" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="343" bodyend="343"/>
+        <references refid="group___bit_manipulation_1ga7ffc0b6cc2b91ee7a9c02fecd46da794" compoundref="bit_8hpp" startline="328" endline="335">rotate_l32</references>
+        <referencedby refid="group___bit_manipulation_1gac8af453195a9a876c53bcaa979bfb117" compoundref="bit_8hpp" startline="392" endline="398">rotate_r</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga221767727d89f32edba6526a7f72d78e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uint64_t rotate_l64</definition>
+        <argsstring>(const uint64_t x, const int s) noexcept</argsstring>
+        <name>rotate_l64</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>64位整数循环左移 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>64位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旋转位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>循环左移后的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="351" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="351" bodyend="358"/>
+        <referencedby refid="group___bit_manipulation_1ga52770304fafa610d5bd1cc1b2934e04b" compoundref="bit_8hpp" startline="376" endline="382">rotate_l</referencedby>
+        <referencedby refid="group___bit_manipulation_1gaaffaa5320d915e9404c9e580b446d387" compoundref="bit_8hpp" startline="366" endline="366">rotate_r64</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gaaffaa5320d915e9404c9e580b446d387" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uint64_t rotate_r64</definition>
+        <argsstring>(const uint64_t x, const int s) noexcept</argsstring>
+        <name>rotate_r64</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>64位整数循环右移 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>64位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旋转位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>循环右移后的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="366" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="366" bodyend="366"/>
+        <references refid="group___bit_manipulation_1ga221767727d89f32edba6526a7f72d78e" compoundref="bit_8hpp" startline="351" endline="358">rotate_l64</references>
+        <referencedby refid="group___bit_manipulation_1gac8af453195a9a876c53bcaa979bfb117" compoundref="bit_8hpp" startline="392" endline="398">rotate_r</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga52770304fafa610d5bd1cc1b2934e04b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uintptr_t rotate_l</definition>
+        <argsstring>(const uintptr_t x, const int s) noexcept</argsstring>
+        <name>rotate_l</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>整数循环左移 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旋转位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>循环左移后的结果</para>
+</simplesect>
+根据平台位数调用相应的循环左移函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="376" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="376" bodyend="382"/>
+        <references refid="group___bit_manipulation_1ga7ffc0b6cc2b91ee7a9c02fecd46da794" compoundref="bit_8hpp" startline="328" endline="335">rotate_l32</references>
+        <references refid="group___bit_manipulation_1ga221767727d89f32edba6526a7f72d78e" compoundref="bit_8hpp" startline="351" endline="358">rotate_l64</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gac8af453195a9a876c53bcaa979bfb117" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uintptr_t rotate_r</definition>
+        <argsstring>(const uintptr_t x, const int s) noexcept</argsstring>
+        <name>rotate_r</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>整数循环右移 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>旋转位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>循环右移后的结果</para>
+</simplesect>
+根据平台位数调用相应的循环右移函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="392" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="392" bodyend="398"/>
+        <references refid="group___bit_manipulation_1ga4af877bc0364692757d58127e24750a8" compoundref="bit_8hpp" startline="343" endline="343">rotate_r32</references>
+        <references refid="group___bit_manipulation_1gaaffaa5320d915e9404c9e580b446d387" compoundref="bit_8hpp" startline="366" endline="366">rotate_r64</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gaca5121f02918b2cea077eb25512cb83c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+        <definition>uintptr_t bit_extract</definition>
+        <argsstring>(const uintptr_t x, const int pos, const int len) noexcept</argsstring>
+        <name>bit_extract</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+<para>从整数中提取指定位段 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源整数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置，从0开始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要提取的位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>提取的位段 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="408" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="408" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga94e957353d602566dffa7ae6f07376bf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uintptr_t bit_insert</definition>
+        <argsstring>(const uintptr_t x, const uintptr_t bits, const int pos, const int len) noexcept</argsstring>
+        <name>bit_insert</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>bits</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+<para>向整数中插入指定位段 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标整数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的位段 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置，从0开始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入后的整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="420" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="420" bodyend="424"/>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1gab8b0fc7d380d8ef733a8fe1239af4e1b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uint32_t reverse_bits32</definition>
+        <argsstring>(uint32_t x) noexcept</argsstring>
+        <name>reverse_bits32</name>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>反转32位整数的位顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>32位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>位反转后的整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="432" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="432" bodyend="439"/>
+        <referencedby refid="group___bit_manipulation_1ga6d479a2f9fba29a8fc0109f60c2b4254" compoundref="bit_8hpp" startline="463" endline="469">reverse_bits</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga5bd5b6856897a340e50ef6c8dab291f7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 uint64_t reverse_bits64</definition>
+        <argsstring>(uint64_t x) noexcept</argsstring>
+        <name>reverse_bits64</name>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>反转64位整数的位顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>64位无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>位反转后的整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="446" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="446" bodyend="454"/>
+        <referencedby refid="group___bit_manipulation_1ga6d479a2f9fba29a8fc0109f60c2b4254" compoundref="bit_8hpp" startline="463" endline="469">reverse_bits</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga6d479a2f9fba29a8fc0109f60c2b4254" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+        <definition>uintptr_t reverse_bits</definition>
+        <argsstring>(const uintptr_t x) noexcept</argsstring>
+        <name>reverse_bits</name>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>反转整数的位顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>无符号整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>位反转后的整数</para>
+</simplesect>
+根据平台位数调用相应的位反转函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="463" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="463" bodyend="469"/>
+        <references refid="group___bit_manipulation_1gab8b0fc7d380d8ef733a8fe1239af4e1b" compoundref="bit_8hpp" startline="432" endline="439">reverse_bits32</references>
+        <references refid="group___bit_manipulation_1ga5bd5b6856897a340e50ef6c8dab291f7" compoundref="bit_8hpp" startline="446" endline="454">reverse_bits64</references>
+      </memberdef>
+      <memberdef kind="function" id="group___bit_manipulation_1ga502c62305af2c0eb853c3d7d755933bd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+        <definition>uintptr_t mask_from_to</definition>
+        <argsstring>(const int from, const int to) noexcept</argsstring>
+        <name>mask_from_to</name>
+        <param>
+          <type>const int</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>to</declname>
+        </param>
+        <briefdescription>
+<para>生成从from到to的位掩码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置（包含） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束位置（包含） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>从from位到to位为1，其他位为0的掩码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" line="478" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/bit.hpp" bodystart="478" bodyend="480"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>位操作类与函数的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -96,14 +96,25 @@ $(function(){initNavTree('this__thread_8hpp.html','',''); });
 <p>当前线程操作  
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="types_8hpp_source.html">NeForce/core/typeinfo/types.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="windef_8hpp_source.html">NeForce/core/config/windef.hpp</a>&quot;</code><br />
+<code>#include &lt;processthreadsapi.h&gt;</code><br />
+<code>#include &lt;synchapi.h&gt;</code><br />
+<code>#include &lt;sched.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;riscv_pause.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 this_thread.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="this__thread_8hpp__incl.svg" width="162" height="294"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="this__thread_8hpp__incl.svg" width="907" height="294"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="this__thread_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:cpu_5Ftimes" id="r_cpu_5Ftimes"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcpu__times.html">cpu_times</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU时间信息类  <a href="structcpu__times.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
 <tr class="memitem:ga97d5771fda7efbec7ffd4cfed32c074d" id="r_ga97d5771fda7efbec7ffd4cfed32c074d"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga97d5771fda7efbec7ffd4cfed32c074d">current_cpu</a> () noexcept</td></tr>
@@ -122,10 +133,16 @@ this_thread.hpp 的引用(Include)关系图:</div>
 <tr class="memdesc:ga8f01e1722b64e9d1cd66a3d3d46c5b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">精确睡眠指定微秒数  <br /></td></tr>
 <tr class="memitem:ga806b20f01364f190e884d670c292ca20" id="r_ga806b20f01364f190e884d670c292ca20"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga806b20f01364f190e884d670c292ca20">sleep_for_ns</a> (<a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> ns) noexcept</td></tr>
 <tr class="memdesc:ga806b20f01364f190e884d670c292ca20"><td class="mdescLeft">&#160;</td><td class="mdescRight">精确睡眠指定纳秒数  <br /></td></tr>
-<tr class="memitem:gae1aea059988cd9dd0edf5f7823610ba6" id="r_gae1aea059988cd9dd0edf5f7823610ba6"><td class="memItemLeft">bool NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#gae1aea059988cd9dd0edf5f7823610ba6">affinity</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> cpu_mask) noexcept</td></tr>
-<tr class="memdesc:gae1aea059988cd9dd0edf5f7823610ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置线程的CPU亲和性  <br /></td></tr>
-<tr class="memitem:ga0d65da9844fd9c1b7b0123ba22e9a3f0" id="r_ga0d65da9844fd9c1b7b0123ba22e9a3f0"><td class="memItemLeft">bool NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga0d65da9844fd9c1b7b0123ba22e9a3f0">priority</a> (int priority) noexcept</td></tr>
-<tr class="memdesc:ga0d65da9844fd9c1b7b0123ba22e9a3f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置线程优先级  <br /></td></tr>
+<tr class="memitem:ga60bc338a853b8a974230a49d9bf4fdb5" id="r_ga60bc338a853b8a974230a49d9bf4fdb5"><td class="memItemLeft">bool NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga60bc338a853b8a974230a49d9bf4fdb5">set_affinity</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> cpu_mask) noexcept</td></tr>
+<tr class="memdesc:ga60bc338a853b8a974230a49d9bf4fdb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置线程的 CPU 亲和性  <br /></td></tr>
+<tr class="memitem:ga3b8ab253d1ca500c83c86febcfffb69b" id="r_ga3b8ab253d1ca500c83c86febcfffb69b"><td class="memItemLeft">bool NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga3b8ab253d1ca500c83c86febcfffb69b">affinity</a> (<a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> &amp;affi) noexcept</td></tr>
+<tr class="memdesc:ga3b8ab253d1ca500c83c86febcfffb69b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取线程的 CPU 亲和性  <br /></td></tr>
+<tr class="memitem:ga93b4a524f89206087571de8d1faa06b5" id="r_ga93b4a524f89206087571de8d1faa06b5"><td class="memItemLeft">bool NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga93b4a524f89206087571de8d1faa06b5">cpu_time</a> (<a class="el" href="structcpu__times.html">cpu_times</a> &amp;times) noexcept</td></tr>
+<tr class="memdesc:ga93b4a524f89206087571de8d1faa06b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前线程的 CPU 时间  <br /></td></tr>
+<tr class="memitem:ga628884c4e7e477df68a380c9751d1b81" id="r_ga628884c4e7e477df68a380c9751d1b81"><td class="memItemLeft">bool NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#ga628884c4e7e477df68a380c9751d1b81">set_priority</a> (int <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority</a>) noexcept</td></tr>
+<tr class="memdesc:ga628884c4e7e477df68a380c9751d1b81"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置线程优先级  <br /></td></tr>
+<tr class="memitem:gae6f7d8a27a49c99a64bbbe66c5cd3f64" id="r_gae6f7d8a27a49c99a64bbbe66c5cd3f64"><td class="memItemLeft">int NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority</a> () noexcept</td></tr>
+<tr class="memdesc:gae6f7d8a27a49c99a64bbbe66c5cd3f64"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取线程优先级  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>当前线程操作 </p>

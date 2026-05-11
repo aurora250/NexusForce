@@ -1,0 +1,712 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___thread" kind="group">
+    <compoundname>Thread</compoundname>
+    <title>线程</title>
+    <innerclass refid="classlazy__thread" prot="public">lazy_thread</innerclass>
+    <innerclass refid="classscoped__thread" prot="public">scoped_thread</innerclass>
+    <innerclass refid="classthread" prot="public">thread</innerclass>
+    <innerclass refid="classthread__tracker" prot="public">thread_tracker</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___thread_1ga97d5771fda7efbec7ffd4cfed32c074d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE int64_t current_cpu</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>current_cpu</name>
+        <briefdescription>
+<para>获取当前CPU核心编号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前线程运行的CPU核心编号</para>
+</simplesect>
+返回当前线程正在运行的CPU核心的逻辑编号。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="63" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" bodystart="63" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1gab8ae3d955c7c6a9052597e15e896f96e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE void yield</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>yield</name>
+        <briefdescription>
+<para>让出当前线程的时间片 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>主动让出当前线程的CPU时间片，让其他线程可以运行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="76" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" bodystart="76" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1gaef795de3960f4434c3f11391cce5e9b4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE void relax</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>relax</name>
+        <briefdescription>
+<para>线程放松 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>使用CPU特定的暂停指令让当前线程短暂放松，减少CPU功耗。 适用于自旋锁等场景中的忙等待。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="90" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" bodystart="90" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1gad354de74be581f6cbbaedd5494d62d88" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE void relax</definition>
+        <argsstring>(const int count) noexcept</argsstring>
+        <name>relax</name>
+        <param>
+          <type>const int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>根据计数进行线程放松 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>放松计数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+根据计数值选择不同程度的放松策略：<itemizedlist>
+<listitem><para>小计数：多次调用relax()</para>
+</listitem><listitem><para>中等计数：调用一次relax()</para>
+</listitem><listitem><para>大计数：直接让出时间片 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="117" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" bodystart="117" bodyend="127"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga369d5171a87b9dcaa7e23d446d5dae91" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE void sleep_for_ms</definition>
+        <argsstring>(uint32_t milliseconds) noexcept</argsstring>
+        <name>sleep_for_ms</name>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>milliseconds</declname>
+        </param>
+        <briefdescription>
+<para>睡眠指定毫秒数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>milliseconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要睡眠的毫秒数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+让当前线程睡眠指定的时间。</para>
+<para><simplesect kind="note"><para>使用系统睡眠，实际睡眠时间受系统调度影响。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="137" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" bodystart="137" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga502974f51f85fd2faba9b8a3241b7e85" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void NEFORCE_API</type>
+        <definition>void NEFORCE_API sleep_for_ms</definition>
+        <argsstring>(uint32_t ms, bool busy_wait) noexcept</argsstring>
+        <name>sleep_for_ms</name>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>ms</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>busy_wait</declname>
+        </param>
+        <briefdescription>
+<para>精确睡眠指定毫秒数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要睡眠的毫秒数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>busy_wait</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用忙等待获得更高精度</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+提供相对精确的睡眠功能。当use_busy_wait为true时，使用忙等待+系统睡眠组合 以获得更高的精度，但会增加CPU使用率。为false时使用纯系统睡眠。</para>
+<para><simplesect kind="note"><para>Windows平台最小精度通常为1-15ms，Linux为1ms，忙等待可达到微秒级精度 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="155" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" declline="155" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga8f01e1722b64e9d1cd66a3d3d46c5b52" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void NEFORCE_API</type>
+        <definition>void NEFORCE_API sleep_for_us</definition>
+        <argsstring>(uint64_t us) noexcept</argsstring>
+        <name>sleep_for_us</name>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>us</declname>
+        </param>
+        <briefdescription>
+<para>精确睡眠指定微秒数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>us</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要睡眠的微秒数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+提供微秒级精度的睡眠，主要用于短时间延迟。</para>
+<para><simplesect kind="note"><para>实际精度受系统时钟精度限制。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="165" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" declline="165" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga806b20f01364f190e884d670c292ca20" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void NEFORCE_API</type>
+        <definition>void NEFORCE_API sleep_for_ns</definition>
+        <argsstring>(uint64_t ns) noexcept</argsstring>
+        <name>sleep_for_ns</name>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>ns</declname>
+        </param>
+        <briefdescription>
+<para>精确睡眠指定纳秒数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ns</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要睡眠的纳秒数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+提供纳秒级精度的睡眠，主要用于极短时间延迟。</para>
+<para><simplesect kind="note"><para>实际精度受CPU频率和指令执行时间限制。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="175" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" declline="175" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga60bc338a853b8a974230a49d9bf4fdb5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool NEFORCE_API</type>
+        <definition>bool NEFORCE_API set_affinity</definition>
+        <argsstring>(size_t cpu_mask) noexcept</argsstring>
+        <name>set_affinity</name>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>cpu_mask</declname>
+        </param>
+        <briefdescription>
+<para>设置线程的 CPU 亲和性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cpu_mask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CPU 掩码，每个位表示一个 CPU 核心 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置是否成功</para>
+</simplesect>
+设置当前线程可以在哪些 CPU 核心上运行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="184" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" declline="184" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga3b8ab253d1ca500c83c86febcfffb69b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool NEFORCE_API</type>
+        <definition>bool NEFORCE_API affinity</definition>
+        <argsstring>(uint64_t &amp;affi) noexcept</argsstring>
+        <name>affinity</name>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> &amp;</type>
+          <declname>affi</declname>
+        </param>
+        <briefdescription>
+<para>获取线程的 CPU 亲和性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>affi</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CPU 亲和性 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>获取是否成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="191" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" declline="191" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga93b4a524f89206087571de8d1faa06b5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool NEFORCE_API</type>
+        <definition>bool NEFORCE_API cpu_time</definition>
+        <argsstring>(cpu_times &amp;times) noexcept</argsstring>
+        <name>cpu_time</name>
+        <param>
+          <type><ref refid="structcpu__times" kindref="compound">cpu_times</ref> &amp;</type>
+          <declname>times</declname>
+        </param>
+        <briefdescription>
+<para>获取当前线程的 CPU 时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>times</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>用户态和内核态时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="198" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" declline="198" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga628884c4e7e477df68a380c9751d1b81" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool NEFORCE_API</type>
+        <definition>bool NEFORCE_API set_priority</definition>
+        <argsstring>(int priority) noexcept</argsstring>
+        <name>set_priority</name>
+        <param>
+          <type>int</type>
+          <declname>priority</declname>
+        </param>
+        <briefdescription>
+<para>设置线程优先级 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>priority</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>优先级值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置是否成功</para>
+</simplesect>
+设置当前线程的调度优先级。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="207" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" declline="207" declcolumn="18"/>
+        <references refid="group___thread_1gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority</references>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1gae6f7d8a27a49c99a64bbbe66c5cd3f64" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int NEFORCE_API</type>
+        <definition>int NEFORCE_API priority</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>priority</name>
+        <briefdescription>
+<para>获取线程优先级 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前线程的优先级值（0-100，0为最低）</para>
+</simplesect>
+获取当前线程的调度优先级。 若获取失败，返回 0。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="216" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" declline="216" declcolumn="17"/>
+        <referencedby refid="structsignal_1acfa41147426f9bde3e4de17b5c766188" compoundref="signals_8hpp" startline="444" endline="448">signal&lt; Types &gt;::connect</referencedby>
+        <referencedby refid="structsignal_1a3dba4fb9c54309c5510e961e0c28dee7" compoundref="signals_8hpp" startline="462" endline="476">signal&lt; Types &gt;::connect</referencedby>
+        <referencedby refid="structsignal_1a41ddbcc2553c833fc43305379fa4ac08" compoundref="signals_8hpp" startline="659" endline="676">signal&lt; Types &gt;::connect_filtered</referencedby>
+        <referencedby refid="structsignal_1aa9277d30b26d90895c1b47f89be50e3c" compoundref="signals_8hpp" startline="602" endline="614">signal&lt; Types &gt;::connect_if</referencedby>
+        <referencedby refid="structsignal_1a8f761800f9a11daf0a1360a176920811" compoundref="signals_8hpp" startline="630" endline="645">signal&lt; Types &gt;::connect_if</referencedby>
+        <referencedby refid="structsignal_1a29c8b656f06088b8e6f1157fd7cf8ec4" compoundref="signals_8hpp" startline="562" endline="569">signal&lt; Types &gt;::connect_signal</referencedby>
+        <referencedby refid="structsignal_1a7d2063751e621de0758171caa2d53f10" compoundref="signals_8hpp" startline="579" endline="588">signal&lt; Types &gt;::connect_signal</referencedby>
+        <referencedby refid="structsignal_1a1785833d435f019073036ac417ba6aae" compoundref="signals_8hpp" startline="690" endline="699">signal&lt; Types &gt;::connect_transformed</referencedby>
+        <referencedby refid="group___thread_pool_1ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group</referencedby>
+        <referencedby refid="group___thread_1ga628884c4e7e477df68a380c9751d1b81">set_priority</referencedby>
+        <referencedby refid="classthread__pool_1ae3bf04c2adddd193bba36f6c338c9b9e">thread_pool::submit_after</referencedby>
+        <referencedby refid="classthread__pool_1a159c162d139e452d7539a4d0c46fc908">thread_pool::submit_every</referencedby>
+        <referencedby refid="classthread__pool_1a4269d4f0985eeb9e6f38bb9aeae9e67a">thread_pool::submit_task</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga505a22091b6fb9a4a8e147bf2258e47a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="structthread_1_1id" kindref="compound">thread::id</ref></type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE thread::id id</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>id</name>
+        <briefdescription>
+<para>获取当前线程标识符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前线程的标识符 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="449" column="41" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="449" bodyend="455"/>
+        <referencedby refid="classtimer__scheduler_1ad7e2861340ab12370ceaec61a82c9129" compoundref="timer_8hpp" startline="172" endline="189">timer_scheduler&lt; Clock &gt;::add_task</referencedby>
+        <referencedby refid="classmeta__type_1a145e272433cc67ed14ba252c0d3f5ef7" compoundref="type_8hpp" startline="109" endline="112">meta_type::meta_type</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga9c11108611d4c65deb691d1b88f0dc07" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="classthread_1a64c16d44c53f6b7aaac118ec379ed0a4" kindref="member">thread::native_handle_type</ref></type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE thread::native_handle_type handle</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>handle</name>
+        <briefdescription>
+<para>获取当前线程句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前线程的句柄 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="461" column="57" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="461" bodyend="467"/>
+        <referencedby refid="structvirtual__thread__awaiter_1ab2b9357585a921806dde17a797a84a03" compoundref="virtual__thread_8hpp" startline="255" endline="255">virtual_thread_awaiter::await_suspend</referencedby>
+        <referencedby refid="classfile__async_1aa27dd3253c71dea9e0329739724561fb">file_async::file_async</referencedby>
+        <referencedby refid="classfile__info_1a90d01d2d0b844bb827fbe41b53d6482c">file_info::file_info</referencedby>
+        <referencedby refid="classfile__locker_1a299b55e3366398a88544208942baaea2">file_locker::file_locker</referencedby>
+        <referencedby refid="classthread_1a4b2d684cd7193db5dfedf70fd705d5e6">thread::name</referencedby>
+        <referencedby refid="classvirtual__thread__scheduler_1ab5f2bf091c5ad0289c46707cc8b83369" compoundref="virtual__thread_8hpp" startline="187" endline="193">virtual_thread_scheduler::schedule</referencedby>
+        <referencedby refid="classthread_1ad7c681ee3c6085a87309f040467b19cb">thread::set_name</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE bool</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE bool name</definition>
+        <argsstring>(char *buffer, size_t size)</argsstring>
+        <name>name</name>
+        <param>
+          <type>char *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>获取当前线程名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>存储名称的缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓冲区大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否获取成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="475" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="475" bodyend="477"/>
+        <references refid="classthread_1ac1c3666fcd10451cee601dec58c32c00">thread::name</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <referencedby refid="classini__document_1adf0d69636ff1a6c09b8191eda8164ddf" compoundref="ini__value_8hpp" startline="398" endline="404">ini_document::add_section</referencedby>
+        <referencedby refid="classenv__document_1af9134380fc056f1a9605a35ec0ef8a9b" compoundref="env__value_8hpp" startline="261" endline="263">env_document::add_variable</referencedby>
+        <referencedby refid="classyaml__builder_1a015f1851426fa2eebe9012d56ba68b85">yaml_builder::alias</referencedby>
+        <referencedby refid="classyaml__builder_1abf640029a79cd8b4c580f06aa78f38a4">yaml_builder::anchor</referencedby>
+        <referencedby refid="classtoml__builder_1a974fb3c69991d8ed2763fb67cc360a98">toml_builder::begin_array_table</referencedby>
+        <referencedby refid="classini__builder_1a44b845c6e271597ff3777dfb5ad79384">ini_builder::begin_section</referencedby>
+        <referencedby refid="classtoml__builder_1a738d1624f77ed33ab8aa325ab10d2287">toml_builder::begin_table</referencedby>
+        <referencedby refid="structhttp__server__request_1a2188745229b5c8798fbd883ceedcf77b" compoundref="http__server__message_8hpp" startline="116" endline="119">http_server_request::cookie</referencedby>
+        <referencedby refid="classcmdline_1ae81eb5f75cf46f384018328e3639c2d8">cmdline::count</referencedby>
+        <referencedby refid="structenvironment_1a90bd34e3e9d1904c293474485e0c32f2">environment::exists</referencedby>
+        <referencedby refid="classregistry_1a3bc2f83a283c6aee3e86078aacb2eb2b" compoundref="registry_8hpp" startline="86" endline="89">registry::find</referencedby>
+        <referencedby refid="classpath__tree_1a72defec19aa8e46baca07b4376ef8f43">path_tree::find_all</referencedby>
+        <referencedby refid="classpath__tree_1_1node_1a81aa88f21fb15b4a7f7967c6b669a078">path_tree::node::find_child</referencedby>
+        <referencedby refid="classregistry_1a805216ed6126937556df9e322cfb4a32" compoundref="registry_8hpp" startline="76" endline="79">registry::find_unlocked</referencedby>
+        <referencedby refid="classtype__builder_1a379d14c7df5dc9c0e4d8d8b812829d9a" compoundref="reflect_8hpp" startline="122" endline="129">type_builder&lt; T &gt;::function</referencedby>
+        <referencedby refid="classtype__builder_1ab3f4880362e3f86773b612e9e84ee24e" compoundref="reflect_8hpp" startline="104" endline="111">type_builder&lt; T &gt;::function</referencedby>
+        <referencedby refid="structenvironment_1ae1d7972f4d2827ec30711d297db776a0">environment::get</referencedby>
+        <referencedby refid="classenv__document_1a667a10890be97a8783cf1ed3662783bb" compoundref="env__value_8hpp" startline="386" endline="389">env_document::get_bool</referencedby>
+        <referencedby refid="classenv__document_1a3620f82893dee8e243f731bfad693510" compoundref="env__value_8hpp" startline="375" endline="378">env_document::get_double</referencedby>
+        <referencedby refid="classenv__document_1ae25010d6987565f84d572f8cf8933eab" compoundref="env__value_8hpp" startline="353" endline="356">env_document::get_int</referencedby>
+        <referencedby refid="classenv__document_1a0f67842dd5a4d9e1a6585030f93048c2" compoundref="env__value_8hpp" startline="364" endline="367">env_document::get_int64</referencedby>
+        <referencedby refid="classplugin__manager_1a785b545933063abb5225b0a54cb016b2">plugin_manager::get_plugin</referencedby>
+        <referencedby refid="classini__document_1acd03326fe4f1daee0e4381590a5dbdf3" compoundref="ini__value_8hpp" startline="427" endline="436">ini_document::get_section</referencedby>
+        <referencedby refid="classini__document_1a078513d51cc82dab3fcf523b4a51ab92" compoundref="ini__value_8hpp" startline="411" endline="420">ini_document::get_section</referencedby>
+        <referencedby refid="classenv__document_1a2ee50a29526af8428366196fa6eab18d" compoundref="env__value_8hpp" startline="342" endline="345">env_document::get_string</referencedby>
+        <referencedby refid="classenv__document_1ab5e47024ac20ea40a17908f715390444" compoundref="env__value_8hpp" startline="295" endline="301">env_document::get_variable</referencedby>
+        <referencedby refid="classenv__document_1a19357104de5a9477941980c8f8973218" compoundref="env__value_8hpp" startline="282" endline="288">env_document::get_variable</referencedby>
+        <referencedby refid="classcmdline_1a083090bc73cb8711d21510b48ee8be77">cmdline::has</referencedby>
+        <referencedby refid="structhttp__server__request_1a5d93c1b2f2b6d1d53a828067e0af17a1" compoundref="http__server__message_8hpp" startline="133" endline="133">http_server_request::has_cookie</referencedby>
+        <referencedby refid="structhttp__server__request_1ac0d2050052e240217808aaf1bd1329bf" compoundref="http__server__message_8hpp" startline="157" endline="157">http_server_request::has_header</referencedby>
+        <referencedby refid="structhttp__server__response_1ae2d56c87dd219b73b94e612d02d91b78" compoundref="http__server__message_8hpp" startline="309" endline="309">http_server_response::has_header</referencedby>
+        <referencedby refid="structhttp__server__request_1a168a6e49707ec38e336869e639a6c2e4" compoundref="http__server__message_8hpp" startline="107" endline="109">http_server_request::has_parameter</referencedby>
+        <referencedby refid="classini__document_1a39180b19126198a95f268753ba91df8f" compoundref="ini__value_8hpp" startline="443" endline="448">ini_document::has_section</referencedby>
+        <referencedby refid="classdynamic__library_1a0a770868526da593b7863afa30a5be1a">dynamic_library::has_symbol</referencedby>
+        <referencedby refid="classenv__document_1a8338acd16458381a11e658bbf839e47e" compoundref="env__value_8hpp" startline="308" endline="308">env_document::has_variable</referencedby>
+        <referencedby refid="structhttp__server__request_1a8827a4003b6aca3332b14685369f76f9" compoundref="http__server__message_8hpp" startline="140" endline="143">http_server_request::header</referencedby>
+        <referencedby refid="structhttp__server__response_1a6c955ce1a0d6ede1758547dda78a34e2" compoundref="http__server__message_8hpp" startline="292" endline="295">http_server_response::header</referencedby>
+        <referencedby refid="classini__section_1aace03d46152dcf1568e8c110e426dedd" compoundref="ini__value_8hpp" startline="208" endline="209">ini_section::ini_section</referencedby>
+        <referencedby refid="structhttp__server__request_1a88f012be69e60bf4282c045bf0238bc3" compoundref="http__server__message_8hpp" startline="90" endline="93">http_server_request::parameter</referencedby>
+        <referencedby refid="classtype__builder_1a7dfee419346f930acb6252545de97b55" compoundref="reflect_8hpp" startline="77" endline="93">type_builder&lt; T &gt;::property</referencedby>
+        <referencedby refid="group___reflection_1ga5a74d42372d4485518ebb6915c124a37" compoundref="reflect_8hpp" startline="198" endline="200">reflect</referencedby>
+        <referencedby refid="classregistry_1a80b07280b49b0e28ecc3f3a1b6c7cccc" compoundref="registry_8hpp" startline="56" endline="67">registry::register_type</referencedby>
+        <referencedby refid="classpath__tree_1_1node_1a17193f36134699f1e9f07c0cc708a892">path_tree::node::remove_child</referencedby>
+        <referencedby refid="classenv__document_1a3c1ef5060483e825066c5964ae019497" compoundref="env__value_8hpp" startline="314" endline="314">env_document::remove_variable</referencedby>
+        <referencedby refid="structenvironment_1a6a5a4531f8ec5310d84c067fcfb6c388">environment::set</referencedby>
+        <referencedby refid="structhttp__server__request_1ab4124dd7efb3fa2c92fa000f2dc484a8" compoundref="http__server__message_8hpp" startline="126" endline="126">http_server_request::set_cookie</referencedby>
+        <referencedby refid="classhttp__server_1a8ae0b82bc4ef2d1ff3288b0689c82256" compoundref="http__server_8hpp" startline="192" endline="192">http_server::set_cookie_name</referencedby>
+        <referencedby refid="structhttp__server__request_1afa656852407ef8175e4e7669dd867133" compoundref="http__server__message_8hpp" startline="150" endline="150">http_server_request::set_header</referencedby>
+        <referencedby refid="structhttp__server__response_1a65d53ed69d5a6533432d3bf81c2503e3" compoundref="http__server__message_8hpp" startline="302" endline="302">http_server_response::set_header</referencedby>
+        <referencedby refid="classini__section_1a4e0fd26ecdb47cf9d234c97765297193" compoundref="ini__value_8hpp" startline="249" endline="249">ini_section::set_name</referencedby>
+        <referencedby refid="group___thread_1ga303744653fe3bf181857637488927d28" compoundref="thread_8hpp" startline="484" endline="484">set_name</referencedby>
+        <referencedby refid="structhttp__server__request_1a1fb643d94f981de49d14aee2c575a663" compoundref="http__server__message_8hpp" startline="100" endline="100">http_server_request::set_parameter</referencedby>
+        <referencedby refid="classenv__document_1a81b7190ea0b57c461429b12ebe628dcb" compoundref="env__value_8hpp" startline="272" endline="275">env_document::set_variable</referencedby>
+        <referencedby refid="classtype__builder_1a489b86bfa65620b9180104c3739d1e49" compoundref="reflect_8hpp" startline="140" endline="145">type_builder&lt; T &gt;::static_function</referencedby>
+        <referencedby refid="classdynamic__library_1a31449138e99fe50bad7212a06bf454eb">dynamic_library::symbol</referencedby>
+        <referencedby refid="classdynamic__library_1a53c3ada7feef0304cb470365ab40470f" compoundref="dynamic__library_8hpp" startline="101" endline="103">dynamic_library::to_symbol</referencedby>
+        <referencedby refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="45" endline="46">type_builder&lt; T &gt;::type_builder</referencedby>
+        <referencedby refid="classplugin__manager_1a9beb1072652ecc2f9080f8a545a781ae">plugin_manager::unload_plugin</referencedby>
+        <referencedby refid="structenvironment_1af1d2eff32051b0a9ecb3a3c0a08078eb">environment::unset</referencedby>
+        <referencedby refid="classini__builder_1adba2bba2f7102d2581704291ed3390d0">ini_builder::value_section</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga303744653fe3bf181857637488927d28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE bool</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE bool set_name</definition>
+        <argsstring>(const char *name)</argsstring>
+        <name>set_name</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>设置当前线程名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>线程名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否设置成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="484" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="484" bodyend="484"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <references refid="classthread_1a11943219b9d0cef98e433e6663e8b000">thread::set_name</references>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1gaaaab5bab899d6f3e7f2bb2c2867254fb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE bool</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE bool is_single_threaded</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>is_single_threaded</name>
+        <briefdescription>
+<para>检查当前是否处于单线程模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果只有主线程运行则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_tracker.hpp" line="86" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_tracker.hpp" bodystart="86" bodyend="86"/>
+        <references refid="classthread__tracker_1adc75c1a5adf3e99832c446b7fe622dd2" compoundref="thread__tracker_8hpp" startline="70" endline="70">thread_tracker::is_single_threaded</references>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1ga48979ba9a5dbca2adc1b3b94bf0edbee" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE int</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE int thread_count</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>thread_count</name>
+        <briefdescription>
+<para>获取当前活动线程数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>活动的NexusForce线程数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_tracker.hpp" line="92" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_tracker.hpp" bodystart="92" bodyend="92"/>
+        <references refid="classthread__tracker_1a6266f094bc8153c30cb699a45d9fa099" compoundref="thread__tracker_8hpp" startline="78" endline="78">thread_tracker::thread_count</references>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1gaafee6defcb6e71227538a97a5b41e235" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Clock</type>
+          </param>
+          <param>
+            <type>typename Dur</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void sleep_until</definition>
+        <argsstring>(const time_point&lt; Clock, Dur &gt; &amp;time)</argsstring>
+        <name>sleep_until</name>
+        <param>
+          <type>const <ref refid="structtime__point" kindref="compound">time_point</ref>&lt; Clock, Dur &gt; &amp;</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>使当前线程睡眠直到指定时间点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Clock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时钟类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要睡眠到的时间点</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+跨平台的线程睡眠函数，支持稳定时钟和非稳定时钟。<itemizedlist>
+<listitem><para>对于稳定时钟，计算一次睡眠时间；</para>
+</listitem><listitem><para>对于非稳定时钟，循环检查直到达到目标时间。 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="174" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="174" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="group___thread_1gadbe19150bdd95fb6be280139d5ef441c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Rep</type>
+          </param>
+          <param>
+            <type>typename Period</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void sleep_for</definition>
+        <argsstring>(const duration&lt; Rep, Period &gt; time)</argsstring>
+        <name>sleep_for</name>
+        <param>
+          <type>const <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, Period &gt;</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>使当前线程睡眠指定时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Rep</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间单位比例 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要睡眠的时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="884" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="884" bodyend="897"/>
+        <references refid="structduration_1a79d16de289fadf4ffd36a989cb985a98" compoundref="duration_8hpp" startline="266" endline="266">duration&lt; Rep, Period &gt;::count</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程管理和相关操作 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

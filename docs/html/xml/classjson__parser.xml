@@ -1,0 +1,397 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classjson__parser" kind="class" language="C++" prot="public">
+    <compoundname>json_parser</compoundname>
+    <includes refid="json__parser_8hpp" local="no">json_parser.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classjson__parser_1a148a58e1d1f8b14112b408080c77a59a" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string json_parser::text_</definition>
+        <argsstring></argsstring>
+        <name>text_</name>
+        <qualifiedname>json_parser::text_</qualifiedname>
+        <briefdescription>
+<para>待解析的JSON文本 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="43" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classjson__parser_1a92d2f4daed270a0301cec1a6513adc13" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t json_parser::len_</definition>
+        <argsstring></argsstring>
+        <name>len_</name>
+        <qualifiedname>json_parser::len_</qualifiedname>
+        <briefdescription>
+<para>文本长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="44" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classjson__parser_1a812b28259b289c980f40765b9febc8c5" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t json_parser::pos_</definition>
+        <argsstring></argsstring>
+        <name>pos_</name>
+        <qualifiedname>json_parser::pos_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>当前解析位置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="45" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classjson__parser_1a498cf4b332956247a20c2741c5bdd824" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void json_parser::skip_space</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>skip_space</name>
+        <qualifiedname>json_parser::skip_space</qualifiedname>
+        <briefdescription>
+<para>跳过空白字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>跳过空格、制表符、换行符等空白字符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="52" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__parser_1a1762529c569b06d6b2a5c8eed5f9c615" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>char</type>
+        <definition>char json_parser::current</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>current</name>
+        <qualifiedname>json_parser::current</qualifiedname>
+        <briefdescription>
+<para>获取当前字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前位置的字符，若已到末尾返回&apos;\0&apos; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="58" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__parser_1abeca9c3dda9ffe0529511a0ae8627cb7" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool json_parser::eof</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>eof</name>
+        <qualifiedname>json_parser::eof</qualifiedname>
+        <briefdescription>
+<para>检查是否已到末尾 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已到文件末尾 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="64" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__parser_1a57b976a988e715ea78195170bbc660b9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__string" kindref="compound">json_string</ref> &gt;</type>
+        <definition>unique_ptr&lt; json_string &gt; json_parser::parse_string</definition>
+        <argsstring>()</argsstring>
+        <name>parse_string</name>
+        <qualifiedname>json_parser::parse_string</qualifiedname>
+        <briefdescription>
+<para>解析JSON字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析得到的字符串值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structjson__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当字符串格式错误或未正确终止时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+解析双引号包裹的字符串，支持转义序列 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="73" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__parser_1a72989244d0a9f13cfbf78be2a6fb34dd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__number" kindref="compound">json_number</ref> &gt;</type>
+        <definition>unique_ptr&lt; json_number &gt; json_parser::parse_number</definition>
+        <argsstring>()</argsstring>
+        <name>parse_number</name>
+        <qualifiedname>json_parser::parse_number</qualifiedname>
+        <briefdescription>
+<para>解析JSON数字 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析得到的数字值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structjson__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当数字格式无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+支持的数字格式：<itemizedlist>
+<listitem><para>整数：123, -456</para>
+</listitem><listitem><para>浮点数：3.14, -0.5</para>
+</listitem><listitem><para>科学计数法：1e10, 2.5e-3 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="85" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__parser_1afc8b4eaa618b2cfc3bd1ccf00ae08a1b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__value" kindref="compound">json_value</ref> &gt;</type>
+        <definition>unique_ptr&lt; json_value &gt; json_parser::parse_keyword</definition>
+        <argsstring>()</argsstring>
+        <name>parse_keyword</name>
+        <qualifiedname>json_parser::parse_keyword</qualifiedname>
+        <briefdescription>
+<para>解析JSON关键字 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析得到的关键字值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structjson__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当遇到无效关键字时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+支持的关键字：<itemizedlist>
+<listitem><para>true：布尔值true</para>
+</listitem><listitem><para>false：布尔值false</para>
+</listitem><listitem><para>null：空值 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="97" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__parser_1ad30eff7d876d16bced047e045b352387" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__array" kindref="compound">json_array</ref> &gt;</type>
+        <definition>unique_ptr&lt; json_array &gt; json_parser::parse_array</definition>
+        <argsstring>()</argsstring>
+        <name>parse_array</name>
+        <qualifiedname>json_parser::parse_array</qualifiedname>
+        <briefdescription>
+<para>解析JSON数组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析得到的数组对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structjson__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当数组格式错误时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+数组格式：[value1, value2, ...] 数组元素可以是任意有效的JSON值类型。 数组可以为空：[] </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="108" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__parser_1a56b221a62ca75b442b1df855cfd1de86" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__object" kindref="compound">json_object</ref> &gt;</type>
+        <definition>unique_ptr&lt; json_object &gt; json_parser::parse_object</definition>
+        <argsstring>()</argsstring>
+        <name>parse_object</name>
+        <qualifiedname>json_parser::parse_object</qualifiedname>
+        <briefdescription>
+<para>解析JSON对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析得到的对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structjson__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当对象格式错误时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+对象格式：{&quot;key1&quot;: value1, &quot;key2&quot;: value2, ...} 键必须是字符串，值可以是任意有效的JSON值类型。 对象可以为空：{} </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="119" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__parser_1af0be56267233fa44e177e45fd93c3b84" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__value" kindref="compound">json_value</ref> &gt;</type>
+        <definition>unique_ptr&lt; json_value &gt; json_parser::parse_value</definition>
+        <argsstring>()</argsstring>
+        <name>parse_value</name>
+        <qualifiedname>json_parser::parse_value</qualifiedname>
+        <briefdescription>
+<para>解析任意JSON值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析得到的JSON值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structjson__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当遇到无效字符时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+根据当前字符决定解析的具体类型：<itemizedlist>
+<listitem><para>&apos;{&apos;：解析对象</para>
+</listitem><listitem><para>&apos;[&apos;：解析数组</para>
+</listitem><listitem><para>&apos;&quot;&apos;：解析字符串</para>
+</listitem><listitem><para>数字或负号：解析数字</para>
+</listitem><listitem><para>&apos;t&apos;/&apos;f&apos;/&apos;n&apos;：解析关键字 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="133" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classjson__parser_1a83d61d739d7729aa59dc7f7ac95e88b7" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>json_parser::json_parser</definition>
+        <argsstring>(string text) noexcept</argsstring>
+        <name>json_parser</name>
+        <qualifiedname>json_parser::json_parser</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>待解析的JSON字符串</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+初始化解析器，准备开始解析。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="142" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" bodystart="142" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__parser_1ae756473667741ea7716b0d9f6e67adec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__value" kindref="compound">json_value</ref> &gt;</type>
+        <definition>unique_ptr&lt; json_value &gt; json_parser::parse</definition>
+        <argsstring>()</argsstring>
+        <name>parse</name>
+        <qualifiedname>json_parser::parse</qualifiedname>
+        <briefdescription>
+<para>执行解析 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析完成的JSON值根节点 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structjson__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当解析过程中遇到语法错误时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+解析整个JSON文本，构建完整的JSON值树。 解析完成后会检查是否还有未处理的字符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="154" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__parser_1a6378ccb1f8c40dc9d1c9a3515aade056" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__value" kindref="compound">json_value</ref> &gt; &gt;</type>
+        <definition>optional&lt; unique_ptr&lt; json_value &gt; &gt; json_parser::try_parse</definition>
+        <argsstring>()</argsstring>
+        <name>try_parse</name>
+        <qualifiedname>json_parser::try_parse</qualifiedname>
+        <briefdescription>
+<para>尝试执行解析 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>解析结果的可选对象</para>
+</simplesect>
+如果解析成功返回包含JSON值的optional， 如果解析失败返回空的optional。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="163" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>JSON配置解析器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>采用递归下降解析算法。 解析过程会维护行号和列号信息，便于错误定位。</para>
+<para>解析符合ECMA-404 JSON标准的格式，支持以下特性：<itemizedlist>
+<listitem><para>对象（Object）：键值对集合</para>
+</listitem><listitem><para>数组（Array）：有序值列表</para>
+</listitem><listitem><para>字符串（String）：双引号包裹的Unicode字符序列</para>
+</listitem><listitem><para>数字（Number）：整数和浮点数</para>
+</listitem><listitem><para>布尔值（Boolean）：true/false</para>
+</listitem><listitem><para>null值 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" line="41" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/json/json_parser.hpp" bodystart="41" bodyend="164"/>
+    <listofallmembers>
+      <member refid="classjson__parser_1a1762529c569b06d6b2a5c8eed5f9c615" prot="private" virt="non-virtual"><scope>json_parser</scope><name>current</name></member>
+      <member refid="classjson__parser_1abeca9c3dda9ffe0529511a0ae8627cb7" prot="private" virt="non-virtual"><scope>json_parser</scope><name>eof</name></member>
+      <member refid="classjson__parser_1a83d61d739d7729aa59dc7f7ac95e88b7" prot="public" virt="non-virtual"><scope>json_parser</scope><name>json_parser</name></member>
+      <member refid="classjson__parser_1a92d2f4daed270a0301cec1a6513adc13" prot="private" virt="non-virtual"><scope>json_parser</scope><name>len_</name></member>
+      <member refid="classjson__parser_1ae756473667741ea7716b0d9f6e67adec" prot="public" virt="non-virtual"><scope>json_parser</scope><name>parse</name></member>
+      <member refid="classjson__parser_1ad30eff7d876d16bced047e045b352387" prot="private" virt="non-virtual"><scope>json_parser</scope><name>parse_array</name></member>
+      <member refid="classjson__parser_1afc8b4eaa618b2cfc3bd1ccf00ae08a1b" prot="private" virt="non-virtual"><scope>json_parser</scope><name>parse_keyword</name></member>
+      <member refid="classjson__parser_1a72989244d0a9f13cfbf78be2a6fb34dd" prot="private" virt="non-virtual"><scope>json_parser</scope><name>parse_number</name></member>
+      <member refid="classjson__parser_1a56b221a62ca75b442b1df855cfd1de86" prot="private" virt="non-virtual"><scope>json_parser</scope><name>parse_object</name></member>
+      <member refid="classjson__parser_1a57b976a988e715ea78195170bbc660b9" prot="private" virt="non-virtual"><scope>json_parser</scope><name>parse_string</name></member>
+      <member refid="classjson__parser_1af0be56267233fa44e177e45fd93c3b84" prot="private" virt="non-virtual"><scope>json_parser</scope><name>parse_value</name></member>
+      <member refid="classjson__parser_1a812b28259b289c980f40765b9febc8c5" prot="private" virt="non-virtual"><scope>json_parser</scope><name>pos_</name></member>
+      <member refid="classjson__parser_1a498cf4b332956247a20c2741c5bdd824" prot="private" virt="non-virtual"><scope>json_parser</scope><name>skip_space</name></member>
+      <member refid="classjson__parser_1a148a58e1d1f8b14112b408080c77a59a" prot="private" virt="non-virtual"><scope>json_parser</scope><name>text_</name></member>
+      <member refid="classjson__parser_1a6378ccb1f8c40dc9d1c9a3515aade056" prot="public" virt="non-virtual"><scope>json_parser</scope><name>try_parse</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

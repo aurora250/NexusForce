@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['位操作_0',['位操作',['../group___bit_manipulation.html',1,'']]]
+  ['仿函数_0',['仿函数',['../group___functor.html',1,'']]]
 ];

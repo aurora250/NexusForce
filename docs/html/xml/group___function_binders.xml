@@ -1,0 +1,370 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___function_binders" kind="group">
+    <compoundname>FunctionBinders</compoundname>
+    <title>绑定函数</title>
+    <innerclass refid="classbinder" prot="public">binder</innerclass>
+    <innerclass refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4" prot="public">binder&lt; Func(BoundArgs...)&gt;</innerclass>
+    <innerclass refid="classbindrer" prot="public">bindrer</innerclass>
+    <innerclass refid="classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4" prot="public">bindrer&lt; Res, Func(BoundArgs...)&gt;</innerclass>
+    <innerclass refid="structbind__helper" prot="public">bind_helper</innerclass>
+    <innerclass refid="structbind__helper_3_01true_00_01_func_00_01_bound_args_8_8_8_01_4" prot="public">bind_helper&lt; true, Func, BoundArgs... &gt;</innerclass>
+    <innerclass refid="structbindr__helper" prot="public">bindr_helper</innerclass>
+    <innerclass refid="structbinder__front" prot="public">binder_front</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___function_binders_1gaaf0fa7c3eafa3f876acbc6be2279a9f9" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>bool</type>
+            <declname>IntLike</declname>
+            <defname>IntLike</defname>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>BoundArgs</declname>
+            <defname>BoundArgs</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structbind__helper" kindref="compound">bind_helper</ref>&lt; IntLike, Func, BoundArgs... &gt;::type</type>
+        <definition>using bind_helper_t = typename bind_helper&lt;IntLike, Func, BoundArgs...&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>bind_helper_t</name>
+        <briefdescription>
+<para>bind_helper的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="727" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="727" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___function_binders_1gaa5a92e90a3ca473839441b27e57ca6ac" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Res</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>BoundArgs</declname>
+            <defname>BoundArgs</defname>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structbindr__helper" kindref="compound">bindr_helper</ref>&lt; Res, Func, BoundArgs... &gt;::type</type>
+        <definition>using bindr_helper_t = typename bindr_helper&lt;Res, Func, BoundArgs...&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>bindr_helper_t</name>
+        <briefdescription>
+<para>bindr_helper的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="765" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="765" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___function_binders_1gaa8edf673d24f0a45eb8ce43d4071e8a8" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structbinder__front" kindref="compound">binder_front</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Func &gt;, <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Args &gt;... &gt;</type>
+        <definition>using binder_front_type = binder_front&lt;decay_t&lt;Func&gt;, decay_t&lt;Args&gt;...&gt;</definition>
+        <argsstring></argsstring>
+        <name>binder_front_type</name>
+        <briefdescription>
+<para>binder_front类型的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="910" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="910" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___function_binders_1gabc804dd9d3293d4c066a9bd6fda0963e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>Func</definition>
+        <argsstring></argsstring>
+        <name>Func</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="743" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="743" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___function_binders_1gac88a3a275337035d2202a893204c9909" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>BoundArgs</declname>
+            <defname>BoundArgs</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>NEFORCE_DEPRECATED_FOR</definition>
+        <argsstring>(&quot;use lambda or bind_front instead of bind&quot;) NEFORCE_NODISCARD const expr bind_helper_t&lt; is_integral_like_v&lt; Func &gt;</argsstring>
+        <name>NEFORCE_DEPRECATED_FOR</name>
+        <param>
+          <type>&quot;use lambda or <ref refid="group___function_binders_1gae7e8b424e5e9e6f6d873383b66e23c60" kindref="member">bind_front</ref> instead of bind&quot;</type>
+        </param>
+        <briefdescription>
+<para>bind函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BoundArgs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定的参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要绑定的函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定的参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定后的函数对象</para>
+</simplesect>
+创建函数绑定器，支持占位符参数重排。返回的绑定器可以存储并稍后调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="741" column="1"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___base_type_qualifier_check_1ga7d4e35933ca5c3ead34c6547f25b7acb" compoundref="type__traits_8hpp" startline="1603">is_integral_like_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___function_binders_1ga4b66bff2edcf2070f62494205601c2a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>BoundArgs</type>
+        <definition>BoundArgs bind</definition>
+        <argsstring>(Func &amp;&amp;func, BoundArgs &amp;&amp;... args)</argsstring>
+        <name>bind</name>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>BoundArgs &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="743" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="743" bodyend="745"/>
+      </memberdef>
+      <memberdef kind="function" id="group___function_binders_1ga5b24c8c877b5a64a99ff339d33f27032" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Res</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>BoundArgs</declname>
+            <defname>BoundArgs</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>NEFORCE_DEPRECATED_FOR</definition>
+        <argsstring>(&quot;use lambda or bind_front instead of bind&quot;) NEFORCE_NODISCARD const expr bindr_helper_t&lt; Res</argsstring>
+        <name>NEFORCE_DEPRECATED_FOR</name>
+        <param>
+          <type>&quot;use lambda or <ref refid="group___function_binders_1gae7e8b424e5e9e6f6d873383b66e23c60" kindref="member">bind_front</ref> instead of bind&quot;</type>
+        </param>
+        <briefdescription>
+<para>指定返回类型的bind函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指定的返回类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BoundArgs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定的参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要绑定的函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定的参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定后的函数对象</para>
+</simplesect>
+创建指定返回类型的函数绑定器，调用时会强制将结果转换为Res类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="780" column="1"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="group___function_binders_1gae7e8b424e5e9e6f6d873383b66e23c60" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible&lt; binder_front_type&lt; Func, Args... &gt;, int, Func, Args... &gt;::value" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___function_binders_1gaa8edf673d24f0a45eb8ce43d4071e8a8" kindref="member">binder_front_type</ref>&lt; Func, Args... &gt;</type>
+        <definition>NEFORCE_NODISCARD constexpr binder_front_type&lt; Func, Args... &gt; bind_front</definition>
+        <argsstring>(Func &amp;&amp;func, Args &amp;&amp;... args)</argsstring>
+        <name>bind_front</name>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>bind_front函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定的参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要绑定的函数对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定的参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>前向绑定后的函数对象</para>
+</simplesect>
+创建前向参数绑定器，将参数绑定到函数的前几个位置。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="923" column="47" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="923" bodyend="926"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>函数绑定和部分应用的工具 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

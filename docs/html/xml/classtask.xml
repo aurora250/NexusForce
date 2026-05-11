@@ -1,0 +1,326 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classtask" kind="class" language="C++" prot="public">
+    <compoundname>task</compoundname>
+    <includes refid="generator_8hpp" local="no">generator.hpp</includes>
+    <innerclass refid="structtask_1_1promise__type" prot="public">task::promise_type</innerclass>
+    <innerclass refid="structtask_1_1awaiter" prot="public">task::awaiter</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classtask_1a3bd951eeecf5de5d37a94e3e09aca23d" prot="private" static="no" mutable="no">
+        <type><ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle</ref>&lt; <ref refid="structtask_1_1promise__type" kindref="compound">promise_type</ref> &gt;</type>
+        <definition>coroutine_handle&lt;promise_type&gt; task&lt; T &gt;::handle_</definition>
+        <argsstring></argsstring>
+        <name>handle_</name>
+        <qualifiedname>task::handle_</qualifiedname>
+        <briefdescription>
+<para>协程句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="587" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="587" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtask_1ae229bb88041fade9c572408e8dcbedfd" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>task&lt; T &gt;::task</definition>
+        <argsstring>(coroutine_handle&lt; promise_type &gt; h)</argsstring>
+        <name>task</name>
+        <qualifiedname>task::task</qualifiedname>
+        <param>
+          <type><ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle</ref>&lt; <ref refid="structtask_1_1promise__type" kindref="compound">promise_type</ref> &gt;</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+<para>从协程句柄构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>h</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协程句柄 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="594" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="594" bodyend="595"/>
+        <referencedby refid="structtask_1_1promise__type_1aad034494a4dbaa044bcaf37154e08aaa" compoundref="generator_8hpp" startline="513" endline="513">task&lt; T &gt;::promise_type::get_return_object</referencedby>
+        <referencedby refid="classtask_1a20d669386e15b25103aee3212ae684ad" compoundref="generator_8hpp" startline="611" endline="623">task&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classtask_1a5e94b9581b7921975806fdc1483f78f4" compoundref="generator_8hpp" startline="601" endline="604">task&lt; T &gt;::task</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1a5e94b9581b7921975806fdc1483f78f4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>task&lt; T &gt;::task</definition>
+        <argsstring>(task &amp;&amp;other) noexcept</argsstring>
+        <name>task</name>
+        <qualifiedname>task::task</qualifiedname>
+        <param>
+          <type><ref refid="classtask" kindref="compound">task</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="601" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="601" bodyend="604"/>
+        <references refid="classtask_1ae229bb88041fade9c572408e8dcbedfd" compoundref="generator_8hpp" startline="594" endline="595">task&lt; T &gt;::task</references>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1a20d669386e15b25103aee3212ae684ad" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classtask" kindref="compound">task</ref> &amp;</type>
+        <definition>task &amp; task&lt; T &gt;::operator=</definition>
+        <argsstring>(task &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>task::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classtask" kindref="compound">task</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="611" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="611" bodyend="623"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="classtask_1ae229bb88041fade9c572408e8dcbedfd" compoundref="generator_8hpp" startline="594" endline="595">task&lt; T &gt;::task</references>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1abcf9c660515466997e2ba3e6d5166dd1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>task&lt; T &gt;::~task</definition>
+        <argsstring>()</argsstring>
+        <name>~task</name>
+        <qualifiedname>task::~task</qualifiedname>
+        <briefdescription>
+<para>析构函数，销毁协程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="628" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="628" bodyend="632"/>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1a801fb283311b541e7f182a21589e106c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>task&lt; T &gt;::task</definition>
+        <argsstring>(const task &amp;)=delete</argsstring>
+        <name>task</name>
+        <qualifiedname>task::task</qualifiedname>
+        <param>
+          <type>const <ref refid="classtask" kindref="compound">task</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="634" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1ab65c05f0bd43da4f02eef9d485f47e58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtask" kindref="compound">task</ref> &amp;</type>
+        <definition>task &amp; task&lt; T &gt;::operator=</definition>
+        <argsstring>(const task &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>task::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classtask" kindref="compound">task</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="635" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1a3650489fb1edb0a9ab612b126b94c112" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structtask_1_1awaiter" kindref="compound">awaiter</ref></type>
+        <definition>awaiter task&lt; T &gt;::operator co_await</definition>
+        <argsstring>()</argsstring>
+        <name>operator co_await</name>
+        <qualifiedname>task::operator co_await</qualifiedname>
+        <briefdescription>
+<para>获取等待器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>等待器对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="641" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="641" bodyend="641"/>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1ab631774bfa12bb16808de715b5844278" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool task&lt; T &gt;::done</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>done</name>
+        <qualifiedname>task::done</qualifiedname>
+        <briefdescription>
+<para>检查任务是否已完成 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已完成 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="647" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="647" bodyend="647"/>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1a4eb3a6735d6e5bf52b2d7534ba0769d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void task&lt; T &gt;::resume</definition>
+        <argsstring>()</argsstring>
+        <name>resume</name>
+        <qualifiedname>task::resume</qualifiedname>
+        <briefdescription>
+<para>恢复任务执行 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="652" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="652" bodyend="656"/>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1a58502672d9bef3a69f89611e79483c31" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T task&lt; T &gt;::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <qualifiedname>task::get</qualifiedname>
+        <briefdescription>
+<para>同步获取任务结果 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>任务结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="662" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="662" bodyend="670"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32">rethrow_exception</references>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1a055a89b2c4ef8ad941976ae9ce12349f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void task&lt; T &gt;::set_cancellation_token</definition>
+        <argsstring>(cancellation_token &amp;token)</argsstring>
+        <name>set_cancellation_token</name>
+        <qualifiedname>task::set_cancellation_token</qualifiedname>
+        <param>
+          <type><ref refid="classcancellation__token" kindref="compound">cancellation_token</ref> &amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>设置取消令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>取消令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="676" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="676" bodyend="680"/>
+      </memberdef>
+      <memberdef kind="function" id="classtask_1ac359179551baf1c15f49de6ec5653b0a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool task&lt; T &gt;::is_cancelled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_cancelled</name>
+        <qualifiedname>task::is_cancelled</qualifiedname>
+        <briefdescription>
+<para>检查任务是否被取消 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否被取消 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="686" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="686" bodyend="686"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异步任务 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务结果类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+表示一个可能产生结果的异步操作。 支持co_await等待、取消、组合等操作。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="467" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="467" bodyend="687"/>
+    <listofallmembers>
+      <member refid="classtask_1ab631774bfa12bb16808de715b5844278" prot="public" virt="non-virtual"><scope>task</scope><name>done</name></member>
+      <member refid="classtask_1a58502672d9bef3a69f89611e79483c31" prot="public" virt="non-virtual"><scope>task</scope><name>get</name></member>
+      <member refid="classtask_1a3bd951eeecf5de5d37a94e3e09aca23d" prot="private" virt="non-virtual"><scope>task</scope><name>handle_</name></member>
+      <member refid="classtask_1ac359179551baf1c15f49de6ec5653b0a" prot="public" virt="non-virtual"><scope>task</scope><name>is_cancelled</name></member>
+      <member refid="classtask_1a3650489fb1edb0a9ab612b126b94c112" prot="public" virt="non-virtual"><scope>task</scope><name>operator co_await</name></member>
+      <member refid="classtask_1a20d669386e15b25103aee3212ae684ad" prot="public" virt="non-virtual"><scope>task</scope><name>operator=</name></member>
+      <member refid="classtask_1ab65c05f0bd43da4f02eef9d485f47e58" prot="public" virt="non-virtual"><scope>task</scope><name>operator=</name></member>
+      <member refid="classtask_1a4eb3a6735d6e5bf52b2d7534ba0769d4" prot="public" virt="non-virtual"><scope>task</scope><name>resume</name></member>
+      <member refid="classtask_1a055a89b2c4ef8ad941976ae9ce12349f" prot="public" virt="non-virtual"><scope>task</scope><name>set_cancellation_token</name></member>
+      <member refid="classtask_1ae229bb88041fade9c572408e8dcbedfd" prot="public" virt="non-virtual"><scope>task</scope><name>task</name></member>
+      <member refid="classtask_1a5e94b9581b7921975806fdc1483f78f4" prot="public" virt="non-virtual"><scope>task</scope><name>task</name></member>
+      <member refid="classtask_1a801fb283311b541e7f182a21589e106c" prot="public" virt="non-virtual"><scope>task</scope><name>task</name></member>
+      <member refid="classtask_1abcf9c660515466997e2ba3e6d5166dd1" prot="public" virt="non-virtual"><scope>task</scope><name>~task</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

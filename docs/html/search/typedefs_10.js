@@ -10,8 +10,7 @@ var searchData=
   ['true_5ftype_7',['true_type',['../group___type_traits_utilities.html#gaa4e9c28fa52ab73ef48e5cbed20c66fd',1,'type_traits.hpp']]],
   ['tuple_5felement_5ft_8',['tuple_element_t',['../group___tuple.html#gab7cc5fe4490aa895e6951dfc9b174c66',1,'pair.hpp']]],
   ['tuple_5fextract_5fbase_5ft_9',['tuple_extract_base_t',['../group___tuple.html#ga88deda623c2c661df6d0b5514e1bcbc2',1,'pair.hpp']]],
-  ['tuple_5ftype_10',['tuple_type',['../structtuple__element_3_01_index_00_01pair_3_01_t1_00_01_t2_01_4_01_4.html#a8155bc6bc2a00027a934fe4357323193',1,'tuple_element&lt; Index, pair&lt; T1, T2 &gt; &gt;']]],
-  ['type_11',['type',['../structbind__helper.html#af5b7b1d7ac24ca95ba3280072622d935',1,'bind_helper::type'],['../structratio.html#ad0f8efac8194dc0af6529d42e859b393',1,'ratio::type'],['../structintegral__constant.html#a24446c10796b5f7a335245fa783edb29',1,'integral_constant::type'],['../structbuild__index__tuple.html#ae8e2b64a843d52f1f11a4c1d061bbfbe',1,'build_index_tuple::type'],['../structtuple__element_3_01_index_00_01pair_3_01_t1_00_01_t2_01_4_01_4.html#a146cca30753993e48c749191c8a000d6',1,'tuple_element&lt; Index, pair&lt; T1, T2 &gt; &gt;::type'],['../classreference__wrapper.html#a1ea5889b8f8a938acbf90adce281a6ae',1,'reference_wrapper::type']]],
-  ['type_5fid_12',['type_id',['../group___reflection.html#ga541516a057bbd67d55d02ece107883d9',1,'any.hpp']]],
-  ['type_5fidentity_5ft_13',['type_identity_t',['../group___type_traits_utilities.html#gaca42c1976d1b12998afcabf8f39e8c23',1,'type_traits.hpp']]]
+  ['type_10',['type',['../structbind__helper.html#af5b7b1d7ac24ca95ba3280072622d935',1,'bind_helper::type'],['../structratio.html#ad0f8efac8194dc0af6529d42e859b393',1,'ratio::type'],['../structintegral__constant.html#a24446c10796b5f7a335245fa783edb29',1,'integral_constant::type'],['../structbuild__index__tuple.html#ae8e2b64a843d52f1f11a4c1d061bbfbe',1,'build_index_tuple::type'],['../classreference__wrapper.html#a1ea5889b8f8a938acbf90adce281a6ae',1,'reference_wrapper::type']]],
+  ['type_5fid_11',['type_id',['../group___reflection.html#ga541516a057bbd67d55d02ece107883d9',1,'any.hpp']]],
+  ['type_5fidentity_5ft_12',['type_identity_t',['../group___type_traits_utilities.html#gaca42c1976d1b12998afcabf8f39e8c23',1,'type_traits.hpp']]]
 ];

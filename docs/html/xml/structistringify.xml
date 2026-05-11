@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structistringify" kind="class" language="C++" prot="public">
+    <compoundname>istringify</compoundname>
+    <derivedcompoundref refid="structiobject" prot="public" virt="non-virtual">iobject&lt; T &gt;</derivedcompoundref>
+    <includes refid="istringify_8hpp" local="no">istringify.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structistringify_1a70229133426897992dc10f0cb4df4564" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; istringify&lt; T &gt;::derived</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>derived</name>
+        <qualifiedname>istringify::derived</qualifiedname>
+        <briefdescription>
+<para>获取派生类常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>派生类常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/istringify.hpp" line="38" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/istringify.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structistringify_1aeb53a048cd2b8e99462c2cf0f5c602bc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string istringify&lt; T &gt;::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>istringify::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>对象的字符串表示</para>
+</simplesect>
+此函数调用派生类的to_string()实现。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/istringify.hpp" line="47" column="50" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/istringify.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>可字符串化接口 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>派生类类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+采用奇异递归模板模式（CRTP）。 继承该接口的派生类需要实现 <ref refid="structistringify_1aeb53a048cd2b8e99462c2cf0f5c602bc" kindref="member">to_string()</ref> 成员函数， 该函数返回对象的字符串表示。通过此接口可以获得统一的字符串转换能力。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iobject&lt; T &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>istringify&lt; T &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/istringify.hpp" line="32" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/istringify.hpp" bodystart="32" bodyend="48"/>
+    <listofallmembers>
+      <member refid="structistringify_1a70229133426897992dc10f0cb4df4564" prot="private" virt="non-virtual"><scope>istringify</scope><name>derived</name></member>
+      <member refid="structistringify_1aeb53a048cd2b8e99462c2cf0f5c602bc" prot="public" virt="non-virtual"><scope>istringify</scope><name>to_string</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,2689 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classoptional" kind="class" language="C++" prot="public">
+    <compoundname>optional</compoundname>
+    <basecompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; optional&lt; T &gt; &gt;</basecompoundref>
+    <includes refid="optional_8hpp" local="no">optional.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classoptional_1afd2ee867ad745ef8a588d2b3061ba51f" prot="public" static="no">
+        <type>T</type>
+        <definition>using optional&lt; T &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>optional::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="77" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classoptional_1acd010a553a844492fd82aebcda7f2415" prot="public" static="no">
+        <type>T *</type>
+        <definition>using optional&lt; T &gt;::pointer = T*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>optional::pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="78" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classoptional_1a0b245266348c0d2aaaec9f44a6be5f5f" prot="public" static="no">
+        <type>T &amp;</type>
+        <definition>using optional&lt; T &gt;::reference = T&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>optional::reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="79" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classoptional_1ac066eecaf47e5eb0c9e26abdfb74186f" prot="public" static="no">
+        <type>const T *</type>
+        <definition>using optional&lt; T &gt;::const_pointer = const T*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>optional::const_pointer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="80" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classoptional_1a3fa596970527e8f299cdc1a0147808be" prot="public" static="no">
+        <type>const T &amp;</type>
+        <definition>using optional&lt; T &gt;::const_reference = const T&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>optional::const_reference</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="81" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classoptional_1ab15ab2e7fe9203b6ec39e56fb43a4bf2" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gaecd67118189edfc6436511ce3f23aef1" kindref="member">bool_constant</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa0146faa0d59953b38f3d7cebefbec2c" kindref="member">is_any_of_v</ref>&lt; <ref refid="group___remove_qualifiers_1gadb53d365fce2ddba102949e4ad3bf058" kindref="member">remove_cv_t</ref>&lt; U &gt;, <ref refid="structnone__t" kindref="compound">none_t</ref>, <ref refid="structinplace__construct__tag" kindref="compound">inplace_construct_tag</ref> &gt; &amp;&amp; <ref refid="group___base_type_qualifier_check_1gad26e8608af957d4388fa3029f2394b6e" kindref="member">is_object_v</ref>&lt; U &gt; &amp;&amp;!<ref refid="group___base_type_qualifier_check_1gae7da5e2383c9a0d42663f07c873d8183" kindref="member">is_array_v</ref>&lt; U &gt; &gt;</type>
+        <definition>using optional&lt; T &gt;::is_valid_optional = bool_constant&lt;!is_any_of_v&lt;remove_cv_t&lt;U&gt;, none_t, inplace_construct_tag&gt; &amp;&amp;
+                                           is_object_v&lt;U&gt; &amp;&amp; !is_array_v&lt;U&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>is_valid_optional</name>
+        <qualifiedname>optional::is_valid_optional</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="85" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classoptional_1a953047886f727a312e44287ef6863e42" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structdisjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; T, const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp; &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; T, <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp; &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; T, const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;&amp; &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; T, <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;&amp; &gt;, <ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt; const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;, T &gt;, <ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt; <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;, T &gt;, <ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt; const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;&amp;, T &gt;, <ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt; <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;&amp;, T &gt; &gt;</type>
+        <definition>using optional&lt; T &gt;::convertible_from_optional = 
+disjunction&lt;is_constructible&lt;T, const optional&lt;U&gt;&amp;&gt;, is_constructible&lt;T, optional&lt;U&gt;&amp;&gt;,
+            is_constructible&lt;T, const optional&lt;U&gt;&amp;&amp;&gt;, is_constructible&lt;T, optional&lt;U&gt;&amp;&amp;&gt;,
+            is_convertible&lt;const optional&lt;U&gt;&amp;, T&gt;, is_convertible&lt;optional&lt;U&gt;&amp;, T&gt;,
+            is_convertible&lt;const optional&lt;U&gt;&amp;&amp;, T&gt;, is_convertible&lt;optional&lt;U&gt;&amp;&amp;, T&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>convertible_from_optional</name>
+        <qualifiedname>optional::convertible_from_optional</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="89" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classoptional_1afd30dbfa0d59bab2903d93477c242f5d" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structdisjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structis__assignable" kindref="compound">is_assignable</ref>&lt; T &amp;, const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp; &gt;, <ref refid="structis__assignable" kindref="compound">is_assignable</ref>&lt; T &amp;, <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp; &gt;, <ref refid="structis__assignable" kindref="compound">is_assignable</ref>&lt; T &amp;, const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;&amp; &gt;, <ref refid="structis__assignable" kindref="compound">is_assignable</ref>&lt; T &amp;, <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;&amp; &gt; &gt;</type>
+        <definition>using optional&lt; T &gt;::assignable_from_optional = 
+disjunction&lt;is_assignable&lt;T&amp;, const optional&lt;U&gt;&amp;&gt;, is_assignable&lt;T&amp;, optional&lt;U&gt;&amp;&gt;,
+            is_assignable&lt;T&amp;, const optional&lt;U&gt;&amp;&amp;&gt;, is_assignable&lt;T&amp;, optional&lt;U&gt;&amp;&amp;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>assignable_from_optional</name>
+        <qualifiedname>optional::assignable_from_optional</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="96" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classoptional_1af1524423022775e4445c50f6cc4e2f0a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool optional&lt; T &gt;::have_value_</definition>
+        <argsstring></argsstring>
+        <name>have_value_</name>
+        <qualifiedname>optional::have_value_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="100" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classoptional_1a70bf3dcd5fdcfbca285ddda428f3bef6" prot="private" static="no" mutable="no">
+        <type><ref refid="group___alignment_1gae1bfcd9586bbb9936d7eb2d2ea32bc8e" kindref="member">aligned_storage_t</ref>&lt; sizeof(T), alignof(T)&gt;</type>
+        <definition>aligned_storage_t&lt;sizeof(T), alignof(T)&gt; optional&lt; T &gt;::storage_</definition>
+        <argsstring></argsstring>
+        <name>storage_</name>
+        <qualifiedname>optional::storage_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="101" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classoptional_1a9eb5b9b1c011363e3411b1c5d5cead35" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * optional&lt; T &gt;::get_ptr</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_ptr</name>
+        <qualifiedname>optional::get_ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="103" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a87b90b4b9ac5d406abd4585cc03f7019" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T *</type>
+        <definition>const T * optional&lt; T &gt;::get_ptr</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_ptr</name>
+        <qualifiedname>optional::get_ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="104" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="104" bodyend="104"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(none_t n=none) noexcept</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+          <declname>n</declname>
+          <defval><ref refid="group___none_1ga821a4974ccf7b7d0b01bf5170acff797" kindref="member">none</ref></defval>
+        </param>
+        <briefdescription>
+<para>从空值构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+构造一个空的可选值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="113" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="113" bodyend="113"/>
+        <references refid="group___none_1ga821a4974ccf7b7d0b01bf5170acff797" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <referencedby refid="classoptional_1a5e9eef72e622c9a732a1a777bcc71159" compoundref="optional_8hpp" startline="743" endline="751">optional&lt; T &gt;::equal_to</referencedby>
+        <referencedby refid="classoptional_1a307e04b21a45e7aafddbd470fabb3b0e" compoundref="optional_8hpp" startline="758" endline="763">optional&lt; T &gt;::less_than</referencedby>
+        <referencedby refid="classoptional_1a93a78e86c5412d5a4b217f2424645b22" compoundref="optional_8hpp" startline="264" endline="279">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a4a0641e07c3aa0e337ae55c134f7f09f" compoundref="optional_8hpp" startline="393" endline="405">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1aa33d8b2169dbe7436b87ed0b5da69034" compoundref="optional_8hpp" startline="233" endline="246">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a9aab1e1040d11762b1a775f2bcbeb69f" compoundref="optional_8hpp" startline="120" endline="123">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a7bdb21471e17d42870e0e9b49677940e" compoundref="optional_8hpp" startline="353" endline="371">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a9337a4681c7ea5fe34015263ec1a332f" compoundref="optional_8hpp" startline="321" endline="334">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1ae6b4f027dfec1fdb05b7fa8e0296573a" compoundref="optional_8hpp" startline="179" endline="189">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a6b785fab5d4be1678797729c200a3c7f" compoundref="optional_8hpp" startline="252" endline="257">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1a5149a2b0e04fded77b8cef05b4a149b7" compoundref="optional_8hpp" startline="379" endline="384">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1a7ede04530718c1fa004354e4f26a7eb5" compoundref="optional_8hpp" startline="199" endline="204">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1afec68e13603a5f09d86ae5afa6a65497" compoundref="optional_8hpp" startline="340" endline="346">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1a7335825238f1b9b85700f6a36af8c7d0" compoundref="optional_8hpp" startline="289" endline="294">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1aa0c1885ebcf0bbcc9db52fd5b3cc3b76" compoundref="optional_8hpp" startline="583" endline="588">optional&lt; T &gt;::or_else</referencedby>
+        <referencedby refid="classoptional_1a94d5cf81292f41e1fb109154ce982cea" compoundref="optional_8hpp" startline="569" endline="574">optional&lt; T &gt;::or_else</referencedby>
+        <referencedby refid="classoptional_1ae336a413c95399231aaa0adaf3d0e4e0" compoundref="optional_8hpp" startline="791" endline="805">optional&lt; T &gt;::swap</referencedby>
+        <referencedby refid="classoptional_1a77ed37ffe6ec605e614597787ae700e9" compoundref="optional_8hpp" startline="695" endline="700">optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classoptional_1a3a3328cd01e092a196867e5d8053fbe0" compoundref="optional_8hpp" startline="667" endline="672">optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classoptional_1a25ac37b8912546addfee273122f8f9a1" compoundref="optional_8hpp" startline="681" endline="686">optional&lt; T &gt;::transform</referencedby>
+        <referencedby refid="classoptional_1a7f37ac002b8cb8a9d7edc2984cc02dd3" compoundref="optional_8hpp" startline="653" endline="658">optional&lt; T &gt;::transform</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a9aab1e1040d11762b1a775f2bcbeb69f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 optional &amp; optional&lt; T &gt;::operator=</definition>
+        <argsstring>(none_t n) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>optional::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>空值赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空值标签 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="120" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="120" bodyend="123"/>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+        <references refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="471" endline="476">optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a561bd099e03ae8fe48321b49613c7eba" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; is_valid_optional&lt; U &gt;<ref refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" kindref="member">::value</ref> &amp;&amp;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classoptional" kindref="compound">optional</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v</ref>&lt; U, T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(U &amp;&amp;value)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值隐式转换构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="133" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="133" bodyend="136"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a561bd099e03ae8fe48321b49613c7eba" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; is_valid_optional&lt; U &gt;<ref refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" kindref="member">::value</ref> &amp;&amp;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classoptional" kindref="compound">optional</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;!<ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v</ref>&lt; U, T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(U &amp;&amp;value)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值显式转换构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="146" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="146" bodyend="149"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a558e9fe386b3d263d8a6528b4f758774" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; T &gt;" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值拷贝构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="155" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="155" bodyend="158"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___type_special_member_function_checks_1gaf7d75265d0e5d446fa4925ac74ca3396" compoundref="type__traits_8hpp" startline="2805">is_nothrow_copy_constructible_v</references>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1acbf62cc039f245a4492081f72527d0d2" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt;" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值移动构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="164" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="164" bodyend="167"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___type_special_member_function_checks_1gac3058b8518087cdea482055e5af4577a" compoundref="type__traits_8hpp" startline="2841">is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1ae6b4f027dfec1fdb05b7fa8e0296573a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt; &amp;&amp;is_nothrow_assignable_v&lt; T &amp;, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classoptional" kindref="compound">optional</ref> &gt; &amp;&amp;<ref refid="group___type_traits_utilities_1ga5b6851725df080a5e8ced7b684b7903f" kindref="member">negation_v</ref>&lt; <ref refid="structconjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structis__scalar" kindref="compound">is_scalar</ref>&lt; T &gt;, <ref refid="structis__same" kindref="compound">is_same</ref>&lt; T, <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; U &gt; &gt; &gt; &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" kindref="member">is_assignable_v</ref>&lt; T &amp;, U &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 optional &amp; optional&lt; T &gt;::operator=</definition>
+        <argsstring>(U &amp;&amp;value)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>optional::operator=</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="179" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="179" bodyend="189"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga167e1b8821cb4036a356540e940cbe08" compoundref="type__traits_8hpp" startline="2865">is_nothrow_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a7ede04530718c1fa004354e4f26a7eb5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, const U &amp; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, const U &amp; &gt; &amp;&amp;<ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v</ref>&lt; const U &amp;, T &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(const optional&lt; U &gt; &amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值隐式转换复制构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="199" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="199" bodyend="204"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a7ede04530718c1fa004354e4f26a7eb5" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, const U &amp; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, const U &amp; &gt; &amp;&amp;!<ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v</ref>&lt; const U &amp;, T &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(const optional&lt; U &gt; &amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值显式转换复制构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="214" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="214" bodyend="219"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1aa33d8b2169dbe7436b87ed0b5da69034" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, const U &amp; &gt; &amp;&amp;is_nothrow_assignable_v&lt; T &amp;, const U &amp; &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classoptional" kindref="compound">optional</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, const U &amp; &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" kindref="member">is_assignable_v</ref>&lt; T &amp;, const U &amp; &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" kindref="member">::value</ref> &amp;&amp;!assignable_from_optional&lt; U &gt;<ref refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 optional &amp; optional&lt; T &gt;::operator=</definition>
+        <argsstring>(const optional&lt; U &gt; &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>optional::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值复制赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="233" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="233" bodyend="246"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___type_special_member_function_checks_1ga167e1b8821cb4036a356540e940cbe08" compoundref="type__traits_8hpp" startline="2865">is_nothrow_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+        <references refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="471" endline="476">optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a6b785fab5d4be1678797729c200a3c7f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(const optional &amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="252" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="252" bodyend="257"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a93a78e86c5412d5a4b217f2424645b22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+        <definition>optional &amp; optional&lt; T &gt;::operator=</definition>
+        <argsstring>(const optional &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>optional::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="264" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="264" bodyend="279"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+        <references refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="471" endline="476">optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a7335825238f1b9b85700f6a36af8c7d0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v</ref>&lt; U, T &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(optional&lt; U &gt; &amp;&amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值隐式转换移动构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="289" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="289" bodyend="294"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a7335825238f1b9b85700f6a36af8c7d0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;!<ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v</ref>&lt; U, T &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(optional&lt; U &gt; &amp;&amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值显式转换移动构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="304" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="304" bodyend="309"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a9337a4681c7ea5fe34015263ec1a332f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, U &gt; &amp;&amp;is_nothrow_assignable_v&lt; T &amp;, U &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+            <defval>T</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classoptional" kindref="compound">optional</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, U &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" kindref="member">is_assignable_v</ref>&lt; T &amp;, U &gt; &amp;&amp;!convertible_from_optional&lt; U &gt;<ref refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" kindref="member">::value</ref> &amp;&amp;!assignable_from_optional&lt; U &gt;<ref refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" kindref="member">::value</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 optional &amp; optional&lt; T &gt;::operator=</definition>
+        <argsstring>(optional&lt; U &gt; &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>optional::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从可选值移动赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="321" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="321" bodyend="334"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___type_special_member_function_checks_1ga167e1b8821cb4036a356540e940cbe08" compoundref="type__traits_8hpp" startline="2865">is_nothrow_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+        <references refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="471" endline="476">optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1afec68e13603a5f09d86ae5afa6a65497" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(optional &amp;&amp;other) noexcept</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type><ref refid="classoptional" kindref="compound">optional</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="340" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="340" bodyend="346"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a7bdb21471e17d42870e0e9b49677940e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+        <definition>optional &amp; optional&lt; T &gt;::operator=</definition>
+        <argsstring>(optional &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>optional::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classoptional" kindref="compound">optional</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="353" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="353" bodyend="371"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+        <references refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="471" endline="476">optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a5149a2b0e04fded77b8cef05b4a149b7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, U &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(const optional&lt; U &amp; &gt; &amp;other)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &amp; &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从引用可选值赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源引用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="379" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="379" bodyend="384"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a4a0641e07c3aa0e337ae55c134f7f09f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga6d04a3013483ab81be2d926d2323be3c" kindref="member">is_assignable_v</ref>&lt; T &amp;, U &amp; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 optional &amp; optional&lt; T &gt;::operator=</definition>
+        <argsstring>(const optional&lt; U &amp; &gt; &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>optional::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref>&lt; U &amp; &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从引用可选值赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源引用类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="393" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="393" bodyend="405"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+        <references refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="471" endline="476">optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1aa3a97d2669c23714f449b9f25c3ba2fd" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Types... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, Types... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(inplace_construct_tag, Types &amp;&amp;... args)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type><ref refid="structinplace__construct__tag" kindref="compound">inplace_construct_tag</ref></type>
+        </param>
+        <param>
+          <type>Types &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>原位构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="413" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="413" bodyend="417"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a367f3dcab5d414d45b159f4a8d3bb8c1" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::optional</definition>
+        <argsstring>(inplace_construct_tag, std::initializer_list&lt; U &gt; ilist, Types &amp;&amp;... args)</argsstring>
+        <name>optional</name>
+        <qualifiedname>optional::optional</qualifiedname>
+        <param>
+          <type><ref refid="structinplace__construct__tag" kindref="compound">inplace_construct_tag</ref></type>
+        </param>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>Types &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>使用初始化列表原位构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="428" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="428" bodyend="432"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1aa6eb37e7dc562a3f355685df9881eb0d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 optional&lt; T &gt;::~optional</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~optional</name>
+        <qualifiedname>optional::~optional</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="437" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="437" bodyend="437"/>
+        <references refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="471" endline="476">optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a7588aac7e19170413ac887d4dd97127d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Types... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, Types... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void optional&lt; T &gt;::emplace</definition>
+        <argsstring>(Types &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>optional::emplace</qualifiedname>
+        <param>
+          <type>Types &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>原位构造值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="445" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="445" bodyend="449"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="471" endline="476">optional&lt; T &gt;::reset</references>
+        <referencedby refid="classoptional_1ae336a413c95399231aaa0adaf3d0e4e0" compoundref="optional_8hpp" startline="791" endline="805">optional&lt; T &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1ab0a09753080dd8b7077eb877929417fc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, std::initializer_list&lt; U &gt; &amp;, Types... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void optional&lt; T &gt;::emplace</definition>
+        <argsstring>(std::initializer_list&lt; U &gt; ilist, Types &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>optional::emplace</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>Types &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>使用初始化列表原位构造值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="461" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="461" bodyend="466"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+        <references refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="471" endline="476">optional&lt; T &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void optional&lt; T &gt;::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>optional::reset</qualifiedname>
+        <briefdescription>
+<para>重置可选值为空 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="471" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="471" bodyend="476"/>
+        <references refid="group___inplace_memory_function_1ga944697ea9e7569e2eab45433e8109032" compoundref="construct_8hpp" startline="46" endline="48">destroy</references>
+        <referencedby refid="classoptional_1ab0a09753080dd8b7077eb877929417fc" compoundref="optional_8hpp" startline="461" endline="466">optional&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classoptional_1a7588aac7e19170413ac887d4dd97127d" compoundref="optional_8hpp" startline="445" endline="449">optional&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classoptional_1a93a78e86c5412d5a4b217f2424645b22" compoundref="optional_8hpp" startline="264" endline="279">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a4a0641e07c3aa0e337ae55c134f7f09f" compoundref="optional_8hpp" startline="393" endline="405">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1aa33d8b2169dbe7436b87ed0b5da69034" compoundref="optional_8hpp" startline="233" endline="246">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a9aab1e1040d11762b1a775f2bcbeb69f" compoundref="optional_8hpp" startline="120" endline="123">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a7bdb21471e17d42870e0e9b49677940e" compoundref="optional_8hpp" startline="353" endline="371">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a9337a4681c7ea5fe34015263ec1a332f" compoundref="optional_8hpp" startline="321" endline="334">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1ae336a413c95399231aaa0adaf3d0e4e0" compoundref="optional_8hpp" startline="791" endline="805">optional&lt; T &gt;::swap</referencedby>
+        <referencedby refid="classoptional_1aa6eb37e7dc562a3f355685df9881eb0d" compoundref="optional_8hpp" startline="437" endline="437">optional&lt; T &gt;::~optional</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a7cce9b645768dc9a9124ab67166f4480" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool optional&lt; T &gt;::has_value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_value</name>
+        <qualifiedname>optional::has_value</qualifiedname>
+        <briefdescription>
+<para>检查是否包含值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否包含值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="482" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="482" bodyend="482"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a43c0d2282116b82f597f9fb916b5e6d8" prot="public" static="no" constexpr="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>optional&lt; T &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>optional::operator bool</qualifiedname>
+        <briefdescription>
+<para>转换为布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否包含值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="488" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="488" bodyend="488"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1accd36cdff6f031f655697b4c455b7a54" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type>const_reference</type>
+        <definition>const_reference optional&lt; T &gt;::value</definition>
+        <argsstring>() const &amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>optional::value</qualifiedname>
+        <briefdescription>
+<para>取出存储的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>存储的值的常量左值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structoptional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="495" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="495" bodyend="500"/>
+        <referencedby refid="group___optional_1gaa84ec23756699cfcc9a34867f5039179" compoundref="optional_8hpp" startline="1366" endline="1368">get</referencedby>
+        <referencedby refid="group___optional_1gae9bd171664ce7a9707e125dcb00cf14d" compoundref="optional_8hpp" startline="1342" endline="1344">get</referencedby>
+        <referencedby refid="group___optional_1gaaadbd66fedcec205250ccfbadd338b8b" compoundref="optional_8hpp" startline="1378" endline="1380">get</referencedby>
+        <referencedby refid="group___optional_1gace8a6181c1cac3762759fde8ffc2680d" compoundref="optional_8hpp" startline="1354" endline="1356">get</referencedby>
+        <referencedby refid="classoptional_1ae6b4f027dfec1fdb05b7fa8e0296573a" compoundref="optional_8hpp" startline="179" endline="189">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1a558e9fe386b3d263d8a6528b4f758774" compoundref="optional_8hpp" startline="155" endline="158">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1acbf62cc039f245a4492081f72527d0d2" compoundref="optional_8hpp" startline="164" endline="167">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1a561bd099e03ae8fe48321b49613c7eba" compoundref="optional_8hpp" startline="133" endline="136">optional&lt; T &gt;::optional</referencedby>
+        <referencedby refid="classoptional_1a8e0ac6844bffd9e68ad2ee106ade6291" compoundref="optional_8hpp" startline="555" endline="560">optional&lt; T &gt;::value_or</referencedby>
+        <referencedby refid="classoptional_1a34dd27dfd0dab00dda2285bfc1d23172" compoundref="optional_8hpp" startline="543" endline="548">optional&lt; T &gt;::value_or</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1af0eebfb27296b6caa6aa0cb6436546a3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <type>reference</type>
+        <definition>reference optional&lt; T &gt;::value</definition>
+        <argsstring>() &amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>optional::value</qualifiedname>
+        <briefdescription>
+<para>取出存储的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>存储的值的左值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structoptional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="507" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="507" bodyend="512"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1ae9e0f9341adb6c06332a2bbeaae23f06" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <type>const value_type &amp;&amp;</type>
+        <definition>const value_type &amp;&amp; optional&lt; T &gt;::value</definition>
+        <argsstring>() const &amp;&amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>optional::value</qualifiedname>
+        <briefdescription>
+<para>取出存储的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>存储的值的常量右值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structoptional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="519" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="519" bodyend="524"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a9c01bf3af575250aeb483cae64cd953c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <type>value_type &amp;&amp;</type>
+        <definition>value_type &amp;&amp; optional&lt; T &gt;::value</definition>
+        <argsstring>() &amp;&amp;</argsstring>
+        <name>value</name>
+        <qualifiedname>optional::value</qualifiedname>
+        <briefdescription>
+<para>取出存储的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>存储的值的右值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structoptional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="531" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="531" bodyend="536"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a34dd27dfd0dab00dda2285bfc1d23172" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; value_type &gt;" virt="non-virtual">
+        <type>value_type</type>
+        <definition>value_type optional&lt; T &gt;::value_or</definition>
+        <argsstring>(value_type value) const &amp;</argsstring>
+        <name>value_or</name>
+        <qualifiedname>optional::value_or</qualifiedname>
+        <param>
+          <type>value_type</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>取出存储的值的拷贝值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值不存在时返回的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值存在时返回其值的拷贝，不存在时返回参数value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="543" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="543" bodyend="548"/>
+        <references refid="group___type_special_member_function_checks_1gaf7d75265d0e5d446fa4925ac74ca3396" compoundref="type__traits_8hpp" startline="2805">is_nothrow_copy_constructible_v</references>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a8e0ac6844bffd9e68ad2ee106ade6291" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; value_type &gt;" virt="non-virtual">
+        <type>value_type</type>
+        <definition>value_type optional&lt; T &gt;::value_or</definition>
+        <argsstring>(value_type value) &amp;&amp;</argsstring>
+        <name>value_or</name>
+        <qualifiedname>optional::value_or</qualifiedname>
+        <param>
+          <type>value_type</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>取出存储的值的移出值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值不存在时返回的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值存在时返回其值的引用，不存在时返回参数value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="555" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="555" bodyend="560"/>
+        <references refid="group___type_special_member_function_checks_1gac3058b8518087cdea482055e5af4577a" compoundref="type__traits_8hpp" startline="2841">is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a94d5cf81292f41e1fb109154ce982cea" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" kindref="member">is_invocable_v</ref>&lt; F &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga27b6602d2b9da1cb2daf37f7c15f9bf2" kindref="member">is_copy_constructible_v</ref>&lt; T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classoptional" kindref="compound">optional</ref></type>
+        <definition>optional optional&lt; T &gt;::or_else</definition>
+        <argsstring>(F &amp;&amp;f) const &amp;</argsstring>
+        <name>or_else</name>
+        <qualifiedname>optional::or_else</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>常量左值否则操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值存在时返回自身的拷贝，不存在时调用函数并返回结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="569" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="569" bodyend="574"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1aa0c1885ebcf0bbcc9db52fd5b3cc3b76" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" kindref="member">is_invocable_v</ref>&lt; F &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaaa19f0c4fddd4e4d26d8d26de4099667" kindref="member">is_move_constructible_v</ref>&lt; T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classoptional" kindref="compound">optional</ref></type>
+        <definition>optional optional&lt; T &gt;::or_else</definition>
+        <argsstring>(F &amp;&amp;f) &amp;&amp;</argsstring>
+        <name>or_else</name>
+        <qualifiedname>optional::or_else</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>右值否则操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值存在时返回自身的移动，不存在时调用函数并返回结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="583" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="583" bodyend="588"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a4ef174e179532fe9fd89ae7e825565d9" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) optional&lt; T &gt;::and_then</definition>
+        <argsstring>(F &amp;&amp;f) const &amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>optional::and_then</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>常量左值然后操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="597" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="597" bodyend="602"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1aaa107fb1965c0bf4a4e15e5064d0cc52" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) optional&lt; T &gt;::and_then</definition>
+        <argsstring>(F &amp;&amp;f) &amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>optional::and_then</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>左值然后操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="611" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="611" bodyend="616"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1abfe8f092a2604a3a5978963c4be33767" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) optional&lt; T &gt;::and_then</definition>
+        <argsstring>(F &amp;&amp;f) const &amp;&amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>optional::and_then</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>常量右值然后操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="625" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="625" bodyend="630"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a0dea507fd84e53a8c39a877ffad352cf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) optional&lt; T &gt;::and_then</definition>
+        <argsstring>(F &amp;&amp;f) &amp;&amp;</argsstring>
+        <name>and_then</name>
+        <qualifiedname>optional::and_then</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>右值然后操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回函数结果，或返回函数返回类型的默认构造类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="639" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="639" bodyend="644"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a7f37ac002b8cb8a9d7edc2984cc02dd3" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; decltype(f(*get_ptr()))&gt; &gt;</type>
+        <definition>optional&lt; remove_cvref_t&lt; decltype(f(*get_ptr()))&gt; &gt; optional&lt; T &gt;::transform</definition>
+        <argsstring>(F &amp;&amp;f) const &amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>optional::transform</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>常量左值转换操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回新的optional，或返回none的optional </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="653" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="653" bodyend="658"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___none_1ga821a4974ccf7b7d0b01bf5170acff797" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a3a3328cd01e092a196867e5d8053fbe0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; decltype(f(*get_ptr()))&gt; &gt;</type>
+        <definition>optional&lt; remove_cvref_t&lt; decltype(f(*get_ptr()))&gt; &gt; optional&lt; T &gt;::transform</definition>
+        <argsstring>(F &amp;&amp;f) &amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>optional::transform</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>左值转换操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值并返回新的optional，或返回none的optional </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="667" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="667" bodyend="672"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___none_1ga821a4974ccf7b7d0b01bf5170acff797" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a25ac37b8912546addfee273122f8f9a1" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; decltype(f(_NEFORCE <ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(*get_ptr())))&gt; &gt;</type>
+        <definition>optional&lt; remove_cvref_t&lt; decltype(f(_NEFORCE move(*get_ptr())))&gt; &gt; optional&lt; T &gt;::transform</definition>
+        <argsstring>(F &amp;&amp;f) const &amp;&amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>optional::transform</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>右值转换操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值的移动并返回新的optional，或返回none的optional </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="681" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="681" bodyend="686"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___none_1ga821a4974ccf7b7d0b01bf5170acff797" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a77ed37ffe6ec605e614597787ae700e9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; decltype(f(_NEFORCE <ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(*get_ptr())))&gt; &gt;</type>
+        <definition>optional&lt; remove_cvref_t&lt; decltype(f(_NEFORCE move(*get_ptr())))&gt; &gt; optional&lt; T &gt;::transform</definition>
+        <argsstring>(F &amp;&amp;f) &amp;&amp;</argsstring>
+        <name>transform</name>
+        <qualifiedname>optional::transform</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>常量右值转换操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数处理存储的值的移动并返回新的optional，或返回none的optional </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="695" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="695" bodyend="700"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___none_1ga821a4974ccf7b7d0b01bf5170acff797" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1aa03db3e23e7a33573537b0e27605bc68" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const_pointer</type>
+        <definition>const_pointer optional&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>optional::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>常量箭头运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向值的常量指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="706" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="706" bodyend="706"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1ae4a503db6d7ad94ae76fb708f44871d5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>pointer</type>
+        <definition>pointer optional&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>optional::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>箭头运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向值的常量指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="712" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="712" bodyend="712"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a43ec24aedece2ef559944cd05ca3382a" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" virt="non-virtual">
+        <type>const_reference</type>
+        <definition>const_reference optional&lt; T &gt;::operator*</definition>
+        <argsstring>() const &amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>optional::operator*</qualifiedname>
+        <briefdescription>
+<para>常量左值解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值的常量左值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="718" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="718" bodyend="718"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a760d4365f55fc775bcba5f261c6c900a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="lvalue" noexcept="yes" virt="non-virtual">
+        <type>reference</type>
+        <definition>reference optional&lt; T &gt;::operator*</definition>
+        <argsstring>() &amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>optional::operator*</qualifiedname>
+        <briefdescription>
+<para>左值解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值的左值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="724" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="724" bodyend="724"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a6481bff58e0229162073501a9a47ee7f" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" virt="non-virtual">
+        <type>const value_type &amp;&amp;</type>
+        <definition>const value_type &amp;&amp; optional&lt; T &gt;::operator*</definition>
+        <argsstring>() const &amp;&amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>optional::operator*</qualifiedname>
+        <briefdescription>
+<para>常量右值解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值的常量右值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="730" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="730" bodyend="730"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a33c9fedca69cbfb61020b8b861349c23" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" refqual="rvalue" noexcept="yes" virt="non-virtual">
+        <type>value_type &amp;&amp;</type>
+        <definition>value_type &amp;&amp; optional&lt; T &gt;::operator*</definition>
+        <argsstring>() &amp;&amp;noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>optional::operator*</qualifiedname>
+        <briefdescription>
+<para>右值解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值的右值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="736" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="736" bodyend="736"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a5e9eef72e622c9a732a1a777bcc71159" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool optional&lt; T &gt;::equal_to</definition>
+        <argsstring>(const optional &amp;rhs) const noexcept</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>optional::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>等于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>两个可选值是否相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="743" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="743" bodyend="751"/>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a307e04b21a45e7aafddbd470fabb3b0e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool optional&lt; T &gt;::less_than</definition>
+        <argsstring>(const optional &amp;rhs) const noexcept</argsstring>
+        <name>less_than</name>
+        <qualifiedname>optional::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前值是否小于右操作数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="758" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="758" bodyend="763"/>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1adf40053c202b10b9d97b48240c007174" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool optional&lt; T &gt;::operator==</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>optional::operator==</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="765" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="765" bodyend="765"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1ae80fc120390e88492b7dd0638ff4075e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool optional&lt; T &gt;::operator!=</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>optional::operator!=</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="766" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="766" bodyend="766"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1ad482c27d4074829384a170752bb90a4e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool optional&lt; T &gt;::operator&gt;</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>optional::operator&gt;</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="767" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="767" bodyend="767"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a15a0d4df4bc0984a1675c2daa2d02e69" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool optional&lt; T &gt;::operator&lt;</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>optional::operator&lt;</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="768" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="768" bodyend="768"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1ac53f60588930d136638d77a351910f6a" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool optional&lt; T &gt;::operator&gt;=</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>optional::operator&gt;=</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="769" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="769" bodyend="769"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a05a8289e96b7cbf380a58a42d5f8ef69" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool optional&lt; T &gt;::operator&lt;=</definition>
+        <argsstring>(none_t) const noexcept</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>optional::operator&lt;=</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="770" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="770" bodyend="770"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1a795f60ad8796f4a1bcce22ca75fd687e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t optional&lt; T &gt;::to_hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_hash</name>
+        <qualifiedname>optional::to_hash</qualifiedname>
+        <briefdescription>
+<para>计算哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="783" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="783" bodyend="785"/>
+      </memberdef>
+      <memberdef kind="function" id="classoptional_1ae336a413c95399231aaa0adaf3d0e4e0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt; &amp;&amp;is_nothrow_swappable_v&lt; T &gt;" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void optional&lt; T &gt;::swap</definition>
+        <argsstring>(optional &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>optional::swap</qualifiedname>
+        <param>
+          <type><ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个可选值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="791" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="791" bodyend="805"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="classoptional_1a7588aac7e19170413ac887d4dd97127d" compoundref="optional_8hpp" startline="445" endline="449">optional&lt; T &gt;::emplace</references>
+        <references refid="group___type_special_member_function_checks_1gac3058b8518087cdea482055e5af4577a" compoundref="type__traits_8hpp" startline="2841">is_nothrow_move_constructible_v</references>
+        <references refid="group___swap_utility_1ga9cc217ccd3ddd28edc3ebfd181bba2f3" compoundref="type__traits_8hpp" startline="3946">is_nothrow_swappable_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" compoundref="optional_8hpp" startline="113" endline="113">optional&lt; T &gt;::optional</references>
+        <references refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="471" endline="476">optional&lt; T &gt;::reset</references>
+        <references refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df">swap</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classoptional_1a9549c89a7a56840b093065be907fe39b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(none_t, const optional &amp;rhs) noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>optional::operator==</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="772" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="772" bodyend="772"/>
+      </memberdef>
+      <memberdef kind="friend" id="classoptional_1a74e048607b928504d0edc4397da8cd82" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator!=</definition>
+        <argsstring>(none_t, const optional &amp;rhs) noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>optional::operator!=</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="773" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="773" bodyend="773"/>
+      </memberdef>
+      <memberdef kind="friend" id="classoptional_1adcb42b28e69b9c77a95f339e314cd5ad" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator&gt;</definition>
+        <argsstring>(none_t, const optional &amp;) noexcept</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>optional::operator&gt;</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="774" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="774" bodyend="774"/>
+      </memberdef>
+      <memberdef kind="friend" id="classoptional_1a4854eacfc120bb2ae18aac027874f9b2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator&lt;</definition>
+        <argsstring>(none_t, const optional &amp;rhs) noexcept</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>optional::operator&lt;</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="775" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="775" bodyend="775"/>
+      </memberdef>
+      <memberdef kind="friend" id="classoptional_1a22ad4eb07b73d4a0101199a0d509d775" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator&gt;=</definition>
+        <argsstring>(none_t, const optional &amp;rhs) noexcept</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>optional::operator&gt;=</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="776" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="776" bodyend="776"/>
+      </memberdef>
+      <memberdef kind="friend" id="classoptional_1a9f04210b1048fc5ba751e790ece638ff" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator&lt;=</definition>
+        <argsstring>(none_t, const optional &amp;) noexcept</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>optional::operator&lt;=</qualifiedname>
+        <param>
+          <type><ref refid="structnone__t" kindref="compound">none_t</ref></type>
+        </param>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="777" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="777" bodyend="777"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>可选值类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>存储值的类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+表示一个可能包含值也可能为空的对象。类似于指针，但拥有值语义。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>icommon&lt; optional&lt; T &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="1">
+        <label>optional&lt; T &gt;</label>
+        <link refid="classoptional"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>icommon&lt; optional&lt; T &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="1">
+        <label>optional&lt; T &gt;</label>
+        <link refid="classoptional"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="63" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="70" bodyend="806"/>
+    <listofallmembers>
+      <member refid="classoptional_1a4ef174e179532fe9fd89ae7e825565d9" prot="public" virt="non-virtual"><scope>optional</scope><name>and_then</name></member>
+      <member refid="classoptional_1aaa107fb1965c0bf4a4e15e5064d0cc52" prot="public" virt="non-virtual"><scope>optional</scope><name>and_then</name></member>
+      <member refid="classoptional_1abfe8f092a2604a3a5978963c4be33767" prot="public" virt="non-virtual"><scope>optional</scope><name>and_then</name></member>
+      <member refid="classoptional_1a0dea507fd84e53a8c39a877ffad352cf" prot="public" virt="non-virtual"><scope>optional</scope><name>and_then</name></member>
+      <member refid="classoptional_1afd30dbfa0d59bab2903d93477c242f5d" prot="private" virt="non-virtual"><scope>optional</scope><name>assignable_from_optional</name></member>
+      <member refid="classoptional_1ac066eecaf47e5eb0c9e26abdfb74186f" prot="public" virt="non-virtual"><scope>optional</scope><name>const_pointer</name></member>
+      <member refid="classoptional_1a3fa596970527e8f299cdc1a0147808be" prot="public" virt="non-virtual"><scope>optional</scope><name>const_reference</name></member>
+      <member refid="classoptional_1a953047886f727a312e44287ef6863e42" prot="private" virt="non-virtual"><scope>optional</scope><name>convertible_from_optional</name></member>
+      <member refid="classoptional_1a7588aac7e19170413ac887d4dd97127d" prot="public" virt="non-virtual"><scope>optional</scope><name>emplace</name></member>
+      <member refid="classoptional_1ab0a09753080dd8b7077eb877929417fc" prot="public" virt="non-virtual"><scope>optional</scope><name>emplace</name></member>
+      <member refid="classoptional_1a5e9eef72e622c9a732a1a777bcc71159" prot="public" virt="non-virtual"><scope>optional</scope><name>equal_to</name></member>
+      <member refid="classoptional_1a9eb5b9b1c011363e3411b1c5d5cead35" prot="private" virt="non-virtual"><scope>optional</scope><name>get_ptr</name></member>
+      <member refid="classoptional_1a87b90b4b9ac5d406abd4585cc03f7019" prot="private" virt="non-virtual"><scope>optional</scope><name>get_ptr</name></member>
+      <member refid="classoptional_1a7cce9b645768dc9a9124ab67166f4480" prot="public" virt="non-virtual"><scope>optional</scope><name>has_value</name></member>
+      <member refid="classoptional_1af1524423022775e4445c50f6cc4e2f0a" prot="private" virt="non-virtual"><scope>optional</scope><name>have_value_</name></member>
+      <member refid="classoptional_1ab15ab2e7fe9203b6ec39e56fb43a4bf2" prot="private" virt="non-virtual"><scope>optional</scope><name>is_valid_optional</name></member>
+      <member refid="classoptional_1a307e04b21a45e7aafddbd470fabb3b0e" prot="public" virt="non-virtual"><scope>optional</scope><name>less_than</name></member>
+      <member refid="classoptional_1a43c0d2282116b82f597f9fb916b5e6d8" prot="public" virt="non-virtual"><scope>optional</scope><name>operator bool</name></member>
+      <member refid="classoptional_1ae80fc120390e88492b7dd0638ff4075e" prot="public" virt="non-virtual"><scope>optional</scope><name>operator!=</name></member>
+      <member refid="classoptional_1a74e048607b928504d0edc4397da8cd82" prot="public" virt="non-virtual"><scope>optional</scope><name>operator!=</name></member>
+      <member refid="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" virt="non-virtual" ambiguityscope="icommon&lt; optional&lt; T &gt; &gt;::"><scope>optional</scope><name>operator!=</name></member>
+      <member refid="classoptional_1a43ec24aedece2ef559944cd05ca3382a" prot="public" virt="non-virtual"><scope>optional</scope><name>operator*</name></member>
+      <member refid="classoptional_1a760d4365f55fc775bcba5f261c6c900a" prot="public" virt="non-virtual"><scope>optional</scope><name>operator*</name></member>
+      <member refid="classoptional_1a6481bff58e0229162073501a9a47ee7f" prot="public" virt="non-virtual"><scope>optional</scope><name>operator*</name></member>
+      <member refid="classoptional_1a33c9fedca69cbfb61020b8b861349c23" prot="public" virt="non-virtual"><scope>optional</scope><name>operator*</name></member>
+      <member refid="classoptional_1aa03db3e23e7a33573537b0e27605bc68" prot="public" virt="non-virtual"><scope>optional</scope><name>operator-&gt;</name></member>
+      <member refid="classoptional_1ae4a503db6d7ad94ae76fb708f44871d5" prot="public" virt="non-virtual"><scope>optional</scope><name>operator-&gt;</name></member>
+      <member refid="classoptional_1a15a0d4df4bc0984a1675c2daa2d02e69" prot="public" virt="non-virtual"><scope>optional</scope><name>operator&lt;</name></member>
+      <member refid="classoptional_1a4854eacfc120bb2ae18aac027874f9b2" prot="public" virt="non-virtual"><scope>optional</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" virt="non-virtual" ambiguityscope="icommon&lt; optional&lt; T &gt; &gt;::"><scope>optional</scope><name>operator&lt;</name></member>
+      <member refid="classoptional_1a05a8289e96b7cbf380a58a42d5f8ef69" prot="public" virt="non-virtual"><scope>optional</scope><name>operator&lt;=</name></member>
+      <member refid="classoptional_1a9f04210b1048fc5ba751e790ece638ff" prot="public" virt="non-virtual"><scope>optional</scope><name>operator&lt;=</name></member>
+      <member refid="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" virt="non-virtual" ambiguityscope="icommon&lt; optional&lt; T &gt; &gt;::"><scope>optional</scope><name>operator&lt;=</name></member>
+      <member refid="classoptional_1a9aab1e1040d11762b1a775f2bcbeb69f" prot="public" virt="non-virtual"><scope>optional</scope><name>operator=</name></member>
+      <member refid="classoptional_1ae6b4f027dfec1fdb05b7fa8e0296573a" prot="public" virt="non-virtual"><scope>optional</scope><name>operator=</name></member>
+      <member refid="classoptional_1aa33d8b2169dbe7436b87ed0b5da69034" prot="public" virt="non-virtual"><scope>optional</scope><name>operator=</name></member>
+      <member refid="classoptional_1a93a78e86c5412d5a4b217f2424645b22" prot="public" virt="non-virtual"><scope>optional</scope><name>operator=</name></member>
+      <member refid="classoptional_1a9337a4681c7ea5fe34015263ec1a332f" prot="public" virt="non-virtual"><scope>optional</scope><name>operator=</name></member>
+      <member refid="classoptional_1a7bdb21471e17d42870e0e9b49677940e" prot="public" virt="non-virtual"><scope>optional</scope><name>operator=</name></member>
+      <member refid="classoptional_1a4a0641e07c3aa0e337ae55c134f7f09f" prot="public" virt="non-virtual"><scope>optional</scope><name>operator=</name></member>
+      <member refid="classoptional_1adf40053c202b10b9d97b48240c007174" prot="public" virt="non-virtual"><scope>optional</scope><name>operator==</name></member>
+      <member refid="classoptional_1a9549c89a7a56840b093065be907fe39b" prot="public" virt="non-virtual"><scope>optional</scope><name>operator==</name></member>
+      <member refid="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" virt="non-virtual" ambiguityscope="icommon&lt; optional&lt; T &gt; &gt;::"><scope>optional</scope><name>operator==</name></member>
+      <member refid="classoptional_1ad482c27d4074829384a170752bb90a4e" prot="public" virt="non-virtual"><scope>optional</scope><name>operator&gt;</name></member>
+      <member refid="classoptional_1adcb42b28e69b9c77a95f339e314cd5ad" prot="public" virt="non-virtual"><scope>optional</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" virt="non-virtual" ambiguityscope="icommon&lt; optional&lt; T &gt; &gt;::"><scope>optional</scope><name>operator&gt;</name></member>
+      <member refid="classoptional_1ac53f60588930d136638d77a351910f6a" prot="public" virt="non-virtual"><scope>optional</scope><name>operator&gt;=</name></member>
+      <member refid="classoptional_1a22ad4eb07b73d4a0101199a0d509d775" prot="public" virt="non-virtual"><scope>optional</scope><name>operator&gt;=</name></member>
+      <member refid="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" virt="non-virtual" ambiguityscope="icommon&lt; optional&lt; T &gt; &gt;::"><scope>optional</scope><name>operator&gt;=</name></member>
+      <member refid="classoptional_1acacae09e8eb3ee707828dbe0aa53750e" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a561bd099e03ae8fe48321b49613c7eba" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a561bd099e03ae8fe48321b49613c7eba" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a558e9fe386b3d263d8a6528b4f758774" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1acbf62cc039f245a4492081f72527d0d2" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a7ede04530718c1fa004354e4f26a7eb5" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a7ede04530718c1fa004354e4f26a7eb5" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a6b785fab5d4be1678797729c200a3c7f" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a7335825238f1b9b85700f6a36af8c7d0" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a7335825238f1b9b85700f6a36af8c7d0" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1afec68e13603a5f09d86ae5afa6a65497" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a5149a2b0e04fded77b8cef05b4a149b7" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1aa3a97d2669c23714f449b9f25c3ba2fd" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a367f3dcab5d414d45b159f4a8d3bb8c1" prot="public" virt="non-virtual"><scope>optional</scope><name>optional</name></member>
+      <member refid="classoptional_1a94d5cf81292f41e1fb109154ce982cea" prot="public" virt="non-virtual"><scope>optional</scope><name>or_else</name></member>
+      <member refid="classoptional_1aa0c1885ebcf0bbcc9db52fd5b3cc3b76" prot="public" virt="non-virtual"><scope>optional</scope><name>or_else</name></member>
+      <member refid="classoptional_1acd010a553a844492fd82aebcda7f2415" prot="public" virt="non-virtual"><scope>optional</scope><name>pointer</name></member>
+      <member refid="classoptional_1a0b245266348c0d2aaaec9f44a6be5f5f" prot="public" virt="non-virtual"><scope>optional</scope><name>reference</name></member>
+      <member refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" prot="public" virt="non-virtual"><scope>optional</scope><name>reset</name></member>
+      <member refid="classoptional_1a70bf3dcd5fdcfbca285ddda428f3bef6" prot="private" virt="non-virtual"><scope>optional</scope><name>storage_</name></member>
+      <member refid="classoptional_1ae336a413c95399231aaa0adaf3d0e4e0" prot="public" virt="non-virtual"><scope>optional</scope><name>swap</name></member>
+      <member refid="classoptional_1a795f60ad8796f4a1bcce22ca75fd687e" prot="public" virt="non-virtual"><scope>optional</scope><name>to_hash</name></member>
+      <member refid="structihashable_1a3bb793a19699c7ccd86fa5d7e91cb513" prot="public" virt="non-virtual"><scope>optional</scope><name>to_ihash</name></member>
+      <member refid="classoptional_1a7f37ac002b8cb8a9d7edc2984cc02dd3" prot="public" virt="non-virtual"><scope>optional</scope><name>transform</name></member>
+      <member refid="classoptional_1a3a3328cd01e092a196867e5d8053fbe0" prot="public" virt="non-virtual"><scope>optional</scope><name>transform</name></member>
+      <member refid="classoptional_1a25ac37b8912546addfee273122f8f9a1" prot="public" virt="non-virtual"><scope>optional</scope><name>transform</name></member>
+      <member refid="classoptional_1a77ed37ffe6ec605e614597787ae700e9" prot="public" virt="non-virtual"><scope>optional</scope><name>transform</name></member>
+      <member refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" prot="public" virt="non-virtual"><scope>optional</scope><name>value</name></member>
+      <member refid="classoptional_1af0eebfb27296b6caa6aa0cb6436546a3" prot="public" virt="non-virtual"><scope>optional</scope><name>value</name></member>
+      <member refid="classoptional_1ae9e0f9341adb6c06332a2bbeaae23f06" prot="public" virt="non-virtual"><scope>optional</scope><name>value</name></member>
+      <member refid="classoptional_1a9c01bf3af575250aeb483cae64cd953c" prot="public" virt="non-virtual"><scope>optional</scope><name>value</name></member>
+      <member refid="classoptional_1a34dd27dfd0dab00dda2285bfc1d23172" prot="public" virt="non-virtual"><scope>optional</scope><name>value_or</name></member>
+      <member refid="classoptional_1a8e0ac6844bffd9e68ad2ee106ade6291" prot="public" virt="non-virtual"><scope>optional</scope><name>value_or</name></member>
+      <member refid="classoptional_1afd2ee867ad745ef8a588d2b3061ba51f" prot="public" virt="non-virtual"><scope>optional</scope><name>value_type</name></member>
+      <member refid="classoptional_1aa6eb37e7dc562a3f355685df9881eb0d" prot="public" virt="non-virtual"><scope>optional</scope><name>~optional</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

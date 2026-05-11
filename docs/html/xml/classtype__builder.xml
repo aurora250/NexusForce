@@ -1,0 +1,576 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classtype__builder" kind="class" language="C++" prot="public">
+    <compoundname>type_builder</compoundname>
+    <includes refid="reflect_8hpp" local="no">reflect.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classtype__builder_1ab79cb37c2f4f679b6424dc53cee002c7" prot="private" static="no" mutable="no">
+        <type><ref refid="classmeta__type" kindref="compound">meta_type</ref> &amp;</type>
+        <definition>meta_type&amp; type_builder&lt; T &gt;::meta_</definition>
+        <argsstring></argsstring>
+        <name>meta_</name>
+        <qualifiedname>type_builder::meta_</qualifiedname>
+        <briefdescription>
+<para>关联的元数据对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="33" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classtype__builder_1a53856737fb24d15f61df5b476dbb0c8d" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>size_t...</type>
+            <declname>Is</declname>
+            <defname>Is</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classmeta__any" kindref="compound">meta_any</ref></type>
+        <definition>static meta_any type_builder&lt; T &gt;::create_with_args</definition>
+        <argsstring>(const vector&lt; meta_any &gt; &amp;args, index_sequence&lt; Is... &gt;)</argsstring>
+        <name>create_with_args</name>
+        <qualifiedname>type_builder::create_with_args</qualifiedname>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classmeta__any" kindref="compound">meta_any</ref> &gt; &amp;</type>
+          <declname>args</declname>
+        </param>
+        <param>
+          <type><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence</ref>&lt; Is... &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="36" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="36" bodyend="38"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>type_builder&lt; T &gt;::type_builder</definition>
+        <argsstring>(string_view name)</argsstring>
+        <name>type_builder</name>
+        <qualifiedname>type_builder::type_builder</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="45" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="45" bodyend="46"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <referencedby refid="classtype__builder_1a5c3b7c7c1a879ec6d24cc3b6fe0491b6" compoundref="reflect_8hpp" startline="54" endline="57">type_builder&lt; T &gt;::base</referencedby>
+        <referencedby refid="classtype__builder_1af38b03c1ec2087f076846eba8155a20f" compoundref="reflect_8hpp" startline="64" endline="67">type_builder&lt; T &gt;::base</referencedby>
+        <referencedby refid="classtype__builder_1aadd3c5a962a61d2df09e9290d95e6350" compoundref="reflect_8hpp" startline="153" endline="157">type_builder&lt; T &gt;::constructor</referencedby>
+        <referencedby refid="classtype__builder_1a379d14c7df5dc9c0e4d8d8b812829d9a" compoundref="reflect_8hpp" startline="122" endline="129">type_builder&lt; T &gt;::function</referencedby>
+        <referencedby refid="classtype__builder_1ab3f4880362e3f86773b612e9e84ee24e" compoundref="reflect_8hpp" startline="104" endline="111">type_builder&lt; T &gt;::function</referencedby>
+        <referencedby refid="classtype__builder_1a7dfee419346f930acb6252545de97b55" compoundref="reflect_8hpp" startline="77" endline="93">type_builder&lt; T &gt;::property</referencedby>
+        <referencedby refid="classtype__builder_1a489b86bfa65620b9180104c3739d1e49" compoundref="reflect_8hpp" startline="140" endline="145">type_builder&lt; T &gt;::static_function</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtype__builder_1a5c3b7c7c1a879ec6d24cc3b6fe0491b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Base</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classtype__builder" kindref="compound">type_builder</ref> &amp;</type>
+        <definition>type_builder &amp; type_builder&lt; T &gt;::base</definition>
+        <argsstring>()</argsstring>
+        <name>base</name>
+        <qualifiedname>type_builder::base</qualifiedname>
+        <briefdescription>
+<para>添加基类（已解析） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基类类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="54" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="54" bodyend="57"/>
+        <references refid="classregistry_1ae3786801b98d932e133778a36eee1d72" compoundref="registry_8hpp" startline="42" endline="45">registry::instance</references>
+        <references refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="45" endline="46">type_builder&lt; T &gt;::type_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classtype__builder_1af38b03c1ec2087f076846eba8155a20f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classtype__builder" kindref="compound">type_builder</ref> &amp;</type>
+        <definition>type_builder &amp; type_builder&lt; T &gt;::base</definition>
+        <argsstring>(string_view base_name)</argsstring>
+        <name>base</name>
+        <qualifiedname>type_builder::base</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>base_name</declname>
+        </param>
+        <briefdescription>
+<para>添加基类（延迟解析） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>base_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基类名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="64" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="64" bodyend="67"/>
+        <references refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="45" endline="46">type_builder&lt; T &gt;::type_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classtype__builder_1a7dfee419346f930acb6252545de97b55" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classtype__builder" kindref="compound">type_builder</ref> &amp;</type>
+        <definition>type_builder &amp; type_builder&lt; T &gt;::property</definition>
+        <argsstring>(string_view name, U T::*member)</argsstring>
+        <name>property</name>
+        <qualifiedname>type_builder::property</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>U T::*</type>
+          <declname>member</declname>
+        </param>
+        <briefdescription>
+<para>添加属性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>member</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成员指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="77" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="77" bodyend="93"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <references refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="45" endline="46">type_builder&lt; T &gt;::type_builder</references>
+        <references refid="group___reflection_1ga4de252f81995385c1d1a472a279288a9" compoundref="reflect_2any_8hpp" startline="42">type_name_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classtype__builder_1ab3f4880362e3f86773b612e9e84ee24e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Ret</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classtype__builder" kindref="compound">type_builder</ref> &amp;</type>
+        <definition>type_builder &amp; type_builder&lt; T &gt;::function</definition>
+        <argsstring>(string_view name, Ret(T::*func)(Args...))</argsstring>
+        <name>function</name>
+        <qualifiedname>type_builder::function</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>Ret(T::*)(Args...)</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>添加成员函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Ret</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成员函数指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="104" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="104" bodyend="111"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <references refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="45" endline="46">type_builder&lt; T &gt;::type_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classtype__builder_1a379d14c7df5dc9c0e4d8d8b812829d9a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Ret</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classtype__builder" kindref="compound">type_builder</ref> &amp;</type>
+        <definition>type_builder &amp; type_builder&lt; T &gt;::function</definition>
+        <argsstring>(string_view name, Ret(T::*func)(Args...) const)</argsstring>
+        <name>function</name>
+        <qualifiedname>type_builder::function</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>Ret(T::*)(Args...) const</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>添加常量成员函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Ret</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>常量成员函数指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="122" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="122" bodyend="129"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <references refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="45" endline="46">type_builder&lt; T &gt;::type_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classtype__builder_1a489b86bfa65620b9180104c3739d1e49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Ret</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classtype__builder" kindref="compound">type_builder</ref> &amp;</type>
+        <definition>type_builder &amp; type_builder&lt; T &gt;::static_function</definition>
+        <argsstring>(string_view name, Ret(*func)(Args...))</argsstring>
+        <name>static_function</name>
+        <qualifiedname>type_builder::static_function</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>Ret(*)(Args...)</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>添加静态函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Ret</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="140" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="140" bodyend="145"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <references refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="45" endline="46">type_builder&lt; T &gt;::type_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classtype__builder_1aadd3c5a962a61d2df09e9290d95e6350" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classtype__builder" kindref="compound">type_builder</ref> &amp;</type>
+        <definition>type_builder &amp; type_builder&lt; T &gt;::constructor</definition>
+        <argsstring>()</argsstring>
+        <name>constructor</name>
+        <qualifiedname>type_builder::constructor</qualifiedname>
+        <briefdescription>
+<para>添加默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用</para>
+</simplesect>
+要求类型是默认可构造的。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="153" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="153" bodyend="157"/>
+        <references refid="classtype__builder_1aadd3c5a962a61d2df09e9290d95e6350" compoundref="reflect_8hpp" startline="153" endline="157">type_builder&lt; T &gt;::constructor</references>
+        <references refid="group___type_special_member_function_checks_1ga8e22546415017859597e46ff37077164" compoundref="type__traits_8hpp" startline="2389">is_default_constructible_v</references>
+        <references refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="45" endline="46">type_builder&lt; T &gt;::type_builder</references>
+        <referencedby refid="classtype__builder_1aadd3c5a962a61d2df09e9290d95e6350" compoundref="reflect_8hpp" startline="153" endline="157">type_builder&lt; T &gt;::constructor</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classtype__builder_1ae380564751216b1629d30d34fe1e6585" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classtype__builder" kindref="compound">type_builder</ref> &amp;</type>
+        <definition>type_builder &amp; type_builder&lt; T &gt;::constructor</definition>
+        <argsstring>()</argsstring>
+        <name>constructor</name>
+        <qualifiedname>type_builder::constructor</qualifiedname>
+        <briefdescription>
+<para>添加带参数构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用</para>
+</simplesect>
+要求类型可从Args类型列表构造。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="167" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="167" bodyend="176"/>
+        <references refid="classtype__builder_1aadd3c5a962a61d2df09e9290d95e6350" compoundref="reflect_8hpp" startline="153" endline="157">type_builder&lt; T &gt;::constructor</references>
+        <references refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" compoundref="type__traits_8hpp" startline="2353">is_constructible_v</references>
+        <references refid="classvector_1ab26ef5bb14c5103a95d936d6e27f5cd2" compoundref="vector_8hpp" startline="666" endline="668">vector&lt; T, Alloc &gt;::size</references>
+        <references refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="45" endline="46">type_builder&lt; T &gt;::type_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classtype__builder_1a8cf7ccfe0b507fadaad4fb9d78ca8047" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classmeta__type" kindref="compound">meta_type</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD meta_type &amp; type_builder&lt; T &gt;::meta</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>meta</name>
+        <qualifiedname>type_builder::meta</qualifiedname>
+        <briefdescription>
+<para>获取元数据对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元数据引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="182" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="182" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="classtype__builder_1acd15af7c15cdaab6f6dd537fb4a33676" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classmeta__type" kindref="compound">meta_type</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const meta_type &amp; type_builder&lt; T &gt;::meta</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>meta</name>
+        <qualifiedname>type_builder::meta</qualifiedname>
+        <briefdescription>
+<para>获取常量元数据对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元数据常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="188" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="188" bodyend="188"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>类型反射构建器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要注册的类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+提供链式API用于构建类型的反射信息。 通过反射函数创建，用于注册基类、属性、函数和构造函数。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="31" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="31" bodyend="189"/>
+    <listofallmembers>
+      <member refid="classtype__builder_1a5c3b7c7c1a879ec6d24cc3b6fe0491b6" prot="public" virt="non-virtual"><scope>type_builder</scope><name>base</name></member>
+      <member refid="classtype__builder_1af38b03c1ec2087f076846eba8155a20f" prot="public" virt="non-virtual"><scope>type_builder</scope><name>base</name></member>
+      <member refid="classtype__builder_1aadd3c5a962a61d2df09e9290d95e6350" prot="public" virt="non-virtual"><scope>type_builder</scope><name>constructor</name></member>
+      <member refid="classtype__builder_1ae380564751216b1629d30d34fe1e6585" prot="public" virt="non-virtual"><scope>type_builder</scope><name>constructor</name></member>
+      <member refid="classtype__builder_1a53856737fb24d15f61df5b476dbb0c8d" prot="private" virt="non-virtual"><scope>type_builder</scope><name>create_with_args</name></member>
+      <member refid="classtype__builder_1ab3f4880362e3f86773b612e9e84ee24e" prot="public" virt="non-virtual"><scope>type_builder</scope><name>function</name></member>
+      <member refid="classtype__builder_1a379d14c7df5dc9c0e4d8d8b812829d9a" prot="public" virt="non-virtual"><scope>type_builder</scope><name>function</name></member>
+      <member refid="classtype__builder_1a8cf7ccfe0b507fadaad4fb9d78ca8047" prot="public" virt="non-virtual"><scope>type_builder</scope><name>meta</name></member>
+      <member refid="classtype__builder_1acd15af7c15cdaab6f6dd537fb4a33676" prot="public" virt="non-virtual"><scope>type_builder</scope><name>meta</name></member>
+      <member refid="classtype__builder_1ab79cb37c2f4f679b6424dc53cee002c7" prot="private" virt="non-virtual"><scope>type_builder</scope><name>meta_</name></member>
+      <member refid="classtype__builder_1a7dfee419346f930acb6252545de97b55" prot="public" virt="non-virtual"><scope>type_builder</scope><name>property</name></member>
+      <member refid="classtype__builder_1a489b86bfa65620b9180104c3739d1e49" prot="public" virt="non-virtual"><scope>type_builder</scope><name>static_function</name></member>
+      <member refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" prot="public" virt="non-virtual"><scope>type_builder</scope><name>type_builder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

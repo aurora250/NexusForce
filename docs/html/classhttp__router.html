@@ -201,7 +201,7 @@ bool&#160;</td><td class="memItemRight"><b>strict_routing</b> = false</td></tr>
 <div class="line">});</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 通配符</span></div>
-<div class="line">router.<a class="code hl_function" href="#a2f6816a6e60ac6a32747a7eee13fd21c">get</a>(<span class="stringliteral">&quot;/files/*&quot;</span>, [](<a class="code hl_typedef" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a>&amp; req, <a class="code hl_typedef" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a>&amp; res) {</div>
+<div class="line">router.<a class="code hl_function" href="#a2f6816a6e60ac6a32747a7eee13fd21c">get</a>(<span class="stringliteral">&quot;/files\ *&quot;</span>, [](<a class="code hl_typedef" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a>&amp; req, <a class="code hl_typedef" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a>&amp; res) {</div>
 <div class="line">    <span class="keywordtype">string</span> path = req.<a class="code hl_function" href="structhttp__server__request.html#a88f012be69e60bf4282c045bf0238bc3">parameter</a>(<span class="stringliteral">&quot;*&quot;</span>);</div>
 <div class="line">    <span class="comment">// 处理文件请求</span></div>
 <div class="line">});</div>
@@ -231,7 +231,7 @@ bool&#160;</td><td class="memItemRight"><b>strict_routing</b> = false</td></tr>
 <div class="ttc" id="agroup___h_t_t_p_html_ga215ee924d62c42786a46d2d18421391a"><div class="ttname"><a href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a></div><div class="ttdeci">http_server_response http_response</div><div class="ttdoc">HTTP响应类型别名</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00343">http_server_message.hpp:343</a></div></div>
 <div class="ttc" id="agroup___h_t_t_p_html_gad666b052985d05dd7564c4fd573c4549"><div class="ttname"><a href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a></div><div class="ttdeci">http_server_request http_request</div><div class="ttdoc">HTTP请求类型别名</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00337">http_server_message.hpp:337</a></div></div>
 <div class="ttc" id="agroup___thread_html_ga505a22091b6fb9a4a8e147bf2258e47a"><div class="ttname"><a href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE_INLINE thread::id id() noexcept</div><div class="ttdoc">获取当前线程标识符</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00449">thread.hpp:449</a></div></div>
-<div class="ttc" id="agroup___unique_pointer_html_ga1392a16f6940e75495ba167745eff5b7"><div class="ttname"><a href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr&lt; T &gt; make_unique(Args &amp;&amp;... args)</div><div class="ttdoc">创建unique_ptr</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00963">unique_ptr.hpp:963</a></div></div>
+<div class="ttc" id="agroup___unique_pointer_html_ga1392a16f6940e75495ba167745eff5b7"><div class="ttname"><a href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique</a></div><div class="ttdeci">NEFORCE_CONSTEXPR20 unique_ptr&lt; T &gt; make_unique(Args &amp;&amp;... args)</div><div class="ttdoc">创建unique_ptr</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00973">unique_ptr.hpp:973</a></div></div>
 <div class="ttc" id="astructhttp__server__request_html_a88f012be69e60bf4282c045bf0238bc3"><div class="ttname"><a href="structhttp__server__request.html#a88f012be69e60bf4282c045bf0238bc3">http_server_request::parameter</a></div><div class="ttdeci">NEFORCE_NODISCARD string_view parameter(const string &amp;name) const noexcept</div><div class="ttdoc">获取参数值</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00090">http_server_message.hpp:90</a></div></div>
 <div class="ttc" id="astructhttp__server__response_html_a7eb8d64f75162d65e089ab24654ffb33"><div class="ttname"><a href="structhttp__server__response.html#a7eb8d64f75162d65e089ab24654ffb33">http_server_response::body</a></div><div class="ttdeci">string body</div><div class="ttdoc">响应正文</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00273">http_server_message.hpp:273</a></div></div>
 </div><!-- fragment --> 
@@ -494,7 +494,7 @@ bool&#160;</td><td class="memItemRight"><b>strict_routing</b> = false</td></tr>
 </dl>
 <p>路由模式语法：</p><ul>
 <li><span class="tt">/users/:<a class="el" href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a" title="获取当前线程标识符">id</a></span> - 路径参数，匹配<span class="tt">/users/123</span>，提取id=123</li>
-<li><span class="tt">/files/*</span> - 通配符，匹配<span class="tt">/files/a/b/c</span>，提取*=a/b/c</li>
+<li><span class="tt">/files/ *</span> - 通配符，匹配<span class="tt">/files/a/b/c</span>，提取*=a/b/c</li>
 <li><span class="tt">/user/([0-9]+)</span> - 正则表达式，匹配数字ID </li>
 </ul>
 
@@ -565,7 +565,7 @@ bool&#160;</td><td class="memItemRight"><b>strict_routing</b> = false</td></tr>
 
 <p class="definition">在文件 <a class="el" href="http__router_8hpp_source.html">http_router.hpp</a> 第 <a class="el" href="http__router_8hpp_source.html#l00196">196</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -602,7 +602,7 @@ bool&#160;</td><td class="memItemRight"><b>strict_routing</b> = false</td></tr>
 
 <p class="definition">在文件 <a class="el" href="http__router_8hpp_source.html">http_router.hpp</a> 第 <a class="el" href="http__router_8hpp_source.html#l00188">188</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -639,7 +639,7 @@ bool&#160;</td><td class="memItemRight"><b>strict_routing</b> = false</td></tr>
 
 <p class="definition">在文件 <a class="el" href="http__router_8hpp_source.html">http_router.hpp</a> 第 <a class="el" href="http__router_8hpp_source.html#l00182">182</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -676,7 +676,7 @@ bool&#160;</td><td class="memItemRight"><b>strict_routing</b> = false</td></tr>
 
 <p class="definition">在文件 <a class="el" href="http__router_8hpp_source.html">http_router.hpp</a> 第 <a class="el" href="http__router_8hpp_source.html#l00170">170</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="http__router_8hpp_source.html#l00170">use()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="http__router_8hpp_source.html#l00170">use()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="http__router_8hpp_source.html#l00170">use()</a>.</p>
 

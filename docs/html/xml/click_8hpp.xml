@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="click_8hpp" kind="file" language="C++">
+    <compoundname>click.hpp</compoundname>
+    <includes refid="clocks_8hpp" local="yes">NeForce/core/time/clocks.hpp</includes>
+    <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
+    <incdepgraph>
+      <node id="10">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>NeForce/core/exception/exception.hpp</label>
+        <link refid="exception_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>NeForce/core/memory/bit.hpp</label>
+        <link refid="bit_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>NeForce/core/memory/memory.hpp</label>
+        <link refid="memory_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>NeForce/core/numeric/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>NeForce/core/numeric/numeric_traits.hpp</label>
+        <link refid="numeric__traits_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>NeForce/core/numeric/numeric_types.hpp</label>
+        <link refid="numeric__types_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>NeForce/core/numeric/ratio.hpp</label>
+        <link refid="ratio_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>NeForce/core/numeric/static_numeric.hpp</label>
+        <link refid="static__numeric_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>click.hpp</label>
+        <link refid="click_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>NeForce/core/time/clocks.hpp</label>
+        <link refid="clocks_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NeForce/core/time/duration.hpp</label>
+        <link refid="duration_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>NeForce/core/time/time_point.hpp</label>
+        <link refid="time__point_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>NeForce/core/typeinfo/type_traits.hpp</label>
+        <link refid="type__traits_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="types_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>assert.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>NeForce.hpp</label>
+        <link refid="_ne_force_8hpp"/>
+      </node>
+      <node id="1">
+        <label>click.hpp</label>
+        <link refid="click_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structclick" prot="public">click</innerclass>
+    <innerclass refid="classscoped__click" prot="public">scoped_click</innerclass>
+    <briefdescription>
+<para>计时器工具 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>此文件提供了计时器和作用域计时器工具，用于测量代码执行时间。 </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_TIME_CLICK_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_TIME_CLICK_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="clocks_8hpp" kindref="compound">NeForce/core/time/clocks.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="structclick" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structclick" kindref="compound">click</ref><sp/>{</highlight></codeline>
+<codeline lineno="28" refid="structclick_1a898892c0a9d6bccaa9476683f1830f05" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structclick_1a898892c0a9d6bccaa9476683f1830f05" kindref="member">time_point</ref><sp/>=<sp/><ref refid="structsystem__clock_1aff5d3693a815b7e4600f56bb57b46c84" kindref="member">system_clock::time_point</ref>;<sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="structclick_1a11b3d1779cb59165ade637b132ad61b1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structclick_1a898892c0a9d6bccaa9476683f1830f05" kindref="member">time_point</ref><sp/><ref refid="structclick_1a11b3d1779cb59165ade637b132ad61b1" kindref="member">start_time</ref>{};<sp/></highlight></codeline>
+<codeline lineno="31" refid="structclick_1a4713c06c976969ede7b42f42e05829dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structclick_1a898892c0a9d6bccaa9476683f1830f05" kindref="member">time_point</ref><sp/><ref refid="structclick_1a4713c06c976969ede7b42f42e05829dd" kindref="member">last_time</ref>{};<sp/><sp/></highlight></codeline>
+<codeline lineno="32" refid="structclick_1a408ee0a1d7de299a9dd91a9f40092e93" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structclick_1a408ee0a1d7de299a9dd91a9f40092e93" kindref="member">started</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="33" refid="structclick_1abeb2d17d3ef03e3f0e25467f93617e9a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structclick_1abeb2d17d3ef03e3f0e25467f93617e9a" kindref="member">stopped</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="structclick_1a6acf0c124695fa5f0cc3a7584c0687b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structclick_1a6acf0c124695fa5f0cc3a7584c0687b6" kindref="member">start</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structclick_1a11b3d1779cb59165ade637b132ad61b1" kindref="member">start_time</ref><sp/>=<sp/><ref refid="structsystem__clock_1a47cd2a828693e9c461f8400b9a4d2670" kindref="member">system_clock::now</ref>();</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structclick_1a408ee0a1d7de299a9dd91a9f40092e93" kindref="member">started</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structclick_1abeb2d17d3ef03e3f0e25467f93617e9a" kindref="member">stopped</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="structclick_1ab5d9e26e6771c55584936c85c407951f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structclick_1ab5d9e26e6771c55584936c85c407951f" kindref="member">update</ref>()<sp/>noexcept<sp/>{<sp/><ref refid="structclick_1a4713c06c976969ede7b42f42e05829dd" kindref="member">last_time</ref><sp/>=<sp/><ref refid="structsystem__clock_1a47cd2a828693e9c461f8400b9a4d2670" kindref="member">system_clock::now</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="structclick_1a478f23b91102313a96c4e2e9b9bbfca4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structclick_1a478f23b91102313a96c4e2e9b9bbfca4" kindref="member">stop</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structclick_1a4713c06c976969ede7b42f42e05829dd" kindref="member">last_time</ref><sp/>=<sp/><ref refid="structsystem__clock_1a47cd2a828693e9c461f8400b9a4d2670" kindref="member">system_clock::now</ref>();</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structclick_1abeb2d17d3ef03e3f0e25467f93617e9a" kindref="member">stopped</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="structclick_1a21a9b640963dbf73211bcbe56e23360d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___duration_1ga9a8cc91104c0b0cceec0f8cf188bd19d" kindref="member">nanoseconds</ref><sp/><ref refid="structclick_1a21a9b640963dbf73211bcbe56e23360d" kindref="member">during</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="structclick_1a408ee0a1d7de299a9dd91a9f40092e93" kindref="member">started</ref><sp/>||<sp/>!<ref refid="structclick_1abeb2d17d3ef03e3f0e25467f93617e9a" kindref="member">stopped</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(<ref refid="structvalue__exception" kindref="compound">value_exception</ref>(</highlight><highlight class="stringliteral">&quot;click<sp/>not<sp/>properly<sp/>started/stopped&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structclick_1a4713c06c976969ede7b42f42e05829dd" kindref="member">last_time</ref><sp/>-<sp/><ref refid="structclick_1a11b3d1779cb59165ade637b132ad61b1" kindref="member">start_time</ref>;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="structclick_1aeebcc51061c5c9b56df22f5761b8aa79" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___duration_1ga9a8cc91104c0b0cceec0f8cf188bd19d" kindref="member">nanoseconds</ref><sp/><ref refid="structclick_1aeebcc51061c5c9b56df22f5761b8aa79" kindref="member">during_s</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="structclick_1a408ee0a1d7de299a9dd91a9f40092e93" kindref="member">started</ref><sp/>||<sp/>!<ref refid="structclick_1abeb2d17d3ef03e3f0e25467f93617e9a" kindref="member">stopped</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___duration_1ga9a8cc91104c0b0cceec0f8cf188bd19d" kindref="member">nanoseconds</ref>{0};</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>diff<sp/>=<sp/><ref refid="structclick_1a4713c06c976969ede7b42f42e05829dd" kindref="member">last_time</ref><sp/>-<sp/><ref refid="structclick_1a11b3d1779cb59165ade637b132ad61b1" kindref="member">start_time</ref>;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>diff.count()<sp/>&gt;=<sp/>0<sp/>?<sp/>diff.to_nano()<sp/>:<sp/>0_ns;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="structclick_1acd46b1dc82b74166b5a9c55a2633a323" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structclick_1acd46b1dc82b74166b5a9c55a2633a323" kindref="member">reset</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structclick_1a408ee0a1d7de299a9dd91a9f40092e93" kindref="member">started</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structclick_1abeb2d17d3ef03e3f0e25467f93617e9a" kindref="member">stopped</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structclick_1a11b3d1779cb59165ade637b132ad61b1" kindref="member">start_time</ref><sp/>=<sp/><ref refid="structclick_1a898892c0a9d6bccaa9476683f1830f05" kindref="member">time_point</ref>{};</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structclick_1a4713c06c976969ede7b42f42e05829dd" kindref="member">last_time</ref><sp/>=<sp/><ref refid="structclick_1a898892c0a9d6bccaa9476683f1830f05" kindref="member">time_point</ref>{};</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="classscoped__click" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classscoped__click_1a8bd8f0552c2b3ea9cb9d716cb2227b3d" kindref="member">scoped_click</ref><sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structclick" kindref="compound">click</ref>&amp;<sp/>clk_;<sp/></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="124" refid="classscoped__click_1a8bd8f0552c2b3ea9cb9d716cb2227b3d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classscoped__click_1a8bd8f0552c2b3ea9cb9d716cb2227b3d" kindref="member">scoped_click</ref>(<ref refid="structclick" kindref="compound">click</ref>&amp;<sp/>clk)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>clk_(clk)<sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>clk_.start();</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132" refid="classscoped__click_1a3083662e31bccc44205c05937090ebe2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscoped__click_1a3083662e31bccc44205c05937090ebe2" kindref="member">scoped_click</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classscoped__click_1a8bd8f0552c2b3ea9cb9d716cb2227b3d" kindref="member">scoped_click</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="classscoped__click_1aa8112b556549d90968089615d74ae429" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscoped__click_1a8bd8f0552c2b3ea9cb9d716cb2227b3d" kindref="member">scoped_click</ref>&amp;<sp/><ref refid="classscoped__click_1aa8112b556549d90968089615d74ae429" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classscoped__click_1a8bd8f0552c2b3ea9cb9d716cb2227b3d" kindref="member">scoped_click</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145" refid="classscoped__click_1ad91adc07b76bd12c1494ad5165faab9e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscoped__click_1ad91adc07b76bd12c1494ad5165faab9e" kindref="member">~scoped_click</ref>()<sp/>noexcept<sp/>{<sp/>clk_.stop();<sp/>}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Click</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_TIME_CLICK_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/click.hpp"/>
+  </compounddef>
+</doxygen>

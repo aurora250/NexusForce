@@ -125,59 +125,75 @@ $(function(){initNavTree('group___file.html','',''); });
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
-<tr class="memitem:ga7629ed37340e93203c1f0c100a479b33" id="r_ga7629ed37340e93203c1f0c100a479b33"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga7629ed37340e93203c1f0c100a479b33">fud_t</a></td></tr>
-<tr class="memdesc:ga7629ed37340e93203c1f0c100a479b33"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件描述符类型  <br /></td></tr>
+<tr class="memitem:ga20cb70020500f32f8c015c7a044a4dfe" id="r_ga20cb70020500f32f8c015c7a044a4dfe"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga20cb70020500f32f8c015c7a044a4dfe">fud_t</a></td></tr>
+<tr class="memdesc:ga20cb70020500f32f8c015c7a044a4dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件描述符类型  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 枚举</h2></td></tr>
+<tr class="memitem:ga9df1cddbb19e649f9e9603e4f8ed4cfe" id="r_ga9df1cddbb19e649f9e9603e4f8ed4cfe"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga9df1cddbb19e649f9e9603e4f8ed4cfe">file_access</a> : fud_t { <a class="el" href="#gga9df1cddbb19e649f9e9603e4f8ed4cfea3466fab4975481651940ed328aa990e4">file_access::READ</a> = GENERIC_READ
+, <a class="el" href="#gga9df1cddbb19e649f9e9603e4f8ed4cfead4b9e47f65b6e79b010582f15785867e">file_access::WRITE</a> = GENERIC_WRITE
+, <a class="el" href="#gga9df1cddbb19e649f9e9603e4f8ed4cfeaa7b843fb734e3b3fea8e5f902d3f4144">file_access::READ_WRITE</a> = GENERIC_READ | GENERIC_WRITE
+, <a class="el" href="#gga9df1cddbb19e649f9e9603e4f8ed4cfea375ffb668aa90f1c7fcae55e9734a752">file_access::APPEND</a> = FILE_APPEND_DATA | GENERIC_WRITE
+ }</td></tr>
+<tr class="memdesc:ga9df1cddbb19e649f9e9603e4f8ed4cfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件访问模式枚举  <a href="#ga9df1cddbb19e649f9e9603e4f8ed4cfe">更多...</a><br /></td></tr>
 <tr class="memitem:gab6d1391a16c8df9584f7eec3ed893d4d" id="r_gab6d1391a16c8df9584f7eec3ed893d4d"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#gab6d1391a16c8df9584f7eec3ed893d4d">file_shared</a> : fud_t { <br />
-&#160;&#160;<a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4dabfba508a0527c128dc812fda6f57cc14">file_shared::SHARE_READ</a> = 1
-, <a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4da25243c198ae883813b4275039307d47a">file_shared::SHARE_WRITE</a> = 2
-, <a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4daa7fb68a7df7bad917e3686f900f1e179">file_shared::SHARE_READ_WRITE</a> = 3
-, <a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4daede250e232c3195050f4eaa485f1a395">file_shared::SHARE_DELETE</a> = 4
+&#160;&#160;<a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4dabfba508a0527c128dc812fda6f57cc14">file_shared::SHARE_READ</a> = FILE_SHARE_READ
+, <a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4da25243c198ae883813b4275039307d47a">file_shared::SHARE_WRITE</a> = FILE_SHARE_WRITE
+, <a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4daa7fb68a7df7bad917e3686f900f1e179">file_shared::SHARE_READ_WRITE</a> = FILE_SHARE_READ | FILE_SHARE_WRITE
+, <a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4daede250e232c3195050f4eaa485f1a395">file_shared::SHARE_DELETE</a> = FILE_SHARE_DELETE
 , <br />
-&#160;&#160;<a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4da1cce1ec8e196c2f881693930d2c14475">file_shared::SHARE_ALL</a> = 7
+&#160;&#160;<a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4da1cce1ec8e196c2f881693930d2c14475">file_shared::SHARE_ALL</a> = FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE
 , <a class="el" href="#ggab6d1391a16c8df9584f7eec3ed893d4da44d94a6023de73e0b4ab722105b2ca45">file_shared::NO_SHARE</a> = 0
 <br />
  }</td></tr>
 <tr class="memdesc:gab6d1391a16c8df9584f7eec3ed893d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件共享模式枚举  <a href="#gab6d1391a16c8df9584f7eec3ed893d4d">更多...</a><br /></td></tr>
 <tr class="memitem:ga90f3ddb67118cfb6f47aba25fbe6af40" id="r_ga90f3ddb67118cfb6f47aba25fbe6af40"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga90f3ddb67118cfb6f47aba25fbe6af40">file_creation</a> : fud_t { <br />
-&#160;&#160;<a class="el" href="#gga90f3ddb67118cfb6f47aba25fbe6af40a2f44c48596198fcb93b5224b0d1d1e80">file_creation::CREATE_FORCE</a> = O_CREAT | O_TRUNC
-, <a class="el" href="#gga90f3ddb67118cfb6f47aba25fbe6af40ad371e1779deb36155b5a9ceff025226a">file_creation::CREATE_NO_EXIST</a> = O_CREAT | O_EXCL
-, <a class="el" href="#gga90f3ddb67118cfb6f47aba25fbe6af40a5e4067b50d7834bb5ab5421449bad9b4">file_creation::OPEN_FORCE</a> = O_CREAT
-, <a class="el" href="#gga90f3ddb67118cfb6f47aba25fbe6af40adb93b4f44dd58007a0e7d89b7baa4690">file_creation::OPEN_EXIST</a> = 0
+&#160;&#160;<a class="el" href="#gga90f3ddb67118cfb6f47aba25fbe6af40a2f44c48596198fcb93b5224b0d1d1e80">file_creation::CREATE_FORCE</a> = CREATE_ALWAYS
+, <a class="el" href="#gga90f3ddb67118cfb6f47aba25fbe6af40ad371e1779deb36155b5a9ceff025226a">file_creation::CREATE_NO_EXIST</a> = CREATE_NEW
+, <a class="el" href="#gga90f3ddb67118cfb6f47aba25fbe6af40a5e4067b50d7834bb5ab5421449bad9b4">file_creation::OPEN_FORCE</a> = OPEN_ALWAYS
+, <a class="el" href="#gga90f3ddb67118cfb6f47aba25fbe6af40adb93b4f44dd58007a0e7d89b7baa4690">file_creation::OPEN_EXIST</a> = OPEN_EXISTING
 , <br />
-&#160;&#160;<a class="el" href="#gga90f3ddb67118cfb6f47aba25fbe6af40a97cec37e07a66dd6a2f4841bd5d13b30">file_creation::TRUNCATE_EXIST</a> = O_TRUNC
+&#160;&#160;<a class="el" href="#gga90f3ddb67118cfb6f47aba25fbe6af40a97cec37e07a66dd6a2f4841bd5d13b30">file_creation::TRUNCATE_EXIST</a> = TRUNCATE_EXISTING
 <br />
  }</td></tr>
 <tr class="memdesc:ga90f3ddb67118cfb6f47aba25fbe6af40"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件创建方式枚举  <a href="#ga90f3ddb67118cfb6f47aba25fbe6af40">更多...</a><br /></td></tr>
 <tr class="memitem:gadd0b8478c8ee0d6b05880ca087016c9e" id="r_gadd0b8478c8ee0d6b05880ca087016c9e"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#gadd0b8478c8ee0d6b05880ca087016c9e">file_attri</a> : fud_t { <br />
-&#160;&#160;<a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea1e23852820b9154316c7c06e2b7ba051">file_attri::NORMAL</a> = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
-, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea34db6698cff32ac89724758fdaa5512e">file_attri::READONLY</a> = S_IRUSR | S_IRGRP | S_IROTH
-, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48">file_attri::DIRECTORY</a> = S_IFDIR
-, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d">file_attri::DEVICE</a> = S_IFBLK | S_IFCHR
+&#160;&#160;<a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea1e23852820b9154316c7c06e2b7ba051">file_attri::NORMAL</a> = FILE_ATTRIBUTE_NORMAL
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea34db6698cff32ac89724758fdaa5512e">file_attri::READONLY</a> = FILE_ATTRIBUTE_READONLY
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea347e628a8f72626a0611ef842fe9d304">file_attri::HIDDEN</a> = FILE_ATTRIBUTE_HIDDEN
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9eafa177138f94a7ea01f549b1aa7893d03">file_attri::SYSTEM</a> = FILE_ATTRIBUTE_SYSTEM
 , <br />
-&#160;&#160;<a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea3102e1ef56da08a1f6f199b6f8cb472d">file_attri::REPARSE_POINT</a> = S_IFLNK
-, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4">file_attri::OVERLAPPED</a> = 0
-, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea63c5a1202e435a488d11461119c447fe">file_attri::NO_BUFFERING</a> = O_DIRECT
-, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1">file_attri::WRITE_THROUGH</a> = O_SYNC
+&#160;&#160;<a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48">file_attri::DIRECTORY</a> = FILE_ATTRIBUTE_DIRECTORY
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea71f01f32e90440fd6039511dde69e995">file_attri::ARCHIVE</a> = FILE_ATTRIBUTE_ARCHIVE
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d">file_attri::DEVICE</a> = FILE_ATTRIBUTE_DEVICE
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea39e02cdeda38ebf7d4a898b900cf0776">file_attri::TEMPORARY</a> = FILE_ATTRIBUTE_TEMPORARY
+, <br />
+&#160;&#160;<a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea3102e1ef56da08a1f6f199b6f8cb472d">file_attri::REPARSE_POINT</a> = FILE_ATTRIBUTE_REPARSE_POINT
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea724ba27218714b182f22d5b24b5e4317">file_attri::COMPRESSED</a> = FILE_ATTRIBUTE_COMPRESSED
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea7ed929f45ba34eff59d81d74d4f80a58">file_attri::OFFLINE</a> = FILE_ATTRIBUTE_OFFLINE
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea3fe1c5068682cdee737d379207ab631f">file_attri::ENCRYPTED</a> = FILE_ATTRIBUTE_ENCRYPTED
+, <br />
+&#160;&#160;<a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea05470727787aa721cf53222b5d3d40f3">file_attri::VIRTUAL</a> = FILE_ATTRIBUTE_VIRTUAL
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4">file_attri::OVERLAPPED</a> = FILE_FLAG_OVERLAPPED
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea63c5a1202e435a488d11461119c447fe">file_attri::NO_BUFFERING</a> = FILE_FLAG_NO_BUFFERING
+, <a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1">file_attri::WRITE_THROUGH</a> = FILE_FLAG_WRITE_THROUGH
 , <br />
 &#160;&#160;<a class="el" href="#ggadd0b8478c8ee0d6b05880ca087016c9ea8606ac74fd2decc1899004c49b226fae">file_attri::OTHERS</a> = 0
 <br />
  }</td></tr>
 <tr class="memdesc:gadd0b8478c8ee0d6b05880ca087016c9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件属性和标志枚举  <a href="#gadd0b8478c8ee0d6b05880ca087016c9e">更多...</a><br /></td></tr>
-<tr class="memitem:ga7af54bf3ecb820477ebc36f2f8fe9a7f" id="r_ga7af54bf3ecb820477ebc36f2f8fe9a7f"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga7af54bf3ecb820477ebc36f2f8fe9a7f">file_pointer</a> : fud_t { <a class="el" href="#gga7af54bf3ecb820477ebc36f2f8fe9a7fa19aad9f2fe3ce0023298ab83f7e75775">file_pointer::BEGIN</a> = SEEK_SET
-, <a class="el" href="#gga7af54bf3ecb820477ebc36f2f8fe9a7faa2770969c827f0f2910f6179418462df">file_pointer::CURRENT</a> = SEEK_CUR
-, <a class="el" href="#gga7af54bf3ecb820477ebc36f2f8fe9a7fab1a326c06d88bf042f73d70f50197905">file_pointer::END</a> = SEEK_END
+<tr class="memitem:ga7af54bf3ecb820477ebc36f2f8fe9a7f" id="r_ga7af54bf3ecb820477ebc36f2f8fe9a7f"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga7af54bf3ecb820477ebc36f2f8fe9a7f">file_pointer</a> : fud_t { <a class="el" href="#gga7af54bf3ecb820477ebc36f2f8fe9a7fa19aad9f2fe3ce0023298ab83f7e75775">file_pointer::BEGIN</a> = FILE_BEGIN
+, <a class="el" href="#gga7af54bf3ecb820477ebc36f2f8fe9a7faa2770969c827f0f2910f6179418462df">file_pointer::CURRENT</a> = FILE_CURRENT
+, <a class="el" href="#gga7af54bf3ecb820477ebc36f2f8fe9a7fab1a326c06d88bf042f73d70f50197905">file_pointer::END</a> = FILE_END
  }</td></tr>
 <tr class="memdesc:ga7af54bf3ecb820477ebc36f2f8fe9a7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件指针移动方式枚举  <a href="#ga7af54bf3ecb820477ebc36f2f8fe9a7f">更多...</a><br /></td></tr>
 <tr class="memitem:ga7ff0ce5ce53760cad46eb6509f978ecf" id="r_ga7ff0ce5ce53760cad46eb6509f978ecf"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga7ff0ce5ce53760cad46eb6509f978ecf">file_lock</a> : fud_t { <br />
-&#160;&#160;<a class="el" href="#gga7ff0ce5ce53760cad46eb6509f978ecfa049518eb4dc1859c7cebbe15876cfd63">file_lock::SHARED</a> = LOCK_SH
-, <a class="el" href="#gga7ff0ce5ce53760cad46eb6509f978ecfaf45c3a0bb3687ed8e221253b3fd4a2ce">file_lock::EXCLUSIVE</a> = LOCK_EX
-, <a class="el" href="#gga7ff0ce5ce53760cad46eb6509f978ecfa91a532cc7963546e8ea9686743f6a277">file_lock::FAIL_IMMEDIATELY</a> = LOCK_NB
-, <a class="el" href="#gga7ff0ce5ce53760cad46eb6509f978ecfacf442cffd430815051b1d69196d57aaf">file_lock::SHARED_NB</a> = LOCK_SH | LOCK_NB
+&#160;&#160;<a class="el" href="#gga7ff0ce5ce53760cad46eb6509f978ecfa049518eb4dc1859c7cebbe15876cfd63">file_lock::SHARED</a> = 0
+, <a class="el" href="#gga7ff0ce5ce53760cad46eb6509f978ecfaf45c3a0bb3687ed8e221253b3fd4a2ce">file_lock::EXCLUSIVE</a> = LOCKFILE_EXCLUSIVE_LOCK
+, <a class="el" href="#gga7ff0ce5ce53760cad46eb6509f978ecfa91a532cc7963546e8ea9686743f6a277">file_lock::FAIL_IMMEDIATELY</a> = LOCKFILE_FAIL_IMMEDIATELY
+, <a class="el" href="#gga7ff0ce5ce53760cad46eb6509f978ecfacf442cffd430815051b1d69196d57aaf">file_lock::SHARED_NB</a> = LOCKFILE_FAIL_IMMEDIATELY
 , <br />
-&#160;&#160;<a class="el" href="#gga7ff0ce5ce53760cad46eb6509f978ecfaec7817304af2e516f4ba7d65e6cdc63b">file_lock::EXCLUSIVE_NB</a> = LOCK_EX | LOCK_NB
+&#160;&#160;<a class="el" href="#gga7ff0ce5ce53760cad46eb6509f978ecfaec7817304af2e516f4ba7d65e6cdc63b">file_lock::EXCLUSIVE_NB</a> = LOCKFILE_EXCLUSIVE_LOCK | LOCKFILE_FAIL_IMMEDIATELY
 <br />
  }</td></tr>
 <tr class="memdesc:ga7ff0ce5ce53760cad46eb6509f978ecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">文件锁类型枚举  <a href="#ga7ff0ce5ce53760cad46eb6509f978ecf">更多...</a><br /></td></tr>
@@ -202,40 +218,20 @@ $(function(){initNavTree('group___file.html','',''); });
 <div class="textblock"><p>文件操作 </p>
 <p>文件操作相关类</p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">类型定义说明</h2>
-<a id="ga7629ed37340e93203c1f0c100a479b33" name="ga7629ed37340e93203c1f0c100a479b33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7629ed37340e93203c1f0c100a479b33">&#9670;&#160;</a></span>fud_t</h2>
+<a id="ga20cb70020500f32f8c015c7a044a4dfe" name="ga20cb70020500f32f8c015c7a044a4dfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga20cb70020500f32f8c015c7a044a4dfe">&#9670;&#160;</a></span>fud_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#ga7629ed37340e93203c1f0c100a479b33">fud_t</a></td>
+          <td class="memname">using <a class="el" href="#ga20cb70020500f32f8c015c7a044a4dfe">fud_t</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <b>初始值:</b><div class="fragment"><div class="line"> </div>
 <div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">enum class</span> file_access : <a class="code hl_typedef" href="#ga7629ed37340e93203c1f0c100a479b33">fud_t</a> {</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">    READ = O_RDONLY,             </div>
-<div class="line">    WRITE = O_WRONLY,            </div>
-<div class="line">    READ_WRITE = O_RDWR,         </div>
-<div class="line">    APPEND = O_WRONLY | O_APPEND </div>
-<div class="line"> </div>
-<div class="line">}</div>
-<div class="ttc" id="agroup___file_html_ga7629ed37340e93203c1f0c100a479b33"><div class="ttname"><a href="#ga7629ed37340e93203c1f0c100a479b33">fud_t</a></div><div class="ttdeci">enum class file_access :fud_t { READ=O_RDONLY, WRITE=O_WRONLY, READ_WRITE=O_RDWR, APPEND=O_WRONLY|O_APPEND } fud_t</div><div class="ttdoc">文件描述符类型</div><div class="ttdef"><b>定义</b> <a href="file__constants_8hpp_source.html#l00041">file_constants.hpp:41</a></div></div>
+<div class="line">::DWORD</div>
 </div><!-- fragment -->
 <p>文件描述符类型 </p>
 <p>跨平台的文件描述符类型定义。 </p>
@@ -245,6 +241,43 @@ $(function(){initNavTree('group___file.html','',''); });
 </div>
 </div>
 <a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">枚举类型说明</h2>
+<a id="ga9df1cddbb19e649f9e9603e4f8ed4cfe" name="ga9df1cddbb19e649f9e9603e4f8ed4cfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9df1cddbb19e649f9e9603e4f8ed4cfe">&#9670;&#160;</a></span>file_access</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#ga9df1cddbb19e649f9e9603e4f8ed4cfe">file_access</a> : <a class="el" href="#ga20cb70020500f32f8c015c7a044a4dfe">fud_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>文件访问模式枚举 </p>
+<p>定义文件的打开方式，包括读、写、读写和追加模式。 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="gga9df1cddbb19e649f9e9603e4f8ed4cfea3466fab4975481651940ed328aa990e4" name="gga9df1cddbb19e649f9e9603e4f8ed4cfea3466fab4975481651940ed328aa990e4"></a>READ&#160;</td><td class="fielddoc"><p>只读模式 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga9df1cddbb19e649f9e9603e4f8ed4cfead4b9e47f65b6e79b010582f15785867e" name="gga9df1cddbb19e649f9e9603e4f8ed4cfead4b9e47f65b6e79b010582f15785867e"></a>WRITE&#160;</td><td class="fielddoc"><p>只写模式 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga9df1cddbb19e649f9e9603e4f8ed4cfeaa7b843fb734e3b3fea8e5f902d3f4144" name="gga9df1cddbb19e649f9e9603e4f8ed4cfeaa7b843fb734e3b3fea8e5f902d3f4144"></a>READ_WRITE&#160;</td><td class="fielddoc"><p>读写模式 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga9df1cddbb19e649f9e9603e4f8ed4cfea375ffb668aa90f1c7fcae55e9734a752" name="gga9df1cddbb19e649f9e9603e4f8ed4cfea375ffb668aa90f1c7fcae55e9734a752"></a>APPEND&#160;</td><td class="fielddoc"><p>追加模式 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="file__constants_8hpp_source.html">file_constants.hpp</a> 第 <a class="el" href="file__constants_8hpp_source.html#l00055">55</a> 行定义.</p>
+
+</div>
+</div>
 <a id="gadd0b8478c8ee0d6b05880ca087016c9e" name="gadd0b8478c8ee0d6b05880ca087016c9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gadd0b8478c8ee0d6b05880ca087016c9e">&#9670;&#160;</a></span>file_attri</h2>
 
@@ -255,7 +288,7 @@ $(function(){initNavTree('group___file.html','',''); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="#gadd0b8478c8ee0d6b05880ca087016c9e">file_attri</a> : <a class="el" href="#ga7629ed37340e93203c1f0c100a479b33">fud_t</a></td>
+          <td class="memname">enum class <a class="el" href="#gadd0b8478c8ee0d6b05880ca087016c9e">file_attri</a> : <a class="el" href="#ga20cb70020500f32f8c015c7a044a4dfe">fud_t</a></td>
         </tr>
       </table>
   </td>
@@ -272,17 +305,33 @@ $(function(){initNavTree('group___file.html','',''); });
 </td></tr>
 <tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea34db6698cff32ac89724758fdaa5512e" name="ggadd0b8478c8ee0d6b05880ca087016c9ea34db6698cff32ac89724758fdaa5512e"></a>READONLY&#160;</td><td class="fielddoc"><p>只读文件 </p>
 </td></tr>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea347e628a8f72626a0611ef842fe9d304" name="ggadd0b8478c8ee0d6b05880ca087016c9ea347e628a8f72626a0611ef842fe9d304"></a>HIDDEN&#160;</td><td class="fielddoc"><p>隐藏文件 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9eafa177138f94a7ea01f549b1aa7893d03" name="ggadd0b8478c8ee0d6b05880ca087016c9eafa177138f94a7ea01f549b1aa7893d03"></a>SYSTEM&#160;</td><td class="fielddoc"><p>系统文件 </p>
+</td></tr>
 <tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48" name="ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48"></a>DIRECTORY&#160;</td><td class="fielddoc"><p>目录 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea71f01f32e90440fd6039511dde69e995" name="ggadd0b8478c8ee0d6b05880ca087016c9ea71f01f32e90440fd6039511dde69e995"></a>ARCHIVE&#160;</td><td class="fielddoc"><p>存档文件 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d" name="ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d"></a>DEVICE&#160;</td><td class="fielddoc"><p>设备文件 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea3102e1ef56da08a1f6f199b6f8cb472d" name="ggadd0b8478c8ee0d6b05880ca087016c9ea3102e1ef56da08a1f6f199b6f8cb472d"></a>REPARSE_POINT&#160;</td><td class="fielddoc"><p>符号链接 </p>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea39e02cdeda38ebf7d4a898b900cf0776" name="ggadd0b8478c8ee0d6b05880ca087016c9ea39e02cdeda38ebf7d4a898b900cf0776"></a>TEMPORARY&#160;</td><td class="fielddoc"><p>临时文件 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4" name="ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4"></a>OVERLAPPED&#160;</td><td class="fielddoc"><p>Linux不支持异步I/O标志 </p>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea3102e1ef56da08a1f6f199b6f8cb472d" name="ggadd0b8478c8ee0d6b05880ca087016c9ea3102e1ef56da08a1f6f199b6f8cb472d"></a>REPARSE_POINT&#160;</td><td class="fielddoc"><p>重解析点 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea63c5a1202e435a488d11461119c447fe" name="ggadd0b8478c8ee0d6b05880ca087016c9ea63c5a1202e435a488d11461119c447fe"></a>NO_BUFFERING&#160;</td><td class="fielddoc"><p>直接I/O </p>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea724ba27218714b182f22d5b24b5e4317" name="ggadd0b8478c8ee0d6b05880ca087016c9ea724ba27218714b182f22d5b24b5e4317"></a>COMPRESSED&#160;</td><td class="fielddoc"><p>压缩文件 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1" name="ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1"></a>WRITE_THROUGH&#160;</td><td class="fielddoc"><p>同步写入 </p>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea7ed929f45ba34eff59d81d74d4f80a58" name="ggadd0b8478c8ee0d6b05880ca087016c9ea7ed929f45ba34eff59d81d74d4f80a58"></a>OFFLINE&#160;</td><td class="fielddoc"><p>离线文件 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea3fe1c5068682cdee737d379207ab631f" name="ggadd0b8478c8ee0d6b05880ca087016c9ea3fe1c5068682cdee737d379207ab631f"></a>ENCRYPTED&#160;</td><td class="fielddoc"><p>加密文件 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea05470727787aa721cf53222b5d3d40f3" name="ggadd0b8478c8ee0d6b05880ca087016c9ea05470727787aa721cf53222b5d3d40f3"></a>VIRTUAL&#160;</td><td class="fielddoc"><p>虚拟文件 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4" name="ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4"></a>OVERLAPPED&#160;</td><td class="fielddoc"><p>支持异步I/O </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea63c5a1202e435a488d11461119c447fe" name="ggadd0b8478c8ee0d6b05880ca087016c9ea63c5a1202e435a488d11461119c447fe"></a>NO_BUFFERING&#160;</td><td class="fielddoc"><p>无缓冲I/O </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1" name="ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1"></a>WRITE_THROUGH&#160;</td><td class="fielddoc"><p>写穿缓存 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ggadd0b8478c8ee0d6b05880ca087016c9ea8606ac74fd2decc1899004c49b226fae" name="ggadd0b8478c8ee0d6b05880ca087016c9ea8606ac74fd2decc1899004c49b226fae"></a>OTHERS&#160;</td><td class="fielddoc"><p>其他属性 </p>
 </td></tr>
@@ -302,7 +351,7 @@ $(function(){initNavTree('group___file.html','',''); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="#ga90f3ddb67118cfb6f47aba25fbe6af40">file_creation</a> : <a class="el" href="#ga7629ed37340e93203c1f0c100a479b33">fud_t</a></td>
+          <td class="memname">enum class <a class="el" href="#ga90f3ddb67118cfb6f47aba25fbe6af40">file_creation</a> : <a class="el" href="#ga20cb70020500f32f8c015c7a044a4dfe">fud_t</a></td>
         </tr>
       </table>
   </td>
@@ -341,7 +390,7 @@ $(function(){initNavTree('group___file.html','',''); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="#ga7ff0ce5ce53760cad46eb6509f978ecf">file_lock</a> : <a class="el" href="#ga7629ed37340e93203c1f0c100a479b33">fud_t</a></td>
+          <td class="memname">enum class <a class="el" href="#ga7ff0ce5ce53760cad46eb6509f978ecf">file_lock</a> : <a class="el" href="#ga20cb70020500f32f8c015c7a044a4dfe">fud_t</a></td>
         </tr>
       </table>
   </td>
@@ -415,7 +464,7 @@ $(function(){initNavTree('group___file.html','',''); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="#ga7af54bf3ecb820477ebc36f2f8fe9a7f">file_pointer</a> : <a class="el" href="#ga7629ed37340e93203c1f0c100a479b33">fud_t</a></td>
+          <td class="memname">enum class <a class="el" href="#ga7af54bf3ecb820477ebc36f2f8fe9a7f">file_pointer</a> : <a class="el" href="#ga20cb70020500f32f8c015c7a044a4dfe">fud_t</a></td>
         </tr>
       </table>
   </td>
@@ -450,7 +499,7 @@ $(function(){initNavTree('group___file.html','',''); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class <a class="el" href="#gab6d1391a16c8df9584f7eec3ed893d4d">file_shared</a> : <a class="el" href="#ga7629ed37340e93203c1f0c100a479b33">fud_t</a></td>
+          <td class="memname">enum class <a class="el" href="#gab6d1391a16c8df9584f7eec3ed893d4d">file_shared</a> : <a class="el" href="#ga20cb70020500f32f8c015c7a044a4dfe">fud_t</a></td>
         </tr>
       </table>
   </td>

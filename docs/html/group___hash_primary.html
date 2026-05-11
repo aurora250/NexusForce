@@ -140,7 +140,7 @@ $(function(){initNavTree('group___hash_primary.html','',''); });
 变量</h2></td></tr>
 <tr class="memitem:ga7b623749eb368d9c6142805167d8c3e8" id="r_ga7b623749eb368d9c6142805167d8c3e8"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga7b623749eb368d9c6142805167d8c3e8">FNV_OFFSET_BASIS</a></td></tr>
 <tr class="memdesc:ga7b623749eb368d9c6142805167d8c3e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">FNV哈希算法的偏移基础值  <br /></td></tr>
-<tr class="memitem:gac9c1200d5d9591e537701046e3cb0eb0" id="r_gac9c1200d5d9591e537701046e3cb0eb0"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gac9c1200d5d9591e537701046e3cb0eb0">FNV_PRIME</a> = 16777619U</td></tr>
+<tr class="memitem:gac9c1200d5d9591e537701046e3cb0eb0" id="r_gac9c1200d5d9591e537701046e3cb0eb0"><td class="memItemLeft">NEFORCE_INLINE17 constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gac9c1200d5d9591e537701046e3cb0eb0">FNV_PRIME</a> = 1099511628211ULL</td></tr>
 <tr class="memdesc:gac9c1200d5d9591e537701046e3cb0eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">FNV哈希算法的质数乘数  <br /></td></tr>
 <tr class="memitem:ga6ca9a57793172db99ade654b0232f81f" id="r_ga6ca9a57793172db99ade654b0232f81f"><td class="memTemplParams" colspan="2"><a id="ga6ca9a57793172db99ade654b0232f81f" name="ga6ca9a57793172db99ade654b0232f81f"></a>
 template&lt;typename Key&gt; </td></tr>
@@ -298,9 +298,9 @@ template&lt;typename Func, typename Arg&gt; </td></tr>
 
 <p class="definition">在文件 <a class="el" href="hash_8hpp_source.html">hash.hpp</a> 第 <a class="el" href="hash_8hpp_source.html#l00152">152</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00392">count()</a>.</p>
+<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00391">count()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="thread_8hpp_source.html#l00112">thread::id::to_hash()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="thread_8hpp_source.html#l00112">thread::id::to_hash()</a> , 以及 <a class="el" href="classuuid.html#a7664699bea951feb280cbcb34533a212">uuid::v7()</a>.</p>
 
 </div>
 </div>
@@ -399,7 +399,7 @@ template&lt;typename CharT&gt; </div>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00037">integral_constant&lt; bool, Value &gt;::value</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02778">basic_string&lt; char &gt;::to_hash()</a> , 以及 <a class="el" href="basic__string__view_8hpp_source.html#l01025">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l02795">basic_string&lt; char &gt;::to_hash()</a> , 以及 <a class="el" href="basic__string__view_8hpp_source.html#l01030">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash()</a>.</p>
 
 </div>
 </div>
@@ -523,9 +523,7 @@ template&lt;typename CharT&gt; </div>
 </div><div class="memdoc">
 <b>初始值:</b><div class="fragment"><div class="line">                                           =</div>
 <div class="line"> </div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">2166136261U</div>
+<div class="line">14695981039346656037ULL</div>
 </div><!-- fragment -->
 <p>FNV哈希算法的偏移基础值 </p>
 <dl class="section note"><dt>注解</dt><dd>根据平台位数使用不同的值，文档以64位为例。 </dd></dl>
@@ -544,7 +542,7 @@ template&lt;typename CharT&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_INLINE17 constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> FNV_PRIME = 16777619U</td>
+          <td class="memname">NEFORCE_INLINE17 constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> FNV_PRIME = 1099511628211ULL</td>
         </tr>
       </table>
   </td>

@@ -1,0 +1,414 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___color" kind="group">
+    <compoundname>Color</compoundname>
+    <title>颜色</title>
+    <innerclass refid="classcolor" prot="public">color</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___color_1ga51172fa58193f273f3b792449b16c896" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classcolor" kindref="compound">color</ref></type>
+        <definition>color operator*</definition>
+        <argsstring>(const double scalar, const color &amp;color) noexcept</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const double</type>
+          <declname>scalar</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classcolor" kindref="compound">color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>标量乘以颜色 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>标量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>颜色 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>缩放后的颜色 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/color.hpp" line="848" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/color.hpp" bodystart="848" bodyend="848"/>
+      </memberdef>
+      <memberdef kind="function" id="group___color_1ga73d78809513a244861e6d4dca58d1d8d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classcolor" kindref="compound">color</ref></type>
+        <definition>color operator*</definition>
+        <argsstring>(const int scalar, const color &amp;color) noexcept</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const int</type>
+          <declname>scalar</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classcolor" kindref="compound">color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>整数标量乘以颜色 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scalar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数标量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>颜色 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>缩放后的颜色 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/color.hpp" line="856" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/color.hpp" bodystart="856" bodyend="856"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>RGB颜色模型的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下颜色表示与合成相关标准规范：</para>
+<para><bold>CSS 颜色标准：</bold><itemizedlist>
+<listitem><para>**W3C CSS Color Module Level 4**：CSS 颜色规范（RGB/RGBA 定义） <ulink url="https://www.w3.org/TR/css-color-4/">https://www.w3.org/TR/css-color-4/</ulink></para>
+</listitem><listitem><para>**W3C CSS Color Module Level 5**：CSS 颜色规范（颜色混合与合成） <ulink url="https://www.w3.org/TR/css-color-5/">https://www.w3.org/TR/css-color-5/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>合成与混合标准：</bold><itemizedlist>
+<listitem><para>**W3C Compositing and Blending Level 1**：合成与混合规范（Alpha 合成） <ulink url="https://www.w3.org/TR/compositing-1/">https://www.w3.org/TR/compositing-1/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>色彩空间标准：</bold><itemizedlist>
+<listitem><para>**IEC 61966-2-1:1999**：多媒体系统与设备 — 色彩测量与管理 — 第2-1部分：sRGB 色彩空间 <ulink url="https://webstore.iec.ch/publication/6169">https://webstore.iec.ch/publication/6169</ulink></para>
+</listitem><listitem><para>**ITU-R BT.709-6**：高清电视标准参数值（色彩空间定义） <ulink url="https://www.itu.int/rec/R-REC-BT.709/">https://www.itu.int/rec/R-REC-BT.709/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>ANSI 终端颜色标准：</bold><itemizedlist>
+<listitem><para>**ECMA-48**：控制功能编码字符集（ANSI 转义序列） <ulink url="https://ecma-international.org/publications-and-standards/standards/ecma-48/">https://ecma-international.org/publications-and-standards/standards/ecma-48/</ulink></para>
+</listitem><listitem><para>**ISO/IEC 6429:1992**：信息技术 — 编码字符集的控制功能 <ulink url="https://www.iso.org/standard/12782.html">https://www.iso.org/standard/12782.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>XTerm 256 色规范：</bold><itemizedlist>
+<listitem><para>**XTerm 256-Color Specification**：XTerm 256 色调色板定义 <ulink url="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Functions-using-CSI-_-ordered-by-the-final-character_s_">https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Functions-using-CSI-_-ordered-by-the-final-character_s_</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>图形文件格式标准：</bold><itemizedlist>
+<listitem><para>**ISO/IEC 15948:2004**：信息技术 — 计算机图形与图像处理 — PNG 规范 <ulink url="https://www.iso.org/standard/29581.html">https://www.iso.org/standard/29581.html</ulink></para>
+</listitem><listitem><para>**ISO 32000-2:2020**：文档管理 — 便携式文档格式 — 第2部分：PDF 2.0（透明度组） <ulink url="https://www.iso.org/standard/75839.html">https://www.iso.org/standard/75839.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___color_1color_components">
+<title>颜色分量定义</title><para>根据 CSS Color Module Level 4 §4.2，RGB 颜色由以下分量组成：</para>
+<para><table rows="5" cols="4"><row>
+<entry thead="yes"><para>分量  </para>
+</entry><entry thead="yes"><para>范围  </para>
+</entry><entry thead="yes"><para>数据类型  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>R (红)  </para>
+</entry><entry thead="no"><para>0-255  </para>
+</entry><entry thead="no"><para>int  </para>
+</entry><entry thead="no"><para>红色通道强度  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>G (绿)  </para>
+</entry><entry thead="no"><para>0-255  </para>
+</entry><entry thead="no"><para>int  </para>
+</entry><entry thead="no"><para>绿色通道强度  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>B (蓝)  </para>
+</entry><entry thead="no"><para>0-255  </para>
+</entry><entry thead="no"><para>int  </para>
+</entry><entry thead="no"><para>蓝色通道强度  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>A (透)  </para>
+</entry><entry thead="no"><para>0-255  </para>
+</entry><entry thead="no"><para>int  </para>
+</entry><entry thead="no"><para>Alpha 通道（0=全透明，255=不透明）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___color_1hex_format">
+<title>十六进制表示</title><para>根据 CSS Color Module Level 4 §5.2，支持以下十六进制格式：</para>
+<para><table rows="3" cols="3"><row>
+<entry thead="yes"><para>格式  </para>
+</entry><entry thead="yes"><para>示例  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>#RRGGBB  </para>
+</entry><entry thead="no"><para>#FF0000  </para>
+</entry><entry thead="no"><para>不透明红色（Alpha=255）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>#RRGGBBAA  </para>
+</entry><entry thead="no"><para>#FF000080  </para>
+</entry><entry thead="no"><para>半透明红色（Alpha=128）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___color_1alpha_compositing">
+<title>Alpha 合成规则</title><para>根据 W3C Compositing and Blending Level 1 §4，Alpha 合成遵循以下规则：</para>
+<para><table rows="3" cols="2"><row>
+<entry thead="yes"><para>操作  </para>
+</entry><entry thead="yes"><para>公式  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>合成 Alpha  </para>
+</entry><entry thead="no"><para>α_result = α_src + α_dst × (1 - α_src)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>合成 RGB  </para>
+</entry><entry thead="no"><para>C_result = (C_src × α_src + C_dst × α_dst × (1 - α_src)) / α_result  </para>
+</entry></row>
+</table>
+</para>
+<para>本实现的 <computeroutput>blend()</computeroutput> 方法遵循上述规范，在直通 Alpha (straight alpha) 空间进行合成。</para>
+</sect1>
+<sect1 id="group___color_1grayscale_conversion">
+<title>灰度转换</title><para>根据 ITU-R BT.709-6 和 sRGB 标准，人眼感知灰度采用以下加权平均：</para>
+<para><table rows="4" cols="3"><row>
+<entry thead="yes"><para>通道  </para>
+</entry><entry thead="yes"><para>权重  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>红色  </para>
+</entry><entry thead="no"><para>0.299  </para>
+</entry><entry thead="no"><para>人眼对红色敏感度  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>绿色  </para>
+</entry><entry thead="no"><para>0.587  </para>
+</entry><entry thead="no"><para>人眼对绿色最敏感  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>蓝色  </para>
+</entry><entry thead="no"><para>0.114  </para>
+</entry><entry thead="no"><para>人眼对蓝色最不敏感  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___color_1ansi_256_palette">
+<title>ANSI 256 色调色板</title><para>根据 XTerm 256-Color 规范，调色板结构如下：</para>
+<para><table rows="4" cols="3"><row>
+<entry thead="yes"><para>索引范围  </para>
+</entry><entry thead="yes"><para>数量  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0-15  </para>
+</entry><entry thead="no"><para>16  </para>
+</entry><entry thead="no"><para>系统标准色（0-7 标准，8-15 高亮）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>16-231  </para>
+</entry><entry thead="no"><para>216  </para>
+</entry><entry thead="no"><para>6×6×6 RGB 立方体（R,G,B ∈ {0,95,135,175,215,255}）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>232-255  </para>
+</entry><entry thead="no"><para>24  </para>
+</entry><entry thead="no"><para>灰度渐变（从 #080808 到 #EEEEEE）  </para>
+</entry></row>
+</table>
+</para>
+<para>6×6×6 颜色立方体的索引公式：<computeroutput>index = 16 + 36×R_idx + 6×G_idx + B_idx</computeroutput></para>
+</sect1>
+<sect1 id="group___color_1basic_ansi_colors">
+<title>基本 ANSI 8/16 色</title><para>根据 ECMA-48 §8.3.117，基本 ANSI 颜色代码：</para>
+<para><table rows="9" cols="4"><row>
+<entry thead="yes"><para>颜色  </para>
+</entry><entry thead="yes"><para>前景码  </para>
+</entry><entry thead="yes"><para>背景码  </para>
+</entry><entry thead="yes"><para>RGB 近似  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>黑色  </para>
+</entry><entry thead="no"><para>30  </para>
+</entry><entry thead="no"><para>40  </para>
+</entry><entry thead="no"><para>#000000  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>红色  </para>
+</entry><entry thead="no"><para>31  </para>
+</entry><entry thead="no"><para>41  </para>
+</entry><entry thead="no"><para>#CD0000  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>绿色  </para>
+</entry><entry thead="no"><para>32  </para>
+</entry><entry thead="no"><para>42  </para>
+</entry><entry thead="no"><para>#00CD00  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>黄色  </para>
+</entry><entry thead="no"><para>33  </para>
+</entry><entry thead="no"><para>43  </para>
+</entry><entry thead="no"><para>#CDCD00  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>蓝色  </para>
+</entry><entry thead="no"><para>34  </para>
+</entry><entry thead="no"><para>44  </para>
+</entry><entry thead="no"><para>#0000EE  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>品红  </para>
+</entry><entry thead="no"><para>35  </para>
+</entry><entry thead="no"><para>45  </para>
+</entry><entry thead="no"><para>#CD00CD  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>青色  </para>
+</entry><entry thead="no"><para>36  </para>
+</entry><entry thead="no"><para>46  </para>
+</entry><entry thead="no"><para>#00CDCD  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>白色  </para>
+</entry><entry thead="no"><para>37  </para>
+</entry><entry thead="no"><para>47  </para>
+</entry><entry thead="no"><para>#E5E5E5  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="7" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>分量范围  </para>
+</entry><entry thead="no"><para>0-255（8 位每通道）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Alpha 类型  </para>
+</entry><entry thead="no"><para>直通 Alpha（non-premultiplied）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>混合模式  </para>
+</entry><entry thead="no"><para>Normal（source-over）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>插值空间  </para>
+</entry><entry thead="no"><para>直通 Alpha 空间  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>灰度权重  </para>
+</entry><entry thead="no"><para>BT.709 / sRGB（0.299, 0.587, 0.114）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>预乘转换  </para>
+</entry><entry thead="no"><para>支持（to_premultiplied / from_premultiplied）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___color_1named_colors">
+<title>预定义颜色常量</title><para>本类提供以下预定义颜色常量：</para>
+<para><table rows="11" cols="3"><row>
+<entry thead="yes"><para>常量名  </para>
+</entry><entry thead="yes"><para>RGB 值  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>black()  </para>
+</entry><entry thead="no"><para>0, 0, 0, 255  </para>
+</entry><entry thead="no"><para>黑色  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>white()  </para>
+</entry><entry thead="no"><para>255, 255, 255, 255  </para>
+</entry><entry thead="no"><para>白色  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>gray()  </para>
+</entry><entry thead="no"><para>128, 128, 128, 255  </para>
+</entry><entry thead="no"><para>灰色  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>red()  </para>
+</entry><entry thead="no"><para>255, 0, 0, 255  </para>
+</entry><entry thead="no"><para>红色  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>green()  </para>
+</entry><entry thead="no"><para>0, 255, 0, 255  </para>
+</entry><entry thead="no"><para>绿色  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>blue()  </para>
+</entry><entry thead="no"><para>0, 0, 255, 255  </para>
+</entry><entry thead="no"><para>蓝色  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>yellow()  </para>
+</entry><entry thead="no"><para>255, 255, 0, 255  </para>
+</entry><entry thead="no"><para>黄色  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>magenta()  </para>
+</entry><entry thead="no"><para>255, 0, 255, 255  </para>
+</entry><entry thead="no"><para>品红  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>cyan()  </para>
+</entry><entry thead="no"><para>0, 255, 255, 255  </para>
+</entry><entry thead="no"><para>青色  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>transparent()  </para>
+</entry><entry thead="no"><para>0, 0, 0, 0  </para>
+</entry><entry thead="no"><para>完全透明  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>本类采用直通 Alpha（straight alpha）表示，符合 CSS 和 SVG 标准。 对于需要预乘 Alpha 的图形 API（如 OpenGL、DirectX、Metal）， 可使用 <computeroutput>to_premultiplied()</computeroutput> 方法进行转换。</para>
+</simplesect>
+<simplesect kind="warning"><para>根据 W3C Compositing Level 1，混合操作应在直通 Alpha 空间进行， 在预乘 Alpha 空间直接混合会产生错误的合成结果。 在跨进程或跨 API 传输预乘颜色数据时务必注明格式。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.w3.org/TR/css-color-4/">https://www.w3.org/TR/css-color-4/</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.w3.org/TR/compositing-1/">https://www.w3.org/TR/compositing-1/</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

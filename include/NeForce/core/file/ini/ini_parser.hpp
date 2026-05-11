@@ -3,10 +3,10 @@
 
 /**
  * @file ini_parser.hpp
- * @brief ini配置解析器
+ * @brief INI配置解析器
  *
- * 此文件提供了ini配置格式的解析器实现。
- * 支持解析ini格式，包括节(section)、键值对、注释等元素。
+ * 此文件提供了INI配置格式的解析器实现。
+ * 支持解析INI格式，包括节(section)、键值对、注释等元素。
  * 提供完整的语法分析和错误处理机制。
  */
 
@@ -15,22 +15,20 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup ConfigFormat 配置格式操作
- * @brief env配置格式管理
+ * @addtogroup ConfigFormat 配置格式操作
  * @{
  */
 
 /**
- * @defgroup IniConfig ini配置
- * @brief ini配置格式管理
+ * @addtogroup IniConfig INI配置
  * @{
  */
 
 /**
  * @class ini_parser
- * @brief ini配置解析器
+ * @brief INI配置解析器
  *
- * 解析ini格式，支持以下特性：
+ * 解析INI格式，支持以下特性：
  * - 节定义（[section]格式）
  * - 键值对（key=value格式）
  * - 注释（支持;和#开头的行）
@@ -152,7 +150,7 @@ public:
      * @return 解析完成的文档对象
      * @throws ini_exception 当解析遇到语法错误时抛出
      *
-     * 逐行解析整个文本内容，构建ini文档结构。
+     * 逐行解析整个文本内容，构建INI文档结构。
      * 解析过程中遇到错误会抛出异常。
      */
     unique_ptr<ini_document> parse();

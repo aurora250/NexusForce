@@ -1,0 +1,552 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classfile__async" kind="class" language="C++" prot="public">
+    <compoundname>file_async</compoundname>
+    <includes refid="file__async_8hpp" local="no">file_async.hpp</includes>
+    <innerclass refid="structfile__async_1_1async__context" prot="private">file_async::async_context</innerclass>
+    <innerclass refid="structfile__async_1_1async__result" prot="public">file_async::async_result</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classfile__async_1a1dffe3f8526b94e6327e43895c6b577c" prot="public" static="no">
+        <type>::DWORD</type>
+        <definition>using file_async::size_type = ::DWORD</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>file_async::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="44" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classfile__async_1aa89bd5ba6636db0098aed0ee62b49d2c" prot="public" static="no">
+        <type>::LONGLONG</type>
+        <definition>using file_async::difference_type = ::LONGLONG</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>file_async::difference_type</qualifiedname>
+        <briefdescription>
+<para>偏移量类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="45" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classfile__async_1a806795660074f7825f91730c57ab32bf" prot="public" static="no">
+        <type>::OVERLAPPED</type>
+        <definition>using file_async::aiocb_type = ::OVERLAPPED</definition>
+        <argsstring></argsstring>
+        <name>aiocb_type</name>
+        <qualifiedname>file_async::aiocb_type</qualifiedname>
+        <briefdescription>
+<para>异步I/O控制块类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="46" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classfile__async_1a8b645f877995e8d118070dc12c6ba3bd" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classfile__async_1a8b645f877995e8d118070dc12c6ba3bd" kindref="member">native_handle_type</ref></type>
+        <definition>using file_async::native_handle_type = _NEFORCE native_handle_type</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>file_async::native_handle_type</qualifiedname>
+        <briefdescription>
+<para>原生文件句柄类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="53" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfile__async_1a8085991142fd3e56bc4f74880a49296b" prot="private" static="no" mutable="no">
+        <type><ref refid="classfile__async_1a8b645f877995e8d118070dc12c6ba3bd" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type file_async::handle_</definition>
+        <argsstring></argsstring>
+        <name>handle_</name>
+        <qualifiedname>file_async::handle_</qualifiedname>
+        <briefdescription>
+<para>文件句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="100" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__async_1a7f37cc169687740eedf3d36adf2e52d5" prot="private" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex file_async::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>file_async::mutex_</qualifiedname>
+        <briefdescription>
+<para>保护操作列表的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="101" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__async_1af429b0fc7556977f86e9dc1598f0fc6e" prot="private" static="no" mutable="yes">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classfile__async_1a806795660074f7825f91730c57ab32bf" kindref="member">aiocb_type</ref> * &gt;</type>
+        <definition>vector&lt;aiocb_type*&gt; file_async::operations_</definition>
+        <argsstring></argsstring>
+        <name>operations_</name>
+        <qualifiedname>file_async::operations_</qualifiedname>
+        <briefdescription>
+<para>进行中的异步操作列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="102" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfile__async_1a28dd4ec7bd211b0687fea4c5505577d7" prot="private" static="no" mutable="yes">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="classfile__async_1a806795660074f7825f91730c57ab32bf" kindref="member">aiocb_type</ref> *, async_context * &gt;</type>
+        <definition>unordered_map&lt;aiocb_type*, async_context*&gt; file_async::contexts_</definition>
+        <argsstring></argsstring>
+        <name>contexts_</name>
+        <qualifiedname>file_async::contexts_</qualifiedname>
+        <briefdescription>
+<para>操作上下文映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="103" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfile__async_1ac648504d7cafe403f994ac0671547978" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_async::complete_result</definition>
+        <argsstring>(async_result &amp;result, size_type bytes) noexcept</argsstring>
+        <name>complete_result</name>
+        <qualifiedname>file_async::complete_result</qualifiedname>
+        <param>
+          <type><ref refid="structfile__async_1_1async__result" kindref="compound">async_result</ref> &amp;</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type><ref refid="classfile__async_1a1dffe3f8526b94e6327e43895c6b577c" kindref="member">size_type</ref></type>
+          <declname>bytes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="105" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__async_1a2b768152a8120f872f46c783ce330342" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_async::check_completion</definition>
+        <argsstring>(async_result &amp;result) noexcept</argsstring>
+        <name>check_completion</name>
+        <qualifiedname>file_async::check_completion</qualifiedname>
+        <param>
+          <type><ref refid="structfile__async_1_1async__result" kindref="compound">async_result</ref> &amp;</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="106" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfile__async_1aa27dd3253c71dea9e0329739724561fb" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>file_async::file_async</definition>
+        <argsstring>(native_handle_type handle)</argsstring>
+        <name>file_async</name>
+        <qualifiedname>file_async::file_async</qualifiedname>
+        <param>
+          <type><ref refid="classfile__async_1a8b645f877995e8d118070dc12c6ba3bd" kindref="member">native_handle_type</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已打开的文件句柄</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+关联指定的文件句柄。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="115" column="14"/>
+        <references refid="group___thread_1ga9c11108611d4c65deb691d1b88f0dc07" compoundref="thread_8hpp" startline="461" endline="467">handle</references>
+        <referencedby refid="classfile__async_1a5d896cd10fd4ca97b016db8bc30143d3">file_async</referencedby>
+        <referencedby refid="classfile__async_1ab75c5fa31ff8aed4ea37fa53a3a34e1c">operator=</referencedby>
+        <referencedby refid="classfile__async_1ac23d04d4fa4c0cf5448b5373cf40506a">~file_async</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfile__async_1ac23d04d4fa4c0cf5448b5373cf40506a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>file_async::~file_async</definition>
+        <argsstring>()</argsstring>
+        <name>~file_async</name>
+        <qualifiedname>file_async::~file_async</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>取消所有进行中的异步操作并释放资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="122" column="5"/>
+        <references refid="classfile__async_1aa27dd3253c71dea9e0329739724561fb">file_async</references>
+      </memberdef>
+      <memberdef kind="function" id="classfile__async_1a47c356f2fe3a0d7576023398d39c0927" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>file_async::file_async</definition>
+        <argsstring>(const file_async &amp;)=delete</argsstring>
+        <name>file_async</name>
+        <qualifiedname>file_async::file_async</qualifiedname>
+        <param>
+          <type>const <ref refid="classfile__async" kindref="compound">file_async</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="124" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__async_1a9483b50e082c762391e130113d21fc58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classfile__async" kindref="compound">file_async</ref> &amp;</type>
+        <definition>file_async &amp; file_async::operator=</definition>
+        <argsstring>(const file_async &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>file_async::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classfile__async" kindref="compound">file_async</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="125" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classfile__async_1a5d896cd10fd4ca97b016db8bc30143d3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>file_async::file_async</definition>
+        <argsstring>(file_async &amp;&amp;other) noexcept</argsstring>
+        <name>file_async</name>
+        <qualifiedname>file_async::file_async</qualifiedname>
+        <param>
+          <type><ref refid="classfile__async" kindref="compound">file_async</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="131" column="5"/>
+        <references refid="classfile__async_1aa27dd3253c71dea9e0329739724561fb">file_async</references>
+      </memberdef>
+      <memberdef kind="function" id="classfile__async_1ab75c5fa31ff8aed4ea37fa53a3a34e1c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classfile__async" kindref="compound">file_async</ref> &amp;</type>
+        <definition>file_async &amp; file_async::operator=</definition>
+        <argsstring>(file_async &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>file_async::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classfile__async" kindref="compound">file_async</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="138" column="16"/>
+        <references refid="classfile__async_1aa27dd3253c71dea9e0329739724561fb">file_async</references>
+      </memberdef>
+      <memberdef kind="function" id="classfile__async_1a8e438650026366cf80e0c7cd65cca921" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfile__async_1_1async__result" kindref="compound">async_result</ref></type>
+        <definition>async_result file_async::read</definition>
+        <argsstring>(string &amp;buffer, size_type size, difference_type offset=-1) const</argsstring>
+        <name>read</name>
+        <qualifiedname>file_async::read</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="classfile__async_1a1dffe3f8526b94e6327e43895c6b577c" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classfile__async_1aa89bd5ba6636db0098aed0ee62b49d2c" kindref="member">difference_type</ref></type>
+          <declname>offset</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>提交异步读取操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出缓冲区（会预先分配空间） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要读取的字节数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件偏移量，-1表示使用当前文件位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>异步操作结果句柄</para>
+</simplesect>
+从文件读取数据到指定缓冲区。如果size为0，立即返回已完成的结果。 如果offset为-1，使用当前文件指针位置；否则从指定偏移量读取。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="150" column="18"/>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classfile__async_1a1dfcb34e84136e542672f6cd262d5267" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfile__async_1_1async__result" kindref="compound">async_result</ref></type>
+        <definition>async_result file_async::write</definition>
+        <argsstring>(string data, size_type size, difference_type offset=-1)</argsstring>
+        <name>write</name>
+        <qualifiedname>file_async::write</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="classfile__async_1a1dffe3f8526b94e6327e43895c6b577c" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classfile__async_1aa89bd5ba6636db0098aed0ee62b49d2c" kindref="member">difference_type</ref></type>
+          <declname>offset</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>提交异步写入操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的字节数，最大值表示写入全部数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件偏移量，-1表示使用当前文件位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>异步操作结果句柄</para>
+</simplesect>
+将数据写入文件。数据会被复制到内部存储，调用者可以立即释放。 如果size为最大值，写入整个字符串；否则写入指定长度。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="162" column="18"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classfile__async_1a5a829b737f32cdbcd60152f05f96b439" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_async::wait</definition>
+        <argsstring>(async_result &amp;result, uint32_t timeout_ms=numeric_traits&lt; uint32_t &gt;::max())</argsstring>
+        <name>wait</name>
+        <qualifiedname>file_async::wait</qualifiedname>
+        <param>
+          <type><ref refid="structfile__async_1_1async__result" kindref="compound">async_result</ref> &amp;</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>timeout_ms</declname>
+          <defval><ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt; <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &gt;<ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">::max</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>等待异步操作完成 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步操作结果句柄 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间（毫秒），最大值表示无限等待 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>操作完成返回true，超时或失败返回false</para>
+</simplesect>
+阻塞当前线程直到异步操作完成或超时。 如果操作已完成，立即返回。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="173" column="10"/>
+        <references refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+      </memberdef>
+      <memberdef kind="function" id="classfile__async_1a38bf1f96c05cee78bf1f8ae1deb299c4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void file_async::cancel</definition>
+        <argsstring>(async_result &amp;result) noexcept</argsstring>
+        <name>cancel</name>
+        <qualifiedname>file_async::cancel</qualifiedname>
+        <param>
+          <type><ref refid="structfile__async_1_1async__result" kindref="compound">async_result</ref> &amp;</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>取消异步操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异步操作结果句柄</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+尝试取消进行中的异步操作。取消成功后，操作状态会被标记为已完成， error_code会被设置为取消错误码。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="182" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>文件异步I/O管理类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供对文件句柄的异步读写操作：<itemizedlist>
+<listitem><para>非阻塞异步读写</para>
+</listitem><listitem><para>支持超时等待</para>
+</listitem><listitem><para>支持取消操作</para>
+</listitem><listitem><para>线程安全的操作提交</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>对同一文件的并发操作顺序由操作系统决定。 </para>
+</simplesect>
+<simplesect kind="note"><para>不持有文件句柄所有权，句柄生命周期由调用方保证。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" line="41" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp" bodystart="41" bodyend="183"/>
+    <listofallmembers>
+      <member refid="classfile__async_1a806795660074f7825f91730c57ab32bf" prot="public" virt="non-virtual"><scope>file_async</scope><name>aiocb_type</name></member>
+      <member refid="classfile__async_1a38bf1f96c05cee78bf1f8ae1deb299c4" prot="public" virt="non-virtual"><scope>file_async</scope><name>cancel</name></member>
+      <member refid="classfile__async_1a2b768152a8120f872f46c783ce330342" prot="private" virt="non-virtual"><scope>file_async</scope><name>check_completion</name></member>
+      <member refid="classfile__async_1ac648504d7cafe403f994ac0671547978" prot="private" virt="non-virtual"><scope>file_async</scope><name>complete_result</name></member>
+      <member refid="classfile__async_1a28dd4ec7bd211b0687fea4c5505577d7" prot="private" virt="non-virtual"><scope>file_async</scope><name>contexts_</name></member>
+      <member refid="classfile__async_1aa89bd5ba6636db0098aed0ee62b49d2c" prot="public" virt="non-virtual"><scope>file_async</scope><name>difference_type</name></member>
+      <member refid="classfile__async_1aa27dd3253c71dea9e0329739724561fb" prot="public" virt="non-virtual"><scope>file_async</scope><name>file_async</name></member>
+      <member refid="classfile__async_1a47c356f2fe3a0d7576023398d39c0927" prot="public" virt="non-virtual"><scope>file_async</scope><name>file_async</name></member>
+      <member refid="classfile__async_1a5d896cd10fd4ca97b016db8bc30143d3" prot="public" virt="non-virtual"><scope>file_async</scope><name>file_async</name></member>
+      <member refid="classfile__async_1a8085991142fd3e56bc4f74880a49296b" prot="private" virt="non-virtual"><scope>file_async</scope><name>handle_</name></member>
+      <member refid="classfile__async_1a7f37cc169687740eedf3d36adf2e52d5" prot="private" virt="non-virtual"><scope>file_async</scope><name>mutex_</name></member>
+      <member refid="classfile__async_1a8b645f877995e8d118070dc12c6ba3bd" prot="public" virt="non-virtual"><scope>file_async</scope><name>native_handle_type</name></member>
+      <member refid="classfile__async_1af429b0fc7556977f86e9dc1598f0fc6e" prot="private" virt="non-virtual"><scope>file_async</scope><name>operations_</name></member>
+      <member refid="classfile__async_1a9483b50e082c762391e130113d21fc58" prot="public" virt="non-virtual"><scope>file_async</scope><name>operator=</name></member>
+      <member refid="classfile__async_1ab75c5fa31ff8aed4ea37fa53a3a34e1c" prot="public" virt="non-virtual"><scope>file_async</scope><name>operator=</name></member>
+      <member refid="classfile__async_1a8e438650026366cf80e0c7cd65cca921" prot="public" virt="non-virtual"><scope>file_async</scope><name>read</name></member>
+      <member refid="classfile__async_1a1dffe3f8526b94e6327e43895c6b577c" prot="public" virt="non-virtual"><scope>file_async</scope><name>size_type</name></member>
+      <member refid="classfile__async_1a5a829b737f32cdbcd60152f05f96b439" prot="public" virt="non-virtual"><scope>file_async</scope><name>wait</name></member>
+      <member refid="classfile__async_1a1dfcb34e84136e542672f6cd262d5267" prot="public" virt="non-virtual"><scope>file_async</scope><name>write</name></member>
+      <member refid="classfile__async_1ac23d04d4fa4c0cf5448b5373cf40506a" prot="public" virt="non-virtual"><scope>file_async</scope><name>~file_async</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -22,7 +22,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct toml_exception
- * @brief toml格式操作失败
+ * @brief TOML格式操作失败
  */
 struct toml_exception final : value_exception {
     explicit toml_exception(const char* info = "TOML Operation Failed.", const char* type = static_type,
@@ -40,13 +40,13 @@ struct toml_exception final : value_exception {
 
 /**
  * @defgroup ConfigFormat 配置格式操作
- * @brief env配置格式管理
+ * @brief 配置格式管理
  * @{
  */
 
 /**
- * @defgroup TomlConfig toml配置
- * @brief toml配置格式管理
+ * @defgroup TomlConfig TOML配置
+ * @brief TOML配置格式管理
  *
  * TOML是一种易于阅读的配置文件格式，设计目标是比JSON更友好、比YAML更简单。
  *
@@ -165,15 +165,15 @@ class toml_table;
 
 /**
  * @class toml_value
- * @brief toml值抽象基类
+ * @brief TOML值抽象基类
  *
- * 提供toml值的统一接口，支持类型识别和字符串转换。
+ * 提供TOML值的统一接口，支持类型识别和字符串转换。
  */
 class NEFORCE_API toml_value : public istringify<toml_value> {
 public:
     /**
      * @enum types
-     * @brief toml值类型枚举
+     * @brief TOML值类型枚举
      */
     enum types {
         Boolean,  ///< 布尔值类型
@@ -191,7 +191,7 @@ public:
     virtual ~toml_value() = default;
 
     /**
-     * @brief 获取toml值类型
+     * @brief 获取TOML值类型
      * @return 类型枚举值
      */
     NEFORCE_NODISCARD virtual types type() const noexcept = 0;
@@ -282,13 +282,13 @@ public:
 
     /**
      * @brief 转换为紧凑格式字符串
-     * @return toml值的紧凑格式字符串表示
+     * @return TOML值的紧凑格式字符串表示
      */
     NEFORCE_NODISCARD string to_string() const;
 
     /**
      * @brief 转换为文档格式字符串
-     * @return toml值的完整文档格式字符串表示
+     * @return TOML值的完整文档格式字符串表示
      */
     NEFORCE_NODISCARD string to_document() const;
 };
@@ -296,9 +296,9 @@ public:
 
 /**
  * @class toml_boolean
- * @brief toml布尔值类
+ * @brief TOML布尔值类
  *
- * 表示toml中的true或false值。
+ * 表示TOML中的true或false值。
  */
 class NEFORCE_API toml_boolean final : public toml_value {
 private:
@@ -333,9 +333,9 @@ public:
 
 /**
  * @class toml_integer
- * @brief toml整数值类
+ * @brief TOML整数值类
  *
- * 表示toml中的64位有符号整数。
+ * 表示TOML中的64位有符号整数。
  */
 class NEFORCE_API toml_integer final : public toml_value {
 private:
@@ -370,9 +370,9 @@ public:
 
 /**
  * @class toml_float
- * @brief toml浮点数值类
+ * @brief TOML浮点数值类
  *
- * 表示toml中的双精度浮点数。
+ * 表示TOML中的双精度浮点数。
  */
 class NEFORCE_API toml_float final : public toml_value {
 private:
@@ -407,9 +407,9 @@ public:
 
 /**
  * @class toml_string
- * @brief toml字符串值类
+ * @brief TOML字符串值类
  *
- * 表示toml中的字符串，支持四种引号类型：
+ * 表示TOML中的字符串，支持四种引号类型：
  * - Basic：双引号字符串 "string"
  * - Literal：单引号字符串 'string'
  * - MultiBasic：多行双引号字符串 """string"""
@@ -469,9 +469,9 @@ public:
 
 /**
  * @class toml_datetime
- * @brief toml日期时间值类
+ * @brief TOML日期时间值类
  *
- * 表示toml中的日期时间类型，支持四种格式：
+ * 表示TOML中的日期时间类型，支持四种格式：
  * - OffsetDateTime：带时区偏移的完整日期时间 1979-05-27T07:32:00Z
  * - LocalDateTime：本地日期时间 1979-05-27T07:32:00
  * - LocalDate：本地日期 1979-05-27
@@ -586,10 +586,10 @@ public:
 
 /**
  * @class toml_array
- * @brief toml数组类
+ * @brief TOML数组类
  *
- * 表示toml中的数组类型，包含有序的元素列表。
- * 每个元素可以是任意toml值类型。
+ * 表示TOML中的数组类型，包含有序的元素列表。
+ * 每个元素可以是任意TOML值类型。
  */
 class NEFORCE_API toml_array final : public toml_value {
 private:
@@ -662,9 +662,9 @@ public:
 
 /**
  * @class toml_table
- * @brief toml表格类
+ * @brief TOML表格类
  *
- * 表示toml中的表格类型，包含多个键值对成员。
+ * 表示TOML中的表格类型，包含多个键值对成员。
  * 支持标准表格和内联表格两种形式。
  */
 class NEFORCE_API toml_table final : public toml_value {

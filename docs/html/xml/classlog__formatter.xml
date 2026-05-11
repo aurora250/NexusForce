@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classlog__formatter" kind="class" language="C++" prot="public">
+    <compoundname>log_formatter</compoundname>
+    <includes refid="log__formatter_8hpp" local="no">log_formatter.hpp</includes>
+    <innerclass refid="structlog__formatter_1_1part" prot="private">log_formatter::part</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classlog__formatter_1adfa732f54185cd3190b7f9218f1d12c7" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string log_formatter::pattern_</definition>
+        <argsstring></argsstring>
+        <name>pattern_</name>
+        <qualifiedname>log_formatter::pattern_</qualifiedname>
+        <briefdescription>
+<para>原始格式模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="54" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlog__formatter_1a21f477e46560552b7316a6f67614bb18" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; part &gt;</type>
+        <definition>vector&lt;part&gt; log_formatter::parts_</definition>
+        <argsstring></argsstring>
+        <name>parts_</name>
+        <qualifiedname>log_formatter::parts_</qualifiedname>
+        <briefdescription>
+<para>解析后的各部分 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="55" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classlog__formatter_1a509a0eaec48e75592df31d1fc486dc53" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void log_formatter::parse_pattern</definition>
+        <argsstring>()</argsstring>
+        <name>parse_pattern</name>
+        <qualifiedname>log_formatter::parse_pattern</qualifiedname>
+        <briefdescription>
+<para>解析格式模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>将模式字符串解析为文本段和占位符段的列表。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="62" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classlog__formatter_1a126df758996316fd0fba8083e8466116" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string log_formatter::resolve_placeholder</definition>
+        <argsstring>(string ph, const log_event &amp;event) const</argsstring>
+        <name>resolve_placeholder</name>
+        <qualifiedname>log_formatter::resolve_placeholder</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>ph</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structlog__event" kindref="compound">log_event</ref> &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>解析占位符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>占位符名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志事件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>占位符对应的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="70" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlog__formatter_1ae4dce333c41dd9e679550198ccd394ce" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>log_formatter::log_formatter</definition>
+        <argsstring>(string pattern)</argsstring>
+        <name>log_formatter</name>
+        <qualifiedname>log_formatter::log_formatter</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>pattern</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pattern</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式模式字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="77" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classlog__formatter_1ad93b92968d24327903ab47525d250de1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string log_formatter::format</definition>
+        <argsstring>(const log_event &amp;event)</argsstring>
+        <name>format</name>
+        <qualifiedname>log_formatter::format</qualifiedname>
+        <param>
+          <type>const <ref refid="structlog__event" kindref="compound">log_event</ref> &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>格式化日志事件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要格式化的日志事件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式化后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="84" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>日志格式化器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>根据指定的模式字符串格式化日志事件。 支持以下占位符：<itemizedlist>
+<listitem><para>{time} : 时间戳</para>
+</listitem><listitem><para>{level} : 日志级别</para>
+</listitem><listitem><para>{file} : 源文件名</para>
+</listitem><listitem><para>{line} : 行号</para>
+</listitem><listitem><para>{func} : 函数名</para>
+</listitem><listitem><para>{thread} : 线程ID</para>
+</listitem><listitem><para>{message} : 日志消息</para>
+</listitem><listitem><para>{context.key} : 上下文中的指定键</para>
+</listitem></itemizedlist>
+</para>
+<para>示例模式：&quot;[{time}] [{level}] {file}:{line} - {message}&quot; </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="38" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" bodystart="38" bodyend="85"/>
+    <listofallmembers>
+      <member refid="classlog__formatter_1ad93b92968d24327903ab47525d250de1" prot="public" virt="non-virtual"><scope>log_formatter</scope><name>format</name></member>
+      <member refid="classlog__formatter_1ae4dce333c41dd9e679550198ccd394ce" prot="public" virt="non-virtual"><scope>log_formatter</scope><name>log_formatter</name></member>
+      <member refid="classlog__formatter_1a509a0eaec48e75592df31d1fc486dc53" prot="private" virt="non-virtual"><scope>log_formatter</scope><name>parse_pattern</name></member>
+      <member refid="classlog__formatter_1a21f477e46560552b7316a6f67614bb18" prot="private" virt="non-virtual"><scope>log_formatter</scope><name>parts_</name></member>
+      <member refid="classlog__formatter_1adfa732f54185cd3190b7f9218f1d12c7" prot="private" virt="non-virtual"><scope>log_formatter</scope><name>pattern_</name></member>
+      <member refid="classlog__formatter_1a126df758996316fd0fba8083e8466116" prot="private" virt="non-virtual"><scope>log_formatter</scope><name>resolve_placeholder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

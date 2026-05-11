@@ -1,0 +1,977 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structports" kind="struct" language="C++" prot="public">
+    <compoundname>ports</compoundname>
+    <basecompoundref refid="structiobject" prot="public" virt="non-virtual">iobject&lt; ports &gt;</basecompoundref>
+    <includes refid="ports_8hpp" local="no">ports.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8" prot="public" static="no" strong="no">
+        <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+        <name>raw</name>
+        <qualifiedname>ports::raw</qualifiedname>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" prot="public">
+          <name>UNDEF</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>未定义/无效端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a1812b85c4a165041197323da60a8d9b9" prot="public">
+          <name>FTP_DATA</name>
+          <initializer>= 20</initializer>
+          <briefdescription>
+<para>FTP数据端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a40e883c984f48e817c42de79d120eee9" prot="public">
+          <name>FTP</name>
+          <initializer>= 21</initializer>
+          <briefdescription>
+<para>FTP控制端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ada5b9afffd52ce9e6fc283f060c568b7" prot="public">
+          <name>SSH</name>
+          <initializer>= 22</initializer>
+          <briefdescription>
+<para>SSH协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8af2fbe4f0bc82990f6ec2eca7a851b2c4" prot="public">
+          <name>TELNET</name>
+          <initializer>= 23</initializer>
+          <briefdescription>
+<para>Telnet协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a9ee24853659527617f10e30b80d0f08c" prot="public">
+          <name>SMTP</name>
+          <initializer>= 25</initializer>
+          <briefdescription>
+<para>SMTP协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a305d7a53eafabf042067c988c705cd93" prot="public">
+          <name>DNS</name>
+          <initializer>= 53</initializer>
+          <briefdescription>
+<para>DNS协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ad771e78a2c51e74ccbfa36b50143a772" prot="public">
+          <name>DHCP_SERVER</name>
+          <initializer>= 67</initializer>
+          <briefdescription>
+<para>DHCP服务器端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a1fb9a6c8c8afd2bc8ed3c40e2e573784" prot="public">
+          <name>DHCP_CLIENT</name>
+          <initializer>= 68</initializer>
+          <briefdescription>
+<para>DHCP客户端端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8adc7b1756fde788264d532e769de47d31" prot="public">
+          <name>TFTP</name>
+          <initializer>= 69</initializer>
+          <briefdescription>
+<para>TFTP协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ad7ed6569a70c2e3158713dafb1eba49a" prot="public">
+          <name>HTTP</name>
+          <initializer>= 80</initializer>
+          <briefdescription>
+<para>HTTP协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8abda72ed8541710980b8ec46af261a740" prot="public">
+          <name>WS</name>
+          <initializer>= 80</initializer>
+          <briefdescription>
+<para>WebSocket协议端口（与HTTP共用） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8af4e50a4efb9c4579dd9b722bdc542e88" prot="public">
+          <name>POP3</name>
+          <initializer>= 110</initializer>
+          <briefdescription>
+<para>POP3协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8affd9626ed90842c4f788925c4409c0aa" prot="public">
+          <name>NTP</name>
+          <initializer>= 123</initializer>
+          <briefdescription>
+<para>NTP协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ace1c1fe008a210c6112c1f5acf936d91" prot="public">
+          <name>IMAP</name>
+          <initializer>= 143</initializer>
+          <briefdescription>
+<para>IMAP协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a4217447d8bd9780863e29c7ffc8cad8e" prot="public">
+          <name>SNMP</name>
+          <initializer>= 161</initializer>
+          <briefdescription>
+<para>SNMP协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a8b718bb5fca31443656f5ed1e3454c8a" prot="public">
+          <name>SNMP_TRAP</name>
+          <initializer>= 162</initializer>
+          <briefdescription>
+<para>SNMP陷阱通知端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a25a4bc8028c7debf35b92dd765f6b9f3" prot="public">
+          <name>LDAP</name>
+          <initializer>= 389</initializer>
+          <briefdescription>
+<para>LDAP协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8af1912bb051f1bce125984a8d82b2fdc6" prot="public">
+          <name>HTTPS</name>
+          <initializer>= 443</initializer>
+          <briefdescription>
+<para>HTTPS协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8af285b1726d9a5c79c618622a8e2d5bce" prot="public">
+          <name>WSS</name>
+          <initializer>= 443</initializer>
+          <briefdescription>
+<para>WebSocket Secure端口（与HTTPS共用） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a071ebae028e5ed419982fa26e085782b" prot="public">
+          <name>SMB</name>
+          <initializer>= 445</initializer>
+          <briefdescription>
+<para>SMB/CIFS协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a2097e40103ed3e90e771361c819b202a" prot="public">
+          <name>SMTPS</name>
+          <initializer>= 465</initializer>
+          <briefdescription>
+<para>SMTPS协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8aa747ed90ba6d253bcebdbdaa35b17cd1" prot="public">
+          <name>SMTP_SUBMIT</name>
+          <initializer>= 587</initializer>
+          <briefdescription>
+<para>SMTP邮件提交端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a7632c259f47a8d352df63f90f580470a" prot="public">
+          <name>LDAPS</name>
+          <initializer>= 636</initializer>
+          <briefdescription>
+<para>LDAPS协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8abe97a7717fbb19461b2f1551158579b6" prot="public">
+          <name>IMAPS</name>
+          <initializer>= 993</initializer>
+          <briefdescription>
+<para>IMAPS协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a55b00737ae6a8e16dd95a7ebdeefc068" prot="public">
+          <name>POP3S</name>
+          <initializer>= 995</initializer>
+          <briefdescription>
+<para>POP3S协议端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ae1fab56c6e78f444d1fbc6f9d1de6bcd" prot="public">
+          <name>MYSQL</name>
+          <initializer>= 3306</initializer>
+          <briefdescription>
+<para>MySQL数据库端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a9e747e801f9b0fb6def175f6965826b8" prot="public">
+          <name>POSTGRESQL</name>
+          <initializer>= 5432</initializer>
+          <briefdescription>
+<para>PostgreSQL数据库端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ab2a8b3c52f6541749f523de3c85969ee" prot="public">
+          <name>REDIS</name>
+          <initializer>= 6379</initializer>
+          <briefdescription>
+<para>Redis数据库端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a4ad3d6561fccc0bd695f388561fdc093" prot="public">
+          <name>MONGODB</name>
+          <initializer>= 27017</initializer>
+          <briefdescription>
+<para>MongoDB数据库端口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>端口号枚举值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="135" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="135" bodyend="168"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structports_1ac83896c19af3451bbd0ce66a1b9a233e" prot="public" static="no" mutable="no">
+        <type><ref refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8" kindref="member">raw</ref></type>
+        <definition>raw ports::port</definition>
+        <argsstring></argsstring>
+        <name>port</name>
+        <qualifiedname>ports::port</qualifiedname>
+        <initializer>{<ref refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" kindref="member">UNDEF</ref>}</initializer>
+        <briefdescription>
+<para>端口值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="170" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="170" bodyend="170"/>
+        <referencedby refid="structports_1af36ad633f7e9d94fb0cde671ef89c480" compoundref="ports_8hpp" startline="229" endline="229">is_dynamic</referencedby>
+        <referencedby refid="structports_1aa263ef720ce252dab8d075a1a9abefdd" compoundref="ports_8hpp" startline="220" endline="223">is_registered</referencedby>
+        <referencedby refid="structports_1a8b073e5dbb9367b27dcc00c95b70d4bf" compoundref="ports_8hpp" startline="214" endline="214">is_well_known</referencedby>
+        <referencedby refid="structports_1abd4092003d11db99eda911f01d242bc8" compoundref="ports_8hpp" startline="200" endline="200">operator bool</referencedby>
+        <referencedby refid="structports_1a88dc0ead0b9d0c484727d7a04d12f6f0" compoundref="ports_8hpp" startline="206" endline="206">operator uint16_t</referencedby>
+        <referencedby refid="classhttp__server_1af1ebf90a83db7ea20851144bee6f67da" compoundref="http__server_8hpp" startline="216" endline="216">http_server::port</referencedby>
+        <referencedby refid="structports_1ad16ca5a958a7bac673c09ae68918d311" compoundref="ports_8hpp" startline="183" endline="184">ports</referencedby>
+        <referencedby refid="structports_1a9971f3b73413357e32b44e4229062f26" compoundref="ports_8hpp" startline="190" endline="192">ports</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structports_1aed7286a23ab2d5be7c08b47807fa5eb0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>ports::ports</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>ports</name>
+        <qualifiedname>ports::ports</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建未定义端口的对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="177" column="15"/>
+        <referencedby refid="structports_1af8fe0623e057c4f2f93f8b7fc6cfe251">parse</referencedby>
+        <referencedby refid="structports_1ad16ca5a958a7bac673c09ae68918d311" compoundref="ports_8hpp" startline="183" endline="184">ports</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structports_1ad16ca5a958a7bac673c09ae68918d311" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>ports::ports</definition>
+        <argsstring>(const raw port) noexcept</argsstring>
+        <name>ports</name>
+        <qualifiedname>ports::ports</qualifiedname>
+        <param>
+          <type>const <ref refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8" kindref="member">raw</ref></type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>从枚举值构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>端口枚举值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="183" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="183" bodyend="184"/>
+        <references refid="structports_1ac83896c19af3451bbd0ce66a1b9a233e" compoundref="ports_8hpp" startline="170" endline="170">port</references>
+        <references refid="structports_1aed7286a23ab2d5be7c08b47807fa5eb0">ports</references>
+      </memberdef>
+      <memberdef kind="function" id="structports_1a9971f3b73413357e32b44e4229062f26" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>ports::ports</definition>
+        <argsstring>(const uint16_t port) noexcept</argsstring>
+        <name>ports</name>
+        <qualifiedname>ports::ports</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>从uint16_t构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>端口数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="190" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="190" bodyend="192"/>
+        <references refid="structports_1ac83896c19af3451bbd0ce66a1b9a233e" compoundref="ports_8hpp" startline="170" endline="170">port</references>
+      </memberdef>
+      <memberdef kind="function" id="structports_1abd4092003d11db99eda911f01d242bc8" prot="public" static="no" constexpr="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>ports::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>ports::operator bool</qualifiedname>
+        <briefdescription>
+<para>布尔转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>端口有效返回true</para>
+</simplesect>
+检查端口是否为undef。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="200" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="200" bodyend="200"/>
+        <references refid="structports_1ac83896c19af3451bbd0ce66a1b9a233e" compoundref="ports_8hpp" startline="170" endline="170">port</references>
+        <references refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" compoundref="ports_8hpp" startline="136">UNDEF</references>
+      </memberdef>
+      <memberdef kind="function" id="structports_1a88dc0ead0b9d0c484727d7a04d12f6f0" prot="public" static="no" constexpr="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>ports::operator uint16_t</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator uint16_t</name>
+        <qualifiedname>ports::operator uint16_t</qualifiedname>
+        <briefdescription>
+<para>uint16_t转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>端口的数值表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="206" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="206" bodyend="206"/>
+        <references refid="structports_1ac83896c19af3451bbd0ce66a1b9a233e" compoundref="ports_8hpp" startline="170" endline="170">port</references>
+      </memberdef>
+      <memberdef kind="function" id="structports_1a2fc7d1adb71cb9050bf987a2e8055f72" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+        <definition>uint16_t ports::value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>value</name>
+        <qualifiedname>ports::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="208" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="208" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="structports_1a8b073e5dbb9367b27dcc00c95b70d4bf" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ports::is_well_known</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_well_known</name>
+        <qualifiedname>ports::is_well_known</qualifiedname>
+        <briefdescription>
+<para>检查端口是否在知名端口范围内 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>若端口号在0-1023范围内返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="214" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="214" bodyend="214"/>
+        <references refid="structports_1ac83896c19af3451bbd0ce66a1b9a233e" compoundref="ports_8hpp" startline="170" endline="170">port</references>
+      </memberdef>
+      <memberdef kind="function" id="structports_1aa263ef720ce252dab8d075a1a9abefdd" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ports::is_registered</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_registered</name>
+        <qualifiedname>ports::is_registered</qualifiedname>
+        <briefdescription>
+<para>检查端口是否在注册端口范围内 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>若端口号在1024-49151范围内返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="220" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="220" bodyend="223"/>
+        <references refid="structports_1ac83896c19af3451bbd0ce66a1b9a233e" compoundref="ports_8hpp" startline="170" endline="170">port</references>
+      </memberdef>
+      <memberdef kind="function" id="structports_1af36ad633f7e9d94fb0cde671ef89c480" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ports::is_dynamic</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_dynamic</name>
+        <qualifiedname>ports::is_dynamic</qualifiedname>
+        <briefdescription>
+<para>检查端口是否在动态/私有端口范围内 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>若端口号在49152-65535范围内返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="229" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="229" bodyend="229"/>
+        <references refid="structports_1ac83896c19af3451bbd0ce66a1b9a233e" compoundref="ports_8hpp" startline="170" endline="170">port</references>
+      </memberdef>
+      <memberdef kind="function" id="structports_1ad216c705c2904893b0ff3331ca5f88ab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string ports::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>ports::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为协议名称字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>协议名称，非标准端口返回空字符串</para>
+</simplesect>
+将端口号转换为对应的协议名称。 对于80端口返回&quot;http&quot;，443端口返回&quot;https&quot;。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="247" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="structports_1ae098763e06d7db0c2b1c5be30c09d5dd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string ports::to_string</definition>
+        <argsstring>(bool is_ws) const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>ports::to_string</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_ws</declname>
+        </param>
+        <briefdescription>
+<para>转换为协议名称字符串（支持WebSocket） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>is_ws</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否为WebSocket协议 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>协议名称</para>
+</simplesect>
+当is_ws为true时，80端口返回&quot;ws&quot;，443端口返回&quot;wss&quot;； 否则返回&quot;http&quot;/&quot;https&quot;。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="257" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structports_1af8fe0623e057c4f2f93f8b7fc6cfe251" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structports" kindref="compound">ports</ref></type>
+        <definition>static ports ports::parse</definition>
+        <argsstring>(string_view scheme) noexcept</argsstring>
+        <name>parse</name>
+        <qualifiedname>ports::parse</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>scheme</declname>
+        </param>
+        <briefdescription>
+<para>从协议名称解析端口 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scheme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协议名称（如&quot;http&quot;、&quot;https&quot;、&quot;ws&quot;等） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应的端口对象，无法识别返回undef</para>
+</simplesect>
+支持常见协议名称到端口号的映射。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="238" column="18"/>
+        <references refid="structports_1aed7286a23ab2d5be7c08b47807fa5eb0">ports</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>网络端口封装类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供类型安全的端口表示，封装了常见协议的端口号，支持从协议名称解析和反向转换。</para>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下网络服务与端口分配相关标准规范：</para>
+<para><bold>端口号分配权威机构：</bold><itemizedlist>
+<listitem><para>**IANA Service Name and Transport Protocol Port Number Registry**：服务名称与端口号注册表 <ulink url="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>核心互联网协议标准：</bold><itemizedlist>
+<listitem><para>**IETF RFC 1340**：Assigned Numbers（已废弃，由 IANA 在线数据库取代） <ulink url="https://www.rfc-editor.org/rfc/rfc1340.html">https://www.rfc-editor.org/rfc/rfc1340.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 6335**：Internet 号码分配机构（IANA）服务名称和传输协议端口号注册程序 <ulink url="https://www.rfc-editor.org/rfc/rfc6335.html">https://www.rfc-editor.org/rfc/rfc6335.html</ulink></para>
+</listitem><listitem><para>**IETF STD 2**：Assigned Internet Protocol Numbers（已废弃，由 RFC 3232 取代） <ulink url="https://www.rfc-editor.org/rfc/rfc3232.html">https://www.rfc-editor.org/rfc/rfc3232.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>各协议端口规范：</bold> <table rows="24" cols="4"><row>
+<entry thead="yes"><para>协议  </para>
+</entry><entry thead="yes"><para>端口号  </para>
+</entry><entry thead="yes"><para>标准引用  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>HTTP  </para>
+</entry><entry thead="no"><para>80  </para>
+</entry><entry thead="no"><para>RFC 7230 §2.7.1（HTTP/1.1 消息语法与路由）  </para>
+</entry><entry thead="no"><para>万维网协议  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>HTTPS  </para>
+</entry><entry thead="no"><para>443  </para>
+</entry><entry thead="no"><para>RFC 2818 §2.4（HTTP Over TLS）  </para>
+</entry><entry thead="no"><para>HTTP over TLS/SSL  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>FTP  </para>
+</entry><entry thead="no"><para>21  </para>
+</entry><entry thead="no"><para>RFC 959 §3.2（文件传输协议）  </para>
+</entry><entry thead="no"><para>文件传输协议（控制端口）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>FTP-DATA  </para>
+</entry><entry thead="no"><para>20  </para>
+</entry><entry thead="no"><para>RFC 959 §3.2（文件传输协议）  </para>
+</entry><entry thead="no"><para>文件传输协议（数据端口）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SSH  </para>
+</entry><entry thead="no"><para>22  </para>
+</entry><entry thead="no"><para>RFC 4251 §4.1（安全 Shell 协议架构）  </para>
+</entry><entry thead="no"><para>安全 Shell 协议  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Telnet  </para>
+</entry><entry thead="no"><para>23  </para>
+</entry><entry thead="no"><para>RFC 854（Telnet 协议规范）  </para>
+</entry><entry thead="no"><para>远程登录协议  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SMTP  </para>
+</entry><entry thead="no"><para>25  </para>
+</entry><entry thead="no"><para>RFC 5321 §4.5.3.2（简单邮件传输协议）  </para>
+</entry><entry thead="no"><para>电子邮件传输  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>DNS  </para>
+</entry><entry thead="no"><para>53  </para>
+</entry><entry thead="no"><para>RFC 1035 §4.2（域名实现与规范）  </para>
+</entry><entry thead="no"><para>域名系统  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>TFTP  </para>
+</entry><entry thead="no"><para>69  </para>
+</entry><entry thead="no"><para>RFC 1350 §5（简单文件传输协议）  </para>
+</entry><entry thead="no"><para>简单文件传输协议  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>POP3  </para>
+</entry><entry thead="no"><para>110  </para>
+</entry><entry thead="no"><para>RFC 1939 §4（邮局协议版本3）  </para>
+</entry><entry thead="no"><para>电子邮件接收协议  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>IMAP  </para>
+</entry><entry thead="no"><para>143  </para>
+</entry><entry thead="no"><para>RFC 3501 §2.1（互联网消息访问协议）  </para>
+</entry><entry thead="no"><para>电子邮件访问协议  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>NTP  </para>
+</entry><entry thead="no"><para>123  </para>
+</entry><entry thead="no"><para>RFC 5905 §4（网络时间协议版本4）  </para>
+</entry><entry thead="no"><para>网络时间同步协议  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SNMP  </para>
+</entry><entry thead="no"><para>161  </para>
+</entry><entry thead="no"><para>RFC 3417 §3（简单网络管理协议）  </para>
+</entry><entry thead="no"><para>网络管理协议  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SNMP-TRAP  </para>
+</entry><entry thead="no"><para>162  </para>
+</entry><entry thead="no"><para>RFC 3417 §3（简单网络管理协议）  </para>
+</entry><entry thead="no"><para>SNMP陷阱通知  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>LDAP  </para>
+</entry><entry thead="no"><para>389  </para>
+</entry><entry thead="no"><para>RFC 4511 §3（轻量级目录访问协议）  </para>
+</entry><entry thead="no"><para>目录服务协议  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>LDAPS  </para>
+</entry><entry thead="no"><para>636  </para>
+</entry><entry thead="no"><para>RFC 4513 §5（LDAP over TLS）  </para>
+</entry><entry thead="no"><para>LDAP over TLS/SSL  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SMB  </para>
+</entry><entry thead="no"><para>445  </para>
+</entry><entry thead="no"><para>Microsoft SMB 协议规范  </para>
+</entry><entry thead="no"><para>服务器消息块协议  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>DHCP-SERVER  </para>
+</entry><entry thead="no"><para>67  </para>
+</entry><entry thead="no"><para>RFC 2131 §3（动态主机配置协议）  </para>
+</entry><entry thead="no"><para>DHCP服务器端口  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>DHCP-CLIENT  </para>
+</entry><entry thead="no"><para>68  </para>
+</entry><entry thead="no"><para>RFC 2131 §3（动态主机配置协议）  </para>
+</entry><entry thead="no"><para>DHCP客户端端口  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>MYSQL  </para>
+</entry><entry thead="no"><para>3306  </para>
+</entry><entry thead="no"><para>MySQL 官方文档  </para>
+</entry><entry thead="no"><para>MySQL数据库  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>POSTGRESQL  </para>
+</entry><entry thead="no"><para>5432  </para>
+</entry><entry thead="no"><para>PostgreSQL 官方文档  </para>
+</entry><entry thead="no"><para>PostgreSQL数据库  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>REDIS  </para>
+</entry><entry thead="no"><para>6379  </para>
+</entry><entry thead="no"><para>Redis 官方文档  </para>
+</entry><entry thead="no"><para>Redis键值存储  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>MONGODB  </para>
+</entry><entry thead="no"><para>27017  </para>
+</entry><entry thead="no"><para>MongoDB 官方文档  </para>
+</entry><entry thead="no"><para>MongoDB数据库  </para>
+</entry></row>
+</table>
+</para>
+<para><bold>WebSocket 协议端口规范：</bold> <table rows="3" cols="4"><row>
+<entry thead="yes"><para>协议  </para>
+</entry><entry thead="yes"><para>端口号  </para>
+</entry><entry thead="yes"><para>标准引用  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>WS  </para>
+</entry><entry thead="no"><para>80  </para>
+</entry><entry thead="no"><para>RFC 6455 §11.1（WebSocket 协议）  </para>
+</entry><entry thead="no"><para>WebSocket over HTTP  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>WSS  </para>
+</entry><entry thead="no"><para>443  </para>
+</entry><entry thead="no"><para>RFC 6455 §11.1（WebSocket 协议）  </para>
+</entry><entry thead="no"><para>WebSocket over TLS/SSL  </para>
+</entry></row>
+</table>
+</para>
+<para><bold>邮件协议扩展端口规范：</bold> <table rows="5" cols="4"><row>
+<entry thead="yes"><para>协议  </para>
+</entry><entry thead="yes"><para>端口号  </para>
+</entry><entry thead="yes"><para>标准引用  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SMTP-SUBMIT  </para>
+</entry><entry thead="no"><para>587  </para>
+</entry><entry thead="no"><para>RFC 6409 §3（邮件提交协议）  </para>
+</entry><entry thead="no"><para>邮件提交  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SMTPS  </para>
+</entry><entry thead="no"><para>465  </para>
+</entry><entry thead="no"><para>历史惯例（IANA已重新分配）  </para>
+</entry><entry thead="no"><para>SMTP over TLS（传统）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>POP3S  </para>
+</entry><entry thead="no"><para>995  </para>
+</entry><entry thead="no"><para>RFC 2595 §5（POP3 over TLS）  </para>
+</entry><entry thead="no"><para>POP3 over TLS/SSL  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>IMAPS  </para>
+</entry><entry thead="no"><para>993  </para>
+</entry><entry thead="no"><para>RFC 2595 §4（IMAP over TLS）  </para>
+</entry><entry thead="no"><para>IMAP over TLS/SSL  </para>
+</entry></row>
+</table>
+</para>
+<para><bold>相关安全标准：</bold><itemizedlist>
+<listitem><para>**IETF RFC 2818**：HTTP Over TLS（HTTPS 端口定义） <ulink url="https://www.rfc-editor.org/rfc/rfc2818.html">https://www.rfc-editor.org/rfc/rfc2818.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 6455**：WebSocket 协议（WS/WSS 端口定义） <ulink url="https://www.rfc-editor.org/rfc/rfc6455.html">https://www.rfc-editor.org/rfc/rfc6455.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 2595**：使用 TLS 的 IMAP、POP3 和 ACAP <ulink url="https://www.rfc-editor.org/rfc/rfc2595.html">https://www.rfc-editor.org/rfc/rfc2595.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="structports_1port_registry">
+<title>IANA 端口号注册表</title><para>根据 IANA 服务名称和端口号注册表，端口号分为三类：</para>
+<para><table rows="4" cols="4"><row>
+<entry thead="yes"><para>范围  </para>
+</entry><entry thead="yes"><para>类别  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry><entry thead="yes"><para>分配要求  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0-1023  </para>
+</entry><entry thead="no"><para>知名端口  </para>
+</entry><entry thead="no"><para>系统端口，由 IANA 分配和管控  </para>
+</entry><entry thead="no"><para>需要 IETF 共识或 IESG 批准  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1024-49151  </para>
+</entry><entry thead="no"><para>注册端口  </para>
+</entry><entry thead="no"><para>用户端口，由 IANA 注册  </para>
+</entry><entry thead="no"><para>需要 IETF 审核或专家审核  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>49152-65535  </para>
+</entry><entry thead="no"><para>动态/私有端口  </para>
+</entry><entry thead="no"><para>临时使用，自动分配  </para>
+</entry><entry thead="no"><para>无需分配  </para>
+</entry></row>
+</table>
+</para>
+<para>本文件中定义的所有端口包含知名端口（0-1023）和部分常用注册端口（1024-49151）。</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="8" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>端口数值类型  </para>
+</entry><entry thead="no"><para>uint16_t（0-65535）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>知名端口范围  </para>
+</entry><entry thead="no"><para>0-1023  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>注册端口范围  </para>
+</entry><entry thead="no"><para>1024-49151  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>默认端口值  </para>
+</entry><entry thead="no"><para>UNDEF（0）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>大小  </para>
+</entry><entry thead="no"><para>2 字节（uint16_t）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>协议名称解析  </para>
+</entry><entry thead="no"><para>大小写不敏感  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>未知协议处理  </para>
+</entry><entry thead="no"><para>返回 UNDEF  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>本实现中定义的端口号均取自 IANA 注册表及相关 RFC 标准文档。</para>
+</simplesect>
+<simplesect kind="warning"><para>端口号 80 和 443 同时服务于 HTTP/HTTPS 和 WebSocket（WS/WSS）协议。 使用 <computeroutput>to_string(bool is_ws)</computeroutput> 方法可明确区分协议类型。 端口号 465（smtps）虽然在实践中广泛使用，但 IANA 已将其重新分配给其他服务， 建议新应用使用端口 587（smtp-submit）配合 STARTTLS。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.iana.org/assignments/service-names-port-numbers/">https://www.iana.org/assignments/service-names-port-numbers/</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc6335">https://www.rfc-editor.org/rfc/rfc6335</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers">https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iobject&lt; ports &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>istringify&lt; ports &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>ports</label>
+        <link refid="structports"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iobject&lt; ports &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>istringify&lt; ports &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>ports</label>
+        <link refid="structports"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" line="130" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ports.hpp" bodystart="130" bodyend="258"/>
+    <listofallmembers>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a1fb9a6c8c8afd2bc8ed3c40e2e573784" prot="public" virt="non-virtual"><scope>ports</scope><name>DHCP_CLIENT</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ad771e78a2c51e74ccbfa36b50143a772" prot="public" virt="non-virtual"><scope>ports</scope><name>DHCP_SERVER</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a305d7a53eafabf042067c988c705cd93" prot="public" virt="non-virtual"><scope>ports</scope><name>DNS</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a40e883c984f48e817c42de79d120eee9" prot="public" virt="non-virtual"><scope>ports</scope><name>FTP</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a1812b85c4a165041197323da60a8d9b9" prot="public" virt="non-virtual"><scope>ports</scope><name>FTP_DATA</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ad7ed6569a70c2e3158713dafb1eba49a" prot="public" virt="non-virtual"><scope>ports</scope><name>HTTP</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8af1912bb051f1bce125984a8d82b2fdc6" prot="public" virt="non-virtual"><scope>ports</scope><name>HTTPS</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ace1c1fe008a210c6112c1f5acf936d91" prot="public" virt="non-virtual"><scope>ports</scope><name>IMAP</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8abe97a7717fbb19461b2f1551158579b6" prot="public" virt="non-virtual"><scope>ports</scope><name>IMAPS</name></member>
+      <member refid="structports_1af36ad633f7e9d94fb0cde671ef89c480" prot="public" virt="non-virtual"><scope>ports</scope><name>is_dynamic</name></member>
+      <member refid="structports_1aa263ef720ce252dab8d075a1a9abefdd" prot="public" virt="non-virtual"><scope>ports</scope><name>is_registered</name></member>
+      <member refid="structports_1a8b073e5dbb9367b27dcc00c95b70d4bf" prot="public" virt="non-virtual"><scope>ports</scope><name>is_well_known</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a25a4bc8028c7debf35b92dd765f6b9f3" prot="public" virt="non-virtual"><scope>ports</scope><name>LDAP</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a7632c259f47a8d352df63f90f580470a" prot="public" virt="non-virtual"><scope>ports</scope><name>LDAPS</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a4ad3d6561fccc0bd695f388561fdc093" prot="public" virt="non-virtual"><scope>ports</scope><name>MONGODB</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ae1fab56c6e78f444d1fbc6f9d1de6bcd" prot="public" virt="non-virtual"><scope>ports</scope><name>MYSQL</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8affd9626ed90842c4f788925c4409c0aa" prot="public" virt="non-virtual"><scope>ports</scope><name>NTP</name></member>
+      <member refid="structports_1abd4092003d11db99eda911f01d242bc8" prot="public" virt="non-virtual"><scope>ports</scope><name>operator bool</name></member>
+      <member refid="structports_1a88dc0ead0b9d0c484727d7a04d12f6f0" prot="public" virt="non-virtual"><scope>ports</scope><name>operator uint16_t</name></member>
+      <member refid="structports_1af8fe0623e057c4f2f93f8b7fc6cfe251" prot="public" virt="non-virtual"><scope>ports</scope><name>parse</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8af4e50a4efb9c4579dd9b722bdc542e88" prot="public" virt="non-virtual"><scope>ports</scope><name>POP3</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a55b00737ae6a8e16dd95a7ebdeefc068" prot="public" virt="non-virtual"><scope>ports</scope><name>POP3S</name></member>
+      <member refid="structports_1ac83896c19af3451bbd0ce66a1b9a233e" prot="public" virt="non-virtual"><scope>ports</scope><name>port</name></member>
+      <member refid="structports_1aed7286a23ab2d5be7c08b47807fa5eb0" prot="public" virt="non-virtual"><scope>ports</scope><name>ports</name></member>
+      <member refid="structports_1ad16ca5a958a7bac673c09ae68918d311" prot="public" virt="non-virtual"><scope>ports</scope><name>ports</name></member>
+      <member refid="structports_1a9971f3b73413357e32b44e4229062f26" prot="public" virt="non-virtual"><scope>ports</scope><name>ports</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a9e747e801f9b0fb6def175f6965826b8" prot="public" virt="non-virtual"><scope>ports</scope><name>POSTGRESQL</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8" prot="public" virt="non-virtual"><scope>ports</scope><name>raw</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ab2a8b3c52f6541749f523de3c85969ee" prot="public" virt="non-virtual"><scope>ports</scope><name>REDIS</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a071ebae028e5ed419982fa26e085782b" prot="public" virt="non-virtual"><scope>ports</scope><name>SMB</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a9ee24853659527617f10e30b80d0f08c" prot="public" virt="non-virtual"><scope>ports</scope><name>SMTP</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8aa747ed90ba6d253bcebdbdaa35b17cd1" prot="public" virt="non-virtual"><scope>ports</scope><name>SMTP_SUBMIT</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a2097e40103ed3e90e771361c819b202a" prot="public" virt="non-virtual"><scope>ports</scope><name>SMTPS</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a4217447d8bd9780863e29c7ffc8cad8e" prot="public" virt="non-virtual"><scope>ports</scope><name>SNMP</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a8b718bb5fca31443656f5ed1e3454c8a" prot="public" virt="non-virtual"><scope>ports</scope><name>SNMP_TRAP</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8ada5b9afffd52ce9e6fc283f060c568b7" prot="public" virt="non-virtual"><scope>ports</scope><name>SSH</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8af2fbe4f0bc82990f6ec2eca7a851b2c4" prot="public" virt="non-virtual"><scope>ports</scope><name>TELNET</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8adc7b1756fde788264d532e769de47d31" prot="public" virt="non-virtual"><scope>ports</scope><name>TFTP</name></member>
+      <member refid="structports_1ad216c705c2904893b0ff3331ca5f88ab" prot="public" virt="non-virtual"><scope>ports</scope><name>to_string</name></member>
+      <member refid="structports_1ae098763e06d7db0c2b1c5be30c09d5dd" prot="public" virt="non-virtual"><scope>ports</scope><name>to_string</name></member>
+      <member refid="structiobject_1a6844b335224b3f1baddee0502c2dcc68" prot="public" virt="non-virtual"><scope>ports</scope><name>try_parse</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" prot="public" virt="non-virtual"><scope>ports</scope><name>UNDEF</name></member>
+      <member refid="structports_1a2fc7d1adb71cb9050bf987a2e8055f72" prot="public" virt="non-virtual"><scope>ports</scope><name>value</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8abda72ed8541710980b8ec46af261a740" prot="public" virt="non-virtual"><scope>ports</scope><name>WS</name></member>
+      <member refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8af285b1726d9a5c79c618622a8e2d5bce" prot="public" virt="non-virtual"><scope>ports</scope><name>WSS</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

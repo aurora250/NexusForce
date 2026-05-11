@@ -1,0 +1,611 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structhttp__session" kind="struct" language="C++" prot="public">
+    <compoundname>http_session</compoundname>
+    <basecompoundref refid="structistringify" prot="public" virt="non-virtual">istringify&lt; http_session &gt;</basecompoundref>
+    <includes refid="http__session_8hpp" local="no">http_session.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhttp__session_1a5f5bf966c9610b51662de2516f29cb78" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string http_session::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>http_session::id</qualifiedname>
+        <briefdescription>
+<para>会话唯一标识符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="162" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__session_1aab6232f4d6be3c9a3dc6a75d03c8dea2" prot="public" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>unordered_map&lt;string, string&gt; http_session::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>http_session::data</qualifiedname>
+        <briefdescription>
+<para>会话数据存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="163" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__session_1a382e18a181c73ac3a6df74399a19e69d" prot="public" static="no" mutable="no">
+        <type><ref refid="classdatetime" kindref="compound">datetime</ref></type>
+        <definition>datetime http_session::last_access</definition>
+        <argsstring></argsstring>
+        <name>last_access</name>
+        <qualifiedname>http_session::last_access</qualifiedname>
+        <initializer>{<ref refid="classdatetime_1ad66b72cda4172c6cf3155d10ee564e4f" kindref="member">datetime::now</ref>()}</initializer>
+        <briefdescription>
+<para>最后访问时间 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="164" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" bodystart="164" bodyend="164"/>
+        <referencedby refid="structhttp__session_1a55fc2c0ecac593ce3f19be916bd52034" compoundref="http__session_8hpp" startline="256" endline="256">idle_time</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__session_1a12e2341f1722bf4a406cfdc24ede7469" prot="public" static="no" mutable="no">
+        <type><ref refid="classdatetime" kindref="compound">datetime</ref></type>
+        <definition>datetime http_session::create_time</definition>
+        <argsstring></argsstring>
+        <name>create_time</name>
+        <qualifiedname>http_session::create_time</qualifiedname>
+        <initializer>{<ref refid="classdatetime_1ad66b72cda4172c6cf3155d10ee564e4f" kindref="member">datetime::now</ref>()}</initializer>
+        <briefdescription>
+<para>创建时间 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="165" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" bodystart="165" bodyend="165"/>
+        <referencedby refid="structhttp__session_1a3bccad1ab10b92d8c6b6c976dcc75818" compoundref="http__session_8hpp" startline="250" endline="250">age</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__session_1a95cf70f6465ab22a9d5e2b2a5326f0cd" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
+        <definition>seconds http_session::max_age</definition>
+        <argsstring></argsstring>
+        <name>max_age</name>
+        <qualifiedname>http_session::max_age</qualifiedname>
+        <initializer>{1800}</initializer>
+        <briefdescription>
+<para>最大空闲时间，默认30分钟 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="166" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" bodystart="166" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__session_1a96a2120a160e0bc4568671d23a70334b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool http_session::is_new</definition>
+        <argsstring></argsstring>
+        <name>is_new</name>
+        <qualifiedname>http_session::is_new</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否为新创建的会话 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="167" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__session_1a326d5e2b307eb5f2023f561d3787c6d0" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool http_session::invalidated</definition>
+        <argsstring></argsstring>
+        <name>invalidated</name>
+        <qualifiedname>http_session::invalidated</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否已无效化 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="168" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" bodystart="168" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structhttp__session_1a739d5a2d7c40a42cb212bf736368f492" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD string &amp; http_session::operator[]</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>http_session::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>下标操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值的引用</para>
+</simplesect>
+如果键不存在，会自动创建空字符串条目。 访问时会自动更新last_access。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="178" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1adf238267fd53966d18b9b14f919888ce" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view http_session::get</definition>
+        <argsstring>(const string &amp;key) const</argsstring>
+        <name>get</name>
+        <qualifiedname>http_session::get</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值的字符串视图，不存在返回空字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="185" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1a712fb2b229e3a29c1b6a9c93fcae6afd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_session::set</definition>
+        <argsstring>(const string &amp;key, string value)</argsstring>
+        <name>set</name>
+        <qualifiedname>http_session::set</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="192" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1a823d831034581b2e27e4b41f310a693d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http_session::remove</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>remove</name>
+        <qualifiedname>http_session::remove</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除键值对 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功删除返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="199" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1acb3a6a8550c4080179fbb8146f47c069" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_session::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>http_session::clear</qualifiedname>
+        <briefdescription>
+<para>清空所有会话数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="204" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1aaa26cafed9d37581829775e924be03d4" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool http_session::contains</definition>
+        <argsstring>(const string &amp;key) const noexcept</argsstring>
+        <name>contains</name>
+        <qualifiedname>http_session::contains</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>检查是否包含键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>存在返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="211" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1a0fa33269e2df1c00132e0eab66667894" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_session::invalidate</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>invalidate</name>
+        <qualifiedname>http_session::invalidate</qualifiedname>
+        <briefdescription>
+<para>无效化会话 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>标记会话为无效，通常用于用户登出。 不会立即清除数据，但is_valid()会返回false。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="219" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1a826a20cbda8c9498a806a4d5366adde0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_session::touch</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>touch</name>
+        <qualifiedname>http_session::touch</qualifiedname>
+        <briefdescription>
+<para>更新最后访问时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>将last_access更新为当前时间，并将is_new设为false。 在每次请求处理时应调用此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="227" column="10"/>
+        <references refid="structhttp__session_1a826a20cbda8c9498a806a4d5366adde0">touch</references>
+        <referencedby refid="structhttp__session_1a826a20cbda8c9498a806a4d5366adde0">touch</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1adbea62dd638f85726e4f8bcfe06d994f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool http_session::is_valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>http_session::is_valid</qualifiedname>
+        <briefdescription>
+<para>检查会话是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true</para>
+</simplesect>
+会话无效的条件：<itemizedlist>
+<listitem><para>已调用invalidate()</para>
+</listitem><listitem><para>超过max_age无活动 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="237" column="28"/>
+        <references refid="structhttp__session_1adbea62dd638f85726e4f8bcfe06d994f">is_valid</references>
+        <referencedby refid="structhttp__session_1adbea62dd638f85726e4f8bcfe06d994f">is_valid</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1a5b8bdcdd578937e2237298a1db1c485d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool http_session::expired</definition>
+        <argsstring>(seconds max_inactive=0_s) const noexcept</argsstring>
+        <name>expired</name>
+        <qualifiedname>http_session::expired</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
+          <declname>max_inactive</declname>
+          <defval>0_s</defval>
+        </param>
+        <briefdescription>
+<para>检查会话是否已过期 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max_inactive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大无活动时间，0表示使用max_age </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>已过期返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="244" column="28"/>
+        <references refid="structhttp__session_1a5b8bdcdd578937e2237298a1db1c485d">expired</references>
+        <referencedby refid="structhttp__session_1a5b8bdcdd578937e2237298a1db1c485d">expired</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1a3bccad1ab10b92d8c6b6c976dcc75818" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
+        <definition>NEFORCE_NODISCARD seconds http_session::age</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>age</name>
+        <qualifiedname>http_session::age</qualifiedname>
+        <briefdescription>
+<para>获取会话年龄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>从创建到现在的秒数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="250" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" bodystart="250" bodyend="250"/>
+        <references refid="structhttp__session_1a3bccad1ab10b92d8c6b6c976dcc75818" compoundref="http__session_8hpp" startline="250" endline="250">age</references>
+        <references refid="structhttp__session_1a12e2341f1722bf4a406cfdc24ede7469" compoundref="http__session_8hpp" startline="165" endline="165">create_time</references>
+        <references refid="classdatetime_1ad66b72cda4172c6cf3155d10ee564e4f">datetime::now</references>
+        <referencedby refid="structhttp__session_1a3bccad1ab10b92d8c6b6c976dcc75818" compoundref="http__session_8hpp" startline="250" endline="250">age</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1a55fc2c0ecac593ce3f19be916bd52034" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
+        <definition>NEFORCE_NODISCARD seconds http_session::idle_time</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>idle_time</name>
+        <qualifiedname>http_session::idle_time</qualifiedname>
+        <briefdescription>
+<para>获取空闲时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>从最后访问到现在的秒数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="256" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" bodystart="256" bodyend="256"/>
+        <references refid="structhttp__session_1a382e18a181c73ac3a6df74399a19e69d" compoundref="http__session_8hpp" startline="164" endline="164">last_access</references>
+        <references refid="classdatetime_1ad66b72cda4172c6cf3155d10ee564e4f">datetime::now</references>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__session_1adbe4e5bb8ba9f3cb23d38fd965050014" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string http_session::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>http_session::to_string</qualifiedname>
+        <briefdescription>
+<para>序列化为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>会话信息的字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="262" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP会话结构 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示一个服务器端HTTP会话，用于存储用户会话数据。 每个会话有唯一的ID，可以存储键值对数据。</para>
+<para>使用示例： <programlisting><codeline><highlight class="comment">//<sp/>创建新会话</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">http_session<sp/>session;</highlight></codeline>
+<codeline><highlight class="normal">session.<ref refid="structhttp__session_1a5f5bf966c9610b51662de2516f29cb78" kindref="member">id</ref><sp/>=<sp/>generate_session_id();</highlight></codeline>
+<codeline><highlight class="normal">session.<ref refid="structhttp__session_1a95cf70f6465ab22a9d5e2b2a5326f0cd" kindref="member">max_age</ref><sp/>=<sp/>3600;<sp/><sp/></highlight><highlight class="comment">//<sp/>1小时</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>存储用户数据</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">session[</highlight><highlight class="stringliteral">&quot;user_id&quot;</highlight><highlight class="normal">]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;12345&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">session.<ref refid="structhttp__session_1a712fb2b229e3a29c1b6a9c93fcae6afd" kindref="member">set</ref>(</highlight><highlight class="stringliteral">&quot;username&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;john_doe&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>读取数据</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(session.<ref refid="structhttp__session_1aaa26cafed9d37581829775e924be03d4" kindref="member">contains</ref>(</highlight><highlight class="stringliteral">&quot;user_id&quot;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>user_id<sp/>=<sp/>session.<ref refid="structhttp__session_1adf238267fd53966d18b9b14f919888ce" kindref="member">get</ref>(</highlight><highlight class="stringliteral">&quot;user_id&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>更新访问时间</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">session.<ref refid="structhttp__session_1a826a20cbda8c9498a806a4d5366adde0" kindref="member">touch</ref>();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>检查会话是否过期（30分钟无活动）</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(session.<ref refid="structhttp__session_1a5b8bdcdd578937e2237298a1db1c485d" kindref="member">expired</ref>(1800))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>session.<ref refid="structhttp__session_1a0fa33269e2df1c00132e0eab66667894" kindref="member">invalidate</ref>();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>会话无效化（登出）</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">session.<ref refid="structhttp__session_1a0fa33269e2df1c00132e0eab66667894" kindref="member">invalidate</ref>();</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>http_session</label>
+        <link refid="structhttp__session"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>istringify&lt; http_session &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>datetime</label>
+        <link refid="classdatetime"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>duration&lt; int64_t &gt;</label>
+        <link refid="structduration"/>
+      </node>
+      <node id="1">
+        <label>http_session</label>
+        <link refid="structhttp__session"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>id</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>create_time</edgelabel>
+          <edgelabel>last_access</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>max_age</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>icommon&lt; datetime &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="12">
+        <label>icomparable&lt; datetime &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="6">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="13">
+        <label>ihashable&lt; datetime &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="9">
+        <label>iobject&lt; datetime &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>istringify&lt; datetime &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="2">
+        <label>istringify&lt; http_session &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="7">
+        <label>unordered_map&lt; basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt;</label>
+        <link refid="classunordered__map"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" line="161" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp" bodystart="161" bodyend="263"/>
+    <listofallmembers>
+      <member refid="structhttp__session_1a3bccad1ab10b92d8c6b6c976dcc75818" prot="public" virt="non-virtual"><scope>http_session</scope><name>age</name></member>
+      <member refid="structhttp__session_1acb3a6a8550c4080179fbb8146f47c069" prot="public" virt="non-virtual"><scope>http_session</scope><name>clear</name></member>
+      <member refid="structhttp__session_1aaa26cafed9d37581829775e924be03d4" prot="public" virt="non-virtual"><scope>http_session</scope><name>contains</name></member>
+      <member refid="structhttp__session_1a12e2341f1722bf4a406cfdc24ede7469" prot="public" virt="non-virtual"><scope>http_session</scope><name>create_time</name></member>
+      <member refid="structhttp__session_1aab6232f4d6be3c9a3dc6a75d03c8dea2" prot="public" virt="non-virtual"><scope>http_session</scope><name>data</name></member>
+      <member refid="structhttp__session_1a5b8bdcdd578937e2237298a1db1c485d" prot="public" virt="non-virtual"><scope>http_session</scope><name>expired</name></member>
+      <member refid="structhttp__session_1adf238267fd53966d18b9b14f919888ce" prot="public" virt="non-virtual"><scope>http_session</scope><name>get</name></member>
+      <member refid="structhttp__session_1a5f5bf966c9610b51662de2516f29cb78" prot="public" virt="non-virtual"><scope>http_session</scope><name>id</name></member>
+      <member refid="structhttp__session_1a55fc2c0ecac593ce3f19be916bd52034" prot="public" virt="non-virtual"><scope>http_session</scope><name>idle_time</name></member>
+      <member refid="structhttp__session_1a0fa33269e2df1c00132e0eab66667894" prot="public" virt="non-virtual"><scope>http_session</scope><name>invalidate</name></member>
+      <member refid="structhttp__session_1a326d5e2b307eb5f2023f561d3787c6d0" prot="public" virt="non-virtual"><scope>http_session</scope><name>invalidated</name></member>
+      <member refid="structhttp__session_1a96a2120a160e0bc4568671d23a70334b" prot="public" virt="non-virtual"><scope>http_session</scope><name>is_new</name></member>
+      <member refid="structhttp__session_1adbea62dd638f85726e4f8bcfe06d994f" prot="public" virt="non-virtual"><scope>http_session</scope><name>is_valid</name></member>
+      <member refid="structhttp__session_1a382e18a181c73ac3a6df74399a19e69d" prot="public" virt="non-virtual"><scope>http_session</scope><name>last_access</name></member>
+      <member refid="structhttp__session_1a95cf70f6465ab22a9d5e2b2a5326f0cd" prot="public" virt="non-virtual"><scope>http_session</scope><name>max_age</name></member>
+      <member refid="structhttp__session_1a739d5a2d7c40a42cb212bf736368f492" prot="public" virt="non-virtual"><scope>http_session</scope><name>operator[]</name></member>
+      <member refid="structhttp__session_1a823d831034581b2e27e4b41f310a693d" prot="public" virt="non-virtual"><scope>http_session</scope><name>remove</name></member>
+      <member refid="structhttp__session_1a712fb2b229e3a29c1b6a9c93fcae6afd" prot="public" virt="non-virtual"><scope>http_session</scope><name>set</name></member>
+      <member refid="structhttp__session_1adbe4e5bb8ba9f3cb23d38fd965050014" prot="public" virt="non-virtual"><scope>http_session</scope><name>to_string</name></member>
+      <member refid="structhttp__session_1a826a20cbda8c9498a806a4d5366adde0" prot="public" virt="non-virtual"><scope>http_session</scope><name>touch</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

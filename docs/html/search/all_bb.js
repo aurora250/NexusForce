@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['量词算法_0',['量词算法',['../group___quantifier_algorithms.html',1,'']]]
+  ['遵循的国际标准_0',['遵循的国际标准',['../group___h_t_t_p.html#standards',1,'']]]
 ];

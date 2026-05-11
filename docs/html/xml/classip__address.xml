@@ -1,0 +1,670 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classip__address" kind="class" language="C++" prot="public">
+    <compoundname>ip_address</compoundname>
+    <basecompoundref refid="structistringify" prot="public" virt="non-virtual">istringify&lt; ip_address &gt;</basecompoundref>
+    <includes refid="ip__address_8hpp" local="no">ip_address.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classip__address_1a3b98397bf02b3c92bebf8b501b8bfe19" prot="public" static="no">
+        <type><ref refid="structvariant" kindref="compound">variant</ref>&lt; <ref refid="structnone__t" kindref="compound">none_t</ref>, ::sockaddr_in, ::sockaddr_in6 &gt;</type>
+        <definition>using ip_address::address_type = variant&lt;none_t, ::sockaddr_in, ::sockaddr_in6&gt;</definition>
+        <argsstring></argsstring>
+        <name>address_type</name>
+        <qualifiedname>ip_address::address_type</qualifiedname>
+        <briefdescription>
+<para>地址存储类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="55" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classip__address_1a96252e4fa9934ce92d4063fe454160fe" prot="private" static="no" mutable="no">
+        <type><ref refid="classip__address_1a3b98397bf02b3c92bebf8b501b8bfe19" kindref="member">address_type</ref></type>
+        <definition>address_type ip_address::addr_</definition>
+        <argsstring></argsstring>
+        <name>addr_</name>
+        <qualifiedname>ip_address::addr_</qualifiedname>
+        <briefdescription>
+<para>存储的地址 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="58" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classip__address_1ac938566448641af3ba1ab6942fca0486" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ip_address::ip_address</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>ip_address</name>
+        <qualifiedname>ip_address::ip_address</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建无效的IP地址对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="66" column="5"/>
+        <referencedby refid="classip__address_1a180ec03fa7dd1c0cca46fcbc2e1ded1c">any</referencedby>
+        <referencedby refid="classip__address_1a80998e8dc8280df952852cffeea393fa" compoundref="ip__address_8hpp" startline="72" endline="73">ip_address</referencedby>
+        <referencedby refid="classip__address_1acf82f298c279306367382ff23cce0510">loopback</referencedby>
+        <referencedby refid="classip__address_1ac514438653e8904c8d3f24a4c08e5740" compoundref="ip__address_8hpp" startline="194" endline="194">operator!=</referencedby>
+        <referencedby refid="classip__address_1a214f612df0a95977798fbeb19dd7d266">operator==</referencedby>
+        <referencedby refid="classip__address_1afa18a9a0c627ef20bd148be8670cf46a">parse</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a80998e8dc8280df952852cffeea393fa" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ip_address::ip_address</definition>
+        <argsstring>(const ::sockaddr_in &amp;addr4) noexcept</argsstring>
+        <name>ip_address</name>
+        <qualifiedname>ip_address::ip_address</qualifiedname>
+        <param>
+          <type>const ::sockaddr_in &amp;</type>
+          <declname>addr4</declname>
+        </param>
+        <briefdescription>
+<para>从IPv4地址构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>addr4</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IPv4地址结构 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="72" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="72" bodyend="73"/>
+        <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1ae4239b7f69e83b99f451956238b92980" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ip_address::ip_address</definition>
+        <argsstring>(const ::sockaddr_in6 &amp;addr6) noexcept</argsstring>
+        <name>ip_address</name>
+        <qualifiedname>ip_address::ip_address</qualifiedname>
+        <param>
+          <type>const ::sockaddr_in6 &amp;</type>
+          <declname>addr6</declname>
+        </param>
+        <briefdescription>
+<para>从IPv6地址构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>addr6</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IPv6地址结构 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="79" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="79" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a5c89af508e8c3d05749e3dc0bd86a28a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ip_address::ip_address</definition>
+        <argsstring>(const ip_address &amp;other) noexcept=default</argsstring>
+        <name>ip_address</name>
+        <qualifiedname>ip_address::ip_address</qualifiedname>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="82" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1aaa690aad7a7f577215bd2eac5a8c4f4d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+        <definition>ip_address &amp; ip_address::operator=</definition>
+        <argsstring>(const ip_address &amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>ip_address::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="83" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a88981013888118a84ab6b655af4b82d0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ip_address::ip_address</definition>
+        <argsstring>(ip_address &amp;&amp;other) noexcept=default</argsstring>
+        <name>ip_address</name>
+        <qualifiedname>ip_address::ip_address</qualifiedname>
+        <param>
+          <type><ref refid="classip__address" kindref="compound">ip_address</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="85" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a0b5d492982ec30c7e2c8d538c6540595" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+        <definition>ip_address &amp; ip_address::operator=</definition>
+        <argsstring>(ip_address &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>ip_address::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classip__address" kindref="compound">ip_address</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="86" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a139ea4cbc9be4e23f04ae1b08b15539f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ip_address::is_valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>ip_address::is_valid</qualifiedname>
+        <briefdescription>
+<para>检查地址是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="92" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a32e935243923f451085130190d79a8d8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ip_address::is_ipv4</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_ipv4</name>
+        <qualifiedname>ip_address::is_ipv4</qualifiedname>
+        <briefdescription>
+<para>检查是否为IPv4地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>IPv4返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="98" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a823f8b51cfec4e2ebfcca58f833e4b10" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ip_address::is_ipv6</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_ipv6</name>
+        <qualifiedname>ip_address::is_ipv6</qualifiedname>
+        <briefdescription>
+<para>检查是否为IPv6地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>IPv6返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="104" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a14ad4d7d5a9fd7243b31a14e59658c61" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARDconst ::sockaddr *</type>
+        <definition>NEFORCE_NODISCARDconst ::sockaddr * ip_address::data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>ip_address::data</qualifiedname>
+        <briefdescription>
+<para>获取底层指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>sockaddr指针，无效地址返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="128" column="40"/>
+        <referencedby refid="classip__address_1a310418dfdef3f8a71f0dfb2ac7142d9a">data</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a310418dfdef3f8a71f0dfb2ac7142d9a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD::sockaddr *</type>
+        <definition>NEFORCE_NODISCARD::sockaddr * ip_address::data</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>ip_address::data</qualifiedname>
+        <briefdescription>
+<para>获取底层指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>sockaddr指针，无效地址返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="134" column="34"/>
+        <references refid="classip__address_1a14ad4d7d5a9fd7243b31a14e59658c61">data</references>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a00979f07fd05c81607664b1152b76b28" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD int</type>
+        <definition>NEFORCE_NODISCARD int ip_address::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>ip_address::size</qualifiedname>
+        <briefdescription>
+<para>获取地址结构大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字节数，无效地址返回0 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="140" column="27"/>
+        <references refid="classip__address_1a00979f07fd05c81607664b1152b76b28">size</references>
+        <referencedby refid="classip__address_1a00979f07fd05c81607664b1152b76b28">size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a51cfbae6deb6526233b8876a9dd47267" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classip__address_1a3b98397bf02b3c92bebf8b501b8bfe19" kindref="member">address_type</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const address_type &amp; ip_address::address</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>address</name>
+        <qualifiedname>ip_address::address</qualifiedname>
+        <briefdescription>
+<para>获取内部地址存储的常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>variant地址存储 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="146" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="146" bodyend="146"/>
+        <references refid="classip__address_1a51cfbae6deb6526233b8876a9dd47267" compoundref="ip__address_8hpp" startline="146" endline="146">address</references>
+        <referencedby refid="classip__address_1a51cfbae6deb6526233b8876a9dd47267" compoundref="ip__address_8hpp" startline="146" endline="146">address</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a93c640535a6e7d1ec3aa7d3b1befdbb5" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD int</type>
+        <definition>NEFORCE_NODISCARD int ip_address::family</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>family</name>
+        <qualifiedname>ip_address::family</qualifiedname>
+        <briefdescription>
+<para>获取地址族 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>地址族 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="152" column="27"/>
+        <referencedby refid="classip__address_1a180ec03fa7dd1c0cca46fcbc2e1ded1c">any</referencedby>
+        <referencedby refid="classip__address_1acf82f298c279306367382ff23cce0510">loopback</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a6f4063b742011d1f94d7721630b725f8" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structports" kindref="compound">ports</ref></type>
+        <definition>NEFORCE_NODISCARD ports ip_address::port</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>port</name>
+        <qualifiedname>ip_address::port</qualifiedname>
+        <briefdescription>
+<para>获取端口号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>端口号 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="158" column="29"/>
+        <references refid="classip__address_1a6f4063b742011d1f94d7721630b725f8">port</references>
+        <referencedby refid="classip__address_1a180ec03fa7dd1c0cca46fcbc2e1ded1c">any</referencedby>
+        <referencedby refid="classip__address_1acf82f298c279306367382ff23cce0510">loopback</referencedby>
+        <referencedby refid="classip__address_1afa18a9a0c627ef20bd148be8670cf46a">parse</referencedby>
+        <referencedby refid="classip__address_1a6f4063b742011d1f94d7721630b725f8">port</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1adf6d7964b4d29e962340254a36277f16" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string ip_address::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>ip_address::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为字符串表示 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式化的IP:端口字符串</para>
+</simplesect>
+IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="167" column="30"/>
+        <references refid="classip__address_1adf6d7964b4d29e962340254a36277f16">to_string</references>
+        <referencedby refid="classip__address_1adf6d7964b4d29e962340254a36277f16">to_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1a214f612df0a95977798fbeb19dd7d266" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ip_address::operator==</definition>
+        <argsstring>(const ip_address &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>ip_address::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>相等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个IP地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>地址和端口都相等返回true</para>
+</simplesect>
+比较IP地址和端口，不比较地址族以外的字段。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="187" column="28"/>
+        <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1ac514438653e8904c8d3f24a4c08e5740" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ip_address::operator!=</definition>
+        <argsstring>(const ip_address &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>ip_address::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>不等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个IP地址 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>不相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="194" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="194" bodyend="194"/>
+        <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classip__address_1a180ec03fa7dd1c0cca46fcbc2e1ded1c" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classip__address" kindref="compound">ip_address</ref></type>
+        <definition>static NEFORCE_NODISCARD ip_address ip_address::any</definition>
+        <argsstring>(ports port=ports::UNDEF, int family=AF_INET) noexcept</argsstring>
+        <name>any</name>
+        <qualifiedname>ip_address::any</qualifiedname>
+        <param>
+          <type><ref refid="structports" kindref="compound">ports</ref></type>
+          <declname>port</declname>
+          <defval><ref refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" kindref="member">ports::UNDEF</ref></defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>family</declname>
+          <defval>AF_INET</defval>
+        </param>
+        <briefdescription>
+<para>获取通配地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>端口号 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>family</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>地址族，默认为IPv4 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>通配地址对象</para>
+</simplesect>
+通配地址用于绑定到所有网络接口。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="114" column="41"/>
+        <references refid="classip__address_1a93c640535a6e7d1ec3aa7d3b1befdbb5">family</references>
+        <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
+        <references refid="classip__address_1a6f4063b742011d1f94d7721630b725f8">port</references>
+        <references refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" compoundref="ports_8hpp" startline="136">ports::UNDEF</references>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1acf82f298c279306367382ff23cce0510" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classip__address" kindref="compound">ip_address</ref></type>
+        <definition>static NEFORCE_NODISCARD ip_address ip_address::loopback</definition>
+        <argsstring>(ports port=ports::UNDEF, int family=AF_INET) noexcept</argsstring>
+        <name>loopback</name>
+        <qualifiedname>ip_address::loopback</qualifiedname>
+        <param>
+          <type><ref refid="structports" kindref="compound">ports</ref></type>
+          <declname>port</declname>
+          <defval><ref refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" kindref="member">ports::UNDEF</ref></defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>family</declname>
+          <defval>AF_INET</defval>
+        </param>
+        <briefdescription>
+<para>获取回环地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>端口号 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>family</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>地址族（AF_INET或AF_INET6），默认为IPv4 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>回环地址对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="122" column="41"/>
+        <references refid="classip__address_1a93c640535a6e7d1ec3aa7d3b1befdbb5">family</references>
+        <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
+        <references refid="classip__address_1a6f4063b742011d1f94d7721630b725f8">port</references>
+        <references refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" compoundref="ports_8hpp" startline="136">ports::UNDEF</references>
+      </memberdef>
+      <memberdef kind="function" id="classip__address_1afa18a9a0c627ef20bd148be8670cf46a" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classip__address" kindref="compound">ip_address</ref> &gt;</type>
+        <definition>static NEFORCE_NODISCARD optional&lt; ip_address &gt; ip_address::parse</definition>
+        <argsstring>(const string &amp;host, ports port=ports{}) noexcept</argsstring>
+        <name>parse</name>
+        <qualifiedname>ip_address::parse</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type><ref refid="structports" kindref="compound">ports</ref></type>
+          <declname>port</declname>
+          <defval><ref refid="structports" kindref="compound">ports</ref>{}</defval>
+        </param>
+        <briefdescription>
+<para>从字符串解析IP地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>host</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>IP地址字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>端口号 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析成功返回ip_address对象，失败返回none</para>
+</simplesect>
+支持IPv4点分十进制和IPv6十六进制格式。 不支持域名解析（如有需要请使用dns_client）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="178" column="39"/>
+        <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
+        <references refid="classip__address_1afa18a9a0c627ef20bd148be8670cf46a">parse</references>
+        <references refid="classip__address_1a6f4063b742011d1f94d7721630b725f8">port</references>
+        <referencedby refid="classip__address_1afa18a9a0c627ef20bd148be8670cf46a">parse</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>IP地址封装类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>封装IPv4和IPv6地址，提供统一的访问接口。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>IPv4和IPv6地址的统一表示</para>
+</listitem><listitem><para>地址解析</para>
+</listitem><listitem><para>地址格式化</para>
+</listitem><listitem><para>获取地址族、端口等信息</para>
+</listitem><listitem><para>通配地址和回环地址生成</para>
+</listitem><listitem><para>地址比较 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ip_address</label>
+        <link refid="classip__address"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>istringify&lt; ip_address &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ip_address</label>
+        <link refid="classip__address"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>istringify&lt; ip_address &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="53" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="53" bodyend="195"/>
+    <listofallmembers>
+      <member refid="classip__address_1a96252e4fa9934ce92d4063fe454160fe" prot="private" virt="non-virtual"><scope>ip_address</scope><name>addr_</name></member>
+      <member refid="classip__address_1a51cfbae6deb6526233b8876a9dd47267" prot="public" virt="non-virtual"><scope>ip_address</scope><name>address</name></member>
+      <member refid="classip__address_1a3b98397bf02b3c92bebf8b501b8bfe19" prot="public" virt="non-virtual"><scope>ip_address</scope><name>address_type</name></member>
+      <member refid="classip__address_1a180ec03fa7dd1c0cca46fcbc2e1ded1c" prot="public" virt="non-virtual"><scope>ip_address</scope><name>any</name></member>
+      <member refid="classip__address_1a14ad4d7d5a9fd7243b31a14e59658c61" prot="public" virt="non-virtual"><scope>ip_address</scope><name>data</name></member>
+      <member refid="classip__address_1a310418dfdef3f8a71f0dfb2ac7142d9a" prot="public" virt="non-virtual"><scope>ip_address</scope><name>data</name></member>
+      <member refid="classip__address_1a93c640535a6e7d1ec3aa7d3b1befdbb5" prot="public" virt="non-virtual"><scope>ip_address</scope><name>family</name></member>
+      <member refid="classip__address_1ac938566448641af3ba1ab6942fca0486" prot="public" virt="non-virtual"><scope>ip_address</scope><name>ip_address</name></member>
+      <member refid="classip__address_1a80998e8dc8280df952852cffeea393fa" prot="public" virt="non-virtual"><scope>ip_address</scope><name>ip_address</name></member>
+      <member refid="classip__address_1ae4239b7f69e83b99f451956238b92980" prot="public" virt="non-virtual"><scope>ip_address</scope><name>ip_address</name></member>
+      <member refid="classip__address_1a5c89af508e8c3d05749e3dc0bd86a28a" prot="public" virt="non-virtual"><scope>ip_address</scope><name>ip_address</name></member>
+      <member refid="classip__address_1a88981013888118a84ab6b655af4b82d0" prot="public" virt="non-virtual"><scope>ip_address</scope><name>ip_address</name></member>
+      <member refid="classip__address_1a32e935243923f451085130190d79a8d8" prot="public" virt="non-virtual"><scope>ip_address</scope><name>is_ipv4</name></member>
+      <member refid="classip__address_1a823f8b51cfec4e2ebfcca58f833e4b10" prot="public" virt="non-virtual"><scope>ip_address</scope><name>is_ipv6</name></member>
+      <member refid="classip__address_1a139ea4cbc9be4e23f04ae1b08b15539f" prot="public" virt="non-virtual"><scope>ip_address</scope><name>is_valid</name></member>
+      <member refid="classip__address_1acf82f298c279306367382ff23cce0510" prot="public" virt="non-virtual"><scope>ip_address</scope><name>loopback</name></member>
+      <member refid="classip__address_1ac514438653e8904c8d3f24a4c08e5740" prot="public" virt="non-virtual"><scope>ip_address</scope><name>operator!=</name></member>
+      <member refid="classip__address_1aaa690aad7a7f577215bd2eac5a8c4f4d" prot="public" virt="non-virtual"><scope>ip_address</scope><name>operator=</name></member>
+      <member refid="classip__address_1a0b5d492982ec30c7e2c8d538c6540595" prot="public" virt="non-virtual"><scope>ip_address</scope><name>operator=</name></member>
+      <member refid="classip__address_1a214f612df0a95977798fbeb19dd7d266" prot="public" virt="non-virtual"><scope>ip_address</scope><name>operator==</name></member>
+      <member refid="classip__address_1afa18a9a0c627ef20bd148be8670cf46a" prot="public" virt="non-virtual"><scope>ip_address</scope><name>parse</name></member>
+      <member refid="classip__address_1a6f4063b742011d1f94d7721630b725f8" prot="public" virt="non-virtual"><scope>ip_address</scope><name>port</name></member>
+      <member refid="classip__address_1a00979f07fd05c81607664b1152b76b28" prot="public" virt="non-virtual"><scope>ip_address</scope><name>size</name></member>
+      <member refid="classip__address_1adf6d7964b4d29e962340254a36277f16" prot="public" virt="non-virtual"><scope>ip_address</scope><name>to_string</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

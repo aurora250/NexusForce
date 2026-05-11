@@ -1,0 +1,1881 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structvariant" kind="struct" language="C++" prot="public">
+    <compoundname>variant</compoundname>
+    <basecompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; variant&lt; Types... &gt; &gt;</basecompoundref>
+    <includes refid="variant_8hpp" local="no">variant.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename...</type>
+        <declname>Types</declname>
+        <defname>Types</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structvariant_1a25f8a68e82f68692108de05f3fa39904" prot="private" static="no">
+        <type>void(*)(<ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *)</type>
+        <definition>using variant&lt; Types &gt;::destruct_function = void (*)(byte_t*)</definition>
+        <argsstring></argsstring>
+        <name>destruct_function</name>
+        <qualifiedname>variant::destruct_function</qualifiedname>
+        <briefdescription>
+<para>析构函数指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="87" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structvariant_1a7d9e5ab150e078d2695b8d6686286171" prot="private" static="no">
+        <type>void(*)(<ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *, <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> const  *)</type>
+        <definition>using variant&lt; Types &gt;::copy_construct_function = void (*)(byte_t*, byte_t const*)</definition>
+        <argsstring></argsstring>
+        <name>copy_construct_function</name>
+        <qualifiedname>variant::copy_construct_function</qualifiedname>
+        <briefdescription>
+<para>拷贝构造函数指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="101" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structvariant_1a07cc8f9288ebdfa2fab8fd24333a1119" prot="private" static="no">
+        <type>void(*)(<ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *, <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> const  *)</type>
+        <definition>using variant&lt; Types &gt;::copy_assignment_function = void (*)(byte_t*, byte_t const*)</definition>
+        <argsstring></argsstring>
+        <name>copy_assignment_function</name>
+        <qualifiedname>variant::copy_assignment_function</qualifiedname>
+        <briefdescription>
+<para>拷贝赋值函数指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="117" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structvariant_1ad555c14d1ff41e9226d577b29a1dc080" prot="private" static="no">
+        <type>void(*)(<ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *, const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *)</type>
+        <definition>using variant&lt; Types &gt;::move_construct_function = void (*)(byte_t*, const byte_t*)</definition>
+        <argsstring></argsstring>
+        <name>move_construct_function</name>
+        <qualifiedname>variant::move_construct_function</qualifiedname>
+        <briefdescription>
+<para>移动构造函数指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="133" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structvariant_1a17ad0753e907ab270ab3f997977be93e" prot="private" static="no">
+        <type>void(*)(<ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *, <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *)</type>
+        <definition>using variant&lt; Types &gt;::move_assignment_function = void (*)(byte_t*, byte_t*)</definition>
+        <argsstring></argsstring>
+        <name>move_assignment_function</name>
+        <qualifiedname>variant::move_assignment_function</qualifiedname>
+        <briefdescription>
+<para>移动赋值函数指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="149" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structvariant_1a096529f042ba70d02a640b584e61ec35" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Lambda</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" kindref="member">common_type_t</ref>&lt; _NEFORCE <ref refid="group___invoke_function_1gaf42c40449c9ef12db7fcf0532b6c90b5" kindref="member">invoke_result_t</ref>&lt; Lambda, Types const  &amp; &gt;... &gt;(*)( <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> const  *, Lambda &amp;&amp;)</type>
+        <definition>using variant&lt; Types &gt;::const_visitor_function = common_type_t&lt;_NEFORCE invoke_result_t&lt;Lambda, Types const&amp;&gt;...&gt; (*)(
+           byte_t const*, Lambda&amp;&amp;)</definition>
+        <argsstring></argsstring>
+        <name>const_visitor_function</name>
+        <qualifiedname>variant::const_visitor_function</qualifiedname>
+        <briefdescription>
+<para>常量访问者函数指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="166" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structvariant_1a5442ea733d701d07ed9b9c3bca236d95" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Lambda</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" kindref="member">common_type_t</ref>&lt; _NEFORCE <ref refid="group___invoke_function_1gaf42c40449c9ef12db7fcf0532b6c90b5" kindref="member">invoke_result_t</ref>&lt; Lambda, Types &amp; &gt;... &gt;(*)(<ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *, Lambda &amp;&amp;)</type>
+        <definition>using variant&lt; Types &gt;::visitor_function = 
+common_type_t&lt;_NEFORCE invoke_result_t&lt;Lambda, Types&amp;&gt;...&gt; (*)(byte_t*, Lambda&amp;&amp;)</definition>
+        <argsstring></argsstring>
+        <name>visitor_function</name>
+        <qualifiedname>variant::visitor_function</qualifiedname>
+        <briefdescription>
+<para>访问者函数指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="186" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structvariant_1abf41ecb59350a4940284b4a30aa60606" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t variant&lt; Types &gt;::index_</definition>
+        <argsstring></argsstring>
+        <name>index_</name>
+        <qualifiedname>variant::index_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>当前存储类型的索引 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="76" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structvariant_1aee434a5f988eb8a64275b04458ea32f3" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></type>
+        <definition>byte_t variant&lt; Types &gt;::union_[_NEFORCE max({sizeof(Types)...})]</definition>
+        <argsstring>[_NEFORCE max({sizeof(Types)...})]</argsstring>
+        <name>union_</name>
+        <qualifiedname>variant::union_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>存储值的联合体内存 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>使用最大对齐和最大大小的字符数组存储实际数据。 对齐方式为所有类型中最大的对齐要求。 大小为所有类型中最大的大小。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="85" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structvariant_1a679cfcdf8b788593635c4a2fa50e4958" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>destruct_function *</type>
+        <definition>static destruct_function * variant&lt; Types &gt;::destructors_table</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>destructors_table</name>
+        <qualifiedname>variant::destructors_table</qualifiedname>
+        <briefdescription>
+<para>获取析构函数表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>析构函数指针数组</para>
+</simplesect>
+为每个类型生成对应的析构函数，存储在静态数组中。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="95" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="95" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1aa40685550cb67a41bc62372655778eb8" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>copy_construct_function *</type>
+        <definition>static copy_construct_function * variant&lt; Types &gt;::copy_constructors_table</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>copy_constructors_table</name>
+        <qualifiedname>variant::copy_constructors_table</qualifiedname>
+        <briefdescription>
+<para>获取拷贝构造函数表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>拷贝构造函数指针数组</para>
+</simplesect>
+为每个类型生成对应的拷贝构造函数，存储在静态数组中。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="109" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="109" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a857c532fef4716928d3b875f75262337" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>copy_assignment_function *</type>
+        <definition>static copy_assignment_function * variant&lt; Types &gt;::copy_assigment_functions_table</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>copy_assigment_functions_table</name>
+        <qualifiedname>variant::copy_assigment_functions_table</qualifiedname>
+        <briefdescription>
+<para>获取拷贝赋值函数表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>拷贝赋值函数指针数组</para>
+</simplesect>
+为每个类型生成对应的拷贝赋值函数，存储在静态数组中。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="125" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="125" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1ad7d181eca20ade5c71eaa536207294de" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>move_construct_function *</type>
+        <definition>static move_construct_function * variant&lt; Types &gt;::move_constructors_table</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>move_constructors_table</name>
+        <qualifiedname>variant::move_constructors_table</qualifiedname>
+        <briefdescription>
+<para>获取移动构造函数表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>移动构造函数指针数组</para>
+</simplesect>
+为每个类型生成对应的移动构造函数，存储在静态数组中。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="141" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="141" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1acd2f724d4f9237287df0e795f6082ab1" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>move_assignment_function *</type>
+        <definition>static move_assignment_function * variant&lt; Types &gt;::move_assigment_functions_table</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>move_assigment_functions_table</name>
+        <qualifiedname>variant::move_assigment_functions_table</qualifiedname>
+        <briefdescription>
+<para>获取移动赋值函数表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>移动赋值函数指针数组</para>
+</simplesect>
+为每个类型生成对应的移动赋值函数，存储在静态数组中。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="157" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="157" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a69f57c54e7e8616ac2141f2f4d4bca58" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Lambda</type>
+          </param>
+        </templateparamlist>
+        <type>const_visitor_function&lt; Lambda &gt; *</type>
+        <definition>static const_visitor_function&lt; Lambda &gt; * variant&lt; Types &gt;::const_visitors_table</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>const_visitors_table</name>
+        <qualifiedname>variant::const_visitors_table</qualifiedname>
+        <briefdescription>
+<para>获取常量访问者函数表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>常量访问者函数指针数组 </para>
+</simplesect>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问者类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+为每个类型生成对应的常量访问者函数，存储在静态数组中。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="177" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="177" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a50d368dcebbcbb53134f7f6805416141" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Lambda</type>
+          </param>
+        </templateparamlist>
+        <type>visitor_function&lt; Lambda &gt; *</type>
+        <definition>static visitor_function&lt; Lambda &gt; * variant&lt; Types &gt;::visitors_table</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>visitors_table</name>
+        <qualifiedname>variant::visitors_table</qualifiedname>
+        <briefdescription>
+<para>获取访问者函数表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>访问者函数指针数组 </para>
+</simplesect>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问者类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+为每个类型生成对应的访问者函数，存储在静态数组中。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="197" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="197" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1ac98e0315f3c8b8cc61cc4ae1e0f3ca04" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; T, U &gt;, bool &gt;</type>
+        <definition>static NEFORCE_CONSTEXPR20 enable_if_t&lt; is_same_v&lt; T, U &gt;, bool &gt; variant&lt; Types &gt;::equal_to_impl</definition>
+        <argsstring>(const T &amp;lhs, const U &amp;rhs)</argsstring>
+        <name>equal_to_impl</name>
+        <qualifiedname>variant::equal_to_impl</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const U &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="240" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="240" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1af69a1b8c7e01196edbcd527b8290d5ee" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; T, U &gt;, bool &gt;</type>
+        <definition>static NEFORCE_CONSTEXPR20 enable_if_t&lt;!is_same_v&lt; T, U &gt;, bool &gt; variant&lt; Types &gt;::equal_to_impl</definition>
+        <argsstring>(const T &amp;, const U &amp;)</argsstring>
+        <name>equal_to_impl</name>
+        <qualifiedname>variant::equal_to_impl</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+        </param>
+        <param>
+          <type>const U &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="244" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="244" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a71a6a12b084734259d3036937d7fec91" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; T, U &gt;, bool &gt;</type>
+        <definition>static NEFORCE_CONSTEXPR20 enable_if_t&lt; is_same_v&lt; T, U &gt;, bool &gt; variant&lt; Types &gt;::less_than_impl</definition>
+        <argsstring>(const T &amp;lhs, const U &amp;rhs)</argsstring>
+        <name>less_than_impl</name>
+        <qualifiedname>variant::less_than_impl</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const U &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="249" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="249" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a374df0db3ec62cc55807cc9d4cd88994" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; T, U &gt;, bool &gt;</type>
+        <definition>static NEFORCE_CONSTEXPR20 enable_if_t&lt;!is_same_v&lt; T, U &gt;, bool &gt; variant&lt; Types &gt;::less_than_impl</definition>
+        <argsstring>(const T &amp;, const U &amp;)</argsstring>
+        <name>less_than_impl</name>
+        <qualifiedname>variant::less_than_impl</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+        </param>
+        <param>
+          <type>const U &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="253" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="253" bodyend="255"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structvariant_1a978b45e70597fdc489f31aebf1261d40" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>, I &gt;, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool variant&lt; Types &gt;::try_construct_impl_aux_aux</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>try_construct_impl_aux_aux</name>
+        <qualifiedname>variant::try_construct_impl_aux_aux</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="207" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="207" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a978b45e70597fdc489f31aebf1261d40" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>, I &gt;, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool variant&lt; Types &gt;::try_construct_impl_aux_aux</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>try_construct_impl_aux_aux</name>
+        <qualifiedname>variant::try_construct_impl_aux_aux</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="215" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="215" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a7ec2768d97e12fd54b0bc86f2e8f4e55" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(I&lt; sizeof...(Types)), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool variant&lt; Types &gt;::try_construct_impl_aux</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>try_construct_impl_aux</name>
+        <qualifiedname>variant::try_construct_impl_aux</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="220" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="220" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1aa63d7368653186bb8e63499b76785f24" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(I &gt;=sizeof...(Types)), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool variant&lt; Types &gt;::try_construct_impl_aux</definition>
+        <argsstring>(Args &amp;&amp;...)</argsstring>
+        <name>try_construct_impl_aux</name>
+        <qualifiedname>variant::try_construct_impl_aux</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;</type>
+          <declname>...</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="225" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="225" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1acfb279158f05be551c5a2d9f103bfd15" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool variant&lt; Types &gt;::try_construct_impl</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>try_construct_impl</name>
+        <qualifiedname>variant::try_construct_impl</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="230" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="230" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1afe8f7be58269a67ede8094d5e4f03667" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>I</declname>
+            <defname>I</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool variant&lt; Types &gt;::try_construct</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>try_construct</name>
+        <qualifiedname>variant::try_construct</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="235" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="235" bodyend="237"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structvariant_1acdbc2f70b7ff9aea3484677d79da1967" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_default_constructible_v&lt; variant_alternative_t&lt; variant, 0 &gt; &gt;" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 variant&lt; Types &gt;::variant</definition>
+        <argsstring>()</argsstring>
+        <name>variant</name>
+        <qualifiedname>variant::variant</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>默认构造变体，存储第一个类型的默认值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="263" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="263" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a31be628d0436c7a04d7f69d7e6395aa4" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga07b45a12528ab6274b3945b59508495d" kindref="member">disjunction_v</ref>&lt; <ref refid="structis__same" kindref="compound">is_same</ref>&lt; T, Types &gt;... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 variant&lt; Types &gt;::variant</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>variant</name>
+        <qualifiedname>variant::variant</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从特定类型值构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要存储的值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从给定类型的值移动构造变体。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="275" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="275" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1ad2d191d329791e4302ff51f8bf252969" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 variant&lt; Types &gt;::variant</definition>
+        <argsstring>(const variant &amp;other)</argsstring>
+        <name>variant</name>
+        <qualifiedname>variant::variant</qualifiedname>
+        <param>
+          <type>const <ref refid="structvariant" kindref="compound">variant</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的变体</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从另一个变体拷贝构造当前变体。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="287" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="287" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a16f22ecbc982b07727870ddd4bc8ab4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="structvariant" kindref="compound">variant</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 variant &amp; variant&lt; Types &gt;::operator=</definition>
+        <argsstring>(const variant &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>variant::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structvariant" kindref="compound">variant</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的变体 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前变体的引用</para>
+</simplesect>
+将另一个变体的值拷贝赋值给当前变体。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="299" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="299" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a62c4f92b7c79713dfc2fb38169152328" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 variant&lt; Types &gt;::variant</definition>
+        <argsstring>(variant &amp;&amp;other) noexcept</argsstring>
+        <name>variant</name>
+        <qualifiedname>variant::variant</qualifiedname>
+        <param>
+          <type><ref refid="structvariant" kindref="compound">variant</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的变体</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从另一个变体移动构造当前变体。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="314" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="314" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a2f68a0ae10a54232af9328d6de44ed34" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="structvariant" kindref="compound">variant</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 variant &amp; variant&lt; Types &gt;::operator=</definition>
+        <argsstring>(variant &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>variant::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structvariant" kindref="compound">variant</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的变体 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前变体的引用</para>
+</simplesect>
+将另一个变体的值移动赋值给当前变体。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="326" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="326" bodyend="333"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a004ff35cd3d00f9270b554e0e6e70739" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; variant_alternative_t&lt; variant, Idx &gt;, Args... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>, Idx &gt;, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 variant&lt; Types &gt;::variant</definition>
+        <argsstring>(pass_size_construct_tag&lt; Idx &gt;, Args &amp;&amp;... args)</argsstring>
+        <name>variant</name>
+        <qualifiedname>variant::variant</qualifiedname>
+        <param>
+          <type>pass_size_construct_tag&lt; Idx &gt;</type>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>参数列表原地构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要构造的类型的索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在指定索引位置直接构造对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="345" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="345" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1ab014599a230d86a7bab87bd9fd3e238c" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; variant_alternative_t&lt; variant, Idx &gt;, std::initializer_list&lt; U &gt; &amp;, Args... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>, Idx &gt;, std::initializer_list&lt; U &gt; &amp;, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 variant&lt; Types &gt;::variant</definition>
+        <argsstring>(pass_size_construct_tag&lt; Idx &gt;, std::initializer_list&lt; U &gt; ilist, Args &amp;&amp;... args)</argsstring>
+        <name>variant</name>
+        <qualifiedname>variant::variant</qualifiedname>
+        <param>
+          <type>pass_size_construct_tag&lt; Idx &gt;</type>
+        </param>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表原地构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要构造的类型的索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用初始化列表在指定索引位置构造对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="364" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="364" bodyend="370"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a0fd76fb818a40962de64253f549aa09b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga07b45a12528ab6274b3945b59508495d" kindref="member">disjunction_v</ref>&lt; <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; Types, Args... &gt;... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>variant&lt; Types &gt;::variant</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>variant</name>
+        <qualifiedname>variant::variant</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>通用构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+尝试使用给定参数构造变体，如果无法构造任何类型，则使用第一个类型的默认值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="380" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="380" bodyend="385"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1ab017fae6cac4e8f70f12956b7fba4baa" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 variant&lt; Types &gt;::~variant</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~variant</name>
+        <qualifiedname>variant::~variant</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>调用当前存储类型的析构函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="392" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="392" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1aa499bd63eb09b8f7e92fcab6971395da" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_invocable&lt; Lambda, Types &amp; &gt;... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Lambda</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1gaf49fb9070ceeed735b3dddc7da0392d7" kindref="member">conjunction_v</ref>&lt; <ref refid="structis__invocable" kindref="compound">is_invocable</ref>&lt; Lambda, Types &amp; &gt;... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" kindref="member">common_type_t</ref>&lt; <ref refid="group___invoke_function_1gaf42c40449c9ef12db7fcf0532b6c90b5" kindref="member">invoke_result_t</ref>&lt; Lambda, Types &amp; &gt;... &gt;</type>
+        <definition>NEFORCE_CONSTEXPR20 common_type_t&lt; invoke_result_t&lt; Lambda, Types &amp; &gt;... &gt; variant&lt; Types &gt;::visit</definition>
+        <argsstring>(Lambda &amp;&amp;lambda)</argsstring>
+        <name>visit</name>
+        <qualifiedname>variant::visit</qualifiedname>
+        <param>
+          <type>Lambda &amp;&amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <briefdescription>
+<para>访问变体值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问者类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问者函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>访问者函数的返回值</para>
+</simplesect>
+使用访问者模式访问当前存储的值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="404" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="404" bodyend="406"/>
+        <referencedby refid="structvariant_1a858482479a1a9e745d82d5b79e3afd24" compoundref="variant_8hpp" startline="598" endline="605">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::equal_to</referencedby>
+        <referencedby refid="structvariant_1aa5f29465e8a2428ddffee243fba2de5b" compoundref="variant_8hpp" startline="612" endline="619">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::less_than</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1ac6a8cc8f4f78b46dd5404c3d77d0bcaa" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="conjunction_v&lt; is_nothrow_invocable&lt; Lambda, const Types &amp; &gt;... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Lambda</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1gaf49fb9070ceeed735b3dddc7da0392d7" kindref="member">conjunction_v</ref>&lt; <ref refid="structis__invocable" kindref="compound">is_invocable</ref>&lt; Lambda, const Types &amp; &gt;... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___type_attribute_operations_1ga63597ca81f0a3a80001c836bc4cbbb84" kindref="member">common_type_t</ref>&lt; <ref refid="group___invoke_function_1gaf42c40449c9ef12db7fcf0532b6c90b5" kindref="member">invoke_result_t</ref>&lt; Lambda, const Types &amp; &gt;... &gt;</type>
+        <definition>NEFORCE_CONSTEXPR20 common_type_t&lt; invoke_result_t&lt; Lambda, const Types &amp; &gt;... &gt; variant&lt; Types &gt;::visit</definition>
+        <argsstring>(Lambda &amp;&amp;lambda) const</argsstring>
+        <name>visit</name>
+        <qualifiedname>variant::visit</qualifiedname>
+        <param>
+          <type>Lambda &amp;&amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <briefdescription>
+<para>常量访问变体值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问者类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问者函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>访问者函数的返回值</para>
+</simplesect>
+使用访问者模式访问当前存储的常量值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="417" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="417" bodyend="420"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a263236de7728fd63c6d99d8a28a23e0f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_t variant&lt; Types &gt;::index</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>index</name>
+        <qualifiedname>variant::index</qualifiedname>
+        <briefdescription>
+<para>获取当前存储类型的索引 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前存储类型的索引 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="426" column="50" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="426" bodyend="426"/>
+        <referencedby refid="structvariant_1a75e79aea57c57e1839964470249c4d3b" compoundref="variant_8hpp" startline="546" endline="550">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::emplace</referencedby>
+        <referencedby refid="structvariant_1a16f22ecbc982b07727870ddd4bc8ab4f" compoundref="variant_8hpp" startline="299" endline="306">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::operator=</referencedby>
+        <referencedby refid="structvariant_1a2f68a0ae10a54232af9328d6de44ed34" compoundref="variant_8hpp" startline="326" endline="333">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::operator=</referencedby>
+        <referencedby refid="structvariant_1ad2d191d329791e4302ff51f8bf252969" compoundref="variant_8hpp" startline="287" endline="290">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::variant</referencedby>
+        <referencedby refid="structvariant_1a62c4f92b7c79713dfc2fb38169152328" compoundref="variant_8hpp" startline="314" endline="317">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::variant</referencedby>
+        <referencedby refid="structvariant_1ac6a8cc8f4f78b46dd5404c3d77d0bcaa" compoundref="variant_8hpp" startline="417" endline="420">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::visit</referencedby>
+        <referencedby refid="structvariant_1aa499bd63eb09b8f7e92fcab6971395da" compoundref="variant_8hpp" startline="404" endline="406">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::visit</referencedby>
+        <referencedby refid="structvariant_1ab017fae6cac4e8f70f12956b7fba4baa" compoundref="variant_8hpp" startline="392" endline="392">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::~variant</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a59922c8c6c415a8dd0815c83e40624cc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1gaa0146faa0d59953b38f3d7cebefbec2c" kindref="member">is_any_of_v</ref>&lt; T, Types... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool variant&lt; Types &gt;::holds_alternative</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>holds_alternative</name>
+        <qualifiedname>variant::holds_alternative</qualifiedname>
+        <briefdescription>
+<para>检查是否存储特定类型的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果存储的是指定类型返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="434" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="434" bodyend="436"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1af51c80742eb99b964c632c5026f57bd8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(Idx&lt; sizeof...(Types)), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>, Idx &gt; &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 variant_alternative_t&lt; variant, Idx &gt; &amp; variant&lt; Types &gt;::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <qualifiedname>variant::get</qualifiedname>
+        <briefdescription>
+<para>获取指定索引位置的引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果索引不匹配 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="445" column="47" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="445" bodyend="450"/>
+        <referencedby refid="structvariant_1ab6552146478d97e24aee5290262bf314" compoundref="variant_8hpp" startline="459" endline="461">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::get</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1ab6552146478d97e24aee5290262bf314" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 T &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 T &amp; variant&lt; Types &gt;::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <qualifiedname>variant::get</qualifiedname>
+        <briefdescription>
+<para>获取指定类型值的引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定类型值的引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果类型不匹配 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="459" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="459" bodyend="461"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1aad32c82f7a9eef261921e330a46deea1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(Idx&lt; sizeof...(Types)), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>, Idx &gt; const &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 variant_alternative_t&lt; variant, Idx &gt; const  &amp; variant&lt; Types &gt;::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <qualifiedname>variant::get</qualifiedname>
+        <briefdescription>
+<para>获取指定索引位置的常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果索引不匹配 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="470" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="470" bodyend="475"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a68e3909d7cc63662b38cf1df5054719f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 T const &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 T const  &amp; variant&lt; Types &gt;::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <qualifiedname>variant::get</qualifiedname>
+        <briefdescription>
+<para>获取指定类型值的常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定类型值的常量引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果类型不匹配 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="484" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="484" bodyend="486"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a383bdb8f8ac0e6f93d75f6d863f4cbb0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(Idx&lt; sizeof...(Types)), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>, Idx &gt; *</type>
+        <definition>NEFORCE_CONSTEXPR20 variant_alternative_t&lt; variant, Idx &gt; * variant&lt; Types &gt;::get_if</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_if</name>
+        <qualifiedname>variant::get_if</qualifiedname>
+        <briefdescription>
+<para>如果存在，获取指定索引位置的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的指针，如果索引不匹配返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="494" column="47" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="494" bodyend="499"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1ae63afa08505c38af0a6f2576791f5701" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 T *</type>
+        <definition>NEFORCE_CONSTEXPR20 T * variant&lt; Types &gt;::get_if</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_if</name>
+        <qualifiedname>variant::get_if</qualifiedname>
+        <briefdescription>
+<para>如果存在，获取指定类型值的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定类型值的指针，如果类型不匹配返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="507" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="507" bodyend="509"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a25c2a3e386919022bd40ac0bbc3b7d90" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(Idx&lt; sizeof...(Types)), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>, Idx &gt; const *</type>
+        <definition>NEFORCE_CONSTEXPR20 variant_alternative_t&lt; variant, Idx &gt; const  * variant&lt; Types &gt;::get_if</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_if</name>
+        <qualifiedname>variant::get_if</qualifiedname>
+        <briefdescription>
+<para>如果存在，获取指定索引位置的常量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量指针，如果索引不匹配返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="517" column="53" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="517" bodyend="522"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1aedba471d26e7b998e717a1b9f1033907" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 T const *</type>
+        <definition>NEFORCE_CONSTEXPR20 T const  * variant&lt; Types &gt;::get_if</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_if</name>
+        <qualifiedname>variant::get_if</qualifiedname>
+        <briefdescription>
+<para>如果存在，获取指定类型值的常量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定类型值的常量指针，如果类型不匹配返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="530" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="530" bodyend="532"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a75e79aea57c57e1839964470249c4d3b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; variant_alternative_t&lt; variant, Idx &gt;, Args... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(Idx&lt; sizeof...(Types)) &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; <ref refid="group___variant_1gac276a03687a0669787a73fafe9ffedef" kindref="member">variant_alternative_t</ref>&lt; <ref refid="structvariant" kindref="compound">variant</ref>, Idx &gt;, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void variant&lt; Types &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>variant::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置构造新值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+销毁当前值并在指定位置构造新值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="546" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="546" bodyend="550"/>
+        <referencedby refid="structvariant_1a59bbee929aeb1fe81072126e1d4fb0b0" compoundref="variant_8hpp" startline="561" endline="563">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::emplace</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a59bbee929aeb1fe81072126e1d4fb0b0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Args... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void variant&lt; Types &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>variant::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>构造指定类型的新值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+销毁当前值并在指定类型位置构造新值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="561" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="561" bodyend="563"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1aa6ac13b545ec10e7c444157d69db3bd1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void variant&lt; Types &gt;::swap</definition>
+        <argsstring>(variant &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>variant::swap</qualifiedname>
+        <param>
+          <type><ref refid="structvariant" kindref="compound">variant</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个变体的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的变体</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+交换当前变体和另一个变体的值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="571" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="571" bodyend="589"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a858482479a1a9e745d82d5b79e3afd24" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool variant&lt; Types &gt;::equal_to</definition>
+        <argsstring>(const variant &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>variant::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="structvariant" kindref="compound">variant</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的变体 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个变体相等返回true，否则返回false</para>
+</simplesect>
+两个变体相等当且仅当它们存储相同类型的值且值相等。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="598" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="598" bodyend="605"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1aa5f29465e8a2428ddffee243fba2de5b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool variant&lt; Types &gt;::less_than</definition>
+        <argsstring>(const variant &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>variant::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="structvariant" kindref="compound">variant</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的变体 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果当前变体小于另一个变体返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="612" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="612" bodyend="619"/>
+      </memberdef>
+      <memberdef kind="function" id="structvariant_1a9024d7f9ff8f832b6df6caf42b333d82" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_t variant&lt; Types &gt;::to_hash</definition>
+        <argsstring>() const</argsstring>
+        <name>to_hash</name>
+        <qualifiedname>variant::to_hash</qualifiedname>
+        <briefdescription>
+<para>计算变体的哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>变体的哈希值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="625" column="50"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>变体类型主模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可存储的类型列表</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+variant是一个类型安全的联合体，可以在运行时存储多种不同类型的值。 使用函数指针表实现各种操作，支持构造、赋值、访问、销毁等操作。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>icommon&lt; variant&lt; Types... &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; variant&lt; Types... &gt; &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>ihashable&lt; variant&lt; Types... &gt; &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="1">
+        <label>variant&lt; Types &gt;</label>
+        <link refid="structvariant"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>icommon&lt; variant&lt; Types... &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; variant&lt; Types... &gt; &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="4">
+        <label>ihashable&lt; variant&lt; Types... &gt; &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="1">
+        <label>variant&lt; Types &gt;</label>
+        <link refid="structvariant"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" line="68" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/variant.hpp" bodystart="68" bodyend="626"/>
+    <listofallmembers>
+      <member refid="structvariant_1a096529f042ba70d02a640b584e61ec35" prot="private" virt="non-virtual"><scope>variant</scope><name>const_visitor_function</name></member>
+      <member refid="structvariant_1a69f57c54e7e8616ac2141f2f4d4bca58" prot="private" virt="non-virtual"><scope>variant</scope><name>const_visitors_table</name></member>
+      <member refid="structvariant_1a857c532fef4716928d3b875f75262337" prot="private" virt="non-virtual"><scope>variant</scope><name>copy_assigment_functions_table</name></member>
+      <member refid="structvariant_1a07cc8f9288ebdfa2fab8fd24333a1119" prot="private" virt="non-virtual"><scope>variant</scope><name>copy_assignment_function</name></member>
+      <member refid="structvariant_1a7d9e5ab150e078d2695b8d6686286171" prot="private" virt="non-virtual"><scope>variant</scope><name>copy_construct_function</name></member>
+      <member refid="structvariant_1aa40685550cb67a41bc62372655778eb8" prot="private" virt="non-virtual"><scope>variant</scope><name>copy_constructors_table</name></member>
+      <member refid="structvariant_1a25f8a68e82f68692108de05f3fa39904" prot="private" virt="non-virtual"><scope>variant</scope><name>destruct_function</name></member>
+      <member refid="structvariant_1a679cfcdf8b788593635c4a2fa50e4958" prot="private" virt="non-virtual"><scope>variant</scope><name>destructors_table</name></member>
+      <member refid="structvariant_1a75e79aea57c57e1839964470249c4d3b" prot="public" virt="non-virtual"><scope>variant</scope><name>emplace</name></member>
+      <member refid="structvariant_1a59bbee929aeb1fe81072126e1d4fb0b0" prot="public" virt="non-virtual"><scope>variant</scope><name>emplace</name></member>
+      <member refid="structvariant_1a858482479a1a9e745d82d5b79e3afd24" prot="public" virt="non-virtual"><scope>variant</scope><name>equal_to</name></member>
+      <member refid="structvariant_1ac98e0315f3c8b8cc61cc4ae1e0f3ca04" prot="private" virt="non-virtual"><scope>variant</scope><name>equal_to_impl</name></member>
+      <member refid="structvariant_1af69a1b8c7e01196edbcd527b8290d5ee" prot="private" virt="non-virtual"><scope>variant</scope><name>equal_to_impl</name></member>
+      <member refid="structvariant_1af51c80742eb99b964c632c5026f57bd8" prot="public" virt="non-virtual"><scope>variant</scope><name>get</name></member>
+      <member refid="structvariant_1ab6552146478d97e24aee5290262bf314" prot="public" virt="non-virtual"><scope>variant</scope><name>get</name></member>
+      <member refid="structvariant_1aad32c82f7a9eef261921e330a46deea1" prot="public" virt="non-virtual"><scope>variant</scope><name>get</name></member>
+      <member refid="structvariant_1a68e3909d7cc63662b38cf1df5054719f" prot="public" virt="non-virtual"><scope>variant</scope><name>get</name></member>
+      <member refid="structvariant_1a383bdb8f8ac0e6f93d75f6d863f4cbb0" prot="public" virt="non-virtual"><scope>variant</scope><name>get_if</name></member>
+      <member refid="structvariant_1ae63afa08505c38af0a6f2576791f5701" prot="public" virt="non-virtual"><scope>variant</scope><name>get_if</name></member>
+      <member refid="structvariant_1a25c2a3e386919022bd40ac0bbc3b7d90" prot="public" virt="non-virtual"><scope>variant</scope><name>get_if</name></member>
+      <member refid="structvariant_1aedba471d26e7b998e717a1b9f1033907" prot="public" virt="non-virtual"><scope>variant</scope><name>get_if</name></member>
+      <member refid="structvariant_1a59922c8c6c415a8dd0815c83e40624cc" prot="public" virt="non-virtual"><scope>variant</scope><name>holds_alternative</name></member>
+      <member refid="structvariant_1a263236de7728fd63c6d99d8a28a23e0f" prot="public" virt="non-virtual"><scope>variant</scope><name>index</name></member>
+      <member refid="structvariant_1abf41ecb59350a4940284b4a30aa60606" prot="private" virt="non-virtual"><scope>variant</scope><name>index_</name></member>
+      <member refid="structvariant_1aa5f29465e8a2428ddffee243fba2de5b" prot="public" virt="non-virtual"><scope>variant</scope><name>less_than</name></member>
+      <member refid="structvariant_1a71a6a12b084734259d3036937d7fec91" prot="private" virt="non-virtual"><scope>variant</scope><name>less_than_impl</name></member>
+      <member refid="structvariant_1a374df0db3ec62cc55807cc9d4cd88994" prot="private" virt="non-virtual"><scope>variant</scope><name>less_than_impl</name></member>
+      <member refid="structvariant_1acd2f724d4f9237287df0e795f6082ab1" prot="private" virt="non-virtual"><scope>variant</scope><name>move_assigment_functions_table</name></member>
+      <member refid="structvariant_1a17ad0753e907ab270ab3f997977be93e" prot="private" virt="non-virtual"><scope>variant</scope><name>move_assignment_function</name></member>
+      <member refid="structvariant_1ad555c14d1ff41e9226d577b29a1dc080" prot="private" virt="non-virtual"><scope>variant</scope><name>move_construct_function</name></member>
+      <member refid="structvariant_1ad7d181eca20ade5c71eaa536207294de" prot="private" virt="non-virtual"><scope>variant</scope><name>move_constructors_table</name></member>
+      <member refid="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" virt="non-virtual"><scope>variant</scope><name>operator!=</name></member>
+      <member refid="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" virt="non-virtual"><scope>variant</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" virt="non-virtual"><scope>variant</scope><name>operator&lt;=</name></member>
+      <member refid="structvariant_1a16f22ecbc982b07727870ddd4bc8ab4f" prot="public" virt="non-virtual"><scope>variant</scope><name>operator=</name></member>
+      <member refid="structvariant_1a2f68a0ae10a54232af9328d6de44ed34" prot="public" virt="non-virtual"><scope>variant</scope><name>operator=</name></member>
+      <member refid="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" virt="non-virtual"><scope>variant</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" virt="non-virtual"><scope>variant</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" virt="non-virtual"><scope>variant</scope><name>operator&gt;=</name></member>
+      <member refid="structvariant_1aa6ac13b545ec10e7c444157d69db3bd1" prot="public" virt="non-virtual"><scope>variant</scope><name>swap</name></member>
+      <member refid="structvariant_1a9024d7f9ff8f832b6df6caf42b333d82" prot="public" virt="non-virtual"><scope>variant</scope><name>to_hash</name></member>
+      <member refid="structihashable_1a3bb793a19699c7ccd86fa5d7e91cb513" prot="public" virt="non-virtual"><scope>variant</scope><name>to_ihash</name></member>
+      <member refid="structvariant_1afe8f7be58269a67ede8094d5e4f03667" prot="private" virt="non-virtual"><scope>variant</scope><name>try_construct</name></member>
+      <member refid="structvariant_1acfb279158f05be551c5a2d9f103bfd15" prot="private" virt="non-virtual"><scope>variant</scope><name>try_construct_impl</name></member>
+      <member refid="structvariant_1a7ec2768d97e12fd54b0bc86f2e8f4e55" prot="private" virt="non-virtual"><scope>variant</scope><name>try_construct_impl_aux</name></member>
+      <member refid="structvariant_1aa63d7368653186bb8e63499b76785f24" prot="private" virt="non-virtual"><scope>variant</scope><name>try_construct_impl_aux</name></member>
+      <member refid="structvariant_1a978b45e70597fdc489f31aebf1261d40" prot="private" virt="non-virtual"><scope>variant</scope><name>try_construct_impl_aux_aux</name></member>
+      <member refid="structvariant_1a978b45e70597fdc489f31aebf1261d40" prot="private" virt="non-virtual"><scope>variant</scope><name>try_construct_impl_aux_aux</name></member>
+      <member refid="structvariant_1aee434a5f988eb8a64275b04458ea32f3" prot="private" virt="non-virtual"><scope>variant</scope><name>union_</name></member>
+      <member refid="structvariant_1acdbc2f70b7ff9aea3484677d79da1967" prot="public" virt="non-virtual"><scope>variant</scope><name>variant</name></member>
+      <member refid="structvariant_1a31be628d0436c7a04d7f69d7e6395aa4" prot="public" virt="non-virtual"><scope>variant</scope><name>variant</name></member>
+      <member refid="structvariant_1ad2d191d329791e4302ff51f8bf252969" prot="public" virt="non-virtual"><scope>variant</scope><name>variant</name></member>
+      <member refid="structvariant_1a62c4f92b7c79713dfc2fb38169152328" prot="public" virt="non-virtual"><scope>variant</scope><name>variant</name></member>
+      <member refid="structvariant_1a004ff35cd3d00f9270b554e0e6e70739" prot="public" virt="non-virtual"><scope>variant</scope><name>variant</name></member>
+      <member refid="structvariant_1ab014599a230d86a7bab87bd9fd3e238c" prot="public" virt="non-virtual"><scope>variant</scope><name>variant</name></member>
+      <member refid="structvariant_1a0fd76fb818a40962de64253f549aa09b" prot="public" virt="non-virtual"><scope>variant</scope><name>variant</name></member>
+      <member refid="structvariant_1aa499bd63eb09b8f7e92fcab6971395da" prot="public" virt="non-virtual"><scope>variant</scope><name>visit</name></member>
+      <member refid="structvariant_1ac6a8cc8f4f78b46dd5404c3d77d0bcaa" prot="public" virt="non-virtual"><scope>variant</scope><name>visit</name></member>
+      <member refid="structvariant_1a5442ea733d701d07ed9b9c3bca236d95" prot="private" virt="non-virtual"><scope>variant</scope><name>visitor_function</name></member>
+      <member refid="structvariant_1a50d368dcebbcbb53134f7f6805416141" prot="private" virt="non-virtual"><scope>variant</scope><name>visitors_table</name></member>
+      <member refid="structvariant_1ab017fae6cac4e8f70f12956b7fba4baa" prot="public" virt="non-virtual"><scope>variant</scope><name>~variant</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

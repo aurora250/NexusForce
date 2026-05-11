@@ -3,10 +3,10 @@
 
 /**
  * @file ini_builder.hpp
- * @brief ini配置格式构建器
+ * @brief INI配置格式构建器
  *
- * 此文件提供了ini配置格式的流式构建器实现。
- * 支持链式调用方式构建ini格式，
+ * 此文件提供了INI配置格式的流式构建器实现。
+ * 支持链式调用方式构建INI格式，
  * 包括节(section)的创建、键值对的设置，以及嵌套节的定义。
  */
 
@@ -15,22 +15,20 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup ConfigFormat 配置格式操作
- * @brief env配置格式管理
+ * @addtogroup ConfigFormat 配置格式操作
  * @{
  */
 
 /**
- * @defgroup IniConfig ini配置
- * @brief ini配置格式管理
+ * @addtogroup IniConfig INI配置
  * @{
  */
 
 /**
  * @class ini_builder
- * @brief ini配置格式构建器
+ * @brief INI配置格式构建器
  *
- * 提供流式接口构建ini配置格式，支持以下特性：
+ * 提供流式接口构建INI配置格式，支持以下特性：
  * - 链式调用设置节和键值对
  * - 支持多种数据类型自动转换
  * - 支持嵌套节的函数式定义
@@ -186,7 +184,7 @@ public:
      * @brief 构建文档
      * @return 构建完成的文档对象
      *
-     * 完成构建过程，返回构建好的ini文档。
+     * 完成构建过程，返回构建好的INI文档。
      * 调用后构建器状态被移动，不应继续使用。
      */
     unique_ptr<ini_document> build() noexcept;

@@ -1,0 +1,734 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classrandom__mt" kind="class" language="C++" prot="public">
+    <compoundname>random_mt</compoundname>
+    <includes refid="random_8hpp" local="no">random.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" prot="public" static="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>using random_mt::seed_type = uint32_t</definition>
+        <argsstring></argsstring>
+        <name>seed_type</name>
+        <qualifiedname>random_mt::seed_type</qualifiedname>
+        <briefdescription>
+<para>种子类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="239" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="239" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classrandom__mt_1a5a45f4b71b6ba750812b891afccebb29" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t random_mt::n</definition>
+        <argsstring></argsstring>
+        <name>n</name>
+        <qualifiedname>random_mt::n</qualifiedname>
+        <initializer>= 624</initializer>
+        <briefdescription>
+<para>状态向量长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="242" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandom__mt_1ad70e0e9583167e398e4dada0e24c3003" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t random_mt::m</definition>
+        <argsstring></argsstring>
+        <name>m</name>
+        <qualifiedname>random_mt::m</qualifiedname>
+        <initializer>= 397</initializer>
+        <briefdescription>
+<para>中间偏移量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="243" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandom__mt_1af3a3b7ec5621d94f4bee24ab53d5e75c" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+        <definition>seed_type random_mt::a</definition>
+        <argsstring></argsstring>
+        <name>a</name>
+        <qualifiedname>random_mt::a</qualifiedname>
+        <initializer>= 0x9908b0df</initializer>
+        <briefdescription>
+<para>旋转矩阵常数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="244" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandom__mt_1a1fc674fdbc367138591512e95c87d0ed" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+        <definition>seed_type random_mt::u</definition>
+        <argsstring></argsstring>
+        <name>u</name>
+        <qualifiedname>random_mt::u</qualifiedname>
+        <initializer>= 11</initializer>
+        <briefdescription>
+<para>位掩码1 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="245" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="245" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandom__mt_1a2d109b2b3f5ef98cb5aa453ef44bc43a" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+        <definition>seed_type random_mt::s</definition>
+        <argsstring></argsstring>
+        <name>s</name>
+        <qualifiedname>random_mt::s</qualifiedname>
+        <initializer>= 7</initializer>
+        <briefdescription>
+<para>位移量1 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="246" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="246" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandom__mt_1a901a422146059c608b67aac84b74487c" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+        <definition>seed_type random_mt::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <qualifiedname>random_mt::b</qualifiedname>
+        <initializer>= 0x9d2c5680</initializer>
+        <briefdescription>
+<para>位掩码2 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="247" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandom__mt_1a0811bd63ba72ac8d14f75973216cd1cd" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+        <definition>seed_type random_mt::t</definition>
+        <argsstring></argsstring>
+        <name>t</name>
+        <qualifiedname>random_mt::t</qualifiedname>
+        <initializer>= 15</initializer>
+        <briefdescription>
+<para>位移量2 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="248" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="248" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandom__mt_1af0ee65da91c894975a46ffe1f1bc5ca3" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+        <definition>seed_type random_mt::c</definition>
+        <argsstring></argsstring>
+        <name>c</name>
+        <qualifiedname>random_mt::c</qualifiedname>
+        <initializer>= 0xefc60000</initializer>
+        <briefdescription>
+<para>位掩码3 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="249" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandom__mt_1add8f1bbd1af2e10e187ac2b8f91ab88c" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+        <definition>seed_type random_mt::l</definition>
+        <argsstring></argsstring>
+        <name>l</name>
+        <qualifiedname>random_mt::l</qualifiedname>
+        <initializer>= 18</initializer>
+        <briefdescription>
+<para>位移量3 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="250" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="250" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classrandom__mt_1a66370f3106c6a7ffdb076e9123509dee" prot="private" static="no" mutable="no">
+        <type><ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+        <definition>seed_type random_mt::state_[n]</definition>
+        <argsstring>[n]</argsstring>
+        <name>state_</name>
+        <qualifiedname>random_mt::state_</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+<para>状态向量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="252" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="252" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="variable" id="classrandom__mt_1a16b1da947f3c5fe76c5569f19bc6ce39" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t random_mt::index_</definition>
+        <argsstring></argsstring>
+        <name>index_</name>
+        <qualifiedname>random_mt::index_</qualifiedname>
+        <initializer>= n</initializer>
+        <briefdescription>
+<para>当前状态索引 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="253" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="253" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classrandom__mt_1a57b4eb533554807502092f5e6762ba80" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void random_mt::twist</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>twist</name>
+        <qualifiedname>random_mt::twist</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="255" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1a306806ad42c998bac38b42a10fb3b5ab" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+        <definition>seed_type random_mt::generate_32bit</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>generate_32bit</name>
+        <qualifiedname>random_mt::generate_32bit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="257" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1a3dbdbfbf1781e4b2db0d88a4379234d6" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t random_mt::generate_64bit</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>generate_64bit</name>
+        <qualifiedname>random_mt::generate_64bit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="258" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1aa173e3aa630f816d8bed61831f88707a" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) random_mt::generate</definition>
+        <argsstring>(true_type) noexcept</argsstring>
+        <name>generate</name>
+        <qualifiedname>random_mt::generate</qualifiedname>
+        <param>
+          <type><ref refid="group___type_traits_utilities_1gaa4e9c28fa52ab73ef48e5cbed20c66fd" kindref="member">true_type</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="260" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="260" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1a62496c8e27b74d452ac066ad76cb1818" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) random_mt::generate</definition>
+        <argsstring>(false_type) noexcept</argsstring>
+        <name>generate</name>
+        <qualifiedname>random_mt::generate</qualifiedname>
+        <param>
+          <type><ref refid="group___type_traits_utilities_1gad15d3ff5d80b8c8c22e9ce862353ba55" kindref="member">false_type</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="261" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="261" bodyend="261"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classrandom__mt_1a6423903f6dd127db18be4b341c5ba3f3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>random_mt::random_mt</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>random_mt</name>
+        <qualifiedname>random_mt::random_mt</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 默认使用当前时间戳值作为种子。 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="268" column="5"/>
+        <referencedby refid="classrandom__mt_1ad0c3f149182892f29b5acdc1a3c1dca6" compoundref="random_8hpp" startline="274" endline="274">random_mt</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1ad0c3f149182892f29b5acdc1a3c1dca6" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>random_mt::random_mt</definition>
+        <argsstring>(const seed_type seed) noexcept</argsstring>
+        <name>random_mt</name>
+        <qualifiedname>random_mt::random_mt</qualifiedname>
+        <param>
+          <type>const <ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+          <declname>seed</declname>
+        </param>
+        <briefdescription>
+<para>带种子构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始种子值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="274" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="274" bodyend="274"/>
+        <references refid="classrandom__mt_1a6423903f6dd127db18be4b341c5ba3f3">random_mt</references>
+        <references refid="classrandom__mt_1a5c99f22d638962e02e68121c63473444">set_seed</references>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1a5c99f22d638962e02e68121c63473444" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void random_mt::set_seed</definition>
+        <argsstring>(seed_type seed) noexcept</argsstring>
+        <name>set_seed</name>
+        <qualifiedname>random_mt::set_seed</qualifiedname>
+        <param>
+          <type><ref refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" kindref="member">seed_type</ref></type>
+          <declname>seed</declname>
+        </param>
+        <briefdescription>
+<para>设置随机数种子 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新种子值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="280" column="10"/>
+        <referencedby refid="classrandom__mt_1ad0c3f149182892f29b5acdc1a3c1dca6" compoundref="random_8hpp" startline="274" endline="274">random_mt</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1a133d986c3768a4eaaeddb5b2ec29e2f2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T random_mt::next_int</definition>
+        <argsstring>(T max) noexcept</argsstring>
+        <name>next_int</name>
+        <qualifiedname>random_mt::next_int</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>生成 [0, max) 范围内的随机整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整形类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>上限（不包含） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>[0, max) 范围内的随机整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="289" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="289" bodyend="297"/>
+        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="compare_8hpp" startline="133" endline="135">max</references>
+        <referencedby refid="classrandom__mt_1a1c44b797a02c0750d497c1c3d2e461b8" compoundref="random_8hpp" startline="307" endline="312">next_int</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1a1c44b797a02c0750d497c1c3d2e461b8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T random_mt::next_int</definition>
+        <argsstring>(T min, T max) noexcept</argsstring>
+        <name>next_int</name>
+        <qualifiedname>random_mt::next_int</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>生成[min, max)范围内的随机整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整形类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>下限（包含） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>上限（不包含） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>[min, max)范围内的随机整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="307" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="307" bodyend="312"/>
+        <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="compare_8hpp" startline="133" endline="135">max</references>
+        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
+        <references refid="classrandom__mt_1a133d986c3768a4eaaeddb5b2ec29e2f2" compoundref="random_8hpp" startline="289" endline="297">next_int</references>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1aaab18ba803326933c9736f5d04dfa0c6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T random_mt::next_int</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>next_int</name>
+        <qualifiedname>random_mt::next_int</qualifiedname>
+        <briefdescription>
+<para>生成完整范围的随机整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整形类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>完整范围的随机整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="320" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="320" bodyend="323"/>
+        <references refid="group___shift_algorithms_1gad0b532388a6235965ae2562b1f8d66d8" compoundref="shift_8hpp" startline="521" endline="530">generate</references>
+        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1a5a0d442f401514a9d36805a4da5a7777" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t random_mt::next_uint64</definition>
+        <argsstring>(uint64_t max) noexcept</argsstring>
+        <name>next_uint64</name>
+        <qualifiedname>random_mt::next_uint64</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>生成 [0, max) 范围内的随机 64 位整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>上限（不包含） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>[0, max) 范围内的随机 64 位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="330" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="330" bodyend="335"/>
+        <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="compare_8hpp" startline="133" endline="135">max</references>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1a3996aa740fbbf1c7477f05fccf97f376" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t random_mt::next_uint64</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>next_uint64</name>
+        <qualifiedname>random_mt::next_uint64</qualifiedname>
+        <briefdescription>
+<para>生成完整范围的随机 64 位整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>完整范围的随机 64 位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="341" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="341" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1a4ddd979b24a93752c932b939899979ac" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T random_mt::next_float</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>next_float</name>
+        <qualifiedname>random_mt::next_float</qualifiedname>
+        <briefdescription>
+<para>生成 [0, 1) 范围内的随机浮点数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>[0, 1) 范围内的随机浮点数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="349" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="349" bodyend="354"/>
+        <references refid="group___shift_algorithms_1gad0b532388a6235965ae2562b1f8d66d8" compoundref="shift_8hpp" startline="521" endline="530">generate</references>
+        <references refid="group___base_type_properties_1ga1233851ade7c3f53dc6b9b0ae01cf978" compoundref="type__traits_8hpp" startline="907">is_floating_point_v</references>
+        <references refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <referencedby refid="classrandom__mt_1abdc26f3b9934581b6aae598b20a757a1" compoundref="random_8hpp" startline="378" endline="380">next_float</referencedby>
+        <referencedby refid="classrandom__mt_1a32b1b9796e96a684154aa40339ac6f3b" compoundref="random_8hpp" startline="364" endline="369">next_float</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1a32b1b9796e96a684154aa40339ac6f3b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T random_mt::next_float</definition>
+        <argsstring>(T min, T max) noexcept</argsstring>
+        <name>next_float</name>
+        <qualifiedname>random_mt::next_float</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>生成 [min, max) 范围内的随机浮点数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>下限（包含） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>上限（不包含） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>[min, max) 范围内的随机浮点数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="364" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="364" bodyend="369"/>
+        <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="compare_8hpp" startline="133" endline="135">max</references>
+        <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
+        <references refid="classrandom__mt_1a4ddd979b24a93752c932b939899979ac" compoundref="random_8hpp" startline="349" endline="354">next_float</references>
+      </memberdef>
+      <memberdef kind="function" id="classrandom__mt_1abdc26f3b9934581b6aae598b20a757a1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T random_mt::next_float</definition>
+        <argsstring>(T max) noexcept</argsstring>
+        <name>next_float</name>
+        <qualifiedname>random_mt::next_float</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>生成 [0, max) 范围内的随机浮点数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>上限（不包含） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>[0, max) 范围内的随机浮点数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="378" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="378" bodyend="380"/>
+        <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="compare_8hpp" startline="133" endline="135">max</references>
+        <references refid="classrandom__mt_1a4ddd979b24a93752c932b939899979ac" compoundref="random_8hpp" startline="349" endline="354">next_float</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>梅森旋转随机数生成器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>使用梅森旋转算法 Mersenne Twister 生成高质量伪随机数， 周期长（2^19937-1）， 随机性良好，但生成速度较慢。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" line="237" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/random.hpp" bodystart="237" bodyend="381"/>
+    <listofallmembers>
+      <member refid="classrandom__mt_1af3a3b7ec5621d94f4bee24ab53d5e75c" prot="private" virt="non-virtual"><scope>random_mt</scope><name>a</name></member>
+      <member refid="classrandom__mt_1a901a422146059c608b67aac84b74487c" prot="private" virt="non-virtual"><scope>random_mt</scope><name>b</name></member>
+      <member refid="classrandom__mt_1af0ee65da91c894975a46ffe1f1bc5ca3" prot="private" virt="non-virtual"><scope>random_mt</scope><name>c</name></member>
+      <member refid="classrandom__mt_1aa173e3aa630f816d8bed61831f88707a" prot="private" virt="non-virtual"><scope>random_mt</scope><name>generate</name></member>
+      <member refid="classrandom__mt_1a62496c8e27b74d452ac066ad76cb1818" prot="private" virt="non-virtual"><scope>random_mt</scope><name>generate</name></member>
+      <member refid="classrandom__mt_1a306806ad42c998bac38b42a10fb3b5ab" prot="private" virt="non-virtual"><scope>random_mt</scope><name>generate_32bit</name></member>
+      <member refid="classrandom__mt_1a3dbdbfbf1781e4b2db0d88a4379234d6" prot="private" virt="non-virtual"><scope>random_mt</scope><name>generate_64bit</name></member>
+      <member refid="classrandom__mt_1a16b1da947f3c5fe76c5569f19bc6ce39" prot="private" virt="non-virtual"><scope>random_mt</scope><name>index_</name></member>
+      <member refid="classrandom__mt_1add8f1bbd1af2e10e187ac2b8f91ab88c" prot="private" virt="non-virtual"><scope>random_mt</scope><name>l</name></member>
+      <member refid="classrandom__mt_1ad70e0e9583167e398e4dada0e24c3003" prot="private" virt="non-virtual"><scope>random_mt</scope><name>m</name></member>
+      <member refid="classrandom__mt_1a5a45f4b71b6ba750812b891afccebb29" prot="private" virt="non-virtual"><scope>random_mt</scope><name>n</name></member>
+      <member refid="classrandom__mt_1a4ddd979b24a93752c932b939899979ac" prot="public" virt="non-virtual"><scope>random_mt</scope><name>next_float</name></member>
+      <member refid="classrandom__mt_1a32b1b9796e96a684154aa40339ac6f3b" prot="public" virt="non-virtual"><scope>random_mt</scope><name>next_float</name></member>
+      <member refid="classrandom__mt_1abdc26f3b9934581b6aae598b20a757a1" prot="public" virt="non-virtual"><scope>random_mt</scope><name>next_float</name></member>
+      <member refid="classrandom__mt_1a133d986c3768a4eaaeddb5b2ec29e2f2" prot="public" virt="non-virtual"><scope>random_mt</scope><name>next_int</name></member>
+      <member refid="classrandom__mt_1a1c44b797a02c0750d497c1c3d2e461b8" prot="public" virt="non-virtual"><scope>random_mt</scope><name>next_int</name></member>
+      <member refid="classrandom__mt_1aaab18ba803326933c9736f5d04dfa0c6" prot="public" virt="non-virtual"><scope>random_mt</scope><name>next_int</name></member>
+      <member refid="classrandom__mt_1a5a0d442f401514a9d36805a4da5a7777" prot="public" virt="non-virtual"><scope>random_mt</scope><name>next_uint64</name></member>
+      <member refid="classrandom__mt_1a3996aa740fbbf1c7477f05fccf97f376" prot="public" virt="non-virtual"><scope>random_mt</scope><name>next_uint64</name></member>
+      <member refid="classrandom__mt_1a6423903f6dd127db18be4b341c5ba3f3" prot="public" virt="non-virtual"><scope>random_mt</scope><name>random_mt</name></member>
+      <member refid="classrandom__mt_1ad0c3f149182892f29b5acdc1a3c1dca6" prot="public" virt="non-virtual"><scope>random_mt</scope><name>random_mt</name></member>
+      <member refid="classrandom__mt_1a2d109b2b3f5ef98cb5aa453ef44bc43a" prot="private" virt="non-virtual"><scope>random_mt</scope><name>s</name></member>
+      <member refid="classrandom__mt_1a92680668e87a6c015c0d9b04e5b06cff" prot="public" virt="non-virtual"><scope>random_mt</scope><name>seed_type</name></member>
+      <member refid="classrandom__mt_1a5c99f22d638962e02e68121c63473444" prot="public" virt="non-virtual"><scope>random_mt</scope><name>set_seed</name></member>
+      <member refid="classrandom__mt_1a66370f3106c6a7ffdb076e9123509dee" prot="private" virt="non-virtual"><scope>random_mt</scope><name>state_</name></member>
+      <member refid="classrandom__mt_1a0811bd63ba72ac8d14f75973216cd1cd" prot="private" virt="non-virtual"><scope>random_mt</scope><name>t</name></member>
+      <member refid="classrandom__mt_1a57b4eb533554807502092f5e6762ba80" prot="private" virt="non-virtual"><scope>random_mt</scope><name>twist</name></member>
+      <member refid="classrandom__mt_1a1fc674fdbc367138591512e95c87d0ed" prot="private" virt="non-virtual"><scope>random_mt</scope><name>u</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

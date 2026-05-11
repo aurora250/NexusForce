@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['记录类型_0',['DNS 记录类型',['../group___d_n_s.html#dns_record_types',1,'']]]
+  ['表单编码规则_0',['表单编码规则',['../structurl.html#form_encoding',1,'']]]
 ];

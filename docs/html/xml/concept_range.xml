@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="concept_range" kind="concept">
+    <compoundname>Range</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename R</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename R&gt;
+concept Range =  requires(R&amp; r) {
+    { <ref refid="group___type_erasure_functions_1ga278da9db83e0ea0b3ba56d8dedf43d86" kindref="member">r.begin</ref>() } -&gt; <ref refid="conceptinput__iterator" kindref="compound">input_iterator</ref>;
+    { <ref refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" kindref="member">r.end</ref>() } -&gt; <ref refid="conceptsentinel__for" kindref="compound">sentinel_for</ref>&lt;decltype(<ref refid="group___type_erasure_functions_1ga278da9db83e0ea0b3ba56d8dedf43d86" kindref="member">r.begin</ref>())&gt;;
+}</initializer>
+    <conceptparts>
+      <codepart line="10">    <programlisting>
+<codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>R&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">Range<sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(R&amp;<sp/>r)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{<sp/>r.begin()<sp/>}<sp/>-&gt;<sp/>input_iterator;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{<sp/>r.end()<sp/>}<sp/>-&gt;<sp/>sentinel_for&lt;</highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(r.begin())&gt;;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="10" column="1"/>
+  </compounddef>
+</doxygen>

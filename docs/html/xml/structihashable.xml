@@ -1,0 +1,473 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structihashable" kind="struct" language="C++" prot="public">
+    <compoundname>ihashable</compoundname>
+    <derivedcompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; compressed_pair&lt; IfEmpty, T, is_empty_v&lt; IfEmpty &gt; &amp;&amp;!is_final_v&lt; IfEmpty &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; compressed_pair&lt; IfEmpty, T, false &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; optional&lt; T &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; optional&lt; T &amp; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structicommon" prot="public" virt="non-virtual">icommon&lt; T &gt;</derivedcompoundref>
+    <includes refid="icommon_8hpp" local="no">icommon.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structihashable_1a7f2443f6828e2ec861c9f2eccb7da7d0" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; ihashable&lt; T &gt;::derived</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>derived</name>
+        <qualifiedname>ihashable::derived</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="32" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structihashable_1a3bb793a19699c7ccd86fa5d7e91cb513" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(derived().to_hash())" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr size_t ihashable&lt; T &gt;::to_ihash</definition>
+        <argsstring>() const</argsstring>
+        <name>to_ihash</name>
+        <qualifiedname>ihashable::to_ihash</qualifiedname>
+        <briefdescription>
+<para>获取对象的哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希值</para>
+</simplesect>
+实际调用派生类的to_hash()方法 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="41" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="41" bodyend="43"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>可哈希对象接口模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>派生类类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+派生类需要实现to_hash()方法，即可通过此接口自动获得哈希支持。 该接口会自动特化hash模板，使对象可用于哈希相关操作如哈希容器。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="54">
+        <label>basic_string&lt; CharT, Traits, Alloc &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>basic_string&lt; char16_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>basic_string&lt; char32_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>basic_string&lt; char8_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>basic_string&lt; wchar_t &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>basic_string_view&lt; char &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>basic_string_view&lt; char16_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>basic_string_view&lt; char32_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>basic_string_view&lt; char8_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>basic_string_view&lt; typename Traits::char_type, Traits &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>basic_string_view&lt; wchar_t &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>character</label>
+        <link refid="structcharacter"/>
+        <childnode refid="57" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>compressed_pair&lt; Func, bool &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>compressed_pair&lt; Func, int &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>compressed_pair&lt; IfEmpty, T, false &gt;</label>
+        <link refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>compressed_pair&lt; allocator_type, float &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>compressed_pair&lt; allocator_type, pointer &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>compressed_pair&lt; allocator_type, size_t &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>compressed_pair&lt; allocator_type, size_type &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>compressed_pair&lt; IfEmpty, T, Compressed &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>compressed_pair&lt; map_allocator, map_pointer &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>compressed_pair&lt; standard_allocator, size_t &gt;</label>
+        <link refid="structcompressed__pair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>decimal</label>
+        <link refid="structdecimal"/>
+        <childnode refid="49" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>float32</label>
+        <link refid="structfloat32"/>
+        <childnode refid="45" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>float64</label>
+        <link refid="structfloat64"/>
+        <childnode refid="47" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>icharacter&lt; T, CharT &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="51" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>icharacter&lt; character, char &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="56" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>icharacter&lt; u16character, char16_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="56" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>icharacter&lt; u32character, char32_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="56" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>icharacter&lt; u8character, char8_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="56" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>icharacter&lt; wcharacter, wchar_t &gt;</label>
+        <link refid="structicharacter"/>
+        <childnode refid="56" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icommon&lt; compressed_pair&lt; IfEmpty, T, false &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>icommon&lt; compressed_pair&lt; IfEmpty, T, is_empty_v&lt; IfEmpty &gt; &amp;&amp;!is_final_v&lt; IfEmpty &gt; &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>icommon&lt; optional&lt; T &amp; &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>icommon&lt; optional&lt; T &gt; &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="32">
+        <label>integer16</label>
+        <link refid="structinteger16"/>
+        <childnode refid="31" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>integer32</label>
+        <link refid="structinteger32"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>integer64</label>
+        <link refid="structinteger64"/>
+        <childnode refid="35" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>integer8</label>
+        <link refid="structinteger8"/>
+        <childnode refid="29" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>ipackage&lt; T, PackageT &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>ipackage&lt; T, CharT &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>ipackage&lt; decimal, decimal_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>ipackage&lt; float32, float32_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>ipackage&lt; float64, float64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>ipackage&lt; integer16, int16_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>ipackage&lt; integer32, int32_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>ipackage&lt; integer64, int64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>ipackage&lt; integer8, int8_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>ipackage&lt; uinteger16, uint16_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>ipackage&lt; uinteger32, uint32_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>ipackage&lt; uinteger64, uint64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>ipackage&lt; uinteger8, uint8_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>optional&lt; T &gt;</label>
+        <link refid="classoptional"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>optional&lt; T &amp; &gt;</label>
+        <link refid="classoptional_3_01_t_01_6_01_4"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>pair&lt; const Key, T &gt;</label>
+        <link refid="structpair"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>u16character</label>
+        <link refid="structu16character"/>
+        <childnode refid="63" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>u32character</label>
+        <link refid="structu32character"/>
+        <childnode refid="65" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>u8character</label>
+        <link refid="structu8character"/>
+        <childnode refid="61" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>uinteger16</label>
+        <link refid="structuinteger16"/>
+        <childnode refid="39" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>uinteger32</label>
+        <link refid="structuinteger32"/>
+        <childnode refid="41" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>uinteger64</label>
+        <link refid="structuinteger64"/>
+        <childnode refid="43" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>uinteger8</label>
+        <link refid="structuinteger8"/>
+        <childnode refid="37" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>wcharacter</label>
+        <link refid="structwcharacter"/>
+        <childnode refid="59" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" line="30" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/icommon.hpp" bodystart="30" bodyend="44"/>
+    <listofallmembers>
+      <member refid="structihashable_1a7f2443f6828e2ec861c9f2eccb7da7d0" prot="private" virt="non-virtual"><scope>ihashable</scope><name>derived</name></member>
+      <member refid="structihashable_1a3bb793a19699c7ccd86fa5d7e91cb513" prot="public" virt="non-virtual"><scope>ihashable</scope><name>to_ihash</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

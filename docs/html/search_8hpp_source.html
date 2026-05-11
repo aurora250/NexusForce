@@ -148,11 +148,11 @@ $(function(){initNavTree('search_8hpp_source.html','',''); });
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        middle = first;</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#ga0ebe1ee99151c272bdedc1a48d148aa2">advance</a>(middle, half);</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">if</span> (comp(value, *middle)) {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            first = middle;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            ++first;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            len = len - half - 1;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            len = half;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            len = half;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            first = middle;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            ++first;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            len = len - half - 1;</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        }</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    }</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">return</span> first;</div>
@@ -162,7 +162,7 @@ $(function(){initNavTree('search_8hpp_source.html','',''); });
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
 <div class="foldopen" id="foldopen00130" data-start="{" data-end="}">
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="group___bound_algorithms.html#ga6f6bb1298a0ac7a415fb627a1ef9d47f">  130</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___bound_algorithms.html#ga6b8b644144e4b0e5f0258c0b3018385e">upper_bound</a>(Iterator first, Iterator last, <span class="keyword">const</span> T&amp; value) {</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___bound_algorithms.html#ga6b8b644144e4b0e5f0258c0b3018385e">upper_bound</a>(first, last, value, _NEFORCE <a class="code hl_struct" href="structgreater.html">greater</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___bound_algorithms.html#ga6b8b644144e4b0e5f0258c0b3018385e">upper_bound</a>(first, last, value, _NEFORCE <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>}</div>
 </div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span></div>
@@ -192,398 +192,405 @@ $(function(){initNavTree('search_8hpp_source.html','',''); });
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">if</span> (comp(*first2, *first1)) {</div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        }</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keywordflow">if</span> (comp(*first1, *first2)) {</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            ++first1;</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            ++first1, ++first2;</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        }</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    }</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordflow">return</span> first2 == last2;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>}</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keywordflow">if</span> (comp(*first1, *first2)) {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            ++first1;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            ++first1, ++first2;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        }</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <span class="keywordflow">return</span> first2 == last2;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>}</div>
 </div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span></div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
-<div class="foldopen" id="foldopen00208" data-start="{" data-end="}">
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno"><a class="line" href="group___bound_algorithms.html#ga0c529451c3d9d93f8b4f2550519e0285">  208</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___bound_algorithms.html#gaf298d16e23f7d383c2433077142cd9a8">includes</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___bound_algorithms.html#gaf298d16e23f7d383c2433077142cd9a8">includes</a>(first1, last1, first2, last2, _NEFORCE <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator1&gt;</a>&gt;());</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>}</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00207" data-start="{" data-end="}">
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="group___bound_algorithms.html#ga0c529451c3d9d93f8b4f2550519e0285">  207</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___bound_algorithms.html#gaf298d16e23f7d383c2433077142cd9a8">includes</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___bound_algorithms.html#gaf298d16e23f7d383c2433077142cd9a8">includes</a>(first1, last1, first2, last2, _NEFORCE <a class="code hl_struct" href="structless.html">less</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator1&gt;</a>&gt;());</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}</div>
 </div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> <span class="comment">// BoundAlgorithms</span></div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span></div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate&gt;</div>
-<div class="foldopen" id="foldopen00230" data-start="{" data-end="}">
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="group___quantifier_algorithms.html#gad953b0ada9620c3fd485317b9db7093e">  230</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___quantifier_algorithms.html#gad953b0ada9620c3fd485317b9db7093e">all_of</a>(Iterator first, Iterator last, Predicate pred) {</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">if</span> (!pred(*first)) {</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        }</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    }</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>}</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> <span class="comment">// BoundAlgorithms</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate&gt;</div>
+<div class="foldopen" id="foldopen00229" data-start="{" data-end="}">
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno"><a class="line" href="group___quantifier_algorithms.html#gad953b0ada9620c3fd485317b9db7093e">  229</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___quantifier_algorithms.html#gad953b0ada9620c3fd485317b9db7093e">all_of</a>(Iterator first, Iterator last, Predicate pred) {</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="keywordflow">if</span> (!pred(*first)) {</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        }</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    }</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>}</div>
 </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span></div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate&gt;</div>
-<div class="foldopen" id="foldopen00251" data-start="{" data-end="}">
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="group___quantifier_algorithms.html#gac20e73ba59f5ba9db9ce34e6970a88dc">  251</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___quantifier_algorithms.html#gac20e73ba59f5ba9db9ce34e6970a88dc">any_of</a>(Iterator first, Iterator last, Predicate pred) {</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        <span class="keywordflow">if</span> (pred(*first)) {</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        }</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    }</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>}</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span></div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate&gt;</div>
+<div class="foldopen" id="foldopen00250" data-start="{" data-end="}">
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno"><a class="line" href="group___quantifier_algorithms.html#gac20e73ba59f5ba9db9ce34e6970a88dc">  250</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___quantifier_algorithms.html#gac20e73ba59f5ba9db9ce34e6970a88dc">any_of</a>(Iterator first, Iterator last, Predicate pred) {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        <span class="keywordflow">if</span> (pred(*first)) {</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        }</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    }</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>}</div>
 </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span></div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate&gt;</div>
-<div class="foldopen" id="foldopen00272" data-start="{" data-end="}">
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno"><a class="line" href="group___quantifier_algorithms.html#gace2f064497b7230c156f70f5da706edc">  272</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___quantifier_algorithms.html#gace2f064497b7230c156f70f5da706edc">none_of</a>(Iterator first, Iterator last, Predicate pred) {</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        <span class="keywordflow">if</span> (pred(*first)) {</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        }</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    }</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>}</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate&gt;</div>
+<div class="foldopen" id="foldopen00271" data-start="{" data-end="}">
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno"><a class="line" href="group___quantifier_algorithms.html#gace2f064497b7230c156f70f5da706edc">  271</a></span><span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="group___quantifier_algorithms.html#gace2f064497b7230c156f70f5da706edc">none_of</a>(Iterator first, Iterator last, Predicate pred) {</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keywordflow">if</span> (pred(*first)) {</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        }</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    }</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>}</div>
 </div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span> <span class="comment">// QuantifierAlgorithms</span></div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span></div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> BinaryPredicate&gt;</div>
-<div class="foldopen" id="foldopen00301" data-start="{" data-end="}">
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno"><a class="line" href="group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be">  301</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be">adjacent_find</a>(Iterator first, Iterator last, BinaryPredicate binary_pred) {</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="keywordflow">if</span> (first == last) {</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        <span class="keywordflow">return</span> last;</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    }</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    Iterator <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> = first;</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keywordflow">while</span> (++<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> != last) {</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        <span class="keywordflow">if</span> (binary_pred(*first, *<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>)) {</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>            <span class="keywordflow">return</span> first;</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        }</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        first = <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>;</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    }</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="keywordflow">return</span> last;</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>}</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> <span class="comment">// QuantifierAlgorithms</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span></div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span></div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> BinaryPredicate&gt;</div>
+<div class="foldopen" id="foldopen00300" data-start="{" data-end="}">
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno"><a class="line" href="group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be">  300</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be">adjacent_find</a>(Iterator first, Iterator last, BinaryPredicate binary_pred) {</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    <span class="keywordflow">if</span> (first == last) {</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>        <span class="keywordflow">return</span> last;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    }</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    Iterator <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> = first;</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    <span class="keywordflow">while</span> (++<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a> != last) {</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        <span class="keywordflow">if</span> (binary_pred(*first, *<a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>)) {</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>            <span class="keywordflow">return</span> first;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        }</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        first = <a class="code hl_function" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>;</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    }</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keywordflow">return</span> last;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>}</div>
 </div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span></div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
-<div class="foldopen" id="foldopen00325" data-start="{" data-end="}">
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno"><a class="line" href="group___adjacent_algorithms.html#ga66044ecc5c63afc5e3fc716e74cb9b68">  325</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be">adjacent_find</a>(Iterator first, Iterator last) {</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be">adjacent_find</a>(first, last, _NEFORCE <a class="code hl_struct" href="structequal__to.html">equal_to</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>}</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span></div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator&gt;</div>
+<div class="foldopen" id="foldopen00324" data-start="{" data-end="}">
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno"><a class="line" href="group___adjacent_algorithms.html#ga66044ecc5c63afc5e3fc716e74cb9b68">  324</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be">adjacent_find</a>(Iterator first, Iterator last) {</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be">adjacent_find</a>(first, last, _NEFORCE <a class="code hl_struct" href="structequal__to.html">equal_to</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>}</div>
 </div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> <span class="comment">// AdjacentAlgorithms</span></div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span></div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span></div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> BinaryPredicate,</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>          <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="foldopen" id="foldopen00350" data-start="{" data-end="}">
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno"><a class="line" href="group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c">  350</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> <a class="code hl_function" href="group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c">count_if</a>(Iterator first, Iterator last, <span class="keyword">const</span> T&amp; value, BinaryPredicate pred) {</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> n = 0;</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="keywordflow">if</span> (pred(*first, value)) {</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>            ++n;</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        }</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    }</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    <span class="keywordflow">return</span> n;</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>}</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> <span class="comment">// AdjacentAlgorithms</span></div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span></div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> BinaryPredicate,</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>          <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00349" data-start="{" data-end="}">
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno"><a class="line" href="group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c">  349</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> <a class="code hl_function" href="group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c">count_if</a>(Iterator first, Iterator last, <span class="keyword">const</span> T&amp; value, BinaryPredicate pred) {</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> n = 0;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        <span class="keywordflow">if</span> (pred(*first, value)) {</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>            ++n;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        }</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    }</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    <span class="keywordflow">return</span> n;</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>}</div>
 </div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span></div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate&gt;</div>
-<div class="foldopen" id="foldopen00370" data-start="{" data-end="}">
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno"><a class="line" href="group___counting_algorithms.html#ga1b902ac9fed79516a0188338ec0b5c8a">  370</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> <a class="code hl_function" href="group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c">count_if</a>(Iterator first, Iterator last, Predicate pred) {</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> n = 0;</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        <span class="keywordflow">if</span> (pred(*first)) {</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>            ++n;</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        }</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    }</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    <span class="keywordflow">return</span> n;</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>}</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span></div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate&gt;</div>
+<div class="foldopen" id="foldopen00369" data-start="{" data-end="}">
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno"><a class="line" href="group___counting_algorithms.html#ga1b902ac9fed79516a0188338ec0b5c8a">  369</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> <a class="code hl_function" href="group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c">count_if</a>(Iterator first, Iterator last, Predicate pred) {</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> n = 0;</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="keywordflow">for</span> (; first != last; ++first) {</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        <span class="keywordflow">if</span> (pred(*first)) {</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>            ++n;</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        }</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    }</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    <span class="keywordflow">return</span> n;</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>}</div>
 </div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span></div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00392" data-start="{" data-end="}">
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno"><a class="line" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">  392</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>(Iterator first, Iterator last, <span class="keyword">const</span> T&amp; value) {</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c">count_if</a>(first, last, value, _NEFORCE <a class="code hl_struct" href="structequal__to.html">equal_to</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>}</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span></div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00391" data-start="{" data-end="}">
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno"><a class="line" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">  391</a></span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t&lt;Iterator&gt;</a> <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>(Iterator first, Iterator last, <span class="keyword">const</span> T&amp; value) {</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c">count_if</a>(first, last, value, _NEFORCE <a class="code hl_struct" href="structequal__to.html">equal_to</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator&gt;</a>&gt;());</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>}</div>
 </div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> <span class="comment">// CountingAlgorithms</span></div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span></div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span></div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00414" data-start="{" data-end="}">
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno"><a class="line" href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">  414</a></span>NEFORCE_NODISCARD <span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">find</a>(Iterator first, Iterator last, <span class="keyword">const</span> T&amp; value) {</div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span> </div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>    <span class="keywordflow">while</span> (first != last &amp;&amp; *first != value) {</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>        ++first;</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    }</div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    <span class="keywordflow">return</span> first;</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>}</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span> <span class="comment">// CountingAlgorithms</span></div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span></div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00413" data-start="{" data-end="}">
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno"><a class="line" href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">  413</a></span>NEFORCE_NODISCARD <span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">find</a>(Iterator first, Iterator last, <span class="keyword">const</span> T&amp; value) {</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>    <span class="keywordflow">while</span> (first != last &amp;&amp; *first != value) {</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>        ++first;</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>    }</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    <span class="keywordflow">return</span> first;</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>}</div>
 </div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span></div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate&gt;</div>
-<div class="foldopen" id="foldopen00433" data-start="{" data-end="}">
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno"><a class="line" href="group___finding_algorithms.html#gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8">  433</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___finding_algorithms.html#gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8">find_if</a>(Iterator first, Iterator last, Predicate pred) {</div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span> </div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>    <span class="keywordflow">while</span> (first != last &amp;&amp; !pred(*first)) {</div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>        ++first;</div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>    }</div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>    <span class="keywordflow">return</span> first;</div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>}</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span></div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate&gt;</div>
+<div class="foldopen" id="foldopen00432" data-start="{" data-end="}">
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno"><a class="line" href="group___finding_algorithms.html#gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8">  432</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___finding_algorithms.html#gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8">find_if</a>(Iterator first, Iterator last, Predicate pred) {</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span> </div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>    <span class="keywordflow">while</span> (first != last &amp;&amp; !pred(*first)) {</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>        ++first;</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>    }</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>    <span class="keywordflow">return</span> first;</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>}</div>
 </div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span></div>
-<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate, enable_if_t&lt;is_ranges_input_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
-<div class="foldopen" id="foldopen00452" data-start="{" data-end="}">
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno"><a class="line" href="group___finding_algorithms.html#ga3b3f143e3868c5b0779cd7253d1a0a8a">  452</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___finding_algorithms.html#ga3b3f143e3868c5b0779cd7253d1a0a8a">find_if_not</a>(Iterator first, Iterator last, Predicate pred) {</div>
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span> </div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>    <span class="keywordflow">while</span> (first != last &amp;&amp; pred(*first)) {</div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>        ++first;</div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    }</div>
-<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>    <span class="keywordflow">return</span> first;</div>
-<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>}</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span></div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> Predicate, enable_if_t&lt;is_ranges_input_iter_v&lt;Iterator&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
+<div class="foldopen" id="foldopen00451" data-start="{" data-end="}">
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno"><a class="line" href="group___finding_algorithms.html#ga3b3f143e3868c5b0779cd7253d1a0a8a">  451</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___finding_algorithms.html#ga3b3f143e3868c5b0779cd7253d1a0a8a">find_if_not</a>(Iterator first, Iterator last, Predicate pred) {</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span> </div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>    <span class="keywordflow">while</span> (first != last &amp;&amp; pred(*first)) {</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>        ++first;</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>    }</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    <span class="keywordflow">return</span> first;</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>}</div>
 </div>
-<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span> <span class="comment">// FindingAlgorithms</span></div>
-<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span></div>
-<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span></div>
-<div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2, <span class="keyword">typename</span> BinaryPredicate&gt;</div>
-<div class="foldopen" id="foldopen00482" data-start="{" data-end="}">
-<div class="line"><a id="l00482" name="l00482"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">  482</a></span><span class="keyword">constexpr</span> Iterator1 <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2,</div>
-<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span>                           BinaryPredicate binary_pred) {</div>
-<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span> </div>
-<div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator2&gt;</a>,</div>
-<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>                  <span class="stringliteral">&quot;Iterator must be forward_iterator&quot;</span>);</div>
-<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span> </div>
-<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>    <span class="keyword">const</span> <span class="keyword">auto</span> d1 = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first1, last1);</div>
-<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>    <span class="keyword">const</span> <span class="keyword">auto</span> d2 = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first2, last2);</div>
-<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>    <span class="keywordflow">if</span> (d1 &lt; d2) {</div>
-<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>        <span class="keywordflow">return</span> last1;</div>
-<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>    }</div>
-<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span> </div>
-<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>    Iterator1 current1 = first1;</div>
-<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>    Iterator2 current2 = first2;</div>
-<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span> </div>
-<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>    <span class="keywordflow">while</span> (current2 != last2) {</div>
-<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>        <span class="keywordflow">if</span> (binary_pred(*current1, *current2)) {</div>
-<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>            ++current1;</div>
-<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>            ++current2;</div>
-<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>            <span class="keywordflow">if</span> (d1 == d2) {</div>
-<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>                <span class="keywordflow">return</span> last1;</div>
-<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>            }</div>
-<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span> </div>
-<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>            current1 = ++first1;</div>
-<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>            current2 = first2;</div>
-<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>            --d1;</div>
-<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        }</div>
-<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>    }</div>
-<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>    <span class="keywordflow">return</span> first1;</div>
-<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>}</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span> <span class="comment">// FindingAlgorithms</span></div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span></div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span></div>
+<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2, <span class="keyword">typename</span> BinaryPredicate&gt;</div>
+<div class="foldopen" id="foldopen00481" data-start="{" data-end="}">
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">  481</a></span><span class="keyword">constexpr</span> Iterator1 <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2,</div>
+<div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span>                           BinaryPredicate binary_pred) {</div>
+<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span> </div>
+<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator2&gt;</a>,</div>
+<div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>                  <span class="stringliteral">&quot;Iterator must be forward_iterator&quot;</span>);</div>
+<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span> </div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>    <span class="keyword">auto</span> d1 = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first1, last1);</div>
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>    <span class="keyword">const</span> <span class="keyword">auto</span> d2 = _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first2, last2);</div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>    <span class="keywordflow">if</span> (d1 &lt; d2) {</div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>        <span class="keywordflow">return</span> last1;</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>    }</div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span> </div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>    Iterator1 current1 = first1;</div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>    Iterator2 current2 = first2;</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span> </div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>    <span class="keywordflow">while</span> (current2 != last2) {</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>        <span class="keywordflow">if</span> (binary_pred(*current1, *current2)) {</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>            ++current1;</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>            ++current2;</div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>            <span class="keywordflow">if</span> (d1 == d2) {</div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>                <span class="keywordflow">return</span> last1;</div>
+<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>            }</div>
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span> </div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>            current1 = ++first1;</div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>            current2 = first2;</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>            --d1;</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>        }</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>    }</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>    <span class="keywordflow">return</span> first1;</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>}</div>
 </div>
-<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span></div>
-<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
-<div class="foldopen" id="foldopen00525" data-start="{" data-end="}">
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#gab41c0b2c56fb167b4a8677560491b3c3">  525</a></span><span class="keyword">constexpr</span> Iterator1 <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(first1, last1, first2, last2, _NEFORCE <a class="code hl_struct" href="structequal__to.html">equal_to</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator1&gt;</a>&gt;());</div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>}</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span></div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00524" data-start="{" data-end="}">
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#gab41c0b2c56fb167b4a8677560491b3c3">  524</a></span><span class="keyword">constexpr</span> Iterator1 <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(first1, last1, first2, last2, _NEFORCE <a class="code hl_struct" href="structequal__to.html">equal_to</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator1&gt;</a>&gt;());</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>}</div>
 </div>
-<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span></div>
-<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00540" data-start="{" data-end="}">
-<div class="line"><a id="l00540" name="l00540"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga9580524f56d452c88e066180e465af27">  540</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga9580524f56d452c88e066180e465af27">search_n</a>(Iterator first, Iterator last, <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>, <span class="keyword">const</span> T&amp; value) {</div>
-<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be forward_iterator&quot;</span>);</div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span> </div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    first = _NEFORCE <a class="code hl_function" href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">find</a>(first, last, value);</div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    <span class="keywordflow">while</span> (first != last) {</div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>        <span class="keywordtype">size_t</span> n = <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a> - 1;</div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>        Iterator i = first;</div>
-<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>        ++i;</div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>        <span class="keywordflow">while</span> (i != last &amp;&amp; n != 0 &amp;&amp; *i == value) {</div>
-<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>            ++i;</div>
-<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>            --n;</div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>        }</div>
-<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>        <span class="keywordflow">if</span> (n == 0) {</div>
-<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>            <span class="keywordflow">return</span> first;</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span></div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00539" data-start="{" data-end="}">
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga9580524f56d452c88e066180e465af27">  539</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga9580524f56d452c88e066180e465af27">search_n</a>(Iterator first, Iterator last, <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>, <span class="keyword">const</span> T&amp; value) {</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be forward_iterator&quot;</span>);</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span> </div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a> == 0) {</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>        <span class="keywordflow">return</span> first;</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    }</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span> </div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>    first = _NEFORCE <a class="code hl_function" href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">find</a>(first, last, value);</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>    <span class="keywordflow">while</span> (first != last) {</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>        <span class="keywordtype">size_t</span> n = <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a> - 1;</div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>        Iterator i = first;</div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>        ++i;</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>        <span class="keywordflow">while</span> (i != last &amp;&amp; n != 0 &amp;&amp; *i == value) {</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>            ++i;</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>            --n;</div>
 <div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>        }</div>
-<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span> </div>
-<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>        first = _NEFORCE <a class="code hl_function" href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">find</a>(i, last, value);</div>
-<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>    }</div>
-<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>    <span class="keywordflow">return</span> last;</div>
-<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>}</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>        <span class="keywordflow">if</span> (n == 0) {</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>            <span class="keywordflow">return</span> first;</div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>        }</div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span> </div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>        first = _NEFORCE <a class="code hl_function" href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">find</a>(i, last, value);</div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>    }</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    <span class="keywordflow">return</span> last;</div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>}</div>
 </div>
-<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span></div>
-<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> BinaryPredicate&gt;</div>
-<div class="foldopen" id="foldopen00574" data-start="{" data-end="}">
-<div class="line"><a id="l00574" name="l00574"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga2f70389e3338d4062ffc0dcccd619383">  574</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga9580524f56d452c88e066180e465af27">search_n</a>(Iterator first, Iterator last, <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>, <span class="keyword">const</span> T&amp; value,</div>
-<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>                            BinaryPredicate binary_pred) {</div>
-<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be forward_iterator&quot;</span>);</div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span> </div>
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    <span class="keywordflow">while</span> (first != last) {</div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>        <span class="keywordflow">if</span> (binary_pred(*first, value)) {</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>        }</div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>        ++first;</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span></div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T, <span class="keyword">typename</span> BinaryPredicate&gt;</div>
+<div class="foldopen" id="foldopen00577" data-start="{" data-end="}">
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga2f70389e3338d4062ffc0dcccd619383">  577</a></span><span class="keyword">constexpr</span> Iterator <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga9580524f56d452c88e066180e465af27">search_n</a>(Iterator first, Iterator last, <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>, <span class="keyword">const</span> T&amp; value,</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>                            BinaryPredicate binary_pred) {</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator&gt;</a>, <span class="stringliteral">&quot;Iterator must be forward_iterator&quot;</span>);</div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span> </div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a> == 0) {</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>        <span class="keywordflow">return</span> first;</div>
 <div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    }</div>
 <div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span> </div>
 <div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>    <span class="keywordflow">while</span> (first != last) {</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>        <span class="keywordtype">size_t</span> n = <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a> - 1;</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>        Iterator i = first;</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>        ++i;</div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span> </div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>        <span class="keywordflow">while</span> (i != last &amp;&amp; n != 0 &amp;&amp; binary_pred(*i, value)) {</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>            ++i;</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>            --n;</div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>        }</div>
-<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>        <span class="keywordflow">if</span> (n == 0) {</div>
-<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>            <span class="keywordflow">return</span> first;</div>
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>        }</div>
-<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span> </div>
-<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>        <span class="keywordflow">while</span> (i != last) {</div>
-<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>            <span class="keywordflow">if</span> (binary_pred(*i, value)) {</div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>            }</div>
-<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>            ++i;</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>        <span class="keywordflow">if</span> (binary_pred(*first, value)) {</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>        }</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>        ++first;</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>    }</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span> </div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>    <span class="keywordflow">while</span> (first != last) {</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>        <span class="keywordtype">size_t</span> n = <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a> - 1;</div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>        Iterator i = first;</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>        ++i;</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span> </div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>        <span class="keywordflow">while</span> (i != last &amp;&amp; n != 0 &amp;&amp; binary_pred(*i, value)) {</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>            ++i;</div>
+<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>            --n;</div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>        }</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>        <span class="keywordflow">if</span> (n == 0) {</div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>            <span class="keywordflow">return</span> first;</div>
 <div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>        }</div>
-<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>        first = i;</div>
-<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>    }</div>
-<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>    <span class="keywordflow">return</span> last;</div>
-<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>}</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span> </div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>        <span class="keywordflow">while</span> (i != last) {</div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>            <span class="keywordflow">if</span> (binary_pred(*i, value)) {</div>
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>            }</div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>            ++i;</div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>        }</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>        first = i;</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>    }</div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>    <span class="keywordflow">return</span> last;</div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>}</div>
 </div>
-<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span> </div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span><span class="preprocessor">#ifndef NEFORCE_STANDARD_17</span></div>
-<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>NEFORCE_BEGIN_INNER__</div>
-<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span> </div>
-<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
-<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_ranges_bid_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator2&gt;</a>, Iterator1&gt;</div>
-<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>__find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
-<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>    <span class="keyword">using </span>reviter1 = _NEFORCE <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>;</div>
-<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>    <span class="keyword">using </span>reviter2 = _NEFORCE <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>;</div>
-<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>    reviter1 rlast1(first1);</div>
-<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>    reviter2 rlast2(first2);</div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>    reviter1 rresult = _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(reviter1(last1), rlast1, reviter2(last2), rlast2);</div>
-<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>    <span class="keywordflow">if</span> (rresult == rlast1) {</div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>        <span class="keywordflow">return</span> last1;</div>
-<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>    }</div>
-<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>    Iterator1 result = rresult.base();</div>
-<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#ga0ebe1ee99151c272bdedc1a48d148aa2">advance</a>(result, -<a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first2, last2));</div>
-<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>}</div>
-<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span> </div>
-<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
-<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!(<a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator2&gt;</a>), Iterator1&gt;</div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>__find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
-<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>    Iterator1 result = last1;</div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>        Iterator1 new_result = _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(first1, last1, first2, last2);</div>
-<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>        <span class="keywordflow">if</span> (new_result == last1) {</div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>            <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>        }</div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>        result = new_result;</div>
-<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>        first1 = new_result;</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>        ++first1;</div>
-<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>    }</div>
-<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>}</div>
-<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span> </div>
-<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>NEFORCE_END_INNER__</div>
-<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_17</span></div>
-<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span></div>
-<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
-<div class="foldopen" id="foldopen00659" data-start="{" data-end="}">
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga9997e6a5ac3609fc198d306e328229f4">  659</a></span><span class="keyword">constexpr</span> Iterator1 <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga9997e6a5ac3609fc198d306e328229f4">find_end</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator2&gt;</a>,</div>
-<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>                  <span class="stringliteral">&quot;Iterator must be forward_iterator&quot;</span>);</div>
-<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span> </div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>    <span class="keywordflow">if</span> (first2 == last2) {</div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>        <span class="keywordflow">return</span> last1;</div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>    }</div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_17</span></div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator2&gt;</a>) {</div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>        <span class="keyword">using </span>reviter1 = _NEFORCE <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>;</div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>        <span class="keyword">using </span>reviter2 = _NEFORCE <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>;</div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span> </div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>        reviter1 rlast1(first1);</div>
-<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>        reviter2 rlast2(first2);</div>
-<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>        reviter1 rresult = _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(reviter1(last1), rlast1, reviter2(last2), rlast2);</div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>        <span class="keywordflow">if</span> (rresult == rlast1) {</div>
-<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>            <span class="keywordflow">return</span> last1;</div>
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>        }</div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span> </div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span><span class="preprocessor">#ifndef NEFORCE_STANDARD_17</span></div>
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>NEFORCE_BEGIN_INNER__</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span> </div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t&lt;is_ranges_bid_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator2&gt;</a>, Iterator1&gt;</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>__find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>    <span class="keyword">using </span>reviter1 = _NEFORCE <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>;</div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>    <span class="keyword">using </span>reviter2 = _NEFORCE <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>;</div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    reviter1 rlast1(first1);</div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    reviter2 rlast2(first2);</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    reviter1 rresult = _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(reviter1(last1), rlast1, reviter2(last2), rlast2);</div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>    <span class="keywordflow">if</span> (rresult == rlast1) {</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>        <span class="keywordflow">return</span> last1;</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>    }</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>    Iterator1 result = rresult.base();</div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>    _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#ga0ebe1ee99151c272bdedc1a48d148aa2">advance</a>(result, -<a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first2, last2));</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>}</div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span> </div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span><span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!(<a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator2&gt;</a>), Iterator1&gt;</div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>__find_end_aux(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>    Iterator1 result = last1;</div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>        Iterator1 new_result = _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(first1, last1, first2, last2);</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>        <span class="keywordflow">if</span> (new_result == last1) {</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>            <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>        }</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>        result = new_result;</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>        first1 = new_result;</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>        ++first1;</div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>    }</div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>}</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span> </div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>NEFORCE_END_INNER__</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_STANDARD_17</span></div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span></div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00666" data-start="{" data-end="}">
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga9997e6a5ac3609fc198d306e328229f4">  666</a></span><span class="keyword">constexpr</span> Iterator1 <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga9997e6a5ac3609fc198d306e328229f4">find_end</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v&lt;Iterator2&gt;</a>,</div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>                  <span class="stringliteral">&quot;Iterator must be forward_iterator&quot;</span>);</div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span> </div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>    <span class="keywordflow">if</span> (first2 == last2) {</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>        <span class="keywordflow">return</span> last1;</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>    }</div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span><span class="preprocessor">#ifdef NEFORCE_STANDARD_17</span></div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v&lt;Iterator2&gt;</a>) {</div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>        <span class="keyword">using </span>reviter1 = _NEFORCE <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator1&gt;</a>;</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>        <span class="keyword">using </span>reviter2 = _NEFORCE <a class="code hl_class" href="classreverse__iterator.html">reverse_iterator&lt;Iterator2&gt;</a>;</div>
 <div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span> </div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>        Iterator1 result = rresult.base();</div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>        _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#ga0ebe1ee99151c272bdedc1a48d148aa2">advance</a>(result, -<a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first2, last2));</div>
-<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>        Iterator1 result = last1;</div>
-<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>        <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>            Iterator1 new_result = _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(first1, last1, first2, last2);</div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>            <span class="keywordflow">if</span> (new_result == last1) {</div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>                <span class="keywordflow">return</span> result;</div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>            }</div>
-<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>            result = new_result;</div>
-<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>            first1 = new_result;</div>
-<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>            ++first1;</div>
-<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>        }</div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>    }</div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    <span class="keywordflow">return</span> inner::__find_end_aux(first1, last1, first2, last2);</div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>}</div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>        reviter1 rlast1(first1);</div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>        reviter2 rlast2(first2);</div>
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>        reviter1 rresult = _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(reviter1(last1), rlast1, reviter2(last2), rlast2);</div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>        <span class="keywordflow">if</span> (rresult == rlast1) {</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>            <span class="keywordflow">return</span> last1;</div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>        }</div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span> </div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>        Iterator1 result = rresult.base();</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>        _NEFORCE <a class="code hl_function" href="group___iterator_operation.html#ga0ebe1ee99151c272bdedc1a48d148aa2">advance</a>(result, -<a class="code hl_function" href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a>(first2, last2));</div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>        Iterator1 result = last1;</div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>        <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>            Iterator1 new_result = _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a>(first1, last1, first2, last2);</div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>            <span class="keywordflow">if</span> (new_result == last1) {</div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>                <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>            }</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>            result = new_result;</div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>            first1 = new_result;</div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>            ++first1;</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>        }</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>    }</div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>    <span class="keywordflow">return</span> inner::__find_end_aux(first1, last1, first2, last2);</div>
+<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>}</div>
 </div>
-<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span></div>
-<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2, <span class="keyword">typename</span> BinaryPredicate&gt;</div>
-<div class="foldopen" id="foldopen00711" data-start="{" data-end="}">
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d">  711</a></span><span class="keyword">constexpr</span> Iterator1 <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d">find_first_of</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2,</div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>                                  BinaryPredicate comp) {</div>
-<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator2&gt;</a>,</div>
-<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>                  <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
-<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span> </div>
-<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    <span class="keywordflow">for</span> (; first1 != last1; ++first1) {</div>
-<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>        <span class="keywordflow">for</span> (Iterator2 iter = first2; iter != last2; ++iter) {</div>
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>            <span class="keywordflow">if</span> (comp(*first1, *iter)) {</div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>                <span class="keywordflow">return</span> first1;</div>
-<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>            }</div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>        }</div>
-<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>    }</div>
-<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>    <span class="keywordflow">return</span> last1;</div>
-<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>}</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span></div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2, <span class="keyword">typename</span> BinaryPredicate&gt;</div>
+<div class="foldopen" id="foldopen00718" data-start="{" data-end="}">
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d">  718</a></span><span class="keyword">constexpr</span> Iterator1 <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d">find_first_of</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2,</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>                                  BinaryPredicate comp) {</div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>    <span class="keyword">static_assert</span>(<a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator1&gt;</a> &amp;&amp; <a class="code hl_variable" href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v&lt;Iterator2&gt;</a>,</div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>                  <span class="stringliteral">&quot;Iterator must be input_iterator&quot;</span>);</div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span> </div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>    <span class="keywordflow">for</span> (; first1 != last1; ++first1) {</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>        <span class="keywordflow">for</span> (Iterator2 iter = first2; iter != last2; ++iter) {</div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>            <span class="keywordflow">if</span> (comp(*first1, *iter)) {</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>                <span class="keywordflow">return</span> first1;</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>            }</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>        }</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>    }</div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>    <span class="keywordflow">return</span> last1;</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>}</div>
 </div>
-<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span></div>
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
-<div class="foldopen" id="foldopen00737" data-start="{" data-end="}">
-<div class="line"><a id="l00737" name="l00737"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga6f541ef8f79986ada39f65ec055de358">  737</a></span><span class="keyword">constexpr</span> Iterator1 <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d">find_first_of</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
-<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d">find_first_of</a>(first1, last1, first2, last2, _NEFORCE <a class="code hl_struct" href="structequal__to.html">equal_to</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator1&gt;</a>&gt;());</div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>}</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span></div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Iterator1, <span class="keyword">typename</span> Iterator2&gt;</div>
+<div class="foldopen" id="foldopen00744" data-start="{" data-end="}">
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno"><a class="line" href="group___pattern_matching_algorithms.html#ga6f541ef8f79986ada39f65ec055de358">  744</a></span><span class="keyword">constexpr</span> Iterator1 <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d">find_first_of</a>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2) {</div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>    <span class="keywordflow">return</span> _NEFORCE <a class="code hl_function" href="group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d">find_first_of</a>(first1, last1, first2, last2, _NEFORCE <a class="code hl_struct" href="structequal__to.html">equal_to</a>&lt;<a class="code hl_typedef" href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t&lt;Iterator1&gt;</a>&gt;());</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>}</div>
 </div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span> <span class="comment">// PatternMatchingAlgorithms</span></div>
-<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span> <span class="comment">// StandardAlgorithms</span></div>
-<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span> </div>
-<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ALGORITHM_SEARCH_HPP__</span></div>
-<div class="ttc" id="aclassreverse__iterator_html"><div class="ttname"><a href="classreverse__iterator.html">reverse_iterator</a></div><div class="ttdoc">反向迭代器模板类</div><div class="ttdef"><b>定义</b> <a href="ranges_8hpp_source.html#l00930">ranges.hpp:930</a></div></div>
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span> <span class="comment">// PatternMatchingAlgorithms</span></div>
+<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span> <span class="comment">// StandardAlgorithms</span></div>
+<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span> </div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ALGORITHM_SEARCH_HPP__</span></div>
+<div class="ttc" id="aclassreverse__iterator_html"><div class="ttname"><a href="classreverse__iterator.html">reverse_iterator</a></div><div class="ttdoc">反向迭代器模板类</div><div class="ttdef"><b>定义</b> <a href="ranges_8hpp_source.html#l00949">ranges.hpp:949</a></div></div>
 <div class="ttc" id="afunctor_8hpp_html"><div class="ttname"><a href="functor_8hpp.html">functor.hpp</a></div><div class="ttdoc">仿函数</div></div>
-<div class="ttc" id="agroup___adjacent_algorithms_html_ga13ada6eb80186e1a77c9c378a3e917be"><div class="ttname"><a href="group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be">adjacent_find</a></div><div class="ttdeci">constexpr Iterator adjacent_find(Iterator first, Iterator last, BinaryPredicate binary_pred)</div><div class="ttdoc">查找第一对满足条件的相邻元素</div><div class="ttdef"><b>定义</b> <a href="#l00301">search.hpp:301</a></div></div>
+<div class="ttc" id="agroup___adjacent_algorithms_html_ga13ada6eb80186e1a77c9c378a3e917be"><div class="ttname"><a href="group___adjacent_algorithms.html#ga13ada6eb80186e1a77c9c378a3e917be">adjacent_find</a></div><div class="ttdeci">constexpr Iterator adjacent_find(Iterator first, Iterator last, BinaryPredicate binary_pred)</div><div class="ttdoc">查找第一对满足条件的相邻元素</div><div class="ttdef"><b>定义</b> <a href="#l00300">search.hpp:300</a></div></div>
 <div class="ttc" id="agroup___bound_algorithms_html_ga24ee998b1b95d1568e1c6674215a0159"><div class="ttname"><a href="group___bound_algorithms.html#ga24ee998b1b95d1568e1c6674215a0159">binary_search</a></div><div class="ttdeci">constexpr bool binary_search(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">在有序范围内进行二分查找</div><div class="ttdef"><b>定义</b> <a href="#l00144">search.hpp:144</a></div></div>
 <div class="ttc" id="agroup___bound_algorithms_html_ga6b8b644144e4b0e5f0258c0b3018385e"><div class="ttname"><a href="group___bound_algorithms.html#ga6b8b644144e4b0e5f0258c0b3018385e">upper_bound</a></div><div class="ttdeci">constexpr Iterator upper_bound(Iterator first, Iterator last, const T &amp;value, Compare comp)</div><div class="ttdoc">查找有序范围中第一个大于指定值的元素位置</div><div class="ttdef"><b>定义</b> <a href="#l00096">search.hpp:96</a></div></div>
 <div class="ttc" id="agroup___bound_algorithms_html_ga752e4da223be382b51f4af020097beab"><div class="ttname"><a href="group___bound_algorithms.html#ga752e4da223be382b51f4af020097beab">lower_bound</a></div><div class="ttdeci">constexpr Iterator lower_bound(Iterator first, Iterator last, const T &amp;value, Compare comp)</div><div class="ttdoc">查找有序范围中第一个不小于指定值的元素位置</div><div class="ttdef"><b>定义</b> <a href="#l00043">search.hpp:43</a></div></div>
 <div class="ttc" id="agroup___bound_algorithms_html_gaf298d16e23f7d383c2433077142cd9a8"><div class="ttname"><a href="group___bound_algorithms.html#gaf298d16e23f7d383c2433077142cd9a8">includes</a></div><div class="ttdeci">constexpr bool includes(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp)</div><div class="ttdoc">检查一个有序范围是否包含另一个有序范围的所有元素</div><div class="ttdef"><b>定义</b> <a href="#l00179">search.hpp:179</a></div></div>
-<div class="ttc" id="agroup___counting_algorithms_html_ga5d0fab1508e6f8692b5efafed6bd722c"><div class="ttname"><a href="group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c">count_if</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count_if(Iterator first, Iterator last, const T &amp;value, BinaryPredicate pred)</div><div class="ttdoc">统计范围内满足二元谓词的元素数量</div><div class="ttdef"><b>定义</b> <a href="#l00350">search.hpp:350</a></div></div>
-<div class="ttc" id="agroup___counting_algorithms_html_ga7f00e4c627612d89b2c6152a0c498c40"><div class="ttname"><a href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">统计范围内等于指定值的元素数量</div><div class="ttdef"><b>定义</b> <a href="#l00392">search.hpp:392</a></div></div>
-<div class="ttc" id="agroup___finding_algorithms_html_ga3b3f143e3868c5b0779cd7253d1a0a8a"><div class="ttname"><a href="group___finding_algorithms.html#ga3b3f143e3868c5b0779cd7253d1a0a8a">find_if_not</a></div><div class="ttdeci">constexpr Iterator find_if_not(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">查找范围内第一个不满足谓词的元素</div><div class="ttdef"><b>定义</b> <a href="#l00452">search.hpp:452</a></div></div>
-<div class="ttc" id="agroup___finding_algorithms_html_gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8"><div class="ttname"><a href="group___finding_algorithms.html#gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8">find_if</a></div><div class="ttdeci">constexpr Iterator find_if(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">查找范围内第一个满足谓词的元素</div><div class="ttdef"><b>定义</b> <a href="#l00433">search.hpp:433</a></div></div>
-<div class="ttc" id="agroup___finding_algorithms_html_gaf00ba933b64f438e9c32ebf9cb1d7c8d"><div class="ttname"><a href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">find</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr Iterator find(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">查找范围内第一个等于指定值的元素</div><div class="ttdef"><b>定义</b> <a href="#l00414">search.hpp:414</a></div></div>
+<div class="ttc" id="agroup___counting_algorithms_html_ga5d0fab1508e6f8692b5efafed6bd722c"><div class="ttname"><a href="group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c">count_if</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count_if(Iterator first, Iterator last, const T &amp;value, BinaryPredicate pred)</div><div class="ttdoc">统计范围内满足二元谓词的元素数量</div><div class="ttdef"><b>定义</b> <a href="#l00349">search.hpp:349</a></div></div>
+<div class="ttc" id="agroup___counting_algorithms_html_ga7f00e4c627612d89b2c6152a0c498c40"><div class="ttname"><a href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">统计范围内等于指定值的元素数量</div><div class="ttdef"><b>定义</b> <a href="#l00391">search.hpp:391</a></div></div>
+<div class="ttc" id="agroup___finding_algorithms_html_ga3b3f143e3868c5b0779cd7253d1a0a8a"><div class="ttname"><a href="group___finding_algorithms.html#ga3b3f143e3868c5b0779cd7253d1a0a8a">find_if_not</a></div><div class="ttdeci">constexpr Iterator find_if_not(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">查找范围内第一个不满足谓词的元素</div><div class="ttdef"><b>定义</b> <a href="#l00451">search.hpp:451</a></div></div>
+<div class="ttc" id="agroup___finding_algorithms_html_gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8"><div class="ttname"><a href="group___finding_algorithms.html#gac806ea7ce9eb5a1ae1ddf4a34dd8b3b8">find_if</a></div><div class="ttdeci">constexpr Iterator find_if(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">查找范围内第一个满足谓词的元素</div><div class="ttdef"><b>定义</b> <a href="#l00432">search.hpp:432</a></div></div>
+<div class="ttc" id="agroup___finding_algorithms_html_gaf00ba933b64f438e9c32ebf9cb1d7c8d"><div class="ttname"><a href="group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d">find</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr Iterator find(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">查找范围内第一个等于指定值的元素</div><div class="ttdef"><b>定义</b> <a href="#l00413">search.hpp:413</a></div></div>
 <div class="ttc" id="agroup___iterator_category_checks_html_ga0cd01d6904a8c302e61f27b32d50c9fa"><div class="ttname"><a href="group___iterator_category_checks.html#ga0cd01d6904a8c302e61f27b32d50c9fa">is_ranges_input_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_input_iter_v</div><div class="ttdoc">检查是否为范围输入迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00540">concepts.hpp:540</a></div></div>
 <div class="ttc" id="agroup___iterator_category_checks_html_ga47b4de454cb338a8959fd068e1d827e6"><div class="ttname"><a href="group___iterator_category_checks.html#ga47b4de454cb338a8959fd068e1d827e6">is_ranges_fwd_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_fwd_iter_v</div><div class="ttdoc">检查是否为范围前向迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00561">concepts.hpp:561</a></div></div>
 <div class="ttc" id="agroup___iterator_category_checks_html_ga56f3ab178cee74039e73463d63a71658"><div class="ttname"><a href="group___iterator_category_checks.html#ga56f3ab178cee74039e73463d63a71658">is_ranges_bid_iter_v</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr bool is_ranges_bid_iter_v</div><div class="ttdoc">检查是否为范围双向迭代器</div><div class="ttdef"><b>定义</b> <a href="concepts_8hpp_source.html#l00581">concepts.hpp:581</a></div></div>
@@ -592,17 +599,16 @@ $(function(){initNavTree('search_8hpp_source.html','',''); });
 <div class="ttc" id="agroup___iterator_operation_html_gabd49270b18593c75e6b68d05a5a389ba"><div class="ttname"><a href="group___iterator_operation.html#gabd49270b18593c75e6b68d05a5a389ba">distance</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; distance(Iterator first, Iterator last)</div><div class="ttdoc">计算两个迭代器之间的距离</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00201">iterator.hpp:201</a></div></div>
 <div class="ttc" id="agroup___iterator_traits_html_gad620992f7bf5c8c7b5dfae7a3dd55781"><div class="ttname"><a href="group___iterator_traits.html#gad620992f7bf5c8c7b5dfae7a3dd55781">iter_value_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::value_type iter_value_t</div><div class="ttdoc">获取迭代器的值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00092">iterator_traits.hpp:92</a></div></div>
 <div class="ttc" id="agroup___iterator_traits_html_gaf61f58aa2abc24434e0b77340ddf2cfa"><div class="ttname"><a href="group___iterator_traits.html#gaf61f58aa2abc24434e0b77340ddf2cfa">iter_difference_t</a></div><div class="ttdeci">typename iterator_traits&lt; Iterator &gt;::difference_type iter_difference_t</div><div class="ttdoc">获取迭代器的差值类型</div><div class="ttdef"><b>定义</b> <a href="iterator__traits_8hpp_source.html#l00100">iterator_traits.hpp:100</a></div></div>
-<div class="ttc" id="agroup___pattern_matching_algorithms_html_ga07db4eea0c988d493904052c4839973e"><div class="ttname"><a href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a></div><div class="ttdeci">constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPredicate binary_pred)</div><div class="ttdoc">在范围内查找子序列的第一次出现</div><div class="ttdef"><b>定义</b> <a href="#l00482">search.hpp:482</a></div></div>
-<div class="ttc" id="agroup___pattern_matching_algorithms_html_ga1753228dbceb869e6fd58b39f1b2853d"><div class="ttname"><a href="group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d">find_first_of</a></div><div class="ttdeci">constexpr Iterator1 find_first_of(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPredicate comp)</div><div class="ttdoc">查找范围内第一个出现在指定集合中的元素</div><div class="ttdef"><b>定义</b> <a href="#l00711">search.hpp:711</a></div></div>
-<div class="ttc" id="agroup___pattern_matching_algorithms_html_ga9580524f56d452c88e066180e465af27"><div class="ttname"><a href="group___pattern_matching_algorithms.html#ga9580524f56d452c88e066180e465af27">search_n</a></div><div class="ttdeci">constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, const T &amp;value)</div><div class="ttdoc">查找范围内连续n个等于指定值的子序列</div><div class="ttdef"><b>定义</b> <a href="#l00540">search.hpp:540</a></div></div>
-<div class="ttc" id="agroup___pattern_matching_algorithms_html_ga9997e6a5ac3609fc198d306e328229f4"><div class="ttname"><a href="group___pattern_matching_algorithms.html#ga9997e6a5ac3609fc198d306e328229f4">find_end</a></div><div class="ttdeci">constexpr Iterator1 find_end(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)</div><div class="ttdoc">在范围内查找子序列的最后一次出现</div><div class="ttdef"><b>定义</b> <a href="#l00659">search.hpp:659</a></div></div>
-<div class="ttc" id="agroup___quantifier_algorithms_html_gac20e73ba59f5ba9db9ce34e6970a88dc"><div class="ttname"><a href="group___quantifier_algorithms.html#gac20e73ba59f5ba9db9ce34e6970a88dc">any_of</a></div><div class="ttdeci">constexpr bool any_of(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">检查是否有任意元素满足谓词</div><div class="ttdef"><b>定义</b> <a href="#l00251">search.hpp:251</a></div></div>
-<div class="ttc" id="agroup___quantifier_algorithms_html_gace2f064497b7230c156f70f5da706edc"><div class="ttname"><a href="group___quantifier_algorithms.html#gace2f064497b7230c156f70f5da706edc">none_of</a></div><div class="ttdeci">constexpr bool none_of(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">检查是否没有元素满足谓词</div><div class="ttdef"><b>定义</b> <a href="#l00272">search.hpp:272</a></div></div>
-<div class="ttc" id="agroup___quantifier_algorithms_html_gad953b0ada9620c3fd485317b9db7093e"><div class="ttname"><a href="group___quantifier_algorithms.html#gad953b0ada9620c3fd485317b9db7093e">all_of</a></div><div class="ttdeci">constexpr bool all_of(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">检查所有元素是否都满足谓词</div><div class="ttdef"><b>定义</b> <a href="#l00230">search.hpp:230</a></div></div>
+<div class="ttc" id="agroup___pattern_matching_algorithms_html_ga07db4eea0c988d493904052c4839973e"><div class="ttname"><a href="group___pattern_matching_algorithms.html#ga07db4eea0c988d493904052c4839973e">search</a></div><div class="ttdeci">constexpr Iterator1 search(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPredicate binary_pred)</div><div class="ttdoc">在范围内查找子序列的第一次出现</div><div class="ttdef"><b>定义</b> <a href="#l00481">search.hpp:481</a></div></div>
+<div class="ttc" id="agroup___pattern_matching_algorithms_html_ga1753228dbceb869e6fd58b39f1b2853d"><div class="ttname"><a href="group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d">find_first_of</a></div><div class="ttdeci">constexpr Iterator1 find_first_of(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, BinaryPredicate comp)</div><div class="ttdoc">查找范围内第一个出现在指定集合中的元素</div><div class="ttdef"><b>定义</b> <a href="#l00718">search.hpp:718</a></div></div>
+<div class="ttc" id="agroup___pattern_matching_algorithms_html_ga9580524f56d452c88e066180e465af27"><div class="ttname"><a href="group___pattern_matching_algorithms.html#ga9580524f56d452c88e066180e465af27">search_n</a></div><div class="ttdeci">constexpr Iterator search_n(Iterator first, Iterator last, const size_t count, const T &amp;value)</div><div class="ttdoc">查找范围内连续n个等于指定值的子序列</div><div class="ttdef"><b>定义</b> <a href="#l00539">search.hpp:539</a></div></div>
+<div class="ttc" id="agroup___pattern_matching_algorithms_html_ga9997e6a5ac3609fc198d306e328229f4"><div class="ttname"><a href="group___pattern_matching_algorithms.html#ga9997e6a5ac3609fc198d306e328229f4">find_end</a></div><div class="ttdeci">constexpr Iterator1 find_end(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)</div><div class="ttdoc">在范围内查找子序列的最后一次出现</div><div class="ttdef"><b>定义</b> <a href="#l00666">search.hpp:666</a></div></div>
+<div class="ttc" id="agroup___quantifier_algorithms_html_gac20e73ba59f5ba9db9ce34e6970a88dc"><div class="ttname"><a href="group___quantifier_algorithms.html#gac20e73ba59f5ba9db9ce34e6970a88dc">any_of</a></div><div class="ttdeci">constexpr bool any_of(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">检查是否有任意元素满足谓词</div><div class="ttdef"><b>定义</b> <a href="#l00250">search.hpp:250</a></div></div>
+<div class="ttc" id="agroup___quantifier_algorithms_html_gace2f064497b7230c156f70f5da706edc"><div class="ttname"><a href="group___quantifier_algorithms.html#gace2f064497b7230c156f70f5da706edc">none_of</a></div><div class="ttdeci">constexpr bool none_of(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">检查是否没有元素满足谓词</div><div class="ttdef"><b>定义</b> <a href="#l00271">search.hpp:271</a></div></div>
+<div class="ttc" id="agroup___quantifier_algorithms_html_gad953b0ada9620c3fd485317b9db7093e"><div class="ttname"><a href="group___quantifier_algorithms.html#gad953b0ada9620c3fd485317b9db7093e">all_of</a></div><div class="ttdeci">constexpr bool all_of(Iterator first, Iterator last, Predicate pred)</div><div class="ttdoc">检查所有元素是否都满足谓词</div><div class="ttdef"><b>定义</b> <a href="#l00229">search.hpp:229</a></div></div>
 <div class="ttc" id="agroup___type_traits_utilities_html_gafd80b775b0bd95747206fc628ad065f0"><div class="ttname"><a href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a></div><div class="ttdeci">typename enable_if&lt; Test, T &gt;::type enable_if_t</div><div class="ttdoc">enable_if的便捷别名</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l00118">type_traits.hpp:118</a></div></div>
 <div class="ttc" id="areverse__iterator_8hpp_html"><div class="ttname"><a href="reverse__iterator_8hpp.html">reverse_iterator.hpp</a></div><div class="ttdoc">反向迭代器</div></div>
 <div class="ttc" id="astructequal__to_html"><div class="ttname"><a href="structequal__to.html">equal_to</a></div><div class="ttdoc">相等比较仿函数</div><div class="ttdef"><b>定义</b> <a href="functor_8hpp_source.html#l00261">functor.hpp:261</a></div></div>
-<div class="ttc" id="astructgreater_html"><div class="ttname"><a href="structgreater.html">greater</a></div><div class="ttdoc">大于比较仿函数</div><div class="ttdef"><b>定义</b> <a href="functor_8hpp_source.html#l00321">functor.hpp:321</a></div></div>
 <div class="ttc" id="astructless_html"><div class="ttname"><a href="structless.html">less</a></div><div class="ttdoc">小于比较仿函数</div><div class="ttdef"><b>定义</b> <a href="functor_8hpp_source.html#l00351">functor.hpp:351</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

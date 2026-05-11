@@ -1,0 +1,886 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classshare__memory" kind="class" language="C++" prot="public">
+    <compoundname>share_memory</compoundname>
+    <includes refid="share__memory_8hpp" local="no">share_memory.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>access_mode</name>
+        <qualifiedname>share_memory::access_mode</qualifiedname>
+        <enumvalue id="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35abefe72871b2de8f4f0e20108517e31fe" prot="public">
+          <name>read_only</name>
+          <initializer>= 0x01</initializer>
+          <briefdescription>
+<para>只读模式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35a06ad287ea83b37a6f9db3d8d10d72c8f" prot="public">
+          <name>read_write</name>
+          <initializer>= 0x02</initializer>
+          <briefdescription>
+<para>读写模式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>访问模式枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="56" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="56" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="enum" id="classshare__memory_1a44ac8b8e6ff49cfe0f91b017ad68e23a" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>open_mode</name>
+        <qualifiedname>share_memory::open_mode</qualifiedname>
+        <enumvalue id="classshare__memory_1a44ac8b8e6ff49cfe0f91b017ad68e23aa1740b9b2eb7d1bfb828b321c41524e12" prot="public">
+          <name>create_only</name>
+          <briefdescription>
+<para>仅创建（已存在则失败） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classshare__memory_1a44ac8b8e6ff49cfe0f91b017ad68e23aa3cd050e22f6601441356cc4578b66999" prot="public">
+          <name>open_only</name>
+          <briefdescription>
+<para>仅打开（不存在则失败） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classshare__memory_1a44ac8b8e6ff49cfe0f91b017ad68e23aaf7a6e5d182e5d5a2e09302a5c3671daf" prot="public">
+          <name>open_or_create</name>
+          <briefdescription>
+<para>打开或创建 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>打开模式枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="65" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="65" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classshare__memory_1ac9c50fcaaa7bf35a411d4c327a11dcef" prot="public" static="no">
+        <type>_NEFORCE native_handle_type</type>
+        <definition>using share_memory::native_handle_type = _NEFORCE native_handle_type</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>share_memory::native_handle_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="71" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classshare__memory_1ab2aa8efddde9cfbf5c8c5263d9e68244" prot="private" static="no" mutable="no">
+        <type>native_handle_type</type>
+        <definition>native_handle_type share_memory::handle_</definition>
+        <argsstring></argsstring>
+        <name>handle_</name>
+        <qualifiedname>share_memory::handle_</qualifiedname>
+        <briefdescription>
+<para>映射句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="74" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1a57952e8630500ce908b8432a4439d8e7" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string share_memory::name_</definition>
+        <argsstring></argsstring>
+        <name>name_</name>
+        <qualifiedname>share_memory::name_</qualifiedname>
+        <briefdescription>
+<para>共享内存名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="75" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1acc5fbcf45971bde879ce63ba10f4907e" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t share_memory::size_</definition>
+        <argsstring></argsstring>
+        <name>size_</name>
+        <qualifiedname>share_memory::size_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>共享内存大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="76" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="76" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1aeb4b5bac1e710a980be2efa9e47da0c3" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t share_memory::internal_mapped_size_</definition>
+        <argsstring></argsstring>
+        <name>internal_mapped_size_</name>
+        <qualifiedname>share_memory::internal_mapped_size_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>含填充的映射大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="77" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1afff729ff908a18518574e8205e6aede4" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t share_memory::mapped_size_</definition>
+        <argsstring></argsstring>
+        <name>mapped_size_</name>
+        <qualifiedname>share_memory::mapped_size_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>映射大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="78" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1a99b1959365994a6747d120e4e4ac26fd" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* share_memory::original_mapped_addr_</definition>
+        <argsstring></argsstring>
+        <name>original_mapped_addr_</name>
+        <qualifiedname>share_memory::original_mapped_addr_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>原始映射地址 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="79" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1ab86e5be5ed042bf826d84b93025f08d5" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* share_memory::mapped_addr_</definition>
+        <argsstring></argsstring>
+        <name>mapped_addr_</name>
+        <qualifiedname>share_memory::mapped_addr_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>映射地址 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="80" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1a95b7d05dec65d62c809701f1e0430717" prot="private" static="no" mutable="no">
+        <type><ref refid="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35" kindref="member">access_mode</ref></type>
+        <definition>access_mode share_memory::access_mode_</definition>
+        <argsstring></argsstring>
+        <name>access_mode_</name>
+        <qualifiedname>share_memory::access_mode_</qualifiedname>
+        <initializer>{<ref refid="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35a06ad287ea83b37a6f9db3d8d10d72c8f" kindref="member">access_mode::read_write</ref>}</initializer>
+        <briefdescription>
+<para>访问模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="81" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1a2fb70968340050a39fa1b1e761554c5a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool share_memory::is_open_</definition>
+        <argsstring></argsstring>
+        <name>is_open_</name>
+        <qualifiedname>share_memory::is_open_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否已打开 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="82" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>share_memory::share_memory</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>share_memory</name>
+        <qualifiedname>share_memory::share_memory</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="88" column="5"/>
+        <referencedby refid="classshare__memory_1a794820489c390db24e2a8facb9923bf1">operator=</referencedby>
+        <referencedby refid="classshare__memory_1aa8628e04be4a1e2c4511ce09e7f14b31">share_memory</referencedby>
+        <referencedby refid="classshare__memory_1a0f3329a81f686f3a00127cf2c3f90465">share_memory</referencedby>
+        <referencedby refid="classshare__memory_1a931d2cea4d64625fc4bd3c12ed0196c2">~share_memory</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1aa8628e04be4a1e2c4511ce09e7f14b31" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>share_memory::share_memory</definition>
+        <argsstring>(const string &amp;name, size_t size, open_mode mode=open_mode::open_or_create, access_mode access=access_mode::read_write)</argsstring>
+        <name>share_memory</name>
+        <qualifiedname>share_memory::share_memory</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classshare__memory_1a44ac8b8e6ff49cfe0f91b017ad68e23a" kindref="member">open_mode</ref></type>
+          <declname>mode</declname>
+          <defval><ref refid="classshare__memory_1a44ac8b8e6ff49cfe0f91b017ad68e23aaf7a6e5d182e5d5a2e09302a5c3671daf" kindref="member">open_mode::open_or_create</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35" kindref="member">access_mode</ref></type>
+          <declname>access</declname>
+          <defval><ref refid="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35a06ad287ea83b37a6f9db3d8d10d72c8f" kindref="member">access_mode::read_write</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>共享内存名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>共享内存大小（字节） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>打开模式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>access</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问模式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structshare__memory__exception" kindref="compound">share_memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建或打开失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="98" column="14"/>
+        <references refid="classshare__memory_1a8ee597725aa36e76003fbbbc8b151a3a" compoundref="share__memory_8hpp" startline="181" endline="181">name</references>
+        <references refid="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32">share_memory</references>
+        <references refid="classshare__memory_1a84e439c18b438282247953f9811b7003" compoundref="share__memory_8hpp" startline="169" endline="169">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1afb694127ca43c3e60960b20a70be993f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>share_memory::share_memory</definition>
+        <argsstring>(const share_memory &amp;)=delete</argsstring>
+        <name>share_memory</name>
+        <qualifiedname>share_memory::share_memory</qualifiedname>
+        <param>
+          <type>const <ref refid="classshare__memory" kindref="compound">share_memory</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="101" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a9ca9987a9af6592a508d1e09ec019da7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classshare__memory" kindref="compound">share_memory</ref> &amp;</type>
+        <definition>share_memory &amp; share_memory::operator=</definition>
+        <argsstring>(const share_memory &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>share_memory::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classshare__memory" kindref="compound">share_memory</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="102" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a0f3329a81f686f3a00127cf2c3f90465" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>share_memory::share_memory</definition>
+        <argsstring>(share_memory &amp;&amp;other) noexcept</argsstring>
+        <name>share_memory</name>
+        <qualifiedname>share_memory::share_memory</qualifiedname>
+        <param>
+          <type><ref refid="classshare__memory" kindref="compound">share_memory</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="107" column="5"/>
+        <references refid="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32">share_memory</references>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a794820489c390db24e2a8facb9923bf1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classshare__memory" kindref="compound">share_memory</ref> &amp;</type>
+        <definition>share_memory &amp; share_memory::operator=</definition>
+        <argsstring>(share_memory &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>share_memory::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classshare__memory" kindref="compound">share_memory</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="112" column="18"/>
+        <references refid="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32">share_memory</references>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a931d2cea4d64625fc4bd3c12ed0196c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>share_memory::~share_memory</definition>
+        <argsstring>()</argsstring>
+        <name>~share_memory</name>
+        <qualifiedname>share_memory::~share_memory</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="117" column="5"/>
+        <references refid="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32">share_memory</references>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void share_memory::open</definition>
+        <argsstring>(const string &amp;name, size_t size, open_mode mode=open_mode::open_or_create, access_mode access=access_mode::read_write)</argsstring>
+        <name>open</name>
+        <qualifiedname>share_memory::open</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="classshare__memory_1a44ac8b8e6ff49cfe0f91b017ad68e23a" kindref="member">open_mode</ref></type>
+          <declname>mode</declname>
+          <defval><ref refid="classshare__memory_1a44ac8b8e6ff49cfe0f91b017ad68e23aaf7a6e5d182e5d5a2e09302a5c3671daf" kindref="member">open_mode::open_or_create</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35" kindref="member">access_mode</ref></type>
+          <declname>access</declname>
+          <defval><ref refid="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35a06ad287ea83b37a6f9db3d8d10d72c8f" kindref="member">access_mode::read_write</ref></defval>
+        </param>
+        <briefdescription>
+<para>打开或创建共享内存 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>共享内存名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>共享内存大小（字节） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>打开模式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>access</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问模式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structshare__memory__exception" kindref="compound">share_memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>操作失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="127" column="10"/>
+        <references refid="classshare__memory_1a8ee597725aa36e76003fbbbc8b151a3a" compoundref="share__memory_8hpp" startline="181" endline="181">name</references>
+        <references refid="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9">open</references>
+        <references refid="classshare__memory_1a84e439c18b438282247953f9811b7003" compoundref="share__memory_8hpp" startline="169" endline="169">size</references>
+        <referencedby refid="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9">open</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1af9748141b09b10dcefac10adb833d794" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void share_memory::close</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>close</name>
+        <qualifiedname>share_memory::close</qualifiedname>
+        <briefdescription>
+<para>关闭共享内存 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="133" column="10"/>
+        <references refid="classshare__memory_1af9748141b09b10dcefac10adb833d794">close</references>
+        <referencedby refid="classshare__memory_1af9748141b09b10dcefac10adb833d794">close</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a7f93dd42e93a791947c3ef82d44b7c6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * share_memory::map</definition>
+        <argsstring>(size_t offset=0, size_t length=0)</argsstring>
+        <name>map</name>
+        <qualifiedname>share_memory::map</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>length</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>映射共享内存到进程地址空间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>映射偏移量（字节） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>映射长度（字节，0表示全部） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>映射地址 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structshare__memory__exception" kindref="compound">share_memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>映射失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="142" column="10"/>
+        <references refid="classshare__memory_1a7f93dd42e93a791947c3ef82d44b7c6f">map</references>
+        <referencedby refid="classshare__memory_1a7f93dd42e93a791947c3ef82d44b7c6f">map</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a36ea9063d34633beb9823aa4069232a1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void share_memory::unmap</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>unmap</name>
+        <qualifiedname>share_memory::unmap</qualifiedname>
+        <briefdescription>
+<para>取消映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="147" column="10"/>
+        <references refid="classshare__memory_1a36ea9063d34633beb9823aa4069232a1">unmap</references>
+        <referencedby refid="classshare__memory_1a36ea9063d34633beb9823aa4069232a1">unmap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1af51cee302e442c2114dc774ed42138f7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD void *</type>
+        <definition>NEFORCE_NODISCARD void * share_memory::data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>share_memory::data</qualifiedname>
+        <briefdescription>
+<para>获取映射地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>映射地址，未映射则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="153" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="153" bodyend="153"/>
+        <references refid="classshare__memory_1af51cee302e442c2114dc774ed42138f7" compoundref="share__memory_8hpp" startline="153" endline="153">data</references>
+        <referencedby refid="classshare__memory_1af51cee302e442c2114dc774ed42138f7" compoundref="share__memory_8hpp" startline="153" endline="153">data</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a7f8fc88d99c039c1cce6978af3aa0b21" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD T *</type>
+        <definition>NEFORCE_NODISCARD T * share_memory::data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>share_memory::data</qualifiedname>
+        <briefdescription>
+<para>获取映射地址（类型转换版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型转换后的地址 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="161" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="161" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a84e439c18b438282247953f9811b7003" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD size_t share_memory::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>share_memory::size</qualifiedname>
+        <briefdescription>
+<para>获取共享内存大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>共享内存大小（字节） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="169" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="169" bodyend="169"/>
+        <referencedby refid="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9">open</referencedby>
+        <referencedby refid="classshare__memory_1aa8628e04be4a1e2c4511ce09e7f14b31">share_memory</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a960e9ec371a81e229f8077c5ea361740" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD size_t share_memory::mapped_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>mapped_size</name>
+        <qualifiedname>share_memory::mapped_size</qualifiedname>
+        <briefdescription>
+<para>获取映射大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>映射大小（字节） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="175" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="175" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a8ee597725aa36e76003fbbbc8b151a3a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const string &amp; share_memory::name</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>name</name>
+        <qualifiedname>share_memory::name</qualifiedname>
+        <briefdescription>
+<para>获取共享内存名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>共享内存名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="181" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="181" bodyend="181"/>
+        <referencedby refid="classshare__memory_1a0951f98b351a1816708ea78c6b33f528">exists</referencedby>
+        <referencedby refid="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9">open</referencedby>
+        <referencedby refid="classshare__memory_1a48a47c0aebb11a0497306ebc362f8975">remove</referencedby>
+        <referencedby refid="classshare__memory_1aa8628e04be4a1e2c4511ce09e7f14b31">share_memory</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1ac8de73a5067bd855a89e5141a06ddefb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool share_memory::is_open</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_open</name>
+        <qualifiedname>share_memory::is_open</qualifiedname>
+        <briefdescription>
+<para>检查是否已打开 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已打开 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="187" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="187" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1ab4fb12c4190804f5c3b5ec8aab5e5cf3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool share_memory::is_mapped</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_mapped</name>
+        <qualifiedname>share_memory::is_mapped</qualifiedname>
+        <briefdescription>
+<para>检查是否已映射 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已映射 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="193" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="193" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a6cfd0764176b9e974c0bcf0faad9ac61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool share_memory::flush</definition>
+        <argsstring>(bool async=false)</argsstring>
+        <name>flush</name>
+        <qualifiedname>share_memory::flush</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>async</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>刷新共享内存到磁盘 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>async</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否异步刷新 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="200" column="10"/>
+        <references refid="group___async_1gacb2c2756930195cd969cc14a06c437bf" compoundref="async_8hpp" startline="43" endline="56">async</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classshare__memory_1a48a47c0aebb11a0497306ebc362f8975" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool share_memory::remove</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>remove</name>
+        <qualifiedname>share_memory::remove</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>删除共享内存对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>共享内存名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功删除 </para>
+</simplesect>
+<simplesect kind="note"><para>即使关闭句柄，如果还有其他进程持有句柄，对象仍会存在 可以尝试打开以检查是否真的被移除 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="209" column="17"/>
+        <references refid="classshare__memory_1a8ee597725aa36e76003fbbbc8b151a3a" compoundref="share__memory_8hpp" startline="181" endline="181">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a0951f98b351a1816708ea78c6b33f528" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>static NEFORCE_NODISCARD bool share_memory::exists</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>exists</name>
+        <qualifiedname>share_memory::exists</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>检查共享内存是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>共享内存名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否存在 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="216" column="35"/>
+        <references refid="classshare__memory_1a8ee597725aa36e76003fbbbc8b151a3a" compoundref="share__memory_8hpp" startline="181" endline="181">name</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>共享内存管理类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供跨进程的共享内存创建、映射和访问功能。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="50" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="50" bodyend="217"/>
+    <listofallmembers>
+      <member refid="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35" prot="public" virt="non-virtual"><scope>share_memory</scope><name>access_mode</name></member>
+      <member refid="classshare__memory_1a95b7d05dec65d62c809701f1e0430717" prot="private" virt="non-virtual"><scope>share_memory</scope><name>access_mode_</name></member>
+      <member refid="classshare__memory_1af9748141b09b10dcefac10adb833d794" prot="public" virt="non-virtual"><scope>share_memory</scope><name>close</name></member>
+      <member refid="classshare__memory_1af51cee302e442c2114dc774ed42138f7" prot="public" virt="non-virtual"><scope>share_memory</scope><name>data</name></member>
+      <member refid="classshare__memory_1a7f8fc88d99c039c1cce6978af3aa0b21" prot="public" virt="non-virtual"><scope>share_memory</scope><name>data</name></member>
+      <member refid="classshare__memory_1a0951f98b351a1816708ea78c6b33f528" prot="public" virt="non-virtual"><scope>share_memory</scope><name>exists</name></member>
+      <member refid="classshare__memory_1a6cfd0764176b9e974c0bcf0faad9ac61" prot="public" virt="non-virtual"><scope>share_memory</scope><name>flush</name></member>
+      <member refid="classshare__memory_1ab2aa8efddde9cfbf5c8c5263d9e68244" prot="private" virt="non-virtual"><scope>share_memory</scope><name>handle_</name></member>
+      <member refid="classshare__memory_1aeb4b5bac1e710a980be2efa9e47da0c3" prot="private" virt="non-virtual"><scope>share_memory</scope><name>internal_mapped_size_</name></member>
+      <member refid="classshare__memory_1ab4fb12c4190804f5c3b5ec8aab5e5cf3" prot="public" virt="non-virtual"><scope>share_memory</scope><name>is_mapped</name></member>
+      <member refid="classshare__memory_1ac8de73a5067bd855a89e5141a06ddefb" prot="public" virt="non-virtual"><scope>share_memory</scope><name>is_open</name></member>
+      <member refid="classshare__memory_1a2fb70968340050a39fa1b1e761554c5a" prot="private" virt="non-virtual"><scope>share_memory</scope><name>is_open_</name></member>
+      <member refid="classshare__memory_1a7f93dd42e93a791947c3ef82d44b7c6f" prot="public" virt="non-virtual"><scope>share_memory</scope><name>map</name></member>
+      <member refid="classshare__memory_1ab86e5be5ed042bf826d84b93025f08d5" prot="private" virt="non-virtual"><scope>share_memory</scope><name>mapped_addr_</name></member>
+      <member refid="classshare__memory_1a960e9ec371a81e229f8077c5ea361740" prot="public" virt="non-virtual"><scope>share_memory</scope><name>mapped_size</name></member>
+      <member refid="classshare__memory_1afff729ff908a18518574e8205e6aede4" prot="private" virt="non-virtual"><scope>share_memory</scope><name>mapped_size_</name></member>
+      <member refid="classshare__memory_1a8ee597725aa36e76003fbbbc8b151a3a" prot="public" virt="non-virtual"><scope>share_memory</scope><name>name</name></member>
+      <member refid="classshare__memory_1a57952e8630500ce908b8432a4439d8e7" prot="private" virt="non-virtual"><scope>share_memory</scope><name>name_</name></member>
+      <member refid="classshare__memory_1ac9c50fcaaa7bf35a411d4c327a11dcef" prot="public" virt="non-virtual"><scope>share_memory</scope><name>native_handle_type</name></member>
+      <member refid="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9" prot="public" virt="non-virtual"><scope>share_memory</scope><name>open</name></member>
+      <member refid="classshare__memory_1a44ac8b8e6ff49cfe0f91b017ad68e23a" prot="public" virt="non-virtual"><scope>share_memory</scope><name>open_mode</name></member>
+      <member refid="classshare__memory_1a9ca9987a9af6592a508d1e09ec019da7" prot="public" virt="non-virtual"><scope>share_memory</scope><name>operator=</name></member>
+      <member refid="classshare__memory_1a794820489c390db24e2a8facb9923bf1" prot="public" virt="non-virtual"><scope>share_memory</scope><name>operator=</name></member>
+      <member refid="classshare__memory_1a99b1959365994a6747d120e4e4ac26fd" prot="private" virt="non-virtual"><scope>share_memory</scope><name>original_mapped_addr_</name></member>
+      <member refid="classshare__memory_1a48a47c0aebb11a0497306ebc362f8975" prot="public" virt="non-virtual"><scope>share_memory</scope><name>remove</name></member>
+      <member refid="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32" prot="public" virt="non-virtual"><scope>share_memory</scope><name>share_memory</name></member>
+      <member refid="classshare__memory_1aa8628e04be4a1e2c4511ce09e7f14b31" prot="public" virt="non-virtual"><scope>share_memory</scope><name>share_memory</name></member>
+      <member refid="classshare__memory_1afb694127ca43c3e60960b20a70be993f" prot="public" virt="non-virtual"><scope>share_memory</scope><name>share_memory</name></member>
+      <member refid="classshare__memory_1a0f3329a81f686f3a00127cf2c3f90465" prot="public" virt="non-virtual"><scope>share_memory</scope><name>share_memory</name></member>
+      <member refid="classshare__memory_1a84e439c18b438282247953f9811b7003" prot="public" virt="non-virtual"><scope>share_memory</scope><name>size</name></member>
+      <member refid="classshare__memory_1acc5fbcf45971bde879ce63ba10f4907e" prot="private" virt="non-virtual"><scope>share_memory</scope><name>size_</name></member>
+      <member refid="classshare__memory_1a36ea9063d34633beb9823aa4069232a1" prot="public" virt="non-virtual"><scope>share_memory</scope><name>unmap</name></member>
+      <member refid="classshare__memory_1a931d2cea4d64625fc4bd3c12ed0196c2" prot="public" virt="non-virtual"><scope>share_memory</scope><name>~share_memory</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

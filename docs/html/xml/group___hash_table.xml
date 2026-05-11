@@ -1,0 +1,297 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___hash_table" kind="group">
+    <compoundname>HashTable</compoundname>
+    <title>哈希表</title>
+    <innerclass refid="structhashtable__node" prot="public">hashtable_node</innerclass>
+    <innerclass refid="classhashtable" prot="public">hashtable</innerclass>
+    <innerclass refid="structhashtable__iterator" prot="public">hashtable_iterator</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___hash_table_1gac5f4a3f35a22043d3e7cc1516ff73729" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_BEGIN_CONSTANTS__ NEFORCE_INLINE17 constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_BEGIN_CONSTANTS__ NEFORCE_INLINE17 constexpr size_t HASH_PRIME_LIST[]</definition>
+        <argsstring>[]</argsstring>
+        <name>HASH_PRIME_LIST</name>
+        <briefdescription>
+<para>哈希表素数列表（64位系统） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>用于确定哈希表大小的一系列素数，减少哈希冲突。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="274" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="274" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___hash_table_1ga8bc07f5ca630d16c995e37109829b4f9" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_INLINE17 constexpr size_t HASH_PRIMER_COUNT</definition>
+        <argsstring></argsstring>
+        <name>HASH_PRIMER_COUNT</name>
+        <initializer>= <ref refid="group___array_properties_1gafcb76e99467d872575ce22b0a2d8b526" kindref="member">extent_v</ref>&lt;decltype(<ref refid="group___hash_table_1gac5f4a3f35a22043d3e7cc1516ff73729" kindref="member">HASH_PRIME_LIST</ref>)&gt;</initializer>
+        <briefdescription>
+<para>素数列表长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="384" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="384" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>基于哈希表的无序容器实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>哈希表是一种基于键直接访问数据的数据结构，通过哈希函数将键映射到桶， 提供平均常数时间复杂度的插入、删除和查找操作。 作为无序关联式容器的底层实现。</para>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下数据结构相关标准规范：</para>
+<para><bold>哈希表算法与数据结构文献：</bold><itemizedlist>
+<listitem><para>**Donald E. Knuth (1998)**：The Art of Computer Programming, Volume 3 — Sorting and Searching §6.4 Hashing（哈希表经典理论分析）</para>
+</listitem><listitem><para>**Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein**： Introduction to Algorithms (3rd Edition), Chapter 11 — Hash Tables</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>哈希函数设计参考：</bold><itemizedlist>
+<listitem><para>**Maurice V. Wilkes (1965)**：Slave Memories and Dynamic Storage Allocation IEEE Transactions on Electronic Computers, EC-14(2): 270-271</para>
+</listitem><listitem><para>**Donald E. Knuth (1973)**：The Art of Computer Programming, Volume 1 — Fundamental Algorithms</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>负载因子与性能分析：</bold><itemizedlist>
+<listitem><para>**Gaston H. Gonnet, Per-Åke Larson (1988)**：External hashing with limited internal storage Journal of the ACM, 35(1): 161-184</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___hash_table_1hash_table_principles">
+<title>哈希表原理</title><para>哈希表通过哈希函数将键映射到数组索引（桶），实现 O(1) 平均时间复杂度的操作：</para>
+<para>**核心概念**： <table rows="6" cols="2"><row>
+<entry thead="yes"><para>概念  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>哈希函数  </para>
+</entry><entry thead="no"><para>将键映射到整数索引的函数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>桶  </para>
+</entry><entry thead="no"><para>存储具有相同哈希值元素的容器  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>负载因子  </para>
+</entry><entry thead="no"><para>元素数量 / 桶数量，决定哈希表的拥挤程度  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>冲突  </para>
+</entry><entry thead="no"><para>不同键产生相同哈希值的现象  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>冲突解决  </para>
+</entry><entry thead="no"><para>链地址法（本实现）或开放寻址法  </para>
+</entry></row>
+</table>
+</para>
+<para>**链地址法**：<itemizedlist>
+<listitem><para>每个桶存储一个链表头指针</para>
+</listitem><listitem><para>冲突的元素追加到链表末尾</para>
+</listitem><listitem><para>查找时需要遍历链表</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___hash_table_1bucket_size_strategy">
+<title>桶大小策略</title><para>本实现使用素数表确定桶数量，以改善哈希分布的均匀性：</para>
+<para><table rows="3" cols="3"><row>
+<entry thead="yes"><para>位数  </para>
+</entry><entry thead="yes"><para>最大素数  </para>
+</entry><entry thead="yes"><para>素数个数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>32位  </para>
+</entry><entry thead="no"><para>1,610,612,741  </para>
+</entry><entry thead="no"><para>28  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>64位  </para>
+</entry><entry thead="no"><para>6,477,510,814,054,053,699  </para>
+</entry><entry thead="no"><para>78  </para>
+</entry></row>
+</table>
+</para>
+<para>素数表的选择基于以下原因：<itemizedlist>
+<listitem><para>素数作为模数可减少哈希冲突的规律性</para>
+</listitem><listitem><para>避免与哈希函数中的乘数产生公因子</para>
+</listitem><listitem><para>改善分布均匀性（参考 Knuth 分析）</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___hash_table_1load_factor_management">
+<title>负载因子管理</title><para>负载因子 α = size / buckets，控制哈希表的时空权衡：</para>
+<para><table rows="5" cols="3"><row>
+<entry thead="yes"><para>α 范围  </para>
+</entry><entry thead="yes"><para>性能特征  </para>
+</entry><entry thead="yes"><para>操作  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>α &lt; 0.5  </para>
+</entry><entry thead="no"><para>稀疏，空间浪费，冲突极少  </para>
+</entry><entry thead="no"><para>适合高频率查找  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0.5 ≤ α ≤ 1.0  </para>
+</entry><entry thead="no"><para>平衡，推荐默认值（本实现默认 1.0）  </para>
+</entry><entry thead="no"><para>一般场景最优  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>α &gt; 1.0  </para>
+</entry><entry thead="no"><para>密集，空间效率高，查找性能下降  </para>
+</entry><entry thead="no"><para>触发 rehash  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>α &gt; 2.0  </para>
+</entry><entry thead="no"><para>过度拥挤，查找退化为 O(n)  </para>
+</entry><entry thead="no"><para>强制 rehash  </para>
+</entry></row>
+</table>
+</para>
+<para>当负载因子超过 max_load_factor() 时，自动触发 rehash 扩容。</para>
+</sect1>
+<sect1 id="group___hash_table_1time_complexity">
+<title>时间复杂度</title><para><table rows="7" cols="4"><row>
+<entry thead="yes"><para>操作  </para>
+</entry><entry thead="yes"><para>平均情况  </para>
+</entry><entry thead="yes"><para>最坏情况  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>insert  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>冲突时遍历链表，rehash 时 O(n)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>erase  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>定位桶后删除节点  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>find  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>遍历桶内链表  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>count  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>同 find  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>rehash  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>重新分配所有元素  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>clear  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>释放所有节点  </para>
+</entry></row>
+</table>
+</para>
+<para>其中 n = <ref refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" kindref="member">size()</ref>。</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="8" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>冲突解决  </para>
+</entry><entry thead="no"><para>链地址法（Separate Chaining）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>桶大小增长策略  </para>
+</entry><entry thead="no"><para>素数表（约 1.5 倍增长）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最大负载因子  </para>
+</entry><entry thead="no"><para>1.0（默认，可配置）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>迭代器类别  </para>
+</entry><entry thead="no"><para>前向迭代器（Forward Iterator）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>异常安全  </para>
+</entry><entry thead="no"><para>基本保证（insert 时分配失败不影响原有状态）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>线程安全  </para>
+</entry><entry thead="no"><para>不安全（需外部同步）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>节点分配  </para>
+</entry><entry thead="no"><para>使用 Alloc 分配器  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___hash_table_1iterator_invalidation">
+<title>迭代器失效规则</title><para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>操作  </para>
+</entry><entry thead="yes"><para>失效范围  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>insert  </para>
+</entry><entry thead="no"><para>不失效任何迭代器  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>erase  </para>
+</entry><entry thead="no"><para>仅失效指向被删除元素的迭代器  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>rehash  </para>
+</entry><entry thead="no"><para>全部迭代器失效  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>clear  </para>
+</entry><entry thead="no"><para>全部迭代器失效  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>swap  </para>
+</entry><entry thead="no"><para>迭代器交换，指向元素保持有效  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___hash_table_1unique_vs_equal">
+<title>唯一键与允许重复键</title><para>本实现提供两种插入模式：</para>
+<para><table rows="3" cols="3"><row>
+<entry thead="yes"><para>模式  </para>
+</entry><entry thead="yes"><para>方法后缀  </para>
+</entry><entry thead="yes"><para>行为  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>唯一键  </para>
+</entry><entry thead="no"><para>_unique  </para>
+</entry><entry thead="no"><para>键已存在时替换或忽略（取决于实现）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>允许重复键  </para>
+</entry><entry thead="no"><para>_equal  </para>
+</entry><entry thead="no"><para>允许相同键的多个值共存  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>本实现采用链地址法处理冲突，在负载因子适当时性能最优。 对于需要稳定迭代器的场景，哈希表是理想选择。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/container/unordered_map">https://en.cppreference.com/w/cpp/container/unordered_map</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Hash_table">https://en.wikipedia.org/wiki/Hash_table</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://dl.acm.org/doi/10.1145/356643.356645">https://dl.acm.org/doi/10.1145/356643.356645</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

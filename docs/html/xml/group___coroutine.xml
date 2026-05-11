@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___coroutine" kind="group">
+    <compoundname>Coroutine</compoundname>
+    <title>协程</title>
+    <innerclass refid="structcoroutine__traits" prot="public">coroutine_traits</innerclass>
+    <innerclass refid="structcoroutine__traits__impl" prot="public">coroutine_traits_impl</innerclass>
+    <innerclass refid="structcoroutine__traits__impl_3_01_res_00_01void__t_3_01typename_01_res_1_1promise__type_01_4_01_4" prot="public">coroutine_traits_impl&lt; Res, void_t&lt; typename Res::promise_type &gt; &gt;</innerclass>
+    <innerclass refid="structsuspend__always" prot="public">suspend_always</innerclass>
+    <innerclass refid="structsuspend__never" prot="public">suspend_never</innerclass>
+    <innerclass refid="classcancellation__token" prot="public">cancellation_token</innerclass>
+    <innerclass refid="classgenerator" prot="public">generator</innerclass>
+    <innerclass refid="classtask" prot="public">task</innerclass>
+    <innerclass refid="classtask_3_01void_01_4" prot="public">task&lt; void &gt;</innerclass>
+    <innerclass refid="structvirtual__thread__task" prot="public">virtual_thread_task</innerclass>
+    <innerclass refid="classvirtual__thread__scheduler" prot="public">virtual_thread_scheduler</innerclass>
+    <innerclass refid="structvirtual__thread__awaiter" prot="public">virtual_thread_awaiter</innerclass>
+    <innerclass refid="classvirtual__thread" prot="public">virtual_thread</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Promise</type>
+            <defval>void</defval>
+          </param>
+        </templateparamlist>
+        <type>std::coroutine_handle&lt; Promise &gt;</type>
+        <definition>using coroutine_handle = std::coroutine_handle&lt;Promise&gt;</definition>
+        <argsstring></argsstring>
+        <name>coroutine_handle</name>
+        <briefdescription>
+<para>协程句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Promise</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>promise类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用自定义coroutine_handle会编译失败， 故对std::coroutine_handle重新导出，用于管理协程的生命周期。 提供恢复、销毁等操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="64" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___coroutine_1ga703e941b1a9f15e23513daa24ed4d587" prot="public" static="no">
+        <type><ref refid="group___coroutine_1ga8688aa61087dce3a6914a4d6c7f7b55a" kindref="member">std::noop_coroutine_handle</ref></type>
+        <definition>using noop_coroutine_promise = std::noop_coroutine_handle</definition>
+        <argsstring></argsstring>
+        <name>noop_coroutine_promise</name>
+        <briefdescription>
+<para>空操作协程的promise类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="95" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___coroutine_1ga8688aa61087dce3a6914a4d6c7f7b55a" prot="public" static="no">
+        <type><ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle</ref>&lt; <ref refid="group___coroutine_1ga703e941b1a9f15e23513daa24ed4d587" kindref="member">noop_coroutine_promise</ref> &gt;</type>
+        <definition>using noop_coroutine_handle = coroutine_handle&lt;noop_coroutine_promise&gt;</definition>
+        <argsstring></argsstring>
+        <name>noop_coroutine_handle</name>
+        <briefdescription>
+<para>空操作协程句柄类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="100" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___coroutine_1ga43aa77a087a863d0064283cc5871fde7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___coroutine_1ga8688aa61087dce3a6914a4d6c7f7b55a" kindref="member">noop_coroutine_handle</ref></type>
+        <definition>noop_coroutine_handle noop_coroutine</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>noop_coroutine</name>
+        <briefdescription>
+<para>获取空操作协程句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>空操作协程句柄</para>
+</simplesect>
+空操作协程是一个特殊协程，永远不会完成，调用resume无效果。 可用于需要协程句柄但不需要实际协程的场景。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="109" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="109" bodyend="109"/>
+        <referencedby refid="structtask_1_1promise__type_1_1final__awaiter_1ac9266960119774b0ecd39811a7ed9f6c" compoundref="generator_8hpp" startline="490" endline="496">task&lt; T &gt;::promise_type::final_awaiter::await_suspend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___coroutine_1ga8c72fd92de476361237939b98f6a450c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Tasks</declname>
+            <defname>Tasks</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classtask" kindref="compound">task</ref>&lt; tuple&lt; typename Tasks::promise_type::result_type... &gt; &gt;</type>
+        <definition>task&lt; tuple&lt; typename Tasks::promise_type::result_type... &gt; &gt; when_all</definition>
+        <argsstring>(Tasks &amp;&amp;... tasks)</argsstring>
+        <name>when_all</name>
+        <param>
+          <type>Tasks &amp;&amp;...</type>
+          <declname>tasks</declname>
+        </param>
+        <briefdescription>
+<para>等待所有任务完成 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Tasks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tasks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要等待的任务 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含所有任务结果的任务</para>
+</simplesect>
+并行执行多个任务，等待所有任务完成后返回结果元组。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="844" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="844" bodyend="848"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="group___coroutine_1ga79f854a5ada0083996d280c91b6cb2c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Factory</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classtask" kindref="compound">task</ref>&lt; T &gt;</type>
+        <definition>task&lt; T &gt; retry</definition>
+        <argsstring>(Factory &amp;&amp;factory, const size_t max_attempts, function&lt; bool(const exception_ptr &amp;)&gt; should_retry=nullptr)</argsstring>
+        <name>retry</name>
+        <param>
+          <type>Factory &amp;&amp;</type>
+          <declname>factory</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>max_attempts</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; bool(const <ref refid="classexception__ptr" kindref="compound">exception_ptr</ref> &amp;)&gt;</type>
+          <declname>should_retry</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>带重试的异步操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结果类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Factory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>工厂函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>factory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回task&lt;T&gt;的工厂函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_attempts</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大尝试次数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>should_retry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>判断是否应该重试的函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>任务结果</para>
+</simplesect>
+执行异步操作，失败时根据策略重试。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="863" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="863" bodyend="885"/>
+        <references refid="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419">current_exception</references>
+        <references refid="group___invoke_function_1gabdbb43df9038587b1f25b2169c305571" compoundref="invoke_8hpp" startline="418">is_invocable_r_v</references>
+        <references refid="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32">rethrow_exception</references>
+        <referencedby refid="classlock__free__queue_1a24c20d863075bbbcedc192df5625d1e3" compoundref="lock__free__queue_8hpp" startline="290" endline="315">lock_free_queue&lt; T &gt;::try_pop</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>协程支持 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>协程和虚拟线程相关功能</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

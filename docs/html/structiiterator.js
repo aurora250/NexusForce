@@ -1,6 +1,5 @@
 var structiiterator =
 [
-    [ "operator!=", "structiiterator.html#ae1d654e0bdebce5de93691c1521767ab", null ],
     [ "operator*", "structiiterator.html#a38542caf08064732ea33b4c4bada41cb", null ],
     [ "operator+", "structiiterator.html#a70c35e54eb9a283316a815aab00f2986", null ],
     [ "operator++", "structiiterator.html#a251522d2785c4415a0f74129315f75db", null ],
@@ -12,10 +11,5 @@ var structiiterator =
     [ "operator--", "structiiterator.html#a8f20f2ea8cc4054292010754489850f7", null ],
     [ "operator-=", "structiiterator.html#a4aa2a32cfd3581b745db141b491723db", null ],
     [ "operator->", "structiiterator.html#a789b844bcb717b7bbdd8727e3f27a2f8", null ],
-    [ "operator<", "structiiterator.html#ae131b6da2b79f90e9c35f7c6e1e6e2ea", null ],
-    [ "operator<=", "structiiterator.html#acd45ddf410739b47f977be6ed1e964bb", null ],
-    [ "operator==", "structiiterator.html#a36a4df98fec0b13eb84e938feeb0d7d7", null ],
-    [ "operator>", "structiiterator.html#af75d4ca526effe8e955ef1f340f28440", null ],
-    [ "operator>=", "structiiterator.html#aa367239b9d38c3af07fa911f3b1af1ae", null ],
     [ "operator+", "structiiterator.html#aa72e9f33acae994f81c07eba411a693e", null ]
 ];

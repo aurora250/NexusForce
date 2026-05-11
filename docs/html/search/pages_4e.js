@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['支持环境_0',['🖥️ 支持环境',['../index.html#autotoc_md6',1,'']]]
+  ['操作码与响应码_0',['操作码与响应码',['../group___d_n_s.html#dns_opcodes',1,'']]]
 ];

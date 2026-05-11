@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structiplugin" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>iplugin</compoundname>
+    <includes refid="iplugin_8hpp" local="no">iplugin.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiplugin_1a967f1f917c644f138f8e4536dc986879" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iplugin::~iplugin</definition>
+        <argsstring>()=default</argsstring>
+        <name>~iplugin</name>
+        <qualifiedname>iplugin::~iplugin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="45" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structiplugin_1a23d6085a2e63cbf778e215d44490ebd4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const <ref refid="structplugin__info" kindref="compound">plugin_info</ref> &amp;</type>
+        <definition>virtual const plugin_info &amp; iplugin::get_info</definition>
+        <argsstring>() const =0</argsstring>
+        <name>get_info</name>
+        <qualifiedname>iplugin::get_info</qualifiedname>
+        <briefdescription>
+<para>获取插件信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>插件信息结构引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="51" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="structiplugin_1a470ea9b8c6b7058e8a2bb69ffe364e02" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iplugin::initialize</definition>
+        <argsstring>()=0</argsstring>
+        <name>initialize</name>
+        <qualifiedname>iplugin::initialize</qualifiedname>
+        <briefdescription>
+<para>初始化插件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>在插件加载后调用，用于执行初始化操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="58" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structiplugin_1a5b1f48287bf155612ce014811215da5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iplugin::execute</definition>
+        <argsstring>()=0</argsstring>
+        <name>execute</name>
+        <qualifiedname>iplugin::execute</qualifiedname>
+        <briefdescription>
+<para>执行插件的主要功能 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="63" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structiplugin_1ae5d9267f0a284319b9df78496ae6c8b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iplugin::shutdown</definition>
+        <argsstring>()=0</argsstring>
+        <name>shutdown</name>
+        <qualifiedname>iplugin::shutdown</qualifiedname>
+        <briefdescription>
+<para>关闭插件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>在插件卸载前调用，用于清理资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="70" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>插件接口基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>所有插件必须实现的接口，定义了插件的生命周期管理方法。 插件需要实现初始化、执行和关闭等操作。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" line="44" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp" bodystart="44" bodyend="71"/>
+    <listofallmembers>
+      <member refid="structiplugin_1a5b1f48287bf155612ce014811215da5c" prot="public" virt="pure-virtual"><scope>iplugin</scope><name>execute</name></member>
+      <member refid="structiplugin_1a23d6085a2e63cbf778e215d44490ebd4" prot="public" virt="pure-virtual"><scope>iplugin</scope><name>get_info</name></member>
+      <member refid="structiplugin_1a470ea9b8c6b7058e8a2bb69ffe364e02" prot="public" virt="pure-virtual"><scope>iplugin</scope><name>initialize</name></member>
+      <member refid="structiplugin_1ae5d9267f0a284319b9df78496ae6c8b3" prot="public" virt="pure-virtual"><scope>iplugin</scope><name>shutdown</name></member>
+      <member refid="structiplugin_1a967f1f917c644f138f8e4536dc986879" prot="public" virt="virtual"><scope>iplugin</scope><name>~iplugin</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

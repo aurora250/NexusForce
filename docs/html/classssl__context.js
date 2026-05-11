@@ -1,6 +1,8 @@
 var classssl__context =
 [
     [ "ssl_context", "classssl__context.html#a66547e0420877dfe3109b5c1ebab7437", null ],
+    [ "clone", "classssl__context.html#a10459f705e17d31675e237b26d1f1b2a", null ],
+    [ "clone_shared", "classssl__context.html#afd2628b66a19c8d6a89e94d21c297a16", null ],
     [ "is_valid", "classssl__context.html#a578442e1760cc9d136347c462611fedf", null ],
     [ "load_certificate", "classssl__context.html#a22215336ea11c5521366581dec47543f", null ],
     [ "load_certificate_from_memory", "classssl__context.html#aec13982e180a000537a06105e556ff28", null ],

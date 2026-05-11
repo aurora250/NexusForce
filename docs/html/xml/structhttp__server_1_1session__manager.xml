@@ -1,0 +1,427 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structhttp__server_1_1session__manager" kind="struct" language="C++" prot="private">
+    <compoundname>http_server::session_manager</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a990ac6d19ca7d7fa5b5aed63e0261e8c" prot="public" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="structhttp__session" kindref="compound">http_session</ref> &gt;</type>
+        <definition>unordered_map&lt;string, http_session&gt; http_server::session_manager::sessions_</definition>
+        <argsstring></argsstring>
+        <name>sessions_</name>
+        <qualifiedname>http_server::session_manager::sessions_</qualifiedname>
+        <briefdescription>
+<para>会话存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="80" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__server_1_1session__manager_1af89775ec4991ee5acd1a254d5338af84" prot="public" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex http_server::session_manager::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>http_server::session_manager::mutex_</qualifiedname>
+        <briefdescription>
+<para>会话互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="81" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a9abd70872aeeeb68f5f3856b3cbb34db" prot="public" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; http_server::session_manager::cleanup_running_</definition>
+        <argsstring></argsstring>
+        <name>cleanup_running_</name>
+        <qualifiedname>http_server::session_manager::cleanup_running_</qualifiedname>
+        <briefdescription>
+<para>清理线程运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="82" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__server_1_1session__manager_1af2b536c6c15e0c5198829cc80a562267" prot="public" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread http_server::session_manager::cleanup_thread_</definition>
+        <argsstring></argsstring>
+        <name>cleanup_thread_</name>
+        <qualifiedname>http_server::session_manager::cleanup_thread_</qualifiedname>
+        <briefdescription>
+<para>清理线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="83" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a14f3b0eb4fcfe5e0343929287e9ee6da" prot="public" static="no" mutable="no">
+        <type><ref refid="classrandom__mt" kindref="compound">random_mt</ref></type>
+        <definition>random_mt http_server::session_manager::rand_</definition>
+        <argsstring></argsstring>
+        <name>rand_</name>
+        <qualifiedname>http_server::session_manager::rand_</qualifiedname>
+        <briefdescription>
+<para>随机数生成器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="84" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a1da7fffba3a013457c12faefc5eb2558" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
+        <definition>seconds http_server::session_manager::cleanup_interval_</definition>
+        <argsstring></argsstring>
+        <name>cleanup_interval_</name>
+        <qualifiedname>http_server::session_manager::cleanup_interval_</qualifiedname>
+        <initializer>{300}</initializer>
+        <briefdescription>
+<para>清理间隔 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="85" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a61ee6889ef9bd8903147eba174481a3f" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t http_server::session_manager::max_sessions_</definition>
+        <argsstring></argsstring>
+        <name>max_sessions_</name>
+        <qualifiedname>http_server::session_manager::max_sessions_</qualifiedname>
+        <initializer>{10000}</initializer>
+        <briefdescription>
+<para>最大会话数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="86" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1ae2f811ed84e3eebae744989827422a64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string http_server::session_manager::generate_session_id</definition>
+        <argsstring>()</argsstring>
+        <name>generate_session_id</name>
+        <qualifiedname>http_server::session_manager::generate_session_id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="88" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1aa54df641f33fbcacf01b9ccda122c97a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http_server::session_manager::session_manager</definition>
+        <argsstring>()</argsstring>
+        <name>session_manager</name>
+        <qualifiedname>http_server::session_manager::session_manager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="90" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1a03cd2d42d472e0fb964075631ac381a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http_server::session_manager::~session_manager</definition>
+        <argsstring>()</argsstring>
+        <name>~session_manager</name>
+        <qualifiedname>http_server::session_manager::~session_manager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="91" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1a46d0a9764a7bec90e07b904808aa35f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http_server::session_manager::session_manager</definition>
+        <argsstring>(const session_manager &amp;)=delete</argsstring>
+        <name>session_manager</name>
+        <qualifiedname>http_server::session_manager::session_manager</qualifiedname>
+        <param>
+          <type>const session_manager &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="93" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1a8b979e91edb98ee748454d7ff3a05c7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>session_manager &amp;</type>
+        <definition>session_manager &amp; http_server::session_manager::operator=</definition>
+        <argsstring>(const session_manager &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>http_server::session_manager::operator=</qualifiedname>
+        <param>
+          <type>const session_manager &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="94" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1ad6bd32a343cfd36219cc872733e62be0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>http_server::session_manager::session_manager</definition>
+        <argsstring>(session_manager &amp;&amp;) noexcept=delete</argsstring>
+        <name>session_manager</name>
+        <qualifiedname>http_server::session_manager::session_manager</qualifiedname>
+        <param>
+          <type>session_manager &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="96" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1a8fa9256d5dfb09267c469b8d313a226d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>session_manager &amp;</type>
+        <definition>session_manager &amp; http_server::session_manager::operator=</definition>
+        <argsstring>(session_manager &amp;&amp;) noexcept=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>http_server::session_manager::operator=</qualifiedname>
+        <param>
+          <type>session_manager &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="97" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1a8a6541b8953a5005b2925b4a0cebd75b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structhttp__session" kindref="compound">http_session</ref> *</type>
+        <definition>http_session * http_server::session_manager::get_session</definition>
+        <argsstring>(const string &amp;session_id, bool create=true)</argsstring>
+        <name>get_session</name>
+        <qualifiedname>http_server::session_manager::get_session</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>session_id</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>create</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="99" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1ad6385057bf8d9d156c09bb0c8e178a45" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::session_manager::remove_session</definition>
+        <argsstring>(const string &amp;session_id) noexcept</argsstring>
+        <name>remove_session</name>
+        <qualifiedname>http_server::session_manager::remove_session</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>session_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="100" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1ac25af56248a17f05f7f0c356425a179f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::session_manager::cleanup_expired_sessions</definition>
+        <argsstring>()</argsstring>
+        <name>cleanup_expired_sessions</name>
+        <qualifiedname>http_server::session_manager::cleanup_expired_sessions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="101" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1a19721a3b5a1c79475876c1f864b567f1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http_server::session_manager::session_exists</definition>
+        <argsstring>(const string &amp;session_id) const noexcept</argsstring>
+        <name>session_exists</name>
+        <qualifiedname>http_server::session_manager::session_exists</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>session_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="102" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1a188f7447c28ee38bb96401bb64bf2d8c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t http_server::session_manager::session_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>session_count</name>
+        <qualifiedname>http_server::session_manager::session_count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="104" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1a45ba7082b69799e1aaa6a54e25eb8d8a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::session_manager::set_cleanup_interval</definition>
+        <argsstring>(seconds interval) noexcept</argsstring>
+        <name>set_cleanup_interval</name>
+        <qualifiedname>http_server::session_manager::set_cleanup_interval</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
+          <declname>interval</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="105" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structhttp__server_1_1session__manager_1ad7812b4bf54bf7fd0610ee10b765095b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::session_manager::set_max_sessions</definition>
+        <argsstring>(size_t max) noexcept</argsstring>
+        <name>set_max_sessions</name>
+        <qualifiedname>http_server::session_manager::set_max_sessions</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="106" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>会话管理器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理所有HTTP会话，包括创建、查找、删除和过期清理。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>atomic&lt; bool &gt;</label>
+        <link refid="structatomic_3_01bool_01_4"/>
+      </node>
+      <node id="7">
+        <label>duration&lt; int64_t &gt;</label>
+        <link refid="structduration"/>
+      </node>
+      <node id="1">
+        <label>http_server::session_manager</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>sessions_</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>mutex_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>cleanup_running_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>cleanup_thread_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>rand_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>cleanup_interval_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>mutex</label>
+        <link refid="classmutex"/>
+      </node>
+      <node id="6">
+        <label>random_mt</label>
+        <link refid="classrandom__mt"/>
+      </node>
+      <node id="5">
+        <label>thread</label>
+        <link refid="classthread"/>
+      </node>
+      <node id="2">
+        <label>unordered_map&lt; basic_string&lt; char &gt;, http_session &gt;</label>
+        <link refid="classunordered__map"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="79" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="79" bodyend="107"/>
+    <listofallmembers>
+      <member refid="structhttp__server_1_1session__manager_1ac25af56248a17f05f7f0c356425a179f" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>cleanup_expired_sessions</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a1da7fffba3a013457c12faefc5eb2558" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>cleanup_interval_</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a9abd70872aeeeb68f5f3856b3cbb34db" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>cleanup_running_</name></member>
+      <member refid="structhttp__server_1_1session__manager_1af2b536c6c15e0c5198829cc80a562267" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>cleanup_thread_</name></member>
+      <member refid="structhttp__server_1_1session__manager_1ae2f811ed84e3eebae744989827422a64" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>generate_session_id</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a8a6541b8953a5005b2925b4a0cebd75b" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>get_session</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a61ee6889ef9bd8903147eba174481a3f" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>max_sessions_</name></member>
+      <member refid="structhttp__server_1_1session__manager_1af89775ec4991ee5acd1a254d5338af84" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>mutex_</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a8b979e91edb98ee748454d7ff3a05c7e" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>operator=</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a8fa9256d5dfb09267c469b8d313a226d" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>operator=</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a14f3b0eb4fcfe5e0343929287e9ee6da" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>rand_</name></member>
+      <member refid="structhttp__server_1_1session__manager_1ad6385057bf8d9d156c09bb0c8e178a45" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>remove_session</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a188f7447c28ee38bb96401bb64bf2d8c" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>session_count</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a19721a3b5a1c79475876c1f864b567f1" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>session_exists</name></member>
+      <member refid="structhttp__server_1_1session__manager_1aa54df641f33fbcacf01b9ccda122c97a" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>session_manager</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a46d0a9764a7bec90e07b904808aa35f4" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>session_manager</name></member>
+      <member refid="structhttp__server_1_1session__manager_1ad6bd32a343cfd36219cc872733e62be0" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>session_manager</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a990ac6d19ca7d7fa5b5aed63e0261e8c" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>sessions_</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a45ba7082b69799e1aaa6a54e25eb8d8a" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>set_cleanup_interval</name></member>
+      <member refid="structhttp__server_1_1session__manager_1ad7812b4bf54bf7fd0610ee10b765095b" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>set_max_sessions</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a03cd2d42d472e0fb964075631ac381a0" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>~session_manager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -3,9 +3,12 @@ var group___process =
     [ "process", "classprocess.html", [
       [ "state_info", "structprocess_1_1state__info.html", [
         [ "is_running", "structprocess_1_1state__info.html#af076950a1963de275017f09ebc4fff65", null ],
+        [ "process_handle", "structprocess_1_1state__info.html#a364db330c5b9d31721f46338bd99ba3b", null ],
         [ "process_id", "structprocess_1_1state__info.html#a6598dd1fe07df238467557f2ab7df2c4", null ],
         [ "stdout_output", "structprocess_1_1state__info.html#a1f7f72dc813cbea2a3f5fc1605d4055c", null ],
-        [ "stdout_pipe", "structprocess_1_1state__info.html#afc29813a5d417fc8ae7d9c0703e3c037", null ]
+        [ "stdout_pipe", "structprocess_1_1state__info.html#afc29813a5d417fc8ae7d9c0703e3c037", null ],
+        [ "thread_handle", "structprocess_1_1state__info.html#ab1796cf3e0dbde7f205ddc77fcf9c074", null ],
+        [ "thread_id", "structprocess_1_1state__info.html#ac10f295add86d82d6fb2806ebd643e2d", null ]
       ] ],
       [ "memory_info", "structprocess_1_1memory__info.html", [
         [ "pagefile_usage", "structprocess_1_1memory__info.html#ad82ffba7bbad1c45c5783a326008bdfe", null ],
@@ -18,7 +21,7 @@ var group___process =
         [ "user_time_ms", "structprocess_1_1time__info.html#a7bb18a8a5556aee85d652152a5e243c5", null ],
         [ "wall_time_ms", "structprocess_1_1time__info.html#a15225d1b9e0bcd24c1512c5c810757c6", null ]
       ] ],
-      [ "native_id_type", "classprocess.html#a20a5f8b9e680fa516dc1ce2bb65f8a53", null ],
+      [ "native_id_type", "classprocess.html#ab91bd774333ce8998d5100bb41be1da8", null ],
       [ "permission", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242", [
         [ "read", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aecae13117d6f0584c25a9da6c8f8415e", null ],
         [ "write", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee", null ],

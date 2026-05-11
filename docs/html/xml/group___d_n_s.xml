@@ -1,0 +1,514 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___d_n_s" kind="group">
+    <compoundname>DNS</compoundname>
+    <title>DNS</title>
+    <innerclass refid="classdns__client" prot="public">dns_client</innerclass>
+    <innerclass refid="structdns__record" prot="public">dns_record</innerclass>
+    <innerclass refid="structdns__query__result" prot="public">dns_query_result</innerclass>
+    <innerclass refid="structdns__header" prot="public">dns_header</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group___d_n_s_1ga973c6b85131920f4de96d7db1206a51b" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <name>dns_opcode</name>
+        <enumvalue id="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba5662080872eece1e1ceeec5750198283" prot="public">
+          <name>QUERY</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>标准查询 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba418263145671bab1c1942979a2f30355" prot="public">
+          <name>IQUERY</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>反向查询 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba5f241c8c8f985b3c51e05d39cf030f4c" prot="public">
+          <name>STATUS</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>服务器状态请求 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba9d087bfb809874e1b3e9adcbae8ca761" prot="public">
+          <name>NOTIFY</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+<para>区域通知 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba15a8022d0ed9cd9c2a2e756822703eb4" prot="public">
+          <name>UPDATE</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+<para>区域更新 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>DNS操作码枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义DNS消息的操作类型，指定查询或响应的目的。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="181" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="181" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___d_n_s_1ga12a6552e04528df27737709ea060c9d1" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+        <name>dns_query</name>
+        <enumvalue id="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1ae43bd933c18b06d29f9c46cce78de0f2" prot="public">
+          <name>INTERNET</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>Internet类 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1a7f903fc95c5f6059a3c0d1b22820dbf7" prot="public">
+          <name>CHAOS</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>CHAOS类 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1a968ced8fabc2a848519f87df57607aee" prot="public">
+          <name>HESIOD</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+<para>HESIOD类 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1a8e1bde3c3d303163521522cf1d62f21f" prot="public">
+          <name>ANY</name>
+          <initializer>= 255</initializer>
+          <briefdescription>
+<para>任何类 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>DNS查询类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义DNS查询的类别，指定查询的协议族或类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="195" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="195" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___d_n_s_1ga4512397ee6460c3c286f1220692348c7" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <name>dns_response</name>
+        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7a71b596df7cfe9f22486d013e022dab21" prot="public">
+          <name>NON_ERROR</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>无错误，查询成功 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7a57779da5393b24165afff75397dd8862" prot="public">
+          <name>FORMAT_ERROR</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>格式错误，服务器无法解析查询 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7af3be33aa3dbdb9c86e55775e9c67ffb5" prot="public">
+          <name>SERVER_FAILURE</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>服务器失败，无法处理查询 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7af8776b19ae67c635b8a9dff25f1fae8d" prot="public">
+          <name>NAME_ERROR</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>名称错误，域名不存在 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7a3e860a081575fc82cc7b6ed2ca602947" prot="public">
+          <name>NOT_IMPLEMENTED</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+<para>未实现，服务器不支持该查询类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7a392253eaea22aafdb199bc238bafc082" prot="public">
+          <name>REFUSED</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+<para>拒绝，服务器拒绝执行查询 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>DNS响应码枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义DNS服务器返回的响应状态码。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="208" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="208" bodyend="215"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>DNS组件 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>本模块提供了 DNS（域名系统）协议的完整客户端实现，支持消息构建、查询发送、 响应解析、缓存管理以及多种记录类型的查询。</para>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下 IETF RFC 规范与相关标准：</para>
+<para><bold>DNS 核心协议规范：</bold><itemizedlist>
+<listitem><para>**IETF STD 13 / RFC 1034**：域名 — 概念与设施 <ulink url="https://www.rfc-editor.org/rfc/rfc1034.html">https://www.rfc-editor.org/rfc/rfc1034.html</ulink></para>
+</listitem><listitem><para>**IETF STD 13 / RFC 1035**：域名 — 实现与规范 <ulink url="https://www.rfc-editor.org/rfc/rfc1035.html">https://www.rfc-editor.org/rfc/rfc1035.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>DNS 扩展与更新：</bold><itemizedlist>
+<listitem><para>**IETF RFC 2181**：DNS 规范的澄清 <ulink url="https://www.rfc-editor.org/rfc/rfc2181.html">https://www.rfc-editor.org/rfc/rfc2181.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 6891**：DNS 扩展机制 (EDNS0) <ulink url="https://www.rfc-editor.org/rfc/rfc6891.html">https://www.rfc-editor.org/rfc/rfc6891.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>DNS 记录类型定义：</bold><itemizedlist>
+<listitem><para>**IANA DNS Parameters Registry**：DNS 参数注册表 <ulink url="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml">https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>DNS 传输协议：</bold><itemizedlist>
+<listitem><para>**IETF RFC 7766**：DNS over TCP 实现要求 <ulink url="https://www.rfc-editor.org/rfc/rfc7766.html">https://www.rfc-editor.org/rfc/rfc7766.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 8484**：DNS over HTTPS (DoH)（参考） <ulink url="https://www.rfc-editor.org/rfc/rfc8484.html">https://www.rfc-editor.org/rfc/rfc8484.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>IPv6 地址记录：</bold><itemizedlist>
+<listitem><para>**IETF RFC 3596**：DNS 对 IPv6 的扩展 (AAAA 记录) <ulink url="https://www.rfc-editor.org/rfc/rfc3596.html">https://www.rfc-editor.org/rfc/rfc3596.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>邮件交换记录：</bold><itemizedlist>
+<listitem><para>**IETF RFC 1035 §3.3.9**：MX 记录定义</para>
+</listitem><listitem><para>**IETF RFC 7505**：空 MX 记录（&quot;.&quot; 表示不接收邮件） <ulink url="https://www.rfc-editor.org/rfc/rfc7505.html">https://www.rfc-editor.org/rfc/rfc7505.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>服务定位记录：</bold><itemizedlist>
+<listitem><para>**IETF RFC 2782**：DNS SRV 记录 <ulink url="https://www.rfc-editor.org/rfc/rfc2782.html">https://www.rfc-editor.org/rfc/rfc2782.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___d_n_s_1dns_message_structure">
+<title>DNS 消息结构</title><para>根据 RFC 1035 §4.1，DNS 消息由以下部分组成：</para>
+<para><table rows="6" cols="3"><row>
+<entry thead="yes"><para>部分  </para>
+</entry><entry thead="yes"><para>大小  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Header  </para>
+</entry><entry thead="no"><para>12 字节  </para>
+</entry><entry thead="no"><para>包含 ID、标志位、各段计数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Question  </para>
+</entry><entry thead="no"><para>可变  </para>
+</entry><entry thead="no"><para>查询的域名、类型、类  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Answer  </para>
+</entry><entry thead="no"><para>可变  </para>
+</entry><entry thead="no"><para>回答的资源记录  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Authority  </para>
+</entry><entry thead="no"><para>可变  </para>
+</entry><entry thead="no"><para>指向权威名称服务器的资源记录  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Additional  </para>
+</entry><entry thead="no"><para>可变  </para>
+</entry><entry thead="no"><para>附加信息记录（如 EDNS0）  </para>
+</entry></row>
+</table>
+</para>
+<para>**头部标志位**（RFC 1035 §4.1.1）： <table rows="9" cols="3"><row>
+<entry thead="yes"><para>位偏移  </para>
+</entry><entry thead="yes"><para>名称  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0  </para>
+</entry><entry thead="no"><para>QR  </para>
+</entry><entry thead="no"><para>0=查询，1=响应  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1-4  </para>
+</entry><entry thead="no"><para>OPCODE  </para>
+</entry><entry thead="no"><para>操作码：0=QUERY, 1=IQUERY, 2=STATUS, 4=NOTIFY, 5=UPDATE  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>5  </para>
+</entry><entry thead="no"><para>AA  </para>
+</entry><entry thead="no"><para>权威回答  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>6  </para>
+</entry><entry thead="no"><para>TC  </para>
+</entry><entry thead="no"><para>截断标志（响应被截断，需使用 TCP 重试）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>7  </para>
+</entry><entry thead="no"><para>RD  </para>
+</entry><entry thead="no"><para>期望递归查询  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>8  </para>
+</entry><entry thead="no"><para>RA  </para>
+</entry><entry thead="no"><para>递归可用  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>9-11  </para>
+</entry><entry thead="no"><para>Z  </para>
+</entry><entry thead="no"><para>保留位（必须为0）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>12-15  </para>
+</entry><entry thead="no"><para>RCODE  </para>
+</entry><entry thead="no"><para>响应码：0=无错误, 1=格式错误, 2=服务器失败, 3=名称错误等  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___d_n_s_1dns_record_types">
+<title>DNS 记录类型</title><para>根据 IANA DNS 参数注册表，本模块支持以下常见记录类型：</para>
+<para><table rows="10" cols="4"><row>
+<entry thead="yes"><para>类型  </para>
+</entry><entry thead="yes"><para>值  </para>
+</entry><entry thead="yes"><para>RFC 引用  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>A  </para>
+</entry><entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>RFC 1035  </para>
+</entry><entry thead="no"><para>主机地址（IPv4）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>NS  </para>
+</entry><entry thead="no"><para>2  </para>
+</entry><entry thead="no"><para>RFC 1035  </para>
+</entry><entry thead="no"><para>权威名称服务器  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>CNAME  </para>
+</entry><entry thead="no"><para>5  </para>
+</entry><entry thead="no"><para>RFC 1035  </para>
+</entry><entry thead="no"><para>规范名称（别名）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SOA  </para>
+</entry><entry thead="no"><para>6  </para>
+</entry><entry thead="no"><para>RFC 1035  </para>
+</entry><entry thead="no"><para>授权区域起始  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>PTR  </para>
+</entry><entry thead="no"><para>12  </para>
+</entry><entry thead="no"><para>RFC 1035  </para>
+</entry><entry thead="no"><para>域名指针（反向查询）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>MX  </para>
+</entry><entry thead="no"><para>15  </para>
+</entry><entry thead="no"><para>RFC 1035  </para>
+</entry><entry thead="no"><para>邮件交换  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>TXT  </para>
+</entry><entry thead="no"><para>16  </para>
+</entry><entry thead="no"><para>RFC 1035  </para>
+</entry><entry thead="no"><para>文本字符串  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>AAAA  </para>
+</entry><entry thead="no"><para>28  </para>
+</entry><entry thead="no"><para>RFC 3596  </para>
+</entry><entry thead="no"><para>IPv6 地址  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SRV  </para>
+</entry><entry thead="no"><para>33  </para>
+</entry><entry thead="no"><para>RFC 2782  </para>
+</entry><entry thead="no"><para>服务定位器  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___d_n_s_1dns_opcodes">
+<title>操作码与响应码</title><para>**操作码（OPCODE）**（RFC 1035 §4.1.1，RFC 1996，RFC 2136）： <table rows="6" cols="3"><row>
+<entry thead="yes"><para>值  </para>
+</entry><entry thead="yes"><para>名称  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0  </para>
+</entry><entry thead="no"><para>QUERY  </para>
+</entry><entry thead="no"><para>标准查询  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>IQUERY  </para>
+</entry><entry thead="no"><para>反向查询（已废弃）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>2  </para>
+</entry><entry thead="no"><para>STATUS  </para>
+</entry><entry thead="no"><para>服务器状态请求  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>4  </para>
+</entry><entry thead="no"><para>NOTIFY  </para>
+</entry><entry thead="no"><para>区域变更通知  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>5  </para>
+</entry><entry thead="no"><para>UPDATE  </para>
+</entry><entry thead="no"><para>动态更新  </para>
+</entry></row>
+</table>
+</para>
+<para>**响应码（RCODE）**（RFC 1035 §4.1.1，RFC 6891 扩展）： <table rows="7" cols="3"><row>
+<entry thead="yes"><para>值  </para>
+</entry><entry thead="yes"><para>名称  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0  </para>
+</entry><entry thead="no"><para>NoError  </para>
+</entry><entry thead="no"><para>无错误  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>FormErr  </para>
+</entry><entry thead="no"><para>格式错误  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>2  </para>
+</entry><entry thead="no"><para>ServFail  </para>
+</entry><entry thead="no"><para>服务器失败  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>3  </para>
+</entry><entry thead="no"><para>NXDomain  </para>
+</entry><entry thead="no"><para>不存在的域名  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>4  </para>
+</entry><entry thead="no"><para>NotImp  </para>
+</entry><entry thead="no"><para>未实现  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>5  </para>
+</entry><entry thead="no"><para>Refused  </para>
+</entry><entry thead="no"><para>拒绝查询  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___d_n_s_1dns_classes">
+<title>查询类（CLASS）</title><para>根据 RFC 1035 §3.2.4： <table rows="5" cols="3"><row>
+<entry thead="yes"><para>值  </para>
+</entry><entry thead="yes"><para>名称  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>IN  </para>
+</entry><entry thead="no"><para>Internet（最常用）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>3  </para>
+</entry><entry thead="no"><para>CH  </para>
+</entry><entry thead="no"><para>CHAOS 类  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>4  </para>
+</entry><entry thead="no"><para>HS  </para>
+</entry><entry thead="no"><para>Hesiod  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>255  </para>
+</entry><entry thead="no"><para>ANY  </para>
+</entry><entry thead="no"><para>任何类（通配）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___d_n_s_1dns_transport">
+<title>DNS 传输协议</title><para>根据 RFC 1035 §4.2 和 RFC 7766：<itemizedlist>
+<listitem><para>**UDP**：默认传输协议，消息大小限制为 512 字节（EDNS0 可扩展）</para>
+</listitem><listitem><para>**TCP**：当响应被截断（TC 标志置位）或消息超过 UDP 限制时自动切换</para>
+</listitem><listitem><para>**本实现**：优先使用 UDP，若响应截断则自动通过 TCP 重试</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___d_n_s_1dns_caching">
+<title>DNS 缓存机制</title><para>根据 RFC 1035 §7.2 的 TTL 规范：<itemizedlist>
+<listitem><para>每条资源记录包含 TTL（生存时间，秒）</para>
+</listitem><listitem><para>缓存条目按记录的 TTL 值过期</para>
+</listitem><listitem><para>本实现支持自定义缓存 TTL 上限（默认 300 秒）</para>
+</listitem><listitem><para>缓存条目在查询前检查有效期，过期后自动刷新</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___d_n_s_1reverse_dns">
+<title>反向 DNS 查询</title><para>根据 RFC 1035 §3.5，PTR 记录用于 IP 地址到域名的映射：<itemizedlist>
+<listitem><para>IPv4 地址转换为特殊域名：<computeroutput>x.x.x.x.in-addr.arpa</computeroutput></para>
+</listitem><listitem><para>例如 IP <computeroutput>8.8.8.8</computeroutput> 查询 <computeroutput>8.8.8.8.in-addr.arpa</computeroutput> 的 PTR 记录</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>DNS 消息使用大端字节序编码，本实现自动处理字节序转换。 对于超过 512 字节的 UDP 响应，建议启用 EDNS0 或依赖 TCP 自动切换机制。</para>
+</simplesect>
+<simplesect kind="warning"><para>缓存 TTL 应根据实际业务需求设置，过长的 TTL 可能导致 IP 变更后无法及时更新。 反向查询（PTR）并非所有 IP 地址都有对应的记录。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml">https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc1034.html">https://www.rfc-editor.org/rfc/rfc1034.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc1035.html">https://www.rfc-editor.org/rfc/rfc1035.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://developers.google.com/speed/public-dns">https://developers.google.com/speed/public-dns</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.cloudflare.com/learning/dns/what-is-dns/">https://www.cloudflare.com/learning/dns/what-is-dns/</ulink></para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

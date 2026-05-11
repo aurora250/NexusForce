@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classstop__token" kind="class" language="C++" prot="public">
+    <compoundname>stop_token</compoundname>
+    <includes refid="stop__token_8hpp" local="no">stop_token.hpp</includes>
+    <innerclass refid="structstop__token_1_1stop__callback__node" prot="private">stop_token::stop_callback_node</innerclass>
+    <innerclass refid="structstop__token_1_1stop__state" prot="private">stop_token::stop_state</innerclass>
+    <innerclass refid="structstop__token_1_1stop__state__reference" prot="private">stop_token::stop_state_reference</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classstop__token_1ad547a4a6d36ed9745bc39837f3040df0" prot="private" static="no" mutable="no">
+        <type>stop_state_reference</type>
+        <definition>stop_state_reference stop_token::state_ref_</definition>
+        <argsstring></argsstring>
+        <name>state_ref_</name>
+        <qualifiedname>stop_token::state_ref_</qualifiedname>
+        <briefdescription>
+<para>停止状态引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="388" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="388" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classstop__token_1a0a26096d0071b0d089255f8f56e42ea1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class stop_source</definition>
+        <argsstring></argsstring>
+        <name>stop_source</name>
+        <qualifiedname>stop_token::stop_source</qualifiedname>
+        <param>
+          <type><ref refid="classstop__source" kindref="compound">stop_source</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="390" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="390" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classstop__token_1a631047dccb86368d9e30f5c2408f9022" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Callback</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class stop_callback</definition>
+        <argsstring></argsstring>
+        <name>stop_callback</name>
+        <qualifiedname>stop_token::stop_callback</qualifiedname>
+        <param>
+          <type><ref refid="classstop__callback" kindref="compound">stop_callback</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="393" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="393" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classstop__token_1a97a842dd04c662fd1348699a7db43d40" prot="private" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>stop_token::stop_token</definition>
+        <argsstring>(stop_state_reference state_ref) noexcept</argsstring>
+        <name>stop_token</name>
+        <qualifiedname>stop_token::stop_token</qualifiedname>
+        <param>
+          <type>stop_state_reference</type>
+          <declname>state_ref</declname>
+        </param>
+        <briefdescription>
+<para>私有构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state_ref</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>停止状态引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="399" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="399" bodyend="400"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classstop__token_1a45e7ef5478527e4dc018c5c2937e7f27" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>stop_token::stop_token</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>stop_token</name>
+        <qualifiedname>stop_token::stop_token</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="403" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classstop__token_1a697e0ffd1d2dffc9cc564584333d2e6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>stop_token::~stop_token</definition>
+        <argsstring>()=default</argsstring>
+        <name>~stop_token</name>
+        <qualifiedname>stop_token::~stop_token</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="404" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classstop__token_1ae83dacd04723dd3b43a4c0d4e13c7a53" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>stop_token::stop_token</definition>
+        <argsstring>(const stop_token &amp;) noexcept=default</argsstring>
+        <name>stop_token</name>
+        <qualifiedname>stop_token::stop_token</qualifiedname>
+        <param>
+          <type>const <ref refid="classstop__token" kindref="compound">stop_token</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="405" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classstop__token_1a9c4c99d80991b9f331d8e28ed22810c1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classstop__token" kindref="compound">stop_token</ref> &amp;</type>
+        <definition>stop_token &amp; stop_token::operator=</definition>
+        <argsstring>(const stop_token &amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>stop_token::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classstop__token" kindref="compound">stop_token</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="406" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classstop__token_1ac96cbcebf0ab36c708023b5e000e7f1f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>stop_token::stop_token</definition>
+        <argsstring>(stop_token &amp;&amp;) noexcept=default</argsstring>
+        <name>stop_token</name>
+        <qualifiedname>stop_token::stop_token</qualifiedname>
+        <param>
+          <type><ref refid="classstop__token" kindref="compound">stop_token</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="407" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classstop__token_1aff6a0baa3ef0438b140f2c8c1aa26744" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classstop__token" kindref="compound">stop_token</ref> &amp;</type>
+        <definition>stop_token &amp; stop_token::operator=</definition>
+        <argsstring>(stop_token &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>stop_token::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classstop__token" kindref="compound">stop_token</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="408" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classstop__token_1aa7d74fb192db473b605fdff275335091" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool stop_token::stop_possible</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>stop_possible</name>
+        <qualifiedname>stop_token::stop_possible</qualifiedname>
+        <briefdescription>
+<para>检查是否可能收到停止请求 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否可能收到停止请求 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="414" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="414" bodyend="416"/>
+        <references refid="classstop__token_1aa7d74fb192db473b605fdff275335091" compoundref="stop__token_8hpp" startline="414" endline="416">stop_possible</references>
+        <referencedby refid="classstop__token_1aa7d74fb192db473b605fdff275335091" compoundref="stop__token_8hpp" startline="414" endline="416">stop_possible</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classstop__token_1acf04fb18670347f68629c3050080eade" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool stop_token::stop_requested</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>stop_requested</name>
+        <qualifiedname>stop_token::stop_requested</qualifiedname>
+        <briefdescription>
+<para>检查是否已收到停止请求 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已收到停止请求 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="422" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="422" bodyend="424"/>
+      </memberdef>
+      <memberdef kind="function" id="classstop__token_1a7e3f7603f421bcb4de2ced918dc38746" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void stop_token::swap</definition>
+        <argsstring>(stop_token &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>stop_token::swap</qualifiedname>
+        <param>
+          <type><ref refid="classstop__token" kindref="compound">stop_token</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个停止令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的停止令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="430" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="430" bodyend="430"/>
+      </memberdef>
+      <memberdef kind="function" id="classstop__token_1a3b09a917812f73534bd0f925e56b7d75" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool stop_token::operator==</definition>
+        <argsstring>(const stop_token &amp;rhs) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>stop_token::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classstop__token" kindref="compound">stop_token</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的停止令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否相等</para>
+</simplesect>
+检查两个停止令牌是否共享同一个停止状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="439" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="439" bodyend="439"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>停止令牌类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>停止令牌用于查询是否收到停止请求，但不具备发起停止请求的能力。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" line="38" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/stop_token.hpp" bodystart="38" bodyend="440"/>
+    <listofallmembers>
+      <member refid="classstop__token_1a9c4c99d80991b9f331d8e28ed22810c1" prot="public" virt="non-virtual"><scope>stop_token</scope><name>operator=</name></member>
+      <member refid="classstop__token_1aff6a0baa3ef0438b140f2c8c1aa26744" prot="public" virt="non-virtual"><scope>stop_token</scope><name>operator=</name></member>
+      <member refid="classstop__token_1a3b09a917812f73534bd0f925e56b7d75" prot="public" virt="non-virtual"><scope>stop_token</scope><name>operator==</name></member>
+      <member refid="classstop__token_1ad547a4a6d36ed9745bc39837f3040df0" prot="private" virt="non-virtual"><scope>stop_token</scope><name>state_ref_</name></member>
+      <member refid="classstop__token_1aa7d74fb192db473b605fdff275335091" prot="public" virt="non-virtual"><scope>stop_token</scope><name>stop_possible</name></member>
+      <member refid="classstop__token_1acf04fb18670347f68629c3050080eade" prot="public" virt="non-virtual"><scope>stop_token</scope><name>stop_requested</name></member>
+      <member refid="classstop__token_1a97a842dd04c662fd1348699a7db43d40" prot="private" virt="non-virtual"><scope>stop_token</scope><name>stop_token</name></member>
+      <member refid="classstop__token_1a45e7ef5478527e4dc018c5c2937e7f27" prot="public" virt="non-virtual"><scope>stop_token</scope><name>stop_token</name></member>
+      <member refid="classstop__token_1ae83dacd04723dd3b43a4c0d4e13c7a53" prot="public" virt="non-virtual"><scope>stop_token</scope><name>stop_token</name></member>
+      <member refid="classstop__token_1ac96cbcebf0ab36c708023b5e000e7f1f" prot="public" virt="non-virtual"><scope>stop_token</scope><name>stop_token</name></member>
+      <member refid="classstop__token_1a7e3f7603f421bcb4de2ced918dc38746" prot="public" virt="non-virtual"><scope>stop_token</scope><name>swap</name></member>
+      <member refid="classstop__token_1a697e0ffd1d2dffc9cc564584333d2e6c" prot="public" virt="non-virtual"><scope>stop_token</scope><name>~stop_token</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

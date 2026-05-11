@@ -3,9 +3,9 @@
 
 /**
  * @file env_value.hpp
- * @brief env配置格式变量
+ * @brief ENV配置格式变量
  *
- * 此文件提供了env配置格式的抽象基类和具体实现类。
+ * 此文件提供了ENV配置格式的抽象基类和具体实现类。
  */
 
 #include "NeForce/core/container/unordered_map.hpp"
@@ -21,7 +21,7 @@ NEFORCE_BEGIN_NAMESPACE__
 
 /**
  * @struct env_exception
- * @brief env格式操作失败
+ * @brief ENV格式操作失败
  */
 struct env_exception final : value_exception {
     explicit env_exception(const char* info = "ENV Operation Failed.", const char* type = static_type,
@@ -39,13 +39,13 @@ struct env_exception final : value_exception {
 
 /**
  * @defgroup ConfigFormat 配置格式操作
- * @brief env配置格式管理
+ * @brief 配置格式管理
  * @{
  */
 
 /**
- * @defgroup EnvConfig env配置
- * @brief env配置格式管理
+ * @defgroup EnvConfig ENV配置
+ * @brief ENV配置格式管理
  * @{
  */
 

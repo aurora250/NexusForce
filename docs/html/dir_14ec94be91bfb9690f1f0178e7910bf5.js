@@ -2,7 +2,6 @@ var dir_14ec94be91bfb9690f1f0178e7910bf5 =
 [
     [ "algorithm.hpp", "algorithm_8hpp.html", null ],
     [ "compare.hpp", "compare_8hpp.html", "compare_8hpp" ],
-    [ "ext_sort.hpp", "ext__sort_8hpp.html", "ext__sort_8hpp" ],
     [ "heap.hpp", "heap_8hpp.html", "heap_8hpp" ],
     [ "iterator.hpp", "iterator_8hpp.html", "iterator_8hpp" ],
     [ "leonardo_heap.hpp", "leonardo__heap_8hpp.html", "leonardo__heap_8hpp" ],

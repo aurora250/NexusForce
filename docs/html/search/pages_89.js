@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📊_20数学库_20math_0',['📊 数学库 (Math)',['../index.html#autotoc_md37',1,'']]]
+  ['💾_20内存管理_20memory_0',['💾 内存管理 (Memory)',['../index.html#autotoc_md32',1,'']]]
 ];

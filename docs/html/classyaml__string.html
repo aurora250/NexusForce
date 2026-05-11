@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: yaml_string类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classyaml__string.html','','classyaml__string-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">yaml_string类 参考<span class="mlabels"><span class="mlabel final">final</span></span><div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___yaml_config.html">YAML配置</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>YAML字符串值类型  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="yaml__value_8hpp_source.html">yaml_value.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 yaml_string 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classyaml__string__inherit__graph.svg" width="171" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a48e128d7b4fcf4d04fb90af96a5c5a9e" id="r_a48e128d7b4fcf4d04fb90af96a5c5a9e"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9e">string_style</a> { <br />
+&#160;&#160;<a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9ea817728238931bce05d10fd01f2a7a114">Plain</a>
+, <a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9ea746710a8be035d20b38c7a9dcff65e90">SingleQuoted</a>
+, <a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9ea87a025534958443263359b4970cf2974">DoubleQuoted</a>
+, <a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9eab1eefd53c9c42936a544c442ad2f9b21">Literal</a>
+, <br />
+&#160;&#160;<a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9ea5f786c37a3e1297211444a8a0957eed2">Folded</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a48e128d7b4fcf4d04fb90af96a5c5a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">字符串标量样式枚举  <a href="#a48e128d7b4fcf4d04fb90af96a5c5a9e">更多...</a><br /></td></tr>
+<tr class="inherit_header pub_types_classyaml__value"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classyaml__value')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 类型 继承自 <a class="el" href="classyaml__value.html">yaml_value</a></td></tr>
+<tr class="memitem:a408d20891c27dc523f9ac6fa971c7633 inherit pub_types_classyaml__value" id="r_a408d20891c27dc523f9ac6fa971c7633"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633">types</a> { <br />
+&#160;&#160;<a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633aa775a43cea16e807d355941f57dbf173">Null</a>
+, <a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633a6be7945e897201a66071024da0900aa0">Boolean</a>
+, <a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633a0a3aafd59dc0cce142285be68230f2e5">Integer</a>
+, <a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633a5db3a045c98baa2946cee0092e2ee286">Float</a>
+, <br />
+&#160;&#160;<a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633a0240ab072a97f74032be8aa1ae913d8a">String</a>
+, <a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633aa02528b3e15dc44e07229369b29eaa2b">Timestamp</a>
+, <a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633a4e91bdc7df808a4e70247c0655588b65">Sequence</a>
+, <a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633a96d3ceb2cf8b297b6589107df8dd88df">Mapping</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a408d20891c27dc523f9ac6fa971c7633"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML值类型枚举  <a href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:aa38cad3052f57267027bdd94ca3b8542" id="r_aa38cad3052f57267027bdd94ca3b8542"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa38cad3052f57267027bdd94ca3b8542">yaml_string</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> v, const <a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9e">string_style</a> s=<a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9ea817728238931bce05d10fd01f2a7a114">Plain</a>) noexcept</td></tr>
+<tr class="memdesc:aa38cad3052f57267027bdd94ca3b8542"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造字符串值  <br /></td></tr>
+<tr class="memitem:ac4a884aaa6ae3d556c52222639a69618" id="r_ac4a884aaa6ae3d556c52222639a69618"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633">types</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac4a884aaa6ae3d556c52222639a69618">type</a> () const noexcept override</td></tr>
+<tr class="memdesc:ac4a884aaa6ae3d556c52222639a69618"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取值的具体类型  <br /></td></tr>
+<tr class="memitem:a19b8d67d6efa68987a7a70004159d365" id="r_a19b8d67d6efa68987a7a70004159d365"><td class="memItemLeft">NEFORCE_NODISCARD const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a19b8d67d6efa68987a7a70004159d365">get_value</a> () const noexcept</td></tr>
+<tr class="memdesc:a19b8d67d6efa68987a7a70004159d365"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取字符串内容  <br /></td></tr>
+<tr class="memitem:aa0ab1204c798735f52e34c9af90dcb5f" id="r_aa0ab1204c798735f52e34c9af90dcb5f"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9e">string_style</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa0ab1204c798735f52e34c9af90dcb5f">get_style</a> () const noexcept</td></tr>
+<tr class="memdesc:aa0ab1204c798735f52e34c9af90dcb5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取标量样式  <br /></td></tr>
+<tr class="inherit_header pub_methods_classyaml__value"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classyaml__value')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="classyaml__value.html">yaml_value</a></td></tr>
+<tr class="memitem:a47d57ba8446097c984e55f07d7fea7aa inherit pub_methods_classyaml__value" id="r_a47d57ba8446097c984e55f07d7fea7aa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="classyaml__value.html#a47d57ba8446097c984e55f07d7fea7aa">set_anchor</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;a)</td></tr>
+<tr class="memdesc:a47d57ba8446097c984e55f07d7fea7aa inherit pub_methods_classyaml__value"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置锚点名  <br /></td></tr>
+<tr class="memitem:a7407556dfb52984c3415db35ee112869 inherit pub_methods_classyaml__value" id="r_a7407556dfb52984c3415db35ee112869"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="classyaml__value.html#a7407556dfb52984c3415db35ee112869">set_tag</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;t)</td></tr>
+<tr class="memdesc:a7407556dfb52984c3415db35ee112869 inherit pub_methods_classyaml__value"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置类型标签  <br /></td></tr>
+<tr class="memitem:afe768ac15954b26002a86197725d3b74 inherit pub_methods_classyaml__value" id="r_afe768ac15954b26002a86197725d3b74"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="classyaml__value.html#afe768ac15954b26002a86197725d3b74">to_string</a> () const</td></tr>
+<tr class="memdesc:afe768ac15954b26002a86197725d3b74 inherit pub_methods_classyaml__value"><td class="mdescLeft">&#160;</td><td class="mdescRight">紧凑单行序列化  <br /></td></tr>
+<tr class="memitem:a0c4328854eb893b5fe471e7fa05c8c32 inherit pub_methods_classyaml__value" id="r_a0c4328854eb893b5fe471e7fa05c8c32"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="classyaml__value.html#a0c4328854eb893b5fe471e7fa05c8c32">to_document</a> () const</td></tr>
+<tr class="memdesc:a0c4328854eb893b5fe471e7fa05c8c32 inherit pub_methods_classyaml__value"><td class="mdescLeft">&#160;</td><td class="mdescRight">格式化文档序列化  <br /></td></tr>
+<tr class="inherit_header pub_methods_structistringify"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structistringify')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structistringify.html">istringify&lt; yaml_value &gt;</a></td></tr>
+<tr class="memitem:aeb53a048cd2b8e99462c2cf0f5c602bc inherit pub_methods_structistringify" id="r_aeb53a048cd2b8e99462c2cf0f5c602bc"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="structistringify.html#aeb53a048cd2b8e99462c2cf0f5c602bc">to_string</a> () const</td></tr>
+<tr class="memdesc:aeb53a048cd2b8e99462c2cf0f5c602bc inherit pub_methods_structistringify"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为字符串  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
+额外继承的成员函数</h2></td></tr>
+<tr class="inherit_header pub_attribs_classyaml__value"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classyaml__value')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 属性 继承自 <a class="el" href="classyaml__value.html">yaml_value</a></td></tr>
+<tr class="memitem:ad86b30a51fa8bab180f21e485637140c inherit pub_attribs_classyaml__value" id="r_ad86b30a51fa8bab180f21e485637140c"><td class="memItemLeft">
+<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><b>anchor</b></td></tr>
+<tr class="memdesc:ad86b30a51fa8bab180f21e485637140c inherit pub_attribs_classyaml__value"><td class="mdescLeft">&#160;</td><td class="mdescRight">锚点名（YAML &amp;anchor 语法），空字符串表示无锚点 <br /></td></tr>
+<tr class="memitem:a0cdc7a438e67a2b66f10c0e7df489f21 inherit pub_attribs_classyaml__value" id="r_a0cdc7a438e67a2b66f10c0e7df489f21"><td class="memItemLeft">
+<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><b>tag</b></td></tr>
+<tr class="memdesc:a0cdc7a438e67a2b66f10c0e7df489f21 inherit pub_attribs_classyaml__value"><td class="mdescLeft">&#160;</td><td class="mdescRight">类型标签（YAML !tag 语法），空字符串表示无标签 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>YAML字符串值类型 </p>
+<p>表示YAML中的字符串值。支持YAML 1.2定义的五种标量样式：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">样式  </th><th class="markdownTableHeadNone">枚举值  </th><th class="markdownTableHeadNone">语法示例  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Plain  </td><td class="markdownTableBodyNone">Plain  </td><td class="markdownTableBodyNone">hello world  </td><td class="markdownTableBodyNone">无引号纯文本  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SingleQuoted  </td><td class="markdownTableBodyNone">SingleQuoted  </td><td class="markdownTableBodyNone">'hello world'  </td><td class="markdownTableBodyNone">单引号，'' 表示字面引号  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DoubleQuoted  </td><td class="markdownTableBodyNone">DoubleQuoted  </td><td class="markdownTableBodyNone">"hello\\nworld"  </td><td class="markdownTableBodyNone">双引号，支持转义序列  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Literal  </td><td class="markdownTableBodyNone">Literal  </td><td class="markdownTableBodyNone">\|\n line1\n line2  </td><td class="markdownTableBodyNone">块字面量，保留换行  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Folded  </td><td class="markdownTableBodyNone">Folded  </td><td class="markdownTableBodyNone">&gt;\n line1\n line2  </td><td class="markdownTableBodyNone">块折叠，换行转空格  </td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="yaml__value_8hpp_source.html">yaml_value.hpp</a> 第 <a class="el" href="yaml__value_8hpp_source.html#l00420">420</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="a48e128d7b4fcf4d04fb90af96a5c5a9e" name="a48e128d7b4fcf4d04fb90af96a5c5a9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48e128d7b4fcf4d04fb90af96a5c5a9e">&#9670;&#160;</a></span>string_style</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9e">yaml_string::string_style</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>字符串标量样式枚举 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a48e128d7b4fcf4d04fb90af96a5c5a9ea817728238931bce05d10fd01f2a7a114" name="a48e128d7b4fcf4d04fb90af96a5c5a9ea817728238931bce05d10fd01f2a7a114"></a>Plain&#160;</td><td class="fielddoc"><p>纯文本样式（无引号） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a48e128d7b4fcf4d04fb90af96a5c5a9ea746710a8be035d20b38c7a9dcff65e90" name="a48e128d7b4fcf4d04fb90af96a5c5a9ea746710a8be035d20b38c7a9dcff65e90"></a>SingleQuoted&#160;</td><td class="fielddoc"><p>单引号样式（'string'） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a48e128d7b4fcf4d04fb90af96a5c5a9ea87a025534958443263359b4970cf2974" name="a48e128d7b4fcf4d04fb90af96a5c5a9ea87a025534958443263359b4970cf2974"></a>DoubleQuoted&#160;</td><td class="fielddoc"><p>双引号样式（"string"，支持转义） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a48e128d7b4fcf4d04fb90af96a5c5a9eab1eefd53c9c42936a544c442ad2f9b21" name="a48e128d7b4fcf4d04fb90af96a5c5a9eab1eefd53c9c42936a544c442ad2f9b21"></a>Literal&#160;</td><td class="fielddoc"><p>块字面量样式（|，保留换行） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a48e128d7b4fcf4d04fb90af96a5c5a9ea5f786c37a3e1297211444a8a0957eed2" name="a48e128d7b4fcf4d04fb90af96a5c5a9ea5f786c37a3e1297211444a8a0957eed2"></a>Folded&#160;</td><td class="fielddoc"><p>块折叠样式（&gt;，换行转空格） </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="yaml__value_8hpp_source.html">yaml_value.hpp</a> 第 <a class="el" href="yaml__value_8hpp_source.html#l00426">426</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="aa38cad3052f57267027bdd94ca3b8542" name="aa38cad3052f57267027bdd94ca3b8542"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa38cad3052f57267027bdd94ca3b8542">&#9670;&#160;</a></span>yaml_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">yaml_string::yaml_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9e">string_style</a></td>          <td class="paramname"><span class="paramname"><em>s</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9ea817728238931bce05d10fd01f2a7a114">Plain</a></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造字符串值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>字符串内容 </td></tr>
+    <tr><td class="paramname">s</td><td>标量样式，默认为纯文本 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__value_8hpp_source.html">yaml_value.hpp</a> 第 <a class="el" href="yaml__value_8hpp_source.html#l00444">444</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="yaml__value_8hpp_source.html#l00427">Plain</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="aa0ab1204c798735f52e34c9af90dcb5f" name="aa0ab1204c798735f52e34c9af90dcb5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0ab1204c798735f52e34c9af90dcb5f">&#9670;&#160;</a></span>get_style()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="#a48e128d7b4fcf4d04fb90af96a5c5a9e">string_style</a> yaml_string::get_style </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取标量样式 </p>
+<dl class="section return"><dt>返回</dt><dd>字符串样式枚举值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__value_8hpp_source.html">yaml_value.hpp</a> 第 <a class="el" href="yaml__value_8hpp_source.html#l00461">461</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a19b8d67d6efa68987a7a70004159d365" name="a19b8d67d6efa68987a7a70004159d365"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19b8d67d6efa68987a7a70004159d365">&#9670;&#160;</a></span>get_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp; yaml_string::get_value </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取字符串内容 </p>
+<dl class="section return"><dt>返回</dt><dd>字符串常量引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="yaml__value_8hpp_source.html">yaml_value.hpp</a> 第 <a class="el" href="yaml__value_8hpp_source.html#l00455">455</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac4a884aaa6ae3d556c52222639a69618" name="ac4a884aaa6ae3d556c52222639a69618"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4a884aaa6ae3d556c52222639a69618">&#9670;&#160;</a></span>type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633">types</a> yaml_string::type </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取值的具体类型 </p>
+<dl class="section return"><dt>返回</dt><dd>类型枚举值 </dd></dl>
+
+<p>实现了 <a class="el" href="classyaml__value.html#a887865d133b23f6d5f8e0f8f322ba10e">yaml_value</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="yaml__value_8hpp_source.html">yaml_value.hpp</a> 第 <a class="el" href="yaml__value_8hpp_source.html#l00448">448</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="yaml__value_8hpp_source.html#l00230">yaml_value::String</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="yaml__value_8hpp_source.html">yaml_value.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classyaml__string.html">yaml_string</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

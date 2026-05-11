@@ -98,6 +98,8 @@ $(function(){initNavTree('group___math_functions.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
+<tr class="memitem:gae024fad97dddef0a805c6966bfa3944b" id="r_gae024fad97dddef0a805c6966bfa3944b"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gae024fad97dddef0a805c6966bfa3944b">safe_decimal_to_uint64</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x) noexcept</td></tr>
+<tr class="memdesc:gae024fad97dddef0a805c6966bfa3944b"><td class="mdescLeft">&#160;</td><td class="mdescRight">将非负 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a" title="扩展精度浮点数类型">decimal_t</a> 安全转换为 uint64_t（避免 &gt;= 2^63 时的 UB）  <br /></td></tr>
 <tr class="memitem:ga55829b9b67398c4682967ec5d5ccfa33" id="r_ga55829b9b67398c4682967ec5d5ccfa33"><td class="memItemLeft">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga55829b9b67398c4682967ec5d5ccfa33">fibonacci</a> (const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> n) noexcept</td></tr>
 <tr class="memdesc:ga55829b9b67398c4682967ec5d5ccfa33"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算斐波那契数  <br /></td></tr>
 <tr class="memitem:ga26007f8cd6027cb5ac19933049de833b" id="r_ga26007f8cd6027cb5ac19933049de833b"><td class="memItemLeft">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga26007f8cd6027cb5ac19933049de833b">leonardo</a> (const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> n) noexcept</td></tr>
@@ -114,12 +116,12 @@ $(function(){initNavTree('group___math_functions.html','',''); });
 <tr class="memitem:ga5d870a03a23071f49bf709e3efb8d0e5" id="r_ga5d870a03a23071f49bf709e3efb8d0e5"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga5d870a03a23071f49bf709e3efb8d0e5 template"><td class="memItemLeft">NEFORCE_CONST_FUNCTION constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga5d870a03a23071f49bf709e3efb8d0e5">sum</a> (const T &amp;x) noexcept</td></tr>
 <tr class="memdesc:ga5d870a03a23071f49bf709e3efb8d0e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">单参数求和  <br /></td></tr>
-<tr class="memitem:ga2a9a984cb6ca03a4db7868754937cf5b" id="r_ga2a9a984cb6ca03a4db7868754937cf5b"><td class="memTemplParams" colspan="2">template&lt;typename First, typename... Rests, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;(sizeof...(Rests) &gt; 0), int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga2a9a984cb6ca03a4db7868754937cf5b template"><td class="memItemLeft">NEFORCE_CONST_FUNCTION constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#ga2a9a984cb6ca03a4db7868754937cf5b">sum</a> (First first, Rests... args)</td></tr>
-<tr class="memdesc:ga2a9a984cb6ca03a4db7868754937cf5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">多参数求和  <br /></td></tr>
-<tr class="memitem:ga7fb267cb84d4d77f442f6e0b943f6120" id="r_ga7fb267cb84d4d77f442f6e0b943f6120"><td class="memTemplParams" colspan="2">template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;(sizeof...(Args) &gt; 0), int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga7fb267cb84d4d77f442f6e0b943f6120 template"><td class="memItemLeft">NEFORCE_CONST_FUNCTION constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#ga7fb267cb84d4d77f442f6e0b943f6120">average</a> (Args... args)</td></tr>
-<tr class="memdesc:ga7fb267cb84d4d77f442f6e0b943f6120"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算平均值  <br /></td></tr>
+<tr class="memitem:ga3c4715923b8f3d77ce1826e960a405dc" id="r_ga3c4715923b8f3d77ce1826e960a405dc"><td class="memTemplParams" colspan="2">template&lt;typename First, typename... Rests, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;(sizeof...(Rests) &gt; 0), int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga3c4715923b8f3d77ce1826e960a405dc template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#ga3c4715923b8f3d77ce1826e960a405dc">sum</a> (First first, Rests... args)</td></tr>
+<tr class="memdesc:ga3c4715923b8f3d77ce1826e960a405dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">多参数求和  <br /></td></tr>
+<tr class="memitem:ga743363ff679412699ab9b01b052cba93" id="r_ga743363ff679412699ab9b01b052cba93"><td class="memTemplParams" colspan="2">template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;(sizeof...(Args) &gt; 0), int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga743363ff679412699ab9b01b052cba93 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#ga743363ff679412699ab9b01b052cba93">average</a> (Args... args)</td></tr>
+<tr class="memdesc:ga743363ff679412699ab9b01b052cba93"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算平均值  <br /></td></tr>
 <tr class="memitem:gaf10f4f48e95d20eaf9968bb3b0be5fae" id="r_gaf10f4f48e95d20eaf9968bb3b0be5fae"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:gaf10f4f48e95d20eaf9968bb3b0be5fae template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 int&#160;</td><td class="memItemRight"><a class="el" href="#gaf10f4f48e95d20eaf9968bb3b0be5fae">sign</a> (const T &amp;value) noexcept</td></tr>
 <tr class="memdesc:gaf10f4f48e95d20eaf9968bb3b0be5fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取数值的符号  <br /></td></tr>
@@ -129,9 +131,9 @@ $(function(){initNavTree('group___math_functions.html','',''); });
 <tr class="memitem:ga769be3a4c0a8bfb669df02028a2900b2" id="r_ga769be3a4c0a8bfb669df02028a2900b2"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga769be3a4c0a8bfb669df02028a2900b2 template"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T&#160;</td><td class="memItemRight"><a class="el" href="#ga769be3a4c0a8bfb669df02028a2900b2">lcm</a> (const T &amp;m, const T &amp;n) noexcept</td></tr>
 <tr class="memdesc:ga769be3a4c0a8bfb669df02028a2900b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算最小公倍数  <br /></td></tr>
-<tr class="memitem:gac2fc02d8beaa56845fd51333276c1ca0" id="r_gac2fc02d8beaa56845fd51333276c1ca0"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gac2fc02d8beaa56845fd51333276c1ca0 template"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga1233851ade7c3f53dc6b9b0ae01cf978">is_floating_point_v</a>&lt; T &gt;, T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac2fc02d8beaa56845fd51333276c1ca0">mod</a> (const T x, const T y)</td></tr>
-<tr class="memdesc:gac2fc02d8beaa56845fd51333276c1ca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">浮点数取模运算  <br /></td></tr>
+<tr class="memitem:ga584831cb7db02edb5d37b30a050b5736" id="r_ga584831cb7db02edb5d37b30a050b5736"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga584831cb7db02edb5d37b30a050b5736 template"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga1233851ade7c3f53dc6b9b0ae01cf978">is_floating_point_v</a>&lt; T &gt;, T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga584831cb7db02edb5d37b30a050b5736">mod</a> (const T x, const T y)</td></tr>
+<tr class="memdesc:ga584831cb7db02edb5d37b30a050b5736"><td class="mdescLeft">&#160;</td><td class="mdescRight">浮点数取模运算  <br /></td></tr>
 <tr class="memitem:ga9ddd9ce58a4bfcad8c97c856569f306c" id="r_ga9ddd9ce58a4bfcad8c97c856569f306c"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga9ddd9ce58a4bfcad8c97c856569f306c template"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 T&#160;</td><td class="memItemRight"><a class="el" href="#ga9ddd9ce58a4bfcad8c97c856569f306c">power</a> (const T &amp;x, <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> n) noexcept</td></tr>
 <tr class="memdesc:ga9ddd9ce58a4bfcad8c97c856569f306c"><td class="mdescLeft">&#160;</td><td class="mdescRight">幂运算  <br /></td></tr>
@@ -139,12 +141,12 @@ $(function(){initNavTree('group___math_functions.html','',''); });
 <tr class="memdesc:gad6437c4092894e2d64564b195c35773e"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算e的n次幂  <br /></td></tr>
 <tr class="memitem:ga5d5d2b89486ad0b478c3b1b45a63f6af" id="r_ga5d5d2b89486ad0b478c3b1b45a63f6af"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga5d5d2b89486ad0b478c3b1b45a63f6af">logarithm_e</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x) noexcept</td></tr>
 <tr class="memdesc:ga5d5d2b89486ad0b478c3b1b45a63f6af"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算自然对数  <br /></td></tr>
-<tr class="memitem:ga56c40549ddda23b1b5299dcd5b571022" id="r_ga56c40549ddda23b1b5299dcd5b571022"><td class="memItemLeft">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga56c40549ddda23b1b5299dcd5b571022">logarithm</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> base)</td></tr>
-<tr class="memdesc:ga56c40549ddda23b1b5299dcd5b571022"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算任意底数的对数  <br /></td></tr>
-<tr class="memitem:ga3cd5674a1320f11bb1fc5f7e4a0859ba" id="r_ga3cd5674a1320f11bb1fc5f7e4a0859ba"><td class="memItemLeft">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga3cd5674a1320f11bb1fc5f7e4a0859ba">logarithm_2</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x)</td></tr>
-<tr class="memdesc:ga3cd5674a1320f11bb1fc5f7e4a0859ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算以2为底的对数  <br /></td></tr>
-<tr class="memitem:ga4f7d110f61188f2d3485f460cae001e7" id="r_ga4f7d110f61188f2d3485f460cae001e7"><td class="memItemLeft">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga4f7d110f61188f2d3485f460cae001e7">logarithm_10</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x)</td></tr>
-<tr class="memdesc:ga4f7d110f61188f2d3485f460cae001e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算以10为底的对数  <br /></td></tr>
+<tr class="memitem:gadf32bc15f8dc7bb17e2467baf3b10fcf" id="r_gadf32bc15f8dc7bb17e2467baf3b10fcf"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gadf32bc15f8dc7bb17e2467baf3b10fcf">logarithm</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> base)</td></tr>
+<tr class="memdesc:gadf32bc15f8dc7bb17e2467baf3b10fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算任意底数的对数  <br /></td></tr>
+<tr class="memitem:gace48fe289aecfcd412d7a89ad7f7d451" id="r_gace48fe289aecfcd412d7a89ad7f7d451"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gace48fe289aecfcd412d7a89ad7f7d451">logarithm_2</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x)</td></tr>
+<tr class="memdesc:gace48fe289aecfcd412d7a89ad7f7d451"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算以2为底的对数  <br /></td></tr>
+<tr class="memitem:ga6631c330e7cd6b205e9d2be8d4c634cc" id="r_ga6631c330e7cd6b205e9d2be8d4c634cc"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga6631c330e7cd6b205e9d2be8d4c634cc">logarithm_10</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x)</td></tr>
+<tr class="memdesc:ga6631c330e7cd6b205e9d2be8d4c634cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算以10为底的对数  <br /></td></tr>
 <tr class="memitem:ga3e1661aadeb32478031c64533ca48b9c" id="r_ga3e1661aadeb32478031c64533ca48b9c"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga3e1661aadeb32478031c64533ca48b9c">square_root</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> precise=<a class="el" href="group___math_constants.html#ga6b2f5fadae8acf971067aaf9edc78c6f">constants::DEFAULT_TOLERANCE</a>) noexcept</td></tr>
 <tr class="memdesc:ga3e1661aadeb32478031c64533ca48b9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算平方根  <br /></td></tr>
 <tr class="memitem:gad8bc333dfd3170bbd6fd1649e43510d5" id="r_gad8bc333dfd3170bbd6fd1649e43510d5"><td class="memItemLeft">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gad8bc333dfd3170bbd6fd1649e43510d5">cube_root</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> precise=<a class="el" href="group___math_constants.html#ga6b2f5fadae8acf971067aaf9edc78c6f">constants::DEFAULT_TOLERANCE</a>) noexcept</td></tr>
@@ -175,12 +177,12 @@ $(function(){initNavTree('group___math_functions.html','',''); });
 <tr class="memdesc:ga1b7b9f4c4d8b78b086a6f81d789e652b"><td class="mdescLeft">&#160;</td><td class="mdescRight">截断  <br /></td></tr>
 <tr class="memitem:ga941de5a90405aca3b46b970f36cd82e2" id="r_ga941de5a90405aca3b46b970f36cd82e2"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga941de5a90405aca3b46b970f36cd82e2">truncate</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x) noexcept</td></tr>
 <tr class="memdesc:ga941de5a90405aca3b46b970f36cd82e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">截断到整数位  <br /></td></tr>
-<tr class="memitem:gaa31ad9d28e62674fb57d10984cd39fdf" id="r_gaa31ad9d28e62674fb57d10984cd39fdf"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool&#160;</td><td class="memItemRight"><a class="el" href="#gaa31ad9d28e62674fb57d10984cd39fdf">around_multiple</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> axis, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> toler=<a class="el" href="group___math_constants.html#ga6b2f5fadae8acf971067aaf9edc78c6f">constants::DEFAULT_TOLERANCE</a>)</td></tr>
-<tr class="memdesc:gaa31ad9d28e62674fb57d10984cd39fdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否接近某个倍数值  <br /></td></tr>
-<tr class="memitem:ga6a8c4eee1c229c51abbe69ed0074c3cb" id="r_ga6a8c4eee1c229c51abbe69ed0074c3cb"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga6a8c4eee1c229c51abbe69ed0074c3cb">around_pi</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> toler=<a class="el" href="group___math_constants.html#ga2036acdefc1770536397367e313b3f8e">constants::LOOSE_TOLERANCE</a>)</td></tr>
-<tr class="memdesc:ga6a8c4eee1c229c51abbe69ed0074c3cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否接近π的整数倍  <br /></td></tr>
-<tr class="memitem:ga43da75fd1782a9408ebf8a8295e4dd75" id="r_ga43da75fd1782a9408ebf8a8295e4dd75"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga43da75fd1782a9408ebf8a8295e4dd75">around_zero</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> toler=<a class="el" href="group___math_constants.html#ga2036acdefc1770536397367e313b3f8e">constants::LOOSE_TOLERANCE</a>) noexcept</td></tr>
-<tr class="memdesc:ga43da75fd1782a9408ebf8a8295e4dd75"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否接近零  <br /></td></tr>
+<tr class="memitem:ga7525db58acda774a68cf13ac9ac95314" id="r_ga7525db58acda774a68cf13ac9ac95314"><td class="memItemLeft">NEFORCE_CONSTEXPR14 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga7525db58acda774a68cf13ac9ac95314">around_multiple</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> axis, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> toler=<a class="el" href="group___math_constants.html#ga6b2f5fadae8acf971067aaf9edc78c6f">constants::DEFAULT_TOLERANCE</a>)</td></tr>
+<tr class="memdesc:ga7525db58acda774a68cf13ac9ac95314"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否接近某个倍数值  <br /></td></tr>
+<tr class="memitem:gab6c2f0feca645599aa61301b20d66772" id="r_gab6c2f0feca645599aa61301b20d66772"><td class="memItemLeft">NEFORCE_CONSTEXPR14 bool&#160;</td><td class="memItemRight"><a class="el" href="#gab6c2f0feca645599aa61301b20d66772">around_pi</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> toler=<a class="el" href="group___math_constants.html#ga2036acdefc1770536397367e313b3f8e">constants::LOOSE_TOLERANCE</a>)</td></tr>
+<tr class="memdesc:gab6c2f0feca645599aa61301b20d66772"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否接近π的整数倍  <br /></td></tr>
+<tr class="memitem:gaf313321f06cd95a726535eb9ba171e51" id="r_gaf313321f06cd95a726535eb9ba171e51"><td class="memItemLeft">NEFORCE_CONSTEXPR14 bool&#160;</td><td class="memItemRight"><a class="el" href="#gaf313321f06cd95a726535eb9ba171e51">around_zero</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> toler=<a class="el" href="group___math_constants.html#ga2036acdefc1770536397367e313b3f8e">constants::LOOSE_TOLERANCE</a>) noexcept</td></tr>
+<tr class="memdesc:gaf313321f06cd95a726535eb9ba171e51"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否接近零  <br /></td></tr>
 <tr class="memitem:gabc4025ee1596355ee63d616923292504" id="r_gabc4025ee1596355ee63d616923292504"><td class="memItemLeft">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gabc4025ee1596355ee63d616923292504">remainder</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x, const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> y) noexcept</td></tr>
 <tr class="memdesc:gabc4025ee1596355ee63d616923292504"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算余数  <br /></td></tr>
 <tr class="memitem:ga1cc3e49b9f10e69c056e4761ad721d8e" id="r_ga1cc3e49b9f10e69c056e4761ad721d8e"><td class="memItemLeft">NEFORCE_CONST_FUNCTION constexpr <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga1cc3e49b9f10e69c056e4761ad721d8e">float_part</a> (const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> x) noexcept</td></tr>
@@ -317,9 +319,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>绝对值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00221">221</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00234">234</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l01032">arccosine()</a>, <a class="el" href="math_8hpp_source.html#l01011">arcsine()</a>, <a class="el" href="math_8hpp_source.html#l00966">arctangent()</a>, <a class="el" href="math_8hpp_source.html#l00718">around_multiple()</a>, <a class="el" href="math_8hpp_source.html#l00745">around_zero()</a>, <a class="el" href="math_8hpp_source.html#l00519">cube_root()</a>, <a class="el" href="math_8hpp_source.html#l00301">gcd()</a>, <a class="el" href="math_8hpp_source.html#l00405">logarithm_e()</a>, <a class="el" href="math_8hpp_source.html#l00611">round()</a>, <a class="el" href="math_8hpp_source.html#l00487">square_root()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00693">truncate()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l01083">arccosine()</a>, <a class="el" href="math_8hpp_source.html#l01062">arcsine()</a>, <a class="el" href="math_8hpp_source.html#l01017">arctangent()</a>, <a class="el" href="math_8hpp_source.html#l00771">around_multiple()</a>, <a class="el" href="math_8hpp_source.html#l00796">around_zero()</a>, <a class="el" href="math_8hpp_source.html#l00620">ceil()</a>, <a class="el" href="math_8hpp_source.html#l00532">cube_root()</a>, <a class="el" href="math_8hpp_source.html#l00574">floor()</a>, <a class="el" href="math_8hpp_source.html#l00314">gcd()</a>, <a class="el" href="math_8hpp_source.html#l00418">logarithm_e()</a>, <a class="el" href="math_8hpp_source.html#l00662">round()</a>, <a class="el" href="math_8hpp_source.html#l00500">square_root()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00746">truncate()</a>.</p>
 
 </div>
 </div>
@@ -363,7 +365,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>对应的弧度值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00197">197</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00210">210</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00927">is_arithmetic_v</a>.</p>
 
@@ -401,9 +403,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>arccos(x)（弧度值，范围[0, π]） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l01032">1032</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l01083">1083</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a>, <a class="el" href="math_8hpp_source.html#l01011">arcsine()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>, <a class="el" href="math_8hpp_source.html#l01062">arcsine()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
 
 </div>
 </div>
@@ -439,11 +441,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>arcsin(x)（弧度值，范围[-π/2, π/2]） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l01011">1011</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l01062">1062</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a>, <a class="el" href="math_8hpp_source.html#l00966">arctangent()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a>, <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00487">square_root()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>, <a class="el" href="math_8hpp_source.html#l01017">arctangent()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a>, <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00500">square_root()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l01032">arccosine()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l01083">arccosine()</a>.</p>
 
 </div>
 </div>
@@ -480,22 +482,22 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>arctan(x)（弧度值，范围(-π/2, π/2)）</dd></dl>
 <p>当|x|&gt;1时，利用恒等式 arctan(x) = π/2 - arctan(1/x)。 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00966">966</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l01017">1017</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00487">square_root()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00500">square_root()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l01011">arcsine()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l01062">arcsine()</a>.</p>
 
 </div>
 </div>
-<a id="gaa31ad9d28e62674fb57d10984cd39fdf" name="gaa31ad9d28e62674fb57d10984cd39fdf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa31ad9d28e62674fb57d10984cd39fdf">&#9670;&#160;</a></span>around_multiple()</h2>
+<a id="ga7525db58acda774a68cf13ac9ac95314" name="ga7525db58acda774a68cf13ac9ac95314"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7525db58acda774a68cf13ac9ac95314">&#9670;&#160;</a></span>around_multiple()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_multiple </td>
+          <td class="memname">NEFORCE_CONSTEXPR14 bool around_multiple </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
         </tr>
@@ -529,22 +531,22 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00718">718</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00771">771</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00611">round()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00662">round()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00733">around_pi()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00786">around_pi()</a>.</p>
 
 </div>
 </div>
-<a id="ga6a8c4eee1c229c51abbe69ed0074c3cb" name="ga6a8c4eee1c229c51abbe69ed0074c3cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6a8c4eee1c229c51abbe69ed0074c3cb">&#9670;&#160;</a></span>around_pi()</h2>
+<a id="gab6c2f0feca645599aa61301b20d66772" name="gab6c2f0feca645599aa61301b20d66772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab6c2f0feca645599aa61301b20d66772">&#9670;&#160;</a></span>around_pi()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_pi </td>
+          <td class="memname">NEFORCE_CONSTEXPR14 bool around_pi </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
         </tr>
@@ -566,14 +568,14 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果x接近π的整数倍则返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00733">733</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00786">786</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00718">around_multiple()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00771">around_multiple()</a>.</p>
 
 </div>
 </div>
-<a id="ga43da75fd1782a9408ebf8a8295e4dd75" name="ga43da75fd1782a9408ebf8a8295e4dd75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga43da75fd1782a9408ebf8a8295e4dd75">&#9670;&#160;</a></span>around_zero()</h2>
+<a id="gaf313321f06cd95a726535eb9ba171e51" name="gaf313321f06cd95a726535eb9ba171e51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf313321f06cd95a726535eb9ba171e51">&#9670;&#160;</a></span>around_zero()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -582,7 +584,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool around_zero </td>
+          <td class="memname">NEFORCE_CONSTEXPR14 bool around_zero </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
         </tr>
@@ -609,16 +611,16 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果|x| &lt; toler则返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00745">745</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00796">796</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00914">tangent()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00965">tangent()</a>.</p>
 
 </div>
 </div>
-<a id="ga7fb267cb84d4d77f442f6e0b943f6120" name="ga7fb267cb84d4d77f442f6e0b943f6120"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7fb267cb84d4d77f442f6e0b943f6120">&#9670;&#160;</a></span>average()</h2>
+<a id="ga743363ff679412699ab9b01b052cba93" name="ga743363ff679412699ab9b01b052cba93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga743363ff679412699ab9b01b052cba93">&#9670;&#160;</a></span>average()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -629,7 +631,7 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONST_FUNCTION constexpr decltype(auto) average </td>
+          <td class="memname">decltype(auto) average </td>
           <td>(</td>
           <td class="paramtype">Args...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
           <td></td>
@@ -657,9 +659,9 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>平均值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00270">270</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00283">283</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00246">sum()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00259">sum()</a>.</p>
 
 </div>
 </div>
@@ -695,11 +697,11 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>向上取整后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00586">586</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00620">620</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="numeric__types_8hpp_source.html#l00102">is_finite()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00102">is_finite()</a>, <a class="el" href="numeric__traits_8hpp_source.html#l00153">numeric_traits&lt; T, Dummy &gt;::max()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00161">safe_decimal_to_uint64()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00601">ceil()</a>, <a class="el" href="math_8hpp_source.html#l00650">ceil_bit()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00197">atomic_futex&lt; WaiterBit &gt;::load_when_equal_for()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00215">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until()</a>, <a class="el" href="hashtable_8hpp_source.html#l01026">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash()</a>, <a class="el" href="hashtable_8hpp_source.html#l01066">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve()</a>, <a class="el" href="math_8hpp_source.html#l00693">truncate()</a>, <a class="el" href="condition__variable_8hpp_source.html#l00304">condition_variable::wait_for()</a>, <a class="el" href="condition__variable_8hpp_source.html#l00320">condition_variable::wait_for()</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00260">condition_variable::wait_until()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00652">ceil()</a>, <a class="el" href="math_8hpp_source.html#l00703">ceil_bit()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00197">atomic_futex&lt; WaiterBit &gt;::load_when_equal_for()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00215">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until()</a>, <a class="el" href="hashtable_8hpp_source.html#l01092">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash()</a>, <a class="el" href="hashtable_8hpp_source.html#l01132">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve()</a>, <a class="el" href="math_8hpp_source.html#l00746">truncate()</a>, <a class="el" href="condition__variable_8hpp_source.html#l00302">condition_variable::wait_for()</a>, <a class="el" href="condition__variable_8hpp_source.html#l00318">condition_variable::wait_for()</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00258">condition_variable::wait_until()</a>.</p>
 
 </div>
 </div>
@@ -740,9 +742,9 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>向上取整后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00601">601</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00652">652</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00586">ceil()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00372">power()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00620">ceil()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00385">power()</a>.</p>
 
 </div>
 </div>
@@ -783,11 +785,11 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>向上舍入后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00650">650</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00703">703</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00586">ceil()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00372">power()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00620">ceil()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00385">power()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00661">round_bit()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00671">truncate_bit()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00714">round_bit()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00724">truncate_bit()</a>.</p>
 
 </div>
 </div>
@@ -824,7 +826,7 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 <dl class="section return"><dt>返回</dt><dd>cos(x)</dd></dl>
 <p>利用恒等式 cos(x) = sin(π/2 - x) 计算。 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00886">886</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00937">937</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
 
@@ -860,9 +862,9 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00957">957</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l01008">1008</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00914">tangent()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00965">tangent()</a>.</p>
 
 </div>
 </div>
@@ -904,9 +906,9 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 <dl class="section return"><dt>返回</dt><dd>³√x</dd></dl>
 <p>使用牛顿迭代法计算。 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00519">519</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00532">532</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00141">prev()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00141">prev()</a>.</p>
 
 </div>
 </div>
@@ -942,9 +944,9 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>e^n </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00394">394</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00407">407</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00372">power()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00385">power()</a>.</p>
 
 </div>
 </div>
@@ -980,7 +982,7 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>n! </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00548">548</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00561">561</a> 行定义.</p>
 
 </div>
 </div>
@@ -1017,9 +1019,9 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 <dl class="section return"><dt>返回</dt><dd>第n个斐波那契数</dd></dl>
 <p>如果n小于预计算的数量，直接返回预计算结果； 否则递归计算。 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00165">165</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00178">178</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00186">leonardo()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00199">leonardo()</a>.</p>
 
 </div>
 </div>
@@ -1061,7 +1063,7 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 <dl class="section return"><dt>返回</dt><dd>小数部分</dd></dl>
 <p>将x的整数部分存入int_ptr，返回小数部分。 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00782">782</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00833">833</a> 行定义.</p>
 
 </div>
 </div>
@@ -1097,7 +1099,7 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>x的小数部分 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00770">770</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00821">821</a> 行定义.</p>
 
 </div>
 </div>
@@ -1133,11 +1135,11 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>向下取整后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00561">561</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00574">574</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="numeric__types_8hpp_source.html#l00102">is_finite()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00102">is_finite()</a>, <a class="el" href="numeric__traits_8hpp_source.html#l00153">numeric_traits&lt; T, Dummy &gt;::max()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00161">safe_decimal_to_uint64()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00315">bit_ceil()</a>, <a class="el" href="math_8hpp_source.html#l00576">floor()</a>, <a class="el" href="math_8hpp_source.html#l00639">floor_bit()</a>, <a class="el" href="math_8hpp_source.html#l00611">round()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00693">truncate()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bit_8hpp_source.html#l00307">bit_ceil()</a>, <a class="el" href="math_8hpp_source.html#l00605">floor()</a>, <a class="el" href="math_8hpp_source.html#l00692">floor_bit()</a>, <a class="el" href="math_8hpp_source.html#l00662">round()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00746">truncate()</a>.</p>
 
 </div>
 </div>
@@ -1178,9 +1180,9 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>向下取整后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00576">576</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00605">605</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00561">floor()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00372">power()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00574">floor()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00385">power()</a>.</p>
 
 </div>
 </div>
@@ -1221,11 +1223,11 @@ template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.
 </dl>
 <dl class="section return"><dt>返回</dt><dd>向下舍入后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00639">639</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00692">692</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00561">floor()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00372">power()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00574">floor()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00385">power()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00661">round_bit()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00671">truncate_bit()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00714">round_bit()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00724">truncate_bit()</a>.</p>
 
 </div>
 </div>
@@ -1274,11 +1276,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>最大公约数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00301">301</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00314">314</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00320">lcm()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00333">lcm()</a>.</p>
 
 </div>
 </div>
@@ -1327,9 +1329,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>最小公倍数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00320">320</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00333">333</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00301">gcd()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00314">gcd()</a>.</p>
 
 </div>
 </div>
@@ -1366,22 +1368,22 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>第n个莱昂纳多数</dd></dl>
 <p>莱昂纳多数：L(n) = 2 * F(n+1) - 1 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00186">186</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00199">199</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00165">fibonacci()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00178">fibonacci()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="leonardo__heap_8hpp_source.html#l00128">adjust_leonardo_heap()</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00232">pop_leonardo_heap()</a> , 以及 <a class="el" href="leonardo__heap_8hpp_source.html#l00274">sort_leonardo_heap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="leonardo__heap_8hpp_source.html#l00128">adjust_leonardo_heap()</a>, <a class="el" href="leonardo__heap_8hpp_source.html#l00236">pop_leonardo_heap()</a> , 以及 <a class="el" href="leonardo__heap_8hpp_source.html#l00278">sort_leonardo_heap()</a>.</p>
 
 </div>
 </div>
-<a id="ga56c40549ddda23b1b5299dcd5b571022" name="ga56c40549ddda23b1b5299dcd5b571022"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga56c40549ddda23b1b5299dcd5b571022">&#9670;&#160;</a></span>logarithm()</h2>
+<a id="gadf32bc15f8dc7bb17e2467baf3b10fcf" name="gadf32bc15f8dc7bb17e2467baf3b10fcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadf32bc15f8dc7bb17e2467baf3b10fcf">&#9670;&#160;</a></span>logarithm()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> logarithm </td>
+          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> logarithm </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
         </tr>
@@ -1403,22 +1405,22 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>以base为底x的对数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00456">456</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00469">469</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00405">logarithm_e()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00418">logarithm_e()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00476">logarithm_10()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00469">logarithm_2()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00489">logarithm_10()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00482">logarithm_2()</a>.</p>
 
 </div>
 </div>
-<a id="ga4f7d110f61188f2d3485f460cae001e7" name="ga4f7d110f61188f2d3485f460cae001e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4f7d110f61188f2d3485f460cae001e7">&#9670;&#160;</a></span>logarithm_10()</h2>
+<a id="ga6631c330e7cd6b205e9d2be8d4c634cc" name="ga6631c330e7cd6b205e9d2be8d4c634cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6631c330e7cd6b205e9d2be8d4c634cc">&#9670;&#160;</a></span>logarithm_10()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> logarithm_10 </td>
+          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> logarithm_10 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
           <td></td>
@@ -1435,20 +1437,20 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>log₁₀(x) </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00476">476</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00489">489</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00456">logarithm()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00469">logarithm()</a>.</p>
 
 </div>
 </div>
-<a id="ga3cd5674a1320f11bb1fc5f7e4a0859ba" name="ga3cd5674a1320f11bb1fc5f7e4a0859ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3cd5674a1320f11bb1fc5f7e4a0859ba">&#9670;&#160;</a></span>logarithm_2()</h2>
+<a id="gace48fe289aecfcd412d7a89ad7f7d451" name="gace48fe289aecfcd412d7a89ad7f7d451"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gace48fe289aecfcd412d7a89ad7f7d451">&#9670;&#160;</a></span>logarithm_2()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> logarithm_2 </td>
+          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a> logarithm_2 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
           <td></td>
@@ -1465,9 +1467,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>log₂(x) </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00469">469</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00482">482</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00456">logarithm()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00469">logarithm()</a>.</p>
 
 </div>
 </div>
@@ -1504,16 +1506,16 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>ln(x)</dd></dl>
 <p>使用反正切泰勒展开计算。 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00405">405</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00418">418</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a>, <a class="el" href="numeric__traits_8hpp_source.html#l00183">numeric_traits&lt; T, Dummy &gt;::infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>, <a class="el" href="numeric__traits_8hpp_source.html#l00183">numeric_traits&lt; T, Dummy &gt;::infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bloom__filter_8hpp_source.html#l00314">bloom_filter&lt; T, Hash &gt;::approximate_count()</a>, <a class="el" href="bloom__filter_8hpp_source.html#l00279">bloom_filter&lt; T, Hash &gt;::capacity()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00456">logarithm()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bloom__filter_8hpp_source.html#l00320">bloom_filter&lt; T, Hash &gt;::approximate_count()</a>, <a class="el" href="bloom__filter_8hpp_source.html#l00285">bloom_filter&lt; T, Hash &gt;::capacity()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00469">logarithm()</a>.</p>
 
 </div>
 </div>
-<a id="gac2fc02d8beaa56845fd51333276c1ca0" name="gac2fc02d8beaa56845fd51333276c1ca0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac2fc02d8beaa56845fd51333276c1ca0">&#9670;&#160;</a></span>mod()</h2>
+<a id="ga584831cb7db02edb5d37b30a050b5736" name="ga584831cb7db02edb5d37b30a050b5736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga584831cb7db02edb5d37b30a050b5736">&#9670;&#160;</a></span>mod()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1521,7 +1523,7 @@ template&lt;typename T&gt; </div>
 template&lt;typename T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga1233851ade7c3f53dc6b9b0ae01cf978">is_floating_point_v</a>&lt; T &gt;, T &gt; mod </td>
+          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga1233851ade7c3f53dc6b9b0ae01cf978">is_floating_point_v</a>&lt; T &gt;, T &gt; mod </td>
           <td>(</td>
           <td class="paramtype">const T</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
         </tr>
@@ -1555,11 +1557,11 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00333">333</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00346">346</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ipackage_8hpp_source.html#l00188">ipackage&lt; integer8, int8_t &gt;::operator%=()</a>, <a class="el" href="memory__order_8hpp_source.html#l00186">operator&amp;()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00174">operator|()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ipackage_8hpp_source.html#l00188">ipackage&lt; integer8, int8_t &gt;::operator%=()</a>, <a class="el" href="memory__order_8hpp_source.html#l00232">operator&amp;()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00220">operator|()</a>.</p>
 
 </div>
 </div>
@@ -1609,11 +1611,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>x的n次幂</dd></dl>
 <p>使用快速幂算法实现。 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00372">372</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00385">385</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00927">is_arithmetic_v</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00601">ceil()</a>, <a class="el" href="math_8hpp_source.html#l00650">ceil_bit()</a>, <a class="el" href="math_8hpp_source.html#l00394">exponential()</a>, <a class="el" href="bloom__filter_8hpp_source.html#l00331">bloom_filter&lt; T, Hash &gt;::false_positive_rate()</a>, <a class="el" href="math_8hpp_source.html#l00576">floor()</a>, <a class="el" href="math_8hpp_source.html#l00639">floor_bit()</a>, <a class="el" href="math_8hpp_source.html#l00682">round()</a>, <a class="el" href="math_8hpp_source.html#l00661">round_bit()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00693">truncate()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00652">ceil()</a>, <a class="el" href="math_8hpp_source.html#l00703">ceil_bit()</a>, <a class="el" href="math_8hpp_source.html#l00407">exponential()</a>, <a class="el" href="bloom__filter_8hpp_source.html#l00337">bloom_filter&lt; T, Hash &gt;::false_positive_rate()</a>, <a class="el" href="math_8hpp_source.html#l00605">floor()</a>, <a class="el" href="math_8hpp_source.html#l00692">floor_bit()</a>, <a class="el" href="math_8hpp_source.html#l00735">round()</a>, <a class="el" href="math_8hpp_source.html#l00714">round_bit()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00746">truncate()</a>.</p>
 
 </div>
 </div>
@@ -1657,7 +1659,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>对应的角度值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00209">209</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00222">222</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00927">is_arithmetic_v</a>.</p>
 
@@ -1701,9 +1703,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>x除以y的余数</dd></dl>
 <p>使用对称舍入规则 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00758">758</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00809">809</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a>, <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00611">round()</a>.</p>
+<p class="reference">引用了 <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a>, <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00662">round()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00149">_udiv128()</a> , 以及 <a class="el" href="structuint128__t.html#aed23e948c74e06bda0c6454e82dfeec5">uint128_t::div64()</a>.</p>
 
 </div>
 </div>
@@ -1739,11 +1743,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>四舍五入后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00611">611</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00662">662</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a>, <a class="el" href="math_8hpp_source.html#l00561">floor()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00102">is_finite()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>, <a class="el" href="math_8hpp_source.html#l00574">floor()</a> , 以及 <a class="el" href="numeric__types_8hpp_source.html#l00102">is_finite()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00718">around_multiple()</a>, <a class="el" href="color_8hpp_source.html#l00557">color::blend()</a>, <a class="el" href="color_8hpp_source.html#l00761">color::from_premultiplied()</a>, <a class="el" href="color_8hpp_source.html#l00470">color::operator*()</a>, <a class="el" href="color_8hpp_source.html#l00515">color::operator*=()</a>, <a class="el" href="math_8hpp_source.html#l00758">remainder()</a>, <a class="el" href="math_8hpp_source.html#l00682">round()</a>, <a class="el" href="color_8hpp_source.html#l00423">color::set_opacity()</a> , 以及 <a class="el" href="color_8hpp_source.html#l00750">color::to_premultiplied()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00771">around_multiple()</a>, <a class="el" href="color_8hpp_source.html#l00583">color::blend()</a>, <a class="el" href="color_8hpp_source.html#l00771">color::from_premultiplied()</a>, <a class="el" href="color_8hpp_source.html#l00496">color::operator*()</a>, <a class="el" href="color_8hpp_source.html#l00541">color::operator*=()</a>, <a class="el" href="math_8hpp_source.html#l00809">remainder()</a>, <a class="el" href="math_8hpp_source.html#l00735">round()</a>, <a class="el" href="color_8hpp_source.html#l00449">color::set_opacity()</a> , 以及 <a class="el" href="color_8hpp_source.html#l00760">color::to_premultiplied()</a>.</p>
 
 </div>
 </div>
@@ -1784,9 +1788,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>四舍五入后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00682">682</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00735">735</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00372">power()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00611">round()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00385">power()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00662">round()</a>.</p>
 
 </div>
 </div>
@@ -1827,9 +1831,41 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>四舍五入后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00661">661</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00714">714</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00650">ceil_bit()</a>, <a class="el" href="math_8hpp_source.html#l00639">floor_bit()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00372">power()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00703">ceil_bit()</a>, <a class="el" href="math_8hpp_source.html#l00692">floor_bit()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00385">power()</a>.</p>
+
+</div>
+</div>
+<a id="gae024fad97dddef0a805c6966bfa3944b" name="gae024fad97dddef0a805c6966bfa3944b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae024fad97dddef0a805c6966bfa3944b">&#9670;&#160;</a></span>safe_decimal_to_uint64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> safe_decimal_to_uint64 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a">decimal_t</a></td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将非负 <a class="el" href="group___core_types.html#ga3e85271b70b4968c07a1ed54e119182a" title="扩展精度浮点数类型">decimal_t</a> 安全转换为 uint64_t（避免 &gt;= 2^63 时的 UB） </p>
+<dl class="section return"><dt>返回</dt><dd>对应的 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca" title="64位无符号整数类型">uint64_t</a> 值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00161">161</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00620">ceil()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00574">floor()</a>.</p>
 
 </div>
 </div>
@@ -1873,11 +1909,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>符号值：正数返回1，负数返回-1，零返回0 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00281">281</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00294">294</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l00927">is_arithmetic_v</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l01232">datetime::parse_RFC3339()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l01167">datetime::to_offset_string()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="datetime_8hpp_source.html#l01233">datetime::parse_RFC3339()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l01167">datetime::to_offset_string()</a>.</p>
 
 </div>
 </div>
@@ -1914,7 +1950,7 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>sin(x)</dd></dl>
 <p>使用泰勒展开计算，先进行周期性处理。 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00856">856</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00907">907</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
 
@@ -1958,11 +1994,11 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>√x</dd></dl>
 <p>使用牛顿迭代法计算。 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00487">487</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00500">500</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a>, <a class="el" href="iterator_8hpp_source.html#l00141">prev()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a>, <a class="el" href="iterator_8hpp_source.html#l00141">prev()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l01011">arcsine()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00966">arctangent()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l01062">arcsine()</a> , 以及 <a class="el" href="math_8hpp_source.html#l01017">arctangent()</a>.</p>
 
 </div>
 </div>
@@ -2007,14 +2043,14 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>参数本身</dd></dl>
 <p>递归sum的终止位置 </p>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00246">246</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00259">259</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00270">average()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00259">sum()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00283">average()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00272">sum()</a>.</p>
 
 </div>
 </div>
-<a id="ga2a9a984cb6ca03a4db7868754937cf5b" name="ga2a9a984cb6ca03a4db7868754937cf5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2a9a984cb6ca03a4db7868754937cf5b">&#9670;&#160;</a></span>sum() <span class="overload">[2/2]</span></h2>
+<a id="ga3c4715923b8f3d77ce1826e960a405dc" name="ga3c4715923b8f3d77ce1826e960a405dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3c4715923b8f3d77ce1826e960a405dc">&#9670;&#160;</a></span>sum() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2025,7 +2061,7 @@ template&lt;typename First, typename... Rests, <a class="el" href="group___type_
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONST_FUNCTION constexpr decltype(auto) sum </td>
+          <td class="memname">decltype(auto) sum </td>
           <td>(</td>
           <td class="paramtype">First</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
         </tr>
@@ -2059,9 +2095,9 @@ template&lt;typename First, typename... Rests, <a class="el" href="group___type_
 </dl>
 <dl class="section return"><dt>返回</dt><dd>所有参数的和 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00259">259</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00272">272</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00246">sum()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00259">sum()</a>.</p>
 
 </div>
 </div>
@@ -2103,11 +2139,11 @@ template&lt;typename First, typename... Rests, <a class="el" href="group___type_
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00914">914</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00965">965</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00745">around_zero()</a>, <a class="el" href="numeric__traits_8hpp_source.html#l00183">numeric_traits&lt; T, Dummy &gt;::infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00796">around_zero()</a>, <a class="el" href="numeric__traits_8hpp_source.html#l00183">numeric_traits&lt; T, Dummy &gt;::infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00089">is_infinity()</a>, <a class="el" href="numeric__types_8hpp_source.html#l00052">is_nan()</a> , 以及 <a class="el" href="numeric__traits_8hpp_source.html#l00193">numeric_traits&lt; T, Dummy &gt;::quiet_nan()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l00957">cotangent()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="math_8hpp_source.html#l01008">cotangent()</a>.</p>
 
 </div>
 </div>
@@ -2143,7 +2179,7 @@ template&lt;typename First, typename... Rests, <a class="el" href="group___type_
 </dl>
 <dl class="section return"><dt>返回</dt><dd>截断后的整数值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00703">703</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00756">756</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="numeric__types_8hpp_source.html#l00102">is_finite()</a>.</p>
 
@@ -2186,9 +2222,9 @@ template&lt;typename First, typename... Rests, <a class="el" href="group___type_
 </dl>
 <dl class="section return"><dt>返回</dt><dd>截断后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00693">693</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00746">746</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00221">absolute()</a>, <a class="el" href="math_8hpp_source.html#l00586">ceil()</a>, <a class="el" href="math_8hpp_source.html#l00561">floor()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00372">power()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00234">absolute()</a>, <a class="el" href="math_8hpp_source.html#l00620">ceil()</a>, <a class="el" href="math_8hpp_source.html#l00574">floor()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00385">power()</a>.</p>
 
 </div>
 </div>
@@ -2229,9 +2265,9 @@ template&lt;typename First, typename... Rests, <a class="el" href="group___type_
 </dl>
 <dl class="section return"><dt>返回</dt><dd>截断后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00671">671</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="math_8hpp_source.html">math.hpp</a> 第 <a class="el" href="math_8hpp_source.html#l00724">724</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00650">ceil_bit()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00639">floor_bit()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00703">ceil_bit()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00692">floor_bit()</a>.</p>
 
 </div>
 </div>

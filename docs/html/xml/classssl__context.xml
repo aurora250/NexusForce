@@ -1,0 +1,813 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classssl__context" kind="class" language="C++" prot="public">
+    <compoundname>ssl_context</compoundname>
+    <includes refid="ssl__context_8hpp" local="no">ssl_context.hpp</includes>
+    <innerclass refid="structssl__context_1_1ctx__deleter" prot="private">ssl_context::ctx_deleter</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classssl__context_1a716dd4edd8b6bb98830f4ed6d7b93735" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt;::SSL_CTX, ctx_deleter &gt;</type>
+        <definition>unique_ptr&lt;::SSL_CTX, ctx_deleter&gt; ssl_context::ctx_</definition>
+        <argsstring></argsstring>
+        <name>ctx_</name>
+        <qualifiedname>ssl_context::ctx_</qualifiedname>
+        <briefdescription>
+<para>OpenSSL SSL_CTX对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="69" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classssl__context_1afa17e2d688e443378ec42e052ab52d03" prot="private" static="no" mutable="no">
+        <type><ref refid="group___s_s_l_1ga4012ce4e3211cb41f69956042abba0c8" kindref="member">ssl_method</ref></type>
+        <definition>ssl_method ssl_context::method_</definition>
+        <argsstring></argsstring>
+        <name>method_</name>
+        <qualifiedname>ssl_context::method_</qualifiedname>
+        <briefdescription>
+<para>记录创建时使用的方法 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="70" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classssl__context_1a66547e0420877dfe3109b5c1ebab7437" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ssl_context::ssl_context</definition>
+        <argsstring>(ssl_method method=ssl_method::TLS_SERVER)</argsstring>
+        <name>ssl_context</name>
+        <qualifiedname>ssl_context::ssl_context</qualifiedname>
+        <param>
+          <type><ref refid="group___s_s_l_1ga4012ce4e3211cb41f69956042abba0c8" kindref="member">ssl_method</ref></type>
+          <declname>method</declname>
+          <defval><ref refid="group___s_s_l_1gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387" kindref="member">ssl_method::TLS_SERVER</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>method</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL/TLS方法类型（默认为TLS服务器） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文创建失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建SSL上下文并设置基本选项：<itemizedlist>
+<listitem><para>禁用SSLv2/SSLv3（不安全）</para>
+</listitem><listitem><para>设置默认密码套件</para>
+</listitem><listitem><para>设置默认CA验证路径 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="83" column="14"/>
+        <references refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437">ssl_context</references>
+        <references refid="group___s_s_l_1gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387" compoundref="ssl__context_8hpp" startline="36">TLS_SERVER</references>
+        <referencedby refid="classssl__context_1a10459f705e17d31675e237b26d1f1b2a">clone</referencedby>
+        <referencedby refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437">ssl_context</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1af5508cf9235d3fad59ed66daaeacb8b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ssl_context::~ssl_context</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ssl_context</name>
+        <qualifiedname>ssl_context::~ssl_context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="85" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1a981739a338c50bca405c6c185777f200" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ssl_context::ssl_context</definition>
+        <argsstring>(const ssl_context &amp;)=delete</argsstring>
+        <name>ssl_context</name>
+        <qualifiedname>ssl_context::ssl_context</qualifiedname>
+        <param>
+          <type>const <ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="87" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1ab6332b4281a93ac5ebd4419d4cafc5f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
+        <definition>ssl_context &amp; ssl_context::operator=</definition>
+        <argsstring>(const ssl_context &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>ssl_context::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="88" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1aa688abcc86343d96ca3dcabb74830ff0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ssl_context::ssl_context</definition>
+        <argsstring>(ssl_context &amp;&amp;other) noexcept=default</argsstring>
+        <name>ssl_context</name>
+        <qualifiedname>ssl_context::ssl_context</qualifiedname>
+        <param>
+          <type><ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="90" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1ad14fc2a70da6bd29240f1576986ccc46" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
+        <definition>ssl_context &amp; ssl_context::operator=</definition>
+        <argsstring>(ssl_context &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>ssl_context::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="91" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1a10459f705e17d31675e237b26d1f1b2a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classssl__context" kindref="compound">ssl_context</ref></type>
+        <definition>ssl_context ssl_context::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <qualifiedname>ssl_context::clone</qualifiedname>
+        <briefdescription>
+<para>克隆当前SSL上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>新的ssl_context实例 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>克隆失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>克隆的上下文与原上下文共享同一底层SSL_CTX，对任意一个的配置修改将影响所有克隆实例。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="99" column="17"/>
+        <references refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437">ssl_context</references>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1afd2628b66a19c8d6a89e94d21c297a16" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classssl__context" kindref="compound">ssl_context</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD shared_ptr&lt; ssl_context &gt; ssl_context::clone_shared</definition>
+        <argsstring>() const</argsstring>
+        <name>clone_shared</name>
+        <qualifiedname>ssl_context::clone_shared</qualifiedname>
+        <briefdescription>
+<para>克隆为共享指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>克隆的上下文共享指针 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>克隆失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="106" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1a22215336ea11c5521366581dec47543f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ssl_context::load_certificate</definition>
+        <argsstring>(const string &amp;cert_file, const string &amp;key_file)</argsstring>
+        <name>load_certificate</name>
+        <qualifiedname>ssl_context::load_certificate</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>cert_file</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key_file</declname>
+        </param>
+        <briefdescription>
+<para>加载证书和私钥（从文件） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cert_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>证书文件路径（PEM格式） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>私钥文件路径（PEM格式） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载成功返回true</para>
+</simplesect>
+加载服务器或客户端的证书和对应的私钥。 会自动检查私钥是否与证书匹配。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="117" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1aec13982e180a000537a06105e556ff28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_context::load_certificate_from_memory</definition>
+        <argsstring>(const string &amp;cert_pem, const string &amp;key_pem)</argsstring>
+        <name>load_certificate_from_memory</name>
+        <qualifiedname>ssl_context::load_certificate_from_memory</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>cert_pem</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key_pem</declname>
+        </param>
+        <briefdescription>
+<para>加载证书和私钥（从内存） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cert_pem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>证书PEM数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_pem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>私钥PEM数据 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文为空或解析、设置失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>证书或密钥数据为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从内存中的PEM数据加载证书和私钥，适用于嵌入式证书。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="128" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1af745272315450d6031ef5c672a6e9129" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ssl_context::load_verify_locations</definition>
+        <argsstring>(const string &amp;ca_file, const string &amp;ca_path=&quot;&quot;)</argsstring>
+        <name>load_verify_locations</name>
+        <qualifiedname>ssl_context::load_verify_locations</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>ca_file</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>ca_path</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>加载CA证书用于验证 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ca_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CA证书文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ca_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>CA证书目录路径（可选） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载成功返回true</para>
+</simplesect>
+设置用于验证对等方证书的CA证书。 可以指定单个文件或目录（目录中的证书会被自动加载）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="139" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1a716bbb717d41d3f7755c61108b1858b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_context::set_options</definition>
+        <argsstring>(long options)</argsstring>
+        <name>set_options</name>
+        <qualifiedname>ssl_context::set_options</qualifiedname>
+        <param>
+          <type>long</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+<para>设置SSL选项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenSSL SSL_OP_*标志位组合 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+设置SSL上下文的选项，如禁用特定协议版本、启用特定特性等。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="148" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1afc476ac46905f6fe25805d871900542a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_context::set_verify_mode</definition>
+        <argsstring>(int mode)</argsstring>
+        <name>set_verify_mode</name>
+        <qualifiedname>ssl_context::set_verify_mode</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>设置验证模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenSSL SSL_VERIFY_*模式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+设置对等方证书的验证模式。 常用模式：<itemizedlist>
+<listitem><para>SSL_VERIFY_NONE：不验证客户端证书</para>
+</listitem><listitem><para>SSL_VERIFY_PEER：验证客户端证书</para>
+</listitem><listitem><para>SSL_VERIFY_FAIL_IF_NO_PEER_CERT：客户端必须提供证书 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="161" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1aa9de73f40d992c24c2e31946a3c35cc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_context::require_client_certificate</definition>
+        <argsstring>()</argsstring>
+        <name>require_client_certificate</name>
+        <qualifiedname>ssl_context::require_client_certificate</qualifiedname>
+        <briefdescription>
+<para>要求客户端提供证书 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+服务器端使用，要求客户端必须提供有效证书。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="169" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1a4edec8d73877dcbe5e94b2255ff8b940" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_context::set_cipher_list</definition>
+        <argsstring>(const string &amp;ciphers)</argsstring>
+        <name>set_cipher_list</name>
+        <qualifiedname>ssl_context::set_cipher_list</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>ciphers</declname>
+        </param>
+        <briefdescription>
+<para>设置密码套件列表（TLS 1.2及以下） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ciphers</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenSSL密码套件字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文为空或设置失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+设置可用的密码套件列表，格式为OpenSSL密码套件字符串。 例如：&quot;ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384&quot; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="179" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1af64a00239c7cd3d3de7cc91109462f42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_context::set_ciphersuites</definition>
+        <argsstring>(const string &amp;ciphersuites)</argsstring>
+        <name>set_ciphersuites</name>
+        <qualifiedname>ssl_context::set_ciphersuites</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>ciphersuites</declname>
+        </param>
+        <briefdescription>
+<para>设置密码套件列表（TLS 1.3） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ciphersuites</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenSSL TLS 1.3密码套件字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文为空或设置失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+设置TLS 1.3的密码套件列表。 例如：&quot;TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256&quot; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="189" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1ad03da982750376dc73a460eec7498a10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_context::set_default_options</definition>
+        <argsstring>()</argsstring>
+        <name>set_default_options</name>
+        <qualifiedname>ssl_context::set_default_options</qualifiedname>
+        <briefdescription>
+<para>设置安全的默认选项 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+配置推荐的现代安全选项：<itemizedlist>
+<listitem><para>禁用SSLv2/SSLv3/TLSv1/TLSv1.1</para>
+</listitem><listitem><para>优先使用服务器密码套件</para>
+</listitem><listitem><para>禁用压缩</para>
+</listitem><listitem><para>设置最小TLS版本为1.2</para>
+</listitem><listitem><para>设置安全的密码套件列表 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="202" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1a2d95fd9f424a34d0f56af203fca50c53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_context::set_session_cache_size</definition>
+        <argsstring>(long size)</argsstring>
+        <name>set_session_cache_size</name>
+        <qualifiedname>ssl_context::set_session_cache_size</qualifiedname>
+        <param>
+          <type>long</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>设置会话缓存大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓存大小（会话数） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+设置SSL会话缓存的最大会话数。 会话缓存可以提高重复连接的性能。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="212" column="10"/>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1a9ef857acc354c1ed524fd8d45260b764" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_context::set_timeout</definition>
+        <argsstring>(long seconds)</argsstring>
+        <name>set_timeout</name>
+        <qualifiedname>ssl_context::set_timeout</qualifiedname>
+        <param>
+          <type>long</type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+<para>设置会话超时时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+设置SSL会话缓存中会话的超时时间。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="221" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1ab8aad3c116c70eb8fd80c1eae3ebb1ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_context::set_alpn_protos</definition>
+        <argsstring>(const vector&lt; string &gt; &amp;protocols)</argsstring>
+        <name>set_alpn_protos</name>
+        <qualifiedname>ssl_context::set_alpn_protos</qualifiedname>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>protocols</declname>
+        </param>
+        <briefdescription>
+<para>设置ALPN协议列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>protocols</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协议名称列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文为空或设置失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协议名称长度无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+设置应用层协议协商（ALPN）支持的协议列表。 用于在TLS握手时协商应用层协议（如HTTP/2）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="232" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1aa5b41ad6a5228d7eaeab06dd4d8a33d1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD::SSL_CTX *</type>
+        <definition>NEFORCE_NODISCARD::SSL_CTX * ssl_context::native_handle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>ssl_context::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取原生SSL_CTX句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SSL_CTX指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="238" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" bodystart="238" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1a033f21fdfb92c225f5c2dd92a6c1a4ef" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ssl_context::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>ssl_context::operator bool</qualifiedname>
+        <briefdescription>
+<para>布尔转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>上下文有效返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="244" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" bodystart="244" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__context_1a578442e1760cc9d136347c462611fedf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ssl_context::is_valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>ssl_context::is_valid</qualifiedname>
+        <briefdescription>
+<para>检查上下文是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="250" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" bodystart="250" bodyend="250"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>SSL/TLS上下文管理类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>封装OpenSSL的SSL_CTX对象，提供SSL连接的配置和管理功能。 支持证书加载、验证配置、密码套件设置等。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>SSL上下文创建和配置</para>
+</listitem><listitem><para>证书和私钥加载</para>
+</listitem><listitem><para>CA证书验证配置</para>
+</listitem><listitem><para>密码套件和协议版本设置</para>
+</listitem><listitem><para>ALPN（应用层协议协商）支持</para>
+</listitem><listitem><para>会话缓存和超时配置</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>上下文对象是线程安全的，可以被多个SSL连接共享。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" line="59" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp" bodystart="59" bodyend="251"/>
+    <listofallmembers>
+      <member refid="classssl__context_1a10459f705e17d31675e237b26d1f1b2a" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>clone</name></member>
+      <member refid="classssl__context_1afd2628b66a19c8d6a89e94d21c297a16" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>clone_shared</name></member>
+      <member refid="classssl__context_1a716dd4edd8b6bb98830f4ed6d7b93735" prot="private" virt="non-virtual"><scope>ssl_context</scope><name>ctx_</name></member>
+      <member refid="classssl__context_1a578442e1760cc9d136347c462611fedf" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>is_valid</name></member>
+      <member refid="classssl__context_1a22215336ea11c5521366581dec47543f" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>load_certificate</name></member>
+      <member refid="classssl__context_1aec13982e180a000537a06105e556ff28" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>load_certificate_from_memory</name></member>
+      <member refid="classssl__context_1af745272315450d6031ef5c672a6e9129" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>load_verify_locations</name></member>
+      <member refid="classssl__context_1afa17e2d688e443378ec42e052ab52d03" prot="private" virt="non-virtual"><scope>ssl_context</scope><name>method_</name></member>
+      <member refid="classssl__context_1aa5b41ad6a5228d7eaeab06dd4d8a33d1" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>native_handle</name></member>
+      <member refid="classssl__context_1a033f21fdfb92c225f5c2dd92a6c1a4ef" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>operator bool</name></member>
+      <member refid="classssl__context_1ab6332b4281a93ac5ebd4419d4cafc5f9" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>operator=</name></member>
+      <member refid="classssl__context_1ad14fc2a70da6bd29240f1576986ccc46" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>operator=</name></member>
+      <member refid="classssl__context_1aa9de73f40d992c24c2e31946a3c35cc1" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>require_client_certificate</name></member>
+      <member refid="classssl__context_1ab8aad3c116c70eb8fd80c1eae3ebb1ed" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>set_alpn_protos</name></member>
+      <member refid="classssl__context_1a4edec8d73877dcbe5e94b2255ff8b940" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>set_cipher_list</name></member>
+      <member refid="classssl__context_1af64a00239c7cd3d3de7cc91109462f42" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>set_ciphersuites</name></member>
+      <member refid="classssl__context_1ad03da982750376dc73a460eec7498a10" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>set_default_options</name></member>
+      <member refid="classssl__context_1a716bbb717d41d3f7755c61108b1858b4" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>set_options</name></member>
+      <member refid="classssl__context_1a2d95fd9f424a34d0f56af203fca50c53" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>set_session_cache_size</name></member>
+      <member refid="classssl__context_1a9ef857acc354c1ed524fd8d45260b764" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>set_timeout</name></member>
+      <member refid="classssl__context_1afc476ac46905f6fe25805d871900542a" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>set_verify_mode</name></member>
+      <member refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>ssl_context</name></member>
+      <member refid="classssl__context_1a981739a338c50bca405c6c185777f200" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>ssl_context</name></member>
+      <member refid="classssl__context_1aa688abcc86343d96ca3dcabb74830ff0" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>ssl_context</name></member>
+      <member refid="classssl__context_1af5508cf9235d3fad59ed66daaeacb8b9" prot="public" virt="non-virtual"><scope>ssl_context</scope><name>~ssl_context</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

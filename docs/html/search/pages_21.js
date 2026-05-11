@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['传输协议_0',['DNS 传输协议',['../group___d_n_s.html#dns_transport',1,'']]]
+  ['代理对编码规则_0',['UTF-16 代理对编码规则',['../group___code_point.html#utf16_surrogates',1,'']]]
 ];

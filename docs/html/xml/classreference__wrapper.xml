@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classreference__wrapper" kind="class" language="C++" prot="public">
+    <compoundname>reference_wrapper</compoundname>
+    <includes refid="reference__wrapper_8hpp" local="no">reference_wrapper.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classreference__wrapper_1a1ea5889b8f8a938acbf90adce281a6ae" prot="public" static="no">
+        <type>T</type>
+        <definition>using reference_wrapper&lt; T &gt;::type = T</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>reference_wrapper::type</qualifiedname>
+        <briefdescription>
+<para>包装的类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="66" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classreference__wrapper_1a77bdb85e7a1fed22584c98e14d553423" prot="private" static="no" mutable="no">
+        <type>T *</type>
+        <definition>T* reference_wrapper&lt; T &gt;::ptr_</definition>
+        <argsstring></argsstring>
+        <name>ptr_</name>
+        <qualifiedname>reference_wrapper::ptr_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>指向包装对象的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="69" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classreference__wrapper_1a0b259e361592069c71bd65f5baad8822" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(inner::__ref_wrapper_construct_aux&lt; T &gt;(_NEFORCE declval&lt; U &gt;()))" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structconjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structnegation" kindref="compound">negation</ref>&lt; <ref refid="structis__same" kindref="compound">is_same</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; U &gt;, <ref refid="classreference__wrapper" kindref="compound">reference_wrapper</ref> &gt; &gt;, inner::ref_wrapper_constructable_from&lt; T, U &gt; &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR14</type>
+        <definition>NEFORCE_CONSTEXPR14 reference_wrapper&lt; T &gt;::reference_wrapper</definition>
+        <argsstring>(U &amp;&amp;x)</argsstring>
+        <name>reference_wrapper</name>
+        <qualifiedname>reference_wrapper::reference_wrapper</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要包装的引用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从任意可以转换为T引用的类型构造引用包装器。 禁止从右值构造，防止悬垂引用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="84" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="84" bodyend="87"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c">declval</references>
+        <references refid="group___reference_wrapper_1ga65ec3600aa7a6390944677be016c5f77" compoundref="reference__wrapper_8hpp" startline="132" endline="134">ref</references>
+      </memberdef>
+      <memberdef kind="function" id="classreference__wrapper_1a7bcb5d32871dcd91165c91e5cd25737c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14</type>
+        <definition>NEFORCE_CONSTEXPR14 reference_wrapper&lt; T &gt;::operator T&amp;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator T&amp;</name>
+        <qualifiedname>reference_wrapper::operator T&amp;</qualifiedname>
+        <briefdescription>
+<para>隐式转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>包装的引用</para>
+</simplesect>
+允许reference_wrapper隐式转换为T&amp;，方便使用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="95" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classreference__wrapper_1ab60bc360875712a6f4cd990bf8c0e8b5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR14 T &amp;</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR14 T &amp; reference_wrapper&lt; T &gt;::get</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>reference_wrapper::get</qualifiedname>
+        <briefdescription>
+<para>获取包装的引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>包装的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="101" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="101" bodyend="101"/>
+        <referencedby refid="classreference__wrapper_1a5c43b0f9a2ddd66bcc8f0096b9dfe63b" compoundref="reference__wrapper_8hpp" startline="112" endline="115">reference_wrapper&lt; T &gt;::operator()</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classreference__wrapper_1a5c43b0f9a2ddd66bcc8f0096b9dfe63b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_invocable&lt; T &amp;, Args... &gt;::value" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR14 inner::__invoke_result_aux&lt; T &amp;, Args... &gt;<ref refid="classreference__wrapper_1a1ea5889b8f8a938acbf90adce281a6ae" kindref="member">::type</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 inner::__invoke_result_aux&lt; T &amp;, Args... &gt;::type reference_wrapper&lt; T &gt;::operator()</definition>
+        <argsstring>(Args &amp;&amp;... args) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>reference_wrapper::operator()</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>函数调用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>调用参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数调用结果</para>
+</simplesect>
+如果T是可调用类型，可以通过reference_wrapper直接调用包装的函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="112" column="68" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="112" bodyend="115"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="classreference__wrapper_1ab60bc360875712a6f4cd990bf8c0e8b5" compoundref="reference__wrapper_8hpp" startline="101" endline="101">reference_wrapper&lt; T &gt;::get</references>
+        <references refid="group___invoke_function_1ga529f4a5476de9eb8ed295cb17c719c96" compoundref="invoke_8hpp" startline="538" endline="543">invoke</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>引用包装器类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被包装的类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将引用包装为可复制的值类型，可以在容器中存储引用。</para>
+<para>支持隐式转换为原始引用，以及函数调用运算符。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" line="61" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/reference_wrapper.hpp" bodystart="61" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classreference__wrapper_1ab60bc360875712a6f4cd990bf8c0e8b5" prot="public" virt="non-virtual"><scope>reference_wrapper</scope><name>get</name></member>
+      <member refid="classreference__wrapper_1a7bcb5d32871dcd91165c91e5cd25737c" prot="public" virt="non-virtual"><scope>reference_wrapper</scope><name>operator T&amp;</name></member>
+      <member refid="classreference__wrapper_1a5c43b0f9a2ddd66bcc8f0096b9dfe63b" prot="public" virt="non-virtual"><scope>reference_wrapper</scope><name>operator()</name></member>
+      <member refid="classreference__wrapper_1a77bdb85e7a1fed22584c98e14d553423" prot="private" virt="non-virtual"><scope>reference_wrapper</scope><name>ptr_</name></member>
+      <member refid="classreference__wrapper_1a0b259e361592069c71bd65f5baad8822" prot="public" virt="non-virtual"><scope>reference_wrapper</scope><name>reference_wrapper</name></member>
+      <member refid="classreference__wrapper_1a1ea5889b8f8a938acbf90adce281a6ae" prot="public" virt="non-virtual"><scope>reference_wrapper</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

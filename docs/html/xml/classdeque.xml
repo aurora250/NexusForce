@@ -1,0 +1,3236 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classdeque" kind="class" language="C++" prot="public">
+    <compoundname>deque</compoundname>
+    <basecompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; deque&lt; T, allocator&lt; T &gt; &gt; &gt;</basecompoundref>
+    <includes refid="deque_8hpp" local="no">deque.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;T&gt;</defval>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <declname>BufSize</declname>
+        <defname>BufSize</defname>
+        <defval>0</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classdeque_1a2d9d4cd3f0e2f842cbc9418ad9424dac" prot="public" static="no">
+        <type>T *</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::pointer = T*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>deque::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="272" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="272" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1ac0c04ff2064a2ab05372ab9e4d5639bf" prot="public" static="no">
+        <type>T &amp;</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::reference = T&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>deque::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="273" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="273" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1a26192de88a773e3743fdb900fe035798" prot="public" static="no">
+        <type>const T *</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::const_pointer = const T*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>deque::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="274" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="274" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1ad723de2349ae5871bead762970ee1e35" prot="public" static="no">
+        <type>const T &amp;</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::const_reference = const T&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>deque::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="275" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="275" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1a01912c1545bfbdef7c012542ec761ef4" prot="public" static="no">
+        <type>T</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>deque::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="276" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="276" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::size_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>deque::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="277" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="277" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1acbbd5b4650f04501d73ab132a0df1932" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref></type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>deque::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="278" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="278" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" prot="public" static="no">
+        <type><ref refid="structdeque__iterator" kindref="compound">deque_iterator</ref>&lt; false, <ref refid="classdeque" kindref="compound">deque</ref>, BufSize &gt;</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::iterator = deque_iterator&lt;false, deque, BufSize&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>deque::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="279" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="279" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1ac8339d67e4f48322f4ef562aa07daff2" prot="public" static="no">
+        <type><ref refid="structdeque__iterator" kindref="compound">deque_iterator</ref>&lt; true, <ref refid="classdeque" kindref="compound">deque</ref>, BufSize &gt;</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::const_iterator = deque_iterator&lt;true, deque, BufSize&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>deque::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="280" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="280" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1a4e6018f7a8f07be49e6b019931a21374" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classdeque_1a4e6018f7a8f07be49e6b019931a21374" kindref="member">reverse_iterator</ref>&lt; <ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref> &gt;</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::reverse_iterator = _NEFORCE reverse_iterator&lt;iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>deque::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="281" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="281" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1a87b66790815626aad9fbf6e03678a90c" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classdeque_1a4e6018f7a8f07be49e6b019931a21374" kindref="member">reverse_iterator</ref>&lt; <ref refid="classdeque_1ac8339d67e4f48322f4ef562aa07daff2" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::const_reverse_iterator = _NEFORCE reverse_iterator&lt;const_iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>deque::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>常量反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="282" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="282" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1a053b811462aacb3f2b07ceaeb60b1177" prot="public" static="no">
+        <type>Alloc</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::allocator_type = Alloc</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>deque::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="283" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="283" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classdeque_1a28797dc2ca365e2f07dd7783d310439d" prot="private" static="no">
+        <type><ref refid="classdeque_1a2d9d4cd3f0e2f842cbc9418ad9424dac" kindref="member">pointer</ref> *</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::map_pointer = pointer*</definition>
+        <argsstring></argsstring>
+        <name>map_pointer</name>
+        <qualifiedname>deque::map_pointer</qualifiedname>
+        <briefdescription>
+<para>中控器指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="289" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="289" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdeque_1a1513c1fa37ed9d7d2a5e0a2cee62a679" prot="private" static="no">
+        <type>typename Alloc::template rebind&lt; <ref refid="classdeque_1a2d9d4cd3f0e2f842cbc9418ad9424dac" kindref="member">pointer</ref> &gt;::other</type>
+        <definition>using deque&lt; T, Alloc, BufSize &gt;::map_allocator = typename Alloc::template rebind&lt;pointer&gt;::other</definition>
+        <argsstring></argsstring>
+        <name>map_allocator</name>
+        <qualifiedname>deque::map_allocator</qualifiedname>
+        <briefdescription>
+<para>中控器分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="290" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="290" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classdeque_1a67b47395f4c5b6bf8fef4a3e0df786da" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="classdeque_1acbbd5b4650f04501d73ab132a0df1932" kindref="member">difference_type</ref></type>
+        <definition>difference_type deque&lt; T, Alloc, BufSize &gt;::buffer_size</definition>
+        <argsstring></argsstring>
+        <name>buffer_size</name>
+        <qualifiedname>deque::buffer_size</qualifiedname>
+        <initializer>= <ref refid="structdeque__iterator_1a0603bb63eaff32df65e44dab18dba3da" kindref="member">iterator::buffer_size</ref></initializer>
+        <briefdescription>
+<para>缓冲区大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="286" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="286" bodyend="-1"/>
+        <referencedby refid="classdeque_1a43206d200267af194dc0c6836740c996" compoundref="deque_8hpp" startline="1153" endline="1166">deque&lt; T, Alloc, BufSize &gt;::pop_back</referencedby>
+        <referencedby refid="classdeque_1acd9396712c8f5d8a1fce913a0be67052" compoundref="deque_8hpp" startline="1171" endline="1184">deque&lt; T, Alloc, BufSize &gt;::pop_front</referencedby>
+        <referencedby refid="classdeque_1a7cfe7a465779118495c90e91d5350da2" compoundref="deque_8hpp" startline="1340" endline="1355">deque&lt; T, Alloc, BufSize &gt;::shrink_to_fit</referencedby>
+        <referencedby refid="classdeque_1a1a5e9b314eb209e249bfd4f1da756a06" compoundref="deque_8hpp" startline="904" endline="921">deque&lt; T, Alloc, BufSize &gt;::~deque</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdeque_1a77b0e49d057ed747afbca9ae164786d7" prot="private" static="no" mutable="no">
+        <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>iterator deque&lt; T, Alloc, BufSize &gt;::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <qualifiedname>deque::start_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="292" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="292" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdeque_1a7da0f6ee6f247337e238b85db78a241b" prot="private" static="no" mutable="no">
+        <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>iterator deque&lt; T, Alloc, BufSize &gt;::finish_</definition>
+        <argsstring></argsstring>
+        <name>finish_</name>
+        <qualifiedname>deque::finish_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="293" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="293" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdeque_1a3fe189e851e0fe995bc9b3ae31f88253" prot="private" static="no" mutable="no">
+        <type><ref refid="structcompressed__pair" kindref="compound">compressed_pair</ref>&lt; <ref refid="classdeque_1a053b811462aacb3f2b07ceaeb60b1177" kindref="member">allocator_type</ref>, <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref> &gt;</type>
+        <definition>compressed_pair&lt;allocator_type, size_type&gt; deque&lt; T, Alloc, BufSize &gt;::map_size_pair_</definition>
+        <argsstring></argsstring>
+        <name>map_size_pair_</name>
+        <qualifiedname>deque::map_size_pair_</qualifiedname>
+        <initializer>{<ref refid="structdefault__construct__tag" kindref="compound">default_construct_tag</ref>{}, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="295" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="295" bodyend="295"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdeque_1a7f039f56791860dfd4177b96cdb633ed" prot="private" static="no" mutable="no">
+        <type><ref refid="structcompressed__pair" kindref="compound">compressed_pair</ref>&lt; map_allocator, map_pointer &gt;</type>
+        <definition>compressed_pair&lt;map_allocator, map_pointer&gt; deque&lt; T, Alloc, BufSize &gt;::map_pair_</definition>
+        <argsstring></argsstring>
+        <name>map_pair_</name>
+        <qualifiedname>deque::map_pair_</qualifiedname>
+        <initializer>{<ref refid="structdefault__construct__tag" kindref="compound">default_construct_tag</ref>{}, nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="297" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="297" bodyend="297"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classdeque_1af3eb39703369860f5ecc901110deaacb" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t deque&lt; T, Alloc, BufSize &gt;::init_map_size</definition>
+        <argsstring></argsstring>
+        <name>init_map_size</name>
+        <qualifiedname>deque::init_map_size</qualifiedname>
+        <initializer>= 8</initializer>
+        <briefdescription>
+<para>初始中控器大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="301" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="301" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classdeque_1aeddac3b47224f06082b8031f83d30391" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>map_pointer</type>
+        <definition>map_pointer deque&lt; T, Alloc, BufSize &gt;::create_map</definition>
+        <argsstring>(const size_t n)</argsstring>
+        <name>create_map</name>
+        <qualifiedname>deque::create_map</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>创建中控器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>中控器大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>创建的中控器指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="308" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="308" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ae50a240721cacffa23e670ff8e8fd449" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::create_nodes</definition>
+        <argsstring>(map_pointer start, map_pointer finish)</argsstring>
+        <name>create_nodes</name>
+        <qualifiedname>deque::create_nodes</qualifiedname>
+        <param>
+          <type>map_pointer</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>map_pointer</type>
+          <declname>finish</declname>
+        </param>
+        <briefdescription>
+<para>创建节点（缓冲区） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始节点指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>finish</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束节点指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+为指定范围内的每个节点分配缓冲区内存。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="323" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="323" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1aa2697dea32e1df18da5afeabf5e2e1db" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; value_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::destroy_nodes</definition>
+        <argsstring>(map_pointer start, map_pointer finish)</argsstring>
+        <name>destroy_nodes</name>
+        <qualifiedname>deque::destroy_nodes</qualifiedname>
+        <param>
+          <type>map_pointer</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>map_pointer</type>
+          <declname>finish</declname>
+        </param>
+        <briefdescription>
+<para>销毁节点（缓冲区） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始节点指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>finish</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束节点指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+释放指定范围内节点的缓冲区内存。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="346" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="346" bodyend="354"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a6b8346fe75eb8e39c30f411bc248e692" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::create_map_and_nodes</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>create_map_and_nodes</name>
+        <qualifiedname>deque::create_map_and_nodes</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>创建中控器和节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+根据元素数量分配中控器和必要的缓冲区。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="362" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="362" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a1e3e7c204cb927b826fe51b46e56be57" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::fill_initialize</definition>
+        <argsstring>(const size_type n, const T &amp;value)</argsstring>
+        <name>fill_initialize</name>
+        <qualifiedname>deque::fill_initialize</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>填充初始化 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>填充值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="400" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="400" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a26f5f9922b5bdfb5938227d06a32f7c5" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; deque&lt; T, Alloc, BufSize &gt;::copy_initialize</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>copy_initialize</name>
+        <qualifiedname>deque::copy_initialize</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围拷贝初始化（非前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="419" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="419" bodyend="423"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a6f0009d41d88a3a8d8934c7569be7a83" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; deque&lt; T, Alloc, BufSize &gt;::copy_initialize</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>copy_initialize</name>
+        <qualifiedname>deque::copy_initialize</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围拷贝初始化（前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="432" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="432" bodyend="442"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a4c3fa85ab6ce25b04c33eda75d53bae7" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::assign_aux_n</definition>
+        <argsstring>(size_type n, const T &amp;value)</argsstring>
+        <name>assign_aux_n</name>
+        <qualifiedname>deque::assign_aux_n</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>辅助赋值函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要赋的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="449" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="449" bodyend="457"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a7b20ac3251eea09213153f0e59c31d01" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; deque&lt; T, Alloc, BufSize &gt;::assign_ranges</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>assign_ranges</name>
+        <qualifiedname>deque::assign_ranges</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围赋值（非前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="466" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="466" bodyend="470"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a86dc39c7ae25b0f75b4a4f580da4160c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; deque&lt; T, Alloc, BufSize &gt;::assign_ranges</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>assign_ranges</name>
+        <qualifiedname>deque::assign_ranges</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围赋值（前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="479" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="479" bodyend="493"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a411e321445eb05c7e269debab5f14e55" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::reallocate_map</definition>
+        <argsstring>(const size_type n, const bool add_at_front)</argsstring>
+        <name>reallocate_map</name>
+        <qualifiedname>deque::reallocate_map</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>add_at_front</declname>
+        </param>
+        <briefdescription>
+<para>重新分配中控器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>需要新增的缓冲区数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>add_at_front</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否在前端添加</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+当需要在前端或后端添加新缓冲区而空间不足时， 重新分配中控器以容纳更多缓冲区指针。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="503" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="503" bodyend="569"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a39e79e071fd2518a983ec12b5f010b3e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::insert_ranges_n</definition>
+        <argsstring>(iterator position, Iterator first, Iterator last, size_type n)</argsstring>
+        <name>insert_ranges_n</name>
+        <qualifiedname>deque::insert_ranges_n</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type><ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>范围插入辅助函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="580" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="580" bodyend="635"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a51ce083458b6584bda796c869124deb8" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; deque&lt; T, Alloc, BufSize &gt;::insert_ranges</definition>
+        <argsstring>(iterator position, Iterator first, Iterator last)</argsstring>
+        <name>insert_ranges</name>
+        <qualifiedname>deque::insert_ranges</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入（非前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="645" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="645" bodyend="662"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a282dfc4be2304d33427575e629c412e6" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; deque&lt; T, Alloc, BufSize &gt;::insert_ranges</definition>
+        <argsstring>(iterator position, Iterator first, Iterator last)</argsstring>
+        <name>insert_ranges</name>
+        <qualifiedname>deque::insert_ranges</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入（前向迭代器版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="672" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="672" bodyend="703"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1af5cfa34d41dec6140ab7452a53b7d2b2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::insert_n_aux</definition>
+        <argsstring>(iterator position, size_type n, const T &amp;value)</argsstring>
+        <name>insert_n_aux</name>
+        <qualifiedname>deque::insert_n_aux</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入n个指定值的元素辅助函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="711" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="711" bodyend="765"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a9f5589785cb9dc7243dccfc472f01fcf" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_assignable_v&lt; value_type &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>iterator deque&lt; T, Alloc, BufSize &gt;::insert_aux</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>insert_aux</name>
+        <qualifiedname>deque::insert_aux</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>插入单个元素辅助函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="775" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="775" bodyend="801"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdeque_1a17268f4bf56124fa71ebb36ef241133b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>deque&lt; T, Alloc, BufSize &gt;::deque</definition>
+        <argsstring>()</argsstring>
+        <name>deque</name>
+        <qualifiedname>deque::deque</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空双端队列。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="809" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="809" bodyend="809"/>
+        <references refid="group___type_initialize_function_1gafff7aa9d7280a07a58464ccdf4a8931a" compoundref="type__traits_8hpp" startline="4318" endline="4321">initialize</references>
+        <referencedby refid="classdeque_1a042b14f0dd53ae635fca21811c31a06f" compoundref="deque_8hpp" startline="856" endline="856">deque&lt; T, Alloc, BufSize &gt;::deque</referencedby>
+        <referencedby refid="classdeque_1ad811b029e5c0ebb9e8dffc83a5dee121" compoundref="deque_8hpp" startline="883" endline="883">deque&lt; T, Alloc, BufSize &gt;::deque</referencedby>
+        <referencedby refid="classdeque_1a160fbc7b7721a96794644ec6a46e1274" compoundref="deque_8hpp" startline="1426" endline="1429">deque&lt; T, Alloc, BufSize &gt;::equal_to</referencedby>
+        <referencedby refid="classdeque_1a42fd03dd1bb5dc114c12d754e58d2195" compoundref="deque_8hpp" startline="1436" endline="1439">deque&lt; T, Alloc, BufSize &gt;::less_than</referencedby>
+        <referencedby refid="classdeque_1afc8aee0b6ed56366dc9f34ee46107a25" compoundref="deque_8hpp" startline="863" endline="877">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1a798490221ab73e7d691fe4a115de05af" compoundref="deque_8hpp" startline="890" endline="897">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1a5e771d854d6ceec22e28db77121b5958" compoundref="deque_8hpp" startline="846" endline="850">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1a2bc9e5114adc88054d962dd466a18920" compoundref="deque_8hpp" startline="1410" endline="1419">deque&lt; T, Alloc, BufSize &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a2dde7384e1dd5acb521afd10700b6639" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>deque&lt; T, Alloc, BufSize &gt;::deque</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>deque</name>
+        <qualifiedname>deque::deque</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>构造包含n个默认构造元素的双端队列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="815" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="815" bodyend="815"/>
+        <references refid="group___type_initialize_function_1gafff7aa9d7280a07a58464ccdf4a8931a" compoundref="type__traits_8hpp" startline="4318" endline="4321">initialize</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1aa834c0d4107f06ff09f0fb65f80ddafb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>deque&lt; T, Alloc, BufSize &gt;::deque</definition>
+        <argsstring>(const size_type n, const T &amp;value)</argsstring>
+        <name>deque</name>
+        <qualifiedname>deque::deque</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>构造包含n个指定值元素的双端队列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="822" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="822" bodyend="822"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ad7f3a762bd0a3cb76eaac32cdcd4b799" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>deque&lt; T, Alloc, BufSize &gt;::deque</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>deque</name>
+        <qualifiedname>deque::deque</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="831" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="831" bodyend="833"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1aeb42f9e8de07e79bd1d7618661a85751" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>deque&lt; T, Alloc, BufSize &gt;::deque</definition>
+        <argsstring>(std::initializer_list&lt; T &gt; ilist)</argsstring>
+        <name>deque</name>
+        <qualifiedname>deque::deque</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="839" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="839" bodyend="839"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a5e771d854d6ceec22e28db77121b5958" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classdeque" kindref="compound">deque</ref> &amp;</type>
+        <definition>deque &amp; deque&lt; T, Alloc, BufSize &gt;::operator=</definition>
+        <argsstring>(std::initializer_list&lt; T &gt; ilist)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>deque::operator=</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="846" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="846" bodyend="850"/>
+        <references refid="classdeque_1a17268f4bf56124fa71ebb36ef241133b" compoundref="deque_8hpp" startline="809" endline="809">deque&lt; T, Alloc, BufSize &gt;::deque</references>
+        <references refid="classdeque_1a2bc9e5114adc88054d962dd466a18920" compoundref="deque_8hpp" startline="1410" endline="1419">deque&lt; T, Alloc, BufSize &gt;::swap</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a042b14f0dd53ae635fca21811c31a06f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>deque&lt; T, Alloc, BufSize &gt;::deque</definition>
+        <argsstring>(const deque &amp;other)</argsstring>
+        <name>deque</name>
+        <qualifiedname>deque::deque</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque" kindref="compound">deque</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源双端队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="856" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="856" bodyend="856"/>
+        <references refid="classdeque_1acb9ef1a1308c650904783174c2dfc249" compoundref="deque_8hpp" startline="951" endline="951">deque&lt; T, Alloc, BufSize &gt;::cbegin</references>
+        <references refid="classdeque_1aa6ab05b3ac23e0476409577283fc57d7" compoundref="deque_8hpp" startline="957" endline="957">deque&lt; T, Alloc, BufSize &gt;::cend</references>
+        <references refid="classdeque_1a17268f4bf56124fa71ebb36ef241133b" compoundref="deque_8hpp" startline="809" endline="809">deque&lt; T, Alloc, BufSize &gt;::deque</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1afc8aee0b6ed56366dc9f34ee46107a25" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classdeque" kindref="compound">deque</ref> &amp;</type>
+        <definition>deque &amp; deque&lt; T, Alloc, BufSize &gt;::operator=</definition>
+        <argsstring>(const deque &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>deque::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque" kindref="compound">deque</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源双端队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="863" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="863" bodyend="877"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="classdeque_1a98afb52a2b9cd6157e10e2dff4c84d80" compoundref="deque_8hpp" startline="927" endline="927">deque&lt; T, Alloc, BufSize &gt;::begin</references>
+        <references refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" compoundref="shift_8hpp" startline="90" endline="98">copy</references>
+        <references refid="classdeque_1a17268f4bf56124fa71ebb36ef241133b" compoundref="deque_8hpp" startline="809" endline="809">deque&lt; T, Alloc, BufSize &gt;::deque</references>
+        <references refid="classdeque_1a769037c17e2e28e0038354e86dc9761f" compoundref="deque_8hpp" startline="933" endline="933">deque&lt; T, Alloc, BufSize &gt;::end</references>
+        <references refid="classdeque_1a52338e7ad6f3a127e8f7baeb4d80246a" compoundref="deque_8hpp" startline="1294" endline="1305">deque&lt; T, Alloc, BufSize &gt;::erase</references>
+        <references refid="classdeque_1a6cebdf61a3a9f2448f679ed3fd8da6e0" compoundref="deque_8hpp" startline="1216" endline="1226">deque&lt; T, Alloc, BufSize &gt;::insert</references>
+        <references refid="classdeque_1ac6b72fd2b10ac783bfe96edfbd39b158" compoundref="deque_8hpp" startline="999" endline="999">deque&lt; T, Alloc, BufSize &gt;::size</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ad811b029e5c0ebb9e8dffc83a5dee121" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>deque&lt; T, Alloc, BufSize &gt;::deque</definition>
+        <argsstring>(deque &amp;&amp;other) noexcept</argsstring>
+        <name>deque</name>
+        <qualifiedname>deque::deque</qualifiedname>
+        <param>
+          <type><ref refid="classdeque" kindref="compound">deque</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源双端队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="883" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="883" bodyend="883"/>
+        <references refid="classdeque_1a17268f4bf56124fa71ebb36ef241133b" compoundref="deque_8hpp" startline="809" endline="809">deque&lt; T, Alloc, BufSize &gt;::deque</references>
+        <references refid="classdeque_1a2bc9e5114adc88054d962dd466a18920" compoundref="deque_8hpp" startline="1410" endline="1419">deque&lt; T, Alloc, BufSize &gt;::swap</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a798490221ab73e7d691fe4a115de05af" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classdeque" kindref="compound">deque</ref> &amp;</type>
+        <definition>deque &amp; deque&lt; T, Alloc, BufSize &gt;::operator=</definition>
+        <argsstring>(deque &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>deque::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classdeque" kindref="compound">deque</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源双端队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="890" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="890" bodyend="897"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="classdeque_1a043ce12ba6463b2dd4e2d155f27a74c4" compoundref="deque_8hpp" startline="1362" endline="1376">deque&lt; T, Alloc, BufSize &gt;::clear</references>
+        <references refid="classdeque_1a17268f4bf56124fa71ebb36ef241133b" compoundref="deque_8hpp" startline="809" endline="809">deque&lt; T, Alloc, BufSize &gt;::deque</references>
+        <references refid="classdeque_1a2bc9e5114adc88054d962dd466a18920" compoundref="deque_8hpp" startline="1410" endline="1419">deque&lt; T, Alloc, BufSize &gt;::swap</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a1a5e9b314eb209e249bfd4f1da756a06" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>deque&lt; T, Alloc, BufSize &gt;::~deque</definition>
+        <argsstring>()</argsstring>
+        <name>~deque</name>
+        <qualifiedname>deque::~deque</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>销毁所有元素并释放所有内存。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="904" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="904" bodyend="921"/>
+        <references refid="classdeque_1a67b47395f4c5b6bf8fef4a3e0df786da" compoundref="deque_8hpp" startline="286">deque&lt; T, Alloc, BufSize &gt;::buffer_size</references>
+        <references refid="classdeque_1a043ce12ba6463b2dd4e2d155f27a74c4" compoundref="deque_8hpp" startline="1362" endline="1376">deque&lt; T, Alloc, BufSize &gt;::clear</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a98afb52a2b9cd6157e10e2dff4c84d80" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator deque&lt; T, Alloc, BufSize &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>deque::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="927" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="927" bodyend="927"/>
+        <referencedby refid="classdeque_1afc8aee0b6ed56366dc9f34ee46107a25" compoundref="deque_8hpp" startline="863" endline="877">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1aafbac141eddd0aef16fcb3728eda95c8" compoundref="deque_8hpp" startline="969" endline="969">deque&lt; T, Alloc, BufSize &gt;::rend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a769037c17e2e28e0038354e86dc9761f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD iterator deque&lt; T, Alloc, BufSize &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>deque::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="933" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="933" bodyend="933"/>
+        <referencedby refid="classdeque_1afc8aee0b6ed56366dc9f34ee46107a25" compoundref="deque_8hpp" startline="863" endline="877">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1a30b2cc031b0c51d4d768a075fd176927" compoundref="deque_8hpp" startline="963" endline="963">deque&lt; T, Alloc, BufSize &gt;::rbegin</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a8fcf04512c2db247c0bde1760ab13dd4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ac8339d67e4f48322f4ef562aa07daff2" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator deque&lt; T, Alloc, BufSize &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>deque::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="939" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="939" bodyend="939"/>
+        <references refid="classdeque_1acb9ef1a1308c650904783174c2dfc249" compoundref="deque_8hpp" startline="951" endline="951">deque&lt; T, Alloc, BufSize &gt;::cbegin</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a8cb50b5336a3f0e1e86eb3ff118fa5d1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ac8339d67e4f48322f4ef562aa07daff2" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator deque&lt; T, Alloc, BufSize &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>deque::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="945" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="945" bodyend="945"/>
+        <references refid="classdeque_1aa6ab05b3ac23e0476409577283fc57d7" compoundref="deque_8hpp" startline="957" endline="957">deque&lt; T, Alloc, BufSize &gt;::cend</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1acb9ef1a1308c650904783174c2dfc249" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ac8339d67e4f48322f4ef562aa07daff2" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator deque&lt; T, Alloc, BufSize &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>deque::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="951" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="951" bodyend="951"/>
+        <referencedby refid="classdeque_1a8fcf04512c2db247c0bde1760ab13dd4" compoundref="deque_8hpp" startline="939" endline="939">deque&lt; T, Alloc, BufSize &gt;::begin</referencedby>
+        <referencedby refid="classdeque_1a8e921c7d2e304d41cc6158e38f04f18f" compoundref="deque_8hpp" startline="993" endline="993">deque&lt; T, Alloc, BufSize &gt;::crend</referencedby>
+        <referencedby refid="classdeque_1a042b14f0dd53ae635fca21811c31a06f" compoundref="deque_8hpp" startline="856" endline="856">deque&lt; T, Alloc, BufSize &gt;::deque</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1aa6ab05b3ac23e0476409577283fc57d7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ac8339d67e4f48322f4ef562aa07daff2" kindref="member">const_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_iterator deque&lt; T, Alloc, BufSize &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>deque::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="957" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="957" bodyend="957"/>
+        <referencedby refid="classdeque_1a94514c32c5a30f2ca0e18823357f5fe3" compoundref="deque_8hpp" startline="987" endline="987">deque&lt; T, Alloc, BufSize &gt;::crbegin</referencedby>
+        <referencedby refid="classdeque_1a042b14f0dd53ae635fca21811c31a06f" compoundref="deque_8hpp" startline="856" endline="856">deque&lt; T, Alloc, BufSize &gt;::deque</referencedby>
+        <referencedby refid="classdeque_1a8cb50b5336a3f0e1e86eb3ff118fa5d1" compoundref="deque_8hpp" startline="945" endline="945">deque&lt; T, Alloc, BufSize &gt;::end</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a30b2cc031b0c51d4d768a075fd176927" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1a4e6018f7a8f07be49e6b019931a21374" kindref="member">reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD reverse_iterator deque&lt; T, Alloc, BufSize &gt;::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>deque::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="963" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="963" bodyend="963"/>
+        <references refid="classdeque_1a769037c17e2e28e0038354e86dc9761f" compoundref="deque_8hpp" startline="933" endline="933">deque&lt; T, Alloc, BufSize &gt;::end</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1aafbac141eddd0aef16fcb3728eda95c8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1a4e6018f7a8f07be49e6b019931a21374" kindref="member">reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD reverse_iterator deque&lt; T, Alloc, BufSize &gt;::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>deque::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素之前位置的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="969" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="969" bodyend="969"/>
+        <references refid="classdeque_1a98afb52a2b9cd6157e10e2dff4c84d80" compoundref="deque_8hpp" startline="927" endline="927">deque&lt; T, Alloc, BufSize &gt;::begin</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ada63cd195b55ae6688c4743324ac5108" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1a87b66790815626aad9fbf6e03678a90c" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator deque&lt; T, Alloc, BufSize &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>deque::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="975" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="975" bodyend="975"/>
+        <references refid="classdeque_1a94514c32c5a30f2ca0e18823357f5fe3" compoundref="deque_8hpp" startline="987" endline="987">deque&lt; T, Alloc, BufSize &gt;::crbegin</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ae4b53e49ec100ff6c935f108192de06c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1a87b66790815626aad9fbf6e03678a90c" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator deque&lt; T, Alloc, BufSize &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>deque::rend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="981" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="981" bodyend="981"/>
+        <references refid="classdeque_1a8e921c7d2e304d41cc6158e38f04f18f" compoundref="deque_8hpp" startline="993" endline="993">deque&lt; T, Alloc, BufSize &gt;::crend</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a94514c32c5a30f2ca0e18823357f5fe3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1a87b66790815626aad9fbf6e03678a90c" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator deque&lt; T, Alloc, BufSize &gt;::crbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crbegin</name>
+        <qualifiedname>deque::crbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="987" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="987" bodyend="987"/>
+        <references refid="classdeque_1aa6ab05b3ac23e0476409577283fc57d7" compoundref="deque_8hpp" startline="957" endline="957">deque&lt; T, Alloc, BufSize &gt;::cend</references>
+        <referencedby refid="classdeque_1ada63cd195b55ae6688c4743324ac5108" compoundref="deque_8hpp" startline="975" endline="975">deque&lt; T, Alloc, BufSize &gt;::rbegin</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a8e921c7d2e304d41cc6158e38f04f18f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1a87b66790815626aad9fbf6e03678a90c" kindref="member">const_reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD const_reverse_iterator deque&lt; T, Alloc, BufSize &gt;::crend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crend</name>
+        <qualifiedname>deque::crend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="993" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="993" bodyend="993"/>
+        <references refid="classdeque_1acb9ef1a1308c650904783174c2dfc249" compoundref="deque_8hpp" startline="951" endline="951">deque&lt; T, Alloc, BufSize &gt;::cbegin</references>
+        <referencedby refid="classdeque_1ae4b53e49ec100ff6c935f108192de06c" compoundref="deque_8hpp" startline="981" endline="981">deque&lt; T, Alloc, BufSize &gt;::rend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ac6b72fd2b10ac783bfe96edfbd39b158" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type deque&lt; T, Alloc, BufSize &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>deque::size</qualifiedname>
+        <briefdescription>
+<para>获取当前元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="999" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="999" bodyend="999"/>
+        <referencedby refid="classdeque_1a94792822506120513940582f2ac1ec10" compoundref="deque_8hpp" startline="1313" endline="1333">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+        <referencedby refid="classdeque_1a52338e7ad6f3a127e8f7baeb4d80246a" compoundref="deque_8hpp" startline="1294" endline="1305">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+        <referencedby refid="classdeque_1afc8aee0b6ed56366dc9f34ee46107a25" compoundref="deque_8hpp" startline="863" endline="877">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1a6d99623953b72f0760b4cc8321882874" compoundref="deque_8hpp" startline="1057" endline="1064">deque&lt; T, Alloc, BufSize &gt;::resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a648ba40b6fc4d3795700d135a49db841" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type deque&lt; T, Alloc, BufSize &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>deque::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1005" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1005" bodyend="1005"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1accb2a403098d4c448e6ec8a676d6d61c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool deque&lt; T, Alloc, BufSize &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>deque::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1011" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1011" bodyend="1011"/>
+        <referencedby refid="classdeque_1a11a2f85536142ecf476cc8f632d755cc" compoundref="deque_8hpp" startline="1044" endline="1047">deque&lt; T, Alloc, BufSize &gt;::back</referencedby>
+        <referencedby refid="classdeque_1ad4e54f3735a99bdd5d5a9df0269b2c5e" compoundref="deque_8hpp" startline="1035" endline="1038">deque&lt; T, Alloc, BufSize &gt;::back</referencedby>
+        <referencedby refid="classdeque_1a9d3ebba82b4169c50db331016fac5bc0" compoundref="deque_8hpp" startline="1026" endline="1029">deque&lt; T, Alloc, BufSize &gt;::front</referencedby>
+        <referencedby refid="classdeque_1aa42014ac40bcb37d3fb55cc6f6ea4a22" compoundref="deque_8hpp" startline="1017" endline="1020">deque&lt; T, Alloc, BufSize &gt;::front</referencedby>
+        <referencedby refid="classdeque_1a43206d200267af194dc0c6836740c996" compoundref="deque_8hpp" startline="1153" endline="1166">deque&lt; T, Alloc, BufSize &gt;::pop_back</referencedby>
+        <referencedby refid="classdeque_1acd9396712c8f5d8a1fce913a0be67052" compoundref="deque_8hpp" startline="1171" endline="1184">deque&lt; T, Alloc, BufSize &gt;::pop_front</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1aa42014ac40bcb37d3fb55cc6f6ea4a22" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ac0c04ff2064a2ab05372ab9e4d5639bf" kindref="member">reference</ref></type>
+        <definition>NEFORCE_NODISCARD reference deque&lt; T, Alloc, BufSize &gt;::front</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>front</name>
+        <qualifiedname>deque::front</qualifiedname>
+        <briefdescription>
+<para>访问第一个元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>第一个元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1017" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1017" bodyend="1020"/>
+        <references refid="classdeque_1accb2a403098d4c448e6ec8a676d6d61c" compoundref="deque_8hpp" startline="1011" endline="1011">deque&lt; T, Alloc, BufSize &gt;::empty</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a9d3ebba82b4169c50db331016fac5bc0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ad723de2349ae5871bead762970ee1e35" kindref="member">const_reference</ref></type>
+        <definition>NEFORCE_NODISCARD const_reference deque&lt; T, Alloc, BufSize &gt;::front</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>front</name>
+        <qualifiedname>deque::front</qualifiedname>
+        <briefdescription>
+<para>访问第一个常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>第一个元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1026" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1026" bodyend="1029"/>
+        <references refid="classdeque_1accb2a403098d4c448e6ec8a676d6d61c" compoundref="deque_8hpp" startline="1011" endline="1011">deque&lt; T, Alloc, BufSize &gt;::empty</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ad4e54f3735a99bdd5d5a9df0269b2c5e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ac0c04ff2064a2ab05372ab9e4d5639bf" kindref="member">reference</ref></type>
+        <definition>NEFORCE_NODISCARD reference deque&lt; T, Alloc, BufSize &gt;::back</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>back</name>
+        <qualifiedname>deque::back</qualifiedname>
+        <briefdescription>
+<para>访问最后一个元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最后一个元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1035" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1035" bodyend="1038"/>
+        <references refid="classdeque_1accb2a403098d4c448e6ec8a676d6d61c" compoundref="deque_8hpp" startline="1011" endline="1011">deque&lt; T, Alloc, BufSize &gt;::empty</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a11a2f85536142ecf476cc8f632d755cc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ad723de2349ae5871bead762970ee1e35" kindref="member">const_reference</ref></type>
+        <definition>NEFORCE_NODISCARD const_reference deque&lt; T, Alloc, BufSize &gt;::back</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>back</name>
+        <qualifiedname>deque::back</qualifiedname>
+        <briefdescription>
+<para>访问最后一个常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最后一个元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1044" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1044" bodyend="1047"/>
+        <references refid="classdeque_1accb2a403098d4c448e6ec8a676d6d61c" compoundref="deque_8hpp" startline="1011" endline="1011">deque&lt; T, Alloc, BufSize &gt;::empty</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a6d99623953b72f0760b4cc8321882874" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::resize</definition>
+        <argsstring>(size_type n, const T &amp;value)</argsstring>
+        <name>resize</name>
+        <qualifiedname>deque::resize</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>调整大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的大小 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>用于填充新元素的默认值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+如果新大小小于当前大小，删除多余元素； 如果大于当前大小，在末尾插入指定值的副本。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1057" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1057" bodyend="1064"/>
+        <references refid="classdeque_1a52338e7ad6f3a127e8f7baeb4d80246a" compoundref="deque_8hpp" startline="1294" endline="1305">deque&lt; T, Alloc, BufSize &gt;::erase</references>
+        <references refid="classdeque_1a6cebdf61a3a9f2448f679ed3fd8da6e0" compoundref="deque_8hpp" startline="1216" endline="1226">deque&lt; T, Alloc, BufSize &gt;::insert</references>
+        <references refid="classdeque_1ac6b72fd2b10ac783bfe96edfbd39b158" compoundref="deque_8hpp" startline="999" endline="999">deque&lt; T, Alloc, BufSize &gt;::size</references>
+        <referencedby refid="classdeque_1a05de6d491766321374ce879f29c2f164" compoundref="deque_8hpp" startline="1070" endline="1070">deque&lt; T, Alloc, BufSize &gt;::resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a05de6d491766321374ce879f29c2f164" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::resize</definition>
+        <argsstring>(const size_type n)</argsstring>
+        <name>resize</name>
+        <qualifiedname>deque::resize</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>使用默认构造的元素调整大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1070" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1070" bodyend="1070"/>
+        <references refid="group___type_initialize_function_1gafff7aa9d7280a07a58464ccdf4a8931a" compoundref="type__traits_8hpp" startline="4318" endline="4321">initialize</references>
+        <references refid="classdeque_1a6d99623953b72f0760b4cc8321882874" compoundref="deque_8hpp" startline="1057" endline="1064">deque&lt; T, Alloc, BufSize &gt;::resize</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ab7d884944fc917015465c84380a2b13e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>iterator deque&lt; T, Alloc, BufSize &gt;::emplace</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>deque::emplace</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1080" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1080" bodyend="1090"/>
+        <references refid="classdeque_1a5100707179dde9adc98257e8124a89ae" compoundref="deque_8hpp" startline="1098" endline="1107">deque&lt; T, Alloc, BufSize &gt;::emplace_back</references>
+        <references refid="classdeque_1adf16fcef6659022e90368edfa08c5309" compoundref="deque_8hpp" startline="1115" endline="1124">deque&lt; T, Alloc, BufSize &gt;::emplace_front</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a5100707179dde9adc98257e8124a89ae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::emplace_back</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_back</name>
+        <qualifiedname>deque::emplace_back</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在末尾构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1098" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1098" bodyend="1107"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <referencedby refid="classdeque_1ab7d884944fc917015465c84380a2b13e" compoundref="deque_8hpp" startline="1080" endline="1090">deque&lt; T, Alloc, BufSize &gt;::emplace</referencedby>
+        <referencedby refid="classdeque_1a57f96fda19136ccb3e5ee50afac92711" compoundref="deque_8hpp" startline="1234" endline="1244">deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+        <referencedby refid="classdeque_1a23f142950098fcf594169c49f633eef0" compoundref="deque_8hpp" startline="1130" endline="1130">deque&lt; T, Alloc, BufSize &gt;::push_back</referencedby>
+        <referencedby refid="classdeque_1ad35c524de02a4fdb5b89f57f1c474ca6" compoundref="deque_8hpp" startline="1142" endline="1142">deque&lt; T, Alloc, BufSize &gt;::push_back</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1adf16fcef6659022e90368edfa08c5309" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::emplace_front</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace_front</name>
+        <qualifiedname>deque::emplace_front</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在开头构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1115" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1115" bodyend="1124"/>
+        <references refid="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" compoundref="construct_8hpp" startline="33" endline="36">construct</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <referencedby refid="classdeque_1ab7d884944fc917015465c84380a2b13e" compoundref="deque_8hpp" startline="1080" endline="1090">deque&lt; T, Alloc, BufSize &gt;::emplace</referencedby>
+        <referencedby refid="classdeque_1a57f96fda19136ccb3e5ee50afac92711" compoundref="deque_8hpp" startline="1234" endline="1244">deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+        <referencedby refid="classdeque_1a8e2918ade8b4bd10ed284a4848b8608c" compoundref="deque_8hpp" startline="1136" endline="1136">deque&lt; T, Alloc, BufSize &gt;::push_front</referencedby>
+        <referencedby refid="classdeque_1a6b3765ff861ba1af72b0f3ac76b983e2" compoundref="deque_8hpp" startline="1148" endline="1148">deque&lt; T, Alloc, BufSize &gt;::push_front</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a23f142950098fcf594169c49f633eef0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::push_back</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>push_back</name>
+        <qualifiedname>deque::push_back</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在末尾拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1130" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1130" bodyend="1130"/>
+        <references refid="classdeque_1a5100707179dde9adc98257e8124a89ae" compoundref="deque_8hpp" startline="1098" endline="1107">deque&lt; T, Alloc, BufSize &gt;::emplace_back</references>
+        <referencedby refid="classdeque_1a6cebdf61a3a9f2448f679ed3fd8da6e0" compoundref="deque_8hpp" startline="1216" endline="1226">deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a8e2918ade8b4bd10ed284a4848b8608c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::push_front</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>push_front</name>
+        <qualifiedname>deque::push_front</qualifiedname>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在开头拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1136" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1136" bodyend="1136"/>
+        <references refid="classdeque_1adf16fcef6659022e90368edfa08c5309" compoundref="deque_8hpp" startline="1115" endline="1124">deque&lt; T, Alloc, BufSize &gt;::emplace_front</references>
+        <referencedby refid="classdeque_1a6cebdf61a3a9f2448f679ed3fd8da6e0" compoundref="deque_8hpp" startline="1216" endline="1226">deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ad35c524de02a4fdb5b89f57f1c474ca6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::push_back</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>push_back</name>
+        <qualifiedname>deque::push_back</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在末尾移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1142" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1142" bodyend="1142"/>
+        <references refid="classdeque_1a5100707179dde9adc98257e8124a89ae" compoundref="deque_8hpp" startline="1098" endline="1107">deque&lt; T, Alloc, BufSize &gt;::emplace_back</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a6b3765ff861ba1af72b0f3ac76b983e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::push_front</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>push_front</name>
+        <qualifiedname>deque::push_front</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在开头移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1148" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1148" bodyend="1148"/>
+        <references refid="classdeque_1adf16fcef6659022e90368edfa08c5309" compoundref="deque_8hpp" startline="1115" endline="1124">deque&lt; T, Alloc, BufSize &gt;::emplace_front</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a43206d200267af194dc0c6836740c996" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; value_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::pop_back</definition>
+        <argsstring>()</argsstring>
+        <name>pop_back</name>
+        <qualifiedname>deque::pop_back</qualifiedname>
+        <briefdescription>
+<para>移除末尾元素 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1153" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1153" bodyend="1166"/>
+        <references refid="classdeque_1a67b47395f4c5b6bf8fef4a3e0df786da" compoundref="deque_8hpp" startline="286">deque&lt; T, Alloc, BufSize &gt;::buffer_size</references>
+        <references refid="group___inplace_memory_function_1ga944697ea9e7569e2eab45433e8109032" compoundref="construct_8hpp" startline="46" endline="48">destroy</references>
+        <references refid="classdeque_1accb2a403098d4c448e6ec8a676d6d61c" compoundref="deque_8hpp" startline="1011" endline="1011">deque&lt; T, Alloc, BufSize &gt;::empty</references>
+        <references refid="group___type_special_member_function_checks_1ga826320e89a7a8ec2f75d2c960df7011d" compoundref="type__traits_8hpp" startline="2966">is_nothrow_destructible_v</references>
+        <referencedby refid="classdeque_1a52338e7ad6f3a127e8f7baeb4d80246a" compoundref="deque_8hpp" startline="1294" endline="1305">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1acd9396712c8f5d8a1fce913a0be67052" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; value_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::pop_front</definition>
+        <argsstring>()</argsstring>
+        <name>pop_front</name>
+        <qualifiedname>deque::pop_front</qualifiedname>
+        <briefdescription>
+<para>移除开头元素 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1171" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1171" bodyend="1184"/>
+        <references refid="classdeque_1a67b47395f4c5b6bf8fef4a3e0df786da" compoundref="deque_8hpp" startline="286">deque&lt; T, Alloc, BufSize &gt;::buffer_size</references>
+        <references refid="group___inplace_memory_function_1ga944697ea9e7569e2eab45433e8109032" compoundref="construct_8hpp" startline="46" endline="48">destroy</references>
+        <references refid="classdeque_1accb2a403098d4c448e6ec8a676d6d61c" compoundref="deque_8hpp" startline="1011" endline="1011">deque&lt; T, Alloc, BufSize &gt;::empty</references>
+        <references refid="group___type_special_member_function_checks_1ga826320e89a7a8ec2f75d2c960df7011d" compoundref="type__traits_8hpp" startline="2966">is_nothrow_destructible_v</references>
+        <referencedby refid="classdeque_1a52338e7ad6f3a127e8f7baeb4d80246a" compoundref="deque_8hpp" startline="1294" endline="1305">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1aedecaa32b2ac5d10c3eb9a8314fd07f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::assign</definition>
+        <argsstring>(const size_type count, const T &amp;value)</argsstring>
+        <name>assign</name>
+        <qualifiedname>deque::assign</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>赋值n个指定值的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要赋的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1191" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1191" bodyend="1191"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a2f6d3f7af63ba079a732a3752638183e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::assign</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>assign</name>
+        <qualifiedname>deque::assign</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1200" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1200" bodyend="1202"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a6a92be40ef60057523713e6c3c186e56" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::assign</definition>
+        <argsstring>(std::initializer_list&lt; T &gt; ilist)</argsstring>
+        <name>assign</name>
+        <qualifiedname>deque::assign</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1208" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1208" bodyend="1208"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a6cebdf61a3a9f2448f679ed3fd8da6e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>iterator deque&lt; T, Alloc, BufSize &gt;::insert</definition>
+        <argsstring>(iterator position, const T &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>deque::insert</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1216" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1216" bodyend="1226"/>
+        <references refid="group___iterator_operation_1gaf4cd040af11ff6b9b0fc0f4d70a7eb5e" compoundref="iterator_8hpp" startline="141" endline="145">prev</references>
+        <references refid="classdeque_1a23f142950098fcf594169c49f633eef0" compoundref="deque_8hpp" startline="1130" endline="1130">deque&lt; T, Alloc, BufSize &gt;::push_back</references>
+        <references refid="classdeque_1a8e2918ade8b4bd10ed284a4848b8608c" compoundref="deque_8hpp" startline="1136" endline="1136">deque&lt; T, Alloc, BufSize &gt;::push_front</references>
+        <referencedby refid="classdeque_1abde1583fef802a0ee36139a2f36dbe44" compoundref="deque_8hpp" startline="1263" endline="1265">deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+        <referencedby refid="classdeque_1afc8aee0b6ed56366dc9f34ee46107a25" compoundref="deque_8hpp" startline="863" endline="877">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1a6d99623953b72f0760b4cc8321882874" compoundref="deque_8hpp" startline="1057" endline="1064">deque&lt; T, Alloc, BufSize &gt;::resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a57f96fda19136ccb3e5ee50afac92711" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>iterator deque&lt; T, Alloc, BufSize &gt;::insert</definition>
+        <argsstring>(iterator position, T &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>deque::insert</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在指定位置移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1234" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1234" bodyend="1244"/>
+        <references refid="classdeque_1a5100707179dde9adc98257e8124a89ae" compoundref="deque_8hpp" startline="1098" endline="1107">deque&lt; T, Alloc, BufSize &gt;::emplace_back</references>
+        <references refid="classdeque_1adf16fcef6659022e90368edfa08c5309" compoundref="deque_8hpp" startline="1115" endline="1124">deque&lt; T, Alloc, BufSize &gt;::emplace_front</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___iterator_operation_1gaf4cd040af11ff6b9b0fc0f4d70a7eb5e" compoundref="iterator_8hpp" startline="141" endline="145">prev</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ad2f2918de191c609d09fc0948a522474" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" kindref="member">is_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::insert</definition>
+        <argsstring>(iterator position, Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>deque::insert</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1254" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1254" bodyend="1256"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1abde1583fef802a0ee36139a2f36dbe44" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>iterator deque&lt; T, Alloc, BufSize &gt;::insert</definition>
+        <argsstring>(iterator position, std::initializer_list&lt; T &gt; list)</argsstring>
+        <name>insert</name>
+        <qualifiedname>deque::insert</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>std::initializer_list&lt; T &gt;</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表插入 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>list</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1263" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1263" bodyend="1265"/>
+        <references refid="classlist_1a5a52c17b7cd3a3899a38f2067d7b8ec8" compoundref="list_8hpp" startline="396" endline="396">list&lt; T, Alloc &gt;::begin</references>
+        <references refid="classlist_1ac3436051e8562ead05c67ff400e78707" compoundref="list_8hpp" startline="402" endline="402">list&lt; T, Alloc &gt;::end</references>
+        <references refid="classdeque_1a6cebdf61a3a9f2448f679ed3fd8da6e0" compoundref="deque_8hpp" startline="1216" endline="1226">deque&lt; T, Alloc, BufSize &gt;::insert</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1aaafb1c5f8fad779fdc5360a3197b6a87" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::insert</definition>
+        <argsstring>(iterator position, const size_t n, const T &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>deque::insert</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>插入n个指定值的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1273" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1273" bodyend="1287"/>
+        <references refid="group___uninitialized_memory_operations_1gaa3c7446fdf46fd39cfbe18593667d6d5" compoundref="uninitialized_8hpp" startline="288" endline="290">uninitialized_fill_n</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a52338e7ad6f3a127e8f7baeb4d80246a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>iterator deque&lt; T, Alloc, BufSize &gt;::erase</definition>
+        <argsstring>(iterator position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>deque::erase</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1294" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1294" bodyend="1305"/>
+        <references refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" compoundref="shift_8hpp" startline="90" endline="98">copy</references>
+        <references refid="group___shift_algorithms_1ga4d3adeb0c2f00c00929d912671c22729" compoundref="shift_8hpp" startline="245" endline="254">copy_backward</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <references refid="classdeque_1a43206d200267af194dc0c6836740c996" compoundref="deque_8hpp" startline="1153" endline="1166">deque&lt; T, Alloc, BufSize &gt;::pop_back</references>
+        <references refid="classdeque_1acd9396712c8f5d8a1fce913a0be67052" compoundref="deque_8hpp" startline="1171" endline="1184">deque&lt; T, Alloc, BufSize &gt;::pop_front</references>
+        <references refid="classdeque_1ac6b72fd2b10ac783bfe96edfbd39b158" compoundref="deque_8hpp" startline="999" endline="999">deque&lt; T, Alloc, BufSize &gt;::size</references>
+        <referencedby refid="classdeque_1afc8aee0b6ed56366dc9f34ee46107a25" compoundref="deque_8hpp" startline="863" endline="877">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1a6d99623953b72f0760b4cc8321882874" compoundref="deque_8hpp" startline="1057" endline="1064">deque&lt; T, Alloc, BufSize &gt;::resize</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a94792822506120513940582f2ac1ec10" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+        <definition>iterator deque&lt; T, Alloc, BufSize &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>deque::erase</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后一个被删除元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1313" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1313" bodyend="1333"/>
+        <references refid="classdeque_1a043ce12ba6463b2dd4e2d155f27a74c4" compoundref="deque_8hpp" startline="1362" endline="1376">deque&lt; T, Alloc, BufSize &gt;::clear</references>
+        <references refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" compoundref="shift_8hpp" startline="90" endline="98">copy</references>
+        <references refid="group___shift_algorithms_1ga4d3adeb0c2f00c00929d912671c22729" compoundref="shift_8hpp" startline="245" endline="254">copy_backward</references>
+        <references refid="group___inplace_memory_function_1ga944697ea9e7569e2eab45433e8109032" compoundref="construct_8hpp" startline="46" endline="48">destroy</references>
+        <references refid="classdeque_1ac6b72fd2b10ac783bfe96edfbd39b158" compoundref="deque_8hpp" startline="999" endline="999">deque&lt; T, Alloc, BufSize &gt;::size</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a7cfe7a465779118495c90e91d5350da2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; value_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::shrink_to_fit</definition>
+        <argsstring>()</argsstring>
+        <name>shrink_to_fit</name>
+        <qualifiedname>deque::shrink_to_fit</qualifiedname>
+        <briefdescription>
+<para>收缩容量以适应当前大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>释放两端未使用的缓冲区，但保留中控器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1340" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1340" bodyend="1355"/>
+        <references refid="classdeque_1a67b47395f4c5b6bf8fef4a3e0df786da" compoundref="deque_8hpp" startline="286">deque&lt; T, Alloc, BufSize &gt;::buffer_size</references>
+        <references refid="group___type_special_member_function_checks_1ga826320e89a7a8ec2f75d2c960df7011d" compoundref="type__traits_8hpp" startline="2966">is_nothrow_destructible_v</references>
+        <referencedby refid="classdeque_1a043ce12ba6463b2dd4e2d155f27a74c4" compoundref="deque_8hpp" startline="1362" endline="1376">deque&lt; T, Alloc, BufSize &gt;::clear</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a043ce12ba6463b2dd4e2d155f27a74c4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; value_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>deque::clear</qualifiedname>
+        <briefdescription>
+<para>清空双端队列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>销毁所有元素，释放所有缓冲区，重置迭代器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1362" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1362" bodyend="1376"/>
+        <references refid="group___type_special_member_function_checks_1ga826320e89a7a8ec2f75d2c960df7011d" compoundref="type__traits_8hpp" startline="2966">is_nothrow_destructible_v</references>
+        <references refid="classdeque_1a7cfe7a465779118495c90e91d5350da2" compoundref="deque_8hpp" startline="1340" endline="1355">deque&lt; T, Alloc, BufSize &gt;::shrink_to_fit</references>
+        <referencedby refid="classdeque_1a94792822506120513940582f2ac1ec10" compoundref="deque_8hpp" startline="1313" endline="1333">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
+        <referencedby refid="classdeque_1a798490221ab73e7d691fe4a115de05af" compoundref="deque_8hpp" startline="890" endline="897">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1a1a5e9b314eb209e249bfd4f1da756a06" compoundref="deque_8hpp" startline="904" endline="921">deque&lt; T, Alloc, BufSize &gt;::~deque</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a3988c9295ef603ea3f7332263254d244" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ad723de2349ae5871bead762970ee1e35" kindref="member">const_reference</ref></type>
+        <definition>NEFORCE_NODISCARD const_reference deque&lt; T, Alloc, BufSize &gt;::at</definition>
+        <argsstring>(size_type position) const noexcept</argsstring>
+        <name>at</name>
+        <qualifiedname>deque::at</qualifiedname>
+        <param>
+          <type><ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>带边界检查的常量索引访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1383" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1383" bodyend="1383"/>
+        <referencedby refid="classdeque_1aa85af0ed2c917f5278cf69e273dd5264" compoundref="deque_8hpp" startline="1397" endline="1397">deque&lt; T, Alloc, BufSize &gt;::operator[]</referencedby>
+        <referencedby refid="classdeque_1a0f594207846ba5fa56dda2bf84a6f757" compoundref="deque_8hpp" startline="1404" endline="1404">deque&lt; T, Alloc, BufSize &gt;::operator[]</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1ae21ea9176a99009eda74b9f5fbad4d40" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ac0c04ff2064a2ab05372ab9e4d5639bf" kindref="member">reference</ref></type>
+        <definition>NEFORCE_NODISCARD reference deque&lt; T, Alloc, BufSize &gt;::at</definition>
+        <argsstring>(const size_type position) noexcept</argsstring>
+        <name>at</name>
+        <qualifiedname>deque::at</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>带边界检查的索引访问 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1390" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1390" bodyend="1390"/>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1aa85af0ed2c917f5278cf69e273dd5264" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ad723de2349ae5871bead762970ee1e35" kindref="member">const_reference</ref></type>
+        <definition>NEFORCE_NODISCARD const_reference deque&lt; T, Alloc, BufSize &gt;::operator[]</definition>
+        <argsstring>(const size_type position) const noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>deque::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>常量下标访问操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1397" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1397" bodyend="1397"/>
+        <references refid="classdeque_1a3988c9295ef603ea3f7332263254d244" compoundref="deque_8hpp" startline="1383" endline="1383">deque&lt; T, Alloc, BufSize &gt;::at</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a0f594207846ba5fa56dda2bf84a6f757" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classdeque_1ac0c04ff2064a2ab05372ab9e4d5639bf" kindref="member">reference</ref></type>
+        <definition>NEFORCE_NODISCARD reference deque&lt; T, Alloc, BufSize &gt;::operator[]</definition>
+        <argsstring>(const size_type position) noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>deque::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" kindref="member">size_type</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>下标访问操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1404" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1404" bodyend="1404"/>
+        <references refid="classdeque_1a3988c9295ef603ea3f7332263254d244" compoundref="deque_8hpp" startline="1383" endline="1383">deque&lt; T, Alloc, BufSize &gt;::at</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a2bc9e5114adc88054d962dd466a18920" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; map_allocator &gt; &amp;&amp;is_nothrow_swappable_v&lt; allocator_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void deque&lt; T, Alloc, BufSize &gt;::swap</definition>
+        <argsstring>(deque &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>deque::swap</qualifiedname>
+        <param>
+          <type><ref refid="classdeque" kindref="compound">deque</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个双端队列的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个双端队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1410" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1410" bodyend="1419"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <references refid="classdeque_1a17268f4bf56124fa71ebb36ef241133b" compoundref="deque_8hpp" startline="809" endline="809">deque&lt; T, Alloc, BufSize &gt;::deque</references>
+        <references refid="group___swap_utility_1ga9cc217ccd3ddd28edc3ebfd181bba2f3" compoundref="type__traits_8hpp" startline="3946">is_nothrow_swappable_v</references>
+        <references refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df">swap</references>
+        <referencedby refid="classdeque_1ad811b029e5c0ebb9e8dffc83a5dee121" compoundref="deque_8hpp" startline="883" endline="883">deque&lt; T, Alloc, BufSize &gt;::deque</referencedby>
+        <referencedby refid="classdeque_1a798490221ab73e7d691fe4a115de05af" compoundref="deque_8hpp" startline="890" endline="897">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+        <referencedby refid="classdeque_1a5e771d854d6ceec22e28db77121b5958" compoundref="deque_8hpp" startline="846" endline="850">deque&lt; T, Alloc, BufSize &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a160fbc7b7721a96794644ec6a46e1274" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE equal(cbegin(), cend(), rhs.cbegin()))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool deque&lt; T, Alloc, BufSize &gt;::equal_to</definition>
+        <argsstring>(const deque &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>deque::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque" kindref="compound">deque</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧双端队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个双端队列大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1426" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1426" bodyend="1429"/>
+        <references refid="group___type_erasure_functions_1ga796d7c7d5e48edc3e66bc8d7f701a521" compoundref="type__erase_8hpp" startline="102" endline="104">cbegin</references>
+        <references refid="group___type_erasure_functions_1gadeb4e27820f80300a080c819ded7ff45" compoundref="type__erase_8hpp" startline="114" endline="116">cend</references>
+        <references refid="classdeque_1a17268f4bf56124fa71ebb36ef241133b" compoundref="deque_8hpp" startline="809" endline="809">deque&lt; T, Alloc, BufSize &gt;::deque</references>
+        <references refid="group___compare_algorithms_1ga682c1803a35a1de8b019d003138ae5dd" compoundref="compare_8hpp" startline="54" endline="65">equal</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classdeque_1a42fd03dd1bb5dc114c12d754e58d2195" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool deque&lt; T, Alloc, BufSize &gt;::less_than</definition>
+        <argsstring>(const deque &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>deque::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classdeque" kindref="compound">deque</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧双端队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1436" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="1436" bodyend="1439"/>
+        <references refid="group___type_erasure_functions_1ga796d7c7d5e48edc3e66bc8d7f701a521" compoundref="type__erase_8hpp" startline="102" endline="104">cbegin</references>
+        <references refid="group___type_erasure_functions_1gadeb4e27820f80300a080c819ded7ff45" compoundref="type__erase_8hpp" startline="114" endline="116">cend</references>
+        <references refid="classdeque_1a17268f4bf56124fa71ebb36ef241133b" compoundref="deque_8hpp" startline="809" endline="809">deque&lt; T, Alloc, BufSize &gt;::deque</references>
+        <references refid="group___compare_algorithms_1ga9b8af8f5da11c5b93627d6e5fb30f784" compoundref="compare_8hpp" startline="451" endline="466">lexicographical_compare</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>双端队列容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BufSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>缓冲区大小（0表示自动计算）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+双端队列是一种支持在两端高效插入和删除的序列容器。 采用分块存储结构：元素被分割成多个固定大小的缓冲区， 这些缓冲区的指针存储在中控器中，从而实现动态增长和两端操作。 提供随机访问迭代器，但迭代器可能因重新分配而失效。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>deque&lt; T, Alloc, BufSize &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>deque&lt; T, Alloc, BufSize &gt;</label>
+        <link refid="classdeque"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="266" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" bodystart="266" bodyend="1440"/>
+    <listofallmembers>
+      <member refid="classdeque_1a053b811462aacb3f2b07ceaeb60b1177" prot="public" virt="non-virtual"><scope>deque</scope><name>allocator_type</name></member>
+      <member refid="classdeque_1aedecaa32b2ac5d10c3eb9a8314fd07f4" prot="public" virt="non-virtual"><scope>deque</scope><name>assign</name></member>
+      <member refid="classdeque_1a2f6d3f7af63ba079a732a3752638183e" prot="public" virt="non-virtual"><scope>deque</scope><name>assign</name></member>
+      <member refid="classdeque_1a6a92be40ef60057523713e6c3c186e56" prot="public" virt="non-virtual"><scope>deque</scope><name>assign</name></member>
+      <member refid="classdeque_1a4c3fa85ab6ce25b04c33eda75d53bae7" prot="private" virt="non-virtual"><scope>deque</scope><name>assign_aux_n</name></member>
+      <member refid="classdeque_1a7b20ac3251eea09213153f0e59c31d01" prot="private" virt="non-virtual"><scope>deque</scope><name>assign_ranges</name></member>
+      <member refid="classdeque_1a86dc39c7ae25b0f75b4a4f580da4160c" prot="private" virt="non-virtual"><scope>deque</scope><name>assign_ranges</name></member>
+      <member refid="classdeque_1a3988c9295ef603ea3f7332263254d244" prot="public" virt="non-virtual"><scope>deque</scope><name>at</name></member>
+      <member refid="classdeque_1ae21ea9176a99009eda74b9f5fbad4d40" prot="public" virt="non-virtual"><scope>deque</scope><name>at</name></member>
+      <member refid="classdeque_1ad4e54f3735a99bdd5d5a9df0269b2c5e" prot="public" virt="non-virtual"><scope>deque</scope><name>back</name></member>
+      <member refid="classdeque_1a11a2f85536142ecf476cc8f632d755cc" prot="public" virt="non-virtual"><scope>deque</scope><name>back</name></member>
+      <member refid="classdeque_1a98afb52a2b9cd6157e10e2dff4c84d80" prot="public" virt="non-virtual"><scope>deque</scope><name>begin</name></member>
+      <member refid="classdeque_1a8fcf04512c2db247c0bde1760ab13dd4" prot="public" virt="non-virtual"><scope>deque</scope><name>begin</name></member>
+      <member refid="classdeque_1a67b47395f4c5b6bf8fef4a3e0df786da" prot="public" virt="non-virtual"><scope>deque</scope><name>buffer_size</name></member>
+      <member refid="classdeque_1acb9ef1a1308c650904783174c2dfc249" prot="public" virt="non-virtual"><scope>deque</scope><name>cbegin</name></member>
+      <member refid="classdeque_1aa6ab05b3ac23e0476409577283fc57d7" prot="public" virt="non-virtual"><scope>deque</scope><name>cend</name></member>
+      <member refid="classdeque_1a043ce12ba6463b2dd4e2d155f27a74c4" prot="public" virt="non-virtual"><scope>deque</scope><name>clear</name></member>
+      <member refid="classdeque_1ac8339d67e4f48322f4ef562aa07daff2" prot="public" virt="non-virtual"><scope>deque</scope><name>const_iterator</name></member>
+      <member refid="classdeque_1a26192de88a773e3743fdb900fe035798" prot="public" virt="non-virtual"><scope>deque</scope><name>const_pointer</name></member>
+      <member refid="classdeque_1ad723de2349ae5871bead762970ee1e35" prot="public" virt="non-virtual"><scope>deque</scope><name>const_reference</name></member>
+      <member refid="classdeque_1a87b66790815626aad9fbf6e03678a90c" prot="public" virt="non-virtual"><scope>deque</scope><name>const_reverse_iterator</name></member>
+      <member refid="classdeque_1a26f5f9922b5bdfb5938227d06a32f7c5" prot="private" virt="non-virtual"><scope>deque</scope><name>copy_initialize</name></member>
+      <member refid="classdeque_1a6f0009d41d88a3a8d8934c7569be7a83" prot="private" virt="non-virtual"><scope>deque</scope><name>copy_initialize</name></member>
+      <member refid="classdeque_1a94514c32c5a30f2ca0e18823357f5fe3" prot="public" virt="non-virtual"><scope>deque</scope><name>crbegin</name></member>
+      <member refid="classdeque_1aeddac3b47224f06082b8031f83d30391" prot="private" virt="non-virtual"><scope>deque</scope><name>create_map</name></member>
+      <member refid="classdeque_1a6b8346fe75eb8e39c30f411bc248e692" prot="private" virt="non-virtual"><scope>deque</scope><name>create_map_and_nodes</name></member>
+      <member refid="classdeque_1ae50a240721cacffa23e670ff8e8fd449" prot="private" virt="non-virtual"><scope>deque</scope><name>create_nodes</name></member>
+      <member refid="classdeque_1a8e921c7d2e304d41cc6158e38f04f18f" prot="public" virt="non-virtual"><scope>deque</scope><name>crend</name></member>
+      <member refid="classdeque_1a17268f4bf56124fa71ebb36ef241133b" prot="public" virt="non-virtual"><scope>deque</scope><name>deque</name></member>
+      <member refid="classdeque_1a2dde7384e1dd5acb521afd10700b6639" prot="public" virt="non-virtual"><scope>deque</scope><name>deque</name></member>
+      <member refid="classdeque_1aa834c0d4107f06ff09f0fb65f80ddafb" prot="public" virt="non-virtual"><scope>deque</scope><name>deque</name></member>
+      <member refid="classdeque_1ad7f3a762bd0a3cb76eaac32cdcd4b799" prot="public" virt="non-virtual"><scope>deque</scope><name>deque</name></member>
+      <member refid="classdeque_1aeb42f9e8de07e79bd1d7618661a85751" prot="public" virt="non-virtual"><scope>deque</scope><name>deque</name></member>
+      <member refid="classdeque_1a042b14f0dd53ae635fca21811c31a06f" prot="public" virt="non-virtual"><scope>deque</scope><name>deque</name></member>
+      <member refid="classdeque_1ad811b029e5c0ebb9e8dffc83a5dee121" prot="public" virt="non-virtual"><scope>deque</scope><name>deque</name></member>
+      <member refid="classdeque_1aa2697dea32e1df18da5afeabf5e2e1db" prot="private" virt="non-virtual"><scope>deque</scope><name>destroy_nodes</name></member>
+      <member refid="classdeque_1acbbd5b4650f04501d73ab132a0df1932" prot="public" virt="non-virtual"><scope>deque</scope><name>difference_type</name></member>
+      <member refid="classdeque_1ab7d884944fc917015465c84380a2b13e" prot="public" virt="non-virtual"><scope>deque</scope><name>emplace</name></member>
+      <member refid="classdeque_1a5100707179dde9adc98257e8124a89ae" prot="public" virt="non-virtual"><scope>deque</scope><name>emplace_back</name></member>
+      <member refid="classdeque_1adf16fcef6659022e90368edfa08c5309" prot="public" virt="non-virtual"><scope>deque</scope><name>emplace_front</name></member>
+      <member refid="classdeque_1accb2a403098d4c448e6ec8a676d6d61c" prot="public" virt="non-virtual"><scope>deque</scope><name>empty</name></member>
+      <member refid="classdeque_1a769037c17e2e28e0038354e86dc9761f" prot="public" virt="non-virtual"><scope>deque</scope><name>end</name></member>
+      <member refid="classdeque_1a8cb50b5336a3f0e1e86eb3ff118fa5d1" prot="public" virt="non-virtual"><scope>deque</scope><name>end</name></member>
+      <member refid="classdeque_1a160fbc7b7721a96794644ec6a46e1274" prot="public" virt="non-virtual"><scope>deque</scope><name>equal_to</name></member>
+      <member refid="classdeque_1a52338e7ad6f3a127e8f7baeb4d80246a" prot="public" virt="non-virtual"><scope>deque</scope><name>erase</name></member>
+      <member refid="classdeque_1a94792822506120513940582f2ac1ec10" prot="public" virt="non-virtual"><scope>deque</scope><name>erase</name></member>
+      <member refid="classdeque_1a1e3e7c204cb927b826fe51b46e56be57" prot="private" virt="non-virtual"><scope>deque</scope><name>fill_initialize</name></member>
+      <member refid="classdeque_1a7da0f6ee6f247337e238b85db78a241b" prot="private" virt="non-virtual"><scope>deque</scope><name>finish_</name></member>
+      <member refid="classdeque_1aa42014ac40bcb37d3fb55cc6f6ea4a22" prot="public" virt="non-virtual"><scope>deque</scope><name>front</name></member>
+      <member refid="classdeque_1a9d3ebba82b4169c50db331016fac5bc0" prot="public" virt="non-virtual"><scope>deque</scope><name>front</name></member>
+      <member refid="classdeque_1af3eb39703369860f5ecc901110deaacb" prot="private" virt="non-virtual"><scope>deque</scope><name>init_map_size</name></member>
+      <member refid="classdeque_1a6cebdf61a3a9f2448f679ed3fd8da6e0" prot="public" virt="non-virtual"><scope>deque</scope><name>insert</name></member>
+      <member refid="classdeque_1a57f96fda19136ccb3e5ee50afac92711" prot="public" virt="non-virtual"><scope>deque</scope><name>insert</name></member>
+      <member refid="classdeque_1ad2f2918de191c609d09fc0948a522474" prot="public" virt="non-virtual"><scope>deque</scope><name>insert</name></member>
+      <member refid="classdeque_1abde1583fef802a0ee36139a2f36dbe44" prot="public" virt="non-virtual"><scope>deque</scope><name>insert</name></member>
+      <member refid="classdeque_1aaafb1c5f8fad779fdc5360a3197b6a87" prot="public" virt="non-virtual"><scope>deque</scope><name>insert</name></member>
+      <member refid="classdeque_1a9f5589785cb9dc7243dccfc472f01fcf" prot="private" virt="non-virtual"><scope>deque</scope><name>insert_aux</name></member>
+      <member refid="classdeque_1af5cfa34d41dec6140ab7452a53b7d2b2" prot="private" virt="non-virtual"><scope>deque</scope><name>insert_n_aux</name></member>
+      <member refid="classdeque_1a51ce083458b6584bda796c869124deb8" prot="private" virt="non-virtual"><scope>deque</scope><name>insert_ranges</name></member>
+      <member refid="classdeque_1a282dfc4be2304d33427575e629c412e6" prot="private" virt="non-virtual"><scope>deque</scope><name>insert_ranges</name></member>
+      <member refid="classdeque_1a39e79e071fd2518a983ec12b5f010b3e" prot="private" virt="non-virtual"><scope>deque</scope><name>insert_ranges_n</name></member>
+      <member refid="classdeque_1adf1f4aca5f08b6b72e638f4c8db6d279" prot="public" virt="non-virtual"><scope>deque</scope><name>iterator</name></member>
+      <member refid="classdeque_1a42fd03dd1bb5dc114c12d754e58d2195" prot="public" virt="non-virtual"><scope>deque</scope><name>less_than</name></member>
+      <member refid="classdeque_1a1513c1fa37ed9d7d2a5e0a2cee62a679" prot="private" virt="non-virtual"><scope>deque</scope><name>map_allocator</name></member>
+      <member refid="classdeque_1a7f039f56791860dfd4177b96cdb633ed" prot="private" virt="non-virtual"><scope>deque</scope><name>map_pair_</name></member>
+      <member refid="classdeque_1a28797dc2ca365e2f07dd7783d310439d" prot="private" virt="non-virtual"><scope>deque</scope><name>map_pointer</name></member>
+      <member refid="classdeque_1a3fe189e851e0fe995bc9b3ae31f88253" prot="private" virt="non-virtual"><scope>deque</scope><name>map_size_pair_</name></member>
+      <member refid="classdeque_1a648ba40b6fc4d3795700d135a49db841" prot="public" virt="non-virtual"><scope>deque</scope><name>max_size</name></member>
+      <member refid="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" virt="non-virtual"><scope>deque</scope><name>operator!=</name></member>
+      <member refid="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" virt="non-virtual"><scope>deque</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" virt="non-virtual"><scope>deque</scope><name>operator&lt;=</name></member>
+      <member refid="classdeque_1a5e771d854d6ceec22e28db77121b5958" prot="public" virt="non-virtual"><scope>deque</scope><name>operator=</name></member>
+      <member refid="classdeque_1afc8aee0b6ed56366dc9f34ee46107a25" prot="public" virt="non-virtual"><scope>deque</scope><name>operator=</name></member>
+      <member refid="classdeque_1a798490221ab73e7d691fe4a115de05af" prot="public" virt="non-virtual"><scope>deque</scope><name>operator=</name></member>
+      <member refid="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" virt="non-virtual"><scope>deque</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" virt="non-virtual"><scope>deque</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" virt="non-virtual"><scope>deque</scope><name>operator&gt;=</name></member>
+      <member refid="classdeque_1aa85af0ed2c917f5278cf69e273dd5264" prot="public" virt="non-virtual"><scope>deque</scope><name>operator[]</name></member>
+      <member refid="classdeque_1a0f594207846ba5fa56dda2bf84a6f757" prot="public" virt="non-virtual"><scope>deque</scope><name>operator[]</name></member>
+      <member refid="classdeque_1a2d9d4cd3f0e2f842cbc9418ad9424dac" prot="public" virt="non-virtual"><scope>deque</scope><name>pointer</name></member>
+      <member refid="classdeque_1a43206d200267af194dc0c6836740c996" prot="public" virt="non-virtual"><scope>deque</scope><name>pop_back</name></member>
+      <member refid="classdeque_1acd9396712c8f5d8a1fce913a0be67052" prot="public" virt="non-virtual"><scope>deque</scope><name>pop_front</name></member>
+      <member refid="classdeque_1a23f142950098fcf594169c49f633eef0" prot="public" virt="non-virtual"><scope>deque</scope><name>push_back</name></member>
+      <member refid="classdeque_1ad35c524de02a4fdb5b89f57f1c474ca6" prot="public" virt="non-virtual"><scope>deque</scope><name>push_back</name></member>
+      <member refid="classdeque_1a8e2918ade8b4bd10ed284a4848b8608c" prot="public" virt="non-virtual"><scope>deque</scope><name>push_front</name></member>
+      <member refid="classdeque_1a6b3765ff861ba1af72b0f3ac76b983e2" prot="public" virt="non-virtual"><scope>deque</scope><name>push_front</name></member>
+      <member refid="classdeque_1a30b2cc031b0c51d4d768a075fd176927" prot="public" virt="non-virtual"><scope>deque</scope><name>rbegin</name></member>
+      <member refid="classdeque_1ada63cd195b55ae6688c4743324ac5108" prot="public" virt="non-virtual"><scope>deque</scope><name>rbegin</name></member>
+      <member refid="classdeque_1a411e321445eb05c7e269debab5f14e55" prot="private" virt="non-virtual"><scope>deque</scope><name>reallocate_map</name></member>
+      <member refid="classdeque_1ac0c04ff2064a2ab05372ab9e4d5639bf" prot="public" virt="non-virtual"><scope>deque</scope><name>reference</name></member>
+      <member refid="classdeque_1aafbac141eddd0aef16fcb3728eda95c8" prot="public" virt="non-virtual"><scope>deque</scope><name>rend</name></member>
+      <member refid="classdeque_1ae4b53e49ec100ff6c935f108192de06c" prot="public" virt="non-virtual"><scope>deque</scope><name>rend</name></member>
+      <member refid="classdeque_1a6d99623953b72f0760b4cc8321882874" prot="public" virt="non-virtual"><scope>deque</scope><name>resize</name></member>
+      <member refid="classdeque_1a05de6d491766321374ce879f29c2f164" prot="public" virt="non-virtual"><scope>deque</scope><name>resize</name></member>
+      <member refid="classdeque_1a4e6018f7a8f07be49e6b019931a21374" prot="public" virt="non-virtual"><scope>deque</scope><name>reverse_iterator</name></member>
+      <member refid="classdeque_1a7cfe7a465779118495c90e91d5350da2" prot="public" virt="non-virtual"><scope>deque</scope><name>shrink_to_fit</name></member>
+      <member refid="classdeque_1ac6b72fd2b10ac783bfe96edfbd39b158" prot="public" virt="non-virtual"><scope>deque</scope><name>size</name></member>
+      <member refid="classdeque_1ab1eed4f8a3eb7c2675dd69947f04c72f" prot="public" virt="non-virtual"><scope>deque</scope><name>size_type</name></member>
+      <member refid="classdeque_1a77b0e49d057ed747afbca9ae164786d7" prot="private" virt="non-virtual"><scope>deque</scope><name>start_</name></member>
+      <member refid="classdeque_1a2bc9e5114adc88054d962dd466a18920" prot="public" virt="non-virtual"><scope>deque</scope><name>swap</name></member>
+      <member refid="classdeque_1a01912c1545bfbdef7c012542ec761ef4" prot="public" virt="non-virtual"><scope>deque</scope><name>value_type</name></member>
+      <member refid="classdeque_1a1a5e9b314eb209e249bfd4f1da756a06" prot="public" virt="non-virtual"><scope>deque</scope><name>~deque</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

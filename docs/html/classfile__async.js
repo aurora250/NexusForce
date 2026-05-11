@@ -1,10 +1,10 @@
 var classfile__async =
 [
     [ "async_result", "structfile__async_1_1async__result.html", "structfile__async_1_1async__result" ],
-    [ "aiocb_type", "classfile__async.html#a110a0a81e3cc38623a3d2e5d6c4eb063", null ],
-    [ "difference_type", "classfile__async.html#ac632bce1de27636f174add6550b4f786", null ],
+    [ "aiocb_type", "classfile__async.html#a806795660074f7825f91730c57ab32bf", null ],
+    [ "difference_type", "classfile__async.html#aa89bd5ba6636db0098aed0ee62b49d2c", null ],
     [ "native_handle_type", "classfile__async.html#a8b645f877995e8d118070dc12c6ba3bd", null ],
-    [ "size_type", "classfile__async.html#ae2b83eb43005b5544c6e52afd935c03f", null ],
+    [ "size_type", "classfile__async.html#a1dffe3f8526b94e6327e43895c6b577c", null ],
     [ "file_async", "classfile__async.html#aa27dd3253c71dea9e0329739724561fb", null ],
     [ "~file_async", "classfile__async.html#ac23d04d4fa4c0cf5448b5373cf40506a", null ],
     [ "file_async", "classfile__async.html#a5d896cd10fd4ca97b016db8bc30143d3", null ],

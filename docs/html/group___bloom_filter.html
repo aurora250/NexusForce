@@ -165,8 +165,8 @@ $(function(){initNavTree('group___bloom_filter.html','',''); });
 <h1 class="doxsection"><a class="anchor" id="double_hashing"></a>
 双哈希技术</h1>
 <p>本实现采用 Kirsch &amp; Mitzenmacher (2006) 提出的双哈希技术：</p>
-<p>**原理**： 仅计算两个独立的哈希值 h₁(x) 和 h₂(x)，通过线性组合生成 k 个哈希值： </p><div class="fragment"><div class="line">g_i(x) = (h₁(x) + i × h₂(x)) <a class="code hl_function" href="group___math_functions.html#gac2fc02d8beaa56845fd51333276c1ca0">mod</a> m  (i = 0, 1, ..., k-1)</div>
-<div class="ttc" id="agroup___math_functions_html_gac2fc02d8beaa56845fd51333276c1ca0"><div class="ttname"><a href="group___math_functions.html#gac2fc02d8beaa56845fd51333276c1ca0">mod</a></div><div class="ttdeci">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 enable_if_t&lt; is_floating_point_v&lt; T &gt;, T &gt; mod(const T x, const T y)</div><div class="ttdoc">浮点数取模运算</div><div class="ttdef"><b>定义</b> <a href="math_8hpp_source.html#l00333">math.hpp:333</a></div></div>
+<p>**原理**： 仅计算两个独立的哈希值 h₁(x) 和 h₂(x)，通过线性组合生成 k 个哈希值： </p><div class="fragment"><div class="line">g_i(x) = (h₁(x) + i × h₂(x)) <a class="code hl_function" href="group___math_functions.html#ga584831cb7db02edb5d37b30a050b5736">mod</a> m  (i = 0, 1, ..., k-1)</div>
+<div class="ttc" id="agroup___math_functions_html_ga584831cb7db02edb5d37b30a050b5736"><div class="ttname"><a href="group___math_functions.html#ga584831cb7db02edb5d37b30a050b5736">mod</a></div><div class="ttdeci">NEFORCE_CONSTEXPR14 enable_if_t&lt; is_floating_point_v&lt; T &gt;, T &gt; mod(const T x, const T y)</div><div class="ttdoc">浮点数取模运算</div><div class="ttdef"><b>定义</b> <a href="math_8hpp_source.html#l00346">math.hpp:346</a></div></div>
 </div><!-- fragment --><p>**优点**：</p><ul>
 <li>减少哈希计算开销</li>
 <li>理论证明与 k 个独立哈希函数具有相同的渐近性能</li>

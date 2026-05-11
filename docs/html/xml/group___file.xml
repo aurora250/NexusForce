@@ -1,0 +1,829 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___file" kind="group">
+    <compoundname>File</compoundname>
+    <title>文件</title>
+    <innerclass refid="classfile" prot="public">file</innerclass>
+    <innerclass refid="classfile__async" prot="public">file_async</innerclass>
+    <innerclass refid="classfile__diff" prot="public">file_diff</innerclass>
+    <innerclass refid="classfile__info" prot="public">file_info</innerclass>
+    <innerclass refid="classfile__locker" prot="public">file_locker</innerclass>
+    <innerclass refid="classfile__lock__guard" prot="public">file_lock_guard</innerclass>
+    <innerclass refid="classfile__mapper" prot="public">file_mapper</innerclass>
+    <innerclass refid="classfile__watcher" prot="public">file_watcher</innerclass>
+    <innerclass refid="classfilesystem" prot="public">filesystem</innerclass>
+    <innerclass refid="classpath" prot="public">path</innerclass>
+    <innerclass refid="classpath__tree" prot="public">path_tree</innerclass>
+    <innerclass refid="classtemp__file" prot="public">temp_file</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group___file_1ga9df1cddbb19e649f9e9603e4f8ed4cfe" prot="public" static="no" strong="yes">
+        <type><ref refid="group___file_1ga20cb70020500f32f8c015c7a044a4dfe" kindref="member">fud_t</ref></type>
+        <name>file_access</name>
+        <enumvalue id="group___file_1gga9df1cddbb19e649f9e9603e4f8ed4cfea3466fab4975481651940ed328aa990e4" prot="public">
+          <name>READ</name>
+          <initializer>= GENERIC_READ</initializer>
+          <briefdescription>
+<para>只读模式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga9df1cddbb19e649f9e9603e4f8ed4cfead4b9e47f65b6e79b010582f15785867e" prot="public">
+          <name>WRITE</name>
+          <initializer>= GENERIC_WRITE</initializer>
+          <briefdescription>
+<para>只写模式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga9df1cddbb19e649f9e9603e4f8ed4cfeaa7b843fb734e3b3fea8e5f902d3f4144" prot="public">
+          <name>READ_WRITE</name>
+          <initializer>= GENERIC_READ | GENERIC_WRITE</initializer>
+          <briefdescription>
+<para>读写模式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga9df1cddbb19e649f9e9603e4f8ed4cfea375ffb668aa90f1c7fcae55e9734a752" prot="public">
+          <name>APPEND</name>
+          <initializer>= FILE_APPEND_DATA | GENERIC_WRITE</initializer>
+          <briefdescription>
+<para>追加模式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>文件访问模式枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义文件的打开方式，包括读、写、读写和追加模式。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="55" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="55" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___file_1gab6d1391a16c8df9584f7eec3ed893d4d" prot="public" static="no" strong="yes">
+        <type><ref refid="group___file_1ga20cb70020500f32f8c015c7a044a4dfe" kindref="member">fud_t</ref></type>
+        <name>file_shared</name>
+        <enumvalue id="group___file_1ggab6d1391a16c8df9584f7eec3ed893d4dabfba508a0527c128dc812fda6f57cc14" prot="public">
+          <name>SHARE_READ</name>
+          <initializer>= FILE_SHARE_READ</initializer>
+          <briefdescription>
+<para>允许其他进程读取 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggab6d1391a16c8df9584f7eec3ed893d4da25243c198ae883813b4275039307d47a" prot="public">
+          <name>SHARE_WRITE</name>
+          <initializer>= FILE_SHARE_WRITE</initializer>
+          <briefdescription>
+<para>允许其他进程写入 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggab6d1391a16c8df9584f7eec3ed893d4daa7fb68a7df7bad917e3686f900f1e179" prot="public">
+          <name>SHARE_READ_WRITE</name>
+          <initializer>= FILE_SHARE_READ | FILE_SHARE_WRITE</initializer>
+          <briefdescription>
+<para>允许其他进程读写 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggab6d1391a16c8df9584f7eec3ed893d4daede250e232c3195050f4eaa485f1a395" prot="public">
+          <name>SHARE_DELETE</name>
+          <initializer>= FILE_SHARE_DELETE</initializer>
+          <briefdescription>
+<para>允许其他进程删除 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggab6d1391a16c8df9584f7eec3ed893d4da1cce1ec8e196c2f881693930d2c14475" prot="public">
+          <name>SHARE_ALL</name>
+          <initializer>= FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE</initializer>
+          <briefdescription>
+<para>允许所有操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggab6d1391a16c8df9584f7eec3ed893d4da44d94a6023de73e0b4ab722105b2ca45" prot="public">
+          <name>NO_SHARE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>不允许共享 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>文件共享模式枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义文件被其他进程访问时的共享权限。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="84" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="84" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___file_1ga90f3ddb67118cfb6f47aba25fbe6af40" prot="public" static="no" strong="yes">
+        <type><ref refid="group___file_1ga20cb70020500f32f8c015c7a044a4dfe" kindref="member">fud_t</ref></type>
+        <name>file_creation</name>
+        <enumvalue id="group___file_1gga90f3ddb67118cfb6f47aba25fbe6af40a2f44c48596198fcb93b5224b0d1d1e80" prot="public">
+          <name>CREATE_FORCE</name>
+          <initializer>= CREATE_ALWAYS</initializer>
+          <briefdescription>
+<para>强制创建新文件（覆盖已存在） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga90f3ddb67118cfb6f47aba25fbe6af40ad371e1779deb36155b5a9ceff025226a" prot="public">
+          <name>CREATE_NO_EXIST</name>
+          <initializer>= CREATE_NEW</initializer>
+          <briefdescription>
+<para>仅当文件不存在时创建 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga90f3ddb67118cfb6f47aba25fbe6af40a5e4067b50d7834bb5ab5421449bad9b4" prot="public">
+          <name>OPEN_FORCE</name>
+          <initializer>= OPEN_ALWAYS</initializer>
+          <briefdescription>
+<para>打开文件，不存在则创建 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga90f3ddb67118cfb6f47aba25fbe6af40adb93b4f44dd58007a0e7d89b7baa4690" prot="public">
+          <name>OPEN_EXIST</name>
+          <initializer>= OPEN_EXISTING</initializer>
+          <briefdescription>
+<para>仅打开已存在的文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga90f3ddb67118cfb6f47aba25fbe6af40a97cec37e07a66dd6a2f4841bd5d13b30" prot="public">
+          <name>TRUNCATE_EXIST</name>
+          <initializer>= TRUNCATE_EXISTING</initializer>
+          <briefdescription>
+<para>打开已存在文件并清空内容 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>文件创建方式枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义文件打开或创建时的行为。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="117" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="117" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___file_1gadd0b8478c8ee0d6b05880ca087016c9e" prot="public" static="no" strong="yes">
+        <type><ref refid="group___file_1ga20cb70020500f32f8c015c7a044a4dfe" kindref="member">fud_t</ref></type>
+        <name>file_attri</name>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea1e23852820b9154316c7c06e2b7ba051" prot="public">
+          <name>NORMAL</name>
+          <initializer>= FILE_ATTRIBUTE_NORMAL</initializer>
+          <briefdescription>
+<para>普通文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea34db6698cff32ac89724758fdaa5512e" prot="public">
+          <name>READONLY</name>
+          <initializer>= FILE_ATTRIBUTE_READONLY</initializer>
+          <briefdescription>
+<para>只读文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea347e628a8f72626a0611ef842fe9d304" prot="public">
+          <name>HIDDEN</name>
+          <initializer>= FILE_ATTRIBUTE_HIDDEN</initializer>
+          <briefdescription>
+<para>隐藏文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9eafa177138f94a7ea01f549b1aa7893d03" prot="public">
+          <name>SYSTEM</name>
+          <initializer>= FILE_ATTRIBUTE_SYSTEM</initializer>
+          <briefdescription>
+<para>系统文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea28766b4be065d0c806c2e9c9d914af48" prot="public">
+          <name>DIRECTORY</name>
+          <initializer>= FILE_ATTRIBUTE_DIRECTORY</initializer>
+          <briefdescription>
+<para>目录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea71f01f32e90440fd6039511dde69e995" prot="public">
+          <name>ARCHIVE</name>
+          <initializer>= FILE_ATTRIBUTE_ARCHIVE</initializer>
+          <briefdescription>
+<para>存档文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9eae10b6ab6a278644ce40631f62f360b6d" prot="public">
+          <name>DEVICE</name>
+          <initializer>= FILE_ATTRIBUTE_DEVICE</initializer>
+          <briefdescription>
+<para>设备文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea39e02cdeda38ebf7d4a898b900cf0776" prot="public">
+          <name>TEMPORARY</name>
+          <initializer>= FILE_ATTRIBUTE_TEMPORARY</initializer>
+          <briefdescription>
+<para>临时文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea3102e1ef56da08a1f6f199b6f8cb472d" prot="public">
+          <name>REPARSE_POINT</name>
+          <initializer>= FILE_ATTRIBUTE_REPARSE_POINT</initializer>
+          <briefdescription>
+<para>重解析点 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea724ba27218714b182f22d5b24b5e4317" prot="public">
+          <name>COMPRESSED</name>
+          <initializer>= FILE_ATTRIBUTE_COMPRESSED</initializer>
+          <briefdescription>
+<para>压缩文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea7ed929f45ba34eff59d81d74d4f80a58" prot="public">
+          <name>OFFLINE</name>
+          <initializer>= FILE_ATTRIBUTE_OFFLINE</initializer>
+          <briefdescription>
+<para>离线文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea3fe1c5068682cdee737d379207ab631f" prot="public">
+          <name>ENCRYPTED</name>
+          <initializer>= FILE_ATTRIBUTE_ENCRYPTED</initializer>
+          <briefdescription>
+<para>加密文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea05470727787aa721cf53222b5d3d40f3" prot="public">
+          <name>VIRTUAL</name>
+          <initializer>= FILE_ATTRIBUTE_VIRTUAL</initializer>
+          <briefdescription>
+<para>虚拟文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea9cfe110ae43252e200f2d562efc30ce4" prot="public">
+          <name>OVERLAPPED</name>
+          <initializer>= FILE_FLAG_OVERLAPPED</initializer>
+          <briefdescription>
+<para>支持异步I/O </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea63c5a1202e435a488d11461119c447fe" prot="public">
+          <name>NO_BUFFERING</name>
+          <initializer>= FILE_FLAG_NO_BUFFERING</initializer>
+          <briefdescription>
+<para>无缓冲I/O </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1" prot="public">
+          <name>WRITE_THROUGH</name>
+          <initializer>= FILE_FLAG_WRITE_THROUGH</initializer>
+          <briefdescription>
+<para>写穿缓存 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1ggadd0b8478c8ee0d6b05880ca087016c9ea8606ac74fd2decc1899004c49b226fae" prot="public">
+          <name>OTHERS</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>其他属性 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>文件属性和标志枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义文件的属性和打开时的特殊标志。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="148" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="148" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___file_1ga7af54bf3ecb820477ebc36f2f8fe9a7f" prot="public" static="no" strong="yes">
+        <type><ref refid="group___file_1ga20cb70020500f32f8c015c7a044a4dfe" kindref="member">fud_t</ref></type>
+        <name>file_pointer</name>
+        <enumvalue id="group___file_1gga7af54bf3ecb820477ebc36f2f8fe9a7fa19aad9f2fe3ce0023298ab83f7e75775" prot="public">
+          <name>BEGIN</name>
+          <initializer>= FILE_BEGIN</initializer>
+          <briefdescription>
+<para>从文件开头开始 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga7af54bf3ecb820477ebc36f2f8fe9a7faa2770969c827f0f2910f6179418462df" prot="public">
+          <name>CURRENT</name>
+          <initializer>= FILE_CURRENT</initializer>
+          <briefdescription>
+<para>从当前位置开始 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga7af54bf3ecb820477ebc36f2f8fe9a7fab1a326c06d88bf042f73d70f50197905" prot="public">
+          <name>END</name>
+          <initializer>= FILE_END</initializer>
+          <briefdescription>
+<para>从文件结尾开始 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>文件指针移动方式枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义文件指针移动时的参考位置。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="195" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="195" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" prot="public" static="no" strong="yes">
+        <type><ref refid="group___file_1ga20cb70020500f32f8c015c7a044a4dfe" kindref="member">fud_t</ref></type>
+        <name>file_lock</name>
+        <enumvalue id="group___file_1gga7ff0ce5ce53760cad46eb6509f978ecfa049518eb4dc1859c7cebbe15876cfd63" prot="public">
+          <name>SHARED</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>共享锁 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga7ff0ce5ce53760cad46eb6509f978ecfaf45c3a0bb3687ed8e221253b3fd4a2ce" prot="public">
+          <name>EXCLUSIVE</name>
+          <initializer>= LOCKFILE_EXCLUSIVE_LOCK</initializer>
+          <briefdescription>
+<para>独占锁 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga7ff0ce5ce53760cad46eb6509f978ecfa91a532cc7963546e8ea9686743f6a277" prot="public">
+          <name>FAIL_IMMEDIATELY</name>
+          <initializer>= LOCKFILE_FAIL_IMMEDIATELY</initializer>
+          <briefdescription>
+<para>立即失败 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga7ff0ce5ce53760cad46eb6509f978ecfacf442cffd430815051b1d69196d57aaf" prot="public">
+          <name>SHARED_NB</name>
+          <initializer>= LOCKFILE_FAIL_IMMEDIATELY</initializer>
+          <briefdescription>
+<para>非阻塞共享锁 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga7ff0ce5ce53760cad46eb6509f978ecfaec7817304af2e516f4ba7d65e6cdc63b" prot="public">
+          <name>EXCLUSIVE_NB</name>
+          <initializer>= LOCKFILE_EXCLUSIVE_LOCK | LOCKFILE_FAIL_IMMEDIATELY</initializer>
+          <briefdescription>
+<para>非阻塞独占锁 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>文件锁类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义文件锁的类型和行为。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="214" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="214" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___file_1ga43a6bee6e48cc42ec150c994b67f1cd7" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>file_watch_event</name>
+        <enumvalue id="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a98690bf632c29c17c9e4c5a64069903c" prot="public">
+          <name>CREATED</name>
+          <initializer>= 0x01</initializer>
+          <briefdescription>
+<para>文件创建事件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a63c2867fdcae0e8e8413d7ac21b69b59" prot="public">
+          <name>DELETED</name>
+          <initializer>= 0x02</initializer>
+          <briefdescription>
+<para>文件删除事件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a40e3819215b52841e19a7cac06b5f065" prot="public">
+          <name>MODIFIED</name>
+          <initializer>= 0x04</initializer>
+          <briefdescription>
+<para>文件修改事件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7aa25e78d8d98c26f0fd73aa560f93c828" prot="public">
+          <name>RENAMED</name>
+          <initializer>= 0x08</initializer>
+          <briefdescription>
+<para>文件重命名事件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a86e694e287d2c453e981896da405b512" prot="public">
+          <name>ACCESSED</name>
+          <initializer>= 0x10</initializer>
+          <briefdescription>
+<para>文件访问事件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga43a6bee6e48cc42ec150c994b67f1cd7a5fb1f955b45e38e31789286a1790398d" prot="public">
+          <name>ALL</name>
+          <initializer>= CREATED | DELETED | MODIFIED | RENAMED | ACCESSED</initializer>
+          <briefdescription>
+<para>所有事件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>文件监视事件枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义文件系统监视器可以捕获的事件类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="245" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="245" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___file_1ga53c3f75e3242a97262ec084d0a588b9f" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>file_map_hint</name>
+        <enumvalue id="group___file_1gga53c3f75e3242a97262ec084d0a588b9fa1e23852820b9154316c7c06e2b7ba051" prot="public">
+          <name>NORMAL</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>常规访问模式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga53c3f75e3242a97262ec084d0a588b9fa39403cd282d944abcd4f14996cb71bcb" prot="public">
+          <name>SEQUENTIAL</name>
+          <briefdescription>
+<para>顺序访问模式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___file_1gga53c3f75e3242a97262ec084d0a588b9fa170e02e86972c2be8559884cc3c12254" prot="public">
+          <name>RANDOM</name>
+          <briefdescription>
+<para>随机访问模式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>内存映射文件访问提示枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>为内存映射文件提供访问模式的提示，用于优化性能。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="261" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="261" bodyend="265"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___file_1ga20cb70020500f32f8c015c7a044a4dfe" prot="public" static="no">
+        <type>::DWORD</type>
+        <definition>using fud_t = 
+
+::DWORD</definition>
+        <argsstring></argsstring>
+        <name>fud_t</name>
+        <briefdescription>
+<para>文件描述符类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>跨平台的文件描述符类型定义。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="41" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___file_1ga99a97dd9a53a855479a0f005f533d440" prot="public" static="no" mutable="no">
+        <type>class NEFORCE_API</type>
+        <definition>class NEFORCE_API file</definition>
+        <argsstring></argsstring>
+        <name>file</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="34" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___file_1ga81f7d7b003b03ee35dbc15f23bacf639" prot="public" static="no" mutable="no">
+        <type>class NEFORCE_API</type>
+        <definition>class NEFORCE_API path_tree</definition>
+        <argsstring></argsstring>
+        <name>path_tree</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/path.hpp" line="22" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/path.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___file_1gaf5358b238dab24656ea432a18269823c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___file_1ga9df1cddbb19e649f9e9603e4f8ed4cfe" kindref="member">file_access</ref></type>
+        <definition>file_access operator|</definition>
+        <argsstring>(file_access a, file_access b)</argsstring>
+        <name>operator|</name>
+        <param>
+          <type><ref refid="group___file_1ga9df1cddbb19e649f9e9603e4f8ed4cfe" kindref="member">file_access</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga9df1cddbb19e649f9e9603e4f8ed4cfe" kindref="member">file_access</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="69" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="69" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="group___file_1ga9bb92e05af6db93a5a1259cbd65c1766" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___file_1ga9df1cddbb19e649f9e9603e4f8ed4cfe" kindref="member">file_access</ref></type>
+        <definition>file_access operator&amp;</definition>
+        <argsstring>(file_access a, file_access b)</argsstring>
+        <name>operator&amp;</name>
+        <param>
+          <type><ref refid="group___file_1ga9df1cddbb19e649f9e9603e4f8ed4cfe" kindref="member">file_access</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga9df1cddbb19e649f9e9603e4f8ed4cfe" kindref="member">file_access</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="73" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="73" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="group___file_1ga130e5b9adf8fedc94dea1d0009be9d00" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___file_1gab6d1391a16c8df9584f7eec3ed893d4d" kindref="member">file_shared</ref></type>
+        <definition>file_shared operator|</definition>
+        <argsstring>(file_shared a, file_shared b)</argsstring>
+        <name>operator|</name>
+        <param>
+          <type><ref refid="group___file_1gab6d1391a16c8df9584f7eec3ed893d4d" kindref="member">file_shared</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1gab6d1391a16c8df9584f7eec3ed893d4d" kindref="member">file_shared</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="102" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="102" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="group___file_1ga2b8a07c89bf0a337cf2f2bbb6c1cac3a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___file_1gab6d1391a16c8df9584f7eec3ed893d4d" kindref="member">file_shared</ref></type>
+        <definition>file_shared operator&amp;</definition>
+        <argsstring>(file_shared a, file_shared b)</argsstring>
+        <name>operator&amp;</name>
+        <param>
+          <type><ref refid="group___file_1gab6d1391a16c8df9584f7eec3ed893d4d" kindref="member">file_shared</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1gab6d1391a16c8df9584f7eec3ed893d4d" kindref="member">file_shared</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="106" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="106" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="group___file_1ga0dffc5707a7da73b7a54dd081386b706" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___file_1ga90f3ddb67118cfb6f47aba25fbe6af40" kindref="member">file_creation</ref></type>
+        <definition>file_creation operator|</definition>
+        <argsstring>(file_creation a, file_creation b)</argsstring>
+        <name>operator|</name>
+        <param>
+          <type><ref refid="group___file_1ga90f3ddb67118cfb6f47aba25fbe6af40" kindref="member">file_creation</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga90f3ddb67118cfb6f47aba25fbe6af40" kindref="member">file_creation</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="133" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="133" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="group___file_1ga0026e0799ff095846fe935d2ee5f9c15" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___file_1ga90f3ddb67118cfb6f47aba25fbe6af40" kindref="member">file_creation</ref></type>
+        <definition>file_creation operator&amp;</definition>
+        <argsstring>(file_creation a, file_creation b)</argsstring>
+        <name>operator&amp;</name>
+        <param>
+          <type><ref refid="group___file_1ga90f3ddb67118cfb6f47aba25fbe6af40" kindref="member">file_creation</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga90f3ddb67118cfb6f47aba25fbe6af40" kindref="member">file_creation</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="137" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="137" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="group___file_1gac9cbe6da63f65c135187684fdfe056de" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___file_1gadd0b8478c8ee0d6b05880ca087016c9e" kindref="member">file_attri</ref></type>
+        <definition>file_attri operator|</definition>
+        <argsstring>(file_attri a, file_attri b)</argsstring>
+        <name>operator|</name>
+        <param>
+          <type><ref refid="group___file_1gadd0b8478c8ee0d6b05880ca087016c9e" kindref="member">file_attri</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1gadd0b8478c8ee0d6b05880ca087016c9e" kindref="member">file_attri</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="180" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="180" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="group___file_1gad7abf6da2900e7006750ec8b242129bf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___file_1gadd0b8478c8ee0d6b05880ca087016c9e" kindref="member">file_attri</ref></type>
+        <definition>file_attri operator&amp;</definition>
+        <argsstring>(file_attri a, file_attri b)</argsstring>
+        <name>operator&amp;</name>
+        <param>
+          <type><ref refid="group___file_1gadd0b8478c8ee0d6b05880ca087016c9e" kindref="member">file_attri</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1gadd0b8478c8ee0d6b05880ca087016c9e" kindref="member">file_attri</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="184" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="184" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="group___file_1ga3e5539d83d40e2a64b6875b2f9709f85" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref></type>
+        <definition>file_lock operator|</definition>
+        <argsstring>(file_lock a, file_lock b)</argsstring>
+        <name>operator|</name>
+        <param>
+          <type><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="230" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="230" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="group___file_1gab91a588a333317483b18ed62a143f208" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref></type>
+        <definition>file_lock operator&amp;</definition>
+        <argsstring>(file_lock a, file_lock b)</argsstring>
+        <name>operator&amp;</name>
+        <param>
+          <type><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" line="234" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_constants.hpp" bodystart="234" bodyend="236"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>文件操作 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>文件操作相关类</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -14,7 +14,7 @@ var structarray__iterator =
     [ "decrement", "structarray__iterator.html#a8eaa6b6bc9f326c9a70fa012d2e9b351", null ],
     [ "dereference", "structarray__iterator.html#add603761db234acd53ccdea8c0f955c0", null ],
     [ "distance_to", "structarray__iterator.html#a84ffa4b24f34d5680a979c43374377b2", null ],
-    [ "equal", "structarray__iterator.html#a1346ee0d94b1b868e9ee9e6f881fbdc6", null ],
+    [ "equal_to", "structarray__iterator.html#a2d8824d3301837199c9baeff4e7ed1bb", null ],
     [ "increment", "structarray__iterator.html#ac2ac604cd466c3b50ced881270f753c7", null ],
     [ "less_than", "structarray__iterator.html#ac748790bb00350d4a14da4f35a49cd0d", null ],
     [ "operator[]", "structarray__iterator.html#aac6b4103a45a66f78a690ee8e445c7e6", null ]

@@ -45,7 +45,7 @@ var structatomic__base_3_01_t_01_5_01_4 =
     [ "operator=", "structatomic__base_3_01_t_01_5_01_4.html#ac6c0cacce2cdb0043b03411aadfea473", null ],
     [ "operator^=", "structatomic__base.html#a7c87e16ad9de16b216977ef1f35a40ca", null ],
     [ "operator|=", "structatomic__base.html#acee86a43dd988ca37d0c1a319903eaeb", null ],
-    [ "store", "structatomic__base_3_01_t_01_5_01_4.html#a3bb7cbe13ec8db0b8ba6f134eb31b1ab", null ],
     [ "store", "structatomic__base_3_01_t_01_5_01_4.html#a95b43b5cc705af7badc6d18dfc8b2431", null ],
+    [ "store", "structatomic__base_3_01_t_01_5_01_4.html#af64a00bcd805e76ccd7a07211cacc104", null ],
     [ "wait", "structatomic__base_3_01_t_01_5_01_4.html#af7379fe6e4ea83d93fab90faed67c15a", null ]
 ];

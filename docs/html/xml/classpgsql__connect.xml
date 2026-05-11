@@ -1,0 +1,509 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classpgsql__connect" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>pgsql_connect</compoundname>
+    <basecompoundref refid="structidb__tb__connect" prot="public" virt="non-virtual">idb_tb_connect</basecompoundref>
+    <includes refid="pgsql__connect_8hpp" local="no">pgsql_connect.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classpgsql__connect_1a302469e924ae30db8d91181b635d164b" prot="private" static="no" mutable="no">
+        <type>::PGconn *</type>
+        <definition>::PGconn* pgsql_connect::link_</definition>
+        <argsstring></argsstring>
+        <name>link_</name>
+        <qualifiedname>pgsql_connect::link_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>PostgreSQL连接句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="44" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpgsql__connect_1a46fc0b1fe4104bfc85840c8b7665746b" prot="private" static="no" mutable="yes">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string pgsql_connect::last_error_</definition>
+        <argsstring></argsstring>
+        <name>last_error_</name>
+        <qualifiedname>pgsql_connect::last_error_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>最后错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="45" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpgsql__connect_1a61a798ca149cd2581705d2152a4077a8" prot="private" static="no" mutable="yes">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t pgsql_connect::last_errno_</definition>
+        <argsstring></argsstring>
+        <name>last_errno_</name>
+        <qualifiedname>pgsql_connect::last_errno_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>最后错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="46" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classpgsql__connect_1ac9870d95c3fd6dbc78a73bb6efea9d34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>pgsql_connect::pgsql_connect</definition>
+        <argsstring>()=default</argsstring>
+        <name>pgsql_connect</name>
+        <qualifiedname>pgsql_connect::pgsql_connect</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="52" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1afd2f6fe358954bb580cf600549a59645" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>pgsql_connect::~pgsql_connect</definition>
+        <argsstring>() override</argsstring>
+        <name>~pgsql_connect</name>
+        <qualifiedname>pgsql_connect::~pgsql_connect</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动关闭数据库连接。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="59" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="59" bodyend="59"/>
+        <references refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19">idb_connect::close</references>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a34dbb9b0c024857c66c87e782a4be069" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>pgsql_connect::pgsql_connect</definition>
+        <argsstring>(const pgsql_connect &amp;)=delete</argsstring>
+        <name>pgsql_connect</name>
+        <qualifiedname>pgsql_connect::pgsql_connect</qualifiedname>
+        <param>
+          <type>const <ref refid="classpgsql__connect" kindref="compound">pgsql_connect</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="61" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1aceb07e3b69ba8e9cb23ef36d83cd2f6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classpgsql__connect" kindref="compound">pgsql_connect</ref> &amp;</type>
+        <definition>pgsql_connect &amp; pgsql_connect::operator=</definition>
+        <argsstring>(const pgsql_connect &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>pgsql_connect::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classpgsql__connect" kindref="compound">pgsql_connect</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="62" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a4ff17a8d36b989b9aed3f94df49d99cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool pgsql_connect::connect</definition>
+        <argsstring>(const db_config &amp;config) override</argsstring>
+        <name>connect</name>
+        <qualifiedname>pgsql_connect::connect</qualifiedname>
+        <reimplements refid="structidb__connect_1a7ae3001e8ef72724b952fac4ea66cde7">connect</reimplements>
+        <param>
+          <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>建立数据库连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>连接成功返回true</para>
+</simplesect>
+根据配置构建连接字符串，建立PostgreSQL连接。 连接成功后刷新存活时间。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="72" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a9215a5add6d0650189fce2d0d3b4b8a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool pgsql_connect::reconnect</definition>
+        <argsstring>(const db_config &amp;config) override</argsstring>
+        <name>reconnect</name>
+        <qualifiedname>pgsql_connect::reconnect</qualifiedname>
+        <reimplements refid="structidb__connect_1a5faaad097bbdc6d8e530eb9f3ec7af94">reconnect</reimplements>
+        <param>
+          <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>重新连接数据库 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>重连成功返回true</para>
+</simplesect>
+关闭当前连接，使用新配置重新连接。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a3450d90f43777ec011692214e68ecd82" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void pgsql_connect::close</definition>
+        <argsstring>() override</argsstring>
+        <name>close</name>
+        <qualifiedname>pgsql_connect::close</qualifiedname>
+        <reimplements refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19">close</reimplements>
+        <briefdescription>
+<para>关闭数据库连接 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="86" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a4903abe371af79d3193ae88a3a2f56aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool pgsql_connect::set_character_set</definition>
+        <argsstring>(const string &amp;encoding) const override</argsstring>
+        <name>set_character_set</name>
+        <qualifiedname>pgsql_connect::set_character_set</qualifiedname>
+        <reimplements refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad">set_character_set</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>encoding</declname>
+        </param>
+        <briefdescription>
+<para>设置字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>encoding</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符集名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="93" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a56044bf2f47f8a4150597cc183e83ede" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view pgsql_connect::get_character_set</definition>
+        <argsstring>() const override</argsstring>
+        <name>get_character_set</name>
+        <qualifiedname>pgsql_connect::get_character_set</qualifiedname>
+        <reimplements refid="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767">get_character_set</reimplements>
+        <briefdescription>
+<para>获取当前字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符集名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="99" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a9f3dca64f4be6c93db3302b269b3b61c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view pgsql_connect::get_error</definition>
+        <argsstring>() const override</argsstring>
+        <name>get_error</name>
+        <qualifiedname>pgsql_connect::get_error</qualifiedname>
+        <reimplements refid="structidb__connect_1a128b6a7646a28e85e231beb150439c01">get_error</reimplements>
+        <briefdescription>
+<para>获取最后错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="105" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="105" bodyend="105"/>
+        <references refid="classbasic__string__view_1a859a0a299a008f84cd9647cecce3a865" compoundref="basic__string__view_8hpp" startline="440" endline="442">basic_string_view&lt; CharT, Traits &gt;::view</references>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a1960703117d7a933044bbdf7ef32563f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_NODISCARD uint32_t pgsql_connect::get_errno</definition>
+        <argsstring>() const override</argsstring>
+        <name>get_errno</name>
+        <qualifiedname>pgsql_connect::get_errno</qualifiedname>
+        <reimplements refid="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e">get_errno</reimplements>
+        <briefdescription>
+<para>获取最后错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="111" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="111" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a035e9c7ee0abe108fe689c8a3a12abb0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool pgsql_connect::update</definition>
+        <argsstring>(const string &amp;sql) const override</argsstring>
+        <name>update</name>
+        <qualifiedname>pgsql_connect::update</qualifiedname>
+        <reimplements refid="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2">update</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>执行非查询SQL语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SQL语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>执行成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="118" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a31806222a34e6b49b6ad4116130da7d4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
+        <definition>unique_ptr&lt; idb_tb_result &gt; pgsql_connect::query</definition>
+        <argsstring>(const string &amp;sql) const override</argsstring>
+        <name>query</name>
+        <qualifiedname>pgsql_connect::query</qualifiedname>
+        <reimplements refid="structidb__tb__connect_1abc6b0d8058de22758e6c33fa9212e31e">query</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>执行查询SQL语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SELECT语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>查询结果集，失败返回空指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="125" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a2b5a9bf1dac1e7b784ab3f07b90d8894" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__statement" kindref="compound">idb_prepared_statement</ref> &gt;</type>
+        <definition>unique_ptr&lt; idb_prepared_statement &gt; pgsql_connect::prepare_statement</definition>
+        <argsstring>(const string &amp;sql) const override</argsstring>
+        <name>prepare_statement</name>
+        <qualifiedname>pgsql_connect::prepare_statement</qualifiedname>
+        <reimplements refid="structidb__tb__connect_1a37513bfd22b7ea67498dbac6f98e8156">prepare_statement</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>创建预处理语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>带占位符的SQL语句（使用$1, $2等） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>预处理语句对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="132" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a8480c07a5da1bae59f4b2b5d395ace01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool pgsql_connect::connected</definition>
+        <argsstring>() const override</argsstring>
+        <name>connected</name>
+        <qualifiedname>pgsql_connect::connected</qualifiedname>
+        <reimplements refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d">connected</reimplements>
+        <briefdescription>
+<para>检查连接是否已建立 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已连接返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="138" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool pgsql_connect::is_valid</definition>
+        <argsstring>() const override</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>pgsql_connect::is_valid</qualifiedname>
+        <reimplements refid="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0">is_valid</reimplements>
+        <briefdescription>
+<para>检查连接是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="144" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="144" bodyend="144"/>
+        <references refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d">idb_connect::connected</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>PostgreSQL数据库连接类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_tb_connect接口，提供PostgreSQL数据库的连接和操作功能。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>PostgreSQL连接建立和关闭</para>
+</listitem><listitem><para>字符集设置和查询</para>
+</listitem><listitem><para>SQL语句执行</para>
+</listitem><listitem><para>查询结果获取</para>
+</listitem><listitem><para>预处理语句支持</para>
+</listitem><listitem><para>连接健康检查 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>idb_connect</label>
+        <link refid="structidb__connect"/>
+      </node>
+      <node id="2">
+        <label>idb_tb_connect</label>
+        <link refid="structidb__tb__connect"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>pgsql_connect</label>
+        <link refid="classpgsql__connect"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>idb_connect</label>
+        <link refid="structidb__connect"/>
+      </node>
+      <node id="2">
+        <label>idb_tb_connect</label>
+        <link refid="structidb__tb__connect"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>pgsql_connect</label>
+        <link refid="classpgsql__connect"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="42" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="42" bodyend="145"/>
+    <listofallmembers>
+      <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>clock_type</name></member>
+      <member refid="classpgsql__connect_1a3450d90f43777ec011692214e68ecd82" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>close</name></member>
+      <member refid="classpgsql__connect_1a4ff17a8d36b989b9aed3f94df49d99cd" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>connect</name></member>
+      <member refid="classpgsql__connect_1a8480c07a5da1bae59f4b2b5d395ace01" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>connected</name></member>
+      <member refid="structidb__connect_1affedca161dc65836d2ecd3ae76e9158d" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>get_alive</name></member>
+      <member refid="classpgsql__connect_1a56044bf2f47f8a4150597cc183e83ede" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>get_character_set</name></member>
+      <member refid="classpgsql__connect_1a1960703117d7a933044bbdf7ef32563f" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>get_errno</name></member>
+      <member refid="classpgsql__connect_1a9f3dca64f4be6c93db3302b269b3b61c" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>get_error</name></member>
+      <member refid="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>is_valid</name></member>
+      <member refid="classpgsql__connect_1a61a798ca149cd2581705d2152a4077a8" prot="private" virt="non-virtual"><scope>pgsql_connect</scope><name>last_errno_</name></member>
+      <member refid="classpgsql__connect_1a46fc0b1fe4104bfc85840c8b7665746b" prot="private" virt="non-virtual"><scope>pgsql_connect</scope><name>last_error_</name></member>
+      <member refid="classpgsql__connect_1a302469e924ae30db8d91181b635d164b" prot="private" virt="non-virtual"><scope>pgsql_connect</scope><name>link_</name></member>
+      <member refid="classpgsql__connect_1aceb07e3b69ba8e9cb23ef36d83cd2f6e" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>operator=</name></member>
+      <member refid="classpgsql__connect_1ac9870d95c3fd6dbc78a73bb6efea9d34" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>pgsql_connect</name></member>
+      <member refid="classpgsql__connect_1a34dbb9b0c024857c66c87e782a4be069" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>pgsql_connect</name></member>
+      <member refid="classpgsql__connect_1a2b5a9bf1dac1e7b784ab3f07b90d8894" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>prepare_statement</name></member>
+      <member refid="classpgsql__connect_1a31806222a34e6b49b6ad4116130da7d4" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>query</name></member>
+      <member refid="classpgsql__connect_1a9215a5add6d0650189fce2d0d3b4b8a7" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>reconnect</name></member>
+      <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>refresh_alive</name></member>
+      <member refid="classpgsql__connect_1a4903abe371af79d3193ae88a3a2f56aa" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>set_character_set</name></member>
+      <member refid="classpgsql__connect_1a035e9c7ee0abe108fe689c8a3a12abb0" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>update</name></member>
+      <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>~idb_connect</name></member>
+      <member refid="structidb__tb__connect_1a4ba8618ecc342e6ddfc5c20d9f2297ad" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>~idb_tb_connect</name></member>
+      <member refid="classpgsql__connect_1afd2f6fe358954bb580cf600549a59645" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>~pgsql_connect</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

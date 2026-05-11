@@ -12,6 +12,6 @@ var structrb__tree__iterator =
     [ "container", "structrb__tree__iterator.html#ac413af7a306d208dd9aa3e164411634e", null ],
     [ "decrement", "structrb__tree__iterator.html#a2672d2cc27ad325fa496bec22d5b5ed4", null ],
     [ "dereference", "structrb__tree__iterator.html#ac0eb0c8be302069e2eee676e1aaaa898", null ],
-    [ "equal", "structrb__tree__iterator.html#aafdd3a07a0c72e560653899225cea883", null ],
+    [ "equal_to", "structrb__tree__iterator.html#a789561292d79c4ade4e4300a62e3d800", null ],
     [ "increment", "structrb__tree__iterator.html#a0b89664dddcfcb5cc5a5be70456b0dec", null ]
 ];

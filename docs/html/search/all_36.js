@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['共享内存_0',['共享内存',['../group___share_memory.html',1,'']]],
-  ['共享智能指针_1',['共享智能指针',['../group___shared_pointer.html',1,'']]]
+  ['停止令牌_0',['停止令牌',['../group___stop_tokens.html',1,'']]]
 ];

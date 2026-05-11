@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structidb__prepared__result" kind="struct" language="C++" prot="public">
+    <compoundname>idb_prepared_result</compoundname>
+    <basecompoundref refid="structidb__tb__result" prot="public" virt="non-virtual">idb_tb_result</basecompoundref>
+    <derivedcompoundref refid="classmysql__prepared__result" prot="public" virt="non-virtual">mysql_prepared_result</derivedcompoundref>
+    <derivedcompoundref refid="classpgsql__prepared__result" prot="public" virt="non-virtual">pgsql_prepared_result</derivedcompoundref>
+    <derivedcompoundref refid="structsqlite__prepared__result" prot="public" virt="non-virtual">sqlite_prepared_result</derivedcompoundref>
+    <includes refid="db__interface_8hpp" local="no">db_interface.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structidb__prepared__result_1aeb3651a0f85121a210b224c0554be6cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>idb_prepared_result::~idb_prepared_result</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~idb_prepared_result</name>
+        <qualifiedname>idb_prepared_result::~idb_prepared_result</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="133" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>预处理语句执行结果 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示预处理语句查询的结果集。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>idb_prepared_result</label>
+        <link refid="structidb__prepared__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>idb_result</label>
+        <link refid="structidb__result"/>
+      </node>
+      <node id="2">
+        <label>idb_tb_result</label>
+        <link refid="structidb__tb__result"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>mysql_prepared_result</label>
+        <link refid="classmysql__prepared__result"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>pgsql_prepared_result</label>
+        <link refid="classpgsql__prepared__result"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>sqlite_prepared_result</label>
+        <link refid="structsqlite__prepared__result"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>idb_prepared_result</label>
+        <link refid="structidb__prepared__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>idb_result</label>
+        <link refid="structidb__result"/>
+      </node>
+      <node id="2">
+        <label>idb_tb_result</label>
+        <link refid="structidb__tb__result"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="132" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="132" bodyend="134"/>
+    <listofallmembers>
+      <member refid="structidb__tb__result_1a15bba511bedb7883a9770516e60d0502" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>column_count</name></member>
+      <member refid="structidb__tb__result_1acf9e2cdb951dfadb26394addafd314bd" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>column_names</name></member>
+      <member refid="structidb__result_1a679893315e15ca3a6009b495527a89d5" prot="public" virt="non-virtual"><scope>idb_prepared_result</scope><name>difference_type</name></member>
+      <member refid="structidb__result_1aa1c85e3b42031de74a7fb1f7a95e2754" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>empty</name></member>
+      <member refid="structidb__tb__result_1ae1bc5e789f06b1d381f8922dc0c5e9af" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get</name></member>
+      <member refid="structidb__tb__result_1ab2a5e423b358828cada7a8be14651196" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_bit</name></member>
+      <member refid="structidb__tb__result_1ac3feb428fffed8adfa41c28b64bae4ea" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_blob</name></member>
+      <member refid="structidb__tb__result_1ad35689b23d23b40ed9fe12c425527c58" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_bool</name></member>
+      <member refid="structidb__tb__result_1ac54604a476b6a85e5ff0892304adf0a3" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_date</name></member>
+      <member refid="structidb__tb__result_1a0148e0ef2825f69afcbf37f1306b96cb" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_datetime</name></member>
+      <member refid="structidb__tb__result_1a3c7275cb280846f4d59fa4b78411493d" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_decimal</name></member>
+      <member refid="structidb__tb__result_1a5ef4af6943ee76fadf05fc2989d56ebd" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_float32</name></member>
+      <member refid="structidb__tb__result_1a1c4d6dcd48871d296845f934c8218cf9" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_float64</name></member>
+      <member refid="structidb__tb__result_1aed5fa0a878a1868a38db6b29308d5299" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_int16</name></member>
+      <member refid="structidb__tb__result_1a30c2b4161d1197de423889027ae5272d" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_int32</name></member>
+      <member refid="structidb__tb__result_1a313b404f40b06095313fdad5a71c36d9" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_int64</name></member>
+      <member refid="structidb__tb__result_1a0501bb1dba04138e9347c6685a8070d2" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_time</name></member>
+      <member refid="structidb__tb__result_1a25e41967e2cd971cb73a691092342f7e" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>get_timestamp</name></member>
+      <member refid="structidb__result_1a4ffe1b5d13e654c3cb99f000e7d4d093" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>next</name></member>
+      <member refid="structidb__tb__result_1aabb704cab81e3fdae2849fcdd6d73c75" prot="public" virt="pure-virtual"><scope>idb_prepared_result</scope><name>row_count</name></member>
+      <member refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" prot="public" virt="non-virtual"><scope>idb_prepared_result</scope><name>size_type</name></member>
+      <member refid="structidb__prepared__result_1aeb3651a0f85121a210b224c0554be6cb" prot="public" virt="non-virtual"><scope>idb_prepared_result</scope><name>~idb_prepared_result</name></member>
+      <member refid="structidb__result_1a0e439857c8563bcbaf6389388ce2fec1" prot="public" virt="virtual"><scope>idb_prepared_result</scope><name>~idb_result</name></member>
+      <member refid="structidb__tb__result_1a7640d4b01e32ccdbfc12b807ef985343" prot="public" virt="non-virtual"><scope>idb_prepared_result</scope><name>~idb_tb_result</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

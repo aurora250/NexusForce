@@ -1,0 +1,421 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___optional" kind="group">
+    <compoundname>Optional</compoundname>
+    <title>可选值</title>
+    <innerclass refid="classoptional" prot="public">optional</innerclass>
+    <innerclass refid="structis__optional" prot="public">is_optional</innerclass>
+    <innerclass refid="structis__optional_3_01optional_3_01_t_01_4_01_4" prot="public">is_optional&lt; optional&lt; T &gt; &gt;</innerclass>
+    <innerclass refid="classoptional_3_01_t_01_6_01_4" prot="public">optional&lt; T &amp; &gt;</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___optional_1gaaccb42e00ba01ff6d7cce7d499d82982" prot="public" static="no" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 bool</type>
+        <definition>NEFORCE_INLINE17 bool is_optional_v</definition>
+        <argsstring></argsstring>
+        <name>is_optional_v</name>
+        <initializer>= is_optional&lt;T&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="59" column="23" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___optional_1ga2b02cc74f13a05b6e8c659f3a3dccd6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>optional</definition>
+        <argsstring>(T) -&gt; optional&lt; T &gt;</argsstring>
+        <name>optional</name>
+        <param>
+          <type>T</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="1301" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" declline="1301" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___optional_1ga055e10186ceebff052851474f0006a95" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Args... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; T &gt;</type>
+        <definition>optional&lt; T &gt; make_optional</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>make_optional</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>原位构造可选值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>构造的可选值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="1313" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="1313" bodyend="1315"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___optional_1ga10bb28edf47aad45dd721e37c9104bab" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Args... &gt;" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; T, std::initializer_list&lt; U &gt; &amp;, Args... &gt;, <ref refid="classoptional" kindref="compound">optional</ref>&lt; T &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_constructible_v&lt; T, std::initializer_list&lt; U &gt; &amp;, Args... &gt;, optional&lt; T &gt; &gt; make_optional</definition>
+        <argsstring>(std::initializer_list&lt; U &gt; ilist, Args &amp;&amp;... args)</argsstring>
+        <name>make_optional</name>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>使用初始化列表原位构造可选值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>构造的可选值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="1328" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="1328" bodyend="1331"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2786">is_nothrow_constructible_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___optional_1gae9bd171664ce7a9707e125dcb00cf14d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const T &amp;</type>
+        <definition>const T &amp; get</definition>
+        <argsstring>(const optional&lt; T &gt; &amp;opt)</argsstring>
+        <name>get</name>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref>&lt; T &gt; &amp;</type>
+          <declname>opt</declname>
+        </param>
+        <briefdescription>
+<para>获取可选值中的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选值持有的值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量左值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structoptional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="1342" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="1342" bodyend="1344"/>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="group___optional_1gace8a6181c1cac3762759fde8ffc2680d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; get</definition>
+        <argsstring>(optional&lt; T &gt; &amp;opt)</argsstring>
+        <name>get</name>
+        <param>
+          <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; T &gt; &amp;</type>
+          <declname>opt</declname>
+        </param>
+        <briefdescription>
+<para>获取可选值中的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选值持有的值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的左值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structoptional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="1354" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="1354" bodyend="1356"/>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="group___optional_1gaa84ec23756699cfcc9a34867f5039179" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const T &amp;&amp;</type>
+        <definition>const T &amp;&amp; get</definition>
+        <argsstring>(const optional&lt; T &gt; &amp;&amp;opt)</argsstring>
+        <name>get</name>
+        <param>
+          <type>const <ref refid="classoptional" kindref="compound">optional</ref>&lt; T &gt; &amp;&amp;</type>
+          <declname>opt</declname>
+        </param>
+        <briefdescription>
+<para>获取可选值中的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选值持有的值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的常量右值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structoptional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="1366" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="1366" bodyend="1368"/>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="group___optional_1gaaadbd66fedcec205250ccfbadd338b8b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T &amp;&amp;</type>
+        <definition>T &amp;&amp; get</definition>
+        <argsstring>(optional&lt; T &gt; &amp;&amp;opt)</argsstring>
+        <name>get</name>
+        <param>
+          <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; T &gt; &amp;&amp;</type>
+          <declname>opt</declname>
+        </param>
+        <briefdescription>
+<para>获取可选值中的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选值持有的值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置元素的右值引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structoptional__exception" kindref="compound">optional_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果值未存储 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" line="1378" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/optional.hpp" bodystart="1378" bodyend="1380"/>
+        <references refid="classoptional_1accd36cdff6f031f655697b4c455b7a54" compoundref="optional_8hpp" startline="495" endline="500">optional&lt; T &gt;::value</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>可选值类型及相关操作 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

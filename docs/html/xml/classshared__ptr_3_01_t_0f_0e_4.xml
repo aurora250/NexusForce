@@ -1,0 +1,566 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classshared__ptr_3_01_t_0f_0e_4" kind="class" language="C++" prot="public">
+    <compoundname>shared_ptr&lt; T[]&gt;</compoundname>
+    <basecompoundref refid="classshared__ptr" prot="private" virt="non-virtual">shared_ptr&lt; T &gt;</basecompoundref>
+    <includes refid="shared__ptr_8hpp" local="no">shared_ptr.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classshared__ptr_3_01_t_0f_0e_4_1a222ee60cf85a68c21b595409f95af353" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___add_qualifiers_1gac084a21f7a057df50ed3f436567e993f" kindref="member">add_lvalue_reference_t</ref>&lt; T &gt;</type>
+        <definition>add_lvalue_reference_t&lt; T &gt; shared_ptr&lt; T[]&gt;::operator[]</definition>
+        <argsstring>(size_t idx)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::operator[]</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>数组下标运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>数组元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="746" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="746" bodyend="746"/>
+        <references refid="classshared__ptr_1af0dd23428cefac45f7c1c79069d642cc" compoundref="shared__ptr_8hpp" startline="580" endline="580">shared_ptr&lt; T &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1afe9c01b80231ffdb6a583b9bd039338b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref> &amp;</type>
+        <definition>shared_ptr &amp; shared_ptr&lt; T &gt;::operator=</definition>
+        <argsstring>(const shared_ptr &amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前共享指针的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="369" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="369" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1aa47a23f3ef476dc71989aae6563fdd13" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>shared_ptr&lt; T &gt;::~shared_ptr</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~shared_ptr</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::~shared_ptr</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>减少强引用计数，当计数为0时删除对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="503" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="503" bodyend="503"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1ac118d4abeed77dbc2fd33b0492eaa4ed" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void shared_ptr&lt; T &gt;::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::reset</qualifiedname>
+        <briefdescription>
+<para>重置共享指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="508" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="508" bodyend="514"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1a14df07f511486326b06c8904b9592eb9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD long</type>
+        <definition>NEFORCE_NODISCARD long shared_ptr&lt; T &gt;::use_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>use_count</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::use_count</qualifiedname>
+        <briefdescription>
+<para>获取引用计数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>强引用计数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="556" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="556" bodyend="556"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1ad0f39143b8c43e77e3f9d17464b351e2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool shared_ptr&lt; T &gt;::unique</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>unique</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::unique</qualifiedname>
+        <briefdescription>
+<para>检查是否独占所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否只有当前共享指针引用对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="562" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="562" bodyend="562"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1ace405e1a458c9e2a95c60b3626fcd20d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void shared_ptr&lt; T &gt;::swap</definition>
+        <argsstring>(shared_ptr &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::swap</qualifiedname>
+        <param>
+          <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个共享指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="568" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="568" bodyend="574"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1af0dd23428cefac45f7c1c79069d642cc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD T *</type>
+        <definition>NEFORCE_NODISCARD T * shared_ptr&lt; T &gt;::get</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::get</qualifiedname>
+        <briefdescription>
+<para>获取原始指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>管理的对象指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="580" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="580" bodyend="580"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1a224aa0b15a17921e871bf6011b85c59f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD T *</type>
+        <definition>NEFORCE_NODISCARD T * shared_ptr&lt; T &gt;::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>指针解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>管理的对象指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="586" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="586" bodyend="586"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1a652eb13222fd511006c0b359a870a69d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___add_qualifiers_1gac084a21f7a057df50ed3f436567e993f" kindref="member">add_lvalue_reference_t</ref>&lt; T &gt;</type>
+        <definition>NEFORCE_NODISCARD add_lvalue_reference_t&lt; T &gt; shared_ptr&lt; T &gt;::operator*</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::operator*</qualifiedname>
+        <briefdescription>
+<para>解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>对象的左值引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="592" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="592" bodyend="592"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1a39681ab35505b0530e08fc126a69e2bb" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD</type>
+        <definition>NEFORCE_NODISCARD shared_ptr&lt; T &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::operator bool</qualifiedname>
+        <briefdescription>
+<para>布尔转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否管理对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="598" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="598" bodyend="598"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1a8a6508741166eaea37769c22b78679b4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool shared_ptr&lt; T &gt;::owner_equal</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;rhs) const noexcept</argsstring>
+        <name>owner_equal</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::owner_equal</qualifiedname>
+        <param>
+          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>检查所有权是否相等 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较的共享指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否共享同一控制块 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="607" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="607" bodyend="609"/>
+      </memberdef>
+      <memberdef kind="function" id="classshared__ptr_1a146190821b353ada1e2be18df1624f32" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool shared_ptr&lt; T &gt;::owner_before</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;rhs) const noexcept</argsstring>
+        <name>owner_before</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::owner_before</qualifiedname>
+        <param>
+          <type>const <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>比较所有权顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较的共享指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前控制块地址是否小于rhs的控制块地址 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="626" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="626" bodyend="628"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classshared__ptr_1a9719b09c9168249b3ff078146ea554d0" prot="public" static="no">
+        <type>T</type>
+        <definition>using shared_ptr&lt; T &gt;::element_type = </definition>
+        <argsstring></argsstring>
+        <name>element_type</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::element_type</qualifiedname>
+        <briefdescription>
+<para>元素类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="272" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="272" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classshared__ptr_1af5e89f66eafd688bcd6b1f439ad1ddc7" prot="private" static="no">
+        <type>inner::__smart_ptr_counter</type>
+        <definition>using shared_ptr&lt; T &gt;::owner_type = </definition>
+        <argsstring></argsstring>
+        <name>owner_type</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::owner_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="275" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="275" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classshared__ptr_1a1477b02ea0e1cc248c298c5374a5e0bf" prot="private" static="no">
+        <type>inner::__smart_ptr_counter_impl&lt; U, Deleter &gt;</type>
+        <definition>using shared_ptr&lt; T &gt;::owner_deleter = </definition>
+        <argsstring></argsstring>
+        <name>owner_deleter</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::owner_deleter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="278" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="278" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classshared__ptr_1a84e33ec6d9d5dac41ea635d03a80e9a1" prot="private" static="no">
+        <type>inner::__smart_ptr_counter_impl&lt; U, <ref refid="structdefault__deleter" kindref="compound">default_deleter</ref>&lt; U &gt; &gt;</type>
+        <definition>using shared_ptr&lt; T &gt;::owner_default = </definition>
+        <argsstring></argsstring>
+        <name>owner_default</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::owner_default</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="281" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="281" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classshared__ptr_1a6b7339a68791a2ee8b096b6e6e84683c" prot="private" static="no" mutable="no">
+        <type><ref refid="classshared__ptr_1a9719b09c9168249b3ff078146ea554d0" kindref="member">element_type</ref> *</type>
+        <definition>element_type* shared_ptr&lt; T &gt;::ptr_</definition>
+        <argsstring></argsstring>
+        <name>ptr_</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::ptr_</qualifiedname>
+        <briefdescription>
+<para>管理的对象指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="283" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="283" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshared__ptr_1aef8d8d99bfeed7889551d590742e05cc" prot="private" static="no" mutable="no">
+        <type>owner_type *</type>
+        <definition>owner_type* shared_ptr&lt; T &gt;::owner_</definition>
+        <argsstring></argsstring>
+        <name>owner_</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::owner_</qualifiedname>
+        <briefdescription>
+<para>控制块指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="284" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="284" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classshared__ptr_1af1d6a6f3f2a27ed68db73635116a6eaf" prot="private" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>shared_ptr&lt; T &gt;::shared_ptr</definition>
+        <argsstring>(T *ptr, owner_type *owner) noexcept</argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::shared_ptr</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>owner_type *</type>
+          <declname>owner</declname>
+        </param>
+        <briefdescription>
+<para>私有构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对象指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>owner</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>控制块指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="291" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="291" bodyend="293"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classshared__ptr_1a9b0476a9fee76473ff0beee5309d8fbe" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; U &gt;</type>
+        <definition>shared_ptr&lt; U &gt; inner::__make_shared_fused</definition>
+        <argsstring>(U *, inner::__smart_ptr_counter *) noexcept</argsstring>
+        <name>inner::__make_shared_fused</name>
+        <qualifiedname>shared_ptr&lt; T[]&gt;::__make_shared_fused</qualifiedname>
+        <param>
+          <type>U *</type>
+        </param>
+        <param>
+          <type>inner::__smart_ptr_counter *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="305" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>数组特化的共享指针 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>shared_ptr&lt; T &gt;</label>
+        <link refid="classshared__ptr"/>
+      </node>
+      <node id="1">
+        <label>shared_ptr&lt; T[]&gt;</label>
+        <link refid="classshared__ptr_3_01_t_0f_0e_4"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>shared_ptr&lt; T &gt;</label>
+        <link refid="classshared__ptr"/>
+      </node>
+      <node id="1">
+        <label>shared_ptr&lt; T[]&gt;</label>
+        <link refid="classshared__ptr_3_01_t_0f_0e_4"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="737" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" bodystart="737" bodyend="747"/>
+    <listofallmembers>
+      <member refid="classshared__ptr_1a9719b09c9168249b3ff078146ea554d0" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>element_type</name></member>
+      <member refid="classshared__ptr_1af0dd23428cefac45f7c1c79069d642cc" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>get</name></member>
+      <member refid="classshared__ptr_1a9b0476a9fee76473ff0beee5309d8fbe" prot="private" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>inner::__make_shared_fused</name></member>
+      <member refid="classshared__ptr_1a39681ab35505b0530e08fc126a69e2bb" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>operator bool</name></member>
+      <member refid="classshared__ptr_1a652eb13222fd511006c0b359a870a69d" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>operator*</name></member>
+      <member refid="classshared__ptr_1a224aa0b15a17921e871bf6011b85c59f" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>operator-&gt;</name></member>
+      <member refid="classshared__ptr_1afe9c01b80231ffdb6a583b9bd039338b" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>operator=</name></member>
+      <member refid="classshared__ptr_1afdb658aae4338f3ba204a58c40861081" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>operator=</name></member>
+      <member refid="classshared__ptr_1a7c5591a7d27713ea3416eec3896e49af" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>operator=</name></member>
+      <member refid="classshared__ptr_1a08331d55eadf6f94256a25ce1272247d" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>operator=</name></member>
+      <member refid="classshared__ptr_3_01_t_0f_0e_4_1a222ee60cf85a68c21b595409f95af353" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>operator[]</name></member>
+      <member refid="classshared__ptr_1aef8d8d99bfeed7889551d590742e05cc" prot="private" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>owner_</name></member>
+      <member refid="classshared__ptr_1a146190821b353ada1e2be18df1624f32" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>owner_before</name></member>
+      <member refid="classshared__ptr_1a573a556b82f34083afae5eeebf6303ce" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>owner_before</name></member>
+      <member refid="classshared__ptr_1a84e33ec6d9d5dac41ea635d03a80e9a1" prot="private" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>owner_default</name></member>
+      <member refid="classshared__ptr_1a1477b02ea0e1cc248c298c5374a5e0bf" prot="private" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>owner_deleter</name></member>
+      <member refid="classshared__ptr_1a8a6508741166eaea37769c22b78679b4" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>owner_equal</name></member>
+      <member refid="classshared__ptr_1a6cde9b6e26ea5e81fa68018e30c75a6b" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>owner_equal</name></member>
+      <member refid="classshared__ptr_1af5e89f66eafd688bcd6b1f439ad1ddc7" prot="private" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>owner_type</name></member>
+      <member refid="classshared__ptr_1a6b7339a68791a2ee8b096b6e6e84683c" prot="private" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>ptr_</name></member>
+      <member refid="classshared__ptr_1ac118d4abeed77dbc2fd33b0492eaa4ed" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>reset</name></member>
+      <member refid="classshared__ptr_1a6223ce2bd1e7a3e85e4936158acef543" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>reset</name></member>
+      <member refid="classshared__ptr_1aaa2b90e688580eb3ae5650dab45137ab" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>reset</name></member>
+      <member refid="classshared__ptr_1af1d6a6f3f2a27ed68db73635116a6eaf" prot="private" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1a8042d3746d60349c2a03c2798e4659b7" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1ac7e11e0e3b6fc9eb4bc67564d260ff15" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1a98a639fa55aace07c033c96501f740dd" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1a48c74a221da446440eaecbc174f5d6a0" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1a632cc2d91df26ba1609d5e1773a07aff" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1a74f77286266c3e97be80985cefbcf7fb" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1a02e7800728c3d4507e21fa35f8525ca6" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1a10ea8901a4ff629737cb0b8f5cbfbdcf" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1a77050547e16a30e68b8dcc6884a69551" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1ace6db1cb41632c05a4f288f453b6bf71" prot="private" virt="non-virtual" ambiguityscope="shared_ptr::"><scope>shared_ptr&lt; T[]&gt;</scope><name>shared_ptr</name></member>
+      <member refid="classshared__ptr_1ace405e1a458c9e2a95c60b3626fcd20d" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>swap</name></member>
+      <member refid="classshared__ptr_1ad0f39143b8c43e77e3f9d17464b351e2" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>unique</name></member>
+      <member refid="classshared__ptr_1a14df07f511486326b06c8904b9592eb9" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>use_count</name></member>
+      <member refid="classshared__ptr_1aa47a23f3ef476dc71989aae6563fdd13" prot="public" virt="non-virtual"><scope>shared_ptr&lt; T[]&gt;</scope><name>~shared_ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -3,7 +3,7 @@ var classprocess =
     [ "state_info", "structprocess_1_1state__info.html", "structprocess_1_1state__info" ],
     [ "memory_info", "structprocess_1_1memory__info.html", "structprocess_1_1memory__info" ],
     [ "time_info", "structprocess_1_1time__info.html", "structprocess_1_1time__info" ],
-    [ "native_id_type", "classprocess.html#a20a5f8b9e680fa516dc1ce2bb65f8a53", null ],
+    [ "native_id_type", "classprocess.html#ab91bd774333ce8998d5100bb41be1da8", null ],
     [ "permission", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242", [
       [ "read", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aecae13117d6f0584c25a9da6c8f8415e", null ],
       [ "write", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee", null ],

@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___debug_breakpoints_and_assertions" kind="group">
+    <compoundname>DebugBreakpointsAndAssertions</compoundname>
+    <title>调试与断言</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___debug_breakpoints_and_assertions_1gaeb58751600e0fca687b84d898c191b4d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE void</type>
+        <definition>NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE_INLINE void unreachable</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>unreachable</name>
+        <briefdescription>
+<para>标记不可达代码路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>该函数用于向编译器指示当前代码路径永远不会被执行。当编译器遇到此调用时， 可以进行激进的优化，假设此后的代码永远不会运行。如果实际执行到了此函数， 将导致未定义行为（通常是程序崩溃或产生不可预测的结果）。</para>
+<para><simplesect kind="note"><para>此函数永远不会返回，调用后程序行为未定义。 </para>
+</simplesect>
+<simplesect kind="warning"><para>仅在确定代码路径绝对不可达时使用，否则会导致严重的运行时问题。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" line="68" column="52" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" bodystart="68" bodyend="74"/>
+        <referencedby refid="classstandard__allocator_1a3669f872023a6acb978a9c963beecd8f" compoundref="standard__allocator_8hpp" startline="377" endline="386">standard_allocator&lt; U &gt;::allocate</referencedby>
+        <referencedby refid="group___any_1gac77841c2785c6a7c7cf788160ffa9afb" compoundref="utility_2any_8hpp" startline="476" endline="487">any_cast</referencedby>
+        <referencedby refid="classmeta__any_1a25638f0d21b6df005f70854db39d4ce5" compoundref="reflect_2any_8hpp" startline="231" endline="237">meta_any::convert</referencedby>
+        <referencedby refid="classmeta__any_1a53217426a0ba55f2466c25c224eb7d7f" compoundref="reflect_2any_8hpp" startline="189" endline="195">meta_any::get</referencedby>
+        <referencedby refid="classmeta__any_1a95734a2357a5058ccedc14b697201b16" compoundref="reflect_2any_8hpp" startline="204" endline="210">meta_any::get</referencedby>
+        <referencedby refid="classtoml__datetime_1ae6070320f2e0b3aada3eb88263f39cc4" compoundref="toml__value_8hpp" startline="560" endline="578">toml_datetime::get_string_value</referencedby>
+        <referencedby refid="group___shared_pointer_1ga1caeb7d9a2a15936a6bfa478a70f937e" compoundref="shared__ptr_8hpp" startline="873" endline="884">make_shared</referencedby>
+        <referencedby refid="classcolor_1aad94570f89f1b79a4a930c05d294c52e" compoundref="color_8hpp" startline="632" endline="653">color::parse</referencedby>
+        <referencedby refid="classtoml__datetime_1a9c1e295cd66f1ede89cc620aeb223319" compoundref="toml__value_8hpp" startline="505" endline="536">toml_datetime::toml_datetime</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___debug_breakpoints_and_assertions_1gab65500ce348116b824d6cd6b0a4314bb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE constexpr bool</type>
+        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE constexpr bool is_constant_evaluated</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>is_constant_evaluated</name>
+        <briefdescription>
+<para>检查当前上下文是否在常量求值中 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果在常量求值上下文中返回true，否则返回false</para>
+</simplesect>
+用于区分编译时和运行时 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" line="83" column="63" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" bodystart="83" bodyend="85"/>
+        <referencedby refid="group___memory_allocator_1gad6fdcfaea13a6884027fc1f3c210ebe8" compoundref="standard__allocator_8hpp" startline="202" endline="217">allocate</referencedby>
+        <referencedby refid="group___memory_allocator_1gac626b2429b256f29a7ce45d2934fe644" compoundref="standard__allocator_8hpp" startline="306" endline="319">deallocate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___debug_breakpoints_and_assertions_1ga1bdd60752443b2fbe3c2b4662bdbb3d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool NEFORCE_API</type>
+        <definition>bool NEFORCE_API is_debugger_present</definition>
+        <argsstring>()</argsstring>
+        <name>is_debugger_present</name>
+        <briefdescription>
+<para>检测当前进程是否正在被调试器附加 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果正在调试则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" line="92" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" declline="92" declcolumn="18"/>
+        <referencedby refid="group___debug_breakpoints_and_assertions_1ga1ec2c81775d38ae2fa9f4dcc5362ad1a" compoundref="breakpoint_8hpp" startline="137" endline="141">breakpoint_if_debugging</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___debug_breakpoints_and_assertions_1ga44276692070c729aa1833c18ed6b642c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void NEFORCE_API</type>
+        <definition>void NEFORCE_API debug_assert</definition>
+        <argsstring>(bool condition, const char *message=nullptr)</argsstring>
+        <name>debug_assert</name>
+        <param>
+          <type>bool</type>
+          <declname>condition</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>message</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>调试断言 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>条件表达式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>message</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>断言失败时的消息</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+当条件为false时，输出断言失败信息并触发调试断点（如果正在调试）。 仅在调试构建中有效，发布构建中此函数为空操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" line="102" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" declline="102" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="group___debug_breakpoints_and_assertions_1gafa8ef7ba87451f020500628969e2d760" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE void breakpoint</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>breakpoint</name>
+        <briefdescription>
+<para>触发调试断点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>此函数会直接触发断点，无论是否有调试器附加。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" line="109" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" bodystart="109" bodyend="129"/>
+        <referencedby refid="group___debug_breakpoints_and_assertions_1ga1ec2c81775d38ae2fa9f4dcc5362ad1a" compoundref="breakpoint_8hpp" startline="137" endline="141">breakpoint_if_debugging</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___debug_breakpoints_and_assertions_1ga1ec2c81775d38ae2fa9f4dcc5362ad1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE_INLINE void breakpoint_if_debugging</definition>
+        <argsstring>()</argsstring>
+        <name>breakpoint_if_debugging</name>
+        <briefdescription>
+<para>如果正在调试则触发断点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>首先检查是否有调试器附加，如果有则触发断点。 适用于条件性断点，避免在非调试环境中意外中断。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" line="137" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" bodystart="137" bodyend="141"/>
+        <references refid="group___debug_breakpoints_and_assertions_1gafa8ef7ba87451f020500628969e2d760" compoundref="breakpoint_8hpp" startline="109" endline="129">breakpoint</references>
+        <references refid="group___debug_breakpoints_and_assertions_1ga1bdd60752443b2fbe3c2b4662bdbb3d7">is_debugger_present</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="group___debug_breakpoints_and_assertions_1ga2e66375a1cbe4c9de4100dc4a0dd7e6f" prot="public" static="no">
+        <name>NEFORCE_DEBUG_VERIFY</name>
+        <param><defname>CON</defname></param>
+        <param><defname>MESG</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" line="36" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___debug_breakpoints_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" prot="public" static="no">
+        <name>NEFORCE_CONSTEXPR_ASSERT</name>
+        <param><defname>COND</defname></param>
+        <initializer>do {                                                       \
+    if (_NEFORCE <ref refid="group___debug_breakpoints_and_assertions_1gab65500ce348116b824d6cd6b0a4314bb" kindref="member">is_constant_evaluated</ref>() &amp;&amp; !bool(COND)) { \
+        _NEFORCE <ref refid="group___debug_breakpoints_and_assertions_1gaeb58751600e0fca687b84d898c191b4d" kindref="member">unreachable</ref>();                            \
+    }                                                      \
+} while (false);</initializer>
+        <briefdescription>
+<para>编译时常量断言 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>在常量求值上下文中进行断言，如果条件为false则触发不可达代码。 仅在C++20及以上版本有效。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" line="47" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/breakpoint.hpp" bodystart="47" bodyend="52"/>
+        <referencedby refid="group___atomic_operations_1ga53e71ce4980e49652fa2787d1b3a7375" compoundref="atomic__base_8hpp" startline="668" endline="691">atomic_cmpexch_strong</referencedby>
+        <referencedby refid="group___atomic_operations_1gafc070ab9d97fede6cb57cfd8074219e1" compoundref="atomic__base_8hpp" startline="1043" endline="1069">atomic_cmpexch_strong_any</referencedby>
+        <referencedby refid="group___atomic_operations_1gac0e1e634abfd1bb68c905b25576eb5d4" compoundref="atomic__base_8hpp" startline="527" endline="653">atomic_cmpexch_weak</referencedby>
+        <referencedby refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="922" endline="1029">atomic_cmpexch_weak_any</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1ace121fe0edc65d5339cd015f4e7703df" compoundref="atomic__base_8hpp" startline="3047" endline="3050">atomic_ref_base&lt; Float, false, true &gt;::atomic_ref_base</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aa0d58511f41e15fe4b0dcded86705b91" compoundref="atomic__base_8hpp" startline="2641" endline="2644">atomic_ref_base&lt; T, false, false &gt;::atomic_ref_base</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1aab75f3f3fdab13f4ec3f6eb69cf17e06" compoundref="atomic__base_8hpp" startline="2790" endline="2793">atomic_ref_base&lt; T, true, false &gt;::atomic_ref_base</referencedby>
+        <referencedby refid="classatomic__semaphore_1a90820d8558e3fbed25dfa4040560b942" compoundref="semaphore_8hpp" startline="77" endline="80">atomic_semaphore&lt; 1 &gt;::atomic_semaphore</referencedby>
+        <referencedby refid="classmemory__view_1a6853a6345f853aaf0d2d5747bc106e99" compoundref="memory__view_8hpp" startline="330" endline="333">memory_view&lt; byte_t &gt;::back</referencedby>
+        <referencedby refid="structatomic__flag_1a482380fc8a9add7bbdc779a601b63444" compoundref="atomic__base_8hpp" startline="1368" endline="1385">atomic_flag::clear</referencedby>
+        <referencedby refid="structatomic__flag_1a9bad570d55fe97eb579d9f73ec6e78c9" compoundref="atomic__base_8hpp" startline="1390" endline="1407">atomic_flag::clear</referencedby>
+        <referencedby refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" compoundref="atomic_8hpp" startline="207" endline="212">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_1a986a7b48409d105ffb9c70ff3942db1c" compoundref="atomic_8hpp" startline="217" endline="222">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1afa68bbb346cae3e468cbb225d9a5da40" compoundref="atomic__base_8hpp" startline="2234" endline="2240">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1ad646d547e215185837af3cfa8bdfe4ee" compoundref="atomic__base_8hpp" startline="2245" endline="2251">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic_1aae3c3ec7b287a0fc7d98db21be55f066" compoundref="atomic_8hpp" startline="166" endline="170">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic_1a8c37e4a198018c0a0d174d7775f467a7" compoundref="atomic_8hpp" startline="175" endline="179">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a50c59c5bfcc109952946968caf0d1002" compoundref="atomic__base_8hpp" startline="2188" endline="2193">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1add6adc9a5802894b30bee42d2952a7d9" compoundref="atomic__base_8hpp" startline="2198" endline="2204">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="classmemory__view_1ac562f952abf23a65da2b53ab1f8ea8cb" compoundref="memory__view_8hpp" startline="392" endline="395">memory_view&lt; byte_t &gt;::first</referencedby>
+        <referencedby refid="classmemory__view_1ad75e7195fc4cf1214aecbe89355f84a9" compoundref="memory__view_8hpp" startline="321" endline="324">memory_view&lt; byte_t &gt;::front</referencedby>
+        <referencedby refid="classmemory__view_1ad73fb730f7c7a9070f07d670cda3b713" compoundref="memory__view_8hpp" startline="414" endline="417">memory_view&lt; byte_t &gt;::last</referencedby>
+        <referencedby refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" compoundref="latch_8hpp" startline="52" endline="55">latch::latch</referencedby>
+        <referencedby refid="structatomic__base_1af024d40b0357b05a72df587152b2f4a5" compoundref="atomic__base_8hpp" startline="1650" endline="1660">atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_1a364965b7b7d5d8c1ad0a1a523b48cde9" compoundref="atomic__base_8hpp" startline="1665" endline="1675">atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aa119b562899473202f03f0ee12d334f7" compoundref="atomic__base_8hpp" startline="2098" endline="2117">atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a658b7958e9e1ded49d703c6b20d54a7c" compoundref="atomic__base_8hpp" startline="2122" endline="2141">atomic_base&lt; T * &gt;::load</referencedby>
+        <referencedby refid="structgenerator_1_1iterator_1a1226c1f65215b7bb04a24f6aea3bf8c5" compoundref="generator_8hpp" startline="253" endline="256">generator&lt; T &gt;::iterator::operator*</referencedby>
+        <referencedby refid="classmemory__view_1a6e261c2f6ed74252f975929e6487cd80" compoundref="memory__view_8hpp" startline="340" endline="343">memory_view&lt; byte_t &gt;::operator[]</referencedby>
+        <referencedby refid="structatomic__base_1a4c12cae12a0f6bf002f8fcedce9cdbb5" compoundref="atomic__base_8hpp" startline="1614" endline="1626">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_1a9cd7bc0d2ccf4dfd26c8ee64b5a8ee26" compoundref="atomic__base_8hpp" startline="1631" endline="1643">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a95b43b5cc705af7badc6d18dfc8b2431" compoundref="atomic__base_8hpp" startline="2070" endline="2091">atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1af64a00bcd805e76ccd7a07211cacc104" compoundref="atomic__base_8hpp" startline="2045" endline="2065">atomic_base&lt; T * &gt;::store</referencedby>
+        <referencedby refid="classmemory__view_1a513349466fb9936118cefed9178fe1d0" compoundref="memory__view_8hpp" startline="437" endline="446">memory_view&lt; byte_t &gt;::view</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>调试断点和断言工具 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

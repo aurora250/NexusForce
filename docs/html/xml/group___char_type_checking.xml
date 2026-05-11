@@ -1,0 +1,639 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___char_type_checking" kind="group">
+    <compoundname>CharTypeChecking</compoundname>
+    <title>字符类型检查</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___char_type_checking_1ga1afb55a61d64e71fd0c5387a19df3636" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_ctype</definition>
+        <argsstring>(const CharT c, uint64_t mask_low, uint64_t mask_high) noexcept</argsstring>
+        <name>is_ctype</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>mask_low</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>mask_high</declname>
+        </param>
+        <briefdescription>
+<para>通用字符类型检查函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mask_low</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>低64位ASCII字符的位掩码 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mask_high</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>高64位ASCII字符的位掩码 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符在掩码中则返回true，否则返回false</para>
+</simplesect>
+使用位掩码技术高效检查字符类型，支持任意字符类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="115" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="115" bodyend="126"/>
+        <references refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
+        <referencedby refid="group___char_type_checking_1ga54ee4b379a3b5f3200b577804db90b16" compoundref="char__types_8hpp" startline="148" endline="150">is_cntrl</referencedby>
+        <referencedby refid="group___char_type_checking_1ga6fce84ff259aeb98e8edb4935af8a5e8" compoundref="char__types_8hpp" startline="135" endline="137">is_punct</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1ga6fce84ff259aeb98e8edb4935af8a5e8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_punct</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_punct</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为标点符号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是标点符号则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="135" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="135" bodyend="137"/>
+        <references refid="group___char_type_checking_1ga1afb55a61d64e71fd0c5387a19df3636" compoundref="char__types_8hpp" startline="115" endline="126">is_ctype</references>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1ga54ee4b379a3b5f3200b577804db90b16" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_cntrl</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_cntrl</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为控制字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是控制字符则返回true，否则返回false</para>
+</simplesect>
+控制字符包括ASCII码0-31和127。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="148" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="148" bodyend="150"/>
+        <references refid="group___char_type_checking_1ga1afb55a61d64e71fd0c5387a19df3636" compoundref="char__types_8hpp" startline="115" endline="126">is_ctype</references>
+        <referencedby refid="group___char_type_checking_1gaf10ab6b530f7a08d45e446b947225d89" compoundref="char__types_8hpp" startline="161" endline="164">is_print</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1gaf10ab6b530f7a08d45e446b947225d89" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_print</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_print</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为可打印字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是可打印字符则返回true，否则返回false</para>
+</simplesect>
+可打印字符是非控制字符且ASCII码在0-127范围内的字符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="161" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="161" bodyend="164"/>
+        <references refid="group___char_type_checking_1ga54ee4b379a3b5f3200b577804db90b16" compoundref="char__types_8hpp" startline="148" endline="150">is_cntrl</references>
+        <referencedby refid="group___char_type_checking_1gaf29ecd4deceb511e0e3eb324ccde1802" compoundref="char__types_8hpp" startline="190" endline="192">is_graph</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1ga70252cadeb097c48b5e6edae58406356" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_blank</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_blank</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为空白字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是空白字符则返回true，否则返回false</para>
+</simplesect>
+空白字符包括：制表符和空格。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="175" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="175" bodyend="179"/>
+        <references refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
+        <referencedby refid="group___char_type_checking_1gaf29ecd4deceb511e0e3eb324ccde1802" compoundref="char__types_8hpp" startline="190" endline="192">is_graph</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1gaf29ecd4deceb511e0e3eb324ccde1802" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_graph</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_graph</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为图形字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是图形字符则返回true，否则返回false</para>
+</simplesect>
+图形字符是可打印字符但不是空白字符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="190" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="190" bodyend="192"/>
+        <references refid="group___char_type_checking_1ga70252cadeb097c48b5e6edae58406356" compoundref="char__types_8hpp" startline="175" endline="179">is_blank</references>
+        <references refid="group___char_type_checking_1gaf10ab6b530f7a08d45e446b947225d89" compoundref="char__types_8hpp" startline="161" endline="164">is_print</references>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1gadbad0104b10841cc70a92d335ec34d35" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_ascii</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_ascii</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为ASCII字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是ASCII字符则返回true，否则返回false</para>
+</simplesect>
+ASCII字符的编码在0-127范围内。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="203" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="203" bodyend="207"/>
+        <references refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1gafd3abf02df46318e1997fe03c2d44909" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 bool is_space</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_space</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为空白字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是空白字符则返回true，否则返回false</para>
+</simplesect>
+空白字符包括：水平制表符, 换行符, 垂直制表符, 换页符, 回车符, 空格。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="218" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="218" bodyend="222"/>
+        <references refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
+        <referencedby refid="classbasic__string_1a04ad1cd489247f3bf6450e84b27ac3c9" compoundref="basic__string_8hpp" startline="2651" endline="2653">basic_string&lt; char &gt;::trim_left</referencedby>
+        <referencedby refid="classbasic__string__view_1a1b337d8fdc464b02fa07338eba0d5607" compoundref="basic__string__view_8hpp" startline="907" endline="909">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left</referencedby>
+        <referencedby refid="classbasic__string_1a5c17af8b70c474ea94e99ec87ab6dfc2" compoundref="basic__string_8hpp" startline="2659" endline="2661">basic_string&lt; char &gt;::trim_right</referencedby>
+        <referencedby refid="classbasic__string__view_1afcce609453ec42173773c45f27d5004e" compoundref="basic__string__view_8hpp" startline="915" endline="917">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1ga9647036e3fd4889c43245603af6de72f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_alpha</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_alpha</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为字母 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是字母则返回true，否则返回false</para>
+</simplesect>
+字母包括A-Z和a-z。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="233" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="233" bodyend="240"/>
+        <references refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
+        <referencedby refid="group___char_type_checking_1ga6ae6e4975250f3f08822bf7130285d57" compoundref="char__types_8hpp" startline="288" endline="290">is_alpha_or_digit</referencedby>
+        <referencedby refid="group___char_type_checking_1ga2bc419a3d1d9b1423d519b667295df6c" compoundref="char__types_8hpp" startline="299" endline="301">is_digit_or_alpha</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1ga4879a0699b90eecc609283c6f61a7847" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_digit</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_digit</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为数字 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是数字则返回true，否则返回false</para>
+</simplesect>
+数字包括0-9。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="251" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="251" bodyend="258"/>
+        <references refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
+        <referencedby refid="group___char_type_checking_1ga6ae6e4975250f3f08822bf7130285d57" compoundref="char__types_8hpp" startline="288" endline="290">is_alpha_or_digit</referencedby>
+        <referencedby refid="group___char_type_checking_1ga2bc419a3d1d9b1423d519b667295df6c" compoundref="char__types_8hpp" startline="299" endline="301">is_digit_or_alpha</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1ga24b05557f8930a4066566d0da18ec4b5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_xdigit</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_xdigit</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为十六进制数字 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是十六进制数字则返回true，否则返回false</para>
+</simplesect>
+十六进制数字包括0-9, A-F, a-f。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="269" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="269" bodyend="279"/>
+        <references refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1ga6ae6e4975250f3f08822bf7130285d57" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_alpha_or_digit</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_alpha_or_digit</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为字母或数字 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是字母或数字则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="288" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="288" bodyend="290"/>
+        <references refid="group___char_type_checking_1ga9647036e3fd4889c43245603af6de72f" compoundref="char__types_8hpp" startline="233" endline="240">is_alpha</references>
+        <references refid="group___char_type_checking_1ga4879a0699b90eecc609283c6f61a7847" compoundref="char__types_8hpp" startline="251" endline="258">is_digit</references>
+      </memberdef>
+      <memberdef kind="function" id="group___char_type_checking_1ga2bc419a3d1d9b1423d519b667295df6c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool</type>
+        <definition>NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 bool is_digit_or_alpha</definition>
+        <argsstring>(const CharT c) noexcept</argsstring>
+        <name>is_digit_or_alpha</name>
+        <param>
+          <type>const CharT</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>检查字符是否为数字或字母 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果字符是数字或字母则返回true，否则返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" line="299" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/char_types.hpp" bodystart="299" bodyend="301"/>
+        <references refid="group___char_type_checking_1ga9647036e3fd4889c43245603af6de72f" compoundref="char__types_8hpp" startline="233" endline="240">is_alpha</references>
+        <references refid="group___char_type_checking_1ga4879a0699b90eecc609283c6f61a7847" compoundref="char__types_8hpp" startline="251" endline="258">is_digit</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>检查字符是否属于特定类型的函数 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

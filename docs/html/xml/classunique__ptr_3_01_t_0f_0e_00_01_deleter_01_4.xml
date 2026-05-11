@@ -1,0 +1,995 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4" kind="class" language="C++" prot="public">
+    <compoundname>unique_ptr&lt; T[], Deleter &gt;</compoundname>
+    <includes refid="unique__ptr_8hpp" local="no">unique_ptr.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Deleter</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af807d0e962003f51c72aa8506cc1ec14" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>typename inner::__unique_ptr_impl&lt; T, U &gt;::DeleterConstraint::type</type>
+        <definition>using unique_ptr&lt; T[], Deleter &gt;::DeleterConstraint = typename inner::__unique_ptr_impl&lt;T, U&gt;::DeleterConstraint::type</definition>
+        <argsstring></argsstring>
+        <name>DeleterConstraint</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::DeleterConstraint</qualifiedname>
+        <briefdescription>
+<para>删除器约束类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="383" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="383" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a6f2f85819804b8a075bfbed6347b9c72" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+          <param>
+            <type>typename UP</type>
+            <defval><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt;U, E&gt;</defval>
+          </param>
+          <param>
+            <type>typename UP_pointer</type>
+            <defval>typename UP::pointer</defval>
+          </param>
+          <param>
+            <type>typename UP_element_type</type>
+            <defval>typename UP::element_type</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structconjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structis__array" kindref="compound">is_array</ref>&lt; U &gt;, <ref refid="structis__same" kindref="compound">is_same</ref>&lt; <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref>, <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" kindref="member">element_type</ref> * &gt;, <ref refid="structis__same" kindref="compound">is_same</ref>&lt; UP_pointer, UP_element_type * &gt;, <ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt; UP_element_type(*)[], <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" kindref="member">element_type</ref>(*)[]&gt; &gt;</type>
+        <definition>using unique_ptr&lt; T[], Deleter &gt;::safe_conversion = 
+conjunction&lt;is_array&lt;U&gt;, is_same&lt;pointer, element_type*&gt;, is_same&lt;UP_pointer, UP_element_type*&gt;,
+            is_convertible&lt;UP_element_type (*)[], element_type (*)[]&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>safe_conversion</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::safe_conversion</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="395" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="395" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1aca71504ddfe682b8bde8e027eeb92297" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structconjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structdisjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structdisjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structis__same" kindref="compound">is_same</ref>&lt; U, <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref> &gt;, <ref refid="structis__same" kindref="compound">is_same</ref>&lt; U, <ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref> &gt; &gt;, <ref refid="structconjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structis__pointer" kindref="compound">is_pointer</ref>&lt; U &gt;, <ref refid="structis__same" kindref="compound">is_same</ref>&lt; <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref>, <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" kindref="member">element_type</ref> * &gt;, <ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt; <ref refid="group___remove_qualifiers_1ga81cba9b583535ccfde0e7eb172bbec71" kindref="member">remove_pointer_t</ref>&lt; U &gt;(*)[], <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" kindref="member">element_type</ref>(*)[]&gt; &gt; &gt; &gt;</type>
+        <definition>using unique_ptr&lt; T[], Deleter &gt;::safe_conversion_raw = 
+conjunction&lt;disjunction&lt;disjunction&lt;is_same&lt;U, pointer&gt;, is_same&lt;U, nullptr_t&gt;&gt;,
+                        conjunction&lt;is_pointer&lt;U&gt;, is_same&lt;pointer, element_type*&gt;,
+                                    is_convertible&lt;remove_pointer_t&lt;U&gt; (*)[], element_type (*)[]&gt;&gt;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>safe_conversion_raw</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::safe_conversion_raw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="400" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="400" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" prot="public" static="no">
+        <type>typename inner::__unique_ptr_impl&lt; T, Deleter &gt;::pointer</type>
+        <definition>using unique_ptr&lt; T[], Deleter &gt;::pointer = typename inner::__unique_ptr_impl&lt;T, Deleter&gt;::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="388" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="388" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" prot="public" static="no">
+        <type>T</type>
+        <definition>using unique_ptr&lt; T[], Deleter &gt;::element_type = T</definition>
+        <argsstring></argsstring>
+        <name>element_type</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::element_type</qualifiedname>
+        <briefdescription>
+<para>元素类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="389" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="389" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" prot="public" static="no">
+        <type>Deleter</type>
+        <definition>using unique_ptr&lt; T[], Deleter &gt;::deleter_type = Deleter</definition>
+        <argsstring></argsstring>
+        <name>deleter_type</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::deleter_type</qualifiedname>
+        <briefdescription>
+<para>删除器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="390" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="390" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af1ec0d35f9c129c943d88ed7c3c72f49" prot="private" static="no" mutable="no">
+        <type>inner::__unique_ptr_data&lt; T, Deleter &gt;</type>
+        <definition>inner::__unique_ptr_data&lt;T, Deleter&gt; unique_ptr&lt; T[], Deleter &gt;::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::data_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>内部数据存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="385" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="385" bodyend="385"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Del</type>
+            <defval>Deleter</defval>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>DeleterConstraint&lt;Del&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; safe_conversion_raw&lt; U &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(U ptr) noexcept</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>U</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>从指针构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Del</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的数组指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="414" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="414" bodyend="415"/>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a811910b5dc18f52dd96f853c80f3f37a">operator=</referencedby>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1accad32a5dda96be9d8c9522ec1dc5dc3" compoundref="unique__ptr_8hpp" startline="503" endline="506">operator=</referencedby>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a2d549d3e328c2c71b7e13aa054887e49">operator=</referencedby>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ad1f11fdde703e70ac712dfea679c0fc8" compoundref="unique__ptr_8hpp" startline="493" endline="497">operator=</referencedby>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8a09e0389ccad830e6eb29f8b5333b57" compoundref="unique__ptr_8hpp" startline="568" endline="568">swap</referencedby>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af7b8378e519200606d28105970b6a595">unique_ptr</referencedby>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a036c26c7881d6e934e2467c4094470f2">unique_ptr</referencedby>
+        <referencedby refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a73848629a27adffebcc5c8a47a330e6e" compoundref="unique__ptr_8hpp" startline="468" endline="469">unique_ptr</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8e4e3f9349fad379cd3c58b8cf0c53dc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Del</type>
+            <defval><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref></defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structconjunction" kindref="compound">conjunction</ref>&lt; safe_conversion_raw&lt; U &gt;, <ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; Del &gt; &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(U ptr, const deleter_type &amp;deleter) noexcept</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>U</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref> &amp;</type>
+          <declname>deleter</declname>
+        </param>
+        <briefdescription>
+<para>从指针和复制删除器构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Del</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的数组指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="426" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="426" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a007644845a7ac5df7d978b2d490b86b4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Del</type>
+            <defval><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref></defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structconjunction" kindref="compound">conjunction</ref>&lt; safe_conversion_raw&lt; U &gt;, <ref refid="structis__move__constructible" kindref="compound">is_move_constructible</ref>&lt; Del &gt; &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(U ptr, enable_if_t&lt;!is_lvalue_reference&lt; Del &gt;::value, Del &amp;&amp; &gt; deleter) noexcept</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>U</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="structis__lvalue__reference" kindref="compound">is_lvalue_reference</ref>&lt; Del &gt;::value, Del &amp;&amp; &gt;</type>
+          <declname>deleter</declname>
+        </param>
+        <briefdescription>
+<para>从指针和移动删除器构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Del</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的数组指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="438" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="438" bodyend="439"/>
+        <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a2ee129da9363b6b3475290f1509a26da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename Del</type>
+            <defval><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref></defval>
+          </param>
+          <param>
+            <type>typename DelMoveRef</type>
+            <defval><ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt;Del&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; safe_conversion_raw&lt; U &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(U, enable_if_t&lt; is_lvalue_reference&lt; Del &gt;::value, DelMoveRef &amp;&amp; &gt;)=delete</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>U</type>
+        </param>
+        <param>
+          <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__lvalue__reference" kindref="compound">is_lvalue_reference</ref>&lt; Del &gt;::value, DelMoveRef &amp;&amp; &gt;</type>
+        </param>
+        <briefdescription>
+<para>禁止从右值引用删除器构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="446" column="5"/>
+        <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;&lt; false &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a036c26c7881d6e934e2467c4094470f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(unique_ptr &amp;&amp;)=default</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="448" column="5"/>
+        <references refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a730f845540bdebd23e29dbc5af946581" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Del</type>
+            <defval>Deleter</defval>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>DeleterConstraint&lt;Del&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(nullptr_t=nullptr) noexcept</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>空指针构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Del</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="455" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="455" bodyend="455"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a73848629a27adffebcc5c8a47a330e6e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structconjunction" kindref="compound">conjunction</ref>&lt; safe_conversion&lt; U, E &gt;, <ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt; <ref refid="structis__reference" kindref="compound">is_reference</ref>&lt; Deleter &gt;::value, <ref refid="structis__same" kindref="compound">is_same</ref>&lt; E, Deleter &gt;, <ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt; E, Deleter &gt; &gt; &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(unique_ptr&lt; U, E &gt; &amp;&amp;other) noexcept</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从其他unique_ptr转换构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="468" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="468" bodyend="469"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a90cd8a46e18a6842ed8ed1d30c0d9e0a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr&lt; T[], Deleter &gt;::~unique_ptr</definition>
+        <argsstring>()</argsstring>
+        <name>~unique_ptr</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::~unique_ptr</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="474" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="474" bodyend="480"/>
+        <references refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" compoundref="unique__ptr_8hpp" startline="325" endline="325">unique_ptr&lt; T, Deleter &gt;::get_deleter</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a2d549d3e328c2c71b7e13aa054887e49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref> &amp;</type>
+        <definition>unique_ptr &amp; unique_ptr&lt; T[], Deleter &gt;::operator=</definition>
+        <argsstring>(unique_ptr &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="482" column="16"/>
+        <references refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ad1f11fdde703e70ac712dfea679c0fc8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename E</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1gaf49fb9070ceeed735b3dddc7da0392d7" kindref="member">conjunction_v</ref>&lt; safe_conversion&lt; U, E &gt;, <ref refid="structis__assignable" kindref="compound">is_assignable</ref>&lt; <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref> &amp;, E &amp;&amp; &gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr &amp; unique_ptr&lt; T[], Deleter &gt;::operator=</definition>
+        <argsstring>(unique_ptr&lt; U, E &gt; &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; U, E &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>从其他unique_ptr移动赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源unique_ptr </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="493" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="493" bodyend="497"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" compoundref="unique__ptr_8hpp" startline="325" endline="325">unique_ptr&lt; T, Deleter &gt;::get_deleter</references>
+        <references refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" compoundref="unique__ptr_8hpp" startline="356" endline="360">unique_ptr&lt; T, Deleter &gt;::reset</references>
+        <references refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1accad32a5dda96be9d8c9522ec1dc5dc3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr &amp; unique_ptr&lt; T[], Deleter &gt;::operator=</definition>
+        <argsstring>(nullptr_t) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::operator=</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+        </param>
+        <briefdescription>
+<para>nullptr赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前对象引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="503" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="503" bodyend="506"/>
+        <references refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" compoundref="unique__ptr_8hpp" startline="356" endline="360">unique_ptr&lt; T, Deleter &gt;::reset</references>
+        <references refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a419a6712835ceb63c2332d96fae3327e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___add_qualifiers_1gac084a21f7a057df50ed3f436567e993f" kindref="member">add_lvalue_reference_t</ref>&lt; <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" kindref="member">element_type</ref> &gt;</type>
+        <definition>NEFORCE_CONSTEXPR20 add_lvalue_reference_t&lt; element_type &gt; unique_ptr&lt; T[], Deleter &gt;::operator[]</definition>
+        <argsstring>(size_t idx) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::operator[]</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>数组下标运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>数组元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="513" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="513" bodyend="516"/>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a94f46cbb8e45deafbf4458282d9e3809" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref></type>
+        <definition>NEFORCE_CONSTEXPR20 pointer unique_ptr&lt; T[], Deleter &gt;::get</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::get</qualifiedname>
+        <briefdescription>
+<para>获取原始指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="521" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="521" bodyend="521"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a555e3e95e5899d41276d58bf27d11462" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 deleter_type &amp; unique_ptr&lt; T[], Deleter &gt;::get_deleter</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_deleter</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::get_deleter</qualifiedname>
+        <briefdescription>
+<para>获取删除器引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="526" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="526" bodyend="526"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a0397d22ea05cd43bc444504cd2a69597" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 const <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref> &amp;</type>
+        <definition>NEFORCE_CONSTEXPR20 const deleter_type &amp; unique_ptr&lt; T[], Deleter &gt;::get_deleter</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_deleter</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::get_deleter</qualifiedname>
+        <briefdescription>
+<para>获取删除器常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="531" column="44" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="531" bodyend="531"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ab8c3eb74c61eed55b2ad0d82307e9b7e" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 unique_ptr&lt; T[], Deleter &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::operator bool</qualifiedname>
+        <briefdescription>
+<para>bool转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否管理非空数组 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="537" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="537" bodyend="537"/>
+        <references refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" compoundref="unique__ptr_8hpp" startline="320" endline="320">unique_ptr&lt; T, Deleter &gt;::get</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1afeb39ccd70dade8f8fb67c87701b490d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref></type>
+        <definition>NEFORCE_CONSTEXPR20 pointer unique_ptr&lt; T[], Deleter &gt;::release</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::release</qualifiedname>
+        <briefdescription>
+<para>释放所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="542" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="542" bodyend="542"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9e16512f0f1ee0f05ccebe9fd4199d15" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structconjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structdisjunction" kindref="compound">disjunction</ref>&lt; <ref refid="structis__same" kindref="compound">is_same</ref>&lt; U, <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref> &gt;, <ref refid="structconjunction" kindref="compound">conjunction</ref>&lt; <ref refid="structis__same" kindref="compound">is_same</ref>&lt; <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref>, <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" kindref="member">element_type</ref> * &gt;, <ref refid="structis__pointer" kindref="compound">is_pointer</ref>&lt; U &gt;, <ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt; <ref refid="group___remove_qualifiers_1ga81cba9b583535ccfde0e7eb172bbec71" kindref="member">remove_pointer_t</ref>&lt; U &gt;(*)[], <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" kindref="member">element_type</ref>(*)[]&gt; &gt; &gt; &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void unique_ptr&lt; T[], Deleter &gt;::reset</definition>
+        <argsstring>(U ptr) noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::reset</qualifiedname>
+        <param>
+          <type>U</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>重置管理的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="555" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="555" bodyend="557"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a3b9e3e5a15f0865eb7d104f9498d052c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void unique_ptr&lt; T[], Deleter &gt;::reset</definition>
+        <argsstring>(nullptr_t=nullptr) noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::reset</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>重置为空指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="562" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="562" bodyend="562"/>
+        <references refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" compoundref="unique__ptr_8hpp" startline="356" endline="360">unique_ptr&lt; T, Deleter &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8a09e0389ccad830e6eb29f8b5333b57" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void unique_ptr&lt; T[], Deleter &gt;::swap</definition>
+        <argsstring>(unique_ptr &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::swap</qualifiedname>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个unique_ptr </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="568" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="568" bodyend="568"/>
+        <references refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af7b8378e519200606d28105970b6a595" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</definition>
+        <argsstring>(const unique_ptr &amp;)=delete</argsstring>
+        <name>unique_ptr</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::unique_ptr</qualifiedname>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止复制构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="570" column="5"/>
+        <references refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a811910b5dc18f52dd96f853c80f3f37a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref> &amp;</type>
+        <definition>unique_ptr &amp; unique_ptr&lt; T[], Deleter &gt;::operator=</definition>
+        <argsstring>(const unique_ptr &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止复制赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="571" column="16"/>
+        <references refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" compoundref="unique__ptr_8hpp" startline="414" endline="415">unique_ptr</references>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_1a73450603f460b996bb1847b2f536c0f5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(*_NEFORCE declval&lt; pointer &gt;())" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___add_qualifiers_1gac084a21f7a057df50ed3f436567e993f" kindref="member">add_lvalue_reference_t</ref>&lt; <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" kindref="member">element_type</ref> &gt;</type>
+        <definition>NEFORCE_CONSTEXPR20 add_lvalue_reference_t&lt; element_type &gt; unique_ptr&lt; T, Deleter &gt;::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::operator*</qualifiedname>
+        <briefdescription>
+<para>解引用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>管理对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="306" column="48" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="306" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classunique__ptr_1adad9506f6921b78de331b68fccb8b1d2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref></type>
+        <definition>NEFORCE_CONSTEXPR20 pointer unique_ptr&lt; T, Deleter &gt;::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>unique_ptr&lt; T[], Deleter &gt;::operator-&gt;</qualifiedname>
+        <briefdescription>
+<para>成员访问运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>管理对象的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="315" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="315" bodyend="315"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>数组特化的unique_ptr </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" line="381" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp" bodystart="381" bodyend="572"/>
+    <listofallmembers>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af1ec0d35f9c129c943d88ed7c3c72f49" prot="private" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>data_</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>deleter_type</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af807d0e962003f51c72aa8506cc1ec14" prot="private" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>DeleterConstraint</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8ace3789d9c673b8141ac033485fca51" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>element_type</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a94f46cbb8e45deafbf4458282d9e3809" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>get</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a555e3e95e5899d41276d58bf27d11462" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>get_deleter</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a0397d22ea05cd43bc444504cd2a69597" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>get_deleter</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ab8c3eb74c61eed55b2ad0d82307e9b7e" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>operator bool</name></member>
+      <member refid="classunique__ptr_1a73450603f460b996bb1847b2f536c0f5" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>operator*</name></member>
+      <member refid="classunique__ptr_1adad9506f6921b78de331b68fccb8b1d2" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>operator-&gt;</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a2d549d3e328c2c71b7e13aa054887e49" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>operator=</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ad1f11fdde703e70ac712dfea679c0fc8" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>operator=</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1accad32a5dda96be9d8c9522ec1dc5dc3" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>operator=</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a811910b5dc18f52dd96f853c80f3f37a" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>operator=</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a419a6712835ceb63c2332d96fae3327e" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>operator[]</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>pointer</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1afeb39ccd70dade8f8fb67c87701b490d" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>release</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9e16512f0f1ee0f05ccebe9fd4199d15" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>reset</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a3b9e3e5a15f0865eb7d104f9498d052c" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>reset</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a6f2f85819804b8a075bfbed6347b9c72" prot="private" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>safe_conversion</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1aca71504ddfe682b8bde8e027eeb92297" prot="private" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>safe_conversion_raw</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8a09e0389ccad830e6eb29f8b5333b57" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>swap</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a337628ce74bdaf0e4246f1deea147071" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a8e4e3f9349fad379cd3c58b8cf0c53dc" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a007644845a7ac5df7d978b2d490b86b4" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a2ee129da9363b6b3475290f1509a26da" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a036c26c7881d6e934e2467c4094470f2" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a730f845540bdebd23e29dbc5af946581" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a73848629a27adffebcc5c8a47a330e6e" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1af7b8378e519200606d28105970b6a595" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>unique_ptr</name></member>
+      <member refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a90cd8a46e18a6842ed8ed1d30c0d9e0a" prot="public" virt="non-virtual"><scope>unique_ptr&lt; T[], Deleter &gt;</scope><name>~unique_ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

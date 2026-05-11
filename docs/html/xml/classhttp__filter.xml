@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classhttp__filter" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>http_filter</compoundname>
+    <derivedcompoundref refid="classauthentication__filter" prot="public" virt="non-virtual">authentication_filter</derivedcompoundref>
+    <derivedcompoundref refid="classcors__filter" prot="public" virt="non-virtual">cors_filter</derivedcompoundref>
+    <derivedcompoundref refid="classlogging__filter" prot="public" virt="non-virtual">logging_filter</derivedcompoundref>
+    <derivedcompoundref refid="classrate__limit__filter" prot="public" virt="non-virtual">rate_limit_filter</derivedcompoundref>
+    <derivedcompoundref refid="classstatic__file__filter" prot="public" virt="non-virtual">static_file_filter</derivedcompoundref>
+    <includes refid="http__filter_8hpp" local="no">http_filter.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhttp__filter_1a2959973ac0c34b0323c1e3fdc03449ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual http_filter::~http_filter</definition>
+        <argsstring>()=default</argsstring>
+        <name>~http_filter</name>
+        <qualifiedname>http_filter::~http_filter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="51" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__filter_1a00ee11e4e2b0c596d6f99cbafec3ddad" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void http_filter::do_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response)=0</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>http_filter::do_filter</qualifiedname>
+        <reimplementedby refid="classauthentication__filter_1a1e5caced2ec556c5f017d21fce037160">do_filter</reimplementedby>
+        <reimplementedby refid="classcors__filter_1a17aab51804046f95332fc958f3795599">do_filter</reimplementedby>
+        <reimplementedby refid="classlogging__filter_1aaba3d6e3e7af642bb50e12586ca92269">do_filter</reimplementedby>
+        <reimplementedby refid="classrate__limit__filter_1af872309e049a8e518ddeff53a695083b">do_filter</reimplementedby>
+        <reimplementedby refid="classstatic__file__filter_1a9f62ddd77fcde51982ebbbbf5812b450">do_filter</reimplementedby>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="61" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__filter_1a9563cab58ce1b4217008e55b37b022f2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool http_filter::pre_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response)</argsstring>
+        <name>pre_filter</name>
+        <qualifiedname>http_filter::pre_filter</qualifiedname>
+        <reimplementedby refid="classauthentication__filter_1a19bb024bb9162df64cdb8e342381f30d">pre_filter</reimplementedby>
+        <reimplementedby refid="classcors__filter_1ad96e0ee4f33512b3e0fbfce32babf803">pre_filter</reimplementedby>
+        <reimplementedby refid="classlogging__filter_1ab869810af66899707193b86f506e7c4e">pre_filter</reimplementedby>
+        <reimplementedby refid="classrate__limit__filter_1a3adaacba1b6f99aa228323302eff5714">pre_filter</reimplementedby>
+        <reimplementedby refid="classstatic__file__filter_1adfb5d26040e9cfb2d1fe732507ce5640">pre_filter</reimplementedby>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>预处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>返回false表示中断后续处理</para>
+</simplesect>
+在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="71" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__filter_1acaaaf04f0a1520c29312b76336615aec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void http_filter::post_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response)</argsstring>
+        <name>post_filter</name>
+        <qualifiedname>http_filter::post_filter</qualifiedname>
+        <reimplementedby refid="classlogging__filter_1af19db73fdc591efde6336d096c2ec5df">post_filter</reimplementedby>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>后处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在响应发送前调用，可以修改响应头或正文。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="80" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__filter_1a5fa05d13b0e74d2a70e05a3c808e8c52" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>virtual NEFORCE_NODISCARD string http_filter::name</definition>
+        <argsstring>() const</argsstring>
+        <name>name</name>
+        <qualifiedname>http_filter::name</qualifiedname>
+        <reimplementedby refid="classauthentication__filter_1a4f124db2138f93b53c8a1680fb65ed59">name</reimplementedby>
+        <reimplementedby refid="classcors__filter_1afca6ff11886e1af96e95528968712d0f">name</reimplementedby>
+        <reimplementedby refid="classlogging__filter_1ae984e70075fb8d2f74bca9f5825e2510">name</reimplementedby>
+        <reimplementedby refid="classrate__limit__filter_1a4125c5f7a386e3f3106b784e305d3654">name</reimplementedby>
+        <reimplementedby refid="classstatic__file__filter_1a09f89760c0807b9c4877800cec76ac2c">name</reimplementedby>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="86" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP过滤器基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>所有HTTP过滤器的抽象基类，定义了过滤器的生命周期方法。</para>
+<para>过滤器生命周期：<orderedlist>
+<listitem><para>pre_filter：请求处理前调用</para>
+</listitem><listitem><para>do_filter：实际处理</para>
+</listitem><listitem><para>post_filter：响应发送前调用 </para>
+</listitem></orderedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>authentication_filter</label>
+        <link refid="classauthentication__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>cors_filter</label>
+        <link refid="classcors__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>http_filter</label>
+        <link refid="classhttp__filter"/>
+      </node>
+      <node id="4">
+        <label>logging_filter</label>
+        <link refid="classlogging__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>rate_limit_filter</label>
+        <link refid="classrate__limit__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>static_file_filter</label>
+        <link refid="classstatic__file__filter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="49" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="49" bodyend="87"/>
+    <listofallmembers>
+      <member refid="classhttp__filter_1a00ee11e4e2b0c596d6f99cbafec3ddad" prot="public" virt="pure-virtual"><scope>http_filter</scope><name>do_filter</name></member>
+      <member refid="classhttp__filter_1a5fa05d13b0e74d2a70e05a3c808e8c52" prot="public" virt="virtual"><scope>http_filter</scope><name>name</name></member>
+      <member refid="classhttp__filter_1acaaaf04f0a1520c29312b76336615aec" prot="public" virt="virtual"><scope>http_filter</scope><name>post_filter</name></member>
+      <member refid="classhttp__filter_1a9563cab58ce1b4217008e55b37b022f2" prot="public" virt="virtual"><scope>http_filter</scope><name>pre_filter</name></member>
+      <member refid="classhttp__filter_1a2959973ac0c34b0323c1e3fdc03449ed" prot="public" virt="virtual"><scope>http_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

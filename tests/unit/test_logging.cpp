@@ -82,6 +82,8 @@ TEST(LogFormatterTest, FileLineFuncThread) {
     EXPECT_NE(result.find("main"), string::npos);
 }
 
+#ifdef NEFORCE_PLATFORM_LINUX
+
 class ConsoleSinkTest : public ::testing::Test {
 protected:
     void SetUp() override { console_sink test_sink; }
@@ -104,6 +106,8 @@ TEST_F(ConsoleSinkTest, FlushDoesNotThrow) {
     console_sink sink;
     EXPECT_NO_THROW(sink.flush());
 }
+
+#endif
 
 class FileSinkTest : public ::testing::Test {
 protected:

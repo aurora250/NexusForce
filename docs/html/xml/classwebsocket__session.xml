@@ -1,0 +1,1066 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classwebsocket__session" kind="class" language="C++" prot="public">
+    <compoundname>websocket_session</compoundname>
+    <basecompoundref refid="structenable__shared__from__this" prot="public" virt="non-virtual">enable_shared_from_this&lt; websocket_session &gt;</basecompoundref>
+    <includes refid="websocket_8hpp" local="no">websocket.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classwebsocket__session_1a4abaa8761a35b3f6cbd39301a6710bcf" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;, <ref refid="group___web_socket_1ga6f03b53401c24a4ee83541255774ef0f" kindref="member">websocket_opcode</ref>)&gt;</type>
+        <definition>using websocket_session::message_handler = function&lt;void(const string&amp;, websocket_opcode)&gt;</definition>
+        <argsstring></argsstring>
+        <name>message_handler</name>
+        <qualifiedname>websocket_session::message_handler</qualifiedname>
+        <briefdescription>
+<para>消息处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="213" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classwebsocket__session_1a3046e7a8e4c7d218190d5dd0267f3dd8" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(<ref refid="group___web_socket_1gab56e001ece32405515a29e0bf0d10c0f" kindref="member">websocket_status</ref>, const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;)&gt;</type>
+        <definition>using websocket_session::close_handler = function&lt;void(websocket_status, const string&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>close_handler</name>
+        <qualifiedname>websocket_session::close_handler</qualifiedname>
+        <briefdescription>
+<para>关闭处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="214" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classwebsocket__session_1a9357893528e04fa9e0ccaeef3fd1d9a2" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(const <ref refid="structexception" kindref="compound">exception</ref> &amp;)&gt;</type>
+        <definition>using websocket_session::error_handler = function&lt;void(const exception&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>error_handler</name>
+        <qualifiedname>websocket_session::error_handler</qualifiedname>
+        <briefdescription>
+<para>错误处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="215" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="215" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classwebsocket__session_1a465e8c5726717fbed53c21b46c844d42" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
+        <definition>unique_ptr&lt;tcp_socket&gt; websocket_session::socket_</definition>
+        <argsstring></argsstring>
+        <name>socket_</name>
+        <qualifiedname>websocket_session::socket_</qualifiedname>
+        <briefdescription>
+<para>底层socket </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="218" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1ad26a0db7c85b2c28a7f686a2ecac1e01" prot="private" static="no" mutable="no">
+        <type><ref refid="classwebsocket__server" kindref="compound">websocket_server</ref> *</type>
+        <definition>websocket_server* websocket_session::server_</definition>
+        <argsstring></argsstring>
+        <name>server_</name>
+        <qualifiedname>websocket_session::server_</qualifiedname>
+        <briefdescription>
+<para>所属服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="219" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="219" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1a33160e5a81ebe2b26033be2a0af5676a" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; websocket_session::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>websocket_session::running_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="221" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="221" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1a714736cb9d1cd1390d3d28e572159dc8" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic__flag" kindref="compound">atomic_flag</ref></type>
+        <definition>atomic_flag websocket_session::closed_once_</definition>
+        <argsstring></argsstring>
+        <name>closed_once_</name>
+        <qualifiedname>websocket_session::closed_once_</qualifiedname>
+        <briefdescription>
+<para>防止重复关闭 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="222" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1aeca34faac6a7bad5259afb1b9debfd3e" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread websocket_session::read_thread_</definition>
+        <argsstring></argsstring>
+        <name>read_thread_</name>
+        <qualifiedname>websocket_session::read_thread_</qualifiedname>
+        <briefdescription>
+<para>读线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="224" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1aa353c9468a116e1b36c9f7d54f63d801" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread websocket_session::write_thread_</definition>
+        <argsstring></argsstring>
+        <name>write_thread_</name>
+        <qualifiedname>websocket_session::write_thread_</qualifiedname>
+        <briefdescription>
+<para>写线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="225" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1aafd519691288d603f3f6b0a529a83867" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread websocket_session::heartbeat_thread_</definition>
+        <argsstring></argsstring>
+        <name>heartbeat_thread_</name>
+        <qualifiedname>websocket_session::heartbeat_thread_</qualifiedname>
+        <briefdescription>
+<para>心跳线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="226" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="226" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1afda2ae7dd107a012807c9ed7aa0912ec" prot="private" static="no" mutable="no">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex websocket_session::write_mutex_</definition>
+        <argsstring></argsstring>
+        <name>write_mutex_</name>
+        <qualifiedname>websocket_session::write_mutex_</qualifiedname>
+        <briefdescription>
+<para>写队列互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="228" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1a8109c0c9301804c0e693520f2e22857a" prot="private" static="no" mutable="no">
+        <type><ref refid="classcondition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable websocket_session::write_cv_</definition>
+        <argsstring></argsstring>
+        <name>write_cv_</name>
+        <qualifiedname>websocket_session::write_cv_</qualifiedname>
+        <briefdescription>
+<para>写条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="229" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1a5f79dbd5937d409a3acd97d26e173bb7" prot="private" static="no" mutable="no">
+        <type><ref refid="classqueue" kindref="compound">queue</ref>&lt; <ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref> &gt;</type>
+        <definition>queue&lt;byte_vector&gt; websocket_session::write_queue_</definition>
+        <argsstring></argsstring>
+        <name>write_queue_</name>
+        <qualifiedname>websocket_session::write_queue_</qualifiedname>
+        <briefdescription>
+<para>普通消息队列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="230" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="230" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1ab86d258e8231524726b2ef22a9666afe" prot="private" static="no" mutable="no">
+        <type><ref refid="classqueue" kindref="compound">queue</ref>&lt; <ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref> &gt;</type>
+        <definition>queue&lt;byte_vector&gt; websocket_session::ctrl_queue_</definition>
+        <argsstring></argsstring>
+        <name>ctrl_queue_</name>
+        <qualifiedname>websocket_session::ctrl_queue_</qualifiedname>
+        <briefdescription>
+<para>控制帧队列（Ping/Pong/Close） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="231" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1a1e934a73ec065cae2dcd686e4c380b9c" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string websocket_session::fragment_buffer_</definition>
+        <argsstring></argsstring>
+        <name>fragment_buffer_</name>
+        <qualifiedname>websocket_session::fragment_buffer_</qualifiedname>
+        <briefdescription>
+<para>分片缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="233" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1a221d311a62207d82c85f22fde77c4665" prot="private" static="no" mutable="no">
+        <type><ref refid="group___web_socket_1ga6f03b53401c24a4ee83541255774ef0f" kindref="member">websocket_opcode</ref></type>
+        <definition>websocket_opcode websocket_session::fragment_opcode_</definition>
+        <argsstring></argsstring>
+        <name>fragment_opcode_</name>
+        <qualifiedname>websocket_session::fragment_opcode_</qualifiedname>
+        <initializer>= <ref refid="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fa61a96ffcb251bb9bf0abf8fec19d0ea8" kindref="member">websocket_opcode::TEXT</ref></initializer>
+        <briefdescription>
+<para>当前分片类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="234" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1a8fa3fc8c9a1963655cf950d4a0d5165f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool websocket_session::in_fragment_</definition>
+        <argsstring></argsstring>
+        <name>in_fragment_</name>
+        <qualifiedname>websocket_session::in_fragment_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否正在接收分片 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="235" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1aa899c3cc689db9ecc16a7a2a59b1c495" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; websocket_session::ping_pending_</definition>
+        <argsstring></argsstring>
+        <name>ping_pending_</name>
+        <qualifiedname>websocket_session::ping_pending_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否有待响应的Ping </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="237" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="237" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1ab42617172fc4dd68133c72b04b64d63a" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref> &gt;</type>
+        <definition>atomic&lt;int64_t&gt; websocket_session::last_pong_ms_</definition>
+        <argsstring></argsstring>
+        <name>last_pong_ms_</name>
+        <qualifiedname>websocket_session::last_pong_ms_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>最后收到Pong的时间 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="238" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="238" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1afe819a08db45c2a2501d49e795f9d5e1" prot="private" static="no" mutable="no">
+        <type><ref refid="classwebsocket__session_1a4abaa8761a35b3f6cbd39301a6710bcf" kindref="member">message_handler</ref></type>
+        <definition>message_handler websocket_session::on_message_</definition>
+        <argsstring></argsstring>
+        <name>on_message_</name>
+        <qualifiedname>websocket_session::on_message_</qualifiedname>
+        <briefdescription>
+<para>消息回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="240" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1ae40707e97246190e9e0a32cfe4227f27" prot="private" static="no" mutable="no">
+        <type><ref refid="classwebsocket__session_1a3046e7a8e4c7d218190d5dd0267f3dd8" kindref="member">close_handler</ref></type>
+        <definition>close_handler websocket_session::on_close_</definition>
+        <argsstring></argsstring>
+        <name>on_close_</name>
+        <qualifiedname>websocket_session::on_close_</qualifiedname>
+        <briefdescription>
+<para>关闭回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="241" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classwebsocket__session_1ac626d816038e8fa8889e4f321c8ddd17" prot="private" static="no" mutable="no">
+        <type><ref refid="classwebsocket__session_1a9357893528e04fa9e0ccaeef3fd1d9a2" kindref="member">error_handler</ref></type>
+        <definition>error_handler websocket_session::on_error_</definition>
+        <argsstring></argsstring>
+        <name>on_error_</name>
+        <qualifiedname>websocket_session::on_error_</qualifiedname>
+        <briefdescription>
+<para>错误回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="242" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="242" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classwebsocket__session_1a6529af2056ecbe3cbe76303ca75c4ac1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool websocket_session::queue_frame</definition>
+        <argsstring>(byte_vector frame, bool is_control=false)</argsstring>
+        <name>queue_frame</name>
+        <qualifiedname>websocket_session::queue_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_control</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="244" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1ad73e8a173d878193494a975c7c9a3069" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::write_loop</definition>
+        <argsstring>()</argsstring>
+        <name>write_loop</name>
+        <qualifiedname>websocket_session::write_loop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="245" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1ad8f2d7c7c7db77b24721188779b5995a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::read_loop</definition>
+        <argsstring>()</argsstring>
+        <name>read_loop</name>
+        <qualifiedname>websocket_session::read_loop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="247" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1aa311409dfdef4ce029625193774afb01" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool websocket_session::read_frame</definition>
+        <argsstring>()</argsstring>
+        <name>read_frame</name>
+        <qualifiedname>websocket_session::read_frame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="248" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a9a53798f1798b0b6ef89ec6372961edb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool websocket_session::dispatch</definition>
+        <argsstring>(const websocket_frame_header &amp;hdr, websocket_opcode opcode, string payload)</argsstring>
+        <name>dispatch</name>
+        <qualifiedname>websocket_session::dispatch</qualifiedname>
+        <param>
+          <type>const <ref refid="structwebsocket__frame__header" kindref="compound">websocket_frame_header</ref> &amp;</type>
+          <declname>hdr</declname>
+        </param>
+        <param>
+          <type><ref refid="group___web_socket_1ga6f03b53401c24a4ee83541255774ef0f" kindref="member">websocket_opcode</ref></type>
+          <declname>opcode</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>payload</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="250" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a125e109cd9441bc190c1bd17aa60bddf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::deliver_message</definition>
+        <argsstring>(const string &amp;data, websocket_opcode opcode)</argsstring>
+        <name>deliver_message</name>
+        <qualifiedname>websocket_session::deliver_message</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___web_socket_1ga6f03b53401c24a4ee83541255774ef0f" kindref="member">websocket_opcode</ref></type>
+          <declname>opcode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="251" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1af9c347a50e30fbec588ad2b2a2901d19" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::send_close_frame</definition>
+        <argsstring>(websocket_status status, const string &amp;reason)</argsstring>
+        <name>send_close_frame</name>
+        <qualifiedname>websocket_session::send_close_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___web_socket_1gab56e001ece32405515a29e0bf0d10c0f" kindref="member">websocket_status</ref></type>
+          <declname>status</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>reason</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="253" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a6503b06732301662a5a1ec3428bceac4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::handle_close_frame</definition>
+        <argsstring>(string payload)</argsstring>
+        <name>handle_close_frame</name>
+        <qualifiedname>websocket_session::handle_close_frame</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>payload</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="254" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a8c2c315aefed573b4911cca02847992e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::heartbeat_loop</definition>
+        <argsstring>()</argsstring>
+        <name>heartbeat_loop</name>
+        <qualifiedname>websocket_session::heartbeat_loop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="256" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a5105234ecc60edbd94c6fa88793b32ad" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::do_stop</definition>
+        <argsstring>(websocket_status status, const string &amp;reason)</argsstring>
+        <name>do_stop</name>
+        <qualifiedname>websocket_session::do_stop</qualifiedname>
+        <param>
+          <type><ref refid="group___web_socket_1gab56e001ece32405515a29e0bf0d10c0f" kindref="member">websocket_status</ref></type>
+          <declname>status</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>reason</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="258" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classwebsocket__session_1a780f8dbdf6a0c7a69be53a00177d74c5" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>websocket_session::websocket_session</definition>
+        <argsstring>(unique_ptr&lt; tcp_socket &gt; sock, websocket_server *server=nullptr)</argsstring>
+        <name>websocket_session</name>
+        <qualifiedname>websocket_session::websocket_session</qualifiedname>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
+          <declname>sock</declname>
+        </param>
+        <param>
+          <type><ref refid="classwebsocket__server" kindref="compound">websocket_server</ref> *</type>
+          <declname>server</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>TCP/SSL socket </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>server</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>所属服务器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="266" column="14"/>
+        <referencedby refid="classwebsocket__session_1a9c38f9d9dfabe97dc0dcbaf19266c7e6">~websocket_session</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a9c38f9d9dfabe97dc0dcbaf19266c7e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>websocket_session::~websocket_session</definition>
+        <argsstring>()</argsstring>
+        <name>~websocket_session</name>
+        <qualifiedname>websocket_session::~websocket_session</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="271" column="5"/>
+        <references refid="classwebsocket__session_1a780f8dbdf6a0c7a69be53a00177d74c5">websocket_session</references>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a4bb026d8a19c648a2684a49b8c455954" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>websocket_session::websocket_session</definition>
+        <argsstring>(const websocket_session &amp;)=delete</argsstring>
+        <name>websocket_session</name>
+        <qualifiedname>websocket_session::websocket_session</qualifiedname>
+        <param>
+          <type>const <ref refid="classwebsocket__session" kindref="compound">websocket_session</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="273" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1aac0a837464b96c9b9473d5103d85c035" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classwebsocket__session" kindref="compound">websocket_session</ref> &amp;</type>
+        <definition>websocket_session &amp; websocket_session::operator=</definition>
+        <argsstring>(const websocket_session &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>websocket_session::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classwebsocket__session" kindref="compound">websocket_session</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="274" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a191ca2f118812d4c03f30fc1076c2ff8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::start</definition>
+        <argsstring>()</argsstring>
+        <name>start</name>
+        <qualifiedname>websocket_session::start</qualifiedname>
+        <briefdescription>
+<para>启动会话 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>启动读、写、心跳三个线程。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="281" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a4293edef06962564c57229989f755905" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::close</definition>
+        <argsstring>(websocket_status status=websocket_status::NORMAL_CLOSURE, const string &amp;reason=&quot;&quot;)</argsstring>
+        <name>close</name>
+        <qualifiedname>websocket_session::close</qualifiedname>
+        <param>
+          <type><ref refid="group___web_socket_1gab56e001ece32405515a29e0bf0d10c0f" kindref="member">websocket_status</ref></type>
+          <declname>status</declname>
+          <defval><ref refid="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa459901592f44ead38af2f02c74a777d0" kindref="member">websocket_status::NORMAL_CLOSURE</ref></defval>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>reason</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>关闭连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>关闭状态码（默认NORMAL_CLOSURE） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>reason</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>关闭原因 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="288" column="10"/>
+        <references refid="group___web_socket_1ggab56e001ece32405515a29e0bf0d10c0fa459901592f44ead38af2f02c74a777d0" compoundref="websocket_8hpp" startline="53">NORMAL_CLOSURE</references>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1ac0a53b632fc017fae2dec768d24b7c65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>websocket_session::stop</qualifiedname>
+        <briefdescription>
+<para>停止会话 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="293" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a63462f1a714a2520dca8fd4c6e6a36f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool websocket_session::send</definition>
+        <argsstring>(const string &amp;data, websocket_opcode opcode=websocket_opcode::TEXT)</argsstring>
+        <name>send</name>
+        <qualifiedname>websocket_session::send</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___web_socket_1ga6f03b53401c24a4ee83541255774ef0f" kindref="member">websocket_opcode</ref></type>
+          <declname>opcode</declname>
+          <defval><ref refid="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fa61a96ffcb251bb9bf0abf8fec19d0ea8" kindref="member">websocket_opcode::TEXT</ref></defval>
+        </param>
+        <briefdescription>
+<para>发送文本/二进制消息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>消息数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>opcode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>操作码（默认TEXT） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>发送成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="301" column="10"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fa61a96ffcb251bb9bf0abf8fec19d0ea8" compoundref="websocket_8hpp" startline="79">TEXT</references>
+        <referencedby refid="classwebsocket__session_1a74a5734c8df72ad7544fd3636704c665" compoundref="websocket_8hpp" startline="308" endline="308">send_binary</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a74a5734c8df72ad7544fd3636704c665" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool websocket_session::send_binary</definition>
+        <argsstring>(const string &amp;data)</argsstring>
+        <name>send_binary</name>
+        <qualifiedname>websocket_session::send_binary</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>发送二进制消息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>消息数据 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>发送成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="308" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="308" bodyend="308"/>
+        <references refid="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fa98ad0e8750ae10ad556ed7a62affb452" compoundref="websocket_8hpp" startline="80">BINARY</references>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="classwebsocket__session_1a63462f1a714a2520dca8fd4c6e6a36f6">send</references>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a518747318c8d053b64accbab5c2753ca" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool websocket_session::is_open</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_open</name>
+        <qualifiedname>websocket_session::is_open</qualifiedname>
+        <briefdescription>
+<para>检查连接是否开启 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>开启返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="314" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="314" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1aaebbcc5d2e0a943226e6d53d95066cca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::set_message_handler</definition>
+        <argsstring>(message_handler handler)</argsstring>
+        <name>set_message_handler</name>
+        <qualifiedname>websocket_session::set_message_handler</qualifiedname>
+        <param>
+          <type><ref refid="classwebsocket__session_1a4abaa8761a35b3f6cbd39301a6710bcf" kindref="member">message_handler</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置消息处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="320" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="320" bodyend="320"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1af77e313e481b77c5a125ef3c9819dcd6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::set_close_handler</definition>
+        <argsstring>(close_handler handler)</argsstring>
+        <name>set_close_handler</name>
+        <qualifiedname>websocket_session::set_close_handler</qualifiedname>
+        <param>
+          <type><ref refid="classwebsocket__session_1a3046e7a8e4c7d218190d5dd0267f3dd8" kindref="member">close_handler</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置关闭处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="326" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="326" bodyend="326"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a40df249d0e94b96b4a736c8ff752f5ea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void websocket_session::set_error_handler</definition>
+        <argsstring>(error_handler handler)</argsstring>
+        <name>set_error_handler</name>
+        <qualifiedname>websocket_session::set_error_handler</qualifiedname>
+        <param>
+          <type><ref refid="classwebsocket__session_1a9357893528e04fa9e0ccaeef3fd1d9a2" kindref="member">error_handler</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>设置错误处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>处理函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="332" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="332" bodyend="332"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1ab75d9beacbd176cff4c40fe06af47e19" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &amp;</type>
+        <definition>tcp_socket &amp; websocket_session::socket</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>socket</name>
+        <qualifiedname>websocket_session::socket</qualifiedname>
+        <briefdescription>
+<para>获取底层socket引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>socket引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="338" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="338" bodyend="338"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a8c5e17fbe27db7ab514b45e5af7364df" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &amp;</type>
+        <definition>const tcp_socket &amp; websocket_session::socket</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>socket</name>
+        <qualifiedname>websocket_session::socket</qualifiedname>
+        <briefdescription>
+<para>获取底层socket常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>socket常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="344" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="344" bodyend="344"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1a0b9fbe90fb51dc56e8cccc2b29c23e8c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classssl__socket" kindref="compound">ssl_socket</ref> *</type>
+        <definition>ssl_socket * websocket_session::ssl_socket_ptr</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ssl_socket_ptr</name>
+        <qualifiedname>websocket_session::ssl_socket_ptr</qualifiedname>
+        <briefdescription>
+<para>获取SSL socket指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SSL socket指针，若非SSL连接返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="350" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="350" bodyend="350"/>
+      </memberdef>
+      <memberdef kind="function" id="classwebsocket__session_1acb75b5583b665b601f4c3346eed8c3e6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classssl__socket" kindref="compound">ssl_socket</ref> *</type>
+        <definition>const ssl_socket * websocket_session::ssl_socket_ptr</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>ssl_socket_ptr</name>
+        <qualifiedname>websocket_session::ssl_socket_ptr</qualifiedname>
+        <briefdescription>
+<para>获取SSL socket常量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SSL socket常量指针，若非SSL连接返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="356" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="356" bodyend="356"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>WebSocket会话类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示单个WebSocket连接，负责帧的解析、发送、心跳和生命周期管理。</para>
+<para>使用示例： <programlisting><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>session<sp/>=<sp/><ref refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" kindref="member">make_shared&lt;websocket_session&gt;</ref>(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(sock));</highlight></codeline>
+<codeline><highlight class="normal">session-&gt;set_message_handler([](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>msg,<sp/><ref refid="group___web_socket_1ga6f03b53401c24a4ee83541255774ef0f" kindref="member">websocket_opcode</ref><sp/>opcode)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(opcode<sp/>==<sp/><ref refid="group___web_socket_1gga6f03b53401c24a4ee83541255774ef0fa61a96ffcb251bb9bf0abf8fec19d0ea8" kindref="member">websocket_opcode::TEXT</ref>)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Text:<sp/>&quot;</highlight><highlight class="normal">,<sp/>msg);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>处理二进制消息</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal">session-&gt;set_close_handler([](<ref refid="group___web_socket_1gab56e001ece32405515a29e0bf0d10c0f" kindref="member">websocket_status</ref><sp/>status,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>reason)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Closed:<sp/>&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(status),<sp/></highlight><highlight class="stringliteral">&quot;<sp/>-<sp/>&quot;</highlight><highlight class="normal">,<sp/>reason);</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal">session-&gt;start();</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>enable_shared_from_this&lt; websocket_session &gt;</label>
+        <link refid="structenable__shared__from__this"/>
+      </node>
+      <node id="1">
+        <label>websocket_session</label>
+        <link refid="classwebsocket__session"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>enable_shared_from_this&lt; websocket_session &gt;</label>
+        <link refid="structenable__shared__from__this"/>
+      </node>
+      <node id="1">
+        <label>websocket_session</label>
+        <link refid="classwebsocket__session"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="211" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="211" bodyend="357"/>
+    <listofallmembers>
+      <member refid="classwebsocket__session_1a4293edef06962564c57229989f755905" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>close</name></member>
+      <member refid="classwebsocket__session_1a3046e7a8e4c7d218190d5dd0267f3dd8" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>close_handler</name></member>
+      <member refid="classwebsocket__session_1a714736cb9d1cd1390d3d28e572159dc8" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>closed_once_</name></member>
+      <member refid="classwebsocket__session_1ab86d258e8231524726b2ef22a9666afe" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>ctrl_queue_</name></member>
+      <member refid="classwebsocket__session_1a125e109cd9441bc190c1bd17aa60bddf" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>deliver_message</name></member>
+      <member refid="classwebsocket__session_1a9a53798f1798b0b6ef89ec6372961edb" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>dispatch</name></member>
+      <member refid="classwebsocket__session_1a5105234ecc60edbd94c6fa88793b32ad" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>do_stop</name></member>
+      <member refid="structenable__shared__from__this_1a6badcf3b2e323032ff5766796093f96f" prot="protected" virt="non-virtual"><scope>websocket_session</scope><name>enable_shared_from_this</name></member>
+      <member refid="classwebsocket__session_1a9357893528e04fa9e0ccaeef3fd1d9a2" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>error_handler</name></member>
+      <member refid="classwebsocket__session_1a1e934a73ec065cae2dcd686e4c380b9c" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>fragment_buffer_</name></member>
+      <member refid="classwebsocket__session_1a221d311a62207d82c85f22fde77c4665" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>fragment_opcode_</name></member>
+      <member refid="classwebsocket__session_1a6503b06732301662a5a1ec3428bceac4" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>handle_close_frame</name></member>
+      <member refid="classwebsocket__session_1a8c2c315aefed573b4911cca02847992e" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>heartbeat_loop</name></member>
+      <member refid="classwebsocket__session_1aafd519691288d603f3f6b0a529a83867" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>heartbeat_thread_</name></member>
+      <member refid="classwebsocket__session_1a8fa3fc8c9a1963655cf950d4a0d5165f" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>in_fragment_</name></member>
+      <member refid="classwebsocket__session_1a518747318c8d053b64accbab5c2753ca" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>is_open</name></member>
+      <member refid="classwebsocket__session_1ab42617172fc4dd68133c72b04b64d63a" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>last_pong_ms_</name></member>
+      <member refid="classwebsocket__session_1a4abaa8761a35b3f6cbd39301a6710bcf" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>message_handler</name></member>
+      <member refid="classwebsocket__session_1ae40707e97246190e9e0a32cfe4227f27" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_close_</name></member>
+      <member refid="classwebsocket__session_1ac626d816038e8fa8889e4f321c8ddd17" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_error_</name></member>
+      <member refid="classwebsocket__session_1afe819a08db45c2a2501d49e795f9d5e1" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>on_message_</name></member>
+      <member refid="classwebsocket__session_1aac0a837464b96c9b9473d5103d85c035" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>operator=</name></member>
+      <member refid="classwebsocket__session_1aa899c3cc689db9ecc16a7a2a59b1c495" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>ping_pending_</name></member>
+      <member refid="classwebsocket__session_1a6529af2056ecbe3cbe76303ca75c4ac1" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>queue_frame</name></member>
+      <member refid="classwebsocket__session_1aa311409dfdef4ce029625193774afb01" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>read_frame</name></member>
+      <member refid="classwebsocket__session_1ad8f2d7c7c7db77b24721188779b5995a" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>read_loop</name></member>
+      <member refid="classwebsocket__session_1aeca34faac6a7bad5259afb1b9debfd3e" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>read_thread_</name></member>
+      <member refid="classwebsocket__session_1a33160e5a81ebe2b26033be2a0af5676a" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>running_</name></member>
+      <member refid="classwebsocket__session_1a63462f1a714a2520dca8fd4c6e6a36f6" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>send</name></member>
+      <member refid="classwebsocket__session_1a74a5734c8df72ad7544fd3636704c665" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>send_binary</name></member>
+      <member refid="classwebsocket__session_1af9c347a50e30fbec588ad2b2a2901d19" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>send_close_frame</name></member>
+      <member refid="classwebsocket__session_1ad26a0db7c85b2c28a7f686a2ecac1e01" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>server_</name></member>
+      <member refid="classwebsocket__session_1af77e313e481b77c5a125ef3c9819dcd6" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>set_close_handler</name></member>
+      <member refid="classwebsocket__session_1a40df249d0e94b96b4a736c8ff752f5ea" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>set_error_handler</name></member>
+      <member refid="classwebsocket__session_1aaebbcc5d2e0a943226e6d53d95066cca" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>set_message_handler</name></member>
+      <member refid="structenable__shared__from__this_1ad048382df1fdf3e976e6e443d6bb61c6" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>shared_from_this</name></member>
+      <member refid="classwebsocket__session_1ab75d9beacbd176cff4c40fe06af47e19" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>socket</name></member>
+      <member refid="classwebsocket__session_1a8c5e17fbe27db7ab514b45e5af7364df" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>socket</name></member>
+      <member refid="classwebsocket__session_1a465e8c5726717fbed53c21b46c844d42" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>socket_</name></member>
+      <member refid="classwebsocket__session_1a0b9fbe90fb51dc56e8cccc2b29c23e8c" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>ssl_socket_ptr</name></member>
+      <member refid="classwebsocket__session_1acb75b5583b665b601f4c3346eed8c3e6" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>ssl_socket_ptr</name></member>
+      <member refid="classwebsocket__session_1a191ca2f118812d4c03f30fc1076c2ff8" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>start</name></member>
+      <member refid="classwebsocket__session_1ac0a53b632fc017fae2dec768d24b7c65" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>stop</name></member>
+      <member refid="classwebsocket__session_1a780f8dbdf6a0c7a69be53a00177d74c5" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>websocket_session</name></member>
+      <member refid="classwebsocket__session_1a4bb026d8a19c648a2684a49b8c455954" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>websocket_session</name></member>
+      <member refid="classwebsocket__session_1a8109c0c9301804c0e693520f2e22857a" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>write_cv_</name></member>
+      <member refid="classwebsocket__session_1ad73e8a173d878193494a975c7c9a3069" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>write_loop</name></member>
+      <member refid="classwebsocket__session_1afda2ae7dd107a012807c9ed7aa0912ec" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>write_mutex_</name></member>
+      <member refid="classwebsocket__session_1a5f79dbd5937d409a3acd97d26e173bb7" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>write_queue_</name></member>
+      <member refid="classwebsocket__session_1aa353c9468a116e1b36c9f7d54f63d801" prot="private" virt="non-virtual"><scope>websocket_session</scope><name>write_thread_</name></member>
+      <member refid="classwebsocket__session_1a9c38f9d9dfabe97dc0dcbaf19266c7e6" prot="public" virt="non-virtual"><scope>websocket_session</scope><name>~websocket_session</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

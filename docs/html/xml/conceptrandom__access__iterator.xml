@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="conceptrandom__access__iterator" kind="concept">
+    <compoundname>random_access_iterator</compoundname>
+    <includes refid="concepts_8hpp" local="no">concepts.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Iterator</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename Iterator&gt;
+concept <ref refid="conceptrandom__access__iterator" kindref="compound">random_access_iterator</ref> = 
+        <ref refid="conceptbidirectional__iterator" kindref="compound">bidirectional_iterator</ref>&lt;Iterator&gt; &amp;&amp;
+        requires(Iterator it1, Iterator it2, typename <ref refid="structiterator__traits" kindref="compound">iterator_traits</ref>&lt;Iterator&gt;::difference_type n) {
+            { it1 + n } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;Iterator&gt;;
+            { n + it1 } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;Iterator&gt;;
+            { it1 - n } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;Iterator&gt;;
+            { it1 += n } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;Iterator&gt;;
+            { it1 -= n } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;Iterator&gt;;
+            { it2 - it1 } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;typename <ref refid="structiterator__traits" kindref="compound">iterator_traits</ref>&lt;Iterator&gt;::difference_type&gt;;
+            { it1[n] } -&gt; <ref refid="conceptconvertible__to" kindref="compound">convertible_to</ref>&lt;typename <ref refid="structiterator__traits" kindref="compound">iterator_traits</ref>&lt;Iterator&gt;::value_type&gt;;
+        }</initializer>
+    <conceptparts>
+      <codepart line="356">    <programlisting>
+<codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">random_access_iterator<sp/>=</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bidirectional_iterator&lt;Iterator&gt;<sp/>&amp;&amp;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(Iterator<sp/>it1,<sp/>Iterator<sp/>it2,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>iterator_traits&lt;Iterator&gt;::difference_type<sp/>n)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>it1<sp/>+<sp/>n<sp/>}<sp/>-&gt;<sp/>convertible_to&lt;Iterator&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>n<sp/>+<sp/>it1<sp/>}<sp/>-&gt;<sp/>convertible_to&lt;Iterator&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>it1<sp/>-<sp/>n<sp/>}<sp/>-&gt;<sp/>convertible_to&lt;Iterator&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>it1<sp/>+=<sp/>n<sp/>}<sp/>-&gt;<sp/>convertible_to&lt;Iterator&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>it1<sp/>-=<sp/>n<sp/>}<sp/>-&gt;<sp/>convertible_to&lt;Iterator&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>it2<sp/>-<sp/>it1<sp/>}<sp/>-&gt;<sp/>convertible_to&lt;typename<sp/>iterator_traits&lt;Iterator&gt;::difference_type&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>it1[n]<sp/>}<sp/>-&gt;<sp/>convertible_to&lt;typename<sp/>iterator_traits&lt;Iterator&gt;::value_type&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+<para>检查类型是否为随机访问迭代器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在双向迭代器基础上增加随机访问操作支持。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="356" column="1"/>
+  </compounddef>
+</doxygen>

@@ -18,6 +18,7 @@ var c_09_09config_8hpp =
     [ "NEFORCE_COMPILER_CLANG", "group___compiler_detection.html#gab29fe3d146c95cdb4b8369238eca3332", null ],
     [ "NEFORCE_COMPILER_GCC", "group___compiler_detection.html#ga72e565a901bf3a6bb1d7d8ff180a9afd", null ],
     [ "NEFORCE_COMPILER_GNUC", "group___compiler_detection.html#gaeb1b1b4eafd9a2fa8ac482f6dbf55e88", null ],
+    [ "NEFORCE_COMPILER_LLVM_MINGW", "group___compiler_detection.html#gab7e373869a12ec56ab94585d3ec6ba1d", null ],
     [ "NEFORCE_COMPILER_MINGW", "group___compiler_detection.html#ga41bf385f7c1de4e23b55295b50e0313c", null ],
     [ "NEFORCE_COMPILER_MSVC", "group___compiler_detection.html#gafd81fe9133681e4fac29d7ed477bcd22", null ],
     [ "NEFORCE_MACRO_RANGE_ARITHMETIC", "group___type_range_macros.html#gae88cf53d9352ddd605216e8be978a230", null ],
@@ -40,6 +41,5 @@ var c_09_09config_8hpp =
     [ "NEFORCE_STANDARD_14", "group___cxx_standard_detection.html#gaddbf00d28e1b3dcb0a4e3937565280fe", null ],
     [ "NEFORCE_STANDARD_17", "group___cxx_standard_detection.html#gacfb11e8f0b3c4bdd52b4f6b3fcca5caf", null ],
     [ "NEFORCE_STANDARD_20", "group___cxx_standard_detection.html#ga15a44225a036fa856299c55ee8951862", null ],
-    [ "NEFORCE_STANDARD_23", "group___cxx_standard_detection.html#ga5f7c2e135c790d1ab521c7950376e910", null ],
     [ "NEFORCE_STANDARD_98", "group___cxx_standard_detection.html#gae2287f3ed3e2c7e723dbdc9d79b097c0", null ]
 ];

@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classtcp__acceptor" kind="class" language="C++" prot="public">
+    <compoundname>tcp_acceptor</compoundname>
+    <basecompoundref refid="classip__socket" prot="public" virt="non-virtual">ip_socket</basecompoundref>
+    <derivedcompoundref refid="classssl__acceptor" prot="public" virt="non-virtual">ssl_acceptor</derivedcompoundref>
+    <includes refid="tcp__acceptor_8hpp" local="no">tcp_acceptor.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtcp__acceptor_1a7a7be44b5b84d5114202f0abc78dca02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>tcp_acceptor::tcp_acceptor</definition>
+        <argsstring>()=default</argsstring>
+        <name>tcp_acceptor</name>
+        <qualifiedname>tcp_acceptor::tcp_acceptor</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="80" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void tcp_acceptor::open</definition>
+        <argsstring>(const ip_address &amp;endpoint, int backlog=SOMAXCONN)</argsstring>
+        <name>open</name>
+        <qualifiedname>tcp_acceptor::open</qualifiedname>
+        <param>
+          <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>backlog</declname>
+          <defval>SOMAXCONN</defval>
+        </param>
+        <briefdescription>
+<para>打开并开始监听 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要绑定的本地端点地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>backlog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接队列大小（默认SOMAXCONN） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绑定或监听失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>端点无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="89" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__acceptor_1a61ceb34c57bc0b322be30c33ecfa9eef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref></type>
+        <definition>NEFORCE_NODISCARD tcp_socket tcp_acceptor::accept</definition>
+        <argsstring>()</argsstring>
+        <name>accept</name>
+        <qualifiedname>tcp_acceptor::accept</qualifiedname>
+        <briefdescription>
+<para>接受客户端连接（阻塞模式） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>新的TCP socket对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接受失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>acceptor未打开时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+阻塞等待直到有新连接到达，然后返回代表该连接的socket。 返回的socket可用于与客户端通信。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="100" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__acceptor_1a6300cbb9eec6e11bb1df9870f7ac8675" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
+        <definition>NEFORCE_NODISCARD optional&lt; tcp_socket &gt; tcp_acceptor::accept_nonblock</definition>
+        <argsstring>()</argsstring>
+        <name>accept_nonblock</name>
+        <qualifiedname>tcp_acceptor::accept_nonblock</qualifiedname>
+        <briefdescription>
+<para>接受客户端连接（非阻塞模式） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有新连接返回socket对象，无连接返回none </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发生错误时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+非阻塞地尝试接受新连接。 如果没有待处理的连接，立即返回none。 需要先设置socket为非阻塞模式。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="111" column="32"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>TCP Acceptor类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现TCP服务器的连接接受功能，负责监听端口并接受客户端连接。 继承自ip_socket，提供专门用于服务器端的操作。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>绑定到本地端点</para>
+</listitem><listitem><para>开始监听连接</para>
+</listitem><listitem><para>接受客户端连接</para>
+</listitem></itemizedlist>
+</para>
+<para>使用示例： <programlisting><codeline><highlight class="comment">//<sp/>TCP服务器示例</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classtcp__acceptor_1a7a7be44b5b84d5114202f0abc78dca02" kindref="member">tcp_acceptor</ref><sp/>acceptor;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>绑定并监听端口</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>endpoint<sp/>=<sp/><ref refid="classip__address_1a180ec03fa7dd1c0cca46fcbc2e1ded1c" kindref="member">ip_address::any</ref>(ports(8080));</highlight></codeline>
+<codeline><highlight class="normal">acceptor.<ref refid="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" kindref="member">open</ref>(endpoint,<sp/>128);</highlight></codeline>
+<codeline><highlight class="normal">acceptor.<ref refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" kindref="member">set_nonblocking</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Server<sp/>listening<sp/>on<sp/>&quot;</highlight><highlight class="normal">,<sp/>endpoint);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>接受客户端连接</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>client<sp/>=<sp/>acceptor.<ref refid="classtcp__acceptor_1a6300cbb9eec6e11bb1df9870f7ac8675" kindref="member">accept_nonblock</ref>();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(client)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>获取客户端地址</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>client_addr<sp/>=<sp/>client.remote_endpoint();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(client_addr)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;New<sp/>connection<sp/>from<sp/>&quot;</highlight><highlight class="normal">,<sp/>client_addr);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>处理客户端请求</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buffer[1024];</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref><sp/>received<sp/>=<sp/>client.receive({buffer,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(buffer)});</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(received<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>client.send_all({</highlight><highlight class="stringliteral">&quot;Hello<sp/>from<sp/>server!&quot;</highlight><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception&amp;<sp/>e)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Accept<sp/>error:<sp/>&quot;</highlight><highlight class="normal">,<sp/>e.<ref refid="structexception_1ac635798f4eb88397f79b995966b26683" kindref="member">what</ref>());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><simplesect kind="note"><para>默认启用地址重用选项，允许在关闭后立即重用端口。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>ip_socket</label>
+        <link refid="classip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>socket_base</label>
+        <link refid="classsocket__base"/>
+      </node>
+      <node id="4">
+        <label>ssl_acceptor</label>
+        <link refid="classssl__acceptor"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>tcp_acceptor</label>
+        <link refid="classtcp__acceptor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>ip_socket</label>
+        <link refid="classip__socket"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>socket_base</label>
+        <link refid="classsocket__base"/>
+      </node>
+      <node id="1">
+        <label>tcp_acceptor</label>
+        <link refid="classtcp__acceptor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="75" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" bodystart="75" bodyend="112"/>
+    <listofallmembers>
+      <member refid="classtcp__acceptor_1a61ceb34c57bc0b322be30c33ecfa9eef" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>accept</name></member>
+      <member refid="classtcp__acceptor_1a6300cbb9eec6e11bb1df9870f7ac8675" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>accept_nonblock</name></member>
+      <member refid="classip__socket_1a981aa1544d7794182f65c1764fc83443" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>address_family</name></member>
+      <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>bind</name></member>
+      <member refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" prot="public" virt="virtual"><scope>tcp_acceptor</scope><name>close</name></member>
+      <member refid="classip__socket_1a50186a110e9b4e5c67aac5a23e021ace" prot="public" virt="virtual"><scope>tcp_acceptor</scope><name>connect</name></member>
+      <member refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" prot="protected" virt="non-virtual"><scope>tcp_acceptor</scope><name>family_</name></member>
+      <member refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" prot="protected" virt="non-virtual"><scope>tcp_acceptor</scope><name>fd_</name></member>
+      <member refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>get_option</name></member>
+      <member refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>invalid_handle</name></member>
+      <member refid="classip__socket_1aaae0820ef1814fdd2299e646e7ce0b88" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1a8a478205847df7ca0529f15ca8ce50b8" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1a00d8e53e5b1c1d7dc6de2fe45e50ffc4" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1aae6b6a8b9b8bea4d66dba690c8222980" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>ip_socket</name></member>
+      <member refid="classip__socket_1a84a515031395f20e2365e46cfabd9fdb" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>is_ipv4</name></member>
+      <member refid="classip__socket_1a33e8a286462c74c4c4eb4df045dac507" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>is_ipv6</name></member>
+      <member refid="classsocket__base_1a6187ffba6859cc29fcf0c0b08916dcca" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>is_open</name></member>
+      <member refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>listen</name></member>
+      <member refid="classsocket__base_1a698bf7147749c5f0bbfd0a906875eb5e" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>local_endpoint</name></member>
+      <member refid="classsocket__base_1a7a733151fa76e8e33ebd6d637c06e0fd" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>native_handle</name></member>
+      <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>native_handle_type</name></member>
+      <member refid="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>open</name></member>
+      <member refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>tcp_acceptor</scope><name>open</name></member>
+      <member refid="classip__socket_1af46a0c10c0c23ab91a8445c16733ed61" prot="protected" virt="non-virtual"><scope>tcp_acceptor</scope><name>open_ip</name></member>
+      <member refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>operator bool</name></member>
+      <member refid="classip__socket_1a5df14bf84d50bdad66ab775ad2c5cbba" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>operator=</name></member>
+      <member refid="classip__socket_1a73fbebcb7a962895a5943597b9d3d6d8" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>operator=</name></member>
+      <member refid="classsocket__base_1af825fb2543e89b098bc9c1da47f09647" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>tcp_acceptor</scope><name>operator=</name></member>
+      <member refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>tcp_acceptor</scope><name>operator=</name></member>
+      <member refid="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>release</name></member>
+      <member refid="classsocket__base_1a3af835aab3dbb6e477c9833184437b62" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>remote_endpoint</name></member>
+      <member refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>set_keep_alive</name></member>
+      <member refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>set_nonblocking</name></member>
+      <member refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>set_option</name></member>
+      <member refid="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>set_receive_buffer_size</name></member>
+      <member refid="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>set_receive_timeout</name></member>
+      <member refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>set_reuse_address</name></member>
+      <member refid="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>set_reuse_port</name></member>
+      <member refid="classsocket__base_1a7126487c99a283ff1eb6b3475893e280" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>set_send_buffer_size</name></member>
+      <member refid="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>set_send_timeout</name></member>
+      <member refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>set_tcp_nodelay</name></member>
+      <member refid="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>shutdown_both</name></member>
+      <member refid="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>shutdown_receive</name></member>
+      <member refid="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>shutdown_send</name></member>
+      <member refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1a57db04b97c49aa2c123b8b4cb155ee9b" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>socket_base</name></member>
+      <member refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>socket_base</name></member>
+      <member refid="classtcp__acceptor_1a7a7be44b5b84d5114202f0abc78dca02" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>tcp_acceptor</name></member>
+      <member refid="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>try_open</name></member>
+      <member refid="classip__socket_1a4a1d2bcfb15b0d319defef1c9da3c0d4" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>~ip_socket</name></member>
+      <member refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" prot="public" virt="virtual"><scope>tcp_acceptor</scope><name>~socket_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

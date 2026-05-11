@@ -3,10 +3,10 @@
 
 /**
  * @file toml_builder.hpp
- * @brief toml配置格式构建器
+ * @brief TOML配置格式构建器
  *
- * 此文件提供了toml配置格式的流式构建器实现。
- * 支持链式调用和函数式编程方式构建toml格式。
+ * 此文件提供了TOML配置格式的流式构建器实现。
+ * 支持链式调用和函数式编程方式构建TOML格式。
  */
 
 #include "NeForce/core/container/stack.hpp"
@@ -20,22 +20,22 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
- * @addtogroup TomlConfig toml配置
+ * @addtogroup TomlConfig TOML配置
  * @{
  */
 
 /**
  * @class toml_builder
- * @brief toml配置构建器
+ * @brief TOML配置构建器
  *
- * 提供流式接口构建toml配置格式，支持以下特性：
+ * 提供流式接口构建TOML配置格式，支持以下特性：
  * - 链式调用构建表格和数组
  * - 自动类型转换（整数、浮点数、布尔值、字符串）
  * - 函数式构建嵌套结构
  * - 集合类型自动转换（可迭代对象、映射表）
  * - 上下文管理（自动维护当前表格/数组状态）
- * - 支持所有toml字符串类型（Basic, Literal, Multi-line）
- * - 支持所有toml日期时间类型
+ * - 支持所有TOML字符串类型（Basic, Literal, Multi-line）
+ * - 支持所有TOML日期时间类型
  */
 class NEFORCE_API toml_builder {
 private:
@@ -84,7 +84,7 @@ private:
 private:
     /**
      * @brief 值设置的通用实现
-     * @tparam T toml值类型
+     * @tparam T TOML值类型
      * @param value 要设置的值指针
      * @return 自身引用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
@@ -351,8 +351,8 @@ public:
     toml_builder& value(const string_view value) { return this->value(string(value)); }
 
     /**
-     * @brief 设置已构建的toml值
-     * @param value toml值指针
+     * @brief 设置已构建的TOML值
+     * @param value TOML值指针
      * @return 自身引用，支持链式调用
      * @throws toml_exception 当上下文无效、键名缺失或键重复时抛出
      */
@@ -424,7 +424,7 @@ public:
     toml_builder& value_array(const function<void(toml_builder&)>& build_func);
 
     /**
-     * @brief 构建toml文档
+     * @brief 构建TOML文档
      * @return 构建完成的根表格
      * @throws toml_exception 当存在未闭合的上下文时抛出
      *

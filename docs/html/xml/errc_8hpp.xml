@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="errc_8hpp" kind="file" language="C++">
+    <compoundname>errc.hpp</compoundname>
+    <includes refid="types_8hpp" local="yes">NeForce/core/typeinfo/types.hpp</includes>
+    <includes local="no">cerrno</includes>
+    <includedby refid="error__category_8hpp" local="yes">error_category.hpp</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>errc.hpp</label>
+        <link refid="errc_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="types_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>assert.h</label>
+      </node>
+      <node id="5">
+        <label>cerrno</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5">
+        <label>NeForce.hpp</label>
+        <link refid="_ne_force_8hpp"/>
+      </node>
+      <node id="1">
+        <label>errc.hpp</label>
+        <link refid="errc_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>error_category.hpp</label>
+        <link refid="error__category_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>error_code.hpp</label>
+        <link refid="error__code_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>error_condition.hpp</label>
+        <link refid="error__condition_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>file.hpp</label>
+        <link refid="file_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>file_async.hpp</label>
+        <link refid="file__async_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>temp_file.hpp</label>
+        <link refid="temp__file_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>file_sink.hpp</label>
+        <link refid="file__sink_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="enum">
+      <member refid="group___error_code_1gaf82e70cdc0af1c3132fe6f20443944e6" kind="enum"><name>errc</name></member>
+    </sectiondef>
+    <briefdescription>
+<para>系统错误码枚举 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>此文件提供了跨平台的系统错误码枚举，封装了POSIX errno值。 通过统一的枚举类型，可以在不同平台上使用相同的错误码名称。 </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_EXCEPTION_ERRC_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_EXCEPTION_ERRC_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="types_8hpp" kindref="compound">NeForce/core/typeinfo/types.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cerrno&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="group___error_code_1gaf82e70cdc0af1c3132fe6f20443944e6" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="group___error_code_1gaf82e70cdc0af1c3132fe6f20443944e6" kindref="member">errc</ref><sp/>:<sp/><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="30" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a260ca9dd8a4577fc00b7bd5810298076" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a260ca9dd8a4577fc00b7bd5810298076" kindref="member">success</ref><sp/>=<sp/>0,<sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a8ab69162f060cc46b805b3265ad1cdf1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a8ab69162f060cc46b805b3265ad1cdf1" kindref="member">address_family_not_supported</ref><sp/>=<sp/>EAFNOSUPPORT,<sp/></highlight></codeline>
+<codeline lineno="33" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a8e2bc80599069d337b43dff6edfb6891" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a8e2bc80599069d337b43dff6edfb6891" kindref="member">address_in_use</ref><sp/>=<sp/>EADDRINUSE,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a20abf2ffbf6e82e36405843f269d6438" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a20abf2ffbf6e82e36405843f269d6438" kindref="member">address_not_available</ref><sp/>=<sp/>EADDRNOTAVAIL,<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="35" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ab5580b198f691ab2df12f5e2ab974373" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ab5580b198f691ab2df12f5e2ab974373" kindref="member">already_connected</ref><sp/>=<sp/>EISCONN,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a1b245b26b5ea3428c050d7f1503d7715" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a1b245b26b5ea3428c050d7f1503d7715" kindref="member">argument_list_too_long</ref><sp/>=<sp/>E2BIG,<sp/></highlight></codeline>
+<codeline lineno="38" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a4b82222a0895b538d0597092b3ceab3e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a4b82222a0895b538d0597092b3ceab3e" kindref="member">argument_out_of_domain</ref><sp/>=<sp/>EDOM,<sp/><sp/></highlight></codeline>
+<codeline lineno="39" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aaf169f73a82794128aa491c4b4f1c071" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aaf169f73a82794128aa491c4b4f1c071" kindref="member">bad_address</ref><sp/>=<sp/>EFAULT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="40" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a9941c5c8c58ff058b870e94e96ac38e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a9941c5c8c58ff058b870e94e96ac38e1" kindref="member">bad_file_descriptor</ref><sp/>=<sp/>EBADF,<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ae55d43eabeefe5a8271b4a3c898bd18f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ae55d43eabeefe5a8271b4a3c898bd18f" kindref="member">invalid_argument</ref><sp/>=<sp/>EINVAL,<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="42" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a143653b075bff946193644ba6d97fa5d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a143653b075bff946193644ba6d97fa5d" kindref="member">value_too_large</ref><sp/>=<sp/>EOVERFLOW,<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="43" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a8e0fafb181567cc468e1ee81983d739d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a8e0fafb181567cc468e1ee81983d739d" kindref="member">result_out_of_range</ref><sp/>=<sp/>ERANGE,<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a2f0338eed54503152be1d31c93c9c2f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a2f0338eed54503152be1d31c93c9c2f1" kindref="member">broken_pipe</ref><sp/>=<sp/>EPIPE,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="46" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a2f8f27a7eef1ad585c7ab6f25a6c2c79" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a2f8f27a7eef1ad585c7ab6f25a6c2c79" kindref="member">connection_aborted</ref><sp/>=<sp/>ECONNABORTED,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="47" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a81cf222a9b1530171fdfd66c3f734989" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a81cf222a9b1530171fdfd66c3f734989" kindref="member">connection_already_in_progress</ref><sp/>=<sp/>EALREADY,<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="48" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a53793ee58fc24168a0d6549c3cb2df8e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a53793ee58fc24168a0d6549c3cb2df8e" kindref="member">connection_refused</ref><sp/>=<sp/>ECONNREFUSED,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="49" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6abf39bfc8665384194e343c08ab344405" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6abf39bfc8665384194e343c08ab344405" kindref="member">connection_reset</ref><sp/>=<sp/>ECONNRESET,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="50" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a326032e01f2a5e14c7f730f4d03d753a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a326032e01f2a5e14c7f730f4d03d753a" kindref="member">destination_address_required</ref><sp/>=<sp/>EDESTADDRREQ,<sp/></highlight></codeline>
+<codeline lineno="51" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6afe2377fbd16d7f335474e1df7d6376bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6afe2377fbd16d7f335474e1df7d6376bf" kindref="member">host_unreachable</ref><sp/>=<sp/>EHOSTUNREACH,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="52" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ade5f4bc2f8a4690176e22e83196b9fd3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ade5f4bc2f8a4690176e22e83196b9fd3" kindref="member">message_size</ref><sp/>=<sp/>EMSGSIZE,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="53" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a93b16d34b1689f66f0cfed60e99c0009" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a93b16d34b1689f66f0cfed60e99c0009" kindref="member">network_down</ref><sp/>=<sp/>ENETDOWN,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="54" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a0e1d200ae35ede416bf85f84093ce37a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a0e1d200ae35ede416bf85f84093ce37a" kindref="member">network_reset</ref><sp/>=<sp/>ENETRESET,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="55" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a608a68344b4eb1fe0690861a83828816" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a608a68344b4eb1fe0690861a83828816" kindref="member">network_unreachable</ref><sp/>=<sp/>ENETUNREACH,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="56" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a618ead44397b73cf0baa08b460b66c39" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a618ead44397b73cf0baa08b460b66c39" kindref="member">no_buffer_space</ref><sp/>=<sp/>ENOBUFS,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="57" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6abed8a9032d9366c28582a0ad59a31525" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6abed8a9032d9366c28582a0ad59a31525" kindref="member">no_protocol_option</ref><sp/>=<sp/>ENOPROTOOPT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="58" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a69c2dbb5917ca550a862e9c1c839bca1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a69c2dbb5917ca550a862e9c1c839bca1" kindref="member">not_connected</ref><sp/>=<sp/>ENOTCONN,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="59" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a4c7eb50b6d86ac8a130ebebc18dbe263" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a4c7eb50b6d86ac8a130ebebc18dbe263" kindref="member">operation_in_progress</ref><sp/>=<sp/>EINPROGRESS,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="60" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a738abdaead9cd7b2e2ea19a34764b385" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a738abdaead9cd7b2e2ea19a34764b385" kindref="member">operation_would_block</ref><sp/>=<sp/>EWOULDBLOCK,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="61" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a9665c745d0a9132d8da6ed55e89a0564" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a9665c745d0a9132d8da6ed55e89a0564" kindref="member">protocol_error</ref><sp/>=<sp/>EPROTO,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="62" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aa2635acef8b9a3e1c40923829722d472" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aa2635acef8b9a3e1c40923829722d472" kindref="member">protocol_not_supported</ref><sp/>=<sp/>EPROTONOSUPPORT,<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="63" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ac1a620a30954dc9402a811453c2c3e3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ac1a620a30954dc9402a811453c2c3e3f" kindref="member">stream_timeout</ref><sp/>=<sp/>ETIME,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="64" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a56c27b1ab1a5a5a0eae853cabb4dc0c1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a56c27b1ab1a5a5a0eae853cabb4dc0c1" kindref="member">timed_out</ref><sp/>=<sp/>ETIMEDOUT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="65" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a81cac28a38438710de9856af4a8bcd0b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a81cac28a38438710de9856af4a8bcd0b" kindref="member">wrong_protocol_type</ref><sp/>=<sp/>EPROTOTYPE,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a6177070a517d51a4382ab0d7c88e5b58" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a6177070a517d51a4382ab0d7c88e5b58" kindref="member">cross_device_link</ref><sp/>=<sp/>EXDEV,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="68" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ab3ab5338a00f49c4451851cc5442f370" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ab3ab5338a00f49c4451851cc5442f370" kindref="member">device_or_resource_busy</ref><sp/>=<sp/>EBUSY,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="69" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a6a336135d33e62f49edc55f29354e12e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a6a336135d33e62f49edc55f29354e12e" kindref="member">directory_not_empty</ref><sp/>=<sp/>ENOTEMPTY,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="70" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a41edf636e3c7b59f797348fc58472258" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a41edf636e3c7b59f797348fc58472258" kindref="member">file_exists</ref><sp/>=<sp/>EEXIST,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="71" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aa1e14bfb89b41ddf654b1772c8fd2e74" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aa1e14bfb89b41ddf654b1772c8fd2e74" kindref="member">file_too_large</ref><sp/>=<sp/>EFBIG,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="72" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a6e56e6ed055b9771b8192a4f229fee27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a6e56e6ed055b9771b8192a4f229fee27" kindref="member">filename_too_long</ref><sp/>=<sp/>ENAMETOOLONG,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="73" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a45fe7da1767194b580aeba752d7b44ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a45fe7da1767194b580aeba752d7b44ae" kindref="member">inappropriate_io_control_operation</ref><sp/>=<sp/>ENOTTY,<sp/></highlight></codeline>
+<codeline lineno="74" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6abd86a2c65caf6a270b916234ab321ce3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6abd86a2c65caf6a270b916234ab321ce3" kindref="member">invalid_seek</ref><sp/>=<sp/>ESPIPE,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="75" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6acccc32f2a5f7dc7b87d2f85daea66789" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6acccc32f2a5f7dc7b87d2f85daea66789" kindref="member">io_error</ref><sp/>=<sp/>EIO,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="76" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6af3c51d7ea75a76f26c0a2bdc00c4e006" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6af3c51d7ea75a76f26c0a2bdc00c4e006" kindref="member">is_a_directory</ref><sp/>=<sp/>EISDIR,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="77" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a1a5334dd8d1ca56e33887bd44630641b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a1a5334dd8d1ca56e33887bd44630641b" kindref="member">no_space_on_device</ref><sp/>=<sp/>ENOSPC,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="78" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a5c83a012eac17bbf458df5804801e373" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a5c83a012eac17bbf458df5804801e373" kindref="member">no_such_device_or_address</ref><sp/>=<sp/>ENXIO,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="79" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6af42b2e58729e2783b683c8610977fc22" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6af42b2e58729e2783b683c8610977fc22" kindref="member">no_such_device</ref><sp/>=<sp/>ENODEV,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="80" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a2e70fc89b08f26fa3fc77694c91e8f7a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a2e70fc89b08f26fa3fc77694c91e8f7a" kindref="member">no_such_file_or_directory</ref><sp/>=<sp/>ENOENT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="81" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a21e867ca95e1dfecff4701863547dcec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a21e867ca95e1dfecff4701863547dcec" kindref="member">not_a_directory</ref><sp/>=<sp/>ENOTDIR,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="82" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a06108efce8ef1cd8aa4cc440f8b4317f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a06108efce8ef1cd8aa4cc440f8b4317f" kindref="member">read_only_file_system</ref><sp/>=<sp/>EROFS,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="83" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ad2f80f12d22bb099fcf1062db660b567" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ad2f80f12d22bb099fcf1062db660b567" kindref="member">text_file_busy</ref><sp/>=<sp/>ETXTBSY,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="84" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a3130d1d4e000cdc1e7c47013e313c10e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a3130d1d4e000cdc1e7c47013e313c10e" kindref="member">too_many_files_open_in_system</ref><sp/>=<sp/>ENFILE,<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="85" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aed2c33c8fe874cfeba6f4a7747c62d05" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aed2c33c8fe874cfeba6f4a7747c62d05" kindref="member">too_many_files_open</ref><sp/>=<sp/>EMFILE,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="86" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6abfe22fc9b27a8ff13186aba60b6bc5c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6abfe22fc9b27a8ff13186aba60b6bc5c8" kindref="member">too_many_links</ref><sp/>=<sp/>EMLINK,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="87" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a33c78baca1480479c88aa4d50cb68206" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a33c78baca1480479c88aa4d50cb68206" kindref="member">too_many_symbolic_link_levels</ref><sp/>=<sp/>ELOOP,<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ad08d4c854a6810cebd2a8ab61876f919" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ad08d4c854a6810cebd2a8ab61876f919" kindref="member">no_child_process</ref><sp/>=<sp/>ECHILD,<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="90" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ad91a9b8a734f2bef4b778f89806cbab7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ad91a9b8a734f2bef4b778f89806cbab7" kindref="member">no_such_process</ref><sp/>=<sp/>ESRCH,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="91" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a8344b3d509942f035d5e303022f9b986" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a8344b3d509942f035d5e303022f9b986" kindref="member">operation_not_permitted</ref><sp/>=<sp/>EPERM,<sp/></highlight></codeline>
+<codeline lineno="92" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ae8ee838822072f02738dbd7d97ea03fc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ae8ee838822072f02738dbd7d97ea03fc" kindref="member">permission_denied</ref><sp/>=<sp/>EACCES,<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aafdb5594dc3e484fc1bfd7c564d550c1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aafdb5594dc3e484fc1bfd7c564d550c1" kindref="member">not_enough_memory</ref><sp/>=<sp/>ENOMEM,<sp/></highlight></codeline>
+<codeline lineno="95" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a58688487c3e24313637a76bd29881e64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a58688487c3e24313637a76bd29881e64" kindref="member">no_lock_available</ref><sp/>=<sp/>ENOLCK,<sp/></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6afadb76763385627e57ec386c9b6038f0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6afadb76763385627e57ec386c9b6038f0" kindref="member">interrupted</ref><sp/>=<sp/>EINTR,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="98" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a2abac2fa6722c56b2ea17ac6c4097f68" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a2abac2fa6722c56b2ea17ac6c4097f68" kindref="member">owner_dead</ref><sp/>=<sp/>EOWNERDEAD,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="99" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a6805059549401365b824b54573a6f46e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a6805059549401365b824b54573a6f46e" kindref="member">state_not_recoverable</ref><sp/>=<sp/>ENOTRECOVERABLE,<sp/></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a4dfaf9c996cf045f32d17edc9754fc95" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a4dfaf9c996cf045f32d17edc9754fc95" kindref="member">executable_format_error</ref><sp/>=<sp/>ENOEXEC,<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="102" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aa33c516bbdfb179cef733c8daeb97bed" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aa33c516bbdfb179cef733c8daeb97bed" kindref="member">function_not_supported</ref><sp/>=<sp/>ENOSYS,<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="103" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a53a9e57a679708b2d8ff0ccd8ec96b18" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a53a9e57a679708b2d8ff0ccd8ec96b18" kindref="member">illegal_byte_sequence</ref><sp/>=<sp/>EILSEQ,<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="104" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aa55e82356e9721946aa9ba954733c6f0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aa55e82356e9721946aa9ba954733c6f0" kindref="member">not_supported</ref><sp/>=<sp/>ENOTSUP,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="105" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a69bf074bf052ee4c9047b62fe7c24569" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a69bf074bf052ee4c9047b62fe7c24569" kindref="member">operation_not_supported</ref><sp/>=<sp/>EOPNOTSUPP,<sp/></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aeec0f03ad92584c78835c10ab79d7f42" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aeec0f03ad92584c78835c10ab79d7f42" kindref="member">no_message_available</ref><sp/>=<sp/>ENODATA,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="108" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6acec935db07cfc57caafa37e98eafb213" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6acec935db07cfc57caafa37e98eafb213" kindref="member">no_message</ref><sp/>=<sp/>ENOMSG,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="109" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6afd3d0bdcc9eb9e68534b7d055c5fe586" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6afd3d0bdcc9eb9e68534b7d055c5fe586" kindref="member">operation_canceled</ref><sp/>=<sp/>ECANCELED,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="110" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aed65f7649c6f0e365673d65a9d8119d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6aed65f7649c6f0e365673d65a9d8119d8" kindref="member">resource_deadlock_would_occur</ref><sp/>=<sp/>EDEADLK,<sp/></highlight></codeline>
+<codeline lineno="111" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ae46a97ea2906921c8c626890bde832cf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6ae46a97ea2906921c8c626890bde832cf" kindref="member">resource_unavailable_try_again</ref><sp/>=<sp/>EAGAIN,<sp/></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a054e5b4ff59331386872de744d661719" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a054e5b4ff59331386872de744d661719" kindref="member">identifier_removed</ref><sp/>=<sp/>EIDRM,<sp/></highlight></codeline>
+<codeline lineno="114" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6add431dfaf61ea842693dca8be1ebcaf7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6add431dfaf61ea842693dca8be1ebcaf7" kindref="member">no_link</ref><sp/>=<sp/>ENOLINK,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="115" refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a22ac64bb14c46bcbc338a21950b6e722" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___error_code_1ggaf82e70cdc0af1c3132fe6f20443944e6a22ac64bb14c46bcbc338a21950b6e722" kindref="member">not_a_socket</ref><sp/>=<sp/>ENOTSOCK,<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="116"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ErrorCode</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_EXCEPTION_ERRC_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/errc.hpp"/>
+  </compounddef>
+</doxygen>

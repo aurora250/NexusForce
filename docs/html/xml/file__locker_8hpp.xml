@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="file__locker_8hpp" kind="file" language="C++">
+    <compoundname>file_locker.hpp</compoundname>
+    <includes refid="file__constants_8hpp" local="yes">NeForce/core/file/file_constants.hpp</includes>
+    <includes refid="types_8hpp" local="yes">NeForce/core/typeinfo/types.hpp</includes>
+    <includedby refid="file_8hpp" local="yes">file.hpp</includedby>
+    <incdepgraph>
+      <node id="4">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>NeForce/core/config/windef.hpp</label>
+        <link refid="windef_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>NeForce/core/file/file_constants.hpp</label>
+        <link refid="file__constants_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>file_locker.hpp</label>
+        <link refid="file__locker_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="types_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>WinBase.h</label>
+      </node>
+      <node id="5">
+        <label>assert.h</label>
+      </node>
+      <node id="8">
+        <label>fcntl.h</label>
+      </node>
+      <node id="6">
+        <label>windef.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4">
+        <label>NeForce.hpp</label>
+        <link refid="_ne_force_8hpp"/>
+      </node>
+      <node id="2">
+        <label>file.hpp</label>
+        <link refid="file_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>file_locker.hpp</label>
+        <link refid="file__locker_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>temp_file.hpp</label>
+        <link refid="temp__file_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>file_sink.hpp</label>
+        <link refid="file__sink_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classfile__locker" prot="public">file_locker</innerclass>
+    <innerclass refid="classfile__lock__guard" prot="public">file_lock_guard</innerclass>
+    <briefdescription>
+<para>文件区域锁管理 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>此文件提供了文件区域锁定功能， 支持对文件的部分区域进行独占或共享锁定。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>区域锁定：锁定文件的指定区域</para>
+</listitem><listitem><para>区域解锁：解锁已锁定的区域</para>
+</listitem><listitem><para>尝试锁定：非阻塞的锁定操作</para>
+</listitem><listitem><para>锁状态查询：检查指定区域是否被锁定</para>
+</listitem><listitem><para>RAII锁守卫：自动管理锁的生命周期 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_FILE_FILE_LOCKER_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_FILE_FILE_LOCKER_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="file__constants_8hpp" kindref="compound">NeForce/core/file/file_constants.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="types_8hpp" kindref="compound">NeForce/core/typeinfo/types.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="classfile__locker" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classfile__locker_1a299b55e3366398a88544208942baaea2" kindref="member">file_locker</ref><sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43" refid="classfile__locker_1a06afcfbd59de71b7718b421ec9f617e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfile__locker_1a06afcfbd59de71b7718b421ec9f617e9" kindref="member">native_handle_type</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="classfile__locker_1a06afcfbd59de71b7718b421ec9f617e9" kindref="member">native_handle_type</ref>;<sp/></highlight></codeline>
+<codeline lineno="44" refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" kindref="member">difference_type</ref><sp/>=<sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__locker_1a06afcfbd59de71b7718b421ec9f617e9" kindref="member">native_handle_type</ref><sp/>handle_;<sp/></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="56" refid="classfile__locker_1a299b55e3366398a88544208942baaea2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classfile__locker_1a299b55e3366398a88544208942baaea2" kindref="member">file_locker</ref>(<ref refid="classfile__locker_1a06afcfbd59de71b7718b421ec9f617e9" kindref="member">native_handle_type</ref><sp/><ref refid="group___thread_1ga9c11108611d4c65deb691d1b88f0dc07" kindref="member">handle</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__locker_1a299b55e3366398a88544208942baaea2" kindref="member">file_locker</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfile__locker_1a299b55e3366398a88544208942baaea2" kindref="member">file_locker</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__locker_1a299b55e3366398a88544208942baaea2" kindref="member">file_locker</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfile__locker_1a299b55e3366398a88544208942baaea2" kindref="member">file_locker</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="classfile__locker_1ab93c29e79c1ab206eed9212986bd5efd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__locker_1ab93c29e79c1ab206eed9212986bd5efd" kindref="member">lock</ref>(<ref refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" kindref="member">difference_type</ref><sp/>offset,<sp/><ref refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" kindref="member">difference_type</ref><sp/>length,<sp/><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref><sp/>mode<sp/>=<sp/><ref refid="group___file_1gga7ff0ce5ce53760cad46eb6509f978ecfaf45c3a0bb3687ed8e221253b3fd4a2ce" kindref="member">file_lock::EXCLUSIVE</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81" refid="classfile__locker_1a21192de3f975839312f4d3ac88e65e78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__locker_1a21192de3f975839312f4d3ac88e65e78" kindref="member">unlock</ref>(<ref refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" kindref="member">difference_type</ref><sp/>offset,<sp/><ref refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" kindref="member">difference_type</ref><sp/>length)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="classfile__locker_1a669e9558cc977620adfc0d34f34cb3ab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__locker_1a669e9558cc977620adfc0d34f34cb3ab" kindref="member">try_lock</ref>(<ref refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" kindref="member">difference_type</ref><sp/>offset,<sp/><ref refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" kindref="member">difference_type</ref><sp/>length,<sp/><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref><sp/>mode)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="classfile__locker_1afcb0844e7a9ef723ef0a7fd419019b21" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__locker_1afcb0844e7a9ef723ef0a7fd419019b21" kindref="member">is_locked</ref>(<ref refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" kindref="member">difference_type</ref><sp/>offset,<sp/><ref refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" kindref="member">difference_type</ref><sp/>length,</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref>*<sp/>lock_out<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115" refid="classfile__locker_1a656e70c2c4c94ea19f570dd3a7c952a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__locker_1a656e70c2c4c94ea19f570dd3a7c952a3" kindref="member">lock_whole</ref>(<ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref><sp/>mode<sp/>=<sp/><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref>::<ref refid="group___file_1gga7ff0ce5ce53760cad46eb6509f978ecfaf45c3a0bb3687ed8e221253b3fd4a2ce" kindref="member">EXCLUSIVE</ref>)<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="classfile__locker_1a874529f6f087a7c6ce1417dfee404341" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__locker_1a874529f6f087a7c6ce1417dfee404341" kindref="member">unlock_whole</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="classfile__lock__guard" refkind="compound"><highlight class="normal">class<sp/>NEFORCE_API<sp/><ref refid="classfile__lock__guard_1a110d10bc9f6c3037945d63c5c97fb21d" kindref="member">file_lock_guard</ref><sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="136" refid="classfile__lock__guard_1a1a5bd134ad110a7c33ac67bc27f35513" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfile__lock__guard_1a1a5bd134ad110a7c33ac67bc27f35513" kindref="member">difference_type</ref><sp/>=<sp/><ref refid="classfile__locker_1a0d5945085777171f908ae673f33b4083" kindref="member">file_locker::difference_type</ref>;<sp/></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__locker" kindref="compound">file_locker</ref>&amp;<sp/>locker_;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__lock__guard_1a1a5bd134ad110a7c33ac67bc27f35513" kindref="member">difference_type</ref><sp/>offset_;<sp/></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__lock__guard_1a1a5bd134ad110a7c33ac67bc27f35513" kindref="member">difference_type</ref><sp/>length_;<sp/></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>locked_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="154" refid="classfile__lock__guard_1a110d10bc9f6c3037945d63c5c97fb21d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__lock__guard_1a110d10bc9f6c3037945d63c5c97fb21d" kindref="member">file_lock_guard</ref>(<ref refid="classfile__locker" kindref="compound">file_locker</ref>&amp;<sp/>locker,<sp/><ref refid="classfile__lock__guard_1a1a5bd134ad110a7c33ac67bc27f35513" kindref="member">difference_type</ref><sp/>offset,<sp/><ref refid="classfile__lock__guard_1a1a5bd134ad110a7c33ac67bc27f35513" kindref="member">difference_type</ref><sp/>length,<sp/><ref refid="group___file_1ga7ff0ce5ce53760cad46eb6509f978ecf" kindref="member">file_lock</ref><sp/>mode);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161" refid="classfile__lock__guard_1af502f63935fa4e7b59c485716aa2af3a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__lock__guard_1af502f63935fa4e7b59c485716aa2af3a" kindref="member">~file_lock_guard</ref>();</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__lock__guard_1a110d10bc9f6c3037945d63c5c97fb21d" kindref="member">file_lock_guard</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfile__lock__guard_1a110d10bc9f6c3037945d63c5c97fb21d" kindref="member">file_lock_guard</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__lock__guard_1a110d10bc9f6c3037945d63c5c97fb21d" kindref="member">file_lock_guard</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfile__lock__guard_1a110d10bc9f6c3037945d63c5c97fb21d" kindref="member">file_lock_guard</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170" refid="classfile__lock__guard_1a1aa1e94b3c835c67eda130d636c3a348" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__lock__guard_1a1aa1e94b3c835c67eda130d636c3a348" kindref="member">is_locked</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>locked_;<sp/>}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179" refid="classfile__lock__guard_1a3cafdf0ebd5af925ea17ba6f2f5ea2e0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfile__lock__guard_1a3cafdf0ebd5af925ea17ba6f2f5ea2e0" kindref="member">unlock</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>File</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_FILE_FILE_LOCKER_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp"/>
+  </compounddef>
+</doxygen>

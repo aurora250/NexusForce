@@ -1,9 +1,9 @@
 var unique__ptr_8hpp =
 [
-    [ "const_pointer_cast", "group___unique_pointer.html#ga8236ff854917f0a44e679af28ba98128", null ],
-    [ "const_pointer_cast", "group___unique_pointer.html#gaa1882c39d000059af9a4806b14ee003c", null ],
-    [ "dynamic_pointer_cast", "group___unique_pointer.html#gaf11f91854b5e34801552478983db3e00", null ],
-    [ "dynamic_pointer_cast", "group___unique_pointer.html#gafe56143bed93a0219a73b7f3aca1180b", null ],
+    [ "const_pointer_cast", "group___unique_pointer.html#gae2b923cda7dca9d7b9a3d7a0d8c36223", null ],
+    [ "const_pointer_cast", "group___unique_pointer.html#gaff521462e36faa64ae1c49af9d3764b9", null ],
+    [ "dynamic_pointer_cast", "group___unique_pointer.html#ga8466e5182516a72b5d5d667434dde851", null ],
+    [ "dynamic_pointer_cast", "group___unique_pointer.html#ga2d8e39ee27f0bbb613490661597ad679", null ],
     [ "make_unique", "group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7", null ],
     [ "make_unique", "group___unique_pointer.html#gad7eab479e3aa31dc40743c1c0431cd0b", null ],
     [ "make_unique", "group___unique_pointer.html#gab4d3b888298c124ec2952f99cf23ef9d", null ],
@@ -25,9 +25,9 @@ var unique__ptr_8hpp =
     [ "operator>=", "group___unique_pointer.html#ga366aeaf83540a81f667c532c781530e3", null ],
     [ "operator>=", "group___unique_pointer.html#ga5ddd67c0ff52ee718fde2ce960b50f0c", null ],
     [ "operator>=", "group___unique_pointer.html#ga9d125b022b79c38f6384b92692ebd2a1", null ],
-    [ "reinterpret_pointer_cast", "group___unique_pointer.html#ga4a0ef43262a18e3281a1515365f4cc73", null ],
-    [ "reinterpret_pointer_cast", "group___unique_pointer.html#ga5ac19d9b78091a60e8306da54e056826", null ],
-    [ "static_pointer_cast", "group___unique_pointer.html#gaad50c03769543ab8a0f83240b2152639", null ],
-    [ "static_pointer_cast", "group___unique_pointer.html#ga65025ff0afc45ff0daebc7d1c5424901", null ],
+    [ "reinterpret_pointer_cast", "group___unique_pointer.html#ga76599839c521de4c36c0ab2813670317", null ],
+    [ "reinterpret_pointer_cast", "group___unique_pointer.html#ga5b7c0b0025c36f71ae411090dab937da", null ],
+    [ "static_pointer_cast", "group___unique_pointer.html#gad594540a669260eea0cca34015b4653c", null ],
+    [ "static_pointer_cast", "group___unique_pointer.html#ga8c4222e9004a639aac55ce24ec209c86", null ],
     [ "swap", "group___unique_pointer.html#ga3def886ee466fc780671110b23c22e0d", null ]
 ];

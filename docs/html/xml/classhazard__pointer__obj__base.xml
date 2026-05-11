@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classhazard__pointer__obj__base" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>hazard_pointer_obj_base</compoundname>
+    <derivedcompoundref refid="classhazard__pointer__obj" prot="public" virt="non-virtual">hazard_pointer_obj&lt; T, Deleter &gt;</derivedcompoundref>
+    <includes refid="hazard__ptr_8hpp" local="no">hazard_ptr.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classhazard__pointer__obj__base_1ade76a3fc1006cff9269564b074937bf7" prot="public" static="no" mutable="no">
+        <type><ref refid="classhazard__pointer__obj__base" kindref="compound">hazard_pointer_obj_base</ref> *</type>
+        <definition>hazard_pointer_obj_base* hazard_pointer_obj_base::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <qualifiedname>hazard_pointer_obj_base::next</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>链表中的下一个对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="86" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="86" bodyend="86"/>
+        <referencedby refid="structretire__list_1a33fc37aaad8e02fc7ab0c3d9a32a8113" compoundref="hazard__ptr_8hpp" startline="135" endline="139">retire_list::add</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhazard__pointer__obj__base_1a5616b796b5e8cc18929e56e5c8a85241" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual hazard_pointer_obj_base::~hazard_pointer_obj_base</definition>
+        <argsstring>()=default</argsstring>
+        <name>~hazard_pointer_obj_base</name>
+        <qualifiedname>hazard_pointer_obj_base::~hazard_pointer_obj_base</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="88" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classhazard__pointer__obj__base_1a9e179233d5b592750c0e44262f75dfe8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void hazard_pointer_obj_base::destroy</definition>
+        <argsstring>()=0</argsstring>
+        <name>destroy</name>
+        <qualifiedname>hazard_pointer_obj_base::destroy</qualifiedname>
+        <reimplementedby refid="classhazard__pointer__obj_1abc7269dcc8a1838682952567cf555d87">destroy</reimplementedby>
+        <briefdescription>
+<para>销毁对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="89" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>险象指针对象基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>所有需要通过险象指针回收的对象都需要继承此类。 提供多态销毁接口。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>hazard_pointer_obj&lt; T, Deleter &gt;</label>
+        <link refid="classhazard__pointer__obj"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>hazard_pointer_obj_base</label>
+        <link refid="classhazard__pointer__obj__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>hazard_pointer_obj_base</label>
+        <link refid="classhazard__pointer__obj__base"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="84" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="84" bodyend="90"/>
+    <listofallmembers>
+      <member refid="classhazard__pointer__obj__base_1a9e179233d5b592750c0e44262f75dfe8" prot="public" virt="pure-virtual"><scope>hazard_pointer_obj_base</scope><name>destroy</name></member>
+      <member refid="classhazard__pointer__obj__base_1ade76a3fc1006cff9269564b074937bf7" prot="public" virt="non-virtual"><scope>hazard_pointer_obj_base</scope><name>next</name></member>
+      <member refid="classhazard__pointer__obj__base_1a5616b796b5e8cc18929e56e5c8a85241" prot="public" virt="virtual"><scope>hazard_pointer_obj_base</scope><name>~hazard_pointer_obj_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

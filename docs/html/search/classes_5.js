@@ -35,7 +35,7 @@ var searchData=
   ['function_3c_20bool_28const_20http_5fserver_5frequest_20_26_29_3e_32',['function&lt; bool(const http_server_request &amp;)&gt;',['../classfunction.html',1,'']]],
   ['function_3c_20bool_28const_20log_5fevent_20_26_29_3e_33',['function&lt; bool(const log_event &amp;)&gt;',['../classfunction.html',1,'']]],
   ['function_3c_20bool_28const_20node_20_26_29_3e_34',['function&lt; bool(const node &amp;)&gt;',['../classfunction.html',1,'']]],
-  ['function_3c_20bool_28signal_5fevent_2c_20void_20_2a_29_3e_35',['function&lt; bool(signal_event, void *)&gt;',['../classfunction.html',1,'']]],
+  ['function_3c_20bool_28event_2c_20void_20_2a_29_3e_35',['function&lt; bool(event, void *)&gt;',['../classfunction.html',1,'']]],
   ['function_3c_20callback_5fresult_28types_2e_2e_2e_29_3e_36',['function&lt; callback_result(Types...)&gt;',['../classfunction.html',1,'']]],
   ['function_3c_20meta_5fany_28const_20vector_3c_20meta_5fany_20_3e_20_26_29_3e_37',['function&lt; meta_any(const vector&lt; meta_any &gt; &amp;)&gt;',['../classfunction.html',1,'']]],
   ['function_3c_20meta_5fany_28void_20_2a_29_3e_38',['function&lt; meta_any(void *)&gt;',['../classfunction.html',1,'']]],

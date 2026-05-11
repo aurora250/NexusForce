@@ -1,0 +1,1402 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___string_operations" kind="group">
+    <compoundname>StringOperations</compoundname>
+    <title>字符串操作</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___string_operations_1ga32e3d14580f551b5516d7dc5693ed649" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>CharT *</type>
+        <definition>CharT * string_copy</definition>
+        <argsstring>(CharT *NEFORCE_RESTRICT dest, const CharT *NEFORCE_RESTRICT src) noexcept</argsstring>
+        <name>string_copy</name>
+        <param>
+          <type>CharT *NEFORCE_RESTRICT</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const CharT *NEFORCE_RESTRICT</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>复制字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标字符串指针 </para>
+</simplesect>
+<simplesect kind="note"><para>使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。</para>
+</simplesect>
+将源字符串复制到目标缓冲区，包括终止空字符。 如果任一指针为空，返回空指针。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="392" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="392" bodyend="404"/>
+        <referencedby refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="98">exception::exception</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga750727c383bac362aceda4acd5b50f75" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>CharT *</type>
+        <definition>CharT * string_copy</definition>
+        <argsstring>(CharT *NEFORCE_RESTRICT dest, const CharT *NEFORCE_RESTRICT src, const size_t count) noexcept</argsstring>
+        <name>string_copy</name>
+        <param>
+          <type>CharT *NEFORCE_RESTRICT</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const CharT *NEFORCE_RESTRICT</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>复制指定长度的字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要复制的最大字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标字符串指针</para>
+</simplesect>
+复制最多 count 个字符，如果源字符串长度小于 count，用空字符填充剩余位置。 如果源字符串长度大于等于 count，不会自动添加终止空字符。</para>
+<para><simplesect kind="note"><para>使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="420" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="420" bodyend="441"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1gaaa0d9e86ebc26ac4aa3d72b0895ba40c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>CharT *</type>
+        <definition>CharT * string_copy_offset</definition>
+        <argsstring>(CharT *NEFORCE_RESTRICT dest, const CharT *NEFORCE_RESTRICT src) noexcept</argsstring>
+        <name>string_copy_offset</name>
+        <param>
+          <type>CharT *NEFORCE_RESTRICT</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const CharT *NEFORCE_RESTRICT</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>复制字符串并返回指向结尾的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向目标字符串结尾的指针，终止空字符之前 </para>
+</simplesect>
+<simplesect kind="note"><para>使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="452" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="452" bodyend="463"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1gacd531fe2621a9feedd04bd4da8fedf4c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>CharT *</type>
+        <definition>CharT * string_copy_offset</definition>
+        <argsstring>(CharT *NEFORCE_RESTRICT dest, const CharT *NEFORCE_RESTRICT src, const size_t count) noexcept</argsstring>
+        <name>string_copy_offset</name>
+        <param>
+          <type>CharT *NEFORCE_RESTRICT</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const CharT *NEFORCE_RESTRICT</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>复制指定长度的字符串并返回指向结尾的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要复制的最大字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向目标字符串第 count 个字符的指针 </para>
+</simplesect>
+<simplesect kind="note"><para>使用restrict关键字优化，要求源和目标内存不重叠，否则将产生未定义行为。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="475" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="475" bodyend="495"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga66435457bd7a3b93d4ce2ee17a72f698" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr int</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr int string_compare</definition>
+        <argsstring>(const CharT *dest, const CharT *src) noexcept</argsstring>
+        <name>string_compare</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const CharT *</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>比较两个字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>比较结果<itemizedlist>
+<listitem><para>正数：第一个字符串大于第二个</para>
+</listitem><listitem><para>负数：第一个字符串小于第二个</para>
+</listitem><listitem><para>零：两个字符串相等 </para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="508" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="508" bodyend="530"/>
+        <referencedby refid="structbase__char__traits_1a8ae2c82ecb4017e18d40b0c931970e6c" compoundref="char__traits_8hpp" startline="70" endline="72">base_char_traits&lt; CharT, IntT &gt;::compare</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1gadcce3d331cce0104dfbe84f17657c268" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr int</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr int string_compare</definition>
+        <argsstring>(const CharT *dest, const CharT *src, const size_t count) noexcept</argsstring>
+        <name>string_compare</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const CharT *</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>比较两个字符串的前n个字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="541" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="541" bodyend="570"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1gaa9d437d5bd278d64d78d1c3e8c62dfa3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr int</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr int string_compare_ignore_case</definition>
+        <argsstring>(const CharT *s1, const CharT *s2) noexcept</argsstring>
+        <name>string_compare_ignore_case</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>s1</declname>
+        </param>
+        <param>
+          <type>const CharT *</type>
+          <declname>s2</declname>
+        </param>
+        <briefdescription>
+<para>忽略大小写比较两个字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>比较结果<itemizedlist>
+<listitem><para>正数：第一个字符串大于第二个</para>
+</listitem><listitem><para>负数：第一个字符串小于第二个</para>
+</listitem><listitem><para>零：两个字符串相等 </para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="583" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="583" bodyend="607"/>
+        <references refid="group___char_case_conversion_1ga9ebd830d1c6d4e99d42a3ca5c2c927c2" compoundref="memory_8hpp" startline="343" endline="351">to_lowercase</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga9abdfd7cabb7b3bb16b0658ad76574c1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr int</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr int string_compare_ignore_case</definition>
+        <argsstring>(const CharT *s1, const CharT *s2, const size_t count) noexcept</argsstring>
+        <name>string_compare_ignore_case</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>s1</declname>
+        </param>
+        <param>
+          <type>const CharT *</type>
+          <declname>s2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>忽略大小写比较两个字符串的前n个字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>s2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="618" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="618" bodyend="651"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+        <references refid="group___char_case_conversion_1ga9ebd830d1c6d4e99d42a3ca5c2c927c2" compoundref="memory_8hpp" startline="343" endline="351">to_lowercase</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga0e8fab30e2216887d2734637a4d099b2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr size_t string_length</definition>
+        <argsstring>(const CharT *str) noexcept</argsstring>
+        <name>string_length</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>计算字符串长度 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串长度，不包含终止空字符 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="660" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="660" bodyend="670"/>
+        <references refid="group___base_type_properties_1ga299a1c32eb65bb99760c4f3b2acf41a2" compoundref="type__traits_8hpp" startline="829">is_character_v</references>
+        <referencedby refid="structbase__char__traits_1ac5375a2e03f6d9b5cf48b9b7d1824c37" compoundref="char__traits_8hpp" startline="79" endline="81">base_char_traits&lt; CharT, IntT &gt;::length</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga03fb2cee5d166b1e24c581b8cfd23e70" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr size_t string_length</definition>
+        <argsstring>(const CharT *str, const size_t max_len) noexcept</argsstring>
+        <name>string_length</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>max_len</declname>
+        </param>
+        <briefdescription>
+<para>计算字符串的最大长度 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大搜索长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串长度，不超过max_len</para>
+</simplesect>
+计算字符串长度，但最多检查max_len个字符。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="682" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="682" bodyend="690"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga151ef08015f0ff951fc76644c1f9c583" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr const CharT *</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr const CharT * string_find</definition>
+        <argsstring>(const CharT *str, const CharT chr) noexcept</argsstring>
+        <name>string_find</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const CharT</type>
+          <declname>chr</declname>
+        </param>
+        <briefdescription>
+<para>查找字符在字符串中首次出现的位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>chr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向首次出现位置的指针，未找到或输入为空时返回空指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="700" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="700" bodyend="714"/>
+        <referencedby refid="structbase__char__traits_1ad50da1b6fe9ff4d43a3668a440642999" compoundref="char__traits_8hpp" startline="90" endline="93">base_char_traits&lt; CharT, IntT &gt;::find</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga210788c1c81b6a4a30ef1c37b53e9c3f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr const CharT *</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr const CharT * string_find</definition>
+        <argsstring>(const CharT *str, const CharT chr, const size_t count) noexcept</argsstring>
+        <name>string_find</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const CharT</type>
+          <declname>chr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>在前n个字符中查找字符首次出现的位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>chr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的字符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要搜索的最大字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向首次出现位置的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="725" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="725" bodyend="740"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1gabc11ebb793a884564a609b2d2a2df27c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr const CharT *</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr const CharT * string_find_last</definition>
+        <argsstring>(const CharT *str, const CharT chr) noexcept</argsstring>
+        <name>string_find_last</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const CharT</type>
+          <declname>chr</declname>
+        </param>
+        <briefdescription>
+<para>查找字符在字符串中最后出现的位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>chr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的字符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向最后出现位置的指针，未找到或输入为空时返回空指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="750" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="750" bodyend="763"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga867363b01add331d154ec936caf0fa24" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr CharT *</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr CharT * string_find_any</definition>
+        <argsstring>(CharT *str, const CharT *accept) noexcept</argsstring>
+        <name>string_find_any</name>
+        <param>
+          <type>CharT *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const CharT *</type>
+          <declname>accept</declname>
+        </param>
+        <briefdescription>
+<para>查找字符串中第一个出现在指定字符集中的字符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>accept</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符集指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配字符的指针，未找到时返回空指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="773" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="773" bodyend="789"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1gaa3786ec975118f882849bb50619ac4bf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr const CharT *</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr const CharT * string_find_pattern</definition>
+        <argsstring>(const CharT *dest, const CharT *src) noexcept</argsstring>
+        <name>string_find_pattern</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const CharT *</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>查找子字符串在字符串中首次出现的位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向子字符串首次出现位置的指针，未找到时返回空指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="799" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="799" bodyend="817"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga62a57f0b9dc8309e5ebf3394320a2d5a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr const CharT *</type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr const CharT * string_find_pattern_ignored_case</definition>
+        <argsstring>(const CharT *dest, const CharT *src) noexcept</argsstring>
+        <name>string_find_pattern_ignored_case</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const CharT *</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>忽略大小写查找子字符串在字符串中首次出现的位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向子字符串首次出现位置的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="827" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="827" bodyend="855"/>
+        <references refid="group___char_case_conversion_1ga9ebd830d1c6d4e99d42a3ca5c2c927c2" compoundref="memory_8hpp" startline="343" endline="351">to_lowercase</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga4539ba21e67e2d174ccbea4773204edd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr size_t string_span_in</definition>
+        <argsstring>(const CharT *str, const CharT *accept) noexcept</argsstring>
+        <name>string_span_in</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const CharT *</type>
+          <declname>accept</declname>
+        </param>
+        <briefdescription>
+<para>计算字符串开头包含在指定字符集中的字符数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>accept</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符集指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>开头连续出现在字符集中的字符数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="865" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="865" bodyend="887"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga04dd9171ba35f6788375bca0b67e6abd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_PURE_FUNCTION constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_PURE_FUNCTION constexpr size_t string_span_not_in</definition>
+        <argsstring>(const CharT *str, const CharT *reject) noexcept</argsstring>
+        <name>string_span_not_in</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const CharT *</type>
+          <declname>reject</declname>
+        </param>
+        <briefdescription>
+<para>计算字符串开头不包含在指定字符集中的字符数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>reject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>排除字符集指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>开头连续不出现在排除字符集中的字符数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="897" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="897" bodyend="921"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1gad62301c4e3eabe23cbdec7ecb306688c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>CharT *</type>
+        <definition>CharT * string_set</definition>
+        <argsstring>(CharT *str, const CharT value) noexcept</argsstring>
+        <name>string_set</name>
+        <param>
+          <type>CharT *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const CharT</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>将字符串中的所有字符设置为指定值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的字符值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>原字符串指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="931" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="931" bodyend="941"/>
+        <referencedby refid="structbase__char__traits_1a238e3fe35d8c96654ffb2c885ec1dcf9" compoundref="char__traits_8hpp" startline="102" endline="104">base_char_traits&lt; CharT, IntT &gt;::assign</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1gafadcfa9c4007db8398b7eef78d184600" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>CharT *</type>
+        <definition>CharT * string_set</definition>
+        <argsstring>(CharT *str, const CharT value, const size_t count) noexcept</argsstring>
+        <name>string_set</name>
+        <param>
+          <type>CharT *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const CharT</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>将字符串中的前n个字符设置为指定值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的字符值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>原字符串指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="952" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="952" bodyend="960"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga2a21d2ded53762ac24a9524831e174d5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>CharT *</type>
+        <definition>CharT * string_reverse</definition>
+        <argsstring>(CharT *str) noexcept</argsstring>
+        <name>string_reverse</name>
+        <param>
+          <type>CharT *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>反转字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>反转后的字符串指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="969" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="969" bodyend="987"/>
+        <references refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga64735eb717b22449bd0a90f8cc994b80" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>CharT *</type>
+        <definition>CharT * string_concatenate</definition>
+        <argsstring>(CharT *NEFORCE_RESTRICT dest, const CharT *NEFORCE_RESTRICT src) noexcept</argsstring>
+        <name>string_concatenate</name>
+        <param>
+          <type>CharT *NEFORCE_RESTRICT</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const CharT *NEFORCE_RESTRICT</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>连接两个字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标字符串指针 </para>
+</simplesect>
+<simplesect kind="note"><para>目标字符串指针必须有足够空间 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="998" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="998" bodyend="1014"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_operations_1ga1c8d8e2d7fb1168075254fdfb64ae0d2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>CharT *</type>
+        <definition>CharT * string_concatenate</definition>
+        <argsstring>(CharT *NEFORCE_RESTRICT dest, const CharT *NEFORCE_RESTRICT src, const size_t count) noexcept</argsstring>
+        <name>string_concatenate</name>
+        <param>
+          <type>CharT *NEFORCE_RESTRICT</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>const CharT *NEFORCE_RESTRICT</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>连接源字符串的前n个字符到目标字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要连接的最大字符数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标字符串指针 </para>
+</simplesect>
+<simplesect kind="note"><para>目标字符串指针必须有足够空间 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" line="1026" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory.hpp" bodystart="1026" bodyend="1046"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>字符串操作函数的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

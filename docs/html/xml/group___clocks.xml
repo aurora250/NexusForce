@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___clocks" kind="group">
+    <compoundname>Clocks</compoundname>
+    <title>时钟</title>
+    <innerclass refid="structsystem__clock" prot="public">system_clock</innerclass>
+    <innerclass refid="structsteady__clock" prot="public">steady_clock</innerclass>
+    <innerclass refid="structis__clock" prot="public">is_clock</innerclass>
+    <innerclass refid="structis__clock_3_01system__clock_01_4" prot="public">is_clock&lt; system_clock &gt;</innerclass>
+    <innerclass refid="structis__clock_3_01steady__clock_01_4" prot="public">is_clock&lt; steady_clock &gt;</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___clocks_1ga29d0a81521495fbc5b7b5cc45f93801d" prot="public" static="no" mutable="no">
+        <type>struct NEFORCE_API</type>
+        <definition>struct NEFORCE_API steady_clock</definition>
+        <argsstring></argsstring>
+        <name>steady_clock</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="20" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___clocks_1gaa602f2a37f8bbb1bec380bbce0c0a684" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr bool</type>
+        <definition>NEFORCE_INLINE17 constexpr bool is_clock_v</definition>
+        <argsstring></argsstring>
+        <name>is_clock_v</name>
+        <initializer>= <ref refid="structis__clock" kindref="compound">is_clock</ref>&lt;T&gt;::value</initializer>
+        <briefdescription>
+<para>is_clock的便捷变量模板 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="151" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" bodystart="151" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___clocks_1ga6bc60a651dfd90af871126448be4d078" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref> NEFORCE_API</type>
+        <definition>milliseconds NEFORCE_API relative_time</definition>
+        <argsstring>(int64_t sec, int64_t nsec, bool is_monotonic=false) noexcept</argsstring>
+        <name>relative_time</name>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>sec</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>nsec</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_monotonic</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>将绝对时间戳转换为相对延迟毫秒数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绝对时间戳的秒部分 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nsec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绝对时间戳的纳秒部分，取值范围为 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>is_monotonic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用单调时钟 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>相对延迟时间</para>
+</simplesect>
+此函数接收一个绝对时间戳和时钟类型标志， 计算从当前时刻到该时间点之间的时间差，并以毫秒形式返回。 返回的毫秒数会被限制在 0 到 2^32-2 的范围内， 适用于需要有限范围内延迟值的定时器或调度场景。</para>
+<para><simplesect kind="note"><para>输入支持纳秒精度，但输出仅保留毫秒精度 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" line="129" column="26" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/clocks.hpp" declline="129" declcolumn="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>时钟类型及相关操作 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

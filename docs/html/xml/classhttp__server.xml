@@ -1,0 +1,978 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classhttp__server" kind="class" language="C++" prot="public">
+    <compoundname>http_server</compoundname>
+    <includes refid="http__server_8hpp" local="no">http_server.hpp</includes>
+    <innerclass refid="structhttp__server_1_1session__manager" prot="private">http_server::session_manager</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classhttp__server_1a755df815f0f63dae3a202c876d4ad75b" prot="public" static="no">
+        <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref></type>
+        <definition>using http_server::socket_type = tcp_socket</definition>
+        <argsstring></argsstring>
+        <name>socket_type</name>
+        <qualifiedname>http_server::socket_type</qualifiedname>
+        <briefdescription>
+<para>Socket类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="70" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhttp__server_1acc682d73a7ac26ebce8499ceb0711725" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> &gt;</type>
+        <definition>unique_ptr&lt;tcp_server_base&gt; http_server::server_</definition>
+        <argsstring></argsstring>
+        <name>server_</name>
+        <qualifiedname>http_server::server_</qualifiedname>
+        <briefdescription>
+<para>TCP/SSL服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="109" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__server_1ae3c77613081470f8a284179cf68842be" prot="private" static="no" mutable="no">
+        <type><ref refid="classhttp__router" kindref="compound">http_router</ref></type>
+        <definition>http_router http_server::router_</definition>
+        <argsstring></argsstring>
+        <name>router_</name>
+        <qualifiedname>http_server::router_</qualifiedname>
+        <briefdescription>
+<para>HTTP路由器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="110" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__server_1ab6a954520676d17ebc039639b2f1fa57" prot="private" static="no" mutable="no">
+        <type><ref refid="classwebsocket__server" kindref="compound">websocket_server</ref></type>
+        <definition>websocket_server http_server::ws_server_</definition>
+        <argsstring></argsstring>
+        <name>ws_server_</name>
+        <qualifiedname>http_server::ws_server_</qualifiedname>
+        <briefdescription>
+<para>WebSocket服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="111" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__server_1a9229eb554085b9dc1cc5bc6007f6fbaa" prot="private" static="no" mutable="no">
+        <type>session_manager</type>
+        <definition>session_manager http_server::session_manager_</definition>
+        <argsstring></argsstring>
+        <name>session_manager_</name>
+        <qualifiedname>http_server::session_manager_</qualifiedname>
+        <briefdescription>
+<para>会话管理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="112" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__server_1a306b132e82b41bf9f14ed31262d7a6b0" prot="private" static="no" mutable="no">
+        <type><ref refid="structhttp__cookie__name" kindref="compound">http_cookie_name</ref></type>
+        <definition>http_cookie_name http_server::cookie_name_</definition>
+        <argsstring></argsstring>
+        <name>cookie_name_</name>
+        <qualifiedname>http_server::cookie_name_</qualifiedname>
+        <initializer>{<ref refid="structhttp__cookie__name_1a4bb5f633d68f4a6be8a0d69b351d7936" kindref="member">http_cookie_name::JSESSIONID</ref>()}</initializer>
+        <briefdescription>
+<para>会话Cookie名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="114" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="114" bodyend="114"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classhttp__server_1a86bf2660ddc1c52405bb80140ff775f9" prot="public" static="no" mutable="no">
+        <type><ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size http_server::max_server_header_size</definition>
+        <argsstring></argsstring>
+        <name>max_server_header_size</name>
+        <qualifiedname>http_server::max_server_header_size</qualifiedname>
+        <initializer>{16_KB}</initializer>
+        <briefdescription>
+<para>最大请求头大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="123" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="123" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__server_1a85f26c5a1d2232d7a8aefba1f8dd3f2d" prot="public" static="no" mutable="no">
+        <type><ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size http_server::max_server_body_size</definition>
+        <argsstring></argsstring>
+        <name>max_server_body_size</name>
+        <qualifiedname>http_server::max_server_body_size</qualifiedname>
+        <initializer>{100_MB}</initializer>
+        <briefdescription>
+<para>最大请求体大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="124" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="124" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp__server_1a6448c63c08a21979469e9e1ffc56012b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool http_server::enable_websocket</definition>
+        <argsstring></argsstring>
+        <name>enable_websocket</name>
+        <qualifiedname>http_server::enable_websocket</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>是否启用WebSocket </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="125" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="125" bodyend="125"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classhttp__server_1abb5113cbdad9ae2d3e8173fe9d006dff" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref></type>
+        <definition>static http_request http_server::parse_request</definition>
+        <argsstring>(tcp_socket *client_socket, session_manager &amp;manager, const http_cookie_name &amp;name, byte_size max_header_size, byte_size max_body_size)</argsstring>
+        <name>parse_request</name>
+        <qualifiedname>http_server::parse_request</qualifiedname>
+        <param>
+          <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> *</type>
+          <declname>client_socket</declname>
+        </param>
+        <param>
+          <type>session_manager &amp;</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhttp__cookie__name" kindref="compound">http_cookie_name</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+          <declname>max_header_size</declname>
+        </param>
+        <param>
+          <type><ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+          <declname>max_body_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="116" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a491c7cc10be8d5b932984c9caa6f820f" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structhttp__session" kindref="compound">http_session</ref> *</type>
+        <definition>static http_session * http_server::get_or_create_session</definition>
+        <argsstring>(http_request &amp;request, bool create, session_manager &amp;manager, const http_cookie_name &amp;name)</argsstring>
+        <name>get_or_create_session</name>
+        <qualifiedname>http_server::get_or_create_session</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>create</declname>
+        </param>
+        <param>
+          <type>session_manager &amp;</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structhttp__cookie__name" kindref="compound">http_cookie_name</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="119" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhttp__server_1a410866c3b085e12448cf37e975e857aa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::handle_client</definition>
+        <argsstring>(tcp_socket client_socket)</argsstring>
+        <name>handle_client</name>
+        <qualifiedname>http_server::handle_client</qualifiedname>
+        <param>
+          <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref></type>
+          <declname>client_socket</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="128" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1ac294af9c31ade0fd6842a680fd435a37" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http_server::try_websocket_upgrade</definition>
+        <argsstring>(tcp_socket &amp;client_socket, http_request &amp;request)</argsstring>
+        <name>try_websocket_upgrade</name>
+        <qualifiedname>http_server::try_websocket_upgrade</qualifiedname>
+        <param>
+          <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &amp;</type>
+          <declname>client_socket</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="129" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a1a6b049d0e2b5a37dacab05a10a0d048" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::handle_request_with_forward</definition>
+        <argsstring>(tcp_socket &amp;client_socket, http_request &amp;request, http_session *sess)</argsstring>
+        <name>handle_request_with_forward</name>
+        <qualifiedname>http_server::handle_request_with_forward</qualifiedname>
+        <param>
+          <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &amp;</type>
+          <declname>client_socket</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="structhttp__session" kindref="compound">http_session</ref> *</type>
+          <declname>sess</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="130" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http_server::http_server</definition>
+        <argsstring>(ports port, size_t worker_count=thread_pool::max_thread_threshhold())</argsstring>
+        <name>http_server</name>
+        <qualifiedname>http_server::http_server</qualifiedname>
+        <param>
+          <type><ref refid="structports" kindref="compound">ports</ref></type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>worker_count</declname>
+          <defval>thread_pool::max_thread_threshhold()</defval>
+        </param>
+        <briefdescription>
+<para>构造HTTP服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>监听端口 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>worker_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>工作线程数（默认最大） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="138" column="14"/>
+        <references refid="classhttp__server_1af1ebf90a83db7ea20851144bee6f67da" compoundref="http__server_8hpp" startline="216" endline="216">port</references>
+        <referencedby refid="classhttp__server_1aba4ee10f91e7ed646e3f49c5d7bf4a1f">http_server</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1aba4ee10f91e7ed646e3f49c5d7bf4a1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http_server::http_server</definition>
+        <argsstring>(ports port, ssl_context ctx, size_t worker_count=thread_pool::max_thread_threshhold())</argsstring>
+        <name>http_server</name>
+        <qualifiedname>http_server::http_server</qualifiedname>
+        <param>
+          <type><ref refid="structports" kindref="compound">ports</ref></type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type><ref refid="classssl__context" kindref="compound">ssl_context</ref></type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>worker_count</declname>
+          <defval>thread_pool::max_thread_threshhold()</defval>
+        </param>
+        <briefdescription>
+<para>构造HTTPS服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>监听端口 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文（必须已加载证书） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>worker_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>工作线程数（默认最大） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="146" column="5"/>
+        <references refid="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2">http_server</references>
+        <references refid="classhttp__server_1af1ebf90a83db7ea20851144bee6f67da" compoundref="http__server_8hpp" startline="216" endline="216">port</references>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1ad73b8edb19ce6667a813ab2485778c16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http_server::~http_server</definition>
+        <argsstring>()=default</argsstring>
+        <name>~http_server</name>
+        <qualifiedname>http_server::~http_server</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="148" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a9010468dd7743b95d97cc2f22ed54b1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http_server::http_server</definition>
+        <argsstring>(const http_server &amp;)=delete</argsstring>
+        <name>http_server</name>
+        <qualifiedname>http_server::http_server</qualifiedname>
+        <param>
+          <type>const <ref refid="classhttp__server" kindref="compound">http_server</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="150" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1afa809e97830f11f8f1e15c7ddad67afd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classhttp__server" kindref="compound">http_server</ref> &amp;</type>
+        <definition>http_server &amp; http_server::operator=</definition>
+        <argsstring>(const http_server &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>http_server::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classhttp__server" kindref="compound">http_server</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="151" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1ab114e8aa3b253ec0a411798999709cbf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>http_server::http_server</definition>
+        <argsstring>(http_server &amp;&amp;) noexcept=delete</argsstring>
+        <name>http_server</name>
+        <qualifiedname>http_server::http_server</qualifiedname>
+        <param>
+          <type><ref refid="classhttp__server" kindref="compound">http_server</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="153" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a871fadc08f6dd2d1995f5ae28cd36547" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhttp__server" kindref="compound">http_server</ref> &amp;</type>
+        <definition>http_server &amp; http_server::operator=</definition>
+        <argsstring>(http_server &amp;&amp;) noexcept=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>http_server::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classhttp__server" kindref="compound">http_server</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="154" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1ad38cd02ebb3673ef7ce5b53546935b09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http_server::load_certificate</definition>
+        <argsstring>(const string &amp;cert_file, const string &amp;key_file)</argsstring>
+        <name>load_certificate</name>
+        <qualifiedname>http_server::load_certificate</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>cert_file</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key_file</declname>
+        </param>
+        <briefdescription>
+<para>加载SSL证书 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cert_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>证书文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>私钥文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="162" column="10"/>
+        <references refid="classhttp__server_1ad38cd02ebb3673ef7ce5b53546935b09">load_certificate</references>
+        <referencedby refid="classhttp__server_1ad38cd02ebb3673ef7ce5b53546935b09">load_certificate</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a18dc968946074ce39af2ed7d8d2b04e4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classhttp__router" kindref="compound">http_router</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD http_router &amp; http_server::router</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>router</name>
+        <qualifiedname>http_server::router</qualifiedname>
+        <briefdescription>
+<para>获取路由器引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>路由器引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="168" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="168" bodyend="168"/>
+        <references refid="classhttp__server_1a18dc968946074ce39af2ed7d8d2b04e4" compoundref="http__server_8hpp" startline="168" endline="168">router</references>
+        <referencedby refid="classhttp__server_1a18dc968946074ce39af2ed7d8d2b04e4" compoundref="http__server_8hpp" startline="168" endline="168">router</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a70384465c1b0f883c67788f956773b53" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classhttp__router" kindref="compound">http_router</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const http_router &amp; http_server::router</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>router</name>
+        <qualifiedname>http_server::router</qualifiedname>
+        <briefdescription>
+<para>获取路由器常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>路由器常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="174" column="41" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="174" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1ab976bf681d31ab05c566abc6dc530840" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classwebsocket__server" kindref="compound">websocket_server</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD websocket_server &amp; http_server::websocket</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>websocket</name>
+        <qualifiedname>http_server::websocket</qualifiedname>
+        <briefdescription>
+<para>获取WebSocket服务器引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>WebSocket服务器引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="180" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="180" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a5f2f7e301f856fdf04ec870a2b465ba0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classwebsocket__server" kindref="compound">websocket_server</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const websocket_server &amp; http_server::websocket</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>websocket</name>
+        <qualifiedname>http_server::websocket</qualifiedname>
+        <briefdescription>
+<para>获取WebSocket服务器常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>WebSocket服务器常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="186" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="186" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a8ae0b82bc4ef2d1ff3288b0689c82256" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::set_cookie_name</definition>
+        <argsstring>(http_cookie_name name) noexcept</argsstring>
+        <name>set_cookie_name</name>
+        <qualifiedname>http_server::set_cookie_name</qualifiedname>
+        <param>
+          <type><ref refid="structhttp__cookie__name" kindref="compound">http_cookie_name</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>设置会话Cookie名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cookie名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="192" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="192" bodyend="192"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1ac576251ff24c0bab80b23590b1d5bc5b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="structhttp__cookie__name" kindref="compound">http_cookie_name</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const http_cookie_name &amp; http_server::cookie_name</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cookie_name</name>
+        <qualifiedname>http_server::cookie_name</qualifiedname>
+        <briefdescription>
+<para>获取会话Cookie名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Cookie名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="198" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="198" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1af27919173888fc86812614162e7973c0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::set_session_cleanup_interval</definition>
+        <argsstring>(seconds interval) noexcept</argsstring>
+        <name>set_session_cleanup_interval</name>
+        <qualifiedname>http_server::set_session_cleanup_interval</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
+          <declname>interval</declname>
+        </param>
+        <briefdescription>
+<para>设置会话清理间隔 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>interval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>间隔时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="204" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="204" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a5a233441cb3717e67bb65f80b4abdc86" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::set_max_sessions</definition>
+        <argsstring>(size_t max) noexcept</argsstring>
+        <name>set_max_sessions</name>
+        <qualifiedname>http_server::set_max_sessions</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>设置最大会话数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="210" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="210" bodyend="210"/>
+        <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="compare_8hpp" startline="133" endline="135">max</references>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1af1ebf90a83db7ea20851144bee6f67da" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structports" kindref="compound">ports</ref></type>
+        <definition>NEFORCE_NODISCARD ports http_server::port</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>port</name>
+        <qualifiedname>http_server::port</qualifiedname>
+        <briefdescription>
+<para>获取监听端口 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>端口号 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="216" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="216" bodyend="216"/>
+        <references refid="structports_1ac83896c19af3451bbd0ce66a1b9a233e" compoundref="ports_8hpp" startline="170" endline="170">ports::port</references>
+        <referencedby refid="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2">http_server</referencedby>
+        <referencedby refid="classhttp__server_1aba4ee10f91e7ed646e3f49c5d7bf4a1f">http_server</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a15546a917a6cfef8eb21079878018eee" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool http_server::is_running</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_running</name>
+        <qualifiedname>http_server::is_running</qualifiedname>
+        <briefdescription>
+<para>检查服务器是否运行中 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>运行中返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="222" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="222" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a166b7eb52bf3fe7a7cdae8514cd47664" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structhttp__session" kindref="compound">http_session</ref> *</type>
+        <definition>NEFORCE_NODISCARD http_session * http_server::get_session</definition>
+        <argsstring>(http_request &amp;request, bool create=false)</argsstring>
+        <name>get_session</name>
+        <qualifiedname>http_server::get_session</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>create</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>获取会话（从请求中） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>create</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>不存在时是否创建 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>会话指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="230" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a16d4679ab288d1c2a76aa52b05d87650" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http_server::start</definition>
+        <argsstring>(int backlog=SOMAXCONN)</argsstring>
+        <name>start</name>
+        <qualifiedname>http_server::start</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>backlog</declname>
+          <defval>SOMAXCONN</defval>
+        </param>
+        <briefdescription>
+<para>启动服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>backlog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接队列大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>启动成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="237" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="237" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1adab9d134cf5e2bffa2ba2a93701cb0d5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void http_server::stop</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>stop</name>
+        <qualifiedname>http_server::stop</qualifiedname>
+        <briefdescription>
+<para>停止服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="242" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="242" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1ad18ed76cacb1c2161db90e2444ae4cdc" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> *</type>
+        <definition>NEFORCE_NODISCARD tcp_server_base * http_server::server</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>server</name>
+        <qualifiedname>http_server::server</qualifiedname>
+        <briefdescription>
+<para>获取底层服务器指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>服务器指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="248" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="248" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp__server_1a50c2822a0cf85db0b04e1a055365187c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classtcp__server__base" kindref="compound">tcp_server_base</ref> *</type>
+        <definition>NEFORCE_NODISCARD const tcp_server_base * http_server::server</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>server</name>
+        <qualifiedname>http_server::server</qualifiedname>
+        <briefdescription>
+<para>获取底层服务器常量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>服务器常量指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="254" column="45" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="254" bodyend="254"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP/HTTPS服务器类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供完整的HTTP/HTTPS服务器功能，包括请求解析、路由分发、 会话管理、WebSocket升级等。</para>
+<para>使用示例： <programlisting><codeline><highlight class="comment">//<sp/>HTTP服务器</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2" kindref="member">http_server</ref><sp/><ref refid="classhttp__server_1ad18ed76cacb1c2161db90e2444ae4cdc" kindref="member">server</ref>(ports{8080});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>设置路由</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhttp__server_1ad18ed76cacb1c2161db90e2444ae4cdc" kindref="member">server</ref>.router().get(</highlight><highlight class="stringliteral">&quot;/&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>res.<ref refid="structhttp__server__response_1a7eb8d64f75162d65e089ab24654ffb33" kindref="member">body</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&lt;h1&gt;Hello<sp/>World&lt;/h1&gt;&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>res.<ref refid="structhttp__server__response_1a283b6cd33f07f80eb2024694dbff6c01" kindref="member">set_content_type</ref>(<ref refid="structhttp__content_1a93bc8d95236fa5c6cf1f80e798bd311e" kindref="member">http_content::HTML_TEXT</ref>());</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhttp__server_1ad18ed76cacb1c2161db90e2444ae4cdc" kindref="member">server</ref>.router().get(</highlight><highlight class="stringliteral">&quot;/api/users&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>res.<ref refid="structhttp__server__response_1a7eb8d64f75162d65e089ab24654ffb33" kindref="member">body</ref><sp/>=<sp/>R</highlight><highlight class="stringliteral">&quot;({&quot;users&quot;:<sp/>[{&quot;id&quot;:<sp/>1,<sp/>&quot;name&quot;:<sp/>&quot;John&quot;}]})&quot;;</highlight></codeline>
+<codeline><highlight class="stringliteral"><sp/><sp/><sp/><sp/>res.<ref refid="structhttp__server__response_1a283b6cd33f07f80eb2024694dbff6c01" kindref="member">set_content_type</ref>(<ref refid="structhttp__content_1a483cc76357457a343a5d4317804042af" kindref="member">http_content::JSON_APP</ref>());</highlight></codeline>
+<codeline><highlight class="stringliteral">});</highlight></codeline>
+<codeline><highlight class="stringliteral"></highlight></codeline>
+<codeline><highlight class="stringliteral"></highlight><highlight class="comment">//<sp/>WebSocket路由</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhttp__server_1ad18ed76cacb1c2161db90e2444ae4cdc" kindref="member">server</ref>.websocket().route(</highlight><highlight class="stringliteral">&quot;/ws&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="classwebsocket__server_1ae34039860d8e90e6112af725a134005a" kindref="member">websocket_server::session_ptr</ref><sp/>session)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>session-&gt;<ref refid="classwebsocket__session_1aaebbcc5d2e0a943226e6d53d95066cca" kindref="member">set_message_handler</ref>([](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>msg,<sp/><ref refid="group___web_socket_1ga6f03b53401c24a4ee83541255774ef0f" kindref="member">websocket_opcode</ref><sp/>opcode)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>session-&gt;<ref refid="classwebsocket__session_1a63462f1a714a2520dca8fd4c6e6a36f6" kindref="member">send</ref>(</highlight><highlight class="stringliteral">&quot;Echo:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>msg);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>启动服务器</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classhttp__server_1ad18ed76cacb1c2161db90e2444ae4cdc" kindref="member">server</ref>.start();</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>byte_size</label>
+        <link refid="classbyte__size"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>http_server</label>
+        <link refid="classhttp__server"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>max_server_body_size</edgelabel>
+          <edgelabel>max_server_header_size</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>icommon&lt; byte_size &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>icomparable&lt; byte_size &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="7">
+        <label>ihashable&lt; byte_size &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="3">
+        <label>iobject&lt; byte_size &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>istringify&lt; byte_size &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="68" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="68" bodyend="255"/>
+    <listofallmembers>
+      <member refid="classhttp__server_1ac576251ff24c0bab80b23590b1d5bc5b" prot="public" virt="non-virtual"><scope>http_server</scope><name>cookie_name</name></member>
+      <member refid="classhttp__server_1a306b132e82b41bf9f14ed31262d7a6b0" prot="private" virt="non-virtual"><scope>http_server</scope><name>cookie_name_</name></member>
+      <member refid="classhttp__server_1a6448c63c08a21979469e9e1ffc56012b" prot="public" virt="non-virtual"><scope>http_server</scope><name>enable_websocket</name></member>
+      <member refid="classhttp__server_1a491c7cc10be8d5b932984c9caa6f820f" prot="private" virt="non-virtual"><scope>http_server</scope><name>get_or_create_session</name></member>
+      <member refid="classhttp__server_1a166b7eb52bf3fe7a7cdae8514cd47664" prot="public" virt="non-virtual"><scope>http_server</scope><name>get_session</name></member>
+      <member refid="classhttp__server_1a410866c3b085e12448cf37e975e857aa" prot="private" virt="non-virtual"><scope>http_server</scope><name>handle_client</name></member>
+      <member refid="classhttp__server_1a1a6b049d0e2b5a37dacab05a10a0d048" prot="private" virt="non-virtual"><scope>http_server</scope><name>handle_request_with_forward</name></member>
+      <member refid="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
+      <member refid="classhttp__server_1aba4ee10f91e7ed646e3f49c5d7bf4a1f" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
+      <member refid="classhttp__server_1a9010468dd7743b95d97cc2f22ed54b1f" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
+      <member refid="classhttp__server_1ab114e8aa3b253ec0a411798999709cbf" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
+      <member refid="classhttp__server_1a15546a917a6cfef8eb21079878018eee" prot="public" virt="non-virtual"><scope>http_server</scope><name>is_running</name></member>
+      <member refid="classhttp__server_1ad38cd02ebb3673ef7ce5b53546935b09" prot="public" virt="non-virtual"><scope>http_server</scope><name>load_certificate</name></member>
+      <member refid="classhttp__server_1a85f26c5a1d2232d7a8aefba1f8dd3f2d" prot="public" virt="non-virtual"><scope>http_server</scope><name>max_server_body_size</name></member>
+      <member refid="classhttp__server_1a86bf2660ddc1c52405bb80140ff775f9" prot="public" virt="non-virtual"><scope>http_server</scope><name>max_server_header_size</name></member>
+      <member refid="classhttp__server_1afa809e97830f11f8f1e15c7ddad67afd" prot="public" virt="non-virtual"><scope>http_server</scope><name>operator=</name></member>
+      <member refid="classhttp__server_1a871fadc08f6dd2d1995f5ae28cd36547" prot="public" virt="non-virtual"><scope>http_server</scope><name>operator=</name></member>
+      <member refid="classhttp__server_1abb5113cbdad9ae2d3e8173fe9d006dff" prot="private" virt="non-virtual"><scope>http_server</scope><name>parse_request</name></member>
+      <member refid="classhttp__server_1af1ebf90a83db7ea20851144bee6f67da" prot="public" virt="non-virtual"><scope>http_server</scope><name>port</name></member>
+      <member refid="classhttp__server_1a18dc968946074ce39af2ed7d8d2b04e4" prot="public" virt="non-virtual"><scope>http_server</scope><name>router</name></member>
+      <member refid="classhttp__server_1a70384465c1b0f883c67788f956773b53" prot="public" virt="non-virtual"><scope>http_server</scope><name>router</name></member>
+      <member refid="classhttp__server_1ae3c77613081470f8a284179cf68842be" prot="private" virt="non-virtual"><scope>http_server</scope><name>router_</name></member>
+      <member refid="classhttp__server_1ad18ed76cacb1c2161db90e2444ae4cdc" prot="public" virt="non-virtual"><scope>http_server</scope><name>server</name></member>
+      <member refid="classhttp__server_1a50c2822a0cf85db0b04e1a055365187c" prot="public" virt="non-virtual"><scope>http_server</scope><name>server</name></member>
+      <member refid="classhttp__server_1acc682d73a7ac26ebce8499ceb0711725" prot="private" virt="non-virtual"><scope>http_server</scope><name>server_</name></member>
+      <member refid="classhttp__server_1a9229eb554085b9dc1cc5bc6007f6fbaa" prot="private" virt="non-virtual"><scope>http_server</scope><name>session_manager_</name></member>
+      <member refid="classhttp__server_1a8ae0b82bc4ef2d1ff3288b0689c82256" prot="public" virt="non-virtual"><scope>http_server</scope><name>set_cookie_name</name></member>
+      <member refid="classhttp__server_1a5a233441cb3717e67bb65f80b4abdc86" prot="public" virt="non-virtual"><scope>http_server</scope><name>set_max_sessions</name></member>
+      <member refid="classhttp__server_1af27919173888fc86812614162e7973c0" prot="public" virt="non-virtual"><scope>http_server</scope><name>set_session_cleanup_interval</name></member>
+      <member refid="classhttp__server_1a755df815f0f63dae3a202c876d4ad75b" prot="public" virt="non-virtual"><scope>http_server</scope><name>socket_type</name></member>
+      <member refid="classhttp__server_1a16d4679ab288d1c2a76aa52b05d87650" prot="public" virt="non-virtual"><scope>http_server</scope><name>start</name></member>
+      <member refid="classhttp__server_1adab9d134cf5e2bffa2ba2a93701cb0d5" prot="public" virt="non-virtual"><scope>http_server</scope><name>stop</name></member>
+      <member refid="classhttp__server_1ac294af9c31ade0fd6842a680fd435a37" prot="private" virt="non-virtual"><scope>http_server</scope><name>try_websocket_upgrade</name></member>
+      <member refid="classhttp__server_1ab976bf681d31ab05c566abc6dc530840" prot="public" virt="non-virtual"><scope>http_server</scope><name>websocket</name></member>
+      <member refid="classhttp__server_1a5f2f7e301f856fdf04ec870a2b465ba0" prot="public" virt="non-virtual"><scope>http_server</scope><name>websocket</name></member>
+      <member refid="classhttp__server_1ab6a954520676d17ebc039639b2f1fa57" prot="private" virt="non-virtual"><scope>http_server</scope><name>ws_server_</name></member>
+      <member refid="classhttp__server_1ad73b8edb19ce6667a813ab2485778c16" prot="public" virt="non-virtual"><scope>http_server</scope><name>~http_server</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

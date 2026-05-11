@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___shuffle_algorithms" kind="group">
+    <compoundname>ShuffleAlgorithms</compoundname>
+    <title>随机重排算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___shuffle_algorithms_1ga3bcbde813bd43737ddaf4c106caac469" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void shuffle</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>shuffle</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>随机重排序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用Fisher-Yates洗牌算法（Knuth洗牌）将范围 [first, last) 中的元素随机重排。 算法对每个位置 i（从第二个元素开始），在 [first, i] 范围内随机选择一个位置 j， 然后交换位置 i 和 j 的元素。</para>
+<para><simplesect kind="note"><para>要求 Iterator 满足随机访问迭代器概念 </para>
+</simplesect>
+<simplesect kind="note"><para>使用默认的 <ref refid="classrandom__lcd" kindref="compound">random_lcd</ref> 线性同余随机数生成器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shuffle.hpp" line="40" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shuffle.hpp" bodystart="40" bodyend="52"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <references refid="classrandom__lcd_1ab7827758610c019138c8ab81e3663d36" compoundref="random_8hpp" startline="135" endline="143">random_lcd::next_int</references>
+      </memberdef>
+      <memberdef kind="function" id="group___shuffle_algorithms_1ga7d0bd6e732e8ea782985610e8276d3ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Generator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void shuffle</definition>
+        <argsstring>(Iterator first, Iterator last, Generator &amp;rand)</argsstring>
+        <name>shuffle</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Generator &amp;</type>
+          <declname>rand</declname>
+        </param>
+        <briefdescription>
+<para>随机重排序列（使用自定义随机数生成器） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Generator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机数生成器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>自定义随机数生成器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用Fisher-Yates洗牌算法将范围 [first, last) 中的元素随机重排。 允许使用自定义的随机数生成器，提供更大的灵活性。</para>
+<para>随机数生成器需要满足以下要求：<itemizedlist>
+<listitem><para>可调用，接受一个整数参数 n</para>
+</listitem><listitem><para>返回 [0, n) 范围内的随机整数</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>要求 Iterator 满足随机访问迭代器概念 </para>
+</simplesect>
+<simplesect kind="note"><para>随机数生成器必须提供 operator()(integer) -&gt; integer 方法 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shuffle.hpp" line="73" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/shuffle.hpp" bodystart="73" bodyend="83"/>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <references refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>随机重排算法的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

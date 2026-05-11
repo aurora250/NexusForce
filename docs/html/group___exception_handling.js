@@ -47,5 +47,5 @@ var group___exception_handling =
     [ "make_exception_ptr", "group___exception_handling.html#gac43ce5d8fc82090c24f3088e37cc2d89", null ],
     [ "rethrow_exception", "group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32", null ],
     [ "throw_with_stack", "group___exception_handling.html#gafcaf017f48e0577f063b54671e2a06ec", null ],
-    [ "uncaught_exceptions", "group___exception_handling.html#gafa2df93411a6e72fbe11790aea38de2a", null ]
+    [ "uncaught_exceptions", "group___exception_handling.html#ga28496880d7de221739d7afa46a69059d", null ]
 ];

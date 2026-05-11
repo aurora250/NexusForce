@@ -98,9 +98,15 @@ $(function(){initNavTree('classsemaphore.html','','classsemaphore-members'); });
 
 <p><code>#include &lt;<a class="el" href="semaphore_8hpp_source.html">semaphore.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a83d575a008cf2880a797eb2a3b436524" id="r_a83d575a008cf2880a797eb2a3b436524"><td class="memItemLeft"><a id="a83d575a008cf2880a797eb2a3b436524" name="a83d575a008cf2880a797eb2a3b436524"></a>
+using&#160;</td><td class="memItemRight"><b>native_handle_type</b> = ::HANDLE</td></tr>
+<tr class="memdesc:a83d575a008cf2880a797eb2a3b436524"><td class="mdescLeft">&#160;</td><td class="mdescRight">原生句柄类型 <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a6023fe3d87bccedd287a1f2244691f41" id="r_a6023fe3d87bccedd287a1f2244691f41"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6023fe3d87bccedd287a1f2244691f41">semaphore</a> (long initial=0, long maximum=max_count)</td></tr>
+<tr class="memitem:a6023fe3d87bccedd287a1f2244691f41" id="r_a6023fe3d87bccedd287a1f2244691f41"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6023fe3d87bccedd287a1f2244691f41">semaphore</a> (long initial=0, long maximum=<a class="el" href="#aff28dd13dfee27fc5e565ff1fea9121a">max_count</a>)</td></tr>
 <tr class="memdesc:a6023fe3d87bccedd287a1f2244691f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造系统级信号量  <br /></td></tr>
 <tr class="memitem:a91211aa51e970af200a5c7009371c4c5" id="r_a91211aa51e970af200a5c7009371c4c5"><td class="memItemLeft"><a id="a91211aa51e970af200a5c7009371c4c5" name="a91211aa51e970af200a5c7009371c4c5"></a>
 &#160;</td><td class="memItemRight"><b>~semaphore</b> () noexcept</td></tr>
@@ -119,6 +125,12 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a25ef4fd1a54c09a07290806f242e8b50"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放信号量  <br /></td></tr>
 <tr class="memitem:ab20020329e57e990088ef2d658a761cf" id="r_ab20020329e57e990088ef2d658a761cf"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab20020329e57e990088ef2d658a761cf">value</a> () const noexcept</td></tr>
 <tr class="memdesc:ab20020329e57e990088ef2d658a761cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询当前信号量计数值  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+静态 Public 属性</h2></td></tr>
+<tr class="memitem:aff28dd13dfee27fc5e565ff1fea9121a" id="r_aff28dd13dfee27fc5e565ff1fea9121a"><td class="memItemLeft"><a id="aff28dd13dfee27fc5e565ff1fea9121a" name="aff28dd13dfee27fc5e565ff1fea9121a"></a>
+static constexpr long&#160;</td><td class="memItemRight"><b>max_count</b> = <a class="el" href="classnumeric__traits.html">numeric_traits</a>&lt;long&gt;<a class="el" href="group___compare_algorithms.html#ga01c48c11cc5d3222cb2e3adf0f843f3e">::max</a>()</td></tr>
+<tr class="memdesc:aff28dd13dfee27fc5e565ff1fea9121a"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大计数值 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>系统信号量类 </p>
@@ -143,7 +155,7 @@ Public 成员函数</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>maximum</em></span><span class="paramdefsep"> = </span><span class="paramdefval">max_count</span>&#160;)</td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>maximum</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#aff28dd13dfee27fc5e565ff1fea9121a">max_count</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -167,6 +179,8 @@ Public 成员函数</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p class="reference">引用了 <a class="el" href="semaphore_8hpp_source.html#l00178">max_count</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a91211aa51e970af200a5c7009371c4c5">~semaphore()</a>.</p>
 

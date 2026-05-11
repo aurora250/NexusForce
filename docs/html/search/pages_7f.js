@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['项目简介_0',['📖 项目简介',['../index.html#autotoc_md4',1,'']]]
+  ['部分排序_0',['部分排序',['../group___sort_algorithms.html#partial_sorting',1,'']]]
 ];

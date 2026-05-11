@@ -1,0 +1,460 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classdynamic__library" kind="class" language="C++" prot="public">
+    <compoundname>dynamic_library</compoundname>
+    <includes refid="dynamic__library_8hpp" local="no">dynamic_library.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdynamic__library_1a24119fc2848061f1c25d32354f6e9257" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* dynamic_library::handle_</definition>
+        <argsstring></argsstring>
+        <name>handle_</name>
+        <qualifiedname>dynamic_library::handle_</qualifiedname>
+        <briefdescription>
+<para>动态库句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="52" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdynamic__library_1ac82112d5f28a8ce4ee19f161798af7fc" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string dynamic_library::path_</definition>
+        <argsstring></argsstring>
+        <name>path_</name>
+        <qualifiedname>dynamic_library::path_</qualifiedname>
+        <briefdescription>
+<para>库文件路径 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="53" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classdynamic__library_1a73150354299c9f3a489fc020cf1857b0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dynamic_library::open</definition>
+        <argsstring>()</argsstring>
+        <name>open</name>
+        <qualifiedname>dynamic_library::open</qualifiedname>
+        <briefdescription>
+<para>打开动态库 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>dl_exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>加载失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="60" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a0996f3be81f3b25c8516946d6cbfcd96" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dynamic_library::close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <qualifiedname>dynamic_library::close</qualifiedname>
+        <briefdescription>
+<para>关闭动态库 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="65" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdynamic__library_1a31bb6aaaff7d126a8a1db3b73498d3f8" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>dynamic_library::dynamic_library</definition>
+        <argsstring>(string pth)</argsstring>
+        <name>dynamic_library</name>
+        <qualifiedname>dynamic_library::dynamic_library</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>pth</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，打开指定的动态库 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>动态库路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdynamic__library__exception" kindref="compound">dynamic_library_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>加载失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="73" column="14"/>
+        <references refid="classdynamic__library_1a31bb6aaaff7d126a8a1db3b73498d3f8">dynamic_library</references>
+        <referencedby refid="classdynamic__library_1ad02ef87854cbd93532937eacf09e4a35">dynamic_library</referencedby>
+        <referencedby refid="classdynamic__library_1a31bb6aaaff7d126a8a1db3b73498d3f8">dynamic_library</referencedby>
+        <referencedby refid="classdynamic__library_1a8547e38412ac7c6ea7995e3d98ec6f40">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a823bfd4639880b27df502908f3acaa3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>dynamic_library::~dynamic_library</definition>
+        <argsstring>()</argsstring>
+        <name>~dynamic_library</name>
+        <qualifiedname>dynamic_library::~dynamic_library</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="75" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a584238ff2e0eec21c30c82d32ca678ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>dynamic_library::dynamic_library</definition>
+        <argsstring>(const dynamic_library &amp;)=delete</argsstring>
+        <name>dynamic_library</name>
+        <qualifiedname>dynamic_library::dynamic_library</qualifiedname>
+        <param>
+          <type>const <ref refid="classdynamic__library" kindref="compound">dynamic_library</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="77" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a904d2fc1ab17231c8f7d8781d2dc35f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classdynamic__library" kindref="compound">dynamic_library</ref> &amp;</type>
+        <definition>dynamic_library &amp; dynamic_library::operator=</definition>
+        <argsstring>(const dynamic_library &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>dynamic_library::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classdynamic__library" kindref="compound">dynamic_library</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="78" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1ad02ef87854cbd93532937eacf09e4a35" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>dynamic_library::dynamic_library</definition>
+        <argsstring>(dynamic_library &amp;&amp;other) noexcept</argsstring>
+        <name>dynamic_library</name>
+        <qualifiedname>dynamic_library::dynamic_library</qualifiedname>
+        <param>
+          <type><ref refid="classdynamic__library" kindref="compound">dynamic_library</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="84" column="5"/>
+        <references refid="classdynamic__library_1a31bb6aaaff7d126a8a1db3b73498d3f8">dynamic_library</references>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a8547e38412ac7c6ea7995e3d98ec6f40" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classdynamic__library" kindref="compound">dynamic_library</ref> &amp;</type>
+        <definition>dynamic_library &amp; dynamic_library::operator=</definition>
+        <argsstring>(dynamic_library &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>dynamic_library::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classdynamic__library" kindref="compound">dynamic_library</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="91" column="21"/>
+        <references refid="classdynamic__library_1a31bb6aaaff7d126a8a1db3b73498d3f8">dynamic_library</references>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a53c3ada7feef0304cb470365ab40470f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T dynamic_library::to_symbol</definition>
+        <argsstring>(const string &amp;name) const</argsstring>
+        <name>to_symbol</name>
+        <qualifiedname>dynamic_library::to_symbol</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取符号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>符号类型（函数指针类型） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>符号名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>符号地址，转换为指定类型 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdynamic__library__exception" kindref="compound">dynamic_library_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>符号不存在时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="101" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" bodystart="101" bodyend="103"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <references refid="classdynamic__library_1a31449138e99fe50bad7212a06bf454eb">symbol</references>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a31449138e99fe50bad7212a06bf454eb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD void *</type>
+        <definition>NEFORCE_NODISCARD void * dynamic_library::symbol</definition>
+        <argsstring>(const string &amp;name) const</argsstring>
+        <name>symbol</name>
+        <qualifiedname>dynamic_library::symbol</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取原始符号地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>符号名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>符号地址 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdynamic__library__exception" kindref="compound">dynamic_library_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>符号不存在时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="111" column="28"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <referencedby refid="classdynamic__library_1a53c3ada7feef0304cb470365ab40470f" compoundref="dynamic__library_8hpp" startline="101" endline="103">to_symbol</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a0a770868526da593b7863afa30a5be1a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool dynamic_library::has_symbol</definition>
+        <argsstring>(const string &amp;name) const noexcept</argsstring>
+        <name>has_symbol</name>
+        <qualifiedname>dynamic_library::has_symbol</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>检查符号是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>符号名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>符号是否存在 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="118" column="28"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a3fc1a50d1d41748f1c66264a0292f3ad" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool dynamic_library::is_open</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_open</name>
+        <qualifiedname>dynamic_library::is_open</qualifiedname>
+        <briefdescription>
+<para>检查动态库是否已加载 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已加载 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="124" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" bodystart="124" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a230c26c6c81585ebf602df7d5d6d0c67" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void dynamic_library::unload</definition>
+        <argsstring>()</argsstring>
+        <name>unload</name>
+        <qualifiedname>dynamic_library::unload</qualifiedname>
+        <briefdescription>
+<para>卸载动态库 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="129" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" bodystart="129" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a5d91951588cb2dae7acd35622bedccde" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD void *</type>
+        <definition>NEFORCE_NODISCARD void * dynamic_library::native_handle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>dynamic_library::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取原生句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>平台相关的动态库句柄 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="135" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" bodystart="135" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classdynamic__library_1a74275d373d6cf37c18c427bf3fdcacc3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const string &amp; dynamic_library::path</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>path</name>
+        <qualifiedname>dynamic_library::path</qualifiedname>
+        <briefdescription>
+<para>获取库文件路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>路径字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="141" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" bodystart="141" bodyend="141"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>动态链接库加载器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>支持动态库的加载、卸载和符号解析操作。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" line="50" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/dynamic_library.hpp" bodystart="50" bodyend="142"/>
+    <listofallmembers>
+      <member refid="classdynamic__library_1a0996f3be81f3b25c8516946d6cbfcd96" prot="private" virt="non-virtual"><scope>dynamic_library</scope><name>close</name></member>
+      <member refid="classdynamic__library_1a31bb6aaaff7d126a8a1db3b73498d3f8" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>dynamic_library</name></member>
+      <member refid="classdynamic__library_1a584238ff2e0eec21c30c82d32ca678ed" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>dynamic_library</name></member>
+      <member refid="classdynamic__library_1ad02ef87854cbd93532937eacf09e4a35" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>dynamic_library</name></member>
+      <member refid="classdynamic__library_1a24119fc2848061f1c25d32354f6e9257" prot="private" virt="non-virtual"><scope>dynamic_library</scope><name>handle_</name></member>
+      <member refid="classdynamic__library_1a0a770868526da593b7863afa30a5be1a" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>has_symbol</name></member>
+      <member refid="classdynamic__library_1a3fc1a50d1d41748f1c66264a0292f3ad" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>is_open</name></member>
+      <member refid="classdynamic__library_1a5d91951588cb2dae7acd35622bedccde" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>native_handle</name></member>
+      <member refid="classdynamic__library_1a73150354299c9f3a489fc020cf1857b0" prot="private" virt="non-virtual"><scope>dynamic_library</scope><name>open</name></member>
+      <member refid="classdynamic__library_1a904d2fc1ab17231c8f7d8781d2dc35f2" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>operator=</name></member>
+      <member refid="classdynamic__library_1a8547e38412ac7c6ea7995e3d98ec6f40" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>operator=</name></member>
+      <member refid="classdynamic__library_1a74275d373d6cf37c18c427bf3fdcacc3" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>path</name></member>
+      <member refid="classdynamic__library_1ac82112d5f28a8ce4ee19f161798af7fc" prot="private" virt="non-virtual"><scope>dynamic_library</scope><name>path_</name></member>
+      <member refid="classdynamic__library_1a31449138e99fe50bad7212a06bf454eb" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>symbol</name></member>
+      <member refid="classdynamic__library_1a53c3ada7feef0304cb470365ab40470f" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>to_symbol</name></member>
+      <member refid="classdynamic__library_1a230c26c6c81585ebf602df7d5d6d0c67" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>unload</name></member>
+      <member refid="classdynamic__library_1a823bfd4639880b27df502908f3acaa3e" prot="public" virt="non-virtual"><scope>dynamic_library</scope><name>~dynamic_library</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -15,7 +15,7 @@ var memory_8hpp =
     [ "memory_zero", "group___memory_functions.html#ga0590f0952874df69fedc3740320ce1bb", null ],
     [ "string_compare", "group___string_operations.html#ga66435457bd7a3b93d4ce2ee17a72f698", null ],
     [ "string_compare", "group___string_operations.html#gadcce3d331cce0104dfbe84f17657c268", null ],
-    [ "string_compare_ignore_case", "group___string_operations.html#gabc68823d8f3e9dbb1b213f7b88d84878", null ],
+    [ "string_compare_ignore_case", "group___string_operations.html#gaa9d437d5bd278d64d78d1c3e8c62dfa3", null ],
     [ "string_compare_ignore_case", "group___string_operations.html#ga9abdfd7cabb7b3bb16b0658ad76574c1", null ],
     [ "string_concatenate", "group___string_operations.html#ga64735eb717b22449bd0a90f8cc994b80", null ],
     [ "string_concatenate", "group___string_operations.html#ga1c8d8e2d7fb1168075254fdfb64ae0d2", null ],

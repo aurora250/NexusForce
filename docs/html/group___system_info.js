@@ -25,7 +25,7 @@ var group___system_info =
         [ "hyperthreading", "structsysinfo_1_1_c_p_u__info.html#a7fcdb67c44d302cdead6baa15ace39bf", null ],
         [ "brand", "structsysinfo_1_1_c_p_u__info.html#ac444585514c69df4fb285d73905c8b11", null ],
         [ "cores", "structsysinfo_1_1_c_p_u__info.html#a72950152b1295f64fbae6363e0a91215", null ],
-        [ "current_MHZ", "structsysinfo_1_1_c_p_u__info.html#a7ff7cd89432a692e8d9e5f802c9d3572", null ],
+        [ "current_MHz", "structsysinfo_1_1_c_p_u__info.html#a1b737fae9977a80fdbcd3b5476d2c1ec", null ],
         [ "features", "structsysinfo_1_1_c_p_u__info.html#a13f2d5ac60ff53dfb5415c8a4c55ee49", null ],
         [ "logical_processors", "structsysinfo_1_1_c_p_u__info.html#af1ecda498492da2dd5ad938d5096a530", null ],
         [ "max_MHz", "structsysinfo_1_1_c_p_u__info.html#aad2f7f4d8b6e92bf324e7dfbc6011705", null ],
@@ -46,7 +46,10 @@ var group___system_info =
         [ "X64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63af0851da0e02bf22830828822f578dc8f", null ],
         [ "ARM", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a47f45e65244c17ec9fa8771a5c6d60e1", null ],
         [ "ARM64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63ab9b55c80d095761ac7757ced0fedadc4", null ],
-        [ "IA64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a4c2c294c51f3230d47a6bf0fb0cbe47a", null ]
+        [ "RISCV32", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a9fe8c36311da48049559d1e1f119f8ad", null ],
+        [ "RISCV64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63aafaf0bad004e6a71e15785a0e5089263", null ],
+        [ "LOONGARCH64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f", null ],
+        [ "LOONGARCH32", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a", null ]
       ] ],
       [ "get_architecture", "classsysinfo.html#a2969c1689b21d9bc883071ccb353bbfd", null ],
       [ "get_CPU_info", "classsysinfo.html#a3bd522897d213009f59aae487346d179", null ],

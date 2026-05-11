@@ -31,6 +31,7 @@ var group___exceptions =
     [ "ini_exception", "structini__exception.html", null ],
     [ "json_exception", "structjson__exception.html", null ],
     [ "toml_exception", "structtoml__exception.html", null ],
+    [ "yaml_exception", "structyaml__exception.html", null ],
     [ "allocate_exception", "structallocate__exception.html", null ],
     [ "regex_exception", "structregex__exception.html", null ],
     [ "cmdline_exception", "structcmdline__exception.html", null ],

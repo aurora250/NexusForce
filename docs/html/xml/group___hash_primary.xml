@@ -1,0 +1,513 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___hash_primary" kind="group">
+    <compoundname>HashPrimary</compoundname>
+    <title>哈希算法</title>
+    <innerclass refid="structhash_3_01coroutine__handle_3_01_promise_01_4_01_4" prot="public">hash&lt; coroutine_handle&lt; Promise &gt; &gt;</innerclass>
+    <innerclass refid="structhash" prot="public">hash</innerclass>
+    <innerclass refid="structhash_3_01_t_01_5_01_4" prot="public">hash&lt; T * &gt;</innerclass>
+    <innerclass refid="structhash_3_01_t_00_01enable__if__t_3_01is__enum__v_3_01_t_01_4_01_4_01_4" prot="public">hash&lt; T, enable_if_t&lt; is_enum_v&lt; T &gt; &gt; &gt;</innerclass>
+    <innerclass refid="structmurmur__hash" prot="public">murmur_hash</innerclass>
+    <innerclass refid="structis__nothrow__hashable" prot="public">is_nothrow_hashable</innerclass>
+    <innerclass refid="structis__hash" prot="public">is_hash</innerclass>
+    <innerclass refid="structhash_3_01_t_00_01enable__if__t_3_01is__base__of_3_01ihashable_3_01_t_01_4_00_01_t_01_4_1_1value_01_4_01_4" prot="public">hash&lt; T, enable_if_t&lt; is_base_of&lt; ihashable&lt; T &gt;, T &gt;::value &gt; &gt;</innerclass>
+    <innerclass refid="structhash_3_01shared__ptr_3_01_t_01_4_01_4" prot="public">hash&lt; shared_ptr&lt; T &gt; &gt;</innerclass>
+    <innerclass refid="structhash_3_01unique__ptr_3_01_t_00_01_deleter_01_4_01_4" prot="public">hash&lt; unique_ptr&lt; T, Deleter &gt; &gt;</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___hash_primary_1ga7b623749eb368d9c6142805167d8c3e8" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_INLINE17 constexpr size_t FNV_OFFSET_BASIS</definition>
+        <argsstring></argsstring>
+        <name>FNV_OFFSET_BASIS</name>
+        <initializer>                                           =
+
+14695981039346656037ULL</initializer>
+        <briefdescription>
+<para>FNV哈希算法的偏移基础值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>根据平台位数使用不同的值，文档以64位为例。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="111" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___hash_primary_1gac9c1200d5d9591e537701046e3cb0eb0" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>NEFORCE_INLINE17 constexpr <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_INLINE17 constexpr size_t FNV_PRIME</definition>
+        <argsstring></argsstring>
+        <name>FNV_PRIME</name>
+        <initializer>= 1099511628211ULL</initializer>
+        <briefdescription>
+<para>FNV哈希算法的质数乘数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>根据平台位数使用不同的值，文档以64位为例。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="123" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___hash_primary_1ga6ca9a57793172db99ade654b0232f81f" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr bool</type>
+        <definition>NEFORCE_INLINE17 constexpr bool is_nothrow_hashable_v</definition>
+        <argsstring></argsstring>
+        <name>is_nothrow_hashable_v</name>
+        <initializer>= <ref refid="structis__nothrow__hashable" kindref="compound">is_nothrow_hashable</ref>&lt;Key&gt;::value</initializer>
+        <briefdescription>
+<para>is_nothrow_hashable的便捷变量模板 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="361" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="361" bodyend="-1"/>
+        <referencedby refid="classhashtable_1ae8a62a464589037c602ada94f77f5531" compoundref="hashtable_8hpp" startline="1036" endline="1038">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::bucket_index</referencedby>
+        <referencedby refid="classhashtable_1a22424473156d28f00e8f57077d147dba" compoundref="hashtable_8hpp" startline="1455" endline="1457">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
+        <referencedby refid="classhashtable_1a8ccb8315dbb19507e79397848a3bc4a4" compoundref="hashtable_8hpp" startline="1436" endline="1448">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::count</referencedby>
+        <referencedby refid="classhashtable_1ab24b6e166f249620e76d79147fe949e5" compoundref="hashtable_8hpp" startline="1362" endline="1364">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classhashtable_1a69cb3ef1f09f278a837e3e8e758d6369" compoundref="hashtable_8hpp" startline="1284" endline="1323">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classhashtable_1a98fde6b1f065ecae67b668f67e5f288f" compoundref="hashtable_8hpp" startline="1246" endline="1277">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classhashtable_1ac25e9855ad371a73729e2c970d594880" compoundref="hashtable_8hpp" startline="1372" endline="1375">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classhashtable_1a33185aeb2ea3ef8b694919568fd03705" compoundref="hashtable_8hpp" startline="1331" endline="1355">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
+        <referencedby refid="classhashtable_1aae63d8a272b25e7c68cabbabf03705d7" compoundref="hashtable_8hpp" startline="1417" endline="1429">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
+        <referencedby refid="classhashtable_1a3269c651cf82ba48ce0b323b81170b01" compoundref="hashtable_8hpp" startline="1398" endline="1410">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="group___hash_primary_1ga017f9314c0e8086c45cbb406983476de" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename Arg</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool is_hash_v</definition>
+        <argsstring></argsstring>
+        <name>is_hash_v</name>
+        <initializer>= <ref refid="structis__hash" kindref="compound">is_hash</ref>&lt;Func, Arg&gt;::value</initializer>
+        <briefdescription>
+<para>is_hash的便捷变量模板 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="390" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="390" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___hash_primary_1ga20409000240b9904721f7918223dc731" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 size_t FNV_hash</definition>
+        <argsstring>(const byte_t *first, const size_t count) noexcept</argsstring>
+        <name>FNV_hash</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>FNV-1a哈希算法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据的起始字节指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据的字节数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>计算出的哈希值</para>
+</simplesect>
+FNV（Fowler-Noll-Vo）是一种非加密哈希算法，具有：<orderedlist>
+<listitem><para>良好的雪崩效应（avalanche effect）</para>
+</listitem><listitem><para>较低的碰撞率</para>
+</listitem><listitem><para>实现简单高效</para>
+</listitem></orderedlist>
+</para>
+<para>FNV_hash函数使用FNV-1a版本算法，先异或再乘法的顺序。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="152" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="152" bodyend="159"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+        <referencedby refid="structthread_1_1id_1aa1e76c7df33be4d83151f47bc0825aaf" compoundref="thread_8hpp" startline="112" endline="114">thread::id::to_hash</referencedby>
+        <referencedby refid="classuuid_1a7664699bea951feb280cbcb34533a212">uuid::v7</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___hash_primary_1ga7ba8ee96f866b11a393bb705b97132fe" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 size_t FNV_hash_integer</definition>
+        <argsstring>(const T value) noexcept</argsstring>
+        <name>FNV_hash_integer</name>
+        <param>
+          <type>const T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>整数类型的FNV哈希 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要哈希的整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>整数的哈希值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="168" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="168" bodyend="178"/>
+        <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="group___hash_primary_1gacee153134b3c477f48bf2c7f20e82237" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename CharT</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 size_t FNV_hash_string</definition>
+        <argsstring>(const CharT *str, const size_t len) noexcept</argsstring>
+        <name>FNV_hash_string</name>
+        <param>
+          <type>const CharT *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+<para>字符串类型的FNV哈希 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CharT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串的哈希值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="188" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="188" bodyend="197"/>
+        <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;::value</references>
+        <referencedby refid="classbasic__string_1adf6f8452670426fd9311aa431ab35939" compoundref="basic__string_8hpp" startline="2795" endline="2797">basic_string&lt; char &gt;::to_hash</referencedby>
+        <referencedby refid="classbasic__string__view_1ac5b48469669704fbec45234198a14e17" compoundref="basic__string__view_8hpp" startline="1030" endline="1032">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___hash_primary_1ga874816e8d77feae51451b53f8c026b57" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR14 <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_CONSTEXPR14 size_t DJB2_hash</definition>
+        <argsstring>(const char *str, const size_t len) noexcept</argsstring>
+        <name>DJB2_hash</name>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+<para>DJB2哈希算法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>计算出的哈希值</para>
+</simplesect>
+DJB2是一种非加密哈希算法，具有以下特点：<orderedlist>
+<listitem><para>实现简单</para>
+</listitem><listitem><para>速度快</para>
+</listitem><listitem><para>分布均匀</para>
+</listitem></orderedlist>
+</para>
+<para>但在某些特殊情况下仍可能出现哈希冲突。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="274" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" bodystart="274" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="group___hash_primary_1gaa610d5c5365bf2d436f5f6f0c38c91db" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structmurmur__hash" kindref="compound">murmur_hash</ref> NEFORCE_API</type>
+        <definition>murmur_hash NEFORCE_API MurmurHash_x64</definition>
+        <argsstring>(const void *key, size_t len, uint32_t seed) noexcept</argsstring>
+        <name>MurmurHash_x64</name>
+        <param>
+          <type>const void *</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>seed</declname>
+        </param>
+        <briefdescription>
+<para>MurmurHash3_x64_128算法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要哈希的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希种子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>128位哈希结果</para>
+</simplesect>
+MurmurHash是一种非加密哈希算法，具有：<orderedlist>
+<listitem><para>速度快</para>
+</listitem><listitem><para>碰撞率低</para>
+</listitem><listitem><para>可自定义种子</para>
+</listitem></orderedlist>
+</para>
+<para>MurmurHash_x64是MurmurHash3的64位版本，产生128位哈希值。</para>
+<para><simplesect kind="note"><para>仅64位系统可用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="324" column="25" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" declline="324" declcolumn="25"/>
+      </memberdef>
+      <memberdef kind="function" id="group___hash_primary_1ga10907e3249f281ccbf2ceaa0cd21db77" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> NEFORCE_API</type>
+        <definition>uint32_t NEFORCE_API MurmurHash_x32</definition>
+        <argsstring>(const void *key, size_t len, uint32_t seed) noexcept</argsstring>
+        <name>MurmurHash_x32</name>
+        <param>
+          <type>const void *</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>seed</declname>
+        </param>
+        <briefdescription>
+<para>MurmurHash3_x86_32算法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要哈希的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>seed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哈希种子 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>32位哈希结果</para>
+</simplesect>
+MurmurHash3的32位版本，产生32位哈希值。 适用于32位系统或需要32位哈希的场景。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" line="337" column="22" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/functional/hash.hpp" declline="337" declcolumn="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>哈希模板和哈希算法实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现中的哈希算法参考以下标准规范与学术文献：</para>
+<para><bold>哈希算法规范参考：</bold><itemizedlist>
+<listitem><para>**IETF RFC 6234**：US 安全哈希算法 (SHA) 及基于 SHA 的 HMAC 和 HKDF（加密哈希参考） <ulink url="https://www.rfc-editor.org/rfc/rfc6234.html">https://www.rfc-editor.org/rfc/rfc6234.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>非加密哈希算法文献：</bold><itemizedlist>
+<listitem><para>**FNV-1a 哈希算法**：Fowler–Noll–Vo 哈希函数规范 <ulink url="https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17">https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17</ulink></para>
+</listitem><listitem><para>**MurmurHash3 算法**：Austin Appleby 设计的非加密哈希函数 <ulink url="https://github.com/aappleby/smhasher/wiki/MurmurHash3">https://github.com/aappleby/smhasher/wiki/MurmurHash3</ulink></para>
+</listitem><listitem><para>**DJB2 哈希算法**：Daniel J. Bernstein 设计的字符串哈希函数 <ulink url="http://www.cse.yorku.ca/~oz/hash.html">http://www.cse.yorku.ca/~oz/hash.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>哈希函数安全标准：</bold><itemizedlist>
+<listitem><para>**NIST SP 800-185**：SHA-3 派生函数 — cSHAKE、KMAC、TupleHash、ParallelHash <ulink url="https://csrc.nist.gov/pubs/sp/800/185/final">https://csrc.nist.gov/pubs/sp/800/185/final</ulink></para>
+</listitem><listitem><para>**NIST SP 800-107 Rev. 1**：使用已批准哈希算法的应用推荐 <ulink url="https://csrc.nist.gov/pubs/sp/800/107/r1/final">https://csrc.nist.gov/pubs/sp/800/107/r1/final</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___hash_primary_1algorithm_comparison">
+<title>哈希算法对比</title><para>本文件提供以下三种非加密哈希算法：</para>
+<para><table rows="4" cols="4"><row>
+<entry thead="yes"><para>算法  </para>
+</entry><entry thead="yes"><para>输出位数  </para>
+</entry><entry thead="yes"><para>特点  </para>
+</entry><entry thead="yes"><para>适用场景  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>FNV-1a  </para>
+</entry><entry thead="no"><para>32/64 位  </para>
+</entry><entry thead="no"><para>实现简单、雪崩效应好、碰撞率低  </para>
+</entry><entry thead="no"><para>哈希表、编译时哈希  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>DJB2  </para>
+</entry><entry thead="no"><para>32/64 位  </para>
+</entry><entry thead="no"><para>极简实现、速度快  </para>
+</entry><entry thead="no"><para>简单字符串哈希  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>MurmurHash3  </para>
+</entry><entry thead="no"><para>32/128 位  </para>
+</entry><entry thead="no"><para>速度快、分布均匀、可自定义种子  </para>
+</entry><entry thead="no"><para>高性能哈希表、Bloom Filter  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___hash_primary_1hash_requirements">
+<title>哈希函数要求</title><para>根据 ISO/IEC 14882:2020 §16.4.4，C++ 标准库哈希函数应满足：<itemizedlist>
+<listitem><para>可调用类型：接受 Key 类型参数，返回 <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></para>
+</listitem><listitem><para>相等性：若 k1 == k2，则 <ref refid="structhash" kindref="compound">hash(k1)</ref> == <ref refid="structhash" kindref="compound">hash(k2)</ref></para>
+</listitem><listitem><para>不抛出异常（推荐）：哈希计算不抛出异常</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___hash_primary_1security_note">
+<title>安全注意事项</title><para><simplesect kind="warning"><para><bold>重要安全提示**：<itemizedlist>
+<listitem><para>FNV-1a、DJB2 和 MurmurHash3 均为**非加密哈希算法</para>
+</listitem></itemizedlist>
+</bold><itemizedlist>
+<listitem><para>这些算法不应用于安全敏感场景，如密码存储、数字签名、消息认证码</para>
+</listitem><listitem><para>非加密哈希算法容易受到哈希碰撞攻击和长度扩展攻击</para>
+</listitem><listitem><para>对于安全场景，请使用密码学安全的哈希函数（如 SHA-256、SHA-3、BLAKE2）</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="note"><para>本文件中的哈希函数实现主要用于哈希表、Bloom Filter、数据分片等 性能敏感的非安全场景。对于需要密码学强度的应用，请使用 <computeroutput>NeForce/core/encrypt/</computeroutput> 目录下的 SHA-256 等算法。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17">https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://github.com/aappleby/smhasher">https://github.com/aappleby/smhasher</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Hash_function">https://en.wikipedia.org/wiki/Hash_function</ulink></para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

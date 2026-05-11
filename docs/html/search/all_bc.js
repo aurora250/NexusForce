@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['错误码_0',['错误码',['../group___error_code.html',1,'']]]
+  ['部分排序_0',['部分排序',['../group___sort_algorithms.html#partial_sorting',1,'']]]
 ];

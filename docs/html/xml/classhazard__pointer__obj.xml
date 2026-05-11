@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classhazard__pointer__obj" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>hazard_pointer_obj</compoundname>
+    <basecompoundref refid="classhazard__pointer__obj__base" prot="public" virt="non-virtual">hazard_pointer_obj_base</basecompoundref>
+    <includes refid="hazard__ptr_8hpp" local="no">hazard_ptr.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Deleter</type>
+        <defval><ref refid="structdefault__deleter" kindref="compound">default_deleter</ref>&lt;void&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhazard__pointer__obj_1a111007c9b519639da37322078363bffa" prot="private" static="no" mutable="no">
+        <type>T *</type>
+        <definition>T* hazard_pointer_obj&lt; T, Deleter &gt;::ptr</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>hazard_pointer_obj::ptr</qualifiedname>
+        <briefdescription>
+<para>实际对象指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="102" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhazard__pointer__obj_1a1b3a0d84c21fce5b2122d11701f924dc" prot="private" static="no" mutable="no">
+        <type>Deleter</type>
+        <definition>Deleter hazard_pointer_obj&lt; T, Deleter &gt;::deleter</definition>
+        <argsstring></argsstring>
+        <name>deleter</name>
+        <qualifiedname>hazard_pointer_obj::deleter</qualifiedname>
+        <briefdescription>
+<para>删除器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="103" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhazard__pointer__obj_1a8737ba02a9fa052b09177db2d6afb229" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>hazard_pointer_obj&lt; T, Deleter &gt;::hazard_pointer_obj</definition>
+        <argsstring>(T *p, Deleter d=Deleter())</argsstring>
+        <name>hazard_pointer_obj</name>
+        <qualifiedname>hazard_pointer_obj::hazard_pointer_obj</qualifiedname>
+        <param>
+          <type>T *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>Deleter</type>
+          <declname>d</declname>
+          <defval>Deleter()</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要管理的指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>d</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="111" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="111" bodyend="113"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classhazard__pointer__obj_1abc7269dcc8a1838682952567cf555d87" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void hazard_pointer_obj&lt; T, Deleter &gt;::destroy</definition>
+        <argsstring>() override</argsstring>
+        <name>destroy</name>
+        <qualifiedname>hazard_pointer_obj::destroy</qualifiedname>
+        <reimplements refid="classhazard__pointer__obj__base_1a9e179233d5b592750c0e44262f75dfe8">destroy</reimplements>
+        <briefdescription>
+<para>销毁对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="118" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="118" bodyend="118"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>险象指针对象模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Deleter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>删除器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+包装需要回收的对象，包含自定义删除器。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>hazard_pointer_obj&lt; T, Deleter &gt;</label>
+        <link refid="classhazard__pointer__obj"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>hazard_pointer_obj_base</label>
+        <link refid="classhazard__pointer__obj__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>hazard_pointer_obj&lt; T, Deleter &gt;</label>
+        <link refid="classhazard__pointer__obj"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>hazard_pointer_obj_base</label>
+        <link refid="classhazard__pointer__obj__base"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" line="101" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp" bodystart="101" bodyend="119"/>
+    <listofallmembers>
+      <member refid="classhazard__pointer__obj_1a1b3a0d84c21fce5b2122d11701f924dc" prot="private" virt="non-virtual"><scope>hazard_pointer_obj</scope><name>deleter</name></member>
+      <member refid="classhazard__pointer__obj_1abc7269dcc8a1838682952567cf555d87" prot="public" virt="virtual"><scope>hazard_pointer_obj</scope><name>destroy</name></member>
+      <member refid="classhazard__pointer__obj_1a8737ba02a9fa052b09177db2d6afb229" prot="public" virt="non-virtual"><scope>hazard_pointer_obj</scope><name>hazard_pointer_obj</name></member>
+      <member refid="classhazard__pointer__obj__base_1ade76a3fc1006cff9269564b074937bf7" prot="public" virt="non-virtual"><scope>hazard_pointer_obj</scope><name>next</name></member>
+      <member refid="classhazard__pointer__obj_1a111007c9b519639da37322078363bffa" prot="private" virt="non-virtual"><scope>hazard_pointer_obj</scope><name>ptr</name></member>
+      <member refid="classhazard__pointer__obj__base_1a5616b796b5e8cc18929e56e5c8a85241" prot="public" virt="virtual"><scope>hazard_pointer_obj</scope><name>~hazard_pointer_obj_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

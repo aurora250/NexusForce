@@ -263,10 +263,10 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept(noexcept(tree_.
 <tr class="memdesc:af70e8ca11bbbc6a49fb43de3a6ae463c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的常量元素范围  <br /></td></tr>
 <tr class="memitem:afffcff4cad1b5f690b1019ea607a87b4" id="r_afffcff4cad1b5f690b1019ea607a87b4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afffcff4cad1b5f690b1019ea607a87b4">swap</a> (<a class="el" href="classmultimap.html">multimap</a> &amp;other) noexcept(<a class="el" href="group___swap_utility.html#ga9cc217ccd3ddd28edc3ebfd181bba2f3">is_nothrow_swappable_v</a>&lt; base_type &gt;)</td></tr>
 <tr class="memdesc:afffcff4cad1b5f690b1019ea607a87b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个multimap的内容  <br /></td></tr>
-<tr class="memitem:a6723c8693bd3bed9087e05dc010486df" id="r_a6723c8693bd3bed9087e05dc010486df"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a6723c8693bd3bed9087e05dc010486df">operator==</a> (const <a class="el" href="classmultimap.html">multimap</a> &amp;rhs) const noexcept(noexcept(tree_==rhs.tree_))</td></tr>
-<tr class="memdesc:a6723c8693bd3bed9087e05dc010486df"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
-<tr class="memitem:afb57706691a89f8d49f99f384eb15a18" id="r_afb57706691a89f8d49f99f384eb15a18"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#afb57706691a89f8d49f99f384eb15a18">operator&lt;</a> (const <a class="el" href="classmultimap.html">multimap</a> &amp;rhs) const noexcept(noexcept(tree_&lt; rhs.tree_))</td></tr>
-<tr class="memdesc:afb57706691a89f8d49f99f384eb15a18"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
+<tr class="memitem:a008d2814f820f5010140c230ca35b64f" id="r_a008d2814f820f5010140c230ca35b64f"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a008d2814f820f5010140c230ca35b64f">equal_to</a> (const <a class="el" href="classmultimap.html">multimap</a> &amp;rhs) const noexcept(noexcept(tree_==rhs.tree_))</td></tr>
+<tr class="memdesc:a008d2814f820f5010140c230ca35b64f"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:a0845f77d599011e356957b6855085b09" id="r_a0845f77d599011e356957b6855085b09"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a0845f77d599011e356957b6855085b09">less_than</a> (const <a class="el" href="classmultimap.html">multimap</a> &amp;rhs) const noexcept(noexcept(tree_&lt; rhs.tree_))</td></tr>
+<tr class="memdesc:a0845f77d599011e356957b6855085b09"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt;<br />
@@ -312,9 +312,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>默认构造函数 </p>
 <p>构造一个空multimap，使用默认的比较函数。 </p>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00098">98</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00101">101</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00112">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00129">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00171">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00179">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00476">operator&lt;()</a>, <a class="el" href="multimap_8hpp_source.html#l00120">operator=()</a>, <a class="el" href="multimap_8hpp_source.html#l00137">operator=()</a>, <a class="el" href="multimap_8hpp_source.html#l00187">operator=()</a>, <a class="el" href="multimap_8hpp_source.html#l00467">operator==()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00460">swap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00470">equal_to()</a>, <a class="el" href="multimap_8hpp_source.html#l00479">less_than()</a>, <a class="el" href="multimap_8hpp_source.html#l00115">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00132">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00174">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00182">multimap()</a>, <a class="el" href="multimap_8hpp_source.html#l00123">operator=()</a>, <a class="el" href="multimap_8hpp_source.html#l00140">operator=()</a>, <a class="el" href="multimap_8hpp_source.html#l00190">operator=()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00463">swap()</a>.</p>
 
 </div>
 </div>
@@ -351,7 +351,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00105">105</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00108">108</a> 行定义.</p>
 
 </div>
 </div>
@@ -388,9 +388,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00112">112</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00115">115</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00098">multimap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00101">multimap()</a>.</p>
 
 </div>
 </div>
@@ -427,9 +427,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00129">129</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00132">132</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02841">is_nothrow_move_constructible_v</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00098">multimap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02841">is_nothrow_move_constructible_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00101">multimap()</a>.</p>
 
 </div>
 </div>
@@ -479,7 +479,7 @@ template&lt;typename Iterator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00149">149</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00152">152</a> 行定义.</p>
 
 </div>
 </div>
@@ -535,7 +535,7 @@ template&lt;typename Iterator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00162">162</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00165">165</a> 行定义.</p>
 
 </div>
 </div>
@@ -572,9 +572,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00171">171</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00174">174</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00202">begin()</a>, <a class="el" href="multimap_8hpp_source.html#l00208">end()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00098">multimap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00205">begin()</a>, <a class="el" href="multimap_8hpp_source.html#l00211">end()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00101">multimap()</a>.</p>
 
 </div>
 </div>
@@ -616,9 +616,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00179">179</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00182">182</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00202">begin()</a>, <a class="el" href="multimap_8hpp_source.html#l00208">end()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00098">multimap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00205">begin()</a>, <a class="el" href="multimap_8hpp_source.html#l00211">end()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00101">multimap()</a>.</p>
 
 </div>
 </div>
@@ -651,7 +651,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00214">214</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00217">217</a> 行定义.</p>
 
 </div>
 </div>
@@ -683,9 +683,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00202">202</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00205">205</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00171">multimap()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00179">multimap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00174">multimap()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00182">multimap()</a>.</p>
 
 </div>
 </div>
@@ -717,7 +717,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00226">226</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00229">229</a> 行定义.</p>
 
 </div>
 </div>
@@ -749,7 +749,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00232">232</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00235">235</a> 行定义.</p>
 
 </div>
 </div>
@@ -787,7 +787,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>匹配的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00410">410</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00413">413</a> 行定义.</p>
 
 </div>
 </div>
@@ -819,7 +819,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最大元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00262">262</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00265">265</a> 行定义.</p>
 
 </div>
 </div>
@@ -851,7 +851,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00268">268</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00271">271</a> 行定义.</p>
 
 </div>
 </div>
@@ -897,7 +897,7 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00307">307</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00310">310</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
 
@@ -950,7 +950,7 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00333">333</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00336">336</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
 
@@ -984,7 +984,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>检查是否为空 </p>
 <dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00286">286</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00289">289</a> 行定义.</p>
 
 </div>
 </div>
@@ -1016,7 +1016,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00220">220</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00223">223</a> 行定义.</p>
 
 </div>
 </div>
@@ -1048,9 +1048,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00208">208</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00211">211</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00171">multimap()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00179">multimap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00174">multimap()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00182">multimap()</a>.</p>
 
 </div>
 </div>
@@ -1088,7 +1088,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00445">445</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00448">448</a> 行定义.</p>
 
 </div>
 </div>
@@ -1126,7 +1126,47 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00452">452</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00455">455</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a008d2814f820f5010140c230ca35b64f" name="a008d2814f820f5010140c230ca35b64f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a008d2814f820f5010140c230ca35b64f">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个multimap大小相等且对应元素相等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00470">470</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00101">multimap()</a>.</p>
 
 </div>
 </div>
@@ -1164,7 +1204,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>删除的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00377">377</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00380">380</a> 行定义.</p>
 
 </div>
 </div>
@@ -1206,7 +1246,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00384">384</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00387">387</a> 行定义.</p>
 
 </div>
 </div>
@@ -1243,7 +1283,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00370">370</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00373">373</a> 行定义.</p>
 
 </div>
 </div>
@@ -1281,7 +1321,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的迭代器，未找到则返回end() </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00396">396</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00399">399</a> 行定义.</p>
 
 </div>
 </div>
@@ -1319,7 +1359,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的常量迭代器，未找到则返回cend() </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00403">403</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00406">406</a> 行定义.</p>
 
 </div>
 </div>
@@ -1357,9 +1397,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00316">316</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00319">319</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00187">operator=()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="multimap_8hpp_source.html#l00190">operator=()</a>.</p>
 
 </div>
 </div>
@@ -1409,7 +1449,7 @@ template&lt;typename Iterator&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00362">362</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00365">365</a> 行定义.</p>
 
 </div>
 </div>
@@ -1452,7 +1492,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00343">343</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00346">346</a> 行定义.</p>
 
 </div>
 </div>
@@ -1495,9 +1535,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00351">351</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00354">354</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -1535,9 +1575,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00323">323</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00326">326</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00313">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -1569,7 +1609,47 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取键比较函数对象 </p>
 <dl class="section return"><dt>返回</dt><dd>键比较函数对象的副本 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00292">292</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00295">295</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0845f77d599011e356957b6855085b09" name="a0845f77d599011e356957b6855085b09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0845f77d599011e356957b6855085b09">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧multimap </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00479">479</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00101">multimap()</a>.</p>
 
 </div>
 </div>
@@ -1607,7 +1687,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00417">417</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00420">420</a> 行定义.</p>
 
 </div>
 </div>
@@ -1645,7 +1725,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00424">424</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00427">427</a> 行定义.</p>
 
 </div>
 </div>
@@ -1677,47 +1757,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取最大可能大小 </p>
 <dl class="section return"><dt>返回</dt><dd>最大元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00280">280</a> 行定义.</p>
-
-</div>
-</div>
-<a id="afb57706691a89f8d49f99f384eb15a18" name="afb57706691a89f8d49f99f384eb15a18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb57706691a89f8d49f99f384eb15a18">&#9670;&#160;</a></span>operator&lt;()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::operator&lt; </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>小于比较操作符 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>右侧multimap </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00476">476</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00098">multimap()</a>.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00283">283</a> 行定义.</p>
 
 </div>
 </div>
@@ -1755,9 +1795,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00120">120</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00123">123</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00098">multimap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00101">multimap()</a>.</p>
 
 </div>
 </div>
@@ -1795,9 +1835,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00137">137</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00140">140</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02902">is_nothrow_move_assignable_v</a>, <a class="el" href="shift_8hpp_source.html#l00313">move()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00098">multimap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02902">is_nothrow_move_assignable_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00101">multimap()</a>.</p>
 
 </div>
 </div>
@@ -1835,49 +1875,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00187">187</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00190">190</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00389">clear()</a>, <a class="el" href="multimap_8hpp_source.html#l00316">insert()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00098">multimap()</a>.</p>
-
-</div>
-</div>
-<a id="a6723c8693bd3bed9087e05dc010486df" name="a6723c8693bd3bed9087e05dc010486df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6723c8693bd3bed9087e05dc010486df">&#9670;&#160;</a></span>operator==()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;rb_tree_node&lt;pair&lt;const Key, T&gt;&gt;&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt;::operator== </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classmultimap.html">multimap</a>&lt; Key, T, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>相等比较操作符 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">rhs</td><td>右侧multimap </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>如果两个multimap大小相等且对应元素相等返回true </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00467">467</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00098">multimap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="multimap_8hpp_source.html#l00392">clear()</a>, <a class="el" href="multimap_8hpp_source.html#l00319">insert()</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00101">multimap()</a>.</p>
 
 </div>
 </div>
@@ -1909,7 +1909,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最大元素的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00250">250</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00253">253</a> 行定义.</p>
 
 </div>
 </div>
@@ -1941,7 +1941,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取反向起始迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最大元素的反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00238">238</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00241">241</a> 行定义.</p>
 
 </div>
 </div>
@@ -1973,7 +1973,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取常量反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的常量反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00256">256</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00259">259</a> 行定义.</p>
 
 </div>
 </div>
@@ -2005,7 +2005,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取反向结束迭代器 </p>
 <dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的反向迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00244">244</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00247">247</a> 行定义.</p>
 
 </div>
 </div>
@@ -2037,7 +2037,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取元素数量 </p>
 <dl class="section return"><dt>返回</dt><dd>multimap中的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00274">274</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00277">277</a> 行定义.</p>
 
 </div>
 </div>
@@ -2074,9 +2074,9 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00460">460</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00463">463</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03951">is_nothrow_swappable_v</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00098">multimap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03946">is_nothrow_swappable_v</a> , 以及 <a class="el" href="multimap_8hpp_source.html#l00101">multimap()</a>.</p>
 
 </div>
 </div>
@@ -2114,7 +2114,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00431">431</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00434">434</a> 行定义.</p>
 
 </div>
 </div>
@@ -2152,7 +2152,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的常量迭代器 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00438">438</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00441">441</a> 行定义.</p>
 
 </div>
 </div>
@@ -2184,7 +2184,7 @@ template&lt;typename Key, typename T, typename Compare = less&lt;Key&gt;, typena
 <p>获取值比较函数对象 </p>
 <dl class="section return"><dt>返回</dt><dd>值比较函数对象的副本 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00298">298</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="multimap_8hpp_source.html">multimap.hpp</a> 第 <a class="el" href="multimap_8hpp_source.html#l00301">301</a> 行定义.</p>
 
 </div>
 </div>

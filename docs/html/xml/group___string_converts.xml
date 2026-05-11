@@ -1,0 +1,1512 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___string_converts" kind="group">
+    <compoundname>StringConverts</compoundname>
+    <title>字符串转换</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___string_converts_1ga31c6fb8bbf417f4e00ea2f52899e84f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga2dd33cb2936b9c2e75a085b78a7349a1" kindref="member">is_base_of_v</ref>&lt; <ref refid="structistringify" kindref="compound">istringify</ref>&lt; T &gt;, T &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string</definition>
+        <argsstring>(const T &amp;obj)</argsstring>
+        <name>to_string</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>将实现了istringify接口的对象转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对象的字符串表示</para>
+</simplesect>
+全局辅助函数，用于方便地调用实现了istringify接口的对象的to_string方法。 仅当T是istringify&lt;T&gt;的派生类时可用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/istringify.hpp" line="68" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/interface/istringify.hpp" bodystart="68" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga2572a573ce25a016394c7c55378ca676" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="structuint128__t" kindref="compound">uint128_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr uint128_t to_uint128</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_uint128</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为128位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的128位无符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="797" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="797" bodyend="807"/>
+        <references refid="classbasic__string__view_1a16a3b7dd1dfc880ae5afb1680bde2a26" compoundref="basic__string__view_8hpp" startline="331" endline="331">basic_string_view&lt; CharT, Traits &gt;::data</references>
+        <referencedby refid="structint128__t_1ad5e375eb299cf57a009c308b9e6d7a99" compoundref="int128_8hpp" startline="526" endline="529">int128_t::operator&lt;&lt;=</referencedby>
+        <referencedby refid="structuint128__t_1adac20986bb26baa46fe3a8fe1edd869b" compoundref="int128_8hpp" startline="831" endline="831">uint128_t::uint128_t</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga830438551f149faf2b98ff56d529647c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="structint128__t" kindref="compound">int128_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr int128_t to_int128</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_int128</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为128位有符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的128位有符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" line="817" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/int128.hpp" bodystart="817" bodyend="827"/>
+        <references refid="classbasic__string__view_1a16a3b7dd1dfc880ae5afb1680bde2a26" compoundref="basic__string__view_8hpp" startline="331" endline="331">basic_string_view&lt; CharT, Traits &gt;::data</references>
+        <referencedby refid="structint128__t_1a6b3a3a9bf9163a0c10b46cc40663c73a" compoundref="int128_8hpp" startline="833" endline="833">int128_t::int128_t</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga31874b04e06ebff7b7c8e7e5594dc298" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga3068631062aaf7da4cc0371da9e7a377" kindref="member">float32_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr float32_t to_float32</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr)</argsstring>
+        <name>to_float32</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为32位浮点数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的32位浮点数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="505" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="505" bodyend="515"/>
+        <references refid="classbasic__string__view_1a16a3b7dd1dfc880ae5afb1680bde2a26" compoundref="basic__string__view_8hpp" startline="331" endline="331">basic_string_view&lt; CharT, Traits &gt;::data</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga1f5155d159305f819abbf7be465d99b6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr float64_t to_float64</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr)</argsstring>
+        <name>to_float64</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为64位浮点数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的64位浮点数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="524" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="524" bodyend="534"/>
+        <references refid="classbasic__string__view_1a16a3b7dd1dfc880ae5afb1680bde2a26" compoundref="basic__string__view_8hpp" startline="331" endline="331">basic_string_view&lt; CharT, Traits &gt;::data</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga19263ca94456dbdd63476072694d7fb1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr decimal_t to_decimal</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr)</argsstring>
+        <name>to_decimal</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为decimal浮点数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的十进制浮点数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="543" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="543" bodyend="553"/>
+        <references refid="classbasic__string__view_1a16a3b7dd1dfc880ae5afb1680bde2a26" compoundref="basic__string__view_8hpp" startline="331" endline="331">basic_string_view&lt; CharT, Traits &gt;::data</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga61f69852feb7daff33c969b9cea51692" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr int64_t to_int64</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_int64</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为64位有符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的64位有符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="563" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="563" bodyend="573"/>
+        <references refid="classbasic__string__view_1a16a3b7dd1dfc880ae5afb1680bde2a26" compoundref="basic__string__view_8hpp" startline="331" endline="331">basic_string_view&lt; CharT, Traits &gt;::data</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1gaaeca306ce6742e6cefcd461937579e55" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr uint64_t to_uint64</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_uint64</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为64位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的64位无符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="583" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="583" bodyend="593"/>
+        <references refid="classbasic__string__view_1a16a3b7dd1dfc880ae5afb1680bde2a26" compoundref="basic__string__view_8hpp" startline="331" endline="331">basic_string_view&lt; CharT, Traits &gt;::data</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga91f73eff4b1c7b7a80bd1e333bb4bc02" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr int32_t to_int32</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_int32</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为32位有符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的32位有符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="603" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="603" bodyend="613"/>
+        <references refid="classbasic__string__view_1a16a3b7dd1dfc880ae5afb1680bde2a26" compoundref="basic__string__view_8hpp" startline="331" endline="331">basic_string_view&lt; CharT, Traits &gt;::data</references>
+        <referencedby refid="structboolean_1a3b98f71ee9986526acd7eecd77f493c5" compoundref="packages_8hpp" startline="74" endline="90">boolean::parse</referencedby>
+        <referencedby refid="group___string_converts_1ga7759b71afe57e6f40eda18ba2b85f143" compoundref="to__numerics_8hpp" startline="643" endline="650">to_int16</referencedby>
+        <referencedby refid="group___string_converts_1ga713f2722e1b305fc518693c88ec01e28" compoundref="to__numerics_8hpp" startline="676" endline="683">to_int8</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga3cce0d6c468870811bf60c1221ae3014" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr uint32_t to_uint32</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_uint32</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为32位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的32位无符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="623" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="623" bodyend="633"/>
+        <references refid="classbasic__string__view_1a16a3b7dd1dfc880ae5afb1680bde2a26" compoundref="basic__string__view_8hpp" startline="331" endline="331">basic_string_view&lt; CharT, Traits &gt;::data</references>
+        <referencedby refid="group___string_converts_1ga1aff9cd4ff9aa693027e13d27ff847fa" compoundref="to__numerics_8hpp" startline="660" endline="666">to_uint16</referencedby>
+        <referencedby refid="group___string_converts_1gae011732c6f636f80c49ec96aedab71a2" compoundref="to__numerics_8hpp" startline="693" endline="699">to_uint8</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga7759b71afe57e6f40eda18ba2b85f143" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga8b23aa936eec66c1c69ecd7b399ddf19" kindref="member">int16_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr int16_t to_int16</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_int16</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为16位有符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的16位有符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="643" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="643" bodyend="650"/>
+        <references refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="classnumeric__traits_1a562b092bb7289237720de2d905a02bef" compoundref="numeric__traits_8hpp" startline="148" endline="148">numeric_traits&lt; T, Dummy &gt;::min</references>
+        <references refid="group___string_converts_1ga91f73eff4b1c7b7a80bd1e333bb4bc02" compoundref="to__numerics_8hpp" startline="603" endline="613">to_int32</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga1aff9cd4ff9aa693027e13d27ff847fa" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr uint16_t to_uint16</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_uint16</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为16位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的16位无符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="660" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="660" bodyend="666"/>
+        <references refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="group___string_converts_1ga3cce0d6c468870811bf60c1221ae3014" compoundref="to__numerics_8hpp" startline="623" endline="633">to_uint32</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga713f2722e1b305fc518693c88ec01e28" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1gaef0a181fd471ee04962c9ce581a83ca0" kindref="member">int8_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr int8_t to_int8</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_int8</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为8位有符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的8位有符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="676" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="676" bodyend="683"/>
+        <references refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="classnumeric__traits_1a562b092bb7289237720de2d905a02bef" compoundref="numeric__traits_8hpp" startline="148" endline="148">numeric_traits&lt; T, Dummy &gt;::min</references>
+        <references refid="group___string_converts_1ga91f73eff4b1c7b7a80bd1e333bb4bc02" compoundref="to__numerics_8hpp" startline="603" endline="613">to_int32</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1gae011732c6f636f80c49ec96aedab71a2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr uint8_t to_uint8</definition>
+        <argsstring>(const string_view sv, size_t *idx=nullptr, const int base=10)</argsstring>
+        <name>to_uint8</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> *</type>
+          <declname>idx</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>base</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+<para>将字符串转换为8位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可选参数，存储转换结束位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>进制基数（0表示自动检测） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的8位无符号整数 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structtypecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>转换失败时 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" line="693" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_numerics.hpp" bodystart="693" bodyend="699"/>
+        <references refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="group___string_converts_1ga3cce0d6c468870811bf60c1221ae3014" compoundref="to__numerics_8hpp" startline="623" endline="633">to_uint32</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga801e4d9a7e7bb386d60e07ab8492c1b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename P</type>
+            <defval><ref refid="group___base_type_properties_1gad3210ef30a41dfbe37f4b0afa11cf9d1" kindref="member">package_t</ref>&lt;T&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_properties_1ga2097f41e78735e8dfe11d7bce991afc7" kindref="member">is_packaged_v</ref>&lt; T &gt; &amp;&amp;<ref refid="group___base_type_qualifier_check_1ga2dd33cb2936b9c2e75a085b78a7349a1" kindref="member">is_base_of_v</ref>&lt; <ref refid="structistringify" kindref="compound">istringify</ref>&lt; P &gt;, P &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>to_string</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>将可包装类型转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可包装类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串表示</para>
+</simplesect>
+通过包装类型进行字符串转换，要求包装类型实现了istringify接口。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="36" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="36" bodyend="38"/>
+        <references refid="group___string_converts_1ga801e4d9a7e7bb386d60e07ab8492c1b0" compoundref="to__string_8hpp" startline="36" endline="38">to_string</references>
+        <referencedby refid="group___string_converts_1gaaea09a977e7aca90ca8a7932146302c4" compoundref="to__string_8hpp" startline="241" endline="247">to_string</referencedby>
+        <referencedby refid="group___string_converts_1ga3a2ec08d836344f9ff90f555c1db97a5" compoundref="to__string_8hpp" startline="159" endline="161">to_string</referencedby>
+        <referencedby refid="group___string_converts_1ga094214fc66ed142546ccf87a3dd3084d" compoundref="to__string_8hpp" startline="147" endline="149">to_string</referencedby>
+        <referencedby refid="group___string_converts_1ga0f8469e436acf31ada4f8c5af47ba82a" compoundref="to__string_8hpp" startline="171" endline="173">to_string</referencedby>
+        <referencedby refid="group___string_converts_1ga801e4d9a7e7bb386d60e07ab8492c1b0" compoundref="to__string_8hpp" startline="36" endline="38">to_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1gaec0c42db45ec17d4fcfc7fd3d05e3628" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string</definition>
+        <argsstring>(nullptr_t np)</argsstring>
+        <name>to_string</name>
+        <param>
+          <type><ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref></type>
+          <declname>np</declname>
+        </param>
+        <briefdescription>
+<para>将空指针转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>np</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串&quot;nullptr&quot; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="45" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga094214fc66ed142546ccf87a3dd3084d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename IfEmpty</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string</definition>
+        <argsstring>(const compressed_pair&lt; IfEmpty, T, true &gt; &amp;obj)</argsstring>
+        <name>to_string</name>
+        <param>
+          <type>const <ref refid="structcompressed__pair" kindref="compound">compressed_pair</ref>&lt; IfEmpty, T, true &gt; &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>将压缩对（已压缩版本）转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IfEmpty</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空基类类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩对 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值的字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="147" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="147" bodyend="149"/>
+        <references refid="group___string_converts_1ga801e4d9a7e7bb386d60e07ab8492c1b0" compoundref="to__string_8hpp" startline="36" endline="38">to_string</references>
+        <references refid="structcompressed__pair_1a85011ff9527606e2f8a5d97e7c5c3b68" compoundref="compressed__pair_8hpp" startline="34">compressed_pair&lt; IfEmpty, T, Compressed &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga3a2ec08d836344f9ff90f555c1db97a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename IfEmpty</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string</definition>
+        <argsstring>(const compressed_pair&lt; IfEmpty, T, false &gt; &amp;obj)</argsstring>
+        <name>to_string</name>
+        <param>
+          <type>const <ref refid="structcompressed__pair" kindref="compound">compressed_pair</ref>&lt; IfEmpty, T, false &gt; &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>将压缩对（未压缩版本）转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IfEmpty</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空基类类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩对 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式为&quot;{ value, empty }&quot;的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="159" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="159" bodyend="161"/>
+        <references refid="group___string_converts_1ga801e4d9a7e7bb386d60e07ab8492c1b0" compoundref="to__string_8hpp" startline="36" endline="38">to_string</references>
+        <references refid="structcompressed__pair_1a85011ff9527606e2f8a5d97e7c5c3b68" compoundref="compressed__pair_8hpp" startline="34">compressed_pair&lt; IfEmpty, T, Compressed &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga0f8469e436acf31ada4f8c5af47ba82a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T1</type>
+          </param>
+          <param>
+            <type>typename T2</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string</definition>
+        <argsstring>(const pair&lt; T1, T2 &gt; &amp;obj)</argsstring>
+        <name>to_string</name>
+        <param>
+          <type>const <ref refid="structpair" kindref="compound">pair</ref>&lt; T1, T2 &gt; &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <briefdescription>
+<para>将对转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式为&quot;{ first, second }&quot;的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="171" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="171" bodyend="173"/>
+        <references refid="structpair_1aed925258783c91efbc5432030709d54e" compoundref="pair_8hpp" startline="100">pair&lt; T1, T2 &gt;::first</references>
+        <references refid="structpair_1a63ae1bbd5a6ce6bd6167b5359fa7a01f" compoundref="pair_8hpp" startline="101">pair&lt; T1, T2 &gt;::second</references>
+        <references refid="group___string_converts_1ga801e4d9a7e7bb386d60e07ab8492c1b0" compoundref="to__string_8hpp" startline="36" endline="38">to_string</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga26dff0e6014b2d81ef57177e67ecd86a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string</definition>
+        <argsstring>(const tuple&lt; Args... &gt; &amp;tup)</argsstring>
+        <name>to_string</name>
+        <param>
+          <type>const tuple&lt; Args... &gt; &amp;</type>
+          <declname>tup</declname>
+        </param>
+        <briefdescription>
+<para>将元组转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元组 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="214" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="214" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1gaaea09a977e7aca90ca8a7932146302c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(sizeof...(Args) &gt; 1), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>to_string</name>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>将多个参数转换为字符串并连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>连接后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="241" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="241" bodyend="247"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="group___string_converts_1ga801e4d9a7e7bb386d60e07ab8492c1b0" compoundref="to__string_8hpp" startline="36" endline="38">to_string</references>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga5a2a115e331bd1a82024837f9e433a94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__floating__point" kindref="compound">is_floating_point</ref>&lt; T &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_with_precision</definition>
+        <argsstring>(T x, int precision, bool scientific=false)</argsstring>
+        <name>to_string_with_precision</name>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>precision</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>scientific</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>将浮点数转换为字符串（带精度控制） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>precision</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>精度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scientific</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用科学计数法 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="511" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="511" bodyend="513"/>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1gab3736804eb4cabadcc2e6f47424fa071" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__floating__point" kindref="compound">is_floating_point</ref>&lt; T &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_general</definition>
+        <argsstring>(T x, int precision=6)</argsstring>
+        <name>to_string_general</name>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>precision</declname>
+          <defval>6</defval>
+        </param>
+        <briefdescription>
+<para>将浮点数转换为字符串（通用格式） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>precision</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>精度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="523" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="523" bodyend="525"/>
+        <referencedby refid="structformatter_3_01_t_00_01enable__if__t_3_01is__floating__point__v_3_01_t_01_4_01_4_01_4_1ac2103c0369fd4a5333925d60c0f9ff2a" compoundref="format_8hpp" startline="404" endline="439">formatter&lt; T, enable_if_t&lt; is_floating_point_v&lt; T &gt; &gt; &gt;::operator()</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1ga7054cdde046bf5c14e9905779ad35a07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__floating__point" kindref="compound">is_floating_point</ref>&lt; T &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_fixed</definition>
+        <argsstring>(T x, int precision=6)</argsstring>
+        <name>to_string_fixed</name>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>precision</declname>
+          <defval>6</defval>
+        </param>
+        <briefdescription>
+<para>将浮点数转换为字符串（固定小数格式） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>precision</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>精度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="535" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="535" bodyend="537"/>
+        <referencedby refid="structformatter_3_01_t_00_01enable__if__t_3_01is__floating__point__v_3_01_t_01_4_01_4_01_4_1ac2103c0369fd4a5333925d60c0f9ff2a" compoundref="format_8hpp" startline="404" endline="439">formatter&lt; T, enable_if_t&lt; is_floating_point_v&lt; T &gt; &gt; &gt;::operator()</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___string_converts_1gab003720775a25ba5769677b38db10a44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__floating__point" kindref="compound">is_floating_point</ref>&lt; T &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string_scientific</definition>
+        <argsstring>(T x, int precision=6)</argsstring>
+        <name>to_string_scientific</name>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>precision</declname>
+          <defval>6</defval>
+        </param>
+        <briefdescription>
+<para>将浮点数转换为字符串（科学计数法格式） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>precision</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>精度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" line="547" column="46" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/to_string.hpp" bodystart="547" bodyend="549"/>
+        <referencedby refid="structformatter_3_01_t_00_01enable__if__t_3_01is__floating__point__v_3_01_t_01_4_01_4_01_4_1ac2103c0369fd4a5333925d60c0f9ff2a" compoundref="format_8hpp" startline="404" endline="439">formatter&lt; T, enable_if_t&lt; is_floating_point_v&lt; T &gt; &gt; &gt;::operator()</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>字符串与数据类型之间的转换功能 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

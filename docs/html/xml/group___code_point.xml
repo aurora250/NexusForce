@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___code_point" kind="group">
+    <compoundname>CodePoint</compoundname>
+    <title>Unicode码点</title>
+    <innerclass refid="classcodepoint" prot="public">codepoint</innerclass>
+    <briefdescription>
+<para>码点处理相关功能 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Unicode码点范围：U+0000 ~ U+10FFFF（排除代理项范围0xD800-0xDFFF）</para>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下 Unicode 和字符编码相关标准规范：</para>
+<para><bold>Unicode 核心标准：</bold><itemizedlist>
+<listitem><para>**Unicode 15.1.0**：Unicode 字符编码标准 <ulink url="https://unicode.org/versions/Unicode15.1.0/">https://unicode.org/versions/Unicode15.1.0/</ulink></para>
+</listitem><listitem><para>**Unicode 16.0.0**：Unicode 字符编码标准（最新版本） <ulink url="https://unicode.org/versions/Unicode16.0.0/">https://unicode.org/versions/Unicode16.0.0/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>UTF 编码格式标准：</bold><itemizedlist>
+<listitem><para>**IETF RFC 3629**：UTF-8 — ISO 10646 的转换格式（UTF-8 编码规范） <ulink url="https://www.rfc-editor.org/rfc/rfc3629.html">https://www.rfc-editor.org/rfc/rfc3629.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 2781**：UTF-16 — ISO 10646 的编码格式（UTF-16 编码规范） <ulink url="https://www.rfc-editor.org/rfc/rfc2781.html">https://www.rfc-editor.org/rfc/rfc2781.html</ulink></para>
+</listitem><listitem><para>**Unicode Standard Annex #15**：Unicode 规范化形式 <ulink url="https://unicode.org/reports/tr15/">https://unicode.org/reports/tr15/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>通用字符集编码标准：</bold><itemizedlist>
+<listitem><para>**ISO/IEC 10646:2020**：信息技术 — 通用编码字符集 (UCS) <ulink url="https://www.iso.org/standard/76835.html">https://www.iso.org/standard/76835.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>相关编程语言标准：</bold><itemizedlist>
+<listitem><para>**ISO/IEC 14882:2020**：C++ 编程语言标准（char8_t、char16_t、char32_t 类型） <ulink url="https://www.iso.org/standard/79358.html">https://www.iso.org/standard/79358.html</ulink></para>
+</listitem><listitem><para>**ISO/IEC 9899:2018**：C 语言标准（宽字符与 Unicode 支持） <ulink url="https://www.iso.org/standard/74528.html">https://www.iso.org/standard/74528.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___code_point_1unicode_ranges">
+<title>Unicode 码点范围定义</title><para>根据 Unicode 15.1.0 §2.4，码点空间划分为以下区域：</para>
+<para><table rows="9" cols="5"><row>
+<entry thead="yes"><para>范围名称  </para>
+</entry><entry thead="yes"><para>码点范围  </para>
+</entry><entry thead="yes"><para>UTF-8 字节数  </para>
+</entry><entry thead="yes"><para>UTF-16 码元数  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Basic Latin (ASCII)  </para>
+</entry><entry thead="no"><para>U+0000 - U+007F  </para>
+</entry><entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>与 ASCII 完全兼容  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Latin-1 Supplement  </para>
+</entry><entry thead="no"><para>U+0080 - U+00FF  </para>
+</entry><entry thead="no"><para>2  </para>
+</entry><entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>ISO 8859-1 扩展  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>BMP (Basic Multilingual)  </para>
+</entry><entry thead="no"><para>U+0100 - U+FFFF  </para>
+</entry><entry thead="no"><para>3  </para>
+</entry><entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>基本多文种平面  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Supplementary Planes  </para>
+</entry><entry thead="no"><para>U+10000 - U+10FFFF  </para>
+</entry><entry thead="no"><para>4  </para>
+</entry><entry thead="no"><para>2 (代理对)  </para>
+</entry><entry thead="no"><para>16 个辅助平面  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>High Surrogates  </para>
+</entry><entry thead="no"><para>U+D800 - U+DBFF  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry><entry thead="no"><para>高代理项（无效码点）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Low Surrogates  </para>
+</entry><entry thead="no"><para>U+DC00 - U+DFFF  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry><entry thead="no"><para>低代理项（无效码点）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Noncharacters  </para>
+</entry><entry thead="no"><para>U+FDD0 - U+FDEF 等  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry><entry thead="no"><para>非字符（内部使用）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Private Use Area  </para>
+</entry><entry thead="no"><para>U+E000 - U+F8FF 等  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry><entry thead="no"><para>—  </para>
+</entry><entry thead="no"><para>私用区  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___code_point_1utf8_encoding">
+<title>UTF-8 编码规则</title><para>根据 RFC 3629 §3，UTF-8 编码遵循以下比特模式：</para>
+<para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>码点范围  </para>
+</entry><entry thead="yes"><para>UTF-8 字节序列  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>U+0000 - U+007F  </para>
+</entry><entry thead="no"><para>0xxxxxxx  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>U+0080 - U+07FF  </para>
+</entry><entry thead="no"><para>110xxxxx 10xxxxxx  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>U+0800 - U+FFFF  </para>
+</entry><entry thead="no"><para>1110xxxx 10xxxxxx 10xxxxxx  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>U+10000 - U+10FFFF  </para>
+</entry><entry thead="no"><para>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___code_point_1utf16_surrogates">
+<title>UTF-16 代理对编码规则</title><para>根据 RFC 2781 §2.1，辅助平面字符使用代理对编码：</para>
+<para><table rows="3" cols="3"><row>
+<entry thead="yes"><para>组成部分  </para>
+</entry><entry thead="yes"><para>计算方式  </para>
+</entry><entry thead="yes"><para>值范围  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>高代理项  </para>
+</entry><entry thead="no"><para>((cp - 0x10000) &gt;&gt; 10) + 0xD800  </para>
+</entry><entry thead="no"><para>0xD800 - 0xDBFF  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>低代理项  </para>
+</entry><entry thead="no"><para>((cp - 0x10000) &amp; 0x3FF) + 0xDC00  </para>
+</entry><entry thead="no"><para>0xDC00 - 0xDFFF  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="8" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>码点类型  </para>
+</entry><entry thead="no"><para>uint32_t（32 位无符号整数）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最大合法码点  </para>
+</entry><entry thead="no"><para>0x10FFFF（Unicode §2.4）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>替换字符  </para>
+</entry><entry thead="no"><para>U+FFFD（� REPLACEMENT CHARACTER）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>无效序列处理  </para>
+</entry><entry thead="no"><para>替换为 U+FFFD（RFC 3629 §4）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>过度长序列检测  </para>
+</entry><entry thead="no"><para>支持（拒绝非最短形式的 UTF-8 序列）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>代理项检测  </para>
+</entry><entry thead="no"><para>支持（拒绝孤立的代理项）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>字节序处理  </para>
+</entry><entry thead="no"><para>支持（decode_utf16 提供 need_swap 参数）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___code_point_1validation_rules">
+<title>码点验证规则</title><para>根据 Unicode 标准，合法码点必须满足以下条件：<itemizedlist>
+<listitem><para>值不超过 0x10FFFF（Unicode 最大码点）</para>
+</listitem><listitem><para>不是高代理项（0xD800-0xDBFF）</para>
+</listitem><listitem><para>不是低代理项（0xDC00-0xDFFF）</para>
+</listitem></itemizedlist>
+</para>
+<para>非法的 UTF-8 序列（根据 RFC 3629 §4）：<itemizedlist>
+<listitem><para>过度长编码（使用超过所需的字节数）</para>
+</listitem><listitem><para>无效的后续字节（不以 10xxxxxx 开头）</para>
+</listitem><listitem><para>截断序列（字节数不足）</para>
+</listitem><listitem><para>孤立的代理项（U+D800-U+DFFF）</para>
+</listitem><listitem><para>超出范围的码点（&gt;U+10FFFF）</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>Unicode 标准规定，处理无效的 UTF 序列时应用替换字符 U+FFFD 替换， 而不应抛出异常或截断数据。本实现遵循此最佳实践。</para>
+</simplesect>
+<simplesect kind="warning"><para>根据 RFC 3629 §4，UTF-8 解码器必须拒绝过度长序列和非最短形式， 以防止安全漏洞（如目录遍历攻击）。本实现执行此验证。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://unicode.org/">https://unicode.org/</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc3629">https://www.rfc-editor.org/rfc/rfc3629</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc2781">https://www.rfc-editor.org/rfc/rfc2781</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.iso.org/standard/76835.html">https://www.iso.org/standard/76835.html</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

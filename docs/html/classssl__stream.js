@@ -1,6 +1,6 @@
 var classssl__stream =
 [
-    [ "native_handle_type", "classssl__stream.html#afc24338af0bfb2d13cc9b8b900fadbae", null ],
+    [ "native_handle_type", "classssl__stream.html#ae051cc1c9f187ca1d0d7d6ed3bfbae11", null ],
     [ "ssl_stream", "classssl__stream.html#ab02e87e9e16e91897e6cff777bb29186", null ],
     [ "ssl_stream", "classssl__stream.html#a08bc78c38c699630bdfd08492fabadfd", null ],
     [ "accept", "classssl__stream.html#a8d50c0caaf302839aba7a8989a3fa875", null ],

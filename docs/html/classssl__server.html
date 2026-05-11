@@ -143,8 +143,12 @@ using&#160;</td><td class="memItemRight"><b>client_handler_t</b> = <a class="el"
 using&#160;</td><td class="memItemRight"><b>exception_handler_t</b> = <a class="el" href="classfunction.html">function</a>&lt;void(const <a class="el" href="structexception.html">exception</a>&amp;)&gt;</td></tr>
 <tr class="memdesc:a5f608ddaffbd9596fd27cdfc6401a27b inherit pub_types_classtcp__server__base"><td class="mdescLeft">&#160;</td><td class="mdescRight">异常处理器类型 <br /></td></tr>
 <tr class="inherit_header pro_methods_classtcp__server__base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_classtcp__server__base')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Protected 成员函数 继承自 <a class="el" href="classtcp__server__base.html">tcp_server_base</a></td></tr>
-<tr class="memitem:a339fb280765125ff0e63bb3cb89bcb15 inherit pro_methods_classtcp__server__base" id="r_a339fb280765125ff0e63bb3cb89bcb15"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="classtcp__server__base.html#a339fb280765125ff0e63bb3cb89bcb15">accept_loop</a> ()</td></tr>
-<tr class="memdesc:a339fb280765125ff0e63bb3cb89bcb15 inherit pro_methods_classtcp__server__base"><td class="mdescLeft">&#160;</td><td class="mdescRight">接受连接的主循环  <br /></td></tr>
+<tr class="memitem:a6cfadb556ef18b029e0c510f143e833b inherit pro_methods_classtcp__server__base" id="r_a6cfadb556ef18b029e0c510f143e833b"><td class="memItemLeft">
+void&#160;</td><td class="memItemRight"><b>notify_stop</b> () noexcept</td></tr>
+<tr class="memdesc:a6cfadb556ef18b029e0c510f143e833b inherit pro_methods_classtcp__server__base"><td class="mdescLeft">&#160;</td><td class="mdescRight">向 wake_pipe_ 写端写入一个字节，唤醒 accept_loop <br /></td></tr>
+<tr class="memitem:a339fb280765125ff0e63bb3cb89bcb15 inherit pro_methods_classtcp__server__base" id="r_a339fb280765125ff0e63bb3cb89bcb15"><td class="memItemLeft">
+void&#160;</td><td class="memItemRight"><b>accept_loop</b> ()</td></tr>
+<tr class="memdesc:a339fb280765125ff0e63bb3cb89bcb15 inherit pro_methods_classtcp__server__base"><td class="mdescLeft">&#160;</td><td class="mdescRight">接受连接的主循环 <br /></td></tr>
 <tr class="memitem:a24bf1c8ad6716a8348518f48fad88eb2 inherit pro_methods_classtcp__server__base" id="r_a24bf1c8ad6716a8348518f48fad88eb2"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="classtcp__server__base.html#a24bf1c8ad6716a8348518f48fad88eb2">handle_client</a> (<a class="el" href="classtcp__socket.html">tcp_socket</a> client)</td></tr>
 <tr class="memdesc:a24bf1c8ad6716a8348518f48fad88eb2 inherit pro_methods_classtcp__server__base"><td class="mdescLeft">&#160;</td><td class="mdescRight">处理单个客户端连接  <br /></td></tr>
 <tr class="inherit_header pro_attribs_classtcp__server__base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classtcp__server__base')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Protected 属性 继承自 <a class="el" href="classtcp__server__base.html">tcp_server_base</a></td></tr>
@@ -169,6 +173,9 @@ using&#160;</td><td class="memItemRight"><b>exception_handler_t</b> = <a class="
 <tr class="memitem:a831cef70165579b406d091ded06b6a19 inherit pro_attribs_classtcp__server__base" id="r_a831cef70165579b406d091ded06b6a19"><td class="memItemLeft">
 <a class="el" href="classtcp__server__base.html#a5f608ddaffbd9596fd27cdfc6401a27b">exception_handler_t</a>&#160;</td><td class="memItemRight"><b>exception_handler_</b></td></tr>
 <tr class="memdesc:a831cef70165579b406d091ded06b6a19 inherit pro_attribs_classtcp__server__base"><td class="mdescLeft">&#160;</td><td class="mdescRight">异常处理器 <br /></td></tr>
+<tr class="memitem:a1a7e1de9c6df5ba9aa1a12feb06023b8 inherit pro_attribs_classtcp__server__base" id="r_a1a7e1de9c6df5ba9aa1a12feb06023b8"><td class="memItemLeft">
+<a class="el" href="classmutex.html">mutex</a>&#160;</td><td class="memItemRight"><b>acceptor_mutex_</b></td></tr>
+<tr class="memdesc:a1a7e1de9c6df5ba9aa1a12feb06023b8 inherit pro_attribs_classtcp__server__base"><td class="mdescLeft">&#160;</td><td class="mdescRight">TCP接受器互斥锁 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>SSL/TLS服务器类 </p>
@@ -193,9 +200,9 @@ using&#160;</td><td class="memItemRight"><b>exception_handler_t</b> = <a class="
 <div class="ttc" id="aclassssl__server_html_ae975999b59c678bdf7e16867ecdd1d31"><div class="ttname"><a href="#ae975999b59c678bdf7e16867ecdd1d31">ssl_server::ssl_server</a></div><div class="ttdeci">ssl_server(ports port, size_t worker_count=thread_pool::max_thread_threshhold())</div><div class="ttdoc">构造函数</div></div>
 <div class="ttc" id="aclassssl__socket_html"><div class="ttname"><a href="classssl__socket.html">ssl_socket</a></div><div class="ttdoc">SSL/TLS安全Socket类</div><div class="ttdef"><b>定义</b> <a href="ssl__socket_8hpp_source.html#l00078">ssl_socket.hpp:78</a></div></div>
 <div class="ttc" id="aclasstcp__socket_html"><div class="ttname"><a href="classtcp__socket.html">tcp_socket</a></div><div class="ttdoc">TCP Socket类</div><div class="ttdef"><b>定义</b> <a href="tcp__socket_8hpp_source.html#l00069">tcp_socket.hpp:69</a></div></div>
-<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00516">console.hpp:516</a></div></div>
+<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00614">console.hpp:614</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00211">211</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00223">223</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="ae975999b59c678bdf7e16867ecdd1d31" name="ae975999b59c678bdf7e16867ecdd1d31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae975999b59c678bdf7e16867ecdd1d31">&#9670;&#160;</a></span>ssl_server()</h2>
@@ -233,7 +240,7 @@ using&#160;</td><td class="memItemRight"><b>exception_handler_t</b> = <a class="
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="tcp__server_8hpp_source.html#l00152">tcp_server_base::port()</a>.</p>
+<p class="reference">引用了 <a class="el" href="tcp__server_8hpp_source.html#l00164">tcp_server_base::port()</a>.</p>
 
 </div>
 </div>
@@ -264,7 +271,7 @@ using&#160;</td><td class="memItemRight"><b>exception_handler_t</b> = <a class="
 <p>获取常量SSL上下文 </p>
 <dl class="section return"><dt>返回</dt><dd>常量SSL上下文引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00252">252</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00264">264</a> 行定义.</p>
 
 </div>
 </div>
@@ -294,7 +301,7 @@ using&#160;</td><td class="memItemRight"><b>exception_handler_t</b> = <a class="
 <p>获取SSL上下文 </p>
 <dl class="section return"><dt>返回</dt><dd>SSL上下文引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00246">246</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00258">258</a> 行定义.</p>
 
 </div>
 </div>

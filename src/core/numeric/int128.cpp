@@ -61,7 +61,7 @@ namespace {
             return;
         }
 #if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
-        if (divisor.hi == 0) {
+        if (divisor.hi == 0 && dividend.hi < divisor.lo) {
             uint64_t rem = 0;
 #    ifdef NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
             quotient.lo = _udiv128(dividend.hi, dividend.lo, divisor.lo, &rem);
@@ -154,6 +154,14 @@ uint128_t uint128_t::mul64(uint64_t a, uint64_t b) noexcept {
 
 uint64_t uint128_t::div64(uint64_t divisor, uint64_t* remainder) const noexcept {
 #if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
+    if (hi >= divisor) {
+        uint128_t quot, rem;
+        divmod128(*this, uint128_t(divisor), quot, rem);
+        if (remainder != nullptr) {
+            *remainder = rem.lo;
+        }
+        return quot.lo;
+    }
     uint64_t rem = 0;
 #    ifdef NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
     uint64_t quot = _udiv128(hi, lo, divisor, &rem);

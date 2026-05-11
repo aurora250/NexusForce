@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structexception__ptr_1_1ecb" kind="struct" language="C++" prot="public">
+    <compoundname>exception_ptr::ecb</compoundname>
+    <includes refid="exception__ptr_8hpp" local="no">exception_ptr.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" prot="public" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classexception__wrapper" kindref="compound">exception_wrapper</ref> &gt;</type>
+        <definition>unique_ptr&lt;exception_wrapper&gt; exception_ptr::ecb::wrapper</definition>
+        <argsstring></argsstring>
+        <name>wrapper</name>
+        <qualifiedname>exception_ptr::ecb::wrapper</qualifiedname>
+        <briefdescription>
+<para>异常包装器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="118" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="118" bodyend="-1"/>
+        <referencedby refid="structexception__ptr_1_1ecb_1ae25e38edd19bb95d42b7a6b91276f2ea" compoundref="exception__ptr_8hpp" startline="125" endline="126">ecb</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" prot="public" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; int &gt;</type>
+        <definition>atomic&lt;int&gt; exception_ptr::ecb::ref_count</definition>
+        <argsstring></argsstring>
+        <name>ref_count</name>
+        <qualifiedname>exception_ptr::ecb::ref_count</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+<para>引用计数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="119" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="119" bodyend="119"/>
+        <referencedby refid="structexception__ptr_1_1ecb_1a38e94338fa3c2c5d554aa924b4893cd9" compoundref="exception__ptr_8hpp" startline="131" endline="131">add_ref</referencedby>
+        <referencedby refid="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" compoundref="exception__ptr_8hpp" startline="137" endline="141">release</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structexception__ptr_1_1ecb_1ae25e38edd19bb95d42b7a6b91276f2ea" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>exception_ptr::ecb::ecb</definition>
+        <argsstring>(unique_ptr&lt; exception_wrapper &gt; wrapper)</argsstring>
+        <name>ecb</name>
+        <qualifiedname>exception_ptr::ecb::ecb</qualifiedname>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classexception__wrapper" kindref="compound">exception_wrapper</ref> &gt;</type>
+          <declname>wrapper</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>wrapper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常包装器的唯一指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="125" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="125" bodyend="126"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" compoundref="exception__ptr_8hpp" startline="118">wrapper</references>
+      </memberdef>
+      <memberdef kind="function" id="structexception__ptr_1_1ecb_1a38e94338fa3c2c5d554aa924b4893cd9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE void exception_ptr::ecb::add_ref</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>add_ref</name>
+        <qualifiedname>exception_ptr::ecb::add_ref</qualifiedname>
+        <briefdescription>
+<para>增加引用计数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="131" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="131" bodyend="131"/>
+        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" compoundref="exception__ptr_8hpp" startline="119" endline="119">ref_count</references>
+      </memberdef>
+      <memberdef kind="function" id="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE void exception_ptr::ecb::release</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>exception_ptr::ecb::release</qualifiedname>
+        <briefdescription>
+<para>减少引用计数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>当引用计数归零时，删除控制块 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="137" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="137" bodyend="141"/>
+        <references refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" compoundref="memory__order_8hpp" startline="181">memory_order_acq_rel</references>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" compoundref="exception__ptr_8hpp" startline="119" endline="119">ref_count</references>
+        <referencedby refid="classexception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" compoundref="exception__ptr_8hpp" startline="314" endline="324">exception_ptr::make_exception_ptr</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异常控制块 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理异常包装器的生命周期和引用计数。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>atomic&lt; int &gt;</label>
+        <link refid="structatomic_3_01int_01_4"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>atomic_base&lt; int &gt;</label>
+        <link refid="structatomic__base"/>
+      </node>
+      <node id="1">
+        <label>exception_ptr::ecb</label>
+        <link refid="structexception__ptr_1_1ecb"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>wrapper</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>ref_count</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>unique_ptr&lt; exception_wrapper &gt;</label>
+        <link refid="classunique__ptr"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="117" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="117" bodyend="142"/>
+    <listofallmembers>
+      <member refid="structexception__ptr_1_1ecb_1a38e94338fa3c2c5d554aa924b4893cd9" prot="public" virt="non-virtual"><scope>exception_ptr::ecb</scope><name>add_ref</name></member>
+      <member refid="structexception__ptr_1_1ecb_1ae25e38edd19bb95d42b7a6b91276f2ea" prot="public" virt="non-virtual"><scope>exception_ptr::ecb</scope><name>ecb</name></member>
+      <member refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" prot="public" virt="non-virtual"><scope>exception_ptr::ecb</scope><name>ref_count</name></member>
+      <member refid="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" prot="public" virt="non-virtual"><scope>exception_ptr::ecb</scope><name>release</name></member>
+      <member refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" prot="public" virt="non-virtual"><scope>exception_ptr::ecb</scope><name>wrapper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📦_20压缩_20compress_0',['📦 压缩 (Compress)',['../index.html#autotoc_md33',1,'']]],
-  ['📦_20容器_20container_1',['📦 容器 (Container)',['../index.html#autotoc_md20',1,'']]]
+  ['📝_20日志系统_20logging_0',['📝 日志系统 (Logging)',['../index.html#autotoc_md25',1,'']]],
+  ['📝_20更新日志_1',['📝 更新日志',['../index.html#autotoc_md49',1,'']]]
 ];

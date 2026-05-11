@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['操作码与响应码_0',['操作码与响应码',['../group___d_n_s.html#dns_opcodes',1,'']]]
+  ['控制台io_0',['控制台IO',['../group___console_i_o.html',1,'']]]
 ];

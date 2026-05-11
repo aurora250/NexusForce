@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___bloom_filter" kind="group">
+    <compoundname>BloomFilter</compoundname>
+    <title>布隆过滤器</title>
+    <innerclass refid="classbloom__filter" prot="public">bloom_filter</innerclass>
+    <briefdescription>
+<para>布隆过滤器实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>布隆过滤器是一种空间效率很高的概率性数据结构， 用于判断一个元素是否在集合中，可能存在误报但不会有漏报。</para>
+<sect1 id="group___bloom_filter_1references">
+<title>学术文献与算法来源</title><para>本实现基于以下原创学术论文和经典理论分析：</para>
+<para><bold>布隆过滤器原始论文：</bold><itemizedlist>
+<listitem><para>**Burton H. Bloom (1970)**：Space/Time Trade-offs in Hash Coding with Allowable Errors Communications of the ACM, 13(7): 422-426 <ulink url="https://doi.org/10.1145/362686.362692">https://doi.org/10.1145/362686.362692</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>理论分析与最优参数推导：</bold><itemizedlist>
+<listitem><para>**Andrei Broder, Michael Mitzenmacher (2004)**：Network Applications of Bloom Filters: A Survey Internet Mathematics, 1(4): 485-509 <ulink url="https://doi.org/10.1080/15427951.2004.10129096">https://doi.org/10.1080/15427951.2004.10129096</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>双哈希技术文献：</bold><itemizedlist>
+<listitem><para>**Adam Kirsch, Michael Mitzenmacher (2006)**：Less Hashing, Same Performance: Building a Better Bloom Filter Random Structures &amp; Algorithms, 33(2): 187-218 <ulink url="https://doi.org/10.1002/rsa.20208">https://doi.org/10.1002/rsa.20208</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___bloom_filter_1bloom_filter_principles">
+<title>布隆过滤器原理</title><para>布隆过滤器由 m 位的位数组和 k 个独立的哈希函数组成：</para>
+<para>**核心操作**： <table rows="3" cols="3"><row>
+<entry thead="yes"><para>操作  </para>
+</entry><entry thead="yes"><para>过程  </para>
+</entry><entry thead="yes"><para>时间复杂度  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>插入  </para>
+</entry><entry thead="no"><para>计算 k 个哈希值，将对应位设为 1  </para>
+</entry><entry thead="no"><para>O(k)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>查询  </para>
+</entry><entry thead="no"><para>计算 k 个哈希值，检查所有对应位是否都为 1  </para>
+</entry><entry thead="no"><para>O(k)  </para>
+</entry></row>
+</table>
+</para>
+<para>**特性总结**： <table rows="6" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>空间效率  </para>
+</entry><entry thead="no"><para>仅使用位数组，空间复杂度 O(m)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>假阴性（漏报）  </para>
+</entry><entry thead="no"><para>不可能（已插入元素一定返回 true）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>假阳性（误报）  </para>
+</entry><entry thead="no"><para>可能（未插入元素可能返回 true）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>删除操作  </para>
+</entry><entry thead="no"><para>不支持（可能影响其他元素）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>元素计数  </para>
+</entry><entry thead="no"><para>仅支持估算  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___bloom_filter_1optimal_parameters">
+<title>最优参数推导</title><para>给定预期插入元素数量 n 和目标误报率 p，最优参数由以下公式确定：</para>
+<para>**最优位数组大小 m**： <programlisting><codeline><highlight class="normal">m<sp/>=<sp/>-n<sp/>×<sp/>ln(p)<sp/>/<sp/>(ln<sp/>2)²</highlight></codeline>
+</programlisting></para>
+<para>**最优哈希函数数量 k**： <programlisting><codeline><highlight class="normal">k<sp/>=<sp/>(m<sp/>/<sp/>n)<sp/>×<sp/>ln<sp/>2</highlight></codeline>
+</programlisting></para>
+<para>在此最优配置下，误报率 p 与参数关系为： <programlisting><codeline><highlight class="normal">p<sp/>=<sp/>(1<sp/>-<sp/>e^(-kn/m))^k</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="group___bloom_filter_1parameter_examples">
+<title>参数示例</title><para>给定 n = 1,000,000，不同目标误报率下的最优参数：</para>
+<para><table rows="5" cols="5"><row>
+<entry thead="yes"><para>目标误报率 p  </para>
+</entry><entry thead="yes"><para>m (位数)  </para>
+</entry><entry thead="yes"><para>m (MB)  </para>
+</entry><entry thead="yes"><para>k  </para>
+</entry><entry thead="yes"><para>理论容量  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0.1 (10%)  </para>
+</entry><entry thead="no"><para>4,792,530  </para>
+</entry><entry thead="no"><para>0.57  </para>
+</entry><entry thead="no"><para>3  </para>
+</entry><entry thead="no"><para>1,107,000  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0.01 (1%)  </para>
+</entry><entry thead="no"><para>9,585,059  </para>
+</entry><entry thead="no"><para>1.14  </para>
+</entry><entry thead="no"><para>7  </para>
+</entry><entry thead="no"><para>947,000  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0.001 (0.1%)  </para>
+</entry><entry thead="no"><para>14,377,589  </para>
+</entry><entry thead="no"><para>1.71  </para>
+</entry><entry thead="no"><para>10  </para>
+</entry><entry thead="no"><para>996,000  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0.0001 (0.01%)  </para>
+</entry><entry thead="no"><para>19,170,117  </para>
+</entry><entry thead="no"><para>2.28  </para>
+</entry><entry thead="no"><para>13  </para>
+</entry><entry thead="no"><para>1,022,000  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___bloom_filter_1double_hashing">
+<title>双哈希技术</title><para>本实现采用 Kirsch &amp; Mitzenmacher (2006) 提出的双哈希技术：</para>
+<para>**原理**： 仅计算两个独立的哈希值 h₁(x) 和 h₂(x)，通过线性组合生成 k 个哈希值： <programlisting><codeline><highlight class="normal">g_i(x)<sp/>=<sp/>(h₁(x)<sp/>+<sp/>i<sp/>×<sp/>h₂(x))<sp/><ref refid="group___math_functions_1ga584831cb7db02edb5d37b30a050b5736" kindref="member">mod</ref><sp/>m<sp/><sp/>(i<sp/>=<sp/>0,<sp/>1,<sp/>...,<sp/>k-1)</highlight></codeline>
+</programlisting></para>
+<para>**优点**：<itemizedlist>
+<listitem><para>减少哈希计算开销</para>
+</listitem><listitem><para>理论证明与 k 个独立哈希函数具有相同的渐近性能</para>
+</listitem><listitem><para>要求 h₂(x) 与 m 互质（通过确保 h₂(x) 为奇数实现）</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___bloom_filter_1false_positive_estimation">
+<title>误报率估算</title><para>设位数组中 1 的比例为 x，则当前误报率可估算为： <programlisting><codeline><highlight class="normal">p<sp/>≈<sp/>x^k</highlight></codeline>
+</programlisting></para>
+<para>当前元素数量可估算为： <programlisting><codeline><highlight class="normal">n<sp/>≈<sp/>-(m/k)<sp/>×<sp/>ln(1<sp/>-<sp/>x)</highlight></codeline>
+</programlisting></para>
+</sect1>
+<sect1 id="group___bloom_filter_1applications">
+<title>典型应用场景</title><para>布隆过滤器广泛应用于以下场景：</para>
+<para><table rows="8" cols="2"><row>
+<entry thead="yes"><para>应用场景  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>缓存穿透防护  </para>
+</entry><entry thead="no"><para>快速过滤不存在的键，避免查询后端存储  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>数据库查询优化  </para>
+</entry><entry thead="no"><para>在 LSM-Tree 中减少不必要的磁盘读取  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>网络爬虫 URL 去重  </para>
+</entry><entry thead="no"><para>高效判断 URL 是否已访问  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>垃圾邮件过滤  </para>
+</entry><entry thead="no"><para>快速检查邮件地址是否在黑名单中  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>分布式系统同步  </para>
+</entry><entry thead="no"><para>快速判断数据是否存在于远程节点  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>区块链轻节点  </para>
+</entry><entry thead="no"><para>验证交易是否属于某个区块（BIP 37）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>拼写检查  </para>
+</entry><entry thead="no"><para>快速判断单词是否在词典中  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___bloom_filter_1limitations">
+<title>局限性</title><para><table rows="5" cols="2"><row>
+<entry thead="yes"><para>限制  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>不支持删除  </para>
+</entry><entry thead="no"><para>将位清零可能影响其他元素的查询  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>误报率  </para>
+</entry><entry thead="no"><para>随插入元素数量增加而上升  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>无法枚举元素  </para>
+</entry><entry thead="no"><para>无法获知具体存储了哪些元素  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>精确计数困难  </para>
+</entry><entry thead="no"><para>只能通过位数组状态估算  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>布隆过滤器在空间敏感且可容忍少量误报的场景下表现优异。 对于需要精确结果或支持删除操作的场景，应考虑使用哈希表或计数布隆过滤器。</para>
+</simplesect>
+<simplesect kind="warning"><para>误报率随插入元素数量增加而上升。当实际插入数量远超预期时， 误报率将显著增加。建议预留 20-30% 的容量余量。 布隆过滤器不支持删除操作，将位清零会破坏其他元素的查询准确性。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Bloom_filter">https://en.wikipedia.org/wiki/Bloom_filter</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://dl.acm.org/doi/10.1145/362686.362692">https://dl.acm.org/doi/10.1145/362686.362692</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.eecs.harvard.edu/~michaelm/postscripts/rsa2008.pdf">https://www.eecs.harvard.edu/~michaelm/postscripts/rsa2008.pdf</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

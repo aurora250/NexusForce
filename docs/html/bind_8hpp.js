@@ -7,7 +7,7 @@ var bind_8hpp =
     [ "NEFORCE_DEPRECATED_FOR", "group___function_binders.html#gac88a3a275337035d2202a893204c9909", null ],
     [ "NEFORCE_DEPRECATED_FOR", "group___function_binders.html#ga5b24c8c877b5a64a99ff339d33f27032", null ],
     [ "is_bind_expression_v", "group___bind_traits.html#gaf539c0518877c7c881ffffc03bee7a09", null ],
-    [ "is_placeholder_v", "group___bind_traits.html#gab48a9793a158a3951a615bcb32c6430d", null ],
+    [ "is_placeholder_v", "group___bind_traits.html#gafbb08120747a1676e781101cffe17643", null ],
     [ "placeholders::p1", "namespaceplaceholders.html#a9fcf8f2fa0e0591d9df352bc625f06d9", null ],
     [ "placeholders::p10", "namespaceplaceholders.html#ae54db330b3afe8d1979575adc03c5940", null ],
     [ "placeholders::p11", "namespaceplaceholders.html#aa079b599724bb7433a64e1a9b0583d7c", null ],
@@ -36,6 +36,5 @@ var bind_8hpp =
     [ "placeholders::p6", "namespaceplaceholders.html#a1a1d81d594ca2ecc0ffb7bc61854b207", null ],
     [ "placeholders::p7", "namespaceplaceholders.html#a854d85436e1211e6b826a49c7e762368", null ],
     [ "placeholders::p8", "namespaceplaceholders.html#ae084d7fc5b9cc26603271cb0a7e4b3a3", null ],
-    [ "placeholders::p9", "namespaceplaceholders.html#a1672d269ff1067da895af8d697afa8ff", null ],
-    [ "placeholder_v", "group___bind_traits.html#ga12321c38464d3c4cb1d25b160bd840cd", null ]
+    [ "placeholders::p9", "namespaceplaceholders.html#a1672d269ff1067da895af8d697afa8ff", null ]
 ];

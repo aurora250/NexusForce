@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classconsole__sink" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>console_sink</compoundname>
+    <basecompoundref refid="classlog__sink" prot="public" virt="non-virtual">log_sink</basecompoundref>
+    <includes refid="log__sink_8hpp" local="no">log_sink.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classconsole__sink_1aabfb3e9398b18135386b9deabbc62488" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void console_sink::log</definition>
+        <argsstring>(const log_event &amp;event) override</argsstring>
+        <name>log</name>
+        <qualifiedname>console_sink::log</qualifiedname>
+        <reimplements refid="classlog__sink_1a23426545dd75dd433f3d5b7b0407faaf">log</reimplements>
+        <param>
+          <type>const <ref refid="structlog__event" kindref="compound">log_event</ref> &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>输出日志到控制台 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志事件</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用设置的格式化器或默认格式将日志输出到控制台。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="78" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classconsole__sink_1a6e2aa384313eaaae970176e5b843688f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void console_sink::flush</definition>
+        <argsstring>() override</argsstring>
+        <name>flush</name>
+        <qualifiedname>console_sink::flush</qualifiedname>
+        <reimplements refid="classlog__sink_1adb79b71ac6d34d43d31a708d9c46f599">flush</reimplements>
+        <briefdescription>
+<para>刷新控制台缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="83" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>控制台输出目标 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>将日志输出到标准控制台，支持颜色显示。 如果没有设置格式化器，使用默认格式。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>console_sink</label>
+        <link refid="classconsole__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>log_sink</label>
+        <link refid="classlog__sink"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>console_sink</label>
+        <link refid="classconsole__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>log_sink</label>
+        <link refid="classlog__sink"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>formatter_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>unique_ptr&lt; log_formatter &gt;</label>
+        <link refid="classunique__ptr"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="70" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="70" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classconsole__sink_1a6e2aa384313eaaae970176e5b843688f" prot="public" virt="virtual"><scope>console_sink</scope><name>flush</name></member>
+      <member refid="classlog__sink_1a4ef9a9a7bd511f678816d4654ed1f9b0" prot="protected" virt="non-virtual"><scope>console_sink</scope><name>formatter_</name></member>
+      <member refid="classconsole__sink_1aabfb3e9398b18135386b9deabbc62488" prot="public" virt="virtual"><scope>console_sink</scope><name>log</name></member>
+      <member refid="classlog__sink_1a354978735401f7f31d9a4c9bcc97f398" prot="public" virt="non-virtual"><scope>console_sink</scope><name>set_formatter</name></member>
+      <member refid="classlog__sink_1a6d5597d2bc719df8f956f9d0a33ae584" prot="public" virt="virtual"><scope>console_sink</scope><name>~log_sink</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

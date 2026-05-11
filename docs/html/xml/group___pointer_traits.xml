@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___pointer_traits" kind="group">
+    <compoundname>PointerTraits</compoundname>
+    <title>指针萃取</title>
+    <innerclass refid="structpointer__traits" prot="public">pointer_traits</innerclass>
+    <innerclass refid="structpointer__traits_3_01_t_01_5_01_4" prot="public">pointer_traits&lt; T * &gt;</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___pointer_traits_1gaad81bc9519e268839715728fedfea51e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Ptr</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structpointer__traits" kindref="compound">pointer_traits</ref>&lt; Ptr &gt;::template rebind&lt; T &gt;</type>
+        <definition>using pointer_rebind = typename pointer_traits&lt;Ptr&gt;::template rebind&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>pointer_rebind</name>
+        <briefdescription>
+<para>指针重新绑定的便捷别名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始指针类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新元素类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将指针Ptr重新绑定到新元素类型T。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" line="300" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" bodystart="300" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___pointer_traits_1gac0004e8b2ceae8ef1ca7f782adc45122" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Ptr</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) ptr_const_cast</definition>
+        <argsstring>(Ptr ptr) noexcept</argsstring>
+        <name>ptr_const_cast</name>
+        <param>
+          <type>Ptr</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>移除指针的const限定符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>移除了const限定符的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" line="309" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" bodystart="309" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="group___pointer_traits_1gae5389a2c211913bf9c5700224a7eb73e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) ptr_const_cast</definition>
+        <argsstring>(T *ptr) noexcept</argsstring>
+        <name>ptr_const_cast</name>
+        <param>
+          <type>T *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>移除原始指针的const限定符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要转换的原始指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>移除了const限定符的原始指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" line="324" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" bodystart="324" bodyend="326"/>
+      </memberdef>
+      <memberdef kind="function" id="group___pointer_traits_1ga27751f364a156df0d2465257f9cac040" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Ptr</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) to_address</definition>
+        <argsstring>(const Ptr &amp;ptr) noexcept</argsstring>
+        <name>to_address</name>
+        <param>
+          <type>const Ptr &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>安全地获取任意指针类型指向的地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>指针对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指针指向的地址 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" line="335" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/iterator/iterator_traits.hpp" bodystart="335" bodyend="337"/>
+        <references refid="structpointer__traits_1a60e83bcdf802f8a6d3a09d69adb572ae" compoundref="iterator__traits_8hpp" startline="254" endline="256">pointer_traits&lt; T &gt;::to_address</references>
+        <referencedby refid="structallocated__ptr_1a0242cf61cc7b0e1a10683e90f8686e57" compoundref="allocated__ptr_8hpp" startline="99" endline="99">allocated_ptr&lt; Alloc &gt;::get</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>统一处理各种指针类型的特性 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

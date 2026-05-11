@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___reflection" kind="group">
+    <compoundname>Reflection</compoundname>
+    <title>反射系统</title>
+    <innerclass refid="structtype__name" prot="public">type_name</innerclass>
+    <innerclass refid="classmeta__any" prot="public">meta_any</innerclass>
+    <innerclass refid="classmeta__function" prot="public">meta_function</innerclass>
+    <innerclass refid="classmeta__property" prot="public">meta_property</innerclass>
+    <innerclass refid="classtype__builder" prot="public">type_builder</innerclass>
+    <innerclass refid="classregistry" prot="public">registry</innerclass>
+    <innerclass refid="classmeta__type" prot="public">meta_type</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___reflection_1ga541516a057bbd67d55d02ece107883d9" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>using type_id = size_t</definition>
+        <argsstring></argsstring>
+        <name>type_id</name>
+        <briefdescription>
+<para>类型标识符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="23" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___reflection_1ga4de252f81995385c1d1a472a279288a9" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_INLINE17 constexpr <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_INLINE17 constexpr string_view type_name_v</definition>
+        <argsstring></argsstring>
+        <name>type_name_v</name>
+        <initializer>= <ref refid="structtype__name" kindref="compound">type_name</ref>&lt;T&gt;::value</initializer>
+        <briefdescription>
+<para>type_name的便捷访问变量模板 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="42" column="40" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="42" bodyend="-1"/>
+        <referencedby refid="classmeta__any_1a4eefc608561f7bee0b6e6d7543d3b5e6" compoundref="reflect_2any_8hpp" startline="171" endline="180">meta_any::cast</referencedby>
+        <referencedby refid="classmeta__any_1ac18a6153f6fa4c280185bce4c0ac0af9" compoundref="reflect_2any_8hpp" startline="154" endline="163">meta_any::cast</referencedby>
+        <referencedby refid="classtype__builder_1a7dfee419346f930acb6252545de97b55" compoundref="reflect_8hpp" startline="77" endline="93">type_builder&lt; T &gt;::property</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___reflection_1ga5a74d42372d4485518ebb6915c124a37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classtype__builder" kindref="compound">type_builder</ref>&lt; T &gt;</type>
+        <definition>type_builder&lt; T &gt; reflect</definition>
+        <argsstring>(string_view name)</argsstring>
+        <name>reflect</name>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>创建类型反射构建器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要注册的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型构建器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="198" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="198" bodyend="200"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="group___reflection_1ga6508bad6337bffd24165f1d8038e2eb8" prot="public" static="no">
+        <name>NEFORCE_REFLECT_REGISTER_N</name>
+        <param><defname>Class</defname></param>
+        <param><defname>Name</defname></param>
+        <initializer>static auto _neforce_reflect_##Class = _NEFORCE <ref refid="group___reflection_1ga5a74d42372d4485518ebb6915c124a37" kindref="member">reflect::reflect</ref>&lt;Class&gt;(Name)</initializer>
+        <briefdescription>
+<para>注册类型（无基类） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Class</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>注册名</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+注册一个没有基类的类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="210" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="210" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="define" id="group___reflection_1gad623e383ce36c4add72a0ff8cc80c972" prot="public" static="no">
+        <name>NEFORCE_REFLECT_REGISTER_N_DERIVED</name>
+        <param><defname>Class</defname></param>
+        <param><defname>Base</defname></param>
+        <param><defname>Name</defname></param>
+        <initializer>static auto _neforce_reflect_##Class = []() {                              \
+    _NEFORCE reflect::registry::instance().resolve_all_bases();            \
+    return _NEFORCE <ref refid="group___reflection_1ga5a74d42372d4485518ebb6915c124a37" kindref="member">reflect::reflect</ref>&lt;Class&gt;(#Class).template base&lt;Base&gt;(); \
+}()</initializer>
+        <briefdescription>
+<para>注册类型（带基类） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Class</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基类名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>注册名</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+注册一个有基类的类型，自动解析继承关系。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="221" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="221" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="define" id="group___reflection_1ga8cd8052ba270c6ae08c9486e3191ac60" prot="public" static="no">
+        <name>NEFORCE_REFLECT_REGISTER</name>
+        <param><defname>Class</defname></param>
+        <initializer><ref refid="group___reflection_1ga6508bad6337bffd24165f1d8038e2eb8" kindref="member">NEFORCE_REFLECT_REGISTER_N</ref>(Class, #Class)</initializer>
+        <briefdescription>
+<para>注册类型（无基类） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Class</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类名</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+注册一个没有基类的类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="233" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___reflection_1gafc434cedd29fcb0b3450b3f9a7d3286d" prot="public" static="no">
+        <name>NEFORCE_REFLECT_REGISTER_DERIVED</name>
+        <param><defname>Class</defname></param>
+        <param><defname>Base</defname></param>
+        <initializer><ref refid="group___reflection_1gad623e383ce36c4add72a0ff8cc80c972" kindref="member">NEFORCE_REFLECT_REGISTER_N_DERIVED</ref>(Class, Base, #Class)</initializer>
+        <briefdescription>
+<para>注册类型（带基类） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Class</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基类名</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+注册一个有基类的类型，自动解析继承关系。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="242" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="242" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>运行时类型反射系统 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___u_t_f" kind="group">
+    <compoundname>UTF</compoundname>
+    <title>UTF</title>
+    <innerclass refid="structcharacter" prot="public">character</innerclass>
+    <innerclass refid="structpackage_3_01char_01_4" prot="public">package&lt; char &gt;</innerclass>
+    <innerclass refid="structunpackage_3_01character_01_4" prot="public">unpackage&lt; character &gt;</innerclass>
+    <innerclass refid="structwcharacter" prot="public">wcharacter</innerclass>
+    <innerclass refid="structpackage_3_01wchar__t_01_4" prot="public">package&lt; wchar_t &gt;</innerclass>
+    <innerclass refid="structunpackage_3_01wcharacter_01_4" prot="public">unpackage&lt; wcharacter &gt;</innerclass>
+    <innerclass refid="structu8character" prot="public">u8character</innerclass>
+    <innerclass refid="structpackage_3_01char8__t_01_4" prot="public">package&lt; char8_t &gt;</innerclass>
+    <innerclass refid="structunpackage_3_01u8character_01_4" prot="public">unpackage&lt; u8character &gt;</innerclass>
+    <innerclass refid="structu16character" prot="public">u16character</innerclass>
+    <innerclass refid="structpackage_3_01char16__t_01_4" prot="public">package&lt; char16_t &gt;</innerclass>
+    <innerclass refid="structunpackage_3_01u16character_01_4" prot="public">unpackage&lt; u16character &gt;</innerclass>
+    <innerclass refid="structu32character" prot="public">u32character</innerclass>
+    <innerclass refid="structpackage_3_01char32__t_01_4" prot="public">package&lt; char32_t &gt;</innerclass>
+    <innerclass refid="structunpackage_3_01u32character_01_4" prot="public">unpackage&lt; u32character &gt;</innerclass>
+    <briefdescription>
+<para>UTF字符包装类集合 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>支持 char、wchar_t、char8_t、char16_t、char32_t 等字符类型之间的相互转换。每个包装类都支持字符到各种UTF字符串类型的转换。</para>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下字符编码与字符串处理相关标准规范：</para>
+<para><bold>Unicode 核心标准：</bold><itemizedlist>
+<listitem><para>**Unicode 15.1.0**：Unicode 字符编码标准 <ulink url="https://unicode.org/versions/Unicode15.1.0/">https://unicode.org/versions/Unicode15.1.0/</ulink></para>
+</listitem><listitem><para>**Unicode 16.0.0**：Unicode 字符编码标准（最新版本） <ulink url="https://unicode.org/versions/Unicode16.0.0/">https://unicode.org/versions/Unicode16.0.0/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>UTF 编码格式标准：</bold><itemizedlist>
+<listitem><para>**IETF RFC 3629**：UTF-8 — ISO 10646 的转换格式（UTF-8 编码规范） <ulink url="https://www.rfc-editor.org/rfc/rfc3629.html">https://www.rfc-editor.org/rfc/rfc3629.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 2781**：UTF-16 — ISO 10646 的编码格式（UTF-16 编码规范，含 BOM 处理） <ulink url="https://www.rfc-editor.org/rfc/rfc2781.html">https://www.rfc-editor.org/rfc/rfc2781.html</ulink></para>
+</listitem><listitem><para>**Unicode Standard Annex #15**：Unicode 规范化形式 <ulink url="https://unicode.org/reports/tr15/">https://unicode.org/reports/tr15/</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>字节序标记（BOM）标准：</bold><itemizedlist>
+<listitem><para>**Unicode Standard §2.13**：字节序标记（BOM）规范 <ulink url="https://unicode.org/versions/Unicode15.1.0/ch02.pdf#G16660">https://unicode.org/versions/Unicode15.1.0/ch02.pdf#G16660</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>通用字符集编码标准：</bold><itemizedlist>
+<listitem><para>**ISO/IEC 10646:2020**：信息技术 — 通用编码字符集 (UCS) <ulink url="https://www.iso.org/standard/76835.html">https://www.iso.org/standard/76835.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>C++ 字符类型标准：</bold><itemizedlist>
+<listitem><para>**ISO/IEC 14882:2020**：C++ 编程语言标准（§5.13.3 字符字面量，§5.13.5 字符串字面量） <ulink url="https://www.iso.org/standard/79358.html">https://www.iso.org/standard/79358.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>C 语言宽字符标准：</bold><itemizedlist>
+<listitem><para>**ISO/IEC 9899:2018**：C 语言标准（§7.19 宽字符工具，§7.28 Unicode 工具） <ulink url="https://www.iso.org/standard/74528.html">https://www.iso.org/standard/74528.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___u_t_f_1character_types">
+<title>字符类型与编码对应</title><para>根据 C++ 标准和 Unicode 规范，各字符类型的编码语义如下：</para>
+<para><table rows="6" cols="5"><row>
+<entry thead="yes"><para>包装类  </para>
+</entry><entry thead="yes"><para>基础类型  </para>
+</entry><entry thead="yes"><para>编码格式  </para>
+</entry><entry thead="yes"><para>码元位数  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>character  </para>
+</entry><entry thead="no"><para>char  </para>
+</entry><entry thead="no"><para>UTF-8  </para>
+</entry><entry thead="no"><para>8 位  </para>
+</entry><entry thead="no"><para>普通字符，UTF-8 编码  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>wcharacter  </para>
+</entry><entry thead="no"><para>wchar_t  </para>
+</entry><entry thead="no"><para>平台相关  </para>
+</entry><entry thead="no"><para>平台相关  </para>
+</entry><entry thead="no"><para>Windows: UTF-16, Unix: UTF-32  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><ref refid="structu8character" kindref="compound">u8character</ref>  </para>
+</entry><entry thead="no"><para>char8_t  </para>
+</entry><entry thead="no"><para>UTF-8  </para>
+</entry><entry thead="no"><para>8 位  </para>
+</entry><entry thead="no"><para>UTF-8 编码  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><ref refid="structu16character" kindref="compound">u16character</ref>  </para>
+</entry><entry thead="no"><para>char16_t  </para>
+</entry><entry thead="no"><para>UTF-16  </para>
+</entry><entry thead="no"><para>16 位  </para>
+</entry><entry thead="no"><para>UTF-16 编码，支持 BOM  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><ref refid="structu32character" kindref="compound">u32character</ref>  </para>
+</entry><entry thead="no"><para>char32_t  </para>
+</entry><entry thead="no"><para>UTF-32  </para>
+</entry><entry thead="no"><para>32 位  </para>
+</entry><entry thead="no"><para>UTF-32 编码（直接码点）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___u_t_f_1platform_differences">
+<title>平台差异</title><para>wchar_t 类型在不同平台上的编码不同：</para>
+<para><table rows="3" cols="4"><row>
+<entry thead="yes"><para>平台  </para>
+</entry><entry thead="yes"><para>wchar_t 大小  </para>
+</entry><entry thead="yes"><para>编码格式  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Windows  </para>
+</entry><entry thead="no"><para>16 位  </para>
+</entry><entry thead="no"><para>UTF-16  </para>
+</entry><entry thead="no"><para>需要代理对表示辅助平面字符  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Linux/macOS  </para>
+</entry><entry thead="no"><para>32 位  </para>
+</entry><entry thead="no"><para>UTF-32  </para>
+</entry><entry thead="no"><para>直接存储完整 Unicode 码点  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___u_t_f_1bom_handling">
+<title>字节序标记（BOM）处理</title><para>根据 RFC 2781 §3.2，UTF-16 字符串可能包含字节序标记：</para>
+<para><table rows="4" cols="3"><row>
+<entry thead="yes"><para>BOM 值  </para>
+</entry><entry thead="yes"><para>含义  </para>
+</entry><entry thead="yes"><para>处理方式  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0xFEFF  </para>
+</entry><entry thead="no"><para>无字节序反转（同系统序）  </para>
+</entry><entry thead="no"><para>根据系统序判断是否需要交换  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0xFFFE  </para>
+</entry><entry thead="no"><para>需要字节序反转  </para>
+</entry><entry thead="no"><para>解码时交换每个码元的字节序  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>无 BOM  </para>
+</entry><entry thead="no"><para>假定为大端序  </para>
+</entry><entry thead="no"><para>RFC 2781 推荐使用大端序  </para>
+</entry></row>
+</table>
+</para>
+<para><ref refid="structu16character" kindref="compound">u16character</ref> 的转换方法自动检测并处理 BOM。</para>
+</sect1>
+<sect1 id="group___u_t_f_1conversion_matrix">
+<title>字符转换支持矩阵</title><para>每个包装类支持转换到以下字符串类型：</para>
+<para><table rows="6" cols="6"><row>
+<entry thead="yes"><para>源类型 \ 目标类型  </para>
+</entry><entry thead="yes"><para>string  </para>
+</entry><entry thead="yes"><para>wstring  </para>
+</entry><entry thead="yes"><para><ref refid="group___string_1gaa25cbe3f775d6f4076da8510ffa1a0f4" kindref="member">u8string</ref>  </para>
+</entry><entry thead="yes"><para><ref refid="group___string_1ga5a46d14521a34d38878f9d7b09aa6452" kindref="member">u16string</ref>  </para>
+</entry><entry thead="yes"><para><ref refid="group___string_1gae9d2688d8ad654e665cf2b8032125af9" kindref="member">u32string</ref>  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>character (UTF-8)  </para>
+</entry><entry thead="no"><para>✓ 直接  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>wcharacter (平台)  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 直接  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><ref refid="structu8character" kindref="compound">u8character</ref> (UTF-8)  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 直接  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><ref refid="structu16character" kindref="compound">u16character</ref> (UTF-16)  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 直接  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry></row>
+<row>
+<entry thead="no"><para><ref refid="structu32character" kindref="compound">u32character</ref> (UTF-32)  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 转换  </para>
+</entry><entry thead="no"><para>✓ 直接  </para>
+</entry></row>
+</table>
+</para>
+<para>图例：✓ 直接 = 直接复制/无转换，✓ 转换 = 通过 Unicode 码点中转转换</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>转换中介  </para>
+</entry><entry thead="no"><para>codepoint（Unicode 码点）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>无效序列处理  </para>
+</entry><entry thead="no"><para>替换为 U+FFFD（� REPLACEMENT CHARACTER）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>BOM 检测  </para>
+</entry><entry thead="no"><para>UTF-16 字符串自动检测 0xFEFF/0xFFFE  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>代理对处理  </para>
+</entry><entry thead="no"><para>支持 UTF-16 代理对编解码  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>过度长序列检测  </para>
+</entry><entry thead="no"><para>支持（UTF-8 解码时验证）  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>所有转换均通过 Unicode 码点（codepoint）作为中转格式， 确保转换过程不丢失信息，且遵循 Unicode 标准的无效序列处理规则。</para>
+</simplesect>
+<simplesect kind="warning"><para>wchar_t 的编码因平台而异，跨平台代码应避免直接依赖 wchar_t 的编码格式。 对于需要可移植编码的场景，推荐使用 char8_t（UTF-8）、char16_t（UTF-16） 或 char32_t（UTF-32）。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://unicode.org/">https://unicode.org/</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc3629">https://www.rfc-editor.org/rfc/rfc3629</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc2781">https://www.rfc-editor.org/rfc/rfc2781</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/language/types">https://en.cppreference.com/w/cpp/language/types</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

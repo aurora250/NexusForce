@@ -1,0 +1,417 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___h_t_t_p" kind="group">
+    <compoundname>HTTP</compoundname>
+    <title>HTTP</title>
+    <innerclass refid="classhttp__client" prot="public">http_client</innerclass>
+    <innerclass refid="structhttp__client__response" prot="public">http_client_response</innerclass>
+    <innerclass refid="structhttp__client__request" prot="public">http_client_request</innerclass>
+    <innerclass refid="classhttp__filter" prot="public">http_filter</innerclass>
+    <innerclass refid="classhttp__filter__chain" prot="public">http_filter_chain</innerclass>
+    <innerclass refid="classcors__filter" prot="public">cors_filter</innerclass>
+    <innerclass refid="classlogging__filter" prot="public">logging_filter</innerclass>
+    <innerclass refid="classstatic__file__filter" prot="public">static_file_filter</innerclass>
+    <innerclass refid="classrate__limit__filter" prot="public">rate_limit_filter</innerclass>
+    <innerclass refid="classauthentication__filter" prot="public">authentication_filter</innerclass>
+    <innerclass refid="classhttp__router" prot="public">http_router</innerclass>
+    <innerclass refid="classhttp__server" prot="public">http_server</innerclass>
+    <innerclass refid="structhttp__server__request" prot="public">http_server_request</innerclass>
+    <innerclass refid="structhttp__server__response" prot="public">http_server_response</innerclass>
+    <innerclass refid="structhttp__cookie" prot="public">http_cookie</innerclass>
+    <innerclass refid="structhttp__session" prot="public">http_session</innerclass>
+    <innergroup refid="group___web_socket">WebSocket</innergroup>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" prot="public" static="no">
+        <type><ref refid="structhttp__server__request" kindref="compound">http_server_request</ref></type>
+        <definition>using http_request = http_server_request</definition>
+        <argsstring></argsstring>
+        <name>http_request</name>
+        <briefdescription>
+<para>HTTP请求类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" line="337" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" bodystart="337" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" prot="public" static="no">
+        <type><ref refid="structhttp__server__response" kindref="compound">http_server_response</ref></type>
+        <definition>using http_response = http_server_response</definition>
+        <argsstring></argsstring>
+        <name>http_response</name>
+        <briefdescription>
+<para>HTTP响应类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" line="343" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" bodystart="343" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP协议及操作 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>本模块提供了完整的 HTTP/1.1 协议支持，涵盖客户端与服务端消息结构、Cookie与会话管理、 路由分发、中间件过滤器链以及 WebSocket 升级协议。</para>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下 IETF RFC 与相关标准规范：</para>
+<para><bold>HTTP/1.1 核心协议：</bold><itemizedlist>
+<listitem><para>**IETF RFC 9110**：HTTP Semantics（HTTP 语义） <ulink url="https://www.rfc-editor.org/rfc/rfc9110.html">https://www.rfc-editor.org/rfc/rfc9110.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 9112**：HTTP/1.1（消息语法与路由） <ulink url="https://www.rfc-editor.org/rfc/rfc9112.html">https://www.rfc-editor.org/rfc/rfc9112.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>HTTP 状态码与头字段注册：</bold><itemizedlist>
+<listitem><para>**IANA HTTP Status Code Registry**：HTTP 状态码注册表 <ulink url="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml</ulink></para>
+</listitem><listitem><para>**IANA Message Headers Registry**：HTTP 头字段注册表 <ulink url="https://www.iana.org/assignments/message-headers/message-headers.xhtml">https://www.iana.org/assignments/message-headers/message-headers.xhtml</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>HTTP 认证与安全：</bold><itemizedlist>
+<listitem><para>**IETF RFC 9110 §11**：HTTP 认证框架</para>
+</listitem><listitem><para>**IETF RFC 6797**：HTTP Strict Transport Security (HSTS) <ulink url="https://www.rfc-editor.org/rfc/rfc6797.html">https://www.rfc-editor.org/rfc/rfc6797.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>Cookie 与会话管理：</bold><itemizedlist>
+<listitem><para>**IETF RFC 6265**：HTTP State Management Mechanism（Cookie 规范） <ulink url="https://www.rfc-editor.org/rfc/rfc6265.html">https://www.rfc-editor.org/rfc/rfc6265.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 6265 §5.3**：SameSite Cookies（更新于 RFC 6265bis）</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>CORS 跨域资源共享：</bold><itemizedlist>
+<listitem><para>**W3C Fetch Living Standard**：CORS 协议定义 <ulink url="https://fetch.spec.whatwg.org/#http-cors-protocol">https://fetch.spec.whatwg.org/#http-cors-protocol</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>WebSocket 协议：</bold><itemizedlist>
+<listitem><para>**IETF RFC 6455**：The WebSocket Protocol <ulink url="https://www.rfc-editor.org/rfc/rfc6455.html">https://www.rfc-editor.org/rfc/rfc6455.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>MIME 类型规范：</bold><itemizedlist>
+<listitem><para>**IANA Media Types Registry**：MIME 类型注册表 <ulink url="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</ulink></para>
+</listitem><listitem><para>**IETF RFC 6838**：Media Type Specifications and Registration Procedures <ulink url="https://www.rfc-editor.org/rfc/rfc6838.html">https://www.rfc-editor.org/rfc/rfc6838.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1http_status_categories">
+<title>HTTP 状态码分类</title><para>根据 RFC 9110 §15，HTTP 状态码按百位数字分类：</para>
+<para><table rows="6" cols="4"><row>
+<entry thead="yes"><para>类别  </para>
+</entry><entry thead="yes"><para>状态码范围  </para>
+</entry><entry thead="yes"><para>含义  </para>
+</entry><entry thead="yes"><para>典型状态码  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1xx  </para>
+</entry><entry thead="no"><para>100 – 199  </para>
+</entry><entry thead="no"><para>信息响应  </para>
+</entry><entry thead="no"><para>100 Continue, 101 Switching Protocols  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>2xx  </para>
+</entry><entry thead="no"><para>200 – 299  </para>
+</entry><entry thead="no"><para>成功  </para>
+</entry><entry thead="no"><para>200 OK, 201 Created, 204 No Content  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>3xx  </para>
+</entry><entry thead="no"><para>300 – 399  </para>
+</entry><entry thead="no"><para>重定向  </para>
+</entry><entry thead="no"><para>301 Moved Permanently, 302 Found, 304 Not Modified  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>4xx  </para>
+</entry><entry thead="no"><para>400 – 499  </para>
+</entry><entry thead="no"><para>客户端错误  </para>
+</entry><entry thead="no"><para>400 Bad Request, 403 Forbidden, 404 Not Found  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>5xx  </para>
+</entry><entry thead="no"><para>500 – 599  </para>
+</entry><entry thead="no"><para>服务器错误  </para>
+</entry><entry thead="no"><para>500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1http_methods">
+<title>HTTP 请求方法</title><para>根据 RFC 9110 §9，本模块支持以下标准 HTTP 方法：</para>
+<para><table rows="10" cols="5"><row>
+<entry thead="yes"><para>方法  </para>
+</entry><entry thead="yes"><para>RFC 引用  </para>
+</entry><entry thead="yes"><para>语义  </para>
+</entry><entry thead="yes"><para>幂等性  </para>
+</entry><entry thead="yes"><para>安全性  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>GET  </para>
+</entry><entry thead="no"><para>§9.3.1  </para>
+</entry><entry thead="no"><para>检索资源表示  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>POST  </para>
+</entry><entry thead="no"><para>§9.3.3  </para>
+</entry><entry thead="no"><para>提交数据进行处理  </para>
+</entry><entry thead="no"><para>否  </para>
+</entry><entry thead="no"><para>否  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>PUT  </para>
+</entry><entry thead="no"><para>§9.3.4  </para>
+</entry><entry thead="no"><para>替换或创建资源  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry><entry thead="no"><para>否  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>DELETE  </para>
+</entry><entry thead="no"><para>§9.3.5  </para>
+</entry><entry thead="no"><para>删除资源  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry><entry thead="no"><para>否  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>HEAD  </para>
+</entry><entry thead="no"><para>§9.3.2  </para>
+</entry><entry thead="no"><para>获取 GET 响应的头部  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>OPTIONS  </para>
+</entry><entry thead="no"><para>§9.3.7  </para>
+</entry><entry thead="no"><para>获取服务器支持的方法  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>TRACE  </para>
+</entry><entry thead="no"><para>§9.3.8  </para>
+</entry><entry thead="no"><para>回显请求（调试用）  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry><entry thead="no"><para>是  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>CONNECT  </para>
+</entry><entry thead="no"><para>§9.3.6  </para>
+</entry><entry thead="no"><para>建立隧道（用于代理）  </para>
+</entry><entry thead="no"><para>否  </para>
+</entry><entry thead="no"><para>否  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>PATCH  </para>
+</entry><entry thead="no"><para>RFC 5789  </para>
+</entry><entry thead="no"><para>部分更新资源  </para>
+</entry><entry thead="no"><para>否  </para>
+</entry><entry thead="no"><para>否  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1cookie_attributes">
+<title>Cookie 属性说明</title><para>根据 RFC 6265 §4.1，Cookie 支持以下属性：</para>
+<para><table rows="8" cols="2"><row>
+<entry thead="yes"><para>属性  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Domain  </para>
+</entry><entry thead="no"><para>指定 Cookie 可用的域名  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Path  </para>
+</entry><entry thead="no"><para>指定 Cookie 可用的路径前缀  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Expires  </para>
+</entry><entry thead="no"><para>指定过期时间（绝对时间）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Max-Age  </para>
+</entry><entry thead="no"><para>指定有效期（相对秒数），优先级高于 Expires  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Secure  </para>
+</entry><entry thead="no"><para>仅通过 HTTPS 传输  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>HttpOnly  </para>
+</entry><entry thead="no"><para>禁止 JavaScript 访问，缓解 XSS 攻击  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SameSite  </para>
+</entry><entry thead="no"><para>跨站请求策略：Strict（禁止跨站）、Lax（允许顶级导航）、None  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1cors_headers">
+<title>CORS 响应头</title><para>根据 Fetch 标准，CORS 使用以下响应头：</para>
+<para><table rows="6" cols="2"><row>
+<entry thead="yes"><para>响应头  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Access-Control-Allow-Origin  </para>
+</entry><entry thead="no"><para>允许访问的源  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Access-Control-Allow-Methods  </para>
+</entry><entry thead="no"><para>允许的 HTTP 方法  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Access-Control-Allow-Headers  </para>
+</entry><entry thead="no"><para>允许的请求头  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Access-Control-Allow-Credentials  </para>
+</entry><entry thead="no"><para>是否允许携带凭证（Cookie）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Access-Control-Max-Age  </para>
+</entry><entry thead="no"><para>预检请求结果缓存时间  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1websocket_protocol">
+<title>WebSocket 协议细节</title><para>根据 RFC 6455，WebSocket 协议规范：</para>
+<para>**握手升级**：<itemizedlist>
+<listitem><para>客户端发送 <computeroutput>Upgrade: websocket</computeroutput> 和 <computeroutput>Connection: Upgrade</computeroutput></para>
+</listitem><listitem><para>服务器返回 <computeroutput>101 Switching Protocols</computeroutput></para>
+</listitem><listitem><para>使用 <computeroutput>Sec-WebSocket-Key</computeroutput> 和 <computeroutput>Sec-WebSocket-Accept</computeroutput> 验证握手</para>
+</listitem></itemizedlist>
+</para>
+<para>**帧结构**（RFC 6455 §5.2）： <table rows="7" cols="3"><row>
+<entry thead="yes"><para>字段  </para>
+</entry><entry thead="yes"><para>位数  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>FIN  </para>
+</entry><entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>是否为消息的最后一帧  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>RSV1-3  </para>
+</entry><entry thead="no"><para>3  </para>
+</entry><entry thead="no"><para>保留位，用于扩展  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Opcode  </para>
+</entry><entry thead="no"><para>4  </para>
+</entry><entry thead="no"><para>帧类型：Continuation(0)、Text(1)、Binary(2)、Close(8)、Ping(9)、Pong(10)  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>MASK  </para>
+</entry><entry thead="no"><para>1  </para>
+</entry><entry thead="no"><para>客户端到服务器的帧必须设置掩码  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Payload len  </para>
+</entry><entry thead="no"><para>7/7+16/7+64  </para>
+</entry><entry thead="no"><para>负载长度  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Masking key  </para>
+</entry><entry thead="no"><para>0/32  </para>
+</entry><entry thead="no"><para>掩码密钥（仅客户端帧）  </para>
+</entry></row>
+</table>
+</para>
+<para>**关闭状态码**（RFC 6455 §7.4）： <table rows="8" cols="3"><row>
+<entry thead="yes"><para>状态码  </para>
+</entry><entry thead="yes"><para>名称  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1000  </para>
+</entry><entry thead="no"><para>Normal Closure  </para>
+</entry><entry thead="no"><para>正常关闭  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1001  </para>
+</entry><entry thead="no"><para>Going Away  </para>
+</entry><entry thead="no"><para>端点离开（如浏览器关闭）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1002  </para>
+</entry><entry thead="no"><para>Protocol Error  </para>
+</entry><entry thead="no"><para>协议错误  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1003  </para>
+</entry><entry thead="no"><para>Unsupported Data  </para>
+</entry><entry thead="no"><para>接收到不支持的数据类型  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1008  </para>
+</entry><entry thead="no"><para>Policy Violation  </para>
+</entry><entry thead="no"><para>违反策略  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1009  </para>
+</entry><entry thead="no"><para>Message Too Big  </para>
+</entry><entry thead="no"><para>消息过大  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>1011  </para>
+</entry><entry thead="no"><para>Internal Error  </para>
+</entry><entry thead="no"><para>服务器内部错误  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="8" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>HTTP 版本  </para>
+</entry><entry thead="no"><para>HTTP/1.1（RFC 9112）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>头部字段大小写  </para>
+</entry><entry thead="no"><para>不区分大小写，存储为原始大小写  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Cookie 解析  </para>
+</entry><entry thead="no"><para>支持 Set-Cookie 和 Cookie 头  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>会话标识符  </para>
+</entry><entry thead="no"><para>支持 JESSIONID, SESSIONID, PHPSESSID 等常见名称  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>路由匹配  </para>
+</entry><entry thead="no"><para>支持静态路径、路径参数（:id）、通配符（*）、正则表达式  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>中间件执行顺序  </para>
+</entry><entry thead="no"><para>预过滤 → 核心过滤 → 路由处理 → 后过滤  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>WebSocket 心跳  </para>
+</entry><entry thead="no"><para>周期性发送 Ping 帧，等待 Pong 响应  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>本模块的 HTTP 解析器严格遵循 RFC 9112 语法规则，支持分块传输编码（chunked） 和 Content-Length 两种方式确定消息体长度。WebSocket 实现完整支持 RFC 6455 定义的控制帧（Ping/Pong/Close）和分片消息。</para>
+</simplesect>
+<simplesect kind="warning"><para>生产环境中应始终通过 HTTPS 使用 Secure 属性的 Cookie， 并在敏感路由上启用 CSRF 防护。WebSocket 连接应考虑使用 WSS（WebSocket Secure）。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc9110.html">https://www.rfc-editor.org/rfc/rfc9110.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc9112.html">https://www.rfc-editor.org/rfc/rfc9112.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc6265.html">https://www.rfc-editor.org/rfc/rfc6265.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc6455.html">https://www.rfc-editor.org/rfc/rfc6455.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</ulink></para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

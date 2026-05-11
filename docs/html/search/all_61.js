@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['布尔值同义词_0',['布尔值同义词',['../yaml__value_8hpp.html#boolean_synonyms',1,'']]],
-  ['布隆过滤器原理_1',['布隆过滤器原理',['../group___bloom_filter.html#bloom_filter_principles',1,'']]],
-  ['布隆过滤器_2',['布隆过滤器',['../group___bloom_filter.html',1,'']]]
+  ['属性说明_0',['Cookie 属性说明',['../group___h_t_t_p.html#cookie_attributes',1,'']]]
 ];

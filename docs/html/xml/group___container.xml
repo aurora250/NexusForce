@@ -1,0 +1,1744 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___container" kind="group">
+    <compoundname>Container</compoundname>
+    <title>标准容器</title>
+    <innerclass refid="structdeque__iterator" prot="public">deque_iterator</innerclass>
+    <innerclass refid="classdeque" prot="public">deque</innerclass>
+    <innerclass refid="structlist__node" prot="public">list_node</innerclass>
+    <innerclass refid="structlist__iterator" prot="public">list_iterator</innerclass>
+    <innerclass refid="classlist" prot="public">list</innerclass>
+    <innerclass refid="classmap" prot="public">map</innerclass>
+    <innerclass refid="classmultimap" prot="public">multimap</innerclass>
+    <innerclass refid="classmultiset" prot="public">multiset</innerclass>
+    <innerclass refid="classpriority__queue" prot="public">priority_queue</innerclass>
+    <innerclass refid="classqueue" prot="public">queue</innerclass>
+    <innerclass refid="classset" prot="public">set</innerclass>
+    <innerclass refid="classstack" prot="public">stack</innerclass>
+    <innerclass refid="classunordered__map" prot="public">unordered_map</innerclass>
+    <innerclass refid="classunordered__multimap" prot="public">unordered_multimap</innerclass>
+    <innerclass refid="classunordered__multiset" prot="public">unordered_multiset</innerclass>
+    <innerclass refid="classunordered__set" prot="public">unordered_set</innerclass>
+    <innerclass refid="structvector__iterator" prot="public">vector_iterator</innerclass>
+    <innerclass refid="classvector" prot="public">vector</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" prot="public" static="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> &gt;</type>
+        <definition>using byte_vector = vector&lt;byte_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>byte_vector</name>
+        <briefdescription>
+<para>字节向量类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/vector.hpp" line="1235" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/vector.hpp" bodystart="1235" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___container_1ga0296a49d9147de2f6cd8bccba90123d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>deque</definition>
+        <argsstring>(T, Alloc=Alloc()) -&gt; deque&lt; T, Alloc &gt;</argsstring>
+        <name>deque</name>
+        <param>
+          <type>T</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1444" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" declline="1444" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga387fbeff7db852b63aa44a4238f6841e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>deque</definition>
+        <argsstring>(Iterator, Iterator, Alloc=Alloc()) -&gt; deque&lt; iter_value_t&lt; Iterator &gt;, Alloc &gt;</argsstring>
+        <name>deque</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" line="1447" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/deque.hpp" declline="1447" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gab63482a0dea1f87752ae2142c0ef85da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>list</definition>
+        <argsstring>(Iterator, Iterator, Alloc=Alloc()) -&gt; list&lt; iter_value_t&lt; Iterator &gt;, Alloc &gt;</argsstring>
+        <name>list</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/list.hpp" line="1078" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/list.hpp" declline="1078" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gaa669a11f11a080d224426c74fd13aece" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;const <ref refid="group___iterator_traits_1ga9cd98c1a9691055745b5fefddf920bfd" kindref="member">iter_map_key_t</ref>&lt;Iterator&gt;, <ref refid="group___iterator_traits_1gaf3cd69194a21e743c359d0d68f90ae32" kindref="member">iter_map_value_t</ref>&lt;Iterator&gt;&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>map</definition>
+        <argsstring>(Iterator, Iterator, Compare=Compare(), Alloc=Alloc()) -&gt; map&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, Compare, Alloc &gt;</argsstring>
+        <name>map</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/map.hpp" line="550" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/map.hpp" declline="550" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gadd64a6a34a282f38e69ecebc89c0714f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;const Key, T&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>map</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, Compare=Compare(), Alloc=Alloc()) -&gt; map&lt; Key, T, Compare, Alloc &gt;</argsstring>
+        <name>map</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/map.hpp" line="554" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/map.hpp" declline="554" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga5dcc97a8d6ba40f18579ec7691c28efa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>map</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; map&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, less&lt; iter_map_key_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>map</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/map.hpp" line="557" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/map.hpp" declline="557" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gae9b5bd3f52b31b43af20157dc7049379" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>map</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, Alloc) -&gt; map&lt; Key, T, less&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>map</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/map.hpp" line="561" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/map.hpp" declline="561" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gad1e746469d7c61f5744ec5de7bbd7497" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;const <ref refid="group___iterator_traits_1ga9cd98c1a9691055745b5fefddf920bfd" kindref="member">iter_map_key_t</ref>&lt;Iterator&gt;, <ref refid="group___iterator_traits_1gaf3cd69194a21e743c359d0d68f90ae32" kindref="member">iter_map_value_t</ref>&lt;Iterator&gt;&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>multimap</definition>
+        <argsstring>(Iterator, Iterator, Compare=Compare(), Alloc=Alloc()) -&gt; multimap&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, Compare, Alloc &gt;</argsstring>
+        <name>multimap</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="487" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" declline="487" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga41d32908ac54a9651f659d72c70d8421" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;const Key, T&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>multimap</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, Compare=Compare(), Alloc=Alloc()) -&gt; multimap&lt; Key, T, Compare, Alloc &gt;</argsstring>
+        <name>multimap</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="491" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" declline="491" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gae7ab91d8f33ea1080992ea24cd913f4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>multimap</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; multimap&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, less&lt; iter_map_key_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>multimap</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="494" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" declline="494" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gadda201064b2d3371a5d1f681b8208493" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>multimap</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, Alloc) -&gt; multimap&lt; Key, T, less&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>multimap</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="498" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" declline="498" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga041feeac60be4732351a18b7780c4f6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>multiset</definition>
+        <argsstring>(Iterator, Iterator, Compare=Compare(), Alloc=Alloc()) -&gt; multiset&lt; iter_value_t&lt; Iterator &gt;, Compare, Alloc &gt;</argsstring>
+        <name>multiset</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="457" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" declline="457" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga15763655b0ba8050bfc1f6330f0a4cce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;Key&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>multiset</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, Compare=Compare(), Alloc=Alloc()) -&gt; multiset&lt; Key, Compare, Alloc &gt;</argsstring>
+        <name>multiset</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="460" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" declline="460" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gad3ed95006b8d23a3c4a414351882957a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>multiset</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; multiset&lt; iter_value_t&lt; Iterator &gt;, less&lt; iter_value_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>multiset</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="463" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" declline="463" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga9caa135a9482e704965cc056d7a1443b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>multiset</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, Alloc) -&gt; multiset&lt; Key, less&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>multiset</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" line="466" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/multiset.hpp" declline="466" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gacea69e1d1df9f3aac6deec12a7741a93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Compare</type>
+          </param>
+          <param>
+            <type>typename Sequence</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>priority_queue</definition>
+        <argsstring>(Compare, Sequence) -&gt; priority_queue&lt; typename Sequence::value_type, Sequence, Compare &gt;</argsstring>
+        <name>priority_queue</name>
+        <param>
+          <type>Compare</type>
+        </param>
+        <param>
+          <type>Sequence</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="269" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" declline="269" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gad8d4aae8048870d798d9fee5a3c966f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Sequence</type>
+            <defval><ref refid="classvector" kindref="compound">vector</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>priority_queue</definition>
+        <argsstring>(Iterator, Iterator, Compare=Compare(), Sequence=Sequence()) -&gt; priority_queue&lt; iter_value_t&lt; Iterator &gt;, Sequence, Compare &gt;</argsstring>
+        <name>priority_queue</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Sequence</type>
+          <defval>Sequence()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" line="273" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/priority_queue.hpp" declline="273" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gade670e0c5088c263cc134a8f74e86193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Sequence</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>queue</definition>
+        <argsstring>(Sequence) -&gt; queue&lt; typename Sequence::value_type, Sequence &gt;</argsstring>
+        <name>queue</name>
+        <param>
+          <type>Sequence</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" line="212" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/queue.hpp" declline="212" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gaf54f968bd900831f511ab1f8e495c76a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>set</definition>
+        <argsstring>(Iterator, Iterator, Compare=Compare(), Alloc=Alloc()) -&gt; set&lt; iter_value_t&lt; Iterator &gt;, Compare, Alloc &gt;</argsstring>
+        <name>set</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/set.hpp" line="458" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/set.hpp" declline="458" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga7b68003bce6ddcad0b9d9703b0d65170" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;Key&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>set</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, Compare=Compare(), Alloc=Alloc()) -&gt; set&lt; Key, Compare, Alloc &gt;</argsstring>
+        <name>set</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/set.hpp" line="461" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/set.hpp" declline="461" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gaedd3058661b56d803b44fc66d3ce1517" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>set</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; set&lt; iter_value_t&lt; Iterator &gt;, less&lt; iter_value_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>set</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/set.hpp" line="464" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/set.hpp" declline="464" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga8ea72045f5d7f7f78a5bfbb89c4182fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>set</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, Alloc) -&gt; set&lt; Key, less&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>set</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/set.hpp" line="467" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/set.hpp" declline="467" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga3cd84b7b6da0d16c94c446ea651d2a2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Sequence</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>stack</definition>
+        <argsstring>(Sequence) -&gt; stack&lt; typename Sequence::value_type, Sequence &gt;</argsstring>
+        <name>stack</name>
+        <param>
+          <type>Sequence</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/stack.hpp" line="161" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/stack.hpp" declline="161" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gaa9a2836918f0f4817ac2cd09027dc512" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+            <defval><ref refid="structhash" kindref="compound">hash</ref>&lt;<ref refid="group___iterator_traits_1ga9cd98c1a9691055745b5fefddf920bfd" kindref="member">iter_map_key_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structequal__to" kindref="compound">equal_to</ref>&lt;<ref refid="group___iterator_traits_1ga9cd98c1a9691055745b5fefddf920bfd" kindref="member">iter_map_key_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_map</definition>
+        <argsstring>(Iterator, Iterator, HashFcn=HashFcn(), Compare=Compare(), Alloc=Alloc()) -&gt; unordered_map&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, HashFcn, Compare, Alloc &gt;</argsstring>
+        <name>unordered_map</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+          <defval>HashFcn()</defval>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="526" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" declline="526" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga3d319fe80baf78fb51eb6a5a0f88af14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+            <defval><ref refid="structhash" kindref="compound">hash</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structequal__to" kindref="compound">equal_to</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;const Key, T&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, HashFcn=HashFcn(), Compare=Compare(), Alloc=Alloc()) -&gt; unordered_map&lt; Key, T, HashFcn, Compare, Alloc &gt;</argsstring>
+        <name>unordered_map</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+          <defval>HashFcn()</defval>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="531" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" declline="531" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga3d3493177d837f25c0f03a72958ebcb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_map</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; unordered_map&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, hash&lt; iter_map_key_t&lt; Iterator &gt; &gt;, equal_to&lt; iter_map_key_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>unordered_map</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="535" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" declline="535" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga2bd0e3eceef94a88553a80e4d0af430a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_map</definition>
+        <argsstring>(Iterator, Iterator, HashFcn, Alloc) -&gt; unordered_map&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, HashFcn, equal_to&lt; iter_map_key_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>unordered_map</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="540" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" declline="540" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gac3ba14301550019aad711bbf14d3e82d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, Alloc) -&gt; unordered_map&lt; Key, T, hash&lt; Key &gt;, equal_to&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>unordered_map</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="544" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" declline="544" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga78ded161b64050e2a39b5098173ca570" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_map</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, HashFcn, Alloc) -&gt; unordered_map&lt; Key, T, HashFcn, equal_to&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>unordered_map</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" line="547" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_map.hpp" declline="547" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gaedf4fd9e569e23f2f4ce1ca229eb541f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+            <defval><ref refid="structhash" kindref="compound">hash</ref>&lt;<ref refid="group___iterator_traits_1ga9cd98c1a9691055745b5fefddf920bfd" kindref="member">iter_map_key_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structequal__to" kindref="compound">equal_to</ref>&lt;<ref refid="group___iterator_traits_1ga9cd98c1a9691055745b5fefddf920bfd" kindref="member">iter_map_key_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multimap</definition>
+        <argsstring>(Iterator, Iterator, HashFcn=HashFcn(), Compare=Compare(), Alloc=Alloc()) -&gt; unordered_multimap&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, HashFcn, Compare, Alloc &gt;</argsstring>
+        <name>unordered_multimap</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+          <defval>HashFcn()</defval>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="484" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" declline="484" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga9928a2c5dfa364e5a8e7fefb150789b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+            <defval><ref refid="structhash" kindref="compound">hash</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structequal__to" kindref="compound">equal_to</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;const Key, T&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multimap</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, HashFcn=HashFcn(), Compare=Compare(), Alloc=Alloc()) -&gt; unordered_multimap&lt; Key, T, HashFcn, Compare, Alloc &gt;</argsstring>
+        <name>unordered_multimap</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+          <defval>HashFcn()</defval>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="489" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" declline="489" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga1a8a0c64032b717355842fe304f3e3ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multimap</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; unordered_multimap&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, hash&lt; iter_map_key_t&lt; Iterator &gt; &gt;, equal_to&lt; iter_map_key_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>unordered_multimap</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="493" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" declline="493" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga8eed6a7367781d385f88c83f44df99c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multimap</definition>
+        <argsstring>(Iterator, Iterator, HashFcn, Alloc) -&gt; unordered_multimap&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, HashFcn, equal_to&lt; iter_map_key_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>unordered_multimap</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="498" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" declline="498" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gaa896f336f4f8ea6912b0cb73cbd51002" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multimap</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, Alloc) -&gt; unordered_multimap&lt; Key, T, hash&lt; Key &gt;, equal_to&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>unordered_multimap</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="503" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" declline="503" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga92d809f32394f603f7ec30702ac900f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multimap</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, HashFcn, Alloc) -&gt; unordered_multimap&lt; Key, T, HashFcn, equal_to&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>unordered_multimap</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" line="507" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multimap.hpp" declline="507" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gaaffc44c0fb172ca8070259d7d7ad04a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+            <defval><ref refid="structhash" kindref="compound">hash</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structequal__to" kindref="compound">equal_to</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multiset</definition>
+        <argsstring>(Iterator, Iterator, HashFcn=HashFcn(), Compare=Compare(), Alloc=Alloc()) -&gt; unordered_multiset&lt; iter_value_t&lt; Iterator &gt;, HashFcn, Compare, Alloc &gt;</argsstring>
+        <name>unordered_multiset</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+          <defval>HashFcn()</defval>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" line="465" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" declline="465" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gab8b161143ed0e3e98f1f101a74d82145" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Value</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+            <defval><ref refid="structhash" kindref="compound">hash</ref>&lt;Value&gt;</defval>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structequal__to" kindref="compound">equal_to</ref>&lt;Value&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;Value&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multiset</definition>
+        <argsstring>(std::initializer_list&lt; Value &gt;, HashFcn=HashFcn(), Compare=Compare(), Alloc=Alloc()) -&gt; unordered_multiset&lt; Value, HashFcn, Compare, Alloc &gt;</argsstring>
+        <name>unordered_multiset</name>
+        <param>
+          <type>std::initializer_list&lt; Value &gt;</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+          <defval>HashFcn()</defval>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" line="470" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" declline="470" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga1b08447986fb5104ddcb677b25b9e1e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multiset</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; unordered_multiset&lt; iter_value_t&lt; Iterator &gt;, hash&lt; iter_value_t&lt; Iterator &gt; &gt;, equal_to&lt; iter_value_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>unordered_multiset</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" line="474" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" declline="474" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga96a73e0ce8158d9c3e826dff7b229231" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multiset</definition>
+        <argsstring>(Iterator, Iterator, HashFcn, Alloc) -&gt; unordered_multiset&lt; iter_value_t&lt; Iterator &gt;, HashFcn, equal_to&lt; iter_value_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>unordered_multiset</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" line="479" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" declline="479" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gac6d215addcfc0f0009e1103af73e3fa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Value</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multiset</definition>
+        <argsstring>(std::initializer_list&lt; Value &gt;, Alloc) -&gt; unordered_multiset&lt; Value, hash&lt; Value &gt;, equal_to&lt; Value &gt;, Alloc &gt;</argsstring>
+        <name>unordered_multiset</name>
+        <param>
+          <type>std::initializer_list&lt; Value &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" line="483" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" declline="483" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga86aeec5cc1e5bb29629636440734d687" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Value</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_multiset</definition>
+        <argsstring>(std::initializer_list&lt; Value &gt;, HashFcn, Alloc) -&gt; unordered_multiset&lt; Value, HashFcn, equal_to&lt; Value &gt;, Alloc &gt;</argsstring>
+        <name>unordered_multiset</name>
+        <param>
+          <type>std::initializer_list&lt; Value &gt;</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" line="487" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_multiset.hpp" declline="487" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga10d661401649d6372630d624504c2591" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+            <defval><ref refid="structhash" kindref="compound">hash</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structequal__to" kindref="compound">equal_to</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_set</definition>
+        <argsstring>(Iterator, Iterator, HashFcn=HashFcn(), Compare=Compare(), Alloc=Alloc()) -&gt; unordered_set&lt; iter_value_t&lt; Iterator &gt;, HashFcn, Compare, Alloc &gt;</argsstring>
+        <name>unordered_set</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+          <defval>HashFcn()</defval>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" line="465" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" declline="465" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga16c78e67702cdbc62c8998ccd26093f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+            <defval><ref refid="structhash" kindref="compound">hash</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structequal__to" kindref="compound">equal_to</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;Key&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_set</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, HashFcn=HashFcn(), Compare=Compare(), Alloc=Alloc()) -&gt; unordered_set&lt; Key, HashFcn, Compare, Alloc &gt;</argsstring>
+        <name>unordered_set</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+          <defval>HashFcn()</defval>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" line="469" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" declline="469" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga44a65535ea60f150b5879bb50bb3676a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_set</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; unordered_set&lt; iter_value_t&lt; Iterator &gt;, hash&lt; iter_value_t&lt; Iterator &gt; &gt;, equal_to&lt; iter_value_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>unordered_set</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" line="473" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" declline="473" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga80d8602f8fbd4875fadaabdc15947b50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_set</definition>
+        <argsstring>(Iterator, Iterator, HashFcn, Alloc) -&gt; unordered_set&lt; iter_value_t&lt; Iterator &gt;, HashFcn, equal_to&lt; iter_value_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>unordered_set</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" line="477" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" declline="477" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gae611b66fe54269e5e967692555cfa274" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_set</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, Alloc) -&gt; unordered_set&lt; Key, hash&lt; Key &gt;, equal_to&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>unordered_set</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" line="481" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" declline="481" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gae90e0b6e395e75549ee73c2f1d3192b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename HashFcn</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>unordered_set</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, HashFcn, Alloc) -&gt; unordered_set&lt; Key, HashFcn, equal_to&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>unordered_set</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>HashFcn</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" line="484" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/unordered_set.hpp" declline="484" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga214721e8483d89bdc5f37d65c41058c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>vector</definition>
+        <argsstring>(T, Alloc=Alloc()) -&gt; vector&lt; T, Alloc &gt;</argsstring>
+        <name>vector</name>
+        <param>
+          <type>T</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/vector.hpp" line="1226" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/vector.hpp" declline="1226" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gaca097263844920685bf6be3ae9e6c51f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>vector</definition>
+        <argsstring>(Iterator, Iterator, Alloc=Alloc()) -&gt; vector&lt; iter_value_t&lt; Iterator &gt;, Alloc &gt;</argsstring>
+        <name>vector</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/vector.hpp" line="1229" column="1" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/container/vector.hpp" declline="1229" declcolumn="1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>支持标准算法的容器的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

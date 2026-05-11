@@ -1,0 +1,347 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structbig__div" kind="struct" language="C++" prot="public">
+    <compoundname>big_div</compoundname>
+    <includes refid="static__numeric_8hpp" local="no">static_numeric.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <declname>NumHigh</declname>
+        <defname>NumHigh</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <declname>NumLow</declname>
+        <defname>NumLow</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <declname>Den</declname>
+        <defname>Den</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structbig__div_1ade688611c5fb351be40a3d0d34ff5901" prot="private" static="no">
+        <type>inner::__big_div_impl&lt; scaled_num_high, scaled_num_low, scaled_den &gt;</type>
+        <definition>using big_div&lt; NumHigh, NumLow, Den &gt;::division_result = inner::__big_div_impl&lt;scaled_num_high, scaled_num_low, scaled_den&gt;</definition>
+        <argsstring></argsstring>
+        <name>division_result</name>
+        <qualifiedname>big_div::division_result</qualifiedname>
+        <briefdescription>
+<para>除法结果 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="245" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="245" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structbig__div_1a2001e75c39028c17397d9aff96f2ee06" prot="private" static="no">
+        <type><ref refid="structbig__mul" kindref="compound">big_mul</ref>&lt; <ref refid="structbig__div_1ab07ed2f4881c2c474e4ad10521828e5e" kindref="member">quotient_low</ref>, Den &gt;</type>
+        <definition>using big_div&lt; NumHigh, NumLow, Den &gt;::product_low = big_mul&lt;quotient_low, Den&gt;</definition>
+        <argsstring></argsstring>
+        <name>product_low</name>
+        <qualifiedname>big_div::product_low</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="253" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="253" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structbig__div_1a6cb30639f641f650a0d13e03a7b6bb43" prot="private" static="no">
+        <type><ref refid="structbig__mul" kindref="compound">big_mul</ref>&lt; <ref refid="structbig__div_1a2d3156e58dcebed6eef7f8a752576b0c" kindref="member">quotient_high</ref>, Den &gt;</type>
+        <definition>using big_div&lt; NumHigh, NumLow, Den &gt;::product_high = big_mul&lt;quotient_high, Den&gt;</definition>
+        <argsstring></argsstring>
+        <name>product_high</name>
+        <qualifiedname>big_div::product_high</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="254" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="254" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structbig__div_1ab4f8fdd461a13138c13a8578fbc0f19f" prot="private" static="no">
+        <type><ref refid="structbig__add" kindref="compound">big_add</ref>&lt; <ref refid="structbig__mul_1a86419bd4f1e7e0fab1d35233096c563f" kindref="member">product_low::result_high</ref>, <ref refid="structbig__mul_1ab83f9c42fa2ab969bb87833444ff8670" kindref="member">product_low::result_low</ref>, <ref refid="structbig__mul_1ab83f9c42fa2ab969bb87833444ff8670" kindref="member">product_high::result_low</ref>, <ref refid="structbig__div_1a7dfcf842fc4cad5efb049774b17b0079" kindref="member">remainder</ref> &gt;</type>
+        <definition>using big_div&lt; NumHigh, NumLow, Den &gt;::total_sum = big_add&lt;product_low::result_high, product_low::result_low, product_high::result_low, remainder&gt;</definition>
+        <argsstring></argsstring>
+        <name>total_sum</name>
+        <qualifiedname>big_div::total_sum</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="255" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="255" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="structbig__div_1ae9ae65fc030f7540b53fe96433595c3f" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>int</type>
+        <definition>int big_div&lt; NumHigh, NumLow, Den &gt;::leading_zeros</definition>
+        <argsstring></argsstring>
+        <name>leading_zeros</name>
+        <qualifiedname>big_div::leading_zeros</qualifiedname>
+        <initializer>= _NEFORCE <ref refid="group___bit_manipulation_1gaccd54859db374262f5c36034b8669abb" kindref="member">countl_zero</ref>(Den)</initializer>
+        <briefdescription>
+<para>除数前导零个数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="234" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1a0b251ffb744c74759aa05ef0e814151b" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>int</type>
+        <definition>int big_div&lt; NumHigh, NumLow, Den &gt;::complement_shift</definition>
+        <argsstring></argsstring>
+        <name>complement_shift</name>
+        <qualifiedname>big_div::complement_shift</qualifiedname>
+        <initializer>= sizeof(<ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref>) * 8 - leading_zeros</initializer>
+        <briefdescription>
+<para>补码位移 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="235" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1af616edd16c4234fd3c4b0ad16dce0bcb" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>int</type>
+        <definition>int big_div&lt; NumHigh, NumLow, Den &gt;::actual_shift</definition>
+        <argsstring></argsstring>
+        <name>actual_shift</name>
+        <qualifiedname>big_div::actual_shift</qualifiedname>
+        <initializer>= (leading_zeros != 0) ? complement_shift : 0</initializer>
+        <briefdescription>
+<para>实际位移 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="236" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1a7226016e21982828944c58df0b5c981e" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_div&lt; NumHigh, NumLow, Den &gt;::shift_factor1</definition>
+        <argsstring></argsstring>
+        <name>shift_factor1</name>
+        <qualifiedname>big_div::shift_factor1</qualifiedname>
+        <initializer>= static_cast&lt;<ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref>&gt;(1) &lt;&lt; leading_zeros</initializer>
+        <briefdescription>
+<para>位移因子1 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="237" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1a62f5c10d5c38447ec3cc718927c1b86b" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_div&lt; NumHigh, NumLow, Den &gt;::shift_factor2</definition>
+        <argsstring></argsstring>
+        <name>shift_factor2</name>
+        <qualifiedname>big_div::shift_factor2</qualifiedname>
+        <initializer>= static_cast&lt;<ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref>&gt;(1) &lt;&lt; actual_shift</initializer>
+        <briefdescription>
+<para>位移因子2 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="238" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1af625188dc589389e2db08de4a3b0eb18" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_div&lt; NumHigh, NumLow, Den &gt;::scaled_den</definition>
+        <argsstring></argsstring>
+        <name>scaled_den</name>
+        <qualifiedname>big_div::scaled_den</qualifiedname>
+        <initializer>= Den * shift_factor1</initializer>
+        <briefdescription>
+<para>缩放后的除数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="239" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="239" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1a014e7bb6122145919f6b0c2e99ee5f6e" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_div&lt; NumHigh, NumLow, Den &gt;::scaled_num_low</definition>
+        <argsstring></argsstring>
+        <name>scaled_num_low</name>
+        <qualifiedname>big_div::scaled_num_low</qualifiedname>
+        <initializer>= NumLow * shift_factor1</initializer>
+        <briefdescription>
+<para>缩放后的被除数低位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="240" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1a929ab730f3daa7a811426b44fb6b9e9f" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_div&lt; NumHigh, NumLow, Den &gt;::num_high_shifted</definition>
+        <argsstring></argsstring>
+        <name>num_high_shifted</name>
+        <qualifiedname>big_div::num_high_shifted</qualifiedname>
+        <initializer>= (NumHigh % Den) * shift_factor1</initializer>
+        <briefdescription>
+<para>缩放后的被除数高位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="241" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1a8f563511657ea8b67e7e8fff775cbd3a" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_div&lt; NumHigh, NumLow, Den &gt;::num_low_high</definition>
+        <argsstring></argsstring>
+        <name>num_low_high</name>
+        <qualifiedname>big_div::num_low_high</qualifiedname>
+        <initializer>                                =
+(leading_zeros != 0) ? (NumLow / shift_factor2) : 0</initializer>
+        <briefdescription>
+<para>被除数低位的高位部分 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="242" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1a9ca4f4212735e32dc297d0f12aaef69e" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_div&lt; NumHigh, NumLow, Den &gt;::scaled_num_high</definition>
+        <argsstring></argsstring>
+        <name>scaled_num_high</name>
+        <qualifiedname>big_div::scaled_num_high</qualifiedname>
+        <initializer>= num_high_shifted + num_low_high</initializer>
+        <briefdescription>
+<para>缩放后的被除数高位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="244" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="244" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structbig__div_1a2d3156e58dcebed6eef7f8a752576b0c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_div&lt; NumHigh, NumLow, Den &gt;::quotient_high</definition>
+        <argsstring></argsstring>
+        <name>quotient_high</name>
+        <qualifiedname>big_div::quotient_high</qualifiedname>
+        <initializer>= NumHigh / Den</initializer>
+        <briefdescription>
+<para>商的高位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="248" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="248" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1ab07ed2f4881c2c474e4ad10521828e5e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_div&lt; NumHigh, NumLow, Den &gt;::quotient_low</definition>
+        <argsstring></argsstring>
+        <name>quotient_low</name>
+        <qualifiedname>big_div::quotient_low</qualifiedname>
+        <initializer>= division_result::quotient</initializer>
+        <briefdescription>
+<para>商的低位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="249" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structbig__div_1a7dfcf842fc4cad5efb049774b17b0079" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1gad0bd5564fc37bede998fc3441dcff9c1" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t big_div&lt; NumHigh, NumLow, Den &gt;::remainder</definition>
+        <argsstring></argsstring>
+        <name>remainder</name>
+        <qualifiedname>big_div::remainder</qualifiedname>
+        <initializer>= division_result::remainder / shift_factor1</initializer>
+        <briefdescription>
+<para>余数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="250" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="250" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>大整数除法 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>NumHigh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被除数的高位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>NumLow</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被除数的低位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Den</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>除数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用位移优化的大整数除法，提高计算效率。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="230" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="230" bodyend="262"/>
+    <listofallmembers>
+      <member refid="structbig__div_1af616edd16c4234fd3c4b0ad16dce0bcb" prot="private" virt="non-virtual"><scope>big_div</scope><name>actual_shift</name></member>
+      <member refid="structbig__div_1a0b251ffb744c74759aa05ef0e814151b" prot="private" virt="non-virtual"><scope>big_div</scope><name>complement_shift</name></member>
+      <member refid="structbig__div_1ade688611c5fb351be40a3d0d34ff5901" prot="private" virt="non-virtual"><scope>big_div</scope><name>division_result</name></member>
+      <member refid="structbig__div_1ae9ae65fc030f7540b53fe96433595c3f" prot="private" virt="non-virtual"><scope>big_div</scope><name>leading_zeros</name></member>
+      <member refid="structbig__div_1a929ab730f3daa7a811426b44fb6b9e9f" prot="private" virt="non-virtual"><scope>big_div</scope><name>num_high_shifted</name></member>
+      <member refid="structbig__div_1a8f563511657ea8b67e7e8fff775cbd3a" prot="private" virt="non-virtual"><scope>big_div</scope><name>num_low_high</name></member>
+      <member refid="structbig__div_1a6cb30639f641f650a0d13e03a7b6bb43" prot="private" virt="non-virtual"><scope>big_div</scope><name>product_high</name></member>
+      <member refid="structbig__div_1a2001e75c39028c17397d9aff96f2ee06" prot="private" virt="non-virtual"><scope>big_div</scope><name>product_low</name></member>
+      <member refid="structbig__div_1a2d3156e58dcebed6eef7f8a752576b0c" prot="public" virt="non-virtual"><scope>big_div</scope><name>quotient_high</name></member>
+      <member refid="structbig__div_1ab07ed2f4881c2c474e4ad10521828e5e" prot="public" virt="non-virtual"><scope>big_div</scope><name>quotient_low</name></member>
+      <member refid="structbig__div_1a7dfcf842fc4cad5efb049774b17b0079" prot="public" virt="non-virtual"><scope>big_div</scope><name>remainder</name></member>
+      <member refid="structbig__div_1af625188dc589389e2db08de4a3b0eb18" prot="private" virt="non-virtual"><scope>big_div</scope><name>scaled_den</name></member>
+      <member refid="structbig__div_1a9ca4f4212735e32dc297d0f12aaef69e" prot="private" virt="non-virtual"><scope>big_div</scope><name>scaled_num_high</name></member>
+      <member refid="structbig__div_1a014e7bb6122145919f6b0c2e99ee5f6e" prot="private" virt="non-virtual"><scope>big_div</scope><name>scaled_num_low</name></member>
+      <member refid="structbig__div_1a7226016e21982828944c58df0b5c981e" prot="private" virt="non-virtual"><scope>big_div</scope><name>shift_factor1</name></member>
+      <member refid="structbig__div_1a62f5c10d5c38447ec3cc718927c1b86b" prot="private" virt="non-virtual"><scope>big_div</scope><name>shift_factor2</name></member>
+      <member refid="structbig__div_1ab4f8fdd461a13138c13a8578fbc0f19f" prot="private" virt="non-virtual"><scope>big_div</scope><name>total_sum</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

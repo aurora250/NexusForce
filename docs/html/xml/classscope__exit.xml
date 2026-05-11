@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classscope__exit" kind="class" language="C++" prot="public">
+    <compoundname>scope_exit</compoundname>
+    <includes refid="scope_8hpp" local="no">scope.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Func</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classscope__exit_1ab5fbc41ae33ddd3a71998e872c87a4eb" prot="private" static="no" mutable="no">
+        <type><ref refid="structcompressed__pair" kindref="compound">compressed_pair</ref>&lt; Func, bool &gt;</type>
+        <definition>compressed_pair&lt;Func, bool&gt; scope_exit&lt; Func &gt;::func_pair_</definition>
+        <argsstring></argsstring>
+        <name>func_pair_</name>
+        <qualifiedname>scope_exit::func_pair_</qualifiedname>
+        <briefdescription>
+<para>函数对象和激活标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="47" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classscope__exit_1acb4a7a473f0f26ce6cf9149260d93b9f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; F &gt;, <ref refid="classscope__exit" kindref="compound">scope_exit</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; Func, F &gt; &amp;&amp;!<ref refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" kindref="member">is_nothrow_constructible_v</ref>&lt; Func, F &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>scope_exit&lt; Func &gt;::scope_exit</definition>
+        <argsstring>(F &amp;&amp;func)</argsstring>
+        <name>scope_exit</name>
+        <qualifiedname>scope_exit::scope_exit</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>构造函数（异常不安全） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+如果函数对象构造过程中抛出异常，会立即执行func()进行清理。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="60" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="60" bodyend="64"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <referencedby refid="classscope__exit_1a280152cc8d0de57c323ecbdbf30463a6" compoundref="scope_8hpp" startline="88" endline="91">scope_exit&lt; Func &gt;::scope_exit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classscope__exit_1ab769d4d6054b907563ef3c232da0e05b" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt; F &gt;, <ref refid="classscope__exit" kindref="compound">scope_exit</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v</ref>&lt; Func, F &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" kindref="member">is_nothrow_constructible_v</ref>&lt; Func, F &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>scope_exit&lt; Func &gt;::scope_exit</definition>
+        <argsstring>(F &amp;&amp;func) noexcept</argsstring>
+        <name>scope_exit</name>
+        <qualifiedname>scope_exit::scope_exit</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>构造函数（异常安全） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+如果函数对象的构造不抛出异常，使用此版本提高性能。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="76" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="76" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__exit_1ac51c5b486dacd26c0d621a0fcc50c0b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>scope_exit&lt; Func &gt;::scope_exit</definition>
+        <argsstring>(const scope_exit &amp;)=delete</argsstring>
+        <name>scope_exit</name>
+        <qualifiedname>scope_exit::scope_exit</qualifiedname>
+        <param>
+          <type>const <ref refid="classscope__exit" kindref="compound">scope_exit</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="79" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__exit_1afbef5891fab7304a5f6dd5d9916ccf45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classscope__exit" kindref="compound">scope_exit</ref> &amp;</type>
+        <definition>scope_exit &amp; scope_exit&lt; Func &gt;::operator=</definition>
+        <argsstring>(const scope_exit &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>scope_exit::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classscope__exit" kindref="compound">scope_exit</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="80" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__exit_1a280152cc8d0de57c323ecbdbf30463a6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; Func &gt;" virt="non-virtual">
+        <type></type>
+        <definition>scope_exit&lt; Func &gt;::scope_exit</definition>
+        <argsstring>(scope_exit &amp;&amp;rhs)</argsstring>
+        <name>scope_exit</name>
+        <qualifiedname>scope_exit::scope_exit</qualifiedname>
+        <param>
+          <type><ref refid="classscope__exit" kindref="compound">scope_exit</ref> &amp;&amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的守卫对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+转移所有权，原守卫对象被释放。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="88" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="88" bodyend="91"/>
+        <references refid="group___type_special_member_function_checks_1gac3058b8518087cdea482055e5af4577a" compoundref="type__traits_8hpp" startline="2841">is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classscope__exit_1acb4a7a473f0f26ce6cf9149260d93b9f" compoundref="scope_8hpp" startline="60" endline="64">scope_exit&lt; Func &gt;::scope_exit</references>
+      </memberdef>
+      <memberdef kind="function" id="classscope__exit_1a2356357221822ee8e40f32eaf185e99e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classscope__exit" kindref="compound">scope_exit</ref> &amp;</type>
+        <definition>scope_exit &amp; scope_exit&lt; Func &gt;::operator=</definition>
+        <argsstring>(scope_exit &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>scope_exit::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classscope__exit" kindref="compound">scope_exit</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="93" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__exit_1ac5af4b4aaf9b226075e61d68bd320752" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>scope_exit&lt; Func &gt;::~scope_exit</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~scope_exit</name>
+        <qualifiedname>scope_exit::~scope_exit</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果守卫处于激活状态，执行函数对象。 必须保证不抛出异常。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="101" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="101" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__exit_1a6ee2b8da9acd91d23cf4377e89e2cad1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void scope_exit&lt; Func &gt;::release</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>scope_exit::release</qualifiedname>
+        <briefdescription>
+<para>释放守卫 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>使守卫不再执行清理操作，转移所有权后使用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="112" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="112" bodyend="112"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>作用域退出守卫 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在作用域退出时无条件执行指定的函数（无论是否发生异常）。</para>
+<para><simplesect kind="note"><para>守卫对象的析构函数不应抛出异常。 如果函数可能抛出异常，建议使用scope_fail或scope_success。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="45" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="45" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classscope__exit_1ab5fbc41ae33ddd3a71998e872c87a4eb" prot="private" virt="non-virtual"><scope>scope_exit</scope><name>func_pair_</name></member>
+      <member refid="classscope__exit_1afbef5891fab7304a5f6dd5d9916ccf45" prot="public" virt="non-virtual"><scope>scope_exit</scope><name>operator=</name></member>
+      <member refid="classscope__exit_1a2356357221822ee8e40f32eaf185e99e" prot="public" virt="non-virtual"><scope>scope_exit</scope><name>operator=</name></member>
+      <member refid="classscope__exit_1a6ee2b8da9acd91d23cf4377e89e2cad1" prot="public" virt="non-virtual"><scope>scope_exit</scope><name>release</name></member>
+      <member refid="classscope__exit_1acb4a7a473f0f26ce6cf9149260d93b9f" prot="public" virt="non-virtual"><scope>scope_exit</scope><name>scope_exit</name></member>
+      <member refid="classscope__exit_1ab769d4d6054b907563ef3c232da0e05b" prot="public" virt="non-virtual"><scope>scope_exit</scope><name>scope_exit</name></member>
+      <member refid="classscope__exit_1ac51c5b486dacd26c0d621a0fcc50c0b9" prot="public" virt="non-virtual"><scope>scope_exit</scope><name>scope_exit</name></member>
+      <member refid="classscope__exit_1a280152cc8d0de57c323ecbdbf30463a6" prot="public" virt="non-virtual"><scope>scope_exit</scope><name>scope_exit</name></member>
+      <member refid="classscope__exit_1ac5af4b4aaf9b226075e61d68bd320752" prot="public" virt="non-virtual"><scope>scope_exit</scope><name>~scope_exit</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

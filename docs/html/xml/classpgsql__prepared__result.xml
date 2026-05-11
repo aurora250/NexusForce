@@ -1,0 +1,710 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classpgsql__prepared__result" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>pgsql_prepared_result</compoundname>
+    <basecompoundref refid="structidb__prepared__result" prot="public" virt="non-virtual">idb_prepared_result</basecompoundref>
+    <includes refid="pgsql__prepared__result_8hpp" local="no">pgsql_prepared_result.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classpgsql__prepared__result_1adef3b3f8b58dca487fb023a541c06cba" prot="private" static="no" mutable="no">
+        <type><ref refid="classpgsql__tb__result" kindref="compound">pgsql_tb_result</ref></type>
+        <definition>pgsql_tb_result pgsql_prepared_result::impl_</definition>
+        <argsstring></argsstring>
+        <name>impl_</name>
+        <qualifiedname>pgsql_prepared_result::impl_</qualifiedname>
+        <briefdescription>
+<para>内部持有的结果集 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="45" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classpgsql__prepared__result_1a871676fa2df76c4a4b9dd21944e8b4b4" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>pgsql_prepared_result::pgsql_prepared_result</definition>
+        <argsstring>(::PGresult *result) noexcept</argsstring>
+        <name>pgsql_prepared_result</name>
+        <qualifiedname>pgsql_prepared_result::pgsql_prepared_result</qualifiedname>
+        <param>
+          <type>::PGresult *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PostgreSQL结果集句柄</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建预处理语句结果集对象，接管PGresult的所有权。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="54" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="54" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a2ff9c2154839e32138b6cf21ce9208d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>pgsql_prepared_result::~pgsql_prepared_result</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~pgsql_prepared_result</name>
+        <qualifiedname>pgsql_prepared_result::~pgsql_prepared_result</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动释放PGresult资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="62" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1ab200c333f108658499041e0f71d10d53" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool pgsql_prepared_result::empty</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>empty</name>
+        <qualifiedname>pgsql_prepared_result::empty</qualifiedname>
+        <reimplements refid="structidb__result_1aa1c85e3b42031de74a7fb1f7a95e2754">empty</reimplements>
+        <briefdescription>
+<para>检查结果集是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>无数据返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="68" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a4e6c772bb0a6a957f726b49de49fd196" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool pgsql_prepared_result::next</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>next</name>
+        <qualifiedname>pgsql_prepared_result::next</qualifiedname>
+        <reimplements refid="structidb__result_1a4ffe1b5d13e654c3cb99f000e7d4d093">next</reimplements>
+        <briefdescription>
+<para>移动到下一行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功移动返回true，到达末尾返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="74" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a5402e720afdab1ca0d1887d9aa47e756" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type pgsql_prepared_result::row_count</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>row_count</name>
+        <qualifiedname>pgsql_prepared_result::row_count</qualifiedname>
+        <reimplements refid="structidb__tb__result_1aabb704cab81e3fdae2849fcdd6d73c75">row_count</reimplements>
+        <briefdescription>
+<para>获取结果集行数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>总行数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="80" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a2708aeb47191b77cdd2f04fa9ae25e5d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD size_type pgsql_prepared_result::column_count</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>column_count</name>
+        <qualifiedname>pgsql_prepared_result::column_count</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a15bba511bedb7883a9770516e60d0502">column_count</reimplements>
+        <briefdescription>
+<para>获取结果集列数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>总列数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="86" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a117cefcf033608f10ea0996498d7b214" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref> &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD const vector&lt; string_view &gt; &amp; pgsql_prepared_result::column_names</definition>
+        <argsstring>() const override</argsstring>
+        <name>column_names</name>
+        <qualifiedname>pgsql_prepared_result::column_names</qualifiedname>
+        <reimplements refid="structidb__tb__result_1acf9e2cdb951dfadb26394addafd314bd">column_names</reimplements>
+        <briefdescription>
+<para>获取列名列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>列名视图列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="92" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1af4c04e828137110eca9f68688badfcf8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>NEFORCE_NODISCARD string_view pgsql_prepared_result::get</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get</name>
+        <qualifiedname>pgsql_prepared_result::get</qualifiedname>
+        <reimplements refid="structidb__tb__result_1ae1bc5e789f06b1d381f8922dc0c5e9af">get</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字符串视图，NULL返回空字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="99" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1afcc51661f2fa3d703a0a935a8974e1cb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool pgsql_prepared_result::get_bool</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_bool</name>
+        <qualifiedname>pgsql_prepared_result::get_bool</qualifiedname>
+        <reimplements refid="structidb__tb__result_1ad35689b23d23b40ed9fe12c425527c58">get_bool</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>布尔值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="106" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="106" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1ae9d62052b592dc5491a5e3a8edccfcec" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga8b23aa936eec66c1c69ecd7b399ddf19" kindref="member">int16_t</ref></type>
+        <definition>NEFORCE_NODISCARD int16_t pgsql_prepared_result::get_int16</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_int16</name>
+        <qualifiedname>pgsql_prepared_result::get_int16</qualifiedname>
+        <reimplements refid="structidb__tb__result_1aed5fa0a878a1868a38db6b29308d5299">get_int16</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取16位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>16位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="113" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="113" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a130661a5c9b0c0f3bef2480d2c63248b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
+        <definition>NEFORCE_NODISCARD int32_t pgsql_prepared_result::get_int32</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_int32</name>
+        <qualifiedname>pgsql_prepared_result::get_int32</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a30c2b4161d1197de423889027ae5272d">get_int32</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取32位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>32位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="120" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="120" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a1bd78d238a1ab4724c0c5819da14b494" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+        <definition>NEFORCE_NODISCARD int64_t pgsql_prepared_result::get_int64</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_int64</name>
+        <qualifiedname>pgsql_prepared_result::get_int64</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a313b404f40b06095313fdad5a71c36d9">get_int64</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取64位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>64位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="127" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="127" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a579f20ba874590d36d7565d51025575a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga3068631062aaf7da4cc0371da9e7a377" kindref="member">float32_t</ref></type>
+        <definition>NEFORCE_NODISCARD float32_t pgsql_prepared_result::get_float32</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_float32</name>
+        <qualifiedname>pgsql_prepared_result::get_float32</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a5ef4af6943ee76fadf05fc2989d56ebd">get_float32</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取32位浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>32位浮点数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="134" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="134" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1ad581a3f346bbe1345722da7971101522" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref></type>
+        <definition>NEFORCE_NODISCARD float64_t pgsql_prepared_result::get_float64</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_float64</name>
+        <qualifiedname>pgsql_prepared_result::get_float64</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a1c4d6dcd48871d296845f934c8218cf9">get_float64</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取64位浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>64位浮点数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="141" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="141" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a42f919b8b5661f28ea94a9b415951d1c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
+        <definition>NEFORCE_NODISCARD decimal_t pgsql_prepared_result::get_decimal</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_decimal</name>
+        <qualifiedname>pgsql_prepared_result::get_decimal</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a3c7275cb280846f4d59fa4b78411493d">get_decimal</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取十进制值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>十进制数对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="148" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="148" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1aadac42ee0baee38b79d10adc652db047" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classvector" kindref="compound">vector</ref>&lt; char &gt;</type>
+        <definition>NEFORCE_NODISCARD vector&lt; char &gt; pgsql_prepared_result::get_blob</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_blob</name>
+        <qualifiedname>pgsql_prepared_result::get_blob</qualifiedname>
+        <reimplements refid="structidb__tb__result_1ac3feb428fffed8adfa41c28b64bae4ea">get_blob</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取BLOB二进制数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字节向量</para>
+</simplesect>
+自动处理PostgreSQL的BYTEA类型解码。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="157" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="157" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1af74cce791fa6bf352cfcc2df8ede3da6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>NEFORCE_NODISCARD uint64_t pgsql_prepared_result::get_bit</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_bit</name>
+        <qualifiedname>pgsql_prepared_result::get_bit</qualifiedname>
+        <reimplements refid="structidb__tb__result_1ab2a5e423b358828cada7a8be14651196">get_bit</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取BIT位字段值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>位字段的整数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="164" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="164" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a22c5af7cce3054ce16463b24b06c0221" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD _NEFORCE <ref refid="classdate" kindref="compound">date</ref></type>
+        <definition>NEFORCE_NODISCARD _NEFORCE date pgsql_prepared_result::get_date</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_date</name>
+        <qualifiedname>pgsql_prepared_result::get_date</qualifiedname>
+        <reimplements refid="structidb__tb__result_1ac54604a476b6a85e5ff0892304adf0a3">get_date</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取日期值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>日期对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="171" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="171" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a05205c37ecbbd8da8b6156bbdbeaab10" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD _NEFORCE <ref refid="classtime" kindref="compound">time</ref></type>
+        <definition>NEFORCE_NODISCARD _NEFORCE time pgsql_prepared_result::get_time</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_time</name>
+        <qualifiedname>pgsql_prepared_result::get_time</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a0501bb1dba04138e9347c6685a8070d2">get_time</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取时间值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>时间对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="178" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="178" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1aa835d12b4e9c0095d0c890e2b25f48e6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD _NEFORCE <ref refid="classdatetime" kindref="compound">datetime</ref></type>
+        <definition>NEFORCE_NODISCARD _NEFORCE datetime pgsql_prepared_result::get_datetime</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_datetime</name>
+        <qualifiedname>pgsql_prepared_result::get_datetime</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a0148e0ef2825f69afcbf37f1306b96cb">get_datetime</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取日期时间值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>日期时间对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="185" column="41" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="185" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__prepared__result_1a3485b22e9fc74d53a93aa2e7b0852314" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD _NEFORCE <ref refid="classtimestamp" kindref="compound">timestamp</ref></type>
+        <definition>NEFORCE_NODISCARD _NEFORCE timestamp pgsql_prepared_result::get_timestamp</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>get_timestamp</name>
+        <qualifiedname>pgsql_prepared_result::get_timestamp</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a25e41967e2cd971cb73a691092342f7e">get_timestamp</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>获取时间戳值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>时间戳对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="194" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="194" bodyend="196"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>PostgreSQL预处理语句结果集类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_prepared_result接口，提供PostgreSQL预处理语句查询结果的访问功能。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>结果集元数据获取</para>
+</listitem><listitem><para>逐行遍历结果集</para>
+</listitem><listitem><para>支持多种数据类型转换</para>
+</listitem><listitem><para>BYTEA二进制数据处理</para>
+</listitem><listitem><para>NULL值检测</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>该类与pgsql_tb_result功能完全相同，但类型上区分了普通查询和预处理语句查询， 便于接口设计和类型安全。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>idb_prepared_result</label>
+        <link refid="structidb__prepared__result"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>idb_result</label>
+        <link refid="structidb__result"/>
+      </node>
+      <node id="3">
+        <label>idb_tb_result</label>
+        <link refid="structidb__tb__result"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>pgsql_prepared_result</label>
+        <link refid="classpgsql__prepared__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>idb_prepared_result</label>
+        <link refid="structidb__prepared__result"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>idb_result</label>
+        <link refid="structidb__result"/>
+      </node>
+      <node id="3">
+        <label>idb_tb_result</label>
+        <link refid="structidb__tb__result"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>pgsql_prepared_result</label>
+        <link refid="classpgsql__prepared__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" line="43" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_result.hpp" bodystart="43" bodyend="197"/>
+    <listofallmembers>
+      <member refid="classpgsql__prepared__result_1a2708aeb47191b77cdd2f04fa9ae25e5d" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>column_count</name></member>
+      <member refid="classpgsql__prepared__result_1a117cefcf033608f10ea0996498d7b214" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>column_names</name></member>
+      <member refid="structidb__result_1a679893315e15ca3a6009b495527a89d5" prot="public" virt="non-virtual"><scope>pgsql_prepared_result</scope><name>difference_type</name></member>
+      <member refid="classpgsql__prepared__result_1ab200c333f108658499041e0f71d10d53" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>empty</name></member>
+      <member refid="classpgsql__prepared__result_1af4c04e828137110eca9f68688badfcf8" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get</name></member>
+      <member refid="classpgsql__prepared__result_1af74cce791fa6bf352cfcc2df8ede3da6" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_bit</name></member>
+      <member refid="classpgsql__prepared__result_1aadac42ee0baee38b79d10adc652db047" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_blob</name></member>
+      <member refid="classpgsql__prepared__result_1afcc51661f2fa3d703a0a935a8974e1cb" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_bool</name></member>
+      <member refid="classpgsql__prepared__result_1a22c5af7cce3054ce16463b24b06c0221" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_date</name></member>
+      <member refid="classpgsql__prepared__result_1aa835d12b4e9c0095d0c890e2b25f48e6" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_datetime</name></member>
+      <member refid="classpgsql__prepared__result_1a42f919b8b5661f28ea94a9b415951d1c" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_decimal</name></member>
+      <member refid="classpgsql__prepared__result_1a579f20ba874590d36d7565d51025575a" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_float32</name></member>
+      <member refid="classpgsql__prepared__result_1ad581a3f346bbe1345722da7971101522" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_float64</name></member>
+      <member refid="classpgsql__prepared__result_1ae9d62052b592dc5491a5e3a8edccfcec" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_int16</name></member>
+      <member refid="classpgsql__prepared__result_1a130661a5c9b0c0f3bef2480d2c63248b" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_int32</name></member>
+      <member refid="classpgsql__prepared__result_1a1bd78d238a1ab4724c0c5819da14b494" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_int64</name></member>
+      <member refid="classpgsql__prepared__result_1a05205c37ecbbd8da8b6156bbdbeaab10" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_time</name></member>
+      <member refid="classpgsql__prepared__result_1a3485b22e9fc74d53a93aa2e7b0852314" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>get_timestamp</name></member>
+      <member refid="classpgsql__prepared__result_1adef3b3f8b58dca487fb023a541c06cba" prot="private" virt="non-virtual"><scope>pgsql_prepared_result</scope><name>impl_</name></member>
+      <member refid="classpgsql__prepared__result_1a4e6c772bb0a6a957f726b49de49fd196" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>next</name></member>
+      <member refid="classpgsql__prepared__result_1a871676fa2df76c4a4b9dd21944e8b4b4" prot="public" virt="non-virtual"><scope>pgsql_prepared_result</scope><name>pgsql_prepared_result</name></member>
+      <member refid="classpgsql__prepared__result_1a5402e720afdab1ca0d1887d9aa47e756" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>row_count</name></member>
+      <member refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" prot="public" virt="non-virtual"><scope>pgsql_prepared_result</scope><name>size_type</name></member>
+      <member refid="structidb__prepared__result_1aeb3651a0f85121a210b224c0554be6cb" prot="public" virt="non-virtual"><scope>pgsql_prepared_result</scope><name>~idb_prepared_result</name></member>
+      <member refid="structidb__result_1a0e439857c8563bcbaf6389388ce2fec1" prot="public" virt="virtual"><scope>pgsql_prepared_result</scope><name>~idb_result</name></member>
+      <member refid="structidb__tb__result_1a7640d4b01e32ccdbfc12b807ef985343" prot="public" virt="non-virtual"><scope>pgsql_prepared_result</scope><name>~idb_tb_result</name></member>
+      <member refid="classpgsql__prepared__result_1a2ff9c2154839e32138b6cf21ce9208d4" prot="public" virt="non-virtual"><scope>pgsql_prepared_result</scope><name>~pgsql_prepared_result</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

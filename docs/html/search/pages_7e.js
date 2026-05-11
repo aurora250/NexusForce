@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['集合样式_0',['集合样式',['../yaml__value_8hpp.html#collection_styles',1,'']]]
+  ['遵循的国际标准_0',['遵循的国际标准',['../group___h_t_t_p.html#standards',1,'']]]
 ];

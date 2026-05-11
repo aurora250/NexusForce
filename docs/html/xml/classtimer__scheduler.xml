@@ -1,0 +1,489 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classtimer__scheduler" kind="class" language="C++" prot="public">
+    <compoundname>timer_scheduler</compoundname>
+    <includes refid="timer_8hpp" local="no">timer.hpp</includes>
+    <innerclass refid="structtimer__scheduler_1_1node" prot="private">timer_scheduler::node</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Clock</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classtimer__scheduler_1a63b53abd0cbc9f95d0c55027a1581617" prot="public" static="no">
+        <type>Clock</type>
+        <definition>using timer_scheduler&lt; Clock &gt;::clock_type = Clock</definition>
+        <argsstring></argsstring>
+        <name>clock_type</name>
+        <qualifiedname>timer_scheduler::clock_type</qualifiedname>
+        <briefdescription>
+<para>时钟类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="43" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtimer__scheduler_1a25c8b70565c98ece1cf245a6665b20b9" prot="public" static="no">
+        <type>typename clock_type::time_point</type>
+        <definition>using timer_scheduler&lt; Clock &gt;::time_point = typename clock_type::time_point</definition>
+        <argsstring></argsstring>
+        <name>time_point</name>
+        <qualifiedname>timer_scheduler::time_point</qualifiedname>
+        <briefdescription>
+<para>时间点类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="44" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtimer__scheduler_1a6ef27e3b872fd24bfeda7f7ec9c70868" prot="public" static="no">
+        <type>typename clock_type::duration</type>
+        <definition>using timer_scheduler&lt; Clock &gt;::duration = typename clock_type::duration</definition>
+        <argsstring></argsstring>
+        <name>duration</name>
+        <qualifiedname>timer_scheduler::duration</qualifiedname>
+        <briefdescription>
+<para>时长类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="45" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtimer__scheduler_1a0ff7c3e92b9b906112140b804623e3ea" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>using timer_scheduler&lt; Clock &gt;::token = size_t</definition>
+        <argsstring></argsstring>
+        <name>token</name>
+        <qualifiedname>timer_scheduler::token</qualifiedname>
+        <briefdescription>
+<para>任务标识符类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="46" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classtimer__scheduler_1ada7122813465be5f928c9c7209325731" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using timer_scheduler&lt; Clock &gt;::handler_type = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>handler_type</name>
+        <qualifiedname>timer_scheduler::handler_type</qualifiedname>
+        <briefdescription>
+<para>回调函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="47" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classtimer__scheduler_1aaaf113becf40069016a9a712ab703646" prot="private" static="no" mutable="no">
+        <type><ref refid="classset" kindref="compound">set</ref>&lt; node &gt;</type>
+        <definition>set&lt;node&gt; timer_scheduler&lt; Clock &gt;::nodes_</definition>
+        <argsstring></argsstring>
+        <name>nodes_</name>
+        <qualifiedname>timer_scheduler::nodes_</qualifiedname>
+        <briefdescription>
+<para>按时间排序的任务集合 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="85" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtimer__scheduler_1afd42949239fb4ac9c9a223bf97f11285" prot="private" static="no" mutable="no">
+        <type><ref refid="classmap" kindref="compound">map</ref>&lt; <ref refid="classtimer__scheduler_1a0ff7c3e92b9b906112140b804623e3ea" kindref="member">token</ref>, typename <ref refid="classset" kindref="compound">set</ref>&lt; node &gt;::iterator &gt;</type>
+        <definition>map&lt;token, typename set&lt;node&gt;::iterator&gt; timer_scheduler&lt; Clock &gt;::node_map_</definition>
+        <argsstring></argsstring>
+        <name>node_map_</name>
+        <qualifiedname>timer_scheduler::node_map_</qualifiedname>
+        <briefdescription>
+<para>ID到迭代器的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="86" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtimer__scheduler_1aed14f923f9236d34026b2305eb4892e7" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread timer_scheduler&lt; Clock &gt;::thread_</definition>
+        <argsstring></argsstring>
+        <name>thread_</name>
+        <qualifiedname>timer_scheduler::thread_</qualifiedname>
+        <briefdescription>
+<para>调度线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="88" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtimer__scheduler_1a41564d8b31537b41e8174545584f5752" prot="private" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex timer_scheduler&lt; Clock &gt;::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>timer_scheduler::mutex_</qualifiedname>
+        <briefdescription>
+<para>互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="89" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtimer__scheduler_1a7cf3f973722c08e1d4c5fe0509442fcb" prot="private" static="no" mutable="no">
+        <type><ref refid="classcondition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable timer_scheduler&lt; Clock &gt;::cv_</definition>
+        <argsstring></argsstring>
+        <name>cv_</name>
+        <qualifiedname>timer_scheduler::cv_</qualifiedname>
+        <briefdescription>
+<para>条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="90" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtimer__scheduler_1a539e4e73a32971a120842ec4fde3c28b" prot="private" static="no" mutable="no">
+        <type><ref refid="classtimer__scheduler_1a0ff7c3e92b9b906112140b804623e3ea" kindref="member">token</ref></type>
+        <definition>token timer_scheduler&lt; Clock &gt;::next_id_</definition>
+        <argsstring></argsstring>
+        <name>next_id_</name>
+        <qualifiedname>timer_scheduler::next_id_</qualifiedname>
+        <briefdescription>
+<para>下一个可用的任务ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="91" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtimer__scheduler_1a0f83fe478eb090dd88c71f000c1d0802" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; timer_scheduler&lt; Clock &gt;::stopped_</definition>
+        <argsstring></argsstring>
+        <name>stopped_</name>
+        <qualifiedname>timer_scheduler::stopped_</qualifiedname>
+        <briefdescription>
+<para>停止标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="92" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classtimer__scheduler_1a63d668995109028bdc9cdbb726de4807" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class thread_pool</definition>
+        <argsstring></argsstring>
+        <name>thread_pool</name>
+        <qualifiedname>timer_scheduler::thread_pool</qualifiedname>
+        <param>
+          <type><ref refid="classthread__pool" kindref="compound">thread_pool</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="94" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classtimer__scheduler_1a6cc8655d1d8de4ac2d99978964f405fd" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void timer_scheduler&lt; Clock &gt;::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <qualifiedname>timer_scheduler::run</qualifiedname>
+        <briefdescription>
+<para>调度线程的主循环 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>循环执行：<orderedlist>
+<listitem><para>等待直到有任务到达或停止信号</para>
+</listitem><listitem><para>执行所有到期的任务</para>
+</listitem><listitem><para>等待下一个任务的到期时间 </para>
+</listitem></orderedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="105" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="105" bodyend="136"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtimer__scheduler_1a3ec94093f0b1ba79c9a2988c37565bab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>timer_scheduler&lt; Clock &gt;::timer_scheduler</definition>
+        <argsstring>()</argsstring>
+        <name>timer_scheduler</name>
+        <qualifiedname>timer_scheduler::timer_scheduler</qualifiedname>
+        <briefdescription>
+<para>构造函数，启动调度线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="142" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="142" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classtimer__scheduler_1a524ba8b6788fe4e0d4d28f554f50f5d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>timer_scheduler&lt; Clock &gt;::~timer_scheduler</definition>
+        <argsstring>()</argsstring>
+        <name>~timer_scheduler</name>
+        <qualifiedname>timer_scheduler::~timer_scheduler</qualifiedname>
+        <briefdescription>
+<para>析构函数，停止调度线程并等待其结束 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="151" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="151" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classtimer__scheduler_1a90b866601138a24bf3821386d29e7add" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>timer_scheduler&lt; Clock &gt;::timer_scheduler</definition>
+        <argsstring>(const timer_scheduler &amp;)=delete</argsstring>
+        <name>timer_scheduler</name>
+        <qualifiedname>timer_scheduler::timer_scheduler</qualifiedname>
+        <param>
+          <type>const <ref refid="classtimer__scheduler" kindref="compound">timer_scheduler</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="159" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classtimer__scheduler_1ab9dd92f0220e7d475e1cd4dc187ddab4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtimer__scheduler" kindref="compound">timer_scheduler</ref> &amp;</type>
+        <definition>timer_scheduler &amp; timer_scheduler&lt; Clock &gt;::operator=</definition>
+        <argsstring>(const timer_scheduler &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>timer_scheduler::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classtimer__scheduler" kindref="compound">timer_scheduler</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="160" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classtimer__scheduler_1a3891bcec2ce30611ff8cd54ecd161c3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>timer_scheduler&lt; Clock &gt;::timer_scheduler</definition>
+        <argsstring>(timer_scheduler &amp;&amp;)=default</argsstring>
+        <name>timer_scheduler</name>
+        <qualifiedname>timer_scheduler::timer_scheduler</qualifiedname>
+        <param>
+          <type><ref refid="classtimer__scheduler" kindref="compound">timer_scheduler</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="161" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classtimer__scheduler_1ab1da9bf55d045cf09a71a75132e1f38f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classtimer__scheduler" kindref="compound">timer_scheduler</ref> &amp;</type>
+        <definition>timer_scheduler &amp; timer_scheduler&lt; Clock &gt;::operator=</definition>
+        <argsstring>(timer_scheduler &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>timer_scheduler::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classtimer__scheduler" kindref="compound">timer_scheduler</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="162" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classtimer__scheduler_1ad7e2861340ab12370ceaec61a82c9129" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classtimer__scheduler_1a0ff7c3e92b9b906112140b804623e3ea" kindref="member">token</ref></type>
+        <definition>token timer_scheduler&lt; Clock &gt;::add_task</definition>
+        <argsstring>(time_point expire, handler_type &amp;&amp;handler)</argsstring>
+        <name>add_task</name>
+        <qualifiedname>timer_scheduler::add_task</qualifiedname>
+        <param>
+          <type><ref refid="classtimer__scheduler_1a25c8b70565c98ece1cf245a6665b20b9" kindref="member">time_point</ref></type>
+          <declname>expire</declname>
+        </param>
+        <param>
+          <type><ref refid="classtimer__scheduler_1ada7122813465be5f928c9c7209325731" kindref="member">handler_type</ref> &amp;&amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>添加定时任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expire</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务到期时间点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务回调函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>任务标识符，可用于取消任务</para>
+</simplesect>
+如果新任务的到期时间早于当前最早的任务，会唤醒调度线程。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="172" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="172" bodyend="189"/>
+        <references refid="group___thread_1ga505a22091b6fb9a4a8e147bf2258e47a" compoundref="thread_8hpp" startline="449" endline="455">id</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classtimer__scheduler_1aa25522eaa375942415f6ab940174a49b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool timer_scheduler&lt; Clock &gt;::cancel</definition>
+        <argsstring>(token id)</argsstring>
+        <name>cancel</name>
+        <qualifiedname>timer_scheduler::cancel</qualifiedname>
+        <param>
+          <type><ref refid="classtimer__scheduler_1a0ff7c3e92b9b906112140b804623e3ea" kindref="member">token</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>取消定时任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务标识符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功取消</para>
+</simplesect>
+如果取消的是当前最早的任务，会唤醒调度线程重新计算等待时间。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="198" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="198" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="classtimer__scheduler_1ac050f83f8dbeee5c8f590c5be3e7a6d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void timer_scheduler&lt; Clock &gt;::cancel_all</definition>
+        <argsstring>()</argsstring>
+        <name>cancel_all</name>
+        <qualifiedname>timer_scheduler::cancel_all</qualifiedname>
+        <briefdescription>
+<para>取消所有定时任务 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="221" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="221" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classtimer__scheduler_1a83bf57ec21b16c6ebc7e0f08bfce0573" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>NEFORCE_NODISCARD size_t timer_scheduler&lt; Clock &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>timer_scheduler::size</qualifiedname>
+        <briefdescription>
+<para>获取当前待处理的任务数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>任务数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="233" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="233" bodyend="236"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>定时任务调度器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Clock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时钟类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+管理所有定时任务的调度和执行。使用独立的线程运行调度循环， 基于时间点对任务进行排序，并在任务到期时执行回调函数。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="41" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="41" bodyend="237"/>
+    <listofallmembers>
+      <member refid="classtimer__scheduler_1ad7e2861340ab12370ceaec61a82c9129" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>add_task</name></member>
+      <member refid="classtimer__scheduler_1aa25522eaa375942415f6ab940174a49b" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>cancel</name></member>
+      <member refid="classtimer__scheduler_1ac050f83f8dbeee5c8f590c5be3e7a6d2" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>cancel_all</name></member>
+      <member refid="classtimer__scheduler_1a63b53abd0cbc9f95d0c55027a1581617" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>clock_type</name></member>
+      <member refid="classtimer__scheduler_1a7cf3f973722c08e1d4c5fe0509442fcb" prot="private" virt="non-virtual"><scope>timer_scheduler</scope><name>cv_</name></member>
+      <member refid="classtimer__scheduler_1a6ef27e3b872fd24bfeda7f7ec9c70868" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>duration</name></member>
+      <member refid="classtimer__scheduler_1ada7122813465be5f928c9c7209325731" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>handler_type</name></member>
+      <member refid="classtimer__scheduler_1a41564d8b31537b41e8174545584f5752" prot="private" virt="non-virtual"><scope>timer_scheduler</scope><name>mutex_</name></member>
+      <member refid="classtimer__scheduler_1a539e4e73a32971a120842ec4fde3c28b" prot="private" virt="non-virtual"><scope>timer_scheduler</scope><name>next_id_</name></member>
+      <member refid="classtimer__scheduler_1afd42949239fb4ac9c9a223bf97f11285" prot="private" virt="non-virtual"><scope>timer_scheduler</scope><name>node_map_</name></member>
+      <member refid="classtimer__scheduler_1aaaf113becf40069016a9a712ab703646" prot="private" virt="non-virtual"><scope>timer_scheduler</scope><name>nodes_</name></member>
+      <member refid="classtimer__scheduler_1ab9dd92f0220e7d475e1cd4dc187ddab4" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>operator=</name></member>
+      <member refid="classtimer__scheduler_1ab1da9bf55d045cf09a71a75132e1f38f" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>operator=</name></member>
+      <member refid="classtimer__scheduler_1a6cc8655d1d8de4ac2d99978964f405fd" prot="private" virt="non-virtual"><scope>timer_scheduler</scope><name>run</name></member>
+      <member refid="classtimer__scheduler_1a83bf57ec21b16c6ebc7e0f08bfce0573" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>size</name></member>
+      <member refid="classtimer__scheduler_1a0f83fe478eb090dd88c71f000c1d0802" prot="private" virt="non-virtual"><scope>timer_scheduler</scope><name>stopped_</name></member>
+      <member refid="classtimer__scheduler_1aed14f923f9236d34026b2305eb4892e7" prot="private" virt="non-virtual"><scope>timer_scheduler</scope><name>thread_</name></member>
+      <member refid="classtimer__scheduler_1a25c8b70565c98ece1cf245a6665b20b9" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>time_point</name></member>
+      <member refid="classtimer__scheduler_1a3ec94093f0b1ba79c9a2988c37565bab" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>timer_scheduler</name></member>
+      <member refid="classtimer__scheduler_1a90b866601138a24bf3821386d29e7add" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>timer_scheduler</name></member>
+      <member refid="classtimer__scheduler_1a3891bcec2ce30611ff8cd54ecd161c3d" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>timer_scheduler</name></member>
+      <member refid="classtimer__scheduler_1a0ff7c3e92b9b906112140b804623e3ea" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>token</name></member>
+      <member refid="classtimer__scheduler_1a524ba8b6788fe4e0d4d28f554f50f5d8" prot="public" virt="non-virtual"><scope>timer_scheduler</scope><name>~timer_scheduler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

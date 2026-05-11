@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structicmp__socket_1_1traceroute__hop" kind="struct" language="C++" prot="public">
+    <compoundname>icmp_socket::traceroute_hop</compoundname>
+    <includes refid="icmp__socket_8hpp" local="no">icmp_socket.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structicmp__socket_1_1traceroute__hop_1af415cdec4d92a7280940fbd2c9941ee6" prot="public" static="no" mutable="no">
+        <type><ref refid="classip__address" kindref="compound">ip_address</ref></type>
+        <definition>ip_address icmp_socket::traceroute_hop::address</definition>
+        <argsstring></argsstring>
+        <name>address</name>
+        <qualifiedname>icmp_socket::traceroute_hop::address</qualifiedname>
+        <briefdescription>
+<para>跳点IP地址 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="130" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structicmp__socket_1_1traceroute__hop_1a625ac742b839eaae6c0d6f8a0e42f54f" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref></type>
+        <definition>milliseconds icmp_socket::traceroute_hop::rtt[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>rtt</name>
+        <qualifiedname>icmp_socket::traceroute_hop::rtt</qualifiedname>
+        <briefdescription>
+<para>三次探测的RTT值（-1超时） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="131" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structicmp__socket_1_1traceroute__hop_1a21b126242c47e88372efbb157bfe0cee" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool icmp_socket::traceroute_hop::reached</definition>
+        <argsstring></argsstring>
+        <name>reached</name>
+        <qualifiedname>icmp_socket::traceroute_hop::reached</qualifiedname>
+        <briefdescription>
+<para>是否到达目标 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="132" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Traceroute跳点信息 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>duration&lt; int64_t, milli &gt;</label>
+        <link refid="structduration"/>
+      </node>
+      <node id="1">
+        <label>icmp_socket::traceroute_hop</label>
+        <link refid="structicmp__socket_1_1traceroute__hop"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>address</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>rtt</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ip_address</label>
+        <link refid="classip__address"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>istringify&lt; ip_address &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="129" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="129" bodyend="133"/>
+    <listofallmembers>
+      <member refid="structicmp__socket_1_1traceroute__hop_1af415cdec4d92a7280940fbd2c9941ee6" prot="public" virt="non-virtual"><scope>icmp_socket::traceroute_hop</scope><name>address</name></member>
+      <member refid="structicmp__socket_1_1traceroute__hop_1a21b126242c47e88372efbb157bfe0cee" prot="public" virt="non-virtual"><scope>icmp_socket::traceroute_hop</scope><name>reached</name></member>
+      <member refid="structicmp__socket_1_1traceroute__hop_1a625ac742b839eaae6c0d6f8a0e42f54f" prot="public" virt="non-virtual"><scope>icmp_socket::traceroute_hop</scope><name>rtt</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

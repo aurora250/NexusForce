@@ -1,0 +1,1603 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classthread__pool" kind="class" language="C++" prot="public">
+    <compoundname>thread_pool</compoundname>
+    <includes refid="thread__pool_8hpp" local="no">thread_pool.hpp</includes>
+    <innerclass refid="structthread__pool_1_1periodic__task__state" prot="public">thread_pool::periodic_task_state</innerclass>
+    <innerclass refid="structthread__pool_1_1pool__statistics" prot="public">thread_pool::pool_statistics</innerclass>
+    <innerclass refid="structthread__pool_1_1priority__task" prot="private">thread_pool::priority_task</innerclass>
+    <innerclass refid="structthread__pool_1_1thread__pool__id__generator" prot="private">thread_pool::thread_pool_id_generator</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classthread__pool_1a4c640f1911280a2e33221d6d2a8148d3" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <name>pool_mode</name>
+        <qualifiedname>thread_pool::pool_mode</qualifiedname>
+        <enumvalue id="classthread__pool_1a4c640f1911280a2e33221d6d2a8148d3acec315e3d0975e5cc2811d5d8725f149" prot="public">
+          <name>fixed</name>
+          <briefdescription>
+<para>固定线程数模式 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classthread__pool_1a4c640f1911280a2e33221d6d2a8148d3a1fb1a060534164a18a99494122825190" prot="public">
+          <name>cached</name>
+          <briefdescription>
+<para>缓存模式，可动态增减线程 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>线程池运行模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="314" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="314" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classthread__pool_1a9177f65ba06f1f7371a69890ece9503d" prot="public" static="no">
+        <type><ref refid="classlocal__queue_1aae2f178f553c35b160ea3f5c6a8f1f16" kindref="member">local_queue::steal_strategy</ref></type>
+        <definition>using thread_pool::steal_strategy = local_queue::steal_strategy</definition>
+        <argsstring></argsstring>
+        <name>steal_strategy</name>
+        <qualifiedname>thread_pool::steal_strategy</qualifiedname>
+        <briefdescription>
+<para>窃取策略类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="347" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="347" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classthread__pool_1a11c3d03ee2141f13727cbd973c24134e" prot="public" static="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>using thread_pool::id_type = uint32_t</definition>
+        <argsstring></argsstring>
+        <name>id_type</name>
+        <qualifiedname>thread_pool::id_type</qualifiedname>
+        <briefdescription>
+<para>线程ID类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="348" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="348" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classthread__pool_1a441d12dda9edd4d083d844279f1ae91d" prot="public" static="no">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="structthread__pool_1_1periodic__task__state" kindref="compound">periodic_task_state</ref> &gt;</type>
+        <definition>using thread_pool::periodic_token = shared_ptr&lt;periodic_task_state&gt;</definition>
+        <argsstring></argsstring>
+        <name>periodic_token</name>
+        <qualifiedname>thread_pool::periodic_token</qualifiedname>
+        <briefdescription>
+<para>周期性任务令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="349" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="349" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classthread__pool_1a0f86abfce93a05b67165f166c653a82b" prot="public" static="no">
+        <type>task_info::priority_type</type>
+        <definition>using thread_pool::priority_type = task_info::priority_type</definition>
+        <argsstring></argsstring>
+        <name>priority_type</name>
+        <qualifiedname>thread_pool::priority_type</qualifiedname>
+        <briefdescription>
+<para>优先级类型别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="350" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="350" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classthread__pool_1a42bbae19a345842ab44476d7e6e1b774" prot="private" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using thread_pool::task_type = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>task_type</name>
+        <qualifiedname>thread_pool::task_type</qualifiedname>
+        <briefdescription>
+<para>任务类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="358" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="358" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classthread__pool_1aa1ffde91470003d6f417613b023eabf1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t thread_pool::task_max_threshhold</definition>
+        <argsstring></argsstring>
+        <name>task_max_threshhold</name>
+        <qualifiedname>thread_pool::task_max_threshhold</qualifiedname>
+        <initializer>= <ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt;<ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref>&gt;<ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">::max</ref>()</initializer>
+        <briefdescription>
+<para>最大任务队列阈值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="352" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="352" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a13644b215258771218b171d3f111a545" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t thread_pool::max_idle_seconds</definition>
+        <argsstring></argsstring>
+        <name>max_idle_seconds</name>
+        <qualifiedname>thread_pool::max_idle_seconds</qualifiedname>
+        <initializer>= 60</initializer>
+        <briefdescription>
+<para>最大空闲秒数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="353" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="353" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classthread__pool_1a44ad5b9d27ddb2c0d2a5f539f28553d1" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="classthread__pool_1a11c3d03ee2141f13727cbd973c24134e" kindref="member">id_type</ref>, <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classlazy__thread" kindref="compound">lazy_thread</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;id_type, unique_ptr&lt;lazy_thread&gt; &gt; thread_pool::threads_map_</definition>
+        <argsstring></argsstring>
+        <name>threads_map_</name>
+        <qualifiedname>thread_pool::threads_map_</qualifiedname>
+        <briefdescription>
+<para>线程映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="386" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="386" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1ac644a53b25d84efc24b1cfed9856f6eb" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="classthread__pool_1a11c3d03ee2141f13727cbd973c24134e" kindref="member">id_type</ref>, <ref refid="structworker__context" kindref="compound">worker_context</ref> &gt;</type>
+        <definition>unordered_map&lt;id_type, worker_context&gt; thread_pool::worker_contexts_</definition>
+        <argsstring></argsstring>
+        <name>worker_contexts_</name>
+        <qualifiedname>thread_pool::worker_contexts_</qualifiedname>
+        <briefdescription>
+<para>工作线程上下文映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="387" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="387" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a601abd6312217e60fe50832939ed68df" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="structworker__context" kindref="compound">worker_context</ref> * &gt; &gt;</type>
+        <definition>vector&lt;atomic&lt;worker_context*&gt; &gt; thread_pool::worker_contexts_ptr_</definition>
+        <argsstring></argsstring>
+        <name>worker_contexts_ptr_</name>
+        <qualifiedname>thread_pool::worker_contexts_ptr_</qualifiedname>
+        <briefdescription>
+<para>工作线程上下文指针数组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="388" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="388" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1ab4beb429978668adcea8c908197b5019" prot="private" static="no" mutable="no">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex thread_pool::worker_contexts_mtx_</definition>
+        <argsstring></argsstring>
+        <name>worker_contexts_mtx_</name>
+        <qualifiedname>thread_pool::worker_contexts_mtx_</qualifiedname>
+        <briefdescription>
+<para>工作线程上下文互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="389" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="389" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1aadd525c61ff27eeb55ad18a7378ed505" prot="private" static="no" mutable="no">
+        <type><ref refid="classtimer__scheduler" kindref="compound">timer_scheduler</ref>&lt; <ref refid="structsteady__clock" kindref="compound">steady_clock</ref> &gt;</type>
+        <definition>timer_scheduler&lt;steady_clock&gt; thread_pool::timer_</definition>
+        <argsstring></argsstring>
+        <name>timer_</name>
+        <qualifiedname>thread_pool::timer_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>定时器调度器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="391" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="391" bodyend="391"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1ab5d083c3627efc138de460356b20d1f3" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread__pool_1a11c3d03ee2141f13727cbd973c24134e" kindref="member">id_type</ref></type>
+        <definition>id_type thread_pool::init_thread_size_</definition>
+        <argsstring></argsstring>
+        <name>init_thread_size_</name>
+        <qualifiedname>thread_pool::init_thread_size_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>初始线程数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="393" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="393" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a883ecc5e45d9de57f034aba5f17b4091" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t thread_pool::thread_threshhold_</definition>
+        <argsstring></argsstring>
+        <name>thread_threshhold_</name>
+        <qualifiedname>thread_pool::thread_threshhold_</qualifiedname>
+        <briefdescription>
+<para>线程数阈值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="394" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="394" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a6e3f3eb2078d6cf8f7c1e985d8c2dbe4" prot="private" static="no" mutable="no">
+        <type><ref refid="classpriority__queue" kindref="compound">priority_queue</ref>&lt; priority_task &gt;</type>
+        <definition>priority_queue&lt;priority_task&gt; thread_pool::task_queue_</definition>
+        <argsstring></argsstring>
+        <name>task_queue_</name>
+        <qualifiedname>thread_pool::task_queue_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>全局优先级任务队列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="396" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="396" bodyend="396"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a53391eb6ad77d48902de36c7a170b1dd" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>atomic&lt;uint32_t&gt; thread_pool::task_size_</definition>
+        <argsstring></argsstring>
+        <name>task_size_</name>
+        <qualifiedname>thread_pool::task_size_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>全局队列大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="397" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="397" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1aae72c80ede752cfad3ae691d776600d0" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>atomic&lt;uint32_t&gt; thread_pool::idle_thread_size_</definition>
+        <argsstring></argsstring>
+        <name>idle_thread_size_</name>
+        <qualifiedname>thread_pool::idle_thread_size_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>空闲线程数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="398" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="398" bodyend="398"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a7a2b11b031c3e0157b53a347d18f08ca" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t thread_pool::task_threshhold_</definition>
+        <argsstring></argsstring>
+        <name>task_threshhold_</name>
+        <qualifiedname>thread_pool::task_threshhold_</qualifiedname>
+        <initializer>{<ref refid="classthread__pool_1aa1ffde91470003d6f417613b023eabf1" kindref="member">task_max_threshhold</ref>}</initializer>
+        <briefdescription>
+<para>任务队列阈值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="399" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="399" bodyend="399"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1ab1fdf6772553735e3efdabda0ba7082e" prot="private" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex thread_pool::task_queue_mtx_</definition>
+        <argsstring></argsstring>
+        <name>task_queue_mtx_</name>
+        <qualifiedname>thread_pool::task_queue_mtx_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>任务队列互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="401" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="401" bodyend="401"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a4c73f45c61686918000de9e4e40d9e88" prot="private" static="no" mutable="no">
+        <type><ref refid="classcondition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable thread_pool::not_full_</definition>
+        <argsstring></argsstring>
+        <name>not_full_</name>
+        <qualifiedname>thread_pool::not_full_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>队列非满条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="402" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="402" bodyend="402"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a7b6a5189dacc1d899371ec3eb3cbd5f1" prot="private" static="no" mutable="no">
+        <type><ref refid="classcondition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable thread_pool::not_empty_</definition>
+        <argsstring></argsstring>
+        <name>not_empty_</name>
+        <qualifiedname>thread_pool::not_empty_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>队列非空条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="403" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="403" bodyend="403"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a1d79d5eedf1acc01008e4b40f9b2781b" prot="private" static="no" mutable="no">
+        <type><ref refid="classcondition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable thread_pool::exit_cond_</definition>
+        <argsstring></argsstring>
+        <name>exit_cond_</name>
+        <qualifiedname>thread_pool::exit_cond_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>退出条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="404" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="404" bodyend="404"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1ad62e4d700f82029d189ccd9a3d3f22ef" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="classthread__pool_1a4c640f1911280a2e33221d6d2a8148d3" kindref="member">pool_mode</ref> &gt;</type>
+        <definition>atomic&lt;pool_mode&gt; thread_pool::pool_mode_</definition>
+        <argsstring></argsstring>
+        <name>pool_mode_</name>
+        <qualifiedname>thread_pool::pool_mode_</qualifiedname>
+        <initializer>{<ref refid="classthread__pool_1a4c640f1911280a2e33221d6d2a8148d3acec315e3d0975e5cc2811d5d8725f149" kindref="member">pool_mode::fixed</ref>}</initializer>
+        <briefdescription>
+<para>线程池模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="406" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="406" bodyend="406"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a8b083c09c3d952375d0dab6fe1d48786" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; thread_pool::is_running_</definition>
+        <argsstring></argsstring>
+        <name>is_running_</name>
+        <qualifiedname>thread_pool::is_running_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否正在运行 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="407" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="407" bodyend="407"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1af5a64b3fc0860a6cbc3e4db0a5fb63bd" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; thread_pool::total_submitted_tasks_</definition>
+        <argsstring></argsstring>
+        <name>total_submitted_tasks_</name>
+        <qualifiedname>thread_pool::total_submitted_tasks_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>总提交任务计数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="409" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="409" bodyend="409"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1aa07218dbca12aab77e24d6caea6095ac" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; thread_pool::total_completed_tasks_</definition>
+        <argsstring></argsstring>
+        <name>total_completed_tasks_</name>
+        <qualifiedname>thread_pool::total_completed_tasks_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>总完成任务计数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="410" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="410" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a7b1e24de8661180e95380395c96ae4cc" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; thread_pool::total_stolen_tasks_</definition>
+        <argsstring></argsstring>
+        <name>total_stolen_tasks_</name>
+        <qualifiedname>thread_pool::total_stolen_tasks_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>总窃取任务计数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="411" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="411" bodyend="411"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1ab3e2a5217237896cb4d2f2320d68b681" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; thread_pool::steal_worker_count_</definition>
+        <argsstring></argsstring>
+        <name>steal_worker_count_</name>
+        <qualifiedname>thread_pool::steal_worker_count_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>正在窃取的工作线程数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="412" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="412" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="variable" id="classthread__pool_1a321a6f42c2c04a3bc7faf3a626b73360" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> &gt;</type>
+        <definition>atomic&lt;uint64_t&gt; thread_pool::next_task_id_</definition>
+        <argsstring></argsstring>
+        <name>next_task_id_</name>
+        <qualifiedname>thread_pool::next_task_id_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>下一个任务ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="413" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="413" bodyend="413"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classthread__pool_1a2e0c0419181c683be93e4784020591f7" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>static size_t thread_pool::max_thread_threshhold</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>max_thread_threshhold</name>
+        <qualifiedname>thread_pool::max_thread_threshhold</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="355" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a41b97485d5e127221793818a6fdcf8ba" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void thread_pool::cancel_periodic_task</definition>
+        <argsstring>(const periodic_token &amp;token)</argsstring>
+        <name>cancel_periodic_task</name>
+        <qualifiedname>thread_pool::cancel_periodic_task</qualifiedname>
+        <param>
+          <type>const <ref refid="classthread__pool_1a441d12dda9edd4d083d844279f1ae91d" kindref="member">periodic_token</ref> &amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>取消周期性任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>周期性任务令牌 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="587" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="587" bodyend="591"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a0ad4266eb8f6c017cf635c837c9096d2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Types</declname>
+            <defname>Types</defname>
+          </param>
+        </templateparamlist>
+        <type>tuple&lt; <ref refid="group___async_1gaf0f72d6a56a7e2c518eca56a51ff014f" kindref="member">future_result_t</ref>&lt; Types &gt;... &gt;</type>
+        <definition>static tuple&lt; future_result_t&lt; Types &gt;... &gt; thread_pool::wait</definition>
+        <argsstring>(future&lt; Types &gt; &amp;&amp;... futures)</argsstring>
+        <name>wait</name>
+        <qualifiedname>thread_pool::wait</qualifiedname>
+        <param>
+          <type><ref refid="classfuture" kindref="compound">future</ref>&lt; Types &gt; &amp;&amp;...</type>
+          <declname>futures</declname>
+        </param>
+        <briefdescription>
+<para>等待多个future完成 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>future结果类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>futures</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要等待的future </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含所有结果的元组 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="600" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="600" bodyend="602"/>
+        <references refid="group___async_1ga10972b510a9c0e438c6d5b217ea9a473" compoundref="future_8hpp" startline="1190" endline="1193">get</references>
+        <references refid="group___tuple_1ga5ed4cb761dbf974f5a60b613fdebb1bf" compoundref="tuple_8hpp" startline="746" endline="749">make_tuple</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classthread__pool_1a296a78934ae22cdfdd50eae731f8446b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t thread_pool::generate_task_id</definition>
+        <argsstring>()</argsstring>
+        <name>generate_task_id</name>
+        <qualifiedname>thread_pool::generate_task_id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="416" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="416" bodyend="416"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1abe52da17fd3c986295a945226e926b89" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void thread_pool::thread_function</definition>
+        <argsstring>(id_type thread_id)</argsstring>
+        <name>thread_function</name>
+        <qualifiedname>thread_pool::thread_function</qualifiedname>
+        <param>
+          <type><ref refid="classthread__pool_1a11c3d03ee2141f13727cbd973c24134e" kindref="member">id_type</ref></type>
+          <declname>thread_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="418" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1aa6c1a9960f97c4800dd9e6e0186131c7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; task_type &gt;</type>
+        <definition>optional&lt; task_type &gt; thread_pool::try_steal_task</definition>
+        <argsstring>(worker_context &amp;ctx)</argsstring>
+        <name>try_steal_task</name>
+        <qualifiedname>thread_pool::try_steal_task</qualifiedname>
+        <param>
+          <type><ref refid="structworker__context" kindref="compound">worker_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="419" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a77206d1e4ace35afce1eb18306d75f27" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structthread__pool_1_1pool__statistics" kindref="compound">pool_statistics</ref></type>
+        <definition>pool_statistics thread_pool::statistics_unsafe</definition>
+        <argsstring>() const</argsstring>
+        <name>statistics_unsafe</name>
+        <qualifiedname>thread_pool::statistics_unsafe</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="421" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classthread__pool_1a78324a6b46c41401389ef61d5f7d21a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>thread_pool::thread_pool</definition>
+        <argsstring>()</argsstring>
+        <name>thread_pool</name>
+        <qualifiedname>thread_pool::thread_pool</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="427" column="5"/>
+        <referencedby refid="classthread__pool_1ac9d8f108fa2419441aba432f8ca98eae">~thread_pool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1ac9d8f108fa2419441aba432f8ca98eae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>thread_pool::~thread_pool</definition>
+        <argsstring>()</argsstring>
+        <name>~thread_pool</name>
+        <qualifiedname>thread_pool::~thread_pool</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="432" column="5"/>
+        <references refid="classthread__pool_1a78324a6b46c41401389ef61d5f7d21a4">thread_pool</references>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1acc2d82f43ee6a07aedcac7a0e4b26c47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>thread_pool::thread_pool</definition>
+        <argsstring>(const thread_pool &amp;)=delete</argsstring>
+        <name>thread_pool</name>
+        <qualifiedname>thread_pool::thread_pool</qualifiedname>
+        <param>
+          <type>const <ref refid="classthread__pool" kindref="compound">thread_pool</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="434" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1aa212f983a54e20580ba37dcb535ef6d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classthread__pool" kindref="compound">thread_pool</ref> &amp;</type>
+        <definition>thread_pool &amp; thread_pool::operator=</definition>
+        <argsstring>(const thread_pool &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>thread_pool::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classthread__pool" kindref="compound">thread_pool</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="435" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a21d2581b4c7b631460498461b989234f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>thread_pool::thread_pool</definition>
+        <argsstring>(thread_pool &amp;&amp;)=delete</argsstring>
+        <name>thread_pool</name>
+        <qualifiedname>thread_pool::thread_pool</qualifiedname>
+        <param>
+          <type><ref refid="classthread__pool" kindref="compound">thread_pool</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="437" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a9c8a542b6607e89a9455ae9ce56d9274" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classthread__pool" kindref="compound">thread_pool</ref> &amp;</type>
+        <definition>thread_pool &amp; thread_pool::operator=</definition>
+        <argsstring>(thread_pool &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>thread_pool::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classthread__pool" kindref="compound">thread_pool</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="438" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1ad2570e71325f8fc0056e2b7db00c1369" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool thread_pool::set_mode</definition>
+        <argsstring>(pool_mode mode) noexcept</argsstring>
+        <name>set_mode</name>
+        <qualifiedname>thread_pool::set_mode</qualifiedname>
+        <param>
+          <type><ref refid="classthread__pool_1a4c640f1911280a2e33221d6d2a8148d3" kindref="member">pool_mode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+<para>设置线程池模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新模式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true（线程池未运行时） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="445" column="10"/>
+        <references refid="classthread__pool_1a3b141f1ae010547460c9f9c0f5a7dfbf" compoundref="thread__pool_8hpp" startline="479" endline="479">mode</references>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1af7af30cde703cd7de4e3484f16b29fe5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool thread_pool::set_steal_mode</definition>
+        <argsstring>(steal_strategy strategy, uint32_t steal_batch=4) noexcept</argsstring>
+        <name>set_steal_mode</name>
+        <qualifiedname>thread_pool::set_steal_mode</qualifiedname>
+        <param>
+          <type><ref refid="classlocal__queue_1aae2f178f553c35b160ea3f5c6a8f1f16" kindref="member">steal_strategy</ref></type>
+          <declname>strategy</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>steal_batch</declname>
+          <defval>4</defval>
+        </param>
+        <briefdescription>
+<para>设置窃取策略 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>strategy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>窃取策略 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>steal_batch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>批次大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true（线程池未运行时） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="453" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a9cf841376ecf2272f396bc2a42b89200" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool thread_pool::set_task_threshhold</definition>
+        <argsstring>(size_t threshhold) noexcept</argsstring>
+        <name>set_task_threshhold</name>
+        <qualifiedname>thread_pool::set_task_threshhold</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>threshhold</declname>
+        </param>
+        <briefdescription>
+<para>设置任务队列阈值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>threshhold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新阈值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true（线程池未运行时） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="460" column="10"/>
+        <references refid="classthread__pool_1a9cf841376ecf2272f396bc2a42b89200">set_task_threshhold</references>
+        <referencedby refid="classthread__pool_1a9cf841376ecf2272f396bc2a42b89200">set_task_threshhold</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a0f8735976acc53cc7b02517efe8ae23b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool thread_pool::set_thread_threshhold</definition>
+        <argsstring>(size_t threshhold) noexcept</argsstring>
+        <name>set_thread_threshhold</name>
+        <qualifiedname>thread_pool::set_thread_threshhold</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>threshhold</declname>
+        </param>
+        <briefdescription>
+<para>设置线程数阈值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>threshhold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新阈值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>设置成功返回true（线程池未运行时且处于缓存模式） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="467" column="10"/>
+        <references refid="classthread__pool_1a0f8735976acc53cc7b02517efe8ae23b">set_thread_threshhold</references>
+        <referencedby refid="classthread__pool_1a0f8735976acc53cc7b02517efe8ae23b">set_thread_threshhold</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a528ed99848dc5301853c4ab581c9d07d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool thread_pool::running</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>running</name>
+        <qualifiedname>thread_pool::running</qualifiedname>
+        <briefdescription>
+<para>检查线程池是否正在运行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>正在运行返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="473" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="473" bodyend="473"/>
+        <references refid="classthread__pool_1a528ed99848dc5301853c4ab581c9d07d" compoundref="thread__pool_8hpp" startline="473" endline="473">running</references>
+        <referencedby refid="classthread__pool_1a528ed99848dc5301853c4ab581c9d07d" compoundref="thread__pool_8hpp" startline="473" endline="473">running</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a3b141f1ae010547460c9f9c0f5a7dfbf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classthread__pool_1a4c640f1911280a2e33221d6d2a8148d3" kindref="member">pool_mode</ref></type>
+        <definition>NEFORCE_NODISCARD pool_mode thread_pool::mode</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>mode</name>
+        <qualifiedname>thread_pool::mode</qualifiedname>
+        <briefdescription>
+<para>获取线程池模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前模式 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="479" column="33" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="479" bodyend="479"/>
+        <referencedby refid="classthread__pool_1ad2570e71325f8fc0056e2b7db00c1369">set_mode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a3a7e731e56996f60b6a2a857f89c3eab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structthread__pool_1_1pool__statistics" kindref="compound">pool_statistics</ref></type>
+        <definition>NEFORCE_NODISCARD pool_statistics thread_pool::statistics</definition>
+        <argsstring>() const</argsstring>
+        <name>statistics</name>
+        <qualifiedname>thread_pool::statistics</qualifiedname>
+        <briefdescription>
+<para>获取线程池统计信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>统计信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="485" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1ae4af3da255dd5f55a7314e804cd91571" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool thread_pool::start</definition>
+        <argsstring>(size_t init_thread_size=3)</argsstring>
+        <name>start</name>
+        <qualifiedname>thread_pool::start</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>init_thread_size</declname>
+          <defval>3</defval>
+        </param>
+        <briefdescription>
+<para>启动线程池 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>init_thread_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始线程数，默认为3 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>启动成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="492" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a3679e32679c97ea0055a38f2df4560ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structthread__pool_1_1pool__statistics" kindref="compound">pool_statistics</ref></type>
+        <definition>pool_statistics thread_pool::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>thread_pool::stop</qualifiedname>
+        <briefdescription>
+<para>停止线程池 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>停止前的统计信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="498" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a4269d4f0985eeb9e6f38bb9aeae9e67a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structsubmit__result" kindref="compound">submit_result</ref>&lt; <ref refid="group___invoke_function_1gaf42c40449c9ef12db7fcf0532b6c90b5" kindref="member">invoke_result_t</ref>&lt; Func, Args... &gt; &gt;</type>
+        <definition>submit_result&lt; invoke_result_t&lt; Func, Args... &gt; &gt; thread_pool::submit_task</definition>
+        <argsstring>(priority_type priority, Func &amp;&amp;func, Args &amp;&amp;... args)</argsstring>
+        <name>submit_task</name>
+        <qualifiedname>thread_pool::submit_task</qualifiedname>
+        <param>
+          <type><ref refid="classthread__pool_1a0f86abfce93a05b67165f166c653a82b" kindref="member">priority_type</ref></type>
+          <declname>priority</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>提交任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>priority</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务优先级 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含future和任务信息的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="510" column="19"/>
+        <references refid="group___thread_1gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority</references>
+        <referencedby refid="classthread__pool_1a1a93d040b178d96b993dffc135a52fb2" compoundref="thread__pool_8hpp" startline="521" endline="524">submit_task</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a1a93d040b178d96b993dffc135a52fb2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structsubmit__result" kindref="compound">submit_result</ref>&lt; <ref refid="group___invoke_function_1gaf42c40449c9ef12db7fcf0532b6c90b5" kindref="member">invoke_result_t</ref>&lt; Func, Args... &gt; &gt;</type>
+        <definition>submit_result&lt; invoke_result_t&lt; Func, Args... &gt; &gt; thread_pool::submit_task</definition>
+        <argsstring>(Func &amp;&amp;func, Args &amp;&amp;... args)</argsstring>
+        <name>submit_task</name>
+        <qualifiedname>thread_pool::submit_task</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>提交任务（使用默认优先级0） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含future和任务信息的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="521" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="521" bodyend="524"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="classthread__pool_1a4269d4f0985eeb9e6f38bb9aeae9e67a">submit_task</references>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1ae3bf04c2adddd193bba36f6c338c9b9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structsubmit__result" kindref="compound">submit_result</ref>&lt; <ref refid="group___invoke_function_1gaf42c40449c9ef12db7fcf0532b6c90b5" kindref="member">invoke_result_t</ref>&lt; Func, Args... &gt; &gt;</type>
+        <definition>submit_result&lt; invoke_result_t&lt; Func, Args... &gt; &gt; thread_pool::submit_after</definition>
+        <argsstring>(int64_t delay_ms, priority_type priority, Func &amp;&amp;func, Args &amp;&amp;... args)</argsstring>
+        <name>submit_after</name>
+        <qualifiedname>thread_pool::submit_after</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>delay_ms</declname>
+        </param>
+        <param>
+          <type><ref refid="classthread__pool_1a0f86abfce93a05b67165f166c653a82b" kindref="member">priority_type</ref></type>
+          <declname>priority</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>提交延迟任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delay_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>延迟时间（毫秒） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>priority</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务优先级 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含future和任务信息的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="537" column="19"/>
+        <references refid="group___thread_1gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority</references>
+        <referencedby refid="classthread__pool_1a3b33992c58dbd64f6c397fbc7092406c" compoundref="thread__pool_8hpp" startline="550" endline="553">submit_after</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a3b33992c58dbd64f6c397fbc7092406c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structsubmit__result" kindref="compound">submit_result</ref>&lt; <ref refid="group___invoke_function_1gaf42c40449c9ef12db7fcf0532b6c90b5" kindref="member">invoke_result_t</ref>&lt; Func, Args... &gt; &gt;</type>
+        <definition>submit_result&lt; invoke_result_t&lt; Func, Args... &gt; &gt; thread_pool::submit_after</definition>
+        <argsstring>(int64_t delay_ms, Func &amp;&amp;func, Args &amp;&amp;... args)</argsstring>
+        <name>submit_after</name>
+        <qualifiedname>thread_pool::submit_after</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>delay_ms</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>提交延迟任务（使用默认优先级0） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delay_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>延迟时间（毫秒） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含future和任务信息的结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="550" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="550" bodyend="553"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="classthread__pool_1ae3bf04c2adddd193bba36f6c338c9b9e">submit_after</references>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a159c162d139e452d7539a4d0c46fc908" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classthread__pool_1a441d12dda9edd4d083d844279f1ae91d" kindref="member">periodic_token</ref></type>
+        <definition>periodic_token thread_pool::submit_every</definition>
+        <argsstring>(int64_t interval_ms, priority_type priority, Func &amp;&amp;func, Args &amp;&amp;... args)</argsstring>
+        <name>submit_every</name>
+        <qualifiedname>thread_pool::submit_every</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>interval_ms</declname>
+        </param>
+        <param>
+          <type><ref refid="classthread__pool_1a0f86abfce93a05b67165f166c653a82b" kindref="member">priority_type</ref></type>
+          <declname>priority</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>提交周期性任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>interval_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>执行间隔（毫秒） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>priority</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务优先级 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>周期性任务令牌，用于取消任务 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="566" column="20"/>
+        <references refid="group___thread_1gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority</references>
+        <referencedby refid="classthread__pool_1a4119fc5a49cda3741698ae66c653894d" compoundref="thread__pool_8hpp" startline="578" endline="581">submit_every</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classthread__pool_1a4119fc5a49cda3741698ae66c653894d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classthread__pool_1a441d12dda9edd4d083d844279f1ae91d" kindref="member">periodic_token</ref></type>
+        <definition>periodic_token thread_pool::submit_every</definition>
+        <argsstring>(int64_t interval_ms, Func &amp;&amp;func, Args &amp;&amp;... args)</argsstring>
+        <name>submit_every</name>
+        <qualifiedname>thread_pool::submit_every</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>interval_ms</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>提交周期性任务（使用默认优先级0） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>interval_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>执行间隔（毫秒） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>周期性任务令牌，用于取消任务 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="578" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="578" bodyend="581"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <references refid="classthread__pool_1a159c162d139e452d7539a4d0c46fc908">submit_every</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程池类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>高性能线程池实现，支持：<itemizedlist>
+<listitem><para>固定模式和缓存模式</para>
+</listitem><listitem><para>任务优先级调度</para>
+</listitem><listitem><para>工作窃取算法</para>
+</listitem><listitem><para>延迟任务和周期性任务</para>
+</listitem><listitem><para>任务组跟踪 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="308" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="308" bodyend="603"/>
+    <listofallmembers>
+      <member refid="classthread__pool_1a41b97485d5e127221793818a6fdcf8ba" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>cancel_periodic_task</name></member>
+      <member refid="classthread__pool_1a1d79d5eedf1acc01008e4b40f9b2781b" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>exit_cond_</name></member>
+      <member refid="classthread__pool_1a296a78934ae22cdfdd50eae731f8446b" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>generate_task_id</name></member>
+      <member refid="classthread__pool_1a11c3d03ee2141f13727cbd973c24134e" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>id_type</name></member>
+      <member refid="classthread__pool_1aae72c80ede752cfad3ae691d776600d0" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>idle_thread_size_</name></member>
+      <member refid="classthread__pool_1ab5d083c3627efc138de460356b20d1f3" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>init_thread_size_</name></member>
+      <member refid="classthread__pool_1a8b083c09c3d952375d0dab6fe1d48786" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>is_running_</name></member>
+      <member refid="classthread__pool_1a13644b215258771218b171d3f111a545" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>max_idle_seconds</name></member>
+      <member refid="classthread__pool_1a2e0c0419181c683be93e4784020591f7" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>max_thread_threshhold</name></member>
+      <member refid="classthread__pool_1a3b141f1ae010547460c9f9c0f5a7dfbf" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>mode</name></member>
+      <member refid="classthread__pool_1a321a6f42c2c04a3bc7faf3a626b73360" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>next_task_id_</name></member>
+      <member refid="classthread__pool_1a7b6a5189dacc1d899371ec3eb3cbd5f1" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>not_empty_</name></member>
+      <member refid="classthread__pool_1a4c73f45c61686918000de9e4e40d9e88" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>not_full_</name></member>
+      <member refid="classthread__pool_1aa212f983a54e20580ba37dcb535ef6d3" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>operator=</name></member>
+      <member refid="classthread__pool_1a9c8a542b6607e89a9455ae9ce56d9274" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>operator=</name></member>
+      <member refid="classthread__pool_1a441d12dda9edd4d083d844279f1ae91d" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>periodic_token</name></member>
+      <member refid="classthread__pool_1a4c640f1911280a2e33221d6d2a8148d3" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>pool_mode</name></member>
+      <member refid="classthread__pool_1ad62e4d700f82029d189ccd9a3d3f22ef" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>pool_mode_</name></member>
+      <member refid="classthread__pool_1a0f86abfce93a05b67165f166c653a82b" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>priority_type</name></member>
+      <member refid="classthread__pool_1a528ed99848dc5301853c4ab581c9d07d" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>running</name></member>
+      <member refid="classthread__pool_1ad2570e71325f8fc0056e2b7db00c1369" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>set_mode</name></member>
+      <member refid="classthread__pool_1af7af30cde703cd7de4e3484f16b29fe5" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>set_steal_mode</name></member>
+      <member refid="classthread__pool_1a9cf841376ecf2272f396bc2a42b89200" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>set_task_threshhold</name></member>
+      <member refid="classthread__pool_1a0f8735976acc53cc7b02517efe8ae23b" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>set_thread_threshhold</name></member>
+      <member refid="classthread__pool_1ae4af3da255dd5f55a7314e804cd91571" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>start</name></member>
+      <member refid="classthread__pool_1a3a7e731e56996f60b6a2a857f89c3eab" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>statistics</name></member>
+      <member refid="classthread__pool_1a77206d1e4ace35afce1eb18306d75f27" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>statistics_unsafe</name></member>
+      <member refid="classthread__pool_1a9177f65ba06f1f7371a69890ece9503d" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>steal_strategy</name></member>
+      <member refid="classthread__pool_1ab3e2a5217237896cb4d2f2320d68b681" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>steal_worker_count_</name></member>
+      <member refid="classthread__pool_1a3679e32679c97ea0055a38f2df4560ec" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>stop</name></member>
+      <member refid="classthread__pool_1ae3bf04c2adddd193bba36f6c338c9b9e" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>submit_after</name></member>
+      <member refid="classthread__pool_1a3b33992c58dbd64f6c397fbc7092406c" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>submit_after</name></member>
+      <member refid="classthread__pool_1a159c162d139e452d7539a4d0c46fc908" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>submit_every</name></member>
+      <member refid="classthread__pool_1a4119fc5a49cda3741698ae66c653894d" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>submit_every</name></member>
+      <member refid="classthread__pool_1a4269d4f0985eeb9e6f38bb9aeae9e67a" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>submit_task</name></member>
+      <member refid="classthread__pool_1a1a93d040b178d96b993dffc135a52fb2" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>submit_task</name></member>
+      <member refid="classthread__pool_1aa1ffde91470003d6f417613b023eabf1" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>task_max_threshhold</name></member>
+      <member refid="classthread__pool_1a6e3f3eb2078d6cf8f7c1e985d8c2dbe4" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>task_queue_</name></member>
+      <member refid="classthread__pool_1ab1fdf6772553735e3efdabda0ba7082e" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>task_queue_mtx_</name></member>
+      <member refid="classthread__pool_1a53391eb6ad77d48902de36c7a170b1dd" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>task_size_</name></member>
+      <member refid="classthread__pool_1a7a2b11b031c3e0157b53a347d18f08ca" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>task_threshhold_</name></member>
+      <member refid="classthread__pool_1a42bbae19a345842ab44476d7e6e1b774" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>task_type</name></member>
+      <member refid="classthread__pool_1abe52da17fd3c986295a945226e926b89" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>thread_function</name></member>
+      <member refid="classthread__pool_1a78324a6b46c41401389ef61d5f7d21a4" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>thread_pool</name></member>
+      <member refid="classthread__pool_1acc2d82f43ee6a07aedcac7a0e4b26c47" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>thread_pool</name></member>
+      <member refid="classthread__pool_1a21d2581b4c7b631460498461b989234f" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>thread_pool</name></member>
+      <member refid="classthread__pool_1a883ecc5e45d9de57f034aba5f17b4091" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>thread_threshhold_</name></member>
+      <member refid="classthread__pool_1a44ad5b9d27ddb2c0d2a5f539f28553d1" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>threads_map_</name></member>
+      <member refid="classthread__pool_1aadd525c61ff27eeb55ad18a7378ed505" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>timer_</name></member>
+      <member refid="classthread__pool_1aa07218dbca12aab77e24d6caea6095ac" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>total_completed_tasks_</name></member>
+      <member refid="classthread__pool_1a7b1e24de8661180e95380395c96ae4cc" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>total_stolen_tasks_</name></member>
+      <member refid="classthread__pool_1af5a64b3fc0860a6cbc3e4db0a5fb63bd" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>total_submitted_tasks_</name></member>
+      <member refid="classthread__pool_1aa6c1a9960f97c4800dd9e6e0186131c7" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>try_steal_task</name></member>
+      <member refid="classthread__pool_1a0ad4266eb8f6c017cf635c837c9096d2" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>wait</name></member>
+      <member refid="classthread__pool_1ac644a53b25d84efc24b1cfed9856f6eb" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>worker_contexts_</name></member>
+      <member refid="classthread__pool_1ab4beb429978668adcea8c908197b5019" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>worker_contexts_mtx_</name></member>
+      <member refid="classthread__pool_1a601abd6312217e60fe50832939ed68df" prot="private" virt="non-virtual"><scope>thread_pool</scope><name>worker_contexts_ptr_</name></member>
+      <member refid="classthread__pool_1ac9d8f108fa2419441aba432f8ca98eae" prot="public" virt="non-virtual"><scope>thread_pool</scope><name>~thread_pool</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structaligned__union" kind="struct" language="C++" prot="public">
+    <compoundname>aligned_union</compoundname>
+    <includes refid="type__traits_8hpp" local="no">type_traits.hpp</includes>
+    <innerclass refid="structaligned__union_1_1type" prot="public">aligned_union::type</innerclass>
+    <templateparamlist>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <declname>Len</declname>
+        <defname>Len</defname>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Types</declname>
+        <defname>Types</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="structaligned__union_1a267879f7b8de78c95151776379ebe412" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t aligned_union&lt; Len, Types &gt;::required_alignment</definition>
+        <argsstring></argsstring>
+        <name>required_alignment</name>
+        <qualifiedname>aligned_union::required_alignment</qualifiedname>
+        <initializer>= <ref refid="structmax__value" kindref="compound">max_value</ref>&lt;alignof(Types)...&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3462" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3462" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structaligned__union_1a249aef6fc7dc3b251b89ac2eb1197483" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t aligned_union&lt; Len, Types &gt;::required_size</definition>
+        <argsstring></argsstring>
+        <name>required_size</name>
+        <qualifiedname>aligned_union::required_size</qualifiedname>
+        <initializer>= <ref refid="structmax__value" kindref="compound">max_value</ref>&lt;sizeof(Types)...&gt;::value</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3463" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3463" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structaligned__union_1a88deed963bb08bae0d0052e1b1c5d084" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t aligned_union&lt; Len, Types &gt;::storage_size</definition>
+        <argsstring></argsstring>
+        <name>storage_size</name>
+        <qualifiedname>aligned_union::storage_size</qualifiedname>
+        <initializer>= (Len &gt; required_size) ? Len : required_size</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3464" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3464" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structaligned__union_1a53f1d8175ee5af2d393643f5bdad70c7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t aligned_union&lt; Len, Types &gt;::alignment_value</definition>
+        <argsstring></argsstring>
+        <name>alignment_value</name>
+        <qualifiedname>aligned_union::alignment_value</qualifiedname>
+        <initializer>= required_alignment</initializer>
+        <briefdescription>
+<para>存储的对齐要求 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3472" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3472" bodyend="-1"/>
+        <referencedby refid="structaligned__union_1a00138160f538766d709631d10e840c92" compoundref="type__traits_8hpp" startline="3497" endline="3499">aligned_union&lt; Len, Types &gt;::is_storable</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structaligned__union_1a438bb9ca11dee9742a583f6ba3d011c6" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t aligned_union&lt; Len, Types &gt;::size_value</definition>
+        <argsstring></argsstring>
+        <name>size_value</name>
+        <qualifiedname>aligned_union::size_value</qualifiedname>
+        <initializer>= storage_size</initializer>
+        <briefdescription>
+<para>存储的实际大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3476" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3476" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structaligned__union_1a00138160f538766d709631d10e840c92" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>static constexpr bool aligned_union&lt; Len, Types &gt;::is_storable</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>is_storable</name>
+        <qualifiedname>aligned_union::is_storable</qualifiedname>
+        <briefdescription>
+<para>检查指定类型是否可以安全存储在aligned_union中 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true 如果类型T可以安全存储，false 否则</para>
+</simplesect>
+类型T必须满足以下条件：<orderedlist>
+<listitem><para>是平凡可复制的(trivially copyable)</para>
+</listitem><listitem><para>大小不超过存储大小</para>
+</listitem><listitem><para>对齐要求不超过存储对齐 </para>
+</listitem></orderedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3497" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3497" bodyend="3499"/>
+        <references refid="structaligned__union_1a53f1d8175ee5af2d393643f5bdad70c7" compoundref="type__traits_8hpp" startline="3472">aligned_union&lt; Len, Types &gt;::alignment_value</references>
+        <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;::value</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>创建可以容纳多种类型的对齐存储类型 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最小存储大小 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可能的类型列表</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建一个可以容纳Types中任何类型的存储，具有严格的对齐要求。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3460" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3460" bodyend="3500"/>
+    <listofallmembers>
+      <member refid="structaligned__union_1a53f1d8175ee5af2d393643f5bdad70c7" prot="public" virt="non-virtual"><scope>aligned_union</scope><name>alignment_value</name></member>
+      <member refid="structaligned__union_1a00138160f538766d709631d10e840c92" prot="public" virt="non-virtual"><scope>aligned_union</scope><name>is_storable</name></member>
+      <member refid="structaligned__union_1a267879f7b8de78c95151776379ebe412" prot="private" virt="non-virtual"><scope>aligned_union</scope><name>required_alignment</name></member>
+      <member refid="structaligned__union_1a249aef6fc7dc3b251b89ac2eb1197483" prot="private" virt="non-virtual"><scope>aligned_union</scope><name>required_size</name></member>
+      <member refid="structaligned__union_1a438bb9ca11dee9742a583f6ba3d011c6" prot="public" virt="non-virtual"><scope>aligned_union</scope><name>size_value</name></member>
+      <member refid="structaligned__union_1a88deed963bb08bae0d0052e1b1c5d084" prot="private" virt="non-virtual"><scope>aligned_union</scope><name>storage_size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

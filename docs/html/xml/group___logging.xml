@@ -1,0 +1,282 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___logging" kind="group">
+    <compoundname>Logging</compoundname>
+    <title>日志系统</title>
+    <innerclass refid="classfile__sink" prot="public">file_sink</innerclass>
+    <innerclass refid="structlog__event" prot="public">log_event</innerclass>
+    <innerclass refid="classlog__formatter" prot="public">log_formatter</innerclass>
+    <innerclass refid="classlog__sink" prot="public">log_sink</innerclass>
+    <innerclass refid="classconsole__sink" prot="public">console_sink</innerclass>
+    <innerclass refid="classlogger" prot="public">logger</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group___logging_1gac91d55174d383848b976a34de843748e" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>log_level</name>
+        <enumvalue id="group___logging_1ggac91d55174d383848b976a34de843748ea2d3e4144aa384b18849ab9a8abad74d6" prot="public">
+          <name>TRACE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>跟踪级别，最详细的调试信息 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___logging_1ggac91d55174d383848b976a34de843748eadc30ec20708ef7b0f641ef78b7880a15" prot="public">
+          <name>DEBUG</name>
+          <briefdescription>
+<para>调试级别，用于开发调试 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___logging_1ggac91d55174d383848b976a34de843748ea551b723eafd6a31d444fcb2f5920fbd3" prot="public">
+          <name>INFO</name>
+          <briefdescription>
+<para>信息级别，普通信息 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___logging_1ggac91d55174d383848b976a34de843748ea32bd8a1db2275458673903bdb84cb277" prot="public">
+          <name>WARN</name>
+          <briefdescription>
+<para>警告级别，表示潜在问题 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___logging_1ggac91d55174d383848b976a34de843748eabb1ca97ec761fc37101737ba0aa2e7c5" prot="public">
+          <name>ERROR</name>
+          <briefdescription>
+<para>错误级别，表示可恢复的错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___logging_1ggac91d55174d383848b976a34de843748ea19da7170bea36556dde582519795f3fc" prot="public">
+          <name>FATAL</name>
+          <briefdescription>
+<para>致命级别，表示不可恢复的错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>日志级别枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义了日志的严重性级别，从最详细的TRACE到最严重的FATAL。 用于控制日志输出和过滤。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="33" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="33" bodyend="40"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___logging_1ga4e290e586cd5cab60821bf2bf31556bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_CONSTEXPR20 string to_string</definition>
+        <argsstring>(const log_level level)</argsstring>
+        <name>to_string</name>
+        <param>
+          <type>const <ref refid="group___logging_1gac91d55174d383848b976a34de843748e" kindref="member">log_level</ref></type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="43" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="43" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="group___logging_1ga7ba3f1921075bd3adc62d2915630fce7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string default_sink_format</definition>
+        <argsstring>(const log_event &amp;ev)</argsstring>
+        <name>default_sink_format</name>
+        <param>
+          <type>const <ref refid="structlog__event" kindref="compound">log_event</ref> &amp;</type>
+          <declname>ev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="22" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="group___logging_1gabec902df54b5c5dc12363add6b0033f1" prot="public" static="no">
+        <name>NEFORCE_LOG_TRACE</name>
+        <param><defname>msg</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().trace(msg, __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>记录TRACE级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="257" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="257" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1ga468b51d53845d91c650bd64ec383f2db" prot="public" static="no">
+        <name>NEFORCE_LOG_DEBUG</name>
+        <param><defname>msg</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().debug(msg, __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>记录DEBUG级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="260" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="260" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1ga27b4cb862a667f280c3651389e1bc377" prot="public" static="no">
+        <name>NEFORCE_LOG_INFO</name>
+        <param><defname>msg</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().info(msg, __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>记录INFO级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="263" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1ga1d0f76ad379d9e5855530e0467d217b2" prot="public" static="no">
+        <name>NEFORCE_LOG_WARN</name>
+        <param><defname>msg</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().warn(msg, __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>记录WARN级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="266" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="266" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1ga860927111c67a1231d2dd479fb141262" prot="public" static="no">
+        <name>NEFORCE_LOG_ERROR</name>
+        <param><defname>msg</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().error(msg, __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>记录ERROR级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="269" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="269" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1ga1c2c0a35fecf5c58de109043e82b279a" prot="public" static="no">
+        <name>NEFORCE_LOG_FATAL</name>
+        <param><defname>msg</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().fatal(msg, __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>记录FATAL级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="272" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="272" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1ga205e2dc039acdf4eb046d0fa5628681b" prot="public" static="no">
+        <name>NEFORCE_LOGF_TRACE</name>
+        <param><defname>msg</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().trace(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>格式化TRACE级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="276" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="276" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1gab0e8fba229c12c4e4d8b4d62032564ad" prot="public" static="no">
+        <name>NEFORCE_LOGF_DEBUG</name>
+        <param><defname>msg</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().debug(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>格式化DEBUG级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="280" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="280" bodyend="281"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1gaea0b2b242d3f8aff3958d20f9c998fc3" prot="public" static="no">
+        <name>NEFORCE_LOGF_INFO</name>
+        <param><defname>msg</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().info(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>格式化INFO级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="284" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="284" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1ga2aff8d140fabdbfc10e6a300fc493a2c" prot="public" static="no">
+        <name>NEFORCE_LOGF_WARN</name>
+        <param><defname>msg</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().warn(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>格式化WARN级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="288" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="288" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1gaa22a88c22e6166ca5d9ac6c5664766c0" prot="public" static="no">
+        <name>NEFORCE_LOGF_ERROR</name>
+        <param><defname>msg</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().error(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>格式化ERROR级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="292" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="292" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="define" id="group___logging_1ga718477d579666c5e10cb5ac70c4211b7" prot="public" static="no">
+        <name>NEFORCE_LOGF_FATAL</name>
+        <param><defname>msg</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().fatal(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <briefdescription>
+<para>格式化FATAL级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="296" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="296" bodyend="297"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>日志记录和管理功能 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

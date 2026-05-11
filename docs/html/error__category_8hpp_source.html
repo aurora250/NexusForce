@@ -117,39 +117,41 @@ $(function(){initNavTree('error__category_8hpp_source.html','',''); });
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    virtual <span class="keywordtype">bool</span> equivalent(<span class="keywordtype">int</span> code, const error_condition&amp; condition) const noexcept;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    virtual <span class="keywordtype">bool</span> equivalent(const error_code&amp; code, <span class="keywordtype">int</span> condition) const noexcept;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">bool</span> operator==(const error_category&amp; rhs) const noexcept { <span class="keywordflow">return</span> <span class="keyword">this</span> == &amp;rhs; }</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">bool</span> operator&lt;(<span class="keyword">const</span> error_category&amp; rhs) <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> less&lt;const error_category*&gt;()(<span class="keyword">this</span>, &amp;rhs); }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">class </span>NEFORCE_API generic_error_category final : <span class="keyword">public</span> error_category {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="group___thread.html#ga6f83c2a4509ed1d467ba909884e9850b">name</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;generic&quot;</span>; }</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> message(<a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> ev) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> equal_to(const error_category&amp; rhs) const noexcept { <span class="keywordflow">return</span> <span class="keyword">this</span> == &amp;rhs; }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> less_than(<span class="keyword">const</span> error_category&amp; rhs) <span class="keyword">const</span> <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">return</span> less&lt;const error_category*&gt;()(<span class="keyword">this</span>, &amp;rhs);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>};</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">class </span>NEFORCE_API generic_error_category final : <span class="keyword">public</span> error_category {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="group___thread.html#ga6f83c2a4509ed1d467ba909884e9850b">name</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;generic&quot;</span>; }</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    NEFORCE_NODISCARD error_condition default_error_condition(<a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> ev) <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>};</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>NEFORCE_API <span class="keyword">const</span> error_category&amp; generic_category() noexcept;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> message(<a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> ev) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    NEFORCE_NODISCARD error_condition default_error_condition(<a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> ev) <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>};</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>inline error_code make_error_code(<a class="code hl_enumeration" href="group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6">errc</a> e) noexcept;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>inline error_condition make_error_condition(<a class="code hl_enumeration" href="group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6">errc</a> e) noexcept;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>class NEFORCE_API system_error_category final : public error_category {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="group___thread.html#ga6f83c2a4509ed1d467ba909884e9850b">name</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;system&quot;</span>; }</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> message(<a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> ev) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>NEFORCE_API <span class="keyword">const</span> error_category&amp; generic_category() noexcept;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>inline error_code make_error_code(<a class="code hl_enumeration" href="group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6">errc</a> e) noexcept;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>inline error_condition make_error_condition(<a class="code hl_enumeration" href="group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6">errc</a> e) noexcept;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>class NEFORCE_API system_error_category final : public error_category {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    NEFORCE_NODISCARD <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="group___thread.html#ga6f83c2a4509ed1d467ba909884e9850b">name</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;system&quot;</span>; }</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    NEFORCE_NODISCARD error_condition default_error_condition(<a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> ev) <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>};</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>NEFORCE_API <span class="keyword">const</span> error_category&amp; system_category() noexcept;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> message(<a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> ev) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    NEFORCE_NODISCARD error_condition default_error_condition(<a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> ev) <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>};</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_EXCEPTION_ERROR_CATEGORY_HPP__</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>NEFORCE_API <span class="keyword">const</span> error_category&amp; system_category() noexcept;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_EXCEPTION_ERROR_CATEGORY_HPP__</span></div>
 <div class="ttc" id="aerrc_8hpp_html"><div class="ttname"><a href="errc_8hpp.html">errc.hpp</a></div><div class="ttdoc">系统错误码枚举</div></div>
 <div class="ttc" id="agroup___core_types_html_ga9f99c01571d1afadb9d8d2e48ec532bb"><div class="ttname"><a href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a></div><div class="ttdeci">int int32_t</div><div class="ttdoc">32位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00079">types.hpp:79</a></div></div>
 <div class="ttc" id="agroup___error_code_html_gaf82e70cdc0af1c3132fe6f20443944e6"><div class="ttname"><a href="group___error_code.html#gaf82e70cdc0af1c3132fe6f20443944e6">errc</a></div><div class="ttdeci">errc</div><div class="ttdoc">系统错误码枚举</div><div class="ttdef"><b>定义</b> <a href="errc_8hpp_source.html#l00029">errc.hpp:29</a></div></div>

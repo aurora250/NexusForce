@@ -1,0 +1,1601 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classmemory__view" kind="class" language="C++" prot="public">
+    <compoundname>memory_view</compoundname>
+    <includes refid="memory__view_8hpp" local="no">memory_view.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Element</type>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <declname>Extent</declname>
+        <defname>Extent</defname>
+        <defval><ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref></defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" prot="public" static="no">
+        <type>Element</type>
+        <definition>using memory_view&lt; Element, Extent &gt;::element_type = Element</definition>
+        <argsstring></argsstring>
+        <name>element_type</name>
+        <qualifiedname>memory_view::element_type</qualifiedname>
+        <briefdescription>
+<para>元素类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="92" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmemory__view_1a53efaf0c5969f9db536c888f2be284a4" prot="public" static="no">
+        <type><ref refid="group___remove_qualifiers_1gadb53d365fce2ddba102949e4ad3bf058" kindref="member">remove_cv_t</ref>&lt; Element &gt;</type>
+        <definition>using memory_view&lt; Element, Extent &gt;::value_type = remove_cv_t&lt;Element&gt;</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>memory_view::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="94" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>using memory_view&lt; Element, Extent &gt;::size_type = size_t</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>memory_view::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="95" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmemory__view_1a59dd1c780adb45fb15c682e0435292a1" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref></type>
+        <definition>using memory_view&lt; Element, Extent &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>memory_view::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="96" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmemory__view_1a0d1d5767876b8381cb6d0fedc23f7176" prot="public" static="no">
+        <type>Element *</type>
+        <definition>using memory_view&lt; Element, Extent &gt;::pointer = Element*</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>memory_view::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="97" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmemory__view_1aba858d2d0ae7f4e682cc54f3bcb223d7" prot="public" static="no">
+        <type>const Element *</type>
+        <definition>using memory_view&lt; Element, Extent &gt;::const_pointer = const Element*</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>memory_view::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="98" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmemory__view_1aa740f49ea07990b47d2bf1f8b9cde567" prot="public" static="no">
+        <type><ref refid="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" kindref="member">element_type</ref> &amp;</type>
+        <definition>using memory_view&lt; Element, Extent &gt;::reference = element_type&amp;</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>memory_view::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="99" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmemory__view_1a3d3a70eed9eb346886fc3b0c38b10f5b" prot="public" static="no">
+        <type>const <ref refid="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" kindref="member">element_type</ref> &amp;</type>
+        <definition>using memory_view&lt; Element, Extent &gt;::const_reference = const element_type&amp;</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>memory_view::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="100" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmemory__view_1aafe39d6ee03367d0ed8d0b8a8b9844a7" prot="public" static="no">
+        <type><ref refid="classnormal__iterator" kindref="compound">normal_iterator</ref>&lt; <ref refid="classmemory__view_1a0d1d5767876b8381cb6d0fedc23f7176" kindref="member">pointer</ref> &gt;</type>
+        <definition>using memory_view&lt; Element, Extent &gt;::iterator = normal_iterator&lt;pointer&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>memory_view::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="101" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmemory__view_1a7bebf7d24afb7d1f18d54f902ae771be" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classmemory__view_1a7bebf7d24afb7d1f18d54f902ae771be" kindref="member">reverse_iterator</ref>&lt; <ref refid="classmemory__view_1aafe39d6ee03367d0ed8d0b8a8b9844a7" kindref="member">iterator</ref> &gt;</type>
+        <definition>using memory_view&lt; Element, Extent &gt;::reverse_iterator = _NEFORCE reverse_iterator&lt;iterator&gt;</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>memory_view::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="102" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classmemory__view_1a6541059cff107a8dfd3c949e2eb0b566" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>ArrayExtent</declname>
+            <defname>ArrayExtent</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; Extent==<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref>||ArrayExtent==Extent, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___convertible_checks_1gab8efd424ae29f19c10d54d62118c763f" kindref="member">is_array_convertible</ref>&lt; Element, U &gt;</type>
+        <definition>using memory_view&lt; Element, Extent &gt;::is_compatible_array = is_array_convertible&lt;Element, U&gt;</definition>
+        <argsstring></argsstring>
+        <name>is_compatible_array</name>
+        <qualifiedname>memory_view::is_compatible_array</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="106" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classmemory__view_1aa31d5f31d701751020cacffeb516b29f" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Ref</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___convertible_checks_1gab8efd424ae29f19c10d54d62118c763f" kindref="member">is_array_convertible</ref>&lt; Element, <ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt; Ref &gt; &gt;</type>
+        <definition>using memory_view&lt; Element, Extent &gt;::is_compatible_ref = is_array_convertible&lt;Element, remove_reference_t&lt;Ref&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>is_compatible_ref</name>
+        <qualifiedname>memory_view::is_compatible_ref</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="109" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmemory__view_1a04869f08c55804830f4e4264eb982a95" prot="private" static="no" mutable="no">
+        <type><ref refid="structcompressed__pair" kindref="compound">compressed_pair</ref>&lt; inner::extent_storage&lt; Extent &gt;, <ref refid="classmemory__view_1a0d1d5767876b8381cb6d0fedc23f7176" kindref="member">pointer</ref> &gt;</type>
+        <definition>compressed_pair&lt;inner::extent_storage&lt;Extent&gt;, pointer&gt; memory_view&lt; Element, Extent &gt;::extent_pair_</definition>
+        <argsstring></argsstring>
+        <name>extent_pair_</name>
+        <qualifiedname>memory_view::extent_pair_</qualifiedname>
+        <briefdescription>
+<para>压缩存储：范围存储和指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="112" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classmemory__view_1ac4d09dc5ec8f9f388944c8dc2b599982" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>OE</declname>
+            <defname>OE</defname>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class memory_view</definition>
+        <argsstring></argsstring>
+        <name>memory_view</name>
+        <qualifiedname>memory_view::memory_view</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view" kindref="compound">memory_view</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="115" column="18" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classmemory__view_1a966fd6ab2b691286fd44c0276b85b2af" prot="public" static="no" mutable="no">
+        <type><ref refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" kindref="member">size_type</ref> count</type>
+        <definition>size_type count memory_view&lt; Element, Extent &gt;::noexcept</definition>
+        <argsstring></argsstring>
+        <name>noexcept</name>
+        <qualifiedname>memory_view::noexcept</qualifiedname>
+        <bitfield> extent_pair_(exact_arg_construct_tag{}</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="192" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmemory__view_1aff00b1d161fd364c634cf448d59c2e90" prot="public" static="no" mutable="no">
+        <type><ref refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" kindref="member">size_type</ref> count</type>
+        <definition>size_type count memory_view&lt; Element, Extent &gt;::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <qualifiedname>memory_view::count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="193" column="2" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmemory__view_1a5cb8d1b73fad0dc476ca4fd3c88786e8" prot="public" static="no" mutable="no">
+        <type>OE &amp;other</type>
+        <definition>OE&amp; other memory_view&lt; Element, Extent &gt;::noexcept</definition>
+        <argsstring></argsstring>
+        <name>noexcept</name>
+        <qualifiedname>memory_view::noexcept</qualifiedname>
+        <bitfield> extent_pair_(exact_arg_construct_tag{}</bitfield>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="281" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="282" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classmemory__view_1a5b261bcd060f6513fff7716280953ffb" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Count</declname>
+            <defname>Count</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; Count !=<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>static constexpr size_t memory_view&lt; Element, Extent &gt;::view_extent</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>view_extent</name>
+        <qualifiedname>memory_view::view_extent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="119" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="119" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a5b261bcd060f6513fff7716280953ffb" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Offset</declname>
+            <defname>Offset</defname>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Count</declname>
+            <defname>Count</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; Count==<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref> &amp;&amp;Extent !=<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>static constexpr size_t memory_view&lt; Element, Extent &gt;::view_extent</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>view_extent</name>
+        <qualifiedname>memory_view::view_extent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="124" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="124" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a5b261bcd060f6513fff7716280953ffb" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Count</declname>
+            <defname>Count</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; Count==<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref> &amp;&amp;Extent==<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>static constexpr size_t memory_view&lt; Element, Extent &gt;::view_extent</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>view_extent</name>
+        <qualifiedname>memory_view::view_extent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="129" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="129" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1acacd34fdbb9e1c5bbdee42419fb84c4a" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>UE</declname>
+            <defname>UE</defname>
+            <defval>Extent</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; UE !=<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_ALWAYS_INLINE constexpr void</type>
+        <definition>static NEFORCE_ALWAYS_INLINE constexpr void memory_view&lt; Element, Extent &gt;::check_extend</definition>
+        <argsstring>(const size_t count) noexcept</argsstring>
+        <name>check_extend</name>
+        <qualifiedname>memory_view::check_extend</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="134" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="134" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1ad8b046a0b36d83c066db001b39366c9d" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>UE</declname>
+            <defname>UE</defname>
+            <defval>Extent</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; UE==<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_ALWAYS_INLINE constexpr void</type>
+        <definition>static NEFORCE_ALWAYS_INLINE constexpr void memory_view&lt; Element, Extent &gt;::check_extend</definition>
+        <argsstring>(const size_t) noexcept</argsstring>
+        <name>check_extend</name>
+        <qualifiedname>memory_view::check_extend</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="138" column="49" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="138" bodyend="138"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classmemory__view_1a8279fd9e0f5732d0a486d4d46be6a79b" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>UE</declname>
+            <defname>UE</defname>
+            <defval>Extent</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; UE !=<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_ALWAYS_INLINE constexpr void</type>
+        <definition>NEFORCE_ALWAYS_INLINE constexpr void memory_view&lt; Element, Extent &gt;::check_count</definition>
+        <argsstring>(const size_t Count) const noexcept</argsstring>
+        <name>check_count</name>
+        <qualifiedname>memory_view::check_count</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>Count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="141" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="141" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a8279fd9e0f5732d0a486d4d46be6a79b" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>UE</declname>
+            <defname>UE</defname>
+            <defval>Extent</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; UE==<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_ALWAYS_INLINE constexpr void</type>
+        <definition>NEFORCE_ALWAYS_INLINE constexpr void memory_view&lt; Element, Extent &gt;::check_count</definition>
+        <argsstring>(const size_t Count) const noexcept</argsstring>
+        <name>check_count</name>
+        <qualifiedname>memory_view::check_count</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>Count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="145" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="145" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a5cb5bc4347f840f4640ac7af0fbb6397" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Offset</declname>
+            <defname>Offset</defname>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Count</declname>
+            <defname>Count</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; Count==<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) memory_view&lt; Element, Extent &gt;::view_aux</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>view_aux</name>
+        <qualifiedname>memory_view::view_aux</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="150" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="150" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a5cb5bc4347f840f4640ac7af0fbb6397" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Offset</declname>
+            <defname>Offset</defname>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Count</declname>
+            <defname>Count</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; Count !=<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref>, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) memory_view&lt; Element, Extent &gt;::view_aux</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>view_aux</name>
+        <qualifiedname>memory_view::view_aux</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="155" column="24" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="155" bodyend="160"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmemory__view_1ac93e926d620b7c196b102989a9dc7447" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>memory_view&lt; Element, Extent &gt;::memory_view</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>memory_view</name>
+        <qualifiedname>memory_view::memory_view</qualifiedname>
+    <requiresclause>((Extent + 1u) &lt;= 1u)    </requiresclause>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造空视图。仅当Extent为0或dynamic_extent时可用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="168" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="168" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a68fed76926f521a04a14a5644a8d87e7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga6ae62ba9d46a5c337504b774b95e140a" kindref="member">is_cot_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>memory_view&lt; Element, Extent &gt;::explicit</definition>
+        <argsstring>(Extent !=dynamic_extent) memory_view(Iterator first</argsstring>
+        <name>explicit</name>
+        <qualifiedname>memory_view::explicit</qualifiedname>
+        <param>
+          <type>Extent !</type>
+          <defval><ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref></defval>
+        </param>
+        <briefdescription>
+<para>从迭代器和大小构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+当Extent为静态大小时，count必须等于Extent。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="190" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1ae3719f47fa2fa54dc903f6b6c087e95b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" kindref="member">size_type</ref> count _NEFORCE</type>
+        <definition>size_type count _NEFORCE memory_view&lt; Element, Extent &gt;::to_address</definition>
+        <argsstring>(first))</argsstring>
+        <name>to_address</name>
+        <qualifiedname>memory_view::to_address</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view_1af311cb06099a11246ce05da88e698a1b" kindref="member">first</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="193" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="193" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a68fed76926f521a04a14a5644a8d87e7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga6ae62ba9d46a5c337504b774b95e140a" kindref="member">is_cot_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>memory_view&lt; Element, Extent &gt;::explicit</definition>
+        <argsstring>(Extent !=dynamic_extent) memory_view(Iterator first</argsstring>
+        <name>explicit</name>
+        <qualifiedname>memory_view::explicit</qualifiedname>
+        <param>
+          <type>Extent !</type>
+          <defval><ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref></defval>
+        </param>
+        <briefdescription>
+<para>从迭代器范围构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+当Extent为静态大小时，范围大小必须等于Extent。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="211" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1add9b5e2f301bdb7d7787e02b3d7fbceb" prot="public" static="no" const="no" explicit="no" inline="yes" noexceptexpression="_NEFORCE distance(first, last)" virt="non-virtual">
+        <type>Iterator <ref refid="classmemory__view_1a5f0b398c55cf7263bc41034e689ff0e9" kindref="member">last</ref></type>
+        <definition>Iterator last memory_view&lt; Element, Extent &gt;::noexcept</definition>
+        <argsstring>()</argsstring>
+        <name>noexcept</name>
+        <qualifiedname>memory_view::noexcept</qualifiedname>
+        <param>
+          <type>noexcept(_NEFORCE <ref refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" kindref="member">distance</ref>(<ref refid="classmemory__view_1af311cb06099a11246ce05da88e698a1b" kindref="member">first</ref>, <ref refid="classmemory__view_1a5f0b398c55cf7263bc41034e689ff0e9" kindref="member">last</ref>))</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="213" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="213" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a858dedeba5cb6398e26c47c6e9947e8a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>AE</declname>
+            <defname>AE</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>memory_view&lt; Element, Extent &gt;::memory_view</definition>
+        <argsstring>(type_identity_t&lt; element_type &gt;(&amp;arr)[AE]) noexcept</argsstring>
+        <name>memory_view</name>
+        <qualifiedname>memory_view::memory_view</qualifiedname>
+        <param>
+          <type><ref refid="group___type_traits_utilities_1gaca42c1976d1b12998afcabf8f39e8c23" kindref="member">type_identity_t</ref>&lt; <ref refid="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" kindref="member">element_type</ref> &gt;(&amp;)</type>
+          <declname>arr</declname>
+          <array>[AE]</array>
+        </param>
+        <briefdescription>
+<para>从C风格数组构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>AE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>C风格数组引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="227" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="227" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a2f14ff02501af4cd798f314e44839232" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>AE</declname>
+            <defname>AE</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>memory_view&lt; Element, Extent &gt;::memory_view</definition>
+        <argsstring>(array&lt; U, AE &gt; &amp;arr) noexcept</argsstring>
+        <name>memory_view</name>
+        <qualifiedname>memory_view::memory_view</qualifiedname>
+        <param>
+          <type><ref refid="classarray" kindref="compound">array</ref>&lt; U, AE &gt; &amp;</type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>从array容器构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>array容器引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="241" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="241" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1aa8fbc95e2c4a7bf4a9cc60ced8910182" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>AE</declname>
+            <defname>AE</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>memory_view&lt; Element, Extent &gt;::memory_view</definition>
+        <argsstring>(const array&lt; U, AE &gt; &amp;arr) noexcept</argsstring>
+        <name>memory_view</name>
+        <qualifiedname>memory_view::memory_view</qualifiedname>
+        <param>
+          <type>const <ref refid="classarray" kindref="compound">array</ref>&lt; U, AE &gt; &amp;</type>
+          <declname>arr</declname>
+        </param>
+        <briefdescription>
+<para>从常量array容器构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数组大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>常量array容器引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="255" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="255" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a7eb1bd51c6a73fd238b61576361493cb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>memory_view&lt; Element, Extent &gt;::memory_view</definition>
+        <argsstring>(const memory_view &amp;other) noexcept=default</argsstring>
+        <name>memory_view</name>
+        <qualifiedname>memory_view::memory_view</qualifiedname>
+        <param>
+          <type>const <ref refid="classmemory__view" kindref="compound">memory_view</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="263" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1afaf401e17d6d6b4dbba3250fd53727e4" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>OE</declname>
+            <defname>OE</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr</type>
+        <definition>memory_view&lt; Element, Extent &gt;::explicit</definition>
+        <argsstring>(Extent !=dynamic_extent &amp;&amp;OE==dynamic_extent) memory_view(const memory_view&lt; U</argsstring>
+        <name>explicit</name>
+        <qualifiedname>memory_view::explicit</qualifiedname>
+        <param>
+          <type>Extent !</type>
+          <defval><ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref> &amp;&amp;OE==<ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref></defval>
+        </param>
+        <briefdescription>
+<para>从其他元素类型的视图转换构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>OE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源范围大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源视图</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+要求类型可转换且范围兼容。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="279" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a87596c23d28637cf0b942f716313ec10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>OE &amp;other</type>
+        <definition>OE &amp;other memory_view&lt; Element, Extent &gt;::static_cast</definition>
+        <argsstring>(other.size())</argsstring>
+        <name>static_cast</name>
+        <qualifiedname>memory_view::static_cast</qualifiedname>
+        <param>
+          <type>other.</type>
+          <declname>size</declname>
+          <array>()</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="281" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a22f63b4b4fe7623e2e6dfcfc9c203628" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>OE &amp;other</type>
+        <definition>OE &amp;other memory_view&lt; Element, Extent &gt;::static_cast</definition>
+        <argsstring>(other.extent_pair_.value))</argsstring>
+        <name>static_cast</name>
+        <qualifiedname>memory_view::static_cast</qualifiedname>
+        <param>
+          <type>other.extent_pair_.</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="281" column="37" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="283" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a520fba1c3e928dc53492cc196bb53809" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref> &amp;</type>
+        <definition>memory_view &amp; memory_view&lt; Element, Extent &gt;::operator=</definition>
+        <argsstring>(const memory_view &amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>memory_view::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classmemory__view" kindref="compound">memory_view</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="292" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a4d849cfa32fe2b2ecbda44b502e570d1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONSTEXPR20</type>
+        <definition>NEFORCE_CONSTEXPR20 memory_view&lt; Element, Extent &gt;::~memory_view</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>~memory_view</name>
+        <qualifiedname>memory_view::~memory_view</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="297" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a2dd09db216cafedce76a79ee1b9afcc4" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr size_type memory_view&lt; Element, Extent &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>memory_view::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="303" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="303" bodyend="303"/>
+        <referencedby refid="classmemory__view_1a6853a6345f853aaf0d2d5747bc106e99" compoundref="memory__view_8hpp" startline="330" endline="333">memory_view&lt; byte_t &gt;::back</referencedby>
+        <referencedby refid="classmemory__view_1a1c36d74fced2732f6f0d257de9bc8bd6" compoundref="memory__view_8hpp" startline="315" endline="315">memory_view&lt; byte_t &gt;::empty</referencedby>
+        <referencedby refid="classmemory__view_1ac562f952abf23a65da2b53ab1f8ea8cb" compoundref="memory__view_8hpp" startline="392" endline="395">memory_view&lt; byte_t &gt;::first</referencedby>
+        <referencedby refid="classmemory__view_1a5f0b398c55cf7263bc41034e689ff0e9" compoundref="memory__view_8hpp" startline="403" endline="407">memory_view&lt; byte_t &gt;::last</referencedby>
+        <referencedby refid="classmemory__view_1ad73fb730f7c7a9070f07d670cda3b713" compoundref="memory__view_8hpp" startline="414" endline="417">memory_view&lt; byte_t &gt;::last</referencedby>
+        <referencedby refid="classmemory__view_1a6e261c2f6ed74252f975929e6487cd80" compoundref="memory__view_8hpp" startline="340" endline="343">memory_view&lt; byte_t &gt;::operator[]</referencedby>
+        <referencedby refid="classmemory__view_1a5922d8099f742d54ec5eea6af357ea30" compoundref="memory__view_8hpp" startline="309" endline="309">memory_view&lt; byte_t &gt;::size_bytes</referencedby>
+        <referencedby refid="classmemory__view_1a513349466fb9936118cefed9178fe1d0" compoundref="memory__view_8hpp" startline="437" endline="446">memory_view&lt; byte_t &gt;::view</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a5922d8099f742d54ec5eea6af357ea30" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" kindref="member">size_type</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr size_type memory_view&lt; Element, Extent &gt;::size_bytes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size_bytes</name>
+        <qualifiedname>memory_view::size_bytes</qualifiedname>
+        <briefdescription>
+<para>获取字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>总字节数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="309" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="309" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a1c36d74fced2732f6f0d257de9bc8bd6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr bool</type>
+        <definition>NEFORCE_NODISCARD constexpr bool memory_view&lt; Element, Extent &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>memory_view::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="315" column="38" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="315" bodyend="315"/>
+        <referencedby refid="classmemory__view_1a6853a6345f853aaf0d2d5747bc106e99" compoundref="memory__view_8hpp" startline="330" endline="333">memory_view&lt; byte_t &gt;::back</referencedby>
+        <referencedby refid="classmemory__view_1ad75e7195fc4cf1214aecbe89355f84a9" compoundref="memory__view_8hpp" startline="321" endline="324">memory_view&lt; byte_t &gt;::front</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1ad75e7195fc4cf1214aecbe89355f84a9" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classmemory__view_1aa740f49ea07990b47d2bf1f8b9cde567" kindref="member">reference</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr reference memory_view&lt; Element, Extent &gt;::front</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>front</name>
+        <qualifiedname>memory_view::front</qualifiedname>
+        <briefdescription>
+<para>访问第一个元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>第一个元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="321" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="321" bodyend="324"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a6853a6345f853aaf0d2d5747bc106e99" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classmemory__view_1aa740f49ea07990b47d2bf1f8b9cde567" kindref="member">reference</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr reference memory_view&lt; Element, Extent &gt;::back</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>back</name>
+        <qualifiedname>memory_view::back</qualifiedname>
+        <briefdescription>
+<para>访问最后一个元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最后一个元素的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="330" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="330" bodyend="333"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a6e261c2f6ed74252f975929e6487cd80" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classmemory__view_1aa740f49ea07990b47d2bf1f8b9cde567" kindref="member">reference</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr reference memory_view&lt; Element, Extent &gt;::operator[]</definition>
+        <argsstring>(size_type index) const noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>memory_view::operator[]</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" kindref="member">size_type</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>下标访问操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定位置的元素引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="340" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="340" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a4ea8bfd0ca2da5604dca84206bb3be1a" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classmemory__view_1a0d1d5767876b8381cb6d0fedc23f7176" kindref="member">pointer</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr pointer memory_view&lt; Element, Extent &gt;::data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>memory_view::data</qualifiedname>
+        <briefdescription>
+<para>获取数据指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向内存起始位置的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="349" column="41" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="349" bodyend="349"/>
+        <referencedby refid="classmemory__view_1af311cb06099a11246ce05da88e698a1b" compoundref="memory__view_8hpp" startline="381" endline="385">memory_view&lt; byte_t &gt;::first</referencedby>
+        <referencedby refid="classmemory__view_1ac562f952abf23a65da2b53ab1f8ea8cb" compoundref="memory__view_8hpp" startline="392" endline="395">memory_view&lt; byte_t &gt;::first</referencedby>
+        <referencedby refid="classmemory__view_1a5f0b398c55cf7263bc41034e689ff0e9" compoundref="memory__view_8hpp" startline="403" endline="407">memory_view&lt; byte_t &gt;::last</referencedby>
+        <referencedby refid="classmemory__view_1ad73fb730f7c7a9070f07d670cda3b713" compoundref="memory__view_8hpp" startline="414" endline="417">memory_view&lt; byte_t &gt;::last</referencedby>
+        <referencedby refid="classmemory__view_1a513349466fb9936118cefed9178fe1d0" compoundref="memory__view_8hpp" startline="437" endline="446">memory_view&lt; byte_t &gt;::view</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a1e9e23af7187c70f20dad9c3559a0e19" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classmemory__view_1aafe39d6ee03367d0ed8d0b8a8b9844a7" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr iterator memory_view&lt; Element, Extent &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>memory_view::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="355" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="355" bodyend="355"/>
+        <referencedby refid="classmemory__view_1afb052f826f840eafa130fe0d311fc235" compoundref="memory__view_8hpp" startline="373" endline="373">memory_view&lt; byte_t &gt;::rend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1ae093d02aee0f25e491faedc5c4493345" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classmemory__view_1aafe39d6ee03367d0ed8d0b8a8b9844a7" kindref="member">iterator</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr iterator memory_view&lt; Element, Extent &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>memory_view::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="361" column="42" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="361" bodyend="361"/>
+        <referencedby refid="classmemory__view_1a25035379d8e86d08440f192c251cd894" compoundref="memory__view_8hpp" startline="367" endline="367">memory_view&lt; byte_t &gt;::rbegin</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a25035379d8e86d08440f192c251cd894" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classmemory__view_1a7bebf7d24afb7d1f18d54f902ae771be" kindref="member">reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr reverse_iterator memory_view&lt; Element, Extent &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>memory_view::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="367" column="50" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="367" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1afb052f826f840eafa130fe0d311fc235" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD constexpr <ref refid="classmemory__view_1a7bebf7d24afb7d1f18d54f902ae771be" kindref="member">reverse_iterator</ref></type>
+        <definition>NEFORCE_NODISCARD constexpr reverse_iterator memory_view&lt; Element, Extent &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>memory_view::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个元素之前位置的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="373" column="50" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="373" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1af311cb06099a11246ce05da88e698a1b" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Count</declname>
+            <defname>Count</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; <ref refid="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" kindref="member">element_type</ref>, Count &gt;</type>
+        <definition>memory_view&lt; element_type, Count &gt; memory_view&lt; Element, Extent &gt;::first</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>first</name>
+        <qualifiedname>memory_view::first</qualifiedname>
+        <briefdescription>
+<para>获取前Count个元素的视图（编译时大小） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="381" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="381" bodyend="385"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1ac562f952abf23a65da2b53ab1f8ea8cb" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; <ref refid="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" kindref="member">element_type</ref> &gt;</type>
+        <definition>memory_view&lt; element_type &gt; memory_view&lt; Element, Extent &gt;::first</definition>
+        <argsstring>(size_type count) const noexcept</argsstring>
+        <name>first</name>
+        <qualifiedname>memory_view::first</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" kindref="member">size_type</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>获取前count个元素的视图（运行时大小） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="392" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="392" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a5f0b398c55cf7263bc41034e689ff0e9" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Count</declname>
+            <defname>Count</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; <ref refid="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" kindref="member">element_type</ref>, Count &gt;</type>
+        <definition>memory_view&lt; element_type, Count &gt; memory_view&lt; Element, Extent &gt;::last</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>last</name>
+        <qualifiedname>memory_view::last</qualifiedname>
+        <briefdescription>
+<para>获取后Count个元素的视图（编译时大小） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="403" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="403" bodyend="407"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1ad73fb730f7c7a9070f07d670cda3b713" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; <ref refid="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" kindref="member">element_type</ref> &gt;</type>
+        <definition>memory_view&lt; element_type &gt; memory_view&lt; Element, Extent &gt;::last</definition>
+        <argsstring>(size_type count) const noexcept</argsstring>
+        <name>last</name>
+        <qualifiedname>memory_view::last</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" kindref="member">size_type</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>获取后count个元素的视图（运行时大小） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="414" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="414" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1afa83db2b8e1cf3ea607da79dac023f90" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Offset</declname>
+            <defname>Offset</defname>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Count</declname>
+            <defname>Count</defname>
+            <defval><ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref></defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; <ref refid="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" kindref="member">element_type</ref>, view_extent&lt; Offset, Count &gt;()&gt;</type>
+        <definition>memory_view&lt; element_type, view_extent&lt; Offset, Count &gt;()&gt; memory_view&lt; Element, Extent &gt;::view</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>view</name>
+        <qualifiedname>memory_view::view</qualifiedname>
+        <briefdescription>
+<para>获取子视图（编译时偏移和大小） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>偏移量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量，默认为dynamic_extent </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>子视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="426" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="426" bodyend="429"/>
+      </memberdef>
+      <memberdef kind="function" id="classmemory__view_1a513349466fb9936118cefed9178fe1d0" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classmemory__view" kindref="compound">memory_view</ref>&lt; <ref refid="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" kindref="member">element_type</ref> &gt;</type>
+        <definition>memory_view&lt; element_type &gt; memory_view&lt; Element, Extent &gt;::view</definition>
+        <argsstring>(size_type offset, size_type count=dynamic_extent) const noexcept</argsstring>
+        <name>view</name>
+        <qualifiedname>memory_view::view</qualifiedname>
+        <param>
+          <type><ref refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" kindref="member">size_type</ref></type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" kindref="member">size_type</ref></type>
+          <declname>count</declname>
+          <defval><ref refid="group___memory_view_1gae58590b34c5a273cdafc1f2f69ace9c8" kindref="member">dynamic_extent</ref></defval>
+        </param>
+        <briefdescription>
+<para>获取子视图（运行时偏移和大小） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>偏移量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素数量，默认为dynamic_extent（到末尾） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>子视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="437" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="437" bodyend="446"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>内存视图模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Element</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Extent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>静态范围大小，默认为dynamic_extent</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+memory_view是一个非拥有的连续内存视图，针对内存操作优化。 可以指向任意连续内存块。支持编译时和运行时大小确定。 提供类似容器的接口，但不进行内存管理。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" line="90" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/memory_view.hpp" bodystart="90" bodyend="447"/>
+    <listofallmembers>
+      <member refid="classmemory__view_1a6853a6345f853aaf0d2d5747bc106e99" prot="public" virt="non-virtual"><scope>memory_view</scope><name>back</name></member>
+      <member refid="classmemory__view_1a1e9e23af7187c70f20dad9c3559a0e19" prot="public" virt="non-virtual"><scope>memory_view</scope><name>begin</name></member>
+      <member refid="classmemory__view_1a8279fd9e0f5732d0a486d4d46be6a79b" prot="private" virt="non-virtual"><scope>memory_view</scope><name>check_count</name></member>
+      <member refid="classmemory__view_1a8279fd9e0f5732d0a486d4d46be6a79b" prot="private" virt="non-virtual"><scope>memory_view</scope><name>check_count</name></member>
+      <member refid="classmemory__view_1acacd34fdbb9e1c5bbdee42419fb84c4a" prot="private" virt="non-virtual"><scope>memory_view</scope><name>check_extend</name></member>
+      <member refid="classmemory__view_1ad8b046a0b36d83c066db001b39366c9d" prot="private" virt="non-virtual"><scope>memory_view</scope><name>check_extend</name></member>
+      <member refid="classmemory__view_1aba858d2d0ae7f4e682cc54f3bcb223d7" prot="public" virt="non-virtual"><scope>memory_view</scope><name>const_pointer</name></member>
+      <member refid="classmemory__view_1a3d3a70eed9eb346886fc3b0c38b10f5b" prot="public" virt="non-virtual"><scope>memory_view</scope><name>const_reference</name></member>
+      <member refid="classmemory__view_1aff00b1d161fd364c634cf448d59c2e90" prot="public" virt="non-virtual"><scope>memory_view</scope><name>count</name></member>
+      <member refid="classmemory__view_1a4ea8bfd0ca2da5604dca84206bb3be1a" prot="public" virt="non-virtual"><scope>memory_view</scope><name>data</name></member>
+      <member refid="classmemory__view_1a59dd1c780adb45fb15c682e0435292a1" prot="public" virt="non-virtual"><scope>memory_view</scope><name>difference_type</name></member>
+      <member refid="classmemory__view_1a9c6669d0d450fab8e4a4f72ce0cd5423" prot="public" virt="non-virtual"><scope>memory_view</scope><name>element_type</name></member>
+      <member refid="classmemory__view_1a1c36d74fced2732f6f0d257de9bc8bd6" prot="public" virt="non-virtual"><scope>memory_view</scope><name>empty</name></member>
+      <member refid="classmemory__view_1ae093d02aee0f25e491faedc5c4493345" prot="public" virt="non-virtual"><scope>memory_view</scope><name>end</name></member>
+      <member refid="classmemory__view_1a68fed76926f521a04a14a5644a8d87e7" prot="public" virt="non-virtual"><scope>memory_view</scope><name>explicit</name></member>
+      <member refid="classmemory__view_1a68fed76926f521a04a14a5644a8d87e7" prot="public" virt="non-virtual"><scope>memory_view</scope><name>explicit</name></member>
+      <member refid="classmemory__view_1afaf401e17d6d6b4dbba3250fd53727e4" prot="public" virt="non-virtual"><scope>memory_view</scope><name>explicit</name></member>
+      <member refid="classmemory__view_1a04869f08c55804830f4e4264eb982a95" prot="private" virt="non-virtual"><scope>memory_view</scope><name>extent_pair_</name></member>
+      <member refid="classmemory__view_1af311cb06099a11246ce05da88e698a1b" prot="public" virt="non-virtual"><scope>memory_view</scope><name>first</name></member>
+      <member refid="classmemory__view_1ac562f952abf23a65da2b53ab1f8ea8cb" prot="public" virt="non-virtual"><scope>memory_view</scope><name>first</name></member>
+      <member refid="classmemory__view_1ad75e7195fc4cf1214aecbe89355f84a9" prot="public" virt="non-virtual"><scope>memory_view</scope><name>front</name></member>
+      <member refid="classmemory__view_1a6541059cff107a8dfd3c949e2eb0b566" prot="private" virt="non-virtual"><scope>memory_view</scope><name>is_compatible_array</name></member>
+      <member refid="classmemory__view_1aa31d5f31d701751020cacffeb516b29f" prot="private" virt="non-virtual"><scope>memory_view</scope><name>is_compatible_ref</name></member>
+      <member refid="classmemory__view_1aafe39d6ee03367d0ed8d0b8a8b9844a7" prot="public" virt="non-virtual"><scope>memory_view</scope><name>iterator</name></member>
+      <member refid="classmemory__view_1a5f0b398c55cf7263bc41034e689ff0e9" prot="public" virt="non-virtual"><scope>memory_view</scope><name>last</name></member>
+      <member refid="classmemory__view_1ad73fb730f7c7a9070f07d670cda3b713" prot="public" virt="non-virtual"><scope>memory_view</scope><name>last</name></member>
+      <member refid="classmemory__view_1ac93e926d620b7c196b102989a9dc7447" prot="public" virt="non-virtual"><scope>memory_view</scope><name>memory_view</name></member>
+      <member refid="classmemory__view_1a858dedeba5cb6398e26c47c6e9947e8a" prot="public" virt="non-virtual"><scope>memory_view</scope><name>memory_view</name></member>
+      <member refid="classmemory__view_1a2f14ff02501af4cd798f314e44839232" prot="public" virt="non-virtual"><scope>memory_view</scope><name>memory_view</name></member>
+      <member refid="classmemory__view_1aa8fbc95e2c4a7bf4a9cc60ced8910182" prot="public" virt="non-virtual"><scope>memory_view</scope><name>memory_view</name></member>
+      <member refid="classmemory__view_1a7eb1bd51c6a73fd238b61576361493cb" prot="public" virt="non-virtual"><scope>memory_view</scope><name>memory_view</name></member>
+      <member refid="classmemory__view_1a966fd6ab2b691286fd44c0276b85b2af" prot="public" virt="non-virtual"><scope>memory_view</scope><name>noexcept</name></member>
+      <member refid="classmemory__view_1a5cb8d1b73fad0dc476ca4fd3c88786e8" prot="public" virt="non-virtual"><scope>memory_view</scope><name>noexcept</name></member>
+      <member refid="classmemory__view_1add9b5e2f301bdb7d7787e02b3d7fbceb" prot="public" virt="non-virtual"><scope>memory_view</scope><name>noexcept</name></member>
+      <member refid="classmemory__view_1a520fba1c3e928dc53492cc196bb53809" prot="public" virt="non-virtual"><scope>memory_view</scope><name>operator=</name></member>
+      <member refid="classmemory__view_1a6e261c2f6ed74252f975929e6487cd80" prot="public" virt="non-virtual"><scope>memory_view</scope><name>operator[]</name></member>
+      <member refid="classmemory__view_1a0d1d5767876b8381cb6d0fedc23f7176" prot="public" virt="non-virtual"><scope>memory_view</scope><name>pointer</name></member>
+      <member refid="classmemory__view_1a25035379d8e86d08440f192c251cd894" prot="public" virt="non-virtual"><scope>memory_view</scope><name>rbegin</name></member>
+      <member refid="classmemory__view_1aa740f49ea07990b47d2bf1f8b9cde567" prot="public" virt="non-virtual"><scope>memory_view</scope><name>reference</name></member>
+      <member refid="classmemory__view_1afb052f826f840eafa130fe0d311fc235" prot="public" virt="non-virtual"><scope>memory_view</scope><name>rend</name></member>
+      <member refid="classmemory__view_1a7bebf7d24afb7d1f18d54f902ae771be" prot="public" virt="non-virtual"><scope>memory_view</scope><name>reverse_iterator</name></member>
+      <member refid="classmemory__view_1a2dd09db216cafedce76a79ee1b9afcc4" prot="public" virt="non-virtual"><scope>memory_view</scope><name>size</name></member>
+      <member refid="classmemory__view_1a5922d8099f742d54ec5eea6af357ea30" prot="public" virt="non-virtual"><scope>memory_view</scope><name>size_bytes</name></member>
+      <member refid="classmemory__view_1a99f22ea4caaa896809a3e9924239e79f" prot="public" virt="non-virtual"><scope>memory_view</scope><name>size_type</name></member>
+      <member refid="classmemory__view_1a87596c23d28637cf0b942f716313ec10" prot="public" virt="non-virtual"><scope>memory_view</scope><name>static_cast</name></member>
+      <member refid="classmemory__view_1a22f63b4b4fe7623e2e6dfcfc9c203628" prot="public" virt="non-virtual"><scope>memory_view</scope><name>static_cast</name></member>
+      <member refid="classmemory__view_1ae3719f47fa2fa54dc903f6b6c087e95b" prot="public" virt="non-virtual"><scope>memory_view</scope><name>to_address</name></member>
+      <member refid="classmemory__view_1a53efaf0c5969f9db536c888f2be284a4" prot="public" virt="non-virtual"><scope>memory_view</scope><name>value_type</name></member>
+      <member refid="classmemory__view_1afa83db2b8e1cf3ea607da79dac023f90" prot="public" virt="non-virtual"><scope>memory_view</scope><name>view</name></member>
+      <member refid="classmemory__view_1a513349466fb9936118cefed9178fe1d0" prot="public" virt="non-virtual"><scope>memory_view</scope><name>view</name></member>
+      <member refid="classmemory__view_1a5cb5bc4347f840f4640ac7af0fbb6397" prot="private" virt="non-virtual"><scope>memory_view</scope><name>view_aux</name></member>
+      <member refid="classmemory__view_1a5cb5bc4347f840f4640ac7af0fbb6397" prot="private" virt="non-virtual"><scope>memory_view</scope><name>view_aux</name></member>
+      <member refid="classmemory__view_1a5b261bcd060f6513fff7716280953ffb" prot="private" virt="non-virtual"><scope>memory_view</scope><name>view_extent</name></member>
+      <member refid="classmemory__view_1a5b261bcd060f6513fff7716280953ffb" prot="private" virt="non-virtual"><scope>memory_view</scope><name>view_extent</name></member>
+      <member refid="classmemory__view_1a5b261bcd060f6513fff7716280953ffb" prot="private" virt="non-virtual"><scope>memory_view</scope><name>view_extent</name></member>
+      <member refid="classmemory__view_1a4d849cfa32fe2b2ecbda44b502e570d1" prot="public" virt="non-virtual"><scope>memory_view</scope><name>~memory_view</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

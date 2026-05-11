@@ -103,200 +103,37 @@ $(function(){initNavTree('yaml__value_8hpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 yaml_value.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="yaml__value_8hpp__incl.svg" width="2608" height="1926"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="yaml__value_8hpp__incl.svg" width="2790" height="1926"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="yaml__value_8hpp_source.html">浏览该文件的源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:yaml_5Fexception" id="r_yaml_5Fexception"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structyaml__exception.html">yaml_exception</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML格式操作失败  <a href="structyaml__exception.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:yaml_5Fvalue" id="r_yaml_5Fvalue"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classyaml__value.html">yaml_value</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML值的抽象基类  <a href="classyaml__value.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:yaml_5Fnull" id="r_yaml_5Fnull"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classyaml__null.html">yaml_null</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML空值类型  <a href="classyaml__null.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:yaml_5Fboolean" id="r_yaml_5Fboolean"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classyaml__boolean.html">yaml_boolean</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML布尔值类型  <a href="classyaml__boolean.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:yaml_5Finteger" id="r_yaml_5Finteger"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classyaml__integer.html">yaml_integer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML整数值类型  <a href="classyaml__integer.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:yaml_5Ffloat" id="r_yaml_5Ffloat"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classyaml__float.html">yaml_float</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML浮点数值类型  <a href="classyaml__float.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:yaml_5Fstring" id="r_yaml_5Fstring"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classyaml__string.html">yaml_string</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML字符串值类型  <a href="classyaml__string.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:yaml_5Ftimestamp" id="r_yaml_5Ftimestamp"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classyaml__timestamp.html">yaml_timestamp</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML时间戳值类型  <a href="classyaml__timestamp.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:yaml_5Fsequence" id="r_yaml_5Fsequence"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classyaml__sequence.html">yaml_sequence</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML序列值类型（数组）  <a href="classyaml__sequence.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:yaml_5Fmapping" id="r_yaml_5Fmapping"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classyaml__mapping.html">yaml_mapping</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">YAML映射值类型（字典/对象）  <a href="classyaml__mapping.html#details">更多...</a><br /></td></tr>
+</table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>YAML配置格式变量 </p>
-<p>此文件提供了YAML（YAML Ain't Markup Language）配置格式的抽象基类和具体实现类。 YAML是一种人类可读的数据序列化语言，常用于配置文件、数据交换和持久化存储。</p>
-<p>支持YAML 1.2规范中的核心数据类型：</p><ul>
-<li>空值（Null）</li>
-<li>布尔值（Boolean）</li>
-<li>整数（Integer，64位有符号）</li>
-<li>浮点数（Float，双精度）</li>
-<li>字符串（String，支持五种标量样式）</li>
-<li>时间戳（Timestamp，ISO 8601 / RFC 3339格式）</li>
-<li>序列（Sequence，支持块样式和流样式）</li>
-<li>映射（Mapping，支持块样式和流样式）</li>
-<li>锚点与别名（Anchor &amp; Alias，通过 anchor 字段支持）</li>
-<li>标签（Tag，自定义类型标注）</li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="standards"></a>
-遵循的国际标准</h1>
-<p>本实现严格遵循以下 YAML 及相关标准规范：</p>
-<p><b>YAML 数据序列化规范：</b></p><ul>
-<li>**YAML 1.2.2 (2021)**：YAML Ain't Markup Language 规范（第3版） <a href="https://yaml.org/spec/1.2.2/">https://yaml.org/spec/1.2.2/</a></li>
-<li>**YAML 1.2 (2009)**：YAML 1.2 规范（第3版预览） <a href="https://yaml.org/spec/1.2/">https://yaml.org/spec/1.2/</a></li>
-<li>**YAML 1.1 (2005)**：YAML 1.1 规范（第2版，已废弃） <a href="https://yaml.org/spec/1.1/">https://yaml.org/spec/1.1/</a></li>
-</ul>
-<p><b>JSON 兼容性标准（YAML 1.2 是 JSON 的超集）：</b></p><ul>
-<li>**IETF RFC 8259**：JSON 数据交换格式（YAML 1.2 完全兼容） <a href="https://www.rfc-editor.org/rfc/rfc8259.html">https://www.rfc-editor.org/rfc/rfc8259.html</a></li>
-<li>**ECMA-404:2017**：JSON 数据交换格式 <a href="https://ecma-international.org/publications-and-standards/standards/ecma-404/">https://ecma-international.org/publications-and-standards/standards/ecma-404/</a></li>
-</ul>
-<p><b>时间戳格式标准（YAML 1.2 §10.4.2 引用）：</b></p><ul>
-<li>**IETF RFC 3339**：互联网日期时间格式 <a href="https://www.rfc-editor.org/rfc/rfc3339.html">https://www.rfc-editor.org/rfc/rfc3339.html</a></li>
-<li>**ISO 8601-1:2019**：日期和时间表示法 <a href="https://www.iso.org/standard/70907.html">https://www.iso.org/standard/70907.html</a></li>
-</ul>
-<p><b>Unicode 编码标准：</b></p><ul>
-<li>**Unicode 15.0.0**：Unicode 字符编码标准（YAML 1.2 §5.1） <a href="https://unicode.org/versions/Unicode15.0.0/">https://unicode.org/versions/Unicode15.0.0/</a></li>
-<li>**ISO/IEC 10646:2020**：通用编码字符集（UCS） <a href="https://www.iso.org/standard/76835.html">https://www.iso.org/standard/76835.html</a></li>
-</ul>
-<p><b>浮点数标准：</b></p><ul>
-<li>**IEEE 754-2019**：浮点数算术标准（YAML 数字遵循） <a href="https://standards.ieee.org/ieee/754/6210/">https://standards.ieee.org/ieee/754/6210/</a></li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="yaml_types"></a>
-YAML 值类型定义</h1>
-<p>根据 YAML 1.2.2 规范，支持以下八种核心值类型：</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">YAML 1.2.2 引用  </th><th class="markdownTableHeadNone">本实现类  </th><th class="markdownTableHeadNone">说明  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Null  </td><td class="markdownTableBodyNone">§10.2  </td><td class="markdownTableBodyNone">yaml_null  </td><td class="markdownTableBodyNone">null、Null、NULL、~  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Boolean  </td><td class="markdownTableBodyNone">§10.3  </td><td class="markdownTableBodyNone">yaml_boolean  </td><td class="markdownTableBodyNone">true/false、True/False、yes/no等  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Integer  </td><td class="markdownTableBodyNone">§10.4.1  </td><td class="markdownTableBodyNone">yaml_integer  </td><td class="markdownTableBodyNone">64位有符号整数（支持十进制、十六进制、八进制）  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Float  </td><td class="markdownTableBodyNone">§10.4.1  </td><td class="markdownTableBodyNone">yaml_float  </td><td class="markdownTableBodyNone">IEEE 754 双精度浮点数（支持 .inf、-.inf、.nan）  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">String  </td><td class="markdownTableBodyNone">§10.5  </td><td class="markdownTableBodyNone">yaml_string  </td><td class="markdownTableBodyNone">Unicode 字符串（UTF-8/UTF-16/UTF-32）  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Timestamp  </td><td class="markdownTableBodyNone">§10.4.2  </td><td class="markdownTableBodyNone">yaml_timestamp  </td><td class="markdownTableBodyNone">ISO 8601 / RFC 3339 时间戳  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Sequence  </td><td class="markdownTableBodyNone">§10.1.1  </td><td class="markdownTableBodyNone">yaml_sequence  </td><td class="markdownTableBodyNone">有序值列表（数组）  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Mapping  </td><td class="markdownTableBodyNone">§10.1.2  </td><td class="markdownTableBodyNone">yaml_mapping  </td><td class="markdownTableBodyNone">键值对集合（字典/对象）  </td></tr>
-</table>
-<h1 class="doxsection"><a class="anchor" id="string_styles"></a>
-字符串标量样式</h1>
-<p>根据 YAML 1.2.2 §7.3，支持五种字符串标量样式：</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">样式  </th><th class="markdownTableHeadNone">语法示例  </th><th class="markdownTableHeadNone">转义序列  </th><th class="markdownTableHeadNone">换行处理  </th><th class="markdownTableHeadNone">说明  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Plain  </td><td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone">不支持  </td><td class="markdownTableBodyNone">折叠空格  </td><td class="markdownTableBodyNone">无引号纯文本  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">SingleQuoted  </td><td class="markdownTableBodyNone">'string'  </td><td class="markdownTableBodyNone">有限支持  </td><td class="markdownTableBodyNone">保留  </td><td class="markdownTableBodyNone">单引号字符串  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">DoubleQuoted  </td><td class="markdownTableBodyNone">"string"  </td><td class="markdownTableBodyNone">完全支持  </td><td class="markdownTableBodyNone">保留  </td><td class="markdownTableBodyNone">双引号字符串（含转义）  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Literal  </td><td class="markdownTableBodyNone">|  </td><td class="markdownTableBodyNone">不支持  </td><td class="markdownTableBodyNone">保留  </td><td class="markdownTableBodyNone">块字面量（保留换行）  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Folded  </td><td class="markdownTableBodyNone">&gt;  </td><td class="markdownTableBodyNone">不支持  </td><td class="markdownTableBodyNone">折叠  </td><td class="markdownTableBodyNone">块折叠（换行转空格）  </td></tr>
-</table>
-<h1 class="doxsection"><a class="anchor" id="collection_styles"></a>
-集合样式</h1>
-<p>根据 YAML 1.2.2 §7.4，序列和映射支持两种集合样式：</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">块样式（Block）  </th><th class="markdownTableHeadNone">流样式（Flow）  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">序列  </td><td class="markdownTableBodyNone">- item1<br  />
-- item2  </td><td class="markdownTableBodyNone">[item1, item2]  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">映射  </td><td class="markdownTableBodyNone">key1: value1\nkey2: value2  </td><td class="markdownTableBodyNone">{key1: value1, key2: value2}  </td></tr>
-</table>
-<h1 class="doxsection"><a class="anchor" id="boolean_synonyms"></a>
-布尔值同义词</h1>
-<p>根据 YAML 1.2.2 §10.3.2，支持以下布尔值同义词：</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">语义值  </th><th class="markdownTableHeadNone">规范形式  </th><th class="markdownTableHeadNone">同义词  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">true  </td><td class="markdownTableBodyNone">true  </td><td class="markdownTableBodyNone">True、TRUE、y、Y、yes、Yes、YES、on、On、ON  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">false  </td><td class="markdownTableBodyNone">False、FALSE、n、N、no、No、NO、off、Off、OFF  </td></tr>
-</table>
-<h1 class="doxsection"><a class="anchor" id="null_synonyms"></a>
-空值同义词</h1>
-<p>根据 YAML 1.2.2 §10.2.2，支持以下空值同义词：</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">规范形式  </th><th class="markdownTableHeadNone">同义词  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">null  </td><td class="markdownTableBodyNone">Null、NULL、~（空字符串在某些上下文中）  </td></tr>
-</table>
-<h1 class="doxsection"><a class="anchor" id="implementation_details"></a>
-实现细节</h1>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">规范参数  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">编码  </td><td class="markdownTableBodyNone">UTF-8（YAML 1.2 §5.1）  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">整数范围  </td><td class="markdownTableBodyNone">-2^63 到 2^63-1（YAML 1.2 §10.4.1）  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">浮点数精度  </td><td class="markdownTableBodyNone">IEEE 754-2019 双精度（YAML 1.2 §10.4.1）  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">字符串转义序列  </td><td class="markdownTableBodyNone">YAML 1.2 §5.7 定义  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">键名唯一性  </td><td class="markdownTableBodyNone">YAML 1.2 §3.2.1（映射中键名应唯一）  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">缩进要求  </td><td class="markdownTableBodyNone">空格字符（YAML 1.2 §6.1），禁止制表符  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">注释支持  </td><td class="markdownTableBodyNone"># 行注释（YAML 1.2 §6.8）  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">锚点与别名  </td><td class="markdownTableBodyNone">&amp;anchor 和 *alias（YAML 1.2 §3.2.2）  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">标签系统  </td><td class="markdownTableBodyNone">!tag 和 !!type（YAML 1.2 §3.2.3）  </td></tr>
-</table>
-<h1 class="doxsection"><a class="anchor" id="string_escape"></a>
-字符串转义序列</h1>
-<p>根据 YAML 1.2.2 §5.7，双引号字符串支持以下转义序列：</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">转义序列  </th><th class="markdownTableHeadNone">字符  </th><th class="markdownTableHeadNone">Unicode 码点  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">\"  </td><td class="markdownTableBodyNone">引号  </td><td class="markdownTableBodyNone">U+0022  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">\\  </td><td class="markdownTableBodyNone">反斜杠  </td><td class="markdownTableBodyNone">U+005C  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">\/  </td><td class="markdownTableBodyNone">斜杠  </td><td class="markdownTableBodyNone">U+002F  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">\b  </td><td class="markdownTableBodyNone">退格  </td><td class="markdownTableBodyNone">U+0008  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">\f  </td><td class="markdownTableBodyNone">换页  </td><td class="markdownTableBodyNone">U+000C  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">\n  </td><td class="markdownTableBodyNone">换行  </td><td class="markdownTableBodyNone">U+000A  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">\r  </td><td class="markdownTableBodyNone">回车  </td><td class="markdownTableBodyNone">U+000D  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">\t  </td><td class="markdownTableBodyNone">制表符  </td><td class="markdownTableBodyNone">U+0009  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">\uXXXX  </td><td class="markdownTableBodyNone">Unicode 字符  </td><td class="markdownTableBodyNone">U+XXXX  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">\UXXXXXXXX  </td><td class="markdownTableBodyNone">Unicode 字符（全范围）  </td><td class="markdownTableBodyNone">U+XXXXXXXX  </td></tr>
-</table>
-<h1 class="doxsection"><a class="anchor" id="yaml_vs_json"></a>
-YAML 1.2 与 JSON 兼容性</h1>
-<p>YAML 1.2 是 JSON 的严格超集，所有有效的 JSON 文档也是有效的 YAML 文档。 这意味着 JSON 可以作为 YAML 的子集进行解析。</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">特性  </th><th class="markdownTableHeadNone">JSON  </th><th class="markdownTableHeadNone">YAML 1.2  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">注释  </td><td class="markdownTableBodyNone">不支持  </td><td class="markdownTableBodyNone"># 行注释  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">字符串引号  </td><td class="markdownTableBodyNone">仅双引号  </td><td class="markdownTableBodyNone">五种样式  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">尾部逗号  </td><td class="markdownTableBodyNone">不允许  </td><td class="markdownTableBodyNone">允许（可选）  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">键名引号  </td><td class="markdownTableBodyNone">必须引号  </td><td class="markdownTableBodyNone">可选（裸键）  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">锚点与别名  </td><td class="markdownTableBodyNone">不支持  </td><td class="markdownTableBodyNone">&amp;anchor 和 *alias  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">标签  </td><td class="markdownTableBodyNone">不支持  </td><td class="markdownTableBodyNone">!tag 和 !!type  </td></tr>
-</table>
-<dl class="section warning"><dt>警告</dt><dd>根据 YAML 1.2 §6.1，制表符（tab）不应用于缩进，仅允许在内容中使用。 流样式映射中重复的键名行为未定义，应避免使用。 </dd>
-<dd>
-根据 YAML 1.2 §3.2.1，映射中的键名在 YAML 1.2 中应唯一。</dd></dl>
-<dl class="section see"><dt>参见</dt><dd><a href="https://yaml.org/">https://yaml.org/</a> </dd>
-<dd>
-<a href="https://yaml.org/spec/1.2.2/">https://yaml.org/spec/1.2.2/</a> </dd>
-<dd>
-<a href="https://json.org/">https://json.org/</a> </dd>
-<dd>
-<a href="https://www.rfc-editor.org/rfc/rfc8259">https://www.rfc-editor.org/rfc/rfc8259</a> </dd></dl>
+<p>此文件提供了YAML（YAML Ain't Markup Language）配置格式的抽象基类和具体实现类。 YAML是一种人类可读的数据序列化语言，常用于配置文件、数据交换和持久化存储。 </p>
 
 <p class="definition">在文件 <a class="el" href="yaml__value_8hpp_source.html">yaml_value.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

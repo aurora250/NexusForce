@@ -1,0 +1,576 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___uninitialized_memory_operations" kind="group">
+    <compoundname>UninitializedMemoryOperations</compoundname>
+    <title>未初始化内存操作</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga4d93b8cbcb234fc1fb491b210cba104c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator2 &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 Iterator2</type>
+        <definition>NEFORCE_CONSTEXPR20 Iterator2 uninitialized_copy</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
+        <name>uninitialized_copy</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>复制元素到未初始化内存 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当值类型为非平凡类型时，如果构造过程中发生异常</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将范围 [first, last) 的元素复制到未初始化的内存区域 [result, ...)。 如果复制过程中抛出异常，已构造的元素会被析构。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="90" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="90" bodyend="95"/>
+        <referencedby refid="classvector_1a2d2774255d5dfb2e579494c7888b6348" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; byte_t &gt;::insert</referencedby>
+        <referencedby refid="classvector_1a8398c5493767d15226937f8322d7369d" compoundref="vector_8hpp" startline="557" endline="574">vector&lt; byte_t &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1gae9ff88080d1cd8aa0a0ce39278f31ce3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator2 &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 Iterator2</type>
+        <definition>NEFORCE_CONSTEXPR20 Iterator2 uninitialized_copy_n</definition>
+        <argsstring>(Iterator1 first, size_t count, Iterator2 result)</argsstring>
+        <name>uninitialized_copy_n</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>复制指定数量的元素到未初始化内存 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要复制的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当值类型为非平凡类型时，如果构造过程中发生异常</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从 first 开始复制 count 个元素到未初始化的内存区域。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="156" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="156" bodyend="158"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+        <referencedby refid="classbasic__string_1ae126c6adbc59258cbec998776d55cced" compoundref="basic__string_8hpp" startline="1752" endline="1797">basic_string&lt; char &gt;::append</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga6f02528bc88e238474438f8dbb3a4805" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void uninitialized_fill</definition>
+        <argsstring>(Iterator first, Iterator last, const T &amp;x)</argsstring>
+        <name>uninitialized_fill</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>在未初始化内存上填充值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要填充的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当值类型为非平凡类型时，如果构造过程中发生异常</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在未初始化的内存区域 [first, last) 上构造值为 x 的对象。 如果构造过程中抛出异常，已构造的元素会被析构。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="218" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="218" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1gaa3c7446fdf46fd39cfbe18593667d6d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 Iterator</type>
+        <definition>NEFORCE_CONSTEXPR20 Iterator uninitialized_fill_n</definition>
+        <argsstring>(Iterator first, size_t n, const T &amp;x)</argsstring>
+        <name>uninitialized_fill_n</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>在未初始化内存中用指定值填充指定数量的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要填充的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要填充的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>填充后的结束迭代器 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当值类型为非平凡类型时，如果构造过程中发生异常</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+类似于 <ref refid="group___shift_algorithms_1gaf7073d1fd2edd9c564d1b7859f096194" kindref="member">fill_n()</ref>，但在未初始化内存上操作。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="288" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="288" bodyend="290"/>
+        <referencedby refid="classvector_1aa76db4c30b9208cd181ec0072df57927" compoundref="vector_8hpp" startline="921" endline="947">vector&lt; byte_t &gt;::assign</referencedby>
+        <referencedby refid="classdeque_1aaafb1c5f8fad779fdc5360a3197b6a87" compoundref="deque_8hpp" startline="1273" endline="1287">deque&lt; T, Alloc, BufSize &gt;::insert</referencedby>
+        <referencedby refid="classvector_1a2d2774255d5dfb2e579494c7888b6348" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; byte_t &gt;::insert</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1gab368b716a7ab773696dcb93099e696d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" kindref="member">is_ranges_input_iter_v</ref>&lt; Iterator1 &gt; &amp;&amp;<ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator2 &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 Iterator2</type>
+        <definition>NEFORCE_CONSTEXPR20 Iterator2 uninitialized_move</definition>
+        <argsstring>(Iterator1 first, Iterator1 last, Iterator2 result)</argsstring>
+        <name>uninitialized_move</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator1</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>在未初始化内存中移动元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围起始 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入范围结束 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当值类型为非平凡类型时，如果构造过程中发生异常</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将范围 [first, last) 的元素移动到以 result 开始的未初始化内存区域。 使用移动构造函数构造对象，可能使源对象处于有效但未指定的状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="359" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="359" bodyend="364"/>
+        <referencedby refid="classvector_1ac2d72346ddff3cf4b6e9b98003c6d0f2" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; byte_t &gt;::emplace</referencedby>
+        <referencedby refid="classvector_1a2d2774255d5dfb2e579494c7888b6348" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; byte_t &gt;::insert</referencedby>
+        <referencedby refid="classvector_1a88d7c0d46bf9436689cf8acff2138f7d" compoundref="vector_8hpp" startline="775" endline="798">vector&lt; byte_t &gt;::reserve</referencedby>
+        <referencedby refid="classvector_1a1e42c66ae2f2a970940975f85a239575" compoundref="vector_8hpp" startline="1107" endline="1135">vector&lt; byte_t &gt;::shrink_to_fit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___uninitialized_memory_operations_1ga06d9a0413eca98701b1a6c1d73f81e48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator1</type>
+          </param>
+          <param>
+            <type>typename Iterator2</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" kindref="member">is_ranges_input_iter_v</ref>&lt; Iterator1 &gt; &amp;&amp;<ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator2 &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 Iterator2</type>
+        <definition>NEFORCE_CONSTEXPR20 Iterator2 uninitialized_move_n</definition>
+        <argsstring>(Iterator1 first, size_t count, Iterator2 result)</argsstring>
+        <name>uninitialized_move_n</name>
+        <param>
+          <type>Iterator1</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <param>
+          <type>Iterator2</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>在未初始化内存中移动指定数量的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出范围起始 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>输出范围结束迭代器 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structmemory__exception" kindref="compound">memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当值类型为非平凡类型时，如果构造过程中发生异常 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" line="424" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/uninitialized.hpp" bodystart="424" bodyend="426"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>在未初始化内存上进行的安全操作 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

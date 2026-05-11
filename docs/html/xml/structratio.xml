@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structratio" kind="struct" language="C++" prot="public">
+    <compoundname>ratio</compoundname>
+    <includes refid="ratio_8hpp" local="no">ratio.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref></type>
+        <declname>Numerator</declname>
+        <defname>Numerator</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref></type>
+        <declname>Denominator</declname>
+        <defname>Denominator</defname>
+        <defval>1</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structratio_1ad0f8efac8194dc0af6529d42e859b393" prot="public" static="no">
+        <type><ref refid="structratio" kindref="compound">ratio</ref>&lt; <ref refid="structratio_1a6a632753060062f1dbfa49cc5999cddb" kindref="member">num</ref>, <ref refid="structratio_1ae5a7c6e950924f0db56cf721e716eb09" kindref="member">den</ref> &gt;</type>
+        <definition>using ratio&lt; Numerator, Denominator &gt;::type = ratio&lt;num, den&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>ratio::type</qualifiedname>
+        <briefdescription>
+<para>自身的类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/ratio.hpp" line="41" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/ratio.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structratio_1a6a632753060062f1dbfa49cc5999cddb" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref></type>
+        <definition>intmax_t ratio&lt; Numerator, Denominator &gt;::num</definition>
+        <argsstring></argsstring>
+        <name>num</name>
+        <qualifiedname>ratio::num</qualifiedname>
+        <initializer>                      =
+Numerator * <ref refid="structstatic__sign" kindref="compound">static_sign</ref>&lt;Denominator&gt;::value / <ref refid="structstatic__gcd" kindref="compound">static_gcd</ref>&lt;Numerator, Denominator&gt;::value</initializer>
+        <briefdescription>
+<para>分母不能为0 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>值必须在范围内 约分后的分子 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/ratio.hpp" line="36" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/ratio.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structratio_1ae5a7c6e950924f0db56cf721e716eb09" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref></type>
+        <definition>intmax_t ratio&lt; Numerator, Denominator &gt;::den</definition>
+        <argsstring></argsstring>
+        <name>den</name>
+        <qualifiedname>ratio::den</qualifiedname>
+        <initializer>                      =
+<ref refid="structstatic__abs" kindref="compound">static_abs</ref>&lt;Denominator&gt;::value / <ref refid="structstatic__gcd" kindref="compound">static_gcd</ref>&lt;Numerator, Denominator&gt;::value</initializer>
+        <briefdescription>
+<para>约分后的分母 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/ratio.hpp" line="38" column="31" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/ratio.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>比率类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Numerator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分子 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Denominator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分母，默认为1</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+表示编译期比率，自动进行约分，确保分子分母是最简形式。 分母总是正的，符号由分子表示。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/ratio.hpp" line="31" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/ratio.hpp" bodystart="31" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structratio_1ae5a7c6e950924f0db56cf721e716eb09" prot="public" virt="non-virtual"><scope>ratio</scope><name>den</name></member>
+      <member refid="structratio_1a6a632753060062f1dbfa49cc5999cddb" prot="public" virt="non-virtual"><scope>ratio</scope><name>num</name></member>
+      <member refid="structratio_1ad0f8efac8194dc0af6529d42e859b393" prot="public" virt="non-virtual"><scope>ratio</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

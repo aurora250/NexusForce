@@ -1,0 +1,1037 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___heap_algorithms" kind="group">
+    <compoundname>HeapAlgorithms</compoundname>
+    <title>堆算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___heap_algorithms_1gae66ef3b07664fe1c01838d58cb11833e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 Iterator</type>
+        <definition>NEFORCE_CONSTEXPR20 Iterator is_heap_until</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>is_heap_until</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>查找堆中破坏堆性质的首个元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>破坏堆性质的第一个元素的迭代器，如果范围是有效堆则返回 last</para>
+</simplesect>
+检查范围 [first, last) 是否满足堆性质，返回第一个破坏堆性质的元素。 堆性质：<itemizedlist>
+<listitem><para>对于最大堆，父节点不小于子节点；</para>
+</listitem><listitem><para>对于最小堆，父节点不大于子节点。 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="123" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="123" bodyend="135"/>
+        <references refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" compoundref="invoke_8hpp" startline="396">is_invocable_v</references>
+        <references refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" compoundref="concepts_8hpp" startline="601">is_ranges_rnd_iter_v</references>
+        <referencedby refid="group___heap_algorithms_1ga1c15e88e9241085e28d0eb0f8ed555aa" compoundref="heap_8hpp" startline="173" endline="175">is_heap</referencedby>
+        <referencedby refid="group___heap_algorithms_1ga0eee97f765933114e7c424bf33511210" compoundref="heap_8hpp" startline="161" endline="163">is_heap</referencedby>
+        <referencedby refid="group___heap_algorithms_1ga2cd8ad7b145417924e3e90fe7412744f" compoundref="heap_8hpp" startline="147" endline="149">is_heap_until</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1ga2cd8ad7b145417924e3e90fe7412744f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 Iterator</type>
+        <definition>NEFORCE_CONSTEXPR20 Iterator is_heap_until</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>is_heap_until</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>查找堆中破坏堆性质的首个元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>破坏堆性质的第一个元素的迭代器，如果范围是有效堆则返回 last</para>
+</simplesect>
+默认使用小于比较，创建最大堆。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="147" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="147" bodyend="149"/>
+        <references refid="group___heap_algorithms_1gae66ef3b07664fe1c01838d58cb11833e" compoundref="heap_8hpp" startline="123" endline="135">is_heap_until</references>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1ga0eee97f765933114e7c424bf33511210" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_CONSTEXPR20 bool is_heap</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>is_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>检查范围是否为有效堆 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果范围是有效堆则返回 true，否则返回 false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="161" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="161" bodyend="163"/>
+        <references refid="group___heap_algorithms_1gae66ef3b07664fe1c01838d58cb11833e" compoundref="heap_8hpp" startline="123" endline="135">is_heap_until</references>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1ga1c15e88e9241085e28d0eb0f8ed555aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 bool</type>
+        <definition>NEFORCE_CONSTEXPR20 bool is_heap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>is_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>检查范围是否为有效堆 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果范围是有效堆则返回 true，否则返回 false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="173" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="173" bodyend="175"/>
+        <references refid="group___heap_algorithms_1gae66ef3b07664fe1c01838d58cb11833e" compoundref="heap_8hpp" startline="123" endline="135">is_heap_until</references>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1gad1cbf5c3d9c1780e1da107267de93d21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void push_heap</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>push_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>向堆中插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+假设范围 [first, last-1) 是有效堆，将 *(last-1) 插入堆中。 调用后范围 [first, last) 是有效堆。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="234" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="234" bodyend="239"/>
+        <referencedby refid="classpriority__queue_1a91ca4e01d1e1eade8797e7938a8e6863" compoundref="priority__queue_8hpp" startline="231" endline="234">priority_queue&lt; T, Sequence, Compare &gt;::emplace</referencedby>
+        <referencedby refid="classpriority__queue_1adbbb09cc1cb6271671905f6c05a172f8" compoundref="priority__queue_8hpp" startline="197" endline="200">priority_queue&lt; T, Sequence, Compare &gt;::push</referencedby>
+        <referencedby refid="classpriority__queue_1aef059fdad8a64085b8132d0512e2faf6" compoundref="priority__queue_8hpp" startline="208" endline="211">priority_queue&lt; T, Sequence, Compare &gt;::push</referencedby>
+        <referencedby refid="group___heap_algorithms_1ga5b9afd42d578ab9316af4611808d555f" compoundref="heap_8hpp" startline="245" endline="247">push_heap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1ga5b9afd42d578ab9316af4611808d555f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void push_heap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>push_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>向堆中插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="245" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="245" bodyend="247"/>
+        <references refid="group___heap_algorithms_1gad1cbf5c3d9c1780e1da107267de93d21" compoundref="heap_8hpp" startline="234" endline="239">push_heap</references>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1ga36c69d89ab0434ee867f42a56a075e7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void adjust_heap</definition>
+        <argsstring>(Iterator first, iter_difference_t&lt; Iterator &gt; hole_index, iter_difference_t&lt; Iterator &gt; len, T value, Compare comp)</argsstring>
+        <name>adjust_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <declname>hole_index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>堆调整辅助函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hole_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空洞位置索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要调整的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在指定位置向下调整堆，然后在调整后的位置向上调整。 用于删除堆顶元素后的堆调整。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="264" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="264" bodyend="280"/>
+        <referencedby refid="group___heap_algorithms_1gaa4abcb1c72060bb2ce7fed9e4e7893f4" compoundref="heap_8hpp" startline="286" endline="289">adjust_heap</referencedby>
+        <referencedby refid="group___heap_algorithms_1ga8beeb5a9c17ae71c242c05a60f312ea2" compoundref="heap_8hpp" startline="392" endline="406">make_heap</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga7604c36909710fbc4e92db0d66ad5054" compoundref="sort_8hpp" startline="514" endline="536">partial_sort_copy</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1gaa4abcb1c72060bb2ce7fed9e4e7893f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void adjust_heap</definition>
+        <argsstring>(Iterator first, iter_difference_t&lt; Iterator &gt; hole_index, iter_difference_t&lt; Iterator &gt; len, T value)</argsstring>
+        <name>adjust_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <declname>hole_index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___iterator_traits_1gaf61f58aa2abc24434e0b77340ddf2cfa" kindref="member">iter_difference_t</ref>&lt; Iterator &gt;</type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>堆调整辅助函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="286" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="286" bodyend="289"/>
+        <references refid="group___heap_algorithms_1ga36c69d89ab0434ee867f42a56a075e7d" compoundref="heap_8hpp" startline="264" endline="280">adjust_heap</references>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1ga13c0e8fb3ca2d9f76d823a800c283dc9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void pop_heap</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>pop_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>删除堆顶元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将堆的最大（或最小）元素移动到 last-1 位置， 并使范围 [first, last-1) 成为有效堆。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="338" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="338" bodyend="344"/>
+        <referencedby refid="classpriority__queue_1adffa6172c8d64a3c32516bb16a453e3a" compoundref="priority__queue_8hpp" startline="218" endline="221">priority_queue&lt; T, Sequence, Compare &gt;::pop</referencedby>
+        <referencedby refid="group___heap_algorithms_1gafea0b2c70923660008b33263e4d3a41b" compoundref="heap_8hpp" startline="350" endline="352">pop_heap</referencedby>
+        <referencedby refid="group___heap_algorithms_1ga6261d7e0da24fa3675dd248b9da5334f" compoundref="heap_8hpp" startline="366" endline="370">sort_heap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1gafea0b2c70923660008b33263e4d3a41b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void pop_heap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>pop_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除堆顶元素 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="350" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="350" bodyend="352"/>
+        <references refid="group___heap_algorithms_1ga13c0e8fb3ca2d9f76d823a800c283dc9" compoundref="heap_8hpp" startline="338" endline="344">pop_heap</references>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1ga6261d7e0da24fa3675dd248b9da5334f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void sort_heap</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>sort_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>将堆转换为有序序列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>堆结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+通过反复弹出堆顶元素，将堆转换为升序（或降序）序列。 操作后，范围 [first, last) 不再满足堆性质，而是已排序。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="366" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="366" bodyend="370"/>
+        <references refid="group___heap_algorithms_1ga13c0e8fb3ca2d9f76d823a800c283dc9" compoundref="heap_8hpp" startline="338" endline="344">pop_heap</references>
+        <referencedby refid="group___sort_algorithms_1gab24fbf7b9775bd8334e5f592a8edf5f6" compoundref="sort_8hpp" startline="472" endline="483">partial_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga7604c36909710fbc4e92db0d66ad5054" compoundref="sort_8hpp" startline="514" endline="536">partial_sort_copy</referencedby>
+        <referencedby refid="group___heap_algorithms_1ga1617986485d2b96acb43fef66cbb16ee" compoundref="heap_8hpp" startline="376" endline="378">sort_heap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1ga1617986485d2b96acb43fef66cbb16ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void sort_heap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>sort_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>将堆转换为有序序列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="376" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="376" bodyend="378"/>
+        <references refid="group___heap_algorithms_1ga6261d7e0da24fa3675dd248b9da5334f" compoundref="heap_8hpp" startline="366" endline="370">sort_heap</references>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1ga8beeb5a9c17ae71c242c05a60f312ea2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void make_heap</definition>
+        <argsstring>(Iterator first, Iterator last, Compare comp)</argsstring>
+        <name>make_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>Compare</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>创建堆 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>随机访问迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将范围 [first, last) 重新排列，使其满足堆性质。 从最后一个非叶子节点开始，向前调整每个节点。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="392" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="392" bodyend="406"/>
+        <references refid="group___heap_algorithms_1ga36c69d89ab0434ee867f42a56a075e7d" compoundref="heap_8hpp" startline="264" endline="280">adjust_heap</references>
+        <referencedby refid="group___heap_algorithms_1ga95a8b88827a8877cf46757ece5faa342" compoundref="heap_8hpp" startline="412" endline="414">make_heap</referencedby>
+        <referencedby refid="group___sort_algorithms_1gab24fbf7b9775bd8334e5f592a8edf5f6" compoundref="sort_8hpp" startline="472" endline="483">partial_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga7604c36909710fbc4e92db0d66ad5054" compoundref="sort_8hpp" startline="514" endline="536">partial_sort_copy</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___heap_algorithms_1ga95a8b88827a8877cf46757ece5faa342" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_CONSTEXPR20 void</type>
+        <definition>NEFORCE_CONSTEXPR20 void make_heap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>make_heap</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>创建堆 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" line="412" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/heap.hpp" bodystart="412" bodyend="414"/>
+        <references refid="group___heap_algorithms_1ga8beeb5a9c17ae71c242c05a60f312ea2" compoundref="heap_8hpp" startline="392" endline="406">make_heap</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>堆算法的实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>堆是一种满足堆性质的完全二叉树，常用于实现优先队列和堆排序。</para>
+<sect1 id="group___h_t_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下数据结构相关标准规范：</para>
+<para><bold>算法复杂度标准参考：</bold><itemizedlist>
+<listitem><para>**ISO/IEC 14882:2020 §25.8.6**：堆操作复杂度要求</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>相关数据结构与算法文献：</bold><itemizedlist>
+<listitem><para>**J.W.J. Williams (1964)**：Algorithm 232 — Heapsort（堆排序原始论文） Communications of the ACM, 7(6): 347-348</para>
+</listitem><listitem><para>**R.W. Floyd (1964)**：Algorithm 245 — Treesort 3（堆调整优化算法） Communications of the ACM, 7(12): 701</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___heap_algorithms_1heap_properties">
+<title>堆性质定义</title><para>根据 C++ 标准，堆是满足以下性质的范围 <computeroutput>[first, last)</computeroutput>：</para>
+<para><table rows="3" cols="3"><row>
+<entry thead="yes"><para>堆类型  </para>
+</entry><entry thead="yes"><para>比较函数要求  </para>
+</entry><entry thead="yes"><para>性质描述  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最大堆  </para>
+</entry><entry thead="no"><para>comp(a, b) 返回 true 表示 a &lt; b  </para>
+</entry><entry thead="no"><para>父节点不小于子节点  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最小堆  </para>
+</entry><entry thead="no"><para>comp(a, b) 返回 true 表示 a &gt; b  </para>
+</entry><entry thead="no"><para>父节点不大于子节点  </para>
+</entry></row>
+</table>
+</para>
+<para>**数学表示**：<itemizedlist>
+<listitem><para>对于索引 i，左子节点索引：2i + 1</para>
+</listitem><listitem><para>对于索引 i，右子节点索引：2i + 2</para>
+</listitem><listitem><para>对于索引 i，父节点索引：(i - 1) / 2（整数除法）</para>
+</listitem></itemizedlist>
+</para>
+<para>**堆性质公式**（最大堆）：<itemizedlist>
+<listitem><para>comp(*(first + parent), *(first + child)) == false</para>
+</listitem><listitem><para>即父节点不小于子节点</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___heap_algorithms_1algorithm_complexity">
+<title>算法复杂度</title><para>根据 ISO/IEC 14882:2020 §25.8，各堆操作的时间复杂度如下：</para>
+<para><table rows="7" cols="4"><row>
+<entry thead="yes"><para>操作  </para>
+</entry><entry thead="yes"><para>函数  </para>
+</entry><entry thead="yes"><para>时间复杂度  </para>
+</entry><entry thead="yes"><para>比较次数上限  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>创建堆  </para>
+</entry><entry thead="no"><para>make_heap  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>最多 3n 次比较  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>插入元素  </para>
+</entry><entry thead="no"><para>push_heap  </para>
+</entry><entry thead="no"><para>O(log n)  </para>
+</entry><entry thead="no"><para>最多 log(n) 次比较  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>删除堆顶  </para>
+</entry><entry thead="no"><para>pop_heap  </para>
+</entry><entry thead="no"><para>O(log n)  </para>
+</entry><entry thead="no"><para>最多 2×log(n) 次比较  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>堆排序  </para>
+</entry><entry thead="no"><para>sort_heap  </para>
+</entry><entry thead="no"><para>O(n log n)  </para>
+</entry><entry thead="no"><para>最多 n×log(n) 次比较  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>验证堆  </para>
+</entry><entry thead="no"><para>is_heap  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>最多 n 次比较  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>查找违规元素  </para>
+</entry><entry thead="no"><para>is_heap_until  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>最多 n 次比较  </para>
+</entry></row>
+</table>
+</para>
+<para>其中 n = last - first。</para>
+</sect1>
+<sect1 id="group___heap_algorithms_1floyd_optimization">
+<title>Floyd 堆调整优化</title><para>本实现采用 Floyd 的堆调整算法（Algorithm 245），其核心思想是：<orderedlist>
+<listitem><para>从空洞位置向下筛选，找到合适的位置</para>
+</listitem><listitem><para>从找到的位置向上调整，放入待插入的元素</para>
+</listitem></orderedlist>
+</para>
+<para>相比传统方法，Floyd 算法减少了每次迭代中的元素交换次数， 将 <computeroutput><ref refid="group___heap_algorithms_1gad1cbf5c3d9c1780e1da107267de93d21" kindref="member">push_heap</ref></computeroutput> 操作的比较次数从最多 2×log(n) 优化为最多 log(n) + 1。</para>
+</sect1>
+<sect1 id="group___h_t_t_p_1implementation_details">
+<title>实现细节</title><para><table rows="7" cols="2"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>规范参数  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>堆类型  </para>
+</entry><entry thead="no"><para>二叉堆（完全二叉树）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>索引基  </para>
+</entry><entry thead="no"><para>0-based（C 风格数组索引）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>迭代器要求  </para>
+</entry><entry thead="no"><para>随机访问迭代器（RandomAccessIterator）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>比较器要求  </para>
+</entry><entry thead="no"><para>严格弱序（Strict Weak Ordering）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>稳定性  </para>
+</entry><entry thead="no"><para>不稳定（不保证相等元素的相对顺序）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>内存使用  </para>
+</entry><entry thead="no"><para>原地操作（O(1) 额外空间）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___heap_algorithms_1comparison_strictness">
+<title>比较器的严格弱序要求</title><para>根据 C++ 标准 §25.7，比较函数 comp 必须满足严格弱序（Strict Weak Ordering）：<itemizedlist>
+<listitem><para>非自反性：comp(a, a) == false</para>
+</listitem><listitem><para>非对称性：若 comp(a, b) == true，则 comp(b, a) == false</para>
+</listitem><listitem><para>传递性：若 comp(a, b) == true 且 comp(b, c) == true，则 comp(a, c) == true</para>
+</listitem><listitem><para>等价的传递性：若 !comp(a, b) &amp;&amp; !comp(b, a)，则 a 和 b 等价</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>本实现采用 Floyd 的优化堆调整算法，在插入和删除操作中减少元素移动次数。 所有操作均为原地操作，不需要额外的内存分配。</para>
+</simplesect>
+<simplesect kind="warning"><para>堆操作要求输入范围满足堆性质（<computeroutput><ref refid="group___heap_algorithms_1ga8beeb5a9c17ae71c242c05a60f312ea2" kindref="member">make_heap</ref></computeroutput> 和 <computeroutput><ref refid="group___heap_algorithms_1gad1cbf5c3d9c1780e1da107267de93d21" kindref="member">push_heap</ref></computeroutput> 的特定范围除外）。 对不满足堆性质的范围调用 <computeroutput><ref refid="group___heap_algorithms_1ga13c0e8fb3ca2d9f76d823a800c283dc9" kindref="member">pop_heap</ref></computeroutput> 或 <computeroutput><ref refid="group___heap_algorithms_1ga6261d7e0da24fa3675dd248b9da5334f" kindref="member">sort_heap</ref></computeroutput> 会导致未定义行为。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.cppreference.com/w/cpp/algorithm#Heap_operations">https://en.cppreference.com/w/cpp/algorithm#Heap_operations</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://dl.acm.org/doi/10.1145/512274.512284（Floyd）">https://dl.acm.org/doi/10.1145/512274.512284（Floyd）</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Binary_heap">https://en.wikipedia.org/wiki/Binary_heap</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

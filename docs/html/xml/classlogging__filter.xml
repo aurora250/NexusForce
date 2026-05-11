@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classlogging__filter" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>logging_filter</compoundname>
+    <basecompoundref refid="classhttp__filter" prot="public" virt="non-virtual">http_filter</basecompoundref>
+    <includes refid="http__filter_8hpp" local="no">http_filter.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classlogging__filter_1a0cdb93b150c118f9024d52df2c5ccf2f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool logging_filter::log_headers</definition>
+        <argsstring></argsstring>
+        <name>log_headers</name>
+        <qualifiedname>logging_filter::log_headers</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否记录请求/响应头 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="205" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlogging__filter_1a30150d6079684333ad4cd31d1f900646" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool logging_filter::log_body</definition>
+        <argsstring></argsstring>
+        <name>log_body</name>
+        <qualifiedname>logging_filter::log_body</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否记录请求/响应体 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="206" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlogging__filter_1a2e1295a39bd9fda747203db5e355ca0c" prot="public" static="no" mutable="no">
+        <type><ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size logging_filter::max_body_log_size</definition>
+        <argsstring></argsstring>
+        <name>max_body_log_size</name>
+        <qualifiedname>logging_filter::max_body_log_size</qualifiedname>
+        <initializer>{1_KB}</initializer>
+        <briefdescription>
+<para>最大记录正文大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="207" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="207" bodyend="207"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlogging__filter_1ab869810af66899707193b86f506e7c4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool logging_filter::pre_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>pre_filter</name>
+        <qualifiedname>logging_filter::pre_filter</qualifiedname>
+        <reimplements refid="classhttp__filter_1a9563cab58ce1b4217008e55b37b022f2">pre_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>预处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>返回false表示中断后续处理</para>
+</simplesect>
+在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="209" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classlogging__filter_1af19db73fdc591efde6336d096c2ec5df" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void logging_filter::post_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>post_filter</name>
+        <qualifiedname>logging_filter::post_filter</qualifiedname>
+        <reimplements refid="classhttp__filter_1acaaaf04f0a1520c29312b76336615aec">post_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>后处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在响应发送前调用，可以修改响应头或正文。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="210" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classlogging__filter_1aaba3d6e3e7af642bb50e12586ca92269" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void logging_filter::do_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>logging_filter::do_filter</qualifiedname>
+        <reimplements refid="classhttp__filter_1a00ee11e4e2b0c596d6f99cbafec3ddad">do_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="211" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="211" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="classlogging__filter_1ae984e70075fb8d2f74bca9f5825e2510" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string logging_filter::name</definition>
+        <argsstring>() const override</argsstring>
+        <name>name</name>
+        <qualifiedname>logging_filter::name</qualifiedname>
+        <reimplements refid="classhttp__filter_1a5fa05d13b0e74d2a70e05a3c808e8c52">name</reimplements>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="212" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="212" bodyend="212"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>日志记录过滤器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>记录HTTP请求和响应的详细信息，用于调试和监控。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>http_filter</label>
+        <link refid="classhttp__filter"/>
+      </node>
+      <node id="1">
+        <label>logging_filter</label>
+        <link refid="classlogging__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>byte_size</label>
+        <link refid="classbyte__size"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>http_filter</label>
+        <link refid="classhttp__filter"/>
+      </node>
+      <node id="6">
+        <label>icommon&lt; byte_size &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>icomparable&lt; byte_size &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="8">
+        <label>ihashable&lt; byte_size &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="4">
+        <label>iobject&lt; byte_size &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>istringify&lt; byte_size &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="1">
+        <label>logging_filter</label>
+        <link refid="classlogging__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>max_body_log_size</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="203" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="203" bodyend="213"/>
+    <listofallmembers>
+      <member refid="classlogging__filter_1aaba3d6e3e7af642bb50e12586ca92269" prot="public" virt="virtual"><scope>logging_filter</scope><name>do_filter</name></member>
+      <member refid="classlogging__filter_1a30150d6079684333ad4cd31d1f900646" prot="public" virt="non-virtual"><scope>logging_filter</scope><name>log_body</name></member>
+      <member refid="classlogging__filter_1a0cdb93b150c118f9024d52df2c5ccf2f" prot="public" virt="non-virtual"><scope>logging_filter</scope><name>log_headers</name></member>
+      <member refid="classlogging__filter_1a2e1295a39bd9fda747203db5e355ca0c" prot="public" virt="non-virtual"><scope>logging_filter</scope><name>max_body_log_size</name></member>
+      <member refid="classlogging__filter_1ae984e70075fb8d2f74bca9f5825e2510" prot="public" virt="virtual"><scope>logging_filter</scope><name>name</name></member>
+      <member refid="classlogging__filter_1af19db73fdc591efde6336d096c2ec5df" prot="public" virt="virtual"><scope>logging_filter</scope><name>post_filter</name></member>
+      <member refid="classlogging__filter_1ab869810af66899707193b86f506e7c4e" prot="public" virt="virtual"><scope>logging_filter</scope><name>pre_filter</name></member>
+      <member refid="classhttp__filter_1a2959973ac0c34b0323c1e3fdc03449ed" prot="public" virt="virtual"><scope>logging_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

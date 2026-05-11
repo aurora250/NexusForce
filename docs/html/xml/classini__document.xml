@@ -1,0 +1,656 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classini__document" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>ini_document</compoundname>
+    <basecompoundref refid="structistringify" prot="public" virt="non-virtual">istringify&lt; ini_document &gt;</basecompoundref>
+    <includes refid="ini__value_8hpp" local="no">ini_value.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classini__document_1ab2069136b2b10a013ce127e10bdd44ca" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classini__section" kindref="compound">ini_section</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;string, unique_ptr&lt;ini_section&gt; &gt; ini_document::sections_</definition>
+        <argsstring></argsstring>
+        <name>sections_</name>
+        <qualifiedname>ini_document::sections_</qualifiedname>
+        <briefdescription>
+<para>节映射表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="363" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="363" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classini__document_1ae16005a7bd2936cf52b960e39ff89e93" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classini__section" kindref="compound">ini_section</ref> &gt;</type>
+        <definition>unique_ptr&lt;ini_section&gt; ini_document::global_section_</definition>
+        <argsstring></argsstring>
+        <name>global_section_</name>
+        <qualifiedname>ini_document::global_section_</qualifiedname>
+        <briefdescription>
+<para>全局节（无名节） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="364" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="364" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classini__document_1a32fd6d1eb003f7a3971d90575f8cd0cc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ini_document::ini_document</definition>
+        <argsstring>()</argsstring>
+        <name>ini_document</name>
+        <qualifiedname>ini_document::ini_document</qualifiedname>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建空文档，初始化全局节。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="372" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="372" bodyend="373"/>
+        <references refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" compoundref="unique__ptr_8hpp" startline="973" endline="975">make_unique</references>
+        <referencedby refid="classini__document_1af47f33d45370ff9f9d58b9c5ed5a36b6">ini_document</referencedby>
+        <referencedby refid="classini__document_1af54adac8913fa4335850f5ea41c05530">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1aed0283ec415c7b9e6f17cb5f939a6309" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ini_document::ini_document</definition>
+        <argsstring>(const ini_document &amp;)=delete</argsstring>
+        <name>ini_document</name>
+        <qualifiedname>ini_document::ini_document</qualifiedname>
+        <param>
+          <type>const <ref refid="classini__document" kindref="compound">ini_document</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="375" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1a15ea7e76dfd31b4cf381570dd95ced20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classini__document" kindref="compound">ini_document</ref> &amp;</type>
+        <definition>ini_document &amp; ini_document::operator=</definition>
+        <argsstring>(const ini_document &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>ini_document::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classini__document" kindref="compound">ini_document</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="376" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1af47f33d45370ff9f9d58b9c5ed5a36b6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ini_document::ini_document</definition>
+        <argsstring>(ini_document &amp;&amp;other) noexcept=default</argsstring>
+        <name>ini_document</name>
+        <qualifiedname>ini_document::ini_document</qualifiedname>
+        <param>
+          <type><ref refid="classini__document" kindref="compound">ini_document</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文档 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="382" column="5"/>
+        <references refid="classini__document_1a32fd6d1eb003f7a3971d90575f8cd0cc" compoundref="ini__value_8hpp" startline="372" endline="373">ini_document</references>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1af54adac8913fa4335850f5ea41c05530" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classini__document" kindref="compound">ini_document</ref> &amp;</type>
+        <definition>ini_document &amp; ini_document::operator=</definition>
+        <argsstring>(ini_document &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>ini_document::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classini__document" kindref="compound">ini_document</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文档 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="389" column="18"/>
+        <references refid="classini__document_1a32fd6d1eb003f7a3971d90575f8cd0cc" compoundref="ini__value_8hpp" startline="372" endline="373">ini_document</references>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1adf0d69636ff1a6c09b8191eda8164ddf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ini_document::add_section</definition>
+        <argsstring>(const string &amp;name, unique_ptr&lt; ini_section &gt; section)</argsstring>
+        <name>add_section</name>
+        <qualifiedname>ini_document::add_section</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classini__section" kindref="compound">ini_section</ref> &gt;</type>
+          <declname>section</declname>
+        </param>
+        <briefdescription>
+<para>添加节 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节智能指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+如果名称为空，则设置为全局节。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="398" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="398" bodyend="404"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1a078513d51cc82dab3fcf523b4a51ab92" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classini__section" kindref="compound">ini_section</ref> *</type>
+        <definition>NEFORCE_NODISCARD const ini_section * ini_document::get_section</definition>
+        <argsstring>(const string &amp;name) const</argsstring>
+        <name>get_section</name>
+        <qualifiedname>ini_document::get_section</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取常量节指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>节的常量指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="411" column="41" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="411" bodyend="420"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <referencedby refid="classini__document_1aabf27f8bc55b8a2701eae8a309af9a3b" compoundref="ini__value_8hpp" startline="514" endline="517">get_bool</referencedby>
+        <referencedby refid="classini__document_1a94713bb28421068a89320ca927d62679" compoundref="ini__value_8hpp" startline="502" endline="505">get_double</referencedby>
+        <referencedby refid="classini__document_1a59c26f81f45c74eec5fc4acc8db60c0c" compoundref="ini__value_8hpp" startline="490" endline="493">get_int</referencedby>
+        <referencedby refid="classini__document_1a337d79602e5de4c228eed1bf75761980" compoundref="ini__value_8hpp" startline="477" endline="481">get_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1acd03326fe4f1daee0e4381590a5dbdf3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classini__section" kindref="compound">ini_section</ref> *</type>
+        <definition>NEFORCE_NODISCARD ini_section * ini_document::get_section</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>get_section</name>
+        <qualifiedname>ini_document::get_section</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取节指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>节的指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="427" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="427" bodyend="436"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1a39180b19126198a95f268753ba91df8f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ini_document::has_section</definition>
+        <argsstring>(const string &amp;name) const</argsstring>
+        <name>has_section</name>
+        <qualifiedname>ini_document::has_section</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>检查节是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否存在 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="443" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="443" bodyend="448"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1a39b134e975024849cddaac33f34dc93a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classini__section" kindref="compound">ini_section</ref> &gt; &gt; &amp;</type>
+        <definition>NEFORCE_NODISCARD const unordered_map&lt; string, unique_ptr&lt; ini_section &gt; &gt; &amp; ini_document::get_sections</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_sections</name>
+        <qualifiedname>ini_document::get_sections</qualifiedname>
+        <briefdescription>
+<para>获取所有节的常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>节映射表的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="454" column="43" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="454" bodyend="456"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1a60e6c5b52b64e37fa96bb65166dabc3d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="classini__section" kindref="compound">ini_section</ref> *</type>
+        <definition>NEFORCE_NODISCARD const ini_section * ini_document::get_global_section</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_global_section</name>
+        <qualifiedname>ini_document::get_global_section</qualifiedname>
+        <briefdescription>
+<para>获取全局节的常量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>全局节的常量指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="462" column="41" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="462" bodyend="462"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1a2964601ed0a25ee274a8dbdbc5997f91" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classini__section" kindref="compound">ini_section</ref> *</type>
+        <definition>NEFORCE_NODISCARD ini_section * ini_document::get_global_section</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_global_section</name>
+        <qualifiedname>ini_document::get_global_section</qualifiedname>
+        <briefdescription>
+<para>获取全局节的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>全局节的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="468" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="468" bodyend="468"/>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1a337d79602e5de4c228eed1bf75761980" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string ini_document::get_string</definition>
+        <argsstring>(const string &amp;section, const string &amp;key, const string &amp;default_value=&quot;&quot;) const</argsstring>
+        <name>get_string</name>
+        <qualifiedname>ini_document::get_string</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>default_value</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>获取字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定属性的字符串值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="477" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="477" bodyend="481"/>
+        <references refid="classini__document_1a078513d51cc82dab3fcf523b4a51ab92" compoundref="ini__value_8hpp" startline="411" endline="420">get_section</references>
+        <references refid="classini__section_1a665924e08fdd706108eba39def61dca9" compoundref="ini__value_8hpp" startline="314" endline="317">ini_section::get_string</references>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1a59c26f81f45c74eec5fc4acc8db60c0c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD int</type>
+        <definition>NEFORCE_NODISCARD int ini_document::get_int</definition>
+        <argsstring>(const string &amp;section, const string &amp;key, int default_value=0) const</argsstring>
+        <name>get_int</name>
+        <qualifiedname>ini_document::get_int</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>default_value</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>获取整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定属性的整数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="490" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="490" bodyend="493"/>
+        <references refid="classini__section_1ac64e7b3461eafb76535ec916a8953359" compoundref="ini__value_8hpp" startline="325" endline="328">ini_section::get_int</references>
+        <references refid="classini__document_1a078513d51cc82dab3fcf523b4a51ab92" compoundref="ini__value_8hpp" startline="411" endline="420">get_section</references>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1a94713bb28421068a89320ca927d62679" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD double</type>
+        <definition>NEFORCE_NODISCARD double ini_document::get_double</definition>
+        <argsstring>(const string &amp;section, const string &amp;key, double default_value=0.0) const</argsstring>
+        <name>get_double</name>
+        <qualifiedname>ini_document::get_double</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>default_value</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+<para>获取双精度浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定属性的双精度浮点值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="502" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="502" bodyend="505"/>
+        <references refid="classini__section_1aa1eac6426e2698bbaa25c2038fdfb2bf" compoundref="ini__value_8hpp" startline="336" endline="339">ini_section::get_double</references>
+        <references refid="classini__document_1a078513d51cc82dab3fcf523b4a51ab92" compoundref="ini__value_8hpp" startline="411" endline="420">get_section</references>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1aabf27f8bc55b8a2701eae8a309af9a3b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ini_document::get_bool</definition>
+        <argsstring>(const string &amp;section, const string &amp;key, bool default_value=false) const</argsstring>
+        <name>get_bool</name>
+        <qualifiedname>ini_document::get_bool</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>section</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>default_value</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>获取布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>default_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指定属性的布尔值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="514" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="514" bodyend="517"/>
+        <references refid="classini__section_1ad528f63992e01c210a3f29d9881cef54" compoundref="ini__value_8hpp" startline="347" endline="350">ini_section::get_bool</references>
+        <references refid="classini__document_1a078513d51cc82dab3fcf523b4a51ab92" compoundref="ini__value_8hpp" startline="411" endline="420">get_section</references>
+      </memberdef>
+      <memberdef kind="function" id="classini__document_1af17f1e4ea9e72de485bb3fd294cde32e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string ini_document::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>ini_document::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>整个文档的字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="523" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>INI文档类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理整个INI配置文件，包含多个节(section)和一个全局节。 提供节的增删改查操作和类型安全的属性访问接口。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ini_document</label>
+        <link refid="classini__document"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>istringify&lt; ini_document &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ini_document</label>
+        <link refid="classini__document"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>istringify&lt; ini_document &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" line="361" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/ini/ini_value.hpp" bodystart="361" bodyend="524"/>
+    <listofallmembers>
+      <member refid="classini__document_1adf0d69636ff1a6c09b8191eda8164ddf" prot="public" virt="non-virtual"><scope>ini_document</scope><name>add_section</name></member>
+      <member refid="classini__document_1aabf27f8bc55b8a2701eae8a309af9a3b" prot="public" virt="non-virtual"><scope>ini_document</scope><name>get_bool</name></member>
+      <member refid="classini__document_1a94713bb28421068a89320ca927d62679" prot="public" virt="non-virtual"><scope>ini_document</scope><name>get_double</name></member>
+      <member refid="classini__document_1a60e6c5b52b64e37fa96bb65166dabc3d" prot="public" virt="non-virtual"><scope>ini_document</scope><name>get_global_section</name></member>
+      <member refid="classini__document_1a2964601ed0a25ee274a8dbdbc5997f91" prot="public" virt="non-virtual"><scope>ini_document</scope><name>get_global_section</name></member>
+      <member refid="classini__document_1a59c26f81f45c74eec5fc4acc8db60c0c" prot="public" virt="non-virtual"><scope>ini_document</scope><name>get_int</name></member>
+      <member refid="classini__document_1a078513d51cc82dab3fcf523b4a51ab92" prot="public" virt="non-virtual"><scope>ini_document</scope><name>get_section</name></member>
+      <member refid="classini__document_1acd03326fe4f1daee0e4381590a5dbdf3" prot="public" virt="non-virtual"><scope>ini_document</scope><name>get_section</name></member>
+      <member refid="classini__document_1a39b134e975024849cddaac33f34dc93a" prot="public" virt="non-virtual"><scope>ini_document</scope><name>get_sections</name></member>
+      <member refid="classini__document_1a337d79602e5de4c228eed1bf75761980" prot="public" virt="non-virtual"><scope>ini_document</scope><name>get_string</name></member>
+      <member refid="classini__document_1ae16005a7bd2936cf52b960e39ff89e93" prot="private" virt="non-virtual"><scope>ini_document</scope><name>global_section_</name></member>
+      <member refid="classini__document_1a39180b19126198a95f268753ba91df8f" prot="public" virt="non-virtual"><scope>ini_document</scope><name>has_section</name></member>
+      <member refid="classini__document_1a32fd6d1eb003f7a3971d90575f8cd0cc" prot="public" virt="non-virtual"><scope>ini_document</scope><name>ini_document</name></member>
+      <member refid="classini__document_1aed0283ec415c7b9e6f17cb5f939a6309" prot="public" virt="non-virtual"><scope>ini_document</scope><name>ini_document</name></member>
+      <member refid="classini__document_1af47f33d45370ff9f9d58b9c5ed5a36b6" prot="public" virt="non-virtual"><scope>ini_document</scope><name>ini_document</name></member>
+      <member refid="classini__document_1a15ea7e76dfd31b4cf381570dd95ced20" prot="public" virt="non-virtual"><scope>ini_document</scope><name>operator=</name></member>
+      <member refid="classini__document_1af54adac8913fa4335850f5ea41c05530" prot="public" virt="non-virtual"><scope>ini_document</scope><name>operator=</name></member>
+      <member refid="classini__document_1ab2069136b2b10a013ce127e10bdd44ca" prot="private" virt="non-virtual"><scope>ini_document</scope><name>sections_</name></member>
+      <member refid="classini__document_1af17f1e4ea9e72de485bb3fd294cde32e" prot="public" virt="non-virtual"><scope>ini_document</scope><name>to_string</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

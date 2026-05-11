@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___parallel_algorithms" kind="group">
+    <compoundname>ParallelAlgorithms</compoundname>
+    <title>并行算法</title>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename BinaryOperation</type>
+          </param>
+          <param>
+            <type>typename Result</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Threshhold</declname>
+            <defname>Threshhold</defname>
+            <defval>10</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void reduce</definition>
+        <argsstring>(Iterator first, Iterator last, BinaryOperation op, Result &amp;res)</argsstring>
+        <name>reduce</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>BinaryOperation</type>
+          <declname>op</declname>
+        </param>
+        <param>
+          <type>Result &amp;</type>
+          <declname>res</declname>
+        </param>
+        <briefdescription>
+<para>并行归约操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BinaryOperation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元操作类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结果类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Threshhold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>并行阈值，小于等于此值时使用串行算法 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>op</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>归约操作的二元函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>归约结果的引用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+使用分治法的并行归约算法。将范围分成两半，分别在不同线程中计算，最后合并结果。 当元素数量小于阈值时，使用串行算法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/parallel.hpp" line="42" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/parallel.hpp" bodystart="42" bodyend="59"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <references refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</references>
+        <references refid="group___reference_wrapper_1ga65ec3600aa7a6390944677be016c5f77" compoundref="reference__wrapper_8hpp" startline="132" endline="134">ref</references>
+        <referencedby refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</referencedby>
+        <referencedby refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename UnaryOperation</type>
+          </param>
+          <param>
+            <type>typename BinaryOp</type>
+          </param>
+          <param>
+            <type>typename Result</type>
+          </param>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>Threshhold</declname>
+            <defname>Threshhold</defname>
+            <defval>10</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void transform_reduce</definition>
+        <argsstring>(Iterator first, Iterator last, UnaryOperation transform, BinaryOp reduce, Result &amp;res)</argsstring>
+        <name>transform_reduce</name>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>UnaryOperation</type>
+          <declname>transform</declname>
+        </param>
+        <param>
+          <type>BinaryOp</type>
+          <declname>reduce</declname>
+        </param>
+        <param>
+          <type>Result &amp;</type>
+          <declname>res</declname>
+        </param>
+        <briefdescription>
+<para>并行变换归约操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>UnaryOperation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>一元变换操作类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>BinaryOp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>二元归约操作类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Result</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结果类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Threshhold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>并行阈值，小于等于此值时使用串行算法 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>范围的结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>transform</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变换操作的一元函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>reduce</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>归约操作的二元函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>归约结果的引用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+先对每个元素应用变换操作，然后进行归约。使用分治法的并行算法。 当元素数量小于阈值时，使用串行算法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/parallel.hpp" line="78" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/parallel.hpp" bodystart="78" bodyend="95"/>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___type_initialize_function_1gafff7aa9d7280a07a58464ccdf4a8931a" compoundref="type__traits_8hpp" startline="4318" endline="4321">initialize</references>
+        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <references refid="group___parallel_algorithms_1gad447586eb3e4c5bd99c06300195deeba" compoundref="parallel_8hpp" startline="42" endline="59">reduce</references>
+        <references refid="group___reference_wrapper_1ga65ec3600aa7a6390944677be016c5f77" compoundref="reference__wrapper_8hpp" startline="132" endline="134">ref</references>
+        <references refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</references>
+        <referencedby refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>并行计算算法 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

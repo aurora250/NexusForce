@@ -1,0 +1,543 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classpromise" kind="class" language="C++" prot="public">
+    <compoundname>promise</compoundname>
+    <includes refid="promise_8hpp" local="no">promise.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Res</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classpromise_1a9c9867e00fe11c873a268f9b7bfb5e5b" prot="public" static="no">
+        <type>inner::__future_base::state_base</type>
+        <definition>using promise&lt; Res &gt;::state_type = inner::__future_base::state_base</definition>
+        <argsstring></argsstring>
+        <name>state_type</name>
+        <qualifiedname>promise::state_type</qualifiedname>
+        <briefdescription>
+<para>状态类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="43" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classpromise_1a974737ae92ff2bf7c88f104121768387" prot="public" static="no">
+        <type>inner::__future_base::basic_result&lt; Res &gt;</type>
+        <definition>using promise&lt; Res &gt;::result_type = inner::__future_base::basic_result&lt;Res&gt;</definition>
+        <argsstring></argsstring>
+        <name>result_type</name>
+        <qualifiedname>promise::result_type</qualifiedname>
+        <briefdescription>
+<para>结果类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="44" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classpromise_1a23ef12fa1a0278408fbff4ca4d4ec86c" prot="public" static="no">
+        <type>inner::__future_base::Ptr&lt; <ref refid="classpromise_1a974737ae92ff2bf7c88f104121768387" kindref="member">result_type</ref> &gt;</type>
+        <definition>using promise&lt; Res &gt;::ptr_type = inner::__future_base::Ptr&lt;result_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr_type</name>
+        <qualifiedname>promise::ptr_type</qualifiedname>
+        <briefdescription>
+<para>结果指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="45" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classpromise_1a54ce8fc9d1c3bfc46b91a40884dffe6b" prot="private" static="no" mutable="no">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classpromise_1a9c9867e00fe11c873a268f9b7bfb5e5b" kindref="member">state_type</ref> &gt;</type>
+        <definition>shared_ptr&lt;state_type&gt; promise&lt; Res &gt;::future_ptr</definition>
+        <argsstring></argsstring>
+        <name>future_ptr</name>
+        <qualifiedname>promise::future_ptr</qualifiedname>
+        <briefdescription>
+<para>共享状态指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="48" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classpromise_1a91d9a8cea4dc8be4090686b73f5bdea0" prot="private" static="no" mutable="no">
+        <type><ref refid="classpromise_1a23ef12fa1a0278408fbff4ca4d4ec86c" kindref="member">ptr_type</ref></type>
+        <definition>ptr_type promise&lt; Res &gt;::storage</definition>
+        <argsstring></argsstring>
+        <name>storage</name>
+        <qualifiedname>promise::storage</qualifiedname>
+        <briefdescription>
+<para>结果存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="49" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classpromise_1a8e7d3ad0dd402922c8df4fe6cf283242" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>struct</type>
+        <definition>friend struct inner::__future_base::state_base::setter</definition>
+        <argsstring></argsstring>
+        <name>inner::__future_base::state_base::setter</name>
+        <qualifiedname>promise::setter</qualifiedname>
+        <param>
+          <type>inner::__future_base::state_base::setter</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="52" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classpromise_1a8c41d2c53dae5286691d52337394315b" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classpromise_1a9c9867e00fe11c873a268f9b7bfb5e5b" kindref="member">state_type</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD state_type &amp; promise&lt; Res &gt;::state</definition>
+        <argsstring>() const</argsstring>
+        <name>state</name>
+        <qualifiedname>promise::state</qualifiedname>
+        <briefdescription>
+<para>获取内部状态引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>状态引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfuture__exception" kindref="compound">future_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果状态无效 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="59" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="59" bodyend="62"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classpromise_1a980a39afa21321c8e9ec5022b0a0123c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>promise&lt; Res &gt;::promise</definition>
+        <argsstring>()</argsstring>
+        <name>promise</name>
+        <qualifiedname>promise::promise</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建新的promise对象，初始化共享状态和结果存储。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="70" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="70" bodyend="72"/>
+        <references refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" compoundref="shared__ptr_8hpp" startline="835" endline="863">make_shared</references>
+        <referencedby refid="structtask_1_1promise__type_1_1final__awaiter_1ac9266960119774b0ecd39811a7ed9f6c" compoundref="generator_8hpp" startline="490" endline="496">task&lt; T &gt;::promise_type::final_awaiter::await_suspend</referencedby>
+        <referencedby refid="classpromise_1a4f73b1bc32d04a4051b70f93279a5d23">promise&lt; Res &gt;::operator=</referencedby>
+        <referencedby refid="classpromise_1a0b28670f46097ce539ac1349fc6bdf69" compoundref="promise_8hpp" startline="87" endline="90">promise&lt; Res &gt;::operator=</referencedby>
+        <referencedby refid="classpromise_3_01void_01_4_1a0543dd01a3e38815590bbfeb7f4a33b1" compoundref="promise_8hpp" startline="301" endline="304">promise&lt; void &gt;::operator=</referencedby>
+        <referencedby refid="classpromise_1accc51c0d31121acce00d75341b18cd34">promise&lt; Res &gt;::promise</referencedby>
+        <referencedby refid="classpromise_1a9a572899607d8841d930d6ae2c067280" compoundref="promise_8hpp" startline="78" endline="80">promise&lt; Res &gt;::promise</referencedby>
+        <referencedby refid="classpromise_1a4e1557182307b5f8298782037b153939" compoundref="promise_8hpp" startline="110" endline="113">promise&lt; Res &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1a9a572899607d8841d930d6ae2c067280" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>promise&lt; Res &gt;::promise</definition>
+        <argsstring>(promise &amp;&amp;other) noexcept</argsstring>
+        <name>promise</name>
+        <qualifiedname>promise::promise</qualifiedname>
+        <param>
+          <type><ref refid="classpromise" kindref="compound">promise</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的promise对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="78" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="78" bodyend="80"/>
+        <references refid="classpromise_1a980a39afa21321c8e9ec5022b0a0123c" compoundref="promise_8hpp" startline="70" endline="72">promise&lt; Res &gt;::promise</references>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1a0b28670f46097ce539ac1349fc6bdf69" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classpromise" kindref="compound">promise</ref> &amp;</type>
+        <definition>promise &amp; promise&lt; Res &gt;::operator=</definition>
+        <argsstring>(promise &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>promise::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classpromise" kindref="compound">promise</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的promise对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="87" column="13" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="87" bodyend="90"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classpromise_1a980a39afa21321c8e9ec5022b0a0123c" compoundref="promise_8hpp" startline="70" endline="72">promise&lt; Res &gt;::promise</references>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1accc51c0d31121acce00d75341b18cd34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>promise&lt; Res &gt;::promise</definition>
+        <argsstring>(const promise &amp;)=delete</argsstring>
+        <name>promise</name>
+        <qualifiedname>promise::promise</qualifiedname>
+        <param>
+          <type>const <ref refid="classpromise" kindref="compound">promise</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="92" column="5"/>
+        <references refid="classpromise_1a980a39afa21321c8e9ec5022b0a0123c" compoundref="promise_8hpp" startline="70" endline="72">promise&lt; Res &gt;::promise</references>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1a4f73b1bc32d04a4051b70f93279a5d23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classpromise" kindref="compound">promise</ref> &amp;</type>
+        <definition>promise &amp; promise&lt; Res &gt;::operator=</definition>
+        <argsstring>(const promise &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>promise::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classpromise" kindref="compound">promise</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="93" column="13"/>
+        <references refid="classpromise_1a980a39afa21321c8e9ec5022b0a0123c" compoundref="promise_8hpp" startline="70" endline="72">promise&lt; Res &gt;::promise</references>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1a42de93529f3ded56619ec146e701c556" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>promise&lt; Res &gt;::~promise</definition>
+        <argsstring>()</argsstring>
+        <name>~promise</name>
+        <qualifiedname>promise::~promise</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果存在关联的future且promise未被设置结果，会自动设置broken_promise异常。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="100" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="100" bodyend="104"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1a4e1557182307b5f8298782037b153939" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void promise&lt; Res &gt;::swap</definition>
+        <argsstring>(promise &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>promise::swap</qualifiedname>
+        <param>
+          <type><ref refid="classpromise" kindref="compound">promise</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个promise对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的promise对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="110" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="110" bodyend="113"/>
+        <references refid="classpromise_1a980a39afa21321c8e9ec5022b0a0123c" compoundref="promise_8hpp" startline="70" endline="72">promise&lt; Res &gt;::promise</references>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1ab0b98ede6c487688e1d9684fc979512b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfuture" kindref="compound">future</ref>&lt; Res &gt;</type>
+        <definition>future&lt; Res &gt; promise&lt; Res &gt;::get_future</definition>
+        <argsstring>()</argsstring>
+        <name>get_future</name>
+        <qualifiedname>promise::get_future</qualifiedname>
+        <briefdescription>
+<para>获取关联的future对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>future对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfuture__exception" kindref="compound">future_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果future已被获取 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="120" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="120" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void promise&lt; Res &gt;::set_value</definition>
+        <argsstring>(Res &amp;&amp;value)</argsstring>
+        <name>set_value</name>
+        <qualifiedname>promise::set_value</qualifiedname>
+        <param>
+          <type>Res &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置结果值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的结果值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfuture__exception" kindref="compound">future_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果结果已被设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="127" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="127" bodyend="127"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1ae0f41e364fa8a8f21ef340ea89e6d8c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void promise&lt; Res &gt;::set_exception</definition>
+        <argsstring>(exception_ptr exception)</argsstring>
+        <name>set_exception</name>
+        <qualifiedname>promise::set_exception</qualifiedname>
+        <param>
+          <type><ref refid="classexception__ptr" kindref="compound">exception_ptr</ref></type>
+          <declname>exception</declname>
+        </param>
+        <briefdescription>
+<para>设置异常 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfuture__exception" kindref="compound">future_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果结果已被设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="134" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="134" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1ae5d2f35b49c5f86a4e695ab8e5ae77f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void promise&lt; Res &gt;::set_value_at_thread_exit</definition>
+        <argsstring>(Res &amp;&amp;value)</argsstring>
+        <name>set_value_at_thread_exit</name>
+        <qualifiedname>promise::set_value_at_thread_exit</qualifiedname>
+        <param>
+          <type>Res &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在线程退出时设置结果值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的结果值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfuture__exception" kindref="compound">future_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果结果已被设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>结果会在当前线程退出时设置，适用于需要保证某些资源在结果设置前有效的场景 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="142" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="142" bodyend="144"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classpromise_1aeaadfd014af7d67f744e6791320dc8f7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void promise&lt; Res &gt;::set_exception_at_thread_exit</definition>
+        <argsstring>(exception_ptr exception)</argsstring>
+        <name>set_exception_at_thread_exit</name>
+        <qualifiedname>promise::set_exception_at_thread_exit</qualifiedname>
+        <param>
+          <type><ref refid="classexception__ptr" kindref="compound">exception_ptr</ref></type>
+          <declname>exception</declname>
+        </param>
+        <briefdescription>
+<para>在线程退出时设置异常 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structfuture__exception" kindref="compound">future_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果结果已被设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="151" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="151" bodyend="153"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Promise类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结果类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+表示一个异步计算的结果提供者，与future配对使用。 可以将计算结果或异常设置到promise中，关联的future可以获取这些结果。</para>
+<para><simplesect kind="note"><para>结果类型不能是数组、函数，必须是可析构类型 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" line="27" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/promise.hpp" bodystart="37" bodyend="154"/>
+    <listofallmembers>
+      <member refid="classpromise_1a54ce8fc9d1c3bfc46b91a40884dffe6b" prot="private" virt="non-virtual"><scope>promise</scope><name>future_ptr</name></member>
+      <member refid="classpromise_1ab0b98ede6c487688e1d9684fc979512b" prot="public" virt="non-virtual"><scope>promise</scope><name>get_future</name></member>
+      <member refid="classpromise_1a0b28670f46097ce539ac1349fc6bdf69" prot="public" virt="non-virtual"><scope>promise</scope><name>operator=</name></member>
+      <member refid="classpromise_1a4f73b1bc32d04a4051b70f93279a5d23" prot="public" virt="non-virtual"><scope>promise</scope><name>operator=</name></member>
+      <member refid="classpromise_1a980a39afa21321c8e9ec5022b0a0123c" prot="public" virt="non-virtual"><scope>promise</scope><name>promise</name></member>
+      <member refid="classpromise_1a9a572899607d8841d930d6ae2c067280" prot="public" virt="non-virtual"><scope>promise</scope><name>promise</name></member>
+      <member refid="classpromise_1accc51c0d31121acce00d75341b18cd34" prot="public" virt="non-virtual"><scope>promise</scope><name>promise</name></member>
+      <member refid="classpromise_1a23ef12fa1a0278408fbff4ca4d4ec86c" prot="public" virt="non-virtual"><scope>promise</scope><name>ptr_type</name></member>
+      <member refid="classpromise_1a974737ae92ff2bf7c88f104121768387" prot="public" virt="non-virtual"><scope>promise</scope><name>result_type</name></member>
+      <member refid="classpromise_1ae0f41e364fa8a8f21ef340ea89e6d8c5" prot="public" virt="non-virtual"><scope>promise</scope><name>set_exception</name></member>
+      <member refid="classpromise_1aeaadfd014af7d67f744e6791320dc8f7" prot="public" virt="non-virtual"><scope>promise</scope><name>set_exception_at_thread_exit</name></member>
+      <member refid="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" prot="public" virt="non-virtual"><scope>promise</scope><name>set_value</name></member>
+      <member refid="classpromise_1ae5d2f35b49c5f86a4e695ab8e5ae77f1" prot="public" virt="non-virtual"><scope>promise</scope><name>set_value_at_thread_exit</name></member>
+      <member refid="classpromise_1a8c41d2c53dae5286691d52337394315b" prot="private" virt="non-virtual"><scope>promise</scope><name>state</name></member>
+      <member refid="classpromise_1a9c9867e00fe11c873a268f9b7bfb5e5b" prot="public" virt="non-virtual"><scope>promise</scope><name>state_type</name></member>
+      <member refid="classpromise_1a91d9a8cea4dc8be4090686b73f5bdea0" prot="private" virt="non-virtual"><scope>promise</scope><name>storage</name></member>
+      <member refid="classpromise_1a4e1557182307b5f8298782037b153939" prot="public" virt="non-virtual"><scope>promise</scope><name>swap</name></member>
+      <member refid="classpromise_1a42de93529f3ded56619ec146e701c556" prot="public" virt="non-virtual"><scope>promise</scope><name>~promise</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___thread_exit" kind="group">
+    <compoundname>ThreadExit</compoundname>
+    <title>线程退出回调</title>
+    <innerclass refid="structat__thread__exit__elt" prot="public">at_thread_exit_elt</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___thread_exit_1ga7dde42f8087c208f60c82547f98afad1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void NEFORCE_API</type>
+        <definition>void NEFORCE_API thread_exit_register</definition>
+        <argsstring>(at_thread_exit_elt *elt, void(*callback)(void *)) noexcept</argsstring>
+        <name>thread_exit_register</name>
+        <param>
+          <type><ref refid="structat__thread__exit__elt" kindref="compound">at_thread_exit_elt</ref> *</type>
+          <declname>elt</declname>
+        </param>
+        <param>
+          <type>void(*)(void *)</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>注册线程退出回调 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>elt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调元素指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将一个回调函数注册到当前线程的退出回调列表中。 回调函数将在当前线程退出时被调用，参数为elt指针本身。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/at_thread_exit.hpp" line="47" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/at_thread_exit.hpp" declline="47" declcolumn="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程退出时的回调管理 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

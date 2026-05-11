@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structenable__if" kind="struct" language="C++" prot="public">
+    <compoundname>enable_if</compoundname>
+    <includes refid="type__traits_8hpp" local="no">type_traits.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>bool</type>
+        <declname>Test</declname>
+        <defname>Test</defname>
+      </param>
+      <param>
+        <type>typename T</type>
+        <defval>void</defval>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>条件启用模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Test</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>布尔测试条件 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果Test为true时启用的类型，默认为void</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+当Test为false时，主模板没有::type成员，触发SFINAE。 当Test为true时，特化版本提供::type成员。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="104" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="104" bodyend="104"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

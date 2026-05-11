@@ -1,0 +1,1211 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classenv__builder" kind="class" language="C++" prot="public">
+    <compoundname>env_builder</compoundname>
+    <includes refid="env__builder_8hpp" local="no">env_builder.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classenv__builder_1a5227617f939e4a0e9a5d168a3b235eab" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classenv__document" kindref="compound">env_document</ref> &gt;</type>
+        <definition>unique_ptr&lt;env_document&gt; env_builder::root_</definition>
+        <argsstring></argsstring>
+        <name>root_</name>
+        <qualifiedname>env_builder::root_</qualifiedname>
+        <briefdescription>
+<para>正在构建的文档对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="40" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classenv__builder_1a5c23fbde57cae86f339d42ceb5638f4e" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string env_builder::current_key_</definition>
+        <argsstring></argsstring>
+        <name>current_key_</name>
+        <qualifiedname>env_builder::current_key_</qualifiedname>
+        <briefdescription>
+<para>当前正在设置的键名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="41" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classenv__builder_1a59bc6d682b7e2ebe4a4536b4529b90be" prot="private" static="no" mutable="no">
+        <type><ref refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40" kindref="member">env_variable::quote_type</ref></type>
+        <definition>env_variable::quote_type env_builder::current_quote_type_</definition>
+        <argsstring></argsstring>
+        <name>current_quote_type_</name>
+        <qualifiedname>env_builder::current_quote_type_</qualifiedname>
+        <initializer>= <ref refid="classenv__variable_1a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21" kindref="member">env_variable::None</ref></initializer>
+        <briefdescription>
+<para>当前值的引号类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="42" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classenv__builder_1a61f63602c7257ff352fb0d7db07a9b5a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool env_builder::current_exported_</definition>
+        <argsstring></argsstring>
+        <name>current_exported_</name>
+        <qualifiedname>env_builder::current_exported_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>当前变量是否导出 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="43" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>env_builder::env_builder</definition>
+        <argsstring>()</argsstring>
+        <name>env_builder</name>
+        <qualifiedname>env_builder::env_builder</qualifiedname>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建一个新的构建器实例，初始化空文档。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="51" column="5"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <referencedby refid="classenv__builder_1a25219c272f5b41fb477d02307a449785">add</referencedby>
+        <referencedby refid="classenv__builder_1a0e88403d4e3a8350b7f270d9e0eaa05e" compoundref="env__builder_8hpp" startline="201" endline="201">add</referencedby>
+        <referencedby refid="classenv__builder_1a8f2991c5ec63a3f821d64e72f92db081" compoundref="env__builder_8hpp" startline="193" endline="193">add</referencedby>
+        <referencedby refid="classenv__builder_1a53219d992c64227860641c56f92a7d77">add</referencedby>
+        <referencedby refid="classenv__builder_1a3754fe065065c73599815b7675f78a3b">add</referencedby>
+        <referencedby refid="classenv__builder_1af5d1b729869ea7d89fa99a48833029f0">add</referencedby>
+        <referencedby refid="classenv__builder_1a0d873e0caa08801152edd03e56c55825">add</referencedby>
+        <referencedby refid="classenv__builder_1a31e3e692f6d000eb4d65fb8e266cd545">add_export</referencedby>
+        <referencedby refid="classenv__builder_1aecf296fd1d3a436eba8e4315a14efaa1">blank_line</referencedby>
+        <referencedby refid="classenv__builder_1aa8c2e948d1945941bb85cc87b82b1a81">comment</referencedby>
+        <referencedby refid="classenv__builder_1afced7029a1452cf9b8a3ddb77e0fbd85">double_quoted</referencedby>
+        <referencedby refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</referencedby>
+        <referencedby refid="classenv__builder_1afc2bced25b7b4eac02ce482a8bd3b7bc">env_builder</referencedby>
+        <referencedby refid="classenv__builder_1ad947d86a2b4371d3073118cfc06e9c04">exported</referencedby>
+        <referencedby refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</referencedby>
+        <referencedby refid="classenv__builder_1a1272de54ee23937e8c8569e6f31093f0">operator=</referencedby>
+        <referencedby refid="classenv__builder_1a3a91d6d567e40b4db388228a013d53e6">single_quoted</referencedby>
+        <referencedby refid="classenv__builder_1a5c2c04209489c1af9c82a3599a337209">unquoted</referencedby>
+        <referencedby refid="classenv__builder_1a9c6121fca7820bbdb887a6ae0c927164">value</referencedby>
+        <referencedby refid="classenv__builder_1ae667cb1cf5e847a4d025f3afa191154c" compoundref="env__builder_8hpp" startline="115" endline="115">value</referencedby>
+        <referencedby refid="classenv__builder_1ac34927e50d59b9cc0dbac26e741eeca3" compoundref="env__builder_8hpp" startline="123" endline="123">value</referencedby>
+        <referencedby refid="classenv__builder_1a3b235b2897f9d12dfc9e6c6bd61f66a5">value</referencedby>
+        <referencedby refid="classenv__builder_1a3a8f4c77834c8c0ddbb48d64f50e312f">value</referencedby>
+        <referencedby refid="classenv__builder_1a0409b9b1dd959df837fc2cc1f864d76a">value</referencedby>
+        <referencedby refid="classenv__builder_1a37c2e7e0cb077de1c60dee99ff1305f1">value</referencedby>
+        <referencedby refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a0b726cbc756fa32e88295a0c30e0f882" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>env_builder::env_builder</definition>
+        <argsstring>(const env_builder &amp;)=delete</argsstring>
+        <name>env_builder</name>
+        <qualifiedname>env_builder::env_builder</qualifiedname>
+        <param>
+          <type>const <ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="53" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a9bbea163b79c2e88d6e8be15fd13638d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::operator=</definition>
+        <argsstring>(const env_builder &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>env_builder::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="54" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1afc2bced25b7b4eac02ce482a8bd3b7bc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>env_builder::env_builder</definition>
+        <argsstring>(env_builder &amp;&amp;other) noexcept=default</argsstring>
+        <name>env_builder</name>
+        <qualifiedname>env_builder::env_builder</qualifiedname>
+        <param>
+          <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源构建器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="60" column="5"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a1272de54ee23937e8c8569e6f31093f0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::operator=</definition>
+        <argsstring>(env_builder &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>env_builder::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源构建器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="67" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1aa572845f69e7b46baf0214944063871c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::key</definition>
+        <argsstring>(string key) noexcept</argsstring>
+        <name>key</name>
+        <qualifiedname>env_builder::key</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量键名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="74" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</references>
+        <referencedby refid="classenv__builder_1a25219c272f5b41fb477d02307a449785">add</referencedby>
+        <referencedby refid="classenv__builder_1a0e88403d4e3a8350b7f270d9e0eaa05e" compoundref="env__builder_8hpp" startline="201" endline="201">add</referencedby>
+        <referencedby refid="classenv__builder_1a8f2991c5ec63a3f821d64e72f92db081" compoundref="env__builder_8hpp" startline="193" endline="193">add</referencedby>
+        <referencedby refid="classenv__builder_1a53219d992c64227860641c56f92a7d77">add</referencedby>
+        <referencedby refid="classenv__builder_1a3754fe065065c73599815b7675f78a3b">add</referencedby>
+        <referencedby refid="classenv__builder_1af5d1b729869ea7d89fa99a48833029f0">add</referencedby>
+        <referencedby refid="classenv__builder_1a0d873e0caa08801152edd03e56c55825">add</referencedby>
+        <referencedby refid="classenv__builder_1a31e3e692f6d000eb4d65fb8e266cd545">add_export</referencedby>
+        <referencedby refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a5c2c04209489c1af9c82a3599a337209" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::unquoted</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>unquoted</name>
+        <qualifiedname>env_builder::unquoted</qualifiedname>
+        <briefdescription>
+<para>设置为无引号模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="80" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a3a91d6d567e40b4db388228a013d53e6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::single_quoted</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>single_quoted</name>
+        <qualifiedname>env_builder::single_quoted</qualifiedname>
+        <briefdescription>
+<para>设置为单引号模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="86" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1a3a91d6d567e40b4db388228a013d53e6">single_quoted</references>
+        <referencedby refid="classenv__builder_1a3a91d6d567e40b4db388228a013d53e6">single_quoted</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1afced7029a1452cf9b8a3ddb77e0fbd85" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::double_quoted</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>double_quoted</name>
+        <qualifiedname>env_builder::double_quoted</qualifiedname>
+        <briefdescription>
+<para>设置为双引号模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="92" column="17"/>
+        <references refid="classenv__builder_1afced7029a1452cf9b8a3ddb77e0fbd85">double_quoted</references>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <referencedby refid="classenv__builder_1afced7029a1452cf9b8a3ddb77e0fbd85">double_quoted</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1ad947d86a2b4371d3073118cfc06e9c04" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::exported</definition>
+        <argsstring>(bool exported=true) noexcept</argsstring>
+        <name>exported</name>
+        <qualifiedname>env_builder::exported</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>exported</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置导出标记 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>exported</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否导出，默认为true </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="99" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1ad947d86a2b4371d3073118cfc06e9c04">exported</references>
+        <referencedby refid="classenv__builder_1ad947d86a2b4371d3073118cfc06e9c04">exported</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a4822207439304abcfec6681a18733513" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::value</definition>
+        <argsstring>(string value)</argsstring>
+        <name>value</name>
+        <qualifiedname>env_builder::value</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（字符串版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structenv__exception" kindref="compound">env_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未设置键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="107" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+        <referencedby refid="classenv__builder_1a25219c272f5b41fb477d02307a449785">add</referencedby>
+        <referencedby refid="classenv__builder_1a0e88403d4e3a8350b7f270d9e0eaa05e" compoundref="env__builder_8hpp" startline="201" endline="201">add</referencedby>
+        <referencedby refid="classenv__builder_1a8f2991c5ec63a3f821d64e72f92db081" compoundref="env__builder_8hpp" startline="193" endline="193">add</referencedby>
+        <referencedby refid="classenv__builder_1a53219d992c64227860641c56f92a7d77">add</referencedby>
+        <referencedby refid="classenv__builder_1a3754fe065065c73599815b7675f78a3b">add</referencedby>
+        <referencedby refid="classenv__builder_1af5d1b729869ea7d89fa99a48833029f0">add</referencedby>
+        <referencedby refid="classenv__builder_1a0d873e0caa08801152edd03e56c55825">add</referencedby>
+        <referencedby refid="classenv__builder_1a31e3e692f6d000eb4d65fb8e266cd545">add_export</referencedby>
+        <referencedby refid="classenv__builder_1a9c6121fca7820bbdb887a6ae0c927164">value</referencedby>
+        <referencedby refid="classenv__builder_1ae667cb1cf5e847a4d025f3afa191154c" compoundref="env__builder_8hpp" startline="115" endline="115">value</referencedby>
+        <referencedby refid="classenv__builder_1ac34927e50d59b9cc0dbac26e741eeca3" compoundref="env__builder_8hpp" startline="123" endline="123">value</referencedby>
+        <referencedby refid="classenv__builder_1a3b235b2897f9d12dfc9e6c6bd61f66a5">value</referencedby>
+        <referencedby refid="classenv__builder_1a3a8f4c77834c8c0ddbb48d64f50e312f">value</referencedby>
+        <referencedby refid="classenv__builder_1a0409b9b1dd959df837fc2cc1f864d76a">value</referencedby>
+        <referencedby refid="classenv__builder_1a37c2e7e0cb077de1c60dee99ff1305f1">value</referencedby>
+        <referencedby refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1ae667cb1cf5e847a4d025f3afa191154c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::value</definition>
+        <argsstring>(const char *value)</argsstring>
+        <name>value</name>
+        <qualifiedname>env_builder::value</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（C字符串版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structenv__exception" kindref="compound">env_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未设置键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="115" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" bodystart="115" bodyend="115"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1ae667cb1cf5e847a4d025f3afa191154c" compoundref="env__builder_8hpp" startline="115" endline="115">value</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+        <referencedby refid="classenv__builder_1ae667cb1cf5e847a4d025f3afa191154c" compoundref="env__builder_8hpp" startline="115" endline="115">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1ac34927e50d59b9cc0dbac26e741eeca3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::value</definition>
+        <argsstring>(const string_view value)</argsstring>
+        <name>value</name>
+        <qualifiedname>env_builder::value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（字符串视图版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structenv__exception" kindref="compound">env_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未设置键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="123" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" bodystart="123" bodyend="123"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1ac34927e50d59b9cc0dbac26e741eeca3" compoundref="env__builder_8hpp" startline="123" endline="123">value</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+        <referencedby refid="classenv__builder_1ac34927e50d59b9cc0dbac26e741eeca3" compoundref="env__builder_8hpp" startline="123" endline="123">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a0409b9b1dd959df837fc2cc1f864d76a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::value</definition>
+        <argsstring>(int value)</argsstring>
+        <name>value</name>
+        <qualifiedname>env_builder::value</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（整数版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structenv__exception" kindref="compound">env_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未设置键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="131" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a37c2e7e0cb077de1c60dee99ff1305f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::value</definition>
+        <argsstring>(int64_t value)</argsstring>
+        <name>value</name>
+        <qualifiedname>env_builder::value</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（64位整数版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>64位整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structenv__exception" kindref="compound">env_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未设置键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="139" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a3b235b2897f9d12dfc9e6c6bd61f66a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::value</definition>
+        <argsstring>(double value)</argsstring>
+        <name>value</name>
+        <qualifiedname>env_builder::value</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（浮点数版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structenv__exception" kindref="compound">env_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未设置键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="147" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a9c6121fca7820bbdb887a6ae0c927164" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::value</definition>
+        <argsstring>(bool value)</argsstring>
+        <name>value</name>
+        <qualifiedname>env_builder::value</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（布尔值版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>布尔值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structenv__exception" kindref="compound">env_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未设置键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="155" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a3a8f4c77834c8c0ddbb48d64f50e312f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::value</definition>
+        <argsstring>(double value, int precision)</argsstring>
+        <name>value</name>
+        <qualifiedname>env_builder::value</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>precision</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键的值（浮点数版本，指定精度） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>precision</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>小数精度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structenv__exception" kindref="compound">env_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当未设置键名时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="164" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1aa8c2e948d1945941bb85cc87b82b1a81" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::comment</definition>
+        <argsstring>(string text) noexcept</argsstring>
+        <name>comment</name>
+        <qualifiedname>env_builder::comment</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>添加注释 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>注释文本 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="171" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1aecf296fd1d3a436eba8e4315a14efaa1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::blank_line</definition>
+        <argsstring>()</argsstring>
+        <name>blank_line</name>
+        <qualifiedname>env_builder::blank_line</qualifiedname>
+        <briefdescription>
+<para>添加空行 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="177" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a0d873e0caa08801152edd03e56c55825" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::add</definition>
+        <argsstring>(string key, string value)</argsstring>
+        <name>add</name>
+        <qualifiedname>env_builder::add</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>直接添加键值对（字符串版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="185" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a8f2991c5ec63a3f821d64e72f92db081" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::add</definition>
+        <argsstring>(string key, const string_view value)</argsstring>
+        <name>add</name>
+        <qualifiedname>env_builder::add</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>直接添加键值对（字符串视图版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="193" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" bodystart="193" bodyend="193"/>
+        <references refid="classenv__builder_1a8f2991c5ec63a3f821d64e72f92db081" compoundref="env__builder_8hpp" startline="193" endline="193">add</references>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+        <referencedby refid="classenv__builder_1a8f2991c5ec63a3f821d64e72f92db081" compoundref="env__builder_8hpp" startline="193" endline="193">add</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a0e88403d4e3a8350b7f270d9e0eaa05e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::add</definition>
+        <argsstring>(string key, const char *value)</argsstring>
+        <name>add</name>
+        <qualifiedname>env_builder::add</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>直接添加键值对（C字符串版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="201" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" bodystart="201" bodyend="201"/>
+        <references refid="classenv__builder_1a0e88403d4e3a8350b7f270d9e0eaa05e" compoundref="env__builder_8hpp" startline="201" endline="201">add</references>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+        <referencedby refid="classenv__builder_1a0e88403d4e3a8350b7f270d9e0eaa05e" compoundref="env__builder_8hpp" startline="201" endline="201">add</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a3754fe065065c73599815b7675f78a3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::add</definition>
+        <argsstring>(string key, int value)</argsstring>
+        <name>add</name>
+        <qualifiedname>env_builder::add</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>直接添加键值对（整数版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="209" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1af5d1b729869ea7d89fa99a48833029f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::add</definition>
+        <argsstring>(string key, int64_t value)</argsstring>
+        <name>add</name>
+        <qualifiedname>env_builder::add</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>直接添加键值对（64位整数版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>64位整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="217" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a53219d992c64227860641c56f92a7d77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::add</definition>
+        <argsstring>(string key, double value)</argsstring>
+        <name>add</name>
+        <qualifiedname>env_builder::add</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>直接添加键值对（浮点数版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="225" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a25219c272f5b41fb477d02307a449785" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::add</definition>
+        <argsstring>(string key, bool value)</argsstring>
+        <name>add</name>
+        <qualifiedname>env_builder::add</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>直接添加键值对（布尔值版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>布尔值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="233" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1a31e3e692f6d000eb4d65fb8e266cd545" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classenv__builder" kindref="compound">env_builder</ref> &amp;</type>
+        <definition>env_builder &amp; env_builder::add_export</definition>
+        <argsstring>(string key, string value)</argsstring>
+        <name>add_export</name>
+        <qualifiedname>env_builder::add_export</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加导出变量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>变量值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用</para>
+</simplesect>
+快捷方法，自动设置export标记。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="243" column="17"/>
+        <references refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae">env_builder</references>
+        <references refid="classenv__builder_1aa572845f69e7b46baf0214944063871c">key</references>
+        <references refid="classenv__builder_1a4822207439304abcfec6681a18733513">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classenv__builder_1ad12d9ac66eac0c28ec15499cfc35704b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classenv__document" kindref="compound">env_document</ref> &gt;</type>
+        <definition>unique_ptr&lt; env_document &gt; env_builder::build</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>build</name>
+        <qualifiedname>env_builder::build</qualifiedname>
+        <briefdescription>
+<para>构建文档 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>构建完成的文档对象</para>
+</simplesect>
+完成构建过程，返回构建好的环境变量文档。 调用后构建器状态被移动，不应继续使用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="252" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>ENV配置格式构建器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供流式接口构建ENV配置格式，支持以下特性：<itemizedlist>
+<listitem><para>链式调用设置变量键值对</para>
+</listitem><listitem><para>支持多种数据类型自动转换</para>
+</listitem><listitem><para>可配置引号类型</para>
+</listitem><listitem><para>支持export标记</para>
+</listitem><listitem><para>可添加注释和空行</para>
+</listitem><listitem><para>浮点数精度控制 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" line="38" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_builder.hpp" bodystart="38" bodyend="253"/>
+    <listofallmembers>
+      <member refid="classenv__builder_1a0d873e0caa08801152edd03e56c55825" prot="public" virt="non-virtual"><scope>env_builder</scope><name>add</name></member>
+      <member refid="classenv__builder_1a8f2991c5ec63a3f821d64e72f92db081" prot="public" virt="non-virtual"><scope>env_builder</scope><name>add</name></member>
+      <member refid="classenv__builder_1a0e88403d4e3a8350b7f270d9e0eaa05e" prot="public" virt="non-virtual"><scope>env_builder</scope><name>add</name></member>
+      <member refid="classenv__builder_1a3754fe065065c73599815b7675f78a3b" prot="public" virt="non-virtual"><scope>env_builder</scope><name>add</name></member>
+      <member refid="classenv__builder_1af5d1b729869ea7d89fa99a48833029f0" prot="public" virt="non-virtual"><scope>env_builder</scope><name>add</name></member>
+      <member refid="classenv__builder_1a53219d992c64227860641c56f92a7d77" prot="public" virt="non-virtual"><scope>env_builder</scope><name>add</name></member>
+      <member refid="classenv__builder_1a25219c272f5b41fb477d02307a449785" prot="public" virt="non-virtual"><scope>env_builder</scope><name>add</name></member>
+      <member refid="classenv__builder_1a31e3e692f6d000eb4d65fb8e266cd545" prot="public" virt="non-virtual"><scope>env_builder</scope><name>add_export</name></member>
+      <member refid="classenv__builder_1aecf296fd1d3a436eba8e4315a14efaa1" prot="public" virt="non-virtual"><scope>env_builder</scope><name>blank_line</name></member>
+      <member refid="classenv__builder_1ad12d9ac66eac0c28ec15499cfc35704b" prot="public" virt="non-virtual"><scope>env_builder</scope><name>build</name></member>
+      <member refid="classenv__builder_1aa8c2e948d1945941bb85cc87b82b1a81" prot="public" virt="non-virtual"><scope>env_builder</scope><name>comment</name></member>
+      <member refid="classenv__builder_1a61f63602c7257ff352fb0d7db07a9b5a" prot="private" virt="non-virtual"><scope>env_builder</scope><name>current_exported_</name></member>
+      <member refid="classenv__builder_1a5c23fbde57cae86f339d42ceb5638f4e" prot="private" virt="non-virtual"><scope>env_builder</scope><name>current_key_</name></member>
+      <member refid="classenv__builder_1a59bc6d682b7e2ebe4a4536b4529b90be" prot="private" virt="non-virtual"><scope>env_builder</scope><name>current_quote_type_</name></member>
+      <member refid="classenv__builder_1afced7029a1452cf9b8a3ddb77e0fbd85" prot="public" virt="non-virtual"><scope>env_builder</scope><name>double_quoted</name></member>
+      <member refid="classenv__builder_1a05932ded5e665fdab59fc02e3c6cefae" prot="public" virt="non-virtual"><scope>env_builder</scope><name>env_builder</name></member>
+      <member refid="classenv__builder_1a0b726cbc756fa32e88295a0c30e0f882" prot="public" virt="non-virtual"><scope>env_builder</scope><name>env_builder</name></member>
+      <member refid="classenv__builder_1afc2bced25b7b4eac02ce482a8bd3b7bc" prot="public" virt="non-virtual"><scope>env_builder</scope><name>env_builder</name></member>
+      <member refid="classenv__builder_1ad947d86a2b4371d3073118cfc06e9c04" prot="public" virt="non-virtual"><scope>env_builder</scope><name>exported</name></member>
+      <member refid="classenv__builder_1aa572845f69e7b46baf0214944063871c" prot="public" virt="non-virtual"><scope>env_builder</scope><name>key</name></member>
+      <member refid="classenv__builder_1a9bbea163b79c2e88d6e8be15fd13638d" prot="public" virt="non-virtual"><scope>env_builder</scope><name>operator=</name></member>
+      <member refid="classenv__builder_1a1272de54ee23937e8c8569e6f31093f0" prot="public" virt="non-virtual"><scope>env_builder</scope><name>operator=</name></member>
+      <member refid="classenv__builder_1a5227617f939e4a0e9a5d168a3b235eab" prot="private" virt="non-virtual"><scope>env_builder</scope><name>root_</name></member>
+      <member refid="classenv__builder_1a3a91d6d567e40b4db388228a013d53e6" prot="public" virt="non-virtual"><scope>env_builder</scope><name>single_quoted</name></member>
+      <member refid="classenv__builder_1a5c2c04209489c1af9c82a3599a337209" prot="public" virt="non-virtual"><scope>env_builder</scope><name>unquoted</name></member>
+      <member refid="classenv__builder_1a4822207439304abcfec6681a18733513" prot="public" virt="non-virtual"><scope>env_builder</scope><name>value</name></member>
+      <member refid="classenv__builder_1ae667cb1cf5e847a4d025f3afa191154c" prot="public" virt="non-virtual"><scope>env_builder</scope><name>value</name></member>
+      <member refid="classenv__builder_1ac34927e50d59b9cc0dbac26e741eeca3" prot="public" virt="non-virtual"><scope>env_builder</scope><name>value</name></member>
+      <member refid="classenv__builder_1a0409b9b1dd959df837fc2cc1f864d76a" prot="public" virt="non-virtual"><scope>env_builder</scope><name>value</name></member>
+      <member refid="classenv__builder_1a37c2e7e0cb077de1c60dee99ff1305f1" prot="public" virt="non-virtual"><scope>env_builder</scope><name>value</name></member>
+      <member refid="classenv__builder_1a3b235b2897f9d12dfc9e6c6bd61f66a5" prot="public" virt="non-virtual"><scope>env_builder</scope><name>value</name></member>
+      <member refid="classenv__builder_1a9c6121fca7820bbdb887a6ae0c927164" prot="public" virt="non-virtual"><scope>env_builder</scope><name>value</name></member>
+      <member refid="classenv__builder_1a3a8f4c77834c8c0ddbb48d64f50e312f" prot="public" virt="non-virtual"><scope>env_builder</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

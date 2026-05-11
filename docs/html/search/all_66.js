@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['异常处理_0',['异常处理',['../group___exception_handling.html',1,'']]],
-  ['异常处理_20exception_1',['❗ 异常处理 (Exception)',['../index.html#autotoc_md35',1,'']]],
-  ['异常类集_2',['异常类集',['../group___exceptions.html',1,'']]],
-  ['异步组件_3',['异步组件',['../group___async_components.html',1,'']]],
-  ['异步调用_4',['异步调用',['../group___async.html',1,'']]]
+  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
 ];

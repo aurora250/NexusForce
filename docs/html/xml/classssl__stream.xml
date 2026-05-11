@@ -1,0 +1,795 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classssl__stream" kind="class" language="C++" prot="public">
+    <compoundname>ssl_stream</compoundname>
+    <includes refid="ssl__stream_8hpp" local="no">ssl_stream.hpp</includes>
+    <innerclass refid="structssl__stream_1_1ssl__deleter" prot="private">ssl_stream::ssl_deleter</innerclass>
+    <innerclass refid="structssl__stream_1_1x509__deleter" prot="private">ssl_stream::x509_deleter</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classssl__stream_1ae051cc1c9f187ca1d0d7d6ed3bfbae11" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga5b7cbd695e4ef11023a4088e5ebe9612" kindref="member">uintptr_t</ref></type>
+        <definition>using ssl_stream::native_handle_type = 
+
+uintptr_t</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>ssl_stream::native_handle_type</qualifiedname>
+        <briefdescription>
+<para>原生文件描述符类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="45" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classssl__stream_1a91f64278b144c18e6deddf291bdf76e4" prot="private" static="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt;::X509, x509_deleter &gt;</type>
+        <definition>using ssl_stream::x509_ptr = unique_ptr&lt;::X509, x509_deleter&gt;</definition>
+        <argsstring></argsstring>
+        <name>x509_ptr</name>
+        <qualifiedname>ssl_stream::x509_ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="69" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classssl__stream_1a41f5741e3cc79e16e287cd432dac68ad" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt;::SSL, ssl_deleter &gt;</type>
+        <definition>unique_ptr&lt;::SSL, ssl_deleter&gt; ssl_stream::ssl_</definition>
+        <argsstring></argsstring>
+        <name>ssl_</name>
+        <qualifiedname>ssl_stream::ssl_</qualifiedname>
+        <briefdescription>
+<para>OpenSSL SSL对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="71" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classssl__stream_1aa506b16fbb1aa9a1ededa9047ba75748" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string ssl_stream::last_error_</definition>
+        <argsstring></argsstring>
+        <name>last_error_</name>
+        <qualifiedname>ssl_stream::last_error_</qualifiedname>
+        <briefdescription>
+<para>最后错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="72" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classssl__stream_1a9952fc3bc99dab24e53cf07760adf429" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_stream::handle_ssl_error</definition>
+        <argsstring>(int ret, const char *operation)</argsstring>
+        <name>handle_ssl_error</name>
+        <qualifiedname>ssl_stream::handle_ssl_error</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>ret</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>operation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="74" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classssl__stream_1ab02e87e9e16e91897e6cff777bb29186" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ssl_stream::ssl_stream</definition>
+        <argsstring>()=default</argsstring>
+        <name>ssl_stream</name>
+        <qualifiedname>ssl_stream::ssl_stream</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建未初始化的SSL流对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="82" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a08bc78c38c699630bdfd08492fabadfd" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ssl_stream::ssl_stream</definition>
+        <argsstring>(const ssl_context &amp;ctx)</argsstring>
+        <name>ssl_stream</name>
+        <qualifiedname>ssl_stream::ssl_stream</qualifiedname>
+        <param>
+          <type>const <ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>从SSL上下文构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL对象创建失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="89" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="89" bodyend="89"/>
+        <references refid="classssl__stream_1ad2cdaf860512de64970b322f71be7e6e">reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a864a018f3ca93cfa3e42504f3588ade9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ssl_stream::ssl_stream</definition>
+        <argsstring>(ssl_stream &amp;&amp;other) noexcept=default</argsstring>
+        <name>ssl_stream</name>
+        <qualifiedname>ssl_stream::ssl_stream</qualifiedname>
+        <param>
+          <type><ref refid="classssl__stream" kindref="compound">ssl_stream</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="91" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a6787b9d83a8a81369a7707b0ec35aeee" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classssl__stream" kindref="compound">ssl_stream</ref> &amp;</type>
+        <definition>ssl_stream &amp; ssl_stream::operator=</definition>
+        <argsstring>(ssl_stream &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>ssl_stream::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classssl__stream" kindref="compound">ssl_stream</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="92" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1ad2cdaf860512de64970b322f71be7e6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_stream::reset</definition>
+        <argsstring>(const ssl_context &amp;ctx)</argsstring>
+        <name>reset</name>
+        <qualifiedname>ssl_stream::reset</qualifiedname>
+        <param>
+          <type>const <ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>重置SSL流 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL对象创建失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建新的SSL对象并关联到指定的上下文。 如果已有SSL对象，会先关闭并释放。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="102" column="10"/>
+        <referencedby refid="classssl__stream_1a08bc78c38c699630bdfd08492fabadfd" compoundref="ssl__stream_8hpp" startline="89" endline="89">ssl_stream</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a9f63a0a0a510ba7bc733bce6b29fc0b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_stream::set_fd</definition>
+        <argsstring>(native_handle_type fd)</argsstring>
+        <name>set_fd</name>
+        <qualifiedname>ssl_stream::set_fd</qualifiedname>
+        <param>
+          <type><ref refid="classssl__stream_1ae051cc1c9f187ca1d0d7d6ed3bfbae11" kindref="member">native_handle_type</ref></type>
+          <declname>fd</declname>
+        </param>
+        <briefdescription>
+<para>设置底层socket文件描述符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket文件描述符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>设置失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件描述符无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将SSL对象关联到已连接的TCP socket。 必须在握手之前调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="113" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a8d50c0caaf302839aba7a8989a3fa875" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_stream::accept</definition>
+        <argsstring>()</argsstring>
+        <name>accept</name>
+        <qualifiedname>ssl_stream::accept</qualifiedname>
+        <briefdescription>
+<para>执行服务器端TLS握手 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>握手失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+作为服务器端接受TLS连接，执行SSL/TLS握手。 需要在set_fd()之后调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="122" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a33c58ee785d4e58e80eaf07e73e27217" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ssl_stream::connect</definition>
+        <argsstring>()</argsstring>
+        <name>connect</name>
+        <qualifiedname>ssl_stream::connect</qualifiedname>
+        <briefdescription>
+<para>执行客户端TLS握手 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>握手成功返回true </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>握手失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+作为客户端发起TLS连接，执行SSL/TLS握手。 需要在set_fd()和set_sni_hostname()（可选）之后调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="132" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a5d919c932bf06d932d0a36dd70faad71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_stream::close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <qualifiedname>ssl_stream::close</qualifiedname>
+        <briefdescription>
+<para>关闭SSL连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>发送close_notify告警，释放SSL对象。 底层的socket不会关闭，需要单独关闭。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="140" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a4725342e2cbd45353601ea030135487a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t ssl_stream::read</definition>
+        <argsstring>(void *buffer, size_t size)</argsstring>
+        <name>read</name>
+        <qualifiedname>ssl_stream::read</qualifiedname>
+        <param>
+          <type>void *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>读取加密数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>接收缓冲区 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要读取的字节数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实际读取的字节数，-1表示错误，0表示需要重试（非阻塞模式）</para>
+</simplesect>
+从SSL连接读取解密后的数据。 非阻塞模式下，如果没有数据可读返回0。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="151" column="13"/>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1aee26c635332fe8806177a5cf52b7a7b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
+        <definition>ssize_t ssl_stream::write</definition>
+        <argsstring>(const void *buffer, size_t size)</argsstring>
+        <name>write</name>
+        <qualifiedname>ssl_stream::write</qualifiedname>
+        <param>
+          <type>const void *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>写入加密数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>实际写入的字节数，-1表示错误，0表示需要重试（非阻塞模式）</para>
+</simplesect>
+加密并发送数据到SSL连接。 非阻塞模式下，如果无法立即发送返回0。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="162" column="13"/>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1adc3dfd5b9f969e5a3d5e646c3ae11994" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; char &gt;</type>
+        <definition>vector&lt; char &gt; ssl_stream::read_all</definition>
+        <argsstring>(size_t max_size=8192)</argsstring>
+        <name>read_all</name>
+        <qualifiedname>ssl_stream::read_all</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>max_size</declname>
+          <defval>8192</defval>
+        </param>
+        <briefdescription>
+<para>读取所有可用数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大读取字节数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>读取的数据 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>读取失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+持续读取直到连接关闭或达到最大大小。 适用于阻塞模式下的完整响应读取。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="173" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a4ae572dd7e946624dcb3c2048251cdda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ssl_stream::write_all</definition>
+        <argsstring>(const void *data, size_t size)</argsstring>
+        <name>write_all</name>
+        <qualifiedname>ssl_stream::write_all</qualifiedname>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>写入所有数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要发送的数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功返回true</para>
+</simplesect>
+持续写入直到所有数据发送完毕。 适用于阻塞模式下的完整数据发送。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="184" column="10"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a8efce66ec363831e7603e577359f21c6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD int</type>
+        <definition>NEFORCE_NODISCARD int ssl_stream::pending</definition>
+        <argsstring>() const</argsstring>
+        <name>pending</name>
+        <qualifiedname>ssl_stream::pending</qualifiedname>
+        <briefdescription>
+<para>获取缓冲区中可读字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>可读字节数</para>
+</simplesect>
+返回SSL对象内部缓冲区中已解密但未读取的字节数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="192" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a1d4f7de8ebab2a49cbf631bcdfdf217e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssl_stream::set_sni_hostname</definition>
+        <argsstring>(const string &amp;hostname)</argsstring>
+        <name>set_sni_hostname</name>
+        <qualifiedname>ssl_stream::set_sni_hostname</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>hostname</declname>
+        </param>
+        <briefdescription>
+<para>设置SNI主机名（客户端） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>服务器主机名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>设置失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主机名为空时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在客户端TLS握手中设置服务器名称指示（SNI）扩展。 用于指示客户端想要连接的服务器名称。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="203" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a4cc5b0f74efe484cab6fc0913356c862" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD x509_ptr</type>
+        <definition>NEFORCE_NODISCARD x509_ptr ssl_stream::get_peer_certificate</definition>
+        <argsstring>() const</argsstring>
+        <name>get_peer_certificate</name>
+        <qualifiedname>ssl_stream::get_peer_certificate</qualifiedname>
+        <briefdescription>
+<para>获取对等方证书 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>X509证书指针</para>
+</simplesect>
+获取TLS握手时对等方提供的证书。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="211" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a39c9de4aa12661b5b908befaa74410cb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ssl_stream::verify_peer</definition>
+        <argsstring>() const</argsstring>
+        <name>verify_peer</name>
+        <qualifiedname>ssl_stream::verify_peer</qualifiedname>
+        <briefdescription>
+<para>验证对等方证书 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>验证通过返回true</para>
+</simplesect>
+检查对等方证书是否有效（未过期、链完整、信任CA）。 需要在握手完成后调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="220" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1ad3b9dc0ed64e92577c8bb4ba3220c583" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string ssl_stream::get_cipher_name</definition>
+        <argsstring>() const</argsstring>
+        <name>get_cipher_name</name>
+        <qualifiedname>ssl_stream::get_cipher_name</qualifiedname>
+        <briefdescription>
+<para>获取密码套件名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>密码套件名称</para>
+</simplesect>
+返回当前TLS连接使用的密码套件名称。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="228" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1aa1eace8edd10d671c001391baf0b6a48" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>NEFORCE_NODISCARD string ssl_stream::get_version</definition>
+        <argsstring>() const</argsstring>
+        <name>get_version</name>
+        <qualifiedname>ssl_stream::get_version</qualifiedname>
+        <briefdescription>
+<para>获取TLS协议版本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>协议版本字符串（如&quot;TLSv1.2&quot;） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="234" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a094d5e2e161252b4b063939239fef4ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+        <definition>NEFORCE_NODISCARD const string &amp; ssl_stream::last_error</definition>
+        <argsstring>() const</argsstring>
+        <name>last_error</name>
+        <qualifiedname>ssl_stream::last_error</qualifiedname>
+        <briefdescription>
+<para>获取最后错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="240" column="36" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="240" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a32cc653e8ae7e2eb2dca776a645786d4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool ssl_stream::is_valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>ssl_stream::is_valid</qualifiedname>
+        <briefdescription>
+<para>检查SSL对象是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="246" column="28" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="246" bodyend="246"/>
+        <referencedby refid="classssl__stream_1a497091962274d5219c13b422e0254b50" compoundref="ssl__stream_8hpp" startline="252" endline="252">operator bool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a497091962274d5219c13b422e0254b50" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ssl_stream::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>ssl_stream::operator bool</qualifiedname>
+        <briefdescription>
+<para>布尔转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="252" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="252" bodyend="252"/>
+        <references refid="classssl__stream_1a32cc653e8ae7e2eb2dca776a645786d4" compoundref="ssl__stream_8hpp" startline="246" endline="246">is_valid</references>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1adb6c7c529d3fc36ee21e27846232f2ac" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD::SSL *</type>
+        <definition>NEFORCE_NODISCARD::SSL * ssl_stream::native_handle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>ssl_stream::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取原生SSL对象指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SSL指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="258" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="258" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classssl__stream_1aa1af4e284b6497eb7fdfe79349f6333a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD::SSL *</type>
+        <definition>NEFORCE_NODISCARD::SSL * ssl_stream::release</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>ssl_stream::release</qualifiedname>
+        <briefdescription>
+<para>释放SSL对象所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SSL指针</para>
+</simplesect>
+释放SSL对象的所有权，调用方负责释放。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="266" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="266" bodyend="266"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>SSL/TLS流封装类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>封装OpenSSL的SSL对象，提供加密通信流的接口。 需要先建立TCP连接，然后在连接上建立SSL/TLS会话。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>SSL/TLS握手</para>
+</listitem><listitem><para>加密数据读写</para>
+</listitem><listitem><para>证书验证</para>
+</listitem><listitem><para>SNI（服务器名称指示）支持</para>
+</listitem><listitem><para>密码套件和协议版本查询</para>
+</listitem><listitem><para>非阻塞I/O支持 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="40" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="40" bodyend="267"/>
+    <listofallmembers>
+      <member refid="classssl__stream_1a8d50c0caaf302839aba7a8989a3fa875" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>accept</name></member>
+      <member refid="classssl__stream_1a5d919c932bf06d932d0a36dd70faad71" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>close</name></member>
+      <member refid="classssl__stream_1a33c58ee785d4e58e80eaf07e73e27217" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>connect</name></member>
+      <member refid="classssl__stream_1ad3b9dc0ed64e92577c8bb4ba3220c583" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>get_cipher_name</name></member>
+      <member refid="classssl__stream_1a4cc5b0f74efe484cab6fc0913356c862" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>get_peer_certificate</name></member>
+      <member refid="classssl__stream_1aa1eace8edd10d671c001391baf0b6a48" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>get_version</name></member>
+      <member refid="classssl__stream_1a9952fc3bc99dab24e53cf07760adf429" prot="private" virt="non-virtual"><scope>ssl_stream</scope><name>handle_ssl_error</name></member>
+      <member refid="classssl__stream_1a32cc653e8ae7e2eb2dca776a645786d4" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>is_valid</name></member>
+      <member refid="classssl__stream_1a094d5e2e161252b4b063939239fef4ee" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>last_error</name></member>
+      <member refid="classssl__stream_1aa506b16fbb1aa9a1ededa9047ba75748" prot="private" virt="non-virtual"><scope>ssl_stream</scope><name>last_error_</name></member>
+      <member refid="classssl__stream_1adb6c7c529d3fc36ee21e27846232f2ac" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>native_handle</name></member>
+      <member refid="classssl__stream_1ae051cc1c9f187ca1d0d7d6ed3bfbae11" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>native_handle_type</name></member>
+      <member refid="classssl__stream_1a497091962274d5219c13b422e0254b50" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>operator bool</name></member>
+      <member refid="classssl__stream_1a6787b9d83a8a81369a7707b0ec35aeee" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>operator=</name></member>
+      <member refid="classssl__stream_1a8efce66ec363831e7603e577359f21c6" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>pending</name></member>
+      <member refid="classssl__stream_1a4725342e2cbd45353601ea030135487a" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>read</name></member>
+      <member refid="classssl__stream_1adc3dfd5b9f969e5a3d5e646c3ae11994" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>read_all</name></member>
+      <member refid="classssl__stream_1aa1af4e284b6497eb7fdfe79349f6333a" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>release</name></member>
+      <member refid="classssl__stream_1ad2cdaf860512de64970b322f71be7e6e" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>reset</name></member>
+      <member refid="classssl__stream_1a9f63a0a0a510ba7bc733bce6b29fc0b8" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>set_fd</name></member>
+      <member refid="classssl__stream_1a1d4f7de8ebab2a49cbf631bcdfdf217e" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>set_sni_hostname</name></member>
+      <member refid="classssl__stream_1a41f5741e3cc79e16e287cd432dac68ad" prot="private" virt="non-virtual"><scope>ssl_stream</scope><name>ssl_</name></member>
+      <member refid="classssl__stream_1ab02e87e9e16e91897e6cff777bb29186" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>ssl_stream</name></member>
+      <member refid="classssl__stream_1a08bc78c38c699630bdfd08492fabadfd" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>ssl_stream</name></member>
+      <member refid="classssl__stream_1a864a018f3ca93cfa3e42504f3588ade9" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>ssl_stream</name></member>
+      <member refid="classssl__stream_1a39c9de4aa12661b5b908befaa74410cb" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>verify_peer</name></member>
+      <member refid="classssl__stream_1aee26c635332fe8806177a5cf52b7a7b4" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>write</name></member>
+      <member refid="classssl__stream_1a4ae572dd7e946624dcb3c2048251cdda" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>write_all</name></member>
+      <member refid="classssl__stream_1a91f64278b144c18e6deddf291bdf76e4" prot="private" virt="non-virtual"><scope>ssl_stream</scope><name>x509_ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

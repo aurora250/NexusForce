@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['线性时间排序算法_0',['线性时间排序算法',['../group___sort_algorithms.html#linear_time_algorithms',1,'']]]
+  ['系统、并发与命令行_0',['⚙️ 系统、并发与命令行',['../index.html#autotoc_md15',1,'']]],
+  ['系统接口_20system_1',['⚙️ 系统接口 (System)',['../index.html#autotoc_md27',1,'']]]
 ];

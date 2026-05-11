@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classregistry" kind="class" language="C++" prot="public">
+    <compoundname>registry</compoundname>
+    <includes refid="registry_8hpp" local="no">registry.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classregistry_1a739c5dc4364f17f2a4a29843db2a5bfb" prot="private" static="no" mutable="no">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex registry::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>registry::mutex_</qualifiedname>
+        <briefdescription>
+<para>保护类型映射的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="32" column="11" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classregistry_1a5eae6f714f820f9508a65ec315415e64" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref>, <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classmeta__type" kindref="compound">meta_type</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;type_id, unique_ptr&lt;meta_type&gt; &gt; registry::types_</definition>
+        <argsstring></argsstring>
+        <name>types_</name>
+        <qualifiedname>registry::types_</qualifiedname>
+        <briefdescription>
+<para>类型ID到元数据的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="33" column="19" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classregistry_1a24a72dffc358a9eaaf9789d1c74a1af1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>registry::registry</definition>
+        <argsstring>()=default</argsstring>
+        <name>registry</name>
+        <qualifiedname>registry::registry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="35" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classregistry_1ae3786801b98d932e133778a36eee1d72" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classregistry" kindref="compound">registry</ref> &amp;</type>
+        <definition>static registry &amp; registry::instance</definition>
+        <argsstring>()</argsstring>
+        <name>instance</name>
+        <qualifiedname>registry::instance</qualifiedname>
+        <briefdescription>
+<para>获取单例实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>注册表实例引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="42" column="21" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="42" bodyend="45"/>
+        <referencedby refid="classtype__builder_1a5c3b7c7c1a879ec6d24cc3b6fe0491b6" compoundref="reflect_8hpp" startline="54" endline="57">type_builder&lt; T &gt;::base</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classregistry_1a80b07280b49b0e28ecc3f3a1b6c7cccc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classmeta__type" kindref="compound">meta_type</ref> &amp;</type>
+        <definition>meta_type &amp; registry::register_type</definition>
+        <argsstring>(string_view name)</argsstring>
+        <name>register_type</name>
+        <qualifiedname>registry::register_type</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>注册类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要注册的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型元数据引用</para>
+</simplesect>
+如果类型已注册，返回现有元数据；否则创建新的元数据。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="56" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="56" bodyend="67"/>
+        <references refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" compoundref="unique__ptr_8hpp" startline="973" endline="975">make_unique</references>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classregistry_1a805216ed6126937556df9e322cfb4a32" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classmeta__type" kindref="compound">meta_type</ref> *</type>
+        <definition>meta_type * registry::find_unlocked</definition>
+        <argsstring>(string_view name)</argsstring>
+        <name>find_unlocked</name>
+        <qualifiedname>registry::find_unlocked</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>查找类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型元数据指针，不存在返回nullptr</para>
+</simplesect>
+<simplesect kind="note"><para>调用前需已持有互斥锁 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="76" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="76" bodyend="79"/>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <referencedby refid="classregistry_1a3bc2f83a283c6aee3e86078aacb2eb2b" compoundref="registry_8hpp" startline="86" endline="89">find</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classregistry_1a3bc2f83a283c6aee3e86078aacb2eb2b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classmeta__type" kindref="compound">meta_type</ref> *</type>
+        <definition>meta_type * registry::find</definition>
+        <argsstring>(string_view name)</argsstring>
+        <name>find</name>
+        <qualifiedname>registry::find</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>查找类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型元数据指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="86" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="86" bodyend="89"/>
+        <references refid="classregistry_1a805216ed6126937556df9e322cfb4a32" compoundref="registry_8hpp" startline="76" endline="79">find_unlocked</references>
+        <references refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classregistry_1ab9aa0e1c8f702d631bfb427f5ee4feeb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classmeta__type" kindref="compound">meta_type</ref> *</type>
+        <definition>meta_type * registry::find</definition>
+        <argsstring>(type_id id)</argsstring>
+        <name>find</name>
+        <qualifiedname>registry::find</qualifiedname>
+        <param>
+          <type><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>查找类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型元数据指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="96" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="96" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classregistry_1a113a83de57e98c1e6f06a47aff4b5557" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void registry::for_each</definition>
+        <argsstring>(Func &amp;&amp;func)</argsstring>
+        <name>for_each</name>
+        <qualifiedname>registry::for_each</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>遍历所有注册的类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数，接收meta_type&amp;参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+对每个注册的类型调用回调函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="110" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="110" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classregistry_1ad9f2bc1e953093b1492a327fedc7566f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void registry::resolve_all_bases</definition>
+        <argsstring>()</argsstring>
+        <name>resolve_all_bases</name>
+        <qualifiedname>registry::resolve_all_bases</qualifiedname>
+        <briefdescription>
+<para>解析所有类型的基类关系 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>遍历所有类型，解析其待解析的基类名称。 应在所有类型注册完成后调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="123" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="123" bodyend="128"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>反射类型注册表 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>全局唯一的类型注册表，存储所有已注册的反射类型元数据。 提供类型查找、遍历和基类解析功能。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" line="30" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/registry.hpp" bodystart="30" bodyend="129"/>
+    <listofallmembers>
+      <member refid="classregistry_1a3bc2f83a283c6aee3e86078aacb2eb2b" prot="public" virt="non-virtual"><scope>registry</scope><name>find</name></member>
+      <member refid="classregistry_1ab9aa0e1c8f702d631bfb427f5ee4feeb" prot="public" virt="non-virtual"><scope>registry</scope><name>find</name></member>
+      <member refid="classregistry_1a805216ed6126937556df9e322cfb4a32" prot="public" virt="non-virtual"><scope>registry</scope><name>find_unlocked</name></member>
+      <member refid="classregistry_1a113a83de57e98c1e6f06a47aff4b5557" prot="public" virt="non-virtual"><scope>registry</scope><name>for_each</name></member>
+      <member refid="classregistry_1ae3786801b98d932e133778a36eee1d72" prot="public" virt="non-virtual"><scope>registry</scope><name>instance</name></member>
+      <member refid="classregistry_1a739c5dc4364f17f2a4a29843db2a5bfb" prot="private" virt="non-virtual"><scope>registry</scope><name>mutex_</name></member>
+      <member refid="classregistry_1a80b07280b49b0e28ecc3f3a1b6c7cccc" prot="public" virt="non-virtual"><scope>registry</scope><name>register_type</name></member>
+      <member refid="classregistry_1a24a72dffc358a9eaaf9789d1c74a1af1" prot="private" virt="non-virtual"><scope>registry</scope><name>registry</name></member>
+      <member refid="classregistry_1ad9f2bc1e953093b1492a327fedc7566f" prot="public" virt="non-virtual"><scope>registry</scope><name>resolve_all_bases</name></member>
+      <member refid="classregistry_1a5eae6f714f820f9508a65ec315415e64" prot="private" virt="non-virtual"><scope>registry</scope><name>types_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

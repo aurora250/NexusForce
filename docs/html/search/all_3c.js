@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['删除器_0',['删除器',['../group___deleter.html',1,'']]],
-  ['删除算法_1',['删除算法',['../group___remove_algorithms.html',1,'']]]
+  ['函数包装器_0',['函数包装器',['../group___function_wrapper.html',1,'']]]
 ];

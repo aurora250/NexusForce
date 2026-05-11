@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classsignal__blocker" kind="class" language="C++" prot="public">
+    <compoundname>signal_blocker</compoundname>
+    <includes refid="signals_8hpp" local="no">signals.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename...</type>
+        <declname>Types</declname>
+        <defname>Types</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classsignal__blocker_1abda4d5207a375772fbce7f2f21e64aad" prot="private" static="no" mutable="no">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; bool &gt;</type>
+        <definition>shared_ptr&lt;bool&gt; signal_blocker&lt; Types &gt;::blocked_flag_</definition>
+        <argsstring></argsstring>
+        <name>blocked_flag_</name>
+        <qualifiedname>signal_blocker::blocked_flag_</qualifiedname>
+        <briefdescription>
+<para>阻塞标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="191" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__blocker_1af1c6bb54ac94897fe200f214e0d1c722" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool signal_blocker&lt; Types &gt;::old_value_</definition>
+        <argsstring></argsstring>
+        <name>old_value_</name>
+        <qualifiedname>signal_blocker::old_value_</qualifiedname>
+        <briefdescription>
+<para>原值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="192" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsignal__blocker_1a2ed70bee6690056de9f0e6f8acd75c3a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool signal_blocker&lt; Types &gt;::released_</definition>
+        <argsstring></argsstring>
+        <name>released_</name>
+        <qualifiedname>signal_blocker::released_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否已手动解除 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="193" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsignal__blocker_1a759fa203e414c7703fe2eec91e5aa693" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>signal_blocker&lt; Types &gt;::signal_blocker</definition>
+        <argsstring>(signal&lt; Types... &gt; &amp;sig) noexcept</argsstring>
+        <name>signal_blocker</name>
+        <qualifiedname>signal_blocker::signal_blocker</qualifiedname>
+        <param>
+          <type><ref refid="structsignal" kindref="compound">signal</ref>&lt; Types... &gt; &amp;</type>
+          <declname>sig</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，阻塞指定信号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sig</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要阻塞的信号 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="200" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="200" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__blocker_1a22e1918528b57aadff8272e52ac4519b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>signal_blocker&lt; Types &gt;::~signal_blocker</definition>
+        <argsstring>()</argsstring>
+        <name>~signal_blocker</name>
+        <qualifiedname>signal_blocker::~signal_blocker</qualifiedname>
+        <briefdescription>
+<para>析构函数，恢复原状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="209" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="209" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__blocker_1a02de1be1ed8c57e4abd3230b4466ce07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>signal_blocker&lt; Types &gt;::signal_blocker</definition>
+        <argsstring>(const signal_blocker &amp;)=delete</argsstring>
+        <name>signal_blocker</name>
+        <qualifiedname>signal_blocker::signal_blocker</qualifiedname>
+        <param>
+          <type>const <ref refid="classsignal__blocker" kindref="compound">signal_blocker</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="215" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__blocker_1a788e7bee482fb97696b47409cdc8fd64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classsignal__blocker" kindref="compound">signal_blocker</ref> &amp;</type>
+        <definition>signal_blocker &amp; signal_blocker&lt; Types &gt;::operator=</definition>
+        <argsstring>(const signal_blocker &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>signal_blocker::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classsignal__blocker" kindref="compound">signal_blocker</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="216" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__blocker_1a62667b891e713fa71c8a2e9a34130835" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void signal_blocker&lt; Types &gt;::unblock</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>unblock</name>
+        <qualifiedname>signal_blocker::unblock</qualifiedname>
+        <briefdescription>
+<para>手动解除阻塞 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>提前解除阻塞，不会等待析构时恢复。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="223" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="223" bodyend="228"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>信号阻塞器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>信号阻塞管理器，在作用域内临时阻塞信号触发。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="189" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="189" bodyend="229"/>
+    <listofallmembers>
+      <member refid="classsignal__blocker_1abda4d5207a375772fbce7f2f21e64aad" prot="private" virt="non-virtual"><scope>signal_blocker</scope><name>blocked_flag_</name></member>
+      <member refid="classsignal__blocker_1af1c6bb54ac94897fe200f214e0d1c722" prot="private" virt="non-virtual"><scope>signal_blocker</scope><name>old_value_</name></member>
+      <member refid="classsignal__blocker_1a788e7bee482fb97696b47409cdc8fd64" prot="public" virt="non-virtual"><scope>signal_blocker</scope><name>operator=</name></member>
+      <member refid="classsignal__blocker_1a2ed70bee6690056de9f0e6f8acd75c3a" prot="private" virt="non-virtual"><scope>signal_blocker</scope><name>released_</name></member>
+      <member refid="classsignal__blocker_1a759fa203e414c7703fe2eec91e5aa693" prot="public" virt="non-virtual"><scope>signal_blocker</scope><name>signal_blocker</name></member>
+      <member refid="classsignal__blocker_1a02de1be1ed8c57e4abd3230b4466ce07" prot="public" virt="non-virtual"><scope>signal_blocker</scope><name>signal_blocker</name></member>
+      <member refid="classsignal__blocker_1a62667b891e713fa71c8a2e9a34130835" prot="public" virt="non-virtual"><scope>signal_blocker</scope><name>unblock</name></member>
+      <member refid="classsignal__blocker_1a22e1918528b57aadff8272e52ac4519b" prot="public" virt="non-virtual"><scope>signal_blocker</scope><name>~signal_blocker</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

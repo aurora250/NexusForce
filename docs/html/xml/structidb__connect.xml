@@ -1,0 +1,399 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structidb__connect" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>idb_connect</compoundname>
+    <derivedcompoundref refid="structidb__kv__connect" prot="public" virt="non-virtual">idb_kv_connect</derivedcompoundref>
+    <derivedcompoundref refid="structidb__tb__connect" prot="public" virt="non-virtual">idb_tb_connect</derivedcompoundref>
+    <includes refid="db__interface_8hpp" local="no">db_interface.hpp</includes>
+    <sectiondef kind="user-defined">
+      <header>连接管理</header>
+      <memberdef kind="function" id="structidb__connect_1a7ae3001e8ef72724b952fac4ea66cde7" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool idb_connect::connect</definition>
+        <argsstring>(const db_config &amp;config)=0</argsstring>
+        <name>connect</name>
+        <qualifiedname>idb_connect::connect</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1ab5c25136bff3882cf88792623d8b3c8b">connect</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a4ff17a8d36b989b9aed3f94df49d99cd">connect</reimplementedby>
+        <reimplementedby refid="structredis__connect_1a04bac35a84d75727c336ad0ae97cd7b9">connect</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a9b8173a41fcdbe55b7af9fd0bd3223e2">connect</reimplementedby>
+        <param>
+          <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>建立连接 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="204" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structidb__connect_1a5faaad097bbdc6d8e530eb9f3ec7af94" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool idb_connect::reconnect</definition>
+        <argsstring>(const db_config &amp;config)=0</argsstring>
+        <name>reconnect</name>
+        <qualifiedname>idb_connect::reconnect</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1a0d4be02834cd55ae35f5cd9d29aa69f7">reconnect</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a9215a5add6d0650189fce2d0d3b4b8a7">reconnect</reimplementedby>
+        <reimplementedby refid="structredis__connect_1a381bd4d837595e8cf4cbddc878145bce">reconnect</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1ab81c7556101e6bf9fab9b53c0ccb43ab">reconnect</reimplementedby>
+        <param>
+          <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>重新连接 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="205" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void idb_connect::close</definition>
+        <argsstring>()=0</argsstring>
+        <name>close</name>
+        <qualifiedname>idb_connect::close</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1a3eb1bfcd465e808514ef8b035e1f3ef5">close</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a3450d90f43777ec011692214e68ecd82">close</reimplementedby>
+        <reimplementedby refid="structredis__connect_1a834b77723f344390fc9b76fa59acd22a">close</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a60bba60200444b0b647d26e342144509">close</reimplementedby>
+        <briefdescription>
+<para>关闭连接 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="206" column="18"/>
+        <referencedby refid="structmysql__connect_1a6333c19361bdf32e80b25af448ec874d" compoundref="mysql__connect_8hpp" startline="58" endline="58">mysql_connect::~mysql_connect</referencedby>
+        <referencedby refid="classpgsql__connect_1afd2f6fe358954bb580cf600549a59645" compoundref="pgsql__connect_8hpp" startline="59" endline="59">pgsql_connect::~pgsql_connect</referencedby>
+        <referencedby refid="structredis__connect_1a9d4fdef658882bbb29a1e769dfe61192" compoundref="redis__connect_8hpp" startline="63" endline="63">redis_connect::~redis_connect</referencedby>
+        <referencedby refid="structsqlite__connect_1a5f2a35ca8e5fdf3aad5700dde761706c" compoundref="sqlite__connect_8hpp" startline="63" endline="63">sqlite_connect::~sqlite_connect</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>字符集设置</header>
+      <memberdef kind="function" id="structidb__connect_1a9f0b407a683b19bee646271a19356aad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool idb_connect::set_character_set</definition>
+        <argsstring>(const string &amp;encoding) const =0</argsstring>
+        <name>set_character_set</name>
+        <qualifiedname>idb_connect::set_character_set</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1a11ac571c00e92f2f95c95d542b65701a">set_character_set</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a4903abe371af79d3193ae88a3a2f56aa">set_character_set</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1add6f71f73c477e298ab3690c7fa2cb05">set_character_set</reimplementedby>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>encoding</declname>
+        </param>
+        <briefdescription>
+<para>设置字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="213" column="18"/>
+        <referencedby refid="structredis__connect_1aa66bf3a032d2b0be45f87bacd5e78e47" compoundref="redis__connect_8hpp" startline="90" endline="91">redis_connect::NEFORCE_DEPRECATED_FOR</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>virtual string_view idb_connect::get_character_set</definition>
+        <argsstring>() const =0</argsstring>
+        <name>get_character_set</name>
+        <qualifiedname>idb_connect::get_character_set</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1a89fd3f85739f0ebf6ee71e539dea8bc5">get_character_set</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a56044bf2f47f8a4150597cc183e83ede">get_character_set</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a7e90df9d163fcbf9bb7a95603c5b3f83">get_character_set</reimplementedby>
+        <briefdescription>
+<para>获取字符集 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="214" column="25"/>
+        <referencedby refid="structredis__connect_1aa9c3e1b7af3100595a9b9e3988b6c4d1" compoundref="redis__connect_8hpp" startline="97" endline="98">redis_connect::NEFORCE_DEPRECATED_FOR</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>错误处理</header>
+      <memberdef kind="function" id="structidb__connect_1a128b6a7646a28e85e231beb150439c01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>virtual string_view idb_connect::get_error</definition>
+        <argsstring>() const =0</argsstring>
+        <name>get_error</name>
+        <qualifiedname>idb_connect::get_error</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1aee6d307c20e88682483b098d4b30d611">get_error</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a9f3dca64f4be6c93db3302b269b3b61c">get_error</reimplementedby>
+        <reimplementedby refid="structredis__connect_1af5c327e104b050e226fa3de67f1e3bea">get_error</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a2a07957e0fda099afdc678b46390e16b">get_error</reimplementedby>
+        <briefdescription>
+<para>获取错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="221" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>virtual uint32_t idb_connect::get_errno</definition>
+        <argsstring>() const =0</argsstring>
+        <name>get_errno</name>
+        <qualifiedname>idb_connect::get_errno</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1a0835bd7e91557c25fb9b5c43af2a759a">get_errno</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a1960703117d7a933044bbdf7ef32563f">get_errno</reimplementedby>
+        <reimplementedby refid="structredis__connect_1a5e7c796199dc65854b6a6dd0008daae3">get_errno</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1aaf26361fd2b411697712bed65d022e57">get_errno</reimplementedby>
+        <briefdescription>
+<para>获取错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="222" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="user-defined">
+      <header>连接状态检测</header>
+      <memberdef kind="function" id="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool idb_connect::connected</definition>
+        <argsstring>() const =0</argsstring>
+        <name>connected</name>
+        <qualifiedname>idb_connect::connected</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1ad550711135630dba12370bc7f45dc0a1">connected</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a8480c07a5da1bae59f4b2b5d395ace01">connected</reimplementedby>
+        <reimplementedby refid="structredis__connect_1abf1840d0ce8ba66dcf167c41cfc162f1">connected</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1abd4969015d139892338dd620b834eccd">connected</reimplementedby>
+        <briefdescription>
+<para>检查连接状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="236" column="18"/>
+        <referencedby refid="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9" compoundref="pgsql__connect_8hpp" startline="144" endline="144">pgsql_connect::is_valid</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool idb_connect::is_valid</definition>
+        <argsstring>() const =0</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>idb_connect::is_valid</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1a9ed7e3f772ebd094431c7a7a20c2a022">is_valid</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9">is_valid</reimplementedby>
+        <reimplementedby refid="structredis__connect_1a1e01a0f142f0ebad62d1d0ff4518067d">is_valid</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1ac60f61740228e60f09580cea8e47ae78">is_valid</reimplementedby>
+        <briefdescription>
+<para>检查连接有效性 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="237" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" static="no">
+        <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref></type>
+        <definition>using idb_connect::clock_type = milliseconds</definition>
+        <argsstring></argsstring>
+        <name>clock_type</name>
+        <qualifiedname>idb_connect::clock_type</qualifiedname>
+        <briefdescription>
+<para>存活时间计时器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="192" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="192" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structidb__connect_1a6505d04274a2d0e7d2a6c1d4df59c1d9" prot="private" static="no" mutable="no">
+        <type><ref refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" kindref="member">clock_type</ref></type>
+        <definition>clock_type idb_connect::alive_time_</definition>
+        <argsstring></argsstring>
+        <name>alive_time_</name>
+        <qualifiedname>idb_connect::alive_time_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>连接存活时间（毫秒） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="195" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="195" bodyend="195"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual idb_connect::~idb_connect</definition>
+        <argsstring>()=default</argsstring>
+        <name>~idb_connect</name>
+        <qualifiedname>idb_connect::~idb_connect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="198" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool idb_connect::update</definition>
+        <argsstring>(const string &amp;sql) const =0</argsstring>
+        <name>update</name>
+        <qualifiedname>idb_connect::update</qualifiedname>
+        <reimplementedby refid="structmysql__connect_1a775c5bcf3e396a32a59f7a867749fb20">update</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a035e9c7ee0abe108fe689c8a3a12abb0">update</reimplementedby>
+        <reimplementedby refid="structredis__connect_1ae1eeac414607310e4c1ce4ba0c01affb">update</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a6658a0711918f65ddd98d8291881a7a2">update</reimplementedby>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>执行非查询SQL语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SQL语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>执行成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="230" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void idb_connect::refresh_alive</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>refresh_alive</name>
+        <qualifiedname>idb_connect::refresh_alive</qualifiedname>
+        <briefdescription>
+<para>刷新连接存活时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>标记当前连接为活动状态，用于连接池空闲检测。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="245" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="245" bodyend="245"/>
+        <references refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</references>
+        <references refid="group___duration_1gafaba32c48d91da85098ecb115cea65ed" compoundref="duration_8hpp" startline="144" endline="152">time_cast</references>
+      </memberdef>
+      <memberdef kind="function" id="structidb__connect_1affedca161dc65836d2ecd3ae76e9158d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" kindref="member">clock_type</ref></type>
+        <definition>NEFORCE_NODISCARD clock_type idb_connect::get_alive</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_alive</name>
+        <qualifiedname>idb_connect::get_alive</qualifiedname>
+        <briefdescription>
+<para>获取连接空闲时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自上次刷新以来的毫秒数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="251" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="251" bodyend="253"/>
+        <references refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</references>
+        <references refid="group___duration_1gafaba32c48d91da85098ecb115cea65ed" compoundref="duration_8hpp" startline="144" endline="152">time_cast</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>数据库连接抽象基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供连接管理、错误处理、存活检测等基础功能。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>idb_connect</label>
+        <link refid="structidb__connect"/>
+      </node>
+      <node id="2">
+        <label>idb_kv_connect</label>
+        <link refid="structidb__kv__connect"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>idb_tb_connect</label>
+        <link refid="structidb__tb__connect"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>mysql_connect</label>
+        <link refid="structmysql__connect"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>pgsql_connect</label>
+        <link refid="classpgsql__connect"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>redis_connect</label>
+        <link refid="structredis__connect"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>sqlite_connect</label>
+        <link refid="structsqlite__connect"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="190" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="190" bodyend="254"/>
+    <listofallmembers>
+      <member refid="structidb__connect_1a6505d04274a2d0e7d2a6c1d4df59c1d9" prot="private" virt="non-virtual"><scope>idb_connect</scope><name>alive_time_</name></member>
+      <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>idb_connect</scope><name>clock_type</name></member>
+      <member refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>close</name></member>
+      <member refid="structidb__connect_1a7ae3001e8ef72724b952fac4ea66cde7" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>connect</name></member>
+      <member refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>connected</name></member>
+      <member refid="structidb__connect_1affedca161dc65836d2ecd3ae76e9158d" prot="public" virt="non-virtual"><scope>idb_connect</scope><name>get_alive</name></member>
+      <member refid="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_character_set</name></member>
+      <member refid="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_errno</name></member>
+      <member refid="structidb__connect_1a128b6a7646a28e85e231beb150439c01" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_error</name></member>
+      <member refid="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>is_valid</name></member>
+      <member refid="structidb__connect_1a5faaad097bbdc6d8e530eb9f3ec7af94" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>reconnect</name></member>
+      <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>idb_connect</scope><name>refresh_alive</name></member>
+      <member refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>set_character_set</name></member>
+      <member refid="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>update</name></member>
+      <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>idb_connect</scope><name>~idb_connect</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
