@@ -1,10 +1,12 @@
 #include <NeForce/core/exception/exception.hpp>
 #include <NeForce/core/exception/exception_ptr.hpp>
 #include <NeForce/core/exception/terminate.hpp>
+#include <exception>
 NEFORCE_BEGIN_NAMESPACE__
 
 exception_ptr current_exception() noexcept {
-    if (uncaught_exceptions() == 0) {
+    std::exception_ptr std_ep = std::current_exception();
+    if (!std_ep) {
         return {};
     }
 

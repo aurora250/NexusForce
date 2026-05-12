@@ -42,17 +42,17 @@ private:
             conjunction_v<is_member_function_pointer<remove_reference_t<Callable>>,
                           is_invocable<Callable, Object, stop_token, Args...>>;
 
-    stop_source stop_source_{none};
-    thread thread_{};
+    stop_source stop_source_;
+    thread thread_;
 
     template <typename Callable, typename Object, typename... Args,
-              enable_if_t<pmf_expects_stop_token<Callable, Args...>, int> = 0>
+              enable_if_t<pmf_expects_stop_token<Callable, Object, Args...>, int> = 0>
     static thread create(stop_source& source, Callable func, Object&& object, Args&&... args) {
         return thread{func, _NEFORCE forward<Object>(object), source.get_token(), _NEFORCE forward<Args>(args)...};
     }
 
     template <typename Callable, typename... Args,
-              enable_if_t<!pmf_expects_stop_token<Callable, Args...> &&
+              enable_if_t<!is_member_function_pointer_v<remove_reference_t<Callable>> &&
                                   is_invocable_v<decay_t<Callable>, stop_token, decay_t<Args>...>,
                           int> = 0>
     static thread create(stop_source& source, Callable func, Args&&... args) {
@@ -60,10 +60,10 @@ private:
     }
 
     template <typename Callable, typename... Args,
-              enable_if_t<!pmf_expects_stop_token<Callable, Args...> &&
+              enable_if_t<!is_member_function_pointer_v<remove_reference_t<Callable>> &&
                                   !is_invocable_v<decay_t<Callable>, stop_token, decay_t<Args>...>,
                           int> = 0>
-    static thread create(stop_source&, Callable func, Args&&... args) {
+    static thread create(stop_source& /*unused*/, Callable func, Args&&... args) {
         static_assert(is_invocable_v<decay_t<Callable>, decay_t<Args>...>,
                       "jthread arguments must be invocable after conversion to rvalues");
         return thread{_NEFORCE forward<Callable>(func), _NEFORCE forward<Args>(args)...};

@@ -179,7 +179,7 @@ public:
      */
     exception_ptr(const exception_ptr& other) noexcept :
     ecb_(other.ecb_) {
-        if (ecb_) {
+        if (ecb_ != nullptr) {
             ecb_->add_ref();
         }
     }
@@ -201,7 +201,7 @@ public:
      * 减少引用计数，当引用计数为0时释放资源。
      */
     ~exception_ptr() noexcept {
-        if (ecb_) {
+        if (ecb_ != nullptr) {
             ecb_->release();
         }
     }
@@ -319,7 +319,7 @@ exception_ptr make_exception_ptr(Ex ex) noexcept {
         result.ecb_ = control_block.release();
         return result;
     } catch (...) {
-        return exception_ptr();
+        return {};
     }
 }
 

@@ -492,7 +492,7 @@ struct __future_base {
         struct setter<Res, Arg&> {
             static_assert(is_same_v<Res, Arg&> || is_same_v<const Res, Arg>, "Invalid specialisation");
 
-            typename promise<Res>::PtrType operator()() const {
+            typename promise<Res>::ptr_type operator()() const {
                 promise_ptr->storage->set(*arg_ptr);
                 return _NEFORCE move(promise_ptr->storage);
             }
@@ -505,7 +505,7 @@ struct __future_base {
          */
         template <typename Res>
         struct setter<Res, Res&&> {
-            typename promise<Res>::PtrType operator()() const {
+            typename promise<Res>::ptr_type operator()() const {
                 promise_ptr->storage->set(_NEFORCE move(*arg_ptr));
                 return _NEFORCE move(promise_ptr->storage);
             }

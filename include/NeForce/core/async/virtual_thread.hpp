@@ -74,6 +74,8 @@ struct virtual_thread_task {
 
     coroutine_handle<promise_type> handle_; ///< 协程句柄
 
+    virtual_thread_task() noexcept = default;
+
     /**
      * @brief 构造函数
      * @param h 协程句柄
@@ -287,11 +289,12 @@ private:
     }
 
 public:
-    virtual_thread() = default;                                           ///< 默认构造函数
-    virtual_thread(const virtual_thread&) = delete;                       ///< 禁止拷贝构造
-    virtual_thread& operator=(const virtual_thread&) = delete;            ///< 禁止拷贝赋值
-    virtual_thread(virtual_thread&& other) noexcept = default;            ///< 移动构造函数
-    virtual_thread& operator=(virtual_thread&& other) noexcept = default; ///< 移动赋值运算符
+    virtual_thread() = default;
+    ~virtual_thread() = default;
+    virtual_thread(const virtual_thread&) = delete;
+    virtual_thread& operator=(const virtual_thread&) = delete;
+    virtual_thread(virtual_thread&& other) noexcept = default;
+    virtual_thread& operator=(virtual_thread&& other) noexcept = default;
 
     /**
      * @brief 启动虚拟线程

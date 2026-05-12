@@ -99,7 +99,7 @@ class tree_barrier {
                 auto expected_phase = old_phase;
                 phase_ref_t phase_ref(state_array_[current_index].tickets[round]);
 
-                if (current_index == last_node && (current_expected & 1)) {
+                if (current_index == last_node && ((current_expected & 1) != 0U)) {
                     if (phase_ref.compare_exchange_strong(expected_phase, full_step, memory_order_acq_rel)) {
                         break;
                     }
@@ -155,7 +155,7 @@ public:
         const auto old_phase = phase_ref.load(memory_order_relaxed);
         const auto current_phase_value = static_cast<byte_t>(old_phase);
 
-        for (; update; --update) {
+        for (; update != 0; --update) {
             if (do_arrive(old_phase, current_index)) {
                 completion_function_();
                 expected_count_ += expected_adjustment_.load(memory_order_relaxed);

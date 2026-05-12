@@ -124,8 +124,10 @@ public:
     /**
      * @brief 移动构造函数
      */
-    exception(exception&& other) noexcept {
-        memory_copy(this, &other);
+    exception(exception&& other) noexcept :
+    code_(other.code_) {
+        memory_copy(info_, other.info_, INFO_SIZE);
+        memory_copy(type_, other.type_, TYPE_SIZE);
         other.info_[0] = '\0';
         other.type_[0] = '\0';
         other.code_ = 0;
@@ -141,6 +143,8 @@ public:
 
         memory_copy(info_, other.info_, INFO_SIZE);
         memory_copy(type_, other.type_, TYPE_SIZE);
+        code_ = other.code_;
+
         other.info_[0] = '\0';
         other.type_[0] = '\0';
         other.code_ = 0;
@@ -155,7 +159,7 @@ public:
      *
      * 从其他异常类型构造。
      */
-    template <typename Error>
+    template <typename Error, enable_if_t<is_base_of_v<exception, Error>, int> = 0>
     explicit exception(const Error& error) :
     exception(error.what(), error.type(), error.code()) {}
 

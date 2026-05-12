@@ -68,6 +68,8 @@ private:
         node(node&&) = default;
         node& operator=(node&&) = default;
 
+        ~node() = default;
+
         /**
          * @brief 比较操作符，按到期时间和ID排序
          */
@@ -84,12 +86,14 @@ private:
 
     set<node> nodes_;                                   ///< 按时间排序的任务集合
     map<token, typename set<node>::iterator> node_map_; ///< ID到迭代器的映射
+    map<token, shared_ptr<atomic<bool>>> cancel_flags_; ///< ID到取消标志的映射
+    map<token, shared_ptr<promise<void>>> promises_;    ///< ID到promise的映射
 
-    thread thread_;         ///< 调度线程
-    mutable mutex mutex_;   ///< 互斥锁
-    condition_variable cv_; ///< 条件变量
-    token next_id_;         ///< 下一个可用的任务ID
-    atomic<bool> stopped_;  ///< 停止标志
+    thread thread_;               ///< 调度线程
+    mutable mutex mutex_;         ///< 互斥锁
+    condition_variable cv_;       ///< 条件变量
+    token next_id_{0};            ///< 下一个可用的任务ID
+    atomic<bool> stopped_{false}; ///< 停止标志
 
     friend class thread_pool;
 
@@ -125,12 +129,14 @@ private:
                     current_node.handler();
                 }
                 lock.lock_quiet();
+
+                cancel_flags_.erase(current_node.id);
+                promises_.erase(current_node.id);
                 now = clock_type::now();
             }
 
             if (!nodes_.empty()) {
-                time_point next_expire = nodes_.begin()->expire;
-                cv_.wait_until(lock, next_expire);
+                cv_.wait_until(lock, nodes_.begin()->expire);
             }
         }
     }
@@ -139,11 +145,7 @@ public:
     /**
      * @brief 构造函数，启动调度线程
      */
-    timer_scheduler() :
-    next_id_(0),
-    stopped_(false) {
-        thread_ = thread(&timer_scheduler::run, this);
-    }
+    timer_scheduler() { thread_ = thread(&timer_scheduler::run, this); }
 
     /**
      * @brief 析构函数，停止调度线程并等待其结束
@@ -158,8 +160,8 @@ public:
 
     timer_scheduler(const timer_scheduler&) = delete;
     timer_scheduler& operator=(const timer_scheduler&) = delete;
-    timer_scheduler(timer_scheduler&&) = default;
-    timer_scheduler& operator=(timer_scheduler&&) = default;
+    timer_scheduler(timer_scheduler&&) = delete;
+    timer_scheduler& operator=(timer_scheduler&&) = delete;
 
     /**
      * @brief 添加定时任务
@@ -173,18 +175,26 @@ public:
         unique_lock<mutex> lock(mutex_);
         token id = next_id_++;
 
+        auto flag = make_shared<atomic<bool>>(false);
+        auto promise = make_shared<_NEFORCE promise<void>>();
+        handler_type wrapped = [flag, h = move(handler), promise]() {
+            if (!flag->load(memory_order_acquire)) {
+                h();
+            }
+            promise->set_value();
+        };
+
         const bool is_earliest = nodes_.empty() || expire < nodes_.begin()->expire;
 
-        node new_node(expire, id, _NEFORCE move(handler));
+        node new_node(expire, id, _NEFORCE move(wrapped));
         auto result = nodes_.insert(new_node);
         node_map_[id] = result.first;
+        cancel_flags_[id] = move(flag);
 
         lock.unlock_quiet();
-
         if (is_earliest) {
             cv_.notify_one();
         }
-
         return id;
     }
 
@@ -197,19 +207,37 @@ public:
      */
     bool cancel(token id) {
         unique_lock<mutex> lock(mutex_);
-        auto it_map = node_map_.find(id);
-        if (it_map == node_map_.end()) {
+
+        const auto flag_it = cancel_flags_.find(id);
+        if (flag_it == cancel_flags_.end()) {
             return false;
         }
+        flag_it->second->store(true, memory_order_release);
 
-        const bool is_earliest = (it_map->second == nodes_.begin());
-        nodes_.erase(it_map->second);
-        node_map_.erase(it_map);
+        auto node_it = node_map_.find(id);
+        if (node_it != node_map_.end()) {
+            const bool is_earliest = (node_it->second == nodes_.begin());
+            nodes_.erase(node_it->second);
+            node_map_.erase(node_it);
 
-        lock.unlock_quiet();
+            lock.unlock_quiet();
+            if (is_earliest) cv_.notify_one();
+            lock.lock_quiet();
 
-        if (is_earliest) {
-            cv_.notify_one();
+            cancel_flags_.erase(flag_it);
+            promises_.erase(id);
+        } else {
+            const auto prom_it = promises_.find(id);
+            shared_ptr<promise<void>> prom;
+            if (prom_it != promises_.end()) {
+                prom = prom_it->second;
+                promises_.erase(prom_it);
+            }
+            lock.unlock_quiet();
+
+            if (prom) {
+                prom->get_future().wait();
+            }
         }
 
         return true;
@@ -220,8 +248,12 @@ public:
      */
     void cancel_all() {
         unique_lock<mutex> lock(mutex_);
+        for (auto& [_, flag] : cancel_flags_) {
+            flag->store(true, memory_order_release);
+        }
         nodes_.clear();
         node_map_.clear();
+        cancel_flags_.clear();
         lock.unlock_quiet();
         cv_.notify_one();
     }
@@ -254,17 +286,22 @@ public:
     using handler_type = typename timer_scheduler<Clock>::handler_type; ///< 回调函数类型
 
 private:
-    timer_scheduler<Clock> scheduler_{};    ///< 共享的调度器
-    token task_id_ = 0;                     ///< 当前任务的ID
-    time_point expire_ = clock_type::now(); ///< 到期时间点
+    shared_ptr<timer_scheduler<Clock>> scheduler_; ///< 共享的调度器
+    token task_id_{0};                             ///< 当前任务的ID
+    time_point expire_{clock_type::now()};         ///< 到期时间点
 
 public:
-    basic_timer() = default;
+    basic_timer() :
+    scheduler_(make_shared<timer_scheduler<Clock>>()) {}
 
     /**
      * @brief 析构函数，自动取消未完成的任务
      */
-    ~basic_timer() { cancel(); }
+    ~basic_timer() {
+        if (scheduler_) {
+            cancel();
+        }
+    }
 
     basic_timer(const basic_timer&) = delete;
     basic_timer& operator=(const basic_timer&) = delete;
@@ -273,7 +310,7 @@ public:
      * @brief 移动构造函数
      */
     basic_timer(basic_timer&& other) noexcept :
-    scheduler_(other.scheduler_),
+    scheduler_(_NEFORCE move(other.scheduler_)),
     task_id_(other.task_id_),
     expire_(other.expire_) {
         other.task_id_ = 0;
@@ -283,11 +320,12 @@ public:
      * @brief 移动赋值运算符
      */
     basic_timer& operator=(basic_timer&& other) noexcept {
-        if (addressof(other) == this) {
+        if (_NEFORCE addressof(other) == this) {
             return *this;
         }
 
         cancel();
+        scheduler_ = _NEFORCE move(other.scheduler_);
         task_id_ = other.task_id_;
         expire_ = other.expire_;
         other.task_id_ = 0;
@@ -346,7 +384,7 @@ public:
     template <typename WaitHandler>
     void async_wait(WaitHandler&& handler) {
         cancel();
-        task_id_ = scheduler_.add_task(expire_, handler_type(_NEFORCE forward<WaitHandler>(handler)));
+        task_id_ = scheduler_->add_task(expire_, handler_type(_NEFORCE forward<WaitHandler>(handler)));
     }
 
     /**
@@ -355,8 +393,8 @@ public:
      * 如果任务尚未执行，会从调度器中移除。
      */
     void cancel() {
-        if (task_id_ != 0) {
-            scheduler_.cancel(task_id_);
+        if (scheduler_ && task_id_ != 0) {
+            scheduler_->cancel(task_id_);
             task_id_ = 0;
         }
     }

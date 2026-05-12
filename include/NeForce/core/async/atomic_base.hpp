@@ -2789,7 +2789,7 @@ public:
      */
     explicit atomic_ref_base(T& value) :
     ptr_(&value) {
-        NEFORCE_CONSTEXPR_ASSERT((static_cast<uintptr_t>(ptr_) % required_alignment) == 0);
+        NEFORCE_CONSTEXPR_ASSERT((reinterpret_cast<uintptr_t>(ptr_) % required_alignment) == 0);
     }
 
     /**
@@ -2851,7 +2851,7 @@ public:
      * @return 是否交换成功
      */
     bool compare_exchange_weak(T& expected, T desire, const memory_order success, const memory_order failure) noexcept {
-        return _NEFORCE atomic_cmpexch_weak(ptr_, expected, desire, success, failure);
+        return _NEFORCE atomic_cmpexch_weak(ptr_, &expected, desire, success, failure);
     }
 
     /**
@@ -2864,7 +2864,7 @@ public:
      */
     bool compare_exchange_strong(T& expected, T desire, const memory_order success,
                                  const memory_order failure) noexcept {
-        return _NEFORCE atomic_cmpexch_strong(ptr_, expected, desire, success, failure);
+        return _NEFORCE atomic_cmpexch_strong(ptr_, &expected, desire, success, failure);
     }
 
     /**
@@ -2875,7 +2875,7 @@ public:
      * @return 是否交换成功
      */
     bool compare_exchange_weak(T& expected, T desire, const memory_order mo = memory_order_seq_cst) noexcept {
-        return _NEFORCE atomic_cmpexch_weak(ptr_, expected, desire, mo, cmpexch_failure_order(mo));
+        return _NEFORCE atomic_cmpexch_weak(ptr_, &expected, desire, mo, cmpexch_failure_order(mo));
     }
 
     /**
@@ -2886,7 +2886,7 @@ public:
      * @return 是否交换成功
      */
     bool compare_exchange_strong(T& expected, T desire, const memory_order mo = memory_order_seq_cst) noexcept {
-        return _NEFORCE atomic_cmpexch_strong(ptr_, expected, desire, mo, cmpexch_failure_order(mo));
+        return _NEFORCE atomic_cmpexch_strong(ptr_, &expected, desire, mo, cmpexch_failure_order(mo));
     }
 
     /**

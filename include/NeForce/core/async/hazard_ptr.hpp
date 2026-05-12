@@ -86,7 +86,8 @@ public:
     hazard_pointer_obj_base* next{nullptr}; ///< 链表中的下一个对象
 
     virtual ~hazard_pointer_obj_base() = default;
-    virtual void destroy() = 0; ///< 销毁对象
+    virtual void destroy() = 0;                          ///< 销毁对象
+    NEFORCE_NODISCARD virtual void* get_ptr() const = 0; ///< 获取包装的内部指针
 };
 
 /**
@@ -116,6 +117,8 @@ public:
      * @brief 销毁对象
      */
     void destroy() override { deleter(ptr); }
+
+    NEFORCE_NODISCARD void* get_ptr() const override { return static_cast<void*>(ptr); }
 };
 
 /**
@@ -127,6 +130,41 @@ public:
 struct retire_list {
     hazard_pointer_obj_base* head{nullptr}; ///< 链表头
     size_t count{0};                        ///< 列表大小
+
+    retire_list() noexcept = default;
+
+    /**
+     * @brief 移动构造函数
+     */
+    retire_list(retire_list&& other) noexcept :
+    head(other.head),
+    count(other.count) {
+        other.head = nullptr;
+        other.count = 0;
+    }
+
+    /**
+     * @brief 移动赋值运算符
+     */
+    retire_list& operator=(retire_list&& other) noexcept {
+        if (addressof(other) == this) {
+            return *this;
+        }
+        clear();
+        head = other.head;
+        count = other.count;
+        other.head = nullptr;
+        other.count = 0;
+        return *this;
+    }
+
+    retire_list(const retire_list&) = delete;
+    retire_list& operator=(const retire_list&) = delete;
+
+    /**
+     * @brief 析构函数
+     */
+    ~retire_list() { clear(); }
 
     /**
      * @brief 添加对象到退役列表
@@ -142,7 +180,7 @@ struct retire_list {
      * @brief 清空并销毁所有对象
      */
     void clear() {
-        while (head) {
+        while (head != nullptr) {
             auto* next = head->next;
             head->destroy();
             delete head;
@@ -150,11 +188,6 @@ struct retire_list {
         }
         count = 0;
     }
-
-    /**
-     * @brief 析构函数
-     */
-    ~retire_list() { clear(); }
 };
 
 /**
@@ -167,7 +200,10 @@ class hazard_pointer_domain {
 private:
     atomic<hazard_pointer_record*> head_{nullptr}; ///< 记录链表头
 
-    static thread_local retire_list tl_retire_list_; ///< 线程本地退役列表
+    static retire_list& get_thread_retire_list() {
+        thread_local retire_list list;
+        return list;
+    }
 
     static constexpr size_t RETIRE_THRESHOLD = 100; ///< 回收阈值
 
@@ -200,25 +236,41 @@ private:
      */
     void scan_and_reclaim() {
         auto hazards = get_hazard_pointers();
-        _NEFORCE sort(hazards.begin(), hazards.end());
+        _NEFORCE sort(hazards.begin(), hazards.end(), less<void*>());
 
-        retire_list new_list;
-        hazard_pointer_obj_base* current = tl_retire_list_.head;
+        auto& thread_list = get_thread_retire_list();
+        hazard_pointer_obj_base* current = thread_list.head;
+        thread_list.head = nullptr;
+        thread_list.count = 0;
 
-        while (current) {
+        hazard_pointer_obj_base* keep_head = nullptr;
+        size_t keep_count = 0;
+        hazard_pointer_obj_base* destroy_head = nullptr;
+
+        while (current != nullptr) {
             auto* next = current->next;
+            void* inner_ptr = current->get_ptr();
 
-            if (_NEFORCE binary_search(hazards.begin(), hazards.end(), current)) {
-                new_list.add(current);
+            if (_NEFORCE binary_search(hazards.begin(), hazards.end(), inner_ptr, less<void*>())) {
+                current->next = keep_head;
+                keep_head = current;
+                ++keep_count;
             } else {
-                current->destroy();
-                delete current;
+                current->next = destroy_head;
+                destroy_head = current;
             }
-
             current = next;
         }
 
-        tl_retire_list_ = _NEFORCE move(new_list);
+        while (destroy_head != nullptr) {
+            auto* next = destroy_head->next;
+            destroy_head->destroy();
+            delete destroy_head;
+            destroy_head = next;
+        }
+
+        thread_list.head = keep_head;
+        thread_list.count = keep_count;
     }
 
 public:
@@ -283,9 +335,9 @@ public:
         }
 
         auto* obj = new hazard_pointer_obj<T, Deleter>(ptr, _NEFORCE move(deleter));
-        tl_retire_list_.add(obj);
+        get_thread_retire_list().add(obj);
 
-        if (tl_retire_list_.count >= RETIRE_THRESHOLD) {
+        if (get_thread_retire_list().count >= RETIRE_THRESHOLD) {
             scan_and_reclaim();
         }
     }

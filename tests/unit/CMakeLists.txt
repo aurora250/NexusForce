@@ -7,6 +7,7 @@ add_executable(NexusForceUnitTests
         test_compress.cpp
         test_db.cpp
         test_encrypt.cpp
+        test_exception.cpp
         test_file.cpp
         test_functional.cpp
         test_logging.cpp
