@@ -1,5 +1,7 @@
 var NAVTREEINDEX14 =
 {
+"classstacktrace_1_1frame.html#ab503bc2b3d194153ed2134390e832943":[2,58,1,0,5],
+"classstacktrace_1_1frame.html#acd940cf6e507cad788d3e13caa8714fb":[2,58,1,0,2],
 "classstacktrace_1_1frame.html#ad2db5bd1f9458436821eb027f01cecbc":[2,58,1,0,1],
 "classstandard__allocator.html":[2,56,0],
 "classstandard__allocator.html#a77bee0971a57c64b5f5d2c28f618b03c":[2,56,0,2],
@@ -247,7 +249,5 @@ var NAVTREEINDEX14 =
 "classtcp__client__base.html#aabe3dcb7d46b2e6a01b5524efa6db9cb":[2,125,2,1,45],
 "classtcp__client__base.html#aad18c6f111cd198e33c7634ba6950dd9":[2,125,2,1,43],
 "classtcp__client__base.html#ab82d9541a6e63484559c1d4af9daf45b":[2,125,2,1,30],
-"classtcp__client__base.html#ab8584da06a5e778efd18bbd35a08a425":[2,125,2,1,55],
-"classtcp__client__base.html#ac94e9cb80fb0db0d5c142da213811a0e":[2,125,2,1,39],
-"classtcp__client__base.html#ac9f7a0c0e90e96e15b24c281e2d98f4f":[2,125,2,1,7]
+"classtcp__client__base.html#ab8584da06a5e778efd18bbd35a08a425":[2,125,2,1,55]
 };

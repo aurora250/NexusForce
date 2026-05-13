@@ -1,5 +1,7 @@
 var NAVTREEINDEX12 =
 {
+"classscoped__click.html#a3083662e31bccc44205c05937090ebe2":[2,94,1,1],
+"classscoped__click.html#a8bd8f0552c2b3ea9cb9d716cb2227b3d":[2,94,1,0],
 "classscoped__click.html#aa8112b556549d90968089615d74ae429":[2,94,1,3],
 "classscoped__click.html#ad91adc07b76bd12c1494ad5165faab9e":[2,94,1,2],
 "classscoped__connection.html":[2,6,2],
@@ -247,7 +249,5 @@ var NAVTREEINDEX12 =
 "classsocket__base.html":[2,125,10],
 "classsocket__base.html#a0c38ed84a8f68fe6a576258f5de32312":[2,125,10,26],
 "classsocket__base.html#a0e1b1431d88934a2de83da39b3ece88c":[2,125,10,30],
-"classsocket__base.html#a243eecfa633156956f8eef37d642af6b":[2,125,10,19],
-"classsocket__base.html#a259bcf1d2f08be76c9c725508dab5f64":[2,125,10,22],
-"classsocket__base.html#a285abeec7b22821af15b2eea0844aaf3":[2,125,10,2]
+"classsocket__base.html#a243eecfa633156956f8eef37d642af6b":[2,125,10,19]
 };

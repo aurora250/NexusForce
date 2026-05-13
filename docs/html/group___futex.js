@@ -9,7 +9,7 @@ var group___futex =
       [ "load_when_equal_until", "classatomic__futex.html#afc4cd5b5e4aa13bfd9e969793c132f9a", null ],
       [ "load_when_equal_until", "classatomic__futex.html#a07ae2b2d3cd0c7e0261434cbbceb19b1", null ],
       [ "load_when_not_equal", "classatomic__futex.html#ad52e9d4567b50bec154abc58b4218874", null ],
-      [ "store_notify_all", "classatomic__futex.html#a16976104dbc96caf0c1856045d3e5715", null ]
+      [ "store_notify_all", "classatomic__futex.html#a5b0321d662a8193b86eda2ababc45e10", null ]
     ] ],
     [ "platform_wait_t", "group___futex.html#ga4ae42858521c6114207203888569da88", null ],
     [ "futex_wait_flags", "group___futex.html#gab7057283120da679629ce8fb1238219b", [

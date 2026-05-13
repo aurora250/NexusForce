@@ -74,14 +74,13 @@
         <argsstring></argsstring>
         <name>stop_source_</name>
         <qualifiedname>scoped_thread::stop_source_</qualifiedname>
-        <initializer>{<ref refid="group___none_1ga821a4974ccf7b7d0b01bf5170acff797" kindref="member">none</ref>}</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/scoped_thread.hpp" line="45" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/scoped_thread.hpp" bodystart="45" bodyend="45"/>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/scoped_thread.hpp" line="45" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/scoped_thread.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classscoped__thread_1a5b2368aae21d8e5606fff234a6ee45e4" prot="private" static="no" mutable="no">
         <type><ref refid="classthread" kindref="compound">thread</ref></type>
@@ -89,14 +88,13 @@
         <argsstring></argsstring>
         <name>thread_</name>
         <qualifiedname>scoped_thread::thread_</qualifiedname>
-        <initializer>{}</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/scoped_thread.hpp" line="46" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/scoped_thread.hpp" bodystart="46" bodyend="46"/>
+        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/scoped_thread.hpp" line="46" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/scoped_thread.hpp" bodystart="46" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -114,7 +112,7 @@
             <defname>Args</defname>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; pmf_expects_stop_token&lt; Callable, Args... &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; pmf_expects_stop_token&lt; Callable, Object, Args... &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
@@ -158,7 +156,7 @@
             <defname>Args</defname>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!pmf_expects_stop_token&lt; Callable, Args... &gt; &amp;&amp;<ref refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" kindref="member">is_invocable_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Callable &gt;, <ref refid="classstop__token" kindref="compound">stop_token</ref>, <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Args &gt;... &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_qualifier_check_1gabd8e59beb0cd64f900515cf60501b33f" kindref="member">is_member_function_pointer_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt; Callable &gt; &gt; &amp;&amp;<ref refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" kindref="member">is_invocable_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Callable &gt;, <ref refid="classstop__token" kindref="compound">stop_token</ref>, <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Args &gt;... &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
@@ -198,7 +196,7 @@
             <defname>Args</defname>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!pmf_expects_stop_token&lt; Callable, Args... &gt; &amp;&amp;!<ref refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" kindref="member">is_invocable_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Callable &gt;, <ref refid="classstop__token" kindref="compound">stop_token</ref>, <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Args &gt;... &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_qualifier_check_1gabd8e59beb0cd64f900515cf60501b33f" kindref="member">is_member_function_pointer_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt; Callable &gt; &gt; &amp;&amp;!<ref refid="group___invoke_function_1gaa5c3841c54405d3bbf10518ff386eaa6" kindref="member">is_invocable_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Callable &gt;, <ref refid="classstop__token" kindref="compound">stop_token</ref>, <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Args &gt;... &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>

@@ -1,7 +1,5 @@
 var NAVTREEINDEX33 =
 {
-"structget__pointer__type.html":[2,43,0],
-"structget__ptr__difference.html":[2,103,6,2],
 "structget__rebind__type.html":[2,103,6,4],
 "structget__size__type.html":[2,43,2],
 "structgreater.html":[2,34,2,4],
@@ -249,5 +247,7 @@ var NAVTREEINDEX33 =
 "structibinary.html#ae64209b0cb3e22af4df8202c10553df0":[2,37,7,3],
 "structibinary.html#aee8466ba577bd14953faf60e3b7958db":[2,37,7,1],
 "structibinary.html#aff4944afc068fc40e48bf91557c60f3e":[2,37,7,0],
-"structicharacter.html":[2,37,0]
+"structicharacter.html":[2,37,0],
+"structicharacter.html#a50417e7f290cfdc1f9a5070a3aecbe0e":[2,37,0,0],
+"structicharacter.html#a8e6c3790d0b57f1c16281e92b3f73a7f":[2,37,0,1]
 };

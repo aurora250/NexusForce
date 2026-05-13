@@ -39,5 +39,6 @@ var searchData=
   ['mon_5fgrouping_36',['mon_grouping',['../structlocale_1_1monetary__info.html#ab397058dd4401272814d051a789371a0',1,'locale::monetary_info']]],
   ['mon_5fthousands_5fsep_37',['mon_thousands_sep',['../structlocale_1_1monetary__info.html#abc1efd192f78a20233253481d8e24478',1,'locale::monetary_info']]],
   ['month_5fdays_38',['month_days',['../classdate.html#a78731e993e4f87ef6dad6f086107ac9a',1,'date']]],
-  ['month_5fnames_39',['month_names',['../structlocale_1_1time__info.html#a62616b19965cb0dd7a1b04192f60c516',1,'locale::time_info']]]
+  ['month_5fnames_39',['month_names',['../structlocale_1_1time__info.html#a62616b19965cb0dd7a1b04192f60c516',1,'locale::time_info']]],
+  ['ms_5f_40',['ms_',['../structsleep__awaiter.html#a4c24def4e871d5af8d0f6c1dd1cc0a97',1,'sleep_awaiter']]]
 ];

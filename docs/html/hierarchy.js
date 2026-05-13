@@ -1084,6 +1084,16 @@ var hierarchy =
         [ "rb_tree< node, node, identity< node >, less< node >, allocator< rb_tree_node< node > > >", "classrb__tree.html", null ]
       ] ]
     ] ],
+    [ "icomparable&lt; rb_tree&lt; token, pair&lt; const token, shared_ptr&lt; atomic&lt; bool &gt; &gt; &gt;, select1st&lt; pair&lt; const token, shared_ptr&lt; atomic&lt; bool &gt; &gt; &gt; &gt;, less&lt; token &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const token, shared_ptr&lt; atomic&lt; bool &gt; &gt; &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
+      [ "icollector< rb_tree< token, pair< const token, shared_ptr< atomic< bool > > >, select1st< pair< const token, shared_ptr< atomic< bool > > > >, less< token >, allocator< rb_tree_node< pair< const token, shared_ptr< atomic< bool > > > > > > >", "structicollector.html", [
+        [ "rb_tree< token, pair< const token, shared_ptr< atomic< bool > > >, select1st< pair< const token, shared_ptr< atomic< bool > > > >, less< token >, allocator< rb_tree_node< pair< const token, shared_ptr< atomic< bool > > > > > >", "classrb__tree.html", null ]
+      ] ]
+    ] ],
+    [ "icomparable&lt; rb_tree&lt; token, pair&lt; const token, shared_ptr&lt; promise&lt; void &gt; &gt; &gt;, select1st&lt; pair&lt; const token, shared_ptr&lt; promise&lt; void &gt; &gt; &gt; &gt;, less&lt; token &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const token, shared_ptr&lt; promise&lt; void &gt; &gt; &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
+      [ "icollector< rb_tree< token, pair< const token, shared_ptr< promise< void > > >, select1st< pair< const token, shared_ptr< promise< void > > > >, less< token >, allocator< rb_tree_node< pair< const token, shared_ptr< promise< void > > > > > > >", "structicollector.html", [
+        [ "rb_tree< token, pair< const token, shared_ptr< promise< void > > >, select1st< pair< const token, shared_ptr< promise< void > > > >, less< token >, allocator< rb_tree_node< pair< const token, shared_ptr< promise< void > > > > > >", "classrb__tree.html", null ]
+      ] ]
+    ] ],
     [ "icomparable&lt; rb_tree&lt; token, pair&lt; const token, typename set&lt; node &gt;::iterator &gt;, select1st&lt; pair&lt; const token, typename set&lt; node &gt;::iterator &gt; &gt;, less&lt; token &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const token, typename set&lt; node &gt;::iterator &gt; &gt; &gt; &gt; &gt;", "structicomparable.html", [
       [ "icollector< rb_tree< token, pair< const token, typename set< node >::iterator >, select1st< pair< const token, typename set< node >::iterator > >, less< token >, allocator< rb_tree_node< pair< const token, typename set< node >::iterator > > > > >", "structicollector.html", [
         [ "rb_tree< token, pair< const token, typename set< node >::iterator >, select1st< pair< const token, typename set< node >::iterator > >, less< token >, allocator< rb_tree_node< pair< const token, typename set< node >::iterator > > > >", "classrb__tree.html", null ]
@@ -1845,6 +1855,8 @@ var hierarchy =
     [ "make_unsigned&lt; T &gt;", "structmake__unsigned.html", null ],
     [ "map&lt; Key, T, Compare, Alloc &gt;", "classmap.html", null ],
     [ "map&lt; basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt;", "classmap.html", null ],
+    [ "map&lt; token, shared_ptr&lt; atomic&lt; bool &gt; &gt; &gt;", "classmap.html", null ],
+    [ "map&lt; token, shared_ptr&lt; promise&lt; void &gt; &gt; &gt;", "classmap.html", null ],
     [ "map&lt; token, typename set&lt; node &gt;::iterator &gt;", "classmap.html", null ],
     [ "file_mapper::map_info", "structfile__mapper_1_1map__info.html", null ],
     [ "match_result", "classmatch__result.html", null ],
@@ -1999,6 +2011,7 @@ var hierarchy =
     [ "signal&lt; Types &gt;", "structsignal.html", null ],
     [ "signal_blocker&lt; Types &gt;", "classsignal__blocker.html", null ],
     [ "signal_guard", "classsignal__guard.html", null ],
+    [ "sleep_awaiter", "structsleep__awaiter.html", null ],
     [ "smtp_message", "structsmtp__message.html", null ],
     [ "socket_base", "classsocket__base.html", [
       [ "icmp_socket", "classicmp__socket.html", null ],

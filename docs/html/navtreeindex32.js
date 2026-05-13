@@ -1,7 +1,5 @@
 var NAVTREEINDEX32 =
 {
-"structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4.html#a0e7098f9d1709080ff010a88a58d2be8":[2,111,1,17],
-"structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4.html#a1c2015a9eaa2b62c69714b650b2c9c98":[2,111,1,10],
 "structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4.html#a2ae4f79010eee05979d52865807fec50":[2,111,1,1],
 "structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4.html#a2cb16a0c50415c98dfbe0325c2f6b654":[2,111,1,6],
 "structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4.html#a54b4845b7902cf40b3fd4720a42385f5":[2,111,1,14],
@@ -161,9 +159,9 @@ var NAVTREEINDEX32 =
 "structexception.html#a50dcb7544585c5cda232c3133d027eff":[2,26,0,4,8],
 "structexception.html#a709d705f97cbad7d531dfb5023107536":[2,26,0,4,7],
 "structexception.html#a80249b2b108c9b913dc7144839092a2b":[2,26,0,4,4],
+"structexception.html#abae6850b5707d91a23d8b8f78b99e7c7":[2,26,0,4,3],
 "structexception.html#ac635798f4eb88397f79b995966b26683":[2,26,0,4,9],
 "structexception.html#ad53654133be61ac0d671b96eea49a2c3":[2,26,0,4,1],
-"structexception.html#af0521c49a602b7a9b96bd230a4a02c74":[2,26,0,4,3],
 "structexception.html#af7e2ec88aedbf1ac46326caa556ce434":[2,26,0,4,2],
 "structexception__ptr_1_1ecb.html":[2,26,3,0],
 "structexception__ptr_1_1ecb.html#a2ac399412a50c2852180a723ce82d812":[2,26,3,0,3],
@@ -249,5 +247,7 @@ var NAVTREEINDEX32 =
 "structgenerator_1_1promise__type.html#afc0b169ccb92470755768b8f740b44c7":[2,5,4,0,1],
 "structget__difference__type.html":[2,43,1],
 "structget__first__para.html":[2,103,6,1],
-"structget__first__temp__para.html":[2,103,6,0]
+"structget__first__temp__para.html":[2,103,6,0],
+"structget__pointer__type.html":[2,43,0],
+"structget__ptr__difference.html":[2,103,6,2]
 };

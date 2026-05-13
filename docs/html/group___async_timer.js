@@ -11,6 +11,7 @@ var group___async_timer =
       [ "add_task", "classtimer__scheduler.html#ad7e2861340ab12370ceaec61a82c9129", null ],
       [ "cancel", "classtimer__scheduler.html#aa25522eaa375942415f6ab940174a49b", null ],
       [ "cancel_all", "classtimer__scheduler.html#ac050f83f8dbeee5c8f590c5be3e7a6d2", null ],
+      [ "is_pending", "classtimer__scheduler.html#a70a910ad934bad4c0c9335f2215924f6", null ],
       [ "size", "classtimer__scheduler.html#a83bf57ec21b16c6ebc7e0f08bfce0573", null ]
     ] ],
     [ "basic_timer&lt; Clock &gt;", "classbasic__timer.html", [

@@ -1452,9 +1452,7 @@ TEST(ThreadPool, SubmitTaskWithPriority) {
         this_thread::sleep_for(20_ms);
         order.store(1);
     });
-    auto res2 = pool.submit_task(static_cast<thread_pool::priority_type>(10), [&order] {
-        order.store(2);
-    });
+    auto res2 = pool.submit_task(static_cast<thread_pool::priority_type>(10), [&order] { order.store(2); });
     res1.future.get();
     res2.future.get();
     EXPECT_NE(order.load(), 0);
@@ -1585,16 +1583,11 @@ TEST(ThreadPool, WaitMultipleFutures) {
 
 class VirtualThreadEnvironment : public ::testing::Environment {
 public:
-    void SetUp() override {
-        virtual_thread::initialize(1);
-    }
-    void TearDown() override {
-        virtual_thread::shutdown();
-    }
+    void SetUp() override { virtual_thread::initialize(1); }
+    void TearDown() override { virtual_thread::shutdown(); }
 };
 
-::testing::Environment* const virtual_thread_env =
-    ::testing::AddGlobalTestEnvironment(new VirtualThreadEnvironment);
+::testing::Environment* const virtual_thread_env = ::testing::AddGlobalTestEnvironment(new VirtualThreadEnvironment);
 
 TEST(VirtualThread, StartBasic) {
     atomic<bool> ran{false};
@@ -1634,18 +1627,14 @@ TEST(VirtualThread, ExceptionHandling) {
 }
 
 TEST(VirtualThread, SleepNoCrash) {
-    auto task_lambda = []() -> virtual_thread_task {
-        co_await virtual_thread::sleep(10);
-    };
+    auto task_lambda = []() -> virtual_thread_task { co_await virtual_thread::sleep(10); };
     auto vt = virtual_thread::start(task_lambda);
     this_thread::sleep_for(50_ms);
     SUCCEED();
 }
 
 TEST(VirtualThreadTask, MoveConstructor) {
-    auto createTask = []() -> virtual_thread_task {
-        co_return;
-    };
+    auto createTask = []() -> virtual_thread_task { co_return; };
     virtual_thread_task task1 = createTask();
     EXPECT_TRUE(task1.handle_);
     virtual_thread_task task2(move(task1));
@@ -1654,9 +1643,7 @@ TEST(VirtualThreadTask, MoveConstructor) {
 }
 
 TEST(VirtualThreadTask, MoveAssignment) {
-    auto createTask = []() -> virtual_thread_task {
-        co_return;
-    };
+    auto createTask = []() -> virtual_thread_task { co_return; };
     virtual_thread_task task1 = createTask();
     virtual_thread_task task2;
     task2 = move(task1);

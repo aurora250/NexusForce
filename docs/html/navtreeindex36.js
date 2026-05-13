@@ -1,7 +1,5 @@
 var NAVTREEINDEX36 =
 {
-"structpair.html#a63ae1bbd5a6ce6bd6167b5359fa7a01f":[2,117,0,22],
-"structpair.html#a651bc7e73c0e01a484760f12d893fff5":[2,117,0,2],
 "structpair.html#a7a125efecc993ea094ff6a057f14f1e8":[2,117,0,0],
 "structpair.html#a7bc90fb9ba337dfc220c0c565a3b32d8":[2,117,0,5],
 "structpair.html#a8c825292ae2c6502f7651d626f679e6b":[2,117,0,6],
@@ -210,11 +208,13 @@ var NAVTREEINDEX36 =
 "structremove__volatile.html":[2,103,1,1],
 "structreplace__first__para.html":[2,103,6,3],
 "structretire__list.html":[2,4,7,3],
-"structretire__list.html#a15ffcee565539d025ab2894a6bad5c7d":[2,4,7,3,3],
-"structretire__list.html#a33fc37aaad8e02fc7ab0c3d9a32a8113":[2,4,7,3,1],
-"structretire__list.html#a661fc02d5203c1a70776d49173813cc9":[2,4,7,3,2],
-"structretire__list.html#a883604f763908f6360de2d705f8a1589":[2,4,7,3,4],
-"structretire__list.html#ab8166a60fc5f971df18cf6e68ffe060e":[2,4,7,3,0],
+"structretire__list.html#a15ffcee565539d025ab2894a6bad5c7d":[2,4,7,3,5],
+"structretire__list.html#a1dc9f0280fe5f023d9499bae37c2ffbd":[2,4,7,3,0],
+"structretire__list.html#a33fc37aaad8e02fc7ab0c3d9a32a8113":[2,4,7,3,2],
+"structretire__list.html#a661fc02d5203c1a70776d49173813cc9":[2,4,7,3,3],
+"structretire__list.html#a883604f763908f6360de2d705f8a1589":[2,4,7,3,6],
+"structretire__list.html#aae137351efcc2f0e62bc00b22a28be0e":[2,4,7,3,4],
+"structretire__list.html#ab8166a60fc5f971df18cf6e68ffe060e":[2,4,7,3,1],
 "structsafe__multiply.html":[2,71,3],
 "structselect1st.html":[2,34,3,1],
 "structselect2nd.html":[2,34,3,2],
@@ -237,6 +237,8 @@ var NAVTREEINDEX36 =
 "structsignal.html#acfa41147426f9bde3e4de17b5c766188":[2,6,3,1],
 "structsignal.html#adbc2cde66647502a24e5b3f675bf7ae6":[2,6,3,12],
 "structsignal.html#ae82c7101e0d85081fc6da463a4686140":[2,6,3,3],
+"structsleep__awaiter.html":[2,5,10],
+"structsleep__awaiter.html#a4c24def4e871d5af8d0f6c1dd1cc0a97":[2,5,10,0],
 "structsmtp__exception.html":[2,26,0,35],
 "structsmtp__message.html":[2,125,8],
 "structsmtp__message.html#a07c52850f665cb8346b4159ec7ec42e2":[2,125,8,3],
@@ -247,7 +249,5 @@ var NAVTREEINDEX36 =
 "structsmtp__message.html#abbdf534a3d79770700b06b77197156d5":[2,125,8,4],
 "structsmtp__message.html#ae2106f6dfab0ac49c0d8e49e3f37be2f":[2,125,8,7],
 "structsmtp__message.html#afd9b01b7cad63e664e41f3cd1d143d18":[2,125,8,0],
-"structsmtp__socket_1_1response.html":[2,125,9,0],
-"structsmtp__socket_1_1response.html#a6c20183bd9127b1e76dea425d3a66906":[2,125,9,0,1],
-"structsmtp__socket_1_1response.html#ac162b6363e835d8e81ed3a70856d1371":[2,125,9,0,2]
+"structsmtp__socket_1_1response.html":[2,125,9,0]
 };

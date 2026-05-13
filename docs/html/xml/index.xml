@@ -1215,7 +1215,7 @@
     <member refid="classatomic__futex_1ac33c79141a3d638c6e825b823f07063d" kind="function"><name>load_when_equal_until</name></member>
     <member refid="classatomic__futex_1a07ae2b2d3cd0c7e0261434cbbceb19b1" kind="function"><name>load_when_equal_until</name></member>
     <member refid="classatomic__futex_1afc4cd5b5e4aa13bfd9e969793c132f9a" kind="function"><name>load_when_equal_until</name></member>
-    <member refid="classatomic__futex_1a16976104dbc96caf0c1856045d3e5715" kind="function"><name>store_notify_all</name></member>
+    <member refid="classatomic__futex_1a5b0321d662a8193b86eda2ababc45e10" kind="function"><name>store_notify_all</name></member>
   </compound>
   <compound refid="structatomic__ref__base" kind="struct"><name>atomic_ref_base</name>
   </compound>
@@ -1806,10 +1806,10 @@
     <member refid="classbasic__timer_1a70d336504e87fc9c1e99e8febb56077a" kind="typedef"><name>duration</name></member>
     <member refid="classbasic__timer_1a625e5206943c7ae7fa2c993a04643b83" kind="typedef"><name>token</name></member>
     <member refid="classbasic__timer_1a67fedc91a0e1ca45b0df36c719a828cb" kind="typedef"><name>handler_type</name></member>
-    <member refid="classbasic__timer_1a2a7d80c4543807dabc24fda308c1d610" kind="variable"><name>scheduler_</name></member>
+    <member refid="classbasic__timer_1a3cf895bfd87015f254ff993f41b33c15" kind="variable"><name>scheduler_</name></member>
     <member refid="classbasic__timer_1a6a98e9688c03cbbc7cd03751f5603d0d" kind="variable"><name>task_id_</name></member>
     <member refid="classbasic__timer_1a281ff7d77328782d9aee8f29789560f5" kind="variable"><name>expire_</name></member>
-    <member refid="classbasic__timer_1a9081f540e957c71ce91dbb446bf7d045" kind="function"><name>basic_timer</name></member>
+    <member refid="classbasic__timer_1a6e00735e1046121c53a0e558ec4fd421" kind="function"><name>basic_timer</name></member>
     <member refid="classbasic__timer_1ad3f2d5cca2d57a577cc10cc3b627b030" kind="function"><name>~basic_timer</name></member>
     <member refid="classbasic__timer_1a40754c2e9393da36d444ce058befc1b4" kind="function"><name>basic_timer</name></member>
     <member refid="classbasic__timer_1abcb7514aeea4618bb97c6b362d9640d1" kind="function"><name>operator=</name></member>
@@ -3663,7 +3663,7 @@
     <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" kind="function"><name>operator=</name></member>
     <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" kind="function"><name>exception</name></member>
     <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" kind="function"><name>operator=</name></member>
-    <member refid="structexception_1af0521c49a602b7a9b96bd230a4a02c74" kind="function"><name>exception</name></member>
+    <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" kind="function"><name>exception</name></member>
     <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" kind="function"><name>~exception</name></member>
     <member refid="structexception_1ac635798f4eb88397f79b995966b26683" kind="function"><name>what</name></member>
     <member refid="structexception_1a50dcb7544585c5cda232c3133d027eff" kind="function"><name>type</name></member>
@@ -4796,8 +4796,8 @@
   </compound>
   <compound refid="classhazard__pointer__domain" kind="class"><name>hazard_pointer_domain</name>
     <member refid="classhazard__pointer__domain_1ab712b91a20bc6ad37f126c5d11fdaaba" kind="variable"><name>head_</name></member>
-    <member refid="classhazard__pointer__domain_1a14a7792458e4af4473f9242390d36e31" kind="variable"><name>tl_retire_list_</name></member>
     <member refid="classhazard__pointer__domain_1a14932dac3b6255d71b9d2f3989b39505" kind="variable"><name>RETIRE_THRESHOLD</name></member>
+    <member refid="classhazard__pointer__domain_1ace7407a40a0347fb7a8ed9f6f2d75c4c" kind="function"><name>get_thread_retire_list</name></member>
     <member refid="classhazard__pointer__domain_1ad1862c33a1390b1f509d2577599d074d" kind="function"><name>get_hazard_pointers</name></member>
     <member refid="classhazard__pointer__domain_1a8d19e54d52fa2b100d5dd2efd4c74242" kind="function"><name>scan_and_reclaim</name></member>
     <member refid="classhazard__pointer__domain_1ad95aec6be814f0f95f69aa41c089a5a1" kind="function"><name>hazard_pointer_domain</name></member>
@@ -4826,11 +4826,13 @@
     <member refid="classhazard__pointer__obj_1a1b3a0d84c21fce5b2122d11701f924dc" kind="variable"><name>deleter</name></member>
     <member refid="classhazard__pointer__obj_1a8737ba02a9fa052b09177db2d6afb229" kind="function"><name>hazard_pointer_obj</name></member>
     <member refid="classhazard__pointer__obj_1abc7269dcc8a1838682952567cf555d87" kind="function"><name>destroy</name></member>
+    <member refid="classhazard__pointer__obj_1afc4fd3b402b67d71f57400a37d7f6425" kind="function"><name>get_ptr</name></member>
   </compound>
   <compound refid="classhazard__pointer__obj__base" kind="class"><name>hazard_pointer_obj_base</name>
     <member refid="classhazard__pointer__obj__base_1ade76a3fc1006cff9269564b074937bf7" kind="variable"><name>next</name></member>
     <member refid="classhazard__pointer__obj__base_1a5616b796b5e8cc18929e56e5c8a85241" kind="function"><name>~hazard_pointer_obj_base</name></member>
     <member refid="classhazard__pointer__obj__base_1a9e179233d5b592750c0e44262f75dfe8" kind="function"><name>destroy</name></member>
+    <member refid="classhazard__pointer__obj__base_1af8293f6644d4fea8e8bc6a68f0372674" kind="function"><name>get_ptr</name></member>
   </compound>
   <compound refid="structhazard__pointer__record" kind="struct"><name>hazard_pointer_record</name>
     <member refid="structhazard__pointer__record_1aa72ef496c7d823531af21d92f7f7cc88" kind="variable"><name>hazard_ptr</name></member>
@@ -7544,6 +7546,7 @@
     <member refid="structtimer__scheduler_1_1node_1a95d98ead2e5aa12932fd8312abdf30b0" kind="function"><name>operator=</name></member>
     <member refid="structtimer__scheduler_1_1node_1a18a519a875e836fc7134a14de3ba6529" kind="function"><name>node</name></member>
     <member refid="structtimer__scheduler_1_1node_1ab4601f5208042c222caa20c441741324" kind="function"><name>operator=</name></member>
+    <member refid="structtimer__scheduler_1_1node_1a9e14937b63998c7b2ded0c4e288ed9ee" kind="function"><name>~node</name></member>
     <member refid="structtimer__scheduler_1_1node_1a7de7ab54e1c6e708343ed8c6758c8ea9" kind="function"><name>operator&lt;</name></member>
   </compound>
   <compound refid="structlock__free__queue_1_1node__counter" kind="struct"><name>lock_free_queue::node_counter</name>
@@ -8888,6 +8891,7 @@
   </compound>
   <compound refid="structvirtual__thread__task_1_1promise__type" kind="struct"><name>virtual_thread_task::promise_type</name>
     <member refid="structvirtual__thread__task_1_1promise__type_1ac3ddcbd783e23872722f2aa196028cf8" kind="variable"><name>exception_</name></member>
+    <member refid="structvirtual__thread__task_1_1promise__type_1a098161502ceabf51bb0f266d123cbade" kind="variable"><name>scheduled_</name></member>
     <member refid="structvirtual__thread__task_1_1promise__type_1abfb12fb610b1028ef2ce7a71060256d5" kind="function"><name>get_return_object</name></member>
     <member refid="structvirtual__thread__task_1_1promise__type_1a80bb560c74f8fa5a58f6997866816133" kind="function"><name>initial_suspend</name></member>
     <member refid="structvirtual__thread__task_1_1promise__type_1aaa221a87a605e7d9ad35bc13ae393821" kind="function"><name>final_suspend</name></member>
@@ -9492,9 +9496,14 @@
   <compound refid="structretire__list" kind="struct"><name>retire_list</name>
     <member refid="structretire__list_1a883604f763908f6360de2d705f8a1589" kind="variable"><name>head</name></member>
     <member refid="structretire__list_1a15ffcee565539d025ab2894a6bad5c7d" kind="variable"><name>count</name></member>
+    <member refid="structretire__list_1a72b30b98858b4906ab04de8b667ba126" kind="function"><name>retire_list</name></member>
+    <member refid="structretire__list_1a1dc9f0280fe5f023d9499bae37c2ffbd" kind="function"><name>retire_list</name></member>
+    <member refid="structretire__list_1aae137351efcc2f0e62bc00b22a28be0e" kind="function"><name>operator=</name></member>
+    <member refid="structretire__list_1a29bb150112b09665d8d78660468e539c" kind="function"><name>retire_list</name></member>
+    <member refid="structretire__list_1ac6cb2f8667b99a85023794ae60fe142c" kind="function"><name>operator=</name></member>
+    <member refid="structretire__list_1ab8166a60fc5f971df18cf6e68ffe060e" kind="function"><name>~retire_list</name></member>
     <member refid="structretire__list_1a33fc37aaad8e02fc7ab0c3d9a32a8113" kind="function"><name>add</name></member>
     <member refid="structretire__list_1a661fc02d5203c1a70776d49173813cc9" kind="function"><name>clear</name></member>
-    <member refid="structretire__list_1ab8166a60fc5f971df18cf6e68ffe060e" kind="function"><name>~retire_list</name></member>
   </compound>
   <compound refid="structreverse__adaptor" kind="struct"><name>reverse_adaptor</name>
     <member refid="structreverse__adaptor_1a94d1551f9b715b8b5c14d701522571a7" kind="function"><name>operator()</name></member>
@@ -10057,6 +10066,12 @@
   <compound refid="structsystem__signal__manager_1_1signal__result" kind="struct"><name>system_signal_manager::signal_result</name>
     <member refid="structsystem__signal__manager_1_1signal__result_1abe37ca7e9981405170d1075d9e4163ab" kind="variable"><name>event</name></member>
     <member refid="structsystem__signal__manager_1_1signal__result_1a1f7e7681e7114ac119c05b30d1ff0ba0" kind="variable"><name>context</name></member>
+  </compound>
+  <compound refid="structsleep__awaiter" kind="struct"><name>sleep_awaiter</name>
+    <member refid="structsleep__awaiter_1a4c24def4e871d5af8d0f6c1dd1cc0a97" kind="variable"><name>ms_</name></member>
+    <member refid="structsleep__awaiter_1a9802db632ba22ce349ab2e63cbc19eec" kind="function"><name>await_ready</name></member>
+    <member refid="structsleep__awaiter_1a9ec87c2a9ca480ca94dd81cfddae11b7" kind="function"><name>await_suspend</name></member>
+    <member refid="structsleep__awaiter_1a999cafefc0d0712770839d18c8766f59" kind="function"><name>await_resume</name></member>
   </compound>
   <compound refid="structslice__adaptor" kind="struct"><name>slice_adaptor</name>
     <member refid="structslice__adaptor_1a5bb492c03b020cc3936c4f6ff4bea277" kind="function"><name>operator()</name></member>
@@ -11810,6 +11825,8 @@
     <member refid="classtimer__scheduler_1ada7122813465be5f928c9c7209325731" kind="typedef"><name>handler_type</name></member>
     <member refid="classtimer__scheduler_1aaaf113becf40069016a9a712ab703646" kind="variable"><name>nodes_</name></member>
     <member refid="classtimer__scheduler_1afd42949239fb4ac9c9a223bf97f11285" kind="variable"><name>node_map_</name></member>
+    <member refid="classtimer__scheduler_1ad18f4bebe486f53098e2c417640d35cf" kind="variable"><name>cancel_flags_</name></member>
+    <member refid="classtimer__scheduler_1aa9590791a0eaa7edbd22b59cf0d14591" kind="variable"><name>promises_</name></member>
     <member refid="classtimer__scheduler_1aed14f923f9236d34026b2305eb4892e7" kind="variable"><name>thread_</name></member>
     <member refid="classtimer__scheduler_1a41564d8b31537b41e8174545584f5752" kind="variable"><name>mutex_</name></member>
     <member refid="classtimer__scheduler_1a7cf3f973722c08e1d4c5fe0509442fcb" kind="variable"><name>cv_</name></member>
@@ -11821,12 +11838,13 @@
     <member refid="classtimer__scheduler_1a524ba8b6788fe4e0d4d28f554f50f5d8" kind="function"><name>~timer_scheduler</name></member>
     <member refid="classtimer__scheduler_1a90b866601138a24bf3821386d29e7add" kind="function"><name>timer_scheduler</name></member>
     <member refid="classtimer__scheduler_1ab9dd92f0220e7d475e1cd4dc187ddab4" kind="function"><name>operator=</name></member>
-    <member refid="classtimer__scheduler_1a3891bcec2ce30611ff8cd54ecd161c3d" kind="function"><name>timer_scheduler</name></member>
-    <member refid="classtimer__scheduler_1ab1da9bf55d045cf09a71a75132e1f38f" kind="function"><name>operator=</name></member>
+    <member refid="classtimer__scheduler_1ab1f91314df2025a3a655f267a1db6185" kind="function"><name>timer_scheduler</name></member>
+    <member refid="classtimer__scheduler_1aa24c529b570d8a1fb85d250cb2684e3b" kind="function"><name>operator=</name></member>
     <member refid="classtimer__scheduler_1ad7e2861340ab12370ceaec61a82c9129" kind="function"><name>add_task</name></member>
     <member refid="classtimer__scheduler_1aa25522eaa375942415f6ab940174a49b" kind="function"><name>cancel</name></member>
     <member refid="classtimer__scheduler_1ac050f83f8dbeee5c8f590c5be3e7a6d2" kind="function"><name>cancel_all</name></member>
     <member refid="classtimer__scheduler_1a83bf57ec21b16c6ebc7e0f08bfce0573" kind="function"><name>size</name></member>
+    <member refid="classtimer__scheduler_1a70a910ad934bad4c0c9335f2215924f6" kind="function"><name>is_pending</name></member>
   </compound>
   <compound refid="classtimestamp" kind="class"><name>timestamp</name>
     <member refid="classtimestamp_1a3da2b864a95ca39281a496b5cf3f5069" kind="typedef"><name>value_type</name></member>
@@ -12425,7 +12443,7 @@
     <member refid="structuint128__t_1a6c841ad83d3bf6e9c550081863f48137" kind="function"><name>operator^=</name></member>
     <member refid="structuint128__t_1adb2bb35eb1f69f5098821846855f966b" kind="function"><name>operator&lt;&lt;=</name></member>
     <member refid="structuint128__t_1af43c44fd270c3ea5518f4c81628d90c1" kind="function"><name>operator&gt;&gt;=</name></member>
-    <member refid="structuint128__t_1aed23e948c74e06bda0c6454e82dfeec5" kind="function"><name>div64</name></member>
+    <member refid="structuint128__t_1aa2dcb9a61a14880b87a0944b4b6e39f1" kind="function"><name>div64</name></member>
     <member refid="structuint128__t_1a20d85809dd1c7f0de651daaf146e589c" kind="function"><name>to_hash</name></member>
     <member refid="structuint128__t_1a587bf6ef8b972a92cc9c02a695e9ada2" kind="function"><name>to_string</name></member>
     <member refid="structuint128__t_1acf20d08b8ebe1afa587fe7e9eb8f8f8b" kind="function"><name>mul64</name></member>
@@ -13220,13 +13238,14 @@
     <member refid="classvirtual__thread_1a3bf562f3f9e53102f0f3cfc97c9e3a0f" kind="variable"><name>task_</name></member>
     <member refid="classvirtual__thread_1acf8b344f85b212e71a83a38b6689ceb7" kind="function"><name>create_task</name></member>
     <member refid="classvirtual__thread_1ac86354b86d2672940194457282f0ea4b" kind="function"><name>virtual_thread</name></member>
+    <member refid="classvirtual__thread_1a96da723dd6f6f10d41d0caf94fdf0258" kind="function"><name>~virtual_thread</name></member>
     <member refid="classvirtual__thread_1a60d118cbde9dd622815e51be0d97bfa8" kind="function"><name>virtual_thread</name></member>
     <member refid="classvirtual__thread_1a8c308b21f6a630e232bc55d96161acc5" kind="function"><name>operator=</name></member>
     <member refid="classvirtual__thread_1acd03e82cfcd86580a796c3dc44da54b8" kind="function"><name>virtual_thread</name></member>
     <member refid="classvirtual__thread_1a09b3fb92daeb54eea55cffac4658abb6" kind="function"><name>operator=</name></member>
     <member refid="classvirtual__thread_1a93b4388447ef55e5758820188474f161" kind="function"><name>start</name></member>
     <member refid="classvirtual__thread_1a61addfa70b27ee1c4a5a9ee9c3b6337b" kind="function"><name>yield</name></member>
-    <member refid="classvirtual__thread_1ab383489e88e638f363dc93ccf00f649d" kind="function"><name>sleep</name></member>
+    <member refid="classvirtual__thread_1a198e8afd583bb7ba0c31d12b609e374a" kind="function"><name>sleep</name></member>
     <member refid="classvirtual__thread_1aad16763690d7b1e9ad3d0571bc62ac40" kind="function"><name>initialize</name></member>
     <member refid="classvirtual__thread_1a74b4d3cfd6a51e961b47279309d3bfc3" kind="function"><name>shutdown</name></member>
   </compound>
@@ -13252,6 +13271,7 @@
   </compound>
   <compound refid="structvirtual__thread__task" kind="struct"><name>virtual_thread_task</name>
     <member refid="structvirtual__thread__task_1aab9696a7dd5e0aa596d91bd6e71ecbd2" kind="variable"><name>handle_</name></member>
+    <member refid="structvirtual__thread__task_1ab8e688877cda242ab2c08a3d70bbf26c" kind="function"><name>virtual_thread_task</name></member>
     <member refid="structvirtual__thread__task_1ad999c5bc10cf195db92c5ad7d97f0fdc" kind="function"><name>virtual_thread_task</name></member>
     <member refid="structvirtual__thread__task_1affa79416f219f96824fb4a9491ac0125" kind="function"><name>~virtual_thread_task</name></member>
     <member refid="structvirtual__thread__task_1ad6d298c579a2ee733c7896bbb73373c6" kind="function"><name>virtual_thread_task</name></member>

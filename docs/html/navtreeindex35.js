@@ -1,7 +1,5 @@
 var NAVTREEINDEX35 =
 {
-"structis__implicitly__default__constructible.html":[2,103,8,6],
-"structis__incrementible.html":[2,103,15,2],
 "structis__integral.html":[2,103,2,8],
 "structis__integral__like.html":[2,103,7,9],
 "structis__invocable.html":[2,36,2],
@@ -249,5 +247,7 @@ var NAVTREEINDEX35 =
 "structpair.html#a3c8f8ef873f5995ff0f434693387cab0":[2,117,0,20],
 "structpair.html#a3eabace47576a435446d9adce4e04529":[2,117,0,16],
 "structpair.html#a477b1300b3654fbf8610173294d9ebab":[2,117,0,18],
-"structpair.html#a5fc8fdee8d793958cc55b507f85eaafe":[2,117,0,12]
+"structpair.html#a5fc8fdee8d793958cc55b507f85eaafe":[2,117,0,12],
+"structpair.html#a63ae1bbd5a6ce6bd6167b5359fa7a01f":[2,117,0,22],
+"structpair.html#a651bc7e73c0e01a484760f12d893fff5":[2,117,0,2]
 };

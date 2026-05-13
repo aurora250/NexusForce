@@ -134,7 +134,7 @@ var searchData=
   ['view_5fbase_3c_20transform_5fview_3c_20v_2c_20func_20_3e_20_3e_131',['view_base&lt; transform_view&lt; V, Func &gt; &gt;',['../structview__base.html',1,'']]],
   ['view_5ftype_132',['view_type',['../classbasic__string.html#a4b3fcd29afecec593f620204889a4041',1,'basic_string']]],
   ['virtual_133',['VIRTUAL',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea05470727787aa721cf53222b5d3d40f3',1,'file_constants.hpp']]],
-  ['virtual_5fthread_134',['virtual_thread',['../classvirtual__thread.html',1,'virtual_thread'],['../classvirtual__thread.html#ac86354b86d2672940194457282f0ea4b',1,'virtual_thread::virtual_thread()=default'],['../classvirtual__thread.html#a60d118cbde9dd622815e51be0d97bfa8',1,'virtual_thread::virtual_thread(const virtual_thread &amp;)=delete'],['../classvirtual__thread.html#acd03e82cfcd86580a796c3dc44da54b8',1,'virtual_thread::virtual_thread(virtual_thread &amp;&amp;other) noexcept=default']]],
+  ['virtual_5fthread_134',['virtual_thread',['../classvirtual__thread.html',1,'']]],
   ['virtual_5fthread_2ehpp_135',['virtual_thread.hpp',['../virtual__thread_8hpp.html',1,'']]],
   ['virtual_5fthread_5fawaiter_136',['virtual_thread_awaiter',['../structvirtual__thread__awaiter.html',1,'']]],
   ['virtual_5fthread_5fscheduler_137',['virtual_thread_scheduler',['../classvirtual__thread__scheduler.html',1,'']]],

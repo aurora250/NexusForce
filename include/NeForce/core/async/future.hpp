@@ -1187,7 +1187,7 @@ using future_result_t = typename future_result<T>::type;
  * @return none_t
  */
 template <typename T>
-NEFORCE_ALWAYS_INLINE enable_if_t<is_void_v<T>, future_result_t<T>> get(future<T>& f) {
+enable_if_t<is_void_v<T>, future_result_t<T>> get(future<T>& f) {
     f.get();
     return none;
 }
@@ -1199,7 +1199,7 @@ NEFORCE_ALWAYS_INLINE enable_if_t<is_void_v<T>, future_result_t<T>> get(future<T
  * @return 结果值
  */
 template <typename T>
-NEFORCE_ALWAYS_INLINE enable_if_t<!is_void_v<T>, future_result_t<T>> get(future<T>& f) {
+enable_if_t<!is_void_v<T>, future_result_t<T>> get(future<T>& f) {
     return f.get();
 }
 

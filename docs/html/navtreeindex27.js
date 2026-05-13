@@ -1,7 +1,5 @@
 var NAVTREEINDEX27 =
 {
-"group___unique_pointer.html#gaf4c9e805e471b53f0d1758160d98c075":[2,60,21],
-"group___unique_pointer.html#gafd5d8431a973b7e88c2b83662ed5b553":[2,60,19],
 "group___unique_pointer.html#gaff521462e36faa64ae1c49af9d3764b9":[2,60,3],
 "group___user_literals.html":[2,63],
 "group___user_literals.html#ga0412a826ccd718b42040042094eb6950":[2,63,24],
@@ -249,5 +247,7 @@ var NAVTREEINDEX27 =
 "lock__free__queue_8hpp_source.html":[6,0,0,0,1,1,17],
 "log__event_8hpp.html":[6,0,0,0,3,1],
 "log__event_8hpp_source.html":[6,0,0,0,3,1],
-"log__formatter_8hpp.html":[6,0,0,0,3,2]
+"log__formatter_8hpp.html":[6,0,0,0,3,2],
+"log__formatter_8hpp_source.html":[6,0,0,0,3,2],
+"log__sink_8hpp.html":[6,0,0,0,3,3]
 };

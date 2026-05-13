@@ -1,7 +1,5 @@
 var NAVTREEINDEX19 =
 {
-"classzlib__compressor_1_1stream__decompressor.html#ad079279d28696f435e764e2dd9dea6c5":[2,0,1,1,8],
-"classzlib__compressor_1_1stream__decompressor.html#ad33909522e889d1c832e14073bb40044":[2,0,1,1,9],
 "click_8hpp.html":[6,0,0,0,1,16,0],
 "click_8hpp_source.html":[6,0,0,0,1,16,0],
 "clocks_8hpp.html":[6,0,0,0,1,16,1],
@@ -249,5 +247,7 @@ var NAVTREEINDEX19 =
 "functions_vars.html":[5,3,2],
 "functions_vars.html":[5,3,2,0],
 "functions_vars_b.html":[5,3,2,1],
-"functions_vars_c.html":[5,3,2,2]
+"functions_vars_c.html":[5,3,2,2],
+"functions_vars_d.html":[5,3,2,3],
+"functions_vars_e.html":[5,3,2,4]
 };

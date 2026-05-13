@@ -1,7 +1,5 @@
 var NAVTREEINDEX34 =
 {
-"structicharacter.html#a50417e7f290cfdc1f9a5070a3aecbe0e":[2,37,0,0],
-"structicharacter.html#a8e6c3790d0b57f1c16281e92b3f73a7f":[2,37,0,1],
 "structicmp__header.html":[2,125,4],
 "structicmp__header.html#a0c0a702941e23230e08684aa636a196d":[2,125,4,4],
 "structicmp__header.html#aa60c9166bcb57ddad63de97452ce10f7":[2,125,4,3],
@@ -249,5 +247,7 @@ var NAVTREEINDEX34 =
 "structis__floating__point.html":[2,103,2,9],
 "structis__function.html":[2,103,7,16],
 "structis__fundamental.html":[2,103,7,12],
-"structis__hash.html":[2,35,6]
+"structis__hash.html":[2,35,6],
+"structis__implicitly__default__constructible.html":[2,103,8,6],
+"structis__incrementible.html":[2,103,15,2]
 };

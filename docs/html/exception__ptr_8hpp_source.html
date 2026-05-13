@@ -191,7 +191,7 @@ $(function(){initNavTree('exception__ptr_8hpp_source.html','',''); });
 <div class="foldopen" id="foldopen00180" data-start="{" data-end="}">
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="classexception__ptr.html#a206fcf9e43bb45328fe0966de67d3685">  180</a></span>    <a class="code hl_function" href="classexception__ptr.html#a206fcf9e43bb45328fe0966de67d3685">exception_ptr</a>(<span class="keyword">const</span> exception_ptr&amp; other) noexcept :</div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    ecb_(other.ecb_) {</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keywordflow">if</span> (ecb_) {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keywordflow">if</span> (ecb_ != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            ecb_-&gt;add_ref();</div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        }</div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    }</div>
@@ -206,7 +206,7 @@ $(function(){initNavTree('exception__ptr_8hpp_source.html','',''); });
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span></div>
 <div class="foldopen" id="foldopen00203" data-start="{" data-end="}">
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="classexception__ptr.html#a3a5bbaa59d8846ad1ba8f08d4d714faf">  203</a></span>    <a class="code hl_function" href="classexception__ptr.html#a3a5bbaa59d8846ad1ba8f08d4d714faf">~exception_ptr</a>() noexcept {</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="keywordflow">if</span> (ecb_) {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <span class="keywordflow">if</span> (ecb_ != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            ecb_-&gt;release();</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        }</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    }</div>
@@ -272,7 +272,7 @@ $(function(){initNavTree('exception__ptr_8hpp_source.html','',''); });
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        result.ecb_ = control_block.<a class="code hl_function" href="structexception__ptr_1_1ecb.html#ab28775b35400880fc5464e783645cbe7">release</a>();</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <span class="keywordflow">return</span> result;</div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    } <span class="keywordflow">catch</span> (...) {</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        <span class="keywordflow">return</span> exception_ptr();</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    }</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>}</div>
 </div>

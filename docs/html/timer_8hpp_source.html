@@ -131,281 +131,330 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        node&amp; operator=(<span class="keyword">const</span> node&amp;) = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        node(node&amp;&amp;) = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        node&amp; operator=(node&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">bool</span> operator&lt;(<span class="keyword">const</span> node&amp; other)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keywordflow">if</span> (expire &lt; other.expire) {</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            }</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="keywordflow">if</span> (expire &gt; other.expire) {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            }</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keywordflow">return</span> <span class="keywordtype">id</span> &lt; other.id;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    };</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <a class="code hl_class" href="classset.html">set&lt;node&gt;</a> nodes_;                                   </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <a class="code hl_class" href="classmap.html">map&lt;token, typename set&lt;node&gt;::iterator</a>&gt; node_map_; </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <a class="code hl_class" href="classthread.html">thread</a> thread_;         </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classmutex.html">mutex</a> mutex_;   </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_class" href="classcondition__variable.html">condition_variable</a> cv_; </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">token</a> next_id_;         </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> stopped_;  </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classthread__pool.html">thread_pool</a>;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordtype">void</span> run() {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">while</span> (!stopped_.<a class="code hl_function" href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">load</a>()) {</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <a class="code hl_class" href="classunique__lock.html">unique_lock&lt;mutex&gt;</a> <a class="code hl_class" href="classlock.html">lock</a>(mutex_);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="keywordflow">if</span> (nodes_.<a class="code hl_function" href="classset.html#a511204e58374d7ed36205f1fd37421f4">empty</a>()) {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                cv_.<a class="code hl_function" href="classcondition__variable.html#af4218a7f80abf59826ff6097ae4d406c">wait</a>(<a class="code hl_class" href="classlock.html">lock</a>, [<span class="keyword">this</span>] { <span class="keywordflow">return</span> stopped_.<a class="code hl_function" href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">load</a>() || !nodes_.<a class="code hl_function" href="classset.html#a511204e58374d7ed36205f1fd37421f4">empty</a>(); });</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                <span class="keywordflow">if</span> (stopped_.load()) {</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                }</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            }</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            <a class="code hl_typedef" href="classtimer__scheduler.html#a25c8b70565c98ece1cf245a6665b20b9">time_point</a> now = clock_type::now();</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            <span class="keywordflow">while</span> (!nodes_.empty() &amp;&amp; nodes_.begin()-&gt;expire &lt;= now) {</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                <span class="keyword">auto</span> it = nodes_.begin();</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                node current_node = *it;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                nodes_.erase(it);</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                node_map_.erase(current_node.id);</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                lock.unlock_quiet();</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                <span class="keywordflow">if</span> (!stopped_.load()) {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                    current_node.handler();</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                lock.lock_quiet();</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                now = clock_type::now();</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            }</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            <span class="keywordflow">if</span> (!nodes_.empty()) {</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                <a class="code hl_typedef" href="classtimer__scheduler.html#a25c8b70565c98ece1cf245a6665b20b9">time_point</a> next_expire = nodes_.begin()-&gt;expire;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                cv_.wait_until(lock, next_expire);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            }</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        }</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        ~node() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordtype">bool</span> operator&lt;(<span class="keyword">const</span> node&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keywordflow">if</span> (expire &lt; other.expire) {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">if</span> (expire &gt; other.expire) {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">return</span> <span class="keywordtype">id</span> &lt; other.id;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    };</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_class" href="classset.html">set&lt;node&gt;</a> nodes_;                                   </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <a class="code hl_class" href="classmap.html">map&lt;token, typename set&lt;node&gt;::iterator</a>&gt; node_map_; </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <a class="code hl_class" href="classmap.html">map&lt;token, shared_ptr&lt;atomic&lt;bool&gt;</a>&gt;&gt; cancel_flags_; </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_class" href="classmap.html">map&lt;token, shared_ptr&lt;promise&lt;void&gt;</a>&gt;&gt; promises_;    </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <a class="code hl_class" href="classthread.html">thread</a> thread_;               </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classmutex.html">mutex</a> mutex_;         </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_class" href="classcondition__variable.html">condition_variable</a> cv_;       </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">token</a> next_id_{1};            </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    atomic&lt;bool&gt; stopped_{<span class="keyword">false</span>}; </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">friend</span> <span class="keyword">class </span>thread_pool;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">void</span> run() {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <span class="keywordflow">while</span> (!stopped_.load()) {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            unique_lock&lt;mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keywordflow">if</span> (nodes_.empty()) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                cv_.wait(lock, [<span class="keyword">this</span>] { <span class="keywordflow">return</span> stopped_.load() || !nodes_.empty(); });</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                <span class="keywordflow">if</span> (stopped_.load()) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <a class="code hl_typedef" href="classtimer__scheduler.html#a25c8b70565c98ece1cf245a6665b20b9">time_point</a> now = clock_type::now();</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <span class="keywordflow">while</span> (!nodes_.empty() &amp;&amp; nodes_.begin()-&gt;expire &lt;= now) {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                <span class="keyword">auto</span> it = nodes_.begin();</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                node current_node = *it;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                nodes_.erase(it);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                node_map_.erase(current_node.id);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                lock.unlock_quiet();</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                <span class="keywordflow">if</span> (!stopped_.load()) {</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                    current_node.handler();</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                lock.lock_quiet();</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                cancel_flags_.erase(current_node.id);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                promises_.erase(current_node.id);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                now = clock_type::now();</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            }</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00142" data-start="{" data-end="}">
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab">  142</a></span>    <a class="code hl_function" href="classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab">timer_scheduler</a>() :</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    next_id_(0),</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    stopped_(false) {</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        thread_ = <a class="code hl_class" href="classthread.html">thread</a>(&amp;timer_scheduler::run, <span class="keyword">this</span>);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            <span class="keywordflow">if</span> (!nodes_.empty()) {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                cv_.wait_until(lock, nodes_.begin()-&gt;expire);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        }</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab">  148</a></span>    <a class="code hl_function" href="classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab">timer_scheduler</a>() { thread_ = <a class="code hl_class" href="classthread.html">thread</a>(&amp;timer_scheduler::run, <span class="keyword">this</span>); }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span></div>
+<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#a524ba8b6788fe4e0d4d28f554f50f5d8">  153</a></span>    <a class="code hl_function" href="classtimer__scheduler.html#a524ba8b6788fe4e0d4d28f554f50f5d8">~timer_scheduler</a>() {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        stopped_.store(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        cv_.notify_one();</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="keywordflow">if</span> (thread_.joinable()) {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            thread_.join();</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        }</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    }</div>
 </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span></div>
-<div class="foldopen" id="foldopen00151" data-start="{" data-end="}">
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#a524ba8b6788fe4e0d4d28f554f50f5d8">  151</a></span>    <a class="code hl_function" href="classtimer__scheduler.html#a524ba8b6788fe4e0d4d28f554f50f5d8">~timer_scheduler</a>() {</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        stopped_.store(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        cv_.notify_one();</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordflow">if</span> (thread_.joinable()) {</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            thread_.join();</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        }</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
-</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <a class="code hl_function" href="classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab">timer_scheduler</a>(<span class="keyword">const</span> <a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <a class="code hl_function" href="classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab">timer_scheduler</a>(<a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp; operator=(<a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span></div>
-<div class="foldopen" id="foldopen00172" data-start="{" data-end="}">
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#ad7e2861340ab12370ceaec61a82c9129">  172</a></span>    <a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">token</a> <a class="code hl_function" href="classtimer__scheduler.html#ad7e2861340ab12370ceaec61a82c9129">add_task</a>(<a class="code hl_typedef" href="classtimer__scheduler.html#a25c8b70565c98ece1cf245a6665b20b9">time_point</a> expire, <a class="code hl_typedef" href="classtimer__scheduler.html#ada7122813465be5f928c9c7209325731">handler_type</a>&amp;&amp; handler) {</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <a class="code hl_class" href="classunique__lock.html">unique_lock&lt;mutex&gt;</a> <a class="code hl_class" href="classlock.html">lock</a>(mutex_);</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">token</a> <span class="keywordtype">id</span> = next_id_++;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> is_earliest = nodes_.empty() || expire &lt; nodes_.begin()-&gt;expire;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <a class="code hl_function" href="classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab">timer_scheduler</a>(<span class="keyword">const</span> <a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <a class="code hl_function" href="classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab">timer_scheduler</a>(<a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp; operator=(<a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span></div>
+<div class="foldopen" id="foldopen00174" data-start="{" data-end="}">
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#ad7e2861340ab12370ceaec61a82c9129">  174</a></span>    <a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">token</a> <a class="code hl_function" href="classtimer__scheduler.html#ad7e2861340ab12370ceaec61a82c9129">add_task</a>(<a class="code hl_typedef" href="classtimer__scheduler.html#a25c8b70565c98ece1cf245a6665b20b9">time_point</a> expire, <a class="code hl_typedef" href="classtimer__scheduler.html#ada7122813465be5f928c9c7209325731">handler_type</a>&amp;&amp; handler) {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <a class="code hl_class" href="classunique__lock.html">unique_lock&lt;mutex&gt;</a> <a class="code hl_class" href="classlock.html">lock</a>(mutex_);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">token</a> <span class="keywordtype">id</span> = next_id_++;</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        node new_node(expire, <span class="keywordtype">id</span>, _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(handler));</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="keyword">auto</span> result = nodes_.insert(new_node);</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        node_map_[<a class="code hl_function" href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a>] = result.first;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <a class="code hl_class" href="classlock.html">lock</a>.unlock_quiet();</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">if</span> (is_earliest) {</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            cv_.notify_one();</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        }</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a>;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    }</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <span class="keyword">auto</span> flag = <a class="code hl_function" href="group___shared_pointer.html#gab47fa86d2917e14f57f68dfa9e83495e">make_shared&lt;atomic&lt;bool&gt;</a>&gt;(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        <span class="keyword">auto</span> <a class="code hl_class" href="classpromise.html">promise</a> = <a class="code hl_function" href="group___shared_pointer.html#gab47fa86d2917e14f57f68dfa9e83495e">make_shared&lt;_NEFORCE promise&lt;void&gt;</a>&gt;();</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        <a class="code hl_typedef" href="classtimer__scheduler.html#ada7122813465be5f928c9c7209325731">handler_type</a> wrapped = [flag, h = <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(handler), <a class="code hl_class" href="classpromise.html">promise</a>]() {</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            <span class="keywordflow">if</span> (!flag-&gt;load(<a class="code hl_variable" href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a>)) {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                h();</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            <a class="code hl_class" href="classpromise.html">promise</a>-&gt;<a class="code hl_function" href="classpromise.html#a3002df1df9d416019fe00dd89fc0e5ff">set_value</a>();</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        };</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> is_earliest = nodes_.empty() || expire &lt; nodes_.begin()-&gt;expire;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        node new_node(expire, <span class="keywordtype">id</span>, _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(wrapped));</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keyword">auto</span> result = nodes_.insert(new_node);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        node_map_[<a class="code hl_function" href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a>] = result.first;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        cancel_flags_[<a class="code hl_function" href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a>] = <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(flag);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        promises_[<a class="code hl_function" href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a>] = <a class="code hl_class" href="classpromise.html">promise</a>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <a class="code hl_class" href="classlock.html">lock</a>.unlock_quiet();</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">if</span> (is_earliest) {</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            cv_.notify_one();</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
 </div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span></div>
-<div class="foldopen" id="foldopen00198" data-start="{" data-end="}">
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#aa25522eaa375942415f6ab940174a49b">  198</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classtimer__scheduler.html#aa25522eaa375942415f6ab940174a49b">cancel</a>(<a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">token</a> <span class="keywordtype">id</span>) {</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <a class="code hl_class" href="classunique__lock.html">unique_lock&lt;mutex&gt;</a> <a class="code hl_class" href="classlock.html">lock</a>(mutex_);</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keyword">auto</span> it_map = node_map_.find(<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keywordflow">if</span> (it_map == node_map_.end()) {</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        }</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> is_earliest = (it_map-&gt;second == nodes_.begin());</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        nodes_.erase(it_map-&gt;second);</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        node_map_.erase(it_map);</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <a class="code hl_class" href="classlock.html">lock</a>.unlock_quiet();</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <span class="keywordflow">if</span> (is_earliest) {</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            cv_.notify_one();</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        }</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    }</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span></div>
+<div class="foldopen" id="foldopen00209" data-start="{" data-end="}">
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#aa25522eaa375942415f6ab940174a49b">  209</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classtimer__scheduler.html#aa25522eaa375942415f6ab940174a49b">cancel</a>(<a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">token</a> <span class="keywordtype">id</span>) {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <a class="code hl_class" href="classunique__lock.html">unique_lock&lt;mutex&gt;</a> <a class="code hl_class" href="classlock.html">lock</a>(mutex_);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keyword">const</span> <span class="keyword">auto</span> flag_it = cancel_flags_.find(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <span class="keywordflow">if</span> (flag_it == cancel_flags_.end()) {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        }</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        flag_it-&gt;second-&gt;store(<span class="keyword">true</span>, <a class="code hl_variable" href="group___memory_order.html#ga80883e2cd37a8e670dc016e91059d936">memory_order_release</a>);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keyword">auto</span> node_it = node_map_.find(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keywordflow">if</span> (node_it != node_map_.end()) {</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="keyword">const</span> <span class="keywordtype">bool</span> is_earliest = (node_it-&gt;second == nodes_.begin());</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            nodes_.erase(node_it-&gt;second);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            node_map_.erase(node_it);</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            <a class="code hl_class" href="classlock.html">lock</a>.unlock_quiet();</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            <span class="keywordflow">if</span> (is_earliest) {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>                cv_.notify_one();</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            }</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <a class="code hl_class" href="classlock.html">lock</a>.lock_quiet();</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            cancel_flags_.erase(flag_it);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            promises_.erase(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            <span class="keyword">const</span> <span class="keyword">auto</span> prom_it = promises_.find(<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;promise&lt;void&gt;</a>&gt; prom;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            <span class="keywordflow">if</span> (prom_it != promises_.end()) {</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>                prom = prom_it-&gt;second;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>                promises_.erase(prom_it);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            }</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            <a class="code hl_class" href="classlock.html">lock</a>.unlock_quiet();</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>            <span class="keywordflow">if</span> (prom) {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>                prom-&gt;get_future().wait();</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>            }</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        }</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    }</div>
 </div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span></div>
-<div class="foldopen" id="foldopen00221" data-start="{" data-end="}">
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#ac050f83f8dbeee5c8f590c5be3e7a6d2">  221</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtimer__scheduler.html#ac050f83f8dbeee5c8f590c5be3e7a6d2">cancel_all</a>() {</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        <a class="code hl_class" href="classunique__lock.html">unique_lock&lt;mutex&gt;</a> <a class="code hl_class" href="classlock.html">lock</a>(mutex_);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        nodes_.clear();</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        node_map_.clear();</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <a class="code hl_class" href="classlock.html">lock</a>.unlock_quiet();</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        cv_.notify_one();</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    }</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span></div>
+<div class="foldopen" id="foldopen00252" data-start="{" data-end="}">
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#ac050f83f8dbeee5c8f590c5be3e7a6d2">  252</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtimer__scheduler.html#ac050f83f8dbeee5c8f590c5be3e7a6d2">cancel_all</a>() {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <a class="code hl_class" href="classunique__lock.html">unique_lock&lt;mutex&gt;</a> <a class="code hl_class" href="classlock.html">lock</a>(mutex_);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; cancel_flag: cancel_flags_) {</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            cancel_flag.second-&gt;store(<span class="keyword">true</span>, <a class="code hl_variable" href="group___memory_order.html#ga80883e2cd37a8e670dc016e91059d936">memory_order_release</a>);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        }</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        nodes_.clear();</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        node_map_.clear();</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        cancel_flags_.clear();</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <a class="code hl_class" href="classlock.html">lock</a>.unlock_quiet();</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        cv_.notify_one();</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    }</div>
 </div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span></div>
-<div class="foldopen" id="foldopen00233" data-start="{" data-end="}">
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#a83bf57ec21b16c6ebc7e0f08bfce0573">  233</a></span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="classtimer__scheduler.html#a83bf57ec21b16c6ebc7e0f08bfce0573">size</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <a class="code hl_class" href="classlock.html">lock&lt;mutex&gt;</a> <a class="code hl_class" href="classlock.html">lock</a>(mutex_);</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        <span class="keywordflow">return</span> nodes_.size();</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    }</div>
-</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>};</div>
-</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span></div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Clock&gt;</div>
-<div class="foldopen" id="foldopen00248" data-start="{" data-end="};">
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="classbasic__timer.html">  248</a></span><span class="keyword">class </span>basic_timer {</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a7e207030e1c38d14b3db768051754597">  250</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbasic__timer.html#a7e207030e1c38d14b3db768051754597">clock_type</a> = Clock;                                           </div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e">  251</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e">time_point</a> = <span class="keyword">typename</span> clock_type::time_point;                 </div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a70d336504e87fc9c1e99e8febb56077a">  252</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbasic__timer.html#a70d336504e87fc9c1e99e8febb56077a">duration</a> = <span class="keyword">typename</span> clock_type::duration;                     </div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a625e5206943c7ae7fa2c993a04643b83">  253</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbasic__timer.html#a625e5206943c7ae7fa2c993a04643b83">token</a> = <span class="keyword">typename</span> <a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">timer_scheduler&lt;Clock&gt;::token</a>;               </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a67fedc91a0e1ca45b0df36c719a828cb">  254</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbasic__timer.html#a67fedc91a0e1ca45b0df36c719a828cb">handler_type</a> = <span class="keyword">typename</span> <a class="code hl_typedef" href="classtimer__scheduler.html#ada7122813465be5f928c9c7209325731">timer_scheduler&lt;Clock&gt;::handler_type</a>; </div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>    <a class="code hl_class" href="classtimer__scheduler.html">timer_scheduler&lt;Clock&gt;</a> scheduler_{};    </div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <a class="code hl_typedef" href="classbasic__timer.html#a625e5206943c7ae7fa2c993a04643b83">token</a> task_id_ = 0;                     </div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <a class="code hl_class" href="structtime__point.html">time_point</a> expire_ = clock_type::now(); </div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <a class="code hl_class" href="classbasic__timer.html">basic_timer</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span></div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="classbasic__timer.html#ad3f2d5cca2d57a577cc10cc3b627b030">  267</a></span>    <a class="code hl_function" href="classbasic__timer.html#ad3f2d5cca2d57a577cc10cc3b627b030">~basic_timer</a>() { <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>(); }</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <a class="code hl_class" href="classbasic__timer.html">basic_timer</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__timer.html">basic_timer</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <a class="code hl_class" href="classbasic__timer.html">basic_timer</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__timer.html">basic_timer</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span></div>
-<div class="foldopen" id="foldopen00275" data-start="{" data-end="}">
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno"><a class="line" href="classbasic__timer.html#aa5c4909463c3076787622d6cfe5ab499">  275</a></span>    <a class="code hl_function" href="classbasic__timer.html#aa5c4909463c3076787622d6cfe5ab499">basic_timer</a>(basic_timer&amp;&amp; other) noexcept :</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    scheduler_(other.scheduler_),</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    task_id_(other.task_id_),</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    expire_(other.expire_) {</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        other.task_id_ = 0;</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    }</div>
+<div class="foldopen" id="foldopen00268" data-start="{" data-end="}">
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#a83bf57ec21b16c6ebc7e0f08bfce0573">  268</a></span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="classtimer__scheduler.html#a83bf57ec21b16c6ebc7e0f08bfce0573">size</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <a class="code hl_class" href="classlock.html">lock&lt;mutex&gt;</a> <a class="code hl_class" href="classlock.html">lock</a>(mutex_);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">return</span> nodes_.size();</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    }</div>
 </div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span></div>
-<div class="foldopen" id="foldopen00285" data-start="{" data-end="}">
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a795e2f0ee98918bdef6fd545a3ce7df9">  285</a></span>    basic_timer&amp; <a class="code hl_function" href="classbasic__timer.html#a795e2f0ee98918bdef6fd545a3ce7df9">operator=</a>(basic_timer&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="group___args_forward_functions.html#ga19657f9185af45f84174ff975bae1fa7">addressof</a>(other) == <span class="keyword">this</span>) {</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        }</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>();</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        task_id_ = other.task_id_;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        expire_ = other.expire_;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        other.task_id_ = 0;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    }</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span></div>
+<div class="foldopen" id="foldopen00278" data-start="{" data-end="}">
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno"><a class="line" href="classtimer__scheduler.html#a70a910ad934bad4c0c9335f2215924f6">  278</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classtimer__scheduler.html#a70a910ad934bad4c0c9335f2215924f6">is_pending</a>(<a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">token</a> <span class="keywordtype">id</span>)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        <a class="code hl_class" href="classlock.html">lock&lt;mutex&gt;</a> <a class="code hl_class" href="classlock.html">lock</a>(mutex_);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="keywordflow">return</span> promises_.find(<span class="keywordtype">id</span>) != promises_.end();</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    }</div>
 </div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span></div>
-<div class="foldopen" id="foldopen00304" data-start="{" data-end="}">
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a4fa890be95fc2674acba94b3e11b70e0">  304</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbasic__timer.html#a4fa890be95fc2674acba94b3e11b70e0">expires_at</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e">time_point</a>&amp; expiry_time) {</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>();</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        expire_ = expiry_time;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    }</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>};</div>
 </div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span></div>
-<div class="foldopen" id="foldopen00315" data-start="{" data-end="}">
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b">  315</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b">expires_after</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classbasic__timer.html#a70d336504e87fc9c1e99e8febb56077a">duration</a>&amp; expiry_duration) {</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>();</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        expire_ = <a class="code hl_function" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">clock_type::now</a>() + expiry_duration;</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    }</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Clock&gt;</div>
+<div class="foldopen" id="foldopen00293" data-start="{" data-end="};">
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="classbasic__timer.html">  293</a></span><span class="keyword">class </span>basic_timer {</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a7e207030e1c38d14b3db768051754597">  295</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbasic__timer.html#a7e207030e1c38d14b3db768051754597">clock_type</a> = Clock;                                           </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno"><a class="line" href="classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e">  296</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e">time_point</a> = <span class="keyword">typename</span> clock_type::time_point;                 </div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a70d336504e87fc9c1e99e8febb56077a">  297</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbasic__timer.html#a70d336504e87fc9c1e99e8febb56077a">duration</a> = <span class="keyword">typename</span> clock_type::duration;                     </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a625e5206943c7ae7fa2c993a04643b83">  298</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbasic__timer.html#a625e5206943c7ae7fa2c993a04643b83">token</a> = <span class="keyword">typename</span> <a class="code hl_typedef" href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">timer_scheduler&lt;Clock&gt;::token</a>;               </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a67fedc91a0e1ca45b0df36c719a828cb">  299</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbasic__timer.html#a67fedc91a0e1ca45b0df36c719a828cb">handler_type</a> = <span class="keyword">typename</span> <a class="code hl_typedef" href="classtimer__scheduler.html#ada7122813465be5f928c9c7209325731">timer_scheduler&lt;Clock&gt;::handler_type</a>; </div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;timer_scheduler&lt;Clock&gt;</a>&gt; scheduler_; </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    <a class="code hl_typedef" href="classbasic__timer.html#a625e5206943c7ae7fa2c993a04643b83">token</a> task_id_{0};                             </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <a class="code hl_class" href="structtime__point.html">time_point</a> expire_{clock_type::now()};         </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    basic_timer() :</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    scheduler_(<a class="code hl_function" href="group___shared_pointer.html#gab47fa86d2917e14f57f68dfa9e83495e">make_shared</a>&lt;timer_scheduler&lt;Clock&gt;&gt;()) {}</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span></div>
+<div class="foldopen" id="foldopen00313" data-start="{" data-end="}">
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno"><a class="line" href="classbasic__timer.html#ad3f2d5cca2d57a577cc10cc3b627b030">  313</a></span>    <a class="code hl_function" href="classbasic__timer.html#ad3f2d5cca2d57a577cc10cc3b627b030">~basic_timer</a>() {</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        <span class="keywordflow">if</span> (scheduler_) {</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>();</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        }</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    }</div>
 </div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span></div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a123f1272f66d05cb56a5f12fe76b3af2">  324</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbasic__timer.html#a123f1272f66d05cb56a5f12fe76b3af2">expires_from_now</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> ms) { <a class="code hl_function" href="classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b">expires_after</a>(<a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(ms)); }</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span></div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a1493cbad9302b5c55cc794bb4f4d8833">  330</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e">time_point</a> <a class="code hl_function" href="classbasic__timer.html#a1493cbad9302b5c55cc794bb4f4d8833">expiry</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> expire_; }</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <a class="code hl_class" href="classbasic__timer.html">basic_timer</a>(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__timer.html">basic_timer</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <a class="code hl_class" href="classbasic__timer.html">basic_timer</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classbasic__timer.html">basic_timer</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span></div>
+<div class="foldopen" id="foldopen00325" data-start="{" data-end="}">
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno"><a class="line" href="classbasic__timer.html#aa5c4909463c3076787622d6cfe5ab499">  325</a></span>    <a class="code hl_function" href="classbasic__timer.html#aa5c4909463c3076787622d6cfe5ab499">basic_timer</a>(basic_timer&amp;&amp; other) noexcept :</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    scheduler_(_NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(other.scheduler_)),</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    task_id_(other.task_id_),</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    expire_(other.expire_) {</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>        other.task_id_ = 0;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    }</div>
+</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span></div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a53ee820d4168dd06780380cc1c3ffca5">  336</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classbasic__timer.html#a53ee820d4168dd06780380cc1c3ffca5">is_active</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> task_id_ != 0; }</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span></div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> WaitHandler&gt;</div>
-<div class="foldopen" id="foldopen00347" data-start="{" data-end="}">
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a223b9bed7f0b3230435522c57d87f09e">  347</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbasic__timer.html#a223b9bed7f0b3230435522c57d87f09e">async_wait</a>(WaitHandler&amp;&amp; handler) {</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>();</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        task_id_ = scheduler_.add_task(expire_, <a class="code hl_typedef" href="classbasic__timer.html#a67fedc91a0e1ca45b0df36c719a828cb">handler_type</a>(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;WaitHandler&gt;</a>(handler)));</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    }</div>
+<div class="foldopen" id="foldopen00335" data-start="{" data-end="}">
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a795e2f0ee98918bdef6fd545a3ce7df9">  335</a></span>    basic_timer&amp; <a class="code hl_function" href="classbasic__timer.html#a795e2f0ee98918bdef6fd545a3ce7df9">operator=</a>(basic_timer&amp;&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        <span class="keywordflow">if</span> (_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#ga19657f9185af45f84174ff975bae1fa7">addressof</a>(other) == <span class="keyword">this</span>) {</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>        }</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>();</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        scheduler_ = _NEFORCE <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(other.scheduler_);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        task_id_ = other.task_id_;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        expire_ = other.expire_;</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        other.task_id_ = 0;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    }</div>
 </div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span></div>
-<div class="foldopen" id="foldopen00357" data-start="{" data-end="}">
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">  357</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>() {</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        <span class="keywordflow">if</span> (task_id_ != 0) {</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>            scheduler_.cancel(task_id_);</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>            task_id_ = 0;</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        }</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    }</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span></div>
+<div class="foldopen" id="foldopen00355" data-start="{" data-end="}">
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a4fa890be95fc2674acba94b3e11b70e0">  355</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbasic__timer.html#a4fa890be95fc2674acba94b3e11b70e0">expires_at</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e">time_point</a>&amp; expiry_time) {</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>();</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        expire_ = expiry_time;</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    }</div>
 </div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>};</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span></div>
+<div class="foldopen" id="foldopen00366" data-start="{" data-end="}">
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b">  366</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b">expires_after</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="classbasic__timer.html#a70d336504e87fc9c1e99e8febb56077a">duration</a>&amp; expiry_duration) {</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>();</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        expire_ = <a class="code hl_function" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">clock_type::now</a>() + expiry_duration;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    }</div>
 </div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span></div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno"><a class="line" href="group___async_timer.html#gaf9d29e0fc3082a1789eafb7a8736a00b">  368</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___async_timer.html#gaf9d29e0fc3082a1789eafb7a8736a00b">steady_timer</a> = <a class="code hl_class" href="classbasic__timer.html">basic_timer&lt;steady_clock&gt;</a>;</div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span></div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno"><a class="line" href="group___async_timer.html#ga1a05e758b1b38f82d3cfec4cc3cb55b7">  373</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___async_timer.html#ga1a05e758b1b38f82d3cfec4cc3cb55b7">system_timer</a> = <a class="code hl_class" href="classbasic__timer.html">basic_timer&lt;system_clock&gt;</a>;</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> <span class="comment">// AsyncTimer</span></div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> <span class="comment">// AsyncComponents</span></div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_TIMER_HPP__</span></div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span></div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a123f1272f66d05cb56a5f12fe76b3af2">  375</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbasic__timer.html#a123f1272f66d05cb56a5f12fe76b3af2">expires_from_now</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> ms) { <a class="code hl_function" href="classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b">expires_after</a>(<a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(ms)); }</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span></div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a1493cbad9302b5c55cc794bb4f4d8833">  381</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e">time_point</a> <a class="code hl_function" href="classbasic__timer.html#a1493cbad9302b5c55cc794bb4f4d8833">expiry</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> expire_; }</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span></div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a53ee820d4168dd06780380cc1c3ffca5">  387</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classbasic__timer.html#a53ee820d4168dd06780380cc1c3ffca5">is_active</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> task_id_ != 0 &amp;&amp; scheduler_ &amp;&amp; scheduler_-&gt;is_pending(task_id_); }</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span></div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> WaitHandler&gt;</div>
+<div class="foldopen" id="foldopen00398" data-start="{" data-end="}">
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a223b9bed7f0b3230435522c57d87f09e">  398</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbasic__timer.html#a223b9bed7f0b3230435522c57d87f09e">async_wait</a>(WaitHandler&amp;&amp; handler) {</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>();</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>        task_id_ = scheduler_-&gt;add_task(expire_, <a class="code hl_typedef" href="classbasic__timer.html#a67fedc91a0e1ca45b0df36c719a828cb">handler_type</a>(_NEFORCE <a class="code hl_function" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward&lt;WaitHandler&gt;</a>(handler)));</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>    }</div>
+</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span></div>
+<div class="foldopen" id="foldopen00408" data-start="{" data-end="}">
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno"><a class="line" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">  408</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">cancel</a>() {</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>        <span class="keywordflow">if</span> (scheduler_ &amp;&amp; task_id_ != 0) {</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>            scheduler_-&gt;cancel(task_id_);</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>            task_id_ = 0;</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>        }</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    }</div>
+</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>};</div>
+</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span></div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno"><a class="line" href="group___async_timer.html#gaf9d29e0fc3082a1789eafb7a8736a00b">  419</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___async_timer.html#gaf9d29e0fc3082a1789eafb7a8736a00b">steady_timer</a> = <a class="code hl_class" href="classbasic__timer.html">basic_timer&lt;steady_clock&gt;</a>;</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span></div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno"><a class="line" href="group___async_timer.html#ga1a05e758b1b38f82d3cfec4cc3cb55b7">  424</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group___async_timer.html#ga1a05e758b1b38f82d3cfec4cc3cb55b7">system_timer</a> = <a class="code hl_class" href="classbasic__timer.html">basic_timer&lt;system_clock&gt;</a>;</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span> <span class="comment">// AsyncTimer</span></div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span> <span class="comment">// AsyncComponents</span></div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span> </div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_TIMER_HPP__</span></div>
 <div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">原子类型完整实现</div></div>
-<div class="ttc" id="aclassbasic__timer_html"><div class="ttname"><a href="classbasic__timer.html">basic_timer</a></div><div class="ttdoc">基本定时器</div><div class="ttdef"><b>定义</b> <a href="#l00248">timer.hpp:248</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a123f1272f66d05cb56a5f12fe76b3af2"><div class="ttname"><a href="classbasic__timer.html#a123f1272f66d05cb56a5f12fe76b3af2">basic_timer::expires_from_now</a></div><div class="ttdeci">void expires_from_now(const int64_t ms)</div><div class="ttdoc">设置从当前时间开始的毫秒数</div><div class="ttdef"><b>定义</b> <a href="#l00324">timer.hpp:324</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a1493cbad9302b5c55cc794bb4f4d8833"><div class="ttname"><a href="classbasic__timer.html#a1493cbad9302b5c55cc794bb4f4d8833">basic_timer::expiry</a></div><div class="ttdeci">NEFORCE_NODISCARD time_point expiry() const</div><div class="ttdoc">获取到期时间点</div><div class="ttdef"><b>定义</b> <a href="#l00330">timer.hpp:330</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a223b9bed7f0b3230435522c57d87f09e"><div class="ttname"><a href="classbasic__timer.html#a223b9bed7f0b3230435522c57d87f09e">basic_timer::async_wait</a></div><div class="ttdeci">void async_wait(WaitHandler &amp;&amp;handler)</div><div class="ttdoc">异步等待定时器到期</div><div class="ttdef"><b>定义</b> <a href="#l00347">timer.hpp:347</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a41d9db90a76e0709c03def4e5f10d73b"><div class="ttname"><a href="classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b">basic_timer::expires_after</a></div><div class="ttdeci">void expires_after(const duration &amp;expiry_duration)</div><div class="ttdoc">设置相对到期时间</div><div class="ttdef"><b>定义</b> <a href="#l00315">timer.hpp:315</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a4fa890be95fc2674acba94b3e11b70e0"><div class="ttname"><a href="classbasic__timer.html#a4fa890be95fc2674acba94b3e11b70e0">basic_timer::expires_at</a></div><div class="ttdeci">void expires_at(const time_point &amp;expiry_time)</div><div class="ttdoc">设置绝对到期时间</div><div class="ttdef"><b>定义</b> <a href="#l00304">timer.hpp:304</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a53ee820d4168dd06780380cc1c3ffca5"><div class="ttname"><a href="classbasic__timer.html#a53ee820d4168dd06780380cc1c3ffca5">basic_timer::is_active</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_active() const</div><div class="ttdoc">检查定时器是否活跃（有待执行的任务）</div><div class="ttdef"><b>定义</b> <a href="#l00336">timer.hpp:336</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a5f986124bf6b4ef059408a2cffe7400e"><div class="ttname"><a href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">basic_timer::cancel</a></div><div class="ttdeci">void cancel()</div><div class="ttdoc">取消定时任务</div><div class="ttdef"><b>定义</b> <a href="#l00357">timer.hpp:357</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a625e5206943c7ae7fa2c993a04643b83"><div class="ttname"><a href="classbasic__timer.html#a625e5206943c7ae7fa2c993a04643b83">basic_timer::token</a></div><div class="ttdeci">typename timer_scheduler&lt; Clock &gt;::token token</div><div class="ttdoc">任务标识符类型</div><div class="ttdef"><b>定义</b> <a href="#l00253">timer.hpp:253</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a67fedc91a0e1ca45b0df36c719a828cb"><div class="ttname"><a href="classbasic__timer.html#a67fedc91a0e1ca45b0df36c719a828cb">basic_timer::handler_type</a></div><div class="ttdeci">typename timer_scheduler&lt; Clock &gt;::handler_type handler_type</div><div class="ttdoc">回调函数类型</div><div class="ttdef"><b>定义</b> <a href="#l00254">timer.hpp:254</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a70d336504e87fc9c1e99e8febb56077a"><div class="ttname"><a href="classbasic__timer.html#a70d336504e87fc9c1e99e8febb56077a">basic_timer::duration</a></div><div class="ttdeci">typename clock_type::duration duration</div><div class="ttdoc">时长类型</div><div class="ttdef"><b>定义</b> <a href="#l00252">timer.hpp:252</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a795e2f0ee98918bdef6fd545a3ce7df9"><div class="ttname"><a href="classbasic__timer.html#a795e2f0ee98918bdef6fd545a3ce7df9">basic_timer::operator=</a></div><div class="ttdeci">basic_timer &amp; operator=(basic_timer &amp;&amp;other) noexcept</div><div class="ttdoc">移动赋值运算符</div><div class="ttdef"><b>定义</b> <a href="#l00285">timer.hpp:285</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_a7e207030e1c38d14b3db768051754597"><div class="ttname"><a href="classbasic__timer.html#a7e207030e1c38d14b3db768051754597">basic_timer::clock_type</a></div><div class="ttdeci">Clock clock_type</div><div class="ttdoc">时钟类型</div><div class="ttdef"><b>定义</b> <a href="#l00250">timer.hpp:250</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_aa5c4909463c3076787622d6cfe5ab499"><div class="ttname"><a href="classbasic__timer.html#aa5c4909463c3076787622d6cfe5ab499">basic_timer::basic_timer</a></div><div class="ttdeci">basic_timer(basic_timer &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00275">timer.hpp:275</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_ad3f2d5cca2d57a577cc10cc3b627b030"><div class="ttname"><a href="classbasic__timer.html#ad3f2d5cca2d57a577cc10cc3b627b030">basic_timer::~basic_timer</a></div><div class="ttdeci">~basic_timer()</div><div class="ttdoc">析构函数，自动取消未完成的任务</div><div class="ttdef"><b>定义</b> <a href="#l00267">timer.hpp:267</a></div></div>
-<div class="ttc" id="aclassbasic__timer_html_ada96b92993c08942916f8e7fe9dc952e"><div class="ttname"><a href="classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e">basic_timer::time_point</a></div><div class="ttdeci">typename clock_type::time_point time_point</div><div class="ttdoc">时间点类型</div><div class="ttdef"><b>定义</b> <a href="#l00251">timer.hpp:251</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html"><div class="ttname"><a href="classbasic__timer.html">basic_timer</a></div><div class="ttdoc">基本定时器</div><div class="ttdef"><b>定义</b> <a href="#l00293">timer.hpp:293</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a123f1272f66d05cb56a5f12fe76b3af2"><div class="ttname"><a href="classbasic__timer.html#a123f1272f66d05cb56a5f12fe76b3af2">basic_timer::expires_from_now</a></div><div class="ttdeci">void expires_from_now(const int64_t ms)</div><div class="ttdoc">设置从当前时间开始的毫秒数</div><div class="ttdef"><b>定义</b> <a href="#l00375">timer.hpp:375</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a1493cbad9302b5c55cc794bb4f4d8833"><div class="ttname"><a href="classbasic__timer.html#a1493cbad9302b5c55cc794bb4f4d8833">basic_timer::expiry</a></div><div class="ttdeci">NEFORCE_NODISCARD time_point expiry() const</div><div class="ttdoc">获取到期时间点</div><div class="ttdef"><b>定义</b> <a href="#l00381">timer.hpp:381</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a223b9bed7f0b3230435522c57d87f09e"><div class="ttname"><a href="classbasic__timer.html#a223b9bed7f0b3230435522c57d87f09e">basic_timer::async_wait</a></div><div class="ttdeci">void async_wait(WaitHandler &amp;&amp;handler)</div><div class="ttdoc">异步等待定时器到期</div><div class="ttdef"><b>定义</b> <a href="#l00398">timer.hpp:398</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a41d9db90a76e0709c03def4e5f10d73b"><div class="ttname"><a href="classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b">basic_timer::expires_after</a></div><div class="ttdeci">void expires_after(const duration &amp;expiry_duration)</div><div class="ttdoc">设置相对到期时间</div><div class="ttdef"><b>定义</b> <a href="#l00366">timer.hpp:366</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a4fa890be95fc2674acba94b3e11b70e0"><div class="ttname"><a href="classbasic__timer.html#a4fa890be95fc2674acba94b3e11b70e0">basic_timer::expires_at</a></div><div class="ttdeci">void expires_at(const time_point &amp;expiry_time)</div><div class="ttdoc">设置绝对到期时间</div><div class="ttdef"><b>定义</b> <a href="#l00355">timer.hpp:355</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a53ee820d4168dd06780380cc1c3ffca5"><div class="ttname"><a href="classbasic__timer.html#a53ee820d4168dd06780380cc1c3ffca5">basic_timer::is_active</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_active() const</div><div class="ttdoc">检查定时器是否活跃（有待执行的任务）</div><div class="ttdef"><b>定义</b> <a href="#l00387">timer.hpp:387</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a5f986124bf6b4ef059408a2cffe7400e"><div class="ttname"><a href="classbasic__timer.html#a5f986124bf6b4ef059408a2cffe7400e">basic_timer::cancel</a></div><div class="ttdeci">void cancel()</div><div class="ttdoc">取消定时任务</div><div class="ttdef"><b>定义</b> <a href="#l00408">timer.hpp:408</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a625e5206943c7ae7fa2c993a04643b83"><div class="ttname"><a href="classbasic__timer.html#a625e5206943c7ae7fa2c993a04643b83">basic_timer::token</a></div><div class="ttdeci">typename timer_scheduler&lt; Clock &gt;::token token</div><div class="ttdoc">任务标识符类型</div><div class="ttdef"><b>定义</b> <a href="#l00298">timer.hpp:298</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a67fedc91a0e1ca45b0df36c719a828cb"><div class="ttname"><a href="classbasic__timer.html#a67fedc91a0e1ca45b0df36c719a828cb">basic_timer::handler_type</a></div><div class="ttdeci">typename timer_scheduler&lt; Clock &gt;::handler_type handler_type</div><div class="ttdoc">回调函数类型</div><div class="ttdef"><b>定义</b> <a href="#l00299">timer.hpp:299</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a70d336504e87fc9c1e99e8febb56077a"><div class="ttname"><a href="classbasic__timer.html#a70d336504e87fc9c1e99e8febb56077a">basic_timer::duration</a></div><div class="ttdeci">typename clock_type::duration duration</div><div class="ttdoc">时长类型</div><div class="ttdef"><b>定义</b> <a href="#l00297">timer.hpp:297</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a795e2f0ee98918bdef6fd545a3ce7df9"><div class="ttname"><a href="classbasic__timer.html#a795e2f0ee98918bdef6fd545a3ce7df9">basic_timer::operator=</a></div><div class="ttdeci">basic_timer &amp; operator=(basic_timer &amp;&amp;other) noexcept</div><div class="ttdoc">移动赋值运算符</div><div class="ttdef"><b>定义</b> <a href="#l00335">timer.hpp:335</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_a7e207030e1c38d14b3db768051754597"><div class="ttname"><a href="classbasic__timer.html#a7e207030e1c38d14b3db768051754597">basic_timer::clock_type</a></div><div class="ttdeci">Clock clock_type</div><div class="ttdoc">时钟类型</div><div class="ttdef"><b>定义</b> <a href="#l00295">timer.hpp:295</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_aa5c4909463c3076787622d6cfe5ab499"><div class="ttname"><a href="classbasic__timer.html#aa5c4909463c3076787622d6cfe5ab499">basic_timer::basic_timer</a></div><div class="ttdeci">basic_timer(basic_timer &amp;&amp;other) noexcept</div><div class="ttdoc">移动构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00325">timer.hpp:325</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_ad3f2d5cca2d57a577cc10cc3b627b030"><div class="ttname"><a href="classbasic__timer.html#ad3f2d5cca2d57a577cc10cc3b627b030">basic_timer::~basic_timer</a></div><div class="ttdeci">~basic_timer()</div><div class="ttdoc">析构函数，自动取消未完成的任务</div><div class="ttdef"><b>定义</b> <a href="#l00313">timer.hpp:313</a></div></div>
+<div class="ttc" id="aclassbasic__timer_html_ada96b92993c08942916f8e7fe9dc952e"><div class="ttname"><a href="classbasic__timer.html#ada96b92993c08942916f8e7fe9dc952e">basic_timer::time_point</a></div><div class="ttdeci">typename clock_type::time_point time_point</div><div class="ttdoc">时间点类型</div><div class="ttdef"><b>定义</b> <a href="#l00296">timer.hpp:296</a></div></div>
 <div class="ttc" id="aclasscondition__variable_html"><div class="ttname"><a href="classcondition__variable.html">condition_variable</a></div><div class="ttdoc">条件变量类</div><div class="ttdef"><b>定义</b> <a href="condition__variable_8hpp_source.html#l00129">condition_variable.hpp:129</a></div></div>
-<div class="ttc" id="aclasscondition__variable_html_af4218a7f80abf59826ff6097ae4d406c"><div class="ttname"><a href="classcondition__variable.html#af4218a7f80abf59826ff6097ae4d406c">condition_variable::wait</a></div><div class="ttdeci">void wait(unique_lock&lt; mutex &gt; &amp;lock)</div><div class="ttdoc">无限期等待</div><div class="ttdef"><b>定义</b> <a href="condition__variable_8hpp_source.html#l00206">condition_variable.hpp:206</a></div></div>
 <div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00029">functional/function.hpp:29</a></div></div>
 <div class="ttc" id="aclasslock_html"><div class="ttname"><a href="classlock.html">lock</a></div><div class="ttdoc">锁管理器模板</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00189">mutex.hpp:189</a></div></div>
 <div class="ttc" id="aclassmap_html"><div class="ttname"><a href="classmap.html">map</a></div><div class="ttdoc">映射容器</div><div class="ttdef"><b>定义</b> <a href="map_8hpp_source.html#l00037">map.hpp:37</a></div></div>
 <div class="ttc" id="aclassmutex_html"><div class="ttname"><a href="classmutex.html">mutex</a></div><div class="ttdoc">非递归互斥锁</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00043">mutex.hpp:43</a></div></div>
+<div class="ttc" id="aclasspromise_html"><div class="ttname"><a href="classpromise.html">promise</a></div><div class="ttdoc">Promise类模板</div><div class="ttdef"><b>定义</b> <a href="promise_8hpp_source.html#l00037">promise.hpp:37</a></div></div>
+<div class="ttc" id="aclasspromise_html_a3002df1df9d416019fe00dd89fc0e5ff"><div class="ttname"><a href="classpromise.html#a3002df1df9d416019fe00dd89fc0e5ff">promise::set_value</a></div><div class="ttdeci">void set_value(Res &amp;&amp;value)</div><div class="ttdoc">设置结果值</div><div class="ttdef"><b>定义</b> <a href="promise_8hpp_source.html#l00127">promise.hpp:127</a></div></div>
 <div class="ttc" id="aclassset_html"><div class="ttname"><a href="classset.html">set</a></div><div class="ttdoc">集合容器</div><div class="ttdef"><b>定义</b> <a href="container_2set_8hpp_source.html#l00035">container/set.hpp:35</a></div></div>
-<div class="ttc" id="aclassset_html_a511204e58374d7ed36205f1fd37421f4"><div class="ttname"><a href="classset.html#a511204e58374d7ed36205f1fd37421f4">set::empty</a></div><div class="ttdeci">NEFORCE_NODISCARD bool empty() const noexcept</div><div class="ttdoc">检查是否为空</div><div class="ttdef"><b>定义</b> <a href="container_2set_8hpp_source.html#l00260">container/set.hpp:260</a></div></div>
-<div class="ttc" id="aclassthread__pool_html"><div class="ttname"><a href="classthread__pool.html">thread_pool</a></div><div class="ttdoc">线程池类</div><div class="ttdef"><b>定义</b> <a href="thread__pool_8hpp_source.html#l00308">thread_pool.hpp:308</a></div></div>
+<div class="ttc" id="aclassshared__ptr_html"><div class="ttname"><a href="classshared__ptr.html">shared_ptr</a></div><div class="ttdoc">共享智能指针类模板</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00270">shared_ptr.hpp:270</a></div></div>
 <div class="ttc" id="aclassthread_html"><div class="ttname"><a href="classthread.html">thread</a></div><div class="ttdoc">线程类</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00065">thread.hpp:65</a></div></div>
 <div class="ttc" id="aclasstimer__scheduler_html"><div class="ttname"><a href="classtimer__scheduler.html">timer_scheduler</a></div><div class="ttdoc">定时任务调度器</div><div class="ttdef"><b>定义</b> <a href="#l00041">timer.hpp:41</a></div></div>
 <div class="ttc" id="aclasstimer__scheduler_html_a0ff7c3e92b9b906112140b804623e3ea"><div class="ttname"><a href="classtimer__scheduler.html#a0ff7c3e92b9b906112140b804623e3ea">timer_scheduler::token</a></div><div class="ttdeci">size_t token</div><div class="ttdoc">任务标识符类型</div><div class="ttdef"><b>定义</b> <a href="#l00046">timer.hpp:46</a></div></div>
 <div class="ttc" id="aclasstimer__scheduler_html_a25c8b70565c98ece1cf245a6665b20b9"><div class="ttname"><a href="classtimer__scheduler.html#a25c8b70565c98ece1cf245a6665b20b9">timer_scheduler::time_point</a></div><div class="ttdeci">typename clock_type::time_point time_point</div><div class="ttdoc">时间点类型</div><div class="ttdef"><b>定义</b> <a href="#l00044">timer.hpp:44</a></div></div>
-<div class="ttc" id="aclasstimer__scheduler_html_a3ec94093f0b1ba79c9a2988c37565bab"><div class="ttname"><a href="classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab">timer_scheduler::timer_scheduler</a></div><div class="ttdeci">timer_scheduler()</div><div class="ttdoc">构造函数，启动调度线程</div><div class="ttdef"><b>定义</b> <a href="#l00142">timer.hpp:142</a></div></div>
-<div class="ttc" id="aclasstimer__scheduler_html_a524ba8b6788fe4e0d4d28f554f50f5d8"><div class="ttname"><a href="classtimer__scheduler.html#a524ba8b6788fe4e0d4d28f554f50f5d8">timer_scheduler::~timer_scheduler</a></div><div class="ttdeci">~timer_scheduler()</div><div class="ttdoc">析构函数，停止调度线程并等待其结束</div><div class="ttdef"><b>定义</b> <a href="#l00151">timer.hpp:151</a></div></div>
+<div class="ttc" id="aclasstimer__scheduler_html_a3ec94093f0b1ba79c9a2988c37565bab"><div class="ttname"><a href="classtimer__scheduler.html#a3ec94093f0b1ba79c9a2988c37565bab">timer_scheduler::timer_scheduler</a></div><div class="ttdeci">timer_scheduler()</div><div class="ttdoc">构造函数，启动调度线程</div><div class="ttdef"><b>定义</b> <a href="#l00148">timer.hpp:148</a></div></div>
+<div class="ttc" id="aclasstimer__scheduler_html_a524ba8b6788fe4e0d4d28f554f50f5d8"><div class="ttname"><a href="classtimer__scheduler.html#a524ba8b6788fe4e0d4d28f554f50f5d8">timer_scheduler::~timer_scheduler</a></div><div class="ttdeci">~timer_scheduler()</div><div class="ttdoc">析构函数，停止调度线程并等待其结束</div><div class="ttdef"><b>定义</b> <a href="#l00153">timer.hpp:153</a></div></div>
 <div class="ttc" id="aclasstimer__scheduler_html_a63b53abd0cbc9f95d0c55027a1581617"><div class="ttname"><a href="classtimer__scheduler.html#a63b53abd0cbc9f95d0c55027a1581617">timer_scheduler::clock_type</a></div><div class="ttdeci">Clock clock_type</div><div class="ttdoc">时钟类型</div><div class="ttdef"><b>定义</b> <a href="#l00043">timer.hpp:43</a></div></div>
 <div class="ttc" id="aclasstimer__scheduler_html_a6ef27e3b872fd24bfeda7f7ec9c70868"><div class="ttname"><a href="classtimer__scheduler.html#a6ef27e3b872fd24bfeda7f7ec9c70868">timer_scheduler::duration</a></div><div class="ttdeci">typename clock_type::duration duration</div><div class="ttdoc">时长类型</div><div class="ttdef"><b>定义</b> <a href="#l00045">timer.hpp:45</a></div></div>
-<div class="ttc" id="aclasstimer__scheduler_html_a83bf57ec21b16c6ebc7e0f08bfce0573"><div class="ttname"><a href="classtimer__scheduler.html#a83bf57ec21b16c6ebc7e0f08bfce0573">timer_scheduler::size</a></div><div class="ttdeci">NEFORCE_NODISCARD size_t size() const</div><div class="ttdoc">获取当前待处理的任务数量</div><div class="ttdef"><b>定义</b> <a href="#l00233">timer.hpp:233</a></div></div>
-<div class="ttc" id="aclasstimer__scheduler_html_aa25522eaa375942415f6ab940174a49b"><div class="ttname"><a href="classtimer__scheduler.html#aa25522eaa375942415f6ab940174a49b">timer_scheduler::cancel</a></div><div class="ttdeci">bool cancel(token id)</div><div class="ttdoc">取消定时任务</div><div class="ttdef"><b>定义</b> <a href="#l00198">timer.hpp:198</a></div></div>
-<div class="ttc" id="aclasstimer__scheduler_html_ac050f83f8dbeee5c8f590c5be3e7a6d2"><div class="ttname"><a href="classtimer__scheduler.html#ac050f83f8dbeee5c8f590c5be3e7a6d2">timer_scheduler::cancel_all</a></div><div class="ttdeci">void cancel_all()</div><div class="ttdoc">取消所有定时任务</div><div class="ttdef"><b>定义</b> <a href="#l00221">timer.hpp:221</a></div></div>
-<div class="ttc" id="aclasstimer__scheduler_html_ad7e2861340ab12370ceaec61a82c9129"><div class="ttname"><a href="classtimer__scheduler.html#ad7e2861340ab12370ceaec61a82c9129">timer_scheduler::add_task</a></div><div class="ttdeci">token add_task(time_point expire, handler_type &amp;&amp;handler)</div><div class="ttdoc">添加定时任务</div><div class="ttdef"><b>定义</b> <a href="#l00172">timer.hpp:172</a></div></div>
+<div class="ttc" id="aclasstimer__scheduler_html_a70a910ad934bad4c0c9335f2215924f6"><div class="ttname"><a href="classtimer__scheduler.html#a70a910ad934bad4c0c9335f2215924f6">timer_scheduler::is_pending</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_pending(token id) const</div><div class="ttdoc">检查任务是否仍在等待或执行中</div><div class="ttdef"><b>定义</b> <a href="#l00278">timer.hpp:278</a></div></div>
+<div class="ttc" id="aclasstimer__scheduler_html_a83bf57ec21b16c6ebc7e0f08bfce0573"><div class="ttname"><a href="classtimer__scheduler.html#a83bf57ec21b16c6ebc7e0f08bfce0573">timer_scheduler::size</a></div><div class="ttdeci">NEFORCE_NODISCARD size_t size() const</div><div class="ttdoc">获取当前待处理的任务数量</div><div class="ttdef"><b>定义</b> <a href="#l00268">timer.hpp:268</a></div></div>
+<div class="ttc" id="aclasstimer__scheduler_html_aa25522eaa375942415f6ab940174a49b"><div class="ttname"><a href="classtimer__scheduler.html#aa25522eaa375942415f6ab940174a49b">timer_scheduler::cancel</a></div><div class="ttdeci">bool cancel(token id)</div><div class="ttdoc">取消定时任务</div><div class="ttdef"><b>定义</b> <a href="#l00209">timer.hpp:209</a></div></div>
+<div class="ttc" id="aclasstimer__scheduler_html_ac050f83f8dbeee5c8f590c5be3e7a6d2"><div class="ttname"><a href="classtimer__scheduler.html#ac050f83f8dbeee5c8f590c5be3e7a6d2">timer_scheduler::cancel_all</a></div><div class="ttdeci">void cancel_all()</div><div class="ttdoc">取消所有定时任务</div><div class="ttdef"><b>定义</b> <a href="#l00252">timer.hpp:252</a></div></div>
+<div class="ttc" id="aclasstimer__scheduler_html_ad7e2861340ab12370ceaec61a82c9129"><div class="ttname"><a href="classtimer__scheduler.html#ad7e2861340ab12370ceaec61a82c9129">timer_scheduler::add_task</a></div><div class="ttdeci">token add_task(time_point expire, handler_type &amp;&amp;handler)</div><div class="ttdoc">添加定时任务</div><div class="ttdef"><b>定义</b> <a href="#l00174">timer.hpp:174</a></div></div>
 <div class="ttc" id="aclasstimer__scheduler_html_ada7122813465be5f928c9c7209325731"><div class="ttname"><a href="classtimer__scheduler.html#ada7122813465be5f928c9c7209325731">timer_scheduler::handler_type</a></div><div class="ttdeci">function&lt; void()&gt; handler_type</div><div class="ttdoc">回调函数类型</div><div class="ttdef"><b>定义</b> <a href="#l00047">timer.hpp:47</a></div></div>
 <div class="ttc" id="aclassunique__lock_html"><div class="ttname"><a href="classunique__lock.html">unique_lock</a></div><div class="ttdoc">独占锁管理器模板</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00256">mutex.hpp:256</a></div></div>
 <div class="ttc" id="acondition__variable_8hpp_html"><div class="ttname"><a href="condition__variable_8hpp.html">condition_variable.hpp</a></div><div class="ttdoc">条件变量行为</div></div>
@@ -413,16 +462,17 @@ $(function(){initNavTree('timer_8hpp_source.html','',''); });
 <div class="ttc" id="afunctional_2function_8hpp_html"><div class="ttname"><a href="functional_2function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
 <div class="ttc" id="agroup___args_forward_functions_html_ga19657f9185af45f84174ff975bae1fa7"><div class="ttname"><a href="group___args_forward_functions.html#ga19657f9185af45f84174ff975bae1fa7">addressof</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T * addressof(T &amp;x) noexcept</div><div class="ttdoc">获取对象的地址</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03063">type_traits.hpp:3063</a></div></div>
 <div class="ttc" id="agroup___args_forward_functions_html_ga48f94c9d04990c7a695f4fc338eba1f8"><div class="ttname"><a href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T &amp;&amp; forward(remove_reference_t&lt; T &gt; &amp;x) noexcept</div><div class="ttdoc">完美转发左值</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03007">type_traits.hpp:3007</a></div></div>
-<div class="ttc" id="agroup___async_timer_html_ga1a05e758b1b38f82d3cfec4cc3cb55b7"><div class="ttname"><a href="group___async_timer.html#ga1a05e758b1b38f82d3cfec4cc3cb55b7">system_timer</a></div><div class="ttdeci">basic_timer&lt; system_clock &gt; system_timer</div><div class="ttdoc">基于系统时钟的定时器</div><div class="ttdef"><b>定义</b> <a href="#l00373">timer.hpp:373</a></div></div>
-<div class="ttc" id="agroup___async_timer_html_gaf9d29e0fc3082a1789eafb7a8736a00b"><div class="ttname"><a href="group___async_timer.html#gaf9d29e0fc3082a1789eafb7a8736a00b">steady_timer</a></div><div class="ttdeci">basic_timer&lt; steady_clock &gt; steady_timer</div><div class="ttdoc">基于稳定时钟的定时器</div><div class="ttdef"><b>定义</b> <a href="#l00368">timer.hpp:368</a></div></div>
+<div class="ttc" id="agroup___async_timer_html_ga1a05e758b1b38f82d3cfec4cc3cb55b7"><div class="ttname"><a href="group___async_timer.html#ga1a05e758b1b38f82d3cfec4cc3cb55b7">system_timer</a></div><div class="ttdeci">basic_timer&lt; system_clock &gt; system_timer</div><div class="ttdoc">基于系统时钟的定时器</div><div class="ttdef"><b>定义</b> <a href="#l00424">timer.hpp:424</a></div></div>
+<div class="ttc" id="agroup___async_timer_html_gaf9d29e0fc3082a1789eafb7a8736a00b"><div class="ttname"><a href="group___async_timer.html#gaf9d29e0fc3082a1789eafb7a8736a00b">steady_timer</a></div><div class="ttdeci">basic_timer&lt; steady_clock &gt; steady_timer</div><div class="ttdoc">基于稳定时钟的定时器</div><div class="ttdef"><b>定义</b> <a href="#l00419">timer.hpp:419</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00087">types.hpp:87</a></div></div>
 <div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_ga80883e2cd37a8e670dc016e91059d936"><div class="ttname"><a href="group___memory_order.html#ga80883e2cd37a8e670dc016e91059d936">memory_order_release</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_release</div><div class="ttdoc">释放内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="memory__order_8hpp_source.html#l00179">memory_order.hpp:179</a></div></div>
+<div class="ttc" id="agroup___memory_order_html_gac472f4b38d5bc0ba23a6113984118c24"><div class="ttname"><a href="group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24">memory_order_acquire</a></div><div class="ttdeci">NEFORCE_INLINE17 constexpr auto memory_order_acquire</div><div class="ttdoc">获取内存顺序常量</div><div class="ttdef"><b>定义</b> <a href="memory__order_8hpp_source.html#l00177">memory_order.hpp:177</a></div></div>
 <div class="ttc" id="agroup___platform_dependent_types_html_ga2d35ca4f92b748b22e8674ea36a6c875"><div class="ttname"><a href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></div><div class="ttdeci">uint64_t size_t</div><div class="ttdoc">无符号大小类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00162">types.hpp:162</a></div></div>
+<div class="ttc" id="agroup___shared_pointer_html_gab47fa86d2917e14f57f68dfa9e83495e"><div class="ttname"><a href="group___shared_pointer.html#gab47fa86d2917e14f57f68dfa9e83495e">make_shared</a></div><div class="ttdeci">enable_if_t&lt;!is_unbounded_array_v&lt; T &gt; &amp;&amp;is_constructible_v&lt; T, Args... &gt;, shared_ptr&lt; T &gt; &gt; make_shared(Args &amp;&amp;... args)</div><div class="ttdoc">融合分配创建共享指针</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00835">shared_ptr.hpp:835</a></div></div>
 <div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
 <div class="ttc" id="agroup___thread_html_ga505a22091b6fb9a4a8e147bf2258e47a"><div class="ttname"><a href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a></div><div class="ttdeci">NEFORCE_ALWAYS_INLINE_INLINE thread::id id() noexcept</div><div class="ttdoc">获取当前线程标识符</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00449">thread.hpp:449</a></div></div>
 <div class="ttc" id="amap_8hpp_html"><div class="ttname"><a href="map_8hpp.html">map.hpp</a></div><div class="ttdoc">映射容器</div></div>
-<div class="ttc" id="astructatomic_html"><div class="ttname"><a href="structatomic.html">atomic</a></div><div class="ttdoc">通用原子类型模板</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00037">atomic.hpp:37</a></div></div>
-<div class="ttc" id="astructatomic_html_a08238b88fc524dbab833b1f2efbca3ec"><div class="ttname"><a href="structatomic.html#a08238b88fc524dbab833b1f2efbca3ec">atomic::load</a></div><div class="ttdeci">T load(const memory_order mo=memory_order_seq_cst) const noexcept</div><div class="ttdoc">原子加载操作</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00130">atomic.hpp:130</a></div></div>
 <div class="ttc" id="astructsteady__clock_html_a1f01ac9bf1927c8b15b205f69a90c29d"><div class="ttname"><a href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</a></div><div class="ttdeci">static time_point now() noexcept</div><div class="ttdoc">获取当前时间点</div></div>
 <div class="ttc" id="astructtime__point_html"><div class="ttname"><a href="structtime__point.html">time_point</a></div><div class="ttdoc">时间点类模板</div><div class="ttdef"><b>定义</b> <a href="time__point_8hpp_source.html#l00084">time_point.hpp:84</a></div></div>
 <div class="ttc" id="athread_8hpp_html"><div class="ttname"><a href="thread_8hpp.html">thread.hpp</a></div><div class="ttdoc">线程管理类</div></div>

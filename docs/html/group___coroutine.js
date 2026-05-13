@@ -98,7 +98,8 @@ var group___coroutine =
         [ "initial_suspend", "structvirtual__thread__task_1_1promise__type.html#a80bb560c74f8fa5a58f6997866816133", null ],
         [ "return_void", "structvirtual__thread__task_1_1promise__type.html#afb4c03a917686ddef60158995dee2be4", null ],
         [ "unhandled_exception", "structvirtual__thread__task_1_1promise__type.html#aa0fe2e55596d0c95a0886310f400fb28", null ],
-        [ "exception_", "structvirtual__thread__task_1_1promise__type.html#ac3ddcbd783e23872722f2aa196028cf8", null ]
+        [ "exception_", "structvirtual__thread__task_1_1promise__type.html#ac3ddcbd783e23872722f2aa196028cf8", null ],
+        [ "scheduled_", "structvirtual__thread__task_1_1promise__type.html#a098161502ceabf51bb0f266d123cbade", null ]
       ] ],
       [ "virtual_thread_task", "structvirtual__thread__task.html#ad999c5bc10cf195db92c5ad7d97f0fdc", null ],
       [ "~virtual_thread_task", "structvirtual__thread__task.html#affa79416f219f96824fb4a9491ac0125", null ],
@@ -120,13 +121,10 @@ var group___coroutine =
       [ "await_suspend", "structvirtual__thread__awaiter.html#ab2b9357585a921806dde17a797a84a03", null ],
       [ "handle_", "structvirtual__thread__awaiter.html#a0d9a71b420f6d08c8bcc5c471b5245f9", null ]
     ] ],
-    [ "virtual_thread", "classvirtual__thread.html", [
-      [ "virtual_thread", "classvirtual__thread.html#ac86354b86d2672940194457282f0ea4b", null ],
-      [ "virtual_thread", "classvirtual__thread.html#a60d118cbde9dd622815e51be0d97bfa8", null ],
-      [ "virtual_thread", "classvirtual__thread.html#acd03e82cfcd86580a796c3dc44da54b8", null ],
-      [ "operator=", "classvirtual__thread.html#a8c308b21f6a630e232bc55d96161acc5", null ],
-      [ "operator=", "classvirtual__thread.html#a09b3fb92daeb54eea55cffac4658abb6", null ]
+    [ "sleep_awaiter", "structsleep__awaiter.html", [
+      [ "ms_", "structsleep__awaiter.html#a4c24def4e871d5af8d0f6c1dd1cc0a97", null ]
     ] ],
+    [ "virtual_thread", "classvirtual__thread.html", null ],
     [ "coroutine_handle", "group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181", null ],
     [ "noop_coroutine_handle", "group___coroutine.html#ga8688aa61087dce3a6914a4d6c7f7b55a", null ],
     [ "noop_coroutine_promise", "group___coroutine.html#ga703e941b1a9f15e23513daa24ed4d587", null ],

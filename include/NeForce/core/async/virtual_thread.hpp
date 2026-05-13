@@ -37,7 +37,7 @@ struct virtual_thread_task {
      * 定义协程的行为和状态管理。
      */
     struct promise_type {
-        exception_ptr exception_; ///< 异常存储
+        exception_ptr exception_;       ///< 异常存储
         atomic<bool> scheduled_{false}; ///< 调度状态标记
 
         /**

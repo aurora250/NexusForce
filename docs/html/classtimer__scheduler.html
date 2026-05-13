@@ -133,6 +133,8 @@ void&#160;</td><td class="memItemRight"><b>cancel_all</b> ()</td></tr>
 <tr class="memdesc:ac050f83f8dbeee5c8f590c5be3e7a6d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">取消所有定时任务 <br /></td></tr>
 <tr class="memitem:a83bf57ec21b16c6ebc7e0f08bfce0573" id="r_a83bf57ec21b16c6ebc7e0f08bfce0573"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a83bf57ec21b16c6ebc7e0f08bfce0573">size</a> () const</td></tr>
 <tr class="memdesc:a83bf57ec21b16c6ebc7e0f08bfce0573"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前待处理的任务数量  <br /></td></tr>
+<tr class="memitem:a70a910ad934bad4c0c9335f2215924f6" id="r_a70a910ad934bad4c0c9335f2215924f6"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a70a910ad934bad4c0c9335f2215924f6">is_pending</a> (<a class="el" href="#a0ff7c3e92b9b906112140b804623e3ea">token</a> <a class="el" href="group___thread.html#ga505a22091b6fb9a4a8e147bf2258e47a">id</a>) const</td></tr>
+<tr class="memdesc:a70a910ad934bad4c0c9335f2215924f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查任务是否仍在等待或执行中  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Clock&gt;<br />
@@ -187,9 +189,9 @@ template&lt;typename Clock&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>任务标识符，可用于取消任务</dd></dl>
 <p>如果新任务的到期时间早于当前最早的任务，会唤醒调度线程。 </p>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00172">172</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00174">174</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00449">id()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00449">id()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l00835">make_shared()</a>, <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00127">promise&lt; Res &gt;::set_value()</a>.</p>
 
 </div>
 </div>
@@ -228,7 +230,47 @@ template&lt;typename Clock&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否成功取消</dd></dl>
 <p>如果取消的是当前最早的任务，会唤醒调度线程重新计算等待时间。 </p>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00198">198</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00209">209</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a>.</p>
+
+</div>
+</div>
+<a id="a70a910ad934bad4c0c9335f2215924f6" name="a70a910ad934bad4c0c9335f2215924f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70a910ad934bad4c0c9335f2215924f6">&#9670;&#160;</a></span>is_pending()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Clock&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classtimer__scheduler.html">timer_scheduler</a>&lt; Clock &gt;::is_pending </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a0ff7c3e92b9b906112140b804623e3ea">token</a></td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查任务是否仍在等待或执行中 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>任务标识符 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>任务是否未完成 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00278">278</a> 行定义.</p>
 
 </div>
 </div>
@@ -260,7 +302,7 @@ template&lt;typename Clock&gt; </div>
 <p>获取当前待处理的任务数量 </p>
 <dl class="section return"><dt>返回</dt><dd>任务数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00233">233</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00268">268</a> 行定义.</p>
 
 </div>
 </div>

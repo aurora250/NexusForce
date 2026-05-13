@@ -1,7 +1,5 @@
 var NAVTREEINDEX28 =
 {
-"log__formatter_8hpp_source.html":[6,0,0,0,3,2],
-"log__sink_8hpp.html":[6,0,0,0,3,3],
 "log__sink_8hpp_source.html":[6,0,0,0,3,3],
 "logger_8hpp.html":[6,0,0,0,3,4],
 "logger_8hpp_source.html":[6,0,0,0,3,4],
@@ -249,5 +247,7 @@ var NAVTREEINDEX28 =
 "structaligned__buffer.html#a2355149523199ddc541b3458cd8235ee":[2,46,0,4],
 "structaligned__buffer.html#a494d346aa1b135e5fe3a46e535ad8877":[2,46,0,3],
 "structaligned__buffer.html#ad96888c87722dfcb664ff73b040704de":[2,46,0,1],
-"structaligned__buffer.html#ae61b06e86bd1c848afdff91a5fce7ec2":[2,46,0,0]
+"structaligned__buffer.html#ae61b06e86bd1c848afdff91a5fce7ec2":[2,46,0,0],
+"structaligned__buffer.html#afd9256f6fcebef2484ba3e269526b26b":[2,46,0,5],
+"structaligned__storage.html":[2,103,12,1]
 };

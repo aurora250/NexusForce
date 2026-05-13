@@ -120,8 +120,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:afc4cd5b5e4aa13bfd9e969793c132f9a" id="r_afc4cd5b5e4aa13bfd9e969793c132f9a"><td class="memTemplParams" colspan="2">template&lt;typename Dur&gt; </td></tr>
 <tr class="memitem:afc4cd5b5e4aa13bfd9e969793c132f9a template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#afc4cd5b5e4aa13bfd9e969793c132f9a">load_when_equal_until</a> (const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo, const <a class="el" href="structtime__point.html">time_point</a>&lt; <a class="el" href="structsteady__clock.html">steady_clock</a>, Dur &gt; &amp;atime)</td></tr>
 <tr class="memdesc:afc4cd5b5e4aa13bfd9e969793c132f9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">在指定时间点前等待值等于指定值（单调时钟）  <br /></td></tr>
-<tr class="memitem:a16976104dbc96caf0c1856045d3e5715" id="r_a16976104dbc96caf0c1856045d3e5715"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a16976104dbc96caf0c1856045d3e5715">store_notify_all</a> (const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo)</td></tr>
-<tr class="memdesc:a16976104dbc96caf0c1856045d3e5715"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储新值并通知所有等待线程  <br /></td></tr>
+<tr class="memitem:a5b0321d662a8193b86eda2ababc45e10" id="r_a5b0321d662a8193b86eda2ababc45e10"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a5b0321d662a8193b86eda2ababc45e10">store_notify_all</a> (const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:a5b0321d662a8193b86eda2ababc45e10"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储新值并通知所有等待线程  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> WaiterBit = 0x80000000&gt;<br />
@@ -318,7 +318,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00197">197</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00620">ceil()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00215">load_when_equal_until()</a> , 以及 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00632">ceil()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00215">load_when_equal_until()</a> , 以及 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
 
 </div>
 </div>
@@ -379,7 +379,7 @@ template&lt;typename Clock, typename Dur&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="atomic__futex_8hpp_source.html">atomic_futex.hpp</a> 第 <a class="el" href="atomic__futex_8hpp_source.html#l00215">215</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00620">ceil()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00215">load_when_equal_until()</a> , 以及 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
+<p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00632">ceil()</a>, <a class="el" href="atomic__futex_8hpp_source.html#l00215">load_when_equal_until()</a> , 以及 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="atomic__futex_8hpp_source.html#l00197">load_when_equal_for()</a> , 以及 <a class="el" href="atomic__futex_8hpp_source.html#l00215">load_when_equal_until()</a>.</p>
 
@@ -549,8 +549,8 @@ template&lt;<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3
 
 </div>
 </div>
-<a id="a16976104dbc96caf0c1856045d3e5715" name="a16976104dbc96caf0c1856045d3e5715"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16976104dbc96caf0c1856045d3e5715">&#9670;&#160;</a></span>store_notify_all()</h2>
+<a id="a5b0321d662a8193b86eda2ababc45e10" name="a5b0321d662a8193b86eda2ababc45e10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b0321d662a8193b86eda2ababc45e10">&#9670;&#160;</a></span>store_notify_all()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -573,7 +573,7 @@ template&lt;<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

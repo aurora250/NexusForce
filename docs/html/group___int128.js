@@ -8,7 +8,7 @@ var group___int128 =
       [ "uint128_t", "structuint128__t.html#afbb6fd0e9189dfd2eb5332ebc619ec06", null ],
       [ "uint128_t", "structuint128__t.html#adfd93c5095c1a7cf749c50e9bc6f2339", null ],
       [ "uint128_t", "structuint128__t.html#adac20986bb26baa46fe3a8fe1edd869b", null ],
-      [ "div64", "structuint128__t.html#aed23e948c74e06bda0c6454e82dfeec5", null ],
+      [ "div64", "structuint128__t.html#aa2dcb9a61a14880b87a0944b4b6e39f1", null ],
       [ "equal_to", "structuint128__t.html#a079d85fe8866c54c128b9d6609468225", null ],
       [ "less_than", "structuint128__t.html#a9b4a0b69ab9c1ac19bf1cf408666ef14", null ],
       [ "operator%=", "structuint128__t.html#ab20590cfbcd1b4d3e0a4dd511011884e", null ],

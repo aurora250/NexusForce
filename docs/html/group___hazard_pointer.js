@@ -11,16 +11,20 @@ var group___hazard_pointer =
     ] ],
     [ "hazard_pointer_obj_base", "classhazard__pointer__obj__base.html", [
       [ "destroy", "classhazard__pointer__obj__base.html#a9e179233d5b592750c0e44262f75dfe8", null ],
+      [ "get_ptr", "classhazard__pointer__obj__base.html#af8293f6644d4fea8e8bc6a68f0372674", null ],
       [ "next", "classhazard__pointer__obj__base.html#ade76a3fc1006cff9269564b074937bf7", null ]
     ] ],
     [ "hazard_pointer_obj&lt; T, Deleter &gt;", "classhazard__pointer__obj.html", [
       [ "hazard_pointer_obj", "classhazard__pointer__obj.html#a8737ba02a9fa052b09177db2d6afb229", null ],
-      [ "destroy", "classhazard__pointer__obj.html#abc7269dcc8a1838682952567cf555d87", null ]
+      [ "destroy", "classhazard__pointer__obj.html#abc7269dcc8a1838682952567cf555d87", null ],
+      [ "get_ptr", "classhazard__pointer__obj.html#afc4fd3b402b67d71f57400a37d7f6425", null ]
     ] ],
     [ "retire_list", "structretire__list.html", [
+      [ "retire_list", "structretire__list.html#a1dc9f0280fe5f023d9499bae37c2ffbd", null ],
       [ "~retire_list", "structretire__list.html#ab8166a60fc5f971df18cf6e68ffe060e", null ],
       [ "add", "structretire__list.html#a33fc37aaad8e02fc7ab0c3d9a32a8113", null ],
       [ "clear", "structretire__list.html#a661fc02d5203c1a70776d49173813cc9", null ],
+      [ "operator=", "structretire__list.html#aae137351efcc2f0e62bc00b22a28be0e", null ],
       [ "count", "structretire__list.html#a15ffcee565539d025ab2894a6bad5c7d", null ],
       [ "head", "structretire__list.html#a883604f763908f6360de2d705f8a1589", null ]
     ] ],
