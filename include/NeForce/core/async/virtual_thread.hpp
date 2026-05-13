@@ -38,6 +38,7 @@ struct virtual_thread_task {
      */
     struct promise_type {
         exception_ptr exception_; ///< 异常存储
+        atomic<bool> scheduled_{false}; ///< 调度状态标记
 
         /**
          * @brief 获取返回对象
@@ -89,7 +90,7 @@ struct virtual_thread_task {
      * 如果协程未完成，销毁协程资源。
      */
     ~virtual_thread_task() {
-        if (handle_ && !handle_.done()) {
+        if (handle_ && !handle_.promise().scheduled_.load()) {
             handle_.destroy();
         }
     }
@@ -113,7 +114,7 @@ struct virtual_thread_task {
         if (addressof(other) == this) {
             return *this;
         }
-        if (handle_ && !handle_.done()) {
+        if (handle_ && !handle_.promise().scheduled_.load()) {
             handle_.destroy();
         }
         handle_ = _NEFORCE exchange(other.handle_, nullptr);
@@ -166,6 +167,9 @@ private:
 
             if (handle) {
                 handle.resume();
+                if (handle.done()) {
+                    handle.destroy();
+                }
             }
         }
     }
@@ -254,11 +258,39 @@ struct virtual_thread_awaiter {
      *
      * 将协程提交给调度器执行。
      */
-    void await_suspend(coroutine_handle<> handle) { virtual_thread_scheduler::get_instance().schedule(handle); }
+    void await_suspend(coroutine_handle<> handle) {
+        auto typed = coroutine_handle<virtual_thread_task::promise_type>::from_address(handle.address());
+        typed.promise().scheduled_.store(true);
+        virtual_thread_scheduler::get_instance().schedule(handle);
+    }
 
     /**
      * @brief 恢复协程
      */
+    void await_resume() const noexcept {}
+};
+
+
+/**
+ * @struct sleep_awaiter
+ * @brief 睡眠等待器
+ *
+ * 挂起当前协程指定时间后重新调度，不阻塞工作线程。
+ */
+struct sleep_awaiter {
+    int64_t ms_; ///< 等待毫秒数
+
+    bool await_ready() const noexcept { return ms_ <= 0; }
+
+    void await_suspend(coroutine_handle<> handle) {
+        auto typed = coroutine_handle<virtual_thread_task::promise_type>::from_address(handle.address());
+        typed.promise().scheduled_.store(true);
+        thread([handle, ms = ms_] {
+            this_thread::sleep_for(milliseconds(ms));
+            virtual_thread_scheduler::get_instance().schedule(handle);
+        }).detach();
+    }
+
     void await_resume() const noexcept {}
 };
 
@@ -326,10 +358,7 @@ public:
      *
      * 挂起当前协程指定时间，协程式睡眠。
      */
-    static virtual_thread_task sleep(const int64_t ms) {
-        co_await yield();
-        this_thread::sleep_for(milliseconds(ms));
-    }
+    static sleep_awaiter sleep(const int64_t ms) { return sleep_awaiter{ms}; }
 
     /**
      * @brief 初始化调度器

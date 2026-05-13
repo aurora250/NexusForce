@@ -613,7 +613,7 @@ struct __future_base {
              * @brief 就绪回调函数
              * @param ptr 指向make_ready对象的指针
              */
-            static void run(void* ptr) {
+            static void run(void* ptr) noexcept {
                 const auto self = static_cast<make_ready*>(ptr);
                 const auto state = self->shared_state.lock();
                 if (state) {

@@ -50,14 +50,12 @@ bool futex_wait_until(void* addr, platform_wait_t value, const bool has_timeout,
 
     if (has_timeout) {
         ::timespec ts{static_cast<ssize_t>(sec), static_cast<ssize_t>(ns)};
-
         const long ret = ::syscall(SYS_futex, addr, oper, value, &ts, nullptr, FUTEX_BITSET_MATCH_ANY);
-
         return ret != -1 || errno != ETIMEDOUT;
     }
 
-    ::syscall(SYS_futex, addr, oper, value, nullptr, nullptr, FUTEX_BITSET_MATCH_ANY);
-    return true;
+    const auto ret = ::syscall(SYS_futex, addr, oper, value, nullptr, nullptr, FUTEX_BITSET_MATCH_ANY);
+    return ret != -1 || errno != EAGAIN;
 #endif
 }
 

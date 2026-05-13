@@ -44,7 +44,11 @@ using platform_wait_t =
  * 定义FUTEX系统调用的操作标志。这些标志对应于Linux内核的FUTEX操作。
  */
 enum class futex_wait_flags : platform_wait_t {
-    private_flag = 0,                                 ///< 私有标志位
+#ifdef NEFORCE_PLATFORM_LINUX
+    private_flag = 0x80, ///< 私有标志位
+#else
+    private_flag = 0, ///< 私有标志位
+#endif
     wait = 0,                                         ///< 等待操作
     wake = 1,                                         ///< 唤醒操作
     requeue = 3,                                      ///< 将等待队列转移到另一个FUTEX

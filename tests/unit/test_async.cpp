@@ -322,8 +322,8 @@ TEST(Barrier, ArriveThenWait) {
     auto tok = b.arrive();
     atomic<bool> flag{false};
     thread t([&]() {
-        b.arrive_and_wait();
         flag.store(true);
+        b.arrive_and_wait();
     });
     b.wait(move(tok));
     EXPECT_TRUE(flag.load());
@@ -1339,7 +1339,249 @@ TEST(BasicTimer, IsActive) {
     EXPECT_FALSE(timer.is_active());
 }
 
-#if 0
+TEST(TaskGroup, IncrementDecrement) {
+    task_group group;
+    group.increment();
+    group.increment();
+    group.decrement();
+    group.decrement();
+    group.wait();
+    SUCCEED();
+}
+
+TEST(TaskGroup, WaitBlocks) {
+    task_group group;
+    group.increment();
+    atomic<bool> finished{false};
+    thread t([&] {
+        group.wait();
+        finished.store(true);
+    });
+    this_thread::sleep_for(10_ms);
+    EXPECT_FALSE(finished.load());
+    group.decrement();
+    t.join();
+    EXPECT_TRUE(finished.load());
+}
+
+TEST(LocalQueue, PushAndPop) {
+    local_queue q;
+    int val = 0;
+    q.push_back([&val] { val = 42; });
+    auto task = q.try_pop();
+    ASSERT_TRUE(task.has_value());
+    (*task)();
+    EXPECT_EQ(val, 42);
+}
+
+TEST(LocalQueue, Empty) {
+    local_queue q;
+    EXPECT_TRUE(q.empty());
+    EXPECT_EQ(q.size(), 0u);
+    q.push_back([] {});
+    EXPECT_FALSE(q.empty());
+    EXPECT_EQ(q.size(), 1u);
+    q.try_pop();
+    EXPECT_TRUE(q.empty());
+}
+
+TEST(LocalQueue, StealHalf) {
+    local_queue src, dst;
+    local_queue::set_steal_strategy(local_queue::steal_strategy::half);
+    int sum = 0;
+    src.push_back([&sum] { sum += 1; });
+    src.push_back([&sum] { sum += 2; });
+    auto stolen = src.be_stolen_by(dst);
+    ASSERT_TRUE(stolen.has_value());
+    (*stolen)();
+    EXPECT_GE(sum, 1);
+    auto remaining = src.try_pop();
+    if (remaining) {
+        (*remaining)();
+    }
+    EXPECT_EQ(sum, 3);
+}
+
+TEST(LocalQueue, RemainSize) {
+    local_queue q;
+    EXPECT_GT(q.remain_size(), 0u);
+    q.push_back([] {});
+    EXPECT_EQ(q.remain_size(), q.capacity() - 1);
+}
+
+TEST(WorkerContext, MoveConstructor) {
+    worker_context ctx;
+    ctx.id = 5;
+    worker_context moved(move(ctx));
+    EXPECT_EQ(moved.id, 5u);
+}
+
+TEST(ThreadPool, StartStop) {
+    thread_pool pool;
+    EXPECT_FALSE(pool.running());
+    pool.start(2);
+    EXPECT_TRUE(pool.running());
+    auto stats = pool.stop();
+    EXPECT_FALSE(pool.running());
+    EXPECT_GT(stats.total_threads, 0u);
+}
+
+TEST(ThreadPool, SubmitTaskReturnsValue) {
+    thread_pool pool;
+    pool.start(1);
+    auto res = pool.submit_task([] { return 42; });
+    EXPECT_EQ(res.future.get(), 42);
+    pool.stop();
+}
+
+TEST(ThreadPool, SubmitTaskVoid) {
+    thread_pool pool;
+    pool.start(1);
+    atomic<bool> flag{false};
+    auto res = pool.submit_task([&flag] { flag.store(true); });
+    res.future.get();
+    EXPECT_TRUE(flag.load());
+    pool.stop();
+}
+
+TEST(ThreadPool, SubmitTaskWithPriority) {
+    thread_pool pool;
+    pool.start(2);
+    atomic<int> order{0};
+    auto res1 = pool.submit_task(static_cast<thread_pool::priority_type>(1), [&order] {
+        this_thread::sleep_for(20_ms);
+        order.store(1);
+    });
+    auto res2 = pool.submit_task(static_cast<thread_pool::priority_type>(10), [&order] {
+        order.store(2);
+    });
+    res1.future.get();
+    res2.future.get();
+    EXPECT_NE(order.load(), 0);
+    pool.stop();
+}
+
+TEST(ThreadPool, SubmitAfter) {
+    thread_pool pool;
+    pool.start(1);
+    auto start = steady_clock::now();
+    auto res = pool.submit_after(50, [] { return 1; });
+    int val = res.future.get();
+    auto elapsed = steady_clock::now() - start;
+    EXPECT_EQ(val, 1);
+    EXPECT_GE(elapsed, 40_ms);
+    pool.stop();
+}
+
+TEST(ThreadPool, SubmitEvery) {
+    thread_pool pool;
+    pool.start(2);
+    atomic<int> count{0};
+    auto token = pool.submit_every(30, [&count] { count.fetch_add(1); });
+    this_thread::sleep_for(80_ms);
+    pool.cancel_periodic_task(token);
+    this_thread::sleep_for(40_ms);
+    int final_count = count.load();
+    EXPECT_GE(final_count, 2);
+    EXPECT_LE(final_count, 5);
+    pool.stop();
+}
+
+TEST(ThreadPool, CancelPeriodicTask) {
+    thread_pool pool;
+    pool.start(1);
+    atomic<bool> executed{false};
+    auto token = pool.submit_every(20, [&executed] { executed.store(true); });
+    pool.cancel_periodic_task(token);
+    this_thread::sleep_for(60_ms);
+    EXPECT_FALSE(executed.load());
+    pool.stop();
+}
+
+TEST(ThreadPool, TaskGroup) {
+    thread_pool pool;
+    pool.start(3);
+    auto group = make_shared<task_group>();
+    get_current_task_group() = group;
+    auto res1 = pool.submit_task([] { this_thread::sleep_for(20_ms); });
+    auto res2 = pool.submit_task([] { this_thread::sleep_for(20_ms); });
+    group->wait();
+    EXPECT_TRUE(true);
+    res1.future.get();
+    res2.future.get();
+    get_current_task_group().reset();
+    pool.stop();
+}
+
+TEST(ThreadPool, Exception) {
+    thread_pool pool;
+    pool.start(1);
+    auto res = pool.submit_task([]() -> int { throw value_exception("test"); });
+    EXPECT_THROW(res.future.get(), exception);
+    EXPECT_EQ(res.task_info->status.load(), task_info::status::failed);
+    pool.stop();
+}
+
+TEST(ThreadPool, Statistics) {
+    thread_pool pool;
+    pool.start(2);
+    auto res = pool.submit_task([] { return 0; });
+    res.future.get();
+    auto stats = pool.statistics();
+    EXPECT_GT(stats.total_threads, 0u);
+    EXPECT_GT(stats.total_completed, 0u);
+    pool.stop();
+}
+
+TEST(ThreadPool, ModeFixed) {
+    thread_pool pool;
+    EXPECT_TRUE(pool.set_mode(thread_pool::pool_mode::fixed));
+    pool.start(2);
+    EXPECT_EQ(pool.mode(), thread_pool::pool_mode::fixed);
+    pool.stop();
+}
+
+TEST(ThreadPool, ModeCached) {
+    thread_pool pool;
+    EXPECT_TRUE(pool.set_mode(thread_pool::pool_mode::cached));
+    pool.start(1);
+    EXPECT_EQ(pool.mode(), thread_pool::pool_mode::cached);
+    pool.stop();
+}
+
+TEST(ThreadPool, SetStealStrategy) {
+    thread_pool pool;
+    EXPECT_TRUE(pool.set_steal_mode(local_queue::steal_strategy::single, 1));
+    pool.start(2);
+    auto res = pool.submit_task([] { return 1; });
+    EXPECT_EQ(res.future.get(), 1);
+    pool.stop();
+}
+
+TEST(ThreadPool, TaskThresholdRejection) {
+    thread_pool pool;
+    pool.set_task_threshhold(1);
+    pool.start(1);
+    auto res1 = pool.submit_task([] { this_thread::sleep_for(2000_ms); });
+    auto res2 = pool.submit_task([] { return 2; });
+    auto res3 = pool.submit_task([] { return 3; });
+    EXPECT_TRUE(res3.task_info && res3.task_info->is_finished());
+    EXPECT_EQ(res3.task_info->status.load(), task_info::status::failed);
+    res1.future.get();
+    EXPECT_EQ(res2.future.get(), 2);
+    pool.stop();
+}
+
+TEST(ThreadPool, WaitMultipleFutures) {
+    thread_pool pool;
+    pool.start(2);
+    auto f1 = pool.submit_task([] { return 10; });
+    auto f2 = pool.submit_task([] { return 20; });
+    auto results = thread_pool::wait(move(f1.future), move(f2.future));
+    EXPECT_EQ(get<0>(results), 10);
+    EXPECT_EQ(get<1>(results), 20);
+    pool.stop();
+}
 
 class VirtualThreadEnvironment : public ::testing::Environment {
 public:
@@ -1347,6 +1589,7 @@ public:
         virtual_thread::initialize(1);
     }
     void TearDown() override {
+        virtual_thread::shutdown();
     }
 };
 
@@ -1363,11 +1606,12 @@ TEST(VirtualThread, StartBasic) {
 TEST(VirtualThread, Yield) {
     atomic<int> sequence{0};
     atomic<int> result{0};
-    auto vt = virtual_thread::start([&] {
+    auto task_lambda = [&]() -> virtual_thread_task {
         sequence.store(sequence.load() + 1);
-        virtual_thread::yield();
+        co_await virtual_thread::yield();
         result.store(sequence.load());
-    });
+    };
+    auto vt = virtual_thread::start(task_lambda);
     this_thread::sleep_for(50_ms);
     EXPECT_EQ(result.load(), 1);
 }
@@ -1390,7 +1634,10 @@ TEST(VirtualThread, ExceptionHandling) {
 }
 
 TEST(VirtualThread, SleepNoCrash) {
-    auto vt = virtual_thread::start([] { virtual_thread::sleep(10); });
+    auto task_lambda = []() -> virtual_thread_task {
+        co_await virtual_thread::sleep(10);
+    };
+    auto vt = virtual_thread::start(task_lambda);
     this_thread::sleep_for(50_ms);
     SUCCEED();
 }
@@ -1424,5 +1671,3 @@ TEST(VirtualThread, MoveVirtualThread) {
     this_thread::sleep_for(50_ms);
     EXPECT_TRUE(ran.load());
 }
-
-#endif

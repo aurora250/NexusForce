@@ -92,7 +92,7 @@ private:
     thread thread_;               ///< 调度线程
     mutable mutex mutex_;         ///< 互斥锁
     condition_variable cv_;       ///< 条件变量
-    token next_id_{0};            ///< 下一个可用的任务ID
+    token next_id_{1};            ///< 下一个可用的任务ID
     atomic<bool> stopped_{false}; ///< 停止标志
 
     friend class thread_pool;
@@ -190,6 +190,7 @@ public:
         auto result = nodes_.insert(new_node);
         node_map_[id] = result.first;
         cancel_flags_[id] = move(flag);
+        promises_[id] = promise;
 
         lock.unlock_quiet();
         if (is_earliest) {
@@ -221,7 +222,9 @@ public:
             node_map_.erase(node_it);
 
             lock.unlock_quiet();
-            if (is_earliest) cv_.notify_one();
+            if (is_earliest) {
+                cv_.notify_one();
+            }
             lock.lock_quiet();
 
             cancel_flags_.erase(flag_it);
@@ -248,8 +251,8 @@ public:
      */
     void cancel_all() {
         unique_lock<mutex> lock(mutex_);
-        for (auto& [_, flag] : cancel_flags_) {
-            flag->store(true, memory_order_release);
+        for (auto& cancel_flag: cancel_flags_) {
+            cancel_flag.second->store(true, memory_order_release);
         }
         nodes_.clear();
         node_map_.clear();
@@ -265,6 +268,16 @@ public:
     NEFORCE_NODISCARD size_t size() const {
         lock<mutex> lock(mutex_);
         return nodes_.size();
+    }
+
+    /**
+     * @brief 检查任务是否仍在等待或执行中
+     * @param id 任务标识符
+     * @return 任务是否未完成
+     */
+    NEFORCE_NODISCARD bool is_pending(token id) const {
+        lock<mutex> lock(mutex_);
+        return promises_.find(id) != promises_.end();
     }
 };
 
@@ -371,7 +384,7 @@ public:
      * @brief 检查定时器是否活跃（有待执行的任务）
      * @return 是否活跃
      */
-    NEFORCE_NODISCARD bool is_active() const { return task_id_ != 0; }
+    NEFORCE_NODISCARD bool is_active() const { return task_id_ != 0 && scheduler_ && scheduler_->is_pending(task_id_); }
 
     /**
      * @brief 异步等待定时器到期

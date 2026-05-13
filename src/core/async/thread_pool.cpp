@@ -225,6 +225,7 @@ void thread_pool::thread_function(const id_type thread_id) {
                 task = task_queue_.top().task;
                 task_queue_.pop();
                 --task_size_;
+                not_full_.notify_one();
             }
         }
 
@@ -471,6 +472,8 @@ thread_pool::pool_statistics thread_pool::stop() {
     }
     is_running_ = false;
 
+    const size_t saved_total_threads = threads_map_.size();
+
     {
         unique_lock<mutex> lk(task_queue_mtx_);
         not_empty_.notify_all();
@@ -491,7 +494,8 @@ thread_pool::pool_statistics thread_pool::stop() {
         worker_contexts_.clear();
     }
 
-    const auto stat = statistics_unsafe();
+    auto stat = statistics_unsafe();
+    stat.total_threads = saved_total_threads;
 
     total_submitted_tasks_ = 0;
     total_completed_tasks_ = 0;

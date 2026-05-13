@@ -402,7 +402,7 @@ struct __future_base::task_setter<PtrT, Func, void> {
         try {
             (*function_ptr)();
         } catch (...) {
-            (*result_ptr)->error_ptr = current_exception();
+            (*result_ptr)->error_ptr = _NEFORCE current_exception();
         }
         return _NEFORCE move(*result_ptr);
     }

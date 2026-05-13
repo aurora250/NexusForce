@@ -270,7 +270,7 @@ public:
      *
      * 原子地存储新值，如果有等待线程，则唤醒所有等待线程。
      */
-    NEFORCE_ALWAYS_INLINE void store_notify_all(const uint32_t value, const memory_order mo) {
+    NEFORCE_ALWAYS_INLINE void store_notify_all(const uint32_t value, const memory_order mo) noexcept {
         const auto futex = static_cast<uint32_t*>(static_cast<void*>(&data_));
         if (data_.exchange(value, mo) & WaiterBit) {
             _NEFORCE futex_notify(futex, true);

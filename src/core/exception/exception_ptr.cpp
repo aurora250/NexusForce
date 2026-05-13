@@ -11,7 +11,7 @@ exception_ptr current_exception() noexcept {
     }
 
     try {
-        throw;
+        std::rethrow_exception(std_ep);
     } catch (const exception& e) {
         return make_exception_ptr(e);
     } catch (const std::exception& e) {

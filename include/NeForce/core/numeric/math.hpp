@@ -146,10 +146,22 @@ NEFORCE_END_CONSTANTS__
  */
 
 NEFORCE_CONST_FUNCTION constexpr int64_t safe_trunc(const decimal_t x) noexcept {
-    constexpr decimal_t max_int64 = static_cast<decimal_t>(numeric_traits<int64_t>::max());
-    constexpr decimal_t min_int64 = static_cast<decimal_t>(numeric_traits<int64_t>::min());
-    if (is_nan(x) || is_infinity(x) || x > max_int64 || x < min_int64) {
+    constexpr int64_t max_val = numeric_traits<int64_t>::max();
+    constexpr int64_t min_val = numeric_traits<int64_t>::min();
+    constexpr decimal_t max_int64 = static_cast<decimal_t>(max_val);
+    constexpr decimal_t min_int64 = static_cast<decimal_t>(min_val);
+
+    if (is_nan(x) || is_infinity(x)) {
         return 0;
+    }
+
+    if (x >= max_int64) {
+        const int64_t result = static_cast<int64_t>(x);
+        return (result == max_val && x <= max_int64) ? result : 0;
+    }
+    if (x <= min_int64) {
+        const int64_t result = static_cast<int64_t>(x);
+        return (result == min_val && x >= min_int64) ? result : 0;
     }
     return static_cast<int64_t>(x);
 }

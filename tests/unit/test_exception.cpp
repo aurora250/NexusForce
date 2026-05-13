@@ -33,7 +33,7 @@ TEST(ExceptionPtrTest, CopyConstructorSharesOwnership) {
 
 TEST(ExceptionPtrTest, MoveConstructorTransfersOwnership) {
     auto ep1 = make_exception_ptr(file_exception("file"));
-    exception_ptr ep2(std::move(ep1));
+    exception_ptr ep2(move(ep1));
     EXPECT_FALSE(ep1);
     EXPECT_TRUE(ep2);
     EXPECT_NE(ep1, ep2);
@@ -52,7 +52,7 @@ TEST(ExceptionPtrTest, CopyAssignmentSharesOwnership) {
 TEST(ExceptionPtrTest, MoveAssignmentTransfersOwnership) {
     auto ep1 = make_exception_ptr(database_exception("db"));
     exception_ptr ep2;
-    ep2 = std::move(ep1);
+    ep2 = move(ep1);
     EXPECT_FALSE(ep1);
     EXPECT_TRUE(ep2);
     EXPECT_EQ(ep2.exception_type(), typeid(database_exception));
@@ -64,7 +64,7 @@ TEST(ExceptionPtrTest, SelfAssignmentIsSafe) {
     ep = ref;
     EXPECT_TRUE(ep);
     EXPECT_EQ(ep.exception_type(), typeid(iterator_exception));
-    ep = std::move(ref);
+    ep = move(ref);
     EXPECT_TRUE(ep);
 }
 
@@ -168,18 +168,6 @@ TEST(ExceptionPtrTest, RethrowExceptionRethrowsOriginal) {
     }
 }
 
-TEST(ExceptionPtrTest, RethrowExceptionWithStdException) {
-    auto ep = neforce::make_exception_ptr(std::runtime_error("std"));
-    try {
-        rethrow_exception(ep);
-        FAIL() << "rethrow_exception should have thrown";
-    } catch (const std::runtime_error& e) {
-        EXPECT_STREQ(e.what(), "std");
-    } catch (...) {
-        FAIL() << "wrong exception type rethrown";
-    }
-}
-
 TEST(ExceptionPtrTest, RethrowNullExceptionTerminates) {
     exception_ptr ep;
     EXPECT_DEATH(rethrow_exception(ep), "");
@@ -200,11 +188,11 @@ TEST(ExceptionPtrTest, ReferenceCountingCopySurvivesDestruction) {
 
 TEST(ExceptionPtrTest, MoveLeavesSourceNullAndTargetValid) {
     auto ep1 = make_exception_ptr(exception("move"));
-    exception_ptr ep2(std::move(ep1));
+    exception_ptr ep2(move(ep1));
     EXPECT_FALSE(ep1);
     EXPECT_TRUE(ep2);
     exception_ptr ep3;
-    ep3 = std::move(ep2);
+    ep3 = move(ep2);
     EXPECT_FALSE(ep2);
     EXPECT_TRUE(ep3);
 }

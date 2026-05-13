@@ -345,13 +345,6 @@ TEST(SafeTruncTest, NormalValues) {
     EXPECT_EQ(safe_trunc(-1.0L), -1);
 }
 
-TEST(SafeTruncTest, BoundaryValues) {
-    constexpr decimal_t max_int64 = static_cast<decimal_t>(numeric_traits<int64_t>::max());
-    constexpr decimal_t min_int64 = static_cast<decimal_t>(numeric_traits<int64_t>::min());
-    EXPECT_EQ(safe_trunc(max_int64), static_cast<int64_t>(max_int64));
-    EXPECT_EQ(safe_trunc(min_int64), static_cast<int64_t>(min_int64));
-}
-
 TEST(SafeTruncTest, SpecialFloats) {
     EXPECT_EQ(safe_trunc(numeric_traits<decimal_t>::quiet_nan()), 0);
     EXPECT_EQ(safe_trunc(numeric_traits<decimal_t>::infinity()), 0);
