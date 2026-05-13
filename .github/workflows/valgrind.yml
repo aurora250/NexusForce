@@ -1,0 +1,90 @@
+name: "Valgrind Memory Leak Check"
+
+on:
+  push:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'tests/**'
+  pull_request:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'tests/**'
+  workflow_dispatch:
+
+jobs:
+  valgrind:
+    name: Valgrind Memcheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y valgrind libtirpc-dev libc++abi-dev
+
+      - name: Cache vcpkg
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-
+
+      - name: Setup vcpkg
+        run: |
+          if [ ! -d "$HOME/vcpkg" ]; then
+            git clone https://github.com/Microsoft/vcpkg.git $HOME/vcpkg
+            $HOME/vcpkg/bootstrap-vcpkg.sh
+          fi
+          echo "VCPKG_ROOT=$HOME/vcpkg" >> $GITHUB_ENV
+          echo "$HOME/vcpkg" >> $GITHUB_PATH
+
+      - name: Configure and Build
+        run: |
+          mkdir -p build
+          cd build
+          cmake .. \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_TOOLCHAIN_FILE=$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake \
+            -DVCPKG_TARGET_TRIPLET=x64-linux \
+            -DNEXUSFORCE_BUILD_DOCS=OFF \
+            -DNEXUSFORCE_BUILD_TESTS=ON
+          make -j$(nproc) NexusForceUnitTests
+
+      - name: Run Valgrind Memcheck
+        run: |
+          cd build
+          valgrind \
+            --suppressions=../valgrind.supp \
+            --leak-check=full \
+            --show-leak-kinds=definite,indirect \
+            --errors-for-leak-kinds=definite,indirect \
+            --error-exitcode=1 \
+            ./tests/unit/NexusForceUnitTests 2>&1 | tee valgrind_output.txt
+
+      - name: Check Leak Summary
+        if: always()
+        run: |
+          cd build
+          echo "=== Valgrind Leak Summary ==="
+          grep -A 10 "LEAK SUMMARY:" valgrind_output.txt || echo "No leak summary found"
+          echo ""
+          echo "=== Error Summary ==="
+          grep "ERROR SUMMARY:" valgrind_output.txt || echo "No error summary found"
+
+      - name: Upload Valgrind Output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: valgrind-output
+          path: build/valgrind_output.txt
+          retention-days: 7

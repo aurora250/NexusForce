@@ -628,7 +628,8 @@ string locale::collation_key(const string& s) const {
         if (n == static_cast<size_t>(-1)) {
             return {};
         }
-        out.resize(n);
+        out.resize(n + 1);
+        out[n] = L'\0';
         return out;
     };
 

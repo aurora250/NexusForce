@@ -136,7 +136,8 @@ private:
             }
 
             if (!nodes_.empty()) {
-                cv_.wait_until(lock, nodes_.begin()->expire);
+                time_point tp = nodes_.begin()->expire;
+                cv_.wait_until(lock, tp);
             }
         }
     }

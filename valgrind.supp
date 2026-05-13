@@ -1,0 +1,101 @@
+# Valgrind Suppressions for NexusForceUnitTests
+# 用法: valgrind --suppressions=valgrind.supp --leak-check=full ./tests/unit/NexusForceUnitTests
+#
+# 此文件抑制以下非项目代码错误:
+# 1. glibc TLS 误报 — pthread_create / aio_create_helper_thread 内部分配
+# 2. GTest 死亡测试产物 — fork()子进程中未清理的 VirtualThreadEnvironment 线程资源
+# 3. glibc wcsxfrm_l 内部 AVX2 越界读取 — 仅在 clang++ 构建中出现
+
+# =============================================================================
+# glibc TLS (Thread Local Storage) 误报
+# =============================================================================
+# pthread_create 通过 allocate_stack -> _dl_allocate_tls -> allocate_dtv 分配
+# 每个线程的 DTV (Dynamic Thread Vector)。glibc 不复用已退出线程的 TLS 槽以优化
+# 线程创建性能，Valgrind 报告为 possibly lost，属已知误报。
+# 注意: 需要两个 calloc 帧因为 glibc 内部调用链包含两层 calloc
+# 注意: 函数名带 @@GLIBC 版本后缀
+# =============================================================================
+
+{
+   glibc_tls_pthread_create
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+}
+
+{
+   glibc_tls_pthread_create_malloc
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+}
+
+# =============================================================================
+# glibc TLS 误报 — aio 异步 IO 辅助线程
+# =============================================================================
+# file_async::read 调用 aio_read 可能创建 glibc 内部辅助线程，
+# 同样触发 TLS 分配，同为 glibc 已知误报
+# =============================================================================
+
+{
+   glibc_tls_aio_helper_thread
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.34
+   fun:__aio_create_helper_thread
+}
+
+# =============================================================================
+# GTest 死亡测试产物 — virtual_thread 线程数据
+# =============================================================================
+# 全局 VirtualThreadEnvironment::SetUp() 调用 virtual_thread::initialize(1)
+# 创建 1 个 worker 线程。死亡测试 (EXPECT_DEATH / EXPECT_DEBUG_DEATH) 通过
+# fork() 创建子进程，子进程故意触发 SIGABRT 以验证死亡断言。
+# 在 fork 的子进程中，继承自父进程的 worker 线程无法正常 join/析构，
+# 导致 make_unique 分配的 thread_data (24 bytes) 被报告为 definitely lost。
+# 仅在 forked+crash 的子进程中发生，主进程正常退出时无此泄漏。
+# =============================================================================
+
+{
+   gtest_death_virtual_thread_worker
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:_Znwm
+   ...
+   fun:_ZN7neforce24virtual_thread_scheduler13start_workers*
+   fun:_ZN7neforce14virtual_thread10initialize*
+   ...
+}
+
+# =============================================================================
+# glibc wcsxfrm_l 内部 AVX2 越界读取
+# =============================================================================
+# locale::collation_key 调用 wcsxfrm_l 进行字符串排序键计算，
+# glibc 内部 __wcpncpy_avx2 以 32 字节对齐块 (YMM 寄存器) 读取，
+# 当内部分配缓冲区末尾未对齐时，最后一个 AVX2 加载越过边界。
+# 仅在 clang++ AVX2 优化路径中出现，非项目代码可修复。
+# collation_key = 13 字符，mangled: _ZNK7neforce6locale13collation_key*
+# =============================================================================
+
+{
+   glibc_wcsxfrm_l_buffer_overread
+   Memcheck:Addr32
+   fun:__wcpncpy_avx2
+   fun:wcsxfrm_l
+   fun:_ZNK7neforce6locale13collation_key*
+}

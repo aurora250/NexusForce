@@ -141,19 +141,12 @@ zlib_compressor::stream_compressor::stream_compressor(const compress_level level
     reset(level, strategy, format);
 }
 
-zlib_compressor::stream_compressor::~stream_compressor() {
-    if (initialized_) {
-        ::deflateEnd(&stream_);
-    }
-}
-
 zlib_compressor::stream_compressor::stream_compressor(stream_compressor&& other) noexcept :
-stream_(other.stream_),
+stream_(move(other.stream_)),
 initialized_(other.initialized_),
 bytes_input_(other.bytes_input_),
 bytes_output_(other.bytes_output_) {
     other.initialized_ = false;
-    other.stream_ = {};
     other.bytes_input_ = 0;
     other.bytes_output_ = 0;
 }
@@ -163,17 +156,12 @@ zlib_compressor::stream_compressor& zlib_compressor::stream_compressor::operator
         return *this;
     }
 
-    if (initialized_) {
-        ::deflateEnd(&stream_);
-    }
-
-    stream_ = other.stream_;
+    stream_ = move(other.stream_);
     initialized_ = other.initialized_;
     bytes_input_ = other.bytes_input_;
     bytes_output_ = other.bytes_output_;
 
     other.initialized_ = false;
-    other.stream_ = {};
     other.bytes_input_ = 0;
     other.bytes_output_ = 0;
 
@@ -182,10 +170,6 @@ zlib_compressor::stream_compressor& zlib_compressor::stream_compressor::operator
 
 void zlib_compressor::stream_compressor::reset(compress_level level, compress_strategy strategy,
                                                compress_format format) {
-
-    if (initialized_) {
-        ::deflateEnd(&stream_);
-    }
 
     int window_bits = MAX_WBITS;
     switch (format) {
@@ -202,8 +186,8 @@ void zlib_compressor::stream_compressor::reset(compress_level level, compress_st
             unreachable();
     }
 
-    stream_ = {};
-    const int result = ::deflateInit2(&stream_, static_cast<int>(level), Z_DEFLATED, window_bits, MAX_MEM_LEVEL,
+    stream_.reset(new ::z_stream{});
+    const int result = ::deflateInit2(stream_.get(), static_cast<int>(level), Z_DEFLATED, window_bits, MAX_MEM_LEVEL,
                                       static_cast<int>(strategy));
 
     check_zlib_error(result);
@@ -218,8 +202,8 @@ byte_vector zlib_compressor::stream_compressor::compress(const cbyte_view& data,
     }
 
     if (!data.empty()) {
-        stream_.avail_in = static_cast<::uInt>(data.size());
-        stream_.next_in = const_cast<byte_t*>(data.data());
+        stream_->avail_in = static_cast<::uInt>(data.size());
+        stream_->next_in = const_cast<byte_t*>(data.data());
         bytes_input_ += data.size();
     }
 
@@ -232,19 +216,19 @@ byte_vector zlib_compressor::stream_compressor::compress(const cbyte_view& data,
 
     do {
         output.resize(output.size() + chunk_size);
-        stream_.avail_out = chunk_size;
-        stream_.next_out = output.data() + output.size() - chunk_size;
+        stream_->avail_out = chunk_size;
+        stream_->next_out = output.data() + output.size() - chunk_size;
 
-        result = ::deflate(&stream_, flush);
+        result = ::deflate(stream_.get(), flush);
 
         if (result == Z_STREAM_ERROR) {
             check_zlib_error(result);
         }
 
-        const size_t have = chunk_size - stream_.avail_out;
+        const size_t have = chunk_size - stream_->avail_out;
         output.resize(output.size() - chunk_size + have);
         bytes_output_ += have;
-    } while (stream_.avail_out == 0 || (finish && result != Z_STREAM_END && !data.empty()));
+    } while (stream_->avail_out == 0 || (finish && result != Z_STREAM_END && !data.empty()));
 
     return output;
 }
@@ -257,19 +241,12 @@ byte_vector zlib_compressor::stream_compressor::finish() { return compress(cbyte
 
 zlib_compressor::stream_decompressor::stream_decompressor(const compress_format format) { reset(format); }
 
-zlib_compressor::stream_decompressor::~stream_decompressor() {
-    if (initialized_) {
-        ::inflateEnd(&stream_);
-    }
-}
-
 zlib_compressor::stream_decompressor::stream_decompressor(stream_decompressor&& other) noexcept :
-stream_(other.stream_),
+stream_(move(other.stream_)),
 initialized_(other.initialized_),
 bytes_input_(other.bytes_input_),
 bytes_output_(other.bytes_output_) {
     other.initialized_ = false;
-    other.stream_ = {};
     other.bytes_input_ = 0;
     other.bytes_output_ = 0;
 }
@@ -280,17 +257,12 @@ zlib_compressor::stream_decompressor::operator=(stream_decompressor&& other) noe
         return *this;
     }
 
-    if (initialized_) {
-        ::inflateEnd(&stream_);
-    }
-
-    stream_ = other.stream_;
+    stream_ = move(other.stream_);
     initialized_ = other.initialized_;
     bytes_input_ = other.bytes_input_;
     bytes_output_ = other.bytes_output_;
 
     other.initialized_ = false;
-    other.stream_ = {};
     other.bytes_input_ = 0;
     other.bytes_output_ = 0;
 
@@ -298,9 +270,6 @@ zlib_compressor::stream_decompressor::operator=(stream_decompressor&& other) noe
 }
 
 void zlib_compressor::stream_decompressor::reset(const compress_format format) {
-    if (initialized_) {
-        ::inflateEnd(&stream_);
-    }
 
     int window_bits = MAX_WBITS;
     switch (format) {
@@ -317,8 +286,8 @@ void zlib_compressor::stream_decompressor::reset(const compress_format format) {
             unreachable();
     }
 
-    stream_ = {};
-    const int result = ::inflateInit2(&stream_, window_bits);
+    stream_.reset(new ::z_stream{});
+    const int result = ::inflateInit2(stream_.get(), window_bits);
     check_zlib_error(result);
     initialized_ = true;
     bytes_input_ = 0;
@@ -331,8 +300,8 @@ byte_vector zlib_compressor::stream_decompressor::decompress(const byte_view& da
     }
 
     if (!data.empty()) {
-        stream_.avail_in = static_cast<::uInt>(data.size());
-        stream_.next_in = data.data();
+        stream_->avail_in = static_cast<::uInt>(data.size());
+        stream_->next_in = data.data();
         bytes_input_ += data.size();
     }
 
@@ -343,19 +312,19 @@ byte_vector zlib_compressor::stream_decompressor::decompress(const byte_view& da
     int result = Z_OK;
     do {
         output.resize(output.size() + chunk_size);
-        stream_.avail_out = chunk_size;
-        stream_.next_out = output.data() + output.size() - chunk_size;
+        stream_->avail_out = chunk_size;
+        stream_->next_out = output.data() + output.size() - chunk_size;
 
-        result = ::inflate(&stream_, finish ? Z_FINISH : Z_NO_FLUSH);
+        result = ::inflate(stream_.get(), finish ? Z_FINISH : Z_NO_FLUSH);
 
         if (result == Z_STREAM_ERROR || result == Z_NEED_DICT || result == Z_DATA_ERROR || result == Z_MEM_ERROR) {
             check_zlib_error(result);
         }
 
-        const size_t have = chunk_size - stream_.avail_out;
+        const size_t have = chunk_size - stream_->avail_out;
         output.resize(output.size() - chunk_size + have);
         bytes_output_ += have;
-    } while (stream_.avail_out == 0 || (finish && result != Z_STREAM_END && !data.empty()));
+    } while (stream_->avail_out == 0 || (finish && result != Z_STREAM_END && !data.empty()));
 
     return output;
 }

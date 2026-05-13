@@ -44,11 +44,17 @@ public:
 private:
 #ifdef NEFORCE_PLATFORM_LINUX
     struct mutex_deleter {
-        void operator()(::pthread_mutex_t* m) const { ::pthread_mutex_destroy(m); }
+        void operator()(::pthread_mutex_t* m) const noexcept {
+            ::pthread_mutex_destroy(m);
+            delete m;
+        }
     };
 
     struct cond_deleter {
-        void operator()(::pthread_cond_t* d) const { ::pthread_cond_destroy(d); }
+        void operator()(::pthread_cond_t* d) const noexcept {
+            ::pthread_cond_destroy(d);
+            delete d;
+        }
     };
 #endif
 

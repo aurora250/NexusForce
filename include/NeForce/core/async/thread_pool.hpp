@@ -14,6 +14,7 @@
 #include "NeForce/core/async/timer.hpp"
 #include "NeForce/core/container/priority_queue.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/memory/weak_ptr.hpp"
 #include "NeForce/core/time/datetime.hpp"
 #include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -820,7 +821,8 @@ thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, const
             [func = _NEFORCE forward<Func>(func),
              tup = _NEFORCE make_tuple(_NEFORCE forward<Args>(args)...)]() mutable { _NEFORCE apply(func, tup); });
     auto handler_ptr = _NEFORCE make_shared<task_type>();
-    *handler_ptr = [this, state, task, interval_ms, priority, handler_ptr]() {
+    weak_ptr<task_type> weak_handler(handler_ptr);
+    *handler_ptr = [this, state, task, interval_ms, priority, weak_handler]() {
         if (state->cancelled.load()) {
             return;
         }
@@ -830,8 +832,10 @@ thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, const
         if (state->cancelled.load()) {
             return;
         }
-        auto next_time = steady_clock::now() + milliseconds(interval_ms);
-        timer_.add_task(next_time, [handler_ptr]() { (*handler_ptr)(); });
+        if (auto locked = weak_handler.lock()) {
+            auto next_time = steady_clock::now() + milliseconds(interval_ms);
+            timer_.add_task(next_time, [locked]() { (*locked)(); });
+        }
     };
 
     auto first_time = steady_clock::now() + milliseconds(interval_ms);

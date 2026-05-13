@@ -14,6 +14,7 @@
 #    include <zlib.h>
 #    include "NeForce/core/container/vector.hpp"
 #    include "NeForce/core/string/string.hpp"
+#    include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -97,6 +98,28 @@ enum class compress_format {
  */
 class NEFORCE_API zlib_compressor {
 private:
+    struct compressor_stream_deleter {
+        void operator()(::z_stream* s) const noexcept {
+            if (s) {
+                if (s->state) {
+                    ::deflateEnd(s);
+                }
+                delete s;
+            }
+        }
+    };
+
+    struct decompressor_stream_deleter {
+        void operator()(::z_stream* s) const noexcept {
+            if (s) {
+                if (s->state) {
+                    ::inflateEnd(s);
+                }
+                delete s;
+            }
+        }
+    };
+
     /**
      * @brief 压缩数据的内部实现
      * @param data 输入数据指针
@@ -237,7 +260,8 @@ public:
      */
     class NEFORCE_API stream_compressor {
     private:
-        ::z_stream stream_{};      ///< zlib流对象
+        unique_ptr<::z_stream, compressor_stream_deleter> stream_; ///< zlib流对象
+
         bool initialized_ = false; ///< 是否已初始化
         size_t bytes_input_ = 0;   ///< 输入字节计数
         size_t bytes_output_ = 0;  ///< 输出字节计数
@@ -257,7 +281,7 @@ public:
         /**
          * @brief 析构函数
          */
-        ~stream_compressor();
+        ~stream_compressor() = default;
 
         stream_compressor(const stream_compressor&) = delete;
         stream_compressor& operator=(const stream_compressor&) = delete;
@@ -341,7 +365,8 @@ public:
      */
     class NEFORCE_API stream_decompressor {
     private:
-        ::z_stream stream_{};      ///< zlib流对象
+        unique_ptr<::z_stream, decompressor_stream_deleter> stream_; ///< zlib流对象
+
         bool initialized_ = false; ///< 是否已初始化
         size_t bytes_input_ = 0;   ///< 输入字节计数
         size_t bytes_output_ = 0;  ///< 输出字节计数
@@ -357,7 +382,7 @@ public:
         /**
          * @brief 析构函数
          */
-        ~stream_decompressor();
+        ~stream_decompressor() = default;
 
         stream_decompressor(const stream_decompressor&) = delete;
         stream_decompressor& operator=(const stream_decompressor&) = delete;
