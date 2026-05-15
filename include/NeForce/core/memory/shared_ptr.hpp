@@ -235,14 +235,14 @@ class weak_ptr;
 NEFORCE_BEGIN_INNER__
 
 template <typename T>
-void __setup_enable_shared_from_impl(T* ptr, __smart_ptr_counter* owner, true_type) noexcept {
+void __setup_enable_shared_from_impl(T* ptr, __smart_ptr_counter* owner, true_type /*unused*/) noexcept {
     if (ptr) {
         static_cast<enable_shared_from_this<T>*>(ptr)->owner_ = owner;
     }
 }
 
 template <typename T>
-void __setup_enable_shared_from_impl(T*, __smart_ptr_counter*, false_type) noexcept {}
+void __setup_enable_shared_from_impl(T* /*unused*/, __smart_ptr_counter* /*unused*/, false_type /*unused*/) noexcept {}
 
 template <typename T>
 void __setup_enable_shared_from(T* ptr, __smart_ptr_counter* owner) noexcept {
@@ -356,7 +356,7 @@ public:
     shared_ptr(const shared_ptr& other) noexcept :
     ptr_(other.ptr_),
     owner_(other.owner_) {
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->incref_strong();
         }
     }
@@ -370,12 +370,12 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->decref_strong();
         }
         ptr_ = other.ptr_;
         owner_ = other.owner_;
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->incref_strong();
         }
         return *this;
@@ -415,7 +415,7 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->decref_strong();
         }
         ptr_ = other.ptr_;
@@ -506,7 +506,7 @@ public:
      * @brief 重置共享指针
      */
     void reset() noexcept {
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->decref_strong();
         }
         owner_ = nullptr;
@@ -553,13 +553,13 @@ public:
      * @brief 获取引用计数
      * @return 强引用计数
      */
-    NEFORCE_NODISCARD long use_count() const noexcept { return owner_ ? owner_->use_count() : 0; }
+    NEFORCE_NODISCARD long use_count() const noexcept { return owner_ != nullptr ? owner_->use_count() : 0; }
 
     /**
      * @brief 检查是否独占所有权
      * @return 是否只有当前共享指针引用对象
      */
-    NEFORCE_NODISCARD bool unique() const noexcept { return owner_ ? owner_->use_count() == 1 : true; }
+    NEFORCE_NODISCARD bool unique() const noexcept { return owner_ != nullptr ? owner_->use_count() == 1 : true; }
 
     /**
      * @brief 交换两个共享指针
@@ -775,7 +775,7 @@ protected:
     /**
      * @brief 构造函数
      */
-    enable_shared_from_this() noexcept {}
+    enable_shared_from_this() noexcept = default;
 
 public:
     /**
@@ -785,7 +785,7 @@ public:
      */
     shared_ptr<T> shared_from_this() {
         static_assert(is_base_of_v<enable_shared_from_this, T>, "shared from T requires derived class");
-        if (!owner_) {
+        if (owner_ == nullptr) {
             NEFORCE_THROW_EXCEPTION(memory_exception("smart pointer share failed."));
         }
         owner_->incref_strong();
@@ -799,7 +799,7 @@ public:
      */
     shared_ptr<const T> shared_from_this() const {
         static_assert(is_base_of_v<enable_shared_from_this, T>, "shared from T requires derived class");
-        if (!owner_) {
+        if (owner_ == nullptr) {
             NEFORCE_THROW_EXCEPTION(memory_exception("smart pointer share failed."));
         }
         owner_->incref_strong();
@@ -912,9 +912,9 @@ enable_if_t<!is_array_v<T> && is_constructible_v<T, Args...>, shared_ptr<T>> all
 
     byte_t* raw_mem = allocator_traits<byte_allocator>::allocate(byte_alloc, raw_size);
 
-    const uintptr_t raw_addr = reinterpret_cast<uintptr_t>(raw_mem);
+    const auto raw_addr = reinterpret_cast<uintptr_t>(raw_mem);
     const uintptr_t aligned_addr = (raw_addr + align - 1) & ~static_cast<uintptr_t>(align - 1);
-    auto aligned_mem = reinterpret_cast<byte_t*>(aligned_addr);
+    auto* aligned_mem = reinterpret_cast<byte_t*>(aligned_addr);
     T* object_ptr = reinterpret_cast<T*>(aligned_mem + offset);
 
     try {
@@ -1030,9 +1030,9 @@ private:
 
         static constexpr uintptr_t lock_bit{1};
 
-        static void dereference(count_type* counter, true_type) noexcept { counter->decref_strong(); }
+        static void dereference(count_type* counter, true_type /*unused*/) noexcept { counter->decref_strong(); }
 
-        static void dereference(count_type* counter, false_type) noexcept { counter->decref_weak(); }
+        static void dereference(count_type* counter, false_type /*unused*/) noexcept { counter->decref_weak(); }
 
     public:
         constexpr atomic_counter() noexcept = default;
@@ -1045,7 +1045,7 @@ private:
         ~atomic_counter() {
             auto value = value_.load(memory_order_relaxed);
             NEFORCE_CONSTEXPR_ASSERT(!(value & lock_bit));
-            if (auto counter = reinterpret_cast<count_type*>(value)) {
+            if (auto* counter = reinterpret_cast<count_type*>(value)) {
                 this->dereference(counter, is_shared_ptr<T>());
             }
         }
@@ -1058,7 +1058,7 @@ private:
                 mo = memory_order_acquire;
             }
             auto cur = value_.load(memory_order_relaxed);
-            while (cur & lock_bit) {
+            while ((cur & lock_bit) != 0U) {
                 this_thread::relax();
                 cur = value_.load(memory_order_relaxed);
             }
@@ -1101,14 +1101,16 @@ private:
     friend struct atomic<T>;
 
 private:
-    static typename atomic_counter::count_type* incref(typename atomic_counter::count_type* counter, true_type) {
+    static typename atomic_counter::count_type* incref(typename atomic_counter::count_type* counter,
+                                                       true_type /*unused*/) {
         if (counter) {
             counter->incref_strong();
         }
         return counter;
     }
 
-    static typename atomic_counter::count_type* incref(typename atomic_counter::count_type* counter, false_type) {
+    static typename atomic_counter::count_type* incref(typename atomic_counter::count_type* counter,
+                                                       false_type /*unused*/) {
         if (counter) {
             counter->incref_weak();
         }
@@ -1213,7 +1215,7 @@ public:
      * @brief 检查是否无锁
      * @return 始终返回false
      */
-    bool is_lock_free() const noexcept { return false; }
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept { return false; }
 
     /**
      * @brief 默认构造函数

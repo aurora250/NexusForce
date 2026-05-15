@@ -358,8 +358,8 @@ struct wcharacter : icharacter<wcharacter, wchar_t> {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
         result.reserve(obj.size());
-        for (size_t i = 0; i < obj.size(); ++i) {
-            result.push_back(static_cast<char16_t>(static_cast<uint16_t>(obj[i])));
+        for (const value_type c: obj) {
+            result.push_back(static_cast<char16_t>(static_cast<uint16_t>(c)));
         }
 #else
         result.reserve(obj.size() * 2);
@@ -605,8 +605,8 @@ public:
         }
         string result;
 
-        size_t start_pos;
-        bool need_swap;
+        size_t start_pos = 0;
+        bool need_swap = false;
         parse_utf16_bom(obj, start_pos, need_swap);
 
         size_t i = start_pos;
@@ -628,8 +628,8 @@ public:
         wstring result;
         result.reserve(obj.size());
 
-        size_t start_pos;
-        bool need_swap;
+        size_t start_pos = 0;
+        bool need_swap = false;
         parse_utf16_bom(obj, start_pos, need_swap);
 
         size_t i = start_pos;
@@ -652,8 +652,8 @@ public:
         u8string result;
         result.reserve(obj.size() * 3);
 
-        size_t start_pos;
-        bool need_swap;
+        size_t start_pos = 0;
+        bool need_swap = false;
         parse_utf16_bom(obj, start_pos, need_swap);
 
         size_t i = start_pos;
@@ -674,8 +674,8 @@ public:
             return {};
         }
 
-        size_t start_pos;
-        bool need_swap;
+        size_t start_pos = 0;
+        bool need_swap = false;
         parse_utf16_bom(obj, start_pos, need_swap);
 
         if (start_pos == 0 && !need_swap) {
@@ -704,8 +704,8 @@ public:
         u32string result;
         result.reserve(obj.size());
 
-        size_t start_pos;
-        bool need_swap;
+        size_t start_pos = 0;
+        bool need_swap = false;
         parse_utf16_bom(obj, start_pos, need_swap);
 
         size_t i = start_pos;

@@ -99,6 +99,7 @@ class tree_barrier {
                 auto expected_phase = old_phase;
                 phase_ref_t phase_ref(state_array_[current_index].tickets[round]);
 
+                // NOLINTNEXTLINE(bugprone-branch-clone)
                 if (current_index == last_node && ((current_expected & 1) != 0U)) {
                     if (phase_ref.compare_exchange_strong(expected_phase, full_step, memory_order_acq_rel)) {
                         break;

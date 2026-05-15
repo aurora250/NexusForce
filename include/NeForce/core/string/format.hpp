@@ -78,7 +78,7 @@ NEFORCE_CONSTEXPR20 string uint_to_string_base(uint64_t value, const int base, c
 
     constexpr auto digits_lower = "0123456789abcdef";
     constexpr auto digits_upper = "0123456789ABCDEF";
-    const auto digits = uppercase ? digits_upper : digits_lower;
+    const auto* digits = uppercase ? digits_upper : digits_lower;
 
     while (value > 0) {
         const uint64_t remainder = value % base;
@@ -110,25 +110,20 @@ constexpr format_type to_number_type(const char c) {
         case 'd':
             return format_type::DECIMAL;
         case 'b':
-            return format_type::BINARY;
         case 'B':
             return format_type::BINARY;
         case 'o':
             return format_type::OCTAL;
         case 'x':
-            return format_type::HEX;
         case 'X':
             return format_type::HEX;
         case 'e':
-            return format_type::SCIENTIFIC;
         case 'E':
             return format_type::SCIENTIFIC;
         case 'f':
-            return format_type::FIXED;
         case 'F':
             return format_type::FIXED;
         case 'g':
-            return format_type::GENERAL;
         case 'G':
             return format_type::GENERAL;
         case 'c':
@@ -340,7 +335,7 @@ struct integer_formatter_impl {
 
         const bool is_negative = Signed && (value < 0);
         const UT abs_value = is_negative ? static_cast<UT>(0 - static_cast<UT>(value)) : static_cast<UT>(value);
-        const uint64_t compatible = static_cast<uint64_t>(abs_value);
+        const auto compatible = static_cast<uint64_t>(abs_value);
 
         string raw;
 
@@ -414,10 +409,7 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
                 raw = _NEFORCE to_string_fixed(value, prec);
                 break;
             }
-            case format_type::GENERAL: {
-                raw = _NEFORCE to_string_general(value, prec);
-                break;
-            }
+            case format_type::GENERAL:
             case format_type::DECIMAL:
             case format_type::DEFAULT:
             default: {
@@ -469,6 +461,7 @@ struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_unsigned_v<T>>> 
      * @return 格式化后的字符串
      */
     NEFORCE_CONSTEXPR20 string operator()(const T value, const format_options& options) const {
+        // NOLINTNEXTLINE(readability-implicit-bool-conversion)
         return inner::integer_formatter_impl<T, false>{}(value, options);
     }
 };
@@ -512,7 +505,7 @@ struct formatter<bool> {
             case format_type::OCTAL:
             case format_type::HEX:
             case format_type::DECIMAL: {
-                return inner::integer_formatter_impl<int, false>{}(value, options);
+                return inner::integer_formatter_impl<int, false>{}(static_cast<int>(value), options);
             }
             default: {
                 break;

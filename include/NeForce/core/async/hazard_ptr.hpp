@@ -71,7 +71,7 @@ struct hazard_pointer_record {
      * @brief 获取当前保护的指针
      * @return 受保护的指针
      */
-    void* get_protected() const { return hazard_ptr.load(memory_order_acquire); }
+    NEFORCE_NODISCARD void* get_protected() const { return hazard_ptr.load(memory_order_acquire); }
 };
 
 /**
@@ -215,10 +215,10 @@ private:
         vector<void*> hazards;
         hazard_pointer_record* current = head_.load(memory_order_acquire);
 
-        while (current) {
+        while (current != nullptr) {
             if (current->active.load(memory_order_acquire)) {
                 void* ptr = current->get_protected();
-                if (ptr) {
+                if (ptr != nullptr) {
                     hazards.push_back(ptr);
                 }
             }
@@ -283,7 +283,7 @@ public:
      */
     ~hazard_pointer_domain() {
         hazard_pointer_record* current = head_.load();
-        while (current) {
+        while (current != nullptr) {
             auto* next = current->next.load();
             delete current;
             current = next;
@@ -301,14 +301,14 @@ public:
      */
     hazard_pointer_record* acquire_record() {
         hazard_pointer_record* current = head_.load(memory_order_acquire);
-        while (current) {
+        while (current != nullptr) {
             if (current->try_acquire()) {
                 return current;
             }
             current = current->next.load(memory_order_acquire);
         }
 
-        hazard_pointer_record* new_record = new hazard_pointer_record();
+        auto* new_record = new hazard_pointer_record();
         new_record->active.store(true, memory_order_relaxed);
 
         hazard_pointer_record* old_head = head_.load(memory_order_relaxed);
@@ -390,7 +390,7 @@ public:
      */
     ~hazard_pointer() {
         reset_protection();
-        if (record_) {
+        if (record_ != nullptr) {
             record_->release();
         }
     }
@@ -408,7 +408,7 @@ public:
         }
 
         reset_protection();
-        if (record_) {
+        if (record_ != nullptr) {
             record_->release();
         }
         record_ = other.record_;
@@ -478,7 +478,7 @@ public:
      * 清除当前保护的指针。
      */
     void reset_protection() noexcept {
-        if (record_) {
+        if (record_ != nullptr) {
             record_->protect(nullptr);
         }
     }

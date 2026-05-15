@@ -9,7 +9,8 @@
  * 闩锁是一种线程协调机制，允许一个或多个线程等待，直到计数器减为零。
  */
 
-#include "atomic_base.hpp"
+#include "NeForce/core/async/atomic_base.hpp"
+#include "NeForce/core/numeric/numeric_traits.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -79,7 +80,7 @@ public:
      *
      * 非阻塞地检查闩锁的计数器是否为零。
      */
-    NEFORCE_ALWAYS_INLINE bool try_wait() const noexcept {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE bool try_wait() const noexcept {
         return _NEFORCE atomic_load(&counter_, memory_order_acquire) == 0;
     }
 

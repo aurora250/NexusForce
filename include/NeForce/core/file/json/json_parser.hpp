@@ -55,13 +55,13 @@ private:
      * @brief 获取当前字符
      * @return 当前位置的字符，若已到末尾返回'\0'
      */
-    char current() const noexcept;
+    NEFORCE_NODISCARD char current() const noexcept;
 
     /**
      * @brief 检查是否已到末尾
      * @return 是否已到文件末尾
      */
-    bool eof() const noexcept;
+    NEFORCE_NODISCARD bool eof() const noexcept;
 
     /**
      * @brief 解析JSON字符串

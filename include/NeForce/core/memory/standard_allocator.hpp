@@ -95,9 +95,9 @@ NEFORCE_INLINE17 constexpr size_t MEMORY_BIG_ALLOC_ALIGN = 32;
  * 大内存分配时在用户数据前后添加的额外空间大小，用于存储元数据。
  */
 NEFORCE_INLINE17 constexpr size_t MEMORY_NO_USER_SIZE = sizeof(void*) + MEMORY_BIG_ALLOC_ALIGN -
-                                                        1
+                                                        static_cast<size_t>(1)
 #    ifdef NEFORCE_STATE_DEBUG
-                                                                * 2
+                                                                * static_cast<size_t>(2)
 #    endif
         ;
 
@@ -135,7 +135,7 @@ NEFORCE_ALLOC_OPTIMIZE NEFORCE_CONSTEXPR20 void* __allocate_aux(const alloc_size
         }
         const auto holder = reinterpret_cast<uintptr_t>(operator new(block_size));
         NEFORCE_DEBUG_VERIFY(holder != 0, "invalid argument");
-        const auto ptr = reinterpret_cast<void*>((holder + MEMORY_NO_USER_SIZE) & ~(MEMORY_BIG_ALLOC_ALIGN - 1));
+        auto* const ptr = reinterpret_cast<void*>((holder + MEMORY_NO_USER_SIZE) & ~(MEMORY_BIG_ALLOC_ALIGN - 1));
         static_cast<uintptr_t*>(ptr)[-1] = holder;
 #    ifdef NEFORCE_STATE_DEBUG
         static_cast<uintptr_t*>(ptr)[-2] = MEMORY_BIG_ALLOC_SENTINEL;
@@ -360,7 +360,7 @@ public:
      * @tparam U 源分配器元素类型
      */
     template <typename U>
-    NEFORCE_CONSTEXPR20 standard_allocator(const standard_allocator<U>&) noexcept {}
+    NEFORCE_CONSTEXPR20 standard_allocator(const standard_allocator<U>& /*unused*/) noexcept {}
 
     NEFORCE_CONSTEXPR20 ~standard_allocator() noexcept = default; ///< 析构函数
 
@@ -419,8 +419,8 @@ public:
  * @return 总是返回 true
  */
 template <typename T, typename U>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const standard_allocator<T>&,
-                                                      const standard_allocator<U>&) noexcept {
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const standard_allocator<T>& /*unused*/,
+                                                      const standard_allocator<U>& /*unused*/) noexcept {
     return true;
 }
 
@@ -431,8 +431,8 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator==(const standard_allocator<T
  * @return 总是返回 false
  */
 template <typename T, typename U>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator!=(const standard_allocator<T>&,
-                                                      const standard_allocator<U>&) noexcept {
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator!=(const standard_allocator<T>& /*unused*/,
+                                                      const standard_allocator<U>& /*unused*/) noexcept {
     return false;
 }
 

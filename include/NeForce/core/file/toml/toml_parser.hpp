@@ -107,20 +107,20 @@ private:
      * @brief 获取当前字符
      * @return 当前位置的字符，若已到末尾返回'\0'
      */
-    char current() const noexcept;
+    NEFORCE_NODISCARD char current() const noexcept;
 
     /**
      * @brief 预取字符
      * @param offset 向前偏移量，默认为1
      * @return 指定偏移位置的字符
      */
-    char peek(size_t offset = 1) const noexcept;
+    NEFORCE_NODISCARD char peek(size_t offset = 1) const noexcept;
 
     /**
      * @brief 检查是否已到末尾
      * @return 是否已到文件末尾
      */
-    bool eof() const noexcept;
+    NEFORCE_NODISCARD bool eof() const noexcept;
 
     /**
      * @brief 前进一个字符
@@ -324,14 +324,14 @@ private:
      *
      * 沿路径获取表格，如果不存在则创建。
      */
-    toml_table* get_or_create_table(const vector<string>& path) const;
+    NEFORCE_NODISCARD toml_table* get_or_create_table(const vector<string>& path) const;
 
     /**
      * @brief 导航到表格
      * @param path 表格路径
      * @return 表格指针，不存在返回nullptr
      */
-    toml_table* navigate_to_table(const vector<string>& path) const;
+    NEFORCE_NODISCARD toml_table* navigate_to_table(const vector<string>& path) const;
 
     /**
      * @brief 设置当前表格
@@ -348,7 +348,7 @@ public:
      *
      * 初始化解析器，创建空的根表格。
      */
-    explicit toml_parser(string text) noexcept :
+    explicit toml_parser(string text) :
     text_(_NEFORCE move(text)),
     len_(text_.size()) {
         root_ = make_unique<toml_table>();

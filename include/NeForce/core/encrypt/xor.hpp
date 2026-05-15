@@ -85,7 +85,7 @@ NEFORCE_ALWAYS_INLINE_INLINE byte_vector XOR_encrypt(const byte_vector& data, co
 NEFORCE_ALWAYS_INLINE_INLINE string XOR_encrypt(const string& data, const string& key) {
     const byte_vector e = XOR_encrypt(cbyte_view{reinterpret_cast<const byte_t*>(data.data()), data.size()},
                                       cbyte_view{reinterpret_cast<const byte_t*>(key.data()), key.size()});
-    return string(e.begin(), e.end());
+    return {e.begin(), e.end()};
 }
 
 
@@ -118,7 +118,7 @@ NEFORCE_ALWAYS_INLINE_INLINE byte_vector XOR_decrypt(const byte_vector& data, co
 NEFORCE_ALWAYS_INLINE_INLINE string XOR_decrypt(const string& data, const string& key) {
     const byte_vector d = XOR_decrypt(cbyte_view{reinterpret_cast<const byte_t*>(data.data()), data.size()},
                                       cbyte_view{reinterpret_cast<const byte_t*>(key.data()), key.size()});
-    return string(d.begin(), d.end());
+    return {d.begin(), d.end()};
 }
 
 /** @} */ // Encryption

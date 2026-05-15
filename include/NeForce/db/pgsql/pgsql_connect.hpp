@@ -42,7 +42,7 @@ NEFORCE_BEGIN_NAMESPACE__
 class NEFORCE_API pgsql_connect final : public idb_tb_connect {
 private:
     ::PGconn* link_ = nullptr;        ///< PostgreSQL连接句柄
-    mutable string last_error_{};     ///< 最后错误信息
+    mutable string last_error_;       ///< 最后错误信息
     mutable uint32_t last_errno_ = 0; ///< 最后错误码
 
 public:

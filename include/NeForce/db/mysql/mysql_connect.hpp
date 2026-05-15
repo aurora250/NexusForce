@@ -160,8 +160,16 @@ public:
      * @brief 构造函数
      * @param config 数据库配置
      */
-    explicit mysql_factory(db_config config) :
+    explicit mysql_factory(db_config config) noexcept :
     idb_factory(move(config)) {}
+
+    mysql_factory(const mysql_factory&) = delete;
+    mysql_factory& operator=(const mysql_factory&) = delete;
+
+    mysql_factory(mysql_factory&&) noexcept = default;
+    mysql_factory& operator=(mysql_factory&&) noexcept = default;
+
+    ~mysql_factory() noexcept override = default;
 
     /**
      * @brief 创建MySQL连接对象

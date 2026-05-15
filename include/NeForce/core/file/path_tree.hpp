@@ -199,7 +199,7 @@ private:
 
     static node::ptr prune_impl(const node::ptr& src, const filter& f, const node::ptr& new_parent, size_t depth);
 
-    string to_string_impl(const node::ptr& n, string_view indent, size_t depth) const;
+    NEFORCE_NODISCARD string to_string_impl(const node::ptr& n, string_view indent, size_t depth) const;
 
 public:
     path_tree() = default;

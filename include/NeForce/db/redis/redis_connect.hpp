@@ -43,7 +43,7 @@ NEFORCE_BEGIN_NAMESPACE__
 struct NEFORCE_API redis_connect final : idb_kv_connect {
 private:
     ::redisContext* link_ = nullptr; ///< Redis连接上下文
-    mutable string last_error_{};    ///< 最后错误信息
+    mutable string last_error_;      ///< 最后错误信息
 
     ::redisReply* execute_command(string_view command, const vector<string_view>& args) const;
     bool authenticate(const string& password) const;
@@ -88,7 +88,7 @@ public:
      * @deprecated Redis不支持设置字符集
      */
     NEFORCE_DEPRECATED_FOR("Redis not support setting character sets")
-    bool set_character_set(const string&) const noexcept override { return false; }
+    bool set_character_set(const string& /*encoding*/) const noexcept override { return false; }
 
     /**
      * @brief 获取字符集（Redis不支持）
@@ -107,7 +107,7 @@ public:
      * @brief 获取最后错误码
      * @return hiredis错误码
      */
-    uint32_t get_errno() const noexcept override { return link_ ? link_->err : 0; }
+    uint32_t get_errno() const noexcept override { return link_ != nullptr ? link_->err : 0; }
 
     /**
      * @brief 执行非查询命令
@@ -127,7 +127,7 @@ public:
      * @brief 检查连接是否已建立
      * @return 已连接返回true
      */
-    bool connected() const noexcept override { return link_ != nullptr && !link_->err; }
+    bool connected() const noexcept override { return link_ != nullptr && link_->err == 0; }
 
     /**
      * @brief 检查连接是否有效

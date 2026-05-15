@@ -98,9 +98,9 @@ private:
     static steal_strategy steal_strategy_; ///< 全局窃取策略
     static uint32_t fixed_batch_size_;     ///< 固定批次大小
 
-    array<function<void()>, queue_size> tasks_{}; ///< 任务数组
-    atomic<uint64_t> head_{0};                    ///< 队列头指针
-    atomic<uint32_t> tail_{0};                    ///< 队列尾指针
+    array<function<void()>, queue_size> tasks_; ///< 任务数组
+    atomic<uint64_t> head_{0};                  ///< 队列头指针
+    atomic<uint32_t> tail_{0};                  ///< 队列尾指针
 
 private:
     constexpr static size_t mask_ = queue_size - 1; ///< 掩码，用于环形索引计算
@@ -133,7 +133,7 @@ public:
      * @brief 检查队列是否为空
      * @return 队列为空返回true
      */
-    NEFORCE_NODISCARD bool empty() const noexcept { return size() == 0u; }
+    NEFORCE_NODISCARD bool empty() const noexcept { return size() == 0U; }
 
     /**
      * @brief 获取剩余容量
@@ -143,7 +143,7 @@ public:
         const auto tail = tail_.load(memory_order_acquire);
         const auto head = head_.load(memory_order_acquire);
         const auto steal = unpack(head).first;
-        const size_t used = static_cast<size_t>(tail - steal);
+        const auto used = static_cast<size_t>(tail - steal);
         const size_t remain = capacity() - used;
         return remain;
     }
@@ -202,7 +202,7 @@ public:
 struct NEFORCE_API worker_context {
     using id_type = uint32_t; ///< 线程ID类型
 
-    local_queue queue{};               ///< 本地任务队列
+    local_queue queue;                 ///< 本地任务队列
     id_type id{0};                     ///< 线程ID
     atomic<bool> is_stealing{false};   ///< 是否正在执行窃取操作
     size_t consecutive_idle_count = 0; ///< 连续空闲次数
@@ -242,7 +242,7 @@ struct task_info {
     timestamp start_time{0};                 ///< 开始执行时间
     timestamp finish_time{0};                ///< 完成时间
     uint32_t worker_thread_id{0};            ///< 执行任务的线程ID
-    string error{};                          ///< 错误信息
+    string error;                            ///< 错误信息
     priority_type priority;                  ///< 任务优先级
 
     /**
@@ -389,20 +389,20 @@ private:
     vector<atomic<worker_context*>> worker_contexts_ptr_;         ///< 工作线程上下文指针数组
     mutex worker_contexts_mtx_;                                   ///< 工作线程上下文互斥锁
 
-    timer_scheduler<steady_clock> timer_{}; ///< 定时器调度器
+    timer_scheduler<steady_clock> timer_; ///< 定时器调度器
 
     id_type init_thread_size_{0}; ///< 初始线程数
     size_t thread_threshhold_;    ///< 线程数阈值
 
-    priority_queue<priority_task> task_queue_{};  ///< 全局优先级任务队列
+    priority_queue<priority_task> task_queue_;    ///< 全局优先级任务队列
     atomic<uint32_t> task_size_{0};               ///< 全局队列大小
     atomic<uint32_t> idle_thread_size_{0};        ///< 空闲线程数
     size_t task_threshhold_{task_max_threshhold}; ///< 任务队列阈值
 
-    mutable mutex task_queue_mtx_{}; ///< 任务队列互斥锁
-    condition_variable not_full_{};  ///< 队列非满条件变量
-    condition_variable not_empty_{}; ///< 队列非空条件变量
-    condition_variable exit_cond_{}; ///< 退出条件变量
+    mutable mutex task_queue_mtx_; ///< 任务队列互斥锁
+    condition_variable not_full_;  ///< 队列非满条件变量
+    condition_variable not_empty_; ///< 队列非空条件变量
+    condition_variable exit_cond_; ///< 退出条件变量
 
     atomic<pool_mode> pool_mode_{pool_mode::fixed}; ///< 线程池模式
     atomic<bool> is_running_{false};                ///< 是否正在运行

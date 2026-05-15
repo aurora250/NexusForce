@@ -27,11 +27,30 @@ NEFORCE_BEGIN_NAMESPACE__
 void sys_console::print_string_unsafe(const string_view str) const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD written = 0;
-    ::WriteConsoleA(out_, str.data(), str.length(), &written, nullptr);
+    ::WriteConsoleA(out_, str.data(), static_cast<::DWORD>(str.length()), &written, nullptr);
 #elif defined(NEFORCE_PLATFORM_LINUX)
     size_t total = 0;
     while (total < str.length()) {
         const ssize_t written = ::write(out_, str.data() + total, str.length() - total);
+        if (written < 0) {
+            if (errno == EINTR) {
+                continue;
+            }
+            break;
+        }
+        total += written;
+    }
+#endif
+}
+
+void sys_console::print_error_unsafe(const string_view str) const {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::DWORD written = 0;
+    ::WriteFile(err_, str.data(), static_cast<::DWORD>(str.length()), &written, nullptr);
+#elif defined(NEFORCE_PLATFORM_LINUX)
+    size_t total = 0;
+    while (total < str.length()) {
+        const ssize_t written = ::write(err_, str.data() + total, str.length() - total);
         if (written < 0) {
             if (errno == EINTR) {
                 continue;
@@ -216,9 +235,15 @@ char sys_console::read_char_unsafe() const {
     ::tcsetattr(in_, TCSANOW, &new_tio);
 
     char ch = '\0';
-    const ssize_t n = ::read(in_, &ch, 1);
+    ssize_t n;
+    do {
+        n = ::read(in_, &ch, 1);
+    } while (n == -1 && errno == EINTR);
     ::tcsetattr(in_, TCSANOW, &old_tio);
 
+    if (n > 0 && ch == '\r') {
+        ch = '\n';
+    }
     return (n > 0) ? ch : '\0';
 #endif
 }
@@ -246,11 +271,11 @@ sys_console::console_size sys_console::get_console_size_unsafe() const {
 
 void sys_console::flush_unsafe() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (::GetFileType(out_) != FILE_TYPE_CHAR) {
-        ::FlushFileBuffers(out_);
-    }
+    ::FlushFileBuffers(out_);
 #elif defined(NEFORCE_PLATFORM_LINUX)
-    if (::isatty(out_) == 0) {
+    if (::isatty(out_)) {
+        ::tcflush(out_, TCOFLUSH);
+    } else {
         ::fsync(out_);
     }
 #endif
@@ -271,7 +296,7 @@ void sys_console::beep_unsafe() const {
             ::write(fd, "\a", 1);
             ::close(fd);
         } else {
-            ::write(STDERR_FILENO, "\a", 1);
+            ::write(err_, "\a", 1);
         }
     }
 #endif
@@ -324,16 +349,13 @@ void sys_console::fade_effect_unsafe(const string_view text, const color& from, 
     print_string_unsafe("\033[2K");
 
     if (!is_fade_in) {
-        set_color_unsafe(to, supports_truecolor());
+        set_color_unsafe(from, supports_truecolor());
         print_string_unsafe(text);
         flush_unsafe();
     }
 
     for (int i = 0; i <= steps; ++i) {
-        float t = static_cast<float>(i) / steps;
-        if (!is_fade_in) {
-            t = 1.0F - t;
-        }
+        const float t = static_cast<float>(i) / steps;
         color current_color = color::lerp(from, to, t);
         print_string_unsafe("\r\033[2K");
         set_color_unsafe(current_color, supports_truecolor());
@@ -355,16 +377,18 @@ sys_console::sys_console() noexcept
 #ifdef NEFORCE_PLATFORM_WINDOWS
 :
 out_(::GetStdHandle(STD_OUTPUT_HANDLE)),
-in_(::GetStdHandle(STD_INPUT_HANDLE))
+in_(::GetStdHandle(STD_INPUT_HANDLE)),
+err_(::GetStdHandle(STD_ERROR_HANDLE))
 #else
 :
 out_(STDOUT_FILENO),
-in_(STDIN_FILENO)
+in_(STDIN_FILENO),
+err_(STDERR_FILENO)
 #endif
 {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     try {
-        if (out_ == INVALID_HANDLE_VALUE || in_ == INVALID_HANDLE_VALUE) {
+        if (out_ == INVALID_HANDLE_VALUE || in_ == INVALID_HANDLE_VALUE || err_ == INVALID_HANDLE_VALUE) {
             return;
         }
 
@@ -407,6 +431,21 @@ void sys_console::print_string(const char* str) {
     print_string_unsafe(str);
 }
 
+void sys_console::print_error(const string& str) {
+    lock<mutex> lock(mutex_);
+    print_error_unsafe(str.view());
+}
+
+void sys_console::print_error(const string_view& view) {
+    lock<mutex> lock(mutex_);
+    print_error_unsafe(view);
+}
+
+void sys_console::print_error(const char* str) {
+    lock<mutex> lock(mutex_);
+    print_error_unsafe(str);
+}
+
 string sys_console::read() {
     lock<mutex> lock(mutex_);
     return read_unsafe();
@@ -425,6 +464,11 @@ char sys_console::read_char() {
 void sys_console::println() {
     lock<mutex> lock(mutex_);
     print_string_unsafe("\n");
+}
+
+void sys_console::eprintln() {
+    lock<mutex> lock(mutex_);
+    print_error_unsafe("\n");
 }
 
 void sys_console::clear() {

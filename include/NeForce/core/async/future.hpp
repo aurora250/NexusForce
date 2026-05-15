@@ -179,12 +179,13 @@ struct __future_base {
         exception_ptr error_ptr{nullptr}; ///< 异常指针，为空表示正常结果
 
     protected:
-        result_base() noexcept {}
-        virtual ~result_base() = default;
+        result_base() noexcept = default;
 
     public:
         result_base(const result_base&) = delete;
         result_base& operator=(const result_base&) = delete;
+
+        virtual ~result_base() = default;
 
         /**
          * @brief 销毁结果对象
@@ -215,7 +216,7 @@ struct __future_base {
     struct basic_result : result_base {
     private:
         aligned_buffer<Res> storage; ///< 对齐存储缓冲区
-        bool initialized;            ///< 是否已初始化标志
+        bool initialized = false;    ///< 是否已初始化标志
 
         /// 销毁实现
         void destroy() override { delete this; }
@@ -226,8 +227,7 @@ struct __future_base {
         /**
          * @brief 默认构造函数
          */
-        basic_result() noexcept :
-        initialized() {}
+        basic_result() noexcept = default;
 
         /**
          * @brief 析构函数
@@ -298,7 +298,7 @@ struct __future_base {
         using result_type = allocated_result<Res, Alloc>;
         typename result_type::allocator_type alloc2(alloc);
         auto guard = _NEFORCE allocate_guarded(alloc2);
-        result_type* ptr = new (static_cast<void*>(guard.get())) result_type{alloc};
+        auto* ptr = new (static_cast<void*>(guard.get())) result_type{alloc};
         guard = nullptr;
         return Ptr<result_type>(ptr);
     }
@@ -310,7 +310,7 @@ struct __future_base {
      * @return 结果对象指针
      */
     template <typename Res, typename T>
-    static Ptr<basic_result<Res>> allocate_result(const _NEFORCE allocator<T>&) {
+    static Ptr<basic_result<Res>> allocate_result(const _NEFORCE allocator<T>& /*unused*/) {
         return Ptr<basic_result<Res>>(new basic_result<Res>);
     }
 
@@ -331,20 +331,16 @@ struct __future_base {
             ready      ///< 结果已就绪
         };
 
-        PtrType result_ptr;    ///< 结果指针
-        atomic_futex<> status; ///< 原子状态变量
-        atomic_flag retrieved; ///< 是否已获取标志
-        once_flag flag;        ///< 一次性标志，用于确保只设置一次结果
+        PtrType result_ptr;                       ///< 结果指针
+        atomic_futex<> status{status::not_ready}; ///< 原子状态变量
+        atomic_flag retrieved;                    ///< 是否已获取标志
+        once_flag flag;                           ///< 一次性标志，用于确保只设置一次结果
 
     public:
         /**
          * @brief 默认构造函数
          */
-        state_base() noexcept :
-        status(status::not_ready),
-        retrieved(false) {
-            retrieved.clear();
-        }
+        state_base() noexcept { retrieved.clear(); }
 
         state_base(const state_base&) = delete;
         state_base& operator=(const state_base&) = delete;
@@ -599,7 +595,7 @@ struct __future_base {
          * @brief 是否为延迟future
          * @return 是否是延迟future
          */
-        virtual bool is_deferred_future() const { return false; }
+        NEFORCE_NODISCARD virtual bool is_deferred_future() const { return false; }
 
         /**
          * @brief 就绪标记器
@@ -614,7 +610,7 @@ struct __future_base {
              * @param ptr 指向make_ready对象的指针
              */
             static void run(void* ptr) noexcept {
-                const auto self = static_cast<make_ready*>(ptr);
+                auto* const self = static_cast<make_ready*>(ptr);
                 const auto state = self->shared_state.lock();
                 if (state) {
                     state->status.store_notify_all(status::ready, memory_order_release);
@@ -737,7 +733,7 @@ public:
      * @brief 检查future是否有效
      * @return 是否有效
      */
-    bool valid() const noexcept { return static_cast<bool>(state_ptr); }
+    NEFORCE_NODISCARD bool valid() const noexcept { return static_cast<bool>(state_ptr); }
 
     /**
      * @brief 等待结果就绪
@@ -781,7 +777,7 @@ protected:
      * @brief 获取结果
      * @return 结果引用
      */
-    result_type get_result() const {
+    NEFORCE_NODISCARD result_type get_result() const {
         state_base::check(state_ptr);
         result_base& result = state_ptr->wait();
         if (result.error_ptr != nullptr) {
@@ -800,20 +796,20 @@ protected:
      * @brief 构造函数
      * @param state 共享状态
      */
-    explicit __basic_future(const state_type& state) :
-    state_ptr(state) {
+    explicit __basic_future(state_type state) :
+    state_ptr(move(state)) {
         state_base::check(state_ptr);
         state_ptr->set_retrieved_flag();
     }
 
-    explicit __basic_future(const shared_future<Res>&) noexcept;
-    explicit __basic_future(shared_future<Res>&&) noexcept;
-    explicit __basic_future(future<Res>&&) noexcept;
+    explicit __basic_future(const shared_future<Res>& other) noexcept;
+    explicit __basic_future(shared_future<Res>&& other) noexcept;
+    explicit __basic_future(future<Res>&& other) noexcept;
 
     /**
      * @brief 默认构造函数
      */
-    constexpr __basic_future() noexcept {}
+    constexpr __basic_future() noexcept = default;
 
     /**
      * @brief 重置器
@@ -937,8 +933,8 @@ class future<Res&> : public inner::__basic_future<Res&> {
     template <typename Function, typename... Args>
     friend future<async_result_t<Function, Args...>> async(launch, Function&&, Args&&...);
 
-    typedef inner::__basic_future<Res&> base_type;
-    typedef typename base_type::state_type state_type;
+    using base_type = inner::__basic_future<Res&>;
+    using state_type = typename base_type::state_type;
 
     explicit future(const state_type& state) :
     base_type(state) {}
@@ -986,11 +982,12 @@ class future<void> : public inner::__basic_future<void> {
     using base_type = inner::__basic_future<void>;
     using state_type = base_type::state_type;
 
-    explicit future(const state_type& state) :
-    base_type(state) {}
+    explicit future(state_type state) :
+    base_type(move(state)) {}
 
 public:
-    constexpr future() noexcept {}
+    constexpr future() noexcept = default;
+
     future(future&& other) noexcept :
     base_type(_NEFORCE move(other)) {}
 
@@ -1100,7 +1097,8 @@ class shared_future<void> : public inner::__basic_future<void> {
     using base_type = inner::__basic_future<void>;
 
 public:
-    constexpr shared_future() noexcept {}
+    constexpr shared_future() noexcept = default;
+
     shared_future(const shared_future& other) :
     base_type(other) {}
     shared_future(future<void>&& other) noexcept :
@@ -1149,7 +1147,7 @@ shared_future<Res&> future<Res&>::share() noexcept {
     return shared_future<Res&>(_NEFORCE move(*this));
 }
 
-inline shared_future<void> future<void>::share() noexcept { return shared_future<void>(_NEFORCE move(*this)); }
+inline shared_future<void> future<void>::share() noexcept { return {_NEFORCE move(*this)}; }
 
 /// @endcond
 

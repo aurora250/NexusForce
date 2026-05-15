@@ -196,7 +196,7 @@ public:
      * @brief 构造空字符U+0000
      * @return 空字符码点对象
      */
-    static constexpr codepoint null() noexcept { return codepoint(0u); }
+    static constexpr codepoint null() noexcept { return codepoint(0U); }
 
     /**
      * @brief 从UTF-8字节流解码一个码点，并推进索引
@@ -224,8 +224,8 @@ public:
      */
     template <typename T>
     static codepoint decode_utf16(const T* data, size_t& index, const size_t len, const bool need_swap) noexcept {
-        uint32_t cp;
-        size_t consumed;
+        uint32_t cp = 0;
+        size_t consumed = 0;
         const bool ok = codepoint::utf16_codepoint(data, index, len, cp, consumed, need_swap);
         if (consumed == 0) {
             return replacement();
@@ -318,43 +318,45 @@ public:
      * @brief 获取码点的uint32_t值
      * @return 码点数值
      */
-    constexpr uint32_t value() const noexcept { return value_; }
+    NEFORCE_NODISCARD constexpr uint32_t value() const noexcept { return value_; }
 
     /**
      * @brief 获取码点的char32_t值
      * @return UTF-32字符
      */
-    constexpr char32_t to_char32() const noexcept { return static_cast<char32_t>(value_); }
+    NEFORCE_NODISCARD constexpr char32_t to_char32() const noexcept { return static_cast<char32_t>(value_); }
 
     /**
      * @brief 是否为替换符U+FFFD
      * @return 是替换符返回true
      */
-    constexpr bool is_replacement() const noexcept { return value_ == REPLACEMENT_VALUE; }
+    NEFORCE_NODISCARD constexpr bool is_replacement() const noexcept { return value_ == REPLACEMENT_VALUE; }
 
     /**
      * @brief 是否为ASCII字符（U+0000 ~ U+007F）
      * @return 是ASCII字符返回true
      */
-    constexpr bool is_ascii() const noexcept { return value_ <= 0x7F; }
+    NEFORCE_NODISCARD constexpr bool is_ascii() const noexcept { return value_ <= 0x7F; }
 
     /**
      * @brief 是否位于基本多文种平面（BMP, U+0000 ~ U+FFFF）
      * @return 在BMP内返回true
      */
-    constexpr bool is_bmp() const noexcept { return value_ <= 0xFFFF; }
+    NEFORCE_NODISCARD constexpr bool is_bmp() const noexcept { return value_ <= 0xFFFF; }
 
     /**
      * @brief 是否为辅助平面字符（需要UTF-16代理对）
      * @return 是辅助平面字符返回true
      */
-    constexpr bool is_supplementary() const noexcept { return value_ > 0xFFFF && value_ <= MAX_VALUE; }
+    NEFORCE_NODISCARD constexpr bool is_supplementary() const noexcept {
+        return value_ > 0xFFFF && value_ <= MAX_VALUE;
+    }
 
     /**
      * @brief 是否需要UTF-16代理对表示
      * @return 需要代理对返回true
      */
-    constexpr bool needs_surrogate_pair() const noexcept { return is_supplementary(); }
+    NEFORCE_NODISCARD constexpr bool needs_surrogate_pair() const noexcept { return is_supplementary(); }
 
     /**
      * @brief UTF-8编码后的字节数
@@ -366,7 +368,7 @@ public:
      * - U+0800 ~ U+FFFF: 3字节
      * - U+10000 ~ U+10FFFF: 4字节
      */
-    constexpr size_t utf8_length() const noexcept {
+    NEFORCE_NODISCARD constexpr size_t utf8_length() const noexcept {
         if (value_ <= 0x7F) {
             return 1;
         }
@@ -385,7 +387,7 @@ public:
      *
      * BMP字符需要1个码元，辅助平面字符需要2个码元（代理对）。
      */
-    constexpr size_t utf16_length() const noexcept { return is_supplementary() ? 2u : 1u; }
+    NEFORCE_NODISCARD constexpr size_t utf16_length() const noexcept { return is_supplementary() ? 2U : 1U; }
 
     /**
      * @brief 追加UTF-8编码到string

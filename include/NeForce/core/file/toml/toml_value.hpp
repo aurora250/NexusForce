@@ -557,7 +557,7 @@ public:
      * @brief 获取字符串格式的日期时间值
      * @return 根据类型格式化的日期时间字符串
      */
-    NEFORCE_NODISCARD string get_string_value() const noexcept {
+    NEFORCE_NODISCARD string get_string_value() const {
         switch (type_) {
             case datetime_type::OffsetDateTime: {
                 return value_.to_RFC3339();
@@ -669,8 +669,8 @@ public:
  */
 class NEFORCE_API toml_table final : public toml_value {
 private:
-    unordered_map<string, unique_ptr<toml_value>> members_{}; ///< 成员映射表
-    bool is_inline_ = false;                                  ///< 是否为内联表格
+    unordered_map<string, unique_ptr<toml_value>> members_; ///< 成员映射表
+    bool is_inline_ = false;                                ///< 是否为内联表格
 
 public:
     /**

@@ -94,7 +94,8 @@ private:
      */
     static destruct_function* destructors_table() noexcept {
         static destruct_function function_ptrs[sizeof...(Types)] = {
-                [](byte_t* union_p) noexcept { reinterpret_cast<Types*>(union_p)->~Types(); }...};
+                // NOLINTNEXTLINE(readability-non-const-parameter)
+                [](byte_t* const union_p) noexcept { reinterpret_cast<Types*>(union_p)->~Types(); }...};
         return function_ptrs;
     }
 
@@ -108,7 +109,8 @@ private:
      */
     static copy_construct_function* copy_constructors_table() noexcept {
         static copy_construct_function function_ptrs[sizeof...(Types)] = {
-                [](byte_t* union_dst, byte_t const* union_src) noexcept {
+                // NOLINTNEXTLINE(readability-non-const-parameter)
+                [](byte_t* const union_dst, byte_t const* union_src) noexcept {
                     new (union_dst) Types(*reinterpret_cast<Types const*>(union_src));
                 }...};
         return function_ptrs;
@@ -140,7 +142,8 @@ private:
      */
     static move_construct_function* move_constructors_table() noexcept {
         static move_construct_function function_ptrs[sizeof...(Types)] = {
-                [](byte_t* union_dst, const byte_t* union_src) noexcept {
+                // NOLINTNEXTLINE(readability-non-const-parameter)
+                [](byte_t* const union_dst, const byte_t* union_src) noexcept {
                     new (union_dst) Types(_NEFORCE move(*reinterpret_cast<const Types*>(union_src)));
                 }...};
         return function_ptrs;
@@ -156,7 +159,8 @@ private:
      */
     static move_assignment_function* move_assigment_functions_table() noexcept {
         static move_assignment_function function_ptrs[sizeof...(Types)] = {
-                [](byte_t* union_dst, byte_t* union_src) noexcept {
+                // NOLINTNEXTLINE(readability-non-const-parameter)
+                [](byte_t* union_dst, byte_t* const union_src) noexcept {
                     *reinterpret_cast<Types*>(union_dst) = _NEFORCE move(*reinterpret_cast<Types*>(union_src));
                 }...};
         return function_ptrs;
@@ -196,7 +200,9 @@ private:
     template <typename Lambda>
     static visitor_function<Lambda>* visitors_table() noexcept {
         static visitor_function<Lambda> function_ptrs[sizeof...(Types)] = {
-                [](byte_t* union_p, Lambda&& lambda) -> common_type_t<_NEFORCE invoke_result_t<Lambda, Types&>...> {
+                // NOLINTNEXTLINE(readability-non-const-parameter)
+                [](byte_t* const union_p,
+                   Lambda&& lambda) -> common_type_t<_NEFORCE invoke_result_t<Lambda, Types&>...> {
                     return _NEFORCE invoke(_NEFORCE forward<Lambda>(lambda), *reinterpret_cast<Types*>(union_p));
                 }...};
         return function_ptrs;
@@ -222,7 +228,7 @@ private:
     }
 
     template <size_t I, typename... Args, enable_if_t<(I >= sizeof...(Types)), int> = 0>
-    constexpr bool try_construct_impl_aux(Args&&...) {
+    constexpr bool try_construct_impl_aux(Args&&... /*unused*/) {
         return false;
     }
 
@@ -241,7 +247,8 @@ private:
         return lhs == rhs;
     }
     template <typename T, typename U>
-    static NEFORCE_CONSTEXPR20 enable_if_t<!is_same_v<T, U>, bool> equal_to_impl(const T&, const U&) {
+    static NEFORCE_CONSTEXPR20 enable_if_t<!is_same_v<T, U>, bool> equal_to_impl(const T& /*unused*/,
+                                                                                 const U& /*unused*/) {
         return false;
     }
 
@@ -250,7 +257,8 @@ private:
         return lhs < rhs;
     }
     template <typename T, typename U>
-    static NEFORCE_CONSTEXPR20 enable_if_t<!is_same_v<T, U>, bool> less_than_impl(const T&, const U&) {
+    static NEFORCE_CONSTEXPR20 enable_if_t<!is_same_v<T, U>, bool> less_than_impl(const T& /*unused*/,
+                                                                                  const U& /*unused*/) {
         return false;
     }
 
@@ -342,7 +350,7 @@ public:
      */
     template <size_t Idx, typename... Args,
               enable_if_t<is_constructible_v<variant_alternative_t<variant, Idx>, Args...>, int> = 0>
-    NEFORCE_CONSTEXPR20 explicit variant(pass_size_construct_tag<Idx>, Args&&... args) noexcept(
+    NEFORCE_CONSTEXPR20 explicit variant(pass_size_construct_tag<Idx> /*unused*/, Args&&... args) noexcept(
             is_nothrow_constructible_v<variant_alternative_t<variant, Idx>, Args...>) :
     index_(Idx) {
         new (union_) variant_alternative_t<variant, Idx>(_NEFORCE forward<Args>(args)...);
@@ -362,7 +370,7 @@ public:
               enable_if_t<is_constructible_v<variant_alternative_t<variant, Idx>, std::initializer_list<U>&, Args...>,
                           int> = 0>
     NEFORCE_CONSTEXPR20 explicit variant(
-            pass_size_construct_tag<Idx>, std::initializer_list<U> ilist,
+            pass_size_construct_tag<Idx> /*unused*/, std::initializer_list<U> ilist,
             Args&&... args) noexcept(is_nothrow_constructible_v<variant_alternative_t<variant, Idx>,
                                                                 std::initializer_list<U>&, Args...>) :
     index_(Idx) {

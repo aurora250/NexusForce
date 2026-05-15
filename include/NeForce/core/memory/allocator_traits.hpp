@@ -143,29 +143,30 @@ private:
     template <typename T, typename... Args>
     static constexpr enable_if_t<
             conjunction_v<negation<has_construct<Alloc, T, Args...>>, is_constructible<T, Args...>>>
-    __construct_aux(Alloc&, T* ptr, Args&&... args) noexcept(_NEFORCE is_nothrow_constructible<T, Args...>::value) {
+    __construct_aux(Alloc& /*unused*/, T* ptr,
+                    Args&&... args) noexcept(_NEFORCE is_nothrow_constructible<T, Args...>::value) {
         _NEFORCE construct(ptr, _NEFORCE forward<Args>(args)...);
     }
 
     template <typename Alloc2, typename T>
-    static constexpr auto __destroy_aux(Alloc2& alloc, T* ptr, int) noexcept(noexcept(alloc.destroy(ptr)))
+    static constexpr auto __destroy_aux(Alloc2& alloc, T* ptr, int /*unused*/) noexcept(noexcept(alloc.destroy(ptr)))
             -> decltype(alloc.destroy(ptr)) {
         alloc.destroy(ptr);
     }
 
     template <typename Alloc2, typename T>
-    static constexpr void __destroy_aux(Alloc2&, T* ptr, ...) noexcept(is_nothrow_destructible_v<T>) {
+    static constexpr void __destroy_aux(Alloc2& /*unused*/, T* ptr, ...) noexcept(is_nothrow_destructible_v<T>) {
         _NEFORCE destroy(ptr);
     }
 
     template <typename Alloc2>
-    static constexpr auto __max_size_aux(Alloc2& alloc, int) noexcept(noexcept(alloc.max_size()))
+    static constexpr auto __max_size_aux(Alloc2& alloc, int /*unused*/) noexcept(noexcept(alloc.max_size()))
             -> decltype(alloc.max_size()) {
         return alloc.max_size();
     }
 
     template <typename Alloc2>
-    static constexpr size_type __max_size_aux(Alloc2&, ...) noexcept {
+    static constexpr size_type __max_size_aux(Alloc2& /*unused*/, ...) noexcept {
         return _NEFORCE numeric_traits<size_type>::max() / sizeof(value_type);
     }
 

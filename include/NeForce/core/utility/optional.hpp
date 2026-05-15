@@ -410,7 +410,7 @@ public:
      * @param args 构造参数
      */
     template <typename... Types, enable_if_t<is_constructible_v<T, Types...>, int> = 0>
-    constexpr explicit optional(inplace_construct_tag,
+    constexpr explicit optional(inplace_construct_tag /*unused*/,
                                 Types&&... args) noexcept(is_nothrow_constructible_v<T, Types...>) :
     have_value_(true) {
         _NEFORCE construct(get_ptr(), _NEFORCE forward<Types>(args)...);
@@ -425,8 +425,9 @@ public:
      */
     template <typename U, typename... Types,
               enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Types...>, int> = 0>
-    constexpr explicit optional(inplace_construct_tag, std::initializer_list<U> ilist, Types&&... args) noexcept(
-            is_nothrow_constructible_v<T, std::initializer_list<U>&, Types...>) :
+    constexpr explicit optional(
+            inplace_construct_tag /*unused*/, std::initializer_list<U> ilist,
+            Types&&... args) noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Types...>) :
     have_value_(true) {
         _NEFORCE construct(get_ptr(), ilist, _NEFORCE forward<Types>(args)...);
     }
@@ -762,25 +763,25 @@ public:
         return *get_ptr() < *rhs.get_ptr();
     }
 
-    constexpr bool operator==(none_t) const noexcept { return !have_value_; }
-    constexpr bool operator!=(none_t) const noexcept { return have_value_; }
-    constexpr bool operator>(none_t) const noexcept { return have_value_; }
-    constexpr bool operator<(none_t) const noexcept { return false; }
-    constexpr bool operator>=(none_t) const noexcept { return true; }
-    constexpr bool operator<=(none_t) const noexcept { return !have_value_; }
+    constexpr bool operator==(none_t /*unused*/) const noexcept { return !have_value_; }
+    constexpr bool operator!=(none_t /*unused*/) const noexcept { return have_value_; }
+    constexpr bool operator>(none_t /*unused*/) const noexcept { return have_value_; }
+    constexpr bool operator<(none_t /*unused*/) const noexcept { return false; }
+    constexpr bool operator>=(none_t /*unused*/) const noexcept { return true; }
+    constexpr bool operator<=(none_t /*unused*/) const noexcept { return !have_value_; }
 
-    friend constexpr bool operator==(none_t, const optional& rhs) noexcept { return !rhs.have_value_; }
-    friend constexpr bool operator!=(none_t, const optional& rhs) noexcept { return rhs.have_value_; }
-    friend constexpr bool operator>(none_t, const optional&) noexcept { return false; }
-    friend constexpr bool operator<(none_t, const optional& rhs) noexcept { return rhs.have_value_; }
-    friend constexpr bool operator>=(none_t, const optional& rhs) noexcept { return !rhs.have_value_; }
-    friend constexpr bool operator<=(none_t, const optional&) noexcept { return true; }
+    friend constexpr bool operator==(none_t /*unused*/, const optional& rhs) noexcept { return !rhs.have_value_; }
+    friend constexpr bool operator!=(none_t /*unused*/, const optional& rhs) noexcept { return rhs.have_value_; }
+    friend constexpr bool operator>(none_t /*unused*/, const optional& /*unused*/) noexcept { return false; }
+    friend constexpr bool operator<(none_t /*unused*/, const optional& rhs) noexcept { return rhs.have_value_; }
+    friend constexpr bool operator>=(none_t /*unused*/, const optional& rhs) noexcept { return !rhs.have_value_; }
+    friend constexpr bool operator<=(none_t /*unused*/, const optional& /*unused*/) noexcept { return true; }
 
     /**
      * @brief 计算哈希值
      * @return 哈希值
      */
-    constexpr size_t to_hash() const noexcept {
+    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept {
         return have_value_ ? hash<T>()(*get_ptr()) : constants::FNV_OFFSET_BASIS;
     }
 
@@ -1004,7 +1005,7 @@ public:
      * @throws optional_exception 如果引用未存储
      */
     constexpr const T& value() const& {
-        if (!ptr_) {
+        if (ptr_ == nullptr) {
             NEFORCE_THROW_EXCEPTION(optional_exception("optional have no reference"));
         }
         return *ptr_;
@@ -1016,7 +1017,7 @@ public:
      * @throws optional_exception 如果引用未存储
      */
     constexpr T& value() & {
-        if (!ptr_) {
+        if (ptr_ == nullptr) {
             NEFORCE_THROW_EXCEPTION(optional_exception("optional have no reference"));
         }
         return *ptr_;
@@ -1028,7 +1029,7 @@ public:
      * @throws optional_exception 如果引用未存储
      */
     constexpr const T&& value() const&& {
-        if (!ptr_) {
+        if (ptr_ == nullptr) {
             NEFORCE_THROW_EXCEPTION(optional_exception("optional have no reference"));
         }
         return *ptr_;
@@ -1040,7 +1041,7 @@ public:
      * @throws optional_exception 如果引用未存储
      */
     constexpr T&& value() && {
-        if (!ptr_) {
+        if (ptr_ == nullptr) {
             NEFORCE_THROW_EXCEPTION(optional_exception("optional have no reference"));
         }
         return *ptr_;
@@ -1267,25 +1268,25 @@ public:
      */
     constexpr bool less_than(const optional& rhs) const noexcept { return ptr_ && rhs.ptr_ && *ptr_ < *rhs.ptr_; }
 
-    constexpr bool operator==(none_t) const noexcept { return ptr_ == nullptr; }
-    constexpr bool operator!=(none_t) const noexcept { return ptr_ != nullptr; }
-    constexpr bool operator>(none_t) const noexcept { return ptr_ != nullptr; }
-    constexpr bool operator<(none_t) const noexcept { return false; }
-    constexpr bool operator>=(none_t) const noexcept { return true; }
-    constexpr bool operator<=(none_t) const noexcept { return ptr_ == nullptr; }
+    constexpr bool operator==(none_t /*unused*/) const noexcept { return ptr_ == nullptr; }
+    constexpr bool operator!=(none_t /*unused*/) const noexcept { return ptr_ != nullptr; }
+    constexpr bool operator>(none_t /*unused*/) const noexcept { return ptr_ != nullptr; }
+    constexpr bool operator<(none_t /*unused*/) const noexcept { return false; }
+    constexpr bool operator>=(none_t /*unused*/) const noexcept { return true; }
+    constexpr bool operator<=(none_t /*unused*/) const noexcept { return ptr_ == nullptr; }
 
-    friend constexpr bool operator==(none_t, const optional& rhs) noexcept { return rhs.ptr_ == nullptr; }
-    friend constexpr bool operator!=(none_t, const optional& rhs) noexcept { return rhs.ptr_ != nullptr; }
-    friend constexpr bool operator>(none_t, const optional&) noexcept { return false; }
-    friend constexpr bool operator<(none_t, const optional& rhs) noexcept { return rhs.ptr_ != nullptr; }
-    friend constexpr bool operator>=(none_t, const optional& rhs) noexcept { return rhs.ptr_ == nullptr; }
-    friend constexpr bool operator<=(none_t, const optional&) noexcept { return true; }
+    friend constexpr bool operator==(none_t /*unused*/, const optional& rhs) noexcept { return rhs.ptr_ == nullptr; }
+    friend constexpr bool operator!=(none_t /*unused*/, const optional& rhs) noexcept { return rhs.ptr_ != nullptr; }
+    friend constexpr bool operator>(none_t /*unused*/, const optional& /*unused*/) noexcept { return false; }
+    friend constexpr bool operator<(none_t /*unused*/, const optional& rhs) noexcept { return rhs.ptr_ != nullptr; }
+    friend constexpr bool operator>=(none_t /*unused*/, const optional& rhs) noexcept { return rhs.ptr_ == nullptr; }
+    friend constexpr bool operator<=(none_t /*unused*/, const optional& /*unused*/) noexcept { return true; }
 
     /**
      * @brief 计算哈希值
      * @return 哈希值
      */
-    constexpr size_t to_hash() const noexcept {
+    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept {
         return ptr_ ? hash<remove_cvref_t<T>>()(*ptr_) : constants::FNV_OFFSET_BASIS;
     }
 

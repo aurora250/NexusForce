@@ -687,8 +687,7 @@ TEST_F(ApplyTest, ApplyWithMutableFunctor) {
 
 TEST_F(ApplyTest, ApplyWithVoidReturn) {
     int out = 0;
-    auto t = forward_as_tuple(out, 3, 4);
-    apply(void_free_func, t);
+    apply(void_free_func, forward_as_tuple(out, 3, 4));
     EXPECT_EQ(out, 7);
 }
 

@@ -48,7 +48,7 @@ struct iplugin {
      * @brief 获取插件信息
      * @return 插件信息结构引用
      */
-    virtual const plugin_info& get_info() const = 0;
+    NEFORCE_NODISCARD virtual const plugin_info& get_info() const = 0;
 
     /**
      * @brief 初始化插件
@@ -132,7 +132,7 @@ public:
      * 调用实际的删除函数销毁插件对象。
      */
     void operator()(iplugin* plugin) const noexcept(is_nothrow_invocable_v<deleter_type, iplugin*>) {
-        if (plugin) {
+        if (plugin != nullptr) {
             func_(plugin);
         }
     }
@@ -143,7 +143,7 @@ public:
      *
      * 用于在移动语义中获取新的删除器实例。
      */
-    plugin_deleter rebind() && noexcept { return plugin_deleter(_NEFORCE move(*this)); }
+    plugin_deleter rebind() && noexcept { return _NEFORCE move(*this); }
 };
 
 /**

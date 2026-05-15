@@ -170,7 +170,7 @@ NEFORCE_CONSTEXPR14 size_t FNV_hash_integer(const T value) noexcept {
 
     size_t result = constants::FNV_OFFSET_BASIS;
     for (size_t i = 0; i < sizeof(T); ++i) {
-        const byte_t byte_val = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
+        const auto byte_val = static_cast<byte_t>((value >> (i * 8)) & 0xFF);
         result ^= static_cast<size_t>(byte_val);
         result *= constants::FNV_PRIME;
     }

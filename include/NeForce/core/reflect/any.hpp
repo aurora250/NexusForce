@@ -62,8 +62,8 @@ class meta_any {
 private:
     struct concepts {
         virtual ~concepts() = default;
-        virtual unique_ptr<concepts> clone() const = 0;
-        virtual reflect::type_id type_id() const noexcept = 0;
+        NEFORCE_NODISCARD virtual unique_ptr<concepts> clone() const = 0;
+        NEFORCE_NODISCARD virtual reflect::type_id type_id() const noexcept = 0;
     };
 
     template <typename T>
@@ -73,9 +73,9 @@ private:
         explicit model(T value) :
         value_(_NEFORCE move(value)) {}
 
-        unique_ptr<concepts> clone() const override { return _NEFORCE make_unique<model<T>>(value_); }
+        NEFORCE_NODISCARD unique_ptr<concepts> clone() const override { return _NEFORCE make_unique<model<T>>(value_); }
 
-        reflect::type_id type_id() const noexcept override { return type_name_v<T>.to_hash(); }
+        NEFORCE_NODISCARD reflect::type_id type_id() const noexcept override { return type_name_v<T>.to_hash(); }
     };
 
     unique_ptr<concepts> storage_{nullptr}; ///< 存储容器

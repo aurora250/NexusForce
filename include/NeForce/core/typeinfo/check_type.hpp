@@ -30,14 +30,16 @@ NEFORCE_BEGIN_INNER__
  */
 class output {
 private:
-    bool is_compact_; ///< 是否为紧凑模式
-    string& str_;     ///< 目标字符串引用
+    bool is_compact_{true}; ///< 是否为紧凑模式
+    string& str_;           ///< 目标字符串引用
 
     template <typename T>
-    static NEFORCE_CONSTEXPR20 bool check_empty(const T&) noexcept {
+    static NEFORCE_CONSTEXPR20 bool check_empty(const T& /*unused*/) noexcept {
         return false;
     }
-    static NEFORCE_CONSTEXPR20 bool check_empty(const char* value) noexcept { return !value || value[0] == 0; }
+    static NEFORCE_CONSTEXPR20 bool check_empty(const char* value) noexcept {
+        return value == nullptr || value[0] == 0;
+    }
 
     template <typename T>
     NEFORCE_CONSTEXPR20 void out(const T& value) {
@@ -53,7 +55,6 @@ private:
 
 public:
     NEFORCE_CONSTEXPR20 output(string& str) noexcept :
-    is_compact_(true),
     str_(str) {}
 
     NEFORCE_CONSTEXPR20 output& operator()() noexcept { return *this; }
@@ -81,12 +82,19 @@ template <bool IsStart>
 struct bracket {
     output& out_;
 
-    NEFORCE_CONSTEXPR20 bracket(output& out, const char* = nullptr) :
+    NEFORCE_CONSTEXPR20 bracket(output& out, const char* /*unused*/ = nullptr) :
     out_(out) {
         out_("(").compact();
     }
 
-    NEFORCE_CONSTEXPR20 ~bracket() { out_.compact()(")"); }
+    NEFORCE_CONSTEXPR20 ~bracket() {
+        try {
+            out_.compact()(")");
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
+        }
+    }
 };
 
 template <>
@@ -139,7 +147,14 @@ struct at_destruct {
     out_(out),
     str_(str) {}
 
-    NEFORCE_CONSTEXPR20 ~at_destruct() { out_(str_); }
+    NEFORCE_CONSTEXPR20 ~at_destruct() {
+        try {
+            out_(str_);
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
+        }
+    }
 
     NEFORCE_CONSTEXPR20 void set_str(const char* str = nullptr) noexcept { str_ = str; }
 };

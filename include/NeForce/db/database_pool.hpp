@@ -64,7 +64,7 @@ private:
         conn(c),
         idle_at(current_ms()) {}
 
-        milliseconds idle_duration() const noexcept { return current_ms() - idle_at; }
+        NEFORCE_NODISCARD milliseconds idle_duration() const noexcept { return current_ms() - idle_at; }
 
         static milliseconds current_ms() noexcept { return time_cast<milliseconds>(steady_clock::now().since_epoch()); }
     };

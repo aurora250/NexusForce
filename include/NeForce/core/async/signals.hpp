@@ -9,11 +9,12 @@
  * 支持线程安全的多播委托、连接管理、自动断开、优先级等功能。
  */
 
+#include "NeForce/core/algorithm/remove.hpp"
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/apply.hpp"
+#include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
-#include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -93,13 +94,13 @@ public:
      * @brief 检查连接是否有效
      * @return 连接是否仍然有效
      */
-    bool connected() const noexcept { return connected_ && *connected_; }
+    NEFORCE_NODISCARD bool connected() const noexcept { return connected_ && *connected_; }
 
     /**
      * @brief 获取连接标志的内部指针
      * @return 共享指针指向bool标志
      */
-    shared_ptr<bool> flag() const noexcept { return connected_; }
+    NEFORCE_NODISCARD shared_ptr<bool> flag() const noexcept { return connected_; }
 };
 
 
@@ -111,7 +112,7 @@ public:
  */
 class scoped_connection {
 private:
-    connection conn_{}; ///< 被管理的连接
+    connection conn_; ///< 被管理的连接
 
 public:
     /**
@@ -164,7 +165,7 @@ public:
      * @brief 检查连接是否有效
      * @return 连接是否仍然有效
      */
-    bool connected() const noexcept { return conn_.connected(); }
+    NEFORCE_NODISCARD bool connected() const noexcept { return conn_.connected(); }
 
     /**
      * @brief 释放连接所有权
@@ -413,10 +414,11 @@ private:
 
 public:
     signal() = default;
+    ~signal() = default;
     signal(const signal&) = delete;
     signal& operator=(const signal&) = delete;
-    signal(signal&&) = default;
-    signal& operator=(signal&&) = default;
+    signal(signal&&) = delete;
+    signal& operator=(signal&&) = delete;
 
     /**
      * @brief 连接成员函数（默认优先级0）
@@ -647,7 +649,7 @@ public:
     /**
      * @brief 过滤连接
      * @tparam Func 回调函数类型
-     * @tparam Filter 过滤器类型
+     * @tparam Filter 过滤器类型，返回值必须为 optional
      * @param callback 回调函数
      * @param filter 过滤器
      * @param priority 优先级
@@ -657,18 +659,18 @@ public:
      */
     template <typename Func, typename Filter>
     connection connect_filtered(Func callback, Filter filter, int priority = 0) {
-        using result_type = invoke_result_t<Filter, Types...>;
-        static_assert(is_optional_v<result_type>, "only optional results are allowed");
-
         return this->connect(
                 [callback = _NEFORCE move(callback), filter = _NEFORCE move(filter)](Types... args) mutable {
                     auto filtered = filter(args...);
                     if (filtered) {
-                        _NEFORCE apply(
-                                [&callback](auto&&... filtered_args) {
-                                    callback(_NEFORCE forward<decltype(filtered_args)>(filtered_args)...);
-                                },
-                                _NEFORCE move(*filtered));
+                        if (filtered) {
+                            auto filtered_tuple = _NEFORCE make_tuple(_NEFORCE move(*filtered));
+                            _NEFORCE apply(
+                                    [&callback](auto&&... filtered_args) {
+                                        callback(_NEFORCE forward<decltype(filtered_args)>(filtered_args)...);
+                                    },
+                                    _NEFORCE move(filtered_tuple));
+                        }
                     }
                     return callback_result::keep;
                 },

@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/container/vector.hpp"
+#include "NeForce/logging/log_event.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -50,6 +51,14 @@ private:
         part(const bool is_ph, string t) noexcept :
         is_placeholder(is_ph),
         text(_NEFORCE move(t)) {}
+
+        ~part() = default;
+
+        part(const part&) = default;
+        part& operator=(const part&) = default;
+
+        part(part&&) noexcept = default;
+        part& operator=(part&&) noexcept = default;
     };
     string pattern_;     ///< 原始格式模式
     vector<part> parts_; ///< 解析后的各部分
@@ -67,7 +76,7 @@ private:
      * @param event 日志事件
      * @return 占位符对应的值
      */
-    string resolve_placeholder(string ph, const log_event& event) const;
+    NEFORCE_NODISCARD string resolve_placeholder(string ph, const log_event& event) const;
 
 public:
     /**
@@ -75,6 +84,14 @@ public:
      * @param pattern 格式模式字符串
      */
     explicit log_formatter(string pattern);
+
+    ~log_formatter() = default;
+
+    log_formatter(const log_formatter&) = default;
+    log_formatter& operator=(const log_formatter&) = default;
+
+    log_formatter(log_formatter&&) noexcept = default;
+    log_formatter& operator=(log_formatter&&) noexcept = default;
 
     /**
      * @brief 格式化日志事件

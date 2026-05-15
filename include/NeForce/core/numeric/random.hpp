@@ -92,7 +92,7 @@ public:
 private:
     static constexpr seed_type a = 1103515245; ///< 乘数
     static constexpr seed_type c = 12345;      ///< 增量
-    static constexpr seed_type m = 1u << 31;   ///< 模数
+    static constexpr seed_type m = 1U << 31;   ///< 模数
 
     seed_type seed_; ///< 当前种子值
 
@@ -108,8 +108,8 @@ private:
         return hi | lo;
     }
 
-    decltype(auto) generate(true_type) noexcept { return generate_32bit(); }
-    decltype(auto) generate(false_type) noexcept { return generate_64bit(); }
+    decltype(auto) generate(true_type /*unused*/) noexcept { return generate_32bit(); }
+    decltype(auto) generate(false_type /*unused*/) noexcept { return generate_64bit(); }
 
 public:
     /**
@@ -257,8 +257,8 @@ private:
     seed_type generate_32bit() noexcept;
     uint64_t generate_64bit() noexcept;
 
-    decltype(auto) generate(true_type) noexcept { return generate_32bit(); }
-    decltype(auto) generate(false_type) noexcept { return generate_64bit(); }
+    decltype(auto) generate(true_type /*unused*/) noexcept { return generate_32bit(); }
+    decltype(auto) generate(false_type /*unused*/) noexcept { return generate_64bit(); }
 
 public:
     /**
@@ -393,19 +393,19 @@ private:
     static void get_random_bytes(byte_t* buffer, size_t length);
 
     static uint32_t generate_32bit() {
-        uint32_t value;
+        uint32_t value = 0;
         get_random_bytes(reinterpret_cast<byte_t*>(&value), sizeof(value));
         return value;
     }
 
     static uint64_t generate_64bit() {
-        uint64_t value;
+        uint64_t value = 0;
         get_random_bytes(reinterpret_cast<byte_t*>(&value), sizeof(value));
         return value;
     }
 
-    static decltype(auto) generate(true_type) { return generate_32bit(); }
-    static decltype(auto) generate(false_type) { return generate_64bit(); }
+    static decltype(auto) generate(true_type /*unused*/) { return generate_32bit(); }
+    static decltype(auto) generate(false_type /*unused*/) { return generate_64bit(); }
 
 public:
     /**

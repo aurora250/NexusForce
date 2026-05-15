@@ -338,25 +338,25 @@ public:
      * @brief 获取红色分量
      * @return 红色分量值
      */
-    constexpr int R() const noexcept { return r; }
+    NEFORCE_NODISCARD constexpr int R() const noexcept { return r; }
 
     /**
      * @brief 获取绿色分量
      * @return 绿色分量值
      */
-    constexpr int G() const noexcept { return g; }
+    NEFORCE_NODISCARD constexpr int G() const noexcept { return g; }
 
     /**
      * @brief 获取蓝色分量
      * @return 蓝色分量值
      */
-    constexpr int B() const noexcept { return b; }
+    NEFORCE_NODISCARD constexpr int B() const noexcept { return b; }
 
     /**
      * @brief 获取透明度
      * @return 透明度值
      */
-    constexpr int A() const noexcept { return a; }
+    NEFORCE_NODISCARD constexpr int A() const noexcept { return a; }
 
     /**
      * @brief 设置红色分量
@@ -428,31 +428,27 @@ public:
      * @brief 检查是否完全透明
      * @return 是否完全透明
      */
-    constexpr bool is_transparent() const noexcept { return a == 0; }
+    NEFORCE_NODISCARD constexpr bool is_transparent() const noexcept { return a == 0; }
 
     /**
      * @brief 检查是否完全不透明
      * @return 是否完全不透明
      */
-    constexpr bool is_opaque() const noexcept { return a == 255; }
+    NEFORCE_NODISCARD constexpr bool is_opaque() const noexcept { return a == 255; }
 
     /**
      * @brief 获取不透明度（0.0-1.0）
      * @return 不透明度
      */
-    constexpr double opacity() const noexcept { return a / 255.0; }
+    NEFORCE_NODISCARD constexpr double opacity() const noexcept { return a / 255.0; }
 
     /**
      * @brief 设置不透明度
      * @param opacity 不透明度（0.0-1.0）
      */
     constexpr void set_opacity(double opacity) noexcept {
-        if (opacity < 0.0) {
-            opacity = 0.0;
-        }
-        if (opacity > 1.0) {
-            opacity = 1.0;
-        }
+        opacity = _NEFORCE max(opacity, 0.0);
+        opacity = _NEFORCE min(opacity, 1.0);
         a = static_cast<int>(_NEFORCE round(opacity * 255));
     }
 
@@ -466,8 +462,8 @@ public:
      */
     static constexpr color lerp(const color& from, const color& to, double t) noexcept {
         t = clamp_double(t);
-        return color(lerp_component(from.r, to.r, t), lerp_component(from.g, to.g, t), lerp_component(from.b, to.b, t),
-                     lerp_component(from.a, to.a, t));
+        return {lerp_component(from.r, to.r, t), lerp_component(from.g, to.g, t), lerp_component(from.b, to.b, t),
+                lerp_component(from.a, to.a, t)};
     }
 
     /**
@@ -476,7 +472,7 @@ public:
      * @return 相加后的颜色
      */
     constexpr color operator+(const color& other) const noexcept {
-        return color(r + other.r, g + other.g, b + other.b, a + other.a);
+        return {r + other.r, g + other.g, b + other.b, a + other.a};
     }
 
     /**
@@ -485,7 +481,7 @@ public:
      * @return 相减后的颜色
      */
     constexpr color operator-(const color& other) const noexcept {
-        return color(r - other.r, g - other.g, b - other.b, a - other.a);
+        return {r - other.r, g - other.g, b - other.b, a - other.a};
     }
 
     /**
@@ -494,8 +490,8 @@ public:
      * @return 缩放后的颜色
      */
     constexpr color operator*(const double scalar) const noexcept {
-        return color(static_cast<int>(_NEFORCE round(r * scalar)), static_cast<int>(_NEFORCE round(g * scalar)),
-                     static_cast<int>(_NEFORCE round(b * scalar)), static_cast<int>(_NEFORCE round(a * scalar)));
+        return {static_cast<int>(_NEFORCE round(r * scalar)), static_cast<int>(_NEFORCE round(g * scalar)),
+                static_cast<int>(_NEFORCE round(b * scalar)), static_cast<int>(_NEFORCE round(a * scalar))};
     }
 
     /**
@@ -606,7 +602,7 @@ public:
         const int newB = static_cast<int>(_NEFORCE round((b * src_a + background.b * dst_a * inv_src_a) * inv_out_a));
         const int newA = static_cast<int>(_NEFORCE round(out_a * 255.0));
 
-        return color(newR, newG, newB, newA);
+        return {newR, newG, newB, newA};
     }
 
     /**
@@ -636,16 +632,16 @@ public:
         }
 
         if (clean_hex.length() == 6) {
-            const int r = hexadecimal::parse(clean_hex.substr(0, 2)).value();
-            const int g = hexadecimal::parse(clean_hex.substr(2, 2)).value();
-            const int b = hexadecimal::parse(clean_hex.substr(4, 2)).value();
-            return {r, g, b};
+            const int64_t r = hexadecimal::parse(clean_hex.substr(0, 2)).value();
+            const int64_t g = hexadecimal::parse(clean_hex.substr(2, 2)).value();
+            const int64_t b = hexadecimal::parse(clean_hex.substr(4, 2)).value();
+            return {static_cast<int>(r), static_cast<int>(g), static_cast<int>(b)};
         } else if (clean_hex.length() == 8) {
-            const int r = hexadecimal::parse(clean_hex.substr(0, 2)).value();
-            const int g = hexadecimal::parse(clean_hex.substr(2, 2)).value();
-            const int b = hexadecimal::parse(clean_hex.substr(4, 2)).value();
-            const int a = hexadecimal::parse(clean_hex.substr(6, 2)).value();
-            return {r, g, b, a};
+            const int64_t r = hexadecimal::parse(clean_hex.substr(0, 2)).value();
+            const int64_t g = hexadecimal::parse(clean_hex.substr(2, 2)).value();
+            const int64_t b = hexadecimal::parse(clean_hex.substr(4, 2)).value();
+            const int64_t a = hexadecimal::parse(clean_hex.substr(6, 2)).value();
+            return {static_cast<int>(r), static_cast<int>(g), static_cast<int>(b), static_cast<int>(a)};
         } else {
             NEFORCE_THROW_EXCEPTION(value_exception("Invalid hex string"));
         }
@@ -759,8 +755,8 @@ public:
      */
     NEFORCE_NODISCARD constexpr color to_premultiplied() const noexcept {
         const decimal_t alpha = a / 255.0;
-        return color(static_cast<int>(_NEFORCE round(r * alpha)), static_cast<int>(_NEFORCE round(g * alpha)),
-                     static_cast<int>(_NEFORCE round(b * alpha)), a);
+        return {static_cast<int>(_NEFORCE round(r * alpha)), static_cast<int>(_NEFORCE round(g * alpha)),
+                static_cast<int>(_NEFORCE round(b * alpha)), a};
     }
 
     /**
@@ -773,8 +769,8 @@ public:
             return transparent();
         }
         const decimal_t inv_alpha = 255.0 / a;
-        return color(static_cast<int>(_NEFORCE round(r * inv_alpha)), static_cast<int>(_NEFORCE round(g * inv_alpha)),
-                     static_cast<int>(_NEFORCE round(b * inv_alpha)), a);
+        return {static_cast<int>(_NEFORCE round(r * inv_alpha)), static_cast<int>(_NEFORCE round(g * inv_alpha)),
+                static_cast<int>(_NEFORCE round(b * inv_alpha)), a};
     }
 
     /**
@@ -809,34 +805,34 @@ public:
     }
 
     /** @brief 黑色 */
-    static constexpr color black() noexcept { return color(0, 0, 0, 255); }
+    static constexpr color black() noexcept { return {0, 0, 0, 255}; }
 
     /** @brief 白色 */
-    static constexpr color white() noexcept { return color(255, 255, 255, 255); }
+    static constexpr color white() noexcept { return {255, 255, 255, 255}; }
 
     /** @brief 灰色 */
-    static constexpr color gray() noexcept { return color(128, 128, 128, 255); }
+    static constexpr color gray() noexcept { return {128, 128, 128, 255}; }
 
     /** @brief 红色 */
-    static constexpr color red() noexcept { return color(255, 0, 0, 255); }
+    static constexpr color red() noexcept { return {255, 0, 0, 255}; }
 
     /** @brief 绿色 */
-    static constexpr color green() noexcept { return color(0, 255, 0, 255); }
+    static constexpr color green() noexcept { return {0, 255, 0, 255}; }
 
     /** @brief 蓝色 */
-    static constexpr color blue() noexcept { return color(0, 0, 255, 255); }
+    static constexpr color blue() noexcept { return {0, 0, 255, 255}; }
 
     /** @brief 黄色 */
-    static constexpr color yellow() noexcept { return color(255, 255, 0, 255); }
+    static constexpr color yellow() noexcept { return {255, 255, 0, 255}; }
 
     /** @brief 品红 */
-    static constexpr color magenta() noexcept { return color(255, 0, 255, 255); }
+    static constexpr color magenta() noexcept { return {255, 0, 255, 255}; }
 
     /** @brief 青色 */
-    static constexpr color cyan() noexcept { return color(0, 255, 255, 255); }
+    static constexpr color cyan() noexcept { return {0, 255, 255, 255}; }
 
     /** @brief 完全透明 */
-    static constexpr color transparent() noexcept { return color(0, 0, 0, 0); }
+    static constexpr color transparent() noexcept { return {0, 0, 0, 0}; }
 };
 
 /**

@@ -231,7 +231,7 @@ private:
      * @brief 判断是否为长字符串模式
      * @return 是否为长字符串
      */
-    NEFORCE_CONSTEXPR20 bool is_long() const noexcept { return (size_pair_.value & long_flag) != 0; }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool is_long() const noexcept { return (size_pair_.value & long_flag) != 0; }
 
     /**
      * @brief 设置大小
@@ -2090,7 +2090,7 @@ public:
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string repeat(size_type n) const noexcept {
         basic_string result;
         result.reserve(size() * n);
-        while (n--) {
+        while (n-- != 0U) {
             result += *this;
         }
         return _NEFORCE move(result);
@@ -3038,7 +3038,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator>=(const basic_string<CharT, 
     return !(rhs < lhs);
 }
 
-#ifndef NEFORCE_COMPILER_LLVM_MINGW
+#ifndef NEFORCE_COMPILER_CLANG_CL
 extern template class basic_string<char>;
 extern template class basic_string<wchar_t>;
 #    ifdef NEFORCE_STANDARD_20

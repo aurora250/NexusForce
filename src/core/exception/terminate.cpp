@@ -306,7 +306,7 @@ void immediate_exit(const int status) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::TerminateProcess(::GetCurrentProcess(), static_cast<::UINT>(status));
 #else
-    syscall_exit(status);
+    syscall_exit_group(status);
 #endif
     unreachable();
 }

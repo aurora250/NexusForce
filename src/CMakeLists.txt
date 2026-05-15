@@ -184,8 +184,12 @@ if (WIN32)
             LIBRARY_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/lib/MinSizeRel
             RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/bin/MinSizeRel
 
-            $<$<PLATFORM_ID:Windows>:WINDOWS_EXPORT_ALL_SYMBOLS ON>
     )
+    if(MSVC)
+        set_target_properties(NexusForce PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+    elseif(WIN32)
+        target_link_options(NexusForce PRIVATE -Wl,-export-all-symbols)
+    endif()
 elseif(UNIX AND NOT APPLE)
     set_target_properties(NexusForce PROPERTIES
             CXX_STANDARD ${CMAKE_CXX_STANDARD}

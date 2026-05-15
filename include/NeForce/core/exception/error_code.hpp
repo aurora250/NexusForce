@@ -33,7 +33,9 @@ public:
     NEFORCE_NODISCARD errc error() const noexcept { return static_cast<errc>(value_); }
     NEFORCE_NODISCARD const error_category& category() const noexcept { return *category_; }
 
-    error_condition default_error_condition() const noexcept { return category_->default_error_condition(value_); }
+    NEFORCE_NODISCARD error_condition default_error_condition() const noexcept {
+        return category_->default_error_condition(value_);
+    }
 
     NEFORCE_NODISCARD string message() const { return category_->message(value_); }
 

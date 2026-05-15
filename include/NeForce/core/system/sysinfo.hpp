@@ -73,7 +73,7 @@ public:
             if (total_physical == 0) {
                 return 0.0;
             }
-            return 100.0 * (1.0 - static_cast<float64_t>(available_physical) / total_physical);
+            return 100.0 * (1.0 - static_cast<float64_t>(available_physical) / static_cast<float64_t>(total_physical));
         }
 
         /**
@@ -90,13 +90,13 @@ public:
      * 包含处理器的型号、频率、核心数等信息。
      */
     struct CPU_info {
-        string vendor{};                ///< 厂商名称
-        string brand{};                 ///< 型号名称
+        string vendor;                  ///< 厂商名称
+        string brand;                   ///< 型号名称
         uint32_t max_MHz{0};            ///< 最大频率
         uint32_t current_MHz{0};        ///< 当前频率
         uint32_t cores{0};              ///< 物理核心数
         uint32_t logical_processors{0}; ///< 逻辑处理器数
-        string features{};              ///< 支持的指令集特性
+        string features;                ///< 支持的指令集特性
 
         /**
          * @brief 检查是否支持超线程
@@ -114,8 +114,8 @@ public:
         uint32_t minor{0};       ///< 次版本号
         uint32_t build{0};       ///< 构建号
         uint32_t platform_id{0}; ///< 平台ID
-        string csd_version{};    ///< 补丁版本
-        string product_name{};   ///< 产品名称
+        string csd_version;      ///< 补丁版本
+        string product_name;     ///< 产品名称
 
         /**
          * @brief 获取版本字符串

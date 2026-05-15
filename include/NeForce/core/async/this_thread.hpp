@@ -22,10 +22,8 @@
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <sched.h>
+#    include <time.h>
 #    include <unistd.h>
-#endif
-#ifdef NEFORCE_ARCH_RISCV
-#    include <riscv_pause.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -37,7 +35,7 @@ struct cpu_times {
     uint64_t user;   ///< 用户态时间
     uint64_t kernel; ///< 内核态时间
     uint64_t idle;   ///< 空闲时间
-    uint64_t total() const noexcept { return user + kernel + idle; }
+    NEFORCE_NODISCARD uint64_t total() const noexcept { return user + kernel + idle; }
 };
 
 NEFORCE_BEGIN_THIS_THREAD__
@@ -96,7 +94,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void relax() noexcept {
 #    elif defined(NEFORCE_ARCH_ARM)
     asm volatile("yield" ::: "memory");
 #    elif defined(NEFORCE_ARCH_RISCV)
-    ::riscv_pause();
+    asm volatile("pause" ::: "memory");
 #    elif defined(NEFORCE_ARCH_LOONGARCH)
     asm volatile("dbar 0" ::: "memory");
 #    else
@@ -138,7 +136,10 @@ NEFORCE_ALWAYS_INLINE_INLINE void sleep_for_ms(uint32_t milliseconds) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::Sleep(milliseconds);
 #else
-    ::usleep(milliseconds * 1000);
+    struct ::timespec ts;
+    ts.tv_sec = milliseconds / 1000;
+    ts.tv_nsec = (milliseconds % 1000) * 1000000;
+    ::nanosleep(&ts, nullptr);
 #endif
 }
 

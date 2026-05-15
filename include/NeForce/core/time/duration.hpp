@@ -263,7 +263,7 @@ public:
      * @brief 获取计数值
      * @return 存储的时间数值
      */
-    constexpr rep count() const noexcept { return rep_; }
+    NEFORCE_NODISCARD constexpr rep count() const noexcept { return rep_; }
 
     /**
      * @brief 一元正号运算符
@@ -394,32 +394,34 @@ public:
      */
     static constexpr duration max() noexcept { return duration(numeric_traits<Rep>::max()); }
 
-    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, nano> to_nano() const {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration<Rep, nano> to_nano() const {
         return _NEFORCE time_cast<nanoseconds>(*this);
     }
-    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, micro> to_micro() const {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration<Rep, micro> to_micro() const {
         return _NEFORCE time_cast<microseconds>(*this);
     }
-    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, milli> to_milli() const {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration<Rep, milli> to_milli() const {
         return _NEFORCE time_cast<milliseconds>(*this);
     }
-    NEFORCE_ALWAYS_INLINE constexpr duration<Rep> to_sec() const { return _NEFORCE time_cast<seconds>(*this); }
-    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<60>> to_minu() const {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration<Rep> to_sec() const {
+        return _NEFORCE time_cast<seconds>(*this);
+    }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<60>> to_minu() const {
         return _NEFORCE time_cast<minutes>(*this);
     }
-    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<3600>> to_hour() const {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<3600>> to_hour() const {
         return _NEFORCE time_cast<hours>(*this);
     }
-    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<86400>> to_day() const {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<86400>> to_day() const {
         return _NEFORCE time_cast<days>(*this);
     }
-    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<604800>> to_week() const {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<604800>> to_week() const {
         return _NEFORCE time_cast<weeks>(*this);
     }
-    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<31556952>> to_year() const {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<31556952>> to_year() const {
         return _NEFORCE time_cast<years>(*this);
     }
-    NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<2629746>> to_month() const {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration<Rep, ratio<2629746>> to_month() const {
         return _NEFORCE time_cast<months>(*this);
     }
 };

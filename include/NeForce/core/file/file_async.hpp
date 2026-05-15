@@ -58,7 +58,7 @@ private:
      * @brief 异步操作上下文
      */
     struct async_context {
-        string data{};            ///< 写操作的数据副本
+        string data;              ///< 写操作的数据副本
         string* buffer = nullptr; ///< 读操作的目标缓冲区
         aiocb_type* cb = nullptr; ///< 异步I/O控制块
         bool is_write = false;    ///< 是否为写操作

@@ -68,7 +68,7 @@ public:
      * @return 属性值（包装为any）
      */
     NEFORCE_NODISCARD meta_any get(void* obj) const {
-        if (!obj || !getter_) {
+        if (obj == nullptr || !getter_) {
             return meta_any{};
         }
         return getter_(move(obj));
@@ -81,7 +81,7 @@ public:
      * @return 设置成功返回true
      */
     bool set(void* obj, const meta_any& value) const {
-        if (!obj || !setter_) {
+        if (obj == nullptr || !setter_) {
             return false;
         }
         try {

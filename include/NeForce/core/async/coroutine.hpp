@@ -106,7 +106,7 @@ using noop_coroutine_handle = coroutine_handle<noop_coroutine_promise>;
  * 空操作协程是一个特殊协程，永远不会完成，调用resume无效果。
  * 可用于需要协程句柄但不需要实际协程的场景。
  */
-inline noop_coroutine_handle noop_coroutine() noexcept { return noop_coroutine_handle(); }
+inline noop_coroutine_handle noop_coroutine() noexcept { return {}; }
 
 
 /**
@@ -117,8 +117,8 @@ inline noop_coroutine_handle noop_coroutine() noexcept { return noop_coroutine_h
  * 适用于需要外部恢复的异步操作。
  */
 struct suspend_always {
-    constexpr bool await_ready() const noexcept { return false; }
-    constexpr void await_suspend(coroutine_handle<>) const noexcept {}
+    NEFORCE_NODISCARD constexpr bool await_ready() const noexcept { return false; }
+    constexpr void await_suspend(coroutine_handle<> /*unused*/) const noexcept {}
     constexpr void await_resume() const noexcept {}
 };
 
@@ -130,8 +130,8 @@ struct suspend_always {
  * 适用于同步操作或不需要暂停的场景。
  */
 struct suspend_never {
-    constexpr bool await_ready() const noexcept { return true; }
-    constexpr void await_suspend(coroutine_handle<>) const noexcept {}
+    NEFORCE_NODISCARD constexpr bool await_ready() const noexcept { return true; }
+    constexpr void await_suspend(coroutine_handle<> /*unused*/) const noexcept {}
     constexpr void await_resume() const noexcept {}
 };
 

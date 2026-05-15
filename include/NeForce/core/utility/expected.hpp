@@ -1,7 +1,9 @@
 #ifndef NEFORCE_CORE_UTILITY_EXPECTED_HPP__
 #define NEFORCE_CORE_UTILITY_EXPECTED_HPP__
 #include "NeForce/core/exception/exception.hpp"
+#include "NeForce/core/functional/invoke.hpp"
 #include "NeForce/core/memory/construct.hpp"
+#include <initializer_list>
 NEFORCE_BEGIN_NAMESPACE__
 
 struct expected_exception final : exception {
@@ -86,14 +88,15 @@ public:
     error_(_NEFORCE forward<Err>(error)) {}
 
     template <typename... Args, typename = enable_if_t<is_constructible_v<ErrorT, Args...>>>
-    constexpr explicit unexpected(inplace_construct_tag,
+    constexpr explicit unexpected(inplace_construct_tag /*unused*/,
                                   Args&&... args) noexcept(is_nothrow_constructible_v<ErrorT, Args...>) :
     error_(_NEFORCE forward<Args>(args)...) {}
 
     template <typename U, typename... Args,
               typename = enable_if_t<is_constructible_v<ErrorT, std::initializer_list<U>&, Args...>>>
-    constexpr explicit unexpected(inplace_construct_tag, std::initializer_list<U> list, Args&&... args) noexcept(
-            is_nothrow_constructible_v<ErrorT, std::initializer_list<U>&, Args...>) :
+    constexpr explicit unexpected(
+            inplace_construct_tag /*unused*/, std::initializer_list<U> list,
+            Args&&... args) noexcept(is_nothrow_constructible_v<ErrorT, std::initializer_list<U>&, Args...>) :
     error_(list, _NEFORCE forward<Args>(args)...) {}
 
     constexpr unexpected& operator=(const unexpected&) = default;
@@ -212,12 +215,12 @@ private:
     }
 
     template <typename Func>
-    explicit constexpr expected(inplace_invoke_tag, Func&& func) :
+    explicit constexpr expected(inplace_invoke_tag /*unused*/, Func&& func) :
     value_(_NEFORCE forward<Func>(func)()),
     has_value_(true) {}
 
     template <typename Func>
-    explicit constexpr expected(unexpect_invoke_tag, Func&& func) :
+    explicit constexpr expected(unexpect_invoke_tag /*unused*/, Func&& func) :
     error_(_NEFORCE forward<Func>(func)()) {}
 
 public:
@@ -342,25 +345,27 @@ public:
     error_(_NEFORCE move(unex).error()) {}
 
     template <typename... Args, enable_if_t<is_constructible_v<T, Args...>, int> = 0>
-    constexpr explicit expected(inplace_construct_tag,
+    constexpr explicit expected(inplace_construct_tag /*unused*/,
                                 Args&&... args) noexcept(is_nothrow_constructible_v<T, Args...>) :
     value_(_NEFORCE forward<Args>(args)...),
     has_value_(true) {}
 
     template <typename U, typename... Args,
               enable_if_t<is_constructible_v<T, std::initializer_list<U>&, Args...>, int> = 0>
-    constexpr explicit expected(inplace_construct_tag, std::initializer_list<U> list, Args&&... args) noexcept(
-            is_nothrow_constructible_v<T, std::initializer_list<U>&, Args...>) :
+    constexpr explicit expected(
+            inplace_construct_tag /*unused*/, std::initializer_list<U> list,
+            Args&&... args) noexcept(is_nothrow_constructible_v<T, std::initializer_list<U>&, Args...>) :
     value_(list, _NEFORCE forward<Args>(args)...),
     has_value_(true) {}
 
     template <typename... Args, enable_if_t<is_constructible_v<ErrorT, Args...>, int> = 0>
-    constexpr explicit expected(unexpect_t, Args&&... args) noexcept(is_nothrow_constructible_v<ErrorT, Args...>) :
+    constexpr explicit expected(unexpect_t /*unused*/,
+                                Args&&... args) noexcept(is_nothrow_constructible_v<ErrorT, Args...>) :
     error_(_NEFORCE forward<Args>(args)...) {}
 
     template <typename U, typename... Args,
               enable_if_t<is_constructible_v<ErrorT, std::initializer_list<U>&, Args...>, int> = 0>
-    constexpr explicit expected(unexpect_t, std::initializer_list<U> list, Args&&... args) noexcept(
+    constexpr explicit expected(unexpect_t /*unused*/, std::initializer_list<U> list, Args&&... args) noexcept(
             is_nothrow_constructible_v<ErrorT, std::initializer_list<U>&, Args...>) :
     error_(list, _NEFORCE forward<Args>(args)...) {}
 
@@ -859,14 +864,14 @@ private:
     }
 
     template <typename Func>
-    explicit constexpr expected(inplace_invoke_tag, Func&& func) :
+    explicit constexpr expected(inplace_invoke_tag /*unused*/, Func&& func) :
     void_(),
     has_value_(true) {
         _NEFORCE forward<Func>(func)();
     }
 
     template <typename Func>
-    explicit constexpr expected(unexpect_invoke_tag, Func&& func) :
+    explicit constexpr expected(unexpect_invoke_tag /*unused*/, Func&& func) :
     error_(_NEFORCE forward<Func>(func)()),
     has_value_(false) {}
 
@@ -963,17 +968,18 @@ public:
     error_(_NEFORCE move(unex).error()),
     has_value_(false) {}
 
-    constexpr explicit expected(inplace_construct_tag) noexcept :
+    constexpr explicit expected(inplace_construct_tag /*unused*/) noexcept :
     expected() {}
 
     template <typename... Args, enable_if_t<is_constructible_v<ErrorT, Args...>, int> = 0>
-    constexpr explicit expected(unexpect_t, Args&&... args) noexcept(is_nothrow_constructible_v<ErrorT, Args...>) :
+    constexpr explicit expected(unexpect_t /*unused*/,
+                                Args&&... args) noexcept(is_nothrow_constructible_v<ErrorT, Args...>) :
     error_(_NEFORCE forward<Args>(args)...),
     has_value_(false) {}
 
     template <typename U, typename... Args,
               enable_if_t<is_constructible_v<ErrorT, std::initializer_list<U>&, Args...>, int> = 0>
-    constexpr explicit expected(unexpect_t, std::initializer_list<U> list, Args&&... args) noexcept(
+    constexpr explicit expected(unexpect_t /*unused*/, std::initializer_list<U> list, Args&&... args) noexcept(
             is_nothrow_constructible_v<ErrorT, std::initializer_list<U>&, Args...>) :
     error_(list, _NEFORCE forward<Args>(args)...),
     has_value_(false) {}

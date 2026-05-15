@@ -51,7 +51,7 @@ NEFORCE_BEGIN_LITERALS__
  * @param len 字符串长度
  * @return string对象
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string operator""_s(const char* str, size_t len) noexcept { return {str, len}; }
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string operator""_s(const char* str, size_t len) { return {str, len}; }
 
 /**
  * @brief 创建wchar_t字符串的字面量操作符
@@ -59,9 +59,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string operator""_s(const char* str, size_
  * @param len 字符串长度
  * @return wstring对象
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 wstring operator""_s(const wchar_t* str, size_t len) noexcept {
-    return {str, len};
-}
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 wstring operator""_s(const wchar_t* str, size_t len) { return {str, len}; }
 
 #ifdef NEFORCE_STANDARD_20
 /**
@@ -70,9 +68,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 wstring operator""_s(const wchar_t* str, s
  * @param len 字符串长度
  * @return u8string对象
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u8string operator""_s(const char8_t* str, size_t len) noexcept {
-    return {str, len};
-}
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u8string operator""_s(const char8_t* str, size_t len) { return {str, len}; }
 #endif
 
 /**
@@ -81,9 +77,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u8string operator""_s(const char8_t* str, 
  * @param len 字符串长度
  * @return u16string对象
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u16string operator""_s(const char16_t* str, size_t len) noexcept {
-    return {str, len};
-}
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u16string operator""_s(const char16_t* str, size_t len) { return {str, len}; }
 
 /**
  * @brief 创建char32_t字符串的字面量操作符
@@ -91,9 +85,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u16string operator""_s(const char16_t* str
  * @param len 字符串长度
  * @return u32string对象
  */
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u32string operator""_s(const char32_t* str, size_t len) noexcept {
-    return {str, len};
-}
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 u32string operator""_s(const char32_t* str, size_t len) { return {str, len}; }
 
 /** @} */ // UserLiterals
 
@@ -324,7 +316,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string address_string(const void* p) {
     constexpr char hex_digits[] = "0123456789abcdef";
     constexpr size_t hex_digit_count = sizeof(void*) * 2;
 
-    const uintptr_t addr_val = reinterpret_cast<uintptr_t>(p);
+    const auto addr_val = reinterpret_cast<uintptr_t>(p);
     uintptr_t mask = address_mask;
     int shift = address_shift;
 
@@ -332,7 +324,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string address_string(const void* p) {
     result.reserve(2 + hex_digit_count);
 
     for (size_t i = 0; i < hex_digit_count; ++i) {
-        const byte_t digit = static_cast<byte_t>((addr_val & mask) >> shift);
+        const auto digit = static_cast<byte_t>((addr_val & mask) >> shift);
         result += hex_digits[digit];
         mask >>= 4;
         shift -= 4;

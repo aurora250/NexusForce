@@ -175,6 +175,13 @@ struct NEFORCE_API ports : iobject<ports> {
      * 创建未定义端口的对象。
      */
     constexpr ports() noexcept = default;
+    ~ports() noexcept = default;
+
+    constexpr ports(const ports&) noexcept = default;
+    ports& operator=(const ports&) noexcept = default;
+
+    constexpr ports(ports&&) noexcept = default;
+    ports& operator=(ports&&) noexcept = default;
 
     /**
      * @brief 从枚举值构造
@@ -205,19 +212,19 @@ struct NEFORCE_API ports : iobject<ports> {
      */
     constexpr explicit operator uint16_t() const noexcept { return static_cast<uint16_t>(port); }
 
-    constexpr uint16_t value() const noexcept { return static_cast<uint16_t>(port); }
+    NEFORCE_NODISCARD constexpr uint16_t value() const noexcept { return static_cast<uint16_t>(port); }
 
     /**
      * @brief 检查端口是否在知名端口范围内
      * @return 若端口号在0-1023范围内返回true
      */
-    constexpr bool is_well_known() const noexcept { return static_cast<uint16_t>(port) <= 1023; }
+    NEFORCE_NODISCARD constexpr bool is_well_known() const noexcept { return static_cast<uint16_t>(port) <= 1023; }
 
     /**
      * @brief 检查端口是否在注册端口范围内
      * @return 若端口号在1024-49151范围内返回true
      */
-    constexpr bool is_registered() const noexcept {
+    NEFORCE_NODISCARD constexpr bool is_registered() const noexcept {
         auto p = static_cast<uint16_t>(port);
         return p >= 1024 && p <= 49151;
     }
@@ -226,7 +233,7 @@ struct NEFORCE_API ports : iobject<ports> {
      * @brief 检查端口是否在动态/私有端口范围内
      * @return 若端口号在49152-65535范围内返回true
      */
-    constexpr bool is_dynamic() const noexcept { return static_cast<uint16_t>(port) >= 49152; }
+    NEFORCE_NODISCARD constexpr bool is_dynamic() const noexcept { return static_cast<uint16_t>(port) >= 49152; }
 
     /**
      * @brief 从协议名称解析端口
@@ -244,7 +251,7 @@ struct NEFORCE_API ports : iobject<ports> {
      * 将端口号转换为对应的协议名称。
      * 对于80端口返回"http"，443端口返回"https"。
      */
-    string to_string() const;
+    NEFORCE_NODISCARD string to_string() const;
 
     /**
      * @brief 转换为协议名称字符串（支持WebSocket）
@@ -254,7 +261,7 @@ struct NEFORCE_API ports : iobject<ports> {
      * 当is_ws为true时，80端口返回"ws"，443端口返回"wss"；
      * 否则返回"http"/"https"。
      */
-    string to_string(bool is_ws) const;
+    NEFORCE_NODISCARD string to_string(bool is_ws) const;
 };
 
 

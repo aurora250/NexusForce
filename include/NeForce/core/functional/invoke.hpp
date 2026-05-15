@@ -423,23 +423,23 @@ NEFORCE_INLINE17 constexpr bool is_invocable_r_v = is_invocable_r<Ret, F, Args..
 NEFORCE_BEGIN_INNER__
 
 template <typename F, typename T, typename... Args>
-constexpr bool __invoke_is_nothrow_dispatch(invoke_memfun_ref_tag) {
+constexpr bool __invoke_is_nothrow_dispatch(invoke_memfun_ref_tag /*unused*/) {
     return noexcept((_NEFORCE declval<unwrap_reference_t<T>>().*_NEFORCE declval<F>())(_NEFORCE declval<Args>()...));
 }
 template <typename F, typename T, typename... Args>
-constexpr bool __invoke_is_nothrow_dispatch(invoke_memfun_deref_tag) {
+constexpr bool __invoke_is_nothrow_dispatch(invoke_memfun_deref_tag /*unused*/) {
     return noexcept((*_NEFORCE declval<T>().*_NEFORCE declval<F>())(_NEFORCE declval<Args>()...));
 }
 template <typename F, typename T>
-constexpr bool __invoke_is_nothrow_dispatch(invoke_memobj_ref_tag) {
+constexpr bool __invoke_is_nothrow_dispatch(invoke_memobj_ref_tag /*unused*/) {
     return noexcept(_NEFORCE declval<unwrap_reference_t<T>>().*_NEFORCE declval<F>());
 }
 template <typename F, typename T>
-constexpr bool __invoke_is_nothrow_dispatch(invoke_memobj_deref_tag) {
+constexpr bool __invoke_is_nothrow_dispatch(invoke_memobj_deref_tag /*unused*/) {
     return noexcept(*_NEFORCE declval<T>().*_NEFORCE declval<F>());
 }
 template <typename F, typename... Args>
-constexpr bool __invoke_is_nothrow_dispatch(invoke_other_tag) {
+constexpr bool __invoke_is_nothrow_dispatch(invoke_other_tag /*unused*/) {
     return noexcept(_NEFORCE declval<F>()(_NEFORCE declval<Args>()...));
 }
 
@@ -495,23 +495,23 @@ constexpr U&& __invoke_forward(remove_reference_t<T>& t) noexcept {
 }
 
 template <typename Res, typename F, typename... Args>
-NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_other_tag, F&& f, Args&&... args) {
+NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_other_tag /*unused*/, F&& f, Args&&... args) {
     return _NEFORCE forward<F>(f)(_NEFORCE forward<Args>(args)...);
 }
 template <typename Res, typename MemFun, typename T, typename... Args>
-NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_ref_tag, MemFun&& f, T&& t, Args&&... args) {
+NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_ref_tag /*unused*/, MemFun&& f, T&& t, Args&&... args) {
     return (inner::__invoke_forward<T>(t).*f)(_NEFORCE forward<Args>(args)...);
 }
 template <typename Res, typename MemFun, typename T, typename... Args>
-NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_deref_tag, MemFun&& f, T&& t, Args&&... args) {
+NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memfun_deref_tag /*unused*/, MemFun&& f, T&& t, Args&&... args) {
     return (*_NEFORCE forward<T>(t).*f)(_NEFORCE forward<Args>(args)...);
 }
 template <typename Res, typename MemPtr, typename T>
-NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memobj_ref_tag, MemPtr&& f, T&& t) {
+NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memobj_ref_tag /*unused*/, MemPtr&& f, T&& t) {
     return inner::__invoke_forward<T>(t).*f;
 }
 template <typename Res, typename MemPtr, typename T>
-NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memobj_deref_tag, MemPtr&& f, T&& t) {
+NEFORCE_CONSTEXPR14 Res __invoke_dispatch(invoke_memobj_deref_tag /*unused*/, MemPtr&& f, T&& t) {
     return *_NEFORCE forward<T>(t).*f;
 }
 

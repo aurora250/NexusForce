@@ -321,7 +321,7 @@ private:
      * 为指定范围内的每个节点分配缓冲区内存。
      */
     void create_nodes(map_pointer start, map_pointer finish) {
-        map_pointer cur;
+        map_pointer cur = nullptr;
         try {
             for (cur = start; cur <= finish; ++cur) {
                 *cur = map_size_pair_.get_base().allocate(buffer_size);
@@ -360,7 +360,7 @@ private:
      * 根据元素数量分配中控器和必要的缓冲区。
      */
     void create_map_and_nodes(const size_type n) {
-        size_type node_nums = n / buffer_size + (n % buffer_size ? 1 : 0);
+        size_type node_nums = n / buffer_size + ((n % buffer_size) != 0U ? 1 : 0);
         map_size_pair_.value = _NEFORCE max(init_map_size, node_nums + 2);
 
         try {
@@ -387,7 +387,8 @@ private:
         start_.change_buff(nstart);
         finish_.change_buff(nfinish);
         start_.current_ = start_.first_;
-        finish_.current_ = n == 0 ? start_.first_ : finish_.first_ + (n % buffer_size ? n % buffer_size : buffer_size);
+        finish_.current_ =
+                n == 0 ? start_.first_ : finish_.first_ + ((n % buffer_size) != 0U ? n % buffer_size : buffer_size);
         start_.container_ = this;
         finish_.container_ = this;
     }

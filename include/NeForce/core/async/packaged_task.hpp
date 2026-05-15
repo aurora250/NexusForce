@@ -44,7 +44,7 @@ public:
      *
      * 创建空的packaged_task对象，不关联任何任务。
      */
-    packaged_task() noexcept {}
+    packaged_task() noexcept = default;
 
     /**
      * @brief 构造函数
@@ -98,7 +98,7 @@ public:
      * @brief 检查任务是否有效
      * @return 是否关联了有效的可调用对象
      */
-    bool valid() const noexcept { return static_cast<bool>(state_ptr); }
+    NEFORCE_NODISCARD bool valid() const noexcept { return static_cast<bool>(state_ptr); }
 
     /**
      * @brief 获取关联的future对象
@@ -176,7 +176,7 @@ private:
 
     void complete_async() override { state_base::set_result(create_task_setter(result_storage, function), true); }
 
-    bool is_deferred_future() const override { return true; }
+    NEFORCE_NODISCARD bool is_deferred_future() const override { return true; }
 
 public:
     template <typename... Args>
@@ -192,11 +192,13 @@ public:
  */
 class __future_base::async_state_common : public __future_base::state_base {
 protected:
-    _NEFORCE thread thread;
-    _NEFORCE once_flag once_flag;
+    thread thread;
+    once_flag once_flag;
 
+public:
     ~async_state_common() override = default;
 
+protected:
     void complete_async() override { join(); }
 
     void join() { _NEFORCE call_once(once_flag, &_NEFORCE thread::join, &thread); }

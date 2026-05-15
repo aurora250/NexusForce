@@ -287,7 +287,7 @@ public:
          * @return 输出/输入字节比率
          */
         NEFORCE_NODISCARD double compression_ratio() const noexcept {
-            return bytes_input_ > 0 ? static_cast<double>(bytes_output_) / bytes_input_ : 0.0;
+            return bytes_input_ > 0 ? static_cast<double>(bytes_output_) / static_cast<double>(bytes_input_) : 0.0;
         }
     };
 
@@ -372,7 +372,7 @@ public:
          * @return 输出/输入字节比率
          */
         NEFORCE_NODISCARD double expansion_ratio() const noexcept {
-            return bytes_input_ > 0 ? static_cast<double>(bytes_output_) / bytes_input_ : 0.0;
+            return bytes_input_ > 0 ? static_cast<double>(bytes_output_) / static_cast<double>(bytes_input_) : 0.0;
         }
     };
 };

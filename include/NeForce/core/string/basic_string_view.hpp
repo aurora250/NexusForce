@@ -1032,7 +1032,7 @@ public:
     }
 };
 
-#ifndef NEFORCE_COMPILER_LLVM_MINGW
+#ifndef NEFORCE_COMPILER_CLANG_CL
 extern template class basic_string_view<char>;
 extern template class basic_string_view<wchar_t>;
 #    ifdef NEFORCE_STANDARD_20

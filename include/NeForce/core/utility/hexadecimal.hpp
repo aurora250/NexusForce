@@ -166,7 +166,7 @@ public:
      * @param value 整数值
      */
     explicit constexpr hexadecimal(const uint64_t value) noexcept :
-    base(value) {}
+    base(static_cast<int64_t>(value)) {}
 
     /**
      * @brief 从字符串视图构造
@@ -225,7 +225,7 @@ public:
         if (position >= 64) {
             NEFORCE_THROW_EXCEPTION(value_exception("Bit position out of range"));
         }
-        return (value_ >> position) & 1;
+        return ((value_ >> position) & static_cast<package_type>(1)) != 0;
     }
 
     /**
@@ -240,9 +240,9 @@ public:
             NEFORCE_THROW_EXCEPTION(value_exception("Bit position out of range"));
         }
         if (bit_value_) {
-            value_ |= (1ULL << position);
+            value_ |= static_cast<int64_t>(1ULL << position);
         } else {
-            value_ &= ~(1ULL << position);
+            value_ &= static_cast<int64_t>(~(1ULL << position));
         }
         return *this;
     }
@@ -257,7 +257,7 @@ public:
         if (position >= 64) {
             NEFORCE_THROW_EXCEPTION(value_exception("Bit position out of range"));
         }
-        value_ ^= (1ULL << position);
+        value_ ^= static_cast<int64_t>(1ULL << position);
         return *this;
     }
 

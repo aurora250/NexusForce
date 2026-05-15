@@ -33,7 +33,7 @@ private:
     meta_type& meta_; ///< 关联的元数据对象
 
     template <typename... Args, size_t... Is>
-    static meta_any create_with_args(const vector<meta_any>& args, index_sequence<Is...>) {
+    static meta_any create_with_args(const vector<meta_any>& args, index_sequence<Is...> /*unused*/) {
         return meta_any(T(args[Is].template convert<Args>()...));
     }
 

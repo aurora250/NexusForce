@@ -443,13 +443,14 @@ private:
     placeholder array_[1]{placeholder{}};
 
 public:
-    constexpr array() noexcept {}
-    NEFORCE_CONSTEXPR20 ~array() noexcept {}
+    constexpr array() noexcept = default;
+    NEFORCE_CONSTEXPR20 ~array() noexcept = default;
 
-    constexpr array(const array&) noexcept {}
-    constexpr array& operator=(const array&) noexcept { return *this; }
-    constexpr array(array&&) noexcept {}
-    constexpr array& operator=(array&&) noexcept { return *this; }
+    constexpr array(const array& /*unused*/) noexcept {}
+    // NOLINTNEXTLINE(bugprone-unhandled-self-assignment)
+    constexpr array& operator=(const array& /*unused*/) noexcept { return *this; }
+    constexpr array(array&& /*unused*/) noexcept {}
+    constexpr array& operator=(array&& /*unused*/) noexcept { return *this; }
 
     NEFORCE_NODISCARD NEFORCE_CONST_FUNCTION NEFORCE_ALWAYS_INLINE constexpr iterator begin() noexcept {
         return iterator{};
@@ -494,21 +495,21 @@ public:
         return true;
     }
 
-    NEFORCE_NODISCARD reference at(size_type) {
+    NEFORCE_NODISCARD reference at(size_type /*unused*/) {
         NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return array_[0];
     }
 
-    NEFORCE_NODISCARD const_reference at(size_type) const {
+    NEFORCE_NODISCARD const_reference at(size_type /*unused*/) const {
         NEFORCE_THROW_EXCEPTION(iterator_exception("array empty."));
         return array_[0];
     }
 
-    NEFORCE_NODISCARD reference operator[](size_type) {
+    NEFORCE_NODISCARD reference operator[](size_type /*unused*/) {
         NEFORCE_THROW_EXCEPTION(iterator_exception("array index out of range"));
         return *data();
     }
-    NEFORCE_NODISCARD const_reference operator[](size_type) const {
+    NEFORCE_NODISCARD const_reference operator[](size_type /*unused*/) const {
         NEFORCE_THROW_EXCEPTION(iterator_exception("array index out of range"));
         return *data();
     }
@@ -537,11 +538,15 @@ public:
         return nullptr;
     }
 
-    NEFORCE_ALWAYS_INLINE constexpr void fill(const T&) {}
-    NEFORCE_ALWAYS_INLINE constexpr void swap(array&) noexcept {}
+    NEFORCE_ALWAYS_INLINE constexpr void fill(const T& /*unused*/) {}
+    NEFORCE_ALWAYS_INLINE constexpr void swap(array& /*unused*/) noexcept {}
 
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool equal_to(const array&) const noexcept { return true; }
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool less_than(const array&) const noexcept { return false; }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool equal_to(const array& /*unused*/) const noexcept {
+        return true;
+    }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool less_than(const array& /*unused*/) const noexcept {
+        return false;
+    }
 };
 
 #ifdef NEFORCE_STANDARD_17

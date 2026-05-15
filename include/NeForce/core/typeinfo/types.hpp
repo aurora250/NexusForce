@@ -526,7 +526,7 @@ struct unpack_utility_construct_tag {
 
 struct ignore_t {
     template <typename T>
-    NEFORCE_CONSTEXPR14 const ignore_t& operator=(const T&) const noexcept {
+    NEFORCE_CONSTEXPR14 const ignore_t& operator=(const T& /*unused*/) const noexcept {
         return *this;
     }
 };

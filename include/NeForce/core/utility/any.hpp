@@ -31,7 +31,7 @@ struct any_cast_false_tag {};
  * @return 指向转换后值的指针
  */
 template <typename T, typename U>
-const T* __any_cast_aux_dispatch_impl(const _NEFORCE any* value, any_cast_true_tag) noexcept;
+const T* __any_cast_aux_dispatch_impl(const _NEFORCE any* value, any_cast_true_tag /*unused*/) noexcept;
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -206,10 +206,10 @@ class NEFORCE_API any {
     using manage_func = void (*)(any_operation, const any*, ArgT*); ///< 管理器函数指针类型
 
     manage_func manage_ = nullptr; ///< 管理器函数指针
-    storage_internal storage_{};   ///< 存储对象
+    storage_internal storage_;     ///< 存储对象
 
     template <typename T, typename U>
-    friend const T* inner::__any_cast_aux_dispatch_impl(const any* value, inner::any_cast_true_tag) noexcept;
+    friend const T* inner::__any_cast_aux_dispatch_impl(const any* value, inner::any_cast_true_tag /*unused*/) noexcept;
 
     /**
      * @brief 尝试构造值
@@ -245,7 +245,7 @@ public:
     /**
      * @brief 默认构造函数
      */
-    any() noexcept {}
+    any() noexcept = default;
 
     /**
      * @brief 复制构造函数
@@ -311,7 +311,7 @@ public:
      */
     template <typename T, typename... Args, typename VT = decay_t<T>, typename Manager = manage_t<VT>,
               enable_if_t<conjunction_v<is_copy_constructible<VT>, is_constructible<VT, Args&&...>>, int> = 0>
-    explicit any(pass_template_construct_tag<T>, Args&&... args) :
+    explicit any(pass_template_construct_tag<T> /*unused*/, Args&&... args) :
     manage_(&Manager::manage) {
         Manager::create(storage_, _NEFORCE forward<Args>(args)...);
     }
@@ -320,7 +320,7 @@ public:
               enable_if_t<conjunction_v<is_copy_constructible<VT>,
                                         is_constructible<VT, std::initializer_list<U>&, Args&&...>>,
                           int> = 0>
-    explicit any(pass_template_construct_tag<T>, std::initializer_list<U> ilist, Args&&... args) :
+    explicit any(pass_template_construct_tag<T> /*unused*/, std::initializer_list<U> ilist, Args&&... args) :
     manage_(&Manager::manage) {
         Manager::create(storage_, ilist, _NEFORCE forward<Args>(args)...);
     }
@@ -408,7 +408,7 @@ any make_any(Args&&... args) {
 NEFORCE_BEGIN_INNER__
 
 template <typename T, typename U>
-const T* __any_cast_aux_dispatch_impl(const any* value, any_cast_true_tag) noexcept {
+const T* __any_cast_aux_dispatch_impl(const any* value, any_cast_true_tag /*unused*/) noexcept {
     if (value->manage_ == &any::manage_t<U>::manage) {
         return static_cast<const T*>(any::manage_t<U>::access(value->storage_));
     }
@@ -416,7 +416,7 @@ const T* __any_cast_aux_dispatch_impl(const any* value, any_cast_true_tag) noexc
 }
 
 template <typename T, typename U>
-const T* __any_cast_aux_dispatch_impl(const any*, any_cast_false_tag) noexcept {
+const T* __any_cast_aux_dispatch_impl(const any* /*unused*/, any_cast_false_tag /*unused*/) noexcept {
     return nullptr;
 }
 
@@ -436,7 +436,7 @@ const T* __any_cast_aux(const any* value) noexcept {
 }
 
 template <typename T, enable_if_t<!is_object_v<T>, int> = 0>
-const T* __any_cast_aux(const any*) noexcept {
+const T* __any_cast_aux(const any* /*unused*/) noexcept {
     return nullptr;
 }
 

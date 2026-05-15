@@ -250,7 +250,7 @@ public:
      * 如果已拥有锁或未管理共享互斥锁，则不执行任何操作。
      */
     void lock() {
-        if (!mutex_) {
+        if (mutex_ == nullptr) {
             return;
         }
         if (owns_lock_) {
@@ -266,7 +266,7 @@ public:
      * 如果未拥有锁或未管理共享互斥锁，则不执行任何操作。
      */
     void unlock() {
-        if (!mutex_) {
+        if (mutex_ == nullptr) {
             return;
         }
         if (!owns_lock_) {
@@ -283,7 +283,7 @@ public:
      * 非阻塞地尝试获取共享互斥锁的读锁。
      */
     bool try_lock() noexcept {
-        if (!mutex_) {
+        if (mutex_ == nullptr) {
             return false;
         }
         if (owns_lock_) {

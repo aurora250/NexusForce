@@ -1680,6 +1680,18 @@ NEFORCE_INLINE17 constexpr bool is_compound_v = is_compound<T>::value;
 #endif
 
 
+template <typename T, typename = void>
+struct is_complete : false_type {};
+
+template <typename T>
+struct is_complete<T, void_t<decltype(sizeof(T))>> : true_type {};
+
+#ifdef NEFORCE_STANDARD_14
+template <typename T>
+NEFORCE_INLINE17 constexpr bool is_complete_v = is_complete<T>::value;
+#endif
+
+
 /**
  * @struct is_const
  * @brief 判断类型是否被const限定
@@ -1773,7 +1785,7 @@ NEFORCE_INLINE17 constexpr bool is_function_v = is_function<T>::value;
 template <typename T>
 struct is_allocable
 : bool_constant<!(is_void<T>::value || is_reference<T>::value || is_function<T>::value || is_const<T>::value) &&
-                (sizeof(T) > 0)> {};
+                is_complete<T>::value> {};
 
 #ifdef NEFORCE_STANDARD_14
 /**

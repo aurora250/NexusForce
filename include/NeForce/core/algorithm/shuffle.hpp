@@ -8,6 +8,7 @@
  * 此文件提供了随机重排算法实现，用于将序列中的元素随机重新排列。
  */
 
+#include "NeForce/core/algorithm/shift.hpp"
 #include "NeForce/core/numeric/random.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

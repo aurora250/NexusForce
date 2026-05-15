@@ -41,7 +41,7 @@ public:
      * @brief 获取异常类型信息
      * @return 异常的类型信息
      */
-    virtual const std::type_info& type() const noexcept = 0;
+    NEFORCE_NODISCARD virtual const std::type_info& type() const noexcept = 0;
 
     /**
      * @brief 克隆异常包装器
@@ -49,7 +49,7 @@ public:
      *
      * 创建当前异常包装器的深拷贝。
      */
-    virtual unique_ptr<exception_wrapper> clone() const = 0;
+    NEFORCE_NODISCARD virtual unique_ptr<exception_wrapper> clone() const = 0;
 };
 
 /**
@@ -88,13 +88,13 @@ public:
      * @brief 获取异常类型信息
      * @return 异常的类型信息
      */
-    NEFORCE_ALWAYS_INLINE const std::type_info& type() const noexcept override { return typeid(Ex); }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE const std::type_info& type() const noexcept override { return typeid(Ex); }
 
     /**
      * @brief 克隆异常包装器
      * @return 异常包装器的唯一指针
      */
-    NEFORCE_ALWAYS_INLINE unique_ptr<exception_wrapper> clone() const override {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE unique_ptr<exception_wrapper> clone() const override {
         return _NEFORCE make_unique<typed_exception_wrapper>(exception_);
     }
 };
@@ -153,7 +153,7 @@ private:
     ecb_(cb) {}
 
     template <typename Ex>
-    friend exception_ptr make_exception_ptr(Ex) noexcept;
+    friend exception_ptr make_exception_ptr(Ex ex) noexcept;
 
     friend exception_ptr NEFORCE_API current_exception() noexcept;
 
@@ -293,7 +293,7 @@ public:
      * 如果异常指针为空，返回typeid(void)。
      */
     NEFORCE_NODISCARD const std::type_info& exception_type() const noexcept {
-        if (!ecb_ || !ecb_->wrapper) {
+        if (ecb_ == nullptr || !ecb_->wrapper) {
             return typeid(void);
         }
         return ecb_->wrapper->type();

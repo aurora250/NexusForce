@@ -69,8 +69,8 @@ private:
 
         frame(const frame&) = default;
         frame& operator=(const frame&) = default;
-        frame(frame&&) = default;
-        frame& operator=(frame&&) = default;
+        frame(frame&&) noexcept = default;
+        frame& operator=(frame&&) noexcept = default;
         ~frame() = default;
     };
 
@@ -157,26 +157,14 @@ private:
     }
 
 public:
-    /**
-     * @brief 默认构造函数
-     */
     json_builder() = default;
+    ~json_builder() = default;
 
     json_builder(const json_builder&) = delete;
     json_builder& operator=(const json_builder&) = delete;
 
-    /**
-     * @brief 移动构造函数
-     * @param other 源构建器
-     */
-    json_builder(json_builder&& other) = default;
-
-    /**
-     * @brief 移动赋值运算符
-     * @param other 源构建器
-     * @return 自身引用
-     */
-    json_builder& operator=(json_builder&& other) = default;
+    json_builder(json_builder&& other) noexcept = default;
+    json_builder& operator=(json_builder&& other) noexcept = default;
 
     /**
      * @brief 开始一个JSON对象

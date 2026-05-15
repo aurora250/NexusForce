@@ -71,7 +71,7 @@ public:
      * 重置预处理语句，允许复用。
      */
     ~sqlite_prepared_result() override {
-        if (stmt_) {
+        if (stmt_ != nullptr) {
             ::sqlite3_reset(stmt_);
         }
     }

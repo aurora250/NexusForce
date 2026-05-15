@@ -14,6 +14,9 @@
 #ifdef NEFORCE_COMPILER_MSVC
 #    include <intrin.h>
 #endif
+#ifdef NEFORCE_COMPILER_CLANG_CL
+#    include <intrin0.inl.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -42,7 +45,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void atomic_thread_fence(const memory_order mo) noe
 #    if defined(NEFORCE_ARCH_X86)
     ::_ReadWriteBarrier();
     if (mo == memory_order_seq_cst) {
-        volatile long guard;
+        volatile long guard = 0;
         ::_InterlockedIncrement(&guard);
         ::_ReadWriteBarrier();
     }
@@ -53,7 +56,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void atomic_thread_fence(const memory_order mo) noe
         ::_ReadWriteBarrier();
     }
 #    else
-    assert(false);
+    ::_ReadWriteBarrier();
 #    endif
 #else
     __atomic_thread_fence(static_cast<int32_t>(mo));
@@ -113,7 +116,7 @@ template <>
 struct interlocked_exchange_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
-#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_COMPILER_LLVM_MINGW)
+#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_COMPILER_CLANG_CL)
         return static_cast<T>(
                 ::_InterlockedExchange64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
 #    else
@@ -275,7 +278,7 @@ template <>
 struct interlocked_fetch_add_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
-#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_COMPILER_LLVM_MINGW)
+#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_COMPILER_CLANG_CL)
         return static_cast<T>(::_InterlockedExchangeAdd64(reinterpret_cast<volatile long long*>(target),
                                                           static_cast<long long>(value)));
 #    else
@@ -314,7 +317,7 @@ template <>
 struct interlocked_fetch_and_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
-#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_COMPILER_LLVM_MINGW)
+#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_COMPILER_CLANG_CL)
         return static_cast<T>(
                 ::_InterlockedAnd64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
 #    else
@@ -352,7 +355,7 @@ template <>
 struct interlocked_fetch_or_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
-#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_COMPILER_LLVM_MINGW)
+#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_COMPILER_CLANG_CL)
         return static_cast<T>(
                 ::_InterlockedOr64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
 #    else
@@ -391,7 +394,7 @@ template <>
 struct interlocked_fetch_xor_impl<8> {
     template <typename T>
     static T call(volatile T* target, T value) {
-#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_COMPILER_LLVM_MINGW)
+#    if defined(NEFORCE_ARCH_BITS_64) || defined(NEFORCE_COMPILER_CLANG_CL)
         return static_cast<T>(
                 ::_InterlockedXor64(reinterpret_cast<volatile long long*>(target), static_cast<long long>(value)));
 #    else
@@ -423,7 +426,7 @@ struct atomic_is_always_lock_free_impl<8> {
 };
 template <>
 struct atomic_is_always_lock_free_impl<16> {
-#    ifdef NEFORCE_ARCH_X86_64
+#    if defined(NEFORCE_ARCH_X86_64) || defined(NEFORCE_ARCH_AARCH64)
     static constexpr bool value = true;
 #    else
     static constexpr bool value = false;
@@ -533,7 +536,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_weak(volatile T* ptr, remove_vo
     return __atomic_compare_exchange_n(ptr, expected, desired, true, static_cast<int32_t>(success),
                                        static_cast<int32_t>(failure));
 #else
-#    if defined(NEFORCE_ARCH_X86)
+#    if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_AARCH64)
     const bool result = inner::interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, desired);
     if (success == memory_order_seq_cst || failure == memory_order_seq_cst) {
         ::_ReadWriteBarrier();
@@ -674,7 +677,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_strong(volatile T* ptr, remove_
     return __atomic_compare_exchange_n(ptr, expected, desired, false, static_cast<int32_t>(success),
                                        static_cast<int32_t>(failure));
 #else
-#    if defined(NEFORCE_ARCH_X86)
+#    if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_AARCH64)
     return _NEFORCE atomic_cmpexch_weak(ptr, expected, desired, success, failure);
 #    else
     remove_volatile_t<T> old_val = *expected;
@@ -927,7 +930,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_weak_any(volatile T* ptr, remov
     return __atomic_compare_exchange(ptr, expected, desired, true, static_cast<int32_t>(success),
                                      static_cast<int32_t>(failure));
 #else
-#    if defined(NEFORCE_ARCH_X86)
+#    if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_AARCH64)
     const bool result = inner::interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, *desired);
     if (success == memory_order_seq_cst || failure == memory_order_seq_cst) {
         ::_ReadWriteBarrier();
@@ -1048,7 +1051,7 @@ NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_strong_any(volatile T* ptr, rem
     return __atomic_compare_exchange(ptr, expected, desired, false, static_cast<int32_t>(success),
                                      static_cast<int32_t>(failure));
 #else
-#    if defined(NEFORCE_ARCH_X86)
+#    if defined(NEFORCE_ARCH_X86) || defined(NEFORCE_ARCH_AARCH64)
     const bool result = inner::interlocked_compare_exchange_impl<sizeof(T)>::call(ptr, expected, *desired);
     if (success == memory_order_seq_cst || failure == memory_order_seq_cst) {
         ::_ReadWriteBarrier();
@@ -1245,7 +1248,7 @@ struct atomic_flag {
             bool;
 #endif
 
-    value_type flag_{0}; ///< 原子标志值
+    value_type flag_{static_cast<value_type>(0)}; ///< 原子标志值
 
     atomic_flag() noexcept = default;
     atomic_flag(const atomic_flag&) = delete;
@@ -1260,7 +1263,7 @@ struct atomic_flag {
      * @param flag 初始标志值
      */
     constexpr atomic_flag(const value_type flag) noexcept :
-    flag_(static_cast<value_type>(flag ? 1 : 0)) {}
+    flag_(static_cast<value_type>(static_cast<int>(flag) != 0 ? 1 : 0)) {}
 
     /**
      * @brief 测试并设置标志
@@ -1299,7 +1302,7 @@ struct atomic_flag {
      * @param mo 内存顺序
      * @return 当前标志值
      */
-    NEFORCE_ALWAYS_INLINE bool test(const memory_order mo = memory_order_seq_cst) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE bool test(const memory_order mo = memory_order_seq_cst) const noexcept {
 #ifdef NEFORCE_COMPILER_GNUC
         value_type value;
         __atomic_load(&flag_, &value, static_cast<int32_t>(mo));
@@ -1316,7 +1319,8 @@ struct atomic_flag {
     /**
      * @brief volatile版本的测试标志值
      */
-    NEFORCE_ALWAYS_INLINE_INLINE bool test(const memory_order mo = memory_order_seq_cst) const volatile noexcept {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE bool test(const memory_order mo = memory_order_seq_cst) const
+            volatile noexcept {
 #ifdef NEFORCE_COMPILER_GNUC
         value_type value;
         __atomic_load(&flag_, &value, static_cast<int32_t>(mo));
@@ -1599,12 +1603,16 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(T), align_inner>(); }
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(T), align_inner>();
+    }
 
     /**
      * @brief volatile版本的检查是否支持无锁操作
      */
-    bool is_lock_free() const volatile noexcept { return _NEFORCE is_always_lock_free<sizeof(T), align_inner>(); }
+    NEFORCE_NODISCARD bool is_lock_free() const volatile noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(T), align_inner>();
+    }
 
     /**
      * @brief 原子存储操作
@@ -2026,14 +2034,14 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept {
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
         return _NEFORCE is_always_lock_free<sizeof(value_type), alignof(value_type)>();
     }
 
     /**
      * @brief volatile版本的检查是否支持无锁操作
      */
-    bool is_lock_free() const volatile noexcept {
+    NEFORCE_NODISCARD bool is_lock_free() const volatile noexcept {
         return _NEFORCE is_always_lock_free<sizeof(value_type), alignof(value_type)>();
     }
 
@@ -2151,7 +2159,7 @@ public:
 #ifdef NEFORCE_COMPILER_GNUC
         return __atomic_exchange_n(&ptr_, ptr, static_cast<int32_t>(mo));
 #else
-        const value_type old =
+        const auto old =
                 static_cast<value_type>(::_InterlockedExchangePointer(reinterpret_cast<void* volatile*>(&ptr_), ptr));
         if (mo == memory_order_seq_cst) {
             ::_ReadWriteBarrier();
@@ -2168,7 +2176,7 @@ public:
 #ifdef NEFORCE_COMPILER_GNUC
         return __atomic_exchange_n(&ptr_, ptr, static_cast<int32_t>(mo));
 #else
-        const value_type old =
+        const auto old =
                 static_cast<value_type>(::_InterlockedExchangePointer(reinterpret_cast<void* volatile*>(&ptr_), ptr));
         if (mo == memory_order_seq_cst) {
             ::_ReadWriteBarrier();
@@ -2297,7 +2305,7 @@ public:
      */
     NEFORCE_ALWAYS_INLINE value_type fetch_add(const ptrdiff_t dest,
                                                const memory_order mo = memory_order_seq_cst) noexcept {
-        const uintptr_t byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
+        const auto byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
         uintptr_t old_val =
                 _NEFORCE atomic_fetch_add_any(reinterpret_cast<uintptr_t*>(_NEFORCE addressof(ptr_)), byte_offset, mo);
         return reinterpret_cast<value_type>(old_val);
@@ -2308,7 +2316,7 @@ public:
      */
     NEFORCE_ALWAYS_INLINE_INLINE value_type fetch_add(const ptrdiff_t dest,
                                                       const memory_order mo = memory_order_seq_cst) volatile noexcept {
-        const uintptr_t byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
+        const auto byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
         uintptr_t old_val =
                 _NEFORCE atomic_fetch_add_any(reinterpret_cast<uintptr_t*>(_NEFORCE addressof(ptr_)), byte_offset, mo);
         return reinterpret_cast<value_type>(old_val);
@@ -2322,7 +2330,7 @@ public:
      */
     NEFORCE_ALWAYS_INLINE value_type fetch_sub(const ptrdiff_t dest,
                                                const memory_order mo = memory_order_seq_cst) noexcept {
-        const uintptr_t byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
+        const auto byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
         uintptr_t old_val =
                 _NEFORCE atomic_fetch_sub_any(reinterpret_cast<uintptr_t*>(_NEFORCE addressof(ptr_)), byte_offset, mo);
         return reinterpret_cast<value_type>(old_val);
@@ -2333,7 +2341,7 @@ public:
      */
     NEFORCE_ALWAYS_INLINE_INLINE value_type fetch_sub(const ptrdiff_t dest,
                                                       const memory_order mo = memory_order_seq_cst) volatile noexcept {
-        const uintptr_t byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
+        const auto byte_offset = static_cast<uintptr_t>(dest * static_cast<ptrdiff_t>(sizeof(T)));
         uintptr_t old_val =
                 _NEFORCE atomic_fetch_sub_any(reinterpret_cast<uintptr_t*>(_NEFORCE addressof(ptr_)), byte_offset, mo);
         return reinterpret_cast<value_type>(old_val);
@@ -2392,12 +2400,14 @@ public:
     /**
      * @brief 检查是否支持无锁操作
      */
-    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(Float), alignof(Float)>(); }
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(Float), alignof(Float)>();
+    }
 
     /**
      * @brief volatile版本的检查是否支持无锁操作
      */
-    bool is_lock_free() const volatile noexcept {
+    NEFORCE_NODISCARD bool is_lock_free() const volatile noexcept {
         return _NEFORCE is_always_lock_free<sizeof(Float), alignof(Float)>();
     }
 
@@ -2624,7 +2634,7 @@ struct atomic_ref_base<T, false, false> {
     static_assert(is_trivially_copyable_v<T>, "atomic_ref_base need trivially copyable T");
 
 private:
-    static constexpr int align_inner = (sizeof(T) & (sizeof(T) - 1)) || sizeof(T) > 16 ? 0 : sizeof(T);
+    static constexpr int align_inner = (sizeof(T) & (sizeof(T) - 1)) != 0U || sizeof(T) > 16 ? 0 : sizeof(T);
 
     T* ptr_; ///< 指向被引用对象的指针
 
@@ -2666,7 +2676,9 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(T), required_alignment>(); }
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(T), required_alignment>();
+    }
 
     /**
      * @brief 原子存储操作
@@ -3069,7 +3081,9 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(Float), required_alignment>(); }
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(Float), required_alignment>();
+    }
 
     /**
      * @brief 原子存储操作
@@ -3262,7 +3276,9 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(T*), required_alignment>(); }
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(T*), required_alignment>();
+    }
 
     /**
      * @brief 原子存储指针操作
@@ -3365,7 +3381,7 @@ public:
      */
     NEFORCE_ALWAYS_INLINE value_type fetch_add(const difference_type dest,
                                                const memory_order mo = memory_order_seq_cst) noexcept {
-        const uintptr_t byte_offset = static_cast<uintptr_t>(dest * static_cast<difference_type>(sizeof(T)));
+        const auto byte_offset = static_cast<uintptr_t>(dest * static_cast<difference_type>(sizeof(T)));
         uintptr_t old_val = _NEFORCE atomic_fetch_add_any(reinterpret_cast<uintptr_t*>(ptr_), byte_offset, mo);
         return reinterpret_cast<value_type>(old_val);
     }
@@ -3378,7 +3394,7 @@ public:
      */
     NEFORCE_ALWAYS_INLINE value_type fetch_sub(const difference_type dest,
                                                const memory_order mo = memory_order_seq_cst) noexcept {
-        const uintptr_t byte_offset = static_cast<uintptr_t>(dest * static_cast<difference_type>(sizeof(T)));
+        const auto byte_offset = static_cast<uintptr_t>(dest * static_cast<difference_type>(sizeof(T)));
         uintptr_t old_val = _NEFORCE atomic_fetch_sub_any(reinterpret_cast<uintptr_t*>(ptr_), byte_offset, mo);
         return reinterpret_cast<value_type>(old_val);
     }

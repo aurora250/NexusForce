@@ -11,6 +11,8 @@
 
 #include "NeForce/core/container/list.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
+#include "NeForce/core/time/clocks.hpp"
+#include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

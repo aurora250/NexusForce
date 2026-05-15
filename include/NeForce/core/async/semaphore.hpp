@@ -285,7 +285,7 @@ public:
      *
      * 查询后立即可能有其他线程改变信号量值。
      */
-    int value() const noexcept;
+    NEFORCE_NODISCARD int value() const noexcept;
 };
 
 /** @} */ // Semaphores

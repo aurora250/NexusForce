@@ -291,9 +291,7 @@ public:
         return byte_size(bytes_ / divisor);
     }
 
-    NEFORCE_NODISCARD friend byte_size operator*(uint64_t factor, const byte_size& size) noexcept {
-        return size * factor;
-    }
+    NEFORCE_NODISCARD friend byte_size operator*(uint64_t factor, const byte_size& size) { return size * factor; }
 
     NEFORCE_NODISCARD bool equal_to(const byte_size& rhs) const noexcept { return bytes_ == rhs.bytes_; }
     NEFORCE_NODISCARD bool less_than(const byte_size& rhs) const noexcept { return bytes_ < rhs.bytes_; }

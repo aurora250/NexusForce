@@ -52,7 +52,7 @@ private:
     void collect_properties(vector<pair<string, const meta_property*>>& result,
                             vector<reflect::type_id>* visited = nullptr) const {
         vector<reflect::type_id> local_visited;
-        if (!visited) {
+        if (visited == nullptr) {
             visited = &local_visited;
         }
 
@@ -62,7 +62,7 @@ private:
         visited->push_back(type_id_);
 
         for (const auto* base: base_types_) {
-            if (base) {
+            if (base != nullptr) {
                 base->collect_properties(result, visited);
             }
         }
@@ -77,7 +77,7 @@ private:
     void collect_functions(vector<pair<string, const meta_function*>>& result,
                            vector<reflect::type_id>* visited = nullptr) const {
         vector<reflect::type_id> local_visited;
-        if (!visited) {
+        if (visited == nullptr) {
             visited = &local_visited;
         }
 
@@ -87,7 +87,7 @@ private:
         visited->push_back(type_id_);
 
         for (const auto* base: base_types_) {
-            if (base) {
+            if (base != nullptr) {
                 base->collect_functions(result, visited);
             }
         }
@@ -137,7 +137,7 @@ public:
      * @return 自身引用
      */
     meta_type& base_type(meta_type* base) {
-        if (base) {
+        if (base != nullptr) {
             base_types_.push_back(base);
         }
         return *this;
@@ -163,7 +163,7 @@ public:
             return true;
         }
         for (auto* base: base_types_) {
-            if (base && base->is_derived_from(base_id)) {
+            if (base != nullptr && base->is_derived_from(base_id)) {
                 return true;
             }
         }
@@ -224,8 +224,8 @@ public:
         }
 
         for (const auto* base: base_types_) {
-            if (base) {
-                if (auto* prop = base->get_property(name)) {
+            if (base != nullptr) {
+                if (const auto* prop = base->get_property(name)) {
                     return prop;
                 }
             }
@@ -245,8 +245,8 @@ public:
         }
 
         for (const auto* base: base_types_) {
-            if (base) {
-                if (auto* func = base->get_function(name)) {
+            if (base != nullptr) {
+                if (const auto* func = base->get_function(name)) {
                     return func;
                 }
             }

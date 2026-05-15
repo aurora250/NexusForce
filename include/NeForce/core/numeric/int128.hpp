@@ -110,7 +110,7 @@ public:
      */
     NEFORCE_NODISCARD constexpr int128_t to_int128() const noexcept;
 
-    explicit constexpr operator bool() const noexcept { return lo || hi; }
+    explicit constexpr operator bool() const noexcept { return lo != 0U || hi != 0U; }
     explicit constexpr operator char() const noexcept { return static_cast<char>(lo); }
     explicit constexpr operator int8_t() const noexcept { return static_cast<int8_t>(lo); }
     explicit constexpr operator uint8_t() const noexcept { return static_cast<uint32_t>(lo); }
@@ -189,7 +189,7 @@ public:
     /**
      * @brief 按位取反
      */
-    constexpr uint128_t operator~() const noexcept { return uint128_t(~hi, ~lo); }
+    constexpr uint128_t operator~() const noexcept { return {~hi, ~lo}; }
 
     /**
      * @brief 按位与赋值
@@ -491,7 +491,7 @@ public:
     /**
      * @brief 按位取反
      */
-    constexpr int128_t operator~() const noexcept { return int128_t(~hi, ~lo); }
+    constexpr int128_t operator~() const noexcept { return {~hi, ~lo}; }
 
     /**
      * @brief 按位与赋值
@@ -622,8 +622,8 @@ NEFORCE_CONSTEXPR20 string uint128_t::to_string() const { return inner::__int_to
 
 constexpr uint128_t operator-(const uint128_t& lhs, const uint128_t& rhs) noexcept {
     const uint64_t new_lo = lhs.lo - rhs.lo;
-    const uint64_t new_hi = lhs.hi - rhs.hi - (lhs.lo < rhs.lo);
-    return uint128_t(new_hi, new_lo);
+    const uint64_t new_hi = lhs.hi - rhs.hi - static_cast<uint64_t>(lhs.lo < rhs.lo);
+    return {new_hi, new_lo};
 }
 
 
@@ -639,11 +639,11 @@ constexpr int128_t operator-(const int128_t& lhs, const int128_t& rhs) noexcept 
     const uint128_t a = lhs.to_uint128();
     const uint128_t b = rhs.to_uint128();
     const uint128_t c = a - b;
-    return int128_t(c.hi, c.lo);
+    return {c.hi, c.lo};
 }
 
-constexpr int128_t uint128_t::to_int128() const noexcept { return int128_t(hi, lo); }
-constexpr uint128_t::operator int128_t() const noexcept { return int128_t(hi, lo); }
+constexpr int128_t uint128_t::to_int128() const noexcept { return {hi, lo}; }
+constexpr uint128_t::operator int128_t() const noexcept { return {hi, lo}; }
 
 
 NEFORCE_BEGIN_LITERALS__
@@ -659,18 +659,14 @@ NEFORCE_BEGIN_LITERALS__
  * @param val 整数值
  * @return uint128_t对象
  */
-constexpr uint128_t operator""_u128(const unsigned long long val) noexcept {
-    return uint128_t(static_cast<uint64_t>(val));
-}
+constexpr uint128_t operator""_u128(const unsigned long long val) noexcept { return {static_cast<uint64_t>(val)}; }
 
 /**
  * @brief 128位有符号整数字面量
  * @param val 整数值
  * @return int128_t对象
  */
-constexpr int128_t operator""_i128(const unsigned long long val) noexcept {
-    return int128_t(static_cast<uint64_t>(val));
-}
+constexpr int128_t operator""_i128(const unsigned long long val) noexcept { return {static_cast<uint64_t>(val)}; }
 
 /**
  * @brief 128位无符号整数字符串字面量

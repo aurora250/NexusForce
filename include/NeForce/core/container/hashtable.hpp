@@ -313,60 +313,60 @@ NEFORCE_INLINE17 constexpr size_t HASH_PRIME_LIST[] = {101,
                                                        891861923,
                                                        1337792887,
                                                        2006689337,
-                                                       3010034021u,
-                                                       4515051137ull,
-                                                       6772576709ull,
-                                                       10158865069ull,
-                                                       15238297621ull,
-                                                       22857446471ull,
-                                                       34286169707ull,
-                                                       51429254599ull,
-                                                       77143881917ull,
-                                                       115715822899ull,
-                                                       173573734363ull,
-                                                       260360601547ull,
-                                                       390540902329ull,
-                                                       585811353559ull,
-                                                       878717030339ull,
-                                                       1318075545511ull,
-                                                       1977113318311ull,
-                                                       2965669977497ull,
-                                                       4448504966249ull,
-                                                       6672757449409ull,
-                                                       10009136174239ull,
-                                                       15013704261371ull,
-                                                       22520556392057ull,
-                                                       33780834588157ull,
-                                                       50671251882247ull,
-                                                       76006877823377ull,
-                                                       114010316735089ull,
-                                                       171015475102649ull,
-                                                       256523212653977ull,
-                                                       384784818980971ull,
-                                                       577177228471507ull,
-                                                       865765842707309ull,
-                                                       1298648764060979ull,
-                                                       1947973146091477ull,
-                                                       2921959719137273ull,
-                                                       4382939578705967ull,
-                                                       6574409368058969ull,
-                                                       9861614052088471ull,
-                                                       14792421078132871ull,
-                                                       22188631617199337ull,
-                                                       33282947425799017ull,
-                                                       49924421138698549ull,
-                                                       74886631708047827ull,
-                                                       112329947562071807ull,
-                                                       168494921343107851ull,
-                                                       252742382014661767ull,
-                                                       379113573021992729ull,
-                                                       568670359532989111ull,
-                                                       853005539299483657ull,
-                                                       1279508308949225477ull,
-                                                       1919262463423838231ull,
-                                                       2878893695135757317ull,
-                                                       4318340542703636011ull,
-                                                       6477510814055453699ull};
+                                                       3010034021U,
+                                                       4515051137ULL,
+                                                       6772576709ULL,
+                                                       10158865069ULL,
+                                                       15238297621ULL,
+                                                       22857446471ULL,
+                                                       34286169707ULL,
+                                                       51429254599ULL,
+                                                       77143881917ULL,
+                                                       115715822899ULL,
+                                                       173573734363ULL,
+                                                       260360601547ULL,
+                                                       390540902329ULL,
+                                                       585811353559ULL,
+                                                       878717030339ULL,
+                                                       1318075545511ULL,
+                                                       1977113318311ULL,
+                                                       2965669977497ULL,
+                                                       4448504966249ULL,
+                                                       6672757449409ULL,
+                                                       10009136174239ULL,
+                                                       15013704261371ULL,
+                                                       22520556392057ULL,
+                                                       33780834588157ULL,
+                                                       50671251882247ULL,
+                                                       76006877823377ULL,
+                                                       114010316735089ULL,
+                                                       171015475102649ULL,
+                                                       256523212653977ULL,
+                                                       384784818980971ULL,
+                                                       577177228471507ULL,
+                                                       865765842707309ULL,
+                                                       1298648764060979ULL,
+                                                       1947973146091477ULL,
+                                                       2921959719137273ULL,
+                                                       4382939578705967ULL,
+                                                       6574409368058969ULL,
+                                                       9861614052088471ULL,
+                                                       14792421078132871ULL,
+                                                       22188631617199337ULL,
+                                                       33282947425799017ULL,
+                                                       49924421138698549ULL,
+                                                       74886631708047827ULL,
+                                                       112329947562071807ULL,
+                                                       168494921343107851ULL,
+                                                       252742382014661767ULL,
+                                                       379113573021992729ULL,
+                                                       568670359532989111ULL,
+                                                       853005539299483657ULL,
+                                                       1279508308949225477ULL,
+                                                       1919262463423838231ULL,
+                                                       2878893695135757317ULL,
+                                                       4318340542703636011ULL,
+                                                       6477510814055453699ULL};
 
 #else
 
@@ -426,7 +426,7 @@ private:
     hasher hasher_{};                                                            ///< 哈希函数对象
     key_equal equals_{};                                                         ///< 键相等比较对象
     ExtractKey extracter_{};                                                     ///< 值提取键对象
-    compressed_pair<allocator_type, float> pair_{default_construct_tag{}, 1.0f}; ///< 压缩存储分配器和最大负载因子
+    compressed_pair<allocator_type, float> pair_{default_construct_tag{}, 1.0F}; ///< 压缩存储分配器和最大负载因子
 
     template <bool, typename>
     friend struct hashtable_iterator;
@@ -607,7 +607,7 @@ private:
     enable_if_t<is_ranges_fwd_iter_v<Iterator>> insert_unique_aux(Iterator first, Iterator last) {
         size_type n = _NEFORCE distance(first, last);
 
-        const size_type need_buckets =
+        const auto need_buckets =
                 static_cast<size_type>(_NEFORCE ceil(static_cast<double>(size_ + n) / max_load_factor()));
         rehash(need_buckets);
 
@@ -642,7 +642,7 @@ private:
     enable_if_t<is_ranges_fwd_iter_v<Iterator>> insert_equal_aux(Iterator first, Iterator last) {
         size_type n = _NEFORCE distance(first, last);
 
-        const size_type need_buckets =
+        const auto need_buckets =
                 static_cast<size_type>(_NEFORCE ceil(static_cast<double>(size_ + n) / max_load_factor()));
         rehash(need_buckets);
 
@@ -841,7 +841,7 @@ public:
      * @param n 初始桶数量提示
      * @param max_lf 最大负载因子
      */
-    explicit hashtable(const size_type n, float max_lf = 1.0f) :
+    explicit hashtable(const size_type n, float max_lf = 1.0F) :
     buckets_(next_size(n), nullptr),
     pair_(default_construct_tag{}, max_lf) {}
 
@@ -851,7 +851,7 @@ public:
      * @param hf 哈希函数
      * @param max_lf 最大负载因子
      */
-    hashtable(const size_type n, const HashFcn& hf, float max_lf = 1.0f) :
+    hashtable(const size_type n, const HashFcn& hf, float max_lf = 1.0F) :
     buckets_(next_size(n), nullptr),
     hasher_(hf),
     pair_(default_construct_tag{}, max_lf) {}
@@ -863,7 +863,7 @@ public:
      * @param eql 相等比较函数
      * @param max_lf 最大负载因子
      */
-    hashtable(const size_type n, const HashFcn& hf, const EqualKey& eql, float max_lf = 1.0f) :
+    hashtable(const size_type n, const HashFcn& hf, const EqualKey& eql, float max_lf = 1.0F) :
     buckets_(next_size(n), nullptr),
     hasher_(hf),
     equals_(eql),
@@ -877,7 +877,7 @@ public:
      * @param ext 值提取函数
      * @param max_lf 最大负载因子
      */
-    hashtable(const size_type n, const HashFcn& hf, const EqualKey& eql, const ExtractKey& ext, float max_lf = 1.0f) :
+    hashtable(const size_type n, const HashFcn& hf, const EqualKey& eql, const ExtractKey& ext, float max_lf = 1.0F) :
     buckets_(next_size(n), nullptr),
     hasher_(hf),
     equals_(eql),
@@ -1067,7 +1067,7 @@ public:
      * @return 负载因子（元素数量/桶数量）
      */
     NEFORCE_NODISCARD float load_factor() const noexcept {
-        return buckets_size() == 0 ? 0.0f : static_cast<float>(size()) / static_cast<float>(buckets_size());
+        return buckets_size() == 0 ? 0.0F : static_cast<float>(size()) / static_cast<float>(buckets_size());
     }
 
     /**
@@ -1134,7 +1134,7 @@ public:
             return;
         }
 
-        const size_type needed = static_cast<size_type>(_NEFORCE ceil(static_cast<double>(n) / max_load_factor()));
+        const auto needed = static_cast<size_type>(_NEFORCE ceil(static_cast<double>(n) / max_load_factor()));
 
         if (needed > static_cast<float>(buckets_max_size())) {
             NEFORCE_THROW_EXCEPTION(value_exception("hashtable size exceeds max count"));
@@ -1473,7 +1473,7 @@ public:
             first = first->next;
         }
 
-        if (!first) {
+        if (first == nullptr) {
             return {end(), end()};
         }
 
@@ -1517,7 +1517,7 @@ public:
             first = first->next;
         }
 
-        if (!first) {
+        if (first == nullptr) {
             return {cend(), cend()};
         }
 

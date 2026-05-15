@@ -78,20 +78,9 @@ bool __platform_wait_until_impl(const platform_wait_t* addr, const platform_wait
         return false;
     }
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
     const auto dur = timeout - now;
-    const auto sec = time_cast<seconds>(dur);
-    const auto ns = time_cast<nanoseconds>(dur - sec);
-#else
-    const auto sys_timeout = steady_clock::to_system<Dur>(timeout);
-    const auto sys_now = system_clock::now();
-    if (sys_timeout <= sys_now) {
-        return false;
-    }
-    const auto sys_dur = sys_timeout - sys_now;
-    const auto sec = time_cast<seconds>(sys_dur);
-    const auto ns = time_cast<nanoseconds>(sys_dur - sec);
-#endif
+    const auto sec = _NEFORCE time_cast<seconds>(dur);
+    const auto ns = _NEFORCE time_cast<nanoseconds>(dur - sec);
 
     return _NEFORCE futex_wait_until(const_cast<void*>(static_cast<const void*>(addr)), old, true, sec.count(),
                                      ns.count(), true);
@@ -269,7 +258,7 @@ public:
      */
     template <typename T, typename Func, typename Clock, typename Dur>
     bool waiter_do_wait_until_v(T old, Func func, const time_point<Clock, Dur>& timeout) noexcept {
-        platform_wait_t value;
+        platform_wait_t value = 0;
         if (base_type::waiter_do_spin(old, _NEFORCE move(func), value, timed_backoff_spin_policy(timeout))) {
             return true;
         }
@@ -310,7 +299,7 @@ public:
      */
     template <typename Pred, typename Clock, typename Dur>
     bool waiter_do_wait_until(Pred pred, const time_point<Clock, Dur>& timeout) noexcept {
-        platform_wait_t value;
+        platform_wait_t value = 0;
         if (this->waiter_do_spin(pred, value, timed_backoff_spin_policy(timeout))) {
             return true;
         }
@@ -330,7 +319,7 @@ public:
      */
     template <typename T, typename Func, typename Rep, typename Period>
     bool waiter_do_wait_for_v(T old, Func func, const duration<Rep, Period>& rt) noexcept {
-        platform_wait_t value;
+        platform_wait_t value = 0;
         if (base_type::waiter_do_spin_v(old, _NEFORCE move(func), value)) {
             return true;
         }
@@ -352,7 +341,7 @@ public:
      */
     template <typename Pred, typename Rep, typename Period>
     bool waiter_do_wait_for(Pred pred, const duration<Rep, Period>& rt) noexcept {
-        platform_wait_t value;
+        platform_wait_t value = 0;
         if (base_type::waiter_do_spin(pred, value)) {
             return true;
         }

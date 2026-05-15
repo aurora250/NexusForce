@@ -325,7 +325,7 @@ public:
      * @brief 添加注释
      * @param comment 注释内容
      */
-    void add_comment(string comment) noexcept { comments_.emplace_back(move(comment)); }
+    void add_comment(string comment) { comments_.emplace_back(move(comment)); }
 
     /**
      * @brief 获取所有注释
@@ -341,7 +341,7 @@ public:
      */
     NEFORCE_NODISCARD string get_string(const string& name, const string& default_value = "") const {
         const auto* var = get_variable(name);
-        return var ? var->get_value() : default_value;
+        return var != nullptr ? var->get_value() : default_value;
     }
 
     /**
@@ -352,7 +352,7 @@ public:
      */
     NEFORCE_NODISCARD int get_int(const string& name, const int default_value = 0) const {
         const auto* var = get_variable(name);
-        return var ? var->get_int(default_value) : default_value;
+        return var != nullptr ? var->get_int(default_value) : default_value;
     }
 
     /**
@@ -363,7 +363,7 @@ public:
      */
     NEFORCE_NODISCARD int64_t get_int64(const string& name, const int64_t default_value = 0) const {
         const auto* var = get_variable(name);
-        return var ? var->get_int64(default_value) : default_value;
+        return var != nullptr ? var->get_int64(default_value) : default_value;
     }
 
     /**
@@ -374,7 +374,7 @@ public:
      */
     NEFORCE_NODISCARD double get_double(const string& name, const double default_value = 0.0) const {
         const auto* var = get_variable(name);
-        return var ? var->get_double(default_value) : default_value;
+        return var != nullptr ? var->get_double(default_value) : default_value;
     }
 
     /**
@@ -385,7 +385,7 @@ public:
      */
     NEFORCE_NODISCARD bool get_bool(const string& name, const bool default_value = false) const {
         const auto* var = get_variable(name);
-        return var ? var->get_bool(default_value) : default_value;
+        return var != nullptr ? var->get_bool(default_value) : default_value;
     }
 
     /**

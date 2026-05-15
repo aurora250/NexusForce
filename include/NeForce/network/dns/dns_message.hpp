@@ -254,7 +254,7 @@ public:
      * @brief 创建超时异常
      * @return DNS异常对象
      */
-    static dns_exception timeout() { return dns_exception("DNS query timeout", code::TIMEOUT); }
+    static dns_exception timeout() { return {"DNS query timeout", code::TIMEOUT}; }
 
     /**
      * @brief 创建网络错误异常
@@ -263,7 +263,7 @@ public:
      * @return DNS异常对象
      */
     static dns_exception network_error(const string& detail, const code code = code::NETWORK_ERROR) {
-        return dns_exception("Network error: " + detail, code);
+        return {"Network error: " + detail, code};
     }
 
     /**
@@ -271,9 +271,7 @@ public:
      * @param detail 错误详情
      * @return DNS异常对象
      */
-    static dns_exception parse_error(const string& detail) {
-        return dns_exception("Parse error: " + detail, code::PARSE_ERROR);
-    }
+    static dns_exception parse_error(const string& detail) { return {"Parse error: " + detail, code::PARSE_ERROR}; }
 
     static constexpr auto static_type = "dns_exception";
 };

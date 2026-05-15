@@ -59,7 +59,7 @@ struct aligned_buffer : aligned_storage<sizeof(T), alignof(T)> {
      * @brief 获取缓冲区的原始常量地址
      * @return 指向缓冲区内存的const void指针
      */
-    const void* addr() const noexcept { return static_cast<const void*>(&storage); }
+    NEFORCE_NODISCARD const void* addr() const noexcept { return static_cast<const void*>(&storage); }
 
     /**
      * @brief 获取缓冲区的类型化指针

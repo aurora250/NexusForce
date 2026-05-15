@@ -92,13 +92,13 @@ private:
          * @brief 检查是否可能收到停止请求
          * @return 是否可能收到停止请求
          */
-        bool stop_possible() noexcept { return value.load(memory_order_acquire) & ~locked_bit; }
+        bool stop_possible() noexcept { return (value.load(memory_order_acquire) & ~locked_bit) != 0U; }
 
         /**
          * @brief 检查是否已收到停止请求
          * @return 是否已收到停止请求
          */
-        bool stop_requested() noexcept { return value.load(memory_order_acquire) & stop_requested_bit; }
+        bool stop_requested() noexcept { return (value.load(memory_order_acquire) & stop_requested_bit) != 0U; }
 
         /**
          * @brief 增加所有者计数
@@ -148,18 +148,18 @@ private:
         bool request_stop() noexcept {
             auto old_value = value.load(memory_order_acquire);
             do {
-                if (old_value & stop_requested_bit) {
+                if ((old_value & stop_requested_bit) != 0U) {
                     return false;
                 }
             } while (!try_lock_and_stop(old_value));
 
             requester_thread_id = this_thread::id();
 
-            while (head) {
-                bool last_callback;
+            while (head != nullptr) {
+                bool last_callback = false;
                 stop_callback_node* callback_node = head;
                 head = head->next;
-                if (head) {
+                if (head != nullptr) {
                     head->prev = nullptr;
                     last_callback = false;
                 } else {
@@ -194,7 +194,7 @@ private:
         bool register_callback(stop_callback_node* callback_node) noexcept {
             auto old_value = value.load(memory_order_acquire);
             do {
-                if (old_value & stop_requested_bit) {
+                if ((old_value & stop_requested_bit) != 0U) {
                     callback_node->run();
                     return false;
                 }
@@ -204,7 +204,7 @@ private:
             } while (!try_lock(old_value));
 
             callback_node->next = head;
-            if (head) {
+            if (head != nullptr) {
                 head->prev = callback_node;
             }
             head = callback_node;
@@ -223,15 +223,15 @@ private:
 
             if (callback_node == head) {
                 head = head->next;
-                if (head) {
+                if (head != nullptr) {
                     head->prev = nullptr;
                 }
                 unlock();
                 return;
             }
-            if (callback_node->prev) {
+            if (callback_node->prev != nullptr) {
                 callback_node->prev->next = callback_node->next;
-                if (callback_node->next) {
+                if (callback_node->next != nullptr) {
                     callback_node->next->prev = callback_node->prev;
                 }
                 unlock();
@@ -245,7 +245,7 @@ private:
                 return;
             }
 
-            if (callback_node->destroyed) {
+            if (callback_node->destroyed != nullptr) {
                 *callback_node->destroyed = true;
             }
         }
@@ -274,7 +274,7 @@ private:
          */
         bool do_try_lock(value_type& current_value, value_type new_bits, const memory_order success_order,
                          const memory_order failure_order) noexcept {
-            if (current_value & locked_bit) {
+            if ((current_value & locked_bit) != 0U) {
                 this_thread::relax();
                 current_value = value.load(failure_order);
                 return false;
@@ -310,7 +310,7 @@ private:
          */
         stop_state_reference(const stop_state_reference& other) noexcept :
         ptr_(other.ptr_) {
-            if (ptr_) {
+            if (ptr_ != nullptr) {
                 ptr_->add_owner();
             }
         }
@@ -328,12 +328,15 @@ private:
          * @brief 拷贝赋值运算符
          */
         stop_state_reference& operator=(const stop_state_reference& other) noexcept {
-            const auto new_ptr = other.ptr_;
+            if (addressof(other) == this) {
+                return *this;
+            }
+            auto* const new_ptr = other.ptr_;
             if (new_ptr != ptr_) {
-                if (new_ptr) {
+                if (new_ptr != nullptr) {
                     new_ptr->add_owner();
                 }
-                if (ptr_) {
+                if (ptr_ != nullptr) {
                     ptr_->release_ownership();
                 }
                 ptr_ = new_ptr;
@@ -345,6 +348,9 @@ private:
          * @brief 移动赋值运算符
          */
         stop_state_reference& operator=(stop_state_reference&& other) noexcept {
+            if (addressof(other) == this) {
+                return *this;
+            }
             stop_state_reference(move(other)).swap(*this);
             return *this;
         }
@@ -353,7 +359,7 @@ private:
          * @brief 析构函数
          */
         ~stop_state_reference() {
-            if (ptr_) {
+            if (ptr_ != nullptr) {
                 ptr_->release_ownership();
             }
         }

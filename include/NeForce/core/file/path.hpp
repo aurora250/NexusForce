@@ -115,7 +115,7 @@ public:
         path_(path),
         start_(pos),
         done_(false) {
-            if (!path_ || path_->empty() || start_ >= path_->size()) {
+            if (path_ == nullptr || path_->empty() || start_ >= path_->size()) {
                 done_ = true;
                 return;
             }
@@ -188,7 +188,7 @@ public:
     };
 
 private:
-    string path_{}; ///< 存储的路径字符串
+    string path_; ///< 存储的路径字符串
 
 public:
     /**
@@ -256,7 +256,7 @@ public:
      * @brief 获取结束路径组件迭代器
      * @return 结束迭代器
      */
-    NEFORCE_NODISCARD split_iterator end() const { return split_iterator(); }
+    NEFORCE_NODISCARD split_iterator end() const { return {}; }
 
     /**
      * @brief 获取父路径

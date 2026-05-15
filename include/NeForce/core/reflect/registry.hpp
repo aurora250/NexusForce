@@ -134,9 +134,9 @@ public:
 
 inline void meta_type::resolve_bases(registry* registry) {
     for (auto& base_name: pending_base_names_) {
-        if (registry) {
+        if (registry != nullptr) {
             auto* base = registry->find(base_name.view());
-            if (base) {
+            if (base != nullptr) {
                 base_types_.push_back(base);
             }
         }
@@ -146,9 +146,9 @@ inline void meta_type::resolve_bases(registry* registry) {
 
 inline void meta_type::resolve_bases_unlocked(registry* registry) {
     for (auto& base_name: pending_base_names_) {
-        if (registry) {
+        if (registry != nullptr) {
             auto* base = registry->find_unlocked(base_name.view());
-            if (base) {
+            if (base != nullptr) {
                 base_types_.push_back(base);
             }
         }

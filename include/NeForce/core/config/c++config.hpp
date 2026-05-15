@@ -19,7 +19,7 @@
  * @note 项目内部使用的宏将不写入文档，具体您可以查看本文件内容
  */
 
-#include <assert.h>
+#include <cassert>
 
 /**
  * @defgroup PlatformDetection 平台检测
@@ -27,7 +27,7 @@
  * @{
  */
 
-#if defined(WIN32) || defined(_WIN32) || defined(_M_X86) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if defined(WIN32) || defined(_WIN32) || defined(_M_X86)
 
 /**
  * @def NEFORCE_PLATFORM_WINDOWS
@@ -41,7 +41,7 @@
  */
 #    define NEFORCE_PLATFORM_WINDOWS32 1
 
-#    if defined(WIN64) || defined(_WIN64) || defined(_M_X64) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    if defined(WIN64) || defined(_WIN64) || defined(_M_X64)
 /**
  * @def NEFORCE_PLATFORM_WINDOWS64
  * @brief 定义在64位Windows平台编译
@@ -50,7 +50,7 @@
 #    endif
 #endif
 
-#if defined(__linux__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if defined(__linux__)
 /**
  * @def NEFORCE_PLATFORM_LINUX
  * @brief 定义在Linux平台编译
@@ -66,7 +66,7 @@
 #        define NEFORCE_PLATFORM_LINUX32 1
 #    endif
 
-#    if (__WORDSIZE == 64) || (__SIZEOF_POINTER__ == 8) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    if (__WORDSIZE == 64) || (__SIZEOF_POINTER__ == 8)
 /**
  * @def NEFORCE_PLATFORM_LINUX64
  * @brief 定义在64位Linux平台编译
@@ -120,54 +120,55 @@
  * @{
  */
 
-#if defined(__GNUC__) || defined(__clang__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-#    if defined(__GNUC__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-/**
- * @def NEFORCE_COMPILER_GNUC
- * @brief 定义使用GNU编译器编译
- */
-#        define NEFORCE_COMPILER_GNUC 1
-#    endif
-
-#    if defined(__clang__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if defined(__clang__)
 /**
  * @def NEFORCE_COMPILER_CLANG
  * @brief 定义使用Clang编译器编译
  */
-#        define NEFORCE_COMPILER_CLANG 1
-#    endif
-
-#    if defined(__MINGW32__) || defined(__MINGW64__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-/**
- * @def NEFORCE_COMPILER_MINGW
- * @brief 定义使用MinGW编译器编译
- */
-#        define NEFORCE_COMPILER_MINGW 1
-#    endif
-
-#    if !(defined(NEFORCE_COMPILER_CLANG) || defined(NEFORCE_COMPILER_MINGW)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
-/**
- * @def NEFORCE_COMPILER_GCC
- * @brief 定义使用GCC编译器编译
- */
-#        define NEFORCE_COMPILER_GCC 1
-#    endif
+#    define NEFORCE_COMPILER_CLANG 1
 #endif
 
-#if defined(_MSC_VER) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if defined(__GNUC__)
+/**
+ * @def NEFORCE_COMPILER_GNUC
+ * @brief 定义使用GNU编译器编译
+ */
+#    define NEFORCE_COMPILER_GNUC 1
+#endif
+
+#if defined(_MSC_VER)
 /**
  * @def NEFORCE_COMPILER_MSVC
  * @brief 定义使用Microsoft Visual C++编译器编译
  */
 #    define NEFORCE_COMPILER_MSVC 1
+
+#    if defined(NEFORCE_COMPILER_CLANG)
+#        define NEFORCE_COMPILER_CLANG_CL 1
+#    endif
 #endif
 
-#if (defined(NEFORCE_COMPILER_MSVC) && defined(NEFORCE_COMPILER_CLANG)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if defined(__GNUC__) && !defined(__clang__) && !defined(__INTEL_COMPILER)
+/**
+ * @def NEFORCE_COMPILER_GCC
+ * @brief 定义使用GCC编译器编译
+ */
+#    define NEFORCE_COMPILER_GCC 1
+#endif
+
+#if defined(__MINGW32__) || defined(__MINGW64__)
+/**
+ * @def NEFORCE_COMPILER_MINGW
+ * @brief 定义使用MinGW编译器编译
+ */
+#    define NEFORCE_COMPILER_MINGW 1
+#    if defined(NEFORCE_COMPILER_CLANG)
 /**
  * @def NEFORCE_COMPILER_LLVM_MINGW
  * @brief 定义使用LLVM MinGW编译器编译
  */
-#    define NEFORCE_COMPILER_LLVM_MINGW 1
+#        define NEFORCE_COMPILER_LLVM_MINGW 1
+#    endif
 #endif
 
 #if !(defined(NEFORCE_COMPILER_GNUC) || defined(NEFORCE_COMPILER_MSVC))
@@ -186,7 +187,7 @@
  * @{
  */
 
-#if defined(NEFORCE_COMPILER_MSVC) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if defined(NEFORCE_COMPILER_MSVC)
 /**
  * @def NEFORCE_API_EXPORT_DLL
  * @brief 在MSVC编译器下使用DLL导出
@@ -199,7 +200,7 @@
 #    define NEFORCE_API_IMPORT_DLL __declspec(dllimport)
 #endif
 
-#if defined(NEFORCE_COMPILER_GNUC) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#if defined(NEFORCE_COMPILER_GNUC)
 /**
  * @def NEFORCE_API_EXPORT
  * @brief 在GNUC编译器下使用空定义，无需显式的导入导出辅助

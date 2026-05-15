@@ -190,7 +190,7 @@ constexpr const T& min(const T& a, const T& b) noexcept(noexcept(b < a)) {
  * 最多进行3次比较。
  */
 template <typename T, typename Compare>
-constexpr const T& median(const T& a, const T& b, const T& c, Compare comp) noexcept(noexcept(comp(a, b))) {
+constexpr T median(const T& a, const T& b, const T& c, Compare comp) noexcept(noexcept(comp(a, b))) {
     if (comp(a, b)) {
         if (comp(b, c)) {
             return b;
@@ -217,7 +217,7 @@ constexpr const T& median(const T& a, const T& b, const T& c, Compare comp) noex
  * @return a、b、c中的中位数
  */
 template <typename T>
-constexpr const T& median(const T& a, const T& b, const T& c) noexcept(noexcept(a < b)) {
+constexpr T median(const T& a, const T& b, const T& c) noexcept(noexcept(a < b)) {
     return _NEFORCE median(a, b, c, _NEFORCE less<>());
 }
 
@@ -405,8 +405,7 @@ constexpr pair<Iterator, Iterator> minmax_element(Iterator first, Iterator last)
  * 要求 lower <= upper
  */
 template <typename T, typename Compare>
-constexpr const T& clamp(const T& value, const T& lower, const T& upper,
-                         Compare comp) noexcept(noexcept(comp(value, lower))) {
+constexpr T clamp(const T& value, const T& lower, const T& upper, Compare comp) noexcept(noexcept(comp(value, lower))) {
     if (comp(value, lower)) {
         return lower;
     }
@@ -425,7 +424,7 @@ constexpr const T& clamp(const T& value, const T& lower, const T& upper,
  * @return 限制后的值
  */
 template <typename T>
-constexpr const T& clamp(const T& value, const T& lower, const T& upper) noexcept(noexcept(lower < upper)) {
+constexpr T clamp(const T& value, const T& lower, const T& upper) noexcept(noexcept(lower < upper)) {
     return _NEFORCE clamp(value, lower, upper, _NEFORCE less<>());
 }
 

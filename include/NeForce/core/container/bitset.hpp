@@ -111,9 +111,13 @@ private:
         NEFORCE_DEBUG_VERIFY(pos < N, "bitset position out of range");
     }
 
-    NEFORCE_ALWAYS_INLINE constexpr size_t block_index(const size_t pos) const noexcept { return pos / bits_per_block; }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr size_t block_index(const size_t pos) const noexcept {
+        return pos / bits_per_block;
+    }
 
-    NEFORCE_ALWAYS_INLINE constexpr size_t bit_index(const size_t pos) const noexcept { return pos % bits_per_block; }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr size_t bit_index(const size_t pos) const noexcept {
+        return pos % bits_per_block;
+    }
 
 public:
     /**
@@ -468,7 +472,7 @@ public:
      * @return unsigned long表示的位值
      * @throw value_exception 如果值超出unsigned long范围
      */
-    NEFORCE_NODISCARD constexpr unsigned long to_ulong() const noexcept {
+    NEFORCE_NODISCARD constexpr unsigned long to_ulong() const {
         NEFORCE_IF_CONSTEXPR(N > sizeof(unsigned long) * 8) {
             constexpr size_t ulong_blocks = (sizeof(unsigned long) * 8 + bits_per_block - 1) / bits_per_block;
             for (size_t i = ulong_blocks; i < block_count; ++i) {
@@ -507,7 +511,7 @@ public:
      * @return unsigned long long表示的位值
      * @throw value_exception 如果值超出unsigned long long范围
      */
-    NEFORCE_NODISCARD constexpr unsigned long long to_ullong() const noexcept {
+    NEFORCE_NODISCARD constexpr unsigned long long to_ullong() const {
         NEFORCE_IF_CONSTEXPR(N > sizeof(unsigned long long) * 8) {
             constexpr size_t ullong_blocks = (sizeof(unsigned long long) * 8 + bits_per_block - 1) / bits_per_block;
             for (size_t i = ullong_blocks; i < block_count; ++i) {

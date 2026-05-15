@@ -101,6 +101,9 @@ struct rb_tree_node_base {
      * @return 最小节点指针
      */
     static base_ptr minimum(base_ptr root) noexcept {
+        if (root == nullptr) {
+            return nullptr;
+        }
         while (root->left_ != nullptr) {
             root = root->left_;
         }
@@ -113,6 +116,9 @@ struct rb_tree_node_base {
      * @return 最大节点指针
      */
     static base_ptr maximum(base_ptr root) noexcept {
+        if (root == nullptr) {
+            return nullptr;
+        }
         while (root->right_ != nullptr) {
             root = root->right_;
         }
@@ -241,8 +247,8 @@ NEFORCE_ALWAYS_INLINE_INLINE rb_tree_node_base* rb_tree_erase_rebalance(rb_tree_
                                                                         rb_tree_node_base*& leftmost,
                                                                         rb_tree_node_base*& rightmost) noexcept {
     rb_tree_node_base* y = erase;
-    rb_tree_node_base* x;
-    rb_tree_node_base* x_parent;
+    rb_tree_node_base* x = nullptr;
+    rb_tree_node_base* x_parent = nullptr;
 
     if (y->left_ == nullptr) {
         x = y->right_;
@@ -479,6 +485,9 @@ protected:
             node_ = y;
         } else {
             base_ptr y = node_->parent_;
+            if (y == nullptr) {
+                return;
+            }
             while (node_ == y->left_) {
                 node_ = y;
                 y = y->parent_;

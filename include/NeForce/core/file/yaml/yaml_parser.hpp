@@ -146,20 +146,20 @@ private:
      * @brief 获取当前字符
      * @return 当前位置的字符
      */
-    char current() const noexcept;
+    NEFORCE_NODISCARD char current() const noexcept;
 
     /**
      * @brief 预读后续字符
      * @param offset 从当前位置的偏移量（默认1）
      * @return 目标位置的字符，超出边界返回 '\\0'
      */
-    char peek(size_t offset = 1) const noexcept;
+    NEFORCE_NODISCARD char peek(size_t offset = 1) const noexcept;
 
     /**
      * @brief 检查是否到达文件末尾
      * @return 如果 pos_ >= len_ 返回 true
      */
-    bool eof() const noexcept;
+    NEFORCE_NODISCARD bool eof() const noexcept;
 
     /**
      * @brief 前进一个字符并更新行列号
@@ -213,14 +213,14 @@ private:
      * @param ch 待检查的字符
      * @return 如果是空格或制表符返回 true
      */
-    bool is_whitespace(char ch) const noexcept;
+    NEFORCE_NODISCARD bool is_whitespace(char ch) const noexcept;
 
     /**
      * @brief 判断字符是否为换行符
      * @param ch 待检查的字符
      * @return 如果是 '\\n' 或 '\\r' 返回 true
      */
-    bool is_newline(char ch) const noexcept;
+    NEFORCE_NODISCARD bool is_newline(char ch) const noexcept;
 
     /**
      * @brief 预读当前行的缩进级别（空格数）
@@ -228,7 +228,7 @@ private:
      *
      * 不移动解析位置，仅读取。
      */
-    size_t peek_indent() const noexcept;
+    NEFORCE_NODISCARD size_t peek_indent() const noexcept;
 
     /**
      * @brief 跳过当前行的缩进空格
@@ -291,13 +291,13 @@ private:
      * @brief 检查当前位置是否有锚点标记（&）
      * @return 如果当前字符是 '&' 返回 true
      */
-    bool has_anchor() const noexcept;
+    NEFORCE_NODISCARD bool has_anchor() const noexcept;
 
     /**
      * @brief 检查当前位置是否有别名标记（*）
      * @return 如果当前字符是 '*' 返回 true
      */
-    bool has_alias() const noexcept;
+    NEFORCE_NODISCARD bool has_alias() const noexcept;
 
     /**
      * @brief 解析纯文本字符串（无引号）
@@ -386,7 +386,7 @@ private:
      * @return 解析后的时间戳值
      * @throws yaml_exception 格式无效时抛出
      */
-    shared_ptr<yaml_timestamp> parse_timestamp(string_view str) const;
+    NEFORCE_NODISCARD shared_ptr<yaml_timestamp> parse_timestamp(string_view str) const;
 
     /**
      * @brief 解析流样式序列（[item1, item2, ...]）
@@ -483,13 +483,13 @@ private:
      * @brief 检查当前位置是否为文档开始标记
      * @return 如果是 --- 返回 true
      */
-    bool is_document_start() const noexcept;
+    NEFORCE_NODISCARD bool is_document_start() const noexcept;
 
     /**
      * @brief 检查当前位置是否为文档结束标记
      * @return 如果是 ... 返回 true
      */
-    bool is_document_end() const noexcept;
+    NEFORCE_NODISCARD bool is_document_end() const noexcept;
 
     /**
      * @brief 判断字符是否可作为纯文本内容
@@ -498,14 +498,14 @@ private:
      *
      * 纯文本字符串不能包含指示符（如 :、#、[、] 等）或流指示符。
      */
-    bool is_plain_safe(char ch) const noexcept;
+    NEFORCE_NODISCARD bool is_plain_safe(char ch) const noexcept;
 
     /**
      * @brief 判断字符是否可用于键名
      * @param ch 待检查的字符
      * @return 如果是有效的键名字符返回 true
      */
-    bool is_key_char(char ch) const noexcept;
+    NEFORCE_NODISCARD bool is_key_char(char ch) const noexcept;
 
     /**
      * @brief 判断字符是否为YAML指示符
@@ -514,7 +514,7 @@ private:
      *
      * 指示符包括：-、?、:、,、[、]、{、}、#、&、*、!、|、>、'、"、%、@、`
      */
-    bool is_indicator(char ch) const noexcept;
+    NEFORCE_NODISCARD bool is_indicator(char ch) const noexcept;
 
     /**
      * @brief 判断字符是否为流样式指示符
@@ -523,7 +523,7 @@ private:
      *
      * 流指示符包括：[、]、{、}、,
      */
-    bool is_flow_indicator(char ch) const noexcept;
+    NEFORCE_NODISCARD bool is_flow_indicator(char ch) const noexcept;
 
     /**
      * @brief 解析Unicode转义序列
@@ -540,7 +540,7 @@ private:
      *
      * 处理 \\\\、\\"、\\n、\\t、\\r、\\b、\\f、\\/、\\uXXXX、\\UXXXXXXXX 等转义序列。
      */
-    string unescape_string(const string& str) const;
+    NEFORCE_NODISCARD string unescape_string(const string& str) const;
 
     /**
      * @brief 抛出带位置信息的解析错误
@@ -560,7 +560,7 @@ public:
      *
      * @note 解析器获取字符串的所有权，原字符串将被清空。
      */
-    explicit yaml_parser(string yaml_str) noexcept :
+    explicit yaml_parser(string yaml_str) :
     yaml_(move(yaml_str)),
     len_(yaml_.size()) {}
 

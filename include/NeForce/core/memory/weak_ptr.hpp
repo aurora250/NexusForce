@@ -87,7 +87,7 @@ public:
     weak_ptr(const weak_ptr& other) noexcept :
     ptr_(other.ptr_),
     owner_(other.owner_) {
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->incref_weak();
         }
     }
@@ -101,7 +101,7 @@ public:
     weak_ptr(const weak_ptr<U>& other) noexcept :
     ptr_(other.ptr_),
     owner_(other.owner_) {
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->incref_weak();
         }
     }
@@ -145,12 +145,12 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->decref_weak();
         }
         ptr_ = other.ptr_;
         owner_ = other.owner_;
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->incref_weak();
         }
         return *this;
@@ -203,7 +203,7 @@ public:
         if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->decref_weak();
         }
         ptr_ = other.ptr_;
@@ -237,7 +237,7 @@ public:
      * 使弱指针不再观察任何对象，减少弱引用计数。
      */
     void reset() noexcept {
-        if (owner_) {
+        if (owner_ != nullptr) {
             owner_->decref_weak();
             owner_ = nullptr;
         }
@@ -260,7 +260,9 @@ public:
      * @brief 获取观察对象的引用计数
      * @return 强引用计数值
      */
-    NEFORCE_NODISCARD long use_count() const noexcept { return owner_ ? static_cast<long>(owner_->use_count()) : 0; }
+    NEFORCE_NODISCARD long use_count() const noexcept {
+        return owner_ != nullptr ? static_cast<long>(owner_->use_count()) : 0;
+    }
 
     /**
      * @brief 检查观察的对象是否已被销毁
@@ -275,7 +277,7 @@ public:
      * 如果观察的对象仍然存在，则创建一个新的共享智能指针。
      */
     NEFORCE_NODISCARD shared_ptr<T> lock() const noexcept {
-        if (owner_ && owner_->try_incref_strong()) {
+        if (owner_ != nullptr && owner_->try_incref_strong()) {
             return shared_ptr<T>(ptr_, owner_);
         }
         return shared_ptr<T>();
@@ -468,7 +470,7 @@ public:
      * @brief 检查是否无锁
      * @return 始终返回false
      */
-    bool is_lock_free() const noexcept { return false; }
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept { return false; }
 
     constexpr atomic() noexcept = default;
 

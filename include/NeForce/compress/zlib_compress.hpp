@@ -55,7 +55,7 @@ struct zlib_exception final : thirdparty_exception {
  *
  * 定义不同的压缩级别，在压缩速度和压缩率之间进行权衡。
  */
-enum class compress_level {
+enum class compress_level : int8_t {
     none = Z_NO_COMPRESSION,               ///< 无压缩
     best_speed = Z_BEST_SPEED,             ///< 最快速度，压缩率最低
     default_level = Z_DEFAULT_COMPRESSION, ///< 默认压缩级别
@@ -68,7 +68,7 @@ enum class compress_level {
  *
  * 定义不同的压缩策略，针对不同类型的数据进行优化。
  */
-enum class compress_strategy {
+enum class compress_strategy : int8_t {
     default_strategy = Z_DEFAULT_STRATEGY, ///< 默认策略，适用于通用数据
     filtered = Z_FILTERED,                 ///< 过滤策略，适用于由过滤器产生的数据
     huffman_only = Z_HUFFMAN_ONLY,         ///< 仅使用霍夫曼编码
@@ -82,7 +82,7 @@ enum class compress_strategy {
  *
  * 定义不同的压缩格式。
  */
-enum class compress_format {
+enum class compress_format : int8_t {
     zlib,   ///< ZLIB格式（RFC 1950）
     gzip,   ///< GZIP格式（RFC 1952）
     deflate ///< 原始Deflate流（无头尾）
@@ -100,8 +100,8 @@ class NEFORCE_API zlib_compressor {
 private:
     struct compressor_stream_deleter {
         void operator()(::z_stream* s) const noexcept {
-            if (s) {
-                if (s->state) {
+            if (s != nullptr) {
+                if (s->state != nullptr) {
                     ::deflateEnd(s);
                 }
                 delete s;
@@ -111,8 +111,8 @@ private:
 
     struct decompressor_stream_deleter {
         void operator()(::z_stream* s) const noexcept {
-            if (s) {
-                if (s->state) {
+            if (s != nullptr) {
+                if (s->state != nullptr) {
                     ::inflateEnd(s);
                 }
                 delete s;
@@ -352,7 +352,7 @@ public:
          * @return 输出/输入字节比率
          */
         NEFORCE_NODISCARD double compression_ratio() const noexcept {
-            return bytes_input_ > 0 ? static_cast<double>(bytes_output_) / bytes_input_ : 0.0;
+            return bytes_input_ > 0 ? static_cast<double>(bytes_output_) / static_cast<double>(bytes_input_) : 0.0;
         }
     };
 
@@ -377,7 +377,7 @@ public:
          * @param format 压缩格式，默认为zlib
          * @throws zlib_exception 当重置失败时抛出
          */
-        stream_decompressor(compress_format format = compress_format::zlib);
+        explicit stream_decompressor(compress_format format = compress_format::zlib);
 
         /**
          * @brief 析构函数
@@ -440,7 +440,7 @@ public:
          * @return 输出/输入字节比率
          */
         NEFORCE_NODISCARD double expansion_ratio() const noexcept {
-            return bytes_input_ > 0 ? static_cast<double>(bytes_output_) / bytes_input_ : 0.0;
+            return bytes_input_ > 0 ? static_cast<double>(bytes_output_) / static_cast<double>(bytes_input_) : 0.0;
         }
     };
 };

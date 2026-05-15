@@ -140,15 +140,15 @@ public:
 
 private:
     native_handle_type handle_; ///< 文件句柄
-    path path_{};               ///< 文件路径
+    path path_;                 ///< 文件路径
     bool opened_ = false;       ///< 是否已打开
     bool append_mode_ = false;  ///< 是否为追加模式
 
     size_type buffer_size_ = buffer_size;    ///< 缓冲区大小
-    mutable byte_vector read_buffer_{};      ///< 读缓冲区
+    mutable byte_vector read_buffer_;        ///< 读缓冲区
     mutable size_type read_buffer_pos_ = 0;  ///< 读缓冲区位置
     mutable size_type read_buffer_size_ = 0; ///< 读缓冲区有效数据大小
-    mutable byte_vector write_buffer_{};     ///< 写缓冲区
+    mutable byte_vector write_buffer_;       ///< 写缓冲区
     mutable size_type write_buffer_pos_ = 0; ///< 写缓冲区位置
 
     mutable error_code last_error_code_; ///< 最后错误码

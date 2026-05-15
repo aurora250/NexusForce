@@ -80,7 +80,8 @@ public:
      *
      * @throws file_exception 文件创建失败时抛出
      */
-    explicit file_sink(path filename, size_t max_file_size = 10 * 1024 * 1024, bool enable_date_rotation = true);
+    explicit file_sink(path filename, size_t max_file_size = static_cast<size_t>(10 * 1024 * 1024),
+                       bool enable_date_rotation = true);
 
     /**
      * @brief 写入日志事件

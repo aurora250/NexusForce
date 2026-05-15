@@ -282,7 +282,7 @@ public:
     list(size_type n, const T& value) {
         list::init_header();
         try {
-            while (n--) {
+            while ((n--) != 0U) {
                 emplace_back(value);
             }
         } catch (...) {
@@ -710,7 +710,7 @@ public:
         link_type first_inserted = nullptr;
 
         try {
-            while (n--) {
+            while ((n--) != 0U) {
                 link_type temp = list::create_node(value);
                 temp->prev = current_prev;
                 temp->next = position.base();
@@ -1019,7 +1019,7 @@ public:
      */
     NEFORCE_NODISCARD const_reference at(size_type position) const {
         const_iterator iter = cbegin();
-        while (position--) {
+        while ((position--) != 0U) {
             ++iter;
         }
         return iter.base()->data;
@@ -1032,7 +1032,7 @@ public:
      */
     NEFORCE_NODISCARD reference at(size_type position) {
         const_iterator iter = cbegin();
-        while (position--) {
+        while ((position--) != 0U) {
             ++iter;
         }
         return iter.base()->data;

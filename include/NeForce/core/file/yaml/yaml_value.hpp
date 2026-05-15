@@ -233,7 +233,14 @@ public:
         Mapping    ///< 键值对集合类型
     };
 
+    yaml_value() = default;
     virtual ~yaml_value() = default;
+
+    yaml_value(const yaml_value&) = default;
+    yaml_value& operator=(const yaml_value&) = default;
+
+    yaml_value(yaml_value&&) noexcept = default;
+    yaml_value& operator=(yaml_value&&) noexcept = default;
 
     /**
      * @brief 获取值的具体类型
@@ -302,6 +309,13 @@ public:
 class NEFORCE_API yaml_null final : public yaml_value {
 public:
     yaml_null() = default;
+    ~yaml_null() override = default;
+
+    yaml_null(const yaml_null&) = default;
+    yaml_null& operator=(const yaml_null&) = default;
+    yaml_null(yaml_null&&) noexcept = default;
+    yaml_null& operator=(yaml_null&&) noexcept = default;
+
     NEFORCE_NODISCARD types type() const noexcept override { return Null; }
     NEFORCE_NODISCARD const yaml_null* as_null() const noexcept override { return this; }
 };
@@ -319,11 +333,18 @@ private:
     bool value; ///< 布尔值存储
 
 public:
+    ~yaml_boolean() override = default;
+
+    yaml_boolean(const yaml_boolean&) = default;
+    yaml_boolean& operator=(const yaml_boolean&) = default;
+    yaml_boolean(yaml_boolean&&) noexcept = default;
+    yaml_boolean& operator=(yaml_boolean&&) noexcept = default;
+
     /**
      * @brief 构造布尔值
      * @param v 布尔值
      */
-    explicit yaml_boolean(const bool v) noexcept :
+    explicit yaml_boolean(const bool v) :
     value(v) {}
 
     NEFORCE_NODISCARD types type() const noexcept override { return Boolean; }
@@ -353,11 +374,18 @@ private:
     int64_t value; ///< 64位有符号整数存储
 
 public:
+    ~yaml_integer() override = default;
+
+    yaml_integer(const yaml_integer&) = default;
+    yaml_integer& operator=(const yaml_integer&) = default;
+    yaml_integer(yaml_integer&&) noexcept = default;
+    yaml_integer& operator=(yaml_integer&&) noexcept = default;
+
     /**
      * @brief 构造整数值
      * @param v 64位有符号整数
      */
-    explicit yaml_integer(const int64_t v) noexcept :
+    explicit yaml_integer(const int64_t v) :
     value(v) {}
 
     NEFORCE_NODISCARD types type() const noexcept override { return Integer; }
@@ -386,11 +414,18 @@ private:
     double value; ///< 双精度浮点数存储
 
 public:
+    ~yaml_float() override = default;
+
+    yaml_float(const yaml_float&) = default;
+    yaml_float& operator=(const yaml_float&) = default;
+    yaml_float(yaml_float&&) noexcept = default;
+    yaml_float& operator=(yaml_float&&) noexcept = default;
+
     /**
      * @brief 构造浮点数值
      * @param v 双精度浮点数
      */
-    explicit yaml_float(const double v) noexcept :
+    explicit yaml_float(const double v) :
     value(v) {}
 
     NEFORCE_NODISCARD types type() const noexcept override { return Float; }
@@ -436,12 +471,19 @@ private:
     string_style style; ///< 标量样式
 
 public:
+    ~yaml_string() override = default;
+
+    yaml_string(const yaml_string&) = default;
+    yaml_string& operator=(const yaml_string&) = default;
+    yaml_string(yaml_string&&) noexcept = default;
+    yaml_string& operator=(yaml_string&&) noexcept = default;
+
     /**
      * @brief 构造字符串值
      * @param v 字符串内容
      * @param s 标量样式，默认为纯文本
      */
-    explicit yaml_string(string v, const string_style s = Plain) noexcept :
+    explicit yaml_string(string v, const string_style s = Plain) :
     value(_NEFORCE move(v)),
     style(s) {}
 
@@ -480,6 +522,13 @@ private:
     datetime value; ///< 日期时间存储
 
 public:
+    ~yaml_timestamp() override = default;
+
+    yaml_timestamp(const yaml_timestamp&) = default;
+    yaml_timestamp& operator=(const yaml_timestamp&) = default;
+    yaml_timestamp(yaml_timestamp&&) noexcept = default;
+    yaml_timestamp& operator=(yaml_timestamp&&) noexcept = default;
+
     /**
      * @brief 从字符串构造时间戳（自动检测格式）
      * @param v ISO 8601 / RFC 3339 格式的字符串
@@ -498,7 +547,7 @@ public:
      * @brief 从 datetime 对象构造时间戳
      * @param dt 日期时间对象
      */
-    explicit yaml_timestamp(const datetime& dt) noexcept :
+    explicit yaml_timestamp(const datetime& dt) :
     value(dt) {}
 
     NEFORCE_NODISCARD types type() const noexcept override { return Timestamp; }
@@ -514,7 +563,7 @@ public:
      * @brief 获取 RFC 3339 格式的字符串表示
      * @return 格式化的时间戳字符串
      */
-    NEFORCE_NODISCARD string get_string_value() const noexcept { return value.to_RFC3339(); }
+    NEFORCE_NODISCARD string get_string_value() const { return value.to_RFC3339(); }
 };
 
 /**
@@ -545,6 +594,8 @@ private:
     sequence_style style;                    ///< 集合样式
 
 public:
+    ~yaml_sequence() override = default;
+
     /**
      * @brief 构造序列
      * @param s 集合样式，默认为块样式
@@ -554,8 +605,8 @@ public:
 
     yaml_sequence(const yaml_sequence&) = delete;
     yaml_sequence& operator=(const yaml_sequence&) = delete;
-    yaml_sequence(yaml_sequence&&) = default;
-    yaml_sequence& operator=(yaml_sequence&&) = default;
+    yaml_sequence(yaml_sequence&&) noexcept = default;
+    yaml_sequence& operator=(yaml_sequence&&) noexcept = default;
 
     NEFORCE_NODISCARD types type() const noexcept override { return Sequence; }
     NEFORCE_NODISCARD const yaml_sequence* as_sequence() const noexcept override { return this; }
@@ -645,6 +696,8 @@ private:
     mapping_style style;                                   ///< 集合样式
 
 public:
+    ~yaml_mapping() override = default;
+
     /**
      * @brief 构造映射
      * @param s 集合样式，默认为块样式
@@ -654,8 +707,8 @@ public:
 
     yaml_mapping(const yaml_mapping&) = delete;
     yaml_mapping& operator=(const yaml_mapping&) = delete;
-    yaml_mapping(yaml_mapping&&) = default;
-    yaml_mapping& operator=(yaml_mapping&&) = default;
+    yaml_mapping(yaml_mapping&&) noexcept = default;
+    yaml_mapping& operator=(yaml_mapping&&) noexcept = default;
 
     NEFORCE_NODISCARD types type() const noexcept override { return Mapping; }
     NEFORCE_NODISCARD const yaml_mapping* as_mapping() const noexcept override { return this; }
@@ -728,7 +781,7 @@ public:
      * 如果键名已存在，保留当前映射中的值（不覆盖）。
      */
     void merge_from(const yaml_mapping* other) {
-        if (!other) {
+        if (other == nullptr) {
             return;
         }
         for (const auto& pair: other->get_members()) {

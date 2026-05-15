@@ -3,8 +3,10 @@
 #include <NeForce/core/async/hazard_ptr.hpp>
 #include <NeForce/core/async/latch.hpp>
 #include <NeForce/core/async/scoped_thread.hpp>
+#include <NeForce/core/async/signals.hpp>
 #include <NeForce/core/async/thread_pool.hpp>
 #include <NeForce/core/async/virtual_thread.hpp>
+#include <NeForce/core/utility/tuple.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 
@@ -20,6 +22,24 @@ namespace {
         }
         void destroy() override {}
         void* get_ptr() const override { return const_cast<test_obj*>(this); }
+    };
+
+    struct test_receiver {
+        int value = 0;
+        void onUpdate(int v) { value = v; }
+        void onUpdateConst(int v) const {}
+    };
+
+    struct simple_executor {
+        vector<function<void()>> tasks;
+        void post(function<void()> f) { tasks.push_back(move(f)); }
+        void run() {
+            auto pending = move(tasks);
+            tasks.clear();
+            for (auto& t: pending) {
+                t();
+            }
+        }
     };
 } // namespace
 
@@ -1231,7 +1251,7 @@ TEST(TimerScheduler, Size) {
     EXPECT_EQ(sched.size(), 0u);
 }
 
-TEST(TimerScheduler, ImmediateTask) {
+TEST(TimerScheduler, ImmediateTask) { // may block
     promise<void> done;
     steady_scheduler sched;
     sched.add_task(steady_clock::now() - 1_h, [&] { done.set_value(); });
@@ -1657,4 +1677,325 @@ TEST(VirtualThread, MoveVirtualThread) {
     virtual_thread vt2(move(vt1));
     this_thread::sleep_for(50_ms);
     EXPECT_TRUE(ran.load());
+}
+
+TEST(SignalTest, BasicEmit) {
+    signal<int> sig;
+    int result = 0;
+    sig.connect([&result](int v) { result = v; });
+    sig.emit(42);
+    EXPECT_EQ(result, 42);
+}
+
+TEST(SignalTest, MemberFunctionConnect) {
+    signal<int> sig;
+    test_receiver receiver;
+    sig.connect(&receiver, &test_receiver::onUpdate);
+    sig.emit(99);
+    EXPECT_EQ(receiver.value, 99);
+}
+
+TEST(SignalTest, ConnectionDisconnect) {
+    signal<int> sig;
+    int count = 0;
+    auto conn = sig.connect([&count](int) { ++count; });
+    sig.emit(1);
+    EXPECT_EQ(count, 1);
+    conn.disconnect();
+    sig.emit(2);
+    EXPECT_EQ(count, 1);
+}
+
+TEST(SignalTest, ScopedConnection) {
+    signal<int> sig;
+    int count = 0;
+    {
+        scoped_connection sc{sig.connect([&count](int) { ++count; })};
+        sig.emit(1);
+        EXPECT_EQ(count, 1);
+    }
+    sig.emit(2);
+    EXPECT_EQ(count, 1);
+}
+
+TEST(SignalTest, OneshotConnection) {
+    signal<int> sig;
+    int count = 0;
+    sig.connect([&count](int) {
+        ++count;
+        return callback_result::keep;
+    });
+    sig.connect([&count](int) {
+        ++count;
+        return callback_result::erase;
+    });
+    sig.emit(1);
+    EXPECT_EQ(count, 2);
+    sig.emit(2);
+    EXPECT_EQ(count, 3);
+}
+
+TEST(SignalTest, OneshotTag) {
+    signal<int> sig;
+    int count = 0;
+    bool called = false;
+    sig.connect([&count, &called](int) {
+        if (called) {
+            return callback_result::keep;
+        }
+        ++count;
+        called = true;
+        return callback_result::erase;
+    });
+    sig.emit(1);
+    EXPECT_EQ(count, 1);
+    sig.emit(2);
+    EXPECT_EQ(count, 1);
+}
+
+TEST(SignalTest, NshotTag) {
+    signal<int> sig;
+    int count = 0;
+    int remaining = 3;
+    sig.connect([&count, &remaining](int) {
+        if (remaining <= 0) {
+            return callback_result::keep;
+        }
+        ++count;
+        --remaining;
+        if (remaining == 0) {
+            return callback_result::erase;
+        }
+        return callback_result::keep;
+    });
+    for (int i = 0; i < 5; ++i) {
+        sig.emit(1);
+    }
+    EXPECT_EQ(count, 3);
+}
+
+TEST(SignalTest, OneshotTagWithObject) {
+    struct scope_receiver {
+        int count = 0;
+        void onEmit(int) { ++count; }
+    };
+    signal<int> sig;
+    auto receiver = make_shared<scope_receiver>();
+    sig.connect(receiver, &scope_receiver::onEmit, oneshot);
+    sig.emit(1);
+    EXPECT_EQ(receiver->count, 1);
+    sig.emit(2);
+    EXPECT_EQ(receiver->count, 1);
+}
+
+TEST(SignalTest, PriorityOrder) {
+    signal<int> sig;
+    vector<int> order;
+    sig.connect([&order](int) { order.push_back(2); }, 10);
+    sig.connect([&order](int) { order.push_back(1); }, 20);
+    sig.connect([&order](int) { order.push_back(3); }, 0);
+    sig.emit(0);
+    ASSERT_EQ(order.size(), 3u);
+    EXPECT_EQ(order[0], 1);
+    EXPECT_EQ(order[1], 2);
+    EXPECT_EQ(order[2], 3);
+}
+
+TEST(SignalTest, SignalBlocking) {
+    signal<int> sig;
+    int count = 0;
+    sig.connect([&count](int) { ++count; });
+    {
+        signal_blocker<int> blocker(sig);
+        sig.emit(1);
+        EXPECT_EQ(count, 0);
+    }
+    sig.emit(2);
+    EXPECT_EQ(count, 1);
+}
+
+TEST(SignalTest, SignalBlockerUnblock) {
+    signal<int> sig;
+    int count = 0;
+    sig.connect([&count](int) { ++count; });
+    {
+        signal_blocker<int> blocker(sig);
+        sig.emit(1);
+        EXPECT_EQ(count, 0);
+        blocker.unblock();
+        sig.emit(2);
+        EXPECT_EQ(count, 1);
+    }
+    sig.emit(3);
+    EXPECT_EQ(count, 2);
+}
+
+TEST(SignalTest, ConnectSignal) {
+    signal<int> a;
+    signal<int> b;
+    int count = 0;
+    b.connect([&count](int) { ++count; });
+    a.connect_signal(b);
+    a.emit(0);
+    EXPECT_EQ(count, 1);
+}
+
+TEST(SignalTest, ConnectSignalPointer) {
+    signal<int> a;
+    signal<int> b;
+    int count = 0;
+    b.connect([&count](int) { ++count; });
+    a.connect_signal(&b);
+    a.emit(0);
+    EXPECT_EQ(count, 1);
+}
+
+TEST(SignalTest, ConnectIf) {
+    signal<int> sig;
+    int sum = 0;
+    sig.connect_if([&sum](int v) { sum += v; }, [](int v) { return v % 2 == 0; });
+    sig.emit(1);
+    sig.emit(2);
+    sig.emit(3);
+    sig.emit(4);
+    EXPECT_EQ(sum, 6);
+}
+
+TEST(SignalTest, ConnectIfMember) {
+    signal<int> sig;
+    test_receiver receiver;
+    sig.connect_if(&receiver, &test_receiver::onUpdate, [](int v) { return v > 10; }, 0);
+    sig.emit(5);
+    EXPECT_EQ(receiver.value, 0);
+    sig.emit(15);
+    EXPECT_EQ(receiver.value, 15);
+}
+
+TEST(SignalTest, ConnectFiltered) {
+    signal<int> sig;
+    int called = 0;
+    int last = 0;
+    sig.connect_filtered(
+            [&called, &last](int v) {
+                ++called;
+                last = v;
+            },
+            [](int v) -> optional<int> {
+                if (v > 0) {
+                    return optional<int>(v * 2);
+                }
+                return optional<int>();
+            });
+    sig.emit(0);
+    EXPECT_EQ(called, 0);
+    sig.emit(3);
+    EXPECT_EQ(called, 1);
+    EXPECT_EQ(last, 6);
+}
+
+TEST(SignalTest, ConnectTransformed) {
+    signal<int, int> sig;
+    int sum = 0;
+    sig.connect_transformed([&sum](int v) { sum += v; }, [](int a, int b) { return a + b; });
+    sig.emit(2, 3);
+    EXPECT_EQ(sum, 5);
+}
+
+TEST(SignalTest, EmitExecutor) {
+    signal<int> sig;
+    int result = 0;
+    sig.connect([&result](int v) { result = v; });
+    simple_executor executor;
+    sig.emit_executor(executor, 77);
+    EXPECT_EQ(result, 0);
+    executor.run();
+    EXPECT_EQ(result, 77);
+}
+
+TEST(SignalTest, WeakPtrAutoCleanup) {
+    signal<int> sig;
+    auto receiver = make_shared<test_receiver>();
+    sig.connect(weak_ptr<test_receiver>(receiver), &test_receiver::onUpdate);
+    sig.emit(10);
+    EXPECT_EQ(receiver->value, 10);
+    receiver.reset();
+    sig.emit(20);
+    EXPECT_TRUE(sig.empty());
+}
+
+TEST(SignalTest, DisconnectAll) {
+    signal<int> sig;
+    int a = 0, b = 0;
+    sig.connect([&a](int) { ++a; });
+    sig.connect([&b](int) { ++b; });
+    sig.disconnect_all();
+    sig.emit(1);
+    EXPECT_EQ(a, 0);
+    EXPECT_EQ(b, 0);
+    EXPECT_TRUE(sig.empty());
+}
+
+TEST(SignalTest, SlotCountAndEmpty) {
+    signal<int> sig;
+    EXPECT_TRUE(sig.empty());
+    EXPECT_EQ(sig.slot_count(), 0u);
+    auto c1 = sig.connect([](int) {});
+    EXPECT_FALSE(sig.empty());
+    EXPECT_EQ(sig.slot_count(), 1u);
+    auto c2 = sig.connect([](int) {});
+    EXPECT_EQ(sig.slot_count(), 2u);
+    c1.disconnect();
+    EXPECT_EQ(sig.slot_count(), 1u);
+    c2.disconnect();
+    EXPECT_TRUE(sig.empty());
+}
+
+TEST(SignalTest, MultipleParameters) {
+    signal<int, string, double> sig;
+    string lastStr;
+    double lastDbl = 0.0;
+    sig.connect([&](int, const string& s, double d) {
+        lastStr = s;
+        lastDbl = d;
+    });
+    sig.emit(1, "hello", 3.14);
+    EXPECT_EQ(lastStr, "hello");
+    EXPECT_DOUBLE_EQ(lastDbl, 3.14);
+}
+
+TEST(SignalTest, ConstMethods) {
+    const signal<int> sig;
+    EXPECT_TRUE(sig.empty());
+    EXPECT_EQ(sig.slot_count(), 0u);
+    EXPECT_FALSE(sig.is_blocked());
+}
+
+TEST(SignalTest, CallbackResultErase) {
+    signal<> sig;
+    int count = 0;
+    sig.connect([&count]() -> callback_result {
+        ++count;
+        return callback_result::erase;
+    });
+    sig.emit();
+    EXPECT_EQ(count, 1);
+    sig.emit();
+    EXPECT_EQ(count, 1);
+}
+
+TEST(SignalTest, VoidCallbackKeep) {
+    signal<> sig;
+    int count = 0;
+    sig.connect([&count]() { ++count; });
+    sig.emit();
+    sig.emit();
+    EXPECT_EQ(count, 2);
+}
+
+TEST(SignalTest, OperatorCall) {
+    signal<int> sig;
+    int val = 0;
+    sig.connect([&val](int v) { val = v; });
+    sig(42);
+    EXPECT_EQ(val, 42);
 }

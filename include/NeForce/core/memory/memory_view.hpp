@@ -45,7 +45,7 @@ struct extent_storage {
     constexpr extent_storage(extent_storage&&) noexcept = default;
     constexpr extent_storage& operator=(extent_storage&&) noexcept = default;
 
-    constexpr extent_storage(size_t) noexcept {}
+    constexpr extent_storage(size_t /*unused*/) noexcept {}
     static constexpr size_t extent() noexcept { return Extent; }
 };
 
@@ -69,7 +69,7 @@ public:
     constexpr extent_storage(const size_t extent_value) noexcept :
     extent_value_(extent_value) {}
 
-    constexpr size_t extent() const noexcept { return extent_value_; }
+    NEFORCE_NODISCARD constexpr size_t extent() const noexcept { return extent_value_; }
 };
 
 NEFORCE_END_INNER__
@@ -135,7 +135,7 @@ private:
         NEFORCE_CONSTEXPR_ASSERT(count == Extent);
     }
     template <size_t UE = Extent, enable_if_t<UE == dynamic_extent, int> = 0>
-    static NEFORCE_ALWAYS_INLINE constexpr void check_extend(const size_t) noexcept {}
+    static NEFORCE_ALWAYS_INLINE constexpr void check_extend(const size_t /*unused*/) noexcept {}
 
     template <size_t UE = Extent, enable_if_t<UE != dynamic_extent, int> = 0>
     NEFORCE_ALWAYS_INLINE constexpr void check_count(const size_t Count) const noexcept {
@@ -167,7 +167,7 @@ public:
      */
     constexpr memory_view() noexcept
 #ifdef NEFORCE_STANDARD_20
-        requires((Extent + 1u) <= 1u)
+        requires((Extent + 1U) <= 1U)
 #endif
     :
     extent_pair_(exact_arg_construct_tag{}, 0, nullptr) {

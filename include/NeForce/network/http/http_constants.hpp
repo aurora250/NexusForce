@@ -390,8 +390,8 @@ public:
      * @brief 字符串构造函数
      * @param content 内容类型字符串
      */
-    explicit http_content(const string& content) :
-    content_(content) {}
+    explicit http_content(string content) :
+    content_(move(content)) {}
 
     /**
      * @brief 字符串赋值运算符
@@ -639,8 +639,8 @@ public:
      * @brief 字符串构造函数
      * @param cookie Cookie名称
      */
-    explicit http_cookie_name(const string& cookie) :
-    cookie_(cookie) {}
+    explicit http_cookie_name(string cookie) :
+    cookie_(move(cookie)) {}
 
     /**
      * @brief 字符串赋值运算符

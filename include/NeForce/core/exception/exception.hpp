@@ -93,7 +93,9 @@ public:
     code_(code) {
         string_copy(info_, info, INFO_SIZE - 1);
         string_copy(type_, type, TYPE_SIZE - 1);
+        // NOLINTNEXTLINE(clang-analyzer-core.NullDereference)
         info_[INFO_SIZE - 1] = '\0';
+        // NOLINTNEXTLINE(clang-analyzer-core.NullDereference)
         type_[TYPE_SIZE - 1] = '\0';
     }
 

@@ -41,11 +41,13 @@ struct ratio {
     using type = ratio<num, den>; ///< 自身的类型
 };
 
+#ifndef NEFORCE_STANDARD_17
 template <intmax_t Numerator, intmax_t Denominator>
 constexpr intmax_t ratio<Numerator, Denominator>::num;
 
 template <intmax_t Numerator, intmax_t Denominator>
 constexpr intmax_t ratio<Numerator, Denominator>::den;
+#endif
 
 
 /**
@@ -96,11 +98,13 @@ public:
     static constexpr intmax_t den = type::den; ///< 乘积的分母
 };
 
+#ifndef NEFORCE_STANDARD_17
 template <typename ratio1, typename ratio2>
 constexpr intmax_t __ratio_multiply_impl<ratio1, ratio2>::num;
 
 template <typename ratio1, typename ratio2>
 constexpr intmax_t __ratio_multiply_impl<ratio1, ratio2>::den;
+#endif
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -135,11 +139,13 @@ struct __ratio_divide_impl {
     static constexpr intmax_t den = type::den; ///< 商的分母
 };
 
+#ifndef NEFORCE_STANDARD_17
 template <typename ratio1, typename ratio2>
 constexpr intmax_t __ratio_divide_impl<ratio1, ratio2>::num;
 
 template <typename ratio1, typename ratio2>
 constexpr intmax_t __ratio_divide_impl<ratio1, ratio2>::den;
+#endif
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -421,11 +427,13 @@ struct ratio_add {
     static constexpr intmax_t den = type::den;                    ///< 和的分母
 };
 
+#ifndef NEFORCE_STANDARD_17
 template <typename ratio1, typename ratio2>
 constexpr intmax_t ratio_add<ratio1, ratio2>::num;
 
 template <typename ratio1, typename ratio2>
 constexpr intmax_t ratio_add<ratio1, ratio2>::den;
+#endif
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -458,11 +466,13 @@ struct ratio_subtract {
     static constexpr intmax_t den = type::den; ///< 差的分母
 };
 
+#ifndef NEFORCE_STANDARD_17
 template <typename ratio1, typename ratio2>
 constexpr intmax_t ratio_subtract<ratio1, ratio2>::num;
 
 template <typename ratio1, typename ratio2>
 constexpr intmax_t ratio_subtract<ratio1, ratio2>::den;
+#endif
 
 NEFORCE_END_INNER__
 /// @endcond

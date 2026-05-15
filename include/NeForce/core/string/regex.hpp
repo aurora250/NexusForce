@@ -189,7 +189,7 @@ class NEFORCE_API regex {
 private:
     struct pcre2_code_deleter {
         void operator()(pcre2_code* code) const noexcept {
-            if (code) {
+            if (code != nullptr) {
                 pcre2_code_free(code);
             }
         }
@@ -197,7 +197,7 @@ private:
 
     struct pcre2_match_data_deleter {
         void operator()(pcre2_match_data* data) const noexcept {
-            if (data) {
+            if (data != nullptr) {
                 pcre2_match_data_free(data);
             }
         }
@@ -269,7 +269,7 @@ public:
      * @param fmt 替换格式字符串
      * @return 替换后的字符串
      */
-    string replace_first(const string& str, string_view fmt) const;
+    NEFORCE_NODISCARD string replace_first(const string& str, string_view fmt) const;
 
     /**
      * @brief 替换所有匹配
@@ -277,7 +277,7 @@ public:
      * @param fmt 替换格式字符串
      * @return 替换后的字符串
      */
-    string replace_all(const string& str, string_view fmt) const;
+    NEFORCE_NODISCARD string replace_all(const string& str, string_view fmt) const;
 
     /**
      * @brief 使用回调函数替换所有匹配
@@ -285,7 +285,8 @@ public:
      * @param callback 回调函数，接收match_result返回替换字符串
      * @return 替换后的字符串
      */
-    string replace_all_callback(const string& str, function<string(const match_result&)> callback) const;
+    NEFORCE_NODISCARD string replace_all_callback(const string& str,
+                                                  function<string(const match_result&)> callback) const;
 
     /**
      * @brief 使用正则表达式分割字符串
@@ -459,7 +460,7 @@ public:
      * @param str 待遍历的字符串
      * @return 起始迭代器
      */
-    static regex_iterator begin(const regex* re, const string& str) { return regex_iterator(re, str, 0); }
+    static regex_iterator begin(const regex* re, const string& str) { return {re, str, 0}; }
 
     /**
      * @brief 获取结束迭代器
@@ -471,7 +472,7 @@ public:
         regex_iterator it;
         it.regex_ = re;
         it.subject_ = str;
-        if (re) {
+        if (re != nullptr) {
             it.build_cache();
             it.current_index_ = -1;
         }
@@ -530,7 +531,7 @@ public:
      * @brief 解引用操作符
      * @return 当前令牌字符串
      */
-    NEFORCE_NODISCARD string operator*() const noexcept { return current_; }
+    NEFORCE_NODISCARD string_view operator*() const noexcept { return current_; }
 
     /**
      * @brief 前置递增操作符

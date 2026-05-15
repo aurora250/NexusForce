@@ -37,6 +37,13 @@ function(nexusforce_compiler_options target)
                     -Wno-atomic-alignment
             )
         endif()
+        if(WIN32 AND CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+            target_compile_definitions(${target} PRIVATE
+                    $<$<CONFIG:Debug>:_DEBUG>
+                    _MT
+                    _DLL
+            )
+        endif()
         message(STATUS "Configured GNU/Clang compiler options for ${target} (${CMAKE_BUILD_TYPE})")
     else()
         message(FATAL_ERROR "Unsupported compiler: ${CMAKE_CXX_COMPILER_ID}")

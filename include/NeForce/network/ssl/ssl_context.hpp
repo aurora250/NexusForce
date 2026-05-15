@@ -60,7 +60,7 @@ class NEFORCE_API ssl_context {
 private:
     struct ctx_deleter {
         void operator()(::SSL_CTX* ctx) const noexcept {
-            if (ctx) {
+            if (ctx != nullptr) {
                 ::SSL_CTX_free(ctx);
             }
         }
@@ -96,7 +96,7 @@ public:
      * @throws ssl_exception 克隆失败时抛出
      * @note 克隆的上下文与原上下文共享同一底层SSL_CTX，对任意一个的配置修改将影响所有克隆实例。
      */
-    ssl_context clone() const;
+    NEFORCE_NODISCARD ssl_context clone() const;
 
     /**
      * @brief 克隆为共享指针

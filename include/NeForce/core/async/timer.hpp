@@ -11,10 +11,12 @@
 
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/async/condition_variable.hpp"
+#include "NeForce/core/async/packaged_task.hpp"
 #include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/map.hpp"
 #include "NeForce/core/container/set.hpp"
 #include "NeForce/core/functional/function.hpp"
+#include "NeForce/core/memory/shared_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -136,8 +138,10 @@ private:
             }
 
             if (!nodes_.empty()) {
-                time_point tp = nodes_.begin()->expire;
-                cv_.wait_until(lock, tp);
+                cv_.wait_until(lock, nodes_.begin()->expire, [this] {
+                    return stopped_.load(memory_order_acquire) || nodes_.empty() ||
+                           nodes_.begin()->expire <= clock_type::now();
+                });
             }
         }
     }

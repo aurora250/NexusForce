@@ -106,13 +106,14 @@ NEFORCE_END_REFLECT__
 NEFORCE_BEGIN_INNER__
 
 template <typename Ret, typename Class, typename... Args, size_t... Is>
-Ret invoke_impl(Class* obj, Ret (Class::*func)(Args...), const vector<reflect::meta_any>& args, index_sequence<Is...>) {
+Ret invoke_impl(Class* obj, Ret (Class::*func)(Args...), const vector<reflect::meta_any>& args,
+                index_sequence<Is...> /*unused*/) {
     return (obj->*func)(args[Is].template convert<Args>()...);
 }
 
 template <typename Ret, typename Class, typename... Args, size_t... Is>
 Ret invoke_impl(const Class* obj, Ret (Class::*func)(Args...) const, const vector<reflect::meta_any>& args,
-                index_sequence<Is...>) {
+                index_sequence<Is...> /*unused*/) {
     return (obj->*func)(args[Is].template convert<Args>()...);
 }
 

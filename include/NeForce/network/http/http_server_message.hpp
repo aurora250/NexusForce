@@ -69,11 +69,11 @@ NEFORCE_BEGIN_HTTP__
  * @endcode
  */
 struct NEFORCE_API http_server_request : iobject<http_server_request> {
-    http_method method = http_method::GET(); ///< HTTP方法
-    string path = "/";                       ///< 请求路径
-    string version = "HTTP/1.1";             ///< HTTP版本
-    string query{};                          ///< 查询字符串
-    string body{};                           ///< 请求正文
+    http_method method{http_method::GET()}; ///< HTTP方法
+    string path{"/"};                       ///< 请求路径
+    string version{"HTTP/1.1"};             ///< HTTP版本
+    string query;                           ///< 查询字符串
+    string body;                            ///< 请求正文
 
     unordered_map<string, string> headers;    ///< 请求头
     unordered_map<string, string> cookies;    ///< Cookie
@@ -265,14 +265,14 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
  * @endcode
  */
 struct NEFORCE_API http_server_response : istringify<http_server_response> {
-    string version{"HTTP/1.1"};                     ///< HTTP版本
-    http_status status = http_status::S4_NOT_FOUNT; ///< HTTP状态码
-    string status_message{};                        ///< 状态消息
-    unordered_map<string, string> headers;          ///< 响应头
-    vector<http_cookie> cookies;                    ///< 设置的Cookie
-    string body{};                                  ///< 响应正文
-    string redirect_url{};                          ///< 重定向URL
-    string forward_path{};                          ///< 转发路径
+    string version{"HTTP/1.1"};                    ///< HTTP版本
+    http_status status{http_status::S4_NOT_FOUNT}; ///< HTTP状态码
+    string status_message;                         ///< 状态消息
+    unordered_map<string, string> headers;         ///< 响应头
+    vector<http_cookie> cookies;                   ///< 设置的Cookie
+    string body;                                   ///< 响应正文
+    string redirect_url;                           ///< 重定向URL
+    string forward_path;                           ///< 转发路径
 
     /**
      * @brief 默认构造函数

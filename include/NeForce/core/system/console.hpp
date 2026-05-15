@@ -87,12 +87,14 @@ private:
 #ifdef NEFORCE_PLATFORM_WINDOWS
     native_handle_type out_;              ///< 标准输出句柄
     native_handle_type in_;               ///< 标准输入句柄
+    native_handle_type err_;              ///< 标准错误句柄
     console_size saved_cursor_pos_{0, 0}; ///< 保存的光标位置
 #else
     native_handle_type out_{-1}; ///< 标准输出文件描述符
     native_handle_type in_{-1};  ///< 标准输入文件描述符
+    native_handle_type err_{-1}; ///< 标准错误文件描述符
 #endif
-    mutable mutex mutex_{};        ///< 互斥锁
+    mutable mutex mutex_;          ///< 互斥锁
     console_size last_size_{0, 0}; ///< 上次记录的控制台尺寸
 
     bool alt_buffer_active_ = false; // 交替缓冲区是否激活
@@ -103,6 +105,10 @@ private:
     void print_string_unsafe(const string& str) const { print_string_unsafe(str.view()); }
     void print_string_unsafe(string_view str) const;
     void print_string_unsafe(const char* str) const { print_string_unsafe(string_view{str}); }
+
+    void print_error_unsafe(const string& str) const { print_error_unsafe(str.view()); }
+    void print_error_unsafe(string_view str) const;
+    void print_error_unsafe(const char* str) const { print_error_unsafe(string_view{str}); }
 
     void set_color_unsafe(const color& color, bool use_256_color) const;
     void typewriter_print_unsafe(string_view text, milliseconds delay_per_char, bool with_sound) const;
@@ -168,6 +174,24 @@ public:
      * @param str 要打印的字符串
      */
     void print_string(const char* str);
+
+    /**
+     * @brief 打印字符串到错误流
+     * @param str 要打印的字符串
+     */
+    void print_error(const string& str);
+
+    /**
+     * @brief 打印字符串视图到错误流
+     * @param view 要打印的字符串视图
+     */
+    void print_error(const string_view& view);
+
+    /**
+     * @brief 打印C风格字符串到错误流
+     * @param str 要打印的字符串
+     */
+    void print_error(const char* str);
 
     /**
      * @brief 读取输入（直到空白字符）
@@ -295,6 +319,59 @@ public:
         this->set_color_unsafe(color, false);
         this->print_string_unsafe(_NEFORCE format(fmt, _NEFORCE forward<Args>(args)...));
         this->print_string_unsafe("\033[0m\n");
+    }
+
+    /**
+     * @brief 打印任意类型的值到错误流
+     * @tparam Args 参数类型
+     * @param args 打印参数
+     */
+    template <typename... Args>
+    void eprint(Args&&... args) {
+        lock<mutex> lock(mutex_);
+        this->print_error_unsafe(_NEFORCE to_string(_NEFORCE forward<Args>(args)...));
+    }
+
+    /**
+     * @brief 格式化打印到错误流
+     * @tparam Args 参数类型
+     * @param fmt 格式字符串
+     * @param args 格式化参数
+     */
+    template <typename... Args>
+    void eprintf(const string_view fmt, Args&&... args) {
+        lock<mutex> lock(mutex_);
+        this->print_error_unsafe(_NEFORCE format(fmt, _NEFORCE forward<Args>(args)...));
+    }
+
+    /**
+     * @brief 打印换行到错误流
+     */
+    void eprintln();
+
+    /**
+     * @brief 打印任意类型的值到错误流并换行
+     * @tparam Args 参数类型
+     * @param args 打印参数
+     */
+    template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
+    void eprintln(Args&&... args) {
+        lock<mutex> lock(mutex_);
+        this->print_error_unsafe(_NEFORCE to_string(_NEFORCE forward<Args>(args)...));
+        this->print_error_unsafe("\n");
+    }
+
+    /**
+     * @brief 格式化打印到错误流并换行
+     * @tparam Args 参数类型
+     * @param fmt 格式字符串
+     * @param args 格式化参数
+     */
+    template <typename... Args>
+    void eprintfln(const string_view fmt, Args&&... args) {
+        lock<mutex> lock(mutex_);
+        this->print_error_unsafe(_NEFORCE format(fmt, _NEFORCE forward<Args>(args)...));
+        this->print_error_unsafe("\n");
     }
 
     /**
@@ -653,6 +730,38 @@ void printcf(const color& color, const string_view fmt, Args&&... args) {
 template <typename... Args>
 void printcfln(const color& color, const string_view fmt, Args&&... args) {
     console.printcfln(color, fmt, _NEFORCE forward<Args>(args)...);
+}
+
+/**
+ * @brief 打印多个值到错误流
+ */
+template <typename... Args>
+void eprint(Args&&... args) {
+    console.eprint(_NEFORCE forward<Args>(args)...);
+}
+
+/**
+ * @brief 格式化打印到错误流
+ */
+template <typename... Args>
+void eprintf(const string_view fmt, Args&&... args) {
+    console.eprintf(fmt, _NEFORCE forward<Args>(args)...);
+}
+
+/**
+ * @brief 打印多个值到错误流并换行
+ */
+template <typename... Args>
+void eprintln(Args&&... args) {
+    console.eprintln(_NEFORCE forward<Args>(args)...);
+}
+
+/**
+ * @brief 格式化打印到错误流并换行
+ */
+template <typename... Args>
+void eprintfln(const string_view fmt, Args&&... args) {
+    console.eprintfln(fmt, _NEFORCE forward<Args>(args)...);
 }
 
 /** @} */ // ConsoleIO

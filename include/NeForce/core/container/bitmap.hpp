@@ -160,7 +160,7 @@ public:
      * @return 比较结果（false < true）
      */
     NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool less_than(const bit_reference& rhs) const noexcept {
-        return static_cast<bool>(*this) < static_cast<bool>(rhs);
+        return !static_cast<bool>(*this) && static_cast<bool>(rhs);
     }
 
     /**
@@ -211,13 +211,13 @@ private:
 
 private:
     template <typename Ref>
-    NEFORCE_CONSTEXPR20 enable_if_t<is_boolean_v<Ref>, Ref> reference_dispatch() const noexcept {
-        return (*ptr_ & (1U << off_)) != 0;
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 enable_if_t<is_boolean_v<Ref>, Ref> reference_dispatch() const noexcept {
+        return (*ptr_ & (1ULL << off_)) != 0;
     }
 
     template <typename Ref>
-    NEFORCE_CONSTEXPR20 enable_if_t<!is_boolean_v<Ref>, Ref> reference_dispatch() const noexcept {
-        return Ref(ptr_, 1U << off_);
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 enable_if_t<!is_boolean_v<Ref>, Ref> reference_dispatch() const noexcept {
+        return Ref(ptr_, 1ULL << off_);
     }
 
 public:
@@ -330,7 +330,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 是否相等
      */
-    NEFORCE_CONSTEXPR20 bool equal_to(const bitmap_iterator& rhs) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool equal_to(const bitmap_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
         return ptr_ == rhs.ptr_ && off_ == rhs.off_;
     }
@@ -340,7 +340,7 @@ public:
      * @param rhs 右侧迭代器
      * @return 当前迭代器是否在rhs之前
      */
-    NEFORCE_CONSTEXPR20 bool less_than(const bitmap_iterator& rhs) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool less_than(const bitmap_iterator& rhs) const noexcept {
         NEFORCE_DEBUG_VERIFY(container_ == rhs.container_, "Attempting to equal to a different container");
         return ptr_ < rhs.ptr_ || (ptr_ == rhs.ptr_ && off_ < rhs.off_);
     }
@@ -413,7 +413,7 @@ private:
          * @brief 析构函数
          */
         NEFORCE_CONSTEXPR20 ~bit_storage() {
-            if (ptr) {
+            if (ptr != nullptr) {
                 cpair.get_base().deallocate(ptr, cpair.value);
             }
         }
@@ -457,7 +457,7 @@ private:
          * @param cap 新容量
          */
         NEFORCE_CONSTEXPR20 void reset(uint32_t* new_ptr = nullptr, const size_t cap = 0) {
-            if (ptr) {
+            if (ptr != nullptr) {
                 cpair.get_base().deallocate(ptr, cpair.value);
             }
             ptr = new_ptr;
@@ -474,13 +474,13 @@ private:
          * @brief 获取存储指针
          * @return 存储指针
          */
-        NEFORCE_CONSTEXPR20 uint32_t* get() const noexcept { return ptr; }
+        NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 uint32_t* get() const noexcept { return ptr; }
 
         /**
          * @brief 获取容量（字数）
          * @return 容量
          */
-        NEFORCE_CONSTEXPR20 size_t capacity() const noexcept { return cpair.value; }
+        NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_t capacity() const noexcept { return cpair.value; }
     };
 
     iterator start_{this};  ///< 起始迭代器
@@ -567,7 +567,7 @@ private:
 
         const iterator new_start(new_storage.get(), 0, this);
         auto new_finish = bitmap::bit_copy(begin(), position, new_start);
-        _NEFORCE fill_n(new_finish, extra_len, value);
+        _NEFORCE fill_n(new_finish, static_cast<difference_type>(extra_len), value);
         new_finish += static_cast<difference_type>(extra_len);
         new_finish = bitmap::bit_copy(position, end(), new_finish);
 
@@ -612,7 +612,6 @@ private:
             *position = value;
             ++finish_;
         } else {
-            const size_type len = size() ? 2 * size() : BITMAP_WORD_SIZE;
             reallocate_insert(position, 1, value);
         }
     }

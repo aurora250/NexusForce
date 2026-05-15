@@ -246,7 +246,7 @@ public:
     NEFORCE_CONSTEXPR20 unique_ptr(pointer ptr, Del&& deleter) noexcept :
     data_(ptr, _NEFORCE forward<Del>(deleter)) {}
 
-    NEFORCE_CONSTEXPR20 unique_ptr(unique_ptr&&) = default; ///< 移动构造函数
+    NEFORCE_CONSTEXPR20 unique_ptr(unique_ptr&&) noexcept = default; ///< 移动构造函数
 
     /**
      * @brief 从其他unique_ptr转换构造
@@ -273,7 +273,7 @@ public:
         ptr = pointer();
     }
 
-    unique_ptr& operator=(unique_ptr&&) = default; ///< 移动赋值运算符
+    unique_ptr& operator=(unique_ptr&&) noexcept = default; ///< 移动赋值运算符
 
     /**
      * @brief 从其他unique_ptr移动赋值
@@ -343,7 +343,7 @@ public:
      * @brief bool转换运算符
      * @return 是否管理非空对象
      */
-    NEFORCE_CONSTEXPR20 explicit operator bool() const noexcept { return get() == pointer() ? false : true; }
+    NEFORCE_CONSTEXPR20 explicit operator bool() const noexcept { return get() != pointer(); }
 
     /**
      * @brief 释放所有权
@@ -534,7 +534,7 @@ public:
      * @brief bool转换运算符
      * @return 是否管理非空数组
      */
-    NEFORCE_CONSTEXPR20 explicit operator bool() const noexcept { return get() == pointer() ? false : true; }
+    NEFORCE_CONSTEXPR20 explicit operator bool() const noexcept { return get() != pointer(); }
 
     /**
      * @brief 释放所有权

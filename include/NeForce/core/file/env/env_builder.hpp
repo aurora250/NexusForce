@@ -168,7 +168,7 @@ public:
      * @param text 注释文本
      * @return 自身引用，支持链式调用
      */
-    env_builder& comment(string text) noexcept;
+    env_builder& comment(string text);
 
     /**
      * @brief 添加空行

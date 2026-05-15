@@ -21,6 +21,7 @@
  */
 
 #include "NeForce/core/exception/exception.hpp"
+#include "NeForce/core/functional/invoke.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
 #include "NeForce/core/utility/compressed_pair.hpp"
 NEFORCE_BEGIN_NAMESPACE__

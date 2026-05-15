@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/async/mutex.hpp"
+#include "NeForce/core/file/path.hpp"
 #include "NeForce/core/utility/byte_size.hpp"
 #include "NeForce/network/http/http_client_message.hpp"
 #include "NeForce/network/tcp/tcp_client.hpp"

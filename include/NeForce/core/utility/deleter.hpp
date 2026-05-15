@@ -34,7 +34,7 @@ struct default_deleter {
      * @tparam U 可转换为T*的类型
      */
     template <typename U, enable_if_t<is_convertible<U*, T*>::value, int> = 0>
-    NEFORCE_CONSTEXPR20 default_deleter(const default_deleter<U>&) noexcept {}
+    NEFORCE_CONSTEXPR20 default_deleter(const default_deleter<U>& /*unused*/) noexcept {}
 
     /**
      * @brief 删除操作符
@@ -66,7 +66,7 @@ struct default_deleter<T[]> {
      * @tparam U 可转换为T的数组类型
      */
     template <typename U, enable_if_t<is_convertible<U (*)[], T (*)[]>::value, int> = 0>
-    NEFORCE_CONSTEXPR20 default_deleter(const default_deleter<U[]>&) noexcept {}
+    NEFORCE_CONSTEXPR20 default_deleter(const default_deleter<U[]>& /*unused*/) noexcept {}
 
     /**
      * @brief 删除操作符

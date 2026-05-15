@@ -93,7 +93,7 @@ public:
      * @brief 转换为字符串表示
      * @return 格式化的MAC地址字符串
      */
-    string to_string() const;
+    NEFORCE_NODISCARD string to_string() const;
 
     /**
      * @brief 相等比较运算符
@@ -113,7 +113,7 @@ public:
      * @brief 获取MAC地址字节数组
      * @return 6字节数组的常量引用
      */
-    const bytes_type& bytes() const noexcept { return bytes_; }
+    NEFORCE_NODISCARD const bytes_type& bytes() const noexcept { return bytes_; }
 };
 
 /** @} */ // NetworkUtil

@@ -9,7 +9,7 @@
  * 用于在未初始化的内存区域上进行构造、复制、移动和填充操作。
  */
 
-#include "NeForce/core/algorithm/iterator.hpp"
+#include "NeForce/core/algorithm/shift.hpp"
 #include "NeForce/core/memory/construct.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

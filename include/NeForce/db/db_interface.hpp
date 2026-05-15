@@ -51,7 +51,7 @@ struct NEFORCE_API idb_result {
      * @brief 检查结果集是否为空
      * @return 无数据返回true
      */
-    virtual bool empty() const = 0;
+    NEFORCE_NODISCARD virtual bool empty() const = 0;
 
     /**
      * @brief 移动到下一行
@@ -73,35 +73,35 @@ struct NEFORCE_API idb_tb_result : idb_result {
      * @brief 获取结果集行数
      * @return 行数
      */
-    virtual size_type row_count() const = 0;
+    NEFORCE_NODISCARD virtual size_type row_count() const = 0;
 
     /**
      * @brief 获取结果集列数
      * @return 列数
      */
-    virtual size_type column_count() const = 0;
+    NEFORCE_NODISCARD virtual size_type column_count() const = 0;
 
     /**
      * @brief 获取所有列名
      * @return 列名列表（按查询顺序）
      */
-    virtual const vector<string_view>& column_names() const = 0;
+    NEFORCE_NODISCARD virtual const vector<string_view>& column_names() const = 0;
 
-    virtual string_view get(size_type n) const = 0; ///< 字符串
+    NEFORCE_NODISCARD virtual string_view get(size_type n) const = 0; ///< 字符串
 
-    virtual bool get_bool(size_type n) const = 0;           ///< 布尔值
-    virtual int16_t get_int16(size_type n) const = 0;       ///< 16位整数
-    virtual int32_t get_int32(size_type n) const = 0;       ///< 32位整数
-    virtual int64_t get_int64(size_type n) const = 0;       ///< 64位整数
-    virtual float32_t get_float32(size_type n) const = 0;   ///< 32位浮点数
-    virtual float64_t get_float64(size_type n) const = 0;   ///< 64位浮点数
-    virtual decimal_t get_decimal(size_type n) const = 0;   ///< 高精度十进制数
-    virtual vector<char> get_blob(size_type n) const = 0;   ///< BLOB二进制数据
-    virtual uint64_t get_bit(size_type n) const = 0;        ///< 位字段值
-    virtual date get_date(size_type n) const = 0;           ///< 日期类型
-    virtual time get_time(size_type n) const = 0;           ///< 时间类型
-    virtual datetime get_datetime(size_type n) const = 0;   ///< 日期时间类型
-    virtual timestamp get_timestamp(size_type n) const = 0; ///< 时间戳类型
+    NEFORCE_NODISCARD virtual bool get_bool(size_type n) const = 0;           ///< 布尔值
+    NEFORCE_NODISCARD virtual int16_t get_int16(size_type n) const = 0;       ///< 16位整数
+    NEFORCE_NODISCARD virtual int32_t get_int32(size_type n) const = 0;       ///< 32位整数
+    NEFORCE_NODISCARD virtual int64_t get_int64(size_type n) const = 0;       ///< 64位整数
+    NEFORCE_NODISCARD virtual float32_t get_float32(size_type n) const = 0;   ///< 32位浮点数
+    NEFORCE_NODISCARD virtual float64_t get_float64(size_type n) const = 0;   ///< 64位浮点数
+    NEFORCE_NODISCARD virtual decimal_t get_decimal(size_type n) const = 0;   ///< 高精度十进制数
+    NEFORCE_NODISCARD virtual vector<char> get_blob(size_type n) const = 0;   ///< BLOB二进制数据
+    NEFORCE_NODISCARD virtual uint64_t get_bit(size_type n) const = 0;        ///< 位字段值
+    NEFORCE_NODISCARD virtual date get_date(size_type n) const = 0;           ///< 日期类型
+    NEFORCE_NODISCARD virtual time get_time(size_type n) const = 0;           ///< 时间类型
+    NEFORCE_NODISCARD virtual datetime get_datetime(size_type n) const = 0;   ///< 日期时间类型
+    NEFORCE_NODISCARD virtual timestamp get_timestamp(size_type n) const = 0; ///< 时间戳类型
 };
 
 /**
@@ -113,14 +113,14 @@ struct NEFORCE_API idb_tb_result : idb_result {
 struct NEFORCE_API idb_kv_result : idb_result {
     ~idb_kv_result() override = default;
 
-    virtual string_view key() const = 0;   ///< 获取键
-    virtual string_view value() const = 0; ///< 获取字符串值
+    NEFORCE_NODISCARD virtual string_view key() const = 0;   ///< 获取键
+    NEFORCE_NODISCARD virtual string_view value() const = 0; ///< 获取字符串值
 
-    virtual bool value_bool() const = 0;                                ///< 获取布尔值
-    virtual int64_t value_int64() const = 0;                            ///< 获取64位整数值
-    virtual double value_double() const = 0;                            ///< 获取浮点值
-    virtual vector<string> value_array() const = 0;                     ///< 获取数组值
-    virtual const vector<pair<string, string>>& value_hash() const = 0; ///< 获取哈希表值
+    NEFORCE_NODISCARD virtual bool value_bool() const = 0;                                ///< 获取布尔值
+    NEFORCE_NODISCARD virtual int64_t value_int64() const = 0;                            ///< 获取64位整数值
+    NEFORCE_NODISCARD virtual double value_double() const = 0;                            ///< 获取浮点值
+    NEFORCE_NODISCARD virtual vector<string> value_array() const = 0;                     ///< 获取数组值
+    NEFORCE_NODISCARD virtual const vector<pair<string, string>>& value_hash() const = 0; ///< 获取哈希表值
 };
 
 /**
@@ -146,7 +146,7 @@ struct NEFORCE_API idb_prepared_statement {
      * @brief 获取参数数量
      * @return 占位符数量
      */
-    virtual uint32_t param_count() const noexcept = 0;
+    NEFORCE_NODISCARD virtual uint32_t param_count() const noexcept = 0;
 
     virtual bool bind_param(uint32_t index, const string& value) = 0; ///< 绑定字符串
     virtual bool bind_param(uint32_t index, string_view value) = 0;   ///< 绑定字符串视图
@@ -172,13 +172,13 @@ struct NEFORCE_API idb_prepared_statement {
      * @brief 获取错误信息
      * @return 错误描述字符串
      */
-    virtual string_view get_error() const noexcept = 0;
+    NEFORCE_NODISCARD virtual string_view get_error() const noexcept = 0;
 
     /**
      * @brief 获取错误码
      * @return 数据库错误码
      */
-    virtual uint32_t get_errno() const noexcept = 0;
+    NEFORCE_NODISCARD virtual uint32_t get_errno() const noexcept = 0;
 };
 
 /**
@@ -210,16 +210,16 @@ public:
      * @name 字符集设置
      * @{
      */
-    virtual bool set_character_set(const string& encoding) const = 0; ///< 设置字符集
-    virtual string_view get_character_set() const = 0;                ///< 获取字符集
+    NEFORCE_NODISCARD virtual bool set_character_set(const string& encoding) const = 0; ///< 设置字符集
+    NEFORCE_NODISCARD virtual string_view get_character_set() const = 0;                ///< 获取字符集
     /** @} */
 
     /**
      * @name 错误处理
      * @{
      */
-    virtual string_view get_error() const = 0; ///< 获取错误信息
-    virtual uint32_t get_errno() const = 0;    ///< 获取错误码
+    NEFORCE_NODISCARD virtual string_view get_error() const = 0; ///< 获取错误信息
+    NEFORCE_NODISCARD virtual uint32_t get_errno() const = 0;    ///< 获取错误码
     /** @} */
 
     /**
@@ -227,14 +227,14 @@ public:
      * @param sql SQL语句
      * @return 执行成功返回true
      */
-    virtual bool update(const string& sql) const = 0;
+    NEFORCE_NODISCARD virtual bool update(const string& sql) const = 0;
 
     /**
      * @name 连接状态检测
      * @{
      */
-    virtual bool connected() const = 0; ///< 检查连接状态
-    virtual bool is_valid() const = 0;  ///< 检查连接有效性
+    NEFORCE_NODISCARD virtual bool connected() const = 0; ///< 检查连接状态
+    NEFORCE_NODISCARD virtual bool is_valid() const = 0;  ///< 检查连接有效性
     /** @} */
 
     /**
@@ -267,14 +267,14 @@ struct NEFORCE_API idb_tb_connect : idb_connect {
      * @param sql SELECT语句
      * @return 查询结果集
      */
-    virtual unique_ptr<idb_tb_result> query(const string& sql) const = 0;
+    NEFORCE_NODISCARD virtual unique_ptr<idb_tb_result> query(const string& sql) const = 0;
 
     /**
      * @brief 创建预处理语句
      * @param sql 带占位符的SQL语句
      * @return 预处理语句对象
      */
-    virtual unique_ptr<idb_prepared_statement> prepare_statement(const string& sql) const = 0;
+    NEFORCE_NODISCARD virtual unique_ptr<idb_prepared_statement> prepare_statement(const string& sql) const = 0;
 };
 
 /**
@@ -291,7 +291,7 @@ struct NEFORCE_API idb_kv_connect : idb_connect {
      * @param sql 命令字符串
      * @return 执行结果
      */
-    virtual unique_ptr<idb_kv_result> query(const string& sql) const = 0;
+    NEFORCE_NODISCARD virtual unique_ptr<idb_kv_result> query(const string& sql) const = 0;
 
     virtual bool set(const string& key, const string& value) = 0;                ///< 设置键值
     virtual bool setex(const string& key, const string& value, int seconds) = 0; ///< 设置键值并指定过期时间
@@ -328,10 +328,16 @@ public:
      * @brief 构造函数
      * @param config 数据库配置
      */
-    explicit idb_factory(db_config config) :
+    explicit idb_factory(db_config config) noexcept :
     config_(move(config)) {}
 
-    virtual ~idb_factory() = default;
+    virtual ~idb_factory() noexcept = default;
+
+    idb_factory(const idb_factory&) = delete;
+    idb_factory& operator=(const idb_factory&) = delete;
+
+    idb_factory(idb_factory&&) noexcept = default;
+    idb_factory& operator=(idb_factory&&) noexcept = default;
 
     /**
      * @brief 创建数据库连接对象

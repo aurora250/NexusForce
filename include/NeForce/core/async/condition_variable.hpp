@@ -30,7 +30,7 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 表示条件变量等待操作的结果状态。
  */
-enum class cv_status {
+enum class cv_status : uint8_t {
     success, ///< 等待成功
     timeout  ///< 等待超时
 };

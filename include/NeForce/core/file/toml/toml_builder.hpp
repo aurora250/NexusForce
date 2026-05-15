@@ -155,7 +155,7 @@ private:
      *
      * 沿路径获取表格，如果不存在则创建。
      */
-    toml_table* get_or_create_table_path(const vector<string>& path) const;
+    NEFORCE_NODISCARD toml_table* get_or_create_table_path(const vector<string>& path) const;
 
     /**
      * @brief 获取或创建表格数组
@@ -165,7 +165,7 @@ private:
      *
      * 沿路径获取或创建用于表格数组的数组。
      */
-    toml_array* get_or_create_array_for_array_table(const vector<string>& path) const;
+    NEFORCE_NODISCARD toml_array* get_or_create_array_for_array_table(const vector<string>& path) const;
 
 public:
     /**

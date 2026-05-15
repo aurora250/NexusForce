@@ -1,9 +1,10 @@
 #ifndef NEFORCE_CORE_ITERATOR_RANGES_HPP__
 #define NEFORCE_CORE_ITERATOR_RANGES_HPP__
 #include "NeForce/core/typeinfo/concepts.hpp"
-NEFORCE_BEGIN_NAMESPACE__
 #ifdef NEFORCE_STANDARD_20
-
+#    include "NeForce/core/functional/invoke.hpp"
+#    include "NeForce/core/utility/tuple.hpp"
+NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_RANGES__
 
 template <typename R>
@@ -835,8 +836,7 @@ public:
     constexpr drop_while_iterator(BaseIter current, Sentinel end, const Pred* pred) :
     current_(current),
     end_(end),
-    pred_(pred),
-    started_(false) {
+    pred_(pred) {
         satisfy_predicate_forward();
     }
 
@@ -1178,7 +1178,7 @@ public:
     constexpr bool operator==(const repeat_iterator& other) const { return count_ == other.count_; }
     constexpr bool operator!=(const repeat_iterator& other) const { return count_ != other.count_; }
 
-    ptrdiff_t count() const noexcept { return count_; }
+    NEFORCE_NODISCARD ptrdiff_t count() const noexcept { return count_; }
 
 private:
     const T* value_ = nullptr;
@@ -1785,13 +1785,13 @@ class slice_view : public view_base<slice_view<V>> {
         auto b = const_cast<remove_const_t<V>&>(base_).begin();
         auto e = const_cast<remove_const_t<V>&>(base_).end();
 
-        for (auto i = 0; i < start_ && b != e; ++i, ++b)
-            ;
+        for (auto i = 0; i < start_ && b != e; ++i, ++b) {
+        }
         auto begin_it = b;
 
         auto n = end_ - start_;
-        for (auto i = 0; i < n && b != e; ++i, ++b)
-            ;
+        for (auto i = 0; i < n && b != e; ++i, ++b) {
+        }
         auto end_it = b;
 
         cache_ = {begin_it, end_it};
@@ -1832,6 +1832,10 @@ public:
 
 template <typename Derived>
 struct range_adaptor_closure {
+protected:
+    constexpr range_adaptor_closure() noexcept = default;
+
+public:
     template <typename OtherClosure>
     friend constexpr auto operator|(range_adaptor_closure<Derived> lhs, range_adaptor_closure<OtherClosure> rhs) {
         return [lhs = static_cast<const Derived&>(lhs), rhs = static_cast<const OtherClosure&>(rhs)](auto&& range) {
@@ -2026,6 +2030,9 @@ NEFORCE_INLINE17 constexpr drop_while_adaptor drop_while;
 
 
 struct reverse_adaptor_closure : range_adaptor_closure<reverse_adaptor_closure> {
+public:
+    reverse_adaptor_closure() noexcept = default;
+
     template <Range R>
         requires bidirectional_iterator<decltype(_NEFORCE declval<R>().begin())>
     constexpr auto operator()(R&& range) const {
@@ -2078,6 +2085,9 @@ NEFORCE_INLINE17 constexpr repeat_adaptor repeat;
 
 
 struct join_adaptor_closure : range_adaptor_closure<join_adaptor_closure> {
+public:
+    join_adaptor_closure() noexcept = default;
+
     template <Range R>
         requires Range<iter_reference_t<decltype(_NEFORCE declval<R>().begin())>>
     constexpr auto operator()(R&& range) const {
@@ -2100,6 +2110,9 @@ NEFORCE_INLINE17 constexpr join_adaptor join;
 
 template <size_t N>
 struct elements_adaptor_closure : range_adaptor_closure<elements_adaptor_closure<N>> {
+public:
+    elements_adaptor_closure() noexcept = default;
+
     template <Range R>
     constexpr auto operator()(R&& range) const {
         return element_view<N, decltype(all(_NEFORCE forward<R>(range)))>{all(_NEFORCE forward<R>(range))};
@@ -2124,6 +2137,9 @@ NEFORCE_INLINE17 constexpr auto values = elements<1>;
 
 
 struct common_adaptor_closure : range_adaptor_closure<common_adaptor_closure> {
+public:
+    common_adaptor_closure() noexcept = default;
+
     template <Range R>
     constexpr auto operator()(R&& range) const {
         if constexpr (common_range<R>) {
@@ -2163,8 +2179,14 @@ NEFORCE_INLINE17 constexpr counted_adaptor counted;
 
 template <typename V2>
 struct concat_adaptor_closure : range_adaptor_closure<concat_adaptor_closure<V2>> {
+public:
     using view_type = decltype(all(_NEFORCE declval<V2>()));
+
+private:
     view_type view_;
+
+public:
+    concat_adaptor_closure() noexcept = default;
 
     constexpr explicit concat_adaptor_closure(V2&& v2) :
     view_(all(_NEFORCE forward<V2>(v2))) {}
@@ -2193,7 +2215,11 @@ NEFORCE_INLINE17 constexpr concat_adaptor concat;
 
 template <typename T>
 struct split_adaptor_closure : range_adaptor_closure<split_adaptor_closure<T>> {
+private:
     T delim_;
+
+public:
+    split_adaptor_closure() noexcept = default;
 
     constexpr explicit split_adaptor_closure(T d) :
     delim_(d) {}
@@ -2220,8 +2246,12 @@ NEFORCE_INLINE17 constexpr split_adaptor split;
 
 
 struct slice_adaptor_closure : range_adaptor_closure<slice_adaptor_closure> {
+private:
     ptrdiff_t start_;
     ptrdiff_t end_;
+
+public:
+    slice_adaptor_closure() noexcept = default;
 
     constexpr explicit slice_adaptor_closure(ptrdiff_t s, ptrdiff_t e) :
     start_(s),
@@ -2247,6 +2277,6 @@ NEFORCE_INLINE17 constexpr slice_adaptor slice;
 NEFORCE_END_RANGES_VIEWS__
 
 NEFORCE_END_RANGES__
-#endif // NEFORCE_STANDARD_20
 NEFORCE_END_NAMESPACE__
+#endif // NEFORCE_STANDARD_20
 #endif // NEFORCE_CORE_ITERATOR_RANGES_HPP__

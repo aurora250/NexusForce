@@ -261,7 +261,7 @@ public:
 
 private:
     native_handle_type handle_{}; ///< 线程句柄
-    id id_{};                     ///< 线程ID
+    id id_{0};                    ///< 线程ID
     state state_ = NOT_A_THREAD;  ///< 线程状态
 
 #ifdef NEFORCE_PLATFORM_WINDOWS

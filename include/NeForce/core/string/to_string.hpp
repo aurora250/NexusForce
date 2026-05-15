@@ -121,7 +121,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& value) {
  * @return 空数组字符串"[]"
  */
 template <typename T, enable_if_t<is_unbounded_array_v<T>, int> = 0>
-NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T&) {
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T& /*unused*/) {
     return {"[]"};
 }
 
@@ -188,7 +188,7 @@ template <typename Tuple, size_t I,
 }
 
 template <typename... UArgs, enable_if_t<sizeof...(UArgs) == 0, int> = 0>
-NEFORCE_CONSTEXPR20 string __to_string_tuple_dispatch(const tuple<UArgs...>&) {
+NEFORCE_CONSTEXPR20 string __to_string_tuple_dispatch(const tuple<UArgs...>& /*unused*/) {
     return {"()"};
 }
 
@@ -386,9 +386,7 @@ __float_to_string_with_precision(T x, int precision = 6, const bool force_scient
         x = -x;
     }
 
-    if (precision < 0) {
-        precision = 0;
-    }
+    precision = _NEFORCE max(precision, 0);
 
     bool use_scientific = false;
     int exponent = 0;

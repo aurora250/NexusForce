@@ -44,19 +44,19 @@ NEFORCE_BEGIN_NAMESPACE__
 class NEFORCE_API pgsql_prepared_statement final : public idb_prepared_statement {
 private:
     struct pstmt_data {
-        vector<string> param_values{};    ///< 参数值字符串
-        vector<const char*> param_ptrs{}; ///< 参数指针数组
-        vector<int> param_lengths{};      ///< 参数长度数组
-        vector<int> param_formats{};      ///< 参数格式数组（0=文本，1=二进制）
+        vector<string> param_values;    ///< 参数值字符串
+        vector<const char*> param_ptrs; ///< 参数指针数组
+        vector<int> param_lengths;      ///< 参数长度数组
+        vector<int> param_formats;      ///< 参数格式数组（0=文本，1=二进制）
     };
 
     ::PGconn* conn_ = nullptr;                                ///< PostgreSQL连接句柄
-    string stmt_name_{};                                      ///< 预处理语句名称
-    string sql_{};                                            ///< 原始SQL语句
+    string stmt_name_;                                        ///< 预处理语句名称
+    string sql_;                                              ///< 原始SQL语句
     uint32_t param_count_ = 0;                                ///< 参数数量
     unique_ptr<pstmt_data> data_ = make_unique<pstmt_data>(); ///< 执行数据
-    vector<vector<char>> param_buffers_{};                    ///< 二进制参数缓冲区
-    string last_error_{};                                     ///< 最后错误信息
+    vector<vector<char>> param_buffers_;                      ///< 二进制参数缓冲区
+    string last_error_;                                       ///< 最后错误信息
     uint32_t last_errno_ = 0;                                 ///< 最后错误码
 
     void set_error(string error, uint32_t errno_val = 0) noexcept;

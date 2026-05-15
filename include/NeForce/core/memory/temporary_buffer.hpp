@@ -9,6 +9,7 @@
  * 用于在算法执行期间分配和自动管理临时内存。
  */
 
+#include "NeForce/core/algorithm/compare.hpp"
 #include "NeForce/core/memory/standard_allocator.hpp"
 #include "NeForce/core/memory/uninitialized.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
@@ -52,9 +53,7 @@ private:
         original_len_ = len_;
         buffer_ = 0;
         constexpr size_t max = numeric_traits<uint32_t>::max() / sizeof(value_type);
-        if (len_ > max) {
-            len_ = max;
-        }
+        len_ = _NEFORCE min(len_, max);
 
         while (len_ > 0) {
             buffer_ = allocator_type::allocate(len_);
@@ -66,7 +65,7 @@ private:
     }
 
     template <typename U = value_type, enable_if_t<is_trivially_copy_assignable_v<U>, int> = 0>
-    NEFORCE_CONSTEXPR20 void initialize_buffer(const U&) noexcept {}
+    NEFORCE_CONSTEXPR20 void initialize_buffer(const U& /*unused*/) noexcept {}
 
     template <typename U = value_type, enable_if_t<!is_trivially_copy_assignable_v<U>, int> = 0>
     NEFORCE_CONSTEXPR20 void initialize_buffer(const U& value) {

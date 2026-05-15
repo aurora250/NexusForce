@@ -52,7 +52,7 @@ public:
 private:
     struct ssl_deleter {
         void operator()(::SSL* ssl) const noexcept {
-            if (ssl) {
+            if (ssl != nullptr) {
                 ::SSL_shutdown(ssl);
                 ::SSL_free(ssl);
             }
@@ -61,7 +61,7 @@ private:
 
     struct x509_deleter {
         void operator()(::X509* cert) const noexcept {
-            if (cert) {
+            if (cert != nullptr) {
                 ::X509_free(cert);
             }
         }

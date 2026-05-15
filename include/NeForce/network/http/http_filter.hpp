@@ -314,7 +314,7 @@ private:
     vector<string> excluded_paths_;                      ///< 排除的路径
     function<bool(const http_request&)> auth_validator_; ///< 认证验证器
 
-    bool is_path_excluded(const string& path) const;
+    NEFORCE_NODISCARD bool is_path_excluded(const string& path) const;
 
 public:
     authentication_filter() = default;

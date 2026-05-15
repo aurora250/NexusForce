@@ -174,7 +174,7 @@ struct tuple<> : public icommon<tuple<>> {
      * @tparam Tag 标签类型
      */
     template <typename Tag, enable_if_t<is_same<Tag, exact_arg_construct_tag>::value, int> = 0>
-    constexpr explicit tuple(Tag) noexcept {}
+    constexpr explicit tuple(Tag /*unused*/) noexcept {}
 
     NEFORCE_CONSTEXPR14 tuple& operator=(const tuple&) noexcept = default; ///< 拷贝赋值运算符
 
@@ -182,18 +182,22 @@ struct tuple<> : public icommon<tuple<>> {
      * @brief 比较两个空元组是否相等
      * @return 总是返回true
      */
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool equal_to(const tuple&) const noexcept { return true; }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool equal_to(const tuple& /*unused*/) const noexcept {
+        return true;
+    }
 
     /**
      * @brief 比较两个空元组的大小关系
      * @return 总是返回false
      */
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool less_than(const tuple&) const noexcept { return false; }
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr bool less_than(const tuple& /*unused*/) const noexcept {
+        return false;
+    }
 
     /**
      * @brief 交换操作
      */
-    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR14 void swap(tuple&) noexcept {}
+    NEFORCE_ALWAYS_INLINE NEFORCE_CONSTEXPR14 void swap(tuple& /*unused*/) noexcept {}
 
     /**
      * @brief 计算空元组的哈希值
@@ -245,7 +249,7 @@ public:
      */
     template <typename Tag, typename U1, typename... U2,
               enable_if_t<is_same<Tag, exact_arg_construct_tag>::value, int> = 0>
-    constexpr tuple(Tag, U1&& this_arg, U2&&... rest_arg) :
+    constexpr tuple(Tag /*unused*/, U1&& this_arg, U2&&... rest_arg) :
     base_type(exact_arg_construct_tag{}, _NEFORCE forward<U2>(rest_arg)...),
     data_(_NEFORCE forward<U1>(this_arg)) {}
 
@@ -259,7 +263,7 @@ public:
      */
     template <typename Tag, typename Tuple, size_t... Index,
               enable_if_t<is_same<Tag, unpack_utility_construct_tag>::value, int> = 0>
-    constexpr tuple(Tag, Tuple&& tup, index_sequence<Index...> idx);
+    constexpr tuple(Tag /*unused*/, Tuple&& tup, index_sequence<Index...> idx);
 
     /**
      * @brief 解包工具构造函数
@@ -268,7 +272,7 @@ public:
      * @param tup 源元组
      */
     template <typename Tag, typename Tuple, enable_if_t<is_same<Tag, unpack_utility_construct_tag>::value, int> = 0>
-    constexpr tuple(Tag, Tuple&& tup) :
+    constexpr tuple(Tag /*unused*/, Tuple&& tup) :
     tuple(unpack_utility_construct_tag{}, _NEFORCE forward<Tuple>(tup),
           make_index_sequence<tuple_size<remove_cvref_t<Tuple>>::value>{}) {}
 
@@ -731,7 +735,7 @@ NEFORCE_END_INNER__
 template <typename This, typename... Rest>
 template <typename Tag, typename Tuple, size_t... Index,
           enable_if_t<is_same<Tag, unpack_utility_construct_tag>::value, int>>
-constexpr tuple<This, Rest...>::tuple(Tag, Tuple&& tup, index_sequence<Index...> idx) :
+constexpr tuple<This, Rest...>::tuple(Tag /*unused*/, Tuple&& tup, index_sequence<Index...> idx) :
 tuple(exact_arg_construct_tag{}, _NEFORCE get<Index>(_NEFORCE forward<Tuple>(tup))...) {}
 
 /// @endcond
@@ -909,7 +913,7 @@ NEFORCE_END_INNER__
 
 template <typename This, typename... Rest>
 template <typename Tuple, size_t... Idx>
-constexpr size_t tuple<This, Rest...>::__broaden_tuple(const Tuple& tup, index_sequence<Idx...>) noexcept {
+constexpr size_t tuple<This, Rest...>::__broaden_tuple(const Tuple& tup, index_sequence<Idx...> /*unused*/) noexcept {
 #ifdef NEFORCE_STANDARD_17
     return (hash<remove_cvref_t<tuple_element_t<Idx, Tuple>>>()(_NEFORCE get<Idx>(tup)) ^ ...);
 #else

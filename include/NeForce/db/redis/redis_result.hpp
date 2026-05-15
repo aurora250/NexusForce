@@ -50,7 +50,7 @@ private:
     size_type kv_cursor_ = 0; ///< 键值对游标
     bool is_array_ = false;   ///< 是否为数组回复
 
-    string get_string() const;
+    NEFORCE_NODISCARD string get_string() const;
 
 public:
     /**
@@ -81,7 +81,9 @@ public:
      * @brief 检查结果集是否为空
      * @return 空结果集返回true
      */
-    NEFORCE_NODISCARD bool empty() const noexcept override { return !result_ || (rows_ == 0 && kv_pairs_->empty()); }
+    NEFORCE_NODISCARD bool empty() const noexcept override {
+        return result_ == nullptr || (rows_ == 0 && kv_pairs_->empty());
+    }
 
     /**
      * @brief 移动到下一个键值对
@@ -154,13 +156,13 @@ public:
      * @brief 获取Redis回复类型
      * @return redisReplyType枚举值
      */
-    NEFORCE_NODISCARD int type() const noexcept { return result_ ? result_->type : -1; }
+    NEFORCE_NODISCARD int type() const noexcept { return result_ != nullptr ? result_->type : -1; }
 
     /**
      * @brief 检查是否为空值回复
      * @return 空值回复返回true
      */
-    NEFORCE_NODISCARD bool is_nil() const noexcept { return result_ && result_->type == REDIS_REPLY_NIL; }
+    NEFORCE_NODISCARD bool is_nil() const noexcept { return result_ != nullptr && result_->type == REDIS_REPLY_NIL; }
 };
 
 /** @} */ // Redis

@@ -109,7 +109,7 @@ public:
      * @brief 获取最后错误码
      * @return SQLite错误码
      */
-    NEFORCE_NODISCARD uint32_t get_errno() const override { return link_ ? ::sqlite3_errcode(link_) : 0; }
+    NEFORCE_NODISCARD uint32_t get_errno() const override { return link_ != nullptr ? ::sqlite3_errcode(link_) : 0; }
 
     /**
      * @brief 执行非查询SQL语句

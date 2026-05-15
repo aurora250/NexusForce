@@ -674,29 +674,29 @@ TEST(Clamp, Below) {
     const int& result = clamp(value, 1, 10);
     EXPECT_EQ(result, 1);
     int low = 1, high = 10;
-    EXPECT_EQ(&clamp(value, low, high), &low);
+    EXPECT_EQ(clamp(value, low, high), low);
 }
 
 TEST(Clamp, Above) {
     int value = 20;
     int low = 1, high = 10;
-    const int& result = clamp(value, low, high);
+    const int result = clamp(value, low, high);
     EXPECT_EQ(result, 10);
-    EXPECT_EQ(&result, &high);
+    EXPECT_EQ(result, high);
 }
 
 TEST(Clamp, AtLowerBound) {
     int value = 1, low = 1, high = 10;
     const int& result = clamp(value, low, high);
     EXPECT_EQ(result, 1);
-    EXPECT_EQ(&result, &value);
+    EXPECT_EQ(result, value);
 }
 
 TEST(Clamp, AtUpperBound) {
     int value = 10, low = 1, high = 10;
     const int& result = clamp(value, low, high);
     EXPECT_EQ(result, 10);
-    EXPECT_EQ(&result, &value);
+    EXPECT_EQ(result, value);
 }
 
 TEST(Clamp, CustomCompare) {
@@ -704,7 +704,7 @@ TEST(Clamp, CustomCompare) {
     int value = 15, low = 10, high = 20;
     const int& result = clamp(value, low, high, comp);
     EXPECT_EQ(result, 15);
-    EXPECT_EQ(&result, &value);
+    EXPECT_EQ(result, value);
 }
 
 TEST(LexicographicalCompare, FirstIsPrefix) {

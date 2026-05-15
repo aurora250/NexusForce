@@ -11,6 +11,7 @@
  */
 
 #include "NeForce/core/algorithm/compare.hpp"
+#include "NeForce/core/numeric/numeric_traits.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -326,7 +327,7 @@ constexpr bool char_traits_equal(const char_traits_ptr_t<Traits> lhs, const size
     if (lh_size != rh_size) {
         return false;
     }
-    if (lh_size == 0u) {
+    if (lh_size == 0U) {
         return true;
     }
 

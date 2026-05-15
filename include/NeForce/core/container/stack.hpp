@@ -47,12 +47,13 @@ private:
     Sequence seq_{}; ///< 底层容器实例
 
 public:
-    /**
-     * @brief 默认构造函数
-     *
-     * 构造一个空栈。
-     */
     stack() = default;
+    ~stack() = default;
+
+    stack(const stack&) = default;
+    stack& operator=(const stack&) = default;
+    stack(stack&&) noexcept(is_nothrow_move_constructible_v<Sequence>) = default;
+    stack& operator=(stack&&) noexcept(is_nothrow_move_assignable_v<Sequence>) = default;
 
     /**
      * @brief 构造函数，使用指定的底层容器副本
@@ -67,11 +68,6 @@ public:
      */
     explicit stack(Sequence&& seq) noexcept(is_nothrow_move_constructible_v<Sequence>) :
     seq_(_NEFORCE move(seq)) {}
-
-    /**
-     * @brief 析构函数
-     */
-    ~stack() = default;
 
     /**
      * @brief 获取栈的大小

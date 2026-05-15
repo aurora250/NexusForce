@@ -719,7 +719,11 @@ constexpr void reverse(Iterator first, Iterator last) {
             ++first;
         }
     } else {
-        while (first != last && first != --last) {
+        while (first != last) {
+            --last;
+            if (first == last) {
+                break;
+            }
             _NEFORCE iter_swap(first, last);
             ++first;
         }

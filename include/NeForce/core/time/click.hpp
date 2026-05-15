@@ -27,10 +27,10 @@ NEFORCE_BEGIN_NAMESPACE__
 struct click {
     using time_point = system_clock::time_point; ///< 时间点类型
 
-    time_point start_time{}; ///< 开始时间点
-    time_point last_time{};  ///< 最后更新时间点或停止时间点
-    bool started = false;    ///< 是否已开始计时
-    bool stopped = false;    ///< 是否已停止计时
+    time_point start_time; ///< 开始时间点
+    time_point last_time;  ///< 最后更新时间点或停止时间点
+    bool started = false;  ///< 是否已开始计时
+    bool stopped = false;  ///< 是否已停止计时
 
     /**
      * @brief 开始计时
@@ -67,7 +67,7 @@ struct click {
      *
      * 返回从开始到停止经过的时间，会检查计时器状态。
      */
-    nanoseconds during() const {
+    NEFORCE_NODISCARD nanoseconds during() const {
         if (!started || !stopped) {
             NEFORCE_THROW_EXCEPTION(value_exception("click not properly started/stopped"));
         }
@@ -80,7 +80,7 @@ struct click {
      *
      * 返回从开始到停止经过的时间，不会抛出异常。
      */
-    nanoseconds during_s() const noexcept {
+    NEFORCE_NODISCARD nanoseconds during_s() const noexcept {
         if (!started || !stopped) {
             return nanoseconds{0};
         }

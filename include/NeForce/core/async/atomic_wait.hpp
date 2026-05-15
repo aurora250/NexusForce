@@ -120,7 +120,7 @@ struct waiter_pool_base {
      * @brief 检查是否有线程在等待
      * @return 是否有等待的线程
      */
-    bool waiter_waiting() const noexcept {
+    NEFORCE_NODISCARD bool waiter_waiting() const noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         platform_wait_t res = ::_InterlockedExchangeAdd(const_cast<volatile platform_wait_t*>(&wait), 0);
 #else
@@ -207,11 +207,13 @@ private:
             is_scalar_v<U> && sizeof(U) == sizeof(platform_wait_t) && alignof(U*) >= alignof(platform_wait_t);
 
     template <typename U, enable_if_t<platform_wait_valid_v<U>, int> = 0>
-    NEFORCE_ALWAYS_INLINE static void waiter_do_spin_v_impl(platform_wait_t*, const U& old, platform_wait_t& value) {
+    NEFORCE_ALWAYS_INLINE static void waiter_do_spin_v_impl(platform_wait_t* /*unused*/, const U& old,
+                                                            platform_wait_t& value) {
         _NEFORCE memory_copy(&value, &old, sizeof(value));
     }
     template <typename U, enable_if_t<!platform_wait_valid_v<U>, int> = 0>
-    NEFORCE_ALWAYS_INLINE static void waiter_do_spin_v_impl(platform_wait_t* addr, const U&, platform_wait_t& value) {
+    NEFORCE_ALWAYS_INLINE static void waiter_do_spin_v_impl(platform_wait_t* addr, const U& /*unused*/,
+                                                            platform_wait_t& value) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         value = ::_InterlockedExchangeAdd(addr, 0);
 #else
@@ -229,7 +231,8 @@ public:
      * @brief 获取平台等待有效的类型的等待地址
      */
     template <typename U>
-    static enable_if_t<platform_wait_valid_v<U>, platform_wait_t*> waiter_wait_addr(const U* addr, platform_wait_t*) {
+    static enable_if_t<platform_wait_valid_v<U>, platform_wait_t*> waiter_wait_addr(const U* addr,
+                                                                                    platform_wait_t* /*unused*/) {
         return reinterpret_cast<platform_wait_t*>(const_cast<U*>(addr));
     }
 
@@ -237,7 +240,8 @@ public:
      * @brief 获取平台等待无效的类型的等待地址
      */
     template <typename U>
-    static enable_if_t<!platform_wait_valid_v<U>, platform_wait_t*> waiter_wait_addr(const U*, platform_wait_t* wait) {
+    static enable_if_t<!platform_wait_valid_v<U>, platform_wait_t*> waiter_wait_addr(const U* /*unused*/,
+                                                                                     platform_wait_t* wait) {
         return wait;
     }
 
@@ -366,7 +370,7 @@ public:
     template <typename T, typename Func>
     void waiter_do_wait_v(T old, Func f) {
         do {
-            platform_wait_t value;
+            platform_wait_t value = 0;
             if (base_type::waiter_do_spin_v(old, f, value)) {
                 return;
             }
@@ -382,7 +386,7 @@ public:
     template <typename Pred>
     void waiter_do_wait(Pred pred) noexcept {
         do {
-            platform_wait_t value;
+            platform_wait_t value = 0;
             if (base_type::waiter_do_spin(pred, value)) {
                 return;
             }

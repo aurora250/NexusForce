@@ -180,8 +180,8 @@ private:
         if (p <= 0.0 || p >= 1.0) {
             return 0;
         }
-        const double ln2 = logarithm_e(2.);
-        const double m = -static_cast<double>(n) * logarithm_e(p) / (ln2 * ln2);
+        constexpr decimal_t ln2 = logarithm_e(2.);
+        const decimal_t m = -static_cast<decimal_t>(n) * logarithm_e(p) / (ln2 * ln2);
         return static_cast<size_t>(ceil(m));
     }
 
@@ -197,7 +197,8 @@ private:
         if (n == 0 || m == 0) {
             return 0;
         }
-        const double k = (static_cast<double>(m) / n) * logarithm_e(2.);
+        constexpr decimal_t ln2 = logarithm_e(2.);
+        const decimal_t k = (static_cast<decimal_t>(m) / static_cast<decimal_t>(n)) * ln2;
         return static_cast<size_t>(max(static_cast<decimal_t>(1), round(k)));
     }
 
@@ -226,7 +227,9 @@ private:
      *
      * 公式：g_i(x) = h1(x) + i * h2(x) (mod m)
      */
-    size_t nth_hash(const size_t i, const size_t h1, const size_t h2) const noexcept { return (h1 + i * h2) % m_; }
+    NEFORCE_NODISCARD size_t nth_hash(const size_t i, const size_t h1, const size_t h2) const noexcept {
+        return (h1 + i * h2) % m_;
+    }
 
 public:
     bloom_filter(const bloom_filter&) noexcept = default;
@@ -447,7 +450,7 @@ public:
      *
      * 将位数组转换为字节数组以便序列化。
      */
-    byte_vector to_bytes() const {
+    NEFORCE_NODISCARD byte_vector to_bytes() const {
         byte_vector bytes((m_ + 7) / 8);
         for (size_t i = 0; i < m_; ++i) {
             if (bits_[i]) {
@@ -469,7 +472,7 @@ public:
             NEFORCE_THROW_EXCEPTION(value_exception("Insufficient byte data"));
         }
         for (size_t i = 0; i < m_; ++i) {
-            bits_[i] = (bytes[i / 8] >> (i % 8)) & 1;
+            bits_[i] = ((bytes[i / 8] >> (i % 8)) & 1) != 0;
         }
     }
 };

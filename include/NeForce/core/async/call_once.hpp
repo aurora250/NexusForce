@@ -95,7 +95,7 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
         }
 
         if (spin_count < 10) {
-            for (uint32_t i = 0; i < (1u << spin_count); ++i) {
+            for (uint32_t i = 0; i < (1U << spin_count); ++i) {
                 this_thread::relax();
             }
             ++spin_count;

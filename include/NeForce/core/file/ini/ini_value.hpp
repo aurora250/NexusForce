@@ -196,7 +196,7 @@ public:
 class NEFORCE_API ini_section final : public ini_value {
 private:
     unordered_map<string, unique_ptr<ini_property>> properties_; ///< 属性映射表
-    string name_{};                                              ///< 节名称
+    string name_;                                                ///< 节名称
 
 public:
     ini_section() = default;
@@ -205,7 +205,7 @@ public:
      * @brief 构造函数
      * @param name 节名称，默认为空（全局节）
      */
-    explicit ini_section(string name) noexcept :
+    explicit ini_section(string name) :
     name_(_NEFORCE move(name)) {}
 
     ini_section(const ini_section&) = delete;
@@ -313,7 +313,7 @@ public:
      */
     NEFORCE_NODISCARD string get_string(const string& key, const string& default_value = "") const {
         const ini_property* prop = get_property(key);
-        return prop ? prop->get_value() : default_value;
+        return prop != nullptr ? prop->get_value() : default_value;
     }
 
     /**
@@ -324,7 +324,7 @@ public:
      */
     NEFORCE_NODISCARD int get_int(const string& key, int default_value = 0) const {
         const ini_property* prop = get_property(key);
-        return prop ? prop->get_int(default_value) : default_value;
+        return prop != nullptr ? prop->get_int(default_value) : default_value;
     }
 
     /**
@@ -335,7 +335,7 @@ public:
      */
     NEFORCE_NODISCARD double get_double(const string& key, double default_value = 0.0) const {
         const ini_property* prop = get_property(key);
-        return prop ? prop->get_double(default_value) : default_value;
+        return prop != nullptr ? prop->get_double(default_value) : default_value;
     }
 
     /**
@@ -346,7 +346,7 @@ public:
      */
     NEFORCE_NODISCARD bool get_bool(const string& key, bool default_value = false) const {
         const ini_property* prop = get_property(key);
-        return prop ? prop->get_bool(default_value) : default_value;
+        return prop != nullptr ? prop->get_bool(default_value) : default_value;
     }
 };
 
@@ -477,7 +477,7 @@ public:
     NEFORCE_NODISCARD string get_string(const string& section, const string& key,
                                         const string& default_value = "") const {
         const ini_section* sec = get_section(section);
-        return sec ? sec->get_string(key, default_value) : default_value;
+        return sec != nullptr ? sec->get_string(key, default_value) : default_value;
     }
 
     /**
@@ -489,7 +489,7 @@ public:
      */
     NEFORCE_NODISCARD int get_int(const string& section, const string& key, int default_value = 0) const {
         const ini_section* sec = get_section(section);
-        return sec ? sec->get_int(key, default_value) : default_value;
+        return sec != nullptr ? sec->get_int(key, default_value) : default_value;
     }
 
     /**
@@ -501,7 +501,7 @@ public:
      */
     NEFORCE_NODISCARD double get_double(const string& section, const string& key, double default_value = 0.0) const {
         const ini_section* sec = get_section(section);
-        return sec ? sec->get_double(key, default_value) : default_value;
+        return sec != nullptr ? sec->get_double(key, default_value) : default_value;
     }
 
     /**
@@ -513,7 +513,7 @@ public:
      */
     NEFORCE_NODISCARD bool get_bool(const string& section, const string& key, bool default_value = false) const {
         const ini_section* sec = get_section(section);
-        return sec ? sec->get_bool(key, default_value) : default_value;
+        return sec != nullptr ? sec->get_bool(key, default_value) : default_value;
     }
 
     /**

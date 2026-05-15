@@ -101,9 +101,9 @@ constexpr enable_if_t<is_signed_v<T>, T> str_to_ints(const string_view sv, char*
         if (c >= '0' && c <= '9') {
             digit = static_cast<UT>(c - '0');
         } else if (c >= 'a' && c <= 'z') {
-            digit = static_cast<UT>(c - 'a' + 10);
+            digit = static_cast<UT>(c - 'a') + static_cast<UT>(10);
         } else if (c >= 'A' && c <= 'Z') {
-            digit = static_cast<UT>(c - 'A' + 10);
+            digit = static_cast<UT>(c - 'A') + static_cast<UT>(10);
         } else {
             break;
         }
@@ -217,9 +217,9 @@ constexpr enable_if_t<is_unsigned_v<T>, T> str_to_uints(const string_view sv, ch
         if (c >= '0' && c <= '9') {
             digit = static_cast<T>(c - '0');
         } else if (c >= 'a' && c <= 'z') {
-            digit = static_cast<T>(c - 'a' + 10);
+            digit = static_cast<T>(c - 'a') + static_cast<T>(10);
         } else if (c >= 'A' && c <= 'Z') {
-            digit = static_cast<T>(c - 'A' + 10);
+            digit = static_cast<T>(c - 'A') + static_cast<T>(10);
         } else {
             break;
         }

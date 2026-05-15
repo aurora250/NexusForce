@@ -68,7 +68,6 @@ protected:
     size_t buffer_size_ = 0;
 
     ftp_protocol() = default;
-    ~ftp_protocol() override = default;
 
     ftp_protocol(ftp_protocol&& other) noexcept;
     ftp_protocol& operator=(ftp_protocol&& other) noexcept;
@@ -76,6 +75,10 @@ protected:
     explicit ftp_protocol(native_handle_type fd) :
     ip_socket(fd) {}
 
+public:
+    ~ftp_protocol() override = default;
+
+protected:
     ssize_t ctrl_send(const char* data, size_t len);
     ssize_t ctrl_recv(char* buf, size_t len);
     bool ctrl_read_line(string& out);

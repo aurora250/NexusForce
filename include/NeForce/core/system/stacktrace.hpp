@@ -42,7 +42,7 @@ public:
         /**
          * @brief 默认构造函数
          */
-        frame() noexcept {}
+        frame() noexcept = default;
 
         /**
          * @brief 从地址构造堆栈帧

@@ -374,7 +374,7 @@ public:
      * 如果已拥有锁或未管理互斥锁，则不执行任何操作。
      */
     void lock_quiet() {
-        if (!mutex_) {
+        if (mutex_ == nullptr) {
             return;
         }
         if (owns_lock_) {
@@ -390,7 +390,7 @@ public:
      * 如果未拥有锁或未管理互斥锁，则不执行任何操作。
      */
     void unlock_quiet() {
-        if (!mutex_) {
+        if (mutex_ == nullptr) {
             return;
         }
         if (!owns_lock_) {
@@ -407,7 +407,7 @@ public:
      * 非阻塞地尝试锁定互斥锁。
      */
     bool try_lock() noexcept {
-        if (!mutex_) {
+        if (mutex_ == nullptr) {
             return false;
         }
         if (owns_lock_) {

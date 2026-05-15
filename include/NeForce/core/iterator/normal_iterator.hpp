@@ -8,7 +8,7 @@
  * 此文件提供了标准迭代器适配器的实现，用于包装底层迭代器并为其提供标准迭代器接口。
  */
 
-#include "NeForce/core/typeinfo/type_traits.hpp"
+#include "NeForce/core/iterator/iterator_traits.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -41,7 +41,7 @@ public:
     /**
      * @brief 默认构造函数
      */
-    constexpr normal_iterator() noexcept(is_nothrow_default_constructible_v<Iterator>) {}
+    constexpr normal_iterator() noexcept(is_nothrow_default_constructible_v<Iterator>) = default;
 
     /**
      * @brief 从底层迭代器构造

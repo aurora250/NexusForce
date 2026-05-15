@@ -16,7 +16,9 @@
 #if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
 #    include "NeForce/core/async/atomic.hpp"
 #    include "NeForce/core/exception/exception_ptr.hpp"
+#    include "NeForce/core/functional/function.hpp"
 #    include "NeForce/core/utility/optional.hpp"
+#    include "NeForce/core/utility/tuple.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -47,7 +49,7 @@ public:
          * @brief 检查是否可立即恢复
          * @return 如果已取消则返回true，表示可以立即恢复（并抛出异常）
          */
-        bool await_ready() const noexcept { return token && token->is_cancelled(); }
+        NEFORCE_NODISCARD bool await_ready() const noexcept { return token != nullptr && token->is_cancelled(); }
 
         /**
          * @brief 暂停协程（实际上从不暂停）
@@ -60,7 +62,7 @@ public:
          * @throws exception 如果已取消则抛出异常
          */
         void await_resume() const {
-            if (token && token->is_cancelled()) {
+            if (token != nullptr && token->is_cancelled()) {
                 NEFORCE_THROW_EXCEPTION(exception("Operation cancelled"));
             }
         }
@@ -77,7 +79,7 @@ private:
      * @brief 释放状态引用
      */
     void release() {
-        if (state_ && state_->ref_count.fetch_sub(1, memory_order_acq_rel) == 1) {
+        if (state_ != nullptr && state_->ref_count.fetch_sub(1, memory_order_acq_rel) == 1) {
             delete state_;
         }
     }
@@ -95,7 +97,7 @@ public:
      */
     cancellation_token(const cancellation_token& other) :
     state_(other.state_) {
-        if (state_) {
+        if (state_ != nullptr) {
             state_->ref_count.fetch_add(1, memory_order_relaxed);
         }
     }
@@ -112,7 +114,7 @@ public:
 
         release();
         state_ = other.state_;
-        if (state_) {
+        if (state_ != nullptr) {
             state_->ref_count.fetch_add(1, memory_order_relaxed);
         }
         return *this;
@@ -127,7 +129,7 @@ public:
      * @brief 请求取消
      */
     void cancel() noexcept {
-        if (state_) {
+        if (state_ != nullptr) {
             state_->cancelled.store(true, memory_order_release);
         }
     }
@@ -136,13 +138,15 @@ public:
      * @brief 检查是否已被取消
      * @return 是否已被取消
      */
-    bool is_cancelled() const noexcept { return state_ && state_->cancelled.load(memory_order_acquire); }
+    NEFORCE_NODISCARD bool is_cancelled() const noexcept {
+        return state_ != nullptr && state_->cancelled.load(memory_order_acquire);
+    }
 
     /**
      * @brief 获取取消检查等待器
      * @return 检查等待器
      */
-    check_awaiter check() const { return check_awaiter{this}; }
+    NEFORCE_NODISCARD check_awaiter check() const { return check_awaiter{this}; }
 };
 
 
@@ -357,7 +361,7 @@ public:
      * @return 变换后的生成器
      */
     template <typename F>
-    invoke_result_t<F, T> map(F&& func) {
+    invoke_result_t<F, T> map(F func) {
         for (auto&& value: *this) {
             co_yield func(_NEFORCE forward<decltype(value)>(value));
         }
@@ -370,7 +374,7 @@ public:
      * @return 过滤后的生成器
      */
     template <typename Pred>
-    generator filter(Pred&& pred) {
+    generator filter(Pred pred) {
         for (auto&& value: *this) {
             if (pred(value)) {
                 co_yield _NEFORCE forward<decltype(value)>(value);
@@ -415,7 +419,7 @@ public:
      * @param other 另一个生成器
      * @return 连接后的生成器
      */
-    generator chain(generator&& other) {
+    generator chain(generator other) {
         for (auto&& value: *this) {
             co_yield _NEFORCE forward<decltype(value)>(value);
         }
@@ -522,7 +526,7 @@ public:
          * @brief 检查是否已取消
          * @return 是否已取消
          */
-        bool is_cancelled() const noexcept { return token && token->is_cancelled(); }
+        NEFORCE_NODISCARD bool is_cancelled() const noexcept { return token != nullptr && token->is_cancelled(); }
 
         /**
          * @brief 初始暂停点
@@ -559,7 +563,7 @@ public:
          * @brief 检查是否可立即恢复
          * @return 如果任务已完成则返回true
          */
-        bool await_ready() const noexcept { return handle.done(); }
+        NEFORCE_NODISCARD bool await_ready() const noexcept { return handle.done(); }
 
         /**
          * @brief 暂停时执行的操作
@@ -644,7 +648,7 @@ public:
      * @brief 检查任务是否已完成
      * @return 是否已完成
      */
-    bool done() const noexcept { return handle_.done(); }
+    NEFORCE_NODISCARD bool done() const noexcept { return handle_.done(); }
 
     /**
      * @brief 恢复任务执行
@@ -683,7 +687,7 @@ public:
      * @brief 检查任务是否被取消
      * @return 是否被取消
      */
-    bool is_cancelled() const noexcept { return handle_ && handle_.promise().is_cancelled(); }
+    NEFORCE_NODISCARD bool is_cancelled() const noexcept { return handle_ && handle_.promise().is_cancelled(); }
 };
 
 
@@ -702,7 +706,7 @@ public:
 
         void set_cancellation_token(cancellation_token* t) { token = t; }
 
-        bool is_cancelled() const { return token && token->is_cancelled(); }
+        NEFORCE_NODISCARD bool is_cancelled() const { return token != nullptr && token->is_cancelled(); }
 
         suspend_always initial_suspend() noexcept { return {}; }
 
@@ -730,7 +734,7 @@ public:
     struct awaiter {
         coroutine_handle<promise_type> handle;
 
-        bool await_ready() const noexcept { return handle.done(); }
+        NEFORCE_NODISCARD bool await_ready() const noexcept { return handle.done(); }
 
         coroutine_handle<> await_suspend(coroutine_handle<> continuation) noexcept {
             handle.promise().continuation = continuation;
@@ -781,7 +785,7 @@ public:
 
     awaiter operator co_await() { return awaiter{handle_}; }
 
-    bool done() const { return handle_.done(); }
+    NEFORCE_NODISCARD bool done() const { return handle_.done(); }
 
     void resume() {
         if (handle_ && !handle_.done()) {
@@ -804,7 +808,7 @@ public:
         }
     }
 
-    bool is_cancelled() const { return handle_ && handle_.promise().is_cancelled(); }
+    NEFORCE_NODISCARD bool is_cancelled() const { return handle_ && handle_.promise().is_cancelled(); }
 };
 
 
@@ -825,7 +829,7 @@ task<void> when_all_helper(Tuple& results, Tasks&&... tasks) {
 }
 
 template <size_t I, typename Tuple, typename... Tasks, enable_if_t<I == sizeof...(Tasks), int> = 0>
-task<void> when_all_helper(Tuple&, Tasks&&...) {
+task<void> when_all_helper(Tuple& /*unused*/, Tasks&&... /*unused*/) {
     co_return;
 }
 

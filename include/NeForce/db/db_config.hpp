@@ -89,12 +89,12 @@ enum class db_type : uint8_t {
  * 提供各数据库类型的便捷配置工厂方法。
  */
 struct NEFORCE_API db_config {
-    string username{};         ///< 数据库用户名
-    string password{};         ///< 数据库密码
-    string database{};         ///< 数据库名
-    string host = "127.0.0.1"; ///< 数据库主机地址
-    string charset{};          ///< 数据库字符集
-    ports port{};              ///< 数据库端口号
+    string username;          ///< 数据库用户名
+    string password;          ///< 数据库密码
+    string database;          ///< 数据库名
+    string host{"127.0.0.1"}; ///< 数据库主机地址
+    string charset;           ///< 数据库字符集
+    ports port;               ///< 数据库端口号
 
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
     /**

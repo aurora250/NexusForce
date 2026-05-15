@@ -102,51 +102,15 @@ NEFORCE_CONSTEXPR14 uint64_t _umul128(const uint64_t a, const uint64_t b, uint64
     return lo;
 }
 
-NEFORCE_BEGIN_INNER__
-NEFORCE_CONSTEXPR14 uint32_t div_digit(const uint64_t u_hi32_lo32, const uint32_t v_hi, const uint32_t v_lo,
-                                       uint64_t* rem_out) noexcept {
-    const auto u_hi32 = static_cast<uint32_t>(u_hi32_lo32 >> 32);
-    const auto u_lo32 = static_cast<uint32_t>(u_hi32_lo32);
-
-    const uint64_t uhat = u_hi32_lo32;
-
-    uint64_t qhat = 0, rhat = 0;
-    if (u_hi32 >= v_hi) {
-        qhat = 0xFFFFFFFFULL;
-        rhat = static_cast<uint64_t>(u_hi32 - v_hi) + static_cast<uint64_t>(v_hi);
-        rhat = uhat - qhat * v_hi;
-    } else {
-        qhat = uhat / v_hi;
-        rhat = uhat - qhat * v_hi;
-    }
-
-    // qhat*v_lo > B*rhat + u_lo32
-    while (qhat >= 0x100000000ULL || qhat * v_lo > ((rhat << 32) | u_lo32)) {
-        --qhat;
-        rhat += v_hi;
-        if (rhat >= 0x100000000ULL) {
-            break;
-        }
-    }
-
-    *rem_out = uhat - qhat * v_hi;
-    return static_cast<uint32_t>(qhat);
-}
-NEFORCE_END_INNER__
-
 /**
- * @brief 128位无符号除法
- * @param dividend_hi 被除数的高64位
- * @param dividend_lo 被除数的低64位
- * @param divisor 除数（64位）
+ * @brief 128位无符号除法（基于Knuth-D）
+ * @param dividend_hi 被除数高64位
+ * @param dividend_lo 被除数低64位
+ * @param divisor 除数（64位，必须非0）
  * @param remainder 输出余数（可为空）
  * @return 商（64位）
- *
- * 计算 (dividend_hi << 64 | dividend_lo) / divisor，返回商，余数存入remainder。
- *
- * 算法基于Knuth的D算法（长除法），支持任意64位除数。
  */
-NEFORCE_CONSTEXPR14 uint64_t _udiv128(const uint64_t dividend_hi, const uint64_t dividend_lo, uint64_t divisor,
+NEFORCE_CONSTEXPR14 uint64_t _udiv128(const uint64_t dividend_hi, const uint64_t dividend_lo, const uint64_t divisor,
                                       uint64_t* remainder) noexcept {
     if (dividend_hi == 0) {
         if (remainder != nullptr) {
@@ -155,84 +119,85 @@ NEFORCE_CONSTEXPR14 uint64_t _udiv128(const uint64_t dividend_hi, const uint64_t
         return dividend_lo / divisor;
     }
 
-    const int shift = clz64(divisor);
+    const int s = _NEFORCE clz64(divisor);
+    const uint64_t d = divisor << s;
 
-    uint64_t d = 0;
     uint64_t u2 = 0, u1 = 0, u0 = 0;
-
-    if (shift == 0) {
-        d = divisor;
-        u2 = 0;
+    if (s == 0) {
         u1 = dividend_hi;
         u0 = dividend_lo;
     } else {
-        d = divisor << shift;
-        u2 = dividend_hi >> (64 - shift);
-        u1 = (dividend_hi << shift) | (dividend_lo >> (64 - shift));
-        u0 = dividend_lo << shift;
+        u2 = dividend_hi >> (64 - s);
+        u1 = (dividend_hi << s) | (dividend_lo >> (64 - s));
+        u0 = dividend_lo << s;
     }
 
     const auto d_hi = static_cast<uint32_t>(d >> 32);
     const auto d_lo = static_cast<uint32_t>(d);
 
-    uint64_t rem1 = 0;
-    uint32_t q1hat = inner::div_digit((u2 << 32) | (u1 >> 32), d_hi, d_lo, &rem1);
-    (void) rem1;
+    uint64_t u_hi = (static_cast<uint64_t>(u2) << 32) | (u1 >> 32);
+    uint64_t q1 = u_hi / d_hi;
+    uint64_t r1 = u_hi % d_hi;
 
-    {
-        uint64_t t_hi = 0;
-        const uint64_t t_lo = _umul128(static_cast<uint64_t>(q1hat), d, &t_hi);
-        uint64_t r_hi = u2 - t_hi;
-        uint64_t r_lo = u1 - t_lo;
-        if (u1 < t_lo) {
-            --r_hi;
-        }
-
-        while (r_hi != 0 || r_lo >= d) {
-            --q1hat;
-            const uint64_t new_r_lo = r_lo + d;
-            const uint64_t carry = (new_r_lo < r_lo) ? 1ULL : 0ULL;
-            r_lo = new_r_lo;
-            r_hi += carry;
-            if (r_hi >= 2) {
-                break;
-            }
-        }
-
-        u1 = r_lo;
-        u2 = 0;
-    }
-
-    uint64_t rem0 = 0;
-    uint32_t q0hat = inner::div_digit((u1 << 32) | (u0 >> 32), d_hi, d_lo, &rem0);
-    (void) rem0;
-
-    {
-        uint64_t t_hi = 0;
-        const uint64_t t_lo = _umul128(static_cast<uint64_t>(q0hat), d, &t_hi);
-        uint64_t r_hi = u1 - t_hi;
-        uint64_t r_lo = u0 - t_lo;
-        if (u0 < t_lo) {
-            --r_hi;
-        }
-
-        while (r_hi != 0 || r_lo >= d) {
-            --q0hat;
-            const uint64_t new_r_lo = r_lo + d;
-            const uint64_t carry = (new_r_lo < r_lo) ? 1ULL : 0ULL;
-            r_lo = new_r_lo;
-            r_hi += carry;
-            if (r_hi >= 2) {
-                break;
-            }
-        }
-
-        if (remainder != nullptr) {
-            *remainder = r_lo >> shift;
+    while (q1 >= 0x100000000ULL || q1 * d_lo > ((r1 << 32) | (u1 & 0xFFFFFFFF))) {
+        --q1;
+        r1 += d_hi;
+        if (r1 >= 0x100000000ULL) {
+            break;
         }
     }
 
-    return (static_cast<uint64_t>(q1hat) << 32) | static_cast<uint64_t>(q0hat);
+    uint64_t prod_hi = 0;
+    uint64_t prod_lo = _NEFORCE _umul128(q1, d, &prod_hi);
+    uint64_t rem_hi = u2 - prod_hi;
+    uint64_t rem_lo = u1 - prod_lo;
+    if (u1 < prod_lo) {
+        --rem_hi;
+    }
+
+    if ((rem_hi & (1ULL << 63)) != 0U) {
+        --q1;
+        rem_lo += d;
+        if (rem_lo < d) {
+            ++rem_hi;
+        }
+    }
+
+    u_hi = rem_lo >> 32;
+    uint64_t q0 = u_hi / d_hi;
+    uint64_t r0 = u_hi % d_hi;
+
+    while (q0 >= 0x100000000ULL || q0 * d_lo > ((r0 << 32) | (rem_lo & 0xFFFFFFFF))) {
+        --q0;
+        r0 += d_hi;
+        if (r0 >= 0x100000000ULL) {
+            break;
+        }
+    }
+
+    prod_lo = _NEFORCE _umul128(q0, d, &prod_hi);
+    uint64_t rem_mid_hi = 0 - prod_hi;
+    uint64_t rem_mid_lo = rem_lo - prod_lo;
+    if (rem_lo < prod_lo) {
+        --rem_mid_hi;
+    }
+
+    if ((rem_mid_hi & (1ULL << 63)) != 0U) {
+        --q0;
+        rem_mid_lo += d;
+    }
+
+    const uint64_t quotient = (q1 << 32) | q0;
+
+    if (remainder != nullptr) {
+        if (s > 0) {
+            *remainder = (rem_mid_lo << (64 - s)) | (u0 >> s);
+        } else {
+            *remainder = u0;
+        }
+    }
+
+    return quotient;
 }
 
 /** @} */ // MSVCCompilerIntrinsics

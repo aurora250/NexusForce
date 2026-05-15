@@ -110,7 +110,7 @@ public:
      * @brief 检查线程是否可被等待
      * @return 线程已启动且尚未被等待或分离时返回true
      */
-    bool joinable() const noexcept { return thread_.joinable(); }
+    NEFORCE_NODISCARD bool joinable() const noexcept { return thread_.joinable(); }
 
     /**
      * @brief 等待线程结束
@@ -132,7 +132,7 @@ public:
      * @brief 获取线程标识符
      * @return 线程标识符
      */
-    thread::id get_id() const noexcept { return thread_.get_id(); }
+    NEFORCE_NODISCARD thread::id get_id() const noexcept { return thread_.get_id(); }
 
     /**
      * @brief 交换两个延迟线程对象

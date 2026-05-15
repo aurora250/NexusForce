@@ -67,20 +67,20 @@ private:
      * @brief 获取当前字符
      * @return 当前位置的字符，若已到末尾返回'\0'
      */
-    char current() const noexcept;
+    NEFORCE_NODISCARD char current() const noexcept;
 
     /**
      * @brief 预取字符
      * @param offset 向前偏移量，默认为1
      * @return 指定偏移位置的字符
      */
-    char peek(size_t offset = 1) const noexcept;
+    NEFORCE_NODISCARD char peek(size_t offset = 1) const noexcept;
 
     /**
      * @brief 检查是否已到末尾
      * @return 是否已到文件末尾
      */
-    bool eof() const noexcept;
+    NEFORCE_NODISCARD bool eof() const noexcept;
 
     /**
      * @brief 前进一个字符
@@ -94,7 +94,7 @@ private:
      * @param line 要检查的行内容
      * @return 是否为注释行（空行或以;、#开头的行）
      */
-    bool is_comment_line(const string& line) const;
+    NEFORCE_NODISCARD bool is_comment_line(const string& line) const;
 
     /**
      * @brief 判断是否为节定义行

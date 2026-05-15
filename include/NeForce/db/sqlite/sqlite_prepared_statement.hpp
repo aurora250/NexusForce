@@ -185,7 +185,9 @@ public:
      * @brief 获取错误码
      * @return SQLite错误码
      */
-    NEFORCE_NODISCARD uint32_t get_errno() const noexcept override { return db_ ? ::sqlite3_errcode(db_) : 0; }
+    NEFORCE_NODISCARD uint32_t get_errno() const noexcept override {
+        return db_ != nullptr ? ::sqlite3_errcode(db_) : 0;
+    }
 };
 
 /** @} */ // SQLite3

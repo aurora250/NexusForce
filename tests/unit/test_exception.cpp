@@ -1,9 +1,75 @@
 #include <NeForce/core/exception/exception_ptr.hpp>
 #include <NeForce/core/exception/exception.hpp>
-#include <NeForce/core/string/string.hpp>
+#include <NeForce/core/exception/terminate.hpp>
+#include <NeForce/core/system/console.hpp>
 #include <exception>
 #include <gtest/gtest.h>
 using namespace neforce;
+
+namespace {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    constexpr int kAbortExitCode = 3;
+#else
+    constexpr int kAbortExitCode = 1;
+#endif
+} // namespace
+
+
+TEST(TerminateTest, AbortTerminatesWithCode1) {
+    EXPECT_EXIT(neforce::abort(), ::testing::ExitedWithCode(kAbortExitCode), ".*");
+}
+
+TEST(TerminateTest, ExitWithStatus0) { EXPECT_EXIT(neforce::exit(0), ::testing::ExitedWithCode(0), ".*"); }
+
+TEST(TerminateTest, ExitWithStatus42) { EXPECT_EXIT(neforce::exit(42), ::testing::ExitedWithCode(42), ".*"); }
+
+TEST(TerminateTest, ImmediateExitStatus) { EXPECT_EXIT(immediate_exit(7), ::testing::ExitedWithCode(7), ".*"); }
+
+TEST(TerminateTest, QuickExitStatus) { EXPECT_EXIT(neforce::quick_exit(99), ::testing::ExitedWithCode(99), ".*"); }
+
+TEST(TerminateTest, TerminateCallsHandlerAndAborts) {
+    neforce::set_terminate([]() { eprint("custom_terminate"); });
+    EXPECT_EXIT(neforce::terminate(), ::testing::ExitedWithCode(kAbortExitCode), "custom_terminate");
+}
+
+TEST(TerminateTest, ExitHandlersCalledInReverseOrder) {
+    EXPECT_EXIT(
+            {
+                neforce::set_exit([]() { eprint("A"); });
+                neforce::set_exit([]() { eprint("B"); });
+                neforce::set_exit([]() { eprint("C"); });
+                neforce::exit(0);
+            },
+            ::testing::ExitedWithCode(0), "CBA");
+}
+
+TEST(TerminateTest, QuickExitHandlersCalledInReverseOrder) {
+    EXPECT_EXIT(
+            {
+                neforce::set_quick_exit([]() { eprint("1"); });
+                neforce::set_quick_exit([]() { eprint("2"); });
+                neforce::quick_exit(0);
+            },
+            ::testing::ExitedWithCode(0), "21");
+}
+
+TEST(TerminateTest, ImmediateExitDoesNotCallExitHandlers) {
+    EXPECT_EXIT(
+            {
+                neforce::set_exit([]() { print("should_not_appear"); });
+                neforce::immediate_exit(5);
+            },
+            ::testing::ExitedWithCode(5), "");
+}
+
+TEST(TerminateTest, QuickExitDoesNotCallExitHandlers) {
+    EXPECT_EXIT(
+            {
+                neforce::set_exit([]() { print("should_not_appear"); });
+                neforce::quick_exit(8);
+            },
+            ::testing::ExitedWithCode(8), "");
+}
 
 TEST(ExceptionPtrTest, DefaultConstructedIsNull) {
     exception_ptr ep;

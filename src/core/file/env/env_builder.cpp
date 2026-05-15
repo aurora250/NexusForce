@@ -103,7 +103,7 @@ env_builder& env_builder::value(const double value, const int precision) {
     return *this;
 }
 
-env_builder& env_builder::comment(string text) noexcept {
+env_builder& env_builder::comment(string text) {
     root_->add_comment(move(text));
     return *this;
 }

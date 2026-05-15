@@ -68,7 +68,8 @@ public:
      * 阻塞等待直到获得锁。
      * 如果length为0，锁定从offset到文件末尾的所有区域。
      */
-    bool lock(difference_type offset, difference_type length, file_lock mode = file_lock::EXCLUSIVE) const noexcept;
+    NEFORCE_NODISCARD bool lock(difference_type offset, difference_type length,
+                                file_lock mode = file_lock::EXCLUSIVE) const noexcept;
 
     /**
      * @brief 解锁文件区域
@@ -78,7 +79,7 @@ public:
      *
      * 释放指定区域的锁。解锁的区域必须与锁定的区域完全匹配。
      */
-    bool unlock(difference_type offset, difference_type length) const noexcept;
+    NEFORCE_NODISCARD bool unlock(difference_type offset, difference_type length) const noexcept;
 
     /**
      * @brief 尝试锁定
@@ -89,7 +90,7 @@ public:
      *
      * 尝试获取锁，如果锁已被占用则立即返回false，不会阻塞等待。
      */
-    bool try_lock(difference_type offset, difference_type length, file_lock mode) const noexcept;
+    NEFORCE_NODISCARD bool try_lock(difference_type offset, difference_type length, file_lock mode) const noexcept;
 
     /**
      * @brief 查询区域是否被锁定
@@ -112,7 +113,7 @@ public:
      *
      * 锁定从文件开头到末尾的整个文件。
      */
-    bool lock_whole(file_lock mode = file_lock::EXCLUSIVE) const noexcept;
+    NEFORCE_NODISCARD bool lock_whole(file_lock mode = file_lock::EXCLUSIVE) const noexcept;
 
     /**
      * @brief 解锁整个文件
@@ -120,7 +121,7 @@ public:
      *
      * 解锁整个文件。
      */
-    bool unlock_whole() const noexcept;
+    NEFORCE_NODISCARD bool unlock_whole() const noexcept;
 };
 
 

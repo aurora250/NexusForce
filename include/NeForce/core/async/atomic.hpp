@@ -38,13 +38,13 @@ struct atomic {
     using value_type = T; ///< 值类型
 
 private:
-    static constexpr int min_align = (sizeof(T) & (sizeof(T) - 1)) || sizeof(T) > 16 ? 0 : sizeof(T);
+    static constexpr int min_align = (sizeof(T) & (sizeof(T) - 1)) != 0U || sizeof(T) > 16 ? 0 : sizeof(T);
     static constexpr int align_inner = min_align > alignof(T) ? min_align : alignof(T);
 
     alignas(align_inner) T value_; ///< 原子值存储
 
     static_assert(is_trivially_copyable_v<T>, "atomic requires a trivially copyable type");
-    static_assert(sizeof(T) > 0, "Incomplete or zero-sized types are not supported");
+    static_assert(is_complete_v<T>, "Incomplete or zero-sized types are not supported");
     static_assert(is_copy_constructible_v<T>, "atomic need copy constructible T");
     static_assert(is_move_constructible_v<T>, "atomic need move constructible T");
     static_assert(is_copy_assignable_v<T>, "atomic copy move assignable T");
@@ -99,12 +99,16 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return _NEFORCE is_always_lock_free<sizeof(value_), align_inner>(); }
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(value_), align_inner>();
+    }
 
     /**
      * @brief volatile版本的检查是否支持无锁操作
      */
-    bool is_lock_free() const volatile noexcept { return _NEFORCE is_always_lock_free<sizeof(value_), align_inner>(); }
+    NEFORCE_NODISCARD bool is_lock_free() const volatile noexcept {
+        return _NEFORCE is_always_lock_free<sizeof(value_), align_inner>();
+    }
 
     /**
      * @brief 原子存储操作
@@ -335,12 +339,12 @@ public:
      * @brief 检查是否支持无锁操作
      * @return 是否支持无锁
      */
-    bool is_lock_free() const noexcept { return base_.is_lock_free(); }
+    NEFORCE_NODISCARD bool is_lock_free() const noexcept { return base_.is_lock_free(); }
 
     /**
      * @brief volatile版本的检查是否支持无锁操作
      */
-    bool is_lock_free() const volatile noexcept { return base_.is_lock_free(); }
+    NEFORCE_NODISCARD bool is_lock_free() const volatile noexcept { return base_.is_lock_free(); }
 
     /**
      * @brief 原子存储操作
@@ -361,12 +365,14 @@ public:
      * @param mo 内存顺序
      * @return 加载的值
      */
-    bool load(const memory_order mo = memory_order_seq_cst) const noexcept { return base_.load(mo); }
+    NEFORCE_NODISCARD bool load(const memory_order mo = memory_order_seq_cst) const noexcept { return base_.load(mo); }
 
     /**
      * @brief volatile版本的原子加载操作
      */
-    bool load(const memory_order mo = memory_order_seq_cst) const volatile noexcept { return base_.load(mo); }
+    NEFORCE_NODISCARD bool load(const memory_order mo = memory_order_seq_cst) const volatile noexcept {
+        return base_.load(mo);
+    }
 
     /**
      * @brief 原子交换操作

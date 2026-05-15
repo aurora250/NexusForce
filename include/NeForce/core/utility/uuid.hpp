@@ -129,9 +129,7 @@ public:
      * @brief 获取UUID的字节视图
      * @return 16字节的只读内存视图
      */
-    NEFORCE_NODISCARD memory_view<const byte_t, 16> bytes() const noexcept {
-        return memory_view<const byte_t, 16>(data_);
-    }
+    NEFORCE_NODISCARD memory_view<const byte_t, 16> bytes() const noexcept { return {data_}; }
 
     /**
      * @brief 获取起始迭代器

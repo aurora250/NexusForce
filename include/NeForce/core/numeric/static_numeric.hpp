@@ -113,8 +113,9 @@ struct big_less : integral_constant<bool, (High1 < High2 || (High1 == High2 && L
  */
 template <uintmax_t High1, uintmax_t Low1, uintmax_t High2, uintmax_t Low2>
 struct big_add {
-    static constexpr uintmax_t result_low = Low1 + Low2;                             ///< 加法结果的低位
-    static constexpr uintmax_t result_high = (High1 + High2 + (Low1 + Low2 < Low1)); ///< 加法结果的高位，包含进位
+    static constexpr uintmax_t result_low = Low1 + Low2; ///< 加法结果的低位
+    static constexpr uintmax_t result_high =
+            (High1 + High2 + static_cast<uintmax_t>(Low1 + Low2 < Low1)); ///< 加法结果的高位，包含进位
 };
 
 /**
@@ -130,8 +131,9 @@ struct big_add {
 template <uintmax_t High1, uintmax_t Low1, uintmax_t High2, uintmax_t Low2>
 struct big_sub {
     static_assert(!big_less<High1, Low1, High2, Low2>::value, "Internal library error");
-    static constexpr uintmax_t result_low = Low1 - Low2;                      ///< 减法结果的低位
-    static constexpr uintmax_t result_high = (High1 - High2 - (Low1 < Low2)); ///< 减法结果的高位，考虑借位
+    static constexpr uintmax_t result_low = Low1 - Low2; ///< 减法结果的低位
+    static constexpr uintmax_t result_high =
+            (High1 - High2 - static_cast<uintmax_t>(Low1 < Low2)); ///< 减法结果的高位，考虑借位
 };
 
 /**

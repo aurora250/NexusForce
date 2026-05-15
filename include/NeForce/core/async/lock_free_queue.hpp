@@ -64,7 +64,7 @@ private:
         /**
          * @brief 默认构造函数
          */
-        counted_node_ptr() noexcept {}
+        counted_node_ptr() noexcept = default;
     };
 
     /**
@@ -321,7 +321,7 @@ public:
      * @note 由于无锁队列的并发特性，此方法返回的结果可能瞬间失效。
      *       仅用于监控和统计，不应用于同步控制。
      */
-    bool empty() const noexcept {
+    NEFORCE_NODISCARD bool empty() const noexcept {
         const counted_node_ptr head_ptr = head.load(memory_order_acquire);
         const counted_node_ptr tail_ptr = tail.load(memory_order_acquire);
         return head_ptr.ptr == tail_ptr.ptr;
@@ -335,7 +335,7 @@ public:
      *       此方法通过维护入队和出队计数器来计算队列大小。
      *       仅用于监控和统计，不应用于同步控制。
      */
-    size_t size() const noexcept {
+    NEFORCE_NODISCARD size_t size() const noexcept {
         const size_t push_cnt = push_count_.load(memory_order_relaxed);
         const size_t pop_cnt = pop_count_.load(memory_order_relaxed);
         return push_cnt - pop_cnt;

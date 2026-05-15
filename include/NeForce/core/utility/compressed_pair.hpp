@@ -81,7 +81,7 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
      * 使用默认构造的基类和给定的参数构造值。
      */
     template <typename... Args, enable_if_t<is_constructible_v<T, Args...>, int> = 0>
-    constexpr explicit compressed_pair(default_construct_tag, Args&&... args) noexcept(
+    constexpr explicit compressed_pair(default_construct_tag /*unused*/, Args&&... args) noexcept(
             conjunction_v<is_nothrow_default_constructible<IfEmpty>, is_nothrow_constructible<T, Args...>>) :
     IfEmpty(),
     value(_NEFORCE forward<Args>(args)...) {}
@@ -97,7 +97,7 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
      */
     template <typename ToEmpty, typename... Args,
               enable_if_t<conjunction_v<is_constructible<IfEmpty, ToEmpty>, is_constructible<T, Args...>>, int> = 0>
-    constexpr explicit compressed_pair(exact_arg_construct_tag, ToEmpty&& first, Args&&... args) noexcept(
+    constexpr explicit compressed_pair(exact_arg_construct_tag /*unused*/, ToEmpty&& first, Args&&... args) noexcept(
             conjunction_v<is_nothrow_constructible<IfEmpty, ToEmpty>, is_nothrow_constructible<T, Args...>>) :
     IfEmpty(_NEFORCE forward<ToEmpty>(first)),
     value(_NEFORCE forward<Args>(args)...) {}
@@ -228,7 +228,7 @@ struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpt
      * @param args 构造参数
      */
     template <typename... Args>
-    constexpr explicit compressed_pair(default_construct_tag, Args&&... args) noexcept(
+    constexpr explicit compressed_pair(default_construct_tag /*unused*/, Args&&... args) noexcept(
             conjunction_v<is_nothrow_default_constructible<IfEmpty>, is_nothrow_constructible<T, Args...>>) :
     no_compressed(),
     value(_NEFORCE forward<Args>(args)...) {}
@@ -241,7 +241,7 @@ struct compressed_pair<IfEmpty, T, false> final : icommon<compressed_pair<IfEmpt
      * @param args 值构造参数
      */
     template <typename ToEmpty, typename... Args>
-    constexpr compressed_pair(exact_arg_construct_tag, ToEmpty&& first, Args&&... args) noexcept(
+    constexpr compressed_pair(exact_arg_construct_tag /*unused*/, ToEmpty&& first, Args&&... args) noexcept(
             conjunction_v<is_nothrow_constructible<IfEmpty, ToEmpty>, is_nothrow_constructible<T, Args...>>) :
     no_compressed(_NEFORCE forward<ToEmpty>(first)),
     value(_NEFORCE forward<Args>(args)...) {}

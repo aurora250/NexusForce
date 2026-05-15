@@ -171,7 +171,7 @@ public:
      * @brief 检查日期是否有效
      * @return 是否有效
      */
-    constexpr bool is_valid() const noexcept { return is_valid(year_, month_, day_); }
+    NEFORCE_NODISCARD constexpr bool is_valid() const noexcept { return is_valid(year_, month_, day_); }
 
     /**
      * @brief 获取纪元起始日期（1970-01-01）
@@ -233,7 +233,7 @@ public:
      * @brief 转换为儒略日
      * @return 儒略日数
      */
-    constexpr int64_t to_julian_day() const noexcept {
+    NEFORCE_NODISCARD constexpr int64_t to_julian_day() const noexcept {
         const date_type a = (14 - month_) / 12;
         const date_type year = year_ + 4800 - a;
         const date_type month = month_ + 12 * a - 3;
@@ -253,9 +253,9 @@ public:
         const int64_t e = c - (1461 * d) / 4;
         const int64_t m = (5 * e + 2) / 153;
 
-        const date_type day = static_cast<date_type>(e - (153 * m + 2) / 5 + 1);
-        const date_type month = static_cast<date_type>(m + 3 - 12 * (m / 10));
-        const date_type year = static_cast<date_type>(100 * b + d - 4800 + (m / 10));
+        const auto day = static_cast<date_type>(e - (153 * m + 2) / 5 + 1);
+        const auto month = static_cast<date_type>(m + 3 - 12 * (m / 10));
+        const auto year = static_cast<date_type>(100 * b + d - 4800 + (m / 10));
 
         return date(year, month, day);
     }
@@ -523,7 +523,7 @@ public:
      * @brief 检查时间是否有效
      * @return 是否有效
      */
-    constexpr bool is_valid() const noexcept { return is_valid(hours_, minutes_, seconds_); }
+    NEFORCE_NODISCARD constexpr bool is_valid() const noexcept { return is_valid(hours_, minutes_, seconds_); }
 
     /**
      * @brief 重置为00:00:00
@@ -737,8 +737,8 @@ public:
     using time_type = _NEFORCE time::time_type; ///< 时间分量类型
 
 private:
-    _NEFORCE date date_{};       ///< 日期部分
-    _NEFORCE time time_{};       ///< 时间部分
+    _NEFORCE date date_;         ///< 日期部分
+    _NEFORCE time time_;         ///< 时间部分
     int64_t offset_seconds_ = 0; ///< 时区偏移
     bool has_timezone_ = false;  ///< 是否有时区信息
 
@@ -884,7 +884,7 @@ public:
      * @brief 检查时间是否有效
      * @return 是否有效
      */
-    constexpr bool is_valid() const noexcept { return date_.is_valid() && time_.is_valid(); }
+    NEFORCE_NODISCARD constexpr bool is_valid() const noexcept { return date_.is_valid() && time_.is_valid(); }
 
     /**
      * @brief 从日期赋值
@@ -1292,7 +1292,7 @@ public:
      * @brief 转换为 RFC 1123
      * @return 格式为 "Wed, 21 Dec 2022 10:00:00 GMT"
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_RFC1123() const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_RFC1123() const {
         constexpr string_view months_string[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 

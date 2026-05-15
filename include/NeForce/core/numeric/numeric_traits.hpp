@@ -500,30 +500,30 @@ public:
      * @brief 获取最小正规范值
      * @return 最小正规范值
      */
-    NEFORCE_NODISCARD static constexpr float32_t min_posi() noexcept { return 1.175494351e-38f; }
+    NEFORCE_NODISCARD static constexpr float32_t min_posi() noexcept { return 1.175494351e-38F; }
     /**
      * @brief 获取最大正规范值
      * @return 最大正规范值
      */
-    NEFORCE_NODISCARD static constexpr float32_t max_posi() noexcept { return 3.402823466e+38f; }
+    NEFORCE_NODISCARD static constexpr float32_t max_posi() noexcept { return 3.402823466e+38F; }
     /**
      * @brief 获取最小负规范值
      * @return 最小负规范值
      */
-    NEFORCE_NODISCARD static constexpr float32_t min_nega() noexcept { return -3.402823466e+38f; }
+    NEFORCE_NODISCARD static constexpr float32_t min_nega() noexcept { return -3.402823466e+38F; }
     /**
      * @brief 获取最大负规范值
      * @return 最大负规范值
      */
-    NEFORCE_NODISCARD static constexpr float32_t max_nega() noexcept { return -1.175494351e-38f; }
+    NEFORCE_NODISCARD static constexpr float32_t max_nega() noexcept { return -1.175494351e-38F; }
 
     NEFORCE_NODISCARD static constexpr float32_t min() noexcept { return min_posi(); }
     NEFORCE_NODISCARD static constexpr float32_t max() noexcept { return max_posi(); }
 
     NEFORCE_NODISCARD static constexpr float32_t lowest() noexcept { return min_nega(); }
-    NEFORCE_NODISCARD static constexpr float32_t epsilon() noexcept { return 1.192092896e-07f; }
+    NEFORCE_NODISCARD static constexpr float32_t epsilon() noexcept { return 1.192092896e-07F; }
     NEFORCE_NODISCARD static constexpr float32_t round_error() noexcept { return 0.5F; }
-    NEFORCE_NODISCARD static constexpr float32_t denorm_min() noexcept { return 1.401298464e-45f; }
+    NEFORCE_NODISCARD static constexpr float32_t denorm_min() noexcept { return 1.401298464e-45F; }
 
     NEFORCE_NODISCARD static constexpr float32_t infinity() noexcept { return __builtin_huge_valf(); }
     NEFORCE_NODISCARD static constexpr float32_t quiet_nan() noexcept {

@@ -394,7 +394,7 @@ public:
  */
 class NEFORCE_API json_object final : public json_value {
 private:
-    unordered_map<string, unique_ptr<json_value>> members_{}; ///< 成员映射表
+    unordered_map<string, unique_ptr<json_value>> members_; ///< 成员映射表
 
 public:
     /**

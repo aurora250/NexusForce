@@ -36,9 +36,9 @@ NEFORCE_CONSTEXPR14 void* memory_copy(void* NEFORCE_RESTRICT dest, const void* N
     }
 
     void* res = dest;
-    auto dest_v = static_cast<volatile byte_t*>(dest);
-    auto src_v = static_cast<const volatile byte_t*>(src);
-    while (count--) {
+    auto* dest_v = static_cast<volatile byte_t*>(dest);
+    const auto* src_v = static_cast<const volatile byte_t*>(src);
+    while (count-- != 0U) {
         // NOLINTNEXTLINE(clang-analyzer-core.uninitialized.Assign)
         *dest_v = *src_v;
         dest_v++;
@@ -74,9 +74,9 @@ NEFORCE_CONSTEXPR14 void* memory_copy_offset(void* NEFORCE_RESTRICT dest, const 
         return nullptr;
     }
 
-    auto dest_v = static_cast<volatile byte_t*>(dest);
-    auto src_v = static_cast<const volatile byte_t*>(src);
-    while (count--) {
+    auto* dest_v = static_cast<volatile byte_t*>(dest);
+    const auto* src_v = static_cast<const volatile byte_t*>(src);
+    while (count-- != 0U) {
         *dest_v = *src_v;
         dest_v++;
         src_v++;
@@ -97,10 +97,10 @@ NEFORCE_CONSTEXPR14 void* memory_copy_until(void* dest, const void* src, const b
         return nullptr;
     }
 
-    auto dest_v = static_cast<volatile byte_t*>(dest);
-    auto src_v = static_cast<const volatile byte_t*>(src);
+    auto* dest_v = static_cast<volatile byte_t*>(dest);
+    const auto* src_v = static_cast<const volatile byte_t*>(src);
 
-    while (count--) {
+    while (count-- != 0U) {
         const byte_t current = *src_v;
         *dest_v = current;
         if (current == value) {
@@ -133,7 +133,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 int memory_compare(const void* lhs, co
         return 1;
     }
 
-    while (count--) {
+    while (count-- != 0U) {
         if (*static_cast<const byte_t*>(lhs) != *static_cast<const byte_t*>(rhs)) {
             return *static_cast<const byte_t*>(lhs) - *static_cast<const byte_t*>(rhs);
         }
@@ -172,16 +172,16 @@ NEFORCE_CONSTEXPR14 void* memory_move(void* dest, const void* src, size_t count)
     }
 
     void* res = dest;
-    auto dest_v = static_cast<volatile byte_t*>(dest);
-    auto src_v = static_cast<const volatile byte_t*>(src);
+    auto* dest_v = static_cast<volatile byte_t*>(dest);
+    const auto* src_v = static_cast<const volatile byte_t*>(src);
     if (dest_v < src_v) {
-        while (count--) {
+        while (count-- != 0U) {
             *dest_v = *src_v;
             dest_v = dest_v + 1;
             src_v = src_v + 1;
         }
     } else if (dest_v > src_v) {
-        while (count--) {
+        while (count-- != 0U) {
             *(dest_v + count) = *(src_v + count);
         }
     }
@@ -201,8 +201,8 @@ NEFORCE_CONSTEXPR14 void* memory_set(void* dest, const byte_t value, size_t coun
     }
 
     void* ret = static_cast<byte_t*>(dest);
-    auto dest_v = static_cast<volatile byte_t*>(dest);
-    while (count--) {
+    auto* dest_v = static_cast<volatile byte_t*>(dest);
+    while (count-- != 0U) {
         *dest_v = value;
         dest_v = dest_v + 1;
     }
@@ -221,7 +221,7 @@ NEFORCE_CONSTEXPR14 void memory_zero(void* dest, const size_t count) noexcept {
         return;
     }
 
-    const auto dest_v = static_cast<volatile byte_t*>(dest);
+    auto* const dest_v = static_cast<volatile byte_t*>(dest);
     for (size_t i = 0; i < count; ++i) {
         dest_v[i] = static_cast<byte_t>(0);
     }
@@ -251,8 +251,8 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 const void* memory_find(const void* de
     if (dest == nullptr) {
         return nullptr;
     }
-    auto p = static_cast<const byte_t*>(dest);
-    while (count--) {
+    const auto* p = static_cast<const byte_t*>(dest);
+    while (count-- != 0U) {
         if (*p == value) {
             return p;
         }
@@ -275,8 +275,8 @@ NEFORCE_CONSTEXPR14 const void* memory_find_pattern(const void* data, const size
         return nullptr;
     }
 
-    const auto data_ptr = static_cast<const byte_t*>(data);
-    const auto pattern_ptr = static_cast<const byte_t*>(pattern);
+    const auto* const data_ptr = static_cast<const byte_t*>(data);
+    const auto* const pattern_ptr = static_cast<const byte_t*>(pattern);
     const size_t last_possible = data_len - pattern_len + 1;
 
     for (size_t i = 0; i < last_possible; ++i) {

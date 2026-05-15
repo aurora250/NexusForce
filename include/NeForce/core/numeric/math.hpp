@@ -148,19 +148,19 @@ NEFORCE_END_CONSTANTS__
 NEFORCE_CONST_FUNCTION constexpr int64_t safe_trunc(const decimal_t x) noexcept {
     constexpr int64_t max_val = numeric_traits<int64_t>::max();
     constexpr int64_t min_val = numeric_traits<int64_t>::min();
-    constexpr decimal_t max_int64 = static_cast<decimal_t>(max_val);
-    constexpr decimal_t min_int64 = static_cast<decimal_t>(min_val);
+    constexpr auto max_int64 = static_cast<decimal_t>(max_val);
+    constexpr auto min_int64 = static_cast<decimal_t>(min_val);
 
     if (is_nan(x) || is_infinity(x)) {
         return 0;
     }
 
     if (x >= max_int64) {
-        const int64_t result = static_cast<int64_t>(x);
+        const auto result = static_cast<int64_t>(x);
         return (result == max_val && x <= max_int64) ? result : 0;
     }
     if (x <= min_int64) {
-        const int64_t result = static_cast<int64_t>(x);
+        const auto result = static_cast<int64_t>(x);
         return (result == min_val && x >= min_int64) ? result : 0;
     }
     return static_cast<int64_t>(x);
@@ -435,7 +435,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t logarithm_e(const decimal_t
         return numeric_traits<decimal_t>::quiet_nan();
     }
     if (x == 0.0L) {
-        return -numeric_traits<decimal_t>::infinity();
+        return static_cast<decimal_t>(-numeric_traits<decimal_t>::infinity());
     }
     if (is_infinity(x) && x > 0) {
         return x;
@@ -588,7 +588,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor(const decimal_t x) no
         return x;
     }
 
-    constexpr decimal_t TWO_POW_64 = static_cast<decimal_t>(numeric_traits<uint64_t>::max());
+    constexpr auto TWO_POW_64 = static_cast<decimal_t>(numeric_traits<uint64_t>::max());
     if (x >= 0.0L) {
         if (x >= TWO_POW_64) {
             return x;
@@ -599,7 +599,7 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t floor(const decimal_t x) no
         if (pos >= TWO_POW_64) {
             return x;
         }
-        const decimal_t floor_pos = static_cast<decimal_t>(safe_decimal_to_uint64(pos));
+        const auto floor_pos = static_cast<decimal_t>(safe_decimal_to_uint64(pos));
         if (absolute(pos - floor_pos) < constants::MACHINE_EPSILON) {
             return -floor_pos;
         } else {
@@ -634,12 +634,12 @@ NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t ceil(const decimal_t x) noe
         return x;
     }
 
-    constexpr decimal_t TWO_POW_64 = static_cast<decimal_t>(numeric_traits<uint64_t>::max());
+    constexpr auto TWO_POW_64 = static_cast<decimal_t>(numeric_traits<uint64_t>::max());
     if (x >= 0.0L) {
         if (x >= TWO_POW_64) {
             return x;
         }
-        const decimal_t floor_x = static_cast<decimal_t>(safe_decimal_to_uint64(x));
+        const auto floor_x = static_cast<decimal_t>(safe_decimal_to_uint64(x));
         if (absolute(x - floor_x) < constants::MACHINE_EPSILON) {
             return floor_x;
         } else {
@@ -863,8 +863,8 @@ NEFORCE_CONSTEXPR14 void reduce_arg_sincos(decimal_t& x, int& quadrant) noexcept
     constexpr decimal_t INV_HALF_PI = 0.63661977236758134308L;
 
     const decimal_t kd = round(x * INV_HALF_PI);
-    const int64_t k = static_cast<int64_t>(kd);
-    quadrant = (quadrant + (k & 3)) & 3;
+    const auto k = static_cast<int64_t>(kd);
+    quadrant = static_cast<int>(quadrant + (k & 3)) & 3;
 
     decimal_t t = kd * HALF_PI_HI;
     x = x - t;
@@ -1005,7 +1005,7 @@ NEFORCE_PURE_FUNCTION NEFORCE_CONSTEXPR14 decimal_t tangent(decimal_t x) noexcep
     }
 
     if (around_zero(c, constants::LOOSE_TOLERANCE)) {
-        constexpr auto inf = numeric_traits<decimal_t>::infinity();
+        constexpr auto inf = static_cast<decimal_t>(numeric_traits<decimal_t>::infinity());
         return (s > 0) ? inf : -inf;
     }
     return s / c;

@@ -60,15 +60,15 @@ NEFORCE_BEGIN_HTTP__
  * @endcode
  */
 struct NEFORCE_API http_cookie : iobject<http_cookie> {
-    http_cookie_name name{};              ///< Cookie名称
-    string value{};                       ///< Cookie值
-    string domain{};                      ///< Domain
-    string path = "/";                    ///< Path
+    http_cookie_name name;                ///< Cookie名称
+    string value;                         ///< Cookie值
+    string domain;                        ///< Domain
+    string path{"/"};                     ///< Path
     seconds max_age{-1};                  ///< Max-Age（-1表示会话Cookie）
-    bool secure = false;                  ///< Secure（仅HTTPS）
-    bool http_only = false;               ///< HttpOnly（禁止JS）
+    bool secure{false};                   ///< Secure（仅HTTPS）
+    bool http_only{false};                ///< HttpOnly（禁止JS）
     string same_site{http_key::Strict()}; ///< SameSite
-    datetime expires{};                   ///< Expires
+    datetime expires;                     ///< Expires
 
     /**
      * @brief 解析Set-Cookie头

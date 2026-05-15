@@ -15,13 +15,13 @@ public:
     error_category(const error_category&) = delete;
     error_category& operator=(const error_category&) = delete;
 
-    virtual const char* name() const noexcept = 0;
-    virtual string message(int32_t ev) const = 0;
+    NEFORCE_NODISCARD virtual const char* name() const noexcept = 0;
+    NEFORCE_NODISCARD virtual string message(int32_t ev) const = 0;
 
-    virtual error_condition default_error_condition(int32_t ev) const noexcept;
+    NEFORCE_NODISCARD virtual error_condition default_error_condition(int32_t ev) const noexcept;
 
-    virtual bool equivalent(int code, const error_condition& condition) const noexcept;
-    virtual bool equivalent(const error_code& code, int condition) const noexcept;
+    NEFORCE_NODISCARD virtual bool equivalent(int code, const error_condition& condition) const noexcept;
+    NEFORCE_NODISCARD virtual bool equivalent(const error_code& code, int condition) const noexcept;
 
     NEFORCE_NODISCARD bool equal_to(const error_category& rhs) const noexcept { return this == &rhs; }
     NEFORCE_NODISCARD bool less_than(const error_category& rhs) const noexcept {

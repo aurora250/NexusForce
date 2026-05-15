@@ -124,7 +124,7 @@ public:
      * @brief 获取事件类型
      * @return 事件类型
      */
-    type event_type() const noexcept { return type_; }
+    NEFORCE_NODISCARD type event_type() const noexcept { return type_; }
 };
 
 /** @} */ // SystemEvent

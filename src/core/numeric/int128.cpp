@@ -6,7 +6,7 @@
 #    if defined(NEFORCE_COMPILER_MINGW)
 #        pragma intrinsic(_umul128, _addcarry_u64, _subborrow_u64, __shiftright128, __shiftleft128)
 #        define NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
-#    elif defined(NEFORCE_COMPILER_LLVM_MINGW)
+#    elif defined(NEFORCE_COMPILER_CLANG_CL)
 #        include <adcintrin.h>
 #        pragma intrinsic(_umul128, __shiftright128, __shiftleft128)
 #        define NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
@@ -60,19 +60,6 @@ namespace {
             remainder = dividend;
             return;
         }
-#if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
-        if (divisor.hi == 0 && dividend.hi < divisor.lo) {
-            uint64_t rem = 0;
-#    ifdef NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
-            quotient.lo = _udiv128(dividend.hi, dividend.lo, divisor.lo, &rem);
-#    else
-            quotient.lo = NF_128 _udiv128(dividend.hi, dividend.lo, divisor.lo, &rem);
-#    endif
-            quotient.hi = 0;
-            remainder = uint128_t(rem);
-            return;
-        }
-#endif
 
         const int bits =
                 dividend.hi != 0 ? (128 - clz64(dividend.hi)) : (dividend.lo != 0 ? (64 - clz64(dividend.lo)) : 0);
@@ -154,24 +141,12 @@ uint128_t uint128_t::mul64(uint64_t a, uint64_t b) noexcept {
 
 uint64_t uint128_t::div64(uint64_t divisor, uint64_t* remainder) const {
 #if defined(NEFORCE_PLATFORM_WINDOWS) || !defined(NEFORCE_SUPPORT_INTRINSIC_INT128)
-    if (hi >= divisor) {
-        uint128_t quot, rem;
-        divmod128(*this, uint128_t(divisor), quot, rem);
-        if (remainder != nullptr) {
-            *remainder = rem.lo;
-        }
-        return quot.lo;
-    }
-    uint64_t rem = 0;
-#    ifdef NEFORCE_NOT_SUPPORT_UDIV128_INTRINSIC
-    uint64_t quot = _udiv128(hi, lo, divisor, &rem);
-#    else
-    uint64_t quot = NF_128 _udiv128(hi, lo, divisor, &rem);
-#    endif
+    uint128_t quot, rem;
+    divmod128(*this, uint128_t(divisor), quot, rem);
     if (remainder != nullptr) {
-        *remainder = rem;
+        *remainder = rem.lo;
     }
-    return quot;
+    return quot.lo;
 #else
     unsigned __int128 dividend = (static_cast<unsigned __int128>(hi) << 64) | lo;
     auto quot = static_cast<uint64_t>(dividend / divisor);

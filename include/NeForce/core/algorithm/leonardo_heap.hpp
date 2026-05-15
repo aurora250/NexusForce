@@ -128,8 +128,8 @@ template <typename Iterator>
 void adjust_leonardo_heap(Iterator first, size_t current_heap, int level_index, vector<int>& levels) {
     static_assert(is_ranges_rnd_iter_v<Iterator>, "Iterator must be random_access_iterator");
 
-    size_t child_heap1;
-    size_t child_heap2;
+    size_t child_heap1 = 0;
+    size_t child_heap2 = 0;
     while (level_index > 0) {
         size_t prev_heap = current_heap - leonardo(levels[level_index]);
         if (*(first + current_heap) < *(first + prev_heap)) {

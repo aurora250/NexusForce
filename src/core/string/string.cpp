@@ -1,7 +1,7 @@
 #include <NeForce/core/string/basic_string.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-#ifndef NEFORCE_COMPILER_LLVM_MINGW
+#ifndef NEFORCE_COMPILER_CLANG_CL
 
 template class basic_string_view<char>;
 template class basic_string_view<wchar_t>;

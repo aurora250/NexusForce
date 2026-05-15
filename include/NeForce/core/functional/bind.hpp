@@ -10,6 +10,8 @@
 
 #include "NeForce/core/functional/functor.hpp"
 #include "NeForce/core/functional/invoke.hpp"
+#include "NeForce/core/utility/integer_sequence.hpp"
+#include "NeForce/core/utility/tuple.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /// @cond
@@ -339,7 +341,7 @@ template <typename T>
 class bind_arg_mapper<reference_wrapper<T>, false, false> {
 public:
     template <typename CVRef, typename Tuple>
-    NEFORCE_CONSTEXPR20 T& operator()(CVRef& arg, Tuple&) const volatile {
+    NEFORCE_CONSTEXPR20 T& operator()(CVRef& arg, Tuple& /*unused*/) const volatile {
         return arg.get();
     }
 };
@@ -356,7 +358,8 @@ public:
 
 private:
     template <typename CVArg, typename... Args, size_t... Indexes>
-    NEFORCE_CONSTEXPR20 auto call(CVArg& arg, tuple<Args...>& tuple_ref, const index_tuple<Indexes...>&) const volatile
+    NEFORCE_CONSTEXPR20 auto call(CVArg& arg, tuple<Args...>& tuple_ref,
+                                  const index_tuple<Indexes...>& /*unused*/) const volatile
             -> decltype(arg(declval<Args>()...)) {
         return arg(_NEFORCE get<Indexes>(_NEFORCE move(tuple_ref))...);
     }
@@ -370,9 +373,8 @@ class bind_arg_mapper<Arg, false, true> {
 
 public:
     template <typename Tuple>
-    NEFORCE_CONSTEXPR20 safe_tuple_element_t<(is_placeholder_v<Arg> - 1), Tuple>&& operator()(const volatile Arg&,
-                                                                                              Tuple& tuple_ref) const
-            volatile {
+    NEFORCE_CONSTEXPR20 safe_tuple_element_t<(is_placeholder_v<Arg> - 1), Tuple>&&
+    operator()(const volatile Arg& /*unused*/, Tuple& tuple_ref) const volatile {
         return _NEFORCE get<(is_placeholder_v<Arg> - 1)>(_NEFORCE move(tuple_ref));
     }
 };
@@ -381,7 +383,7 @@ template <typename Arg>
 class bind_arg_mapper<Arg, false, false> {
 public:
     template <typename CVArg, typename Tuple>
-    NEFORCE_CONSTEXPR20 CVArg&& operator()(CVArg&& arg, Tuple&) const volatile {
+    NEFORCE_CONSTEXPR20 CVArg&& operator()(CVArg&& arg, Tuple& /*unused*/) const volatile {
         return _NEFORCE forward<CVArg>(arg);
     }
 };
@@ -806,23 +808,23 @@ private:
 
 private:
     template <size_t... Indices, typename... CallArgs>
-    constexpr decltype(auto) call_impl(index_sequence<Indices...>, CallArgs&&... call_args) & {
+    constexpr decltype(auto) call_impl(index_sequence<Indices...> /*unused*/, CallArgs&&... call_args) & {
         return _NEFORCE invoke(func_, _NEFORCE get<Indices>(bound_args_)..., _NEFORCE forward<CallArgs>(call_args)...);
     }
 
     template <size_t... Indices, typename... CallArgs>
-    constexpr decltype(auto) call_impl(index_sequence<Indices...>, CallArgs&&... call_args) const& {
+    constexpr decltype(auto) call_impl(index_sequence<Indices...> /*unused*/, CallArgs&&... call_args) const& {
         return _NEFORCE invoke(func_, _NEFORCE get<Indices>(bound_args_)..., _NEFORCE forward<CallArgs>(call_args)...);
     }
 
     template <size_t... Indices, typename... CallArgs>
-    constexpr decltype(auto) call_impl(index_sequence<Indices...>, CallArgs&&... call_args) && {
+    constexpr decltype(auto) call_impl(index_sequence<Indices...> /*unused*/, CallArgs&&... call_args) && {
         return _NEFORCE invoke(_NEFORCE move(func_), _NEFORCE get<Indices>(_NEFORCE move(bound_args_))...,
                                _NEFORCE forward<CallArgs>(call_args)...);
     }
 
     template <size_t... Indices, typename... CallArgs>
-    constexpr decltype(auto) call_impl(index_sequence<Indices...>, CallArgs&&... call_args) const&& {
+    constexpr decltype(auto) call_impl(index_sequence<Indices...> /*unused*/, CallArgs&&... call_args) const&& {
         return _NEFORCE invoke(_NEFORCE move(func_), _NEFORCE get<Indices>(_NEFORCE move(bound_args_))...,
                                _NEFORCE forward<CallArgs>(call_args)...);
     }

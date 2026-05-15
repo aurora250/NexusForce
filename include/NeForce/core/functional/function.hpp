@@ -140,16 +140,16 @@ public:
 
     private:
         template <typename Fn>
-        static void create(storage_data& data, Fn&& f, true_type) {
+        static void create(storage_data& data, Fn&& f, true_type /*unused*/) {
             ::new (data.access()) F(_NEFORCE forward<Fn>(f));
         }
         template <typename Fn>
-        static void create(storage_data& data, Fn&& f, false_type) {
+        static void create(storage_data& data, Fn&& f, false_type /*unused*/) {
             data.access<F*>() = new F(_NEFORCE forward<Fn>(f));
         }
 
-        static void destroy(storage_data& data, true_type) { data.access<F>().~F(); }
-        static void destroy(storage_data& data, false_type) { delete data.access<F*>(); }
+        static void destroy(storage_data& data, true_type /*unused*/) { data.access<F>().~F(); }
+        static void destroy(storage_data& data, false_type /*unused*/) { delete data.access<F*>(); }
 
     public:
         static bool manage(storage_data& dest, const storage_data& src, const FUNCTION_OPERATE oper) {
@@ -189,7 +189,7 @@ public:
             return mptr != nullptr;
         }
         template <typename T>
-        static bool not_empty_function(const T&) noexcept {
+        static bool not_empty_function(const T& /*unused*/) noexcept {
             return true;
         }
     };
@@ -202,12 +202,12 @@ public:
 
     __function_base() noexcept = default;
     ~__function_base() {
-        if (manager_) {
+        if (manager_ != nullptr) {
             manager_(func_, func_, FUNCTION_OPERATE::DESTROY_PTR);
         }
     }
 
-    NEFORCE_NODISCARD bool empty() const { return !manager_; }
+    NEFORCE_NODISCARD bool empty() const { return manager_ == nullptr; }
 };
 
 /**
@@ -254,7 +254,9 @@ public:
 template <>
 class __function_manage_handler<void, void> {
 public:
-    static bool manage(storage_data&, const storage_data&, FUNCTION_OPERATE) { return false; }
+    static bool manage(storage_data& /*unused*/, const storage_data& /*unused*/, FUNCTION_OPERATE /*unused*/) {
+        return false;
+    }
 };
 
 template <typename Sign, typename F, bool Valid = is_object_v<F>>
@@ -461,7 +463,7 @@ public:
         if (manager_) {
             inner::storage_data result{};
             manager_(result, func_, inner::FUNCTION_OPERATE::GET_TYPE_INFO);
-            if (const auto info = result.access<const std::type_info*>()) {
+            if (const auto* const info = result.access<const std::type_info*>()) {
                 return *info;
             }
         }

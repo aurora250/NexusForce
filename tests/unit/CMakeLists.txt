@@ -25,7 +25,7 @@ add_executable(NexusForceUnitTests
         test_utility.cpp
 )
 
-if(MSVC)
+if(WIN32)
     set_target_properties(NexusForceUnitTests PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/Debug
             RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/Release
@@ -33,7 +33,7 @@ if(MSVC)
             RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/bin/MinSizeRel
     )
 elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForce PROPERTIES
+    set_target_properties(NexusForceUnitTests PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
     )
 endif()
