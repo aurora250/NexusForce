@@ -12,7 +12,7 @@
 #include "NeForce/core/string/string.hpp"
 #include "NeForce/core/container/vector.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <locale.h>
+#    include <clocale>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -127,8 +127,8 @@ private:
 #ifdef NEFORCE_PLATFORM_WINDOWS
     string win_name_; ///< 区域设置名称
 #else
-    ::locale_t loc_; ///< 区域设置对象
-    bool owns_;      ///< 是否拥有区域设置对象所有权
+    ::locale_t loc_{LC_GLOBAL_LOCALE}; ///< 区域设置对象
+    bool owns_{false};                 ///< 是否拥有区域设置对象所有权
 #endif
 
     void load_locale(const string& name);

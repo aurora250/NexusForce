@@ -74,7 +74,7 @@ public:
      * @param obj 对象指针
      * @return 返回值包装为meta_any
      */
-    meta_any invoke(void* obj) const noexcept { return invoke(obj, {}); }
+    meta_any invoke(void* obj) const { return invoke(obj, {}); }
 
     /**
      * @brief 获取最小参数数量

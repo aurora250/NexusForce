@@ -30,7 +30,7 @@ check_directories() {
 }
 
 count_with_cloc() {
-    echo -e "${CYAN}使用 cloc 统计代码行数...${NC}"
+    echo -e "${CYAN}使用 cloc 统计...${NC}"
     echo "================================"
 
     local existing_dirs=()
@@ -39,11 +39,20 @@ count_with_cloc() {
     done
 
     if [[ ${#existing_dirs[@]} -eq 0 ]]; then
-        echo -e "${RED}错误: 没有找到任何要统计的目录${NC}"
+        echo -e "${RED}错误: 没有找到任何目录${NC}"
         return 1
     fi
 
-    cloc --include-ext="${EXTENSIONS[*]//\*./}" "${existing_dirs[@]}"
+    local ext_list=""
+    for ext in "${EXTENSIONS[@]}"; do
+        ext="${ext#\*\.}"
+        if [[ -n "$ext_list" ]]; then
+            ext_list+=","
+        fi
+        ext_list+="$ext"
+    done
+
+    cloc "${existing_dirs[@]}" --include-ext="$ext_list"
 }
 
 count_manually() {

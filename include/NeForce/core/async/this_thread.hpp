@@ -8,7 +8,7 @@
  * 此文件提供了跨平台的当前线程操作函数。
  */
 
-#include "NeForce/core/typeinfo/types.hpp"
+#include "NeForce/core/typeinfo/type_traits.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include "NeForce/core/config/windef.hpp"
 #    include <processthreadsapi.h>
@@ -22,8 +22,7 @@
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <sched.h>
-#    include <time.h>
-#    include <unistd.h>
+#    include <ctime>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -138,7 +137,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void sleep_for_ms(uint32_t milliseconds) noexcept {
 #else
     struct ::timespec ts;
     ts.tv_sec = milliseconds / 1000;
-    ts.tv_nsec = (milliseconds % 1000) * 1000000;
+    ts.tv_nsec = static_cast<decay_t<decltype(ts.tv_nsec)>>(milliseconds % 1000) * 1000000;
     ::nanosleep(&ts, nullptr);
 #endif
 }

@@ -6,17 +6,12 @@
 #include <gtest/gtest.h>
 using namespace neforce;
 
-namespace {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    constexpr int kAbortExitCode = 3;
-#else
-    constexpr int kAbortExitCode = 1;
-#endif
-} // namespace
-
-
 TEST(TerminateTest, AbortTerminatesWithCode1) {
-    EXPECT_EXIT(neforce::abort(), ::testing::ExitedWithCode(kAbortExitCode), ".*");
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_EXIT(neforce::abort(), ::testing::ExitedWithCode(3), ".*");
+#else
+    EXPECT_EXIT(neforce::abort(), ::testing::KilledBySignal(SIGABRT), ".*");
+#endif
 }
 
 TEST(TerminateTest, ExitWithStatus0) { EXPECT_EXIT(neforce::exit(0), ::testing::ExitedWithCode(0), ".*"); }
@@ -29,7 +24,11 @@ TEST(TerminateTest, QuickExitStatus) { EXPECT_EXIT(neforce::quick_exit(99), ::te
 
 TEST(TerminateTest, TerminateCallsHandlerAndAborts) {
     neforce::set_terminate([]() { eprint("custom_terminate"); });
-    EXPECT_EXIT(neforce::terminate(), ::testing::ExitedWithCode(kAbortExitCode), "custom_terminate");
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_EXIT(neforce::terminate(), ::testing::ExitedWithCode(3), "custom_terminate");
+#else
+    EXPECT_EXIT(neforce::terminate(), ::testing::KilledBySignal(SIGABRT), "custom_terminate");
+#endif
 }
 
 TEST(TerminateTest, ExitHandlersCalledInReverseOrder) {

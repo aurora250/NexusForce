@@ -980,13 +980,14 @@ class future<void> : public inner::__basic_future<void> {
     friend future<async_result_t<Function, Args...>> async(launch, Function&&, Args&&...);
 
     using base_type = inner::__basic_future<void>;
+    // NOLINTNEXTLINE(readability-redundant-qualified-alias)
     using state_type = base_type::state_type;
 
     explicit future(state_type state) :
     base_type(move(state)) {}
 
 public:
-    constexpr future() noexcept = default;
+    future() noexcept = default;
 
     future(future&& other) noexcept :
     base_type(_NEFORCE move(other)) {}
@@ -1097,7 +1098,7 @@ class shared_future<void> : public inner::__basic_future<void> {
     using base_type = inner::__basic_future<void>;
 
 public:
-    constexpr shared_future() noexcept = default;
+    shared_future() noexcept = default;
 
     shared_future(const shared_future& other) :
     base_type(other) {}

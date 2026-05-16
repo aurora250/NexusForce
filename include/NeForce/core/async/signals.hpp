@@ -663,14 +663,12 @@ public:
                 [callback = _NEFORCE move(callback), filter = _NEFORCE move(filter)](Types... args) mutable {
                     auto filtered = filter(args...);
                     if (filtered) {
-                        if (filtered) {
-                            auto filtered_tuple = _NEFORCE make_tuple(_NEFORCE move(*filtered));
-                            _NEFORCE apply(
-                                    [&callback](auto&&... filtered_args) {
-                                        callback(_NEFORCE forward<decltype(filtered_args)>(filtered_args)...);
-                                    },
-                                    _NEFORCE move(filtered_tuple));
-                        }
+                        auto filtered_tuple = _NEFORCE make_tuple(_NEFORCE move(*filtered));
+                        _NEFORCE apply(
+                                [&callback](auto&&... filtered_args) {
+                                    callback(_NEFORCE forward<decltype(filtered_args)>(filtered_args)...);
+                                },
+                                _NEFORCE move(filtered_tuple));
                     }
                     return callback_result::keep;
                 },

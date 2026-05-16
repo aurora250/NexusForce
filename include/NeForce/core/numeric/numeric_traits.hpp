@@ -623,7 +623,7 @@ public:
     NEFORCE_NODISCARD static constexpr decimal_t round_error() noexcept { return 0.5L; }
     NEFORCE_NODISCARD static constexpr decimal_t denorm_min() noexcept { return 3.64519953188247460253e-4951L; }
 
-    NEFORCE_NODISCARD static constexpr decimal_t infinity() noexcept { return __builtin_huge_val(); }
+    NEFORCE_NODISCARD static constexpr decimal_t infinity() noexcept { return __builtin_huge_vall(); }
     NEFORCE_NODISCARD static constexpr decimal_t quiet_nan() noexcept { return __builtin_nanl(""); }
     NEFORCE_NODISCARD static constexpr decimal_t signaling_nan() noexcept { return __builtin_nansl(""); }
 

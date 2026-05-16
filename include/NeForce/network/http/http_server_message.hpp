@@ -87,7 +87,7 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
      * @param name 参数名
      * @return 参数值，不存在返回空字符串
      */
-    NEFORCE_NODISCARD string_view parameter(const string& name) const noexcept {
+    NEFORCE_NODISCARD string_view parameter(const string& name) const {
         const auto it = parameters.find(name);
         return it != parameters.end() ? it->second.view() : "";
     }
@@ -104,16 +104,14 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
      * @param name 参数名
      * @return 存在返回true
      */
-    NEFORCE_NODISCARD bool has_parameter(const string& name) const noexcept {
-        return parameters.find(name) != parameters.end();
-    }
+    NEFORCE_NODISCARD bool has_parameter(const string& name) const { return parameters.find(name) != parameters.end(); }
 
     /**
      * @brief 获取Cookie值
      * @param name Cookie名
      * @return Cookie值，不存在返回空字符串
      */
-    NEFORCE_NODISCARD string_view cookie(const string& name) const noexcept {
+    NEFORCE_NODISCARD string_view cookie(const string& name) const {
         const auto it = cookies.find(name);
         return it != cookies.end() ? it->second.view() : "";
     }
@@ -130,14 +128,14 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
      * @param name Cookie名
      * @return 存在返回true
      */
-    NEFORCE_NODISCARD bool has_cookie(const string& name) const noexcept { return cookies.find(name) != cookies.end(); }
+    NEFORCE_NODISCARD bool has_cookie(const string& name) const { return cookies.find(name) != cookies.end(); }
 
     /**
      * @brief 获取请求头值
      * @param name 头名称
      * @return 头值，不存在返回空字符串
      */
-    NEFORCE_NODISCARD string_view header(const string& name) const noexcept {
+    NEFORCE_NODISCARD string_view header(const string& name) const {
         const auto it = headers.find(name);
         return it != headers.end() ? it->second.view() : "";
     }
@@ -154,7 +152,7 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
      * @param name 头名称
      * @return 存在返回true
      */
-    NEFORCE_NODISCARD bool has_header(const string& name) const noexcept { return headers.find(name) != headers.end(); }
+    NEFORCE_NODISCARD bool has_header(const string& name) const { return headers.find(name) != headers.end(); }
 
     /**
      * @brief 检查是否有关联的有效会话
@@ -166,13 +164,13 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
      * @brief 获取Content-Type
      * @return Content-Type值
      */
-    NEFORCE_NODISCARD string_view content_type() const noexcept { return header(http_key::Content_Type()); }
+    NEFORCE_NODISCARD string_view content_type() const { return header(http_key::Content_Type()); }
 
     /**
      * @brief 检查是否为Keep-Alive连接
      * @return 是Keep-Alive返回true
      */
-    NEFORCE_NODISCARD bool is_keep_alive() const noexcept {
+    NEFORCE_NODISCARD bool is_keep_alive() const {
         const auto conn = header(http_key::Connection());
         return conn == "keep-alive" || conn == "Keep-Alive";
     }
@@ -190,13 +188,13 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
      * @brief 获取User-Agent
      * @return User-Agent值
      */
-    NEFORCE_NODISCARD string_view user_agent() const noexcept { return header("User-Agent"); }
+    NEFORCE_NODISCARD string_view user_agent() const { return header("User-Agent"); }
 
     /**
      * @brief 获取Referer
      * @return Referer值
      */
-    NEFORCE_NODISCARD string_view referer() const noexcept { return header("Referer"); }
+    NEFORCE_NODISCARD string_view referer() const { return header("Referer"); }
 
     /**
      * @brief 检查是否为AJAX请求
@@ -204,7 +202,7 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
      *
      * 检查X-Requested-With头是否为XMLHttpRequest。
      */
-    NEFORCE_NODISCARD bool is_ajax() const noexcept { return header("X-Requested-With") == "XMLHttpRequest"; }
+    NEFORCE_NODISCARD bool is_ajax() const { return header("X-Requested-With") == "XMLHttpRequest"; }
 
     /**
      * @brief 清空请求所有数据
@@ -289,7 +287,7 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
      * @param name 头名称
      * @return 头值，不存在返回空字符串
      */
-    NEFORCE_NODISCARD string_view header(const string& name) const noexcept {
+    NEFORCE_NODISCARD string_view header(const string& name) const {
         const auto it = headers.find(name);
         return it != headers.end() ? it->second.view() : "";
     }
@@ -306,7 +304,7 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
      * @param name 头名称
      * @return 存在返回true
      */
-    NEFORCE_NODISCARD bool has_header(const string& name) const noexcept { return headers.find(name) != headers.end(); }
+    NEFORCE_NODISCARD bool has_header(const string& name) const { return headers.find(name) != headers.end(); }
 
     /**
      * @brief 设置Content-Type

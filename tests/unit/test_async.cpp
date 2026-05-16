@@ -1680,7 +1680,7 @@ TEST(VirtualThread, MoveVirtualThread) {
 }
 
 TEST(SignalTest, BasicEmit) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int result = 0;
     sig.connect([&result](int v) { result = v; });
     sig.emit(42);
@@ -1688,7 +1688,7 @@ TEST(SignalTest, BasicEmit) {
 }
 
 TEST(SignalTest, MemberFunctionConnect) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     test_receiver receiver;
     sig.connect(&receiver, &test_receiver::onUpdate);
     sig.emit(99);
@@ -1696,7 +1696,7 @@ TEST(SignalTest, MemberFunctionConnect) {
 }
 
 TEST(SignalTest, ConnectionDisconnect) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int count = 0;
     auto conn = sig.connect([&count](int) { ++count; });
     sig.emit(1);
@@ -1707,7 +1707,7 @@ TEST(SignalTest, ConnectionDisconnect) {
 }
 
 TEST(SignalTest, ScopedConnection) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int count = 0;
     {
         scoped_connection sc{sig.connect([&count](int) { ++count; })};
@@ -1719,7 +1719,7 @@ TEST(SignalTest, ScopedConnection) {
 }
 
 TEST(SignalTest, OneshotConnection) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int count = 0;
     sig.connect([&count](int) {
         ++count;
@@ -1736,7 +1736,7 @@ TEST(SignalTest, OneshotConnection) {
 }
 
 TEST(SignalTest, OneshotTag) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int count = 0;
     bool called = false;
     sig.connect([&count, &called](int) {
@@ -1754,7 +1754,7 @@ TEST(SignalTest, OneshotTag) {
 }
 
 TEST(SignalTest, NshotTag) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int count = 0;
     int remaining = 3;
     sig.connect([&count, &remaining](int) {
@@ -1779,7 +1779,7 @@ TEST(SignalTest, OneshotTagWithObject) {
         int count = 0;
         void onEmit(int) { ++count; }
     };
-    signal<int> sig;
+    neforce::signal<int> sig;
     auto receiver = make_shared<scope_receiver>();
     sig.connect(receiver, &scope_receiver::onEmit, oneshot);
     sig.emit(1);
@@ -1789,7 +1789,7 @@ TEST(SignalTest, OneshotTagWithObject) {
 }
 
 TEST(SignalTest, PriorityOrder) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     vector<int> order;
     sig.connect([&order](int) { order.push_back(2); }, 10);
     sig.connect([&order](int) { order.push_back(1); }, 20);
@@ -1802,7 +1802,7 @@ TEST(SignalTest, PriorityOrder) {
 }
 
 TEST(SignalTest, SignalBlocking) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int count = 0;
     sig.connect([&count](int) { ++count; });
     {
@@ -1815,7 +1815,7 @@ TEST(SignalTest, SignalBlocking) {
 }
 
 TEST(SignalTest, SignalBlockerUnblock) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int count = 0;
     sig.connect([&count](int) { ++count; });
     {
@@ -1831,8 +1831,8 @@ TEST(SignalTest, SignalBlockerUnblock) {
 }
 
 TEST(SignalTest, ConnectSignal) {
-    signal<int> a;
-    signal<int> b;
+    neforce::signal<int> a;
+    neforce::signal<int> b;
     int count = 0;
     b.connect([&count](int) { ++count; });
     a.connect_signal(b);
@@ -1841,8 +1841,8 @@ TEST(SignalTest, ConnectSignal) {
 }
 
 TEST(SignalTest, ConnectSignalPointer) {
-    signal<int> a;
-    signal<int> b;
+    neforce::signal<int> a;
+    neforce::signal<int> b;
     int count = 0;
     b.connect([&count](int) { ++count; });
     a.connect_signal(&b);
@@ -1851,7 +1851,7 @@ TEST(SignalTest, ConnectSignalPointer) {
 }
 
 TEST(SignalTest, ConnectIf) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int sum = 0;
     sig.connect_if([&sum](int v) { sum += v; }, [](int v) { return v % 2 == 0; });
     sig.emit(1);
@@ -1862,7 +1862,7 @@ TEST(SignalTest, ConnectIf) {
 }
 
 TEST(SignalTest, ConnectIfMember) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     test_receiver receiver;
     sig.connect_if(&receiver, &test_receiver::onUpdate, [](int v) { return v > 10; }, 0);
     sig.emit(5);
@@ -1872,7 +1872,7 @@ TEST(SignalTest, ConnectIfMember) {
 }
 
 TEST(SignalTest, ConnectFiltered) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int called = 0;
     int last = 0;
     sig.connect_filtered(
@@ -1894,7 +1894,7 @@ TEST(SignalTest, ConnectFiltered) {
 }
 
 TEST(SignalTest, ConnectTransformed) {
-    signal<int, int> sig;
+    neforce::signal<int, int> sig;
     int sum = 0;
     sig.connect_transformed([&sum](int v) { sum += v; }, [](int a, int b) { return a + b; });
     sig.emit(2, 3);
@@ -1902,7 +1902,7 @@ TEST(SignalTest, ConnectTransformed) {
 }
 
 TEST(SignalTest, EmitExecutor) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int result = 0;
     sig.connect([&result](int v) { result = v; });
     simple_executor executor;
@@ -1913,7 +1913,7 @@ TEST(SignalTest, EmitExecutor) {
 }
 
 TEST(SignalTest, WeakPtrAutoCleanup) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     auto receiver = make_shared<test_receiver>();
     sig.connect(weak_ptr<test_receiver>(receiver), &test_receiver::onUpdate);
     sig.emit(10);
@@ -1924,7 +1924,7 @@ TEST(SignalTest, WeakPtrAutoCleanup) {
 }
 
 TEST(SignalTest, DisconnectAll) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int a = 0, b = 0;
     sig.connect([&a](int) { ++a; });
     sig.connect([&b](int) { ++b; });
@@ -1936,7 +1936,7 @@ TEST(SignalTest, DisconnectAll) {
 }
 
 TEST(SignalTest, SlotCountAndEmpty) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     EXPECT_TRUE(sig.empty());
     EXPECT_EQ(sig.slot_count(), 0u);
     auto c1 = sig.connect([](int) {});
@@ -1951,7 +1951,7 @@ TEST(SignalTest, SlotCountAndEmpty) {
 }
 
 TEST(SignalTest, MultipleParameters) {
-    signal<int, string, double> sig;
+    neforce::signal<int, string, double> sig;
     string lastStr;
     double lastDbl = 0.0;
     sig.connect([&](int, const string& s, double d) {
@@ -1964,14 +1964,14 @@ TEST(SignalTest, MultipleParameters) {
 }
 
 TEST(SignalTest, ConstMethods) {
-    const signal<int> sig;
+    const neforce::signal<int> sig;
     EXPECT_TRUE(sig.empty());
     EXPECT_EQ(sig.slot_count(), 0u);
     EXPECT_FALSE(sig.is_blocked());
 }
 
 TEST(SignalTest, CallbackResultErase) {
-    signal<> sig;
+    neforce::signal<> sig;
     int count = 0;
     sig.connect([&count]() -> callback_result {
         ++count;
@@ -1984,7 +1984,7 @@ TEST(SignalTest, CallbackResultErase) {
 }
 
 TEST(SignalTest, VoidCallbackKeep) {
-    signal<> sig;
+    neforce::signal<> sig;
     int count = 0;
     sig.connect([&count]() { ++count; });
     sig.emit();
@@ -1993,7 +1993,7 @@ TEST(SignalTest, VoidCallbackKeep) {
 }
 
 TEST(SignalTest, OperatorCall) {
-    signal<int> sig;
+    neforce::signal<int> sig;
     int val = 0;
     sig.connect([&val](int v) { val = v; });
     sig(42);

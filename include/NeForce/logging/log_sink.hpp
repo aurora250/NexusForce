@@ -9,8 +9,8 @@
  * 日志可以输出到控制台、文件等不同目标。
  */
 
-#include "log_event.hpp"
-#include "log_formatter.hpp"
+#include "NeForce/logging/log_event.hpp"
+#include "NeForce/logging/log_formatter.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

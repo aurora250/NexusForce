@@ -235,7 +235,7 @@ char sys_console::read_char_unsafe() const {
     ::tcsetattr(in_, TCSANOW, &new_tio);
 
     char ch = '\0';
-    ssize_t n;
+    ssize_t n = 0;
     do {
         n = ::read(in_, &ch, 1);
     } while (n == -1 && errno == EINTR);
@@ -273,7 +273,7 @@ void sys_console::flush_unsafe() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::FlushFileBuffers(out_);
 #elif defined(NEFORCE_PLATFORM_LINUX)
-    if (::isatty(out_)) {
+    if (::isatty(out_) != 0) {
         ::tcflush(out_, TCOFLUSH);
     } else {
         ::fsync(out_);

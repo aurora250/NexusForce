@@ -43,7 +43,6 @@ void dynamic_library::close() {
 }
 
 dynamic_library::dynamic_library(string pth) :
-handle_(nullptr),
 path_(move(pth)) {
     open();
 }

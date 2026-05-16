@@ -59,7 +59,7 @@ public:
      * @param key 头名称
      * @return 头值，不存在返回空字符串
      */
-    NEFORCE_NODISCARD string_view header(const string& key) const noexcept {
+    NEFORCE_NODISCARD string_view header(const string& key) const {
         const auto it = headers.find(key);
         if (it == headers.end() || it->second.empty()) {
             return "";
@@ -83,7 +83,7 @@ public:
      * @param key 头名称
      * @return 存在返回true
      */
-    NEFORCE_NODISCARD bool has_header(const string& key) const noexcept { return headers.find(key) != headers.end(); }
+    NEFORCE_NODISCARD bool has_header(const string& key) const { return headers.find(key) != headers.end(); }
 
     /**
      * @brief 检查是否为成功响应（2xx）
@@ -125,7 +125,7 @@ public:
      * @brief 获取Content-Type
      * @return Content-Type值
      */
-    NEFORCE_NODISCARD string_view content_type() const noexcept { return header("Content-Type"); }
+    NEFORCE_NODISCARD string_view content_type() const { return header("Content-Type"); }
 };
 
 
@@ -150,7 +150,7 @@ struct http_client_request {
      * @param key 头名称
      * @return 头值，不存在返回空字符串
      */
-    NEFORCE_NODISCARD string_view header(const string& key) const noexcept {
+    NEFORCE_NODISCARD string_view header(const string& key) const {
         const auto it = headers.find(key);
         if (it == headers.end() || it->second.empty()) {
             return "";

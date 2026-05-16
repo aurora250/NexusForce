@@ -84,16 +84,14 @@ public:
     };
 
 private:
+    native_handle_type out_; ///< 标准输出句柄
+    native_handle_type in_;  ///< 标准输入句柄
+    native_handle_type err_; ///< 标准错误句柄
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    native_handle_type out_;              ///< 标准输出句柄
-    native_handle_type in_;               ///< 标准输入句柄
-    native_handle_type err_;              ///< 标准错误句柄
     console_size saved_cursor_pos_{0, 0}; ///< 保存的光标位置
-#else
-    native_handle_type out_{-1}; ///< 标准输出文件描述符
-    native_handle_type in_{-1};  ///< 标准输入文件描述符
-    native_handle_type err_{-1}; ///< 标准错误文件描述符
 #endif
+
     mutable mutex mutex_;          ///< 互斥锁
     console_size last_size_{0, 0}; ///< 上次记录的控制台尺寸
 

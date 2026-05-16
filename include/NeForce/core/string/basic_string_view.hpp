@@ -808,7 +808,7 @@ public:
      * @param position 起始位置
      * @return 字符出现的次数
      */
-    NEFORCE_CONSTEXPR20 size_type count(value_type chr, const size_type position = 0) const noexcept {
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type count(value_type chr, const size_type position = 0) const noexcept {
         size_type n = 0;
         for (size_type idx = position; idx < size_; ++idx) {
             if (*(data() + idx) == chr) {

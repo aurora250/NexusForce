@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.0.0] - 2026-04-26
+## [1.0.0-beta] - 2026-05-16
 
 ### 🚀 New Features
 - 项目从 MSTL 重命名为 NexusForce
@@ -17,12 +17,15 @@
 - 添加 lru_cache / ttl_cache
 - 添加断点调用 breakpoint
 - 添加错误码系统 errc / error_category / error_code / error_condition
+- 添加 YAML 1.2 的 builder 与 parser
 - 添加路径树 path_tree
 - 添加端序操作 endian
 - 添加 shared_ptr / weak_ptr 特化的 atomic 无锁操作
+- 添加 int128_t 与 uint128_t 操作
 - 添加反射系统与反射注册表 registry
 - 添加 Unicode 码点操作类 codepoint
 - 添加 PCRE2[with JIT] 正则类 regex
+- 添加错误流输出能力 eprint
 - 添加本地化配置类 locale
 - 添加系统管道操作类 pipe
 - 添加共享内存类 share_memory
@@ -46,6 +49,7 @@
 - 优化 call_once 设计
 - 优化 path / file 设计，分离职责到子工具类
 - 使用 iiterator 优化迭代器实现
+- 优化 unique_ptr 的转换功能
 - 优化随机数生成器的结构设计
 - 优化 UTF 转换操作实现
 - 优化 formatter 实现
@@ -66,6 +70,17 @@
 - 修复 make_shared 内存泄漏问题
 - 修复线程池 cached 模式下的临界区操作异常问题
 - 修复 datetime 对UTC时间处理的异常问题
+- 修复 zlib 压缩解压缩的句柄释放方式
+- 修复 futex 在 Linux 的 private 阻塞问题
+- 修复 timer 的异步内存访问问题
+- 修复 bitmap 的内存未初始化问题
+- 修复 AES256 的 gf128_multiply 算法
+- 修复 function 的类型擦除导致字面量被识别为右值的问题
+- 修复 make_shared 在联合分配时的内存泄漏问题
+- 修复随机数生成器的生成范围异常问题
+- 修复 regex_token_iterator 的异常迭代问题
+- 修复 system_signal_manager 在多平台行为不一致的问题
+- 修复 sql_builder 的行为与 ANSI 标准不符合的地方
 
 ## [0.4.0] - 2025-12-26
 

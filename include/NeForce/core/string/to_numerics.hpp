@@ -9,7 +9,6 @@
  * 支持整数、浮点数的转换，包括进制转换和错误处理。
  */
 
-#include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/numeric/math.hpp"
 #include "NeForce/core/string/string_view.hpp"
 #ifdef max
@@ -43,7 +42,7 @@ constexpr enable_if_t<is_signed_v<T>, T> str_to_ints(const string_view sv, char*
     const char* end = start + len;
 
     if (len == 0) {
-        if (endptr) {
+        if (endptr != nullptr) {
             *endptr = const_cast<char*>(start);
         }
         return 0;
@@ -64,7 +63,7 @@ constexpr enable_if_t<is_signed_v<T>, T> str_to_ints(const string_view sv, char*
     }
 
     if (base != 0 && (base < 2 || base > 36)) {
-        if (endptr) {
+        if (endptr != nullptr) {
             *endptr = const_cast<char*>(start_conversion);
         }
         return 0;
@@ -122,7 +121,7 @@ constexpr enable_if_t<is_signed_v<T>, T> str_to_ints(const string_view sv, char*
         ++p;
     }
 
-    if (endptr) {
+    if (endptr != nullptr) {
         *endptr = any_converted ? const_cast<char*>(p) : const_cast<char*>(start_conversion);
     }
 
@@ -161,7 +160,7 @@ constexpr enable_if_t<is_unsigned_v<T>, T> str_to_uints(const string_view sv, ch
     const char* end = start + len;
 
     if (len == 0) {
-        if (endptr) {
+        if (endptr != nullptr) {
             *endptr = const_cast<char*>(start);
         }
         return 0;
@@ -182,7 +181,7 @@ constexpr enable_if_t<is_unsigned_v<T>, T> str_to_uints(const string_view sv, ch
     }
 
     if (base != 0 && (base < 2 || base > 36)) {
-        if (endptr) {
+        if (endptr != nullptr) {
             *endptr = const_cast<char*>(start_conversion);
         }
         return 0;
@@ -238,7 +237,7 @@ constexpr enable_if_t<is_unsigned_v<T>, T> str_to_uints(const string_view sv, ch
         ++p;
     }
 
-    if (endptr) {
+    if (endptr != nullptr) {
         *endptr = any_converted ? const_cast<char*>(p) : const_cast<char*>(start_conversion);
     }
 
@@ -277,9 +276,11 @@ NEFORCE_CONST_FUNCTION constexpr T fast_pow10(int exp) {
     constexpr int max_table_exp = 32;
 
     if (exp >= 0 && exp <= max_table_exp) {
+        // NOLINTNEXTLINE(clang-analyzer-security.ArrayBound)
         return pow10_table[exp];
     }
     if (exp < 0 && -exp <= max_table_exp) {
+        // NOLINTNEXTLINE(clang-analyzer-security.ArrayBound)
         return neg_pow10_table[-exp];
     }
 
@@ -454,13 +455,14 @@ constexpr enable_if_t<is_floating_point_v<T>, T> str_to_floats(const string_view
     if (exponent != 0) {
         constexpr int max_exp = numeric_traits<T>::max_exponent10 + 50;
         constexpr int min_exp = numeric_traits<T>::min_exponent10 - 50;
+        constexpr int max_table_exp = 32;
 
-        if (exponent > max_exp) {
+        if (exponent > max_exp || exponent > max_table_exp) {
             if (endptr) {
                 *endptr = const_cast<char*>(p);
             }
             return (sign > 0) ? numeric_traits<T>::infinity() : -numeric_traits<T>::infinity();
-        } else if (exponent < min_exp) {
+        } else if (exponent < min_exp || exponent < -max_table_exp) {
             if (endptr) {
                 *endptr = const_cast<char*>(p);
             }

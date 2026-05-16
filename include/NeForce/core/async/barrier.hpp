@@ -62,11 +62,11 @@ class tree_barrier {
         alignas(phase_alignment) array<byte_t, 64> tickets; ///< 票证数组
     };
 
-    ptrdiff_t expected_count_;                      ///< 期望的参与线程数
-    unique_ptr<state_data[]> state_array_;          ///< 状态数组指针
-    atomic_base<ptrdiff_t> expected_adjustment_;    ///< 期望调整值
-    CmplFunc completion_function_;                  ///< 完成函数
-    alignas(phase_alignment) byte_t current_phase_; ///< 当前阶段值
+    ptrdiff_t expected_count_;                         ///< 期望的参与线程数
+    unique_ptr<state_data[]> state_array_;             ///< 状态数组指针
+    atomic_base<ptrdiff_t> expected_adjustment_{0};    ///< 期望调整值
+    CmplFunc completion_function_;                     ///< 完成函数
+    alignas(phase_alignment) byte_t current_phase_{0}; ///< 当前阶段值
 
     /**
      * @brief 执行到达操作
@@ -134,9 +134,7 @@ public:
      */
     tree_barrier(const ptrdiff_t expected, CmplFunc completion) :
     expected_count_(expected),
-    expected_adjustment_(0),
-    completion_function_(_NEFORCE move(completion)),
-    current_phase_(static_cast<byte_t>(0)) {
+    completion_function_(_NEFORCE move(completion)) {
         size_t const count = (expected_count_ + 1) >> 1;
         state_array_ = make_unique<state_data[]>(count);
     }

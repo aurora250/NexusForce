@@ -44,13 +44,13 @@ private:
     mutex callback_mutex_;                                   ///< 回调函数互斥锁
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::HANDLE dir_handle_ = INVALID_HANDLE_VALUE;      ///< 目录句柄
-    ::HANDLE completion_port_ = INVALID_HANDLE_VALUE; ///< I/O完成端口
-    ::OVERLAPPED overlapped_{};                       ///< 重叠I/O结构
+    native_handle_type dir_handle_ = INVALID_HANDLE_VALUE;      ///< 目录句柄
+    native_handle_type completion_port_ = INVALID_HANDLE_VALUE; ///< I/O完成端口
+    ::OVERLAPPED overlapped_{};                                 ///< 重叠I/O结构
 #else
-    int inotify_fd_ = -1;       ///< inotify文件描述符
-    int watch_descriptor_ = -1; ///< 监视描述符
-    int event_fd_ = -1;         ///< 事件通知文件描述符
+    native_handle_type inotify_fd_ = -1;       ///< inotify文件描述符
+    native_handle_type watch_descriptor_ = -1; ///< 监视描述符
+    native_handle_type event_fd_ = -1;         ///< 事件通知文件描述符
 #endif
 
     thread watch_thread_; ///< 监视线程

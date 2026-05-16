@@ -138,7 +138,8 @@ private:
             }
 
             if (!nodes_.empty()) {
-                cv_.wait_until(lock, nodes_.begin()->expire, [this] {
+                auto expire_time = nodes_.begin()->expire;
+                cv_.wait_until(lock, expire_time, [this] {
                     return stopped_.load(memory_order_acquire) || nodes_.empty() ||
                            nodes_.begin()->expire <= clock_type::now();
                 });

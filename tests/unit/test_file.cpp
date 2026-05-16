@@ -5184,8 +5184,6 @@ TEST_F(FileAsyncTest, ReadBufferPreallocation) {
     EXPECT_EQ(buffer.substr(0, 21), "preallocation test da");
 }
 
-#if 0
-
 class FileWatcherTest : public ::testing::Test {
 protected:
     void SetUp() override {
@@ -5202,24 +5200,16 @@ protected:
         }
     }
 
-    path get_path(const string& name) const {
-        return test_dir_ / path(name);
-    }
+    path get_path(const string& name) const { return test_dir_ / path(name); }
 
-    static void wait_ms(uint32_t ms) {
-        this_thread::sleep_for(milliseconds(ms));
-    }
+    static void wait_ms(uint32_t ms) { this_thread::sleep_for(milliseconds(ms)); }
 
     path test_dir_;
 };
 
-TEST_F(FileWatcherTest, Constructor) {
-    EXPECT_NO_THROW(file_watcher watcher(test_dir_, false));
-}
+TEST_F(FileWatcherTest, Constructor) { EXPECT_NO_THROW(file_watcher watcher(test_dir_, false)); }
 
-TEST_F(FileWatcherTest, ConstructorRecursive) {
-    EXPECT_NO_THROW(file_watcher watcher(test_dir_, true));
-}
+TEST_F(FileWatcherTest, ConstructorRecursive) { EXPECT_NO_THROW(file_watcher watcher(test_dir_, true)); }
 
 TEST_F(FileWatcherTest, ConstructorNonExistentPath) {
     path non_existent = test_dir_ / path("does_not_exist");
@@ -5237,9 +5227,7 @@ TEST_F(FileWatcherTest, StartStop) {
     file_watcher watcher(test_dir_, false);
 
     int call_count = 0;
-    auto cb = [&](const path&, file_watch_event) {
-        ++call_count;
-    };
+    auto cb = [&](const path&, file_watch_event) { ++call_count; };
 
     EXPECT_TRUE(watcher.start(cb));
     EXPECT_TRUE(watcher.is_watching());
@@ -5680,5 +5668,3 @@ TEST_F(FileWatcherTest, StopThenRestart) {
     EXPECT_TRUE(watcher.is_watching());
     watcher.stop();
 }
-
-#endif

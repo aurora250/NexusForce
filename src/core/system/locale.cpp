@@ -198,25 +198,9 @@ void locale::load_locale(const string& name) {
 #endif
 }
 
-locale::locale()
-#ifdef NEFORCE_PLATFORM_LINUX
-:
-loc_(LC_GLOBAL_LOCALE),
-owns_(false)
-#endif
-{
-    load_locale("C");
-}
+locale::locale() { load_locale("C"); }
 
-locale::locale(const string& name)
-#ifdef NEFORCE_PLATFORM_LINUX
-:
-loc_(LC_GLOBAL_LOCALE),
-owns_(false)
-#endif
-{
-    load_locale(name);
-}
+locale::locale(const string& name) { load_locale(name); }
 
 locale::~locale() {
 #ifdef NEFORCE_PLATFORM_LINUX
@@ -224,15 +208,7 @@ locale::~locale() {
 #endif
 }
 
-locale::locale(const locale& other)
-#ifdef NEFORCE_PLATFORM_LINUX
-:
-loc_(LC_GLOBAL_LOCALE),
-owns_(false)
-#endif
-{
-    load_locale(other.name_);
-}
+locale::locale(const locale& other) { load_locale(other.name_); }
 
 locale& locale::operator=(const locale& other) {
     if (addressof(other) == this) {

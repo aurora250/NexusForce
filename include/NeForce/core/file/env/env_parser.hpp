@@ -158,7 +158,7 @@ public:
      *
      * 初始化解析器并创建空的文档对象。
      */
-    explicit env_parser(string text) noexcept :
+    explicit env_parser(string text) :
     text_(_NEFORCE move(text)),
     len_(text_.size()) {
         root_ = make_unique<env_document>();

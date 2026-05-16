@@ -30,13 +30,26 @@ NEFORCE_BEGIN_NAMESPACE__
  * @note 此函数区分正零和负零。
  */
 template <typename T>
-NEFORCE_CONST_FUNCTION constexpr bool signbit(const T x) noexcept {
+NEFORCE_CONST_FUNCTION constexpr enable_if_t<!(sizeof(T) == 16 && numeric_traits<T>::digits == 64), bool>
+signbit(const T x) noexcept {
     static_assert(is_floating_point_v<T>, "floating point required");
     using UInt = make_integer_t<sizeof(T), false>;
 
     const UInt bits = *reinterpret_cast<const UInt*>(&x);
     constexpr UInt sign_mask = static_cast<UInt>(1) << (8 * sizeof(UInt) - 1);
     return (bits & sign_mask) != 0;
+}
+
+template <typename T>
+NEFORCE_CONST_FUNCTION constexpr enable_if_t<sizeof(T) == 16 && numeric_traits<T>::digits == 64, bool>
+signbit(const T x) noexcept {
+    static_assert(is_floating_point_v<T>, "floating point required");
+
+    struct {
+        byte_t data[16];
+    } buf;
+    memory_copy(&buf, &x, sizeof(buf));
+    return (buf.data[9] & 0x80) != 0;
 }
 
 

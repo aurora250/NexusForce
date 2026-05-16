@@ -1304,7 +1304,7 @@ struct atomic_flag {
      */
     NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE bool test(const memory_order mo = memory_order_seq_cst) const noexcept {
 #ifdef NEFORCE_COMPILER_GNUC
-        value_type value;
+        value_type value = false;
         __atomic_load(&flag_, &value, static_cast<int32_t>(mo));
         return value != static_cast<value_type>(0);
 #else
@@ -1322,7 +1322,7 @@ struct atomic_flag {
     NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE bool test(const memory_order mo = memory_order_seq_cst) const
             volatile noexcept {
 #ifdef NEFORCE_COMPILER_GNUC
-        value_type value;
+        value_type value = false;
         __atomic_load(&flag_, &value, static_cast<int32_t>(mo));
         return value != static_cast<value_type>(0);
 #else
@@ -1340,7 +1340,7 @@ struct atomic_flag {
      * @param mo 内存顺序
      */
     NEFORCE_ALWAYS_INLINE void wait(const bool old, const memory_order mo = memory_order_seq_cst) const noexcept {
-        const value_type value = old ? 1 : 0;
+        const auto value = static_cast<value_type>(old);
         _NEFORCE atomic_wait_address_v(const_cast<const value_type*>(&flag_), value,
                                        [this, mo] { return this->test(mo); });
     }
@@ -1350,7 +1350,7 @@ struct atomic_flag {
      */
     NEFORCE_ALWAYS_INLINE_INLINE void wait(const bool old, const memory_order mo = memory_order_seq_cst) const
             volatile noexcept {
-        const value_type value = old ? 1 : 0;
+        const auto value = static_cast<value_type>(old);
         _NEFORCE atomic_wait_address_v(const_cast<const value_type*>(&flag_), value,
                                        [this, mo] { return this->test(mo); });
     }

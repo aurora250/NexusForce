@@ -124,7 +124,7 @@ struct waiter_pool_base {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         platform_wait_t res = ::_InterlockedExchangeAdd(const_cast<volatile platform_wait_t*>(&wait), 0);
 #else
-        platform_wait_t res;
+        platform_wait_t res = 0;
         __atomic_load(&wait, &res, __ATOMIC_SEQ_CST);
 #endif
         return res != 0;

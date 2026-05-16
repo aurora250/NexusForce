@@ -188,7 +188,7 @@ void system_signal_manager::start_monitoring() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::SetThreadPriority(signal_thread_.native_handle(), THREAD_PRIORITY_HIGHEST);
 #else
-    struct sched_param param;
+    ::sched_param param;
     param.sched_priority = ::sched_get_priority_max(SCHED_FIFO);
     ::pthread_setschedparam(signal_thread_.native_handle(), SCHED_FIFO, &param);
 #endif
@@ -420,18 +420,16 @@ void system_signal_manager::process_signal(const event event, void* context) {
             trigger_force_exit();
 #else
             printcln(color::red(), "Critical error detected, aborting: ", static_cast<int>(event));
-            ::abort();
+            _NEFORCE abort();
 #endif
-            break;
         }
         case event::ABORT: {
             printcln(color::red(), "Abort signal received.");
 #ifdef NEFORCE_PLATFORM_WINDOWS
             trigger_force_exit();
 #else
-            ::abort();
+            _NEFORCE abort();
 #endif
-            break;
         }
         case event::PIPE_BROKEN: {
             printcln(color::yellow(), "Broken pipe signal received, ignoring.");

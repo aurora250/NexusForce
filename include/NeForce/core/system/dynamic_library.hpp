@@ -49,8 +49,8 @@ struct dynamic_library_exception final : system_exception {
  */
 class NEFORCE_API dynamic_library {
 private:
-    void* handle_; ///< 动态库句柄
-    string path_;  ///< 库文件路径
+    void* handle_{nullptr}; ///< 动态库句柄
+    string path_;           ///< 库文件路径
 
 private:
     /**

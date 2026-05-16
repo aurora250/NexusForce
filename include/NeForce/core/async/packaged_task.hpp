@@ -192,8 +192,8 @@ public:
  */
 class __future_base::async_state_common : public __future_base::state_base {
 protected:
-    thread thread;
-    once_flag once_flag;
+    _NEFORCE thread thread;
+    once_flag flag;
 
 public:
     ~async_state_common() override = default;
@@ -201,7 +201,7 @@ public:
 protected:
     void complete_async() override { join(); }
 
-    void join() { _NEFORCE call_once(once_flag, &_NEFORCE thread::join, &thread); }
+    void join() { _NEFORCE call_once(flag, &_NEFORCE thread::join, &thread); }
 };
 
 /**

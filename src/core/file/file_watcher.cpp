@@ -6,8 +6,19 @@
 #    include <poll.h>
 #    include <sys/eventfd.h>
 #    include <sys/inotify.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
+
+namespace {
+    // inotify event ~= sizeof(inotify_event) + NAME_MAX = 272 bytes.
+    // 64KB holds ~240 events per read(), preventing kernel queue overflow
+    // under bursty workloads such as builds or checkouts.
+    constexpr size_t kWatchBufferSize = 65536;
+    // Batch pre-allocation: enough for a single read() worth of events.
+    constexpr size_t kEventBatchCapacity = 256;
+} // namespace
+
 
 file_watcher::file_watcher(path watch_path, const bool recursive) :
 watch_path_(move(watch_path)),
@@ -50,8 +61,6 @@ bool file_watcher::start(callback_t callback, file_watch_event events) {
         return false;
     }
 
-    watch_thread_.start(&file_watcher::watch_thread_func, this);
-
 #else
     inotify_fd_ = ::inotify_init1(IN_NONBLOCK);
     if (inotify_fd_ == -1) {
@@ -90,10 +99,9 @@ bool file_watcher::start(callback_t callback, file_watch_event events) {
         watching_.store(false);
         return false;
     }
-
-    watch_thread_.start(&file_watcher::watch_thread_func, this);
-
 #endif
+
+    watch_thread_ = thread(&file_watcher::watch_thread_func, this);
 
     return true;
 }
@@ -153,9 +161,21 @@ void file_watcher::stop() {
     }
 }
 
-
 void file_watcher::watch_thread_func() {
-    buffer_.resize(MEMORY_BIG_ALLOC_THRESHHOLD);
+    buffer_.resize(kWatchBufferSize);
+
+    string path_prefix = watch_path_.str();
+    if (!path_prefix.empty() && path_prefix.back() != path::preferred_separator) {
+        path_prefix += path::preferred_separator;
+    }
+    const size_t prefix_len = path_prefix.size();
+
+    struct batched_event {
+        string file_name;
+        file_watch_event type;
+    };
+    vector<batched_event> event_batch;
+    event_batch.reserve(kEventBatchCapacity);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::OVERLAPPED local_overlapped{};
@@ -203,8 +223,8 @@ void file_watcher::watch_thread_func() {
         ::ULONG_PTR completion_key = 0;
         ::LPOVERLAPPED lp_overlapped = nullptr;
 
-        const ::BOOL io_completed = ::GetQueuedCompletionStatus(completion_port_, &bytes_transferred, &completion_key,
-                                                                &lp_overlapped, 1000);
+        const ::BOOL io_completed =
+                ::GetQueuedCompletionStatus(completion_port_, &bytes_transferred, &completion_key, &lp_overlapped, 100);
 
         if (io_completed == FALSE) {
             const ::DWORD error = ::GetLastError();
@@ -219,13 +239,13 @@ void file_watcher::watch_thread_func() {
         }
 
         if (bytes_transferred > 0) {
+            event_batch.clear();
             auto* fni = reinterpret_cast<::FILE_NOTIFY_INFORMATION*>(buffer_.data());
 
             while (fni != nullptr && watching_.load()) {
                 const wstring wide_filename(fni->FileName, fni->FileNameLength / sizeof(wchar_t));
-                const string utf8_name = to_string(wide_filename);
+                string utf8_name = to_string(wide_filename);
                 if (!utf8_name.empty()) {
-                    const path full_path = watch_path_ / path{utf8_name};
                     auto event_type = file_watch_event::ACCESSED;
 
                     switch (fni->Action) {
@@ -248,10 +268,7 @@ void file_watcher::watch_thread_func() {
                         }
                     }
 
-                    lock<mutex> lk(callback_mutex_);
-                    if (callback_) {
-                        callback_(full_path, move(event_type));
-                    }
+                    event_batch.push_back({move(utf8_name), event_type});
                 }
 
                 if (fni->NextEntryOffset == 0) {
@@ -259,6 +276,21 @@ void file_watcher::watch_thread_func() {
                 } else {
                     fni = reinterpret_cast<::FILE_NOTIFY_INFORMATION*>(reinterpret_cast<::BYTE*>(fni) +
                                                                        fni->NextEntryOffset);
+                }
+            }
+
+            if (!event_batch.empty()) {
+                callback_t cb_copy;
+                {
+                    lock<mutex> lk(callback_mutex_);
+                    cb_copy = callback_;
+                }
+                if (cb_copy) {
+                    for (auto& be: event_batch) {
+                        path_prefix.resize(prefix_len);
+                        path_prefix.append(be.file_name);
+                        cb_copy(path(path_prefix), be.type);
+                    }
                 }
             }
         }
@@ -285,7 +317,7 @@ void file_watcher::watch_thread_func() {
     fds[1].events = POLLIN;
 
     while (watching_.load() && !stopping_.load()) {
-        const int poll_result = ::poll(fds, 2, 1000);
+        const int poll_result = ::poll(fds, 2, 100);
         if (poll_result == -1) {
             if (errno == EINTR) {
                 continue;
@@ -310,6 +342,7 @@ void file_watcher::watch_thread_func() {
                 break;
             }
 
+            event_batch.clear();
             char* ptr = buffer_.data();
             while (ptr < buffer_.data() + len) {
                 auto* event = reinterpret_cast<struct ::inotify_event*>(ptr);
@@ -330,14 +363,25 @@ void file_watcher::watch_thread_func() {
                 }
 
                 if (matched && event->len > 0) {
-                    path full_path = watch_path_ / path(event->name);
-                    lock<mutex> lk(callback_mutex_);
-                    if (callback_) {
-                        callback_(full_path, move(evt));
-                    }
+                    event_batch.push_back({string(event->name), evt});
                 }
 
                 ptr += sizeof(::inotify_event) + event->len;
+            }
+
+            if (!event_batch.empty()) {
+                callback_t cb_copy;
+                {
+                    lock<mutex> lk(callback_mutex_);
+                    cb_copy = callback_;
+                }
+                if (cb_copy) {
+                    for (auto& be: event_batch) {
+                        path_prefix.resize(prefix_len);
+                        path_prefix.append(be.file_name);
+                        cb_copy(path(path_prefix), be.type);
+                    }
+                }
             }
         }
     }

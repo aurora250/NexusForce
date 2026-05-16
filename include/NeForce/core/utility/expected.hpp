@@ -1,5 +1,6 @@
 #ifndef NEFORCE_CORE_UTILITY_EXPECTED_HPP__
 #define NEFORCE_CORE_UTILITY_EXPECTED_HPP__
+#include "NeForce/core/exception/breakpoint.hpp"
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/functional/invoke.hpp"
 #include "NeForce/core/memory/construct.hpp"

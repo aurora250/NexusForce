@@ -9,6 +9,7 @@
  * 支持类型安全的存取操作，是反射系统的核心基础。
  */
 
+#include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/string/string_view.hpp"
 NEFORCE_BEGIN_NAMESPACE__

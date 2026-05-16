@@ -103,11 +103,7 @@ public:
         if (ptr_ == nullptr) {
             return *this;
         }
-        if (value) {
-            *ptr_ |= mask_;
-        } else {
-            *ptr_ &= ~mask_;
-        }
+        *ptr_ = (*ptr_ & ~mask_) | (value ? mask_ : 0);
         return *this;
     }
 
@@ -407,6 +403,7 @@ private:
             }
             ptr = cpair.get_base().allocate(word);
             cpair.value = word;
+            memory_zero(ptr, word * sizeof(uint32_t));
         }
 
         /**
@@ -721,7 +718,7 @@ public:
         }
         allocate_storage(word);
         set_iterators(word);
-        _NEFORCE fill(storage_.get(), storage_.get() + storage_.capacity(), 0);
+        _NEFORCE fill_n(storage_.get(), static_cast<ptrdiff_t>(storage_.capacity()), 0);
     }
 
     /**
@@ -783,7 +780,8 @@ public:
             return *this;
         }
         bitmap tmp(other);
-        bitmap::swap(tmp);
+        *this = _NEFORCE move(tmp);
+        // NOLINTNEXTLINE(clang-analyzer-core.StackAddressEscape)
         return *this;
     }
 

@@ -14,7 +14,7 @@ protected:
 };
 
 using TestTypes = ::testing::Types<bool, int8_t, int16_t, int32_t, int64_t, uint8_t, uint16_t, uint32_t, uint64_t, char,
-                                   char16_t, char32_t, float32_t, float64_t>;
+                                   char16_t, char32_t, float32_t, float64_t, decimal_t>;
 
 TYPED_TEST_SUITE(NumericTraitsConsistencyTest, TestTypes);
 
