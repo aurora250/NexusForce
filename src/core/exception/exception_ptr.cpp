@@ -46,6 +46,7 @@ void rethrow_exception(const exception_ptr& p) {
         terminate();
     }
     p.ecb_->wrapper->rethrow();
+    unreachable(); // rethrow not return, help GCC to identify
 }
 
 NEFORCE_END_NAMESPACE__
