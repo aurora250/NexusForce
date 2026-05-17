@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🐧_20linux_0',['🐧 Linux',['../index.html#autotoc_md43',1,'']]]
+  ['🏗️_20编译步骤_0',['🏗️ 编译步骤',['../index.html#autotoc_md41',1,'']]]
 ];

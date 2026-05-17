@@ -16,7 +16,7 @@ var classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4 =
     [ "get_deleter", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a0397d22ea05cd43bc444504cd2a69597", null ],
     [ "get_deleter", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a555e3e95e5899d41276d58bf27d11462", null ],
     [ "operator bool", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#ab8c3eb74c61eed55b2ad0d82307e9b7e", null ],
-    [ "operator*", "classunique__ptr.html#a73450603f460b996bb1847b2f536c0f5", null ],
+    [ "operator*", "classunique__ptr.html#a4a3689138ac59016d3209a1021c45eed", null ],
     [ "operator->", "classunique__ptr.html#adad9506f6921b78de331b68fccb8b1d2", null ],
     [ "operator=", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#a811910b5dc18f52dd96f853c80f3f37a", null ],
     [ "operator=", "classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4.html#accad32a5dda96be9d8c9522ec1dc5dc3", null ],

@@ -1,7 +1,7 @@
 var classfile__mapper =
 [
     [ "map_info", "structfile__mapper_1_1map__info.html", "structfile__mapper_1_1map__info" ],
-    [ "native_handle_type", "classfile__mapper.html#aa202b525ce013a40e0af4c529d2e4b52", null ],
+    [ "native_handle_type", "classfile__mapper.html#a144356081b59b80b334a3f229c66e89a", null ],
     [ "size_type", "classfile__mapper.html#a97fa144b38811c51d1894ffd86b875d8", null ],
     [ "file_mapper", "classfile__mapper.html#a7654fa56cd3f3bc7288c9d1b50549b6f", null ],
     [ "~file_mapper", "classfile__mapper.html#a777eba65efb114b59ada48b35c2ccab2", null ],

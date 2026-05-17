@@ -2,13 +2,16 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
   <compounddef id="latch_8hpp" kind="file" language="C++">
     <compoundname>latch.hpp</compoundname>
-    <includes refid="atomic__base_8hpp" local="yes">atomic_base.hpp</includes>
+    <includes refid="atomic__base_8hpp" local="yes">NeForce/core/async/atomic_base.hpp</includes>
+    <includes refid="numeric__traits_8hpp" local="yes">NeForce/core/numeric/numeric_traits.hpp</includes>
     <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
     <incdepgraph>
       <node id="2">
-        <label>atomic_base.hpp</label>
+        <label>NeForce/core/async/atomic_base.hpp</label>
         <link refid="atomic__base_8hpp"/>
         <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
@@ -24,7 +27,7 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -38,8 +41,10 @@
         <link refid="latch_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
       </node>
-      <node id="17">
+      <node id="16">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="6" relation="include">
@@ -48,7 +53,7 @@
       <node id="9">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
@@ -59,8 +64,6 @@
         <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="7">
@@ -75,16 +78,22 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="17">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="15">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>NeForce/core/numeric/numeric_traits.hpp</label>
+        <link refid="numeric__traits_8hpp"/>
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -100,25 +109,25 @@
         </childnode>
       </node>
       <node id="8">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="14">
+        <label>ctime</label>
+      </node>
+      <node id="18">
+        <label>intrin.h</label>
       </node>
       <node id="19">
-        <label>intrin.h</label>
+        <label>intrin0.inl.h</label>
       </node>
       <node id="11">
         <label>processthreadsapi.h</label>
-      </node>
-      <node id="15">
-        <label>riscv_pause.h</label>
       </node>
       <node id="13">
         <label>sched.h</label>
       </node>
       <node id="12">
         <label>synchapi.h</label>
-      </node>
-      <node id="14">
-        <label>unistd.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -145,54 +154,55 @@
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_ASYNC_LATCH_HPP__</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="atomic__base_8hpp" kindref="compound">atomic_base.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35" refid="classlatch" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref><sp/>{</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">alignas</highlight><highlight class="normal">(</highlight><highlight class="keyword">alignof</highlight><highlight class="normal">(<ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref>))<sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>counter_;<sp/></highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="44" refid="classlatch_1aefa9e036b3465180cff7ca28d1f37905" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/><ref refid="classlatch_1aefa9e036b3465180cff7ca28d1f37905" kindref="member">max</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" kindref="member">numeric_traits&lt;platform_wait_t&gt;::max</ref>();<sp/>}</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52" refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>expected)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>counter_(expected)<sp/>{</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___debug_breakpoints_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" kindref="member">NEFORCE_CONSTEXPR_ASSERT</ref>(expected<sp/>&gt;=<sp/>0);</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57" refid="classlatch_1a65fbf24cb0b126f05d13f8242a4f96bb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlatch_1a65fbf24cb0b126f05d13f8242a4f96bb" kindref="member">~latch</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="58" refid="classlatch_1a00355a36c48695412e0ae6e8634f534f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlatch_1a00355a36c48695412e0ae6e8634f534f" kindref="member">latch</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="59" refid="classlatch_1a33b76e8739418ed6b0ffffc7811b7ccd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>&amp;<sp/><ref refid="classlatch_1a33b76e8739418ed6b0ffffc7811b7ccd" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/></highlight></codeline>
-<codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69" refid="classlatch_1af97b3e7f872dacf234135f65508ff964" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlatch_1af97b3e7f872dacf234135f65508ff964" kindref="member">count_down</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>update<sp/>=<sp/>1)<sp/>{</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>old_value<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga021ba5336034625fe4ca4af59bc779da" kindref="member">atomic_fetch_sub</ref>(&amp;counter_,<sp/>update,<sp/><ref refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" kindref="member">memory_order_release</ref>);</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(old_value<sp/>==<sp/>update)<sp/>{</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga5c5949e5e1c0b7d9c13b91322f47f79d" kindref="member">atomic_notify_address</ref>(&amp;counter_,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82" refid="classlatch_1a6cfd32999e758550d70919819991edcd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a6cfd32999e758550d70919819991edcd" kindref="member">try_wait</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1gae881b9b04d18e6f5dd4f5d7311bb48c9" kindref="member">atomic_load</ref>(&amp;counter_,<sp/><ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>)<sp/>==<sp/>0;</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93" refid="classlatch_1a08842ebccf3f250756b4807998f5fdff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a08842ebccf3f250756b4807998f5fdff" kindref="member">wait</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>predicate<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;<ref refid="classlatch_1a6cfd32999e758550d70919819991edcd" kindref="member">try_wait</ref>();<sp/>};</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga04b378083d850b094555357ea10e17ef" kindref="member">atomic_wait_address</ref>(&amp;counter_,<sp/>predicate);</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107" refid="classlatch_1ad43a11355c2e90bba7ada9dd81d14acd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlatch_1ad43a11355c2e90bba7ada9dd81d14acd" kindref="member">arrive_and_wait</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>update<sp/>=<sp/>1)<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlatch_1af97b3e7f872dacf234135f65508ff964" kindref="member">count_down</ref>(update);</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlatch_1a08842ebccf3f250756b4807998f5fdff" kindref="member">wait</ref>();</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="111"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ThreadSync</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="116"><highlight class="normal"></highlight></codeline>
-<codeline lineno="117"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_LATCH_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="atomic__base_8hpp" kindref="compound">NeForce/core/async/atomic_base.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="numeric__traits_8hpp" kindref="compound">NeForce/core/numeric/numeric_traits.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="classlatch" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref><sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">alignas</highlight><highlight class="normal">(</highlight><highlight class="keyword">alignof</highlight><highlight class="normal">(<ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref>))<sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>counter_;<sp/></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="45" refid="classlatch_1aefa9e036b3465180cff7ca28d1f37905" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/><ref refid="classlatch_1aefa9e036b3465180cff7ca28d1f37905" kindref="member">max</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" kindref="member">numeric_traits&lt;platform_wait_t&gt;::max</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>expected)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>counter_(expected)<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___debug_breakpoints_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" kindref="member">NEFORCE_CONSTEXPR_ASSERT</ref>(expected<sp/>&gt;=<sp/>0);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="classlatch_1a65fbf24cb0b126f05d13f8242a4f96bb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlatch_1a65fbf24cb0b126f05d13f8242a4f96bb" kindref="member">~latch</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="59" refid="classlatch_1a00355a36c48695412e0ae6e8634f534f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlatch_1a00355a36c48695412e0ae6e8634f534f" kindref="member">latch</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="60" refid="classlatch_1a33b76e8739418ed6b0ffffc7811b7ccd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>&amp;<sp/><ref refid="classlatch_1a33b76e8739418ed6b0ffffc7811b7ccd" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="classlatch_1af97b3e7f872dacf234135f65508ff964" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlatch_1af97b3e7f872dacf234135f65508ff964" kindref="member">count_down</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>update<sp/>=<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>old_value<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga021ba5336034625fe4ca4af59bc779da" kindref="member">atomic_fetch_sub</ref>(&amp;counter_,<sp/>update,<sp/><ref refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" kindref="member">memory_order_release</ref>);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(old_value<sp/>==<sp/>update)<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga5c5949e5e1c0b7d9c13b91322f47f79d" kindref="member">atomic_notify_address</ref>(&amp;counter_,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="classlatch_1a2206028685d6c7164ab09b8a4796eb11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a2206028685d6c7164ab09b8a4796eb11" kindref="member">try_wait</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1gae881b9b04d18e6f5dd4f5d7311bb48c9" kindref="member">atomic_load</ref>(&amp;counter_,<sp/><ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>)<sp/>==<sp/>0;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94" refid="classlatch_1a08842ebccf3f250756b4807998f5fdff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a08842ebccf3f250756b4807998f5fdff" kindref="member">wait</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>predicate<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;<ref refid="classlatch_1a2206028685d6c7164ab09b8a4796eb11" kindref="member">try_wait</ref>();<sp/>};</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga04b378083d850b094555357ea10e17ef" kindref="member">atomic_wait_address</ref>(&amp;counter_,<sp/>predicate);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108" refid="classlatch_1ad43a11355c2e90bba7ada9dd81d14acd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlatch_1ad43a11355c2e90bba7ada9dd81d14acd" kindref="member">arrive_and_wait</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>update<sp/>=<sp/>1)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlatch_1af97b3e7f872dacf234135f65508ff964" kindref="member">count_down</ref>(update);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlatch_1a08842ebccf3f250756b4807998f5fdff" kindref="member">wait</ref>();</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ThreadSync</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_LATCH_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/latch.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp"/>
   </compounddef>
 </doxygen>

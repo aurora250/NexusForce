@@ -155,142 +155,111 @@ $(function(){initNavTree('msvc__intrinsic_8hpp_source.html','',''); });
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">return</span> lo;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}</div>
 </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>NEFORCE_BEGIN_INNER__</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>NEFORCE_CONSTEXPR14 <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> div_digit(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> u_hi32_lo32, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> v_hi, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> v_lo,</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                                       <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>* rem_out) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keyword">const</span> <span class="keyword">auto</span> u_hi32 = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(u_hi32_lo32 &gt;&gt; 32);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keyword">const</span> <span class="keyword">auto</span> u_lo32 = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(u_hi32_lo32);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> uhat = u_hi32_lo32;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> qhat = 0, rhat = 0;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordflow">if</span> (u_hi32 &gt;= v_hi) {</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        qhat = 0xFFFFFFFFULL;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        rhat = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a><span class="keyword">&gt;</span>(u_hi32 - v_hi) + <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a><span class="keyword">&gt;</span>(v_hi);</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        rhat = uhat - qhat * v_hi;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        qhat = uhat / v_hi;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        rhat = uhat - qhat * v_hi;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="comment">// qhat*v_lo &gt; B*rhat + u_lo32</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">while</span> (qhat &gt;= 0x100000000ULL || qhat * v_lo &gt; ((rhat &lt;&lt; 32) | u_lo32)) {</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        --qhat;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        rhat += v_hi;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">if</span> (rhat &gt;= 0x100000000ULL) {</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        }</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    }</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    *rem_out = uhat - qhat * v_hi;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(qhat);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>NEFORCE_END_INNER__</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span></div>
-<div class="foldopen" id="foldopen00149" data-start="{" data-end="}">
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="group___m_s_v_c_compiler_intrinsics.html#ga6327e37e5117d9bcd0f3b58ff23f7669">  149</a></span>NEFORCE_CONSTEXPR14 <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> <a class="code hl_function" href="group___m_s_v_c_compiler_intrinsics.html#ga6327e37e5117d9bcd0f3b58ff23f7669">_udiv128</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> dividend_hi, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> dividend_lo, <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> divisor,</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                                      <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>* <a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a>) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">if</span> (dividend_hi == 0) {</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            *<a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a> = dividend_lo % divisor;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        }</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">return</span> dividend_lo / divisor;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span></div>
+<div class="foldopen" id="foldopen00113" data-start="{" data-end="}">
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="group___m_s_v_c_compiler_intrinsics.html#gab7d6987d80046d52c36ac6051d35ac56">  113</a></span>NEFORCE_CONSTEXPR14 <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> <a class="code hl_function" href="group___m_s_v_c_compiler_intrinsics.html#gab7d6987d80046d52c36ac6051d35ac56">_udiv128</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> dividend_hi, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> dividend_lo, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> divisor,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                                      <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>* <a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a>) <span class="keyword">noexcept</span> {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">if</span> (dividend_hi == 0) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            *<a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a> = dividend_lo % divisor;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordflow">return</span> dividend_lo / divisor;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> s = _NEFORCE <a class="code hl_function" href="group___bit_manipulation.html#ga29f6f826c8059121f269f3948a1542d4">clz64</a>(divisor);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> d = divisor &lt;&lt; s;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> u2 = 0, u1 = 0, u0 = 0;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">if</span> (s == 0) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        u1 = dividend_hi;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        u0 = dividend_lo;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        u2 = dividend_hi &gt;&gt; (64 - s);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        u1 = (dividend_hi &lt;&lt; s) | (dividend_lo &gt;&gt; (64 - s));</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        u0 = dividend_lo &lt;&lt; s;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keyword">const</span> <span class="keyword">auto</span> d_hi = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(d &gt;&gt; 32);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keyword">const</span> <span class="keyword">auto</span> d_lo = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(d);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> u_hi = (<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a><span class="keyword">&gt;</span>(u2) &lt;&lt; 32) | (u1 &gt;&gt; 32);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> q1 = u_hi / d_hi;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> r1 = u_hi % d_hi;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordflow">while</span> (q1 &gt;= 0x100000000ULL || q1 * d_lo &gt; ((r1 &lt;&lt; 32) | (u1 &amp; 0xFFFFFFFF))) {</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        --q1;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        r1 += d_hi;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">if</span> (r1 &gt;= 0x100000000ULL) {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> prod_hi = 0;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> prod_lo = _NEFORCE <a class="code hl_function" href="group___m_s_v_c_compiler_intrinsics.html#ga9185eaeb22c3a505558c61664c132766">_umul128</a>(q1, d, &amp;prod_hi);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> rem_hi = u2 - prod_hi;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> rem_lo = u1 - prod_lo;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordflow">if</span> (u1 &lt; prod_lo) {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        --rem_hi;</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    }</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> shift = <a class="code hl_function" href="group___bit_manipulation.html#ga29f6f826c8059121f269f3948a1542d4">clz64</a>(divisor);</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> d = 0;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> u2 = 0, u1 = 0, u0 = 0;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">if</span> (shift == 0) {</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        d = divisor;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        u2 = 0;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        u1 = dividend_hi;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        u0 = dividend_lo;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        d = divisor &lt;&lt; shift;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        u2 = dividend_hi &gt;&gt; (64 - shift);</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        u1 = (dividend_hi &lt;&lt; shift) | (dividend_lo &gt;&gt; (64 - shift));</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        u0 = dividend_lo &lt;&lt; shift;</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keyword">const</span> <span class="keyword">auto</span> d_hi = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(d &gt;&gt; 32);</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keyword">const</span> <span class="keyword">auto</span> d_lo = <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a><span class="keyword">&gt;</span>(d);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordflow">if</span> ((rem_hi &amp; (1ULL &lt;&lt; 63)) != 0U) {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        --q1;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        rem_lo += d;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordflow">if</span> (rem_lo &lt; d) {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            ++rem_hi;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    u_hi = rem_lo &gt;&gt; 32;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> q0 = u_hi / d_hi;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> r0 = u_hi % d_hi;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <span class="keywordflow">while</span> (q0 &gt;= 0x100000000ULL || q0 * d_lo &gt; ((r0 &lt;&lt; 32) | (rem_lo &amp; 0xFFFFFFFF))) {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        --q0;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        r0 += d_hi;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <span class="keywordflow">if</span> (r0 &gt;= 0x100000000ULL) {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        }</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    }</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> rem1 = 0;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> q1hat = inner::div_digit((u2 &lt;&lt; 32) | (u1 &gt;&gt; 32), d_hi, d_lo, &amp;rem1);</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    (void) rem1;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    {</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> t_hi = 0;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> t_lo = <a class="code hl_function" href="group___m_s_v_c_compiler_intrinsics.html#ga9185eaeb22c3a505558c61664c132766">_umul128</a>(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a><span class="keyword">&gt;</span>(q1hat), d, &amp;t_hi);</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> r_hi = u2 - t_hi;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> r_lo = u1 - t_lo;</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keywordflow">if</span> (u1 &lt; t_lo) {</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            --r_hi;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        }</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">while</span> (r_hi != 0 || r_lo &gt;= d) {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            --q1hat;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> new_r_lo = r_lo + d;</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> carry = (new_r_lo &lt; r_lo) ? 1ULL : 0ULL;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            r_lo = new_r_lo;</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            r_hi += carry;</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            <span class="keywordflow">if</span> (r_hi &gt;= 2) {</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            }</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        }</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        u1 = r_lo;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        u2 = 0;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> rem0 = 0;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> q0hat = inner::div_digit((u1 &lt;&lt; 32) | (u0 &gt;&gt; 32), d_hi, d_lo, &amp;rem0);</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    (void) rem0;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    {</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> t_hi = 0;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> t_lo = <a class="code hl_function" href="group___m_s_v_c_compiler_intrinsics.html#ga9185eaeb22c3a505558c61664c132766">_umul128</a>(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a><span class="keyword">&gt;</span>(q0hat), d, &amp;t_hi);</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> r_hi = u1 - t_hi;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> r_lo = u0 - t_lo;</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keywordflow">if</span> (u0 &lt; t_lo) {</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            --r_hi;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        }</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keywordflow">while</span> (r_hi != 0 || r_lo &gt;= d) {</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            --q0hat;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> new_r_lo = r_lo + d;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> carry = (new_r_lo &lt; r_lo) ? 1ULL : 0ULL;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            r_lo = new_r_lo;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            r_hi += carry;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            <span class="keywordflow">if</span> (r_hi &gt;= 2) {</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            }</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        }</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            *<a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a> = r_lo &gt;&gt; shift;</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        }</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    }</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordflow">return</span> (<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a><span class="keyword">&gt;</span>(q1hat) &lt;&lt; 32) | <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a><span class="keyword">&gt;</span>(q0hat);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>}</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    prod_lo = _NEFORCE <a class="code hl_function" href="group___m_s_v_c_compiler_intrinsics.html#ga9185eaeb22c3a505558c61664c132766">_umul128</a>(q0, d, &amp;prod_hi);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> rem_mid_hi = 0 - prod_hi;</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> rem_mid_lo = rem_lo - prod_lo;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordflow">if</span> (rem_lo &lt; prod_lo) {</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        --rem_mid_hi;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordflow">if</span> ((rem_mid_hi &amp; (1ULL &lt;&lt; 63)) != 0U) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        --q0;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        rem_mid_lo += d;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    }</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> quotient = (q1 &lt;&lt; 32) | q0;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <span class="keywordflow">if</span> (s &gt; 0) {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            *<a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a> = (rem_mid_lo &lt;&lt; (64 - s)) | (u0 &gt;&gt; s);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            *<a class="code hl_function" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a> = u0;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        }</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordflow">return</span> quotient;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>}</div>
 </div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> <span class="comment">// MSVCCompilerIntrinsics</span></div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_CONFIG_MSVC_INTRINSIC_HPP__</span></div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> <span class="comment">// MSVCCompilerIntrinsics</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_CONFIG_MSVC_INTRINSIC_HPP__</span></div>
 <div class="ttc" id="abit_8hpp_html"><div class="ttname"><a href="bit_8hpp.html">bit.hpp</a></div><div class="ttdoc">位操作函数</div></div>
 <div class="ttc" id="agroup___bit_manipulation_html_ga29f6f826c8059121f269f3948a1542d4"><div class="ttname"><a href="group___bit_manipulation.html#ga29f6f826c8059121f269f3948a1542d4">clz64</a></div><div class="ttdeci">NEFORCE_CONSTEXPR14 int clz64(uint64_t x) noexcept</div><div class="ttdoc">计算64位整数前导零的个数</div><div class="ttdef"><b>定义</b> <a href="bit_8hpp_source.html#l00074">bit.hpp:74</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga0ba18cab9bd5513695cbe748e9bb4879"><div class="ttname"><a href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdoc">8位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00098">types.hpp:98</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
 <div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00118">types.hpp:118</a></div></div>
 <div class="ttc" id="agroup___m_s_v_c_compiler_intrinsics_html_ga390f113f6c4ce609f5a2119b1543deb9"><div class="ttname"><a href="group___m_s_v_c_compiler_intrinsics.html#ga390f113f6c4ce609f5a2119b1543deb9">_subborrow_u64</a></div><div class="ttdeci">NEFORCE_CONSTEXPR14 uint8_t _subborrow_u64(const uint8_t borrow_in, const uint64_t a, const uint64_t b, uint64_t *out) noexcept</div><div class="ttdoc">带借位的64位无符号减法</div><div class="ttdef"><b>定义</b> <a href="#l00060">msvc_intrinsic.hpp:60</a></div></div>
-<div class="ttc" id="agroup___m_s_v_c_compiler_intrinsics_html_ga6327e37e5117d9bcd0f3b58ff23f7669"><div class="ttname"><a href="group___m_s_v_c_compiler_intrinsics.html#ga6327e37e5117d9bcd0f3b58ff23f7669">_udiv128</a></div><div class="ttdeci">NEFORCE_END_INNER__ NEFORCE_CONSTEXPR14 uint64_t _udiv128(const uint64_t dividend_hi, const uint64_t dividend_lo, uint64_t divisor, uint64_t *remainder) noexcept</div><div class="ttdoc">128位无符号除法</div><div class="ttdef"><b>定义</b> <a href="#l00149">msvc_intrinsic.hpp:149</a></div></div>
 <div class="ttc" id="agroup___m_s_v_c_compiler_intrinsics_html_ga9185eaeb22c3a505558c61664c132766"><div class="ttname"><a href="group___m_s_v_c_compiler_intrinsics.html#ga9185eaeb22c3a505558c61664c132766">_umul128</a></div><div class="ttdeci">NEFORCE_CONSTEXPR14 uint64_t _umul128(const uint64_t a, const uint64_t b, uint64_t *hi_out) noexcept</div><div class="ttdoc">64位无符号乘法</div><div class="ttdef"><b>定义</b> <a href="#l00086">msvc_intrinsic.hpp:86</a></div></div>
 <div class="ttc" id="agroup___m_s_v_c_compiler_intrinsics_html_gab4c7185568f88aa1b6c53eb768e6973b"><div class="ttname"><a href="group___m_s_v_c_compiler_intrinsics.html#gab4c7185568f88aa1b6c53eb768e6973b">_addcarry_u64</a></div><div class="ttdeci">NEFORCE_CONSTEXPR14 uint8_t _addcarry_u64(const uint8_t carry_in, const uint64_t a, const uint64_t b, uint64_t *out) noexcept</div><div class="ttdoc">带进位的64位无符号加法</div><div class="ttdef"><b>定义</b> <a href="#l00036">msvc_intrinsic.hpp:36</a></div></div>
+<div class="ttc" id="agroup___m_s_v_c_compiler_intrinsics_html_gab7d6987d80046d52c36ac6051d35ac56"><div class="ttname"><a href="group___m_s_v_c_compiler_intrinsics.html#gab7d6987d80046d52c36ac6051d35ac56">_udiv128</a></div><div class="ttdeci">NEFORCE_CONSTEXPR14 uint64_t _udiv128(const uint64_t dividend_hi, const uint64_t dividend_lo, const uint64_t divisor, uint64_t *remainder) noexcept</div><div class="ttdoc">128位无符号除法（基于Knuth-D）</div><div class="ttdef"><b>定义</b> <a href="#l00113">msvc_intrinsic.hpp:113</a></div></div>
 <div class="ttc" id="agroup___math_functions_html_gabc4025ee1596355ee63d616923292504"><div class="ttname"><a href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a></div><div class="ttdeci">NEFORCE_CONST_FUNCTION NEFORCE_CONSTEXPR14 decimal_t remainder(const decimal_t x, const decimal_t y) noexcept</div><div class="ttdoc">计算余数</div><div class="ttdef"><b>定义</b> <a href="math_8hpp_source.html#l00821">math.hpp:821</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

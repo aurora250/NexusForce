@@ -22,6 +22,7 @@
     <includedby refid="system__event_8hpp" local="yes">system_event.hpp</includedby>
     <includedby refid="thread_8hpp" local="yes">thread.hpp</includedby>
     <includedby refid="toml__value_8hpp" local="yes">toml_value.hpp</includedby>
+    <includedby refid="zlib__compress_8hpp" local="yes">zlib_compress.hpp</includedby>
     <incdepgraph>
       <node id="5">
         <label>NeForce/core/config/c++config.hpp</label>
@@ -96,7 +97,7 @@
         </childnode>
       </node>
       <node id="6">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -104,16 +105,22 @@
         <label>NeForce.hpp</label>
         <link refid="_ne_force_8hpp"/>
       </node>
-      <node id="84">
+      <node id="93">
+        <label>zlib_compress.hpp</label>
+        <link refid="zlib__compress_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
         <label>algorithm.hpp</label>
         <link refid="algorithm_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="83">
+      <node id="85">
         <label>parallel.hpp</label>
         <link refid="parallel_8hpp"/>
-        <childnode refid="84" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
       </node>
       <node id="38">
@@ -122,7 +129,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="78">
+      <node id="79">
         <label>barrier.hpp</label>
         <link refid="barrier_8hpp"/>
         <childnode refid="8" relation="include">
@@ -136,19 +143,19 @@
         <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="43">
         <label>generator.hpp</label>
         <link refid="generator_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="81">
         <label>lazy_thread.hpp</label>
         <link refid="lazy__thread_8hpp"/>
         <childnode refid="39" relation="include">
         </childnode>
       </node>
-      <node id="57">
+      <node id="58">
         <label>lock_free_queue.hpp</label>
         <link refid="lock__free__queue_8hpp"/>
         <childnode refid="8" relation="include">
@@ -161,6 +168,8 @@
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
       </node>
       <node id="36">
         <label>promise.hpp</label>
@@ -168,50 +177,50 @@
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="88">
         <label>scoped_thread.hpp</label>
         <link refid="scoped__thread_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="70">
+      <node id="71">
         <label>signals.hpp</label>
         <link refid="signals_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="85">
+      <node id="87">
         <label>stop_token.hpp</label>
         <link refid="stop__token_8hpp"/>
-        <childnode refid="86" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
-      <node id="77">
+      <node id="78">
         <label>thread.hpp</label>
         <link refid="thread_8hpp"/>
-        <childnode refid="78" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="80" relation="include">
         </childnode>
         <childnode refid="81" relation="include">
         </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
         <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="83" relation="include">
-        </childnode>
-        <childnode refid="76" relation="include">
         </childnode>
         <childnode refid="85" relation="include">
         </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
         <childnode refid="87" relation="include">
         </childnode>
-        <childnode refid="88" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
-        <childnode refid="67" relation="include">
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
         </childnode>
       </node>
       <node id="39">
@@ -222,13 +231,13 @@
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="87">
+      <node id="42">
         <label>timer.hpp</label>
         <link refid="timer_8hpp"/>
         <childnode refid="39" relation="include">
         </childnode>
       </node>
-      <node id="88">
+      <node id="89">
         <label>ttl_cache.hpp</label>
         <link refid="ttl__cache_8hpp"/>
         <childnode refid="8" relation="include">
@@ -239,7 +248,7 @@
         <link refid="exception__ptr_8hpp"/>
         <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
       <node id="27">
@@ -262,41 +271,41 @@
         <childnode refid="28" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>file.hpp</label>
         <link refid="file_8hpp"/>
-        <childnode refid="44" relation="include">
-        </childnode>
         <childnode refid="45" relation="include">
         </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
       </node>
-      <node id="79">
+      <node id="80">
         <label>file_watcher.hpp</label>
         <link refid="file__watcher_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="50">
         <label>ini_builder.hpp</label>
         <link refid="ini__builder_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="51">
         <label>ini_parser.hpp</label>
         <link refid="ini__parser_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="49">
         <label>ini_value.hpp</label>
         <link refid="ini__value_8hpp"/>
-        <childnode refid="49" relation="include">
-        </childnode>
         <childnode refid="50" relation="include">
         </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
       </node>
-      <node id="55">
+      <node id="56">
         <label>json_builder.hpp</label>
         <link refid="json__builder_8hpp"/>
         <childnode refid="8" relation="include">
@@ -304,86 +313,88 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="56">
+      <node id="57">
         <label>json_parser.hpp</label>
         <link refid="json__parser_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="54">
+      <node id="55">
         <label>json_value.hpp</label>
         <link refid="json__value_8hpp"/>
-        <childnode refid="55" relation="include">
-        </childnode>
         <childnode refid="56" relation="include">
         </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
       </node>
-      <node id="69">
+      <node id="70">
         <label>path_tree.hpp</label>
         <link refid="path__tree_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="46">
         <label>temp_file.hpp</label>
         <link refid="temp__file_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="90">
+      <node id="91">
         <label>toml_builder.hpp</label>
         <link refid="toml__builder_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="91">
+      <node id="92">
         <label>toml_parser.hpp</label>
         <link refid="toml__parser_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="89">
+      <node id="90">
         <label>toml_value.hpp</label>
         <link refid="toml__value_8hpp"/>
-        <childnode refid="90" relation="include">
-        </childnode>
         <childnode refid="91" relation="include">
         </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
       </node>
-      <node id="72">
+      <node id="73">
         <label>yaml_builder.hpp</label>
         <link refid="yaml__builder_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="73">
+      <node id="74">
         <label>yaml_parser.hpp</label>
         <link refid="yaml__parser_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="71">
+      <node id="72">
         <label>yaml_value.hpp</label>
         <link refid="yaml__value_8hpp"/>
-        <childnode refid="72" relation="include">
-        </childnode>
         <childnode refid="73" relation="include">
         </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
       </node>
-      <node id="59">
+      <node id="60">
         <label>shared_ptr.hpp</label>
         <link refid="shared__ptr_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="60" relation="include">
-        </childnode>
         <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
         </childnode>
         <childnode refid="68" relation="include">
         </childnode>
-        <childnode refid="67" relation="include">
-        </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="72" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -397,39 +408,43 @@
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
-        <childnode refid="43" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
-        </childnode>
-        <childnode refid="57" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
         <childnode refid="58" relation="include">
         </childnode>
         <childnode refid="59" relation="include">
         </childnode>
-        <childnode refid="74" relation="include">
+        <childnode refid="60" relation="include">
         </childnode>
         <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
         </childnode>
       </node>
-      <node id="68">
+      <node id="69">
         <label>weak_ptr.hpp</label>
         <link refid="weak__ptr_8hpp"/>
         <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="69" relation="include">
-        </childnode>
         <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -476,22 +491,22 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="58">
+      <node id="59">
         <label>regex.hpp</label>
         <link refid="regex_8hpp"/>
-        <childnode refid="47" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
-      <node id="76">
+      <node id="77">
         <label>signal.hpp</label>
         <link refid="signal_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="75">
+      <node id="76">
         <label>system_event.hpp</label>
         <link refid="system__event_8hpp"/>
-        <childnode refid="76" relation="include">
+        <childnode refid="77" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -582,7 +597,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="74">
+      <node id="75">
         <label>sql_builder.hpp</label>
         <link refid="sql__builder_8hpp"/>
         <childnode refid="8" relation="include">
@@ -606,27 +621,35 @@
         <label>sqlite_result.hpp</label>
         <link refid="sqlite__result_8hpp"/>
       </node>
-      <node id="44">
+      <node id="45">
         <label>file_sink.hpp</label>
         <link refid="file__sink_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="81">
+      <node id="82">
         <label>log_event.hpp</label>
         <link refid="log__event_8hpp"/>
-        <childnode refid="82" relation="include">
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
         </childnode>
       </node>
-      <node id="82">
+      <node id="83">
+        <label>log_formatter.hpp</label>
+        <link refid="log__formatter_8hpp"/>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="84">
         <label>log_sink.hpp</label>
         <link refid="log__sink_8hpp"/>
-        <childnode refid="44" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
-        <childnode refid="60" relation="include">
+        <childnode refid="61" relation="include">
         </childnode>
       </node>
-      <node id="60">
+      <node id="61">
         <label>logger.hpp</label>
         <link refid="logger_8hpp"/>
         <childnode refid="8" relation="include">
@@ -648,15 +671,15 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="63">
+      <node id="64">
         <label>ftp_protocol.hpp</label>
         <link refid="ftp__protocol_8hpp_source"/>
         <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="64" relation="include">
+        <childnode refid="65" relation="include">
         </childnode>
       </node>
-      <node id="64">
+      <node id="65">
         <label>ftp_server.hpp</label>
         <link refid="ftp__server_8hpp_source"/>
         <childnode refid="8" relation="include">
@@ -668,13 +691,13 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="47">
         <label>http_filter.hpp</label>
         <link refid="http__filter_8hpp"/>
-        <childnode refid="47" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="48">
         <label>http_router.hpp</label>
         <link refid="http__router_8hpp"/>
         <childnode refid="41" relation="include">
@@ -686,7 +709,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="67">
+      <node id="68">
         <label>websocket.hpp</label>
         <link refid="websocket_8hpp"/>
         <childnode refid="41" relation="include">
@@ -698,7 +721,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="66">
+      <node id="67">
         <label>ssl_acceptor.hpp</label>
         <link refid="ssl__acceptor_8hpp"/>
         <childnode refid="8" relation="include">
@@ -706,30 +729,30 @@
         <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="61">
+      <node id="62">
         <label>ssl_context.hpp</label>
         <link refid="ssl__context_8hpp"/>
-        <childnode refid="62" relation="include">
+        <childnode refid="63" relation="include">
         </childnode>
       </node>
-      <node id="65">
+      <node id="66">
         <label>ssl_socket.hpp</label>
         <link refid="ssl__socket_8hpp"/>
-        <childnode refid="66" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="67" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
       </node>
-      <node id="62">
+      <node id="63">
         <label>ssl_stream.hpp</label>
         <link refid="ssl__stream_8hpp"/>
-        <childnode refid="63" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
       </node>
       <node id="34">
@@ -744,19 +767,19 @@
         <childnode refid="41" relation="include">
         </childnode>
       </node>
-      <node id="51">
+      <node id="52">
         <label>iplugin.hpp</label>
         <link refid="iplugin_8hpp"/>
-        <childnode refid="52" relation="include">
-        </childnode>
-      </node>
-      <node id="52">
-        <label>plugin_entry.hpp</label>
-        <link refid="plugin__entry_8hpp"/>
         <childnode refid="53" relation="include">
         </childnode>
       </node>
       <node id="53">
+        <label>plugin_entry.hpp</label>
+        <link refid="plugin__entry_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
         <label>plugin_manager.hpp</label>
         <link refid="plugin__manager_8hpp"/>
         <childnode refid="8" relation="include">
@@ -999,15 +1022,15 @@
 <codeline lineno="246" refid="classunique__ptr_1a12732bc6d1164f91570b5afd56fdb80a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a12732bc6d1164f91570b5afd56fdb80a" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref><sp/>ptr,<sp/>Del&amp;&amp;<sp/>deleter)<sp/>noexcept<sp/>:</highlight></codeline>
 <codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(ptr,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Del&gt;</ref>(deleter))<sp/>{}</highlight></codeline>
 <codeline lineno="248"><highlight class="normal"></highlight></codeline>
-<codeline lineno="249" refid="classunique__ptr_1a91d8da266b48e5b9704fbb2c3a5de2e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a91d8da266b48e5b9704fbb2c3a5de2e7" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="249" refid="classunique__ptr_1a5fcc7d0fa7e4ea9555d985c60a475123" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a5fcc7d0fa7e4ea9555d985c60a475123" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;<sp/></highlight></codeline>
 <codeline lineno="250"><highlight class="normal"></highlight></codeline>
-<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E,</highlight></codeline>
-<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;conjunction&lt;safe_conversion&lt;U, E&gt;</ref>,</highlight></codeline>
-<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t&lt;is_reference&lt;Deleter&gt;::value</ref>,<sp/><ref refid="structis__same" kindref="compound">is_same&lt;E, Deleter&gt;</ref>,</highlight></codeline>
-<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structis__convertible" kindref="compound">is_convertible&lt;E, Deleter&gt;</ref>&gt;&gt;::value,</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>U,<sp/>typename<sp/>E,</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;<ref refid="structconjunction" kindref="compound">conjunction</ref>&lt;safe_conversion&lt;U,<sp/>E&gt;,</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt;<ref refid="structis__reference" kindref="compound">is_reference</ref>&lt;Deleter&gt;::value,<sp/><ref refid="structis__same" kindref="compound">is_same</ref>&lt;E,<sp/>Deleter&gt;,</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structis__convertible" kindref="compound">is_convertible</ref>&lt;E,<sp/>Deleter&gt;&gt;&gt;::value,</highlight></codeline>
 <codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="262" refid="classunique__ptr_1ac76aab0320b12cf48ee7223aef959a11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1ac76aab0320b12cf48ee7223aef959a11" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr&lt;U, E&gt;</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(other.release(),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;E&gt;</ref>(other.get_deleter()))<sp/>{}</highlight></codeline>
+<codeline lineno="262" refid="classunique__ptr_1ac76aab0320b12cf48ee7223aef959a11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&lt;U,<sp/>E&gt;&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(other.<ref refid="classunique__ptr_1a372af837a21128e149811e6c53d97dc1" kindref="member">release</ref>(),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;E&gt;(other.<ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>()))<sp/>{}</highlight></codeline>
 <codeline lineno="264"><highlight class="normal"></highlight></codeline>
 <codeline lineno="268" refid="classunique__ptr_1a031e2eb70a769560ba8d41719a2cde0a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a031e2eb70a769560ba8d41719a2cde0a" kindref="member">~unique_ptr</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>ptr<sp/>=<sp/>data_.get_ptr();</highlight></codeline>
@@ -1017,11 +1040,11 @@
 <codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr<sp/>=<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>();</highlight></codeline>
 <codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="275"><highlight class="normal"></highlight></codeline>
-<codeline lineno="276" refid="classunique__ptr_1af142ef4ee5570389000944c5d9c94d3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_1af142ef4ee5570389000944c5d9c94d3f" kindref="member">operator=</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="276" refid="classunique__ptr_1a4d975d697c6589c76ee4212c6312025d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_1a4d975d697c6589c76ee4212c6312025d" kindref="member">operator=</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;<sp/></highlight></codeline>
 <codeline lineno="277"><highlight class="normal"></highlight></codeline>
-<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>E,</highlight></codeline>
-<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;conjunction&lt;safe_conversion&lt;U, E&gt;</ref>,<sp/><ref refid="structis__assignable" kindref="compound">is_assignable&lt;deleter_type&amp;, E&amp;&amp;&gt;</ref>&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="287" refid="classunique__ptr_1aa4d65bea3aaebd7a7b0d990ee7a30a78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;<sp/><ref refid="classunique__ptr_1aa4d65bea3aaebd7a7b0d990ee7a30a78" kindref="member">operator=</ref>(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr&lt;U, E&gt;</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>U,<sp/>typename<sp/>E,</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;<ref refid="structconjunction" kindref="compound">conjunction</ref>&lt;safe_conversion&lt;U,<sp/>E&gt;,<sp/><ref refid="structis__assignable" kindref="compound">is_assignable</ref>&lt;<ref refid="classunique__ptr_1a4d0c960b47f45e09fa187a23e4e10204" kindref="member">deleter_type</ref>&amp;,<sp/>E&amp;&amp;&gt;&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="287" refid="classunique__ptr_1aa4d65bea3aaebd7a7b0d990ee7a30a78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&amp;<sp/>operator=(<ref refid="classunique__ptr_1a0897adc49645599a28665301f66a75fe" kindref="member">unique_ptr</ref>&lt;U,<sp/>E&gt;&amp;&amp;<sp/>other)<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1a0ba4ef13bb1c4661fc036ebcd0a01f5a" kindref="member">reset</ref>(other.release());</highlight></codeline>
 <codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr_1adeb1df04364f6586ced1cfc340bb44a5" kindref="member">get_deleter</ref>()<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;E&gt;</ref>(other.get_deleter());</highlight></codeline>
 <codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
@@ -1032,7 +1055,7 @@
 <codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="301"><highlight class="normal"></highlight></codeline>
-<codeline lineno="306" refid="classunique__ptr_1a73450603f460b996bb1847b2f536c0f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="group___add_qualifiers_1gac084a21f7a057df50ed3f436567e993f" kindref="member">add_lvalue_reference_t&lt;element_type&gt;</ref><sp/><ref refid="classunique__ptr_1a73450603f460b996bb1847b2f536c0f5" kindref="member">operator*</ref>()<sp/>const</highlight></codeline>
+<codeline lineno="306" refid="classunique__ptr_1a4a3689138ac59016d3209a1021c45eed" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="group___add_qualifiers_1gac084a21f7a057df50ed3f436567e993f" kindref="member">add_lvalue_reference_t&lt;element_type&gt;</ref><sp/><ref refid="classunique__ptr_1a4a3689138ac59016d3209a1021c45eed" kindref="member">operator*</ref>()<sp/>const</highlight></codeline>
 <codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>noexcept(noexcept(*_NEFORCE<sp/><ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt;<ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>&gt;()))<sp/>{</highlight></codeline>
 <codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*<ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>();</highlight></codeline>
 <codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -1049,7 +1072,7 @@
 <codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(data_).get_deleter();</highlight></codeline>
 <codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="341"><highlight class="normal"></highlight></codeline>
-<codeline lineno="346" refid="classunique__ptr_1a4840d18cb509de8bed78c676c64c27f4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>==<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>()<sp/>?<sp/>false<sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="346" refid="classunique__ptr_1a4840d18cb509de8bed78c676c64c27f4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>!=<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>();<sp/>}</highlight></codeline>
 <codeline lineno="347"><highlight class="normal"></highlight></codeline>
 <codeline lineno="351" refid="classunique__ptr_1a372af837a21128e149811e6c53d97dc1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref><sp/><ref refid="classunique__ptr_1a372af837a21128e149811e6c53d97dc1" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.release();<sp/>}</highlight></codeline>
 <codeline lineno="352"><highlight class="normal"></highlight></codeline>
@@ -1160,7 +1183,7 @@
 <codeline lineno="527"><highlight class="normal"></highlight></codeline>
 <codeline lineno="531" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a0397d22ea05cd43bc444504cd2a69597" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a9504d2b7f5461b852f2eaf56350b74b1" kindref="member">deleter_type</ref>&amp;<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a0397d22ea05cd43bc444504cd2a69597" kindref="member">get_deleter</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.get_deleter();<sp/>}</highlight></codeline>
 <codeline lineno="532"><highlight class="normal"></highlight></codeline>
-<codeline lineno="537" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ab8c3eb74c61eed55b2ad0d82307e9b7e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>==<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>()<sp/>?<sp/>false<sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="537" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1ab8c3eb74c61eed55b2ad0d82307e9b7e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classunique__ptr_1aaad36e992e2a4169701ba56b75718638" kindref="member">get</ref>()<sp/>!=<sp/><ref refid="classunique__ptr_1aeac73084354db39d713b4bc1c27b52c0" kindref="member">pointer</ref>();<sp/>}</highlight></codeline>
 <codeline lineno="538"><highlight class="normal"></highlight></codeline>
 <codeline lineno="542" refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1afeb39ccd70dade8f8fb67c87701b490d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1a19cef8dabae40630596ba78bb5587d7c" kindref="member">pointer</ref><sp/><ref refid="classunique__ptr_3_01_t_0f_0e_00_01_deleter_01_4_1afeb39ccd70dade8f8fb67c87701b490d" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.release();<sp/>}</highlight></codeline>
 <codeline lineno="543"><highlight class="normal"></highlight></codeline>
@@ -1351,6 +1374,6 @@
 <codeline lineno="998"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="999"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_MEMORY_UNIQUE_PTR_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/unique_ptr.hpp"/>
   </compounddef>
 </doxygen>

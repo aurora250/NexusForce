@@ -1,8 +1,8 @@
 var compare_8hpp =
 [
-    [ "clamp", "group___compare_algorithms.html#gaa3f668b9b08117569fd74b8941ef33f8", null ],
-    [ "clamp", "group___compare_algorithms.html#ga6adb4308a8ce2f67f21bf8b2599fa4ad", null ],
-    [ "equal", "group___compare_algorithms.html#ga72e27cb9f8d5b6e71aabcd6a7a2a1c8f", null ],
+    [ "clamp", "group___compare_algorithms.html#gae335939dbe758563e37614c7c39e54aa", null ],
+    [ "clamp", "group___compare_algorithms.html#ga5a3267d0bee58dc5e314113452cf2a9e", null ],
+    [ "equal", "group___compare_algorithms.html#ga0cf2685901b36aa38db0e921467ada9d", null ],
     [ "equal", "group___compare_algorithms.html#ga682c1803a35a1de8b019d003138ae5dd", null ],
     [ "equal_range", "group___compare_algorithms.html#gac30be768f6bc7c5ca6d488a61f2335ba", null ],
     [ "equal_range", "group___compare_algorithms.html#ga396286e554573557c1781c8b3bae3860", null ],
@@ -13,8 +13,8 @@ var compare_8hpp =
     [ "max", "group___compare_algorithms.html#ga21bf5779df2939ac7e9bbf2fa016798c", null ],
     [ "max_element", "group___compare_algorithms.html#gaa226ea8eefb93332e43e44ab173c650e", null ],
     [ "max_element", "group___compare_algorithms.html#gae047220bf13f52d30732510ec976bf5c", null ],
-    [ "median", "group___compare_algorithms.html#ga41c01ec448d2ff480831834823e180b0", null ],
-    [ "median", "group___compare_algorithms.html#ga69873b0598cc28f930d89d2930e78f85", null ],
+    [ "median", "group___compare_algorithms.html#ga8aee46794e9f8496b1f138664cbaf048", null ],
+    [ "median", "group___compare_algorithms.html#gae010167b986f808bc3f8bd37fa199040", null ],
     [ "min", "group___compare_algorithms.html#gaf9b881461c8e7da079e090bf6760a6d1", null ],
     [ "min", "group___compare_algorithms.html#gabf4803a4eaf181e17a6893b2aea9a4c5", null ],
     [ "min", "group___compare_algorithms.html#ga69a55cc167f3341fffddaffc0686dc2a", null ],

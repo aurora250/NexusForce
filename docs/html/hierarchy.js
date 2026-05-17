@@ -243,7 +243,6 @@ var hierarchy =
           [ "database_stmt_exception", "structdatabase__stmt__exception.html", null ],
           [ "database_typecast_exception", "structdatabase__typecast__exception.html", null ]
         ] ],
-        [ "neforce::lz4_exception", "structneforce_1_1lz4__exception.html", null ],
         [ "ssl_exception", "structssl__exception.html", null ],
         [ "zlib_exception", "structzlib__exception.html", null ]
       ] ],
@@ -900,11 +899,6 @@ var hierarchy =
         [ "optional< ssl_stream >", "classoptional.html", null ]
       ] ]
     ] ],
-    [ "icomparable&lt; optional&lt; virtual_thread_task &gt; &gt;", "structicomparable.html", [
-      [ "icommon< optional< virtual_thread_task > >", "structicommon.html", [
-        [ "optional< virtual_thread_task >", "classoptional.html", null ]
-      ] ]
-    ] ],
     [ "icomparable&lt; pair&lt; const aiocb_type *, async_context * &gt; &gt;", "structicomparable.html", [
       [ "icommon< pair< const aiocb_type *, async_context * > >", "structicommon.html", [
         [ "pair< const aiocb_type *, async_context * >", "structpair.html", null ]
@@ -1316,9 +1310,6 @@ var hierarchy =
     [ "ihashable&lt; optional&lt; ssl_stream &gt; &gt;", "structihashable.html", [
       [ "icommon< optional< ssl_stream > >", "structicommon.html", null ]
     ] ],
-    [ "ihashable&lt; optional&lt; virtual_thread_task &gt; &gt;", "structihashable.html", [
-      [ "icommon< optional< virtual_thread_task > >", "structicommon.html", null ]
-    ] ],
     [ "ihashable&lt; pair&lt; const aiocb_type *, async_context * &gt; &gt;", "structihashable.html", [
       [ "icommon< pair< const aiocb_type *, async_context * > >", "structicommon.html", null ]
     ] ],
@@ -1456,6 +1447,7 @@ var hierarchy =
       [ "has_unique_object_representations< T >", "structhas__unique__object__representations.html", null ],
       [ "has_virtual_destructor< T >", "structhas__virtual__destructor.html", null ],
       [ "is_abstract< T >", "structis__abstract.html", null ],
+      [ "is_allocable< T >", "structis__allocable.html", null ],
       [ "is_any_of< T, Types >", "structis__any__of.html", null ],
       [ "is_arithmetic< T >", "structis__arithmetic.html", null ],
       [ "is_array< T >", "structis__array.html", null ],
@@ -1555,7 +1547,6 @@ var hierarchy =
     [ "iplugin", "structiplugin.html", null ],
     [ "is_ADL_swappable&lt; T, Dummy &gt;", "structis___a_d_l__swappable.html", null ],
     [ "is_aggregate&lt; T &gt;", "structis__aggregate.html", null ],
-    [ "is_allocable&lt; T &gt;", "structis__allocable.html", null ],
     [ "is_allocator&lt; Alloc, Dummy &gt;", "structis__allocator.html", null ],
     [ "is_bind_expression&lt; T &gt;", "structis__bind__expression.html", null ],
     [ "is_bounded_array&lt; T &gt;", "structis__bounded__array.html", null ],
@@ -1589,7 +1580,8 @@ var hierarchy =
     [ "is_swappable_from&lt; T1, T2, Dummy &gt;", "structis__swappable__from.html", null ],
     [ "is_unbounded_array&lt; T &gt;", "structis__unbounded__array.html", null ],
     [ "is_view&lt; T &gt;", "structis__view.html", null ],
-    [ "is_view&lt; ranges::view_base&lt; D &gt; &gt;", "structis__view_3_01ranges_1_1view__base_3_01_d_01_4_01_4.html", null ],
+    [ "is_view&lt; 1::view_base&lt; D &gt; &gt;", "structis__view_3_011_1_1view__base_3_01_d_01_4_01_4.html", null ],
+    [ "is_virtual_thread_task&lt; T &gt;", "structis__virtual__thread__task.html", null ],
     [ "is_void&lt; T &gt;", "structis__void.html", null ],
     [ "is_volatile&lt; T &gt;", "structis__volatile.html", null ],
     [ "istringify&lt; T &gt;", "structistringify.html", [
@@ -1849,7 +1841,7 @@ var hierarchy =
     ] ],
     [ "logger", "classlogger.html", null ],
     [ "lru_cache&lt; Key, Value &gt;", "classlru__cache.html", null ],
-    [ "neforce::lz4_compressor", "classneforce_1_1lz4__compressor.html", null ],
+    [ "lz4_compressor", "classlz4__compressor.html", null ],
     [ "make_integer&lt; Size, IsSigned &gt;", "structmake__integer.html", null ],
     [ "make_signed&lt; T &gt;", "structmake__signed.html", null ],
     [ "make_unsigned&lt; T &gt;", "structmake__unsigned.html", null ],
@@ -1942,7 +1934,8 @@ var hierarchy =
     [ "promise&lt; void &gt;", "classpromise_3_01void_01_4.html", null ],
     [ "generator&lt; T &gt;::promise_type", "structgenerator_1_1promise__type.html", null ],
     [ "task&lt; T &gt;::promise_type", "structtask_1_1promise__type.html", null ],
-    [ "virtual_thread_task::promise_type", "structvirtual__thread__task_1_1promise__type.html", null ],
+    [ "virtual_thread_task&lt; T &gt;::promise_type", "structvirtual__thread__task_1_1promise__type.html", null ],
+    [ "virtual_thread_task&lt; void &gt;::promise_type", "structvirtual__thread__task_3_01void_01_4_1_1promise__type.html", null ],
     [ "queue&lt; coroutine_handle&lt;&gt; &gt;", "classqueue.html", null ],
     [ "queue&lt; vector&lt; byte_t &gt; &gt;", "classqueue.html", null ],
     [ "random_lcd", "classrandom__lcd.html", null ],
@@ -2011,7 +2004,6 @@ var hierarchy =
     [ "signal&lt; Types &gt;", "structsignal.html", null ],
     [ "signal_blocker&lt; Types &gt;", "classsignal__blocker.html", null ],
     [ "signal_guard", "classsignal__guard.html", null ],
-    [ "sleep_awaiter", "structsleep__awaiter.html", null ],
     [ "smtp_message", "structsmtp__message.html", null ],
     [ "socket_base", "classsocket__base.html", [
       [ "icmp_socket", "classicmp__socket.html", null ],
@@ -2045,9 +2037,9 @@ var hierarchy =
     [ "stop_callback&lt; Callback &gt;", "classstop__callback.html", null ],
     [ "stop_source", "classstop__source.html", null ],
     [ "stop_token", "classstop__token.html", null ],
-    [ "neforce::lz4_compressor::stream_compressor", "classneforce_1_1lz4__compressor_1_1stream__compressor.html", null ],
+    [ "lz4_compressor::stream_compressor", "classlz4__compressor_1_1stream__compressor.html", null ],
     [ "zlib_compressor::stream_compressor", "classzlib__compressor_1_1stream__compressor.html", null ],
-    [ "neforce::lz4_compressor::stream_decompressor", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html", null ],
+    [ "lz4_compressor::stream_decompressor", "classlz4__compressor_1_1stream__decompressor.html", null ],
     [ "zlib_compressor::stream_decompressor", "classzlib__compressor_1_1stream__decompressor.html", null ],
     [ "submit_result&lt; T &gt;", "structsubmit__result.html", null ],
     [ "suspend_always", "structsuspend__always.html", null ],
@@ -2207,9 +2199,9 @@ var hierarchy =
     [ "view_base&lt; take_while_view&lt; V, Pred &gt; &gt;", "structview__base.html", null ],
     [ "view_base&lt; transform_view&lt; V, Func &gt; &gt;", "structview__base.html", null ],
     [ "virtual_thread", "classvirtual__thread.html", null ],
-    [ "virtual_thread_awaiter", "structvirtual__thread__awaiter.html", null ],
     [ "virtual_thread_scheduler", "classvirtual__thread__scheduler.html", null ],
-    [ "virtual_thread_task", "structvirtual__thread__task.html", null ],
+    [ "virtual_thread_task&lt; T &gt;", "structvirtual__thread__task.html", null ],
+    [ "virtual_thread_task&lt; void &gt;", "structvirtual__thread__task_3_01void_01_4.html", null ],
     [ "weak_ptr&lt; T &gt;", "classweak__ptr.html", null ],
     [ "websocket_frame_header", "structwebsocket__frame__header.html", null ],
     [ "websocket_server", "classwebsocket__server.html", null ],

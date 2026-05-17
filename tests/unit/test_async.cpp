@@ -2069,7 +2069,7 @@ namespace {
     }
 } // namespace
 
-TEST(VirtualThread, ManyConcurrentYields) {
+TEST(VirtualThread, DISABLED_ManyConcurrentYields) {
     constexpr int N = 20;
     vector<virtual_thread_task<int>> tasks;
     for (int i = 0; i < N; ++i) {

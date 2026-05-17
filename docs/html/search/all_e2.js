@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🚀_20特性_0',['🚀 特性',['../index.html#autotoc_md18',1,'']]]
+  ['🗄️_20数据库_20db_0',['🗄️ 数据库 (DB)',['../index.html#autotoc_md24',1,'']]]
 ];

@@ -137,7 +137,7 @@
       <node id="32">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="19" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -206,6 +206,8 @@
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
         </childnode>
       </node>
       <node id="42">
@@ -289,7 +291,7 @@
         </childnode>
       </node>
       <node id="7">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="38">
         <label>initializer_list</label>
@@ -359,7 +361,7 @@
 <codeline lineno="44" refid="structiplugin" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structiplugin" kindref="compound">iplugin</ref><sp/>{</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="structiplugin" kindref="compound">~iplugin</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51" refid="structiplugin_1a23d6085a2e63cbf778e215d44490ebd4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structplugin__info" kindref="compound">plugin_info</ref>&amp;<sp/><ref refid="structiplugin_1a23d6085a2e63cbf778e215d44490ebd4" kindref="member">get_info</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="51" refid="structiplugin_1a5ea5af2ad9c5e7e6b92e75f6e9be11d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structplugin__info" kindref="compound">plugin_info</ref>&amp;<sp/><ref refid="structiplugin_1a5ea5af2ad9c5e7e6b92e75f6e9be11d1" kindref="member">get_info</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="58" refid="structiplugin_1a470ea9b8c6b7058e8a2bb69ffe364e02" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structiplugin_1a470ea9b8c6b7058e8a2bb69ffe364e02" kindref="member">initialize</ref>()<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"></highlight></codeline>
@@ -398,12 +400,12 @@
 <codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="127"><highlight class="normal"></highlight></codeline>
 <codeline lineno="134" refid="structplugin__deleter_1a187bdbd4fd32319ac32cd8d1227814b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structplugin__deleter_1a187bdbd4fd32319ac32cd8d1227814b2" kindref="member">operator()</ref>(<ref refid="structiplugin" kindref="compound">iplugin</ref>*<sp/>plugin)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="group___invoke_function_1ga058f500ef86860b0d5a226505ce3da2d" kindref="member">is_nothrow_invocable_v&lt;deleter_type, iplugin*&gt;</ref>)<sp/>{</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(plugin)<sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(plugin<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func_(plugin);</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="139"><highlight class="normal"></highlight></codeline>
-<codeline lineno="146" refid="structplugin__deleter_1a41b7c48f4f89afe74821e7d3106576be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref><sp/><ref refid="structplugin__deleter_1a41b7c48f4f89afe74821e7d3106576be" kindref="member">rebind</ref>()<sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">));<sp/>}</highlight></codeline>
+<codeline lineno="146" refid="structplugin__deleter_1a41b7c48f4f89afe74821e7d3106576be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structplugin__deleter_1a057a1491b7a95e65738daefe599b113a" kindref="member">plugin_deleter</ref><sp/><ref refid="structplugin__deleter_1a41b7c48f4f89afe74821e7d3106576be" kindref="member">rebind</ref>()<sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
 <codeline lineno="147"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"></highlight></codeline>
 <codeline lineno="155" refid="group___plugin_1gaf947f049a3822c8b84313e907b0ebb58" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group___plugin_1gaf947f049a3822c8b84313e907b0ebb58" kindref="member">plugin_ptr</ref><sp/>=<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;iplugin, plugin_deleter&gt;</ref>;</highlight></codeline>
@@ -412,6 +414,6 @@
 <codeline lineno="159"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_PLUGIN_IPLUGIN_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/plugin/iplugin.hpp"/>
   </compounddef>
 </doxygen>

@@ -219,7 +219,7 @@ $(function(){initNavTree('shared__mutex_8hpp_source.html','',''); });
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span></div>
 <div class="foldopen" id="foldopen00252" data-start="{" data-end="}">
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno"><a class="line" href="classshared__lock.html#a6f23f530fdf0db5d46479d3aea0f2b06">  252</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classshared__lock.html#a6f23f530fdf0db5d46479d3aea0f2b06">lock</a>() {</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">if</span> (!mutex_) {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">if</span> (mutex_ == <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        }</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        <span class="keywordflow">if</span> (owns_lock_) {</div>
@@ -232,7 +232,7 @@ $(function(){initNavTree('shared__mutex_8hpp_source.html','',''); });
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span></div>
 <div class="foldopen" id="foldopen00268" data-start="{" data-end="}">
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="classshared__lock.html#a790e469cdff391b2ecea7b2f3bea4a08">  268</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classshared__lock.html#a790e469cdff391b2ecea7b2f3bea4a08">unlock</a>() {</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordflow">if</span> (!mutex_) {</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordflow">if</span> (mutex_ == <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        }</div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="keywordflow">if</span> (!owns_lock_) {</div>
@@ -245,7 +245,7 @@ $(function(){initNavTree('shared__mutex_8hpp_source.html','',''); });
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span></div>
 <div class="foldopen" id="foldopen00285" data-start="{" data-end="}">
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno"><a class="line" href="classshared__lock.html#a65cab5e791cfcc07c95fa0a3e1ae92d2">  285</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classshared__lock.html#a65cab5e791cfcc07c95fa0a3e1ae92d2">try_lock</a>() noexcept {</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="keywordflow">if</span> (!mutex_) {</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="keywordflow">if</span> (mutex_ == <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        }</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keywordflow">if</span> (owns_lock_) {</div>
@@ -297,7 +297,7 @@ $(function(){initNavTree('shared__mutex_8hpp_source.html','',''); });
 <div class="ttc" id="aclassshared__mutex_html_ac22e3fe87b908ac6d38fcd497aceaa1d"><div class="ttname"><a href="classshared__mutex.html#ac22e3fe87b908ac6d38fcd497aceaa1d">shared_mutex::lock_shared</a></div><div class="ttdeci">void lock_shared()</div><div class="ttdoc">获取读锁</div></div>
 <div class="ttc" id="aclassshared__mutex_html_ac7dd4921f6124a5591cbc9a56569bc7c"><div class="ttname"><a href="classshared__mutex.html#ac7dd4921f6124a5591cbc9a56569bc7c">shared_mutex::try_lock_shared</a></div><div class="ttdeci">bool try_lock_shared() noexcept</div><div class="ttdoc">尝试获取读锁</div></div>
 <div class="ttc" id="aclassshared__mutex_html_acf6dc50ff19f916e3b31162b5c1a30d2"><div class="ttname"><a href="classshared__mutex.html#acf6dc50ff19f916e3b31162b5c1a30d2">shared_mutex::unlock</a></div><div class="ttdeci">void unlock()</div><div class="ttdoc">释放写锁</div></div>
-<div class="ttc" id="agroup___args_forward_functions_html_ga19657f9185af45f84174ff975bae1fa7"><div class="ttname"><a href="group___args_forward_functions.html#ga19657f9185af45f84174ff975bae1fa7">addressof</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T * addressof(T &amp;x) noexcept</div><div class="ttdoc">获取对象的地址</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03063">type_traits.hpp:3063</a></div></div>
+<div class="ttc" id="agroup___args_forward_functions_html_ga19657f9185af45f84174ff975bae1fa7"><div class="ttname"><a href="group___args_forward_functions.html#ga19657f9185af45f84174ff975bae1fa7">addressof</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr T * addressof(T &amp;x) noexcept</div><div class="ttdoc">获取对象的地址</div><div class="ttdef"><b>定义</b> <a href="type__traits_8hpp_source.html#l03075">type_traits.hpp:3075</a></div></div>
 <div class="ttc" id="amutex_8hpp_html"><div class="ttname"><a href="mutex_8hpp.html">mutex.hpp</a></div><div class="ttdoc">互斥锁</div></div>
 <div class="ttc" id="astructdefer__lock__tag_html"><div class="ttname"><a href="structdefer__lock__tag.html">defer_lock_tag</a></div><div class="ttdoc">延迟锁定标签</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00226">mutex.hpp:226</a></div></div>
 <div class="ttc" id="astructtry__lock__tag_html"><div class="ttname"><a href="structtry__lock__tag.html">try_lock_tag</a></div><div class="ttdoc">尝试锁定标签</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00240">mutex.hpp:240</a></div></div>

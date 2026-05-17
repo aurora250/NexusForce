@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📁_20文件系统_20file_0',['📁 文件系统 (File)',['../index.html#autotoc_md22',1,'']]]
+  ['💾_20内存管理_20memory_0',['💾 内存管理 (Memory)',['../index.html#autotoc_md32',1,'']]]
 ];

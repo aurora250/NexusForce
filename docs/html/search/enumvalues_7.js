@@ -8,5 +8,5 @@ var searchData=
   ['host_5funreachable_5',['host_unreachable',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6afe2377fbd16d7f335474e1df7d6376bf',1,'errc.hpp']]],
   ['http_6',['HTTP',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ad7ed6569a70c2e3158713dafb1eba49a',1,'ports']]],
   ['https_7',['HTTPS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8af1912bb051f1bce125984a8d82b2fdc6',1,'ports']]],
-  ['huffman_5fonly_8',['huffman_only',['../group___compression.html#gga573846ea8701aabec09c27f2d432c675aecf69a2d3837334a0776b864fcaddbb0',1,'zlib_compress.hpp']]]
+  ['huffman_5fonly_8',['huffman_only',['../group___compression.html#gga3b93af7c96730e487e7d9126ae98183eaecf69a2d3837334a0776b864fcaddbb0',1,'zlib_compress.hpp']]]
 ];

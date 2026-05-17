@@ -48,7 +48,7 @@ var group___ini_config =
       [ "type", "classini__property.html#a4c41a9e8c251ed0e03f02240e15e4f12", null ]
     ] ],
     [ "ini_section", "classini__section.html", [
-      [ "ini_section", "classini__section.html#aace03d46152dcf1568e8c110e426dedd", null ],
+      [ "ini_section", "classini__section.html#afe1303c17cd6ed09ccb5f166c15bae90", null ],
       [ "ini_section", "classini__section.html#a7af51ac11e4a14f4bbe9431a738594d4", null ],
       [ "add_property", "classini__section.html#afe373c9c751b4810ffaff7e2d2412dd8", null ],
       [ "as_section", "classini__section.html#a048e7f1be2af206b142718b902a804ae", null ],

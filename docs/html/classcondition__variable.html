@@ -106,9 +106,9 @@ using&#160;</td><td class="memItemRight"><b>base_type</b> = inner::condition_var
 <tr class="memitem:a8e92e9247eb5b17b5c1005a309b918fd" id="r_a8e92e9247eb5b17b5c1005a309b918fd"><td class="memItemLeft"><a id="a8e92e9247eb5b17b5c1005a309b918fd" name="a8e92e9247eb5b17b5c1005a309b918fd"></a>
 using&#160;</td><td class="memItemRight"><b>native_handle_type</b> = base_type::native_handle_type</td></tr>
 <tr class="memdesc:a8e92e9247eb5b17b5c1005a309b918fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">原生句柄类型 <br /></td></tr>
-<tr class="memitem:aced8c8b80dcb261481de04240cb41013" id="r_aced8c8b80dcb261481de04240cb41013"><td class="memItemLeft"><a id="aced8c8b80dcb261481de04240cb41013" name="aced8c8b80dcb261481de04240cb41013"></a>
-using&#160;</td><td class="memItemRight"><b>clock_type</b> = _NEFORCE <a class="el" href="structsteady__clock.html">steady_clock</a></td></tr>
-<tr class="memdesc:aced8c8b80dcb261481de04240cb41013"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认时钟类型 <br /></td></tr>
+<tr class="memitem:a1dac29941e18f4cde101a25328d901bd" id="r_a1dac29941e18f4cde101a25328d901bd"><td class="memItemLeft"><a id="a1dac29941e18f4cde101a25328d901bd" name="a1dac29941e18f4cde101a25328d901bd"></a>
+using&#160;</td><td class="memItemRight"><b>clock_type</b> = 1 <a class="el" href="structsteady__clock.html">steady_clock</a></td></tr>
+<tr class="memdesc:a1dac29941e18f4cde101a25328d901bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认时钟类型 <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
@@ -132,19 +132,19 @@ void&#160;</td><td class="memItemRight"><b>notify_all</b> () noexcept</td></tr>
 <tr class="memitem:a567d2021416f447c84611afe745f96a2 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a567d2021416f447c84611afe745f96a2">wait</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, Pred pred)</td></tr>
 <tr class="memdesc:a567d2021416f447c84611afe745f96a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">带谓词的无限期等待  <br /></td></tr>
 <tr class="memitem:a7b55b285f21c99c737ad8b879eb3edc6" id="r_a7b55b285f21c99c737ad8b879eb3edc6"><td class="memTemplParams" colspan="2">template&lt;typename Dur&gt; </td></tr>
-<tr class="memitem:a7b55b285f21c99c737ad8b879eb3edc6 template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7b55b285f21c99c737ad8b879eb3edc6">wait_until</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; <a class="el" href="structsteady__clock.html">steady_clock</a>, Dur &gt; &amp;util)</td></tr>
+<tr class="memitem:a7b55b285f21c99c737ad8b879eb3edc6 template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#gac48748e21401a044d85c1b3124a8e828">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7b55b285f21c99c737ad8b879eb3edc6">wait_until</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; <a class="el" href="structsteady__clock.html">steady_clock</a>, Dur &gt; &amp;util)</td></tr>
 <tr class="memdesc:a7b55b285f21c99c737ad8b879eb3edc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待直到稳定时钟时间点  <br /></td></tr>
 <tr class="memitem:ae18732e8ea4b1b9dacce9b3882a7a33f" id="r_ae18732e8ea4b1b9dacce9b3882a7a33f"><td class="memTemplParams" colspan="2">template&lt;typename Dur&gt; </td></tr>
-<tr class="memitem:ae18732e8ea4b1b9dacce9b3882a7a33f template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae18732e8ea4b1b9dacce9b3882a7a33f">wait_until</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; <a class="el" href="structsystem__clock.html">system_clock</a>, Dur &gt; &amp;util)</td></tr>
+<tr class="memitem:ae18732e8ea4b1b9dacce9b3882a7a33f template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#gac48748e21401a044d85c1b3124a8e828">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae18732e8ea4b1b9dacce9b3882a7a33f">wait_until</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; <a class="el" href="structsystem__clock.html">system_clock</a>, Dur &gt; &amp;util)</td></tr>
 <tr class="memdesc:ae18732e8ea4b1b9dacce9b3882a7a33f"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待直到系统时钟时间点  <br /></td></tr>
 <tr class="memitem:a216086e8b7e905fb379cfd99ea41eb14" id="r_a216086e8b7e905fb379cfd99ea41eb14"><td class="memTemplParams" colspan="2">template&lt;typename Clock, typename Dur&gt; </td></tr>
-<tr class="memitem:a216086e8b7e905fb379cfd99ea41eb14 template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a216086e8b7e905fb379cfd99ea41eb14">wait_until</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;util)</td></tr>
+<tr class="memitem:a216086e8b7e905fb379cfd99ea41eb14 template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#gac48748e21401a044d85c1b3124a8e828">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a216086e8b7e905fb379cfd99ea41eb14">wait_until</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;util)</td></tr>
 <tr class="memdesc:a216086e8b7e905fb379cfd99ea41eb14"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待直到任意时钟时间点  <br /></td></tr>
 <tr class="memitem:ad82c03b3026b593e894c2ae4ba02217b" id="r_ad82c03b3026b593e894c2ae4ba02217b"><td class="memTemplParams" colspan="2">template&lt;typename Clock, typename Dur, typename Pred&gt; </td></tr>
 <tr class="memitem:ad82c03b3026b593e894c2ae4ba02217b template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad82c03b3026b593e894c2ae4ba02217b">wait_until</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;util, Pred pred)</td></tr>
 <tr class="memdesc:ad82c03b3026b593e894c2ae4ba02217b"><td class="mdescLeft">&#160;</td><td class="mdescRight">带谓词的等待直到时间点  <br /></td></tr>
 <tr class="memitem:a9caf38ad7eec6460fbca1bb971b3837c" id="r_a9caf38ad7eec6460fbca1bb971b3837c"><td class="memTemplParams" colspan="2">template&lt;typename Rep, typename Period&gt; </td></tr>
-<tr class="memitem:a9caf38ad7eec6460fbca1bb971b3837c template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9caf38ad7eec6460fbca1bb971b3837c">wait_for</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;rest)</td></tr>
+<tr class="memitem:a9caf38ad7eec6460fbca1bb971b3837c template"><td class="memItemLeft"><a class="el" href="group___condition_variables.html#gac48748e21401a044d85c1b3124a8e828">cv_status</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9caf38ad7eec6460fbca1bb971b3837c">wait_for</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;rest)</td></tr>
 <tr class="memdesc:a9caf38ad7eec6460fbca1bb971b3837c"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待指定的持续时间  <br /></td></tr>
 <tr class="memitem:a315ef6f2b9eb7625826b045b429326c5" id="r_a315ef6f2b9eb7625826b045b429326c5"><td class="memTemplParams" colspan="2">template&lt;typename Rep, typename Period, typename Pred&gt; </td></tr>
 <tr class="memitem:a315ef6f2b9eb7625826b045b429326c5 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a315ef6f2b9eb7625826b045b429326c5">wait_for</a> (<a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;<a class="el" href="classlock.html">lock</a>, const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;rest, Pred pred)</td></tr>
@@ -285,7 +285,7 @@ template&lt;typename Rep, typename Period&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a> condition_variable::wait_for </td>
+          <td class="memname"><a class="el" href="group___condition_variables.html#gac48748e21401a044d85c1b3124a8e828">cv_status</a> condition_variable::wait_for </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
         </tr>
@@ -398,7 +398,7 @@ template&lt;typename Clock, typename Dur&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a> condition_variable::wait_until </td>
+          <td class="memname"><a class="el" href="group___condition_variables.html#gac48748e21401a044d85c1b3124a8e828">cv_status</a> condition_variable::wait_until </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
         </tr>
@@ -511,7 +511,7 @@ template&lt;typename Dur&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a> condition_variable::wait_until </td>
+          <td class="memname"><a class="el" href="group___condition_variables.html#gac48748e21401a044d85c1b3124a8e828">cv_status</a> condition_variable::wait_until </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
         </tr>
@@ -562,7 +562,7 @@ template&lt;typename Dur&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___condition_variables.html#ga6baf1ad6102bc30ce73b6f15b570b493">cv_status</a> condition_variable::wait_until </td>
+          <td class="memname"><a class="el" href="group___condition_variables.html#gac48748e21401a044d85c1b3124a8e828">cv_status</a> condition_variable::wait_until </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classunique__lock.html">unique_lock</a>&lt; <a class="el" href="classmutex.html">mutex</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lock</em></span>, </td>
         </tr>

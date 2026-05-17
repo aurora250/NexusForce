@@ -9,7 +9,7 @@ var structidb__prepared__statement =
     [ "bind_param", "structidb__prepared__statement.html#acf37860b88bfa7fd95272d0c2b13ce0a", null ],
     [ "execute", "structidb__prepared__statement.html#a5edc6ce541b1a871ee9910ba9ec565f9", null ],
     [ "execute_query", "structidb__prepared__statement.html#a75ad5d2dbd0d97d8cfc70ed5ecea5faf", null ],
-    [ "get_errno", "structidb__prepared__statement.html#ac2d8c780282f37e5033aa64025cd0435", null ],
-    [ "get_error", "structidb__prepared__statement.html#a67f600d24fe96ea4b26508953e1ac2ed", null ],
-    [ "param_count", "structidb__prepared__statement.html#a67ab1c9f04a375b478a034db711b3675", null ]
+    [ "get_errno", "structidb__prepared__statement.html#af359273fa35fe15d564d7187c423c8ea", null ],
+    [ "get_error", "structidb__prepared__statement.html#a87b1922a59d1fd066dee64c11f2390d2", null ],
+    [ "param_count", "structidb__prepared__statement.html#aacfb4917901060a69b7864afc956808b", null ]
 ];

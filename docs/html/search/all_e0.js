@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🖥️_20支持环境_0',['🖥️ 支持环境',['../index.html#autotoc_md6',1,'']]]
+  ['🔧_20编译指南_0',['🔧 编译指南',['../index.html#autotoc_md39',1,'']]]
 ];

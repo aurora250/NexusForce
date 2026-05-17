@@ -104,8 +104,8 @@ $(function(){initNavTree('group___m_s_v_c_compiler_intrinsics.html','',''); });
 <tr class="memdesc:ga390f113f6c4ce609f5a2119b1543deb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">带借位的64位无符号减法  <br /></td></tr>
 <tr class="memitem:ga9185eaeb22c3a505558c61664c132766" id="r_ga9185eaeb22c3a505558c61664c132766"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga9185eaeb22c3a505558c61664c132766">_umul128</a> (const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> a, const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> b, <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *hi_out) noexcept</td></tr>
 <tr class="memdesc:ga9185eaeb22c3a505558c61664c132766"><td class="mdescLeft">&#160;</td><td class="mdescRight">64位无符号乘法  <br /></td></tr>
-<tr class="memitem:ga6327e37e5117d9bcd0f3b58ff23f7669" id="r_ga6327e37e5117d9bcd0f3b58ff23f7669"><td class="memItemLeft">NEFORCE_END_INNER__ NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga6327e37e5117d9bcd0f3b58ff23f7669">_udiv128</a> (const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> dividend_hi, const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> dividend_lo, <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> divisor, <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *<a class="el" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a>) noexcept</td></tr>
-<tr class="memdesc:ga6327e37e5117d9bcd0f3b58ff23f7669"><td class="mdescLeft">&#160;</td><td class="mdescRight">128位无符号除法  <br /></td></tr>
+<tr class="memitem:gab7d6987d80046d52c36ac6051d35ac56" id="r_gab7d6987d80046d52c36ac6051d35ac56"><td class="memItemLeft">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#gab7d6987d80046d52c36ac6051d35ac56">_udiv128</a> (const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> dividend_hi, const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> dividend_lo, const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> divisor, <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> *<a class="el" href="group___math_functions.html#gabc4025ee1596355ee63d616923292504">remainder</a>) noexcept</td></tr>
+<tr class="memdesc:gab7d6987d80046d52c36ac6051d35ac56"><td class="mdescLeft">&#160;</td><td class="mdescRight">128位无符号除法（基于Knuth-D）  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>MSVC编译器内部函数的替代实现 </p>
@@ -218,8 +218,8 @@ $(function(){initNavTree('group___m_s_v_c_compiler_intrinsics.html','',''); });
 
 </div>
 </div>
-<a id="ga6327e37e5117d9bcd0f3b58ff23f7669" name="ga6327e37e5117d9bcd0f3b58ff23f7669"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6327e37e5117d9bcd0f3b58ff23f7669">&#9670;&#160;</a></span>_udiv128()</h2>
+<a id="gab7d6987d80046d52c36ac6051d35ac56" name="gab7d6987d80046d52c36ac6051d35ac56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab7d6987d80046d52c36ac6051d35ac56">&#9670;&#160;</a></span>_udiv128()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -228,7 +228,7 @@ $(function(){initNavTree('group___m_s_v_c_compiler_intrinsics.html','',''); });
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_END_INNER__ NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> _udiv128 </td>
+          <td class="memname">NEFORCE_CONSTEXPR14 <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> _udiv128 </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>dividend_hi</em></span>, </td>
         </tr>
@@ -240,7 +240,7 @@ $(function(){initNavTree('group___m_s_v_c_compiler_intrinsics.html','',''); });
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>divisor</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>divisor</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -255,21 +255,19 @@ $(function(){initNavTree('group___m_s_v_c_compiler_intrinsics.html','',''); });
 </table>
 </div><div class="memdoc">
 
-<p>128位无符号除法 </p>
+<p>128位无符号除法（基于Knuth-D） </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dividend_hi</td><td>被除数的高64位 </td></tr>
-    <tr><td class="paramname">dividend_lo</td><td>被除数的低64位 </td></tr>
-    <tr><td class="paramname">divisor</td><td>除数（64位） </td></tr>
+    <tr><td class="paramname">dividend_hi</td><td>被除数高64位 </td></tr>
+    <tr><td class="paramname">dividend_lo</td><td>被除数低64位 </td></tr>
+    <tr><td class="paramname">divisor</td><td>除数（64位，必须非0） </td></tr>
     <tr><td class="paramname">remainder</td><td>输出余数（可为空） </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>商（64位）</dd></dl>
-<p>计算 (dividend_hi &lt;&lt; 64 | dividend_lo) / divisor，返回商，余数存入remainder。</p>
-<p>算法基于Knuth的D算法（长除法），支持任意64位除数。 </p>
+<dl class="section return"><dt>返回</dt><dd>商（64位） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="msvc__intrinsic_8hpp_source.html">msvc_intrinsic.hpp</a> 第 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00149">149</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="msvc__intrinsic_8hpp_source.html">msvc_intrinsic.hpp</a> 第 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00113">113</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00086">_umul128()</a>, <a class="el" href="bit_8hpp_source.html#l00074">clz64()</a> , 以及 <a class="el" href="math_8hpp_source.html#l00821">remainder()</a>.</p>
 
@@ -321,7 +319,7 @@ $(function(){initNavTree('group___m_s_v_c_compiler_intrinsics.html','',''); });
 
 <p class="definition">在文件 <a class="el" href="msvc__intrinsic_8hpp_source.html">msvc_intrinsic.hpp</a> 第 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00086">86</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00149">_udiv128()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="msvc__intrinsic_8hpp_source.html#l00113">_udiv128()</a>.</p>
 
 </div>
 </div>

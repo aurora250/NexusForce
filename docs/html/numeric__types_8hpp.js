@@ -9,5 +9,5 @@ var numeric__types_8hpp =
     [ "is_pos_infinity", "group___numeric_type_checks.html#ga5389af6bac3ad41b95de0d17046ee63d", null ],
     [ "is_positive", "group___numeric_type_checks.html#gace8f15aa26f934ce89066f093de94bd7", null ],
     [ "is_subnormal", "group___numeric_type_checks.html#ga915e7e6e592ce2b5ae2caede19980fbe", null ],
-    [ "signbit", "group___numeric_type_checks.html#ga91644305c075f4c35a23afc391f9e2be", null ]
+    [ "signbit", "group___numeric_type_checks.html#ga17e293401af71cbcf6547f20be9e59d8", null ]
 ];

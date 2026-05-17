@@ -13,7 +13,7 @@ var group___env_config =
       [ "add_export", "classenv__builder.html#a31e3e692f6d000eb4d65fb8e266cd545", null ],
       [ "blank_line", "classenv__builder.html#aecf296fd1d3a436eba8e4315a14efaa1", null ],
       [ "build", "classenv__builder.html#ad12d9ac66eac0c28ec15499cfc35704b", null ],
-      [ "comment", "classenv__builder.html#aa8c2e948d1945941bb85cc87b82b1a81", null ],
+      [ "comment", "classenv__builder.html#a223d2f7231beaa69b6a3a85a1f1f4433", null ],
       [ "double_quoted", "classenv__builder.html#afced7029a1452cf9b8a3ddb77e0fbd85", null ],
       [ "exported", "classenv__builder.html#ad947d86a2b4371d3073118cfc06e9c04", null ],
       [ "key", "classenv__builder.html#aa572845f69e7b46baf0214944063871c", null ],
@@ -30,7 +30,7 @@ var group___env_config =
       [ "value", "classenv__builder.html#a4822207439304abcfec6681a18733513", null ]
     ] ],
     [ "env_parser", "classenv__parser.html", [
-      [ "env_parser", "classenv__parser.html#a6c062ce0a6f2249b720688f2b86a9a74", null ],
+      [ "env_parser", "classenv__parser.html#a94428993046e76145572b32efb18c7d2", null ],
       [ "parse", "classenv__parser.html#a2351df1f04d39e4f3374a20557e0f35d", null ],
       [ "try_parse", "classenv__parser.html#a064fca156364799ffdb19add089fe7c6", null ]
     ] ],
@@ -68,7 +68,7 @@ var group___env_config =
     [ "env_document", "classenv__document.html", [
       [ "env_document", "classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37", null ],
       [ "env_document", "classenv__document.html#a646438e19f3cec646852a659c940c09c", null ],
-      [ "add_comment", "classenv__document.html#a5dd5d74e5cec10f278e290be98fddca9", null ],
+      [ "add_comment", "classenv__document.html#abb62272ba8d60b385be413b071e3c6a0", null ],
       [ "add_variable", "classenv__document.html#af9134380fc056f1a9605a35ec0ef8a9b", null ],
       [ "get_bool", "classenv__document.html#a667a10890be97a8783cf1ed3662783bb", null ],
       [ "get_comments", "classenv__document.html#ad6cc5670f2fab2fcf136fb08ec4ac301", null ],

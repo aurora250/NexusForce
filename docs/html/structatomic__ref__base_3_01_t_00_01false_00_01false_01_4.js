@@ -7,7 +7,7 @@ var structatomic__ref__base_3_01_t_00_01false_00_01false_01_4 =
     [ "compare_exchange_weak", "structatomic__ref__base_3_01_t_00_01false_00_01false_01_4.html#a7a3b62ca9907f922a07d75fe3badcc41", null ],
     [ "compare_exchange_weak", "structatomic__ref__base_3_01_t_00_01false_00_01false_01_4.html#a0b352e98444b8d5ea964f0eaad5a00b9", null ],
     [ "exchange", "structatomic__ref__base_3_01_t_00_01false_00_01false_01_4.html#aef376483a69ffd1f77af18704b3cffd3", null ],
-    [ "is_lock_free", "structatomic__ref__base_3_01_t_00_01false_00_01false_01_4.html#a6c1d9a392799bfb1cc1a900162ed1b7d", null ],
+    [ "is_lock_free", "structatomic__ref__base_3_01_t_00_01false_00_01false_01_4.html#ad85461387ffc95249b47cb80652b9038", null ],
     [ "load", "structatomic__ref__base_3_01_t_00_01false_00_01false_01_4.html#a3ee7a02a97f4eefeb616b14b5b9cbc25", null ],
     [ "notify_all", "structatomic__ref__base_3_01_t_00_01false_00_01false_01_4.html#ad6ac88ec6c445638a928d1ee68a27b46", null ],
     [ "notify_one", "structatomic__ref__base_3_01_t_00_01false_00_01false_01_4.html#afe2e906f7730b3788dac0da95435bd46", null ],

@@ -98,11 +98,13 @@ $(function(){initNavTree('generator_8hpp.html','',''); });
 <div class="textblock"><code>#include &quot;<a class="el" href="coroutine_8hpp_source.html">NeForce/core/async/coroutine.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="atomic_8hpp_source.html">NeForce/core/async/atomic.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="exception__ptr_8hpp_source.html">NeForce/core/exception/exception_ptr.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="functional_2function_8hpp_source.html">NeForce/core/functional/function.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="optional_8hpp_source.html">NeForce/core/utility/optional.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="tuple_8hpp_source.html">NeForce/core/utility/tuple.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 generator.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="generator_8hpp__incl.svg" width="1463" height="838"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="generator_8hpp__incl.svg" width="2095" height="838"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="generator_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -132,12 +134,12 @@ generator.hpp 的引用(Include)关系图:</div>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga8c72fd92de476361237939b98f6a450c" id="r_ga8c72fd92de476361237939b98f6a450c"><td class="memTemplParams" colspan="2">template&lt;typename... Tasks&gt; </td></tr>
-<tr class="memitem:ga8c72fd92de476361237939b98f6a450c template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="group___coroutine.html#ga8c72fd92de476361237939b98f6a450c">when_all</a> (Tasks &amp;&amp;... tasks) -&gt; <a class="el" href="classtask.html">task</a>&lt; tuple&lt; typename Tasks::promise_type::result_type... &gt; &gt;</td></tr>
-<tr class="memdesc:ga8c72fd92de476361237939b98f6a450c"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待所有任务完成  <br /></td></tr>
-<tr class="memitem:ga79f854a5ada0083996d280c91b6cb2c1" id="r_ga79f854a5ada0083996d280c91b6cb2c1"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Factory&gt; </td></tr>
-<tr class="memitem:ga79f854a5ada0083996d280c91b6cb2c1 template"><td class="memItemLeft"><a class="el" href="classtask.html">task</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___coroutine.html#ga79f854a5ada0083996d280c91b6cb2c1">retry</a> (Factory &amp;&amp;factory, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> max_attempts, <a class="el" href="classfunction.html">function</a>&lt; bool(const <a class="el" href="classexception__ptr.html">exception_ptr</a> &amp;)&gt; should_retry=nullptr)</td></tr>
-<tr class="memdesc:ga79f854a5ada0083996d280c91b6cb2c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">带重试的异步操作  <br /></td></tr>
+<tr class="memitem:gaf1931de6c9023a80830659338702aed7" id="r_gaf1931de6c9023a80830659338702aed7"><td class="memTemplParams" colspan="2">template&lt;typename... Tasks&gt; </td></tr>
+<tr class="memitem:gaf1931de6c9023a80830659338702aed7 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="group___coroutine.html#gaf1931de6c9023a80830659338702aed7">when_all</a> (Tasks... tasks) -&gt; <a class="el" href="classtask.html">task</a>&lt; tuple&lt; typename Tasks::promise_type::value_type... &gt; &gt;</td></tr>
+<tr class="memdesc:gaf1931de6c9023a80830659338702aed7"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待所有任务完成  <br /></td></tr>
+<tr class="memitem:gaeeb129739f934bdf8c9e19059ba3ee29" id="r_gaeeb129739f934bdf8c9e19059ba3ee29"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Factory&gt; </td></tr>
+<tr class="memitem:gaeeb129739f934bdf8c9e19059ba3ee29 template"><td class="memItemLeft"><a class="el" href="classtask.html">task</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___coroutine.html#gaeeb129739f934bdf8c9e19059ba3ee29">retry</a> (Factory factory, const <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> max_attempts, const <a class="el" href="classfunction.html">function</a>&lt; bool(const <a class="el" href="classexception__ptr.html">exception_ptr</a> &amp;)&gt; &amp;should_retry={})</td></tr>
+<tr class="memdesc:gaeeb129739f934bdf8c9e19059ba3ee29"><td class="mdescLeft">&#160;</td><td class="mdescRight">带重试的异步操作  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>协程工具 </p>

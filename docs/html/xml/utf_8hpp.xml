@@ -167,7 +167,7 @@
       <node id="32">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="22" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -224,6 +224,8 @@
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="42">
@@ -309,7 +311,7 @@
         </childnode>
       </node>
       <node id="9">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="38">
         <label>initializer_list</label>
@@ -326,12 +328,12 @@
         <label>NeForce.hpp</label>
         <link refid="_ne_force_8hpp"/>
       </node>
-      <node id="43">
+      <node id="44">
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
       <node id="29">
@@ -354,44 +356,44 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="47">
         <label>toml_builder.hpp</label>
         <link refid="toml__builder_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="48">
         <label>toml_parser.hpp</label>
         <link refid="toml__parser_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="46">
         <label>toml_value.hpp</label>
         <link refid="toml__value_8hpp"/>
-        <childnode refid="46" relation="include">
-        </childnode>
         <childnode refid="47" relation="include">
         </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
       </node>
-      <node id="49">
+      <node id="50">
         <label>yaml_builder.hpp</label>
         <link refid="yaml__builder_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="51">
         <label>yaml_parser.hpp</label>
         <link refid="yaml__parser_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="49">
         <label>yaml_value.hpp</label>
         <link refid="yaml__value_8hpp"/>
-        <childnode refid="49" relation="include">
-        </childnode>
         <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -400,7 +402,7 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="51">
+      <node id="52">
         <label>int128.hpp</label>
         <link refid="int128_8hpp"/>
         <childnode refid="7" relation="include">
@@ -419,7 +421,7 @@
         <link refid="to__string_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -447,11 +449,11 @@
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="43" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
       </node>
       <node id="10">
@@ -599,16 +601,24 @@
         <link refid="log__event_8hpp"/>
         <childnode refid="41" relation="include">
         </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
       </node>
       <node id="41">
-        <label>log_sink.hpp</label>
-        <link refid="log__sink_8hpp"/>
-        <childnode refid="30" relation="include">
-        </childnode>
+        <label>log_formatter.hpp</label>
+        <link refid="log__formatter_8hpp"/>
         <childnode refid="42" relation="include">
         </childnode>
       </node>
       <node id="42">
+        <label>log_sink.hpp</label>
+        <link refid="log__sink_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
         <label>logger.hpp</label>
         <link refid="logger_8hpp"/>
         <childnode refid="7" relation="include">
@@ -666,7 +676,7 @@
         <childnode refid="38" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
         <childnode refid="38" relation="include">
@@ -880,8 +890,8 @@
 <codeline lineno="358"><highlight class="normal"></highlight></codeline>
 <codeline lineno="359"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1a0d34d73082a21b23f11df5bbf982c6d5" kindref="member">reserve</ref>(obj.<ref refid="classbasic__string__view_1a005d60d3b4e298a7072a9016b8af2349" kindref="member">size</ref>());</highlight></codeline>
-<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>obj.<ref refid="classbasic__string__view_1a005d60d3b4e298a7072a9016b8af2349" kindref="member">size</ref>();<sp/>++i)<sp/>{</highlight></codeline>
-<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1a72b1e63dfd1b7d0197f9e902d163b7f9" kindref="member">push_back</ref>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">char16_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(obj[i])));</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structwcharacter_1a458dd2338d78dc874f0c47dbabadd37d" kindref="member">value_type</ref><sp/>c:<sp/>obj)<sp/>{</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1a72b1e63dfd1b7d0197f9e902d163b7f9" kindref="member">push_back</ref>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">char16_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(c)));</highlight></codeline>
 <codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="364"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1a0d34d73082a21b23f11df5bbf982c6d5" kindref="member">reserve</ref>(obj.<ref refid="classbasic__string__view_1a005d60d3b4e298a7072a9016b8af2349" kindref="member">size</ref>()<sp/>*<sp/>2);</highlight></codeline>
@@ -1078,8 +1088,8 @@
 <codeline lineno="605"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="606"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
 <codeline lineno="607"><highlight class="normal"></highlight></codeline>
-<codeline lineno="608"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start_pos;</highlight></codeline>
-<codeline lineno="609"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>need_swap;</highlight></codeline>
+<codeline lineno="608"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start_pos<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="609"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>need_swap<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="610"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>parse_utf16_bom(obj,<sp/>start_pos,<sp/>need_swap);</highlight></codeline>
 <codeline lineno="611"><highlight class="normal"></highlight></codeline>
 <codeline lineno="612"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>start_pos;</highlight></codeline>
@@ -1096,8 +1106,8 @@
 <codeline lineno="628"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___string_1gac8b291943e376bed3f3ed295a7dd68af" kindref="member">wstring</ref><sp/>result;</highlight></codeline>
 <codeline lineno="629"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1a0d34d73082a21b23f11df5bbf982c6d5" kindref="member">reserve</ref>(obj.<ref refid="classbasic__string__view_1a005d60d3b4e298a7072a9016b8af2349" kindref="member">size</ref>());</highlight></codeline>
 <codeline lineno="630"><highlight class="normal"></highlight></codeline>
-<codeline lineno="631"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start_pos;</highlight></codeline>
-<codeline lineno="632"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>need_swap;</highlight></codeline>
+<codeline lineno="631"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start_pos<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="632"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>need_swap<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="633"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>parse_utf16_bom(obj,<sp/>start_pos,<sp/>need_swap);</highlight></codeline>
 <codeline lineno="634"><highlight class="normal"></highlight></codeline>
 <codeline lineno="635"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>start_pos;</highlight></codeline>
@@ -1115,8 +1125,8 @@
 <codeline lineno="652"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___string_1gaa25cbe3f775d6f4076da8510ffa1a0f4" kindref="member">u8string</ref><sp/>result;</highlight></codeline>
 <codeline lineno="653"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1a0d34d73082a21b23f11df5bbf982c6d5" kindref="member">reserve</ref>(obj.<ref refid="classbasic__string__view_1a005d60d3b4e298a7072a9016b8af2349" kindref="member">size</ref>()<sp/>*<sp/>3);</highlight></codeline>
 <codeline lineno="654"><highlight class="normal"></highlight></codeline>
-<codeline lineno="655"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start_pos;</highlight></codeline>
-<codeline lineno="656"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>need_swap;</highlight></codeline>
+<codeline lineno="655"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start_pos<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="656"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>need_swap<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="657"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>parse_utf16_bom(obj,<sp/>start_pos,<sp/>need_swap);</highlight></codeline>
 <codeline lineno="658"><highlight class="normal"></highlight></codeline>
 <codeline lineno="659"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>start_pos;</highlight></codeline>
@@ -1132,8 +1142,8 @@
 <codeline lineno="674"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
 <codeline lineno="675"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="676"><highlight class="normal"></highlight></codeline>
-<codeline lineno="677"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start_pos;</highlight></codeline>
-<codeline lineno="678"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>need_swap;</highlight></codeline>
+<codeline lineno="677"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start_pos<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="678"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>need_swap<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="679"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>parse_utf16_bom(obj,<sp/>start_pos,<sp/>need_swap);</highlight></codeline>
 <codeline lineno="680"><highlight class="normal"></highlight></codeline>
 <codeline lineno="681"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(start_pos<sp/>==<sp/>0<sp/>&amp;&amp;<sp/>!need_swap)<sp/>{</highlight></codeline>
@@ -1157,8 +1167,8 @@
 <codeline lineno="704"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___string_1gae9d2688d8ad654e665cf2b8032125af9" kindref="member">u32string</ref><sp/>result;</highlight></codeline>
 <codeline lineno="705"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1a0d34d73082a21b23f11df5bbf982c6d5" kindref="member">reserve</ref>(obj.<ref refid="classbasic__string__view_1a005d60d3b4e298a7072a9016b8af2349" kindref="member">size</ref>());</highlight></codeline>
 <codeline lineno="706"><highlight class="normal"></highlight></codeline>
-<codeline lineno="707"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start_pos;</highlight></codeline>
-<codeline lineno="708"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>need_swap;</highlight></codeline>
+<codeline lineno="707"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start_pos<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="708"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>need_swap<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="709"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>parse_utf16_bom(obj,<sp/>start_pos,<sp/>need_swap);</highlight></codeline>
 <codeline lineno="710"><highlight class="normal"></highlight></codeline>
 <codeline lineno="711"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>start_pos;</highlight></codeline>
@@ -1269,6 +1279,6 @@
 <codeline lineno="850"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="851"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_STRING_UTF_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/string/utf.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/string/utf.hpp"/>
   </compounddef>
 </doxygen>

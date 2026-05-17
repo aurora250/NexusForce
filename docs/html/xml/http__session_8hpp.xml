@@ -228,7 +228,7 @@
       <node id="44">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -298,6 +298,8 @@
       <node id="33">
         <label>NeForce/core/memory/temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
@@ -308,7 +310,7 @@
       <node id="36">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="14" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
@@ -382,6 +384,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
       </node>
       <node id="56">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -418,8 +422,6 @@
       <node id="66">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="30" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="53" relation="include">
@@ -540,7 +542,7 @@
         </childnode>
       </node>
       <node id="12">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="6">
         <label>initializer_list</label>
@@ -632,15 +634,15 @@
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
 <codeline lineno="62" refid="structhttp__cookie" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structhttp__cookie" kindref="compound">http_cookie</ref><sp/>:<sp/><ref refid="structiobject" kindref="compound">iobject</ref>&lt;http_cookie&gt;<sp/>{</highlight></codeline>
-<codeline lineno="63" refid="structhttp__cookie_1a4fbd6a009dfbd85c9a4156fb01da7575" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structhttp__cookie__name" kindref="compound">http_cookie_name</ref><sp/><ref refid="structhttp__cookie_1a4fbd6a009dfbd85c9a4156fb01da7575" kindref="member">name</ref>{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="64" refid="structhttp__cookie_1a22d53fe0796d65f8bfc0ae84a138b160" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1a22d53fe0796d65f8bfc0ae84a138b160" kindref="member">value</ref>{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="65" refid="structhttp__cookie_1a006120f90d47eefc22cb5a1c3b291c7d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1a006120f90d47eefc22cb5a1c3b291c7d" kindref="member">domain</ref>{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="66" refid="structhttp__cookie_1afada35c5e27e76860f5d3aa566d0fa16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1afada35c5e27e76860f5d3aa566d0fa16" kindref="member">path</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;/&quot;</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="63" refid="structhttp__cookie_1a4fbd6a009dfbd85c9a4156fb01da7575" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structhttp__cookie__name" kindref="compound">http_cookie_name</ref><sp/><ref refid="structhttp__cookie_1a4fbd6a009dfbd85c9a4156fb01da7575" kindref="member">name</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="64" refid="structhttp__cookie_1a22d53fe0796d65f8bfc0ae84a138b160" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1a22d53fe0796d65f8bfc0ae84a138b160" kindref="member">value</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="65" refid="structhttp__cookie_1a006120f90d47eefc22cb5a1c3b291c7d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1a006120f90d47eefc22cb5a1c3b291c7d" kindref="member">domain</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66" refid="structhttp__cookie_1afada35c5e27e76860f5d3aa566d0fa16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1afada35c5e27e76860f5d3aa566d0fa16" kindref="member">path</ref>{</highlight><highlight class="stringliteral">&quot;/&quot;</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="67" refid="structhttp__cookie_1a950a6b3a727f43f861717b14a339da74" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/><ref refid="structhttp__cookie_1a950a6b3a727f43f861717b14a339da74" kindref="member">max_age</ref>{-1};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="68" refid="structhttp__cookie_1af49cbc38ef9db6bec81c9ee9966a0201" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1af49cbc38ef9db6bec81c9ee9966a0201" kindref="member">secure</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="69" refid="structhttp__cookie_1a5f622b6255d7aa131034d17a4e5db76b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1a5f622b6255d7aa131034d17a4e5db76b" kindref="member">http_only</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="68" refid="structhttp__cookie_1af49cbc38ef9db6bec81c9ee9966a0201" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1af49cbc38ef9db6bec81c9ee9966a0201" kindref="member">secure</ref>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="69" refid="structhttp__cookie_1a5f622b6255d7aa131034d17a4e5db76b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1a5f622b6255d7aa131034d17a4e5db76b" kindref="member">http_only</ref>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="70" refid="structhttp__cookie_1a2edae87158335116cca313d1dc05b242" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie_1a2edae87158335116cca313d1dc05b242" kindref="member">same_site</ref>{http_key::Strict()};<sp/></highlight></codeline>
-<codeline lineno="71" refid="structhttp__cookie_1a59ce4c2d2bfa39934b0efd2891fca523" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdatetime" kindref="compound">datetime</ref><sp/><ref refid="structhttp__cookie_1a59ce4c2d2bfa39934b0efd2891fca523" kindref="member">expires</ref>{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="71" refid="structhttp__cookie_1a59ce4c2d2bfa39934b0efd2891fca523" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdatetime" kindref="compound">datetime</ref><sp/><ref refid="structhttp__cookie_1a59ce4c2d2bfa39934b0efd2891fca523" kindref="member">expires</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
 <codeline lineno="80" refid="structhttp__cookie_1a3b29586265ea37f47b89e8dd833564d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie" kindref="compound">http_cookie</ref><sp/><ref refid="structhttp__cookie_1a3b29586265ea37f47b89e8dd833564d1" kindref="member">parse</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>header);</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight></codeline>
@@ -696,6 +698,6 @@
 <codeline lineno="268"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="269"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_HTTP_HTTP_SESSION_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_session.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_session.hpp"/>
   </compounddef>
 </doxygen>

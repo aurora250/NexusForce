@@ -17,6 +17,8 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
         <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
@@ -31,7 +33,7 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -48,7 +50,7 @@
         <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="17">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="7" relation="include">
@@ -57,7 +59,7 @@
       <node id="10">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
@@ -68,8 +70,6 @@
         <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -84,7 +84,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="18">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="8" relation="include">
@@ -114,7 +114,7 @@
         <childnode refid="27" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="16">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="6" relation="include">
@@ -163,25 +163,25 @@
         </childnode>
       </node>
       <node id="9">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="15">
+        <label>ctime</label>
+      </node>
+      <node id="19">
+        <label>intrin.h</label>
       </node>
       <node id="20">
-        <label>intrin.h</label>
+        <label>intrin0.inl.h</label>
       </node>
       <node id="12">
         <label>processthreadsapi.h</label>
-      </node>
-      <node id="16">
-        <label>riscv_pause.h</label>
       </node>
       <node id="14">
         <label>sched.h</label>
       </node>
       <node id="13">
         <label>synchapi.h</label>
-      </node>
-      <node id="15">
-        <label>unistd.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -235,7 +235,7 @@
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>external_count<sp/>=<sp/>0;<sp/></highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>node*<sp/>ptr<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>counted_node_ptr()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>counted_node_ptr()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight></codeline>
 <codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">node<sp/>{</highlight></codeline>
@@ -391,7 +391,7 @@
 <codeline lineno="290" refid="classlock__free__queue_1a24c20d863075bbbcedc192df5625d1e3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;T&gt;</ref><sp/><ref refid="classlock__free__queue_1a24c20d863075bbbcedc192df5625d1e3" kindref="member">try_pop</ref>()<sp/>{</highlight></codeline>
 <codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>counted_node_ptr<sp/>old_head{};</highlight></codeline>
 <codeline lineno="292"><highlight class="normal"></highlight></codeline>
-<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group___coroutine_1ga79f854a5ada0083996d280c91b6cb2c1" kindref="member">retry</ref><sp/>=<sp/>0;<sp/><ref refid="group___coroutine_1ga79f854a5ada0083996d280c91b6cb2c1" kindref="member">retry</ref><sp/>&lt;<sp/>3;<sp/>++<ref refid="group___coroutine_1ga79f854a5ada0083996d280c91b6cb2c1" kindref="member">retry</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group___coroutine_1gaeeb129739f934bdf8c9e19059ba3ee29" kindref="member">retry</ref><sp/>=<sp/>0;<sp/><ref refid="group___coroutine_1gaeeb129739f934bdf8c9e19059ba3ee29" kindref="member">retry</ref><sp/>&lt;<sp/>3;<sp/>++<ref refid="group___coroutine_1gaeeb129739f934bdf8c9e19059ba3ee29" kindref="member">retry</ref>)<sp/>{</highlight></codeline>
 <codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>old_head<sp/>=<sp/>head.load(<ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
 <codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lock_free_queue::increase_external_count(head,<sp/>old_head);</highlight></codeline>
 <codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>node*<sp/>ptr<sp/>=<sp/>old_head.ptr;</highlight></codeline>
@@ -415,13 +415,13 @@
 <codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique&lt;T&gt;</ref>();</highlight></codeline>
 <codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="316"><highlight class="normal"></highlight></codeline>
-<codeline lineno="324" refid="classlock__free__queue_1a0407046c06b078c73f0972f7e2afb548" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classlock__free__queue_1a0407046c06b078c73f0972f7e2afb548" kindref="member">empty</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="324" refid="classlock__free__queue_1aa8e4252cc436d8f097df0d76e91fc9e6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classlock__free__queue_1aa8e4252cc436d8f097df0d76e91fc9e6" kindref="member">empty</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>counted_node_ptr<sp/>head_ptr<sp/>=<sp/>head.load(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>);</highlight></codeline>
 <codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>counted_node_ptr<sp/>tail_ptr<sp/>=<sp/>tail.load(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>);</highlight></codeline>
 <codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>head_ptr.ptr<sp/>==<sp/>tail_ptr.ptr;</highlight></codeline>
 <codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="329"><highlight class="normal"></highlight></codeline>
-<codeline lineno="338" refid="classlock__free__queue_1aea52e2c7aa4d45917f8160f3d21eb54c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classlock__free__queue_1aea52e2c7aa4d45917f8160f3d21eb54c" kindref="member">size</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="338" refid="classlock__free__queue_1a51f66096803f60cfc855ee5b8991d770" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classlock__free__queue_1a51f66096803f60cfc855ee5b8991d770" kindref="member">size</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>push_cnt<sp/>=<sp/>push_count_.load(<ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
 <codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>pop_cnt<sp/>=<sp/>pop_count_.load(<ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
 <codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>push_cnt<sp/>-<sp/>pop_cnt;</highlight></codeline>
@@ -445,6 +445,6 @@
 <codeline lineno="372"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="373"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_LOCK_FREE_QUEUE_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp"/>
   </compounddef>
 </doxygen>

@@ -1,36 +1,6 @@
 var namespaces_dup =
 [
     [ "literals", "namespaceliterals.html", null ],
-    [ "placeholders", "namespaceplaceholders.html", [
-      [ "p1", "namespaceplaceholders.html#a9fcf8f2fa0e0591d9df352bc625f06d9", null ],
-      [ "p10", "namespaceplaceholders.html#ae54db330b3afe8d1979575adc03c5940", null ],
-      [ "p11", "namespaceplaceholders.html#aa079b599724bb7433a64e1a9b0583d7c", null ],
-      [ "p12", "namespaceplaceholders.html#ab447a046fb8abfef5b042c94628a9a5a", null ],
-      [ "p13", "namespaceplaceholders.html#ade4eb20ea2a88ef3c9774fb8e85dc943", null ],
-      [ "p14", "namespaceplaceholders.html#af7c5e86771dd975f5c5cf0d4c7a61675", null ],
-      [ "p15", "namespaceplaceholders.html#ac89ea57c93cbd7015d0256f1ba375b53", null ],
-      [ "p16", "namespaceplaceholders.html#a0ad3fa2f979660e8353b885f77688e7a", null ],
-      [ "p17", "namespaceplaceholders.html#aba53784b3a131ad8892995a6b49b3f1e", null ],
-      [ "p18", "namespaceplaceholders.html#a973946ddf9c8420422d87353128bb213", null ],
-      [ "p19", "namespaceplaceholders.html#a521adfb7c2db68ca48f24fe8525410b8", null ],
-      [ "p2", "namespaceplaceholders.html#acc2e011d6b60e3ea3ea9a81c01c2c5d6", null ],
-      [ "p20", "namespaceplaceholders.html#a75487c2d023c77a9099125cabcd03adb", null ],
-      [ "p21", "namespaceplaceholders.html#a7ac632835c3ad7e2de2c7f045752a050", null ],
-      [ "p22", "namespaceplaceholders.html#ae4b6f99b52f60abe8fc5b1c4b427bf47", null ],
-      [ "p23", "namespaceplaceholders.html#a98959b1fd94dbc44d8a01168e7858890", null ],
-      [ "p24", "namespaceplaceholders.html#a8ecb02d681042e8f0c184b28c583d562", null ],
-      [ "p25", "namespaceplaceholders.html#a269a16f04524abf46b5c57497f9f0280", null ],
-      [ "p26", "namespaceplaceholders.html#ab8ddf9514435d5f0e1082ee3b017fd2e", null ],
-      [ "p27", "namespaceplaceholders.html#a01e04bf5295b32e6de411c4d1a3dffc8", null ],
-      [ "p28", "namespaceplaceholders.html#a931ea9ed318f4570910d989c19716fa6", null ],
-      [ "p29", "namespaceplaceholders.html#a7bc866dbc30069396b5f92bc2101c5fe", null ],
-      [ "p3", "namespaceplaceholders.html#a56142cce7de51c8e932cab312da3b1db", null ],
-      [ "p4", "namespaceplaceholders.html#a569a109f8c4b5515d92d8fdc32b046f5", null ],
-      [ "p5", "namespaceplaceholders.html#a649b02e7f14e28ae9dbffb94e219f0bc", null ],
-      [ "p6", "namespaceplaceholders.html#a1a1d81d594ca2ecc0ffb7bc61854b207", null ],
-      [ "p7", "namespaceplaceholders.html#a854d85436e1211e6b826a49c7e762368", null ],
-      [ "p8", "namespaceplaceholders.html#ae084d7fc5b9cc26603271cb0a7e4b3a3", null ],
-      [ "p9", "namespaceplaceholders.html#a1672d269ff1067da895af8d697afa8ff", null ]
-    ] ],
+    [ "placeholders", "namespaceplaceholders.html", null ],
     [ "ranges", "namespaceranges.html", null ]
 ];

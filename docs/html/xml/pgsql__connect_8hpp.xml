@@ -175,7 +175,7 @@
       <node id="35">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -245,7 +245,7 @@
       <node id="39">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
@@ -331,6 +331,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
       </node>
       <node id="59">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -367,8 +369,6 @@
       <node id="69">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="30" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
@@ -523,7 +523,7 @@
         </childnode>
       </node>
       <node id="14">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="8">
         <label>initializer_list</label>
@@ -573,7 +573,7 @@
 <codeline lineno="42" refid="classpgsql__connect" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classpgsql__connect_1ac9870d95c3fd6dbc78a73bb6efea9d34" kindref="member">pgsql_connect</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structidb__tb__connect" kindref="compound">idb_tb_connect</ref><sp/>{</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>::PGconn*<sp/>link_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>last_error_{};<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>last_error_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/>last_errno_<sp/>=<sp/>0;<sp/></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
@@ -606,13 +606,13 @@
 <codeline lineno="133"><highlight class="normal"></highlight></codeline>
 <codeline lineno="138" refid="classpgsql__connect_1a8480c07a5da1bae59f4b2b5d395ace01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classpgsql__connect_1a8480c07a5da1bae59f4b2b5d395ace01" kindref="member">connected</ref>()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="139"><highlight class="normal"></highlight></codeline>
-<codeline lineno="144" refid="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9" kindref="member">is_valid</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d" kindref="member">connected</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="144" refid="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9" kindref="member">is_valid</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structidb__connect_1a0b654dc4116a9ddb698966f4a5ddcdca" kindref="member">connected</ref>();<sp/>}</highlight></codeline>
 <codeline lineno="145"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="153" refid="classpgsql__factory" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classpgsql__factory_1a620346410a9812c2f21c9a458855ce2c" kindref="member">pgsql_factory</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classidb__factory_1ad680ec3a992a6a696e3cff3e7f0b34e1" kindref="member">idb_factory</ref><sp/>{</highlight></codeline>
+<codeline lineno="153" refid="classpgsql__factory" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classpgsql__factory_1a620346410a9812c2f21c9a458855ce2c" kindref="member">pgsql_factory</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classidb__factory_1a875d00f918348f454bb6452c57579ab1" kindref="member">idb_factory</ref><sp/>{</highlight></codeline>
 <codeline lineno="154"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="159" refid="classpgsql__factory_1a620346410a9812c2f21c9a458855ce2c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classpgsql__factory_1a620346410a9812c2f21c9a458855ce2c" kindref="member">pgsql_factory</ref>(<ref refid="structdb__config" kindref="compound">db_config</ref><sp/>config)<sp/>:</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classidb__factory_1ad680ec3a992a6a696e3cff3e7f0b34e1" kindref="member">idb_factory</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(config))<sp/>{}</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classidb__factory_1a875d00f918348f454bb6452c57579ab1" kindref="member">idb_factory</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(config))<sp/>{}</highlight></codeline>
 <codeline lineno="161"><highlight class="normal"></highlight></codeline>
 <codeline lineno="165" refid="classpgsql__factory_1ad83d4ad388909913520867c96e487895" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpgsql__factory_1ad83d4ad388909913520867c96e487895" kindref="member">~pgsql_factory</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="166"><highlight class="normal"></highlight></codeline>
@@ -627,6 +627,6 @@
 <codeline lineno="186"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="187"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_DATABASE_PGSQL_CONNECT_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp"/>
   </compounddef>
 </doxygen>

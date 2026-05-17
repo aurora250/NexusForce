@@ -1,0 +1,536 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classlz4__compressor" kind="class" language="C++" prot="public">
+    <compoundname>lz4_compressor</compoundname>
+    <includes refid="lz4__compress_8hpp" local="no">lz4_compress.hpp</includes>
+    <innerclass refid="classlz4__compressor_1_1stream__compressor" prot="public">lz4_compressor::stream_compressor</innerclass>
+    <innerclass refid="classlz4__compressor_1_1stream__decompressor" prot="public">lz4_compressor::stream_decompressor</innerclass>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classlz4__compressor_1a96d06ad10501d18395fab68aad123ffc" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t lz4_compressor::block_size</definition>
+        <argsstring></argsstring>
+        <name>block_size</name>
+        <qualifiedname>lz4_compressor::block_size</qualifiedname>
+        <initializer>= 65536</initializer>
+        <briefdescription>
+<para>最大块大小常量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>LZ4流式压缩处理的最大数据块大小（64KB）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" line="65" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classlz4__compressor_1a9c9da3fb65c958b9480aba32d0d0d009" prot="private" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector lz4_compressor::compress_data</definition>
+        <argsstring>(const byte_t *data, size_t size, int level)</argsstring>
+        <name>compress_data</name>
+        <qualifiedname>lz4_compressor::compress_data</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>压缩数据的内部实现 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入数据指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入数据大小 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩级别，范围0-12，0为快速压缩，1-12为HC压缩 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>压缩后的字节向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>lz4_exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当压缩失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" line="76" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classlz4__compressor_1afcb772e40e9e0a76a4b59cc7373e6b01" prot="private" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector lz4_compressor::decompress_data</definition>
+        <argsstring>(const byte_t *data, size_t size, size_t estimated_original_size)</argsstring>
+        <name>decompress_data</name>
+        <qualifiedname>lz4_compressor::decompress_data</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>estimated_original_size</declname>
+        </param>
+        <briefdescription>
+<para>解压缩数据的内部实现 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩数据指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩数据大小 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>estimated_original_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预估原始大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解压缩后的字节向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>lz4_exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当解压缩失败或超出最大缓冲区限制时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+如果预估大小不足，会自动调整缓冲区大小重试，最多尝试5次。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" line="88" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classlz4__compressor_1adfe984e62b4532f85ac11f13bfb962f8" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector lz4_compressor::compress</definition>
+        <argsstring>(Iterator begin, Iterator end, const int level=0)</argsstring>
+        <name>compress</name>
+        <qualifiedname>lz4_compressor::compress</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>end</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>level</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>压缩迭代器范围中的数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>begin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩级别 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>压缩后的字节向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>lz4_exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当压缩失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+要求迭代器指向的元素大小为1字节。 压缩级别：<itemizedlist>
+<listitem><para>0：快速压缩（默认）</para>
+</listitem><listitem><para>1-12：HC（高压缩率）模式，级别越高压缩率越高但速度越慢 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" line="107" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" bodystart="107" bodyend="114"/>
+        <references refid="group___type_erasure_functions_1ga278da9db83e0ea0b3ba56d8dedf43d86" compoundref="type__erase_8hpp" startline="30" endline="32">begin</references>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
+        <references refid="group___iterator_category_checks_1gaf0e6312c38a5154a51cd62d622d2dfe3" compoundref="concepts_8hpp" startline="621">is_ranges_cot_iter_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classlz4__compressor_1aea5f74a87ccebcea5cd7dced1e5ced4e" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector lz4_compressor::compress</definition>
+        <argsstring>(const string_view data, const int level=0)</argsstring>
+        <name>compress</name>
+        <qualifiedname>lz4_compressor::compress</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>level</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>压缩字符串视图 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩级别 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>压缩后的字节向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>lz4_exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当压缩失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+压缩级别：<itemizedlist>
+<listitem><para>0：快速压缩（默认）</para>
+</listitem><listitem><para>1-12：HC（高压缩率）模式，级别越高压缩率越高但速度越慢 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" line="127" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" bodystart="127" bodyend="129"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="classlz4__compressor_1adbc1f0003132bf008621db3b6fe4e763" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector lz4_compressor::compress</definition>
+        <argsstring>(const vector&lt; T &gt; &amp;data, const int level=0)</argsstring>
+        <name>compress</name>
+        <qualifiedname>lz4_compressor::compress</qualifiedname>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; T &gt; &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>level</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>压缩字节向量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>元素类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节向量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>压缩级别 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>压缩后的字节向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>lz4_exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当压缩失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+要求向量元素大小为1字节。 压缩级别：<itemizedlist>
+<listitem><para>0：快速压缩（默认）</para>
+</listitem><listitem><para>1-12：HC（高压缩率）模式，级别越高压缩率越高但速度越慢 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" line="145" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" bodystart="145" bodyend="150"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+      <memberdef kind="function" id="classlz4__compressor_1a0f6ad3649cd9ac2604ea855d6da37d5c" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1gaf0e6312c38a5154a51cd62d622d2dfe3" kindref="member">is_ranges_cot_iter_v</ref>&lt; Iterator &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector lz4_compressor::decompress</definition>
+        <argsstring>(Iterator begin, Iterator end, const size_t estimated_original_size=0)</argsstring>
+        <name>decompress</name>
+        <qualifiedname>lz4_compressor::decompress</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>end</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>estimated_original_size</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>解压缩迭代器范围中的数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>begin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>estimated_original_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预估原始大小，为0时自动估计（默认使用压缩大小的4倍） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解压缩后的字节向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>lz4_exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当解压缩失败或超出最大缓冲区限制时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+要求迭代器指向的元素大小为1字节。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" line="164" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" bodystart="164" bodyend="172"/>
+        <references refid="group___type_erasure_functions_1ga278da9db83e0ea0b3ba56d8dedf43d86" compoundref="type__erase_8hpp" startline="30" endline="32">begin</references>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___iterator_operation_1gabd49270b18593c75e6b68d05a5a389ba" compoundref="iterator_8hpp" startline="201" endline="218">distance</references>
+        <references refid="group___type_erasure_functions_1ga4957a4e04980dc4efffacefa1de50c3c" compoundref="type__erase_8hpp" startline="41" endline="43">end</references>
+      </memberdef>
+      <memberdef kind="function" id="classlz4__compressor_1a6f041fbe647b8fe43f0f1ad191971200" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector lz4_compressor::decompress</definition>
+        <argsstring>(const cbyte_view &amp;data, const size_t estimated_original_size=0)</argsstring>
+        <name>decompress</name>
+        <qualifiedname>lz4_compressor::decompress</qualifiedname>
+        <param>
+          <type>const <ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>estimated_original_size</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>解压缩常量字节视图 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>常量字节视图 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>estimated_original_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预估原始大小，为0时自动估计 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解压缩后的字节向量 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>lz4_exception</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当解压缩失败或超出最大缓冲区限制时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" line="181" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" bodystart="181" bodyend="183"/>
+        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>LZ4压缩解压缩工具类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供静态方法和流式处理类，用于数据的压缩和解压缩。 支持多种数据类型输入，包括迭代器范围、字符串视图、字节向量等。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" line="58" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/lz4_compress.hpp" bodystart="58" bodyend="378"/>
+    <listofallmembers>
+      <member refid="classlz4__compressor_1a96d06ad10501d18395fab68aad123ffc" prot="public" virt="non-virtual"><scope>lz4_compressor</scope><name>block_size</name></member>
+      <member refid="classlz4__compressor_1adfe984e62b4532f85ac11f13bfb962f8" prot="public" virt="non-virtual"><scope>lz4_compressor</scope><name>compress</name></member>
+      <member refid="classlz4__compressor_1aea5f74a87ccebcea5cd7dced1e5ced4e" prot="public" virt="non-virtual"><scope>lz4_compressor</scope><name>compress</name></member>
+      <member refid="classlz4__compressor_1adbc1f0003132bf008621db3b6fe4e763" prot="public" virt="non-virtual"><scope>lz4_compressor</scope><name>compress</name></member>
+      <member refid="classlz4__compressor_1a9c9da3fb65c958b9480aba32d0d0d009" prot="private" virt="non-virtual"><scope>lz4_compressor</scope><name>compress_data</name></member>
+      <member refid="classlz4__compressor_1a0f6ad3649cd9ac2604ea855d6da37d5c" prot="public" virt="non-virtual"><scope>lz4_compressor</scope><name>decompress</name></member>
+      <member refid="classlz4__compressor_1a6f041fbe647b8fe43f0f1ad191971200" prot="public" virt="non-virtual"><scope>lz4_compressor</scope><name>decompress</name></member>
+      <member refid="classlz4__compressor_1afcb772e40e9e0a76a4b59cc7373e6b01" prot="private" virt="non-virtual"><scope>lz4_compressor</scope><name>decompress_data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

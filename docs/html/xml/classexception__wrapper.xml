@@ -17,15 +17,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="31" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="31" column="13"/>
       </memberdef>
-      <memberdef kind="function" id="classexception__wrapper_1a3112fb62c8863b12e376df7e36324918" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>void</type>
-        <definition>virtual void exception_wrapper::rethrow</definition>
+      <memberdef kind="function" id="classexception__wrapper_1a5f9d0a2b14862b3248e64ed70c64c702" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NORETURN void</type>
+        <definition>virtual NEFORCE_NORETURN void exception_wrapper::rethrow</definition>
         <argsstring>() const =0</argsstring>
         <name>rethrow</name>
         <qualifiedname>exception_wrapper::rethrow</qualifiedname>
-        <reimplementedby refid="classtyped__exception__wrapper_1a82187b3aff63f9c14d3b090087b6db42">rethrow</reimplementedby>
+        <reimplementedby refid="classtyped__exception__wrapper_1aec9696310f011cfedde6077b4bca67cd">rethrow</reimplementedby>
         <briefdescription>
 <para>重新抛出异常 </para>
         </briefdescription>
@@ -34,15 +34,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="38" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="38" column="35"/>
       </memberdef>
-      <memberdef kind="function" id="classexception__wrapper_1ab04df73bc21daeb1491fba55397a896c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
-        <type>const std::type_info &amp;</type>
-        <definition>virtual const std::type_info &amp; exception_wrapper::type</definition>
+      <memberdef kind="function" id="classexception__wrapper_1a75b4031b3bf86ed08319dfa30e34ca0d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD const std::type_info &amp;</type>
+        <definition>virtual NEFORCE_NODISCARD const std::type_info &amp; exception_wrapper::type</definition>
         <argsstring>() const noexcept=0</argsstring>
         <name>type</name>
         <qualifiedname>exception_wrapper::type</qualifiedname>
-        <reimplementedby refid="classtyped__exception__wrapper_1a8b3de5e4a9a80c8bbc699db724e427db">type</reimplementedby>
+        <reimplementedby refid="classtyped__exception__wrapper_1a0cb3ffe51548e47e30362ee4e04d9b3c">type</reimplementedby>
         <briefdescription>
 <para>获取异常类型信息 </para>
         </briefdescription>
@@ -53,15 +53,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="44" column="34"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="44" column="52"/>
       </memberdef>
-      <memberdef kind="function" id="classexception__wrapper_1a40fd000355a09acab15cfc64c9ec7f8f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classexception__wrapper" kindref="compound">exception_wrapper</ref> &gt;</type>
-        <definition>virtual unique_ptr&lt; exception_wrapper &gt; exception_wrapper::clone</definition>
+      <memberdef kind="function" id="classexception__wrapper_1a43f65f2af0ee2f34a9c3b9fb57346b6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classexception__wrapper" kindref="compound">exception_wrapper</ref> &gt;</type>
+        <definition>virtual NEFORCE_NODISCARD unique_ptr&lt; exception_wrapper &gt; exception_wrapper::clone</definition>
         <argsstring>() const =0</argsstring>
         <name>clone</name>
         <qualifiedname>exception_wrapper::clone</qualifiedname>
-        <reimplementedby refid="classtyped__exception__wrapper_1a2973111a1bccf92fd924f6f6eb15c6de">clone</reimplementedby>
+        <reimplementedby refid="classtyped__exception__wrapper_1af2d0cd1b48ec5146aec4f2996029d328">clone</reimplementedby>
         <briefdescription>
 <para>克隆异常包装器 </para>
         </briefdescription>
@@ -72,9 +72,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="52" column="24"/>
-        <references refid="classexception__wrapper_1a40fd000355a09acab15cfc64c9ec7f8f">clone</references>
-        <referencedby refid="classexception__wrapper_1a40fd000355a09acab15cfc64c9ec7f8f">clone</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="52" column="42"/>
+        <references refid="classexception__wrapper_1a43f65f2af0ee2f34a9c3b9fb57346b6c">clone</references>
+        <referencedby refid="classexception__wrapper_1a43f65f2af0ee2f34a9c3b9fb57346b6c">clone</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -95,11 +95,11 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="29" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="29" bodyend="53"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="29" bodyend="53"/>
     <listofallmembers>
-      <member refid="classexception__wrapper_1a40fd000355a09acab15cfc64c9ec7f8f" prot="public" virt="pure-virtual"><scope>exception_wrapper</scope><name>clone</name></member>
-      <member refid="classexception__wrapper_1a3112fb62c8863b12e376df7e36324918" prot="public" virt="pure-virtual"><scope>exception_wrapper</scope><name>rethrow</name></member>
-      <member refid="classexception__wrapper_1ab04df73bc21daeb1491fba55397a896c" prot="public" virt="pure-virtual"><scope>exception_wrapper</scope><name>type</name></member>
+      <member refid="classexception__wrapper_1a43f65f2af0ee2f34a9c3b9fb57346b6c" prot="public" virt="pure-virtual"><scope>exception_wrapper</scope><name>clone</name></member>
+      <member refid="classexception__wrapper_1a5f9d0a2b14862b3248e64ed70c64c702" prot="public" virt="pure-virtual"><scope>exception_wrapper</scope><name>rethrow</name></member>
+      <member refid="classexception__wrapper_1a75b4031b3bf86ed08319dfa30e34ca0d" prot="public" virt="pure-virtual"><scope>exception_wrapper</scope><name>type</name></member>
       <member refid="classexception__wrapper_1a173feccc1a9c7155807fac427fcd264b" prot="public" virt="virtual"><scope>exception_wrapper</scope><name>~exception_wrapper</name></member>
     </listofallmembers>
   </compounddef>

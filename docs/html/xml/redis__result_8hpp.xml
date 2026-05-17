@@ -175,7 +175,7 @@
       <node id="35">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -245,7 +245,7 @@
       <node id="39">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
@@ -331,6 +331,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
       </node>
       <node id="59">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -367,8 +369,6 @@
       <node id="69">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="30" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
@@ -523,7 +523,7 @@
         </childnode>
       </node>
       <node id="14">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="2">
         <label>hiredis/hiredis.h</label>
@@ -581,7 +581,7 @@
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref><sp/>kv_cursor_<sp/>=<sp/>0;<sp/></highlight></codeline>
 <codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_array_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>get_string()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>get_string()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="61" refid="structredis__result_1a20c04d2b29a78b6835fab8895f228d4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structredis__result_1a20c04d2b29a78b6835fab8895f228d4c" kindref="member">redis_result</ref>();</highlight></codeline>
@@ -590,35 +590,37 @@
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
 <codeline lineno="78" refid="structredis__result_1aec17b3d582b9d4efb8ce79848a7b2d6e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structredis__result_1aec17b3d582b9d4efb8ce79848a7b2d6e" kindref="member">~redis_result</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
-<codeline lineno="84" refid="structredis__result_1a9f5e5cdaed05e62e4a018c819757fbf3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1a9f5e5cdaed05e62e4a018c819757fbf3" kindref="member">empty</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!result_<sp/>||<sp/>(rows_<sp/>==<sp/>0<sp/>&amp;&amp;<sp/>kv_pairs_-&gt;empty());<sp/>}</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93" refid="structredis__result_1a4ead1dbc22e3a1049aa32282885b239c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1a4ead1dbc22e3a1049aa32282885b239c" kindref="member">next</ref>()<sp/>noexcept<sp/>override;</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="102" refid="structredis__result_1a252f450102feb82e6b458456f3ac86b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="structredis__result_1a252f450102feb82e6b458456f3ac86b3" kindref="member">key</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110" refid="structredis__result_1ad358a9353eab406065548841650d6cab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="structredis__result_1ad358a9353eab406065548841650d6cab" kindref="member">value</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="118" refid="structredis__result_1adddd8e462ee844961cf0b5543ba598ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1adddd8e462ee844961cf0b5543ba598ee" kindref="member">value_bool</ref>()<sp/>const<sp/>override;</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="126" refid="structredis__result_1acfb7a9cc5c0970c463cfa919d137244e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref><sp/><ref refid="structredis__result_1acfb7a9cc5c0970c463cfa919d137244e" kindref="member">value_int64</ref>()<sp/>const<sp/>override;</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="134" refid="structredis__result_1aa00cd3d8f3d65dfd8f91a0e72ab6665b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1aa00cd3d8f3d65dfd8f91a0e72ab6665b" kindref="member">value_double</ref>()<sp/>const<sp/>override;</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight></codeline>
-<codeline lineno="143" refid="structredis__result_1a0d18b8e519e2c1d4575c157ab21b3825" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classvector" kindref="compound">vector</ref>&lt;</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&gt;<sp/><ref refid="structredis__result_1a0d18b8e519e2c1d4575c157ab21b3825" kindref="member">value_array</ref>()<sp/>const<sp/>override;</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151" refid="structredis__result_1a06fe0819c6113919e5f42db5bcddcbe4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>const<sp/><ref refid="classvector" kindref="compound">vector</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&gt;&gt;&amp;<sp/><ref refid="structredis__result_1a06fe0819c6113919e5f42db5bcddcbe4" kindref="member">value_hash</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*kv_pairs_;<sp/>}</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"></highlight></codeline>
-<codeline lineno="157" refid="structredis__result_1aab1a8ca9ab57aa98a272edec47cf521c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1aab1a8ca9ab57aa98a272edec47cf521c" kindref="member">type</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result_<sp/>?<sp/>result_-&gt;type<sp/>:<sp/>-1;<sp/>}</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"></highlight></codeline>
-<codeline lineno="163" refid="structredis__result_1a6be2f3ab2fb54fedb9824b920bdbaa0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1a6be2f3ab2fb54fedb9824b920bdbaa0f" kindref="member">is_nil</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result_<sp/>&amp;&amp;<sp/>result_-&gt;type<sp/>==<sp/>REDIS_REPLY_NIL;<sp/>}</highlight></codeline>
-<codeline lineno="164"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Redis</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Database</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="169"><highlight class="normal"></highlight></codeline>
-<codeline lineno="170"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="172"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_DATABASE_REDIS_RESULT_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="structredis__result_1a9f5e5cdaed05e62e4a018c819757fbf3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1a9f5e5cdaed05e62e4a018c819757fbf3" kindref="member">empty</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result_<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>||<sp/>(rows_<sp/>==<sp/>0<sp/>&amp;&amp;<sp/>kv_pairs_-&gt;empty());</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95" refid="structredis__result_1a4ead1dbc22e3a1049aa32282885b239c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1a4ead1dbc22e3a1049aa32282885b239c" kindref="member">next</ref>()<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="structredis__result_1a252f450102feb82e6b458456f3ac86b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="structredis__result_1a252f450102feb82e6b458456f3ac86b3" kindref="member">key</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112" refid="structredis__result_1ad358a9353eab406065548841650d6cab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="structredis__result_1ad358a9353eab406065548841650d6cab" kindref="member">value</ref>()<sp/>const<sp/>noexcept<sp/>override;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="structredis__result_1adddd8e462ee844961cf0b5543ba598ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1adddd8e462ee844961cf0b5543ba598ee" kindref="member">value_bool</ref>()<sp/>const<sp/>override;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128" refid="structredis__result_1acfb7a9cc5c0970c463cfa919d137244e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref><sp/><ref refid="structredis__result_1acfb7a9cc5c0970c463cfa919d137244e" kindref="member">value_int64</ref>()<sp/>const<sp/>override;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136" refid="structredis__result_1aa00cd3d8f3d65dfd8f91a0e72ab6665b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1aa00cd3d8f3d65dfd8f91a0e72ab6665b" kindref="member">value_double</ref>()<sp/>const<sp/>override;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145" refid="structredis__result_1a0d18b8e519e2c1d4575c157ab21b3825" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classvector" kindref="compound">vector</ref>&lt;</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&gt;<sp/><ref refid="structredis__result_1a0d18b8e519e2c1d4575c157ab21b3825" kindref="member">value_array</ref>()<sp/>const<sp/>override;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153" refid="structredis__result_1a06fe0819c6113919e5f42db5bcddcbe4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>const<sp/><ref refid="classvector" kindref="compound">vector</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&gt;&gt;&amp;<sp/><ref refid="structredis__result_1a06fe0819c6113919e5f42db5bcddcbe4" kindref="member">value_hash</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*kv_pairs_;<sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159" refid="structredis__result_1aab1a8ca9ab57aa98a272edec47cf521c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1aab1a8ca9ab57aa98a272edec47cf521c" kindref="member">type</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/>result_-&gt;type<sp/>:<sp/>-1;<sp/>}</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165" refid="structredis__result_1a6be2f3ab2fb54fedb9824b920bdbaa0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__result_1a6be2f3ab2fb54fedb9824b920bdbaa0f" kindref="member">is_nil</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>&amp;&amp;<sp/>result_-&gt;type<sp/>==<sp/>REDIS_REPLY_NIL;<sp/>}</highlight></codeline>
+<codeline lineno="166"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Redis</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Database</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_DATABASE_REDIS_RESULT_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp"/>
   </compounddef>
 </doxygen>

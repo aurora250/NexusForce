@@ -150,15 +150,19 @@ $(function(){initNavTree('sqlite__prepared__statement_8hpp_source.html','',''); 
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span></div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="classsqlite__prepared__statement.html#ad741d5f90270bd2ca5cdae2e59f6b7b8">  182</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="code hl_function" href="classsqlite__prepared__statement.html#ad741d5f90270bd2ca5cdae2e59f6b7b8">get_error</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> last_error_.<a class="code hl_function" href="classbasic__string__view.html#a859a0a299a008f84cd9647cecce3a865">view</a>(); }</div>
 <div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span></div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="classsqlite__prepared__statement.html#aac9769d42e12301e2ccb268b320867bd">  188</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_function" href="classsqlite__prepared__statement.html#aac9769d42e12301e2ccb268b320867bd">get_errno</a>() const noexcept<span class="keyword"> override </span>{ <span class="keywordflow">return</span> db_ ? ::sqlite3_errcode(db_) : 0; }</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>};</div>
+<div class="foldopen" id="foldopen00188" data-start="{" data-end="}">
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="classsqlite__prepared__statement.html#aac9769d42e12301e2ccb268b320867bd">  188</a></span>    NEFORCE_NODISCARD <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_function" href="classsqlite__prepared__statement.html#aac9769d42e12301e2ccb268b320867bd">get_errno</a>() const noexcept<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keywordflow">return</span> db_ != <span class="keyword">nullptr</span> ? ::sqlite3_errcode(db_) : 0;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    }</div>
 </div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> <span class="comment">// SQLite3</span></div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> <span class="comment">// Database</span></div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_SQLITE_PREPARED_STATEMENT_HPP__</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>};</div>
+</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> <span class="comment">// SQLite3</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> <span class="comment">// Database</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_SQLITE_PREPARED_STATEMENT_HPP__</span></div>
 <div class="ttc" id="aclassbasic__string__view_html_a859a0a299a008f84cd9647cecce3a865"><div class="ttname"><a href="classbasic__string__view.html#a859a0a299a008f84cd9647cecce3a865">basic_string_view::view</a></div><div class="ttdeci">NEFORCE_NODISCARD constexpr basic_string_view view(const size_type off, const size_type count=npos) const</div><div class="ttdoc">获取子视图</div><div class="ttdef"><b>定义</b> <a href="basic__string__view_8hpp_source.html#l00440">basic_string_view.hpp:440</a></div></div>
 <div class="ttc" id="aclasssqlite__prepared__statement_html_a0b652a3b7622842aa765b189d7704d39"><div class="ttname"><a href="classsqlite__prepared__statement.html#a0b652a3b7622842aa765b189d7704d39">sqlite_prepared_statement::sqlite_prepared_statement</a></div><div class="ttdeci">sqlite_prepared_statement(::sqlite3 *db, const string &amp;sql)</div><div class="ttdoc">构造函数</div></div>
 <div class="ttc" id="aclasssqlite__prepared__statement_html_a235ed7a1068557e610d0625de3340b1e"><div class="ttname"><a href="classsqlite__prepared__statement.html#a235ed7a1068557e610d0625de3340b1e">sqlite_prepared_statement::bind_param</a></div><div class="ttdeci">bool bind_param(uint32_t index, string_view value) override</div><div class="ttdoc">绑定字符串视图参数</div></div>

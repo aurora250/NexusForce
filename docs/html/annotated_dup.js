@@ -1,9 +1,5 @@
 var annotated_dup =
 [
-    [ "neforce", null, [
-      [ "lz4_exception", "structneforce_1_1lz4__exception.html", null ],
-      [ "lz4_compressor", "classneforce_1_1lz4__compressor.html", "classneforce_1_1lz4__compressor" ]
-    ] ],
     [ "add_const", "structadd__const.html", null ],
     [ "add_cv", "structadd__cv.html", null ],
     [ "add_lvalue_reference", "structadd__lvalue__reference.html", null ],
@@ -400,7 +396,8 @@ var annotated_dup =
     [ "is_unpackaged", "structis__unpackaged.html", null ],
     [ "is_unsigned", "structis__unsigned.html", null ],
     [ "is_view", "structis__view.html", null ],
-    [ "is_view&lt; ranges::view_base&lt; D &gt; &gt;", "structis__view_3_01ranges_1_1view__base_3_01_d_01_4_01_4.html", null ],
+    [ "is_view&lt; 1::view_base&lt; D &gt; &gt;", "structis__view_3_011_1_1view__base_3_01_d_01_4_01_4.html", null ],
+    [ "is_virtual_thread_task", "structis__virtual__thread__task.html", null ],
     [ "is_void", "structis__void.html", null ],
     [ "is_volatile", "structis__volatile.html", null ],
     [ "istringify", "structistringify.html", "structistringify" ],
@@ -437,6 +434,7 @@ var annotated_dup =
     [ "logger", "classlogger.html", "classlogger" ],
     [ "logging_filter", "classlogging__filter.html", "classlogging__filter" ],
     [ "lru_cache", "classlru__cache.html", "classlru__cache" ],
+    [ "lz4_compressor", "classlz4__compressor.html", "classlz4__compressor" ],
     [ "mac_address", "classmac__address.html", "classmac__address" ],
     [ "make_integer", "structmake__integer.html", null ],
     [ "make_signed", "structmake__signed.html", null ],
@@ -602,7 +600,6 @@ var annotated_dup =
     [ "signal", "structsignal.html", "structsignal" ],
     [ "signal_blocker", "classsignal__blocker.html", "classsignal__blocker" ],
     [ "signal_guard", "classsignal__guard.html", "classsignal__guard" ],
-    [ "sleep_awaiter", "structsleep__awaiter.html", "structsleep__awaiter" ],
     [ "smtp_exception", "structsmtp__exception.html", null ],
     [ "smtp_message", "structsmtp__message.html", "structsmtp__message" ],
     [ "smtp_socket", "classsmtp__socket.html", "classsmtp__socket" ],
@@ -728,9 +725,9 @@ var annotated_dup =
     [ "vector_iterator", "structvector__iterator.html", "structvector__iterator" ],
     [ "view_base", "structview__base.html", "structview__base" ],
     [ "virtual_thread", "classvirtual__thread.html", null ],
-    [ "virtual_thread_awaiter", "structvirtual__thread__awaiter.html", "structvirtual__thread__awaiter" ],
     [ "virtual_thread_scheduler", "classvirtual__thread__scheduler.html", "classvirtual__thread__scheduler" ],
     [ "virtual_thread_task", "structvirtual__thread__task.html", "structvirtual__thread__task" ],
+    [ "virtual_thread_task&lt; void &gt;", "structvirtual__thread__task_3_01void_01_4.html", "structvirtual__thread__task_3_01void_01_4" ],
     [ "wcharacter", "structwcharacter.html", "structwcharacter" ],
     [ "weak_ptr", "classweak__ptr.html", "classweak__ptr" ],
     [ "websocket_frame_header", "structwebsocket__frame__header.html", "structwebsocket__frame__header" ],

@@ -6,7 +6,7 @@ var structatomic_3_01weak__ptr_3_01_t_01_4_01_4 =
     [ "compare_exchange_weak", "structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html#ad4869b2612cf0d38f5735d05d7cf3844", null ],
     [ "compare_exchange_weak", "structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html#a28ef35af31202c69a499f7c15f418f38", null ],
     [ "exchange", "structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html#a7a5ee316f303544615f232915fc8f0d8", null ],
-    [ "is_lock_free", "structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html#a66caafd27fd7c27c5f825c8427597668", null ],
+    [ "is_lock_free", "structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html#a7a8b23b446240418b9078f3e16d142c6", null ],
     [ "load", "structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html#adbe257302df56da163cea95ccb7e67dd", null ],
     [ "notify_all", "structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html#ada9f8ff7d744388a0664ca3c921c5eb2", null ],
     [ "notify_one", "structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html#aa6de700b731d2eaf49b846b7f235f683", null ],

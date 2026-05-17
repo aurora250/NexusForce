@@ -18,7 +18,7 @@ var group___semaphores =
       [ "try_acquire", "classsemaphore.html#a6fac839c9604da4b0d700e138c735efa", null ],
       [ "try_acquire_for", "classsemaphore.html#aeccec009d808843dfa063fadbc0fce7f", null ],
       [ "try_acquire_until", "classsemaphore.html#aff6123797344a446506be860322273c4", null ],
-      [ "value", "classsemaphore.html#ab20020329e57e990088ef2d658a761cf", null ]
+      [ "value", "classsemaphore.html#a9cc205098e072d6a6acae8d30ef3ef78", null ]
     ] ],
     [ "binary_semaphore", "group___semaphores.html#gab2a6957724f0f8a6acdf255f36329235", null ]
 ];

@@ -56,9 +56,11 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="63" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
         </childnode>
         <childnode refid="64" relation="include">
         </childnode>
@@ -79,7 +81,7 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="63">
+      <node id="62">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="11" relation="include">
@@ -88,7 +90,7 @@
       <node id="56">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="57" relation="include">
         </childnode>
@@ -99,8 +101,6 @@
         <childnode refid="60" relation="include">
         </childnode>
         <childnode refid="61" relation="include">
-        </childnode>
-        <childnode refid="62" relation="include">
         </childnode>
       </node>
       <node id="12">
@@ -230,7 +230,7 @@
       <node id="34">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -304,7 +304,7 @@
       <node id="38">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="15" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
@@ -380,6 +380,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
       </node>
       <node id="47">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -454,22 +456,25 @@
         </childnode>
       </node>
       <node id="13">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="61">
+        <label>ctime</label>
       </node>
       <node id="7">
         <label>initializer_list</label>
       </node>
-      <node id="64">
+      <node id="63">
         <label>intrin.h</label>
+      </node>
+      <node id="64">
+        <label>intrin0.inl.h</label>
       </node>
       <node id="37">
         <label>new</label>
       </node>
       <node id="58">
         <label>processthreadsapi.h</label>
-      </node>
-      <node id="62">
-        <label>riscv_pause.h</label>
       </node>
       <node id="60">
         <label>sched.h</label>
@@ -479,9 +484,6 @@
       </node>
       <node id="49">
         <label>typeinfo</label>
-      </node>
-      <node id="61">
-        <label>unistd.h</label>
       </node>
       <node id="25">
         <label>utility</label>
@@ -534,12 +536,12 @@
 <codeline lineno="54" refid="classpath__tree_1a72bff3b00bc168622626ff7be33e7258aef399b2d446bb37b7c32ad2cc1b6045b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stop<sp/>=<sp/>2,<sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="64" refid="classpath__tree_1_1node" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>node<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structenable__shared__from__this_1a6badcf3b2e323032ff5766796093f96f" kindref="member">enable_shared_from_this</ref>&lt;node&gt;<sp/>{</highlight></codeline>
+<codeline lineno="64" refid="classpath__tree_1_1node" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>node<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structenable__shared__from__this_1af6f855457646398a518c284275f5e929" kindref="member">enable_shared_from_this</ref>&lt;node&gt;<sp/>{</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">path_tree;</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="68" refid="classpath__tree_1_1node_1a5f41634a8284d75aa0f4e8497eda708b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classpath__tree_1_1node_1a5f41634a8284d75aa0f4e8497eda708b" kindref="member">ptr</ref><sp/>=<sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;node&gt;</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="69" refid="classpath__tree_1_1node_1a593a61c879ad11f77eefc27dfe80a0bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classpath__tree_1_1node_1a593a61c879ad11f77eefc27dfe80a0bc" kindref="member">weak_ptr</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="classpath__tree_1_1node_1a593a61c879ad11f77eefc27dfe80a0bc" kindref="member">weak_ptr&lt;node&gt;</ref>;<sp/></highlight></codeline>
+<codeline lineno="69" refid="classpath__tree_1_1node_1a318beda08dc89463eb0421a3feca4628" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classpath__tree_1_1node_1a318beda08dc89463eb0421a3feca4628" kindref="member">weak_ptr</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="classpath__tree_1_1node_1a318beda08dc89463eb0421a3feca4628" kindref="member">weak_ptr&lt;node&gt;</ref>;<sp/></highlight></codeline>
 <codeline lineno="70" refid="classpath__tree_1_1node_1a2a0801dd531b8ab16eec183e86081ce8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classpath__tree_1_1node_1a2a0801dd531b8ab16eec183e86081ce8" kindref="member">children_list</ref><sp/>=<sp/><ref refid="classvector" kindref="compound">vector&lt;ptr&gt;</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
@@ -621,7 +623,7 @@
 <codeline lineno="199"><highlight class="normal"></highlight></codeline>
 <codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classpath__tree_1_1node_1a5f41634a8284d75aa0f4e8497eda708b" kindref="member">node::ptr</ref><sp/>prune_impl(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath__tree_1_1node_1a5f41634a8284d75aa0f4e8497eda708b" kindref="member">node::ptr</ref>&amp;<sp/>src,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath__tree_1a7731ca7fc5f8029fbd121aae69ce64ff" kindref="member">filter</ref>&amp;<sp/>f,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath__tree_1_1node_1a5f41634a8284d75aa0f4e8497eda708b" kindref="member">node::ptr</ref>&amp;<sp/>new_parent,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>depth);</highlight></codeline>
 <codeline lineno="201"><highlight class="normal"></highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>to_string_impl(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath__tree_1_1node_1a5f41634a8284d75aa0f4e8497eda708b" kindref="member">node::ptr</ref>&amp;<sp/>n,<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>indent,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>depth)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>to_string_impl(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpath__tree_1_1node_1a5f41634a8284d75aa0f4e8497eda708b" kindref="member">node::ptr</ref>&amp;<sp/>n,<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>indent,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>depth)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="203"><highlight class="normal"></highlight></codeline>
 <codeline lineno="204"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>path_tree()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
@@ -685,6 +687,6 @@
 <codeline lineno="380"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="381"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_FILE_PATH_TREE_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp"/>
   </compounddef>
 </doxygen>

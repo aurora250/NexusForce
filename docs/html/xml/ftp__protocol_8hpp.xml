@@ -56,9 +56,11 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="44" relation="include">
         </childnode>
-        <childnode refid="53" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
         </childnode>
         <childnode refid="54" relation="include">
         </childnode>
@@ -79,7 +81,7 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="53">
+      <node id="52">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="12" relation="include">
@@ -88,7 +90,7 @@
       <node id="46">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="47" relation="include">
         </childnode>
@@ -99,8 +101,6 @@
         <childnode refid="50" relation="include">
         </childnode>
         <childnode refid="51" relation="include">
-        </childnode>
-        <childnode refid="52" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -208,7 +208,7 @@
       <node id="35">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -288,7 +288,7 @@
       <node id="39">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
@@ -373,6 +373,8 @@
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
         </childnode>
       </node>
       <node id="64">
@@ -556,13 +558,19 @@
         </childnode>
       </node>
       <node id="14">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="51">
+        <label>ctime</label>
       </node>
       <node id="8">
         <label>initializer_list</label>
       </node>
-      <node id="54">
+      <node id="53">
         <label>intrin.h</label>
+      </node>
+      <node id="54">
+        <label>intrin0.inl.h</label>
       </node>
       <node id="80">
         <label>netinet/in.h</label>
@@ -576,17 +584,11 @@
       <node id="48">
         <label>processthreadsapi.h</label>
       </node>
-      <node id="52">
-        <label>riscv_pause.h</label>
-      </node>
       <node id="50">
         <label>sched.h</label>
       </node>
       <node id="49">
         <label>synchapi.h</label>
-      </node>
-      <node id="51">
-        <label>unistd.h</label>
       </node>
       <node id="26">
         <label>utility</label>
@@ -696,31 +698,34 @@
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buffer_size_<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>ftp_protocol()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>~ftp_protocol()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"></highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>ftp_protocol(ftp_protocol&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>ftp_protocol&amp;<sp/><ref refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" kindref="member">operator=</ref>(ftp_protocol&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>ftp_protocol(<ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>fd)<sp/>:</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>ip_socket(fd)<sp/>{}</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref><sp/>ctrl_send(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len);</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref><sp/>ctrl_recv(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len);</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ctrl_read_line(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>out);</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>response<sp/>read_response();</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>send_response(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>code,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>msg);</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>send_response(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>response&amp;<sp/>resp);</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>clear_buffer()<sp/>{</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer_pos_<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer_size_<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="91"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_FTP_FTP_PROTOCOL_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>ftp_protocol(ftp_protocol&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>ftp_protocol&amp;<sp/><ref refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" kindref="member">operator=</ref>(ftp_protocol&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>ftp_protocol(<ref refid="group___core_types_1gae7d45d137d006d241206598ec95eb28b" kindref="member">native_handle_type</ref><sp/>fd)<sp/>:</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>ip_socket(fd)<sp/>{}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>~ftp_protocol()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref><sp/>ctrl_send(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref><sp/>ctrl_recv(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>len);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ctrl_read_line(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>out);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>response<sp/>read_response();</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>send_response(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>code,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>msg);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>send_response(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>response&amp;<sp/>resp);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>clear_buffer()<sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer_pos_<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer_size_<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_FTP_FTP_PROTOCOL_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ftp/ftp_protocol.hpp"/>
   </compounddef>
 </doxygen>

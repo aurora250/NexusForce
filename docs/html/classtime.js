@@ -7,7 +7,7 @@ var classtime =
     [ "clear", "classtime.html#a7a900345c3b57ab64060715c1a624c0e", null ],
     [ "equal_to", "classtime.html#a4ae6cf4e3027c614a24ebd0ca368a0c1", null ],
     [ "hours", "classtime.html#a3ac21e1964f6e65b799e0356ba6cc90c", null ],
-    [ "is_valid", "classtime.html#a913d264411382fa9cbffa7b2196d1adb", null ],
+    [ "is_valid", "classtime.html#ad588229a8c8ac90e900d76b4d72a2e38", null ],
     [ "less_than", "classtime.html#a136f04439f84723b8c5b7fb95ad46379", null ],
     [ "minutes", "classtime.html#a18fd17881f13626bc6fc834df1b5d631", null ],
     [ "operator+", "classtime.html#aff2b9b0862c974f40d248fec8350ca5c", null ],

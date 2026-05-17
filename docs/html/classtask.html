@@ -118,8 +118,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:abcf9c660515466997e2ba3e6d5166dd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数，销毁协程 <br /></td></tr>
 <tr class="memitem:a3650489fb1edb0a9ab612b126b94c112" id="r_a3650489fb1edb0a9ab612b126b94c112"><td class="memItemLeft"><a class="el" href="structtask_1_1awaiter.html">awaiter</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3650489fb1edb0a9ab612b126b94c112">operator co_await</a> ()</td></tr>
 <tr class="memdesc:a3650489fb1edb0a9ab612b126b94c112"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等待器  <br /></td></tr>
-<tr class="memitem:ab631774bfa12bb16808de715b5844278" id="r_ab631774bfa12bb16808de715b5844278"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab631774bfa12bb16808de715b5844278">done</a> () const noexcept</td></tr>
-<tr class="memdesc:ab631774bfa12bb16808de715b5844278"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查任务是否已完成  <br /></td></tr>
+<tr class="memitem:a130ab0e77a4fc039cb0a6bd04d17960c" id="r_a130ab0e77a4fc039cb0a6bd04d17960c"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a130ab0e77a4fc039cb0a6bd04d17960c">done</a> () const noexcept</td></tr>
+<tr class="memdesc:a130ab0e77a4fc039cb0a6bd04d17960c"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查任务是否已完成  <br /></td></tr>
 <tr class="memitem:a4eb3a6735d6e5bf52b2d7534ba0769d4" id="r_a4eb3a6735d6e5bf52b2d7534ba0769d4"><td class="memItemLeft"><a id="a4eb3a6735d6e5bf52b2d7534ba0769d4" name="a4eb3a6735d6e5bf52b2d7534ba0769d4"></a>
 void&#160;</td><td class="memItemRight"><b>resume</b> ()</td></tr>
 <tr class="memdesc:a4eb3a6735d6e5bf52b2d7534ba0769d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">恢复任务执行 <br /></td></tr>
@@ -127,8 +127,8 @@ void&#160;</td><td class="memItemRight"><b>resume</b> ()</td></tr>
 <tr class="memdesc:a58502672d9bef3a69f89611e79483c31"><td class="mdescLeft">&#160;</td><td class="mdescRight">同步获取任务结果  <br /></td></tr>
 <tr class="memitem:a055a89b2c4ef8ad941976ae9ce12349f" id="r_a055a89b2c4ef8ad941976ae9ce12349f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a055a89b2c4ef8ad941976ae9ce12349f">set_cancellation_token</a> (<a class="el" href="classcancellation__token.html">cancellation_token</a> &amp;token)</td></tr>
 <tr class="memdesc:a055a89b2c4ef8ad941976ae9ce12349f"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置取消令牌  <br /></td></tr>
-<tr class="memitem:ac359179551baf1c15f49de6ec5653b0a" id="r_ac359179551baf1c15f49de6ec5653b0a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac359179551baf1c15f49de6ec5653b0a">is_cancelled</a> () const noexcept</td></tr>
-<tr class="memdesc:ac359179551baf1c15f49de6ec5653b0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查任务是否被取消  <br /></td></tr>
+<tr class="memitem:aef076be7ad451137332b01423a73745a" id="r_aef076be7ad451137332b01423a73745a"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#aef076be7ad451137332b01423a73745a">is_cancelled</a> () const noexcept</td></tr>
+<tr class="memdesc:aef076be7ad451137332b01423a73745a"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查任务是否被取消  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -141,7 +141,7 @@ class task&lt; T &gt;</div><p>异步任务 </p>
 </dl>
 <p>表示一个可能产生结果的异步操作。 支持co_await等待、取消、组合等操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00467">467</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00520">520</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="ae229bb88041fade9c572408e8dcbedfd" name="ae229bb88041fade9c572408e8dcbedfd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae229bb88041fade9c572408e8dcbedfd">&#9670;&#160;</a></span>task() <span class="overload">[1/2]</span></h2>
@@ -176,9 +176,9 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00594">594</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00648">648</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00513">task&lt; T &gt;::promise_type::get_return_object()</a>, <a class="el" href="generator_8hpp_source.html#l00611">operator=()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00601">task()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00567">task&lt; T &gt;::promise_type::get_return_object()</a>, <a class="el" href="generator_8hpp_source.html#l00665">operator=()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00655">task()</a>.</p>
 
 </div>
 </div>
@@ -215,15 +215,15 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00601">601</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00655">655</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="generator_8hpp_source.html#l00594">task()</a>.</p>
+<p class="reference">引用了 <a class="el" href="generator_8hpp_source.html#l00648">task()</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="ab631774bfa12bb16808de715b5844278" name="ab631774bfa12bb16808de715b5844278"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab631774bfa12bb16808de715b5844278">&#9670;&#160;</a></span>done()</h2>
+<a id="a130ab0e77a4fc039cb0a6bd04d17960c" name="a130ab0e77a4fc039cb0a6bd04d17960c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a130ab0e77a4fc039cb0a6bd04d17960c">&#9670;&#160;</a></span>done()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -234,7 +234,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classtask.html">task</a>&lt; T &gt;::done </td>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classtask.html">task</a>&lt; T &gt;::done </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -250,7 +250,7 @@ template&lt;typename T&gt; </div>
 <p>检查任务是否已完成 </p>
 <dl class="section return"><dt>返回</dt><dd>是否已完成 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00647">647</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00701">701</a> 行定义.</p>
 
 </div>
 </div>
@@ -282,14 +282,14 @@ template&lt;typename T&gt; </div>
 <p>同步获取任务结果 </p>
 <dl class="section return"><dt>返回</dt><dd>任务结果 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00662">662</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00716">716</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32">rethrow_exception()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___exception_handling.html#ga947504bd2926f427cb1e964fada47745">rethrow_exception()</a>.</p>
 
 </div>
 </div>
-<a id="ac359179551baf1c15f49de6ec5653b0a" name="ac359179551baf1c15f49de6ec5653b0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac359179551baf1c15f49de6ec5653b0a">&#9670;&#160;</a></span>is_cancelled()</h2>
+<a id="aef076be7ad451137332b01423a73745a" name="aef076be7ad451137332b01423a73745a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef076be7ad451137332b01423a73745a">&#9670;&#160;</a></span>is_cancelled()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,7 +300,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classtask.html">task</a>&lt; T &gt;::is_cancelled </td>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classtask.html">task</a>&lt; T &gt;::is_cancelled </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -316,7 +316,7 @@ template&lt;typename T&gt; </div>
 <p>检查任务是否被取消 </p>
 <dl class="section return"><dt>返回</dt><dd>是否被取消 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00686">686</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00740">740</a> 行定义.</p>
 
 </div>
 </div>
@@ -348,7 +348,7 @@ template&lt;typename T&gt; </div>
 <p>获取等待器 </p>
 <dl class="section return"><dt>返回</dt><dd>等待器对象 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00641">641</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00695">695</a> 行定义.</p>
 
 </div>
 </div>
@@ -386,9 +386,9 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00611">611</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00665">665</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03063">addressof()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00594">task()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03075">addressof()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00648">task()</a>.</p>
 
 </div>
 </div>
@@ -425,7 +425,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00676">676</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="generator_8hpp_source.html">generator.hpp</a> 第 <a class="el" href="generator_8hpp_source.html#l00730">730</a> 行定义.</p>
 
 </div>
 </div>

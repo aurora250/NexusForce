@@ -19,6 +19,8 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
         <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
@@ -33,7 +35,7 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -42,7 +44,7 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="18">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="8" relation="include">
@@ -51,7 +53,7 @@
       <node id="11">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -62,8 +64,6 @@
         <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="9">
@@ -78,7 +78,7 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="20">
+      <node id="19">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="9" relation="include">
@@ -118,7 +118,7 @@
         <childnode refid="28" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="17">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="7" relation="include">
@@ -167,16 +167,19 @@
         </childnode>
       </node>
       <node id="10">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="16">
+        <label>ctime</label>
+      </node>
+      <node id="20">
+        <label>intrin.h</label>
       </node>
       <node id="21">
-        <label>intrin.h</label>
+        <label>intrin0.inl.h</label>
       </node>
       <node id="13">
         <label>processthreadsapi.h</label>
-      </node>
-      <node id="17">
-        <label>riscv_pause.h</label>
       </node>
       <node id="15">
         <label>sched.h</label>
@@ -186,9 +189,6 @@
       </node>
       <node id="2">
         <label>typeinfo</label>
-      </node>
-      <node id="16">
-        <label>unistd.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -210,7 +210,7 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>generator.hpp</label>
         <link refid="generator_8hpp"/>
         <childnode refid="5" relation="include">
@@ -222,6 +222,8 @@
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="9">
@@ -238,12 +240,18 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
+      <node id="15">
+        <label>timer.hpp</label>
+        <link refid="timer_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>exception_ptr.hpp</label>
         <link refid="exception__ptr_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -298,9 +306,9 @@
     <innerclass refid="classexception__ptr" prot="public">exception_ptr</innerclass>
     <innerclass refid="structexception__ptr_1_1ecb" prot="public">exception_ptr::ecb</innerclass>
     <sectiondef kind="func">
+      <member refid="group___exception_handling_1ga947504bd2926f427cb1e964fada47745" kind="function"><name>rethrow_exception</name></member>
       <member refid="group___exception_handling_1gac43ce5d8fc82090c24f3088e37cc2d89" kind="function"><name>make_exception_ptr</name></member>
       <member refid="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419" kind="function"><name>current_exception</name></member>
-      <member refid="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32" kind="function"><name>rethrow_exception</name></member>
     </sectiondef>
     <briefdescription>
 <para>异常指针实现 </para>
@@ -323,11 +331,11 @@
 <codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classexception__wrapper" kindref="compound">~exception_wrapper</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38" refid="classexception__wrapper_1a3112fb62c8863b12e376df7e36324918" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classexception__wrapper_1a3112fb62c8863b12e376df7e36324918" kindref="member">rethrow</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="38" refid="classexception__wrapper_1a5f9d0a2b14862b3248e64ed70c64c702" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NORETURN<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classexception__wrapper_1a5f9d0a2b14862b3248e64ed70c64c702" kindref="member">rethrow</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44" refid="classexception__wrapper_1ab04df73bc21daeb1491fba55397a896c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::type_info&amp;<sp/><ref refid="classexception__wrapper_1ab04df73bc21daeb1491fba55397a896c" kindref="member">type</ref>()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="44" refid="classexception__wrapper_1a75b4031b3bf86ed08319dfa30e34ca0d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::type_info&amp;<sp/><ref refid="classexception__wrapper_1a75b4031b3bf86ed08319dfa30e34ca0d" kindref="member">type</ref>()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52" refid="classexception__wrapper_1a40fd000355a09acab15cfc64c9ec7f8f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>virtual<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt;<ref refid="classexception__wrapper" kindref="compound">exception_wrapper</ref>&gt;<sp/><ref refid="classexception__wrapper_1a40fd000355a09acab15cfc64c9ec7f8f" kindref="member">clone</ref>()<sp/>const<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="52" refid="classexception__wrapper_1a43f65f2af0ee2f34a9c3b9fb57346b6c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>virtual<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt;<ref refid="classexception__wrapper" kindref="compound">exception_wrapper</ref>&gt;<sp/><ref refid="classexception__wrapper_1a43f65f2af0ee2f34a9c3b9fb57346b6c" kindref="member">clone</ref>()<sp/>const<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="53"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="62"><highlight class="normal">template<sp/>&lt;typename<sp/>Ex&gt;</highlight></codeline>
@@ -341,135 +349,136 @@
 <codeline lineno="78" refid="classtyped__exception__wrapper_1a2be0fc2a8bda2ed0dcd632a0206b3737" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classtyped__exception__wrapper_1a2be0fc2a8bda2ed0dcd632a0206b3737" kindref="member">typed_exception_wrapper</ref>(Ex&amp;&amp;<sp/>ex)<sp/>noexcept<sp/>:</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>exception_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ex))<sp/>{}</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="85" refid="classtyped__exception__wrapper_1a82187b3aff63f9c14d3b090087b6db42" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classtyped__exception__wrapper_1a82187b3aff63f9c14d3b090087b6db42" kindref="member">rethrow</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>exception_;<sp/>}</highlight></codeline>
+<codeline lineno="85" refid="classtyped__exception__wrapper_1aec9696310f011cfedde6077b4bca67cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NORETURN<sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classtyped__exception__wrapper_1aec9696310f011cfedde6077b4bca67cd" kindref="member">rethrow</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>exception_;<sp/>}</highlight></codeline>
 <codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91" refid="classtyped__exception__wrapper_1a8b3de5e4a9a80c8bbc699db724e427db" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::type_info&amp;<sp/><ref refid="classtyped__exception__wrapper_1a8b3de5e4a9a80c8bbc699db724e427db" kindref="member">type</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(Ex);<sp/>}</highlight></codeline>
+<codeline lineno="91" refid="classtyped__exception__wrapper_1a0cb3ffe51548e47e30362ee4e04d9b3c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::type_info&amp;<sp/><ref refid="classtyped__exception__wrapper_1a0cb3ffe51548e47e30362ee4e04d9b3c" kindref="member">type</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(Ex);<sp/>}</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97" refid="classtyped__exception__wrapper_1a2973111a1bccf92fd924f6f6eb15c6de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;exception_wrapper&gt;</ref><sp/><ref refid="classtyped__exception__wrapper_1a2973111a1bccf92fd924f6f6eb15c6de" kindref="member">clone</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="97" refid="classtyped__exception__wrapper_1af2d0cd1b48ec5146aec4f2996029d328" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>NEFORCE_ALWAYS_INLINE<sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;exception_wrapper&gt;</ref><sp/><ref refid="classtyped__exception__wrapper_1af2d0cd1b48ec5146aec4f2996029d328" kindref="member">clone</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique&lt;typed_exception_wrapper&gt;</ref>(exception_);</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="100"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"></highlight></codeline>
-<codeline lineno="102"><highlight class="normal"></highlight></codeline>
-<codeline lineno="109" refid="classexception__ptr" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">exception_ptr<sp/>{</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="117" refid="structexception__ptr_1_1ecb" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structexception__ptr_1_1ecb_1ae25e38edd19bb95d42b7a6b91276f2ea" kindref="member">ecb</ref><sp/>{</highlight></codeline>
-<codeline lineno="118" refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;exception_wrapper&gt;</ref><sp/><ref refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" kindref="member">wrapper</ref>;<sp/></highlight></codeline>
-<codeline lineno="119" refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structatomic" kindref="compound">atomic&lt;int&gt;</ref><sp/><ref refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" kindref="member">ref_count</ref>{1};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="120"><highlight class="normal"></highlight></codeline>
-<codeline lineno="125" refid="structexception__ptr_1_1ecb_1ae25e38edd19bb95d42b7a6b91276f2ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structexception__ptr_1_1ecb_1ae25e38edd19bb95d42b7a6b91276f2ea" kindref="member">ecb</ref>(<ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;exception_wrapper&gt;</ref><sp/><ref refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" kindref="member">wrapper</ref>)<sp/>:</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" kindref="member">wrapper</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(<ref refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" kindref="member">wrapper</ref>))<sp/>{}</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="131" refid="structexception__ptr_1_1ecb_1a38e94338fa3c2c5d554aa924b4893cd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structexception__ptr_1_1ecb_1a38e94338fa3c2c5d554aa924b4893cd9" kindref="member">add_ref</ref>()<sp/>noexcept<sp/>{<sp/><ref refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" kindref="member">ref_count</ref>.fetch_add(1,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);<sp/>}</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"></highlight></codeline>
-<codeline lineno="137" refid="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" kindref="member">release</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" kindref="member">ref_count</ref>.load(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>)<sp/>==<sp/>1<sp/>||<sp/><ref refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" kindref="member">ref_count</ref>.fetch_sub(1,<sp/><ref refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" kindref="member">memory_order_acq_rel</ref>)<sp/>==<sp/>1)<sp/>{</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">exception_ptr;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112" refid="group___exception_handling_1ga947504bd2926f427cb1e964fada47745" refkind="member"><highlight class="normal">NEFORCE_NORETURN<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="group___exception_handling_1ga947504bd2926f427cb1e964fada47745" kindref="member">rethrow_exception</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr" kindref="compound">exception_ptr</ref>&amp;<sp/>p);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="classexception__ptr" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">exception_ptr<sp/>{</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="128" refid="structexception__ptr_1_1ecb" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structexception__ptr_1_1ecb_1ae25e38edd19bb95d42b7a6b91276f2ea" kindref="member">ecb</ref><sp/>{</highlight></codeline>
+<codeline lineno="129" refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;exception_wrapper&gt;</ref><sp/><ref refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" kindref="member">wrapper</ref>;<sp/></highlight></codeline>
+<codeline lineno="130" refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structatomic" kindref="compound">atomic&lt;int&gt;</ref><sp/><ref refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" kindref="member">ref_count</ref>{1};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136" refid="structexception__ptr_1_1ecb_1ae25e38edd19bb95d42b7a6b91276f2ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structexception__ptr_1_1ecb_1ae25e38edd19bb95d42b7a6b91276f2ea" kindref="member">ecb</ref>(<ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;exception_wrapper&gt;</ref><sp/><ref refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" kindref="member">wrapper</ref>)<sp/>:</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" kindref="member">wrapper</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(<ref refid="structexception__ptr_1_1ecb_1ab244c1a9be88e08b1f94a93308706994" kindref="member">wrapper</ref>))<sp/>{}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="structexception__ptr_1_1ecb_1a38e94338fa3c2c5d554aa924b4893cd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structexception__ptr_1_1ecb_1a38e94338fa3c2c5d554aa924b4893cd9" kindref="member">add_ref</ref>()<sp/>noexcept<sp/>{<sp/><ref refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" kindref="member">ref_count</ref>.fetch_add(1,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);<sp/>}</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"></highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>ecb*<sp/>ecb_{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};<sp/></highlight></codeline>
-<codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>exception_ptr(ecb*<sp/>cb)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>ecb_(cb)<sp/>{}</highlight></codeline>
+<codeline lineno="148" refid="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" kindref="member">release</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" kindref="member">ref_count</ref>.load(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>)<sp/>==<sp/>1<sp/>||<sp/><ref refid="structexception__ptr_1_1ecb_1a2ac399412a50c2852180a723ce82d812" kindref="member">ref_count</ref>.fetch_sub(1,<sp/><ref refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" kindref="member">memory_order_acq_rel</ref>)<sp/>==<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ex&gt;</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/>exception_ptr<sp/><ref refid="group___exception_handling_1gac43ce5d8fc82090c24f3088e37cc2d89" kindref="member">make_exception_ptr</ref>(Ex)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>ecb*<sp/>ecb_{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};<sp/></highlight></codeline>
 <codeline lineno="157"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158" refid="classexception__ptr_1ae2436c911c2e23511a3012d0ddc2a419" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/>exception_ptr<sp/>NEFORCE_API<sp/><ref refid="classexception__ptr_1ae2436c911c2e23511a3012d0ddc2a419" kindref="member">current_exception</ref>()<sp/>noexcept;</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"></highlight></codeline>
-<codeline lineno="160" refid="classexception__ptr_1a12342507bc5abdc903c22fabac839d32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>friend<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="classexception__ptr_1a12342507bc5abdc903c22fabac839d32" kindref="member">rethrow_exception</ref>(const<sp/>exception_ptr&amp;);</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"></highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>Ex&gt;</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>friend<sp/>exception_ptr<sp/><ref refid="classexception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" kindref="member">make_exception_ptr</ref>(Ex<sp/>ex)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"></highlight></codeline>
-<codeline lineno="165"><highlight class="normal">public:</highlight></codeline>
-<codeline lineno="172" refid="classexception__ptr_1ae0d425f758c1ca9707bfb390f8487893" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>exception_ptr(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref><sp/>np<sp/>=<sp/></highlight><highlight class="keywordtype">nullptr</highlight><highlight class="normal">)<sp/>noexcept<sp/>{}</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="180" refid="classexception__ptr_1a206fcf9e43bb45328fe0966de67d3685" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classexception__ptr_1a206fcf9e43bb45328fe0966de67d3685" kindref="member">exception_ptr</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>ecb_(other.ecb_)<sp/>{</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ecb_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ecb_-&gt;add_ref();</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"></highlight></codeline>
-<codeline lineno="193" refid="classexception__ptr_1a082f7ea4e7eaaf705847a07d55b59523" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classexception__ptr_1a082f7ea4e7eaaf705847a07d55b59523" kindref="member">exception_ptr</ref>(exception_ptr&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>ecb_(other.ecb_)<sp/>{</highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.ecb_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>exception_ptr(ecb*<sp/>cb)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>ecb_(cb)<sp/>{}</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ex&gt;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/>exception_ptr<sp/><ref refid="group___exception_handling_1gac43ce5d8fc82090c24f3088e37cc2d89" kindref="member">make_exception_ptr</ref>(Ex<sp/>ex)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169" refid="classexception__ptr_1ae2436c911c2e23511a3012d0ddc2a419" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/>exception_ptr<sp/>NEFORCE_API<sp/><ref refid="classexception__ptr_1ae2436c911c2e23511a3012d0ddc2a419" kindref="member">current_exception</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171" refid="classexception__ptr_1a12342507bc5abdc903c22fabac839d32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>friend<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="classexception__ptr_1a12342507bc5abdc903c22fabac839d32" kindref="member">rethrow_exception</ref>(const<sp/>exception_ptr&amp;);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>Ex&gt;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>friend<sp/>exception_ptr<sp/><ref refid="classexception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" kindref="member">make_exception_ptr</ref>(Ex<sp/>ex)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal">public:</highlight></codeline>
+<codeline lineno="183" refid="classexception__ptr_1ae0d425f758c1ca9707bfb390f8487893" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>exception_ptr(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref><sp/>np<sp/>=<sp/></highlight><highlight class="keywordtype">nullptr</highlight><highlight class="normal">)<sp/>noexcept<sp/>{}</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191" refid="classexception__ptr_1a206fcf9e43bb45328fe0966de67d3685" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classexception__ptr_1a206fcf9e43bb45328fe0966de67d3685" kindref="member">exception_ptr</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>ecb_(other.ecb_)<sp/>{</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ecb_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ecb_-&gt;add_ref();</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="197"><highlight class="normal"></highlight></codeline>
-<codeline lineno="203" refid="classexception__ptr_1a3a5bbaa59d8846ad1ba8f08d4d714faf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classexception__ptr_1a3a5bbaa59d8846ad1ba8f08d4d714faf" kindref="member">~exception_ptr</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ecb_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ecb_-&gt;release();</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="204" refid="classexception__ptr_1a082f7ea4e7eaaf705847a07d55b59523" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classexception__ptr_1a082f7ea4e7eaaf705847a07d55b59523" kindref="member">exception_ptr</ref>(exception_ptr&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>ecb_(other.ecb_)<sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.ecb_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="208"><highlight class="normal"></highlight></codeline>
-<codeline lineno="214" refid="classexception__ptr_1a6285f3410fcac0e871ed0b061719ba3b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>exception_ptr&amp;<sp/><ref refid="classexception__ptr_1a6285f3410fcac0e871ed0b061719ba3b" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="214" refid="classexception__ptr_1a3a5bbaa59d8846ad1ba8f08d4d714faf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classexception__ptr_1a3a5bbaa59d8846ad1ba8f08d4d714faf" kindref="member">~exception_ptr</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ecb_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ecb_-&gt;release();</highlight></codeline>
 <codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exception_ptr<sp/>temp(other);</highlight></codeline>
-<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(temp);</highlight></codeline>
-<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="222"><highlight class="normal"></highlight></codeline>
-<codeline lineno="228" refid="classexception__ptr_1ace99322177809035a72b74ef9fb9411a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>exception_ptr&amp;<sp/><ref refid="classexception__ptr_1ace99322177809035a72b74ef9fb9411a" kindref="member">operator=</ref>(exception_ptr&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exception_ptr<sp/>temp(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other));</highlight></codeline>
-<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(temp);</highlight></codeline>
-<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="236"><highlight class="normal"></highlight></codeline>
-<codeline lineno="241" refid="classexception__ptr_1af3ad2df8dbe03500d2e56c5424239200" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1af3ad2df8dbe03500d2e56c5424239200" kindref="member">swap</ref>(exception_ptr&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>_NEFORCE<sp/><ref refid="classexception__ptr_1af3ad2df8dbe03500d2e56c5424239200" kindref="member">swap</ref>(ecb_,<sp/>other.ecb_);<sp/>}</highlight></codeline>
-<codeline lineno="242"><highlight class="normal"></highlight></codeline>
-<codeline lineno="249" refid="classexception__ptr_1a12a1b8d65fb1f9856f0a268646be9d0c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ecb_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
-<codeline lineno="250"><highlight class="normal"></highlight></codeline>
-<codeline lineno="258" refid="classexception__ptr_1a5e1914f4fd11fb5cb4934ae4f2916ca6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1a5e1914f4fd11fb5cb4934ae4f2916ca6" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ecb_<sp/>==<sp/>rhs.ecb_;<sp/>}</highlight></codeline>
-<codeline lineno="259"><highlight class="normal"></highlight></codeline>
-<codeline lineno="265" refid="classexception__ptr_1a62c70339b9ff32eb2b17a053173da800" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1a62c70339b9ff32eb2b17a053173da800" kindref="member">operator!=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(*</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>==<sp/>rhs);<sp/>}</highlight></codeline>
-<codeline lineno="266"><highlight class="normal"></highlight></codeline>
-<codeline lineno="271" refid="classexception__ptr_1a45aa9149222ea4a1916907c9e990f0ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1a45aa9149222ea4a1916907c9e990f0ec" kindref="member">operator==</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(*this);<sp/>}</highlight></codeline>
-<codeline lineno="272"><highlight class="normal"></highlight></codeline>
-<codeline lineno="276" refid="classexception__ptr_1adf0357fce8f51722c2f546487405cea7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1adf0357fce8f51722c2f546487405cea7" kindref="member">operator==</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>ptr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!ptr;<sp/>}</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="225" refid="classexception__ptr_1a6285f3410fcac0e871ed0b061719ba3b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>exception_ptr&amp;<sp/><ref refid="classexception__ptr_1a6285f3410fcac0e871ed0b061719ba3b" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exception_ptr<sp/>temp(other);</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(temp);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239" refid="classexception__ptr_1ace99322177809035a72b74ef9fb9411a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>exception_ptr&amp;<sp/><ref refid="classexception__ptr_1ace99322177809035a72b74ef9fb9411a" kindref="member">operator=</ref>(exception_ptr&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exception_ptr<sp/>temp(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other));</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(temp);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252" refid="classexception__ptr_1af3ad2df8dbe03500d2e56c5424239200" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1af3ad2df8dbe03500d2e56c5424239200" kindref="member">swap</ref>(exception_ptr&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>_NEFORCE<sp/><ref refid="classexception__ptr_1af3ad2df8dbe03500d2e56c5424239200" kindref="member">swap</ref>(ecb_,<sp/>other.ecb_);<sp/>}</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="260" refid="classexception__ptr_1a12a1b8d65fb1f9856f0a268646be9d0c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ecb_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269" refid="classexception__ptr_1a5e1914f4fd11fb5cb4934ae4f2916ca6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1a5e1914f4fd11fb5cb4934ae4f2916ca6" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ecb_<sp/>==<sp/>rhs.ecb_;<sp/>}</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight></codeline>
+<codeline lineno="276" refid="classexception__ptr_1a62c70339b9ff32eb2b17a053173da800" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1a62c70339b9ff32eb2b17a053173da800" kindref="member">operator!=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(*</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>==<sp/>rhs);<sp/>}</highlight></codeline>
 <codeline lineno="277"><highlight class="normal"></highlight></codeline>
-<codeline lineno="282" refid="classexception__ptr_1ad2994a1c07a330b3a2894b93081aa4bb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1ad2994a1c07a330b3a2894b93081aa4bb" kindref="member">operator!=</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(*this);<sp/>}</highlight></codeline>
+<codeline lineno="282" refid="classexception__ptr_1a45aa9149222ea4a1916907c9e990f0ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1a45aa9149222ea4a1916907c9e990f0ec" kindref="member">operator==</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(*this);<sp/>}</highlight></codeline>
 <codeline lineno="283"><highlight class="normal"></highlight></codeline>
-<codeline lineno="287" refid="classexception__ptr_1ae83e5337244cc12f57b1dd611a3d13e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1ae83e5337244cc12f57b1dd611a3d13e1" kindref="member">operator!=</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>ptr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(ptr);<sp/>}</highlight></codeline>
+<codeline lineno="287" refid="classexception__ptr_1adf0357fce8f51722c2f546487405cea7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1adf0357fce8f51722c2f546487405cea7" kindref="member">operator==</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>ptr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!ptr;<sp/>}</highlight></codeline>
 <codeline lineno="288"><highlight class="normal"></highlight></codeline>
-<codeline lineno="295" refid="classexception__ptr_1abc4638c62a294adddc011cfa70ba66b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::type_info&amp;<sp/><ref refid="classexception__ptr_1abc4638c62a294adddc011cfa70ba66b8" kindref="member">exception_type</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!ecb_<sp/>||<sp/>!ecb_-&gt;wrapper)<sp/>{</highlight></codeline>
-<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(void);</highlight></codeline>
-<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ecb_-&gt;wrapper-&gt;type();</highlight></codeline>
-<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="301"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="302"><highlight class="normal"></highlight></codeline>
-<codeline lineno="303"><highlight class="normal"></highlight></codeline>
-<codeline lineno="313"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ex&gt;</highlight></codeline>
-<codeline lineno="314" refid="classexception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" refkind="member"><highlight class="normal">exception_ptr<sp/><ref refid="group___exception_handling_1gac43ce5d8fc82090c24f3088e37cc2d89" kindref="member">make_exception_ptr</ref>(Ex<sp/>ex)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>wrapper<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique&lt;typed_exception_wrapper&lt;decay_t&lt;Ex&gt;</ref>&gt;&gt;(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Ex&gt;</ref>(ex));</highlight></codeline>
-<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;exception_ptr::ecb&gt;</ref><sp/>control_block(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="structexception__ptr_1_1ecb" kindref="compound">exception_ptr::ecb</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(wrapper)));</highlight></codeline>
-<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exception_ptr<sp/>result;</highlight></codeline>
-<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.ecb_<sp/>=<sp/>control_block.<ref refid="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" kindref="member">release</ref>();</highlight></codeline>
-<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
-<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
-<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="324"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="325"><highlight class="normal"></highlight></codeline>
-<codeline lineno="333" refid="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419" refkind="member"><highlight class="normal"><ref refid="classexception__ptr" kindref="compound">exception_ptr</ref><sp/>NEFORCE_API<sp/><ref refid="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419" kindref="member">current_exception</ref>()<sp/>noexcept;</highlight></codeline>
-<codeline lineno="334"><highlight class="normal"></highlight></codeline>
-<codeline lineno="343" refid="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>NEFORCE_API<sp/><ref refid="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32" kindref="member">rethrow_exception</ref>(const<sp/><ref refid="classexception__ptr" kindref="compound">exception_ptr</ref>&amp;<sp/>p);</highlight></codeline>
-<codeline lineno="344"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ExceptionHandling</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="346"><highlight class="normal"></highlight></codeline>
-<codeline lineno="347"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="348"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_EXCEPTION_EXCEPTION_PTR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="293" refid="classexception__ptr_1ad2994a1c07a330b3a2894b93081aa4bb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1ad2994a1c07a330b3a2894b93081aa4bb" kindref="member">operator!=</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(*this);<sp/>}</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298" refid="classexception__ptr_1ae83e5337244cc12f57b1dd611a3d13e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classexception__ptr_1ae83e5337244cc12f57b1dd611a3d13e1" kindref="member">operator!=</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception_ptr&amp;<sp/>ptr)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(ptr);<sp/>}</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight></codeline>
+<codeline lineno="306" refid="classexception__ptr_1abc4638c62a294adddc011cfa70ba66b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::type_info&amp;<sp/><ref refid="classexception__ptr_1abc4638c62a294adddc011cfa70ba66b8" kindref="member">exception_type</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ecb_<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>||<sp/>!ecb_-&gt;wrapper)<sp/>{</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(void);</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ecb_-&gt;wrapper-&gt;type();</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="312"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ex&gt;</highlight></codeline>
+<codeline lineno="325" refid="classexception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" refkind="member"><highlight class="normal">exception_ptr<sp/><ref refid="group___exception_handling_1gac43ce5d8fc82090c24f3088e37cc2d89" kindref="member">make_exception_ptr</ref>(Ex<sp/>ex)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>wrapper<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique&lt;typed_exception_wrapper&lt;decay_t&lt;Ex&gt;</ref>&gt;&gt;(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Ex&gt;</ref>(ex));</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;exception_ptr::ecb&gt;</ref><sp/>control_block(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="structexception__ptr_1_1ecb" kindref="compound">exception_ptr::ecb</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(wrapper)));</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exception_ptr<sp/>result;</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.ecb_<sp/>=<sp/>control_block.<ref refid="structexception__ptr_1_1ecb_1ab28775b35400880fc5464e783645cbe7" kindref="member">release</ref>();</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="335"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"></highlight></codeline>
+<codeline lineno="344" refid="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419" refkind="member"><highlight class="normal"><ref refid="classexception__ptr" kindref="compound">exception_ptr</ref><sp/>NEFORCE_API<sp/><ref refid="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419" kindref="member">current_exception</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ExceptionHandling</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="347"><highlight class="normal"></highlight></codeline>
+<codeline lineno="348"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_EXCEPTION_EXCEPTION_PTR_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp"/>
   </compounddef>
 </doxygen>

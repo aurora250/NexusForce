@@ -293,8 +293,8 @@ $(function(){initNavTree('utf_8hpp_source.html','',''); });
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span> </div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        result.<a class="code hl_function" href="classbasic__string.html#a0d34d73082a21b23f11df5bbf982c6d5">reserve</a>(obj.<a class="code hl_function" href="classbasic__string__view.html#a005d60d3b4e298a7072a9016b8af2349">size</a>());</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; obj.<a class="code hl_function" href="classbasic__string__view.html#a005d60d3b4e298a7072a9016b8af2349">size</a>(); ++i) {</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            result.<a class="code hl_function" href="classbasic__string.html#a72b1e63dfd1b7d0197f9e902d163b7f9">push_back</a>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">char16_t</span><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a><span class="keyword">&gt;</span>(obj[i])));</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code hl_typedef" href="structwcharacter.html#a458dd2338d78dc874f0c47dbabadd37d">value_type</a> c: obj) {</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            result.<a class="code hl_function" href="classbasic__string.html#a72b1e63dfd1b7d0197f9e902d163b7f9">push_back</a>(<span class="keyword">static_cast&lt;</span><span class="keywordtype">char16_t</span><span class="keyword">&gt;</span>(<span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a><span class="keyword">&gt;</span>(c)));</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        }</div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        result.<a class="code hl_function" href="classbasic__string.html#a0d34d73082a21b23f11df5bbf982c6d5">reserve</a>(obj.<a class="code hl_function" href="classbasic__string__view.html#a005d60d3b4e298a7072a9016b8af2349">size</a>() * 2);</div>
@@ -507,8 +507,8 @@ $(function(){initNavTree('utf_8hpp_source.html','',''); });
 <div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>        }</div>
 <div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>        <span class="keywordtype">string</span> result;</div>
 <div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span> </div>
-<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>        <span class="keywordtype">size_t</span> start_pos;</div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>        <span class="keywordtype">bool</span> need_swap;</div>
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>        <span class="keywordtype">size_t</span> start_pos = 0;</div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>        <span class="keywordtype">bool</span> need_swap = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>        parse_utf16_bom(obj, start_pos, need_swap);</div>
 <div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span> </div>
 <div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>        <span class="keywordtype">size_t</span> i = start_pos;</div>
@@ -527,8 +527,8 @@ $(function(){initNavTree('utf_8hpp_source.html','',''); });
 <div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>        <a class="code hl_typedef" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a> result;</div>
 <div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>        result.<a class="code hl_function" href="classbasic__string.html#a0d34d73082a21b23f11df5bbf982c6d5">reserve</a>(obj.<a class="code hl_function" href="classbasic__string__view.html#a005d60d3b4e298a7072a9016b8af2349">size</a>());</div>
 <div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span> </div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>        <span class="keywordtype">size_t</span> start_pos;</div>
-<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>        <span class="keywordtype">bool</span> need_swap;</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>        <span class="keywordtype">size_t</span> start_pos = 0;</div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>        <span class="keywordtype">bool</span> need_swap = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>        parse_utf16_bom(obj, start_pos, need_swap);</div>
 <div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span> </div>
 <div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>        <span class="keywordtype">size_t</span> i = start_pos;</div>
@@ -548,8 +548,8 @@ $(function(){initNavTree('utf_8hpp_source.html','',''); });
 <div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>        <a class="code hl_typedef" href="group___string.html#gaa25cbe3f775d6f4076da8510ffa1a0f4">u8string</a> result;</div>
 <div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>        result.<a class="code hl_function" href="classbasic__string.html#a0d34d73082a21b23f11df5bbf982c6d5">reserve</a>(obj.<a class="code hl_function" href="classbasic__string__view.html#a005d60d3b4e298a7072a9016b8af2349">size</a>() * 3);</div>
 <div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span> </div>
-<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>        <span class="keywordtype">size_t</span> start_pos;</div>
-<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>        <span class="keywordtype">bool</span> need_swap;</div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>        <span class="keywordtype">size_t</span> start_pos = 0;</div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>        <span class="keywordtype">bool</span> need_swap = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>        parse_utf16_bom(obj, start_pos, need_swap);</div>
 <div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span> </div>
 <div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>        <span class="keywordtype">size_t</span> i = start_pos;</div>
@@ -567,8 +567,8 @@ $(function(){initNavTree('utf_8hpp_source.html','',''); });
 <div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>            <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>        }</div>
 <div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span> </div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>        <span class="keywordtype">size_t</span> start_pos;</div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>        <span class="keywordtype">bool</span> need_swap;</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>        <span class="keywordtype">size_t</span> start_pos = 0;</div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>        <span class="keywordtype">bool</span> need_swap = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>        parse_utf16_bom(obj, start_pos, need_swap);</div>
 <div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span> </div>
 <div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>        <span class="keywordflow">if</span> (start_pos == 0 &amp;&amp; !need_swap) {</div>
@@ -594,8 +594,8 @@ $(function(){initNavTree('utf_8hpp_source.html','',''); });
 <div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>        <a class="code hl_typedef" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a> result;</div>
 <div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>        result.<a class="code hl_function" href="classbasic__string.html#a0d34d73082a21b23f11df5bbf982c6d5">reserve</a>(obj.<a class="code hl_function" href="classbasic__string__view.html#a005d60d3b4e298a7072a9016b8af2349">size</a>());</div>
 <div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span> </div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>        <span class="keywordtype">size_t</span> start_pos;</div>
-<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>        <span class="keywordtype">bool</span> need_swap;</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>        <span class="keywordtype">size_t</span> start_pos = 0;</div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>        <span class="keywordtype">bool</span> need_swap = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>        parse_utf16_bom(obj, start_pos, need_swap);</div>
 <div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span> </div>
 <div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>        <span class="keywordtype">size_t</span> i = start_pos;</div>

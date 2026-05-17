@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="204" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="204" column="18"/>
       </memberdef>
       <memberdef kind="function" id="structidb__connect_1a5faaad097bbdc6d8e530eb9f3ec7af94" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="205" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="205" column="18"/>
       </memberdef>
       <memberdef kind="function" id="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="206" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="206" column="18"/>
         <referencedby refid="structmysql__connect_1a6333c19361bdf32e80b25af448ec874d" compoundref="mysql__connect_8hpp" startline="58" endline="58">mysql_connect::~mysql_connect</referencedby>
         <referencedby refid="classpgsql__connect_1afd2f6fe358954bb580cf600549a59645" compoundref="pgsql__connect_8hpp" startline="59" endline="59">pgsql_connect::~pgsql_connect</referencedby>
         <referencedby refid="structredis__connect_1a9d4fdef658882bbb29a1e769dfe61192" compoundref="redis__connect_8hpp" startline="63" endline="63">redis_connect::~redis_connect</referencedby>
@@ -79,9 +79,9 @@
     </sectiondef>
     <sectiondef kind="user-defined">
       <header>字符集设置</header>
-      <memberdef kind="function" id="structidb__connect_1a9f0b407a683b19bee646271a19356aad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>bool</type>
-        <definition>virtual bool idb_connect::set_character_set</definition>
+      <memberdef kind="function" id="structidb__connect_1a3b5de8434d4f29793ecd5442549cef25" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>virtual NEFORCE_NODISCARD bool idb_connect::set_character_set</definition>
         <argsstring>(const string &amp;encoding) const =0</argsstring>
         <name>set_character_set</name>
         <qualifiedname>idb_connect::set_character_set</qualifiedname>
@@ -99,12 +99,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="213" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="213" column="36"/>
         <referencedby refid="structredis__connect_1aa66bf3a032d2b0be45f87bacd5e78e47" compoundref="redis__connect_8hpp" startline="90" endline="91">redis_connect::NEFORCE_DEPRECATED_FOR</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-        <definition>virtual string_view idb_connect::get_character_set</definition>
+      <memberdef kind="function" id="structidb__connect_1a9663188aaae0acb8b65c2de0d5cbe75f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>virtual NEFORCE_NODISCARD string_view idb_connect::get_character_set</definition>
         <argsstring>() const =0</argsstring>
         <name>get_character_set</name>
         <qualifiedname>idb_connect::get_character_set</qualifiedname>
@@ -118,15 +118,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="214" column="25"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="214" column="43"/>
         <referencedby refid="structredis__connect_1aa9c3e1b7af3100595a9b9e3988b6c4d1" compoundref="redis__connect_8hpp" startline="97" endline="98">redis_connect::NEFORCE_DEPRECATED_FOR</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="user-defined">
       <header>错误处理</header>
-      <memberdef kind="function" id="structidb__connect_1a128b6a7646a28e85e231beb150439c01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-        <definition>virtual string_view idb_connect::get_error</definition>
+      <memberdef kind="function" id="structidb__connect_1acd973bd3ff55ac0e46f084bd2f0376c3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>virtual NEFORCE_NODISCARD string_view idb_connect::get_error</definition>
         <argsstring>() const =0</argsstring>
         <name>get_error</name>
         <qualifiedname>idb_connect::get_error</qualifiedname>
@@ -141,11 +141,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="221" column="25"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="221" column="43"/>
       </memberdef>
-      <memberdef kind="function" id="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
-        <definition>virtual uint32_t idb_connect::get_errno</definition>
+      <memberdef kind="function" id="structidb__connect_1acd5571b7e44f69a5b235fef61954bbd0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>virtual NEFORCE_NODISCARD uint32_t idb_connect::get_errno</definition>
         <argsstring>() const =0</argsstring>
         <name>get_errno</name>
         <qualifiedname>idb_connect::get_errno</qualifiedname>
@@ -160,14 +160,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="222" column="22"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="222" column="40"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="user-defined">
       <header>连接状态检测</header>
-      <memberdef kind="function" id="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>bool</type>
-        <definition>virtual bool idb_connect::connected</definition>
+      <memberdef kind="function" id="structidb__connect_1a0b654dc4116a9ddb698966f4a5ddcdca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>virtual NEFORCE_NODISCARD bool idb_connect::connected</definition>
         <argsstring>() const =0</argsstring>
         <name>connected</name>
         <qualifiedname>idb_connect::connected</qualifiedname>
@@ -182,12 +182,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="236" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="236" column="36"/>
         <referencedby refid="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9" compoundref="pgsql__connect_8hpp" startline="144" endline="144">pgsql_connect::is_valid</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>bool</type>
-        <definition>virtual bool idb_connect::is_valid</definition>
+      <memberdef kind="function" id="structidb__connect_1aa98cb68e4e03d89b68e3f85367119b25" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>virtual NEFORCE_NODISCARD bool idb_connect::is_valid</definition>
         <argsstring>() const =0</argsstring>
         <name>is_valid</name>
         <qualifiedname>idb_connect::is_valid</qualifiedname>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="237" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="237" column="36"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="192" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="192" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="192" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="192" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -237,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="195" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="195" bodyend="195"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="195" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="195" bodyend="195"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -253,11 +253,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="198" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="198" column="13"/>
       </memberdef>
-      <memberdef kind="function" id="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>bool</type>
-        <definition>virtual bool idb_connect::update</definition>
+      <memberdef kind="function" id="structidb__connect_1a347d4f0ebd95d784c304f2c9e983b614" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>virtual NEFORCE_NODISCARD bool idb_connect::update</definition>
         <argsstring>(const string &amp;sql) const =0</argsstring>
         <name>update</name>
         <qualifiedname>idb_connect::update</qualifiedname>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="230" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="230" column="36"/>
       </memberdef>
       <memberdef kind="function" id="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -304,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="245" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="245" bodyend="245"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="245" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="245" bodyend="245"/>
         <references refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</references>
         <references refid="group___duration_1gafaba32c48d91da85098ecb115cea65ed" compoundref="duration_8hpp" startline="144" endline="152">time_cast</references>
       </memberdef>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="251" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="251" bodyend="253"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="251" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="251" bodyend="253"/>
         <references refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</references>
         <references refid="group___duration_1gafaba32c48d91da85098ecb115cea65ed" compoundref="duration_8hpp" startline="144" endline="152">time_cast</references>
       </memberdef>
@@ -377,22 +377,22 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="190" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="190" bodyend="254"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="190" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="190" bodyend="254"/>
     <listofallmembers>
       <member refid="structidb__connect_1a6505d04274a2d0e7d2a6c1d4df59c1d9" prot="private" virt="non-virtual"><scope>idb_connect</scope><name>alive_time_</name></member>
       <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>idb_connect</scope><name>clock_type</name></member>
       <member refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>close</name></member>
       <member refid="structidb__connect_1a7ae3001e8ef72724b952fac4ea66cde7" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>connect</name></member>
-      <member refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>connected</name></member>
+      <member refid="structidb__connect_1a0b654dc4116a9ddb698966f4a5ddcdca" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>connected</name></member>
       <member refid="structidb__connect_1affedca161dc65836d2ecd3ae76e9158d" prot="public" virt="non-virtual"><scope>idb_connect</scope><name>get_alive</name></member>
-      <member refid="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_character_set</name></member>
-      <member refid="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_errno</name></member>
-      <member refid="structidb__connect_1a128b6a7646a28e85e231beb150439c01" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_error</name></member>
-      <member refid="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>is_valid</name></member>
+      <member refid="structidb__connect_1a9663188aaae0acb8b65c2de0d5cbe75f" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_character_set</name></member>
+      <member refid="structidb__connect_1acd5571b7e44f69a5b235fef61954bbd0" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_errno</name></member>
+      <member refid="structidb__connect_1acd973bd3ff55ac0e46f084bd2f0376c3" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_error</name></member>
+      <member refid="structidb__connect_1aa98cb68e4e03d89b68e3f85367119b25" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>is_valid</name></member>
       <member refid="structidb__connect_1a5faaad097bbdc6d8e530eb9f3ec7af94" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>reconnect</name></member>
       <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>idb_connect</scope><name>refresh_alive</name></member>
-      <member refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>set_character_set</name></member>
-      <member refid="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>update</name></member>
+      <member refid="structidb__connect_1a3b5de8434d4f29793ecd5442549cef25" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>set_character_set</name></member>
+      <member refid="structidb__connect_1a347d4f0ebd95d784c304f2c9e983b614" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>update</name></member>
       <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>idb_connect</scope><name>~idb_connect</name></member>
     </listofallmembers>
   </compounddef>

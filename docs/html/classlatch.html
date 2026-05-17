@@ -113,8 +113,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a33b76e8739418ed6b0ffffc7811b7ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止拷贝赋值 <br /></td></tr>
 <tr class="memitem:af97b3e7f872dacf234135f65508ff964" id="r_af97b3e7f872dacf234135f65508ff964"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#af97b3e7f872dacf234135f65508ff964">count_down</a> (const <a class="el" href="group___futex.html#ga4ae42858521c6114207203888569da88">platform_wait_t</a> update=1)</td></tr>
 <tr class="memdesc:af97b3e7f872dacf234135f65508ff964"><td class="mdescLeft">&#160;</td><td class="mdescRight">减少计数器  <br /></td></tr>
-<tr class="memitem:a6cfd32999e758550d70919819991edcd" id="r_a6cfd32999e758550d70919819991edcd"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#a6cfd32999e758550d70919819991edcd">try_wait</a> () const noexcept</td></tr>
-<tr class="memdesc:a6cfd32999e758550d70919819991edcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试等待  <br /></td></tr>
+<tr class="memitem:a2206028685d6c7164ab09b8a4796eb11" id="r_a2206028685d6c7164ab09b8a4796eb11"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#a2206028685d6c7164ab09b8a4796eb11">try_wait</a> () const noexcept</td></tr>
+<tr class="memdesc:a2206028685d6c7164ab09b8a4796eb11"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试等待  <br /></td></tr>
 <tr class="memitem:a08842ebccf3f250756b4807998f5fdff" id="r_a08842ebccf3f250756b4807998f5fdff"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a08842ebccf3f250756b4807998f5fdff">wait</a> () const noexcept</td></tr>
 <tr class="memdesc:a08842ebccf3f250756b4807998f5fdff"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待计数器为零  <br /></td></tr>
 <tr class="memitem:ad43a11355c2e90bba7ada9dd81d14acd" id="r_ad43a11355c2e90bba7ada9dd81d14acd"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#ad43a11355c2e90bba7ada9dd81d14acd">arrive_and_wait</a> (const <a class="el" href="group___futex.html#ga4ae42858521c6114207203888569da88">platform_wait_t</a> update=1) noexcept</td></tr>
@@ -129,7 +129,7 @@ Public 成员函数</h2></td></tr>
 <div class="textblock"><p>闩锁类 </p>
 <p>闩锁是一种同步原语，用于协调多个线程的执行。 线程可以等待闩锁的计数器减为零，或者减少计数器并等待。 闩锁是一次性的，计数器减为零后不能被重置。 </p>
 
-<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00035">35</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00036">36</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a50bee6b3588a817ac476fe217741cc67" name="a50bee6b3588a817ac476fe217741cc67"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a50bee6b3588a817ac476fe217741cc67">&#9670;&#160;</a></span>latch()</h2>
@@ -163,7 +163,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <p>创建闩锁并设置初始计数值。计数值必须为非负。 </p>
 
-<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00052">52</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00053">53</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="breakpoint_8hpp_source.html#l00047">NEFORCE_CONSTEXPR_ASSERT</a>.</p>
 
@@ -205,9 +205,9 @@ Public 成员函数</h2></td></tr>
 <p>原子地减少计数器，然后等待计数器变为零。 这是一个组合操作，等价于先调用count_down()再调用wait()。</p>
 <dl class="section note"><dt>注解</dt><dd>如果计数器变为负值，行为未定义 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00107">107</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00108">108</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="latch_8hpp_source.html#l00069">count_down()</a> , 以及 <a class="el" href="latch_8hpp_source.html#l00093">wait()</a>.</p>
+<p class="reference">引用了 <a class="el" href="latch_8hpp_source.html#l00070">count_down()</a> , 以及 <a class="el" href="latch_8hpp_source.html#l00094">wait()</a>.</p>
 
 </div>
 </div>
@@ -244,11 +244,11 @@ Public 成员函数</h2></td></tr>
 <p>原子地减少闩锁的计数器。如果计数器减为零，则通知所有等待线程。</p>
 <dl class="section note"><dt>注解</dt><dd>如果计数器变为负值，行为未定义 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00069">69</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00070">70</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00727">atomic_fetch_sub()</a>, <a class="el" href="atomic__wait_8hpp_source.html#l00444">atomic_notify_address()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00730">atomic_fetch_sub()</a>, <a class="el" href="atomic__wait_8hpp_source.html#l00448">atomic_notify_address()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00107">arrive_and_wait()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00108">arrive_and_wait()</a>.</p>
 
 </div>
 </div>
@@ -278,14 +278,14 @@ Public 成员函数</h2></td></tr>
 <p>获取闩锁的最大计数值 </p>
 <dl class="section return"><dt>返回</dt><dd>最大可能的计数值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00044">44</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00045">45</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="numeric__traits_8hpp_source.html#l00153">numeric_traits&lt; T, Dummy &gt;::max()</a>.</p>
 
 </div>
 </div>
-<a id="a6cfd32999e758550d70919819991edcd" name="a6cfd32999e758550d70919819991edcd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6cfd32999e758550d70919819991edcd">&#9670;&#160;</a></span>try_wait()</h2>
+<a id="a2206028685d6c7164ab09b8a4796eb11" name="a2206028685d6c7164ab09b8a4796eb11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2206028685d6c7164ab09b8a4796eb11">&#9670;&#160;</a></span>try_wait()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -294,7 +294,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE bool latch::try_wait </td>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE bool latch::try_wait </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -311,11 +311,11 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>计数器是否为零</dd></dl>
 <p>非阻塞地检查闩锁的计数器是否为零。 </p>
 
-<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00082">82</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00083">83</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00477">atomic_load()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00480">atomic_load()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00093">wait()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00094">wait()</a>.</p>
 
 </div>
 </div>
@@ -346,11 +346,11 @@ Public 成员函数</h2></td></tr>
 <p>阻塞当前线程，直到闩锁的计数器减为零。</p>
 <dl class="section note"><dt>注解</dt><dd>如果计数器已经为零，则立即返回 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00093">93</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00094">94</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__wait_8hpp_source.html#l00429">atomic_wait_address()</a> , 以及 <a class="el" href="latch_8hpp_source.html#l00082">try_wait()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__wait_8hpp_source.html#l00433">atomic_wait_address()</a> , 以及 <a class="el" href="latch_8hpp_source.html#l00083">try_wait()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00107">arrive_and_wait()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00108">arrive_and_wait()</a>.</p>
 
 </div>
 </div>

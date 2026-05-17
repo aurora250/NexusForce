@@ -32,6 +32,6 @@ var classbitset =
     [ "test", "classbitset.html#a9f8b218a668a1d0eef66ef1b810582f1", null ],
     [ "to_string", "classbitset.html#acbdae3d48864f0a16e6f1400b4dfd431", null ],
     [ "to_string", "classbitset.html#a71af94b67719a0938f84217d37315976", null ],
-    [ "to_ullong", "classbitset.html#a718e2a90c8478f0c232372568ad5bb28", null ],
-    [ "to_ulong", "classbitset.html#adf6895ac189a0b0204641e4ec2458d8c", null ]
+    [ "to_ullong", "classbitset.html#af4ee54756eac6bc7d0bf62068af921a2", null ],
+    [ "to_ulong", "classbitset.html#a7dc3220173efddf081c2a61885bc578b", null ]
 ];

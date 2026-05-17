@@ -39,7 +39,7 @@ var group___yaml_config =
       [ "value_string", "classyaml__builder.html#ab72a8a0b80df92517ba5e6293470ecd3", null ]
     ] ],
     [ "yaml_parser", "classyaml__parser.html", [
-      [ "yaml_parser", "classyaml__parser.html#acee797fe1f234bcdf2d47e5d3b42bea1", null ],
+      [ "yaml_parser", "classyaml__parser.html#a6fe8568235c9a4613088601221d063c2", null ],
       [ "parse", "classyaml__parser.html#a4c36293a1a80f5e9e7328f58014fbcdf", null ],
       [ "parse_documents", "classyaml__parser.html#a7df186b3114b32c8ee729f36d6a2056c", null ],
       [ "try_parse", "classyaml__parser.html#a80a4dc635d07ecbf256e37431ab00b2d", null ],
@@ -68,17 +68,17 @@ var group___yaml_config =
       [ "type", "classyaml__null.html#ae767952dcae3a7009de82b86fe5dfaa6", null ]
     ] ],
     [ "yaml_boolean", "classyaml__boolean.html", [
-      [ "yaml_boolean", "classyaml__boolean.html#adc9be21f251d0a1489878fee74ceced2", null ],
+      [ "yaml_boolean", "classyaml__boolean.html#ad3d83b621c8981b20eb0f47b0c55c531", null ],
       [ "get_value", "classyaml__boolean.html#a0ed2008fef679a3e05f92b575db40b3d", null ],
       [ "type", "classyaml__boolean.html#a9310c232eab6725ea5467dd434dbd6a0", null ]
     ] ],
     [ "yaml_integer", "classyaml__integer.html", [
-      [ "yaml_integer", "classyaml__integer.html#a34ab7afb891bbe2d683f6eb7fefd9357", null ],
+      [ "yaml_integer", "classyaml__integer.html#af5821ded4d6668ffe40d1f38a0eb8d10", null ],
       [ "get_value", "classyaml__integer.html#aad5c4b07de7aca65fc6d6d5e17716bba", null ],
       [ "type", "classyaml__integer.html#a868c9ae42759aa7f4e4828ac463ee0b8", null ]
     ] ],
     [ "yaml_float", "classyaml__float.html", [
-      [ "yaml_float", "classyaml__float.html#af492153f42950a8057a41f589943d3b6", null ],
+      [ "yaml_float", "classyaml__float.html#a4466ea144db28539288e6dcf8b5f570b", null ],
       [ "get_value", "classyaml__float.html#a5d916b4768220b008f86d6e21162cdd3", null ],
       [ "type", "classyaml__float.html#a3ccb8b4f32b55c2ff960d1c19b0713df", null ]
     ] ],
@@ -90,15 +90,15 @@ var group___yaml_config =
         [ "Literal", "classyaml__string.html#a48e128d7b4fcf4d04fb90af96a5c5a9eab1eefd53c9c42936a544c442ad2f9b21", null ],
         [ "Folded", "classyaml__string.html#a48e128d7b4fcf4d04fb90af96a5c5a9ea5f786c37a3e1297211444a8a0957eed2", null ]
       ] ],
-      [ "yaml_string", "classyaml__string.html#aa38cad3052f57267027bdd94ca3b8542", null ],
+      [ "yaml_string", "classyaml__string.html#a74b84f0c68cc531003ec733ff5e8660a", null ],
       [ "get_style", "classyaml__string.html#aa0ab1204c798735f52e34c9af90dcb5f", null ],
       [ "get_value", "classyaml__string.html#a19b8d67d6efa68987a7a70004159d365", null ],
       [ "type", "classyaml__string.html#ac4a884aaa6ae3d556c52222639a69618", null ]
     ] ],
     [ "yaml_timestamp", "classyaml__timestamp.html", [
       [ "yaml_timestamp", "classyaml__timestamp.html#a52a11468ab8b37bb2bcd148981421944", null ],
-      [ "yaml_timestamp", "classyaml__timestamp.html#aef85dd58fd27627f0d71bc0975af69c2", null ],
-      [ "get_string_value", "classyaml__timestamp.html#ab696ce0d8cc45934992515f19733efe5", null ],
+      [ "yaml_timestamp", "classyaml__timestamp.html#ab49df2da197cd29b66db6b23a32abb40", null ],
+      [ "get_string_value", "classyaml__timestamp.html#a56454311d0f6f221da944a2dc7561639", null ],
       [ "get_value", "classyaml__timestamp.html#a332b3efe5246c60ee28c3c6b7c71dc94", null ],
       [ "type", "classyaml__timestamp.html#aefa478843aecd06aab6cb77a4f34419e", null ]
     ] ],

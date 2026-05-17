@@ -1,7 +1,7 @@
 var searchData=
 [
   ['data_5ftype_0',['data_type',['../classmap.html#afd6c94769ccebd35c5c1040c08b99583',1,'map::data_type'],['../classmultimap.html#a5addf571cc4ac7791a2fba0505bfe61c',1,'multimap::data_type']]],
-  ['date_5ftype_1',['date_type',['../classdate.html#a11d4f6d97331d073ad174db4a25de107',1,'date::date_type'],['../classdatetime.html#a7d366e6c33327e3a7a29db96b3194d15',1,'datetime::date_type']]],
+  ['date_5ftype_1',['date_type',['../classdate.html#a11d4f6d97331d073ad174db4a25de107',1,'date::date_type'],['../classdatetime.html#a8ff2d8965a82dbe4b6712bdfc226cc6e',1,'datetime::date_type']]],
   ['days_2',['days',['../group___duration.html#ga0e567c20a642391f8404044057c90e98',1,'duration.hpp']]],
   ['deca_3',['deca',['../group___s_i_units.html#gaeb47ecbe72de3b6984811c6a1c8c6d5b',1,'ratio.hpp']]],
   ['decay_5ft_4',['decay_t',['../group___type_attribute_operations.html#ga80b97e91b05a2ed8b6185bba229f39a8',1,'type_traits.hpp']]],

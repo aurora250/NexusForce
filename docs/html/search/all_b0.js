@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['记录类型_0',['DNS 记录类型',['../group___d_n_s.html#dns_record_types',1,'']]]
+  ['计数算法_0',['计数算法',['../group___counting_algorithms.html',1,'']]],
+  ['计时器_1',['计时器',['../group___click.html',1,'']]]
 ];

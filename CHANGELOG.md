@@ -39,7 +39,7 @@
 - 添加 cacert 证书测试
 
 ### 🔧 Improvements
-- 完善配置项并通过 CodeQL / Clang-Format / Clang-Tidy 进行自动化分析
+- 完善配置项并通过 CodeQL / clang-format / clang-tidy / valgrind 进行自动化分析
 - 完善 README 特性项
 - 使用外部配置 cmake 选项
 - 使用 vcpkg 包管理

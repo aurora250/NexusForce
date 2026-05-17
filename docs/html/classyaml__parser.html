@@ -100,8 +100,8 @@ $(function(){initNavTree('classyaml__parser.html','','classyaml__parser-members'
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:acee797fe1f234bcdf2d47e5d3b42bea1" id="r_acee797fe1f234bcdf2d47e5d3b42bea1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#acee797fe1f234bcdf2d47e5d3b42bea1">yaml_parser</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> yaml_str) noexcept</td></tr>
-<tr class="memdesc:acee797fe1f234bcdf2d47e5d3b42bea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a6fe8568235c9a4613088601221d063c2" id="r_a6fe8568235c9a4613088601221d063c2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6fe8568235c9a4613088601221d063c2">yaml_parser</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> yaml_str)</td></tr>
+<tr class="memdesc:a6fe8568235c9a4613088601221d063c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
 <tr class="memitem:a4c36293a1a80f5e9e7328f58014fbcdf" id="r_a4c36293a1a80f5e9e7328f58014fbcdf"><td class="memItemLeft"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classyaml__value.html">yaml_value</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4c36293a1a80f5e9e7328f58014fbcdf">parse</a> ()</td></tr>
 <tr class="memdesc:a4c36293a1a80f5e9e7328f58014fbcdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析YAML文档  <br /></td></tr>
 <tr class="memitem:a80a4dc635d07ecbf256e37431ab00b2d" id="r_a80a4dc635d07ecbf256e37431ab00b2d"><td class="memItemLeft"><a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="classyaml__value.html">yaml_value</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a80a4dc635d07ecbf256e37431ab00b2d">try_parse</a> ()</td></tr>
@@ -169,21 +169,21 @@ Public 成员函数</h2></td></tr>
 </table>
 <h1 class="doxsection"><a class="anchor" id="parser_usage"></a>
 使用示例</h1>
-<p>基本解析（单文档）： </p><div class="fragment"><div class="line"><a class="code hl_function" href="#acee797fe1f234bcdf2d47e5d3b42bea1">yaml_parser</a> parser(<span class="stringliteral">&quot;key: value\nlist: [1, 2, 3]&quot;</span>);</div>
+<p>基本解析（单文档）： </p><div class="fragment"><div class="line"><a class="code hl_function" href="#a6fe8568235c9a4613088601221d063c2">yaml_parser</a> parser(<span class="stringliteral">&quot;key: value\nlist: [1, 2, 3]&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> root = parser.parse();</div>
 <div class="line"><span class="keywordflow">if</span> (<span class="keyword">auto</span>* <a class="code hl_class" href="classmap.html">map</a> = root-&gt;as_mapping()) {</div>
 <div class="line">    <span class="keyword">auto</span>* val = <a class="code hl_class" href="classmap.html">map</a>-&gt;get_member(<span class="stringliteral">&quot;key&quot;</span>);</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassmap_html"><div class="ttname"><a href="classmap.html">map</a></div><div class="ttdoc">映射容器</div><div class="ttdef"><b>定义</b> <a href="map_8hpp_source.html#l00037">map.hpp:37</a></div></div>
-<div class="ttc" id="aclassyaml__parser_html_acee797fe1f234bcdf2d47e5d3b42bea1"><div class="ttname"><a href="#acee797fe1f234bcdf2d47e5d3b42bea1">yaml_parser::yaml_parser</a></div><div class="ttdeci">yaml_parser(string yaml_str) noexcept</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="yaml__parser_8hpp_source.html#l00563">yaml_parser.hpp:563</a></div></div>
-</div><!-- fragment --><p>带错误处理的解析： </p><div class="fragment"><div class="line"><a class="code hl_function" href="#acee797fe1f234bcdf2d47e5d3b42bea1">yaml_parser</a> parser(yaml_content);</div>
+<div class="ttc" id="aclassyaml__parser_html_a6fe8568235c9a4613088601221d063c2"><div class="ttname"><a href="#a6fe8568235c9a4613088601221d063c2">yaml_parser::yaml_parser</a></div><div class="ttdeci">yaml_parser(string yaml_str)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="yaml__parser_8hpp_source.html#l00563">yaml_parser.hpp:563</a></div></div>
+</div><!-- fragment --><p>带错误处理的解析： </p><div class="fragment"><div class="line"><a class="code hl_function" href="#a6fe8568235c9a4613088601221d063c2">yaml_parser</a> parser(yaml_content);</div>
 <div class="line"><span class="keyword">auto</span> result = parser.try_parse();</div>
 <div class="line"><span class="keywordflow">if</span> (result.has_value()) {</div>
 <div class="line">    <span class="comment">// 解析成功，使用 result.value()</span></div>
 <div class="line">} <span class="keywordflow">else</span> {</div>
 <div class="line">    <span class="comment">// 解析失败</span></div>
 <div class="line">}</div>
-</div><!-- fragment --><p>多文档解析： </p><div class="fragment"><div class="line"><a class="code hl_function" href="#acee797fe1f234bcdf2d47e5d3b42bea1">yaml_parser</a> parser(<span class="stringliteral">&quot;---\ndoc1: value\n---\ndoc2: value\n&quot;</span>);</div>
+</div><!-- fragment --><p>多文档解析： </p><div class="fragment"><div class="line"><a class="code hl_function" href="#a6fe8568235c9a4613088601221d063c2">yaml_parser</a> parser(<span class="stringliteral">&quot;---\ndoc1: value\n---\ndoc2: value\n&quot;</span>);</div>
 <div class="line"><span class="keyword">auto</span> docs = parser.parse_documents();</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; doc : docs) {</div>
 <div class="line">    <span class="comment">// 处理每个文档</span></div>
@@ -221,8 +221,8 @@ Public 成员函数</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="yaml__parser_8hpp_source.html">yaml_parser.hpp</a> 第 <a class="el" href="yaml__parser_8hpp_source.html#l00115">115</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="acee797fe1f234bcdf2d47e5d3b42bea1" name="acee797fe1f234bcdf2d47e5d3b42bea1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acee797fe1f234bcdf2d47e5d3b42bea1">&#9670;&#160;</a></span>yaml_parser()</h2>
+<a id="a6fe8568235c9a4613088601221d063c2" name="a6fe8568235c9a4613088601221d063c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fe8568235c9a4613088601221d063c2">&#9670;&#160;</a></span>yaml_parser()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -239,7 +239,7 @@ Public 成员函数</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -255,6 +255,8 @@ Public 成员函数</h2></td></tr>
 <dl class="section note"><dt>注解</dt><dd>解析器获取字符串的所有权，原字符串将被清空。 </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="yaml__parser_8hpp_source.html">yaml_parser.hpp</a> 第 <a class="el" href="yaml__parser_8hpp_source.html#l00563">563</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 </div>
 </div>

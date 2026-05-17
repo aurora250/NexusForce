@@ -128,9 +128,9 @@ $(function(){initNavTree('group___tuple.html','',''); });
 函数</h2></td></tr>
 <tr class="memitem:ga918953b35d8d4d56c7c5b5c2125e822b" id="r_ga918953b35d8d4d56c7c5b5c2125e822b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ga918953b35d8d4d56c7c5b5c2125e822b">NEFORCE_MACRO_RANGES_CV</a> (__NEFORCE_BUILD_ARRAY_TUPLE_SIZE) template&lt; <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Idx</td></tr>
 <tr class="memdesc:ga918953b35d8d4d56c7c5b5c2125e822b"><td class="mdescLeft">&#160;</td><td class="mdescRight">数组的元组元素类型特化  <br /></td></tr>
-<tr class="memitem:gaf1f69e67ec55772495eca5813b38070a" id="r_gaf1f69e67ec55772495eca5813b38070a"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename Tuple&gt; </td></tr>
-<tr class="memitem:gaf1f69e67ec55772495eca5813b38070a template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#gaf1f69e67ec55772495eca5813b38070a">apply</a> (Func &amp;&amp;f, Tuple &amp;&amp;t) noexcept(inner::__apply_unpack_tuple&lt; _NEFORCE <a class="el" href="structis__nothrow__invocable.html">is_nothrow_invocable</a>, Func, Tuple &gt;::value)</td></tr>
-<tr class="memdesc:gaf1f69e67ec55772495eca5813b38070a"><td class="mdescLeft">&#160;</td><td class="mdescRight">将元组元素解包作为参数调用函数  <br /></td></tr>
+<tr class="memitem:ga7e9d6bcb3878109c369580e24400f6d0" id="r_ga7e9d6bcb3878109c369580e24400f6d0"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename Tuple&gt; </td></tr>
+<tr class="memitem:ga7e9d6bcb3878109c369580e24400f6d0 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#ga7e9d6bcb3878109c369580e24400f6d0">apply</a> (Func &amp;&amp;f, Tuple &amp;&amp;t) noexcept(inner::__apply_unpack_tuple&lt; 1 <a class="el" href="structis__nothrow__invocable.html">is_nothrow_invocable</a>, Func, Tuple &gt;::value)</td></tr>
+<tr class="memdesc:ga7e9d6bcb3878109c369580e24400f6d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">将元组元素解包作为参数调用函数  <br /></td></tr>
 <tr class="memitem:gaeacfc405517ebd850c9a45a1b00f014e" id="r_gaeacfc405517ebd850c9a45a1b00f014e"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Index, typename... Types&gt; </td></tr>
 <tr class="memitem:gaeacfc405517ebd850c9a45a1b00f014e template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr <a class="el" href="#gab7cc5fe4490aa895e6951dfc9b174c66">tuple_element_t</a>&lt; Index, Types... &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gaeacfc405517ebd850c9a45a1b00f014e">get</a> (tuple&lt; Types... &gt; &amp;t)</td></tr>
 <tr class="memdesc:gaeacfc405517ebd850c9a45a1b00f014e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取元组中指定位置的元素引用  <br /></td></tr>
@@ -154,9 +154,9 @@ $(function(){initNavTree('group___tuple.html','',''); });
 <tr class="memitem:gab4c17a8aa555027fca3b1d2888decfc7" id="r_gab4c17a8aa555027fca3b1d2888decfc7"><td class="memTemplParams" colspan="2">template&lt;typename... Types&gt; </td></tr>
 <tr class="memitem:gab4c17a8aa555027fca3b1d2888decfc7 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr tuple&lt; Types &amp;&amp;... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gab4c17a8aa555027fca3b1d2888decfc7">forward_as_tuple</a> (Types &amp;&amp;... args) noexcept</td></tr>
 <tr class="memdesc:gab4c17a8aa555027fca3b1d2888decfc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建转发引用元组  <br /></td></tr>
-<tr class="memitem:ga8d3a8b2ed782f185549367fa33cda70d" id="r_ga8d3a8b2ed782f185549367fa33cda70d"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Tuple, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::constructible_from_tuple&lt; T, Tuple &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga8d3a8b2ed782f185549367fa33cda70d template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr T&#160;</td><td class="memItemRight"><a class="el" href="#ga8d3a8b2ed782f185549367fa33cda70d">make_from_tuple</a> (Tuple &amp;&amp;tup) noexcept(noexcept(inner::__broaden_make_from_tuple&lt; T &gt;(_NEFORCE <a class="el" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt; Tuple &gt;(tup), <a class="el" href="group___integer_sequence.html#gaed583aed5d1c7a45292dc4dbc51d6493">make_index_sequence</a>&lt; <a class="el" href="structtuple__size.html">tuple_size</a>&lt; <a class="el" href="group___remove_qualifiers.html#ga5993e4587ccd2777e95893329360358a">remove_reference_t</a>&lt; Tuple &gt; &gt;::value &gt;{})))</td></tr>
-<tr class="memdesc:ga8d3a8b2ed782f185549367fa33cda70d"><td class="mdescLeft">&#160;</td><td class="mdescRight">从元组构造对象  <br /></td></tr>
+<tr class="memitem:gae3ed2d0fd50011adf4feb9524f66a189" id="r_gae3ed2d0fd50011adf4feb9524f66a189"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Tuple, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; inner::constructible_from_tuple&lt; T, Tuple &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gae3ed2d0fd50011adf4feb9524f66a189 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr T&#160;</td><td class="memItemRight"><a class="el" href="#gae3ed2d0fd50011adf4feb9524f66a189">make_from_tuple</a> (Tuple &amp;&amp;tup) noexcept(noexcept(inner::__broaden_make_from_tuple&lt; T &gt;(1 <a class="el" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt; Tuple &gt;(tup), <a class="el" href="group___integer_sequence.html#gaed583aed5d1c7a45292dc4dbc51d6493">make_index_sequence</a>&lt; <a class="el" href="structtuple__size.html">tuple_size</a>&lt; <a class="el" href="group___remove_qualifiers.html#ga5993e4587ccd2777e95893329360358a">remove_reference_t</a>&lt; Tuple &gt; &gt;::value &gt;{})))</td></tr>
+<tr class="memdesc:gae3ed2d0fd50011adf4feb9524f66a189"><td class="mdescLeft">&#160;</td><td class="mdescRight">从元组构造对象  <br /></td></tr>
 <tr class="memitem:ga9e6784003126d5f538ce419b9b2d9a14" id="r_ga9e6784003126d5f538ce419b9b2d9a14"><td class="memTemplParams" colspan="2">template&lt;typename... Tuples&gt; </td></tr>
 <tr class="memitem:ga9e6784003126d5f538ce419b9b2d9a14 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr inner::tuple_cat_bind_t&lt; Tuples... &gt;::Ret&#160;</td><td class="memItemRight"><a class="el" href="#ga9e6784003126d5f538ce419b9b2d9a14">tuple_cat</a> (Tuples &amp;&amp;... tuples)</td></tr>
 <tr class="memdesc:ga9e6784003126d5f538ce419b9b2d9a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">连接多个元组  <br /></td></tr>
@@ -234,8 +234,8 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="gaf1f69e67ec55772495eca5813b38070a" name="gaf1f69e67ec55772495eca5813b38070a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf1f69e67ec55772495eca5813b38070a">&#9670;&#160;</a></span>apply()</h2>
+<a id="ga7e9d6bcb3878109c369580e24400f6d0" name="ga7e9d6bcb3878109c369580e24400f6d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7e9d6bcb3878109c369580e24400f6d0">&#9670;&#160;</a></span>apply()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -283,9 +283,9 @@ template&lt;typename Func, typename Tuple&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="apply_8hpp_source.html">apply.hpp</a> 第 <a class="el" href="apply_8hpp_source.html#l00063">63</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03019">forward()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00524">signal&lt; Types &gt;::emit_executor()</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="lazy__thread_8hpp_source.html#l00067">lazy_thread::lazy_thread()</a>, <a class="el" href="thread_8hpp_source.html#l00340">thread::start()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00302">thread::thread()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00526">signal&lt; Types &gt;::emit_executor()</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="lazy__thread_8hpp_source.html#l00067">lazy_thread::lazy_thread()</a>, <a class="el" href="thread_8hpp_source.html#l00340">thread::start()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00302">thread::thread()</a>.</p>
 
 </div>
 </div>
@@ -329,11 +329,11 @@ template&lt;typename... Types&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>创建的转发引用元组 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00770">770</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00774">774</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03019">forward()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="bind_8hpp_source.html#l00534">binder&lt; Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00546">binder&lt; Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00636">bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00647">bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00870">tuple_cat()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="bind_8hpp_source.html#l00536">binder&lt; Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00548">binder&lt; Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00638">bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()()</a>, <a class="el" href="bind_8hpp_source.html#l00649">bindrer&lt; Res, Func(BoundArgs...)&gt;::operator()()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00874">tuple_cat()</a>.</p>
 
 </div>
 </div>
@@ -378,7 +378,7 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的常量右值引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00708">708</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00712">712</a> 行定义.</p>
 
 </div>
 </div>
@@ -423,7 +423,7 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00680">680</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00684">684</a> 行定义.</p>
 
 </div>
 </div>
@@ -468,7 +468,7 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的右值引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00694">694</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00698">698</a> 行定义.</p>
 
 </div>
 </div>
@@ -513,12 +513,12 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
 </dl>
 <dl class="section return"><dt>返回</dt><dd>指定位置元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00666">666</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00670">670</a> 行定义.</p>
 
 </div>
 </div>
-<a id="ga8d3a8b2ed782f185549367fa33cda70d" name="ga8d3a8b2ed782f185549367fa33cda70d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8d3a8b2ed782f185549367fa33cda70d">&#9670;&#160;</a></span>make_from_tuple()</h2>
+<a id="gae3ed2d0fd50011adf4feb9524f66a189" name="gae3ed2d0fd50011adf4feb9524f66a189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae3ed2d0fd50011adf4feb9524f66a189">&#9670;&#160;</a></span>make_from_tuple()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -558,9 +558,9 @@ template&lt;typename T, typename Tuple, <a class="el" href="group___type_traits_
 </dl>
 <dl class="section return"><dt>返回</dt><dd>构造的对象 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00812">812</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00816">816</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03019">forward()</a>.</p>
 
 </div>
 </div>
@@ -604,11 +604,11 @@ template&lt;typename... Types&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>创建的元组 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00746">746</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00750">750</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03019">forward()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00524">signal&lt; Types &gt;::emit_executor()</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="lazy__thread_8hpp_source.html#l00067">lazy_thread::lazy_thread()</a>, <a class="el" href="thread_8hpp_source.html#l00340">thread::start()</a>, <a class="el" href="thread_8hpp_source.html#l00302">thread::thread()</a> , 以及 <a class="el" href="thread__pool_8hpp_source.html#l00600">thread_pool::wait()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00526">signal&lt; Types &gt;::emit_executor()</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="lazy__thread_8hpp_source.html#l00067">lazy_thread::lazy_thread()</a>, <a class="el" href="thread_8hpp_source.html#l00340">thread::start()</a>, <a class="el" href="thread_8hpp_source.html#l00302">thread::thread()</a>, <a class="el" href="thread__pool_8hpp_source.html#l00601">thread_pool::wait()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00875">when_all()</a>.</p>
 
 </div>
 </div>
@@ -706,7 +706,7 @@ template&lt;typename... Types&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>创建的引用元组 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00758">758</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00762">762</a> 行定义.</p>
 
 </div>
 </div>
@@ -750,9 +750,9 @@ template&lt;typename... Tuples&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>连接后的元组 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00870">870</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tuple_8hpp_source.html">tuple.hpp</a> 第 <a class="el" href="tuple_8hpp_source.html#l00874">874</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00770">forward_as_tuple()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03019">forward()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00774">forward_as_tuple()</a>.</p>
 
 </div>
 </div>

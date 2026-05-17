@@ -368,7 +368,7 @@
       <node id="62">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="15" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
       <node id="16">
@@ -432,6 +432,8 @@
       <node id="56">
         <label>NeForce/core/memory/temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
@@ -442,7 +444,7 @@
       <node id="32">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="17" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -512,6 +514,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="39" relation="include">
         </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
       </node>
       <node id="44">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -548,8 +552,6 @@
       <node id="84">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="24" relation="include">
-        </childnode>
         <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
@@ -656,7 +658,7 @@
         <label>aio.h</label>
       </node>
       <node id="8">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="9">
         <label>cerrno</label>
@@ -786,23 +788,23 @@
 <codeline lineno="140"><highlight class="normal"></highlight></codeline>
 <codeline lineno="141"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile_1a65ab8f69f6981b4745103560dda456c1" kindref="member">native_handle_type</ref><sp/>handle_;<sp/></highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpath" kindref="compound">path</ref><sp/>path_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpath" kindref="compound">path</ref><sp/>path_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>opened_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>append_mode_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/></highlight></codeline>
 <codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>size_type<sp/>buffer_size_<sp/>=<sp/>buffer_size;<sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/>read_buffer_{};<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>size_type<sp/>read_buffer_pos_<sp/>=<sp/>0;<sp/><sp/></highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>size_type<sp/>read_buffer_size_<sp/>=<sp/>0;<sp/></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/>write_buffer_{};<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>size_type<sp/>write_buffer_pos_<sp/>=<sp/>0;<sp/></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile_1a3a397e0e8b8ab59867323f9a43322daa" kindref="member">size_type</ref><sp/>buffer_size_<sp/>=<sp/><ref refid="classfile_1a222b97f5e555de181b043daf33c99ffc" kindref="member">buffer_size</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/>read_buffer_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classfile_1a3a397e0e8b8ab59867323f9a43322daa" kindref="member">size_type</ref><sp/>read_buffer_pos_<sp/>=<sp/>0;<sp/><sp/></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classfile_1a3a397e0e8b8ab59867323f9a43322daa" kindref="member">size_type</ref><sp/>read_buffer_size_<sp/>=<sp/>0;<sp/></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/>write_buffer_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classfile_1a3a397e0e8b8ab59867323f9a43322daa" kindref="member">size_type</ref><sp/>write_buffer_pos_<sp/>=<sp/>0;<sp/></highlight></codeline>
 <codeline lineno="153"><highlight class="normal"></highlight></codeline>
 <codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>error_code<sp/>last_error_code_;<sp/></highlight></codeline>
 <codeline lineno="155"><highlight class="normal"></highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>unique_ptr&lt;file_mapper&gt;<sp/>map_;<sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>unique_ptr&lt;file_locker&gt;<sp/>locker_;<sp/></highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>unique_ptr&lt;file_info&gt;<sp/>info_;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>unique_ptr&lt;file_async&gt;<sp/>async_;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;file_mapper&gt;</ref><sp/>map_;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;file_locker&gt;</ref><sp/>locker_;<sp/></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;file_info&gt;</ref><sp/>info_;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;file_async&gt;</ref><sp/>async_;<sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="160"><highlight class="normal"></highlight></codeline>
 <codeline lineno="161"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init_sub_objects()<sp/>noexcept;</highlight></codeline>
@@ -928,6 +930,6 @@
 <codeline lineno="536"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="537"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_FILE_FILE_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file.hpp"/>
   </compounddef>
 </doxygen>

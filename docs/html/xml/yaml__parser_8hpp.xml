@@ -99,9 +99,11 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="58" relation="include">
         </childnode>
-        <childnode refid="67" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
         </childnode>
         <childnode refid="68" relation="include">
         </childnode>
@@ -122,7 +124,7 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="67">
+      <node id="66">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="11" relation="include">
@@ -131,7 +133,7 @@
       <node id="60">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="61" relation="include">
         </childnode>
@@ -142,8 +144,6 @@
         <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="65" relation="include">
-        </childnode>
-        <childnode refid="66" relation="include">
         </childnode>
       </node>
       <node id="12">
@@ -311,7 +311,7 @@
       <node id="45">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -391,6 +391,8 @@
       <node id="34">
         <label>NeForce/core/memory/temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
         <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
@@ -401,7 +403,7 @@
       <node id="37">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="15" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
@@ -471,6 +473,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
       </node>
       <node id="54">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -507,8 +511,6 @@
       <node id="83">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="31" relation="include">
-        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="51" relation="include">
@@ -629,13 +631,19 @@
         </childnode>
       </node>
       <node id="13">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="65">
+        <label>ctime</label>
       </node>
       <node id="7">
         <label>initializer_list</label>
       </node>
-      <node id="68">
+      <node id="67">
         <label>intrin.h</label>
+      </node>
+      <node id="68">
+        <label>intrin0.inl.h</label>
       </node>
       <node id="36">
         <label>new</label>
@@ -643,17 +651,11 @@
       <node id="62">
         <label>processthreadsapi.h</label>
       </node>
-      <node id="66">
-        <label>riscv_pause.h</label>
-      </node>
       <node id="64">
         <label>sched.h</label>
       </node>
       <node id="63">
         <label>synchapi.h</label>
-      </node>
-      <node id="65">
-        <label>unistd.h</label>
       </node>
       <node id="25">
         <label>utility</label>
@@ -690,7 +692,7 @@
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
-<codeline lineno="115" refid="classyaml__parser" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classyaml__parser_1acee797fe1f234bcdf2d47e5d3b42bea1" kindref="member">yaml_parser</ref><sp/>{</highlight></codeline>
+<codeline lineno="115" refid="classyaml__parser" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classyaml__parser_1a6fe8568235c9a4613088601221d063c2" kindref="member">yaml_parser</ref><sp/>{</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">indent_context<sp/>{</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>level;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
@@ -713,11 +715,11 @@
 <codeline lineno="142"><highlight class="normal"></highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunordered__map" kindref="compound">unordered_map&lt;string, shared_ptr&lt;yaml_value&gt;</ref>&gt;<sp/>anchors_;<sp/></highlight></codeline>
 <codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>current()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>current()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>peek(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>offset<sp/>=<sp/>1)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>peek(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>offset<sp/>=<sp/>1)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="157"><highlight class="normal"></highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>eof()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>eof()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="163"><highlight class="normal"></highlight></codeline>
 <codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" kindref="member">advance</ref>()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"></highlight></codeline>
@@ -735,11 +737,11 @@
 <codeline lineno="205"><highlight class="normal"></highlight></codeline>
 <codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>skip_whitespace_and_comments();</highlight></codeline>
 <codeline lineno="210"><highlight class="normal"></highlight></codeline>
-<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_whitespace(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_whitespace(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="217"><highlight class="normal"></highlight></codeline>
-<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_newline(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_newline(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="224"><highlight class="normal"></highlight></codeline>
-<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>peek_indent()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>peek_indent()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="232"><highlight class="normal"></highlight></codeline>
 <codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>skip_indent();</highlight></codeline>
 <codeline lineno="238"><highlight class="normal"></highlight></codeline>
@@ -757,9 +759,9 @@
 <codeline lineno="283"><highlight class="normal"></highlight></codeline>
 <codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>parse_tag();</highlight></codeline>
 <codeline lineno="289"><highlight class="normal"></highlight></codeline>
-<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>has_anchor()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>has_anchor()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="295"><highlight class="normal"></highlight></codeline>
-<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>has_alias()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>has_alias()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="301"><highlight class="normal"></highlight></codeline>
 <codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;yaml_string&gt;</ref><sp/>parse_plain_string();</highlight></codeline>
 <codeline lineno="309"><highlight class="normal"></highlight></codeline>
@@ -781,7 +783,7 @@
 <codeline lineno="376"><highlight class="normal"></highlight></codeline>
 <codeline lineno="381"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;yaml_null&gt;</ref><sp/>parse_null();</highlight></codeline>
 <codeline lineno="382"><highlight class="normal"></highlight></codeline>
-<codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;yaml_timestamp&gt;</ref><sp/>parse_timestamp(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>str)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;yaml_timestamp&gt;</ref><sp/>parse_timestamp(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>str)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="390"><highlight class="normal"></highlight></codeline>
 <codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;yaml_sequence&gt;</ref><sp/>parse_flow_sequence();</highlight></codeline>
 <codeline lineno="396"><highlight class="normal"></highlight></codeline>
@@ -809,28 +811,28 @@
 <codeline lineno="476"><highlight class="normal"></highlight></codeline>
 <codeline lineno="480"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>parse_document_end();</highlight></codeline>
 <codeline lineno="481"><highlight class="normal"></highlight></codeline>
-<codeline lineno="486"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_document_start()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="486"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_document_start()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="487"><highlight class="normal"></highlight></codeline>
-<codeline lineno="492"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_document_end()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="492"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_document_end()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="493"><highlight class="normal"></highlight></codeline>
-<codeline lineno="501"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_plain_safe(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="501"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_plain_safe(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="502"><highlight class="normal"></highlight></codeline>
-<codeline lineno="508"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_key_char(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="508"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_key_char(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="509"><highlight class="normal"></highlight></codeline>
-<codeline lineno="517"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_indicator(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="517"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_indicator(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="518"><highlight class="normal"></highlight></codeline>
-<codeline lineno="526"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_flow_indicator(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="526"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_flow_indicator(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>ch)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="527"><highlight class="normal"></highlight></codeline>
 <codeline lineno="534"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char32_t</highlight><highlight class="normal"><sp/>parse_unicode_escape(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>digits);</highlight></codeline>
 <codeline lineno="535"><highlight class="normal"></highlight></codeline>
-<codeline lineno="543"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>unescape_string(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>str)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="543"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>unescape_string(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>str)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="544"><highlight class="normal"></highlight></codeline>
 <codeline lineno="552"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NORETURN<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>throw_parse_error(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>message)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="553"><highlight class="normal"></highlight></codeline>
 <codeline lineno="554"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="563" refid="classyaml__parser_1acee797fe1f234bcdf2d47e5d3b42bea1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classyaml__parser_1acee797fe1f234bcdf2d47e5d3b42bea1" kindref="member">yaml_parser</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>yaml_str)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="563" refid="classyaml__parser_1a6fe8568235c9a4613088601221d063c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classyaml__parser_1a6fe8568235c9a4613088601221d063c2" kindref="member">yaml_parser</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>yaml_str)<sp/>:</highlight></codeline>
 <codeline lineno="564"><highlight class="normal"><sp/><sp/><sp/><sp/>yaml_(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(yaml_str)),</highlight></codeline>
-<codeline lineno="565"><highlight class="normal"><sp/><sp/><sp/><sp/>len_(yaml_.size())<sp/>{}</highlight></codeline>
+<codeline lineno="565"><highlight class="normal"><sp/><sp/><sp/><sp/>len_(yaml_.<ref refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" kindref="member">size</ref>())<sp/>{}</highlight></codeline>
 <codeline lineno="566"><highlight class="normal"></highlight></codeline>
 <codeline lineno="577" refid="classyaml__parser_1a4c36293a1a80f5e9e7328f58014fbcdf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;yaml_value&gt;</ref><sp/><ref refid="classyaml__parser_1a4c36293a1a80f5e9e7328f58014fbcdf" kindref="member">parse</ref>();</highlight></codeline>
 <codeline lineno="578"><highlight class="normal"></highlight></codeline>
@@ -846,6 +848,6 @@
 <codeline lineno="613"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="614"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_FILE_YAML_YAML_PARSER_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp"/>
   </compounddef>
 </doxygen>

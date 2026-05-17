@@ -4,13 +4,19 @@
     <compoundname>virtual_thread_task</compoundname>
     <includes refid="virtual__thread_8hpp" local="no">virtual_thread.hpp</includes>
     <innerclass refid="structvirtual__thread__task_1_1promise__type" prot="public">virtual_thread_task::promise_type</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
     <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="structvirtual__thread__task_1aab9696a7dd5e0aa596d91bd6e71ecbd2" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structvirtual__thread__task_1a2c206df237a6a746f1dd925e9112795c" prot="public" static="no" mutable="no">
         <type><ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle</ref>&lt; <ref refid="structvirtual__thread__task_1_1promise__type" kindref="compound">promise_type</ref> &gt;</type>
-        <definition>coroutine_handle&lt;promise_type&gt; virtual_thread_task::handle_</definition>
+        <definition>coroutine_handle&lt;promise_type&gt; virtual_thread_task&lt; T &gt;::handle_</definition>
         <argsstring></argsstring>
         <name>handle_</name>
         <qualifiedname>virtual_thread_task::handle_</qualifiedname>
+        <initializer>{nullptr}</initializer>
         <briefdescription>
 <para>协程句柄 </para>
         </briefdescription>
@@ -18,30 +24,59 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="76" column="22" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="76" bodyend="-1"/>
-        <referencedby refid="structvirtual__thread__task_1ae6a8baf3cd9bb4fe8f972b031248e957" compoundref="virtual__thread_8hpp" startline="113" endline="122">operator=</referencedby>
-        <referencedby refid="structvirtual__thread__task_1ad999c5bc10cf195db92c5ad7d97f0fdc" compoundref="virtual__thread_8hpp" startline="84" endline="85">virtual_thread_task</referencedby>
-        <referencedby refid="structvirtual__thread__task_1affa79416f219f96824fb4a9491ac0125" compoundref="virtual__thread_8hpp" startline="92" endline="96">~virtual_thread_task</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="640" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="640" bodyend="640"/>
+        <referencedby refid="structvirtual__thread__task_1abb78fcc28e8a4c41563a876076d6b9da" compoundref="virtual__thread_8hpp" startline="689" endline="705">virtual_thread_task&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="structvirtual__thread__task_1a844997cfa598f3f3fd6fefa834201d9e" compoundref="virtual__thread_8hpp" startline="651" endline="659">virtual_thread_task&lt; T &gt;::virtual_thread_task</referencedby>
+        <referencedby refid="structvirtual__thread__task_1acea6a7eb5e40118c3e169ff38a345465" compoundref="virtual__thread_8hpp" startline="664" endline="674">virtual_thread_task&lt; T &gt;::~virtual_thread_task</referencedby>
       </memberdef>
-    </sectiondef>
-    <sectiondef kind="public-func">
-      <memberdef kind="function" id="structvirtual__thread__task_1ab8e688877cda242ab2c08a3d70bbf26c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type></type>
-        <definition>virtual_thread_task::virtual_thread_task</definition>
-        <argsstring>() noexcept=default</argsstring>
-        <name>virtual_thread_task</name>
-        <qualifiedname>virtual_thread_task::virtual_thread_task</qualifiedname>
+      <memberdef kind="variable" id="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" prot="public" static="no" mutable="no">
+        <type>inner::task_shared_state&lt; T &gt; *</type>
+        <definition>inner::task_shared_state&lt;T&gt;* virtual_thread_task&lt; T &gt;::shared_state_</definition>
+        <argsstring></argsstring>
+        <name>shared_state_</name>
+        <qualifiedname>virtual_thread_task::shared_state_</qualifiedname>
+        <initializer>{nullptr}</initializer>
         <briefdescription>
+<para>共享状态指针 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="78" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="641" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="641" bodyend="641"/>
+        <referencedby refid="structvirtual__thread__task_1a770c0058ecfbae33d5f6fdbf2309d5fd" compoundref="virtual__thread_8hpp" startline="711" endline="711">virtual_thread_task&lt; T &gt;::await_ready</referencedby>
+        <referencedby refid="structvirtual__thread__task_1a75475798d8c7d48b708c5498c1b677a6" compoundref="virtual__thread_8hpp" startline="731" endline="736">virtual_thread_task&lt; T &gt;::await_resume</referencedby>
+        <referencedby refid="structvirtual__thread__task_1a837ac5a3ae8671c38f03838632c3cc05" compoundref="virtual__thread_8hpp" startline="716" endline="725">virtual_thread_task&lt; T &gt;::await_suspend</referencedby>
+        <referencedby refid="structvirtual__thread__task_1ae51b0e7b3a5acec19201ccad4c0a17db" compoundref="virtual__thread_8hpp" startline="744" endline="753">virtual_thread_task&lt; T &gt;::get_result</referencedby>
+        <referencedby refid="structvirtual__thread__task_1a0e24d200f0a00849b97f4af96d9e8f98" compoundref="virtual__thread_8hpp" startline="758" endline="758">virtual_thread_task&lt; T &gt;::is_done</referencedby>
+        <referencedby refid="structvirtual__thread__task_1abb78fcc28e8a4c41563a876076d6b9da" compoundref="virtual__thread_8hpp" startline="689" endline="705">virtual_thread_task&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="structvirtual__thread__task_1aa3cea8513e543b43609d6e2852416524" compoundref="virtual__thread_8hpp" startline="763" endline="763">virtual_thread_task&lt; T &gt;::valid</referencedby>
+        <referencedby refid="structvirtual__thread__task_1a844997cfa598f3f3fd6fefa834201d9e" compoundref="virtual__thread_8hpp" startline="651" endline="659">virtual_thread_task&lt; T &gt;::virtual_thread_task</referencedby>
+        <referencedby refid="structvirtual__thread__task_1acea6a7eb5e40118c3e169ff38a345465" compoundref="virtual__thread_8hpp" startline="664" endline="674">virtual_thread_task&lt; T &gt;::~virtual_thread_task</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structvirtual__thread__task_1ad999c5bc10cf195db92c5ad7d97f0fdc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structvirtual__thread__task_1a7257c884aed60d6651057df5c40d7913" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>virtual_thread_task::virtual_thread_task</definition>
+        <definition>virtual_thread_task&lt; T &gt;::virtual_thread_task</definition>
+        <argsstring>()=default</argsstring>
+        <name>virtual_thread_task</name>
+        <qualifiedname>virtual_thread_task::virtual_thread_task</qualifiedname>
+        <briefdescription>
+<para>默认构造，创建空任务 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="646" column="5"/>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1aae9ec803d41ac3437996df8014ac9438" compoundref="virtual__thread_8hpp" startline="520" endline="523">virtual_thread_task&lt; T &gt;::promise_type::get_return_object</referencedby>
+        <referencedby refid="structvirtual__thread__task_1abb78fcc28e8a4c41563a876076d6b9da" compoundref="virtual__thread_8hpp" startline="689" endline="705">virtual_thread_task&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="structvirtual__thread__task_1ac0f95502f09a159438d3d833182c898a" compoundref="virtual__thread_8hpp" startline="682" endline="684">virtual_thread_task&lt; T &gt;::virtual_thread_task</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvirtual__thread__task_1a844997cfa598f3f3fd6fefa834201d9e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>virtual_thread_task&lt; T &gt;::virtual_thread_task</definition>
         <argsstring>(coroutine_handle&lt; promise_type &gt; h)</argsstring>
         <name>virtual_thread_task</name>
         <qualifiedname>virtual_thread_task::virtual_thread_task</qualifiedname>
@@ -50,45 +85,37 @@
           <declname>h</declname>
         </param>
         <briefdescription>
-<para>构造函数 </para>
+<para>从协程句柄构造任务 </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>h</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>协程句柄 </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="84" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="84" bodyend="85"/>
-        <references refid="structvirtual__thread__task_1aab9696a7dd5e0aa596d91bd6e71ecbd2" compoundref="virtual__thread_8hpp" startline="76">handle_</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="651" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="651" bodyend="659"/>
+        <references refid="structvirtual__thread__task_1a2c206df237a6a746f1dd925e9112795c" compoundref="virtual__thread_8hpp" startline="640" endline="640">virtual_thread_task&lt; T &gt;::handle_</references>
+        <references refid="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" compoundref="virtual__thread_8hpp" startline="641" endline="641">virtual_thread_task&lt; T &gt;::shared_state_</references>
       </memberdef>
-      <memberdef kind="function" id="structvirtual__thread__task_1affa79416f219f96824fb4a9491ac0125" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="structvirtual__thread__task_1acea6a7eb5e40118c3e169ff38a345465" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>virtual_thread_task::~virtual_thread_task</definition>
+        <definition>virtual_thread_task&lt; T &gt;::~virtual_thread_task</definition>
         <argsstring>()</argsstring>
         <name>~virtual_thread_task</name>
         <qualifiedname>virtual_thread_task::~virtual_thread_task</qualifiedname>
         <briefdescription>
-<para>析构函数 </para>
+<para>析构函数 — 清理未调度的帧，释放共享状态引用 </para>
         </briefdescription>
         <detaileddescription>
-<para>如果协程未完成，销毁协程资源。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="92" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="92" bodyend="96"/>
-        <references refid="structvirtual__thread__task_1aab9696a7dd5e0aa596d91bd6e71ecbd2" compoundref="virtual__thread_8hpp" startline="76">handle_</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="664" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="664" bodyend="674"/>
+        <references refid="structvirtual__thread__task_1a2c206df237a6a746f1dd925e9112795c" compoundref="virtual__thread_8hpp" startline="640" endline="640">virtual_thread_task&lt; T &gt;::handle_</references>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" compoundref="virtual__thread_8hpp" startline="641" endline="641">virtual_thread_task&lt; T &gt;::shared_state_</references>
       </memberdef>
-      <memberdef kind="function" id="structvirtual__thread__task_1ad6d298c579a2ee733c7896bbb73373c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="structvirtual__thread__task_1a2160fc5a8c047b09150ee365319cddda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>virtual_thread_task::virtual_thread_task</definition>
+        <definition>virtual_thread_task&lt; T &gt;::virtual_thread_task</definition>
         <argsstring>(const virtual_thread_task &amp;)=delete</argsstring>
         <name>virtual_thread_task</name>
         <qualifiedname>virtual_thread_task::virtual_thread_task</qualifiedname>
@@ -96,17 +123,16 @@
           <type>const <ref refid="structvirtual__thread__task" kindref="compound">virtual_thread_task</ref> &amp;</type>
         </param>
         <briefdescription>
-<para>禁止拷贝构造 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="98" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="676" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="structvirtual__thread__task_1ac64cfcafa6371aa3ecba138c9ab361df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="structvirtual__thread__task_1abe4f62de8a9dcbb89695f7da343df0eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structvirtual__thread__task" kindref="compound">virtual_thread_task</ref> &amp;</type>
-        <definition>virtual_thread_task &amp; virtual_thread_task::operator=</definition>
+        <definition>virtual_thread_task &amp; virtual_thread_task&lt; T &gt;::operator=</definition>
         <argsstring>(const virtual_thread_task &amp;)=delete</argsstring>
         <name>operator=</name>
         <qualifiedname>virtual_thread_task::operator=</qualifiedname>
@@ -114,17 +140,16 @@
           <type>const <ref refid="structvirtual__thread__task" kindref="compound">virtual_thread_task</ref> &amp;</type>
         </param>
         <briefdescription>
-<para>禁止拷贝赋值 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="99" column="25"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="677" column="25"/>
       </memberdef>
-      <memberdef kind="function" id="structvirtual__thread__task_1ae589260f89456025d7bc690df427abdd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structvirtual__thread__task_1ac0f95502f09a159438d3d833182c898a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
-        <definition>virtual_thread_task::virtual_thread_task</definition>
+        <definition>virtual_thread_task&lt; T &gt;::virtual_thread_task</definition>
         <argsstring>(virtual_thread_task &amp;&amp;other) noexcept</argsstring>
         <name>virtual_thread_task</name>
         <qualifiedname>virtual_thread_task::virtual_thread_task</qualifiedname>
@@ -136,24 +161,15 @@
 <para>移动构造函数 </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>other</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>要移动的虚拟线程任务 </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="105" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="105" bodyend="106"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="682" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="682" bodyend="684"/>
+        <references refid="structvirtual__thread__task_1a7257c884aed60d6651057df5c40d7913">virtual_thread_task&lt; T &gt;::virtual_thread_task</references>
       </memberdef>
-      <memberdef kind="function" id="structvirtual__thread__task_1ae6a8baf3cd9bb4fe8f972b031248e957" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="structvirtual__thread__task_1abb78fcc28e8a4c41563a876076d6b9da" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="structvirtual__thread__task" kindref="compound">virtual_thread_task</ref> &amp;</type>
-        <definition>virtual_thread_task &amp; virtual_thread_task::operator=</definition>
+        <definition>virtual_thread_task &amp; virtual_thread_task&lt; T &gt;::operator=</definition>
         <argsstring>(virtual_thread_task &amp;&amp;other) noexcept</argsstring>
         <name>operator=</name>
         <qualifiedname>virtual_thread_task::operator=</qualifiedname>
@@ -165,43 +181,187 @@
 <para>移动赋值运算符 </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>other</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>要移动的虚拟线程任务 </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>当前对象的引用 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="689" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="689" bodyend="705"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3075" endline="3077">addressof</references>
+        <references refid="group___swap_utility_1ga0c5a3fc6dc35e080dc7f316405327e6e">exchange</references>
+        <references refid="structvirtual__thread__task_1a2c206df237a6a746f1dd925e9112795c" compoundref="virtual__thread_8hpp" startline="640" endline="640">virtual_thread_task&lt; T &gt;::handle_</references>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" compoundref="virtual__thread_8hpp" startline="641" endline="641">virtual_thread_task&lt; T &gt;::shared_state_</references>
+        <references refid="structvirtual__thread__task_1a7257c884aed60d6651057df5c40d7913">virtual_thread_task&lt; T &gt;::virtual_thread_task</references>
+      </memberdef>
+      <memberdef kind="function" id="structvirtual__thread__task_1a770c0058ecfbae33d5f6fdbf2309d5fd" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool virtual_thread_task&lt; T &gt;::await_ready</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>await_ready</name>
+        <qualifiedname>virtual_thread_task::await_ready</qualifiedname>
+        <briefdescription>
+<para>co_await 就绪检查 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>任务是否已完成 </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="113" column="25" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="113" bodyend="122"/>
-        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
-        <references refid="group___swap_utility_1ga0c5a3fc6dc35e080dc7f316405327e6e">exchange</references>
-        <references refid="structvirtual__thread__task_1aab9696a7dd5e0aa596d91bd6e71ecbd2" compoundref="virtual__thread_8hpp" startline="76">handle_</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="711" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="711" bodyend="711"/>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" compoundref="virtual__thread_8hpp" startline="641" endline="641">virtual_thread_task&lt; T &gt;::shared_state_</references>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1a830e3c9947559cb322fb08eeeae7e12e" compoundref="virtual__thread_8hpp" startline="581" endline="599">virtual_thread_task&lt; T &gt;::promise_type::await_transform</referencedby>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1ad5192c1304919fac0705333de16221ab" compoundref="virtual__thread_8hpp" startline="561" endline="575">virtual_thread_task&lt; T &gt;::promise_type::await_transform</referencedby>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1a82709196f67db42a234a9dc93bc519d0" compoundref="virtual__thread_8hpp" startline="535" endline="556">virtual_thread_task&lt; T &gt;::promise_type::final_suspend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvirtual__thread__task_1a837ac5a3ae8671c38f03838632c3cc05" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool virtual_thread_task&lt; T &gt;::await_suspend</definition>
+        <argsstring>(coroutine_handle&lt;&gt; caller) noexcept</argsstring>
+        <name>await_suspend</name>
+        <qualifiedname>virtual_thread_task::await_suspend</qualifiedname>
+        <param>
+          <type><ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle</ref>&lt;&gt;</type>
+          <declname>caller</declname>
+        </param>
+        <briefdescription>
+<para>co_await 挂起时注册 continuation </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="716" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="716" bodyend="725"/>
+        <references refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" compoundref="memory__order_8hpp" startline="181">memory_order_acq_rel</references>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
+        <references refid="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" compoundref="virtual__thread_8hpp" startline="641" endline="641">virtual_thread_task&lt; T &gt;::shared_state_</references>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1a830e3c9947559cb322fb08eeeae7e12e" compoundref="virtual__thread_8hpp" startline="581" endline="599">virtual_thread_task&lt; T &gt;::promise_type::await_transform</referencedby>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1ad5192c1304919fac0705333de16221ab" compoundref="virtual__thread_8hpp" startline="561" endline="575">virtual_thread_task&lt; T &gt;::promise_type::await_transform</referencedby>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1a82709196f67db42a234a9dc93bc519d0" compoundref="virtual__thread_8hpp" startline="535" endline="556">virtual_thread_task&lt; T &gt;::promise_type::final_suspend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvirtual__thread__task_1a75475798d8c7d48b708c5498c1b677a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T virtual_thread_task&lt; T &gt;::await_resume</definition>
+        <argsstring>()</argsstring>
+        <name>await_resume</name>
+        <qualifiedname>virtual_thread_task::await_resume</qualifiedname>
+        <briefdescription>
+<para>co_await 恢复时返回结果或抛出异常 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>任务的返回值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="731" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="731" bodyend="736"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___exception_handling_1ga947504bd2926f427cb1e964fada47745">rethrow_exception</references>
+        <references refid="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" compoundref="virtual__thread_8hpp" startline="641" endline="641">virtual_thread_task&lt; T &gt;::shared_state_</references>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1a830e3c9947559cb322fb08eeeae7e12e" compoundref="virtual__thread_8hpp" startline="581" endline="599">virtual_thread_task&lt; T &gt;::promise_type::await_transform</referencedby>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1ad5192c1304919fac0705333de16221ab" compoundref="virtual__thread_8hpp" startline="561" endline="575">virtual_thread_task&lt; T &gt;::promise_type::await_transform</referencedby>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1a82709196f67db42a234a9dc93bc519d0" compoundref="virtual__thread_8hpp" startline="535" endline="556">virtual_thread_task&lt; T &gt;::promise_type::final_suspend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structvirtual__thread__task_1ae51b0e7b3a5acec19201ccad4c0a17db" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T virtual_thread_task&lt; T &gt;::get_result</definition>
+        <argsstring>()</argsstring>
+        <name>get_result</name>
+        <qualifiedname>virtual_thread_task::get_result</qualifiedname>
+        <briefdescription>
+<para>阻塞获取任务结果 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>若任务未完成则阻塞当前线程。任务异常会在此重新抛出。 <simplesect kind="return"><para>任务的返回值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="744" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="744" bodyend="753"/>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="group___exception_handling_1ga947504bd2926f427cb1e964fada47745">rethrow_exception</references>
+        <references refid="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" compoundref="virtual__thread_8hpp" startline="641" endline="641">virtual_thread_task&lt; T &gt;::shared_state_</references>
+      </memberdef>
+      <memberdef kind="function" id="structvirtual__thread__task_1a0e24d200f0a00849b97f4af96d9e8f98" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool virtual_thread_task&lt; T &gt;::is_done</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_done</name>
+        <qualifiedname>virtual_thread_task::is_done</qualifiedname>
+        <briefdescription>
+<para>检查任务是否已完成 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="758" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="758" bodyend="758"/>
+        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" compoundref="virtual__thread_8hpp" startline="641" endline="641">virtual_thread_task&lt; T &gt;::shared_state_</references>
+      </memberdef>
+      <memberdef kind="function" id="structvirtual__thread__task_1aa3cea8513e543b43609d6e2852416524" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool virtual_thread_task&lt; T &gt;::valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>valid</name>
+        <qualifiedname>virtual_thread_task::valid</qualifiedname>
+        <briefdescription>
+<para>检查任务是否关联有效共享状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="763" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="763" bodyend="763"/>
+        <references refid="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" compoundref="virtual__thread_8hpp" startline="641" endline="641">virtual_thread_task&lt; T &gt;::shared_state_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>虚拟线程任务 </para>
+<para>异步任务主模板 </para>
     </briefdescription>
     <detaileddescription>
-<para>表示一个协程任务，包含协程句柄和异常处理。 </para>
+<para><ref refid="structvirtual__thread__task" kindref="compound">virtual_thread_task</ref> 的类型化版本</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务返回值类型，默认为 void</para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务返回值类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+表示一个返回 T 类型值的异步任务。 提供带返回值的 <ref refid="structvirtual__thread__task_1ae51b0e7b3a5acec19201ccad4c0a17db" kindref="member">get_result()</ref> 和 <ref refid="structvirtual__thread__task_1a75475798d8c7d48b708c5498c1b677a6" kindref="member">await_resume()</ref>。 </para>
     </detaileddescription>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="32" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="32" bodyend="123"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="510" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="510" bodyend="764"/>
     <listofallmembers>
-      <member refid="structvirtual__thread__task_1aab9696a7dd5e0aa596d91bd6e71ecbd2" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>handle_</name></member>
-      <member refid="structvirtual__thread__task_1ac64cfcafa6371aa3ecba138c9ab361df" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>operator=</name></member>
-      <member refid="structvirtual__thread__task_1ae6a8baf3cd9bb4fe8f972b031248e957" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>operator=</name></member>
-      <member refid="structvirtual__thread__task_1ab8e688877cda242ab2c08a3d70bbf26c" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>virtual_thread_task</name></member>
-      <member refid="structvirtual__thread__task_1ad999c5bc10cf195db92c5ad7d97f0fdc" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>virtual_thread_task</name></member>
-      <member refid="structvirtual__thread__task_1ad6d298c579a2ee733c7896bbb73373c6" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>virtual_thread_task</name></member>
-      <member refid="structvirtual__thread__task_1ae589260f89456025d7bc690df427abdd" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>virtual_thread_task</name></member>
-      <member refid="structvirtual__thread__task_1affa79416f219f96824fb4a9491ac0125" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>~virtual_thread_task</name></member>
+      <member refid="structvirtual__thread__task_1a770c0058ecfbae33d5f6fdbf2309d5fd" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>await_ready</name></member>
+      <member refid="structvirtual__thread__task_1a75475798d8c7d48b708c5498c1b677a6" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>await_resume</name></member>
+      <member refid="structvirtual__thread__task_1a837ac5a3ae8671c38f03838632c3cc05" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>await_suspend</name></member>
+      <member refid="structvirtual__thread__task_1ae51b0e7b3a5acec19201ccad4c0a17db" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>get_result</name></member>
+      <member refid="structvirtual__thread__task_1a2c206df237a6a746f1dd925e9112795c" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>handle_</name></member>
+      <member refid="structvirtual__thread__task_1a0e24d200f0a00849b97f4af96d9e8f98" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>is_done</name></member>
+      <member refid="structvirtual__thread__task_1abe4f62de8a9dcbb89695f7da343df0eb" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>operator=</name></member>
+      <member refid="structvirtual__thread__task_1abb78fcc28e8a4c41563a876076d6b9da" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>operator=</name></member>
+      <member refid="structvirtual__thread__task_1afa669db850ef309aceb1f7140292e9a0" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>shared_state_</name></member>
+      <member refid="structvirtual__thread__task_1aa3cea8513e543b43609d6e2852416524" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>valid</name></member>
+      <member refid="structvirtual__thread__task_1a7257c884aed60d6651057df5c40d7913" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>virtual_thread_task</name></member>
+      <member refid="structvirtual__thread__task_1a844997cfa598f3f3fd6fefa834201d9e" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>virtual_thread_task</name></member>
+      <member refid="structvirtual__thread__task_1a2160fc5a8c047b09150ee365319cddda" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>virtual_thread_task</name></member>
+      <member refid="structvirtual__thread__task_1ac0f95502f09a159438d3d833182c898a" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>virtual_thread_task</name></member>
+      <member refid="structvirtual__thread__task_1acea6a7eb5e40118c3e169ff38a345465" prot="public" virt="non-virtual"><scope>virtual_thread_task</scope><name>~virtual_thread_task</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

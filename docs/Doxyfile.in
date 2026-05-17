@@ -43,6 +43,32 @@ PREDEFINED             = NEXUSFORCE_ENABLE_DOXYGEN=1 \
                          NEFORCE_ARCH_LOONGARCH \
                          NEFORCE_ARCH_BITS_64 \
                          NEFORCE_ARCH_BITS_32 \
+                         NEFORCE_BEGIN_NAMESPACE__ namespace neforce { \
+                         NEFORCE_END_NAMESPACE__ } \
+                         _NEFORCE neforce:: \
+                         NEFORCE_BEGIN_CONSTANTS__ namespace constants { \
+                         NEFORCE_END_CONSTANTS__ } \
+                         NEFORCE_BEGIN_THIS_THREAD__ namespace this_thread { \
+                         NEFORCE_END_THIS_THREAD__ } \
+                         NEFORCE_BEGIN_RANGES__ namespace ranges { \
+                         #define NEFORCE_END_RANGES__ } \
+                         NEFORCE_BEGIN_RANGES_VIEWS__ namespace views { \
+                         #define NEFORCE_END_RANGES_VIEWS__ } \
+                         NEFORCE_BEGIN_LITERALS__ inline namespace literals { \
+                         #define NEFORCE_END_LITERALS__ } \
+                         NEFORCE_BEGIN_REFLECT__ namespace reflect { \
+                         #define NEFORCE_END_REFLECT__ } \
+                         NEFORCE_BEGIN_HTTP__ namespace http { \
+                         #define NEFORCE_END_HTTP__ } \
+                         NEFORCE_CONSTEXPR14 constexpr \
+                         NEFORCE_CONSTEXPR17 constexpr \
+                         NEFORCE_INLINE17 inline \
+                         NEFORCE_CONSTEXPR20 constexpr \
+                         NEFORCE_NODISCARD [[nodiscard]] \
+                         NEFORCE_NORETURN [[noreturn]] \
+                         NEFORCE_DEPRECATED [[deprecated]] \
+                         NEFORCE_DEPRECATED_FOR(MSG) [[deprecated(MSG)]] \
+                         NEFORCE_RESTRICT __restrict \
 
 OUTPUT_LANGUAGE        = Chinese
 
@@ -113,7 +139,7 @@ TYPEDEF_HIDES_STRUCT   = YES
 WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = NO      # 警告未文档化的内容
 WARN_IF_DOC_ERROR      = YES
-WARN_NO_PARAMDOC       = NO      # 警告缺少参数文档=
+WARN_NO_PARAMDOC       = NO      # 警告缺少参数文档
 
 ENABLE_PREPROCESSING   = YES
 MACRO_EXPANSION        = YES

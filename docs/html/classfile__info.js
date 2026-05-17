@@ -1,6 +1,6 @@
 var classfile__info =
 [
-    [ "native_handle_type", "classfile__info.html#abb05de0634a1f444adca9bbf8e26373f", null ],
+    [ "native_handle_type", "classfile__info.html#a17e23b23f16643a28107c128f8ae971d", null ],
     [ "size_type", "classfile__info.html#a562df80c22ec41d47304877407d62006", null ],
     [ "file_info", "classfile__info.html#a90d01d2d0b844bb827fbe41b53d6482c", null ],
     [ "attributes", "classfile__info.html#adcb6ab3acc42d05f65b20fee105c1458", null ],

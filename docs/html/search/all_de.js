@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🔤_20字符串处理_20string_0',['🔤 字符串处理 (String)',['../index.html#autotoc_md26',1,'']]],
-  ['🔤_20字符编码与国际化_1',['🔤 字符编码与国际化',['../index.html#autotoc_md13',1,'']]]
+  ['🔐_20加密与安全_20encrypt_0',['🔐 加密与安全 (Encrypt)',['../index.html#autotoc_md21',1,'']]],
+  ['🔐_20密码学与安全算法_1',['🔐 密码学与安全算法',['../index.html#autotoc_md12',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['📡_20标准合规_0',['📡 标准合规',['../index.html#autotoc_md10',1,'']]]
+  ['📝_20日志系统_20logging_0',['📝 日志系统 (Logging)',['../index.html#autotoc_md25',1,'']]],
+  ['📝_20更新日志_1',['📝 更新日志',['../index.html#autotoc_md49',1,'']]]
 ];

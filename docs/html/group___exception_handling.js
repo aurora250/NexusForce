@@ -2,16 +2,16 @@ var group___exception_handling =
 [
     [ "异常类集", "group___exceptions.html", "group___exceptions" ],
     [ "exception_wrapper", "classexception__wrapper.html", [
-      [ "clone", "classexception__wrapper.html#a40fd000355a09acab15cfc64c9ec7f8f", null ],
-      [ "rethrow", "classexception__wrapper.html#a3112fb62c8863b12e376df7e36324918", null ],
-      [ "type", "classexception__wrapper.html#ab04df73bc21daeb1491fba55397a896c", null ]
+      [ "clone", "classexception__wrapper.html#a43f65f2af0ee2f34a9c3b9fb57346b6c", null ],
+      [ "rethrow", "classexception__wrapper.html#a5f9d0a2b14862b3248e64ed70c64c702", null ],
+      [ "type", "classexception__wrapper.html#a75b4031b3bf86ed08319dfa30e34ca0d", null ]
     ] ],
     [ "typed_exception_wrapper&lt; Ex &gt;", "classtyped__exception__wrapper.html", [
       [ "typed_exception_wrapper", "classtyped__exception__wrapper.html#a1fd2dbba5a19d8cd7140f01a17159810", null ],
       [ "typed_exception_wrapper", "classtyped__exception__wrapper.html#a2be0fc2a8bda2ed0dcd632a0206b3737", null ],
-      [ "clone", "classtyped__exception__wrapper.html#a2973111a1bccf92fd924f6f6eb15c6de", null ],
-      [ "rethrow", "classtyped__exception__wrapper.html#a82187b3aff63f9c14d3b090087b6db42", null ],
-      [ "type", "classtyped__exception__wrapper.html#a8b3de5e4a9a80c8bbc699db724e427db", null ]
+      [ "clone", "classtyped__exception__wrapper.html#af2d0cd1b48ec5146aec4f2996029d328", null ],
+      [ "rethrow", "classtyped__exception__wrapper.html#aec9696310f011cfedde6077b4bca67cd", null ],
+      [ "type", "classtyped__exception__wrapper.html#a0cb3ffe51548e47e30362ee4e04d9b3c", null ]
     ] ],
     [ "exception_ptr", "classexception__ptr.html", [
       [ "ecb", "structexception__ptr_1_1ecb.html", [
@@ -45,7 +45,7 @@ var group___exception_handling =
     [ "NEFORCE_ERROR_BUILD_FINAL_CLASS", "group___exception_handling.html#ga438313508830676344f6ccbfad172758", null ],
     [ "current_exception", "group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419", null ],
     [ "make_exception_ptr", "group___exception_handling.html#gac43ce5d8fc82090c24f3088e37cc2d89", null ],
-    [ "rethrow_exception", "group___exception_handling.html#ga12342507bc5abdc903c22fabac839d32", null ],
+    [ "rethrow_exception", "group___exception_handling.html#ga947504bd2926f427cb1e964fada47745", null ],
     [ "throw_with_stack", "group___exception_handling.html#gafcaf017f48e0577f063b54671e2a06ec", null ],
     [ "uncaught_exceptions", "group___exception_handling.html#ga28496880d7de221739d7afa46a69059d", null ]
 ];

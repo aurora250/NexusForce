@@ -33,7 +33,7 @@ var group___toml_config =
       [ "value_table", "classtoml__builder.html#a13971996f0476380a61ee55adde14a80", null ]
     ] ],
     [ "toml_parser", "classtoml__parser.html", [
-      [ "toml_parser", "classtoml__parser.html#a6ccef28c3e84966513f973f762eadf76", null ],
+      [ "toml_parser", "classtoml__parser.html#a54c1c00efb29395d0ecf30fc5f1916ec", null ],
       [ "parse", "classtoml__parser.html#a4b704c54f777bcf04f9eeee374e1c58e", null ],
       [ "try_parse", "classtoml__parser.html#afbdb18ee2bfd5d7bb16c61d478b958e0", null ]
     ] ],
@@ -107,7 +107,7 @@ var group___toml_config =
       [ "toml_datetime", "classtoml__datetime.html#a9c1e295cd66f1ede89cc620aeb223319", null ],
       [ "as_datetime", "classtoml__datetime.html#a6e944a54527ded2f8d1df3fa39eb52f2", null ],
       [ "get_datetime_type", "classtoml__datetime.html#aa3243c1b52bf17e3580c0302e8d0cf85", null ],
-      [ "get_string_value", "classtoml__datetime.html#ae6070320f2e0b3aada3eb88263f39cc4", null ],
+      [ "get_string_value", "classtoml__datetime.html#afc6b5c7b7d1d6da5cee30c714a344adf", null ],
       [ "get_value", "classtoml__datetime.html#a7bb008e03ba7f382d4c836fb7cfb83d3", null ],
       [ "type", "classtoml__datetime.html#a35b33230d37bcf570d1112f01bd729d4", null ]
     ] ],

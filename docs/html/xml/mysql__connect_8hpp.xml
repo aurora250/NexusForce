@@ -175,7 +175,7 @@
       <node id="35">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -245,7 +245,7 @@
       <node id="39">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
@@ -331,6 +331,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
       </node>
       <node id="59">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -367,8 +369,6 @@
       <node id="69">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="30" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
@@ -523,7 +523,7 @@
         </childnode>
       </node>
       <node id="14">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="8">
         <label>initializer_list</label>
@@ -606,22 +606,30 @@
 <codeline lineno="148" refid="structmysql__connect_1a9ed7e3f772ebd094431c7a7a20c2a022" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structmysql__connect_1a9ed7e3f772ebd094431c7a7a20c2a022" kindref="member">is_valid</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/>return<sp/>::mysql_ping(link_)<sp/>==<sp/>0;<sp/>}</highlight></codeline>
 <codeline lineno="149"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="157" refid="classmysql__factory" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classmysql__factory_1a829285da35bc7de72dcbb4d63ea0ddc7" kindref="member">mysql_factory</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classidb__factory_1ad680ec3a992a6a696e3cff3e7f0b34e1" kindref="member">idb_factory</ref><sp/>{</highlight></codeline>
+<codeline lineno="157" refid="classmysql__factory" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classmysql__factory_1ad18997d90b21685de811352d73283be5" kindref="member">mysql_factory</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classidb__factory_1a875d00f918348f454bb6452c57579ab1" kindref="member">idb_factory</ref><sp/>{</highlight></codeline>
 <codeline lineno="158"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="163" refid="classmysql__factory_1a829285da35bc7de72dcbb4d63ea0ddc7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classmysql__factory_1a829285da35bc7de72dcbb4d63ea0ddc7" kindref="member">mysql_factory</ref>(<ref refid="structdb__config" kindref="compound">db_config</ref><sp/>config)<sp/>:</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classidb__factory_1ad680ec3a992a6a696e3cff3e7f0b34e1" kindref="member">idb_factory</ref>(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(config))<sp/>{}</highlight></codeline>
+<codeline lineno="163" refid="classmysql__factory_1ad18997d90b21685de811352d73283be5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classmysql__factory_1ad18997d90b21685de811352d73283be5" kindref="member">mysql_factory</ref>(<ref refid="structdb__config" kindref="compound">db_config</ref><sp/>config)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classidb__factory_1a875d00f918348f454bb6452c57579ab1" kindref="member">idb_factory</ref>(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(config))<sp/>{}</highlight></codeline>
 <codeline lineno="165"><highlight class="normal"></highlight></codeline>
-<codeline lineno="170" refid="classmysql__factory_1a4ebf42cc3b6eb2634e67e26d9f197281" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structidb__connect" kindref="compound">idb_connect</ref>*<sp/><ref refid="classmysql__factory_1a4ebf42cc3b6eb2634e67e26d9f197281" kindref="member">create_connect</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmysql__factory" kindref="compound">mysql_factory</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmysql__factory" kindref="compound">mysql_factory</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmysql__factory" kindref="compound">mysql_factory</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmysql__factory" kindref="compound">mysql_factory</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmysql__factory" kindref="compound">mysql_factory</ref>(<ref refid="classmysql__factory" kindref="compound">mysql_factory</ref>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmysql__factory" kindref="compound">mysql_factory</ref>&amp;<sp/>operator=(<ref refid="classmysql__factory" kindref="compound">mysql_factory</ref>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="171"><highlight class="normal"></highlight></codeline>
-<codeline lineno="177" refid="classmysql__factory_1a47a360e62336b45f2a738a8c6d6fc729" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structidb__result" kindref="compound">idb_result</ref>*<sp/><ref refid="classmysql__factory_1a47a360e62336b45f2a738a8c6d6fc729" kindref="member">create_result</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>native_result)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="178"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>MySQL</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Database</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="183"><highlight class="normal"></highlight></codeline>
-<codeline lineno="184"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_SUPPORT_MYSQL</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="186"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_DATABASE_MYSQL_CONNECT_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>~<ref refid="classmysql__factory" kindref="compound">mysql_factory</ref>()<sp/>noexcept<sp/>override<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178" refid="classmysql__factory_1a4ebf42cc3b6eb2634e67e26d9f197281" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structidb__connect" kindref="compound">idb_connect</ref>*<sp/><ref refid="classmysql__factory_1a4ebf42cc3b6eb2634e67e26d9f197281" kindref="member">create_connect</ref>()<sp/>override;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185" refid="classmysql__factory_1a47a360e62336b45f2a738a8c6d6fc729" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structidb__result" kindref="compound">idb_result</ref>*<sp/><ref refid="classmysql__factory_1a47a360e62336b45f2a738a8c6d6fc729" kindref="member">create_result</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>native_result)<sp/>override;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>MySQL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Database</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_SUPPORT_MYSQL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_DATABASE_MYSQL_CONNECT_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp"/>
   </compounddef>
 </doxygen>

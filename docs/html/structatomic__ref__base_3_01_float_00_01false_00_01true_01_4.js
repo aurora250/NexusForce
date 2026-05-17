@@ -10,7 +10,7 @@ var structatomic__ref__base_3_01_float_00_01false_00_01true_01_4 =
     [ "exchange", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a1c606b766bc4952cc43dd879436375dc", null ],
     [ "fetch_add", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a8065485c88d98d95f67ed562517212eb", null ],
     [ "fetch_sub", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#adb450547460e550bac73301a28e89e1a", null ],
-    [ "is_lock_free", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a66bd5fda4b71a5291d0193c0f9c49a63", null ],
+    [ "is_lock_free", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#ad00a5f9076ef7ea3fbe698eaf41b0502", null ],
     [ "load", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a20649a71b96b780d8567e7a7657994ed", null ],
     [ "notify_all", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a28e149d06ed20a3492ea643533b2dbd6", null ],
     [ "notify_one", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a89b127ce19c5c41b7e8c1ae39eb7c415", null ],

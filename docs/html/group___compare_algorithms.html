@@ -106,9 +106,9 @@ $(function(){initNavTree('group___compare_algorithms.html','',''); });
 <tr class="memitem:ga682c1803a35a1de8b019d003138ae5dd" id="r_ga682c1803a35a1de8b019d003138ae5dd"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate&gt; </td></tr>
 <tr class="memitem:ga682c1803a35a1de8b019d003138ae5dd template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga682c1803a35a1de8b019d003138ae5dd">equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, BinaryPredicate binary_pred) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(binary_pred(*first1, *first2)))</td></tr>
 <tr class="memdesc:ga682c1803a35a1de8b019d003138ae5dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个范围是否相等  <br /></td></tr>
-<tr class="memitem:ga72e27cb9f8d5b6e71aabcd6a7a2a1c8f" id="r_ga72e27cb9f8d5b6e71aabcd6a7a2a1c8f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
-<tr class="memitem:ga72e27cb9f8d5b6e71aabcd6a7a2a1c8f template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga72e27cb9f8d5b6e71aabcd6a7a2a1c8f">equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2) noexcept(noexcept(_NEFORCE equal(first1, last1, first2, _NEFORCE <a class="el" href="structequal__to.html">equal_to</a>&lt;&gt;())))</td></tr>
-<tr class="memdesc:ga72e27cb9f8d5b6e71aabcd6a7a2a1c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个范围是否相等  <br /></td></tr>
+<tr class="memitem:ga0cf2685901b36aa38db0e921467ada9d" id="r_ga0cf2685901b36aa38db0e921467ada9d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2&gt; </td></tr>
+<tr class="memitem:ga0cf2685901b36aa38db0e921467ada9d template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga0cf2685901b36aa38db0e921467ada9d">equal</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2) noexcept(noexcept(1 equal(first1, last1, first2, 1 <a class="el" href="structequal__to.html">equal_to</a>&lt;&gt;())))</td></tr>
+<tr class="memdesc:ga0cf2685901b36aa38db0e921467ada9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个范围是否相等  <br /></td></tr>
 <tr class="memitem:ga396286e554573557c1781c8b3bae3860" id="r_ga396286e554573557c1781c8b3bae3860"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename T, typename Compare&gt; </td></tr>
 <tr class="memitem:ga396286e554573557c1781c8b3bae3860 template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga396286e554573557c1781c8b3bae3860">equal_range</a> (Iterator first, Iterator last, const T &amp;value, Compare comp)</td></tr>
 <tr class="memdesc:ga396286e554573557c1781c8b3bae3860"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找值的相等范围  <br /></td></tr>
@@ -127,12 +127,12 @@ $(function(){initNavTree('group___compare_algorithms.html','',''); });
 <tr class="memitem:gaf9b881461c8e7da079e090bf6760a6d1" id="r_gaf9b881461c8e7da079e090bf6760a6d1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:gaf9b881461c8e7da079e090bf6760a6d1 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gaf9b881461c8e7da079e090bf6760a6d1">min</a> (const T &amp;a, const T &amp;b) noexcept(noexcept(b&lt; a))</td></tr>
 <tr class="memdesc:gaf9b881461c8e7da079e090bf6760a6d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回两个值中的较小者  <br /></td></tr>
-<tr class="memitem:ga69873b0598cc28f930d89d2930e78f85" id="r_ga69873b0598cc28f930d89d2930e78f85"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
-<tr class="memitem:ga69873b0598cc28f930d89d2930e78f85 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga69873b0598cc28f930d89d2930e78f85">median</a> (const T &amp;a, const T &amp;b, const T &amp;c, Compare comp) noexcept(noexcept(comp(a, b)))</td></tr>
-<tr class="memdesc:ga69873b0598cc28f930d89d2930e78f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回三个值的中位数  <br /></td></tr>
-<tr class="memitem:ga41c01ec448d2ff480831834823e180b0" id="r_ga41c01ec448d2ff480831834823e180b0"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga41c01ec448d2ff480831834823e180b0 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga41c01ec448d2ff480831834823e180b0">median</a> (const T &amp;a, const T &amp;b, const T &amp;c) noexcept(noexcept(a&lt; b))</td></tr>
-<tr class="memdesc:ga41c01ec448d2ff480831834823e180b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回三个值的中位数  <br /></td></tr>
+<tr class="memitem:gae010167b986f808bc3f8bd37fa199040" id="r_gae010167b986f808bc3f8bd37fa199040"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:gae010167b986f808bc3f8bd37fa199040 template"><td class="memItemLeft">constexpr T&#160;</td><td class="memItemRight"><a class="el" href="#gae010167b986f808bc3f8bd37fa199040">median</a> (const T &amp;a, const T &amp;b, const T &amp;c, Compare comp) noexcept(noexcept(comp(a, b)))</td></tr>
+<tr class="memdesc:gae010167b986f808bc3f8bd37fa199040"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回三个值的中位数  <br /></td></tr>
+<tr class="memitem:ga8aee46794e9f8496b1f138664cbaf048" id="r_ga8aee46794e9f8496b1f138664cbaf048"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga8aee46794e9f8496b1f138664cbaf048 template"><td class="memItemLeft">constexpr T&#160;</td><td class="memItemRight"><a class="el" href="#ga8aee46794e9f8496b1f138664cbaf048">median</a> (const T &amp;a, const T &amp;b, const T &amp;c) noexcept(noexcept(a&lt; b))</td></tr>
+<tr class="memdesc:ga8aee46794e9f8496b1f138664cbaf048"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回三个值的中位数  <br /></td></tr>
 <tr class="memitem:gae047220bf13f52d30732510ec976bf5c" id="r_gae047220bf13f52d30732510ec976bf5c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare&gt; </td></tr>
 <tr class="memitem:gae047220bf13f52d30732510ec976bf5c template"><td class="memItemLeft">constexpr Iterator&#160;</td><td class="memItemRight"><a class="el" href="#gae047220bf13f52d30732510ec976bf5c">max_element</a> (Iterator first, Iterator last, Compare comp)</td></tr>
 <tr class="memdesc:gae047220bf13f52d30732510ec976bf5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找范围中的最大元素  <br /></td></tr>
@@ -157,12 +157,12 @@ $(function(){initNavTree('group___compare_algorithms.html','',''); });
 <tr class="memitem:ga4bf98caed4f28cf09092e830792d143a" id="r_ga4bf98caed4f28cf09092e830792d143a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
 <tr class="memitem:ga4bf98caed4f28cf09092e830792d143a template"><td class="memItemLeft">constexpr <a class="el" href="structpair.html">pair</a>&lt; Iterator, Iterator &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga4bf98caed4f28cf09092e830792d143a">minmax_element</a> (Iterator first, Iterator last)</td></tr>
 <tr class="memdesc:ga4bf98caed4f28cf09092e830792d143a"><td class="mdescLeft">&#160;</td><td class="mdescRight">同时查找范围中的最小和最大元素  <br /></td></tr>
-<tr class="memitem:ga6adb4308a8ce2f67f21bf8b2599fa4ad" id="r_ga6adb4308a8ce2f67f21bf8b2599fa4ad"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
-<tr class="memitem:ga6adb4308a8ce2f67f21bf8b2599fa4ad template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ga6adb4308a8ce2f67f21bf8b2599fa4ad">clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper, Compare comp) noexcept(noexcept(comp(value, lower)))</td></tr>
-<tr class="memdesc:ga6adb4308a8ce2f67f21bf8b2599fa4ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">将值限制在指定范围内  <br /></td></tr>
-<tr class="memitem:gaa3f668b9b08117569fd74b8941ef33f8" id="r_gaa3f668b9b08117569fd74b8941ef33f8"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gaa3f668b9b08117569fd74b8941ef33f8 template"><td class="memItemLeft">constexpr const T &amp;&#160;</td><td class="memItemRight"><a class="el" href="#gaa3f668b9b08117569fd74b8941ef33f8">clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper) noexcept(noexcept(lower&lt; upper))</td></tr>
-<tr class="memdesc:gaa3f668b9b08117569fd74b8941ef33f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">将值限制在指定范围内  <br /></td></tr>
+<tr class="memitem:ga5a3267d0bee58dc5e314113452cf2a9e" id="r_ga5a3267d0bee58dc5e314113452cf2a9e"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Compare&gt; </td></tr>
+<tr class="memitem:ga5a3267d0bee58dc5e314113452cf2a9e template"><td class="memItemLeft">constexpr T&#160;</td><td class="memItemRight"><a class="el" href="#ga5a3267d0bee58dc5e314113452cf2a9e">clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper, Compare comp) noexcept(noexcept(comp(value, lower)))</td></tr>
+<tr class="memdesc:ga5a3267d0bee58dc5e314113452cf2a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">将值限制在指定范围内  <br /></td></tr>
+<tr class="memitem:gae335939dbe758563e37614c7c39e54aa" id="r_gae335939dbe758563e37614c7c39e54aa"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gae335939dbe758563e37614c7c39e54aa template"><td class="memItemLeft">constexpr T&#160;</td><td class="memItemRight"><a class="el" href="#gae335939dbe758563e37614c7c39e54aa">clamp</a> (const T &amp;value, const T &amp;lower, const T &amp;upper) noexcept(noexcept(lower&lt; upper))</td></tr>
+<tr class="memdesc:gae335939dbe758563e37614c7c39e54aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">将值限制在指定范围内  <br /></td></tr>
 <tr class="memitem:ga9b8af8f5da11c5b93627d6e5fb30f784" id="r_ga9b8af8f5da11c5b93627d6e5fb30f784"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Compare&gt; </td></tr>
 <tr class="memitem:ga9b8af8f5da11c5b93627d6e5fb30f784 template"><td class="memItemLeft">NEFORCE_NODISCARD constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga9b8af8f5da11c5b93627d6e5fb30f784">lexicographical_compare</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp) noexcept(noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(comp(*first1, *first2)) &amp;&amp;noexcept(first1==last1 &amp;&amp;first2 !=last2))</td></tr>
 <tr class="memdesc:ga9b8af8f5da11c5b93627d6e5fb30f784"><td class="mdescLeft">&#160;</td><td class="mdescRight">字典序比较两个范围  <br /></td></tr>
@@ -179,8 +179,8 @@ $(function(){initNavTree('group___compare_algorithms.html','',''); });
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>比较算法的实现 </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="gaa3f668b9b08117569fd74b8941ef33f8" name="gaa3f668b9b08117569fd74b8941ef33f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa3f668b9b08117569fd74b8941ef33f8">&#9670;&#160;</a></span>clamp() <span class="overload">[1/2]</span></h2>
+<a id="gae335939dbe758563e37614c7c39e54aa" name="gae335939dbe758563e37614c7c39e54aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae335939dbe758563e37614c7c39e54aa">&#9670;&#160;</a></span>clamp() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,7 +191,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const T &amp; clamp </td>
+          <td class="memname">T clamp </td>
           <td>(</td>
           <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
@@ -230,14 +230,14 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>限制后的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00428">428</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00427">427</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00408">clamp()</a>.</p>
 
 </div>
 </div>
-<a id="ga6adb4308a8ce2f67f21bf8b2599fa4ad" name="ga6adb4308a8ce2f67f21bf8b2599fa4ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6adb4308a8ce2f67f21bf8b2599fa4ad">&#9670;&#160;</a></span>clamp() <span class="overload">[2/2]</span></h2>
+<a id="ga5a3267d0bee58dc5e314113452cf2a9e" name="ga5a3267d0bee58dc5e314113452cf2a9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5a3267d0bee58dc5e314113452cf2a9e">&#9670;&#160;</a></span>clamp() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +248,7 @@ template&lt;typename T, typename Compare&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const T &amp; clamp </td>
+          <td class="memname">T clamp </td>
           <td>(</td>
           <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
@@ -302,12 +302,12 @@ template&lt;typename T, typename Compare&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00408">408</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00428">clamp()</a>, <a class="el" href="basic__string_8hpp_source.html#l02105">basic_string&lt; char &gt;::substr()</a> , 以及 <a class="el" href="basic__string__view_8hpp_source.html#l00414">basic_string_view&lt; typename Traits::char_type, Traits &gt;::substr()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00427">clamp()</a>, <a class="el" href="basic__string_8hpp_source.html#l02105">basic_string&lt; char &gt;::substr()</a> , 以及 <a class="el" href="basic__string__view_8hpp_source.html#l00414">basic_string_view&lt; typename Traits::char_type, Traits &gt;::substr()</a>.</p>
 
 </div>
 </div>
-<a id="ga72e27cb9f8d5b6e71aabcd6a7a2a1c8f" name="ga72e27cb9f8d5b6e71aabcd6a7a2a1c8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga72e27cb9f8d5b6e71aabcd6a7a2a1c8f">&#9670;&#160;</a></span>equal() <span class="overload">[1/2]</span></h2>
+<a id="ga0cf2685901b36aa38db0e921467ada9d" name="ga0cf2685901b36aa38db0e921467ada9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0cf2685901b36aa38db0e921467ada9d">&#9670;&#160;</a></span>equal() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -428,7 +428,7 @@ template&lt;typename Iterator1, typename Iterator2, typename BinaryPredicate&gt;
 
 <p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00540">is_ranges_input_iter_v</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00078">equal()</a>, <a class="el" href="array_8hpp_source.html#l00397">array&lt; byte_t, MAC_LEN &gt;::equal_to()</a>, <a class="el" href="bitmap_8hpp_source.html#l01163">bitmap::equal_to()</a>, <a class="el" href="deque_8hpp_source.html#l01426">deque&lt; T, Alloc, BufSize &gt;::equal_to()</a>, <a class="el" href="list_8hpp_source.html#l01060">list&lt; pair&lt; Key, Value &gt; &gt;::equal_to()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01564">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_to()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01208">vector&lt; byte_t &gt;::equal_to()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00078">equal()</a>, <a class="el" href="array_8hpp_source.html#l00397">array&lt; byte_t, MAC_LEN &gt;::equal_to()</a>, <a class="el" href="bitmap_8hpp_source.html#l01160">bitmap::equal_to()</a>, <a class="el" href="deque_8hpp_source.html#l01427">deque&lt; T, Alloc, BufSize &gt;::equal_to()</a>, <a class="el" href="list_8hpp_source.html#l01060">list&lt; pair&lt; Key, Value &gt; &gt;::equal_to()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01573">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_to()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01208">vector&lt; byte_t &gt;::equal_to()</a>.</p>
 
 </div>
 </div>
@@ -617,7 +617,7 @@ template&lt;typename Iterator1, typename Iterator2&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>如果第一个范围字典序小于第二个范围则返回true，否则返回false</dd></dl>
 <p>对连续迭代器进行优化，使用内存比较提高性能。 </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00505">505</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00504">504</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00540">is_ranges_input_iter_v</a>.</p>
 
@@ -693,11 +693,11 @@ template&lt;typename Iterator1, typename Iterator2, typename Compare&gt; </div>
 <li>所有对应元素都相等，但第一个范围较短时返回true </li>
 </ol>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00451">451</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00450">450</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00540">is_ranges_input_iter_v</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="array_8hpp_source.html#l00405">array&lt; byte_t, MAC_LEN &gt;::less_than()</a>, <a class="el" href="bitmap_8hpp_source.html#l01173">bitmap::less_than()</a>, <a class="el" href="deque_8hpp_source.html#l01436">deque&lt; T, Alloc, BufSize &gt;::less_than()</a>, <a class="el" href="hashtable_8hpp_source.html#l01591">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than()</a>, <a class="el" href="list_8hpp_source.html#l01070">list&lt; pair&lt; Key, Value &gt; &gt;::less_than()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01574">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::less_than()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01218">vector&lt; byte_t &gt;::less_than()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="array_8hpp_source.html#l00405">array&lt; byte_t, MAC_LEN &gt;::less_than()</a>, <a class="el" href="bitmap_8hpp_source.html#l01170">bitmap::less_than()</a>, <a class="el" href="deque_8hpp_source.html#l01437">deque&lt; T, Alloc, BufSize &gt;::less_than()</a>, <a class="el" href="hashtable_8hpp_source.html#l01591">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than()</a>, <a class="el" href="list_8hpp_source.html#l01070">list&lt; pair&lt; Key, Value &gt; &gt;::less_than()</a>, <a class="el" href="rb__tree_8hpp_source.html#l01583">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::less_than()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l01218">vector&lt; byte_t &gt;::less_than()</a>.</p>
 
 </div>
 </div>
@@ -808,7 +808,7 @@ template&lt;typename T, typename Compare&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00133">133</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00899">allocate_shared()</a>, <a class="el" href="basic__string_8hpp_source.html#l00779">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="vector_8hpp_source.html#l01026">vector&lt; byte_t &gt;::insert()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l00835">make_shared()</a>, <a class="el" href="compare_8hpp_source.html#l00337">minmax_element()</a>, <a class="el" href="random_8hpp_source.html#l00224">random_lcd::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00210">random_lcd::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00378">random_mt::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00364">random_mt::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00511">secret::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00496">secret::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00135">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00153">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00289">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00307">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00418">secret::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00439">secret::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00176">random_lcd::next_uint64()</a>, <a class="el" href="random_8hpp_source.html#l00330">random_mt::next_uint64()</a>, <a class="el" href="random_8hpp_source.html#l00462">secret::next_uint64()</a>, <a class="el" href="hashtable_8hpp_source.html#l01092">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash()</a>, <a class="el" href="vector_8hpp_source.html#l00775">vector&lt; byte_t &gt;::reserve()</a>, <a class="el" href="reflect_2function_8hpp_source.html#l00096">meta_function::set_arg_hints()</a>, <a class="el" href="http__client_8hpp_source.html#l00204">http_client::set_max_redirects()</a>, <a class="el" href="http__server_8hpp_source.html#l00210">http_server::set_max_sessions()</a>, <a class="el" href="variant_8hpp_source.html#l00571">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::swap()</a> , 以及 <a class="el" href="classsystem__event.html#a88a8392cfe11e8ca599f429e60e4eea7">system_event::wait()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="shared__ptr_8hpp_source.html#l00899">allocate_shared()</a>, <a class="el" href="basic__string_8hpp_source.html#l00779">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="vector_8hpp_source.html#l01026">vector&lt; byte_t &gt;::insert()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l00835">make_shared()</a>, <a class="el" href="compare_8hpp_source.html#l00337">minmax_element()</a>, <a class="el" href="random_8hpp_source.html#l00224">random_lcd::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00210">random_lcd::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00378">random_mt::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00364">random_mt::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00511">secret::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00496">secret::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00135">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00153">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00289">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00307">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00418">secret::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00439">secret::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00176">random_lcd::next_uint64()</a>, <a class="el" href="random_8hpp_source.html#l00330">random_mt::next_uint64()</a>, <a class="el" href="random_8hpp_source.html#l00462">secret::next_uint64()</a>, <a class="el" href="hashtable_8hpp_source.html#l01092">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash()</a>, <a class="el" href="vector_8hpp_source.html#l00775">vector&lt; byte_t &gt;::reserve()</a>, <a class="el" href="reflect_2function_8hpp_source.html#l00096">meta_function::set_arg_hints()</a>, <a class="el" href="http__client_8hpp_source.html#l00205">http_client::set_max_redirects()</a>, <a class="el" href="http__server_8hpp_source.html#l00210">http_server::set_max_sessions()</a>, <a class="el" href="color_8hpp_source.html#l00449">color::set_opacity()</a>, <a class="el" href="variant_8hpp_source.html#l00579">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::swap()</a> , 以及 <a class="el" href="classsystem__event.html#a88a8392cfe11e8ca599f429e60e4eea7">system_event::wait()</a>.</p>
 
 </div>
 </div>
@@ -970,8 +970,8 @@ template&lt;typename Iterator, typename Compare&gt; </div>
 
 </div>
 </div>
-<a id="ga41c01ec448d2ff480831834823e180b0" name="ga41c01ec448d2ff480831834823e180b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga41c01ec448d2ff480831834823e180b0">&#9670;&#160;</a></span>median() <span class="overload">[1/2]</span></h2>
+<a id="ga8aee46794e9f8496b1f138664cbaf048" name="ga8aee46794e9f8496b1f138664cbaf048"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8aee46794e9f8496b1f138664cbaf048">&#9670;&#160;</a></span>median() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -982,7 +982,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const T &amp; median </td>
+          <td class="memname">T median </td>
           <td>(</td>
           <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
         </tr>
@@ -1027,8 +1027,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga69873b0598cc28f930d89d2930e78f85" name="ga69873b0598cc28f930d89d2930e78f85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga69873b0598cc28f930d89d2930e78f85">&#9670;&#160;</a></span>median() <span class="overload">[2/2]</span></h2>
+<a id="gae010167b986f808bc3f8bd37fa199040" name="gae010167b986f808bc3f8bd37fa199040"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae010167b986f808bc3f8bd37fa199040">&#9670;&#160;</a></span>median() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1039,7 +1039,7 @@ template&lt;typename T, typename Compare&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const T &amp; median </td>
+          <td class="memname">T median </td>
           <td>(</td>
           <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
         </tr>
@@ -1199,7 +1199,7 @@ template&lt;typename T, typename Compare&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00163">163</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01647">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01614">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01038">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="char__traits_8hpp_source.html#l00346">char_traits_compare()</a>, <a class="el" href="char__traits_8hpp_source.html#l00726">char_traits_find_last_not_of()</a>, <a class="el" href="char__traits_8hpp_source.html#l00559">char_traits_find_last_of()</a>, <a class="el" href="char__traits_8hpp_source.html#l00427">char_traits_rfind()</a>, <a class="el" href="char__traits_8hpp_source.html#l00457">char_traits_rfind_char()</a>, <a class="el" href="char__traits_8hpp_source.html#l00793">char_traits_rfind_not_char()</a>, <a class="el" href="basic__string_8hpp_source.html#l02242">basic_string&lt; char &gt;::compare_ignore_case()</a>, <a class="el" href="basic__string__view_8hpp_source.html#l00517">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare_ignore_case()</a>, <a class="el" href="basic__string_8hpp_source.html#l02153">basic_string&lt; char &gt;::copy()</a>, <a class="el" href="basic__string_8hpp_source.html#l01956">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01941">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="compare_8hpp_source.html#l00337">minmax_element()</a>, <a class="el" href="random_8hpp_source.html#l00210">random_lcd::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00364">random_mt::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00496">secret::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00153">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00307">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00439">secret::next_int()</a>, <a class="el" href="sort_8hpp_source.html#l00337">select_sort()</a>, <a class="el" href="reflect_2function_8hpp_source.html#l00096">meta_function::set_arg_hints()</a>, <a class="el" href="basic__string_8hpp_source.html#l02105">basic_string&lt; char &gt;::substr()</a>, <a class="el" href="sort_8hpp_source.html#l00833">tim_sort()</a>, <a class="el" href="basic__string_8hpp_source.html#l02140">basic_string&lt; char &gt;::view()</a>, <a class="el" href="vector_8hpp_source.html#l00727">vector&lt; byte_t &gt;::view()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00718">vector&lt; byte_t &gt;::view()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="basic__string_8hpp_source.html#l01647">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01614">basic_string&lt; char &gt;::append()</a>, <a class="el" href="basic__string_8hpp_source.html#l01038">basic_string&lt; char &gt;::basic_string()</a>, <a class="el" href="char__traits_8hpp_source.html#l00347">char_traits_compare()</a>, <a class="el" href="char__traits_8hpp_source.html#l00727">char_traits_find_last_not_of()</a>, <a class="el" href="char__traits_8hpp_source.html#l00560">char_traits_find_last_of()</a>, <a class="el" href="char__traits_8hpp_source.html#l00428">char_traits_rfind()</a>, <a class="el" href="char__traits_8hpp_source.html#l00458">char_traits_rfind_char()</a>, <a class="el" href="char__traits_8hpp_source.html#l00794">char_traits_rfind_not_char()</a>, <a class="el" href="basic__string_8hpp_source.html#l02242">basic_string&lt; char &gt;::compare_ignore_case()</a>, <a class="el" href="basic__string__view_8hpp_source.html#l00517">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare_ignore_case()</a>, <a class="el" href="basic__string_8hpp_source.html#l02153">basic_string&lt; char &gt;::copy()</a>, <a class="el" href="basic__string_8hpp_source.html#l01956">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="basic__string_8hpp_source.html#l01941">basic_string&lt; char &gt;::erase()</a>, <a class="el" href="compare_8hpp_source.html#l00337">minmax_element()</a>, <a class="el" href="random_8hpp_source.html#l00210">random_lcd::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00364">random_mt::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00496">secret::next_float()</a>, <a class="el" href="random_8hpp_source.html#l00153">random_lcd::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00307">random_mt::next_int()</a>, <a class="el" href="random_8hpp_source.html#l00439">secret::next_int()</a>, <a class="el" href="sort_8hpp_source.html#l00337">select_sort()</a>, <a class="el" href="reflect_2function_8hpp_source.html#l00096">meta_function::set_arg_hints()</a>, <a class="el" href="color_8hpp_source.html#l00449">color::set_opacity()</a>, <a class="el" href="basic__string_8hpp_source.html#l02105">basic_string&lt; char &gt;::substr()</a>, <a class="el" href="sort_8hpp_source.html#l00833">tim_sort()</a>, <a class="el" href="basic__string_8hpp_source.html#l02140">basic_string&lt; char &gt;::view()</a>, <a class="el" href="vector_8hpp_source.html#l00727">vector&lt; byte_t &gt;::view()</a> , 以及 <a class="el" href="vector_8hpp_source.html#l00718">vector&lt; byte_t &gt;::view()</a>.</p>
 
 </div>
 </div>
@@ -1525,9 +1525,9 @@ template&lt;typename Iterator1, typename Iterator2&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>pair&lt;第一个范围中不匹配的位置, 第二个范围中对应的位置&gt; </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00549">549</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00548">548</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00529">mismatch()</a>.</p>
+<p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00528">mismatch()</a>.</p>
 
 </div>
 </div>
@@ -1591,11 +1591,11 @@ template&lt;typename Iterator1, typename Iterator2, typename Compare&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>pair&lt;第一个范围中不匹配的位置, 第二个范围中对应的位置&gt;</dd></dl>
 <p>比较范围 [first1, last1) 和以 first2 开始的范围， 返回第一个不满足 comp(*it1, *it2) 的位置。 如果所有对应元素都满足谓词，返回 pair&lt;last1, first2 + (last1 - first1)&gt; </p>
 
-<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00529">529</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="compare_8hpp_source.html">compare.hpp</a> 第 <a class="el" href="compare_8hpp_source.html#l00528">528</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="concepts_8hpp_source.html#l00540">is_ranges_input_iter_v</a> , 以及 <a class="el" href="pair_8hpp_source.html#l00474">make_pair()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00549">mismatch()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="compare_8hpp_source.html#l00548">mismatch()</a>.</p>
 
 </div>
 </div>

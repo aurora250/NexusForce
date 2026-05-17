@@ -4,6 +4,7 @@
     <compoundname>aligned_buffer.hpp</compoundname>
     <includes refid="type__traits_8hpp" local="yes">NeForce/core/typeinfo/type_traits.hpp</includes>
     <includedby refid="future_8hpp" local="yes">future.hpp</includedby>
+    <includedby refid="virtual__thread_8hpp" local="yes">virtual_thread.hpp</includedby>
     <incdepgraph>
       <node id="4">
         <label>NeForce/core/config/c++config.hpp</label>
@@ -30,7 +31,7 @@
         </childnode>
       </node>
       <node id="5">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -59,6 +60,8 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
       </node>
       <node id="9">
         <label>promise.hpp</label>
@@ -74,10 +77,24 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
+      <node id="15">
+        <label>timer.hpp</label>
+        <link refid="timer_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>virtual_thread.hpp</label>
+        <link refid="virtual__thread_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>aligned_buffer.hpp</label>
         <link refid="aligned__buffer_8hpp"/>
         <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -153,7 +170,7 @@
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
 <codeline lineno="56" refid="structaligned__buffer_1a494d346aa1b135e5fe3a46e535ad8877" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="structaligned__buffer_1a494d346aa1b135e5fe3a46e535ad8877" kindref="member">addr</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(&amp;<ref refid="structaligned__buffer_1a11fe9f35ed332d433dd01208e0bb2f51" kindref="member">storage</ref>);<sp/>}</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="62" refid="structaligned__buffer_1a1538125b6653047828fdf2742ea8eb2e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="structaligned__buffer_1a1538125b6653047828fdf2742ea8eb2e" kindref="member">addr</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(&amp;<ref refid="structaligned__buffer_1a11fe9f35ed332d433dd01208e0bb2f51" kindref="member">storage</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="62" refid="structaligned__buffer_1a846e7fc77f94572977134cf4ae2c4916" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="structaligned__buffer_1a846e7fc77f94572977134cf4ae2c4916" kindref="member">addr</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(&amp;<ref refid="structaligned__buffer_1a11fe9f35ed332d433dd01208e0bb2f51" kindref="member">storage</ref>);<sp/>}</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
 <codeline lineno="70" refid="structaligned__buffer_1afd9256f6fcebef2484ba3e269526b26b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>T*<sp/><ref refid="structaligned__buffer_1afd9256f6fcebef2484ba3e269526b26b" kindref="member">ptr</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="structaligned__buffer_1a494d346aa1b135e5fe3a46e535ad8877" kindref="member">addr</ref>());<sp/>}</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
@@ -164,6 +181,6 @@
 <codeline lineno="81"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_MEMORY_ALIGNED_BUFFER_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp"/>
   </compounddef>
 </doxygen>

@@ -94,7 +94,7 @@ var searchData=
   ['view_5fbase_3c_20take_5fwhile_5fview_3c_20v_2c_20pred_20_3e_20_3e_91',['view_base&lt; take_while_view&lt; V, Pred &gt; &gt;',['../structview__base.html',1,'']]],
   ['view_5fbase_3c_20transform_5fview_3c_20v_2c_20func_20_3e_20_3e_92',['view_base&lt; transform_view&lt; V, Func &gt; &gt;',['../structview__base.html',1,'']]],
   ['virtual_5fthread_93',['virtual_thread',['../classvirtual__thread.html',1,'']]],
-  ['virtual_5fthread_5fawaiter_94',['virtual_thread_awaiter',['../structvirtual__thread__awaiter.html',1,'']]],
-  ['virtual_5fthread_5fscheduler_95',['virtual_thread_scheduler',['../classvirtual__thread__scheduler.html',1,'']]],
-  ['virtual_5fthread_5ftask_96',['virtual_thread_task',['../structvirtual__thread__task.html',1,'']]]
+  ['virtual_5fthread_5fscheduler_94',['virtual_thread_scheduler',['../classvirtual__thread__scheduler.html',1,'']]],
+  ['virtual_5fthread_5ftask_95',['virtual_thread_task',['../structvirtual__thread__task.html',1,'']]],
+  ['virtual_5fthread_5ftask_3c_20void_20_3e_96',['virtual_thread_task&lt; void &gt;',['../structvirtual__thread__task_3_01void_01_4.html',1,'']]]
 ];

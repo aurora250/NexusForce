@@ -128,13 +128,13 @@ $(function(){initNavTree('group___exception_handling.html','',''); });
 <tr class="memdesc:ga28496880d7de221739d7afa46a69059d"><td class="mdescLeft">&#160;</td><td class="mdescRight">未捕获的异常数量  <br /></td></tr>
 <tr class="memitem:gafcaf017f48e0577f063b54671e2a06ec" id="r_gafcaf017f48e0577f063b54671e2a06ec"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#gafcaf017f48e0577f063b54671e2a06ec">throw_with_stack</a> (const <a class="el" href="structexception.html">exception</a> &amp;err)</td></tr>
 <tr class="memdesc:gafcaf017f48e0577f063b54671e2a06ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">抛出异常并打印堆栈信息  <br /></td></tr>
+<tr class="memitem:ga947504bd2926f427cb1e964fada47745" id="r_ga947504bd2926f427cb1e964fada47745"><td class="memItemLeft">NEFORCE_NORETURN void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga947504bd2926f427cb1e964fada47745">rethrow_exception</a> (const <a class="el" href="classexception__ptr.html">exception_ptr</a> &amp;p)</td></tr>
+<tr class="memdesc:ga947504bd2926f427cb1e964fada47745"><td class="mdescLeft">&#160;</td><td class="mdescRight">重新抛出异常  <br /></td></tr>
 <tr class="memitem:gac43ce5d8fc82090c24f3088e37cc2d89" id="r_gac43ce5d8fc82090c24f3088e37cc2d89"><td class="memTemplParams" colspan="2">template&lt;typename Ex&gt; </td></tr>
 <tr class="memitem:gac43ce5d8fc82090c24f3088e37cc2d89 template"><td class="memItemLeft"><a class="el" href="classexception__ptr.html">exception_ptr</a>&#160;</td><td class="memItemRight"><a class="el" href="#gac43ce5d8fc82090c24f3088e37cc2d89">make_exception_ptr</a> (Ex ex)</td></tr>
 <tr class="memdesc:gac43ce5d8fc82090c24f3088e37cc2d89"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建异常指针  <br /></td></tr>
 <tr class="memitem:gae2436c911c2e23511a3012d0ddc2a419" id="r_gae2436c911c2e23511a3012d0ddc2a419"><td class="memItemLeft"><a class="el" href="classexception__ptr.html">exception_ptr</a> NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#gae2436c911c2e23511a3012d0ddc2a419">current_exception</a> ()</td></tr>
 <tr class="memdesc:gae2436c911c2e23511a3012d0ddc2a419"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前异常  <br /></td></tr>
-<tr class="memitem:ga12342507bc5abdc903c22fabac839d32" id="r_ga12342507bc5abdc903c22fabac839d32"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga12342507bc5abdc903c22fabac839d32">rethrow_exception</a> (const <a class="el" href="classexception__ptr.html">exception_ptr</a> &amp;p)</td></tr>
-<tr class="memdesc:ga12342507bc5abdc903c22fabac839d32"><td class="mdescLeft">&#160;</td><td class="mdescRight">重新抛出异常  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>异常处理类与工具 </p>
@@ -256,7 +256,7 @@ $(function(){initNavTree('group___exception_handling.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>当前异常的异常指针</dd></dl>
 <p>捕获当前异常并创建异常指针。 如果当前没有异常被捕获，返回空的异常指针。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00863">retry()</a>, <a class="el" href="generator_8hpp_source.html#l00204">generator&lt; T &gt;::promise_type::unhandled_exception()</a>, <a class="el" href="generator_8hpp_source.html#l00548">task&lt; T &gt;::promise_type::unhandled_exception()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00073">virtual_thread_task::promise_type::unhandled_exception()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00232">generator&lt; T &gt;::promise_type::unhandled_exception()</a>, <a class="el" href="generator_8hpp_source.html#l00602">task&lt; T &gt;::promise_type::unhandled_exception()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00628">virtual_thread_task&lt; T &gt;::promise_type::unhandled_exception()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00351">virtual_thread_task&lt; void &gt;::promise_type::unhandled_exception()</a>.</p>
 
 </div>
 </div>
@@ -301,18 +301,18 @@ template&lt;typename Ex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>异常指针</dd></dl>
 <p>创建引用指定异常的异常指针。 如果内存分配失败，返回空的异常指针。 </p>
 
-<p class="definition">在文件 <a class="el" href="exception__ptr_8hpp_source.html">exception_ptr.hpp</a> 第 <a class="el" href="exception__ptr_8hpp_source.html#l00314">314</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="exception__ptr_8hpp_source.html">exception_ptr.hpp</a> 第 <a class="el" href="exception__ptr_8hpp_source.html#l00325">325</a> 行定义.</p>
 
 </div>
 </div>
-<a id="ga12342507bc5abdc903c22fabac839d32" name="ga12342507bc5abdc903c22fabac839d32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga12342507bc5abdc903c22fabac839d32">&#9670;&#160;</a></span>rethrow_exception()</h2>
+<a id="ga947504bd2926f427cb1e964fada47745" name="ga947504bd2926f427cb1e964fada47745"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga947504bd2926f427cb1e964fada47745">&#9670;&#160;</a></span>rethrow_exception()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void NEFORCE_API rethrow_exception </td>
+          <td class="memname">NEFORCE_NORETURN void NEFORCE_API rethrow_exception </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classexception__ptr.html">exception_ptr</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
           <td></td>
@@ -330,9 +330,7 @@ template&lt;typename Ex&gt; </div>
 <p>重新抛出异常指针引用的异常。</p>
 <dl class="section note"><dt>注解</dt><dd>如果异常指针为空，进程将被终止。 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="#ga12342507bc5abdc903c22fabac839d32">rethrow_exception()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00578">task&lt; T &gt;::awaiter::await_resume()</a>, <a class="el" href="generator_8hpp_source.html#l00334">generator&lt; T &gt;::begin()</a>, <a class="el" href="generator_8hpp_source.html#l00662">task&lt; T &gt;::get()</a>, <a class="el" href="#ga12342507bc5abdc903c22fabac839d32">rethrow_exception()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00863">retry()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="generator_8hpp_source.html#l00632">task&lt; T &gt;::awaiter::await_resume()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00731">virtual_thread_task&lt; T &gt;::await_resume()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00458">virtual_thread_task&lt; void &gt;::await_resume()</a>, <a class="el" href="generator_8hpp_source.html#l00362">generator&lt; T &gt;::begin()</a>, <a class="el" href="generator_8hpp_source.html#l00716">task&lt; T &gt;::get()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00744">virtual_thread_task&lt; T &gt;::get_result()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00470">virtual_thread_task&lt; void &gt;::get_result()</a>.</p>
 
 </div>
 </div>
@@ -394,7 +392,7 @@ template&lt;typename Ex&gt; </div>
 
 <p class="reference">引用了 <a class="el" href="#ga28496880d7de221739d7afa46a69059d">uncaught_exceptions()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="scope_8hpp_source.html#l00145">scope_fail&lt; Func &gt;::scope_fail()</a>, <a class="el" href="scope_8hpp_source.html#l00226">scope_success&lt; Func &gt;::scope_success()</a>, <a class="el" href="#ga28496880d7de221739d7afa46a69059d">uncaught_exceptions()</a>, <a class="el" href="scope_8hpp_source.html#l00182">scope_fail&lt; Func &gt;::~scope_fail()</a> , 以及 <a class="el" href="scope_8hpp_source.html#l00263">scope_success&lt; Func &gt;::~scope_success()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="scope_8hpp_source.html#l00146">scope_fail&lt; Func &gt;::scope_fail()</a>, <a class="el" href="scope_8hpp_source.html#l00227">scope_success&lt; Func &gt;::scope_success()</a>, <a class="el" href="#ga28496880d7de221739d7afa46a69059d">uncaught_exceptions()</a>, <a class="el" href="scope_8hpp_source.html#l00183">scope_fail&lt; Func &gt;::~scope_fail()</a> , 以及 <a class="el" href="scope_8hpp_source.html#l00264">scope_success&lt; Func &gt;::~scope_success()</a>.</p>
 
 </div>
 </div>

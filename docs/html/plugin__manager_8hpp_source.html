@@ -109,10 +109,10 @@ $(function(){initNavTree('plugin__manager_8hpp_source.html','',''); });
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classplugin__manager.html#a0814c10a16076c9d160da50950074b6a">   33</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classplugin__manager.html#a0814c10a16076c9d160da50950074b6a">library_ptr</a> = <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;dynamic_library&gt;</a>; </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classmutex.html">mutex</a> mutex_{};                             </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, plugin_ptr&gt;</a> plugins_{};       </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    unordered_map&lt;string, library_ptr&gt; libraries_{};    </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    unordered_map&lt;string, string&gt; plugin_to_library_{}; </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classmutex.html">mutex</a> mutex_;                             </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, plugin_ptr&gt;</a> plugins_;       </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, library_ptr&gt;</a> libraries_;    </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, string&gt;</a> plugin_to_library_; </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    plugin_manager() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>

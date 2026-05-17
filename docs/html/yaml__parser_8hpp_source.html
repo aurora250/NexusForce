@@ -103,7 +103,7 @@ $(function(){initNavTree('yaml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span></div>
 <div class="foldopen" id="foldopen00115" data-start="{" data-end="};">
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classyaml__parser.html">  115</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classyaml__parser.html#acee797fe1f234bcdf2d47e5d3b42bea1">yaml_parser</a> {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classyaml__parser.html">  115</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classyaml__parser.html#a6fe8568235c9a4613088601221d063c2">yaml_parser</a> {</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">struct </span>indent_context {</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordtype">size_t</span> level;            </div>
@@ -126,11 +126,11 @@ $(function(){initNavTree('yaml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, shared_ptr&lt;yaml_value&gt;</a>&gt; anchors_; </div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span></div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordtype">char</span> current() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    NEFORCE_NODISCARD <span class="keywordtype">char</span> current() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordtype">char</span> peek(<span class="keywordtype">size_t</span> offset = 1) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    NEFORCE_NODISCARD <span class="keywordtype">char</span> peek(<span class="keywordtype">size_t</span> offset = 1) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span></div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">bool</span> eof() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> eof() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span></div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="group___iterator_operation.html#ga0ebe1ee99151c272bdedc1a48d148aa2">advance</a>() <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span></div>
@@ -148,11 +148,11 @@ $(function(){initNavTree('yaml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span></div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="keywordtype">void</span> skip_whitespace_and_comments();</div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span></div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordtype">bool</span> is_whitespace(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_whitespace(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span></div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordtype">bool</span> is_newline(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_newline(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span></div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="keywordtype">size_t</span> peek_indent() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> peek_indent() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span></div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <span class="keywordtype">size_t</span> skip_indent();</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span></div>
@@ -170,9 +170,9 @@ $(function(){initNavTree('yaml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span></div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <span class="keywordtype">string</span> parse_tag();</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span></div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keywordtype">bool</span> has_anchor() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> has_anchor() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span></div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keywordtype">bool</span> has_alias() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> has_alias() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span></div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;yaml_string&gt;</a> parse_plain_string();</div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span></div>
@@ -194,7 +194,7 @@ $(function(){initNavTree('yaml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span></div>
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;yaml_null&gt;</a> parse_null();</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span></div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;yaml_timestamp&gt;</a> parse_timestamp(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> str) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    NEFORCE_NODISCARD <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;yaml_timestamp&gt;</a> parse_timestamp(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> str) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span></div>
 <div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;yaml_sequence&gt;</a> parse_flow_sequence();</div>
 <div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span></div>
@@ -222,29 +222,29 @@ $(function(){initNavTree('yaml__parser_8hpp_source.html','',''); });
 <div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span></div>
 <div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span>    <span class="keywordtype">void</span> parse_document_end();</div>
 <div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span></div>
-<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>    <span class="keywordtype">bool</span> is_document_start() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_document_start() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span></div>
-<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>    <span class="keywordtype">bool</span> is_document_end() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_document_end() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span></div>
-<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>    <span class="keywordtype">bool</span> is_plain_safe(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_plain_safe(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span></div>
-<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>    <span class="keywordtype">bool</span> is_key_char(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_key_char(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span></div>
-<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>    <span class="keywordtype">bool</span> is_indicator(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_indicator(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span></div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>    <span class="keywordtype">bool</span> is_flow_indicator(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> is_flow_indicator(<span class="keywordtype">char</span> ch) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
 <div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span></div>
 <div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>    <span class="keywordtype">char32_t</span> parse_unicode_escape(<span class="keywordtype">size_t</span> digits);</div>
 <div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span></div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    <span class="keywordtype">string</span> unescape_string(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> unescape_string(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span></div>
 <div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>    NEFORCE_NORETURN <span class="keywordtype">void</span> throw_parse_error(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; message) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span> </div>
 <div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span><span class="keyword">public</span>:</div>
 <div class="foldopen" id="foldopen00563" data-start="{" data-end="}">
-<div class="line"><a id="l00563" name="l00563"></a><span class="lineno"><a class="line" href="classyaml__parser.html#acee797fe1f234bcdf2d47e5d3b42bea1">  563</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classyaml__parser.html#acee797fe1f234bcdf2d47e5d3b42bea1">yaml_parser</a>(<span class="keywordtype">string</span> yaml_str) noexcept :</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno"><a class="line" href="classyaml__parser.html#a6fe8568235c9a4613088601221d063c2">  563</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classyaml__parser.html#a6fe8568235c9a4613088601221d063c2">yaml_parser</a>(<span class="keywordtype">string</span> yaml_str) :</div>
 <div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    yaml_(<a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(yaml_str)),</div>
-<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>    len_(yaml_.size()) {}</div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>    len_(yaml_.<a class="code hl_function" href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a>()) {}</div>
 </div>
 <div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span></div>
 <div class="line"><a id="l00577" name="l00577"></a><span class="lineno"><a class="line" href="classyaml__parser.html#a4c36293a1a80f5e9e7328f58014fbcdf">  577</a></span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;yaml_value&gt;</a> <a class="code hl_function" href="classyaml__parser.html#a4c36293a1a80f5e9e7328f58014fbcdf">parse</a>();</div>
@@ -265,16 +265,17 @@ $(function(){initNavTree('yaml__parser_8hpp_source.html','',''); });
 <div class="ttc" id="aclassshared__ptr_html"><div class="ttname"><a href="classshared__ptr.html">shared_ptr</a></div><div class="ttdoc">共享智能指针类模板</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00270">shared_ptr.hpp:270</a></div></div>
 <div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
 <div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
-<div class="ttc" id="aclassyaml__mapping_html"><div class="ttname"><a href="classyaml__mapping.html">yaml_mapping</a></div><div class="ttdoc">YAML映射值类型（字典/对象）</div><div class="ttdef"><b>定义</b> <a href="yaml__value_8hpp_source.html#l00632">yaml_value.hpp:632</a></div></div>
+<div class="ttc" id="aclassyaml__mapping_html"><div class="ttname"><a href="classyaml__mapping.html">yaml_mapping</a></div><div class="ttdoc">YAML映射值类型（字典/对象）</div><div class="ttdef"><b>定义</b> <a href="yaml__value_8hpp_source.html#l00683">yaml_value.hpp:683</a></div></div>
 <div class="ttc" id="aclassyaml__parser_html_a4c36293a1a80f5e9e7328f58014fbcdf"><div class="ttname"><a href="classyaml__parser.html#a4c36293a1a80f5e9e7328f58014fbcdf">yaml_parser::parse</a></div><div class="ttdeci">shared_ptr&lt; yaml_value &gt; parse()</div><div class="ttdoc">解析YAML文档</div></div>
+<div class="ttc" id="aclassyaml__parser_html_a6fe8568235c9a4613088601221d063c2"><div class="ttname"><a href="classyaml__parser.html#a6fe8568235c9a4613088601221d063c2">yaml_parser::yaml_parser</a></div><div class="ttdeci">yaml_parser(string yaml_str)</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00563">yaml_parser.hpp:563</a></div></div>
 <div class="ttc" id="aclassyaml__parser_html_a7df186b3114b32c8ee729f36d6a2056c"><div class="ttname"><a href="classyaml__parser.html#a7df186b3114b32c8ee729f36d6a2056c">yaml_parser::parse_documents</a></div><div class="ttdeci">vector&lt; shared_ptr&lt; yaml_value &gt; &gt; parse_documents()</div><div class="ttdoc">解析多个YAML文档</div></div>
 <div class="ttc" id="aclassyaml__parser_html_a80a4dc635d07ecbf256e37431ab00b2d"><div class="ttname"><a href="classyaml__parser.html#a80a4dc635d07ecbf256e37431ab00b2d">yaml_parser::try_parse</a></div><div class="ttdeci">optional&lt; shared_ptr&lt; yaml_value &gt; &gt; try_parse()</div><div class="ttdoc">尝试解析YAML文档（不抛出异常）</div></div>
-<div class="ttc" id="aclassyaml__parser_html_acee797fe1f234bcdf2d47e5d3b42bea1"><div class="ttname"><a href="classyaml__parser.html#acee797fe1f234bcdf2d47e5d3b42bea1">yaml_parser::yaml_parser</a></div><div class="ttdeci">yaml_parser(string yaml_str) noexcept</div><div class="ttdoc">构造函数</div><div class="ttdef"><b>定义</b> <a href="#l00563">yaml_parser.hpp:563</a></div></div>
 <div class="ttc" id="aclassyaml__parser_html_ae7b45f67a76022fcc5525a61bd520569"><div class="ttname"><a href="classyaml__parser.html#ae7b45f67a76022fcc5525a61bd520569">yaml_parser::try_parse_documents</a></div><div class="ttdeci">optional&lt; vector&lt; shared_ptr&lt; yaml_value &gt; &gt; &gt; try_parse_documents()</div><div class="ttdoc">尝试解析多个YAML文档（不抛出异常）</div></div>
-<div class="ttc" id="aclassyaml__sequence_html"><div class="ttname"><a href="classyaml__sequence.html">yaml_sequence</a></div><div class="ttdoc">YAML序列值类型（数组）</div><div class="ttdef"><b>定义</b> <a href="yaml__value_8hpp_source.html#l00532">yaml_value.hpp:532</a></div></div>
+<div class="ttc" id="aclassyaml__sequence_html"><div class="ttname"><a href="classyaml__sequence.html">yaml_sequence</a></div><div class="ttdoc">YAML序列值类型（数组）</div><div class="ttdef"><b>定义</b> <a href="yaml__value_8hpp_source.html#l00581">yaml_value.hpp:581</a></div></div>
 <div class="ttc" id="agroup___iterator_operation_html_ga0ebe1ee99151c272bdedc1a48d148aa2"><div class="ttname"><a href="group___iterator_operation.html#ga0ebe1ee99151c272bdedc1a48d148aa2">advance</a></div><div class="ttdeci">constexpr void advance(Iterator &amp;i, Distance n)</div><div class="ttdoc">将迭代器前进指定距离</div><div class="ttdef"><b>定义</b> <a href="iterator_8hpp_source.html#l00106">iterator.hpp:106</a></div></div>
 <div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
 <div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00022">string_view.hpp:22</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga72e7469b7b31643579897a98a59f44ba"><div class="ttname"><a href="group___type_erasure_functions.html#ga72e7469b7b31643579897a98a59f44ba">size</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00292">type_erase.hpp:292</a></div></div>
 <div class="ttc" id="aoptional_8hpp_html"><div class="ttname"><a href="optional_8hpp.html">optional.hpp</a></div><div class="ttdoc">可选值类型</div></div>
 <div class="ttc" id="ayaml__value_8hpp_html"><div class="ttname"><a href="yaml__value_8hpp.html">yaml_value.hpp</a></div><div class="ttdoc">YAML配置格式变量</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -110,10 +110,10 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:af4d602957128b5cd5e8f0edb30c48c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">出队操作  <br /></td></tr>
 <tr class="memitem:a24c20d863075bbbcedc192df5625d1e3" id="r_a24c20d863075bbbcedc192df5625d1e3"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a24c20d863075bbbcedc192df5625d1e3">try_pop</a> ()</td></tr>
 <tr class="memdesc:a24c20d863075bbbcedc192df5625d1e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试出队操作  <br /></td></tr>
-<tr class="memitem:a0407046c06b078c73f0972f7e2afb548" id="r_a0407046c06b078c73f0972f7e2afb548"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a0407046c06b078c73f0972f7e2afb548">empty</a> () const noexcept</td></tr>
-<tr class="memdesc:a0407046c06b078c73f0972f7e2afb548"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查队列是否为空  <br /></td></tr>
-<tr class="memitem:aea52e2c7aa4d45917f8160f3d21eb54c" id="r_aea52e2c7aa4d45917f8160f3d21eb54c"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aea52e2c7aa4d45917f8160f3d21eb54c">size</a> () const noexcept</td></tr>
-<tr class="memdesc:aea52e2c7aa4d45917f8160f3d21eb54c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取队列中元素的近似数量  <br /></td></tr>
+<tr class="memitem:aa8e4252cc436d8f097df0d76e91fc9e6" id="r_aa8e4252cc436d8f097df0d76e91fc9e6"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#aa8e4252cc436d8f097df0d76e91fc9e6">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:aa8e4252cc436d8f097df0d76e91fc9e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查队列是否为空  <br /></td></tr>
+<tr class="memitem:a51f66096803f60cfc855ee5b8991d770" id="r_a51f66096803f60cfc855ee5b8991d770"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a51f66096803f60cfc855ee5b8991d770">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a51f66096803f60cfc855ee5b8991d770"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取队列中元素的近似数量  <br /></td></tr>
 <tr class="memitem:aea072bf54bf6f6418b30f57209a844bc" id="r_aea072bf54bf6f6418b30f57209a844bc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aea072bf54bf6f6418b30f57209a844bc">clear</a> ()</td></tr>
 <tr class="memdesc:aea072bf54bf6f6418b30f57209a844bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空队列  <br /></td></tr>
 </table>
@@ -234,8 +234,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a0407046c06b078c73f0972f7e2afb548" name="a0407046c06b078c73f0972f7e2afb548"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0407046c06b078c73f0972f7e2afb548">&#9670;&#160;</a></span>empty()</h2>
+<a id="aa8e4252cc436d8f097df0d76e91fc9e6" name="aa8e4252cc436d8f097df0d76e91fc9e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8e4252cc436d8f097df0d76e91fc9e6">&#9670;&#160;</a></span>empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -246,7 +246,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classlock__free__queue.html">lock_free_queue</a>&lt; T &gt;::empty </td>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="classlock__free__queue.html">lock_free_queue</a>&lt; T &gt;::empty </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -300,7 +300,7 @@ template&lt;typename T&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00261">261</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00147">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00130">atomic&lt; T &gt;::load()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00151">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00134">atomic&lt; T &gt;::load()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00355">clear()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00208">~lock_free_queue()</a>.</p>
 
@@ -342,12 +342,12 @@ template&lt;typename T&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00223">223</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00207">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00320">unique_ptr&lt; T, Deleter &gt;::get()</a>, <a class="el" href="atomic_8hpp_source.html#l00130">atomic&lt; T &gt;::load()</a>, <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00351">unique_ptr&lt; T, Deleter &gt;::release()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00211">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00320">unique_ptr&lt; T, Deleter &gt;::get()</a>, <a class="el" href="atomic_8hpp_source.html#l00134">atomic&lt; T &gt;::load()</a>, <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00351">unique_ptr&lt; T, Deleter &gt;::release()</a>.</p>
 
 </div>
 </div>
-<a id="aea52e2c7aa4d45917f8160f3d21eb54c" name="aea52e2c7aa4d45917f8160f3d21eb54c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea52e2c7aa4d45917f8160f3d21eb54c">&#9670;&#160;</a></span>size()</h2>
+<a id="a51f66096803f60cfc855ee5b8991d770" name="a51f66096803f60cfc855ee5b8991d770"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51f66096803f60cfc855ee5b8991d770">&#9670;&#160;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -358,7 +358,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="classlock__free__queue.html">lock_free_queue</a>&lt; T &gt;::size </td>
+          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="classlock__free__queue.html">lock_free_queue</a>&lt; T &gt;::size </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -413,7 +413,7 @@ template&lt;typename T&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00290">290</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00147">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00130">atomic&lt; T &gt;::load()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00863">retry()</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00151">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00134">atomic&lt; T &gt;::load()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00897">retry()</a>.</p>
 
 </div>
 </div>

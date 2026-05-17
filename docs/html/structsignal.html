@@ -156,7 +156,7 @@ struct signal&lt; Types &gt;</div><p>信号类 </p>
 </dl>
 <p>多播委托实现。 </p>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00240">240</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00241">241</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a526f637559cfd27c44a0ea266ece0c61" name="a526f637559cfd27c44a0ea266ece0c61"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a526f637559cfd27c44a0ea266ece0c61">&#9670;&#160;</a></span>block_flag()</h2>
@@ -237,7 +237,7 @@ template&lt;typename Func&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>连接句柄 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00444">444</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00446">446</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
 
@@ -304,7 +304,7 @@ template&lt;typename Self, typename MemFn, typename... Tag&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>连接句柄 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00462">462</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00464">464</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
 
@@ -365,11 +365,11 @@ template&lt;typename Self, typename MemFn, typename... Tag&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>连接句柄 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00432">432</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00434">434</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00432">connect()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00434">connect()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00432">connect()</a>, <a class="el" href="signals_8hpp_source.html#l00659">connect_filtered()</a>, <a class="el" href="signals_8hpp_source.html#l00602">connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00630">connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00562">connect_signal()</a>, <a class="el" href="signals_8hpp_source.html#l00579">connect_signal()</a> , 以及 <a class="el" href="signals_8hpp_source.html#l00690">connect_transformed()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00434">connect()</a>, <a class="el" href="signals_8hpp_source.html#l00661">connect_filtered()</a>, <a class="el" href="signals_8hpp_source.html#l00604">connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00632">connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00564">connect_signal()</a>, <a class="el" href="signals_8hpp_source.html#l00581">connect_signal()</a> , 以及 <a class="el" href="signals_8hpp_source.html#l00690">connect_transformed()</a>.</p>
 
 </div>
 </div>
@@ -413,7 +413,7 @@ template&lt;typename Func, typename Filter&gt; </div>
 <dl class="tparams"><dt>模板参数</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Func</td><td>回调函数类型 </td></tr>
-    <tr><td class="paramname">Filter</td><td>过滤器类型 </td></tr>
+    <tr><td class="paramname">Filter</td><td>过滤器类型，返回值必须为 optional </td></tr>
   </table>
   </dd>
 </dl>
@@ -428,9 +428,9 @@ template&lt;typename Func, typename Filter&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>连接句柄</dd></dl>
 <p>过滤器可以修改或抑制参数。 </p>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00659">659</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00661">661</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00432">connect()</a>, <a class="el" href="signals_8hpp_source.html#l00032">keep</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
+<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00434">connect()</a>, <a class="el" href="signals_8hpp_source.html#l00033">keep</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
 
 </div>
 </div>
@@ -489,9 +489,9 @@ template&lt;typename Func, typename Predicate&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>连接句柄</dd></dl>
 <p>仅当谓词返回true时才调用回调。 </p>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00602">602</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00604">604</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00432">connect()</a>, <a class="el" href="type__traits_8hpp_source.html#l00847">is_boolean_v</a>, <a class="el" href="signals_8hpp_source.html#l00032">keep</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
+<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00434">connect()</a>, <a class="el" href="type__traits_8hpp_source.html#l00847">is_boolean_v</a>, <a class="el" href="signals_8hpp_source.html#l00033">keep</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
 
 </div>
 </div>
@@ -563,9 +563,9 @@ template&lt;typename Self, typename MemFn, typename Predicate, typename... Tag&g
 </dl>
 <dl class="section return"><dt>返回</dt><dd>连接句柄 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00630">630</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00632">632</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00432">connect()</a>, <a class="el" href="type__traits_8hpp_source.html#l00847">is_boolean_v</a>, <a class="el" href="signals_8hpp_source.html#l00032">keep</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
+<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00434">connect()</a>, <a class="el" href="type__traits_8hpp_source.html#l00847">is_boolean_v</a>, <a class="el" href="signals_8hpp_source.html#l00033">keep</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
 
 </div>
 </div>
@@ -609,9 +609,9 @@ template&lt;typename... Types&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>连接句柄</dd></dl>
 <p>当此信号触发时，会转发给other信号。 </p>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00562">562</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00564">564</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00432">connect()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
+<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00434">connect()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
 
 </div>
 </div>
@@ -655,9 +655,9 @@ template&lt;typename... Types&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>连接句柄</dd></dl>
 <p>当此信号触发时，如果指针非空，则转发给other信号。 </p>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00579">579</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00581">581</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00432">connect()</a>, <a class="el" href="signals_8hpp_source.html#l00032">keep</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
+<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00434">connect()</a>, <a class="el" href="signals_8hpp_source.html#l00033">keep</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
 
 </div>
 </div>
@@ -718,7 +718,7 @@ template&lt;typename Func, typename Transform&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00690">690</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00432">connect()</a>, <a class="el" href="invoke_8hpp_source.html#l00396">is_invocable_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
+<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00434">connect()</a>, <a class="el" href="invoke_8hpp_source.html#l00396">is_invocable_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="group___thread.html#gae6f7d8a27a49c99a64bbbe66c5cd3f64">priority()</a>.</p>
 
 </div>
 </div>
@@ -756,11 +756,11 @@ template&lt;typename... Types&gt; </div>
 </dl>
 <p>同步调用所有已连接的槽函数。会自动清理已断开或请求擦除的槽。 如果信号被阻塞，则什么也不做。 </p>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00485">485</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00487">487</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00033">erase</a>, <a class="el" href="signals_8hpp_source.html#l00711">is_blocked()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00133">remove_if()</a>.</p>
+<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00034">erase</a>, <a class="el" href="signals_8hpp_source.html#l00711">is_blocked()</a> , 以及 <a class="el" href="remove_8hpp_source.html#l00133">remove_if()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00524">emit_executor()</a> , 以及 <a class="el" href="signals_8hpp_source.html#l00543">operator()()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00526">emit_executor()</a> , 以及 <a class="el" href="signals_8hpp_source.html#l00545">operator()()</a>.</p>
 
 </div>
 </div>
@@ -811,9 +811,9 @@ template&lt;typename Executor&gt; </div>
 </dl>
 <p>在指定的执行器上异步调用emit。 </p>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00524">524</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00526">526</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="apply_8hpp_source.html#l00063">apply()</a>, <a class="el" href="signals_8hpp_source.html#l00485">emit()</a>, <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>, <a class="el" href="tuple_8hpp_source.html#l00746">make_tuple()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="apply_8hpp_source.html#l00063">apply()</a>, <a class="el" href="signals_8hpp_source.html#l00487">emit()</a>, <a class="el" href="type__traits_8hpp_source.html#l03019">forward()</a>, <a class="el" href="tuple_8hpp_source.html#l00750">make_tuple()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -879,7 +879,7 @@ template&lt;typename... Types&gt; </div>
 
 <p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00711">711</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00485">emit()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00487">emit()</a>.</p>
 
 </div>
 </div>
@@ -918,9 +918,9 @@ template&lt;typename... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00543">543</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00545">545</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00485">emit()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="signals_8hpp_source.html#l00487">emit()</a> , 以及 <a class="el" href="type__traits_8hpp_source.html#l03019">forward()</a>.</p>
 
 </div>
 </div>

@@ -175,7 +175,7 @@
       <node id="35">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -245,7 +245,7 @@
       <node id="39">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
@@ -331,6 +331,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
       </node>
       <node id="59">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -367,8 +369,6 @@
       <node id="69">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="30" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
@@ -523,7 +523,7 @@
         </childnode>
       </node>
       <node id="14">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="8">
         <label>initializer_list</label>
@@ -592,7 +592,7 @@
 <codeline lineno="101"><highlight class="normal"></highlight></codeline>
 <codeline lineno="106" refid="structsqlite__connect_1a2a07957e0fda099afdc678b46390e16b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="structsqlite__connect_1a2a07957e0fda099afdc678b46390e16b" kindref="member">get_error</ref>()<sp/>const<sp/>override;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112" refid="structsqlite__connect_1aaf26361fd2b411697712bed65d022e57" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsqlite__connect_1aaf26361fd2b411697712bed65d022e57" kindref="member">get_errno</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>link_<sp/>?<sp/>::sqlite3_errcode(link_)<sp/>:<sp/>0;<sp/>}</highlight></codeline>
+<codeline lineno="112" refid="structsqlite__connect_1aaf26361fd2b411697712bed65d022e57" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsqlite__connect_1aaf26361fd2b411697712bed65d022e57" kindref="member">get_errno</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>link_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/>::sqlite3_errcode(link_)<sp/>:<sp/>0;<sp/>}</highlight></codeline>
 <codeline lineno="113"><highlight class="normal"></highlight></codeline>
 <codeline lineno="119" refid="structsqlite__connect_1a6658a0711918f65ddd98d8291881a7a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsqlite__connect_1a6658a0711918f65ddd98d8291881a7a2" kindref="member">update</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>sql)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="120"><highlight class="normal"></highlight></codeline>
@@ -605,10 +605,10 @@
 <codeline lineno="145" refid="structsqlite__connect_1ac60f61740228e60f09580cea8e47ae78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsqlite__connect_1ac60f61740228e60f09580cea8e47ae78" kindref="member">is_valid</ref>()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="146"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"></highlight></codeline>
-<codeline lineno="154" refid="classsqlite__factory" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classsqlite__factory_1a29a3eea918e06eff27ccd34ccd99d1b6" kindref="member">sqlite_factory</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classidb__factory_1ad680ec3a992a6a696e3cff3e7f0b34e1" kindref="member">idb_factory</ref><sp/>{</highlight></codeline>
+<codeline lineno="154" refid="classsqlite__factory" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classsqlite__factory_1a29a3eea918e06eff27ccd34ccd99d1b6" kindref="member">sqlite_factory</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classidb__factory_1a875d00f918348f454bb6452c57579ab1" kindref="member">idb_factory</ref><sp/>{</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="160" refid="classsqlite__factory_1a29a3eea918e06eff27ccd34ccd99d1b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classsqlite__factory_1a29a3eea918e06eff27ccd34ccd99d1b6" kindref="member">sqlite_factory</ref>(<ref refid="structdb__config" kindref="compound">db_config</ref><sp/>config)<sp/>:</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classidb__factory_1ad680ec3a992a6a696e3cff3e7f0b34e1" kindref="member">idb_factory</ref>(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(config))<sp/>{}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classidb__factory_1a875d00f918348f454bb6452c57579ab1" kindref="member">idb_factory</ref>(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(config))<sp/>{}</highlight></codeline>
 <codeline lineno="162"><highlight class="normal"></highlight></codeline>
 <codeline lineno="167" refid="classsqlite__factory_1a74ed9445802c58b3d703797a86925d6e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structidb__connect" kindref="compound">idb_connect</ref>*<sp/><ref refid="classsqlite__factory_1a74ed9445802c58b3d703797a86925d6e" kindref="member">create_connect</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"></highlight></codeline>
@@ -621,6 +621,6 @@
 <codeline lineno="182"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="183"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_DATABASE_SQLITE_CONNECT_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp"/>
   </compounddef>
 </doxygen>

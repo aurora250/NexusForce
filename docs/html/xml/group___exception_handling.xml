@@ -23,13 +23,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="266" column="17" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" declline="266" declcolumn="17"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="268" column="17" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" declline="268" declcolumn="17"/>
         <references refid="group___exception_handling_1ga28496880d7de221739d7afa46a69059d">uncaught_exceptions</references>
-        <referencedby refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" compoundref="scope_8hpp" startline="145" endline="149">scope_fail&lt; Func &gt;::scope_fail</referencedby>
-        <referencedby refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" compoundref="scope_8hpp" startline="226" endline="230">scope_success&lt; Func &gt;::scope_success</referencedby>
+        <referencedby refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" compoundref="scope_8hpp" startline="146" endline="150">scope_fail&lt; Func &gt;::scope_fail</referencedby>
+        <referencedby refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" compoundref="scope_8hpp" startline="227" endline="231">scope_success&lt; Func &gt;::scope_success</referencedby>
         <referencedby refid="group___exception_handling_1ga28496880d7de221739d7afa46a69059d">uncaught_exceptions</referencedby>
-        <referencedby refid="classscope__fail_1a58fbdf72f42b141800d07ff5f328880c" compoundref="scope_8hpp" startline="182" endline="186">scope_fail&lt; Func &gt;::~scope_fail</referencedby>
-        <referencedby refid="classscope__success_1a310ca7b0aef05c30c2a102a6f81a63ec" compoundref="scope_8hpp" startline="263" endline="267">scope_success&lt; Func &gt;::~scope_success</referencedby>
+        <referencedby refid="classscope__fail_1a58fbdf72f42b141800d07ff5f328880c" compoundref="scope_8hpp" startline="183" endline="187">scope_fail&lt; Func &gt;::~scope_fail</referencedby>
+        <referencedby refid="classscope__success_1a310ca7b0aef05c30c2a102a6f81a63ec" compoundref="scope_8hpp" startline="264" endline="268">scope_success&lt; Func &gt;::~scope_success</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___exception_handling_1gafcaf017f48e0577f063b54671e2a06ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void NEFORCE_API</type>
@@ -57,9 +57,47 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="272" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" declline="272" declcolumn="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="274" column="18" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" declline="274" declcolumn="18"/>
         <references refid="group___exception_handling_1gafcaf017f48e0577f063b54671e2a06ec">throw_with_stack</references>
         <referencedby refid="group___exception_handling_1gafcaf017f48e0577f063b54671e2a06ec">throw_with_stack</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___exception_handling_1ga947504bd2926f427cb1e964fada47745" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_NORETURN void NEFORCE_API</type>
+        <definition>NEFORCE_NORETURN void NEFORCE_API rethrow_exception</definition>
+        <argsstring>(const exception_ptr &amp;p)</argsstring>
+        <name>rethrow_exception</name>
+        <param>
+          <type>const <ref refid="classexception__ptr" kindref="compound">exception_ptr</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>重新抛出异常 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+重新抛出异常指针引用的异常。</para>
+<para><simplesect kind="note"><para>如果异常指针为空，进程将被终止。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="112" column="35" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" declline="112" declcolumn="35"/>
+        <referencedby refid="structtask_1_1awaiter_1a9dd1df2703e550a5dd2759dd453eac51" compoundref="generator_8hpp" startline="632" endline="637">task&lt; T &gt;::awaiter::await_resume</referencedby>
+        <referencedby refid="structvirtual__thread__task_1a75475798d8c7d48b708c5498c1b677a6" compoundref="virtual__thread_8hpp" startline="731" endline="736">virtual_thread_task&lt; T &gt;::await_resume</referencedby>
+        <referencedby refid="structvirtual__thread__task_3_01void_01_4_1a00c111363cdca8d503e6cb91e4dc6583" compoundref="virtual__thread_8hpp" startline="458" endline="462">virtual_thread_task&lt; void &gt;::await_resume</referencedby>
+        <referencedby refid="classgenerator_1a93d1141d7d23880142c7c76ebccd9b72" compoundref="generator_8hpp" startline="362" endline="373">generator&lt; T &gt;::begin</referencedby>
+        <referencedby refid="classtask_1a58502672d9bef3a69f89611e79483c31" compoundref="generator_8hpp" startline="716" endline="724">task&lt; T &gt;::get</referencedby>
+        <referencedby refid="structvirtual__thread__task_1ae51b0e7b3a5acec19201ccad4c0a17db" compoundref="virtual__thread_8hpp" startline="744" endline="753">virtual_thread_task&lt; T &gt;::get_result</referencedby>
+        <referencedby refid="structvirtual__thread__task_3_01void_01_4_1a7cd713d56887ff267c9eba290ba9914c" compoundref="virtual__thread_8hpp" startline="470" endline="478">virtual_thread_task&lt; void &gt;::get_result</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___exception_handling_1gac43ce5d8fc82090c24f3088e37cc2d89" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -103,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="314" column="15" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="314" bodyend="324"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="325" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="325" bodyend="335"/>
       </memberdef>
       <memberdef kind="function" id="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classexception__ptr" kindref="compound">exception_ptr</ref> NEFORCE_API</type>
@@ -120,48 +158,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="333" column="27" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" declline="333" declcolumn="27"/>
-        <referencedby refid="group___coroutine_1ga79f854a5ada0083996d280c91b6cb2c1" compoundref="generator_8hpp" startline="863" endline="885">retry</referencedby>
-        <referencedby refid="structgenerator_1_1promise__type_1adae56dfd455e63193f90202e9fd67e52" compoundref="generator_8hpp" startline="204" endline="204">generator&lt; T &gt;::promise_type::unhandled_exception</referencedby>
-        <referencedby refid="structtask_1_1promise__type_1a367a255980a9849de883c314ffd5f644" compoundref="generator_8hpp" startline="548" endline="548">task&lt; T &gt;::promise_type::unhandled_exception</referencedby>
-        <referencedby refid="structvirtual__thread__task_1_1promise__type_1aa0fe2e55596d0c95a0886310f400fb28" compoundref="virtual__thread_8hpp" startline="73" endline="73">virtual_thread_task::promise_type::unhandled_exception</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void NEFORCE_API</type>
-        <definition>void NEFORCE_API rethrow_exception</definition>
-        <argsstring>(const exception_ptr &amp;p)</argsstring>
-        <name>rethrow_exception</name>
-        <param>
-          <type>const <ref refid="classexception__ptr" kindref="compound">exception_ptr</ref> &amp;</type>
-          <declname>p</declname>
-        </param>
-        <briefdescription>
-<para>重新抛出异常 </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>p</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>异常指针</para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-重新抛出异常指针引用的异常。</para>
-<para><simplesect kind="note"><para>如果异常指针为空，进程将被终止。 </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="343" column="18" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" declline="343" declcolumn="18"/>
-        <references refid="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32">rethrow_exception</references>
-        <referencedby refid="structtask_1_1awaiter_1a9dd1df2703e550a5dd2759dd453eac51" compoundref="generator_8hpp" startline="578" endline="583">task&lt; T &gt;::awaiter::await_resume</referencedby>
-        <referencedby refid="classgenerator_1a93d1141d7d23880142c7c76ebccd9b72" compoundref="generator_8hpp" startline="334" endline="345">generator&lt; T &gt;::begin</referencedby>
-        <referencedby refid="classtask_1a58502672d9bef3a69f89611e79483c31" compoundref="generator_8hpp" startline="662" endline="670">task&lt; T &gt;::get</referencedby>
-        <referencedby refid="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32">rethrow_exception</referencedby>
-        <referencedby refid="group___coroutine_1ga79f854a5ada0083996d280c91b6cb2c1" compoundref="generator_8hpp" startline="863" endline="885">retry</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="344" column="27" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" declline="344" declcolumn="27"/>
+        <referencedby refid="structgenerator_1_1promise__type_1adae56dfd455e63193f90202e9fd67e52" compoundref="generator_8hpp" startline="232" endline="232">generator&lt; T &gt;::promise_type::unhandled_exception</referencedby>
+        <referencedby refid="structtask_1_1promise__type_1a367a255980a9849de883c314ffd5f644" compoundref="generator_8hpp" startline="602" endline="602">task&lt; T &gt;::promise_type::unhandled_exception</referencedby>
+        <referencedby refid="structvirtual__thread__task_1_1promise__type_1a3c4990628480f6aa6e22e855c8a6f021" compoundref="virtual__thread_8hpp" startline="628" endline="628">virtual_thread_task&lt; T &gt;::promise_type::unhandled_exception</referencedby>
+        <referencedby refid="structvirtual__thread__task_3_01void_01_4_1_1promise__type_1af9d7c3f9c364bb4ee5e2f1610c63422b" compoundref="virtual__thread_8hpp" startline="351" endline="351">virtual_thread_task&lt; void &gt;::promise_type::unhandled_exception</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="define">
@@ -181,7 +182,7 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="21" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="21" bodyend="26"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="21" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="21" bodyend="26"/>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1gad1d1f545fb56f3b3894f8661dda823a1" prot="public" static="no">
         <name>__NEFORCE_ERROR_DERIVED_DESTRUCTOR</name>
@@ -193,7 +194,7 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="28" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="28" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="28" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1ga7812a0cd7056aa5f2b533278b85c93e5" prot="public" static="no">
         <name>__NEFORCE_ERROR_FINAL_DESTRUCTOR</name>
@@ -205,7 +206,7 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="30" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="30" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="30" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1ga7b9007b6051e7998c5ca452e1ac91d8a" prot="public" static="no">
         <name>__NEFORCE_ERROR_TYPE</name>
@@ -217,7 +218,7 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="32" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="32" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="32" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1gae678474841c27ba5f9d8215c812fefae" prot="public" static="no">
         <name>NEFORCE_ERROR_BUILD_DERIVED_CLASS</name>
@@ -262,7 +263,7 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="43" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="43" bodyend="48"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="43" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="43" bodyend="48"/>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1ga438313508830676344f6ccbfad172758" prot="public" static="no">
         <name>NEFORCE_ERROR_BUILD_FINAL_CLASS</name>
@@ -307,7 +308,7 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="59" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="59" bodyend="64"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="59" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="59" bodyend="64"/>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1ga68249361ffc8d150053285c070c426b9" prot="public" static="no">
         <name>NEFORCE_THROW_EXCEPTION</name>
@@ -319,7 +320,7 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="277" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="277" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="279" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="279" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="group___exception_handling_1gab8d2a61217d1d4200f90aefe0e99a813" prot="public" static="no">
         <name>NEFORCE_ASSERTION</name>
@@ -333,7 +334,7 @@ BASE(e) {}</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="280" column="9" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="280" bodyend="283"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="282" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="282" bodyend="285"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

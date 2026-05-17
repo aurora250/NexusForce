@@ -107,19 +107,19 @@ $(function(){initNavTree('pgsql__prepared__statement_8hpp_source.html','',''); }
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classpgsql__prepared__statement.html">   44</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classpgsql__prepared__statement.html#a65bd79bcda5170d5087f444776b0e852">pgsql_prepared_statement</a> final : <span class="keyword">public</span> <a class="code hl_struct" href="structidb__prepared__statement.html">idb_prepared_statement</a> {</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">struct </span>pstmt_data {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> param_values{};    </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_class" href="classvector.html">vector&lt;const char*&gt;</a> param_ptrs{}; </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> param_lengths{};      </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> param_formats{};      </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> param_values;    </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_class" href="classvector.html">vector&lt;const char*&gt;</a> param_ptrs; </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> param_lengths;      </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_class" href="classvector.html">vector&lt;int&gt;</a> param_formats;      </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    };</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    ::PGconn* conn_ = <span class="keyword">nullptr</span>;                                </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">string</span> stmt_name_{};                                      </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">string</span> sql_{};                                            </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">string</span> stmt_name_;                                        </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">string</span> sql_;                                              </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> param_count_ = 0;                                </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;pstmt_data&gt;</a> data_ = <a class="code hl_function" href="group___unique_pointer.html#ga1392a16f6940e75495ba167745eff5b7">make_unique&lt;pstmt_data&gt;</a>(); </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_class" href="classvector.html">vector&lt;vector&lt;char&gt;</a>&gt; param_buffers_{};                    </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">string</span> last_error_{};                                     </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_class" href="classvector.html">vector&lt;vector&lt;char&gt;</a>&gt; param_buffers_;                      </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">string</span> last_error_;                                       </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> last_errno_ = 0;                                 </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> set_error(<span class="keywordtype">string</span> error, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> errno_val = 0) <span class="keyword">noexcept</span>;</div>

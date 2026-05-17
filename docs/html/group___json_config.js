@@ -1,15 +1,12 @@
 var group___json_config =
 [
     [ "json_builder", "classjson__builder.html", [
-      [ "json_builder", "classjson__builder.html#a2741c71f0b269a7f75d1c9053ab6ef28", null ],
-      [ "json_builder", "classjson__builder.html#af6a7a828e3a28c7c156c6ae2a1557693", null ],
       [ "begin_array", "classjson__builder.html#af7854cbd3be409a911df6570b64ad24b", null ],
       [ "begin_object", "classjson__builder.html#a736bbd94f6b0c5481d07432662c7d84b", null ],
       [ "build", "classjson__builder.html#afd9ecd6dcc26bb765290d45b30cd9739", null ],
       [ "end_array", "classjson__builder.html#ab7534d8d54ab74042688e0f0ba920def", null ],
       [ "end_object", "classjson__builder.html#a08532efdc612a36ce50446523a64d853", null ],
       [ "key", "classjson__builder.html#a6365d6639f7a9af43d5c561a4d259087", null ],
-      [ "operator=", "classjson__builder.html#a72f9824ec1a9f68a9db26f092e9793dc", null ],
       [ "value", "classjson__builder.html#a4fe5ea7a3f044eff8283e0445c9135bc", null ],
       [ "value", "classjson__builder.html#a3c97f938b11dcbae62eb957c53ee8a53", null ],
       [ "value", "classjson__builder.html#a373ac9793050a11087fd203e749a37ee", null ],

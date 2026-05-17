@@ -3,32 +3,15 @@
   <compounddef id="classvirtual__thread" kind="class" language="C++" prot="public">
     <compoundname>virtual_thread</compoundname>
     <includes refid="virtual__thread_8hpp" local="no">virtual_thread.hpp</includes>
-    <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classvirtual__thread_1a3bf562f3f9e53102f0f3cfc97c9e3a0f" prot="private" static="no" mutable="no">
-        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="structvirtual__thread__task" kindref="compound">virtual_thread_task</ref> &gt;</type>
-        <definition>optional&lt;virtual_thread_task&gt; virtual_thread::task_</definition>
-        <argsstring></argsstring>
-        <name>task_</name>
-        <qualifiedname>virtual_thread::task_</qualifiedname>
-        <briefdescription>
-<para>关联的任务对象 </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="307" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="307" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <sectiondef kind="private-static-func">
-      <memberdef kind="function" id="classvirtual__thread_1acf8b344f85b212e71a83a38b6689ceb7" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classvirtual__thread_1a23da564822d4ce8e84ffb55af083bad6" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Func</type>
           </param>
         </templateparamlist>
-        <type><ref refid="structvirtual__thread__task" kindref="compound">virtual_thread_task</ref></type>
-        <definition>static virtual_thread_task virtual_thread::create_task</definition>
+        <type><ref refid="structvirtual__thread__task" kindref="compound">virtual_thread_task</ref>&lt; void &gt;</type>
+        <definition>static virtual_thread_task&lt; void &gt; virtual_thread::create_task</definition>
         <argsstring>(Func func)</argsstring>
         <name>create_task</name>
         <qualifiedname>virtual_thread::create_task</qualifiedname>
@@ -37,7 +20,7 @@
           <declname>func</declname>
         </param>
         <briefdescription>
-<para>创建任务 </para>
+<para>将普通函数包装为协程任务 </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
@@ -54,128 +37,28 @@
 <parametername>func</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>要执行的函数 </para>
+<para>要包装的函数 </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>虚拟线程任务</para>
+<simplesect kind="return"><para><ref refid="structvirtual__thread__task_3_01void_01_4" kindref="compound">virtual_thread_task&lt;void&gt;</ref> </para>
 </simplesect>
-将普通函数包装为协程任务。 </para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="318" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="318" bodyend="321"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="public-func">
-      <memberdef kind="function" id="classvirtual__thread_1ac86354b86d2672940194457282f0ea4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>virtual_thread::virtual_thread</definition>
-        <argsstring>()=default</argsstring>
-        <name>virtual_thread</name>
-        <qualifiedname>virtual_thread::virtual_thread</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="324" column="5"/>
-      </memberdef>
-      <memberdef kind="function" id="classvirtual__thread_1a96da723dd6f6f10d41d0caf94fdf0258" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>virtual_thread::~virtual_thread</definition>
-        <argsstring>()=default</argsstring>
-        <name>~virtual_thread</name>
-        <qualifiedname>virtual_thread::~virtual_thread</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="325" column="5"/>
-      </memberdef>
-      <memberdef kind="function" id="classvirtual__thread_1a60d118cbde9dd622815e51be0d97bfa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>virtual_thread::virtual_thread</definition>
-        <argsstring>(const virtual_thread &amp;)=delete</argsstring>
-        <name>virtual_thread</name>
-        <qualifiedname>virtual_thread::virtual_thread</qualifiedname>
-        <param>
-          <type>const <ref refid="classvirtual__thread" kindref="compound">virtual_thread</ref> &amp;</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="326" column="5"/>
-      </memberdef>
-      <memberdef kind="function" id="classvirtual__thread_1a8c308b21f6a630e232bc55d96161acc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classvirtual__thread" kindref="compound">virtual_thread</ref> &amp;</type>
-        <definition>virtual_thread &amp; virtual_thread::operator=</definition>
-        <argsstring>(const virtual_thread &amp;)=delete</argsstring>
-        <name>operator=</name>
-        <qualifiedname>virtual_thread::operator=</qualifiedname>
-        <param>
-          <type>const <ref refid="classvirtual__thread" kindref="compound">virtual_thread</ref> &amp;</type>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="327" column="20"/>
-      </memberdef>
-      <memberdef kind="function" id="classvirtual__thread_1acd03e82cfcd86580a796c3dc44da54b8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type></type>
-        <definition>virtual_thread::virtual_thread</definition>
-        <argsstring>(virtual_thread &amp;&amp;other) noexcept=default</argsstring>
-        <name>virtual_thread</name>
-        <qualifiedname>virtual_thread::virtual_thread</qualifiedname>
-        <param>
-          <type><ref refid="classvirtual__thread" kindref="compound">virtual_thread</ref> &amp;&amp;</type>
-          <declname>other</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="328" column="5"/>
-      </memberdef>
-      <memberdef kind="function" id="classvirtual__thread_1a09b3fb92daeb54eea55cffac4658abb6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type><ref refid="classvirtual__thread" kindref="compound">virtual_thread</ref> &amp;</type>
-        <definition>virtual_thread &amp; virtual_thread::operator=</definition>
-        <argsstring>(virtual_thread &amp;&amp;other) noexcept=default</argsstring>
-        <name>operator=</name>
-        <qualifiedname>virtual_thread::operator=</qualifiedname>
-        <param>
-          <type><ref refid="classvirtual__thread" kindref="compound">virtual_thread</ref> &amp;&amp;</type>
-          <declname>other</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="329" column="20"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="782" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="782" bodyend="785"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classvirtual__thread_1a93b4388447ef55e5758820188474f161" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classvirtual__thread_1a68a0929b7f6019c0ccace858038ef743" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Func</type>
           </param>
         </templateparamlist>
-        <type><ref refid="classvirtual__thread" kindref="compound">virtual_thread</ref></type>
-        <definition>static virtual_thread virtual_thread::start</definition>
+        <type>auto</type>
+        <definition>static auto virtual_thread::start</definition>
         <argsstring>(Func &amp;&amp;func)</argsstring>
         <name>start</name>
         <qualifiedname>virtual_thread::start</qualifiedname>
@@ -184,7 +67,7 @@
           <declname>func</declname>
         </param>
         <briefdescription>
-<para>启动虚拟线程 </para>
+<para>启动异步任务 </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
@@ -192,7 +75,7 @@
 <parametername>Func</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>可调用类型 </para>
+<para>可调用类型，返回 <ref refid="structvirtual__thread__task" kindref="compound">virtual_thread_task&lt;T&gt;</ref> 或普通值 </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -201,40 +84,38 @@
 <parametername>func</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>要执行的函数 </para>
+<para>要执行的可调用对象 </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>虚拟线程对象</para>
+<simplesect kind="return"><para>若 func 返回 <ref refid="structvirtual__thread__task" kindref="compound">virtual_thread_task&lt;T&gt;</ref> 则直接返回，否则包装为 <ref refid="structvirtual__thread__task_3_01void_01_4" kindref="compound">virtual_thread_task&lt;void&gt;</ref> </para>
 </simplesect>
-创建并启动新的虚拟线程执行指定函数。 </para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="340" column="27" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="340" bodyend="344"/>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="795" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="795" bodyend="802"/>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <references refid="group___virtual_thread_1gac7b1dd06d6eec46b83066c91fbef0d1c" compoundref="virtual__thread_8hpp" startline="54">is_virtual_thread_task_v</references>
       </memberdef>
-      <memberdef kind="function" id="classvirtual__thread_1a61addfa70b27ee1c4a5a9ee9c3b6337b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="structvirtual__thread__awaiter" kindref="compound">virtual_thread_awaiter</ref></type>
-        <definition>static virtual_thread_awaiter virtual_thread::yield</definition>
+      <memberdef kind="function" id="classvirtual__thread_1a114a00f38ad37a3ba3bf33979845b35c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>inner::yield_tag</type>
+        <definition>static inner::yield_tag virtual_thread::yield</definition>
         <argsstring>()</argsstring>
         <name>yield</name>
         <qualifiedname>virtual_thread::yield</qualifiedname>
         <briefdescription>
-<para>让出执行权 </para>
+<para>创建 yield 标记，用于 co_await 让出执行权 </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>等待器对象</para>
-</simplesect>
-挂起当前协程，将执行权交给调度器。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="352" column="35" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="352" bodyend="352"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="807" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="807" bodyend="807"/>
       </memberdef>
-      <memberdef kind="function" id="classvirtual__thread_1a198e8afd583bb7ba0c31d12b609e374a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="structsleep__awaiter" kindref="compound">sleep_awaiter</ref></type>
-        <definition>static sleep_awaiter virtual_thread::sleep</definition>
+      <memberdef kind="function" id="classvirtual__thread_1aef1257f5a0ae0ab81f3dc7476b35f16e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>inner::sleep_tag</type>
+        <definition>static inner::sleep_tag virtual_thread::sleep</definition>
         <argsstring>(const int64_t ms)</argsstring>
         <name>sleep</name>
         <qualifiedname>virtual_thread::sleep</qualifiedname>
@@ -243,7 +124,7 @@
           <declname>ms</declname>
         </param>
         <briefdescription>
-<para>睡眠指定毫秒数 </para>
+<para>创建 sleep 标记，用于 co_await 休眠 </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -251,17 +132,15 @@
 <parametername>ms</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>毫秒数 </para>
+<para>休眠时长（毫秒） </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>虚拟线程任务</para>
-</simplesect>
-挂起当前协程指定时间，协程式睡眠。 </para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="361" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="361" bodyend="361"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="813" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="813" bodyend="813"/>
       </memberdef>
       <memberdef kind="function" id="classvirtual__thread_1aad16763690d7b1e9ad3d0571bc62ac40" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -274,7 +153,7 @@
           <declname>num_threads</declname>
         </param>
         <briefdescription>
-<para>初始化调度器 </para>
+<para>初始化调度器并启动工作线程 </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -282,17 +161,17 @@
 <parametername>num_threads</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>工作线程数量</para>
+<para>工作线程数量 </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-启动指定数量的工作线程处理协程任务。 </para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="369" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="369" bodyend="369"/>
-        <references refid="classvirtual__thread__scheduler_1a97410a92d46e94ebad5d2758837cf97b" compoundref="virtual__thread_8hpp" startline="182" endline="185">virtual_thread_scheduler::get_instance</references>
-        <references refid="classvirtual__thread__scheduler_1a2269fc5d6435eca5dcb8b16db7df2f42" compoundref="virtual__thread_8hpp" startline="207" endline="211">virtual_thread_scheduler::start_workers</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="819" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="819" bodyend="819"/>
+        <references refid="classvirtual__thread__scheduler_1a97410a92d46e94ebad5d2758837cf97b" compoundref="virtual__thread_8hpp" startline="133" endline="136">virtual_thread_scheduler::get_instance</references>
+        <references refid="classvirtual__thread__scheduler_1a2269fc5d6435eca5dcb8b16db7df2f42" compoundref="virtual__thread_8hpp" startline="154" endline="158">virtual_thread_scheduler::start_workers</references>
       </memberdef>
       <memberdef kind="function" id="classvirtual__thread_1a74b4d3cfd6a51e961b47279309d3bfc3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -304,36 +183,28 @@
 <para>关闭调度器 </para>
         </briefdescription>
         <detaileddescription>
-<para>关闭所有工作线程，清理资源。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="376" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="376" bodyend="376"/>
-        <references refid="classvirtual__thread__scheduler_1a97410a92d46e94ebad5d2758837cf97b" compoundref="virtual__thread_8hpp" startline="182" endline="185">virtual_thread_scheduler::get_instance</references>
-        <references refid="classvirtual__thread__scheduler_1a7334d89ceba9ab3a422db2544a1a49aa" compoundref="virtual__thread_8hpp" startline="218" endline="230">virtual_thread_scheduler::shutdown</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="824" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="824" bodyend="824"/>
+        <references refid="classvirtual__thread__scheduler_1a97410a92d46e94ebad5d2758837cf97b" compoundref="virtual__thread_8hpp" startline="133" endline="136">virtual_thread_scheduler::get_instance</references>
+        <references refid="classvirtual__thread__scheduler_1a7334d89ceba9ab3a422db2544a1a49aa" compoundref="virtual__thread_8hpp" startline="165" endline="177">virtual_thread_scheduler::shutdown</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>虚拟线程类 </para>
+<para>虚拟线程用户门面类 </para>
     </briefdescription>
     <detaileddescription>
-<para>提供虚拟线程的创建、调度和管理功能。 支持协作式多任务和轻量级并发。 </para>
+<para>提供启动异步任务、yield、sleep 等操作的静态接口。 不可实例化（构造/析构为 private，仅提供静态方法）。 </para>
     </detaileddescription>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="305" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="305" bodyend="377"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="773" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="773" bodyend="825"/>
     <listofallmembers>
-      <member refid="classvirtual__thread_1acf8b344f85b212e71a83a38b6689ceb7" prot="private" virt="non-virtual"><scope>virtual_thread</scope><name>create_task</name></member>
+      <member refid="classvirtual__thread_1a23da564822d4ce8e84ffb55af083bad6" prot="private" virt="non-virtual"><scope>virtual_thread</scope><name>create_task</name></member>
       <member refid="classvirtual__thread_1aad16763690d7b1e9ad3d0571bc62ac40" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>initialize</name></member>
-      <member refid="classvirtual__thread_1a8c308b21f6a630e232bc55d96161acc5" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>operator=</name></member>
-      <member refid="classvirtual__thread_1a09b3fb92daeb54eea55cffac4658abb6" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>operator=</name></member>
       <member refid="classvirtual__thread_1a74b4d3cfd6a51e961b47279309d3bfc3" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>shutdown</name></member>
-      <member refid="classvirtual__thread_1a198e8afd583bb7ba0c31d12b609e374a" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>sleep</name></member>
-      <member refid="classvirtual__thread_1a93b4388447ef55e5758820188474f161" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>start</name></member>
-      <member refid="classvirtual__thread_1a3bf562f3f9e53102f0f3cfc97c9e3a0f" prot="private" virt="non-virtual"><scope>virtual_thread</scope><name>task_</name></member>
-      <member refid="classvirtual__thread_1ac86354b86d2672940194457282f0ea4b" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>virtual_thread</name></member>
-      <member refid="classvirtual__thread_1a60d118cbde9dd622815e51be0d97bfa8" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>virtual_thread</name></member>
-      <member refid="classvirtual__thread_1acd03e82cfcd86580a796c3dc44da54b8" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>virtual_thread</name></member>
-      <member refid="classvirtual__thread_1a61addfa70b27ee1c4a5a9ee9c3b6337b" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>yield</name></member>
-      <member refid="classvirtual__thread_1a96da723dd6f6f10d41d0caf94fdf0258" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>~virtual_thread</name></member>
+      <member refid="classvirtual__thread_1aef1257f5a0ae0ab81f3dc7476b35f16e" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>sleep</name></member>
+      <member refid="classvirtual__thread_1a68a0929b7f6019c0ccace858038ef743" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>start</name></member>
+      <member refid="classvirtual__thread_1a114a00f38ad37a3ba3bf33979845b35c" prot="public" virt="non-virtual"><scope>virtual_thread</scope><name>yield</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

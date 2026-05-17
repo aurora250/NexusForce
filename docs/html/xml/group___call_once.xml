@@ -81,11 +81,13 @@
 确保函数在多线程环境中只被执行一次。 如果已经有线程正在执行该函数，其他线程将等待直到执行完成。 如果函数已成功执行，后续调用将立即返回。</para>
 <para><simplesect kind="note"><para>如果函数抛出异常，则视为未执行，后续线程将尝试重新执行 </para>
 </simplesect>
+<simplesect kind="warning"><para>对 call_once 递归调用会导致死锁 </para>
+</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="68" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="68" bodyend="106"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="69" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="69" bodyend="112"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

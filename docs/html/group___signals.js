@@ -3,16 +3,16 @@ var group___signals =
     [ "oneshot_t", "structoneshot__t.html", null ],
     [ "connection", "classconnection.html", [
       [ "connection", "classconnection.html#abf4fbe074e578b5744dc6dc8e595d8e8", null ],
-      [ "connected", "classconnection.html#a9ae30d2439c24be70e2840897cd76ce0", null ],
+      [ "connected", "classconnection.html#a89b63a9a3dabac0307fc3ffa0126765c", null ],
       [ "disconnect", "classconnection.html#acc6d1e3a702e061bfbe2f82969e0f1c8", null ],
-      [ "flag", "classconnection.html#af56e38f6d466c0cb833446b89c9ca2eb", null ]
+      [ "flag", "classconnection.html#aaee6feffb6f5b65c60833102b402e2f9", null ]
     ] ],
     [ "scoped_connection", "classscoped__connection.html", [
       [ "scoped_connection", "classscoped__connection.html#aa31a2348c98a310cbbc3bd71fc4826b5", null ],
       [ "scoped_connection", "classscoped__connection.html#a0dc41701eb941e70c2d9bbc2e1f7aec2", null ],
       [ "~scoped_connection", "classscoped__connection.html#acdca0ae2668e4291c0b97f357e9fea54", null ],
       [ "scoped_connection", "classscoped__connection.html#a86d965ccfc458d727c866feba32e7ee2", null ],
-      [ "connected", "classscoped__connection.html#a213094bc0be001456ebb3543d24dff54", null ],
+      [ "connected", "classscoped__connection.html#a5faddcfaba983d62e68896e3a90371c8", null ],
       [ "disconnect", "classscoped__connection.html#a806470db7579ccca0b24ef7c532c60e5", null ],
       [ "operator=", "classscoped__connection.html#a9f568a791b9bc293e07b7d65897086d8", null ],
       [ "release", "classscoped__connection.html#a0dca2a8da2a5a59ceae89cd254515dc2", null ]

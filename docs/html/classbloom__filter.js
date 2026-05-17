@@ -15,6 +15,6 @@ var classbloom__filter =
     [ "insert", "classbloom__filter.html#ad324bb61dd9f571279f7bda12bc2b2dc", null ],
     [ "intersect", "classbloom__filter.html#a1d249adf7843b10733d0952077be40fd", null ],
     [ "merge", "classbloom__filter.html#a33646fafae5e79cd449470b84f8a8d9e", null ],
-    [ "to_bytes", "classbloom__filter.html#a0a5e85ff7ab12cbc8a4aea9e1a68dbd1", null ],
+    [ "to_bytes", "classbloom__filter.html#a1d00f2f516620f10d9d628ff112d60eb", null ],
     [ "unite", "classbloom__filter.html#aa2ea8a50fab72a5d35591b9e35493a9e", null ]
 ];

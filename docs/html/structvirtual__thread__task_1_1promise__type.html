@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NexusForce: virtual_thread_task::promise_type结构体 参考</title>
+<title>NexusForce: virtual_thread_task&lt; T &gt;::promise_type结构体 参考</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,55 +89,105 @@ $(function(){initNavTree('structvirtual__thread__task_1_1promise__type.html','',
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">virtual_thread_task::promise_type结构体 参考</div></div>
+  <div class="headertitle"><div class="title">virtual_thread_task&lt; T &gt;::promise_type结构体 参考</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>协程承诺类型  
+<p>协程 promise_type，管理任务生命周期与返回值存储  
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:abfb12fb610b1028ef2ce7a71060256d5" id="r_abfb12fb610b1028ef2ce7a71060256d5"><td class="memItemLeft"><a class="el" href="structvirtual__thread__task.html">virtual_thread_task</a>&#160;</td><td class="memItemRight"><a class="el" href="#abfb12fb610b1028ef2ce7a71060256d5">get_return_object</a> ()</td></tr>
-<tr class="memdesc:abfb12fb610b1028ef2ce7a71060256d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取返回对象  <br /></td></tr>
-<tr class="memitem:a80bb560c74f8fa5a58f6997866816133" id="r_a80bb560c74f8fa5a58f6997866816133"><td class="memItemLeft"><a class="el" href="structsuspend__never.html">suspend_never</a>&#160;</td><td class="memItemRight"><a class="el" href="#a80bb560c74f8fa5a58f6997866816133">initial_suspend</a> ()</td></tr>
-<tr class="memdesc:a80bb560c74f8fa5a58f6997866816133"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始挂起点  <br /></td></tr>
-<tr class="memitem:aaa221a87a605e7d9ad35bc13ae393821" id="r_aaa221a87a605e7d9ad35bc13ae393821"><td class="memItemLeft"><a class="el" href="structsuspend__always.html">suspend_always</a>&#160;</td><td class="memItemRight"><a class="el" href="#aaa221a87a605e7d9ad35bc13ae393821">final_suspend</a> () noexcept</td></tr>
-<tr class="memdesc:aaa221a87a605e7d9ad35bc13ae393821"><td class="mdescLeft">&#160;</td><td class="mdescRight">最终挂起点  <br /></td></tr>
-<tr class="memitem:afb4c03a917686ddef60158995dee2be4" id="r_afb4c03a917686ddef60158995dee2be4"><td class="memItemLeft"><a id="afb4c03a917686ddef60158995dee2be4" name="afb4c03a917686ddef60158995dee2be4"></a>
-void&#160;</td><td class="memItemRight"><b>return_void</b> ()</td></tr>
-<tr class="memdesc:afb4c03a917686ddef60158995dee2be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回void <br /></td></tr>
-<tr class="memitem:aa0fe2e55596d0c95a0886310f400fb28" id="r_aa0fe2e55596d0c95a0886310f400fb28"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa0fe2e55596d0c95a0886310f400fb28">unhandled_exception</a> ()</td></tr>
-<tr class="memdesc:aa0fe2e55596d0c95a0886310f400fb28"><td class="mdescLeft">&#160;</td><td class="mdescRight">未处理异常处理  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public 属性</h2></td></tr>
-<tr class="memitem:ac3ddcbd783e23872722f2aa196028cf8" id="r_ac3ddcbd783e23872722f2aa196028cf8"><td class="memItemLeft"><a id="ac3ddcbd783e23872722f2aa196028cf8" name="ac3ddcbd783e23872722f2aa196028cf8"></a>
-<a class="el" href="classexception__ptr.html">exception_ptr</a>&#160;</td><td class="memItemRight"><b>exception_</b></td></tr>
-<tr class="memdesc:ac3ddcbd783e23872722f2aa196028cf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">异常存储 <br /></td></tr>
-<tr class="memitem:a098161502ceabf51bb0f266d123cbade" id="r_a098161502ceabf51bb0f266d123cbade"><td class="memItemLeft"><a id="a098161502ceabf51bb0f266d123cbade" name="a098161502ceabf51bb0f266d123cbade"></a>
-<a class="el" href="structatomic.html">atomic</a>&lt; bool &gt;&#160;</td><td class="memItemRight"><b>scheduled_</b> {false}</td></tr>
-<tr class="memdesc:a098161502ceabf51bb0f266d123cbade"><td class="mdescLeft">&#160;</td><td class="mdescRight">调度状态标记 <br /></td></tr>
+<tr class="memitem:aae9ec803d41ac3437996df8014ac9438" id="r_aae9ec803d41ac3437996df8014ac9438"><td class="memItemLeft"><a id="aae9ec803d41ac3437996df8014ac9438" name="aae9ec803d41ac3437996df8014ac9438"></a>
+<a class="el" href="structvirtual__thread__task.html">virtual_thread_task</a>&#160;</td><td class="memItemRight"><b>get_return_object</b> ()</td></tr>
+<tr class="memdesc:aae9ec803d41ac3437996df8014ac9438"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建返回给调用者的任务对象 <br /></td></tr>
+<tr class="memitem:a1293d481179a4832277bf712ccc37d7d" id="r_a1293d481179a4832277bf712ccc37d7d"><td class="memItemLeft"><a id="a1293d481179a4832277bf712ccc37d7d" name="a1293d481179a4832277bf712ccc37d7d"></a>
+<a class="el" href="structsuspend__never.html">suspend_never</a>&#160;</td><td class="memItemRight"><b>initial_suspend</b> () noexcept</td></tr>
+<tr class="memdesc:a1293d481179a4832277bf712ccc37d7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始挂起点 — 不暂停 <br /></td></tr>
+<tr class="memitem:a82709196f67db42a234a9dc93bc519d0" id="r_a82709196f67db42a234a9dc93bc519d0"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a82709196f67db42a234a9dc93bc519d0">final_suspend</a> () noexcept</td></tr>
+<tr class="memdesc:a82709196f67db42a234a9dc93bc519d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">最终挂起点  <br /></td></tr>
+<tr class="memitem:ad5192c1304919fac0705333de16221ab" id="r_ad5192c1304919fac0705333de16221ab"><td class="memItemLeft"><a id="ad5192c1304919fac0705333de16221ab" name="ad5192c1304919fac0705333de16221ab"></a>
+auto&#160;</td><td class="memItemRight"><b>await_transform</b> (inner::yield_tag)</td></tr>
+<tr class="memdesc:ad5192c1304919fac0705333de16221ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">处理 co_await yield <br /></td></tr>
+<tr class="memitem:a830e3c9947559cb322fb08eeeae7e12e" id="r_a830e3c9947559cb322fb08eeeae7e12e"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a830e3c9947559cb322fb08eeeae7e12e">await_transform</a> (inner::sleep_tag tag)</td></tr>
+<tr class="memdesc:a830e3c9947559cb322fb08eeeae7e12e"><td class="mdescLeft">&#160;</td><td class="mdescRight">处理 co_await sleep  <br /></td></tr>
+<tr class="memitem:a5ccc66af81c8bde9b1d02f9b03ab7697" id="r_a5ccc66af81c8bde9b1d02f9b03ab7697"><td class="memItemLeft"><a id="a5ccc66af81c8bde9b1d02f9b03ab7697" name="a5ccc66af81c8bde9b1d02f9b03ab7697"></a>
+void&#160;</td><td class="memItemRight"><b>return_value</b> (const T &amp;value)</td></tr>
+<tr class="memdesc:a5ccc66af81c8bde9b1d02f9b03ab7697"><td class="mdescLeft">&#160;</td><td class="mdescRight">co_return 值，拷贝存储 <br /></td></tr>
+<tr class="memitem:a19e8bbd6f8f0c71741c4cfe3f7aadae3" id="r_a19e8bbd6f8f0c71741c4cfe3f7aadae3"><td class="memItemLeft"><a id="a19e8bbd6f8f0c71741c4cfe3f7aadae3" name="a19e8bbd6f8f0c71741c4cfe3f7aadae3"></a>
+void&#160;</td><td class="memItemRight"><b>return_value</b> (T &amp;&amp;value)</td></tr>
+<tr class="memdesc:a19e8bbd6f8f0c71741c4cfe3f7aadae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">co_return 值，移动存储 <br /></td></tr>
+<tr class="memitem:a4ab6ac92c55ea0a7109b199017fd5da6" id="r_a4ab6ac92c55ea0a7109b199017fd5da6"><td class="memTemplParams" colspan="2"><a id="a4ab6ac92c55ea0a7109b199017fd5da6" name="a4ab6ac92c55ea0a7109b199017fd5da6"></a>
+template&lt;typename Awaiter&gt; </td></tr>
+<tr class="memitem:a4ab6ac92c55ea0a7109b199017fd5da6 template"><td class="memItemLeft">decltype(auto)&#160;</td><td class="memItemRight"><b>await_transform</b> (Awaiter &amp;&amp;a)</td></tr>
+<tr class="memdesc:a4ab6ac92c55ea0a7109b199017fd5da6"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用 await_transform，透传自定义等待器 <br /></td></tr>
+<tr class="memitem:a3c4990628480f6aa6e22e855c8a6f021" id="r_a3c4990628480f6aa6e22e855c8a6f021"><td class="memItemLeft"><a id="a3c4990628480f6aa6e22e855c8a6f021" name="a3c4990628480f6aa6e22e855c8a6f021"></a>
+void&#160;</td><td class="memItemRight"><b>unhandled_exception</b> ()</td></tr>
+<tr class="memdesc:a3c4990628480f6aa6e22e855c8a6f021"><td class="mdescLeft">&#160;</td><td class="mdescRight">未处理异常的捕获入口 <br /></td></tr>
+<tr class="memitem:a15a12c3e33e0ec8231c93c424081b862" id="r_a15a12c3e33e0ec8231c93c424081b862"><td class="memItemLeft"><a id="a15a12c3e33e0ec8231c93c424081b862" name="a15a12c3e33e0ec8231c93c424081b862"></a>
+&#160;</td><td class="memItemRight"><b>~promise_type</b> ()</td></tr>
+<tr class="memdesc:a15a12c3e33e0ec8231c93c424081b862"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构时释放共享状态的引用 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>协程承诺类型 </p>
-<p>定义协程的行为和状态管理。 </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+struct virtual_thread_task&lt; T &gt;::promise_type</div><p>协程 promise_type，管理任务生命周期与返回值存储 </p>
 
-<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00039">39</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00514">514</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="aaa221a87a605e7d9ad35bc13ae393821" name="aaa221a87a605e7d9ad35bc13ae393821"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa221a87a605e7d9ad35bc13ae393821">&#9670;&#160;</a></span>final_suspend()</h2>
+<a id="a830e3c9947559cb322fb08eeeae7e12e" name="a830e3c9947559cb322fb08eeeae7e12e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a830e3c9947559cb322fb08eeeae7e12e">&#9670;&#160;</a></span>await_transform()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structsuspend__always.html">suspend_always</a> virtual_thread_task::promise_type::final_suspend </td>
+          <td class="memname">auto <a class="el" href="structvirtual__thread__task.html">virtual_thread_task</a>&lt; T &gt;::promise_type::await_transform </td>
+          <td>(</td>
+          <td class="paramtype">inner::sleep_tag</td>          <td class="paramname"><span class="paramname"><em>tag</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>处理 co_await sleep </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>包含休眠时长的标记 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00581">581</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="virtual__thread_8hpp_source.html#l00711">virtual_thread_task&lt; T &gt;::await_ready()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00731">virtual_thread_task&lt; T &gt;::await_resume()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00716">virtual_thread_task&lt; T &gt;::await_suspend()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00133">virtual_thread_scheduler::get_instance()</a>, <a class="el" href="thread_8hpp_source.html#l00461">handle()</a>, <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00142">virtual_thread_scheduler::schedule()</a>.</p>
+
+</div>
+</div>
+<a id="a82709196f67db42a234a9dc93bc519d0" name="a82709196f67db42a234a9dc93bc519d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82709196f67db42a234a9dc93bc519d0">&#9670;&#160;</a></span>final_suspend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="structvirtual__thread__task.html">virtual_thread_task</a>&lt; T &gt;::promise_type::final_suspend </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -151,101 +201,11 @@ Public 属性</h2></td></tr>
 </div><div class="memdoc">
 
 <p>最终挂起点 </p>
-<dl class="section return"><dt>返回</dt><dd>总是挂起的挂起器 </dd></dl>
+<p>标记完成、通知等待者、调度 continuation。 </p>
 
-<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00061">61</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00535">535</a> 行定义.</p>
 
-</div>
-</div>
-<a id="abfb12fb610b1028ef2ce7a71060256d5" name="abfb12fb610b1028ef2ce7a71060256d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfb12fb610b1028ef2ce7a71060256d5">&#9670;&#160;</a></span>get_return_object()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structvirtual__thread__task.html">virtual_thread_task</a> virtual_thread_task::promise_type::get_return_object </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>获取返回对象 </p>
-<dl class="section return"><dt>返回</dt><dd>虚拟线程任务对象 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00047">47</a> 行定义.</p>
-
-</div>
-</div>
-<a id="a80bb560c74f8fa5a58f6997866816133" name="a80bb560c74f8fa5a58f6997866816133"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80bb560c74f8fa5a58f6997866816133">&#9670;&#160;</a></span>initial_suspend()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structsuspend__never.html">suspend_never</a> virtual_thread_task::promise_type::initial_suspend </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>初始挂起点 </p>
-<dl class="section return"><dt>返回</dt><dd>立即恢复的挂起器 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00055">55</a> 行定义.</p>
-
-</div>
-</div>
-<a id="aa0fe2e55596d0c95a0886310f400fb28" name="aa0fe2e55596d0c95a0886310f400fb28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0fe2e55596d0c95a0886310f400fb28">&#9670;&#160;</a></span>unhandled_exception()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void virtual_thread_task::promise_type::unhandled_exception </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>未处理异常处理 </p>
-<p>捕获协程中未处理的异常。 </p>
-
-<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00073">73</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="group___exception_handling.html#gae2436c911c2e23511a3012d0ddc2a419">current_exception()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00040">exception_</a>.</p>
+<p class="reference">引用了 <a class="el" href="virtual__thread_8hpp_source.html#l00711">virtual_thread_task&lt; T &gt;::await_ready()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00731">virtual_thread_task&lt; T &gt;::await_resume()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00716">virtual_thread_task&lt; T &gt;::await_suspend()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00133">virtual_thread_scheduler::get_instance()</a>, <a class="el" href="memory__order_8hpp_source.html#l00181">memory_order_acq_rel</a>, <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00142">virtual_thread_scheduler::schedule()</a>.</p>
 
 </div>
 </div>

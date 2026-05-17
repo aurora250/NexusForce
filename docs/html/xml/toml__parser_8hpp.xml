@@ -245,7 +245,7 @@
       <node id="45">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -309,6 +309,8 @@
       <node id="34">
         <label>NeForce/core/memory/temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
         <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
@@ -319,7 +321,7 @@
       <node id="37">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="15" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
@@ -389,6 +391,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
       </node>
       <node id="59">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -425,8 +429,6 @@
       <node id="69">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="31" relation="include">
-        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
@@ -547,7 +549,7 @@
         </childnode>
       </node>
       <node id="13">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="7">
         <label>initializer_list</label>
@@ -603,7 +605,7 @@
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45" refid="classtoml__parser" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classtoml__parser_1a6ccef28c3e84966513f973f762eadf76" kindref="member">toml_parser</ref><sp/>{</highlight></codeline>
+<codeline lineno="45" refid="classtoml__parser" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classtoml__parser_1a54c1c00efb29395d0ecf30fc5f1916ec" kindref="member">toml_parser</ref><sp/>{</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">context<sp/>{</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classtoml__table" kindref="compound">toml_table</ref>*<sp/>table;<sp/><sp/><sp/></highlight></codeline>
@@ -633,11 +635,11 @@
 <codeline lineno="98"><highlight class="normal"></highlight></codeline>
 <codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>skip_whitespace_no_newline()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="105"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>current()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>current()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>peek(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>offset<sp/>=<sp/>1)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>peek(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>offset<sp/>=<sp/>1)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"></highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>eof()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>eof()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"></highlight></codeline>
 <codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___iterator_operation_1ga0ebe1ee99151c272bdedc1a48d148aa2" kindref="member">advance</ref>()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="131"><highlight class="normal"></highlight></codeline>
@@ -687,16 +689,16 @@
 <codeline lineno="312"><highlight class="normal"></highlight></codeline>
 <codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>parse_array_table_header();</highlight></codeline>
 <codeline lineno="319"><highlight class="normal"></highlight></codeline>
-<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classtoml__table" kindref="compound">toml_table</ref>*<sp/>get_or_create_table(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref>&amp;<sp/><ref refid="classpath" kindref="compound">path</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classtoml__table" kindref="compound">toml_table</ref>*<sp/>get_or_create_table(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref>&amp;<sp/><ref refid="classpath" kindref="compound">path</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="328"><highlight class="normal"></highlight></codeline>
-<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classtoml__table" kindref="compound">toml_table</ref>*<sp/>navigate_to_table(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref>&amp;<sp/><ref refid="classpath" kindref="compound">path</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classtoml__table" kindref="compound">toml_table</ref>*<sp/>navigate_to_table(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref>&amp;<sp/><ref refid="classpath" kindref="compound">path</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="335"><highlight class="normal"></highlight></codeline>
 <codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_current_table(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref>&amp;<sp/><ref refid="classpath" kindref="compound">path</ref>);</highlight></codeline>
 <codeline lineno="343"><highlight class="normal"></highlight></codeline>
 <codeline lineno="344"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="351" refid="classtoml__parser_1a6ccef28c3e84966513f973f762eadf76" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classtoml__parser_1a6ccef28c3e84966513f973f762eadf76" kindref="member">toml_parser</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>text)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="351" refid="classtoml__parser_1a54c1c00efb29395d0ecf30fc5f1916ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classtoml__parser_1a54c1c00efb29395d0ecf30fc5f1916ec" kindref="member">toml_parser</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>text)<sp/>:</highlight></codeline>
 <codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/>text_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(text)),</highlight></codeline>
-<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/>len_(text_.size())<sp/>{</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/>len_(text_.<ref refid="group___type_erasure_functions_1ga72e7469b7b31643579897a98a59f44ba" kindref="member">size</ref>())<sp/>{</highlight></codeline>
 <codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>root_<sp/>=<sp/><ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique&lt;toml_table&gt;</ref>();</highlight></codeline>
 <codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ctb_<sp/>=<sp/>root_.get();</highlight></codeline>
 <codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -711,6 +713,6 @@
 <codeline lineno="381"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="382"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_FILE_TOML_TOML_PARSER_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/toml/toml_parser.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_parser.hpp"/>
   </compounddef>
 </doxygen>

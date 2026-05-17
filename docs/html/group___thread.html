@@ -120,8 +120,6 @@ $(function(){initNavTree('group___thread.html','',''); });
 <tr class="memdesc:gab8ae3d955c7c6a9052597e15e896f96e"><td class="mdescLeft">&#160;</td><td class="mdescRight">让出当前线程的时间片  <br /></td></tr>
 <tr class="memitem:gaef795de3960f4434c3f11391cce5e9b4" id="r_gaef795de3960f4434c3f11391cce5e9b4"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#gaef795de3960f4434c3f11391cce5e9b4">relax</a> () noexcept</td></tr>
 <tr class="memdesc:gaef795de3960f4434c3f11391cce5e9b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程放松  <br /></td></tr>
-<tr class="memitem:gad354de74be581f6cbbaedd5494d62d88" id="r_gad354de74be581f6cbbaedd5494d62d88"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#gad354de74be581f6cbbaedd5494d62d88">relax</a> (const int <a class="el" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>) noexcept</td></tr>
-<tr class="memdesc:gad354de74be581f6cbbaedd5494d62d88"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据计数进行线程放松  <br /></td></tr>
 <tr class="memitem:ga369d5171a87b9dcaa7e23d446d5dae91" id="r_ga369d5171a87b9dcaa7e23d446d5dae91"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#ga369d5171a87b9dcaa7e23d446d5dae91">sleep_for_ms</a> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>) noexcept</td></tr>
 <tr class="memdesc:ga369d5171a87b9dcaa7e23d446d5dae91"><td class="mdescLeft">&#160;</td><td class="mdescRight">睡眠指定毫秒数  <br /></td></tr>
 <tr class="memitem:ga502974f51f85fd2faba9b8a3241b7e85" id="r_ga502974f51f85fd2faba9b8a3241b7e85"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga502974f51f85fd2faba9b8a3241b7e85">sleep_for_ms</a> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> ms, bool busy_wait) noexcept</td></tr>
@@ -257,7 +255,7 @@ $(function(){initNavTree('group___thread.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>当前线程运行的CPU核心编号</dd></dl>
 <p>返回当前线程正在运行的CPU核心的逻辑编号。 </p>
 
-<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00063">63</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00060">60</a> 行定义.</p>
 
 </div>
 </div>
@@ -289,7 +287,7 @@ $(function(){initNavTree('group___thread.html','',''); });
 
 <p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00461">461</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="virtual__thread_8hpp_source.html#l00261">virtual_thread_awaiter::await_suspend()</a>, <a class="el" href="classfile__async.html#aa27dd3253c71dea9e0329739724561fb">file_async::file_async()</a>, <a class="el" href="classfile__info.html#a90d01d2d0b844bb827fbe41b53d6482c">file_info::file_info()</a>, <a class="el" href="classfile__locker.html#a299b55e3366398a88544208942baaea2">file_locker::file_locker()</a>, <a class="el" href="classthread.html#a4b2d684cd7193db5dfedf70fd705d5e6">thread::name()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00193">virtual_thread_scheduler::schedule()</a> , 以及 <a class="el" href="classthread.html#ad7c681ee3c6085a87309f040467b19cb">thread::set_name()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="virtual__thread_8hpp_source.html#l00581">virtual_thread_task&lt; T &gt;::promise_type::await_transform()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00561">virtual_thread_task&lt; T &gt;::promise_type::await_transform()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00315">virtual_thread_task&lt; void &gt;::promise_type::await_transform()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00294">virtual_thread_task&lt; void &gt;::promise_type::await_transform()</a>, <a class="el" href="classfile__async.html#aa27dd3253c71dea9e0329739724561fb">file_async::file_async()</a>, <a class="el" href="classfile__info.html#a90d01d2d0b844bb827fbe41b53d6482c">file_info::file_info()</a>, <a class="el" href="classfile__locker.html#a299b55e3366398a88544208942baaea2">file_locker::file_locker()</a>, <a class="el" href="classthread.html#a4b2d684cd7193db5dfedf70fd705d5e6">thread::name()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00142">virtual_thread_scheduler::schedule()</a> , 以及 <a class="el" href="classthread.html#ad7c681ee3c6085a87309f040467b19cb">thread::set_name()</a>.</p>
 
 </div>
 </div>
@@ -321,7 +319,7 @@ $(function(){initNavTree('group___thread.html','',''); });
 
 <p class="definition">在文件 <a class="el" href="thread_8hpp_source.html">thread.hpp</a> 第 <a class="el" href="thread_8hpp_source.html#l00449">449</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="timer_8hpp_source.html#l00174">timer_scheduler&lt; Clock &gt;::add_task()</a> , 以及 <a class="el" href="type_8hpp_source.html#l00109">meta_type::meta_type()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="timer_8hpp_source.html#l00180">timer_scheduler&lt; Clock &gt;::add_task()</a> , 以及 <a class="el" href="type_8hpp_source.html#l00109">meta_type::meta_type()</a>.</p>
 
 </div>
 </div>
@@ -390,7 +388,7 @@ $(function(){initNavTree('group___thread.html','',''); });
 
 <p class="reference">引用了 <a class="el" href="classthread.html#ac1c3666fcd10451cee601dec58c32c00">thread::name()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ini__value_8hpp_source.html#l00398">ini_document::add_section()</a>, <a class="el" href="env__value_8hpp_source.html#l00261">env_document::add_variable()</a>, <a class="el" href="classyaml__builder.html#a015f1851426fa2eebe9012d56ba68b85">yaml_builder::alias()</a>, <a class="el" href="classyaml__builder.html#abf640029a79cd8b4c580f06aa78f38a4">yaml_builder::anchor()</a>, <a class="el" href="classtoml__builder.html#a974fb3c69991d8ed2763fb67cc360a98">toml_builder::begin_array_table()</a>, <a class="el" href="classini__builder.html#a44b845c6e271597ff3777dfb5ad79384">ini_builder::begin_section()</a>, <a class="el" href="classtoml__builder.html#a738d1624f77ed33ab8aa325ab10d2287">toml_builder::begin_table()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00116">http_server_request::cookie()</a>, <a class="el" href="classcmdline.html#ae81eb5f75cf46f384018328e3639c2d8">cmdline::count()</a>, <a class="el" href="structenvironment.html#a90bd34e3e9d1904c293474485e0c32f2">environment::exists()</a>, <a class="el" href="registry_8hpp_source.html#l00086">registry::find()</a>, <a class="el" href="classpath__tree.html#a72defec19aa8e46baca07b4376ef8f43">path_tree::find_all()</a>, <a class="el" href="classpath__tree_1_1node.html#a81aa88f21fb15b4a7f7967c6b669a078">path_tree::node::find_child()</a>, <a class="el" href="registry_8hpp_source.html#l00076">registry::find_unlocked()</a>, <a class="el" href="reflect_8hpp_source.html#l00122">type_builder&lt; T &gt;::function()</a>, <a class="el" href="reflect_8hpp_source.html#l00104">type_builder&lt; T &gt;::function()</a>, <a class="el" href="structenvironment.html#ae1d7972f4d2827ec30711d297db776a0">environment::get()</a>, <a class="el" href="env__value_8hpp_source.html#l00386">env_document::get_bool()</a>, <a class="el" href="env__value_8hpp_source.html#l00375">env_document::get_double()</a>, <a class="el" href="env__value_8hpp_source.html#l00353">env_document::get_int()</a>, <a class="el" href="env__value_8hpp_source.html#l00364">env_document::get_int64()</a>, <a class="el" href="classplugin__manager.html#a785b545933063abb5225b0a54cb016b2">plugin_manager::get_plugin()</a>, <a class="el" href="ini__value_8hpp_source.html#l00427">ini_document::get_section()</a>, <a class="el" href="ini__value_8hpp_source.html#l00411">ini_document::get_section()</a>, <a class="el" href="env__value_8hpp_source.html#l00342">env_document::get_string()</a>, <a class="el" href="env__value_8hpp_source.html#l00295">env_document::get_variable()</a>, <a class="el" href="env__value_8hpp_source.html#l00282">env_document::get_variable()</a>, <a class="el" href="classcmdline.html#a083090bc73cb8711d21510b48ee8be77">cmdline::has()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00133">http_server_request::has_cookie()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00157">http_server_request::has_header()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00309">http_server_response::has_header()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00107">http_server_request::has_parameter()</a>, <a class="el" href="ini__value_8hpp_source.html#l00443">ini_document::has_section()</a>, <a class="el" href="classdynamic__library.html#a0a770868526da593b7863afa30a5be1a">dynamic_library::has_symbol()</a>, <a class="el" href="env__value_8hpp_source.html#l00308">env_document::has_variable()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00140">http_server_request::header()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00292">http_server_response::header()</a>, <a class="el" href="ini__value_8hpp_source.html#l00208">ini_section::ini_section()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00090">http_server_request::parameter()</a>, <a class="el" href="reflect_8hpp_source.html#l00077">type_builder&lt; T &gt;::property()</a>, <a class="el" href="reflect_8hpp_source.html#l00198">reflect()</a>, <a class="el" href="registry_8hpp_source.html#l00056">registry::register_type()</a>, <a class="el" href="classpath__tree_1_1node.html#a17193f36134699f1e9f07c0cc708a892">path_tree::node::remove_child()</a>, <a class="el" href="env__value_8hpp_source.html#l00314">env_document::remove_variable()</a>, <a class="el" href="structenvironment.html#a6a5a4531f8ec5310d84c067fcfb6c388">environment::set()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00126">http_server_request::set_cookie()</a>, <a class="el" href="http__server_8hpp_source.html#l00192">http_server::set_cookie_name()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00150">http_server_request::set_header()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00302">http_server_response::set_header()</a>, <a class="el" href="ini__value_8hpp_source.html#l00249">ini_section::set_name()</a>, <a class="el" href="thread_8hpp_source.html#l00484">set_name()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00100">http_server_request::set_parameter()</a>, <a class="el" href="env__value_8hpp_source.html#l00272">env_document::set_variable()</a>, <a class="el" href="reflect_8hpp_source.html#l00140">type_builder&lt; T &gt;::static_function()</a>, <a class="el" href="classdynamic__library.html#a31449138e99fe50bad7212a06bf454eb">dynamic_library::symbol()</a>, <a class="el" href="dynamic__library_8hpp_source.html#l00101">dynamic_library::to_symbol()</a>, <a class="el" href="reflect_8hpp_source.html#l00045">type_builder&lt; T &gt;::type_builder()</a>, <a class="el" href="classplugin__manager.html#a9beb1072652ecc2f9080f8a545a781ae">plugin_manager::unload_plugin()</a>, <a class="el" href="structenvironment.html#af1d2eff32051b0a9ecb3a3c0a08078eb">environment::unset()</a> , 以及 <a class="el" href="classini__builder.html#adba2bba2f7102d2581704291ed3390d0">ini_builder::value_section()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ini__value_8hpp_source.html#l00398">ini_document::add_section()</a>, <a class="el" href="env__value_8hpp_source.html#l00261">env_document::add_variable()</a>, <a class="el" href="classyaml__builder.html#a015f1851426fa2eebe9012d56ba68b85">yaml_builder::alias()</a>, <a class="el" href="classyaml__builder.html#abf640029a79cd8b4c580f06aa78f38a4">yaml_builder::anchor()</a>, <a class="el" href="classtoml__builder.html#a974fb3c69991d8ed2763fb67cc360a98">toml_builder::begin_array_table()</a>, <a class="el" href="classini__builder.html#a44b845c6e271597ff3777dfb5ad79384">ini_builder::begin_section()</a>, <a class="el" href="classtoml__builder.html#a738d1624f77ed33ab8aa325ab10d2287">toml_builder::begin_table()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00114">http_server_request::cookie()</a>, <a class="el" href="classcmdline.html#ae81eb5f75cf46f384018328e3639c2d8">cmdline::count()</a>, <a class="el" href="structenvironment.html#a90bd34e3e9d1904c293474485e0c32f2">environment::exists()</a>, <a class="el" href="registry_8hpp_source.html#l00086">registry::find()</a>, <a class="el" href="classpath__tree.html#a72defec19aa8e46baca07b4376ef8f43">path_tree::find_all()</a>, <a class="el" href="classpath__tree_1_1node.html#a81aa88f21fb15b4a7f7967c6b669a078">path_tree::node::find_child()</a>, <a class="el" href="registry_8hpp_source.html#l00076">registry::find_unlocked()</a>, <a class="el" href="reflect_8hpp_source.html#l00122">type_builder&lt; T &gt;::function()</a>, <a class="el" href="reflect_8hpp_source.html#l00104">type_builder&lt; T &gt;::function()</a>, <a class="el" href="structenvironment.html#ae1d7972f4d2827ec30711d297db776a0">environment::get()</a>, <a class="el" href="env__value_8hpp_source.html#l00386">env_document::get_bool()</a>, <a class="el" href="env__value_8hpp_source.html#l00375">env_document::get_double()</a>, <a class="el" href="env__value_8hpp_source.html#l00353">env_document::get_int()</a>, <a class="el" href="env__value_8hpp_source.html#l00364">env_document::get_int64()</a>, <a class="el" href="classplugin__manager.html#a785b545933063abb5225b0a54cb016b2">plugin_manager::get_plugin()</a>, <a class="el" href="ini__value_8hpp_source.html#l00427">ini_document::get_section()</a>, <a class="el" href="ini__value_8hpp_source.html#l00411">ini_document::get_section()</a>, <a class="el" href="env__value_8hpp_source.html#l00342">env_document::get_string()</a>, <a class="el" href="env__value_8hpp_source.html#l00295">env_document::get_variable()</a>, <a class="el" href="env__value_8hpp_source.html#l00282">env_document::get_variable()</a>, <a class="el" href="classcmdline.html#a083090bc73cb8711d21510b48ee8be77">cmdline::has()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00131">http_server_request::has_cookie()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00155">http_server_request::has_header()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00307">http_server_response::has_header()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00107">http_server_request::has_parameter()</a>, <a class="el" href="ini__value_8hpp_source.html#l00443">ini_document::has_section()</a>, <a class="el" href="classdynamic__library.html#a0a770868526da593b7863afa30a5be1a">dynamic_library::has_symbol()</a>, <a class="el" href="env__value_8hpp_source.html#l00308">env_document::has_variable()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00138">http_server_request::header()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00290">http_server_response::header()</a>, <a class="el" href="ini__value_8hpp_source.html#l00208">ini_section::ini_section()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00090">http_server_request::parameter()</a>, <a class="el" href="reflect_8hpp_source.html#l00077">type_builder&lt; T &gt;::property()</a>, <a class="el" href="reflect_8hpp_source.html#l00198">reflect()</a>, <a class="el" href="registry_8hpp_source.html#l00056">registry::register_type()</a>, <a class="el" href="classpath__tree_1_1node.html#a17193f36134699f1e9f07c0cc708a892">path_tree::node::remove_child()</a>, <a class="el" href="env__value_8hpp_source.html#l00314">env_document::remove_variable()</a>, <a class="el" href="structenvironment.html#a6a5a4531f8ec5310d84c067fcfb6c388">environment::set()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00124">http_server_request::set_cookie()</a>, <a class="el" href="http__server_8hpp_source.html#l00192">http_server::set_cookie_name()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00148">http_server_request::set_header()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00300">http_server_response::set_header()</a>, <a class="el" href="ini__value_8hpp_source.html#l00249">ini_section::set_name()</a>, <a class="el" href="thread_8hpp_source.html#l00484">set_name()</a>, <a class="el" href="http__server__message_8hpp_source.html#l00100">http_server_request::set_parameter()</a>, <a class="el" href="env__value_8hpp_source.html#l00272">env_document::set_variable()</a>, <a class="el" href="reflect_8hpp_source.html#l00140">type_builder&lt; T &gt;::static_function()</a>, <a class="el" href="classdynamic__library.html#a31449138e99fe50bad7212a06bf454eb">dynamic_library::symbol()</a>, <a class="el" href="dynamic__library_8hpp_source.html#l00101">dynamic_library::to_symbol()</a>, <a class="el" href="reflect_8hpp_source.html#l00045">type_builder&lt; T &gt;::type_builder()</a>, <a class="el" href="classplugin__manager.html#a9beb1072652ecc2f9080f8a545a781ae">plugin_manager::unload_plugin()</a>, <a class="el" href="structenvironment.html#af1d2eff32051b0a9ecb3a3c0a08078eb">environment::unset()</a> , 以及 <a class="el" href="classini__builder.html#adba2bba2f7102d2581704291ed3390d0">ini_builder::value_section()</a>.</p>
 
 </div>
 </div>
@@ -421,12 +419,12 @@ $(function(){initNavTree('group___thread.html','',''); });
 <dl class="section return"><dt>返回</dt><dd>当前线程的优先级值（0-100，0为最低）</dd></dl>
 <p>获取当前线程的调度优先级。 若获取失败，返回 0。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00444">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00462">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00659">signal&lt; Types &gt;::connect_filtered()</a>, <a class="el" href="signals_8hpp_source.html#l00602">signal&lt; Types &gt;::connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00630">signal&lt; Types &gt;::connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00562">signal&lt; Types &gt;::connect_signal()</a>, <a class="el" href="signals_8hpp_source.html#l00579">signal&lt; Types &gt;::connect_signal()</a>, <a class="el" href="signals_8hpp_source.html#l00690">signal&lt; Types &gt;::connect_transformed()</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="#ga628884c4e7e477df68a380c9751d1b81">set_priority()</a>, <a class="el" href="classthread__pool.html#ae3bf04c2adddd193bba36f6c338c9b9e">thread_pool::submit_after()</a>, <a class="el" href="classthread__pool.html#a159c162d139e452d7539a4d0c46fc908">thread_pool::submit_every()</a> , 以及 <a class="el" href="classthread__pool.html#a4269d4f0985eeb9e6f38bb9aeae9e67a">thread_pool::submit_task()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="signals_8hpp_source.html#l00446">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00464">signal&lt; Types &gt;::connect()</a>, <a class="el" href="signals_8hpp_source.html#l00661">signal&lt; Types &gt;::connect_filtered()</a>, <a class="el" href="signals_8hpp_source.html#l00604">signal&lt; Types &gt;::connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00632">signal&lt; Types &gt;::connect_if()</a>, <a class="el" href="signals_8hpp_source.html#l00564">signal&lt; Types &gt;::connect_signal()</a>, <a class="el" href="signals_8hpp_source.html#l00581">signal&lt; Types &gt;::connect_signal()</a>, <a class="el" href="signals_8hpp_source.html#l00690">signal&lt; Types &gt;::connect_transformed()</a>, <a class="el" href="group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f">get_current_task_group()</a>, <a class="el" href="#ga628884c4e7e477df68a380c9751d1b81">set_priority()</a>, <a class="el" href="classthread__pool.html#ae3bf04c2adddd193bba36f6c338c9b9e">thread_pool::submit_after()</a>, <a class="el" href="classthread__pool.html#a159c162d139e452d7539a4d0c46fc908">thread_pool::submit_every()</a> , 以及 <a class="el" href="classthread__pool.html#a4269d4f0985eeb9e6f38bb9aeae9e67a">thread_pool::submit_task()</a>.</p>
 
 </div>
 </div>
 <a id="gaef795de3960f4434c3f11391cce5e9b4" name="gaef795de3960f4434c3f11391cce5e9b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaef795de3960f4434c3f11391cce5e9b4">&#9670;&#160;</a></span>relax() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#gaef795de3960f4434c3f11391cce5e9b4">&#9670;&#160;</a></span>relax()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -451,49 +449,7 @@ $(function(){initNavTree('group___thread.html','',''); });
 <p>线程放松 </p>
 <p>使用CPU特定的暂停指令让当前线程短暂放松，减少CPU功耗。 适用于自旋锁等场景中的忙等待。 </p>
 
-<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00090">90</a> 行定义.</p>
-
-</div>
-</div>
-<a id="gad354de74be581f6cbbaedd5494d62d88" name="gad354de74be581f6cbbaedd5494d62d88"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad354de74be581f6cbbaedd5494d62d88">&#9670;&#160;</a></span>relax() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE void relax </td>
-          <td>(</td>
-          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>count</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>根据计数进行线程放松 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">count</td><td>放松计数</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>根据计数值选择不同程度的放松策略：</p><ul>
-<li>小计数：多次调用relax()</li>
-<li>中等计数：调用一次relax()</li>
-<li>大计数：直接让出时间片 </li>
-</ul>
-
-<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00117">117</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="search_8hpp_source.html#l00391">count()</a>.</p>
+<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00087">87</a> 行定义.</p>
 
 </div>
 </div>
@@ -631,7 +587,7 @@ template&lt;typename Rep, typename Period&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00884">884</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="duration_8hpp_source.html">duration.hpp</a> 第 <a class="el" href="duration_8hpp_source.html#l00886">886</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="duration_8hpp_source.html#l00266">duration&lt; Rep, Period &gt;::count()</a>.</p>
 
@@ -670,7 +626,7 @@ template&lt;typename Rep, typename Period&gt; </div>
 <p>让当前线程睡眠指定的时间。</p>
 <dl class="section note"><dt>注解</dt><dd>使用系统睡眠，实际睡眠时间受系统调度影响。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00137">137</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00113">113</a> 行定义.</p>
 
 </div>
 </div>
@@ -882,7 +838,7 @@ template&lt;typename Clock, typename Dur&gt; </div>
 <p>让出当前线程的时间片 </p>
 <p>主动让出当前线程的CPU时间片，让其他线程可以运行。 </p>
 
-<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00076">76</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="this__thread_8hpp_source.html">this_thread.hpp</a> 第 <a class="el" href="this__thread_8hpp_source.html#l00073">73</a> 行定义.</p>
 
 </div>
 </div>

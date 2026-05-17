@@ -9,6 +9,7 @@
     <includedby refid="condition__variable_8hpp" local="yes">condition_variable.hpp</includedby>
     <includedby refid="db__interface_8hpp" local="yes">db_interface.hpp</includedby>
     <includedby refid="dns__client_8hpp" local="yes">dns_client.hpp</includedby>
+    <includedby refid="lru__cache_8hpp" local="yes">lru_cache.hpp</includedby>
     <includedby refid="ttl__cache_8hpp" local="yes">ttl_cache.hpp</includedby>
     <incdepgraph>
       <node id="9">
@@ -106,7 +107,7 @@
         </childnode>
       </node>
       <node id="10">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -126,22 +127,22 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>atomic_timed_wait.hpp</label>
         <link refid="atomic__timed__wait_8hpp"/>
-        <childnode refid="17" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="22">
         <label>condition_variable.hpp</label>
         <link refid="condition__variable_8hpp"/>
-        <childnode refid="22" relation="include">
-        </childnode>
         <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
@@ -163,6 +164,8 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
       </node>
       <node id="10">
         <label>promise.hpp</label>
@@ -170,22 +173,22 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="20">
         <label>scoped_thread.hpp</label>
         <link refid="scoped__thread_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>semaphore.hpp</label>
         <link refid="semaphore_8hpp"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>stop_token.hpp</label>
         <link refid="stop__token_8hpp"/>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -196,7 +199,7 @@
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="16">
         <label>timer.hpp</label>
         <link refid="timer_8hpp"/>
         <childnode refid="13" relation="include">
@@ -209,18 +212,24 @@
         </childnode>
       </node>
       <node id="43">
+        <label>lru_cache.hpp</label>
+        <link refid="lru__cache_8hpp"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
         <label>ttl_cache.hpp</label>
         <link refid="ttl__cache_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="24">
+      <node id="25">
         <label>signal.hpp</label>
         <link refid="signal_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="20">
+      <node id="21">
         <label>click.hpp</label>
         <link refid="click_8hpp"/>
         <childnode refid="6" relation="include">
@@ -231,11 +240,11 @@
         <link refid="clocks_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
@@ -243,8 +252,10 @@
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
       </node>
-      <node id="22">
+      <node id="23">
         <label>database_pool.hpp</label>
         <link refid="database__pool_8hpp"/>
         <childnode refid="6" relation="include">
@@ -253,7 +264,7 @@
       <node id="28">
         <label>db_interface.hpp</label>
         <link refid="db__interface_8hpp"/>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -350,7 +361,7 @@
         <label>sqlite_result.hpp</label>
         <link refid="sqlite__result_8hpp"/>
       </node>
-      <node id="23">
+      <node id="24">
         <label>logger.hpp</label>
         <link refid="logger_8hpp"/>
         <childnode refid="6" relation="include">
@@ -443,20 +454,20 @@
 <codeline lineno="30" refid="structsystem__clock_1ad217ea732521ca1ac3f900437d86288b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsystem__clock_1ad217ea732521ca1ac3f900437d86288b" kindref="member">duration</ref><sp/>=<sp/><ref refid="group___duration_1ga9a8cc91104c0b0cceec0f8cf188bd19d" kindref="member">nanoseconds</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="31" refid="structsystem__clock_1aa107f19cc41bfa88dbc2cf54f22e620d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsystem__clock_1aa107f19cc41bfa88dbc2cf54f22e620d" kindref="member">rep</ref><sp/>=<sp/><ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">duration::rep</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="32" refid="structsystem__clock_1a7a0eef92cac7502aae67fdd9b2faaabc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsystem__clock_1a7a0eef92cac7502aae67fdd9b2faaabc" kindref="member">period</ref><sp/>=<sp/><ref refid="structduration_1a68dc2125c5638618cc8235fd1aa3e74b" kindref="member">duration::period</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="33" refid="structsystem__clock_1aff5d3693a815b7e4600f56bb57b46c84" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsystem__clock_1aff5d3693a815b7e4600f56bb57b46c84" kindref="member">time_point</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="structsystem__clock_1aff5d3693a815b7e4600f56bb57b46c84" kindref="member">time_point&lt;system_clock&gt;</ref>;<sp/></highlight></codeline>
+<codeline lineno="33" refid="structsystem__clock_1a46c8a0ed40fc199e96d65672ba86c592" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsystem__clock_1a46c8a0ed40fc199e96d65672ba86c592" kindref="member">time_point</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="structsystem__clock_1a46c8a0ed40fc199e96d65672ba86c592" kindref="member">time_point&lt;system_clock&gt;</ref>;<sp/></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="structduration_1ae715697dae0d3024f30bb2ec9c791551" kindref="member">duration::min</ref>()<sp/>&lt;<sp/><ref refid="structduration_1addac7f644268d8a3cc561218ebb72734" kindref="member">duration::zero</ref>(),<sp/></highlight><highlight class="stringliteral">&quot;a<sp/>clock&apos;s<sp/>minimum<sp/>duration<sp/>cannot<sp/>be<sp/>less<sp/>than<sp/>its<sp/>epoch&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
 <codeline lineno="42" refid="structsystem__clock_1a314db9ecae28e894fbf2b299353f7262" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsystem__clock_1a314db9ecae28e894fbf2b299353f7262" kindref="member">is_steady</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50" refid="structsystem__clock_1a47cd2a828693e9c461f8400b9a4d2670" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structsystem__clock_1aff5d3693a815b7e4600f56bb57b46c84" kindref="member">time_point</ref><sp/><ref refid="structsystem__clock_1a47cd2a828693e9c461f8400b9a4d2670" kindref="member">now</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="50" refid="structsystem__clock_1a47cd2a828693e9c461f8400b9a4d2670" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structsystem__clock_1a46c8a0ed40fc199e96d65672ba86c592" kindref="member">time_point</ref><sp/><ref refid="structsystem__clock_1a47cd2a828693e9c461f8400b9a4d2670" kindref="member">now</ref>()<sp/>noexcept;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57" refid="structsystem__clock_1ac653ba19c86a1f4e620eb522c58b3a76" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/><ref refid="structsystem__clock_1ac653ba19c86a1f4e620eb522c58b3a76" kindref="member">to_seconds</ref>(const<sp/><ref refid="structsystem__clock_1aff5d3693a815b7e4600f56bb57b46c84" kindref="member">time_point</ref>&amp;<sp/>time_point_value)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="57" refid="structsystem__clock_1ac653ba19c86a1f4e620eb522c58b3a76" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/><ref refid="structsystem__clock_1ac653ba19c86a1f4e620eb522c58b3a76" kindref="member">to_seconds</ref>(const<sp/><ref refid="structsystem__clock_1a46c8a0ed40fc199e96d65672ba86c592" kindref="member">time_point</ref>&amp;<sp/>time_point_value)<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>time_point_value.since_epoch().to_sec();</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66" refid="structsystem__clock_1ade04dc35c5c894e4adf73eec0e84321e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structsystem__clock_1aff5d3693a815b7e4600f56bb57b46c84" kindref="member">time_point</ref><sp/><ref refid="structsystem__clock_1ade04dc35c5c894e4adf73eec0e84321e" kindref="member">from_seconds</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/>time_value)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">TP<sp/>=<sp/>_NEFORCE<sp/><ref refid="structsystem__clock_1aff5d3693a815b7e4600f56bb57b46c84" kindref="member">time_point&lt;system_clock, seconds&gt;</ref>;</highlight></codeline>
+<codeline lineno="66" refid="structsystem__clock_1ade04dc35c5c894e4adf73eec0e84321e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structsystem__clock_1a46c8a0ed40fc199e96d65672ba86c592" kindref="member">time_point</ref><sp/><ref refid="structsystem__clock_1ade04dc35c5c894e4adf73eec0e84321e" kindref="member">from_seconds</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/>time_value)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">TP<sp/>=<sp/>_NEFORCE<sp/><ref refid="structsystem__clock_1a46c8a0ed40fc199e96d65672ba86c592" kindref="member">time_point&lt;system_clock, seconds&gt;</ref>;</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___duration_1gafaba32c48d91da85098ecb115cea65ed" kindref="member">time_cast&lt;duration&gt;</ref>(TP(time_value));</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="70"><highlight class="normal">};</highlight></codeline>
@@ -466,14 +477,14 @@
 <codeline lineno="81" refid="structsteady__clock_1a2835ea558a6187fa15658b5d5fcd439c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsteady__clock_1a2835ea558a6187fa15658b5d5fcd439c" kindref="member">duration</ref><sp/>=<sp/><ref refid="group___duration_1ga9a8cc91104c0b0cceec0f8cf188bd19d" kindref="member">nanoseconds</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="82" refid="structsteady__clock_1aa5a04d6165989b4a4ea92e45647803bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsteady__clock_1aa5a04d6165989b4a4ea92e45647803bd" kindref="member">rep</ref><sp/>=<sp/><ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">duration::rep</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="83" refid="structsteady__clock_1a136d5904eea640c1e6381e7653db3bab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsteady__clock_1a136d5904eea640c1e6381e7653db3bab" kindref="member">period</ref><sp/>=<sp/><ref refid="structduration_1a68dc2125c5638618cc8235fd1aa3e74b" kindref="member">duration::period</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="84" refid="structsteady__clock_1aaf25d203f1455c8c7010a6681de52dc5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsteady__clock_1aaf25d203f1455c8c7010a6681de52dc5" kindref="member">time_point</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="structsteady__clock_1aaf25d203f1455c8c7010a6681de52dc5" kindref="member">time_point&lt;steady_clock&gt;</ref>;<sp/></highlight></codeline>
+<codeline lineno="84" refid="structsteady__clock_1aa143383acb50555650c2ce3873a52f2e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsteady__clock_1aa143383acb50555650c2ce3873a52f2e" kindref="member">time_point</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="structsteady__clock_1aa143383acb50555650c2ce3873a52f2e" kindref="member">time_point&lt;steady_clock&gt;</ref>;<sp/></highlight></codeline>
 <codeline lineno="85"><highlight class="normal"></highlight></codeline>
 <codeline lineno="91" refid="structsteady__clock_1a922835cb08bbffb1e5705011d9700d6c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsteady__clock_1a922835cb08bbffb1e5705011d9700d6c" kindref="member">is_steady</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="97" refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structsteady__clock_1aaf25d203f1455c8c7010a6681de52dc5" kindref="member">time_point</ref><sp/><ref refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d" kindref="member">now</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="97" refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structsteady__clock_1aa143383acb50555650c2ce3873a52f2e" kindref="member">time_point</ref><sp/><ref refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d" kindref="member">now</ref>()<sp/>noexcept;</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"></highlight></codeline>
 <codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>Dur&gt;</highlight></codeline>
-<codeline lineno="105" refid="structsteady__clock_1a528667874a0da4524446fed0176a5951" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/><ref refid="structsystem__clock" kindref="compound">system_clock</ref>::<ref refid="structsteady__clock_1aaf25d203f1455c8c7010a6681de52dc5" kindref="member">time_point</ref><sp/><ref refid="structsteady__clock_1a528667874a0da4524446fed0176a5951" kindref="member">to_system</ref>(const<sp/>_NEFORCE<sp/><ref refid="structsteady__clock_1aaf25d203f1455c8c7010a6681de52dc5" kindref="member">time_point</ref>&lt;<ref refid="structsteady__clock" kindref="compound">steady_clock</ref>,<sp/>Dur&gt;&amp;<sp/>tp)<sp/>{</highlight></codeline>
+<codeline lineno="105" refid="structsteady__clock_1accc329b3c24bd4bddb241bf1df11a047" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/><ref refid="structsystem__clock" kindref="compound">system_clock</ref>::<ref refid="structsteady__clock_1aa143383acb50555650c2ce3873a52f2e" kindref="member">time_point</ref><sp/><ref refid="structsteady__clock_1accc329b3c24bd4bddb241bf1df11a047" kindref="member">to_system</ref>(const<sp/>_NEFORCE<sp/><ref refid="structsteady__clock_1aa143383acb50555650c2ce3873a52f2e" kindref="member">time_point</ref>&lt;<ref refid="structsteady__clock" kindref="compound">steady_clock</ref>,<sp/>Dur&gt;&amp;<sp/>tp)<sp/>{</highlight></codeline>
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>steady_now<sp/>=<sp/><ref refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d" kindref="member">steady_clock::now</ref>();</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>sys_now<sp/>=<sp/><ref refid="structsystem__clock_1a47cd2a828693e9c461f8400b9a4d2670" kindref="member">system_clock::now</ref>();</highlight></codeline>
 <codeline lineno="108"><highlight class="normal"></highlight></codeline>
@@ -522,6 +533,6 @@
 <codeline lineno="192"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_TIME_CLOCKS_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/time/clocks.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/time/clocks.hpp"/>
   </compounddef>
 </doxygen>

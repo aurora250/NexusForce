@@ -9,7 +9,7 @@ var classregex__token__iterator =
     [ "regex_token_iterator", "classregex__token__iterator.html#ae554bca42259aaad8fa8f273b3312198", null ],
     [ "regex_token_iterator", "classregex__token__iterator.html#a4f8db9feb800354529f9597f01dd4a7e", null ],
     [ "operator!=", "classregex__token__iterator.html#a8dddcc464a56a29889e7bcdb1bd499ad", null ],
-    [ "operator*", "classregex__token__iterator.html#a964a698e7c2e358b9b056f4f0576eb8f", null ],
+    [ "operator*", "classregex__token__iterator.html#aae0ae832d29007602f5478d98e1a7719", null ],
     [ "operator++", "classregex__token__iterator.html#a6a5fec20ca17992fbde8263bc9f913db", null ],
     [ "operator++", "classregex__token__iterator.html#a3dc0675644637602c33ed0fb022c6ec4", null ],
     [ "operator==", "classregex__token__iterator.html#adaaf7a55f8eccce1532148a1e8e09a55", null ]

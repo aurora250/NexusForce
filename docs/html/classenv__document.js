@@ -2,7 +2,7 @@ var classenv__document =
 [
     [ "env_document", "classenv__document.html#a45c3cc9d435d0f1500e66e556f7cbb37", null ],
     [ "env_document", "classenv__document.html#a646438e19f3cec646852a659c940c09c", null ],
-    [ "add_comment", "classenv__document.html#a5dd5d74e5cec10f278e290be98fddca9", null ],
+    [ "add_comment", "classenv__document.html#abb62272ba8d60b385be413b071e3c6a0", null ],
     [ "add_variable", "classenv__document.html#af9134380fc056f1a9605a35ec0ef8a9b", null ],
     [ "get_bool", "classenv__document.html#a667a10890be97a8783cf1ed3662783bb", null ],
     [ "get_comments", "classenv__document.html#ad6cc5670f2fab2fcf136fb08ec4ac301", null ],

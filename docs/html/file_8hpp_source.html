@@ -164,23 +164,23 @@ $(function(){initNavTree('file_8hpp_source.html','',''); });
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <a class="code hl_typedef" href="classfile.html#a65ab8f69f6981b4745103560dda456c1">native_handle_type</a> handle_; </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <a class="code hl_class" href="classpath.html">path</a> path_{};               </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <a class="code hl_class" href="classpath.html">path</a> path_;                 </div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordtype">bool</span> opened_ = <span class="keyword">false</span>;       </div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordtype">bool</span> append_mode_ = <span class="keyword">false</span>;  </div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    size_type buffer_size_ = buffer_size;    </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> read_buffer_{};      </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keyword">mutable</span> size_type read_buffer_pos_ = 0;  </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">mutable</span> size_type read_buffer_size_ = 0; </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> write_buffer_{};     </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keyword">mutable</span> size_type write_buffer_pos_ = 0; </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <a class="code hl_typedef" href="classfile.html#a3a397e0e8b8ab59867323f9a43322daa">size_type</a> buffer_size_ = <a class="code hl_variable" href="classfile.html#a222b97f5e555de181b043daf33c99ffc">buffer_size</a>;    </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> read_buffer_;        </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="classfile.html#a3a397e0e8b8ab59867323f9a43322daa">size_type</a> read_buffer_pos_ = 0;  </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="classfile.html#a3a397e0e8b8ab59867323f9a43322daa">size_type</a> read_buffer_size_ = 0; </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> write_buffer_;       </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keyword">mutable</span> <a class="code hl_typedef" href="classfile.html#a3a397e0e8b8ab59867323f9a43322daa">size_type</a> write_buffer_pos_ = 0; </div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keyword">mutable</span> error_code last_error_code_; </div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    unique_ptr&lt;file_mapper&gt; map_;    </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    unique_ptr&lt;file_locker&gt; locker_; </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    unique_ptr&lt;file_info&gt; info_;     </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    unique_ptr&lt;file_async&gt; async_;   </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;file_mapper&gt;</a> map_;    </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;file_locker&gt;</a> locker_; </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;file_info&gt;</a> info_;     </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;file_async&gt;</a> async_;   </div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordtype">void</span> init_sub_objects() noexcept;</div>
@@ -360,6 +360,7 @@ $(function(){initNavTree('file_8hpp_source.html','',''); });
 <div class="ttc" id="aclassfile_html_af946665d1d72502040f2f10ca85623be"><div class="ttname"><a href="classfile.html#af946665d1d72502040f2f10ca85623be">file::file_path</a></div><div class="ttdeci">NEFORCE_NODISCARD const path &amp; file_path() const noexcept</div><div class="ttdoc">获取文件路径</div><div class="ttdef"><b>定义</b> <a href="#l00468">file.hpp:468</a></div></div>
 <div class="ttc" id="aclassfile_html_afb7b845db7e43c55adadf319786830b5"><div class="ttname"><a href="classfile.html#afb7b845db7e43c55adadf319786830b5">file::is_opened</a></div><div class="ttdeci">NEFORCE_NODISCARD bool is_opened() const noexcept</div><div class="ttdoc">检查文件是否已打开</div><div class="ttdef"><b>定义</b> <a href="#l00474">file.hpp:474</a></div></div>
 <div class="ttc" id="aclasspath_html"><div class="ttname"><a href="classpath.html">path</a></div><div class="ttdoc">文件路径类</div><div class="ttdef"><b>定义</b> <a href="path_8hpp_source.html#l00036">path.hpp:36</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00206">unique_ptr.hpp:206</a></div></div>
 <div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
 <div class="ttc" id="afile__async_8hpp_html"><div class="ttname"><a href="file__async_8hpp.html">file_async.hpp</a></div><div class="ttdoc">异步文件I/O操作类</div></div>
 <div class="ttc" id="afile__diff_8hpp_html"><div class="ttname"><a href="file__diff_8hpp.html">file_diff.hpp</a></div><div class="ttdoc">文件比较与差异分析工具</div></div>

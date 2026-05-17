@@ -1,6 +1,5 @@
 var group___exceptions =
 [
-    [ "neforce::lz4_exception", "structneforce_1_1lz4__exception.html", null ],
     [ "zlib_exception", "structzlib__exception.html", null ],
     [ "future_exception", "structfuture__exception.html", null ],
     [ "thread_exception", "structthread__exception.html", null ],

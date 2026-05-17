@@ -20,11 +20,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="263" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="263" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="structidb__tb__connect_1abc6b0d8058de22758e6c33fa9212e31e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
-        <definition>virtual unique_ptr&lt; idb_tb_result &gt; idb_tb_connect::query</definition>
+      <memberdef kind="function" id="structidb__tb__connect_1ab576cdb44f70e1c584f5d1a91b84fa45" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
+        <definition>virtual NEFORCE_NODISCARD unique_ptr&lt; idb_tb_result &gt; idb_tb_connect::query</definition>
         <argsstring>(const string &amp;sql) const =0</argsstring>
         <name>query</name>
         <qualifiedname>idb_tb_connect::query</qualifiedname>
@@ -54,11 +54,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="270" column="24"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="270" column="42"/>
       </memberdef>
-      <memberdef kind="function" id="structidb__tb__connect_1a37513bfd22b7ea67498dbac6f98e8156" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__statement" kindref="compound">idb_prepared_statement</ref> &gt;</type>
-        <definition>virtual unique_ptr&lt; idb_prepared_statement &gt; idb_tb_connect::prepare_statement</definition>
+      <memberdef kind="function" id="structidb__tb__connect_1a71998c41c1fc75d7924846ef7db1cbf1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>NEFORCE_NODISCARD <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__statement" kindref="compound">idb_prepared_statement</ref> &gt;</type>
+        <definition>virtual NEFORCE_NODISCARD unique_ptr&lt; idb_prepared_statement &gt; idb_tb_connect::prepare_statement</definition>
         <argsstring>(const string &amp;sql) const =0</argsstring>
         <name>prepare_statement</name>
         <qualifiedname>idb_tb_connect::prepare_statement</qualifiedname>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="277" column="24"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="277" column="42"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -139,23 +139,23 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="262" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="262" bodyend="278"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="262" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="262" bodyend="278"/>
     <listofallmembers>
       <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>idb_tb_connect</scope><name>clock_type</name></member>
       <member refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>close</name></member>
       <member refid="structidb__connect_1a7ae3001e8ef72724b952fac4ea66cde7" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>connect</name></member>
-      <member refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>connected</name></member>
+      <member refid="structidb__connect_1a0b654dc4116a9ddb698966f4a5ddcdca" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>connected</name></member>
       <member refid="structidb__connect_1affedca161dc65836d2ecd3ae76e9158d" prot="public" virt="non-virtual"><scope>idb_tb_connect</scope><name>get_alive</name></member>
-      <member refid="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>get_character_set</name></member>
-      <member refid="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>get_errno</name></member>
-      <member refid="structidb__connect_1a128b6a7646a28e85e231beb150439c01" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>get_error</name></member>
-      <member refid="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>is_valid</name></member>
-      <member refid="structidb__tb__connect_1a37513bfd22b7ea67498dbac6f98e8156" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>prepare_statement</name></member>
-      <member refid="structidb__tb__connect_1abc6b0d8058de22758e6c33fa9212e31e" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>query</name></member>
+      <member refid="structidb__connect_1a9663188aaae0acb8b65c2de0d5cbe75f" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>get_character_set</name></member>
+      <member refid="structidb__connect_1acd5571b7e44f69a5b235fef61954bbd0" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>get_errno</name></member>
+      <member refid="structidb__connect_1acd973bd3ff55ac0e46f084bd2f0376c3" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>get_error</name></member>
+      <member refid="structidb__connect_1aa98cb68e4e03d89b68e3f85367119b25" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>is_valid</name></member>
+      <member refid="structidb__tb__connect_1a71998c41c1fc75d7924846ef7db1cbf1" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>prepare_statement</name></member>
+      <member refid="structidb__tb__connect_1ab576cdb44f70e1c584f5d1a91b84fa45" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>query</name></member>
       <member refid="structidb__connect_1a5faaad097bbdc6d8e530eb9f3ec7af94" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>reconnect</name></member>
       <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>idb_tb_connect</scope><name>refresh_alive</name></member>
-      <member refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>set_character_set</name></member>
-      <member refid="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>update</name></member>
+      <member refid="structidb__connect_1a3b5de8434d4f29793ecd5442549cef25" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>set_character_set</name></member>
+      <member refid="structidb__connect_1a347d4f0ebd95d784c304f2c9e983b614" prot="public" virt="pure-virtual"><scope>idb_tb_connect</scope><name>update</name></member>
       <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>idb_tb_connect</scope><name>~idb_connect</name></member>
       <member refid="structidb__tb__connect_1a4ba8618ecc342e6ddfc5c20d9f2297ad" prot="public" virt="non-virtual"><scope>idb_tb_connect</scope><name>~idb_tb_connect</name></member>
     </listofallmembers>

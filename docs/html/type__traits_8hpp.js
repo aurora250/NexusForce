@@ -12,7 +12,7 @@ var type__traits_8hpp =
     [ "aligned_union_t", "group___alignment.html#gaaf5f392ace63d0a89352f050a2104edc", null ],
     [ "bool_constant", "group___type_traits_utilities.html#gaecd67118189edfc6436511ce3f23aef1", null ],
     [ "common_reference_t", "group___type_attribute_operations.html#ga9159a6bfe7317dea917d34d2a9798fde", null ],
-    [ "common_ternary_operator_t", "group___type_attribute_operations.html#ga6f7624c2711c293f19f15c71febeaeb0", null ],
+    [ "common_ternary_operator_t", "group___type_attribute_operations.html#gab4424883abe97687c4fe83ad04ef27fe", null ],
     [ "common_type_t", "group___type_attribute_operations.html#ga63597ca81f0a3a80001c836bc4cbbb84", null ],
     [ "conditional_t", "group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568", null ],
     [ "copy_cv_t", "group___remove_qualifiers.html#ga48575034f70de8ecb579bdd55823cae7", null ],

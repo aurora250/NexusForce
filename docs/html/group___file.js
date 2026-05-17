@@ -82,7 +82,7 @@ var group___file =
       ] ],
       [ "aiocb_type", "classfile__async.html#a806795660074f7825f91730c57ab32bf", null ],
       [ "difference_type", "classfile__async.html#aa89bd5ba6636db0098aed0ee62b49d2c", null ],
-      [ "native_handle_type", "classfile__async.html#a8b645f877995e8d118070dc12c6ba3bd", null ],
+      [ "native_handle_type", "classfile__async.html#afdf923e5978a89d1b48d8e5f4a3f31dc", null ],
       [ "size_type", "classfile__async.html#a1dffe3f8526b94e6327e43895c6b577c", null ],
       [ "file_async", "classfile__async.html#aa27dd3253c71dea9e0329739724561fb", null ],
       [ "~file_async", "classfile__async.html#ac23d04d4fa4c0cf5448b5373cf40506a", null ],
@@ -105,7 +105,7 @@ var group___file =
       [ "size_type", "classfile__diff.html#a7b253d00c54788d3a0a8a5b27a188a22", null ]
     ] ],
     [ "file_info", "classfile__info.html", [
-      [ "native_handle_type", "classfile__info.html#abb05de0634a1f444adca9bbf8e26373f", null ],
+      [ "native_handle_type", "classfile__info.html#a17e23b23f16643a28107c128f8ae971d", null ],
       [ "size_type", "classfile__info.html#a562df80c22ec41d47304877407d62006", null ],
       [ "file_info", "classfile__info.html#a90d01d2d0b844bb827fbe41b53d6482c", null ],
       [ "attributes", "classfile__info.html#adcb6ab3acc42d05f65b20fee105c1458", null ],
@@ -123,14 +123,14 @@ var group___file =
     ] ],
     [ "file_locker", "classfile__locker.html", [
       [ "difference_type", "classfile__locker.html#a0d5945085777171f908ae673f33b4083", null ],
-      [ "native_handle_type", "classfile__locker.html#a06afcfbd59de71b7718b421ec9f617e9", null ],
+      [ "native_handle_type", "classfile__locker.html#abebd309f9dbde157606ad089e816bb2e", null ],
       [ "file_locker", "classfile__locker.html#a299b55e3366398a88544208942baaea2", null ],
       [ "is_locked", "classfile__locker.html#afcb0844e7a9ef723ef0a7fd419019b21", null ],
-      [ "lock", "classfile__locker.html#ab93c29e79c1ab206eed9212986bd5efd", null ],
-      [ "lock_whole", "classfile__locker.html#a656e70c2c4c94ea19f570dd3a7c952a3", null ],
-      [ "try_lock", "classfile__locker.html#a669e9558cc977620adfc0d34f34cb3ab", null ],
-      [ "unlock", "classfile__locker.html#a21192de3f975839312f4d3ac88e65e78", null ],
-      [ "unlock_whole", "classfile__locker.html#a874529f6f087a7c6ce1417dfee404341", null ]
+      [ "lock", "classfile__locker.html#a6295a056f3b03adf23cdbca27c7a6b4f", null ],
+      [ "lock_whole", "classfile__locker.html#a590e038cd2bbc2be9192a1a2e5a8b7f2", null ],
+      [ "try_lock", "classfile__locker.html#a0199fe6291afd4c1329476c32627de8e", null ],
+      [ "unlock", "classfile__locker.html#aa6566b874ec5fc7480ae030b3b01cf82", null ],
+      [ "unlock_whole", "classfile__locker.html#a6fa51a1483394bf3d1bb81b720a00af5", null ]
     ] ],
     [ "file_lock_guard", "classfile__lock__guard.html", [
       [ "difference_type", "classfile__lock__guard.html#a1a5bd134ad110a7c33ac67bc27f35513", null ],
@@ -147,7 +147,7 @@ var group___file =
         [ "offset", "structfile__mapper_1_1map__info.html#a1cd0251b98f606bf14641938de762ebf", null ],
         [ "size", "structfile__mapper_1_1map__info.html#adc119290182f3ce6c3d598d81eb391b7", null ]
       ] ],
-      [ "native_handle_type", "classfile__mapper.html#aa202b525ce013a40e0af4c529d2e4b52", null ],
+      [ "native_handle_type", "classfile__mapper.html#a144356081b59b80b334a3f229c66e89a", null ],
       [ "size_type", "classfile__mapper.html#a97fa144b38811c51d1894ffd86b875d8", null ],
       [ "file_mapper", "classfile__mapper.html#a7654fa56cd3f3bc7288c9d1b50549b6f", null ],
       [ "~file_mapper", "classfile__mapper.html#a777eba65efb114b59ada48b35c2ccab2", null ],
@@ -232,7 +232,7 @@ var group___file =
       [ "node", "classpath__tree_1_1node.html", [
         [ "children_list", "classpath__tree_1_1node.html#a2a0801dd531b8ab16eec183e86081ce8", null ],
         [ "ptr", "classpath__tree_1_1node.html#a5f41634a8284d75aa0f4e8497eda708b", null ],
-        [ "weak_ptr", "classpath__tree_1_1node.html#a593a61c879ad11f77eefc27dfe80a0bc", null ],
+        [ "weak_ptr", "classpath__tree_1_1node.html#a318beda08dc89463eb0421a3feca4628", null ],
         [ "node", "classpath__tree_1_1node.html#adfe2c7bca934a373dc8f69215b95cea0", null ],
         [ "add_child", "classpath__tree_1_1node.html#aad1af0bcb1d32eb9fd1a5ade9a6a1859", null ],
         [ "child_count", "classpath__tree_1_1node.html#ab5192a883f152dd7c91bb2b71f08457f", null ],
@@ -305,8 +305,8 @@ var group___file =
       [ "~temp_file", "classtemp__file.html#a5e71e19b7818d0c1f0a5702b5bf525ed", null ],
       [ "temp_file", "classtemp__file.html#ac61cc2c5c24611c45369f4751c4c3893", null ],
       [ "cleanup", "classtemp__file.html#ab09ff42e5d8867b3115ef10268a4c955", null ],
-      [ "file", "classtemp__file.html#a3965a72bf4a72e60c8b2554aff8e5365", null ],
-      [ "file", "classtemp__file.html#a8e53a3a42f779ec8476ad5c012f8ec0e", null ],
+      [ "file", "classtemp__file.html#a4dff99305147406ac514ce59d3b41ab6", null ],
+      [ "file", "classtemp__file.html#a67753c1907abb8ad4cd4be198b894b14", null ],
       [ "keep", "classtemp__file.html#aa8d10e724bc565b27dd71e44d38a30e6", null ],
       [ "operator=", "classtemp__file.html#acf979a8ed5ce55511ac3332f0a6dc918", null ],
       [ "policy", "classtemp__file.html#ad62f2c7f18a482383090bc40997f81d9", null ],

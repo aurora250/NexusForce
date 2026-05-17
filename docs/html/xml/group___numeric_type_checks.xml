@@ -4,14 +4,14 @@
     <compoundname>NumericTypeChecks</compoundname>
     <title>数值类型检查</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___numeric_type_checks_1ga91644305c075f4c35a23afc391f9e2be" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___numeric_type_checks_1ga17e293401af71cbcf6547f20be9e59d8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONST_FUNCTION constexpr bool</type>
-        <definition>NEFORCE_CONST_FUNCTION constexpr bool signbit</definition>
+        <type>NEFORCE_CONST_FUNCTION constexpr <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!(sizeof(T)==16 &amp;&amp;<ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt; T &gt;::digits==64), bool &gt;</type>
+        <definition>NEFORCE_CONST_FUNCTION constexpr enable_if_t&lt;!(sizeof(T)==16 &amp;&amp;numeric_traits&lt; T &gt;::digits==64), bool &gt; signbit</definition>
         <argsstring>(const T x) noexcept</argsstring>
         <name>signbit</name>
         <param>
@@ -49,10 +49,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="33" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="33" bodyend="40"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="34" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="34" bodyend="41"/>
         <references refid="group___base_type_properties_1ga1233851ade7c3f53dc6b9b0ae01cf978" compoundref="type__traits_8hpp" startline="907">is_floating_point_v</references>
-        <referencedby refid="group___numeric_type_checks_1gaf257920abab6cb481e08ed775293dd89" compoundref="numeric__types_8hpp" startline="174" endline="176">is_negative</referencedby>
-        <referencedby refid="group___numeric_type_checks_1gace8f15aa26f934ce89066f093de94bd7" compoundref="numeric__types_8hpp" startline="159" endline="161">is_positive</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gaf257920abab6cb481e08ed775293dd89" compoundref="numeric__types_8hpp" startline="187" endline="189">is_negative</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gace8f15aa26f934ce89066f093de94bd7" compoundref="numeric__types_8hpp" startline="172" endline="174">is_positive</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -96,19 +96,19 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="52" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="52" bodyend="55"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="65" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="65" bodyend="68"/>
         <references refid="group___base_type_properties_1ga1233851ade7c3f53dc6b9b0ae01cf978" compoundref="type__traits_8hpp" startline="907">is_floating_point_v</references>
         <referencedby refid="group___math_functions_1gabf45a8b174ac3f17964a04c1b22bffd3" compoundref="math_8hpp" startline="1095" endline="1109">arccosine</referencedby>
         <referencedby refid="group___math_functions_1ga43376d1b397c6fc80783a6d386670762" compoundref="math_8hpp" startline="1074" endline="1088">arcsine</referencedby>
         <referencedby refid="group___math_functions_1ga3d2b251acab308cc0da5d8849af846ae" compoundref="math_8hpp" startline="1029" endline="1067">arctangent</referencedby>
         <referencedby refid="group___math_functions_1ga58bf0477c47c3280cf9f8f97a2499cd2" compoundref="math_8hpp" startline="949" endline="969">cosine</referencedby>
-        <referencedby refid="group___math_functions_1gad8bc333dfd3170bbd6fd1649e43510d5" compoundref="math_8hpp" startline="544" endline="566">cube_root</referencedby>
-        <referencedby refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="102" endline="104">is_finite</referencedby>
+        <referencedby refid="group___math_functions_1gacdbc564d376314dee47b30b61e64a830" compoundref="math_8hpp" startline="544" endline="566">cube_root</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</referencedby>
         <referencedby refid="group___math_functions_1ga5d5d2b89486ad0b478c3b1b45a63f6af" compoundref="math_8hpp" startline="430" endline="473">logarithm_e</referencedby>
         <referencedby refid="group___math_functions_1ga584831cb7db02edb5d37b30a050b5736" compoundref="math_8hpp" startline="358" endline="369">mod</referencedby>
         <referencedby refid="group___math_functions_1gabc4025ee1596355ee63d616923292504" compoundref="math_8hpp" startline="821" endline="826">remainder</referencedby>
         <referencedby refid="group___math_functions_1ga16b11dff64ee3fff1b1c4e8d70a3f64d" compoundref="math_8hpp" startline="919" endline="940">sine</referencedby>
-        <referencedby refid="group___math_functions_1ga3e1661aadeb32478031c64533ca48b9c" compoundref="math_8hpp" startline="512" endline="533">square_root</referencedby>
+        <referencedby refid="group___math_functions_1gaee68e45a75f5f7ec4dbf78f080e4abb2" compoundref="math_8hpp" startline="512" endline="533">square_root</referencedby>
         <referencedby refid="group___math_functions_1gad23db56cc1fdd2ab37cac9755c137abd" compoundref="math_8hpp" startline="977" endline="1012">tangent</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___numeric_type_checks_1ga5389af6bac3ad41b95de0d17046ee63d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -153,10 +153,10 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="64" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="64" bodyend="67"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="77" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="77" bodyend="80"/>
         <references refid="classnumeric__traits_1ac3b99f25020a5bc72aa22dffa82aaad4" compoundref="numeric__traits_8hpp" startline="183" endline="183">numeric_traits&lt; T, Dummy &gt;::infinity</references>
         <references refid="group___base_type_properties_1ga1233851ade7c3f53dc6b9b0ae01cf978" compoundref="type__traits_8hpp" startline="907">is_floating_point_v</references>
-        <referencedby refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___numeric_type_checks_1ga6a2f49b616ffbf2ea907098240a7f14a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -200,10 +200,10 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="76" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="76" bodyend="79"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="89" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="89" bodyend="92"/>
         <references refid="classnumeric__traits_1ac3b99f25020a5bc72aa22dffa82aaad4" compoundref="numeric__traits_8hpp" startline="183" endline="183">numeric_traits&lt; T, Dummy &gt;::infinity</references>
         <references refid="group___base_type_properties_1ga1233851ade7c3f53dc6b9b0ae01cf978" compoundref="type__traits_8hpp" startline="907">is_floating_point_v</references>
-        <referencedby refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -249,18 +249,18 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="89" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="89" bodyend="91"/>
-        <references refid="group___numeric_type_checks_1ga6a2f49b616ffbf2ea907098240a7f14a" compoundref="numeric__types_8hpp" startline="76" endline="79">is_neg_infinity</references>
-        <references refid="group___numeric_type_checks_1ga5389af6bac3ad41b95de0d17046ee63d" compoundref="numeric__types_8hpp" startline="64" endline="67">is_pos_infinity</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="102" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="102" bodyend="104"/>
+        <references refid="group___numeric_type_checks_1ga6a2f49b616ffbf2ea907098240a7f14a" compoundref="numeric__types_8hpp" startline="89" endline="92">is_neg_infinity</references>
+        <references refid="group___numeric_type_checks_1ga5389af6bac3ad41b95de0d17046ee63d" compoundref="numeric__types_8hpp" startline="77" endline="80">is_pos_infinity</references>
         <referencedby refid="group___math_functions_1ga3d2b251acab308cc0da5d8849af846ae" compoundref="math_8hpp" startline="1029" endline="1067">arctangent</referencedby>
         <referencedby refid="group___math_functions_1ga58bf0477c47c3280cf9f8f97a2499cd2" compoundref="math_8hpp" startline="949" endline="969">cosine</referencedby>
-        <referencedby refid="group___math_functions_1gad8bc333dfd3170bbd6fd1649e43510d5" compoundref="math_8hpp" startline="544" endline="566">cube_root</referencedby>
-        <referencedby refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="102" endline="104">is_finite</referencedby>
+        <referencedby refid="group___math_functions_1gacdbc564d376314dee47b30b61e64a830" compoundref="math_8hpp" startline="544" endline="566">cube_root</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</referencedby>
         <referencedby refid="group___math_functions_1ga5d5d2b89486ad0b478c3b1b45a63f6af" compoundref="math_8hpp" startline="430" endline="473">logarithm_e</referencedby>
         <referencedby refid="group___math_functions_1ga584831cb7db02edb5d37b30a050b5736" compoundref="math_8hpp" startline="358" endline="369">mod</referencedby>
         <referencedby refid="group___math_functions_1gabc4025ee1596355ee63d616923292504" compoundref="math_8hpp" startline="821" endline="826">remainder</referencedby>
         <referencedby refid="group___math_functions_1ga16b11dff64ee3fff1b1c4e8d70a3f64d" compoundref="math_8hpp" startline="919" endline="940">sine</referencedby>
-        <referencedby refid="group___math_functions_1ga3e1661aadeb32478031c64533ca48b9c" compoundref="math_8hpp" startline="512" endline="533">square_root</referencedby>
+        <referencedby refid="group___math_functions_1gaee68e45a75f5f7ec4dbf78f080e4abb2" compoundref="math_8hpp" startline="512" endline="533">square_root</referencedby>
         <referencedby refid="group___math_functions_1gad23db56cc1fdd2ab37cac9755c137abd" compoundref="math_8hpp" startline="977" endline="1012">tangent</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -305,13 +305,13 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="102" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="102" bodyend="104"/>
-        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="89" endline="91">is_infinity</references>
-        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="52" endline="55">is_nan</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="115" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="115" bodyend="117"/>
+        <references refid="group___numeric_type_checks_1ga4c46f33c7fdb861f0bb6318af24184b4" compoundref="numeric__types_8hpp" startline="102" endline="104">is_infinity</references>
+        <references refid="group___numeric_type_checks_1ga05435bce3fb10c06d39b258d8af74859" compoundref="numeric__types_8hpp" startline="65" endline="68">is_nan</references>
         <referencedby refid="group___math_functions_1gaa0653fb095511a5bb2f135a246995fbc" compoundref="math_8hpp" startline="632" endline="656">ceil</referencedby>
         <referencedby refid="group___math_functions_1ga20282c137d87af7a972c11f03f022c82" compoundref="math_8hpp" startline="586" endline="609">floor</referencedby>
-        <referencedby refid="group___numeric_type_checks_1gadf9ead971be85eb1be97164142a7c46d" compoundref="numeric__types_8hpp" startline="116" endline="125">is_normal</referencedby>
-        <referencedby refid="group___numeric_type_checks_1ga915e7e6e592ce2b5ae2caede19980fbe" compoundref="numeric__types_8hpp" startline="137" endline="146">is_subnormal</referencedby>
+        <referencedby refid="group___numeric_type_checks_1gadf9ead971be85eb1be97164142a7c46d" compoundref="numeric__types_8hpp" startline="129" endline="138">is_normal</referencedby>
+        <referencedby refid="group___numeric_type_checks_1ga915e7e6e592ce2b5ae2caede19980fbe" compoundref="numeric__types_8hpp" startline="150" endline="159">is_subnormal</referencedby>
         <referencedby refid="group___math_functions_1gab243e63879ead7aa619c79b50e53faa1" compoundref="math_8hpp" startline="674" endline="695">round</referencedby>
         <referencedby refid="group___math_functions_1ga941de5a90405aca3b46b970f36cd82e2" compoundref="math_8hpp" startline="768" endline="773">truncate</referencedby>
       </memberdef>
@@ -357,8 +357,8 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="116" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="116" bodyend="125"/>
-        <references refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="102" endline="104">is_finite</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="129" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="129" bodyend="138"/>
+        <references refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</references>
         <references refid="classnumeric__traits_1a562b092bb7289237720de2d905a02bef" compoundref="numeric__traits_8hpp" startline="148" endline="148">numeric_traits&lt; T, Dummy &gt;::min</references>
       </memberdef>
       <memberdef kind="function" id="group___numeric_type_checks_1ga915e7e6e592ce2b5ae2caede19980fbe" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -403,8 +403,8 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="137" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="137" bodyend="146"/>
-        <references refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="102" endline="104">is_finite</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="150" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="150" bodyend="159"/>
+        <references refid="group___numeric_type_checks_1ga4ffbb08b10152b73a72f99d4e4e23ae9" compoundref="numeric__types_8hpp" startline="115" endline="117">is_finite</references>
       </memberdef>
       <memberdef kind="function" id="group___numeric_type_checks_1gace8f15aa26f934ce89066f093de94bd7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -451,8 +451,8 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="159" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="159" bodyend="161"/>
-        <references refid="group___numeric_type_checks_1ga91644305c075f4c35a23afc391f9e2be" compoundref="numeric__types_8hpp" startline="33" endline="40">signbit</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="172" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="172" bodyend="174"/>
+        <references refid="group___numeric_type_checks_1ga17e293401af71cbcf6547f20be9e59d8" compoundref="numeric__types_8hpp" startline="34" endline="41">signbit</references>
       </memberdef>
       <memberdef kind="function" id="group___numeric_type_checks_1gaf257920abab6cb481e08ed775293dd89" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -499,8 +499,8 @@ NaN的特性：NaN != NaN 总是成立。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="174" column="39" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="174" bodyend="176"/>
-        <references refid="group___numeric_type_checks_1ga91644305c075f4c35a23afc391f9e2be" compoundref="numeric__types_8hpp" startline="33" endline="40">signbit</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" line="187" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/numeric_types.hpp" bodystart="187" bodyend="189"/>
+        <references refid="group___numeric_type_checks_1ga17e293401af71cbcf6547f20be9e59d8" compoundref="numeric__types_8hpp" startline="34" endline="41">signbit</references>
         <referencedby refid="structint128__t_1aa24df74cfe08bbf60aebaf3daea8a380" compoundref="int128_8hpp" startline="430" endline="437">int128_t::less_than</referencedby>
         <referencedby refid="structint128__t_1af7e9e008453d71b4a2ffbba5442f5d3b" compoundref="int128_8hpp" startline="534" endline="551">int128_t::operator&gt;&gt;=</referencedby>
       </memberdef>

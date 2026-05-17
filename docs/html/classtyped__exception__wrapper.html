@@ -109,12 +109,12 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a1fd2dbba5a19d8cd7140f01a17159810"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
 <tr class="memitem:a2be0fc2a8bda2ed0dcd632a0206b3737" id="r_a2be0fc2a8bda2ed0dcd632a0206b3737"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2be0fc2a8bda2ed0dcd632a0206b3737">typed_exception_wrapper</a> (Ex &amp;&amp;ex) noexcept</td></tr>
 <tr class="memdesc:a2be0fc2a8bda2ed0dcd632a0206b3737"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
-<tr class="memitem:a82187b3aff63f9c14d3b090087b6db42" id="r_a82187b3aff63f9c14d3b090087b6db42"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a82187b3aff63f9c14d3b090087b6db42">rethrow</a> () const override</td></tr>
-<tr class="memdesc:a82187b3aff63f9c14d3b090087b6db42"><td class="mdescLeft">&#160;</td><td class="mdescRight">重新抛出异常  <br /></td></tr>
-<tr class="memitem:a8b3de5e4a9a80c8bbc699db724e427db" id="r_a8b3de5e4a9a80c8bbc699db724e427db"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE const std::type_info &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8b3de5e4a9a80c8bbc699db724e427db">type</a> () const noexcept override</td></tr>
-<tr class="memdesc:a8b3de5e4a9a80c8bbc699db724e427db"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取异常类型信息  <br /></td></tr>
-<tr class="memitem:a2973111a1bccf92fd924f6f6eb15c6de" id="r_a2973111a1bccf92fd924f6f6eb15c6de"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classexception__wrapper.html">exception_wrapper</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2973111a1bccf92fd924f6f6eb15c6de">clone</a> () const override</td></tr>
-<tr class="memdesc:a2973111a1bccf92fd924f6f6eb15c6de"><td class="mdescLeft">&#160;</td><td class="mdescRight">克隆异常包装器  <br /></td></tr>
+<tr class="memitem:aec9696310f011cfedde6077b4bca67cd" id="r_aec9696310f011cfedde6077b4bca67cd"><td class="memItemLeft">NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#aec9696310f011cfedde6077b4bca67cd">rethrow</a> () const override</td></tr>
+<tr class="memdesc:aec9696310f011cfedde6077b4bca67cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">重新抛出异常  <br /></td></tr>
+<tr class="memitem:a0cb3ffe51548e47e30362ee4e04d9b3c" id="r_a0cb3ffe51548e47e30362ee4e04d9b3c"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE const std::type_info &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a0cb3ffe51548e47e30362ee4e04d9b3c">type</a> () const noexcept override</td></tr>
+<tr class="memdesc:a0cb3ffe51548e47e30362ee4e04d9b3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取异常类型信息  <br /></td></tr>
+<tr class="memitem:af2d0cd1b48ec5146aec4f2996029d328" id="r_af2d0cd1b48ec5146aec4f2996029d328"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classexception__wrapper.html">exception_wrapper</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af2d0cd1b48ec5146aec4f2996029d328">clone</a> () const override</td></tr>
+<tr class="memdesc:af2d0cd1b48ec5146aec4f2996029d328"><td class="mdescLeft">&#160;</td><td class="mdescRight">克隆异常包装器  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Ex&gt;<br />
@@ -204,8 +204,8 @@ template&lt;typename Ex&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="a2973111a1bccf92fd924f6f6eb15c6de" name="a2973111a1bccf92fd924f6f6eb15c6de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2973111a1bccf92fd924f6f6eb15c6de">&#9670;&#160;</a></span>clone()</h2>
+<a id="af2d0cd1b48ec5146aec4f2996029d328" name="af2d0cd1b48ec5146aec4f2996029d328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2d0cd1b48ec5146aec4f2996029d328">&#9670;&#160;</a></span>clone()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -216,7 +216,7 @@ template&lt;typename Ex&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classexception__wrapper.html">exception_wrapper</a> &gt; <a class="el" href="classtyped__exception__wrapper.html">typed_exception_wrapper</a>&lt; Ex &gt;::clone </td>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classexception__wrapper.html">exception_wrapper</a> &gt; <a class="el" href="classtyped__exception__wrapper.html">typed_exception_wrapper</a>&lt; Ex &gt;::clone </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -232,7 +232,7 @@ template&lt;typename Ex&gt; </div>
 <p>克隆异常包装器 </p>
 <dl class="section return"><dt>返回</dt><dd>异常包装器的唯一指针 </dd></dl>
 
-<p>实现了 <a class="el" href="classexception__wrapper.html#a40fd000355a09acab15cfc64c9ec7f8f">exception_wrapper</a>.</p>
+<p>实现了 <a class="el" href="classexception__wrapper.html#a43f65f2af0ee2f34a9c3b9fb57346b6c">exception_wrapper</a>.</p>
 
 <p class="definition">在文件 <a class="el" href="exception__ptr_8hpp_source.html">exception_ptr.hpp</a> 第 <a class="el" href="exception__ptr_8hpp_source.html#l00097">97</a> 行定义.</p>
 
@@ -240,8 +240,8 @@ template&lt;typename Ex&gt; </div>
 
 </div>
 </div>
-<a id="a82187b3aff63f9c14d3b090087b6db42" name="a82187b3aff63f9c14d3b090087b6db42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82187b3aff63f9c14d3b090087b6db42">&#9670;&#160;</a></span>rethrow()</h2>
+<a id="aec9696310f011cfedde6077b4bca67cd" name="aec9696310f011cfedde6077b4bca67cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec9696310f011cfedde6077b4bca67cd">&#9670;&#160;</a></span>rethrow()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,7 +252,7 @@ template&lt;typename Ex&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE void <a class="el" href="classtyped__exception__wrapper.html">typed_exception_wrapper</a>&lt; Ex &gt;::rethrow </td>
+          <td class="memname">NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE void <a class="el" href="classtyped__exception__wrapper.html">typed_exception_wrapper</a>&lt; Ex &gt;::rethrow </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -268,14 +268,14 @@ template&lt;typename Ex&gt; </div>
 <p>重新抛出异常 </p>
 <dl class="section note"><dt>注解</dt><dd>重新抛出存储的异常 </dd></dl>
 
-<p>实现了 <a class="el" href="classexception__wrapper.html#a3112fb62c8863b12e376df7e36324918">exception_wrapper</a>.</p>
+<p>实现了 <a class="el" href="classexception__wrapper.html#a5f9d0a2b14862b3248e64ed70c64c702">exception_wrapper</a>.</p>
 
 <p class="definition">在文件 <a class="el" href="exception__ptr_8hpp_source.html">exception_ptr.hpp</a> 第 <a class="el" href="exception__ptr_8hpp_source.html#l00085">85</a> 行定义.</p>
 
 </div>
 </div>
-<a id="a8b3de5e4a9a80c8bbc699db724e427db" name="a8b3de5e4a9a80c8bbc699db724e427db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b3de5e4a9a80c8bbc699db724e427db">&#9670;&#160;</a></span>type()</h2>
+<a id="a0cb3ffe51548e47e30362ee4e04d9b3c" name="a0cb3ffe51548e47e30362ee4e04d9b3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cb3ffe51548e47e30362ee4e04d9b3c">&#9670;&#160;</a></span>type()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -286,7 +286,7 @@ template&lt;typename Ex&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE const std::type_info &amp; <a class="el" href="classtyped__exception__wrapper.html">typed_exception_wrapper</a>&lt; Ex &gt;::type </td>
+          <td class="memname">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE const std::type_info &amp; <a class="el" href="classtyped__exception__wrapper.html">typed_exception_wrapper</a>&lt; Ex &gt;::type </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -302,7 +302,7 @@ template&lt;typename Ex&gt; </div>
 <p>获取异常类型信息 </p>
 <dl class="section return"><dt>返回</dt><dd>异常的类型信息 </dd></dl>
 
-<p>实现了 <a class="el" href="classexception__wrapper.html#ab04df73bc21daeb1491fba55397a896c">exception_wrapper</a>.</p>
+<p>实现了 <a class="el" href="classexception__wrapper.html#a75b4031b3bf86ed08319dfa30e34ca0d">exception_wrapper</a>.</p>
 
 <p class="definition">在文件 <a class="el" href="exception__ptr_8hpp_source.html">exception_ptr.hpp</a> 第 <a class="el" href="exception__ptr_8hpp_source.html#l00091">91</a> 行定义.</p>
 

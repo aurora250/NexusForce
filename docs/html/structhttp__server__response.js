@@ -1,8 +1,8 @@
 var structhttp__server__response =
 [
     [ "http_server_response", "structhttp__server__response.html#ae46a45f3c25128212550656c3d23355e", null ],
-    [ "has_header", "structhttp__server__response.html#ae2d56c87dd219b73b94e612d02d91b78", null ],
-    [ "header", "structhttp__server__response.html#a6c955ce1a0d6ede1758547dda78a34e2", null ],
+    [ "has_header", "structhttp__server__response.html#a31ae9ff6d0141f85bf94bb52c8eb9f1b", null ],
+    [ "header", "structhttp__server__response.html#a1ae85de5a80c3e6e0108825f64e55e07", null ],
     [ "set_content_type", "structhttp__server__response.html#a283b6cd33f07f80eb2024694dbff6c01", null ],
     [ "set_content_type", "structhttp__server__response.html#ad374366962f14690d3ae7b996e9171cf", null ],
     [ "set_header", "structhttp__server__response.html#a65d53ed69d5a6533432d3bf81c2503e3", null ],

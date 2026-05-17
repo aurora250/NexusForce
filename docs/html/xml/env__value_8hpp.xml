@@ -199,7 +199,7 @@
       <node id="44">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -257,6 +257,8 @@
       <node id="33">
         <label>NeForce/core/memory/temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
@@ -267,7 +269,7 @@
       <node id="36">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="14" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
@@ -336,6 +338,8 @@
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
         </childnode>
       </node>
       <node id="53">
@@ -411,7 +415,7 @@
         </childnode>
       </node>
       <node id="12">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="6">
         <label>initializer_list</label>
@@ -601,33 +605,33 @@
 <codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>variables_;</highlight></codeline>
 <codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="323"><highlight class="normal"></highlight></codeline>
-<codeline lineno="328" refid="classenv__document_1a5dd5d74e5cec10f278e290be98fddca9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classenv__document_1a5dd5d74e5cec10f278e290be98fddca9" kindref="member">add_comment</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>comment)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>comments_.emplace_back(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(comment));<sp/>}</highlight></codeline>
+<codeline lineno="328" refid="classenv__document_1abb62272ba8d60b385be413b071e3c6a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classenv__document_1abb62272ba8d60b385be413b071e3c6a0" kindref="member">add_comment</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>comment)<sp/>{<sp/>comments_.emplace_back(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(comment));<sp/>}</highlight></codeline>
 <codeline lineno="329"><highlight class="normal"></highlight></codeline>
 <codeline lineno="334" refid="classenv__document_1ad6cc5670f2fab2fcf136fb08ec4ac301" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref>&amp;<sp/><ref refid="classenv__document_1ad6cc5670f2fab2fcf136fb08ec4ac301" kindref="member">get_comments</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>comments_;<sp/>}</highlight></codeline>
 <codeline lineno="335"><highlight class="normal"></highlight></codeline>
 <codeline lineno="342" refid="classenv__document_1a2ee50a29526af8428366196fa6eab18d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classenv__document_1a2ee50a29526af8428366196fa6eab18d" kindref="member">get_string</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>default_value<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>var<sp/>=<sp/><ref refid="classenv__document_1a19357104de5a9477941980c8f8973218" kindref="member">get_variable</ref>(<ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>);</highlight></codeline>
-<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>var<sp/>?<sp/>var-&gt;get_value()<sp/>:<sp/>default_value;</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>var<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/>var-&gt;get_value()<sp/>:<sp/>default_value;</highlight></codeline>
 <codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="346"><highlight class="normal"></highlight></codeline>
 <codeline lineno="353" refid="classenv__document_1ae25010d6987565f84d572f8cf8933eab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classenv__document_1ae25010d6987565f84d572f8cf8933eab" kindref="member">get_int</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>default_value<sp/>=<sp/>0)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>var<sp/>=<sp/><ref refid="classenv__document_1a19357104de5a9477941980c8f8973218" kindref="member">get_variable</ref>(<ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>);</highlight></codeline>
-<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>var<sp/>?<sp/>var-&gt;get_int(default_value)<sp/>:<sp/>default_value;</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>var<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/>var-&gt;get_int(default_value)<sp/>:<sp/>default_value;</highlight></codeline>
 <codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="357"><highlight class="normal"></highlight></codeline>
 <codeline lineno="364" refid="classenv__document_1a0f67842dd5a4d9e1a6585030f93048c2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref><sp/><ref refid="classenv__document_1a0f67842dd5a4d9e1a6585030f93048c2" kindref="member">get_int64</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref><sp/>default_value<sp/>=<sp/>0)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>var<sp/>=<sp/><ref refid="classenv__document_1a19357104de5a9477941980c8f8973218" kindref="member">get_variable</ref>(<ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>);</highlight></codeline>
-<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>var<sp/>?<sp/>var-&gt;get_int64(default_value)<sp/>:<sp/>default_value;</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>var<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/>var-&gt;get_int64(default_value)<sp/>:<sp/>default_value;</highlight></codeline>
 <codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="368"><highlight class="normal"></highlight></codeline>
 <codeline lineno="375" refid="classenv__document_1a3620f82893dee8e243f731bfad693510" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classenv__document_1a3620f82893dee8e243f731bfad693510" kindref="member">get_double</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>default_value<sp/>=<sp/>0.0)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>var<sp/>=<sp/><ref refid="classenv__document_1a19357104de5a9477941980c8f8973218" kindref="member">get_variable</ref>(<ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>);</highlight></codeline>
-<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>var<sp/>?<sp/>var-&gt;get_double(default_value)<sp/>:<sp/>default_value;</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>var<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/>var-&gt;get_double(default_value)<sp/>:<sp/>default_value;</highlight></codeline>
 <codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="379"><highlight class="normal"></highlight></codeline>
 <codeline lineno="386" refid="classenv__document_1a667a10890be97a8783cf1ed3662783bb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classenv__document_1a667a10890be97a8783cf1ed3662783bb" kindref="member">get_bool</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>default_value<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>var<sp/>=<sp/><ref refid="classenv__document_1a19357104de5a9477941980c8f8973218" kindref="member">get_variable</ref>(<ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>);</highlight></codeline>
-<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>var<sp/>?<sp/>var-&gt;get_bool(default_value)<sp/>:<sp/>default_value;</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>var<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/>var-&gt;get_bool(default_value)<sp/>:<sp/>default_value;</highlight></codeline>
 <codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="390"><highlight class="normal"></highlight></codeline>
 <codeline lineno="395" refid="classenv__document_1a2a6ff382165c5e024df98292592d5072" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classenv__document_1a2a6ff382165c5e024df98292592d5072" kindref="member">to_string</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
@@ -638,6 +642,6 @@
 <codeline lineno="402"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="403"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_FILE_ENV_ENV_VALUE_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp"/>
   </compounddef>
 </doxygen>

@@ -19,7 +19,7 @@ var group___reflection =
     [ "meta_function", "classmeta__function.html", [
       [ "invoker", "classmeta__function.html#a9e532e44381a51d000732d3074cf6c20", null ],
       [ "meta_function", "classmeta__function.html#a4817663ff1c14bf96768c7ede3eba82e", null ],
-      [ "invoke", "classmeta__function.html#a3dc138b67ad7e5cd2b69d301d5a39775", null ],
+      [ "invoke", "classmeta__function.html#a488eb83961cd7c0fe14d150a9e22dd34", null ],
       [ "invoke", "classmeta__function.html#a3e8ab2f65758f418b86198b3fd8d4c88", null ],
       [ "max_args", "classmeta__function.html#ada811e3df1e0e800657ddac2b865fdb2", null ],
       [ "min_args", "classmeta__function.html#a901c2d340797d035e798013420997af5", null ],
@@ -58,7 +58,7 @@ var group___reflection =
       [ "resolve_all_bases", "classregistry.html#ad9f2bc1e953093b1492a327fedc7566f", null ]
     ] ],
     [ "meta_type", "classmeta__type.html", [
-      [ "constructor_func", "classmeta__type.html#a0161c45f16889bc56e512c493a61c6d2", null ],
+      [ "constructor_func", "classmeta__type.html#a522c94baeddca5ebba5798bcf404c48c", null ],
       [ "meta_type", "classmeta__type.html#a145e272433cc67ed14ba252c0d3f5ef7", null ],
       [ "all_functions", "classmeta__type.html#af46572f01641c7e9e7b99a139803e3e1", null ],
       [ "all_properties", "classmeta__type.html#afe01f296c80ad8d93d4a37ef3528f21b", null ],

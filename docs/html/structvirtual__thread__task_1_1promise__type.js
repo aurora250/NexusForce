@@ -1,10 +1,13 @@
 var structvirtual__thread__task_1_1promise__type =
 [
-    [ "final_suspend", "structvirtual__thread__task_1_1promise__type.html#aaa221a87a605e7d9ad35bc13ae393821", null ],
-    [ "get_return_object", "structvirtual__thread__task_1_1promise__type.html#abfb12fb610b1028ef2ce7a71060256d5", null ],
-    [ "initial_suspend", "structvirtual__thread__task_1_1promise__type.html#a80bb560c74f8fa5a58f6997866816133", null ],
-    [ "return_void", "structvirtual__thread__task_1_1promise__type.html#afb4c03a917686ddef60158995dee2be4", null ],
-    [ "unhandled_exception", "structvirtual__thread__task_1_1promise__type.html#aa0fe2e55596d0c95a0886310f400fb28", null ],
-    [ "exception_", "structvirtual__thread__task_1_1promise__type.html#ac3ddcbd783e23872722f2aa196028cf8", null ],
-    [ "scheduled_", "structvirtual__thread__task_1_1promise__type.html#a098161502ceabf51bb0f266d123cbade", null ]
+    [ "~promise_type", "structvirtual__thread__task_1_1promise__type.html#a15a12c3e33e0ec8231c93c424081b862", null ],
+    [ "await_transform", "structvirtual__thread__task_1_1promise__type.html#a4ab6ac92c55ea0a7109b199017fd5da6", null ],
+    [ "await_transform", "structvirtual__thread__task_1_1promise__type.html#a830e3c9947559cb322fb08eeeae7e12e", null ],
+    [ "await_transform", "structvirtual__thread__task_1_1promise__type.html#ad5192c1304919fac0705333de16221ab", null ],
+    [ "final_suspend", "structvirtual__thread__task_1_1promise__type.html#a82709196f67db42a234a9dc93bc519d0", null ],
+    [ "get_return_object", "structvirtual__thread__task_1_1promise__type.html#aae9ec803d41ac3437996df8014ac9438", null ],
+    [ "initial_suspend", "structvirtual__thread__task_1_1promise__type.html#a1293d481179a4832277bf712ccc37d7d", null ],
+    [ "return_value", "structvirtual__thread__task_1_1promise__type.html#a5ccc66af81c8bde9b1d02f9b03ab7697", null ],
+    [ "return_value", "structvirtual__thread__task_1_1promise__type.html#a19e8bbd6f8f0c71741c4cfe3f7aadae3", null ],
+    [ "unhandled_exception", "structvirtual__thread__task_1_1promise__type.html#a3c4990628480f6aa6e22e855c8a6f021", null ]
 ];

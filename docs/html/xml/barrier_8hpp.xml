@@ -14,7 +14,7 @@
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
@@ -22,7 +22,7 @@
       <node id="41">
         <label>NeForce/core/algorithm/iterator.hpp</label>
         <link refid="iterator_8hpp"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="42" relation="include">
         </childnode>
@@ -50,6 +50,8 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
         <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="18" relation="include">
@@ -64,7 +66,7 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -83,7 +85,7 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="16">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="6" relation="include">
@@ -92,7 +94,7 @@
       <node id="9">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
@@ -103,8 +105,6 @@
         <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="20">
@@ -147,7 +147,7 @@
         <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="17">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="7" relation="include">
@@ -156,7 +156,7 @@
       <node id="21">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="22">
@@ -215,7 +215,7 @@
         <childnode refid="41" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="15">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="5" relation="include">
@@ -316,13 +316,19 @@
         </childnode>
       </node>
       <node id="8">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="14">
+        <label>ctime</label>
       </node>
       <node id="38">
         <label>initializer_list</label>
       </node>
-      <node id="19">
+      <node id="18">
         <label>intrin.h</label>
+      </node>
+      <node id="19">
+        <label>intrin0.inl.h</label>
       </node>
       <node id="11">
         <label>processthreadsapi.h</label>
@@ -330,17 +336,11 @@
       <node id="35">
         <label>pthread.h</label>
       </node>
-      <node id="15">
-        <label>riscv_pause.h</label>
-      </node>
       <node id="13">
         <label>sched.h</label>
       </node>
       <node id="12">
         <label>synchapi.h</label>
-      </node>
-      <node id="14">
-        <label>unistd.h</label>
       </node>
       <node id="30">
         <label>utility</label>
@@ -397,11 +397,11 @@
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">alignas</highlight><highlight class="normal">(phase_alignment)<sp/><ref refid="classarray" kindref="compound">array&lt;byte_t, 64&gt;</ref><sp/>tickets;<sp/></highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/>expected_count_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;state_data[]&gt;</ref><sp/>state_array_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structatomic__base" kindref="compound">atomic_base&lt;ptrdiff_t&gt;</ref><sp/>expected_adjustment_;<sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>CmplFunc<sp/>completion_function_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">alignas</highlight><highlight class="normal">(phase_alignment)<sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref><sp/>current_phase_;<sp/></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/>expected_count_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;state_data[]&gt;</ref><sp/>state_array_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structatomic__base" kindref="compound">atomic_base&lt;ptrdiff_t&gt;</ref><sp/>expected_adjustment_{0};<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>CmplFunc<sp/>completion_function_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">alignas</highlight><highlight class="normal">(phase_alignment)<sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref><sp/>current_phase_{0};<sp/></highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>do_arrive(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref><sp/>old_phase,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>current_index)<sp/>{</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>old_phase_value<sp/>=<sp/>old_phase;</highlight></codeline>
@@ -426,113 +426,112 @@
 <codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>expected_phase<sp/>=<sp/>old_phase;</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phase_ref_t<sp/>phase_ref(state_array_[current_index].tickets[<ref refid="group___math_functions_1gab243e63879ead7aa619c79b50e53faa1" kindref="member">round</ref>]);</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"></highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(current_index<sp/>==<sp/>last_node<sp/>&amp;&amp;<sp/>((current_expected<sp/>&amp;<sp/>1)<sp/>!=<sp/>0U))<sp/>{</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(phase_ref.compare_exchange_strong(expected_phase,<sp/>full_step,<sp/><ref refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" kindref="member">memory_order_acq_rel</ref>))<sp/>{</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(phase_ref.compare_exchange_strong(expected_phase,<sp/>half_step,<sp/><ref refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" kindref="member">memory_order_acq_rel</ref>))<sp/>{</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(expected_phase<sp/>==<sp/>half_step)<sp/>{</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(phase_ref.compare_exchange_strong(expected_phase,<sp/>full_step,<sp/><ref refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" kindref="member">memory_order_acq_rel</ref>))<sp/>{</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_expected<sp/>=<sp/>last_node<sp/>+<sp/>1;</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_index<sp/>&gt;&gt;=<sp/>1;</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="120"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="121" refid="classtree__barrier_1aa70b32f84d29b9ea643a8fbcc95e2b96" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classtree__barrier_1aa70b32f84d29b9ea643a8fbcc95e2b96" kindref="member">arrival_token</ref><sp/>=<sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>;<sp/></highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="127" refid="classtree__barrier_1a4b579abca00ee35cf1fd01be9dbe54fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/><ref refid="classtree__barrier_1a4b579abca00ee35cf1fd01be9dbe54fd" kindref="member">max</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" kindref="member">numeric_traits&lt;ptrdiff_t&gt;::max</ref>();<sp/>}</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"></highlight></codeline>
-<codeline lineno="134" refid="classtree__barrier_1a58cc248b4aeee58f81e06cc34a84bc24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classtree__barrier_1a58cc248b4aeee58f81e06cc34a84bc24" kindref="member">tree_barrier</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/>expected,<sp/>CmplFunc<sp/>completion)<sp/>:</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>expected_count_(expected),</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>expected_adjustment_(0),</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>completion_function_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(completion)),</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>current_phase_(static_cast&lt;<ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>&gt;(0))<sp/>{</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref><sp/>=<sp/>(expected_count_<sp/>+<sp/>1)<sp/>&gt;&gt;<sp/>1;</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_array_<sp/>=<sp/><ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique&lt;state_data[]&gt;</ref>(<ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>);</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151" refid="classtree__barrier_1ae391881271d8ace6e3c03f8186aa42a4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classtree__barrier_1aa70b32f84d29b9ea643a8fbcc95e2b96" kindref="member">arrival_token</ref><sp/><ref refid="classtree__barrier_1ae391881271d8ace6e3c03f8186aa42a4" kindref="member">arrive</ref>(<ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/>update)<sp/>{</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhash" kindref="compound">hash&lt;thread::id&gt;</ref><sp/>hasher;</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>current_index<sp/>=<sp/>hasher(this_thread::id());</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phase_ref_t<sp/>phase_ref(current_phase_);</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>old_phase<sp/>=<sp/>phase_ref.load(<ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>current_phase_value<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(old_phase);</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(;<sp/>update<sp/>!=<sp/>0;<sp/>--update)<sp/>{</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(do_arrive(old_phase,<sp/>current_index))<sp/>{</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>completion_function_();</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>expected_count_<sp/>+=<sp/>expected_adjustment_.load(<ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>expected_adjustment_.store(0,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>new_phase<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(current_phase_value<sp/>+<sp/>2);</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phase_ref.store(new_phase,<sp/><ref refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" kindref="member">memory_order_release</ref>);</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phase_ref.notify_all();</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>old_phase;</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"></highlight></codeline>
-<codeline lineno="177" refid="classtree__barrier_1a0cabbf16a0b5532fd54ed41be40babc2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classtree__barrier_1a0cabbf16a0b5532fd54ed41be40babc2" kindref="member">wait</ref>(<ref refid="classtree__barrier_1aa70b32f84d29b9ea643a8fbcc95e2b96" kindref="member">arrival_token</ref>&amp;&amp;<sp/>old_phase)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phase_cref_t<sp/>phase_ref(current_phase_);</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>test_function<sp/>=<sp/>[=]<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>phase_ref.load(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>)<sp/>!=<sp/>old_phase;<sp/>};</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga04b378083d850b094555357ea10e17ef" kindref="member">atomic_wait_address</ref>(&amp;current_phase_,<sp/>test_function);</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"></highlight></codeline>
-<codeline lineno="188" refid="classtree__barrier_1aa5b50d3a3120a3164ca07e9941279418" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classtree__barrier_1aa5b50d3a3120a3164ca07e9941279418" kindref="member">arrive_and_drop</ref>()<sp/>{</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>expected_adjustment_.fetch_sub(1,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ignore<sp/>=<sp/><ref refid="classtree__barrier_1ae391881271d8ace6e3c03f8186aa42a4" kindref="member">arrive</ref>(1);</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="192"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>NOLINTNEXTLINE(bugprone-branch-clone)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(current_index<sp/>==<sp/>last_node<sp/>&amp;&amp;<sp/>((current_expected<sp/>&amp;<sp/>1)<sp/>!=<sp/>0U))<sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(phase_ref.compare_exchange_strong(expected_phase,<sp/>full_step,<sp/><ref refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" kindref="member">memory_order_acq_rel</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(phase_ref.compare_exchange_strong(expected_phase,<sp/>half_step,<sp/><ref refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" kindref="member">memory_order_acq_rel</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(expected_phase<sp/>==<sp/>half_step)<sp/>{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(phase_ref.compare_exchange_strong(expected_phase,<sp/>full_step,<sp/><ref refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" kindref="member">memory_order_acq_rel</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_expected<sp/>=<sp/>last_node<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_index<sp/>&gt;&gt;=<sp/>1;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="122" refid="classtree__barrier_1aa70b32f84d29b9ea643a8fbcc95e2b96" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classtree__barrier_1aa70b32f84d29b9ea643a8fbcc95e2b96" kindref="member">arrival_token</ref><sp/>=<sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>;<sp/></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128" refid="classtree__barrier_1a4b579abca00ee35cf1fd01be9dbe54fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/><ref refid="classtree__barrier_1a4b579abca00ee35cf1fd01be9dbe54fd" kindref="member">max</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classnumeric__traits_1aab2de04ed2c4d0ec8aa5d56cc4c2fc34" kindref="member">numeric_traits&lt;ptrdiff_t&gt;::max</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135" refid="classtree__barrier_1a58cc248b4aeee58f81e06cc34a84bc24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classtree__barrier_1a58cc248b4aeee58f81e06cc34a84bc24" kindref="member">tree_barrier</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/>expected,<sp/>CmplFunc<sp/>completion)<sp/>:</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>expected_count_(expected),</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>completion_function_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(completion))<sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref><sp/>=<sp/>(expected_count_<sp/>+<sp/>1)<sp/>&gt;&gt;<sp/>1;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_array_<sp/>=<sp/><ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique&lt;state_data[]&gt;</ref>(<ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150" refid="classtree__barrier_1ae391881271d8ace6e3c03f8186aa42a4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classtree__barrier_1aa70b32f84d29b9ea643a8fbcc95e2b96" kindref="member">arrival_token</ref><sp/><ref refid="classtree__barrier_1ae391881271d8ace6e3c03f8186aa42a4" kindref="member">arrive</ref>(<ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/>update)<sp/>{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structhash" kindref="compound">hash&lt;thread::id&gt;</ref><sp/>hasher;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>current_index<sp/>=<sp/>hasher(this_thread::id());</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phase_ref_t<sp/>phase_ref(current_phase_);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>old_phase<sp/>=<sp/>phase_ref.load(<ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>current_phase_value<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(old_phase);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(;<sp/>update<sp/>!=<sp/>0;<sp/>--update)<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(do_arrive(old_phase,<sp/>current_index))<sp/>{</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>completion_function_();</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>expected_count_<sp/>+=<sp/>expected_adjustment_.load(<ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>expected_adjustment_.store(0,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>new_phase<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(current_phase_value<sp/>+<sp/>2);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phase_ref.store(new_phase,<sp/><ref refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" kindref="member">memory_order_release</ref>);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phase_ref.notify_all();</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>old_phase;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176" refid="classtree__barrier_1a0cabbf16a0b5532fd54ed41be40babc2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classtree__barrier_1a0cabbf16a0b5532fd54ed41be40babc2" kindref="member">wait</ref>(<ref refid="classtree__barrier_1aa70b32f84d29b9ea643a8fbcc95e2b96" kindref="member">arrival_token</ref>&amp;&amp;<sp/>old_phase)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phase_cref_t<sp/>phase_ref(current_phase_);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>test_function<sp/>=<sp/>[=]<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>phase_ref.load(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>)<sp/>!=<sp/>old_phase;<sp/>};</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga04b378083d850b094555357ea10e17ef" kindref="member">atomic_wait_address</ref>(&amp;current_phase_,<sp/>test_function);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187" refid="classtree__barrier_1aa5b50d3a3120a3164ca07e9941279418" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classtree__barrier_1aa5b50d3a3120a3164ca07e9941279418" kindref="member">arrive_and_drop</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>expected_adjustment_.fetch_sub(1,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ignore<sp/>=<sp/><ref refid="classtree__barrier_1ae391881271d8ace6e3c03f8186aa42a4" kindref="member">arrive</ref>(1);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
 <codeline lineno="193"><highlight class="normal"></highlight></codeline>
-<codeline lineno="194"><highlight class="normal"></highlight></codeline>
-<codeline lineno="203"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CmplFunc<sp/>=<sp/>empty_completion&gt;</highlight></codeline>
-<codeline lineno="204" refid="classbarrier" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classbarrier_1ae15bef6ea846f718e16a574b368bb90a" kindref="member">barrier</ref><sp/>{</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">algorithm_type<sp/>=<sp/><ref refid="classtree__barrier" kindref="compound">tree_barrier&lt;CmplFunc&gt;</ref>;<sp/></highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>algorithm_type<sp/>barrier_impl_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="207"><highlight class="normal"></highlight></codeline>
-<codeline lineno="208"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="216" refid="classbarrier_1_1arrival__token" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref><sp/>final<sp/>{</highlight></codeline>
-<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="218" refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref>(<ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="219" refid="classbarrier_1_1arrival__token_1a03e69e41c8eacb413b180bfa8b986073" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref>&amp;<sp/><ref refid="classbarrier_1_1arrival__token_1a03e69e41c8eacb413b180bfa8b986073" kindref="member">operator=</ref>(<ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/></highlight></codeline>
-<codeline lineno="220" refid="classbarrier_1_1arrival__token_1a6bcc945f080bca386a1331763b6bd0b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classbarrier_1_1arrival__token_1a6bcc945f080bca386a1331763b6bd0b4" kindref="member">~arrival_token</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="221"><highlight class="normal"></highlight></codeline>
-<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">barrier;</highlight></codeline>
-<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">internal_token<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classtree__barrier_1aa70b32f84d29b9ea643a8fbcc95e2b96" kindref="member">algorithm_type::arrival_token</ref>;</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref>(internal_token<sp/>token)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>token_(token)<sp/>{}</highlight></codeline>
-<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>internal_token<sp/>token_;</highlight></codeline>
-<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"></highlight></codeline>
-<codeline lineno="234" refid="classbarrier_1a9f1066a9bbef7a4e2e80d31603a30191" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/><ref refid="classbarrier_1a9f1066a9bbef7a4e2e80d31603a30191" kindref="member">max</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtree__barrier_1a4b579abca00ee35cf1fd01be9dbe54fd" kindref="member">algorithm_type::max</ref>();<sp/>}</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"></highlight></codeline>
-<codeline lineno="241" refid="classbarrier_1ae15bef6ea846f718e16a574b368bb90a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1ae15bef6ea846f718e16a574b368bb90a" kindref="member">barrier</ref>(<ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/><ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>,<sp/>CmplFunc<sp/>completion<sp/>=<sp/>CmplFunc())<sp/>:</highlight></codeline>
-<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/>barrier_impl_(<ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(completion))<sp/>{}</highlight></codeline>
-<codeline lineno="243"><highlight class="normal"></highlight></codeline>
-<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classbarrier_1ae15bef6ea846f718e16a574b368bb90a" kindref="member">barrier</ref>(<ref refid="classbarrier" kindref="compound">barrier</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classbarrier" kindref="compound">barrier</ref>&amp;<sp/>operator=(<ref refid="classbarrier" kindref="compound">barrier</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="246"><highlight class="normal"></highlight></codeline>
-<codeline lineno="252" refid="classbarrier_1ab199c5ed5aba6baac7612cbc1a467d11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classbarrier_1_1arrival__token" kindref="compound">arrival_token</ref><sp/><ref refid="classbarrier_1ab199c5ed5aba6baac7612cbc1a467d11" kindref="member">arrive</ref>(<ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/>update<sp/>=<sp/>1)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1_1arrival__token" kindref="compound">arrival_token</ref>{barrier_impl_.arrive(update)};<sp/>}</highlight></codeline>
-<codeline lineno="253"><highlight class="normal"></highlight></codeline>
-<codeline lineno="258" refid="classbarrier_1a32a869c7fbe9dde1d551bb86a9d3bc2b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1a32a869c7fbe9dde1d551bb86a9d3bc2b" kindref="member">wait</ref>(<ref refid="classbarrier_1_1arrival__token" kindref="compound">arrival_token</ref>&amp;&amp;<sp/>phase)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>barrier_impl_.wait(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(phase.token_));<sp/>}</highlight></codeline>
-<codeline lineno="259"><highlight class="normal"></highlight></codeline>
-<codeline lineno="265" refid="classbarrier_1a6ce0630d80358dac9365a9536213f627" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1a6ce0630d80358dac9365a9536213f627" kindref="member">arrive_and_wait</ref>()<sp/>{<sp/>this-&gt;<ref refid="classbarrier_1a32a869c7fbe9dde1d551bb86a9d3bc2b" kindref="member">wait</ref>(<ref refid="classbarrier_1ab199c5ed5aba6baac7612cbc1a467d11" kindref="member">arrive</ref>());<sp/>}</highlight></codeline>
-<codeline lineno="266"><highlight class="normal"></highlight></codeline>
-<codeline lineno="272" refid="classbarrier_1a5a1acbc1c7f02091d597208d20202f51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1a5a1acbc1c7f02091d597208d20202f51" kindref="member">arrive_and_drop</ref>()<sp/>{<sp/>barrier_impl_.<ref refid="classtree__barrier_1aa5b50d3a3120a3164ca07e9941279418" kindref="member">arrive_and_drop</ref>();<sp/>}</highlight></codeline>
-<codeline lineno="273"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="274"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ThreadSync</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="276"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="278"><highlight class="normal"></highlight></codeline>
-<codeline lineno="279"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="280"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_BARRIER_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CmplFunc<sp/>=<sp/>empty_completion&gt;</highlight></codeline>
+<codeline lineno="203" refid="classbarrier" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classbarrier_1ae15bef6ea846f718e16a574b368bb90a" kindref="member">barrier</ref><sp/>{</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">algorithm_type<sp/>=<sp/><ref refid="classtree__barrier" kindref="compound">tree_barrier&lt;CmplFunc&gt;</ref>;<sp/></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>algorithm_type<sp/>barrier_impl_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="215" refid="classbarrier_1_1arrival__token" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref><sp/>final<sp/>{</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="217" refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref>(<ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="218" refid="classbarrier_1_1arrival__token_1a03e69e41c8eacb413b180bfa8b986073" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref>&amp;<sp/><ref refid="classbarrier_1_1arrival__token_1a03e69e41c8eacb413b180bfa8b986073" kindref="member">operator=</ref>(<ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="219" refid="classbarrier_1_1arrival__token_1a6bcc945f080bca386a1331763b6bd0b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classbarrier_1_1arrival__token_1a6bcc945f080bca386a1331763b6bd0b4" kindref="member">~arrival_token</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">barrier;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">internal_token<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="classtree__barrier_1aa70b32f84d29b9ea643a8fbcc95e2b96" kindref="member">algorithm_type::arrival_token</ref>;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1_1arrival__token_1ace47dfce73ebfa98f70bebc7d2b043a0" kindref="member">arrival_token</ref>(internal_token<sp/>token)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>token_(token)<sp/>{}</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>internal_token<sp/>token_;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233" refid="classbarrier_1a9f1066a9bbef7a4e2e80d31603a30191" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/><ref refid="classbarrier_1a9f1066a9bbef7a4e2e80d31603a30191" kindref="member">max</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classtree__barrier_1a4b579abca00ee35cf1fd01be9dbe54fd" kindref="member">algorithm_type::max</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240" refid="classbarrier_1ae15bef6ea846f718e16a574b368bb90a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1ae15bef6ea846f718e16a574b368bb90a" kindref="member">barrier</ref>(<ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/><ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>,<sp/>CmplFunc<sp/>completion<sp/>=<sp/>CmplFunc())<sp/>:</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/>barrier_impl_(<ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(completion))<sp/>{}</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classbarrier_1ae15bef6ea846f718e16a574b368bb90a" kindref="member">barrier</ref>(<ref refid="classbarrier" kindref="compound">barrier</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classbarrier" kindref="compound">barrier</ref>&amp;<sp/>operator=(<ref refid="classbarrier" kindref="compound">barrier</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251" refid="classbarrier_1ab199c5ed5aba6baac7612cbc1a467d11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classbarrier_1_1arrival__token" kindref="compound">arrival_token</ref><sp/><ref refid="classbarrier_1ab199c5ed5aba6baac7612cbc1a467d11" kindref="member">arrive</ref>(<ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref><sp/>update<sp/>=<sp/>1)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1_1arrival__token" kindref="compound">arrival_token</ref>{barrier_impl_.arrive(update)};<sp/>}</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257" refid="classbarrier_1a32a869c7fbe9dde1d551bb86a9d3bc2b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1a32a869c7fbe9dde1d551bb86a9d3bc2b" kindref="member">wait</ref>(<ref refid="classbarrier_1_1arrival__token" kindref="compound">arrival_token</ref>&amp;&amp;<sp/>phase)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>barrier_impl_.wait(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(phase.token_));<sp/>}</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight></codeline>
+<codeline lineno="264" refid="classbarrier_1a6ce0630d80358dac9365a9536213f627" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1a6ce0630d80358dac9365a9536213f627" kindref="member">arrive_and_wait</ref>()<sp/>{<sp/>this-&gt;<ref refid="classbarrier_1a32a869c7fbe9dde1d551bb86a9d3bc2b" kindref="member">wait</ref>(<ref refid="classbarrier_1ab199c5ed5aba6baac7612cbc1a467d11" kindref="member">arrive</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight></codeline>
+<codeline lineno="271" refid="classbarrier_1a5a1acbc1c7f02091d597208d20202f51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbarrier_1a5a1acbc1c7f02091d597208d20202f51" kindref="member">arrive_and_drop</ref>()<sp/>{<sp/>barrier_impl_.<ref refid="classtree__barrier_1aa5b50d3a3120a3164ca07e9941279418" kindref="member">arrive_and_drop</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="272"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ThreadSync</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_BARRIER_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/barrier.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/barrier.hpp"/>
   </compounddef>
 </doxygen>

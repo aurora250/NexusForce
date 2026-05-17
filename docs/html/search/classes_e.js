@@ -63,5 +63,5 @@ var searchData=
   ['promise_60',['promise',['../classpromise.html',1,'']]],
   ['promise_3c_20res_20_26_20_3e_61',['promise&lt; Res &amp; &gt;',['../classpromise_3_01_res_01_6_01_4.html',1,'']]],
   ['promise_3c_20void_20_3e_62',['promise&lt; void &gt;',['../classpromise_3_01void_01_4.html',1,'']]],
-  ['promise_5ftype_63',['promise_type',['../structgenerator_1_1promise__type.html',1,'generator&lt; T &gt;::promise_type'],['../structtask_1_1promise__type.html',1,'task&lt; T &gt;::promise_type'],['../structvirtual__thread__task_1_1promise__type.html',1,'virtual_thread_task::promise_type']]]
+  ['promise_5ftype_63',['promise_type',['../structgenerator_1_1promise__type.html',1,'generator&lt; T &gt;::promise_type'],['../structtask_1_1promise__type.html',1,'task&lt; T &gt;::promise_type'],['../structvirtual__thread__task_1_1promise__type.html',1,'virtual_thread_task&lt; T &gt;::promise_type'],['../structvirtual__thread__task_3_01void_01_4_1_1promise__type.html',1,'virtual_thread_task&lt; void &gt;::promise_type']]]
 ];

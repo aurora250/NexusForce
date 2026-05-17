@@ -4,7 +4,7 @@
     <compoundname>locale.hpp</compoundname>
     <includes refid="string_8hpp" local="yes">NeForce/core/string/string.hpp</includes>
     <includes refid="vector_8hpp" local="yes">NeForce/core/container/vector.hpp</includes>
-    <includes local="no">locale.h</includes>
+    <includes local="no">clocale</includes>
     <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
     <incdepgraph>
       <node id="34">
@@ -132,7 +132,7 @@
       <node id="45">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -190,7 +190,7 @@
       <node id="27">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -247,6 +247,8 @@
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
       <node id="39">
@@ -326,13 +328,13 @@
         </childnode>
       </node>
       <node id="10">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="46">
+        <label>clocale</label>
       </node>
       <node id="35">
         <label>initializer_list</label>
-      </node>
-      <node id="46">
-        <label>locale.h</label>
       </node>
       <node id="26">
         <label>new</label>
@@ -372,7 +374,7 @@
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="string_8hpp" kindref="compound">NeForce/core/string/string.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="vector_8hpp" kindref="compound">NeForce/core/container/vector.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_LINUX</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;locale.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;clocale&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
@@ -440,8 +442,8 @@
 <codeline lineno="127"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>win_name_;<sp/></highlight></codeline>
 <codeline lineno="129"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>::locale_t<sp/>loc_;<sp/></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>owns_;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>::locale_t<sp/>loc_{LC_GLOBAL_LOCALE};<sp/></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>owns_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="132"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="133"><highlight class="normal"></highlight></codeline>
 <codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>load_locale(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>);</highlight></codeline>
@@ -509,6 +511,6 @@
 <codeline lineno="299"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="300"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_SYSTEM_LOCALE_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/system/locale.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp"/>
   </compounddef>
 </doxygen>

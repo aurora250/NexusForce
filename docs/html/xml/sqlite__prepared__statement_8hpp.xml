@@ -174,7 +174,7 @@
       <node id="35">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -244,7 +244,7 @@
       <node id="39">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
@@ -330,6 +330,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
       </node>
       <node id="59">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -366,8 +368,6 @@
       <node id="69">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="30" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
@@ -522,7 +522,7 @@
         </childnode>
       </node>
       <node id="14">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="8">
         <label>initializer_list</label>
@@ -602,15 +602,17 @@
 <codeline lineno="177"><highlight class="normal"></highlight></codeline>
 <codeline lineno="182" refid="classsqlite__prepared__statement_1ad741d5f90270bd2ca5cdae2e59f6b7b8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="classsqlite__prepared__statement_1ad741d5f90270bd2ca5cdae2e59f6b7b8" kindref="member">get_error</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>last_error_.<ref refid="classbasic__string__view_1a859a0a299a008f84cd9647cecce3a865" kindref="member">view</ref>();<sp/>}</highlight></codeline>
 <codeline lineno="183"><highlight class="normal"></highlight></codeline>
-<codeline lineno="188" refid="classsqlite__prepared__statement_1aac9769d42e12301e2ccb268b320867bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="classsqlite__prepared__statement_1aac9769d42e12301e2ccb268b320867bd" kindref="member">get_errno</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>db_<sp/>?<sp/>::sqlite3_errcode(db_)<sp/>:<sp/>0;<sp/>}</highlight></codeline>
-<codeline lineno="189"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>SQLite3</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="192"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Database</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="194"><highlight class="normal"></highlight></codeline>
-<codeline lineno="195"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="197"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_DATABASE_SQLITE_PREPARED_STATEMENT_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188" refid="classsqlite__prepared__statement_1aac9769d42e12301e2ccb268b320867bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="classsqlite__prepared__statement_1aac9769d42e12301e2ccb268b320867bd" kindref="member">get_errno</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>db_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/>::sqlite3_errcode(db_)<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>SQLite3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Database</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_DATABASE_SQLITE_PREPARED_STATEMENT_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_prepared_statement.hpp"/>
   </compounddef>
 </doxygen>

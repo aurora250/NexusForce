@@ -125,7 +125,7 @@ class scope_exit&lt; Func &gt;</div><p>作用域退出守卫 </p>
 <p>在作用域退出时无条件执行指定的函数（无论是否发生异常）。</p>
 <dl class="section note"><dt>注解</dt><dd>守卫对象的析构函数不应抛出异常。 如果函数可能抛出异常，建议使用scope_fail或scope_success。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00045">45</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00046">46</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="acb4a7a473f0f26ce6cf9149260d93b9f" name="acb4a7a473f0f26ce6cf9149260d93b9f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acb4a7a473f0f26ce6cf9149260d93b9f">&#9670;&#160;</a></span>scope_exit() <span class="overload">[1/3]</span></h2>
@@ -169,11 +169,11 @@ template&lt;typename F, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <p>如果函数对象构造过程中抛出异常，会立即执行func()进行清理。 </p>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00060">60</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00061">61</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03019">forward()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="scope_8hpp_source.html#l00088">scope_exit()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="scope_8hpp_source.html#l00089">scope_exit()</a>.</p>
 
 </div>
 </div>
@@ -219,7 +219,7 @@ template&lt;typename F, <a class="el" href="group___type_traits_utilities.html#g
 </dl>
 <p>如果函数对象的构造不抛出异常，使用此版本提高性能。 </p>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00076">76</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00077">77</a> 行定义.</p>
 
 </div>
 </div>
@@ -257,9 +257,9 @@ template&lt;typename Func&gt; </div>
 </dl>
 <p>转移所有权，原守卫对象被释放。 </p>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00088">88</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00089">89</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02841">is_nothrow_move_constructible_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="scope_8hpp_source.html#l00060">scope_exit()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02853">is_nothrow_move_constructible_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="scope_8hpp_source.html#l00061">scope_exit()</a>.</p>
 
 </div>
 </div>
@@ -291,7 +291,7 @@ template&lt;typename Func&gt; </div>
 <p>析构函数 </p>
 <p>如果守卫处于激活状态，执行函数对象。 必须保证不抛出异常。 </p>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00101">101</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00102">102</a> 行定义.</p>
 
 </div>
 </div>
@@ -324,7 +324,7 @@ template&lt;typename Func&gt; </div>
 <p>释放守卫 </p>
 <p>使守卫不再执行清理操作，转移所有权后使用。 </p>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00112">112</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00113">113</a> 行定义.</p>
 
 </div>
 </div>

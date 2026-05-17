@@ -33,6 +33,5 @@ var searchData=
   ['logging_5ffilter_30',['logging_filter',['../classlogging__filter.html',1,'']]],
   ['lru_5fcache_31',['lru_cache',['../classlru__cache.html',1,'']]],
   ['lru_5fcache_3c_20key_2c_20entry_20_3e_32',['lru_cache&lt; Key, entry &gt;',['../classlru__cache.html',1,'']]],
-  ['lz4_5fcompressor_33',['lz4_compressor',['../classneforce_1_1lz4__compressor.html',1,'neforce']]],
-  ['lz4_5fexception_34',['lz4_exception',['../structneforce_1_1lz4__exception.html',1,'neforce']]]
+  ['lz4_5fcompressor_33',['lz4_compressor',['../classlz4__compressor.html',1,'']]]
 ];

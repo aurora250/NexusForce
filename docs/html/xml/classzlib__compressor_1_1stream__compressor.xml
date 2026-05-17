@@ -4,13 +4,12 @@
     <compoundname>zlib_compressor::stream_compressor</compoundname>
     <includes refid="zlib__compress_8hpp" local="no">zlib_compress.hpp</includes>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classzlib__compressor_1_1stream__compressor_1a5ec96fa5b330a09b6d370d4cd2827ed1" prot="private" static="no" mutable="no">
-        <type>::z_stream</type>
-        <definition>::z_stream zlib_compressor::stream_compressor::stream_</definition>
+      <memberdef kind="variable" id="classzlib__compressor_1_1stream__compressor_1a3941f96d71de968c9d62248cea0307ea" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt;::z_stream, compressor_stream_deleter &gt;</type>
+        <definition>unique_ptr&lt;::z_stream, compressor_stream_deleter&gt; zlib_compressor::stream_compressor::stream_</definition>
         <argsstring></argsstring>
         <name>stream_</name>
         <qualifiedname>zlib_compressor::stream_compressor::stream_</qualifiedname>
-        <initializer>{}</initializer>
         <briefdescription>
 <para>zlib流对象 </para>
         </briefdescription>
@@ -18,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="240" column="20" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="240" bodyend="240"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="263" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="263" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classzlib__compressor_1_1stream__compressor_1a7eee14aaf448f8a49bf1bdf5dff22ab2" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -34,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="241" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="241" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="265" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="265" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classzlib__compressor_1_1stream__compressor_1ad8c27b1645a49c03c95dad158f5ba035" prot="private" static="no" mutable="no">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -50,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="242" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="242" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="266" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="266" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classzlib__compressor_1_1stream__compressor_1a55ee5ded67bd0e2debfbad3bbf60dd60" prot="private" static="no" mutable="no">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -66,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="243" column="16" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="243" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="267" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="267" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -77,19 +76,19 @@
         <name>stream_compressor</name>
         <qualifiedname>zlib_compressor::stream_compressor::stream_compressor</qualifiedname>
         <param>
-          <type><ref refid="group___compression_1gabea3bd6adfcf0a71d2d2f2987233318c" kindref="member">compress_level</ref></type>
+          <type><ref refid="group___compression_1gabdadcdb8dedcef8891e61f37348a3b89" kindref="member">compress_level</ref></type>
           <declname>level</declname>
-          <defval><ref refid="group___compression_1ggabea3bd6adfcf0a71d2d2f2987233318ca6637b88286cba926cc1bb0ef49f9d2e8" kindref="member">compress_level::default_level</ref></defval>
+          <defval><ref refid="group___compression_1ggabdadcdb8dedcef8891e61f37348a3b89a6637b88286cba926cc1bb0ef49f9d2e8" kindref="member">compress_level::default_level</ref></defval>
         </param>
         <param>
-          <type><ref refid="group___compression_1ga573846ea8701aabec09c27f2d432c675" kindref="member">compress_strategy</ref></type>
+          <type><ref refid="group___compression_1ga3b93af7c96730e487e7d9126ae98183e" kindref="member">compress_strategy</ref></type>
           <declname>strategy</declname>
-          <defval><ref refid="group___compression_1gga573846ea8701aabec09c27f2d432c675a631738167a29f3283fb2afb8be36482d" kindref="member">compress_strategy::default_strategy</ref></defval>
+          <defval><ref refid="group___compression_1gga3b93af7c96730e487e7d9126ae98183ea631738167a29f3283fb2afb8be36482d" kindref="member">compress_strategy::default_strategy</ref></defval>
         </param>
         <param>
-          <type><ref refid="group___compression_1ga3aad07e45fe05732549e0fb76f8578de" kindref="member">compress_format</ref></type>
+          <type><ref refid="group___compression_1gaf18959145f07c95c3feacddae6234a0c" kindref="member">compress_format</ref></type>
           <declname>format</declname>
-          <defval><ref refid="group___compression_1gga3aad07e45fe05732549e0fb76f8578dea7a990d405d2c6fb93aa8fbb0ec1a3b23" kindref="member">compress_format::zlib</ref></defval>
+          <defval><ref refid="group___compression_1ggaf18959145f07c95c3feacddae6234a0ca7a990d405d2c6fb93aa8fbb0ec1a3b23" kindref="member">compress_format::zlib</ref></defval>
         </param>
         <briefdescription>
 <para>构造函数 </para>
@@ -133,19 +132,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="253" column="18"/>
-        <references refid="group___compression_1ggabea3bd6adfcf0a71d2d2f2987233318ca6637b88286cba926cc1bb0ef49f9d2e8" compoundref="zlib__compress_8hpp" startline="60">default_level</references>
-        <references refid="group___compression_1gga573846ea8701aabec09c27f2d432c675a631738167a29f3283fb2afb8be36482d" compoundref="zlib__compress_8hpp" startline="71">default_strategy</references>
-        <references refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" compoundref="format_8hpp" startline="702" endline="708">format</references>
-        <references refid="group___compression_1gga3aad07e45fe05732549e0fb76f8578dea7a990d405d2c6fb93aa8fbb0ec1a3b23" compoundref="zlib__compress_8hpp" startline="85">zlib</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="277" column="18"/>
+        <references refid="group___compression_1ggabdadcdb8dedcef8891e61f37348a3b89a6637b88286cba926cc1bb0ef49f9d2e8" compoundref="zlib__compress_8hpp" startline="61">default_level</references>
+        <references refid="group___compression_1gga3b93af7c96730e487e7d9126ae98183ea631738167a29f3283fb2afb8be36482d" compoundref="zlib__compress_8hpp" startline="72">default_strategy</references>
+        <references refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" compoundref="format_8hpp" startline="695" endline="701">format</references>
+        <references refid="group___compression_1ggaf18959145f07c95c3feacddae6234a0ca7a990d405d2c6fb93aa8fbb0ec1a3b23" compoundref="zlib__compress_8hpp" startline="86">zlib</references>
         <referencedby refid="classzlib__compressor_1_1stream__compressor_1ae581cc759c603e5a5f6b1bfed3541948">operator=</referencedby>
         <referencedby refid="classzlib__compressor_1_1stream__compressor_1a693ddacffc2e2c894e6ffbf15528f6a7">stream_compressor</referencedby>
-        <referencedby refid="classzlib__compressor_1_1stream__compressor_1a4328d9e71d9446d60a3ba05981bbea32">~stream_compressor</referencedby>
+        <referencedby refid="classzlib__compressor_1_1stream__compressor_1ac4f3d9dc19534a863999b715f3d10477">~stream_compressor</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classzlib__compressor_1_1stream__compressor_1a4328d9e71d9446d60a3ba05981bbea32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classzlib__compressor_1_1stream__compressor_1ac4f3d9dc19534a863999b715f3d10477" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>zlib_compressor::stream_compressor::~stream_compressor</definition>
-        <argsstring>()</argsstring>
+        <argsstring>()=default</argsstring>
         <name>~stream_compressor</name>
         <qualifiedname>zlib_compressor::stream_compressor::~stream_compressor</qualifiedname>
         <briefdescription>
@@ -155,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="260" column="9"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="284" column="9"/>
         <references refid="classzlib__compressor_1_1stream__compressor_1aeed6ccb2b5cc547dea0a3f53fc7d4823">stream_compressor</references>
       </memberdef>
       <memberdef kind="function" id="classzlib__compressor_1_1stream__compressor_1a71193f45fd74f9b22d3d6821025419d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -173,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="262" column="9"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="286" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classzlib__compressor_1_1stream__compressor_1abfeb08bf3f5b7f8e6a288e8e3f72b0f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classzlib__compressor_1_1stream__compressor_1aeed6ccb2b5cc547dea0a3f53fc7d4823" kindref="member">stream_compressor</ref> &amp;</type>
@@ -190,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="263" column="27"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="287" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classzlib__compressor_1_1stream__compressor_1a693ddacffc2e2c894e6ffbf15528f6a7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -219,7 +218,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="269" column="9"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="293" column="9"/>
         <references refid="classzlib__compressor_1_1stream__compressor_1aeed6ccb2b5cc547dea0a3f53fc7d4823">stream_compressor</references>
       </memberdef>
       <memberdef kind="function" id="classzlib__compressor_1_1stream__compressor_1ae581cc759c603e5a5f6b1bfed3541948" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -251,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="276" column="27"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="300" column="27"/>
         <references refid="classzlib__compressor_1_1stream__compressor_1aeed6ccb2b5cc547dea0a3f53fc7d4823">stream_compressor</references>
       </memberdef>
       <memberdef kind="function" id="classzlib__compressor_1_1stream__compressor_1ad76f10cd7d09443fc3873e2c31c84a1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -305,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="285" column="21"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="309" column="21"/>
         <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
         <references refid="classzlib__compressor_1_1stream__compressor_1a3c9ae650c7c4966c05ee29da212a021c">finish</references>
       </memberdef>
@@ -360,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="294" column="21"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="318" column="21"/>
         <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
         <references refid="classzlib__compressor_1_1stream__compressor_1a3c9ae650c7c4966c05ee29da212a021c">finish</references>
       </memberdef>
@@ -389,7 +388,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="301" column="21"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="325" column="21"/>
         <referencedby refid="classzlib__compressor_1_1stream__compressor_1ad76f10cd7d09443fc3873e2c31c84a1f">compress</referencedby>
         <referencedby refid="classzlib__compressor_1_1stream__compressor_1a6aa30f8478704c52a6565770eaa8a31e">compress</referencedby>
       </memberdef>
@@ -400,19 +399,19 @@
         <name>reset</name>
         <qualifiedname>zlib_compressor::stream_compressor::reset</qualifiedname>
         <param>
-          <type><ref refid="group___compression_1gabea3bd6adfcf0a71d2d2f2987233318c" kindref="member">compress_level</ref></type>
+          <type><ref refid="group___compression_1gabdadcdb8dedcef8891e61f37348a3b89" kindref="member">compress_level</ref></type>
           <declname>level</declname>
-          <defval><ref refid="group___compression_1ggabea3bd6adfcf0a71d2d2f2987233318ca6637b88286cba926cc1bb0ef49f9d2e8" kindref="member">compress_level::default_level</ref></defval>
+          <defval><ref refid="group___compression_1ggabdadcdb8dedcef8891e61f37348a3b89a6637b88286cba926cc1bb0ef49f9d2e8" kindref="member">compress_level::default_level</ref></defval>
         </param>
         <param>
-          <type><ref refid="group___compression_1ga573846ea8701aabec09c27f2d432c675" kindref="member">compress_strategy</ref></type>
+          <type><ref refid="group___compression_1ga3b93af7c96730e487e7d9126ae98183e" kindref="member">compress_strategy</ref></type>
           <declname>strategy</declname>
-          <defval><ref refid="group___compression_1gga573846ea8701aabec09c27f2d432c675a631738167a29f3283fb2afb8be36482d" kindref="member">compress_strategy::default_strategy</ref></defval>
+          <defval><ref refid="group___compression_1gga3b93af7c96730e487e7d9126ae98183ea631738167a29f3283fb2afb8be36482d" kindref="member">compress_strategy::default_strategy</ref></defval>
         </param>
         <param>
-          <type><ref refid="group___compression_1ga3aad07e45fe05732549e0fb76f8578de" kindref="member">compress_format</ref></type>
+          <type><ref refid="group___compression_1gaf18959145f07c95c3feacddae6234a0c" kindref="member">compress_format</ref></type>
           <declname>format</declname>
-          <defval><ref refid="group___compression_1gga3aad07e45fe05732549e0fb76f8578dea7a990d405d2c6fb93aa8fbb0ec1a3b23" kindref="member">compress_format::zlib</ref></defval>
+          <defval><ref refid="group___compression_1ggaf18959145f07c95c3feacddae6234a0ca7a990d405d2c6fb93aa8fbb0ec1a3b23" kindref="member">compress_format::zlib</ref></defval>
         </param>
         <briefdescription>
 <para>重置压缩器状态 </para>
@@ -456,11 +455,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="310" column="14"/>
-        <references refid="group___compression_1ggabea3bd6adfcf0a71d2d2f2987233318ca6637b88286cba926cc1bb0ef49f9d2e8" compoundref="zlib__compress_8hpp" startline="60">default_level</references>
-        <references refid="group___compression_1gga573846ea8701aabec09c27f2d432c675a631738167a29f3283fb2afb8be36482d" compoundref="zlib__compress_8hpp" startline="71">default_strategy</references>
-        <references refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" compoundref="format_8hpp" startline="702" endline="708">format</references>
-        <references refid="group___compression_1gga3aad07e45fe05732549e0fb76f8578dea7a990d405d2c6fb93aa8fbb0ec1a3b23" compoundref="zlib__compress_8hpp" startline="85">zlib</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="334" column="14"/>
+        <references refid="group___compression_1ggabdadcdb8dedcef8891e61f37348a3b89a6637b88286cba926cc1bb0ef49f9d2e8" compoundref="zlib__compress_8hpp" startline="61">default_level</references>
+        <references refid="group___compression_1gga3b93af7c96730e487e7d9126ae98183ea631738167a29f3283fb2afb8be36482d" compoundref="zlib__compress_8hpp" startline="72">default_strategy</references>
+        <references refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" compoundref="format_8hpp" startline="695" endline="701">format</references>
+        <references refid="group___compression_1ggaf18959145f07c95c3feacddae6234a0ca7a990d405d2c6fb93aa8fbb0ec1a3b23" compoundref="zlib__compress_8hpp" startline="86">zlib</references>
       </memberdef>
       <memberdef kind="function" id="classzlib__compressor_1_1stream__compressor_1a7422ec78e1d01a78bd542264c57480bd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -478,7 +477,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="318" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="318" bodyend="318"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="342" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="342" bodyend="342"/>
       </memberdef>
       <memberdef kind="function" id="classzlib__compressor_1_1stream__compressor_1a14f5b522db68df19d7ffbd7d4d222534" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>NEFORCE_NODISCARD <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -496,7 +495,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="324" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="324" bodyend="324"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="348" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="348" bodyend="348"/>
       </memberdef>
       <memberdef kind="function" id="classzlib__compressor_1_1stream__compressor_1aac097325838a3d5a030f9aeadf9e9b5a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>NEFORCE_NODISCARD double</type>
@@ -514,7 +513,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="330" column="34" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="330" bodyend="332"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="354" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="354" bodyend="356"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -523,7 +522,7 @@
     <detaileddescription>
 <para>支持分块压缩数据，适用于大文件或网络传输场景。 维护压缩状态，可以多次添加数据并最终完成压缩。 </para>
     </detaileddescription>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="238" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="238" bodyend="333"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" line="261" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/compress/zlib_compress.hpp" bodystart="261" bodyend="357"/>
     <listofallmembers>
       <member refid="classzlib__compressor_1_1stream__compressor_1a7422ec78e1d01a78bd542264c57480bd" prot="public" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>bytes_input</name></member>
       <member refid="classzlib__compressor_1_1stream__compressor_1ad8c27b1645a49c03c95dad158f5ba035" prot="private" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>bytes_input_</name></member>
@@ -537,11 +536,11 @@
       <member refid="classzlib__compressor_1_1stream__compressor_1abfeb08bf3f5b7f8e6a288e8e3f72b0f8" prot="public" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>operator=</name></member>
       <member refid="classzlib__compressor_1_1stream__compressor_1ae581cc759c603e5a5f6b1bfed3541948" prot="public" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>operator=</name></member>
       <member refid="classzlib__compressor_1_1stream__compressor_1a4f3592f6b277785d6de048eaec01e5c1" prot="public" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>reset</name></member>
-      <member refid="classzlib__compressor_1_1stream__compressor_1a5ec96fa5b330a09b6d370d4cd2827ed1" prot="private" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>stream_</name></member>
+      <member refid="classzlib__compressor_1_1stream__compressor_1a3941f96d71de968c9d62248cea0307ea" prot="private" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>stream_</name></member>
       <member refid="classzlib__compressor_1_1stream__compressor_1aeed6ccb2b5cc547dea0a3f53fc7d4823" prot="public" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>stream_compressor</name></member>
       <member refid="classzlib__compressor_1_1stream__compressor_1a71193f45fd74f9b22d3d6821025419d3" prot="public" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>stream_compressor</name></member>
       <member refid="classzlib__compressor_1_1stream__compressor_1a693ddacffc2e2c894e6ffbf15528f6a7" prot="public" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>stream_compressor</name></member>
-      <member refid="classzlib__compressor_1_1stream__compressor_1a4328d9e71d9446d60a3ba05981bbea32" prot="public" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>~stream_compressor</name></member>
+      <member refid="classzlib__compressor_1_1stream__compressor_1ac4f3d9dc19534a863999b715f3d10477" prot="public" virt="non-virtual"><scope>zlib_compressor::stream_compressor</scope><name>~stream_compressor</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

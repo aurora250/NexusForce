@@ -93,9 +93,11 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="39" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
@@ -128,7 +130,7 @@
         <childnode refid="57" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="47">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="8" relation="include">
@@ -137,7 +139,7 @@
       <node id="41">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="42" relation="include">
         </childnode>
@@ -148,8 +150,6 @@
         <childnode refid="45" relation="include">
         </childnode>
         <childnode refid="46" relation="include">
-        </childnode>
-        <childnode refid="47" relation="include">
         </childnode>
       </node>
       <node id="9">
@@ -245,7 +245,7 @@
       <node id="55">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -295,6 +295,8 @@
       <node id="31">
         <label>NeForce/core/memory/temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
         <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
@@ -305,7 +307,7 @@
       <node id="34">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
@@ -387,13 +389,19 @@
         </childnode>
       </node>
       <node id="10">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="46">
+        <label>ctime</label>
       </node>
       <node id="4">
         <label>initializer_list</label>
       </node>
-      <node id="49">
+      <node id="48">
         <label>intrin.h</label>
+      </node>
+      <node id="49">
+        <label>intrin0.inl.h</label>
       </node>
       <node id="33">
         <label>new</label>
@@ -401,17 +409,11 @@
       <node id="43">
         <label>processthreadsapi.h</label>
       </node>
-      <node id="47">
-        <label>riscv_pause.h</label>
-      </node>
       <node id="45">
         <label>sched.h</label>
       </node>
       <node id="44">
         <label>synchapi.h</label>
-      </node>
-      <node id="46">
-        <label>unistd.h</label>
       </node>
       <node id="22">
         <label>utility</label>
@@ -480,7 +482,7 @@
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
 <codeline lineno="68" refid="structhazard__pointer__record_1a442f3b96c8298e3d907f63487b0b7ae0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structhazard__pointer__record_1a442f3b96c8298e3d907f63487b0b7ae0" kindref="member">protect</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>ptr)<sp/>{<sp/><ref refid="structhazard__pointer__record_1aa72ef496c7d823531af21d92f7f7cc88" kindref="member">hazard_ptr</ref>.store(ptr,<sp/><ref refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" kindref="member">memory_order_release</ref>);<sp/>}</highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight></codeline>
-<codeline lineno="74" refid="structhazard__pointer__record_1ae03e1630afad7e8ceb0ee028f932dac4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="structhazard__pointer__record_1ae03e1630afad7e8ceb0ee028f932dac4" kindref="member">get_protected</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhazard__pointer__record_1aa72ef496c7d823531af21d92f7f7cc88" kindref="member">hazard_ptr</ref>.load(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="74" refid="structhazard__pointer__record_1a9bad8d4482e85c2b543c8d19955940f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="structhazard__pointer__record_1a9bad8d4482e85c2b543c8d19955940f1" kindref="member">get_protected</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structhazard__pointer__record_1aa72ef496c7d823531af21d92f7f7cc88" kindref="member">hazard_ptr</ref>.load(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>);<sp/>}</highlight></codeline>
 <codeline lineno="75"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"></highlight></codeline>
 <codeline lineno="84" refid="classhazard__pointer__obj__base" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classhazard__pointer__obj__base" kindref="compound">hazard_pointer_obj_base</ref><sp/>{</highlight></codeline>
@@ -569,10 +571,10 @@
 <codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;void*&gt;</ref><sp/>hazards;</highlight></codeline>
 <codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhazard__pointer__record" kindref="compound">hazard_pointer_record</ref>*<sp/>current<sp/>=<sp/>head_.load(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>);</highlight></codeline>
 <codeline lineno="217"><highlight class="normal"></highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(current)<sp/>{</highlight></codeline>
-<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(current-&gt;<ref refid="structhazard__pointer__record_1af442cb95513e29efbe1c46a6d5fd33ec" kindref="member">active</ref>.<ref refid="structatomic_3_01bool_01_4_1aeae9779b073a62cb0f9dd744433e405f" kindref="member">load</ref>(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>))<sp/>{</highlight></codeline>
-<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>ptr<sp/>=<sp/>current-&gt;<ref refid="structhazard__pointer__record_1ae03e1630afad7e8ceb0ee028f932dac4" kindref="member">get_protected</ref>();</highlight></codeline>
-<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ptr)<sp/>{</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(current<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(current-&gt;<ref refid="structhazard__pointer__record_1af442cb95513e29efbe1c46a6d5fd33ec" kindref="member">active</ref>.<ref refid="structatomic_3_01bool_01_4_1a5e02b0d996e2ec3820d0efbd265eb3f9" kindref="member">load</ref>(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>ptr<sp/>=<sp/>current-&gt;<ref refid="structhazard__pointer__record_1a9bad8d4482e85c2b543c8d19955940f1" kindref="member">get_protected</ref>();</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ptr<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hazards.<ref refid="classvector_1a1add9f846ce2128c0702d803961a2685" kindref="member">push_back</ref>(ptr);</highlight></codeline>
 <codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -626,7 +628,7 @@
 <codeline lineno="278"><highlight class="normal"></highlight></codeline>
 <codeline lineno="284" refid="classhazard__pointer__domain_1a96cda2b40cbab07f17120547422f77a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classhazard__pointer__domain_1a96cda2b40cbab07f17120547422f77a9" kindref="member">~hazard_pointer_domain</ref>()<sp/>{</highlight></codeline>
 <codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhazard__pointer__record" kindref="compound">hazard_pointer_record</ref>*<sp/>current<sp/>=<sp/>head_.load();</highlight></codeline>
-<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(current)<sp/>{</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(current<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/><ref refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" kindref="member">next</ref><sp/>=<sp/>current-&gt;<ref refid="structhazard__pointer__record_1a9ea9b24dfd31f335203fe15ac7dd6725" kindref="member">next</ref>.<ref refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" kindref="member">load</ref>();</highlight></codeline>
 <codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal"><sp/>current;</highlight></codeline>
 <codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current<sp/>=<sp/><ref refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" kindref="member">next</ref>;</highlight></codeline>
@@ -638,19 +640,19 @@
 <codeline lineno="295"><highlight class="normal"></highlight></codeline>
 <codeline lineno="302" refid="classhazard__pointer__domain_1a54909fb9e1d5f81cb50df2dfc67607bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structhazard__pointer__record" kindref="compound">hazard_pointer_record</ref>*<sp/><ref refid="classhazard__pointer__domain_1a54909fb9e1d5f81cb50df2dfc67607bc" kindref="member">acquire_record</ref>()<sp/>{</highlight></codeline>
 <codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhazard__pointer__record" kindref="compound">hazard_pointer_record</ref>*<sp/>current<sp/>=<sp/>head_.load(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>);</highlight></codeline>
-<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(current)<sp/>{</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(current<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(current-&gt;<ref refid="structhazard__pointer__record_1ab365c8bb8d47f7ed2d17c3d2b8dbb0a0" kindref="member">try_acquire</ref>())<sp/>{</highlight></codeline>
 <codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>current;</highlight></codeline>
 <codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current<sp/>=<sp/>current-&gt;<ref refid="structhazard__pointer__record_1a9ea9b24dfd31f335203fe15ac7dd6725" kindref="member">next</ref>.<ref refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" kindref="member">load</ref>(<ref refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" kindref="member">memory_order_acquire</ref>);</highlight></codeline>
 <codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="310"><highlight class="normal"></highlight></codeline>
-<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhazard__pointer__record" kindref="compound">hazard_pointer_record</ref>*<sp/>new_record<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="structhazard__pointer__record" kindref="compound">hazard_pointer_record</ref>();</highlight></codeline>
-<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>new_record-&gt;<ref refid="structhazard__pointer__record_1af442cb95513e29efbe1c46a6d5fd33ec" kindref="member">active</ref>.<ref refid="structatomic_3_01bool_01_4_1a62c07fee296a5aa40abf8b8560541de8" kindref="member">store</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">*<sp/>new_record<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="structhazard__pointer__record" kindref="compound">hazard_pointer_record</ref>();</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>new_record-&gt;active.store(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
 <codeline lineno="313"><highlight class="normal"></highlight></codeline>
 <codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structhazard__pointer__record" kindref="compound">hazard_pointer_record</ref>*<sp/>old_head<sp/>=<sp/>head_.load(<ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
 <codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">do</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>new_record-&gt;<ref refid="structhazard__pointer__record_1a9ea9b24dfd31f335203fe15ac7dd6725" kindref="member">next</ref>.<ref refid="structatomic_1a3e1268f8d4abb49382c713740a13234a" kindref="member">store</ref>(old_head,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>new_record-&gt;next.store(old_head,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
 <codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!head_.compare_exchange_weak(old_head,<sp/>new_record,<sp/><ref refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" kindref="member">memory_order_release</ref>,<sp/><ref refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" kindref="member">memory_order_relaxed</ref>));</highlight></codeline>
 <codeline lineno="318"><highlight class="normal"></highlight></codeline>
 <codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>new_record;</highlight></codeline>
@@ -694,7 +696,7 @@
 <codeline lineno="385"><highlight class="normal"></highlight></codeline>
 <codeline lineno="391" refid="classhazard__pointer_1a03ad491029e5f77e734cf40e33e5327f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classhazard__pointer_1a03ad491029e5f77e734cf40e33e5327f" kindref="member">~hazard_pointer</ref>()<sp/>{</highlight></codeline>
 <codeline lineno="392"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhazard__pointer_1acbff5a8835fbe4d2c935c556ed8eaec1" kindref="member">reset_protection</ref>();</highlight></codeline>
-<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(record_)<sp/>{</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(record_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>record_-&gt;release();</highlight></codeline>
 <codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -712,7 +714,7 @@
 <codeline lineno="408"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="409"><highlight class="normal"></highlight></codeline>
 <codeline lineno="410"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classhazard__pointer_1acbff5a8835fbe4d2c935c556ed8eaec1" kindref="member">reset_protection</ref>();</highlight></codeline>
-<codeline lineno="411"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(record_)<sp/>{</highlight></codeline>
+<codeline lineno="411"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(record_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>record_-&gt;release();</highlight></codeline>
 <codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>record_<sp/>=<sp/>other.record_;</highlight></codeline>
@@ -762,7 +764,7 @@
 <codeline lineno="473"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="474"><highlight class="normal"></highlight></codeline>
 <codeline lineno="480" refid="classhazard__pointer_1acbff5a8835fbe4d2c935c556ed8eaec1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classhazard__pointer_1acbff5a8835fbe4d2c935c556ed8eaec1" kindref="member">reset_protection</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="481"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(record_)<sp/>{</highlight></codeline>
+<codeline lineno="481"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(record_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="482"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>record_-&gt;protect(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="483"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -816,6 +818,6 @@
 <codeline lineno="582"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="583"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_HAZARD_PTR_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/hazard_ptr.hpp"/>
   </compounddef>
 </doxygen>

@@ -208,7 +208,7 @@
       <node id="50">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="4" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="19">
@@ -266,6 +266,8 @@
       <node id="39">
         <label>NeForce/core/memory/temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
         <childnode refid="40" relation="include">
         </childnode>
         <childnode refid="42" relation="include">
@@ -276,7 +278,7 @@
       <node id="42">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="20" relation="include">
+        <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
@@ -318,6 +320,8 @@
       <node id="55">
         <label>NeForce/core/reflect/any.hpp</label>
         <link refid="reflect_2any_8hpp"/>
+        <childnode refid="36" relation="include">
+        </childnode>
         <childnode refid="56" relation="include">
         </childnode>
         <childnode refid="58" relation="include">
@@ -398,6 +402,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="15" relation="include">
         </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
       </node>
       <node id="61">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -472,7 +478,7 @@
         </childnode>
       </node>
       <node id="7">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="16">
         <label>initializer_list</label>
@@ -543,7 +549,7 @@
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmeta__type" kindref="compound">meta_type</ref>&amp;<sp/>meta_;<sp/></highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal">...<sp/>Is&gt;</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classmeta__any" kindref="compound">meta_any</ref><sp/>create_with_args(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;meta_any&gt;</ref>&amp;<sp/>args,<sp/><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence&lt;Is...&gt;</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classmeta__any" kindref="compound">meta_any</ref><sp/>create_with_args(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;meta_any&gt;</ref>&amp;<sp/>args,<sp/><ref refid="group___integer_sequence_1ga26720e99f9258f846d2e957f81425b71" kindref="member">index_sequence&lt;Is...&gt;</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classmeta__any" kindref="compound">meta_any</ref>(T(args[Is].</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>convert&lt;Args&gt;()...));</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"></highlight></codeline>
@@ -656,6 +662,6 @@
 <codeline lineno="247"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="248"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_REFLECT_REFLECT_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp"/>
   </compounddef>
 </doxygen>

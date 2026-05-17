@@ -7,6 +7,7 @@ var topics =
     [ "异步组件", "group___async_components.html", "group___async_components" ],
     [ "协程", "group___coroutine.html", "group___coroutine" ],
     [ "信号槽", "group___signals.html", "group___signals" ],
+    [ "虚拟线程", "group___virtual_thread.html", "group___virtual_thread" ],
     [ "平台检测", "group___platform_detection.html", "group___platform_detection" ],
     [ "编译器检测", "group___compiler_detection.html", "group___compiler_detection" ],
     [ "API导入导出规范", "group___a_p_i_imp_exp_spec.html", "group___a_p_i_imp_exp_spec" ],

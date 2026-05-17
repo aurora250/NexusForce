@@ -262,7 +262,7 @@
       <node id="48">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="3" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
       <node id="17">
@@ -320,6 +320,8 @@
       <node id="37">
         <label>NeForce/core/memory/temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
         <childnode refid="38" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
@@ -330,7 +332,7 @@
       <node id="40">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
@@ -387,6 +389,8 @@
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
       <node id="61">
@@ -462,7 +466,7 @@
         <label>aio.h</label>
       </node>
       <node id="6">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="54">
         <label>cerrno</label>
@@ -559,11 +563,11 @@
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfile__async_1a806795660074f7825f91730c57ab32bf" kindref="member">aiocb_type</ref><sp/>=<sp/>::aiocb;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53" refid="classfile__async_1a8b645f877995e8d118070dc12c6ba3bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfile__async_1a8b645f877995e8d118070dc12c6ba3bd" kindref="member">native_handle_type</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="classfile__async_1a8b645f877995e8d118070dc12c6ba3bd" kindref="member">native_handle_type</ref>;<sp/></highlight></codeline>
+<codeline lineno="53" refid="classfile__async_1afdf923e5978a89d1b48d8e5f4a3f31dc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classfile__async_1afdf923e5978a89d1b48d8e5f4a3f31dc" kindref="member">native_handle_type</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="classfile__async_1afdf923e5978a89d1b48d8e5f4a3f31dc" kindref="member">native_handle_type</ref>;<sp/></highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">async_context<sp/>{</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">*<sp/>buffer<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/></highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfile__async_1a806795660074f7825f91730c57ab32bf" kindref="member">aiocb_type</ref>*<sp/>cb<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/></highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_write<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/></highlight></codeline>
@@ -585,7 +589,7 @@
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"></highlight></codeline>
 <codeline lineno="99"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__async_1a8b645f877995e8d118070dc12c6ba3bd" kindref="member">native_handle_type</ref><sp/>handle_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__async_1afdf923e5978a89d1b48d8e5f4a3f31dc" kindref="member">native_handle_type</ref><sp/>handle_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classmutex" kindref="compound">mutex</ref><sp/>mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;aiocb_type*&gt;</ref><sp/>operations_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classunordered__map" kindref="compound">unordered_map&lt;aiocb_type*, async_context*&gt;</ref><sp/>contexts_;<sp/></highlight></codeline>
@@ -594,7 +598,7 @@
 <codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>check_completion(<ref refid="structfile__async_1_1async__result" kindref="compound">async_result</ref>&amp;<sp/>result)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
 <codeline lineno="108"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="115" refid="classfile__async_1aa27dd3253c71dea9e0329739724561fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classfile__async_1aa27dd3253c71dea9e0329739724561fb" kindref="member">file_async</ref>(<ref refid="classfile__async_1a8b645f877995e8d118070dc12c6ba3bd" kindref="member">native_handle_type</ref><sp/><ref refid="group___thread_1ga9c11108611d4c65deb691d1b88f0dc07" kindref="member">handle</ref>);</highlight></codeline>
+<codeline lineno="115" refid="classfile__async_1aa27dd3253c71dea9e0329739724561fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classfile__async_1aa27dd3253c71dea9e0329739724561fb" kindref="member">file_async</ref>(<ref refid="classfile__async_1afdf923e5978a89d1b48d8e5f4a3f31dc" kindref="member">native_handle_type</ref><sp/><ref refid="group___thread_1ga9c11108611d4c65deb691d1b88f0dc07" kindref="member">handle</ref>);</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"></highlight></codeline>
 <codeline lineno="122" refid="classfile__async_1ac23d04d4fa4c0cf5448b5373cf40506a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile__async_1ac23d04d4fa4c0cf5448b5373cf40506a" kindref="member">~file_async</ref>();</highlight></codeline>
 <codeline lineno="123"><highlight class="normal"></highlight></codeline>
@@ -618,6 +622,6 @@
 <codeline lineno="187"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="188"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_FILE_FILE_ASYNC_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/file/file_async.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_async.hpp"/>
   </compounddef>
 </doxygen>

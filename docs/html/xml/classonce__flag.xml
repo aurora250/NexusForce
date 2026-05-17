@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="40" column="12" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="40" bodyend="40"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="40" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="40" bodyend="40"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -98,25 +98,26 @@
 确保函数在多线程环境中只被执行一次。 如果已经有线程正在执行该函数，其他线程将等待直到执行完成。 如果函数已成功执行，后续调用将立即返回。</para>
 <para><simplesect kind="note"><para>如果函数抛出异常，则视为未执行，后续线程将尝试重新执行 </para>
 </simplesect>
+<simplesect kind="warning"><para>对 call_once 递归调用会导致死锁 </para>
+</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="43" column="17" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="68" bodyend="106"/>
-        <references refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" compoundref="atomic_8hpp" startline="207" endline="212">atomic&lt; T &gt;::compare_exchange_strong</references>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="43" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="69" bodyend="112"/>
+        <references refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" compoundref="atomic_8hpp" startline="211" endline="216">atomic&lt; T &gt;::compare_exchange_strong</references>
+        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
         <references refid="group___invoke_function_1ga529f4a5476de9eb8ed295cb17c719c96" compoundref="invoke_8hpp" startline="538" endline="543">invoke</references>
-        <references refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" compoundref="atomic_8hpp" startline="130" endline="132">atomic&lt; T &gt;::load</references>
-        <references refid="group___memory_order_1ga3b921278ed46859e35eae165a2f2e96d" compoundref="memory__order_8hpp" startline="181">memory_order_acq_rel</references>
+        <references refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" compoundref="atomic_8hpp" startline="134" endline="136">atomic&lt; T &gt;::load</references>
         <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
         <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
         <references refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
-        <references refid="structatomic_1a3e1268f8d4abb49382c713740a13234a" compoundref="atomic_8hpp" startline="114" endline="116">atomic&lt; T &gt;::store</references>
+        <references refid="structatomic_1a3e1268f8d4abb49382c713740a13234a" compoundref="atomic_8hpp" startline="118" endline="120">atomic&lt; T &gt;::store</references>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classonce__flag_1a4899309ba40517b1abd8a9d6cc93fd1c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type></type>
+      <memberdef kind="function" id="classonce__flag_1a270dc7b5691c7431fb75e94988a5b76d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
         <definition>once_flag::once_flag</definition>
         <argsstring>() noexcept=default</argsstring>
         <name>once_flag</name>
@@ -127,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="46" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="46" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classonce__flag_1aaf248c1053fea5d30c248cf7f6ac86a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -144,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="47" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="47" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classonce__flag_1a3692694e788d49771bd07dc9121ad5db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classonce__flag" kindref="compound">once_flag</ref> &amp;</type>
@@ -161,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="48" column="15"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="48" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classonce__flag_1a3ac545abb60a28c70f1b9f54c17bdbf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -178,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="49" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="49" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classonce__flag_1ad9e1a06385391398efed492a045c9434" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classonce__flag" kindref="compound">once_flag</ref> &amp;</type>
@@ -195,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="50" column="15"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="50" column="15"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -208,10 +209,10 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="38" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="38" bodyend="51"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="38" bodyend="51"/>
     <listofallmembers>
       <member refid="classonce__flag_1a6b72113ff3b073878b5fc971d6fe1026" prot="private" virt="non-virtual"><scope>once_flag</scope><name>call_once</name></member>
-      <member refid="classonce__flag_1a4899309ba40517b1abd8a9d6cc93fd1c" prot="public" virt="non-virtual"><scope>once_flag</scope><name>once_flag</name></member>
+      <member refid="classonce__flag_1a270dc7b5691c7431fb75e94988a5b76d" prot="public" virt="non-virtual"><scope>once_flag</scope><name>once_flag</name></member>
       <member refid="classonce__flag_1aaf248c1053fea5d30c248cf7f6ac86a2" prot="public" virt="non-virtual"><scope>once_flag</scope><name>once_flag</name></member>
       <member refid="classonce__flag_1a3ac545abb60a28c70f1b9f54c17bdbf8" prot="public" virt="non-virtual"><scope>once_flag</scope><name>once_flag</name></member>
       <member refid="classonce__flag_1a3692694e788d49771bd07dc9121ad5db" prot="public" virt="non-virtual"><scope>once_flag</scope><name>operator=</name></member>

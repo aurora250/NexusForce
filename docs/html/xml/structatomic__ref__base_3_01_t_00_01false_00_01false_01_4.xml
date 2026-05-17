@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2632" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2632" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2642" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2642" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-attrib">
@@ -32,14 +32,14 @@
         <argsstring></argsstring>
         <name>align_inner</name>
         <qualifiedname>atomic_ref_base&lt; T, false, false &gt;::align_inner</qualifiedname>
-        <initializer>= (sizeof(T) &amp; (sizeof(T) - 1)) || sizeof(T) &gt; 16 ? 0 : sizeof(T)</initializer>
+        <initializer>= (sizeof(T) &amp; (sizeof(T) - 1)) != 0U || sizeof(T) &gt; 16 ? 0 : sizeof(T)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2627" column="26" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2627" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2637" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2637" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2629" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2629" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2639" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2639" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -74,8 +74,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2635" column="29" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2635" bodyend="-1"/>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aa0d58511f41e15fe4b0dcded86705b91" compoundref="atomic__base_8hpp" startline="2641" endline="2644">atomic_ref_base</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2645" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2645" bodyend="-1"/>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aa0d58511f41e15fe4b0dcded86705b91" compoundref="atomic__base_8hpp" startline="2651" endline="2654">atomic_ref_base</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -106,10 +106,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2641" column="14" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2641" bodyend="2644"/>
-        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3063" endline="3065">addressof</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2651" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2651" bodyend="2654"/>
+        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3075" endline="3077">addressof</references>
         <references refid="group___debug_breakpoints_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="breakpoint_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
-        <references refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1adb97a5301f5977e709a0f947029ead12" compoundref="atomic__base_8hpp" startline="2635">required_alignment</references>
+        <references refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1adb97a5301f5977e709a0f947029ead12" compoundref="atomic__base_8hpp" startline="2645">required_alignment</references>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aaffdf9d3a86296bc66375d38ffa8eb1b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2646" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2656" column="5"/>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1ab785ff2e1f9da689410e0722cdabf86e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structatomic__ref__base" kindref="compound">atomic_ref_base</ref> &amp;</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2647" column="21"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2657" column="21"/>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aa4177271feac0464477bcefd8df3a8d3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>T</type>
@@ -174,8 +174,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2654" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2654" bodyend="2657"/>
-        <references refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a8328eb11898c8b08ef22bc8453f9fe5b" compoundref="atomic__base_8hpp" startline="2676" endline="2678">store</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2664" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2664" bodyend="2667"/>
+        <references refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a8328eb11898c8b08ef22bc8453f9fe5b" compoundref="atomic__base_8hpp" startline="2688" endline="2690">store</references>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a2a6e025c89bdd3837f6791e90b01361d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -193,12 +193,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2663" column="5" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2663" bodyend="2663"/>
-        <references refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a3ee7a02a97f4eefeb616b14b5b9cbc25" compoundref="atomic__base_8hpp" startline="2685" endline="2685">load</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2673" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2673" bodyend="2673"/>
+        <references refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a3ee7a02a97f4eefeb616b14b5b9cbc25" compoundref="atomic__base_8hpp" startline="2697" endline="2697">load</references>
       </memberdef>
-      <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a6c1d9a392799bfb1cc1a900162ed1b7d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool atomic_ref_base&lt; T, false, false &gt;::is_lock_free</definition>
+      <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1ad85461387ffc95249b47cb80652b9038" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_NODISCARD bool</type>
+        <definition>NEFORCE_NODISCARD bool atomic_ref_base&lt; T, false, false &gt;::is_lock_free</definition>
         <argsstring>() const noexcept</argsstring>
         <name>is_lock_free</name>
         <qualifiedname>atomic_ref_base&lt; T, false, false &gt;::is_lock_free</qualifiedname>
@@ -212,8 +212,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2669" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2669" bodyend="2669"/>
-        <references refid="group___atomic_operations_1ga3a0d5268ae71df1d0d5872747ebf7c66" compoundref="atomic__base_8hpp" startline="1222" endline="1228">is_always_lock_free</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2679" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2679" bodyend="2681"/>
+        <references refid="group___atomic_operations_1ga3a0d5268ae71df1d0d5872747ebf7c66" compoundref="atomic__base_8hpp" startline="1225" endline="1231">is_always_lock_free</references>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a8328eb11898c8b08ef22bc8453f9fe5b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -255,10 +255,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2676" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2676" bodyend="2678"/>
-        <references refid="group___atomic_operations_1ga235411e03936c4aa90f209ab38cab492" compoundref="atomic__base_8hpp" startline="1080" endline="1089">atomic_store_any</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2688" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2688" bodyend="2690"/>
+        <references refid="group___atomic_operations_1ga235411e03936c4aa90f209ab38cab492" compoundref="atomic__base_8hpp" startline="1083" endline="1092">atomic_store_any</references>
         <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aa4177271feac0464477bcefd8df3a8d3" compoundref="atomic__base_8hpp" startline="2654" endline="2657">operator=</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aa4177271feac0464477bcefd8df3a8d3" compoundref="atomic__base_8hpp" startline="2664" endline="2667">operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a3ee7a02a97f4eefeb616b14b5b9cbc25" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>T</type>
@@ -290,11 +290,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2685" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2685" bodyend="2685"/>
-        <references refid="group___atomic_operations_1ga4066975858c891b3012f41c4f33073b3" compoundref="atomic__base_8hpp" startline="1100" endline="1114">atomic_load_any</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2697" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2697" bodyend="2697"/>
+        <references refid="group___atomic_operations_1ga4066975858c891b3012f41c4f33073b3" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
         <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a2a6e025c89bdd3837f6791e90b01361d" compoundref="atomic__base_8hpp" startline="2663" endline="2663">operator T</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a4d2db5ae6c534d2fc0ba144899eaf6a3" compoundref="atomic__base_8hpp" startline="2749" endline="2751">wait</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a2a6e025c89bdd3837f6791e90b01361d" compoundref="atomic__base_8hpp" startline="2673" endline="2673">operator T</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a4d2db5ae6c534d2fc0ba144899eaf6a3" compoundref="atomic__base_8hpp" startline="2761" endline="2763">wait</referencedby>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aef376483a69ffd1f77af18704b3cffd3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>T</type>
@@ -338,8 +338,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2693" column="7" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2693" bodyend="2695"/>
-        <references refid="group___atomic_operations_1gaf15a5ea63f7851db21ec52e31b494700" compoundref="atomic__base_8hpp" startline="1126" endline="1140">atomic_exchange_any</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2705" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2705" bodyend="2707"/>
+        <references refid="group___atomic_operations_1gaf15a5ea63f7851db21ec52e31b494700" compoundref="atomic__base_8hpp" startline="1129" endline="1143">atomic_exchange_any</references>
         <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a0b352e98444b8d5ea964f0eaad5a00b9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -407,9 +407,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2705" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2705" bodyend="2707"/>
-        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="922" endline="1029">atomic_cmpexch_weak_any</references>
-        <references refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2717" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2717" bodyend="2719"/>
+        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
+        <references refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a2844c986a93927e3f8b8a31a0ed6abe3" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -476,9 +476,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2717" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2717" bodyend="2720"/>
-        <references refid="group___atomic_operations_1gafc070ab9d97fede6cb57cfd8074219e1" compoundref="atomic__base_8hpp" startline="1043" endline="1069">atomic_cmpexch_strong_any</references>
-        <references refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2729" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2729" bodyend="2732"/>
+        <references refid="group___atomic_operations_1gafc070ab9d97fede6cb57cfd8074219e1" compoundref="atomic__base_8hpp" startline="1046" endline="1072">atomic_cmpexch_strong_any</references>
+        <references refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a7a3b62ca9907f922a07d75fe3badcc41" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -534,8 +534,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2729" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2729" bodyend="2731"/>
-        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="922" endline="1029">atomic_cmpexch_weak_any</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2741" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2741" bodyend="2743"/>
+        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
         <references refid="group___memory_order_1gafda3e5c6834532546b1eaef81affc2b2" compoundref="memory__order_8hpp" startline="272" endline="288">cmpexch_failure_order</references>
         <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
       </memberdef>
@@ -593,8 +593,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2740" column="10" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2740" bodyend="2742"/>
-        <references refid="group___atomic_operations_1gafc070ab9d97fede6cb57cfd8074219e1" compoundref="atomic__base_8hpp" startline="1043" endline="1069">atomic_cmpexch_strong_any</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2752" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2752" bodyend="2754"/>
+        <references refid="group___atomic_operations_1gafc070ab9d97fede6cb57cfd8074219e1" compoundref="atomic__base_8hpp" startline="1046" endline="1072">atomic_cmpexch_strong_any</references>
         <references refid="group___memory_order_1gafda3e5c6834532546b1eaef81affc2b2" compoundref="memory__order_8hpp" startline="272" endline="288">cmpexch_failure_order</references>
         <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
       </memberdef>
@@ -638,9 +638,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2749" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2749" bodyend="2751"/>
-        <references refid="group___atomic_operations_1ga546bc65d02a41df5d8915cdce428bb61" compoundref="atomic__wait_8hpp" startline="414" endline="417">atomic_wait_address_v</references>
-        <references refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a3ee7a02a97f4eefeb616b14b5b9cbc25" compoundref="atomic__base_8hpp" startline="2685" endline="2685">load</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2761" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2761" bodyend="2763"/>
+        <references refid="group___atomic_operations_1ga546bc65d02a41df5d8915cdce428bb61" compoundref="atomic__wait_8hpp" startline="418" endline="421">atomic_wait_address_v</references>
+        <references refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a3ee7a02a97f4eefeb616b14b5b9cbc25" compoundref="atomic__base_8hpp" startline="2697" endline="2697">load</references>
         <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1afe2e906f7730b3788dac0da95435bd46" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -656,8 +656,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2756" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2756" bodyend="2756"/>
-        <references refid="group___atomic_operations_1ga5c5949e5e1c0b7d9c13b91322f47f79d" compoundref="atomic__wait_8hpp" startline="444" endline="447">atomic_notify_address</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2768" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2768" bodyend="2768"/>
+        <references refid="group___atomic_operations_1ga5c5949e5e1c0b7d9c13b91322f47f79d" compoundref="atomic__wait_8hpp" startline="448" endline="451">atomic_notify_address</references>
       </memberdef>
       <memberdef kind="function" id="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1ad6ac88ec6c445638a928d1ee68a27b46" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>NEFORCE_ALWAYS_INLINE void</type>
@@ -672,8 +672,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2761" column="32" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2761" bodyend="2761"/>
-        <references refid="group___atomic_operations_1ga5c5949e5e1c0b7d9c13b91322f47f79d" compoundref="atomic__wait_8hpp" startline="444" endline="447">atomic_notify_address</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2773" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2773" bodyend="2773"/>
+        <references refid="group___atomic_operations_1ga5c5949e5e1c0b7d9c13b91322f47f79d" compoundref="atomic__wait_8hpp" startline="448" endline="451">atomic_notify_address</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -691,7 +691,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2623" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2623" bodyend="2762"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="2633" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="2633" bodyend="2774"/>
     <listofallmembers>
       <member refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1ade1bfbd072f87d5a1578eb7c35b0ca1d" prot="private" virt="non-virtual"><scope>atomic_ref_base&lt; T, false, false &gt;</scope><name>align_inner</name></member>
       <member refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aa0d58511f41e15fe4b0dcded86705b91" prot="public" virt="non-virtual"><scope>atomic_ref_base&lt; T, false, false &gt;</scope><name>atomic_ref_base</name></member>
@@ -701,7 +701,7 @@
       <member refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a0b352e98444b8d5ea964f0eaad5a00b9" prot="public" virt="non-virtual"><scope>atomic_ref_base&lt; T, false, false &gt;</scope><name>compare_exchange_weak</name></member>
       <member refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a7a3b62ca9907f922a07d75fe3badcc41" prot="public" virt="non-virtual"><scope>atomic_ref_base&lt; T, false, false &gt;</scope><name>compare_exchange_weak</name></member>
       <member refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1aef376483a69ffd1f77af18704b3cffd3" prot="public" virt="non-virtual"><scope>atomic_ref_base&lt; T, false, false &gt;</scope><name>exchange</name></member>
-      <member refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a6c1d9a392799bfb1cc1a900162ed1b7d" prot="public" virt="non-virtual"><scope>atomic_ref_base&lt; T, false, false &gt;</scope><name>is_lock_free</name></member>
+      <member refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1ad85461387ffc95249b47cb80652b9038" prot="public" virt="non-virtual"><scope>atomic_ref_base&lt; T, false, false &gt;</scope><name>is_lock_free</name></member>
       <member refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a3ee7a02a97f4eefeb616b14b5b9cbc25" prot="public" virt="non-virtual"><scope>atomic_ref_base&lt; T, false, false &gt;</scope><name>load</name></member>
       <member refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1ad6ac88ec6c445638a928d1ee68a27b46" prot="public" virt="non-virtual"><scope>atomic_ref_base&lt; T, false, false &gt;</scope><name>notify_all</name></member>
       <member refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1afe2e906f7730b3788dac0da95435bd46" prot="public" virt="non-virtual"><scope>atomic_ref_base&lt; T, false, false &gt;</scope><name>notify_one</name></member>

@@ -130,6 +130,7 @@ var searchData=
   ['is_5funpackaged_5fv_127',['is_unpackaged_v',['../group___base_type_properties.html#ga67eb3297962a9df13909b64373e0430c',1,'type_traits.hpp']]],
   ['is_5funsigned_5fv_128',['is_unsigned_v',['../group___base_type_properties.html#gae8135fffbcc40a30cf23ea5e1913ab57',1,'type_traits.hpp']]],
   ['is_5fview_5fv_129',['is_view_v',['../group___view.html#ga69d7607cc0fa8174c64edf674103411c',1,'concepts.hpp']]],
-  ['is_5fvoid_5fv_130',['is_void_v',['../group___base_type_properties.html#gaef2319490d0b0a89b7de2e5b86332d19',1,'type_traits.hpp']]],
-  ['is_5fvolatile_5fv_131',['is_volatile_v',['../group___base_type_qualifier_check.html#gaa68c2bd736b1c92ad0241e743aeb9c0a',1,'type_traits.hpp']]]
+  ['is_5fvirtual_5fthread_5ftask_5fv_130',['is_virtual_thread_task_v',['../group___virtual_thread.html#gac7b1dd06d6eec46b83066c91fbef0d1c',1,'virtual_thread.hpp']]],
+  ['is_5fvoid_5fv_131',['is_void_v',['../group___base_type_properties.html#gaef2319490d0b0a89b7de2e5b86332d19',1,'type_traits.hpp']]],
+  ['is_5fvolatile_5fv_132',['is_volatile_v',['../group___base_type_qualifier_check.html#gaa68c2bd736b1c92ad0241e743aeb9c0a',1,'type_traits.hpp']]]
 ];

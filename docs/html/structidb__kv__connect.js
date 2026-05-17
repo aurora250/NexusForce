@@ -9,7 +9,7 @@ var structidb__kv__connect =
     [ "hset", "structidb__kv__connect.html#a0178a9138fe5e3fe003d452295c9883e", null ],
     [ "lpush", "structidb__kv__connect.html#a03d9a4c0ab341017f74be3915d89e963", null ],
     [ "lrange", "structidb__kv__connect.html#a505e795ba3d9ccdb0c1cedcc5771585a", null ],
-    [ "query", "structidb__kv__connect.html#a71f6c141ed4386fbabab0e8ea582a759", null ],
+    [ "query", "structidb__kv__connect.html#a73968af6090fce7f6ab77795199bc7bb", null ],
     [ "rpush", "structidb__kv__connect.html#af04a50d57aec2f910ba84c5725721edc", null ],
     [ "sadd", "structidb__kv__connect.html#a247ebd395ef84752931920b6c56a87f9", null ],
     [ "set", "structidb__kv__connect.html#add7971b12793bba947a99986dd121d37", null ],

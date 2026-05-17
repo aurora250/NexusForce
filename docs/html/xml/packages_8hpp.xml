@@ -196,7 +196,7 @@
       <node id="29">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="14" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
@@ -254,6 +254,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="36" relation="include">
         </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
       </node>
       <node id="41">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -290,8 +292,6 @@
       <node id="53">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="21" relation="include">
-        </childnode>
         <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
@@ -380,7 +380,7 @@
         </childnode>
       </node>
       <node id="12">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="37">
         <label>initializer_list</label>
@@ -397,12 +397,12 @@
         <label>NeForce.hpp</label>
         <link refid="_ne_force_8hpp"/>
       </node>
-      <node id="39">
+      <node id="40">
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
       </node>
       <node id="25">
@@ -425,44 +425,44 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="43">
         <label>toml_builder.hpp</label>
         <link refid="toml__builder_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>toml_parser.hpp</label>
         <link refid="toml__parser_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="42">
         <label>toml_value.hpp</label>
         <link refid="toml__value_8hpp"/>
-        <childnode refid="42" relation="include">
-        </childnode>
         <childnode refid="43" relation="include">
         </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
       </node>
-      <node id="45">
+      <node id="46">
         <label>yaml_builder.hpp</label>
         <link refid="yaml__builder_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="47">
         <label>yaml_parser.hpp</label>
         <link refid="yaml__parser_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>yaml_value.hpp</label>
         <link refid="yaml__value_8hpp"/>
-        <childnode refid="45" relation="include">
-        </childnode>
         <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -490,11 +490,11 @@
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -636,16 +636,24 @@
         <link refid="log__event_8hpp"/>
         <childnode refid="37" relation="include">
         </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
       </node>
       <node id="37">
-        <label>log_sink.hpp</label>
-        <link refid="log__sink_8hpp"/>
-        <childnode refid="26" relation="include">
-        </childnode>
+        <label>log_formatter.hpp</label>
+        <link refid="log__formatter_8hpp"/>
         <childnode refid="38" relation="include">
         </childnode>
       </node>
       <node id="38">
+        <label>log_sink.hpp</label>
+        <link refid="log__sink_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
         <label>logger.hpp</label>
         <link refid="logger_8hpp"/>
         <childnode refid="3" relation="include">
@@ -703,7 +711,7 @@
         <childnode refid="34" relation="include">
         </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
         <childnode refid="34" relation="include">
@@ -802,7 +810,7 @@
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/>obj;</highlight></codeline>
 <codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>str(lower.<ref refid="classbasic__string__view_1a8d02cf849652c9ca5791a8b4acf57a2e" kindref="member">trim</ref>());</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str.<ref refid="classbasic__string_1a14c97bf9634520d168d27c7d627e279a" kindref="member">lowercase</ref>();</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str.<ref refid="classbasic__string_1a04f90cc35a286c67bff4b2419b4fbd9e" kindref="member">lowercase</ref>();</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(str<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;true&quot;</highlight><highlight class="normal"><sp/>||<sp/>str<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;yes&quot;</highlight><highlight class="normal"><sp/>||<sp/>str<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;y&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>obj<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(str<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;false&quot;</highlight><highlight class="normal"><sp/>||<sp/>str<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;no&quot;</highlight><highlight class="normal"><sp/>||<sp/>str<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;n&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
@@ -1061,6 +1069,6 @@
 <codeline lineno="410"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="411"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_UTILITY_PACKAGES_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/utility/packages.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/packages.hpp"/>
   </compounddef>
 </doxygen>

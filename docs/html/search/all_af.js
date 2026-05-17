@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['计数算法_0',['计数算法',['../group___counting_algorithms.html',1,'']]],
-  ['计时器_1',['计时器',['../group___click.html',1,'']]]
+  ['解析器架构_0',['解析器架构',['../classyaml__parser.html#parser_architecture',1,'']]]
 ];

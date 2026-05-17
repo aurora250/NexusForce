@@ -123,15 +123,10 @@ using&#160;</td><td class="memItemRight"><b>const_reference</b> = typename Seque
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a14032a2a28739c1d62fab87fa3bb8c26" id="r_a14032a2a28739c1d62fab87fa3bb8c26"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a14032a2a28739c1d62fab87fa3bb8c26">stack</a> ()=default</td></tr>
-<tr class="memdesc:a14032a2a28739c1d62fab87fa3bb8c26"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
 <tr class="memitem:a58633c699a1868922c36666a2f060473" id="r_a58633c699a1868922c36666a2f060473"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a58633c699a1868922c36666a2f060473">stack</a> (const Sequence &amp;seq)</td></tr>
 <tr class="memdesc:a58633c699a1868922c36666a2f060473"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，使用指定的底层容器副本  <br /></td></tr>
 <tr class="memitem:a7f9135bc4ce629829fab4cddf9ea8af5" id="r_a7f9135bc4ce629829fab4cddf9ea8af5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7f9135bc4ce629829fab4cddf9ea8af5">stack</a> (Sequence &amp;&amp;seq) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gac3058b8518087cdea482055e5af4577a">is_nothrow_move_constructible_v</a>&lt; Sequence &gt;)</td></tr>
 <tr class="memdesc:a7f9135bc4ce629829fab4cddf9ea8af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数，使用指定的底层容器  <br /></td></tr>
-<tr class="memitem:a87136fbbd42d0040be571bb86cbf2912" id="r_a87136fbbd42d0040be571bb86cbf2912"><td class="memItemLeft"><a id="a87136fbbd42d0040be571bb86cbf2912" name="a87136fbbd42d0040be571bb86cbf2912"></a>
-&#160;</td><td class="memItemRight"><b>~stack</b> ()=default</td></tr>
-<tr class="memdesc:a87136fbbd42d0040be571bb86cbf2912"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
 <tr class="memitem:a7e99160f10056920f0ee93e6842d9df0" id="r_a7e99160f10056920f0ee93e6842d9df0"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="#ac1a0b739f2a876e900c65754772822b6">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7e99160f10056920f0ee93e6842d9df0">size</a> () const noexcept(noexcept(seq_.size()))</td></tr>
 <tr class="memdesc:a7e99160f10056920f0ee93e6842d9df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取栈的大小  <br /></td></tr>
 <tr class="memitem:ae046acd0fadb116f591bcb426218ab13" id="r_ae046acd0fadb116f591bcb426218ab13"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#ae046acd0fadb116f591bcb426218ab13">empty</a> () const noexcept(noexcept(seq_.empty()))</td></tr>
@@ -188,40 +183,8 @@ class stack&lt; T, Sequence &gt;</div><p>栈容器适配器 </p>
 
 <p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00035">35</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="a14032a2a28739c1d62fab87fa3bb8c26" name="a14032a2a28739c1d62fab87fa3bb8c26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14032a2a28739c1d62fab87fa3bb8c26">&#9670;&#160;</a></span>stack() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classstack.html">stack</a>&lt; T, Sequence &gt;::stack </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>默认构造函数 </p>
-<p>构造一个空栈。 </p>
-
-<p class="reference">被这些函数引用 <a class="el" href="stack_8hpp_source.html#l00145">equal_to()</a>, <a class="el" href="stack_8hpp_source.html#l00154">less_than()</a> , 以及 <a class="el" href="stack_8hpp_source.html#l00138">swap()</a>.</p>
-
-</div>
-</div>
 <a id="a58633c699a1868922c36666a2f060473" name="a58633c699a1868922c36666a2f060473"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58633c699a1868922c36666a2f060473">&#9670;&#160;</a></span>stack() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a58633c699a1868922c36666a2f060473">&#9670;&#160;</a></span>stack() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,12 +216,12 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00061">61</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00062">62</a> 行定义.</p>
 
 </div>
 </div>
 <a id="a7f9135bc4ce629829fab4cddf9ea8af5" name="a7f9135bc4ce629829fab4cddf9ea8af5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f9135bc4ce629829fab4cddf9ea8af5">&#9670;&#160;</a></span>stack() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f9135bc4ce629829fab4cddf9ea8af5">&#9670;&#160;</a></span>stack() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -290,9 +253,9 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00068">68</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00069">69</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02841">is_nothrow_move_constructible_v</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02853">is_nothrow_move_constructible_v</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -339,9 +302,9 @@ template&lt;typename... Args&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>新构造元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00107">107</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00103">103</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03007">forward()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03019">forward()</a>.</p>
 
 </div>
 </div>
@@ -373,11 +336,11 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 <p>检查栈是否为空 </p>
 <dl class="section return"><dt>返回</dt><dd>栈为空返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00086">86</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00082">82</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="stack_8hpp_source.html#l00086">empty()</a>.</p>
+<p class="reference">引用了 <a class="el" href="stack_8hpp_source.html#l00082">empty()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="stack_8hpp_source.html#l00086">empty()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="stack_8hpp_source.html#l00082">empty()</a>.</p>
 
 </div>
 </div>
@@ -415,9 +378,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>如果两个栈大小相等且对应元素相等返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00145">145</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="#a14032a2a28739c1d62fab87fa3bb8c26">stack()</a>.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00141">141</a> 行定义.</p>
 
 </div>
 </div>
@@ -455,9 +416,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00154">154</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="#a14032a2a28739c1d62fab87fa3bb8c26">stack()</a>.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00150">150</a> 行定义.</p>
 
 </div>
 </div>
@@ -489,7 +448,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 <p>弹栈操作 </p>
 <p>移除栈顶元素。 </p>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00132">132</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00128">128</a> 行定义.</p>
 
 </div>
 </div>
@@ -527,7 +486,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 </dl>
 <p>将元素添加到栈顶。 </p>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00117">117</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00113">113</a> 行定义.</p>
 
 </div>
 </div>
@@ -565,7 +524,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 </dl>
 <p>将元素移动到栈顶。 </p>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00125">125</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00121">121</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -599,11 +558,11 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 <p>获取栈的大小 </p>
 <dl class="section return"><dt>返回</dt><dd>栈中的元素数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00080">80</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00076">76</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="stack_8hpp_source.html#l00080">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="stack_8hpp_source.html#l00076">size()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="stack_8hpp_source.html#l00080">size()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="stack_8hpp_source.html#l00076">size()</a>.</p>
 
 </div>
 </div>
@@ -640,11 +599,11 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00138">138</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00134">134</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03946">is_nothrow_swappable_v</a>, <a class="el" href="#a14032a2a28739c1d62fab87fa3bb8c26">stack()</a> , 以及 <a class="el" href="stack_8hpp_source.html#l00138">swap()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03958">is_nothrow_swappable_v</a> , 以及 <a class="el" href="stack_8hpp_source.html#l00134">swap()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="stack_8hpp_source.html#l00138">swap()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="stack_8hpp_source.html#l00134">swap()</a>.</p>
 
 </div>
 </div>
@@ -676,7 +635,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 <p>常量访问栈顶元素 </p>
 <dl class="section return"><dt>返回</dt><dd>栈顶元素的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00098">98</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00094">94</a> 行定义.</p>
 
 </div>
 </div>
@@ -708,7 +667,7 @@ template&lt;typename T, typename Sequence = deque&lt;T&gt;&gt; </div>
 <p>访问栈顶元素 </p>
 <dl class="section return"><dt>返回</dt><dd>栈顶元素的引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00092">92</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="stack_8hpp_source.html">stack.hpp</a> 第 <a class="el" href="stack_8hpp_source.html#l00088">88</a> 行定义.</p>
 
 </div>
 </div>

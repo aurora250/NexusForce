@@ -169,7 +169,7 @@
       <node id="39">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
@@ -226,6 +226,8 @@
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
         </childnode>
       </node>
       <node id="43">
@@ -357,7 +359,7 @@
         </childnode>
       </node>
       <node id="10">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="4">
         <label>initializer_list</label>
@@ -422,22 +424,22 @@
 <codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="53" refid="classmac__address_1aa1ded32d3a7d520511d240cf937373b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmac__address_1aa1ded32d3a7d520511d240cf937373b0" kindref="member">mac_address</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59" refid="classmac__address_1a71cc5e117db9c63945c421ee6d49a2e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>explicit<sp/><ref refid="classmac__address_1aa1ded32d3a7d520511d240cf937373b0" kindref="member">mac_address</ref>(const<sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*<sp/><ref refid="classmac__address_1a6bc375130c7e39aaee55e3e8c8696bf6" kindref="member">bytes</ref>)<sp/>noexcept<sp/>{<sp/><ref refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" kindref="member">copy</ref>(<ref refid="classmac__address_1a6bc375130c7e39aaee55e3e8c8696bf6" kindref="member">bytes</ref>,<sp/><ref refid="classmac__address_1a6bc375130c7e39aaee55e3e8c8696bf6" kindref="member">bytes</ref><sp/>+<sp/><ref refid="classmac__address_1a2088ba7339c4c03a255ffa74db31bf75" kindref="member">MAC_LEN</ref>,<sp/>bytes_.begin());<sp/>}</highlight></codeline>
+<codeline lineno="59" refid="classmac__address_1a71cc5e117db9c63945c421ee6d49a2e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>explicit<sp/><ref refid="classmac__address_1aa1ded32d3a7d520511d240cf937373b0" kindref="member">mac_address</ref>(const<sp/><ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref>*<sp/><ref refid="classmac__address_1a79f77b1426c46d6c99911af1aee86799" kindref="member">bytes</ref>)<sp/>noexcept<sp/>{<sp/><ref refid="group___shift_algorithms_1ga5e0849ebed625d362d1ffd7bada46f87" kindref="member">copy</ref>(<ref refid="classmac__address_1a79f77b1426c46d6c99911af1aee86799" kindref="member">bytes</ref>,<sp/><ref refid="classmac__address_1a79f77b1426c46d6c99911af1aee86799" kindref="member">bytes</ref><sp/>+<sp/><ref refid="classmac__address_1a2088ba7339c4c03a255ffa74db31bf75" kindref="member">MAC_LEN</ref>,<sp/>bytes_.begin());<sp/>}</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65" refid="classmac__address_1a0816a2699d4bd2f57e7bdbd4edaa0dc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1a0816a2699d4bd2f57e7bdbd4edaa0dc9" kindref="member">mac_address</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1a016a26b0735f132f3c0853ed48fec549" kindref="member">bytes_type</ref>&amp;<sp/><ref refid="classmac__address_1a6bc375130c7e39aaee55e3e8c8696bf6" kindref="member">bytes</ref>)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>bytes_(<ref refid="classmac__address_1a6bc375130c7e39aaee55e3e8c8696bf6" kindref="member">bytes</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="65" refid="classmac__address_1a0816a2699d4bd2f57e7bdbd4edaa0dc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1a0816a2699d4bd2f57e7bdbd4edaa0dc9" kindref="member">mac_address</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1a016a26b0735f132f3c0853ed48fec549" kindref="member">bytes_type</ref>&amp;<sp/><ref refid="classmac__address_1a79f77b1426c46d6c99911af1aee86799" kindref="member">bytes</ref>)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>bytes_(<ref refid="classmac__address_1a79f77b1426c46d6c99911af1aee86799" kindref="member">bytes</ref>)<sp/>{}</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"></highlight></codeline>
 <codeline lineno="77" refid="classmac__address_1a4f42bca24b5c18387da7b67b028f2723" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classoptional" kindref="compound">optional&lt;mac_address&gt;</ref><sp/><ref refid="classmac__address_1a4f42bca24b5c18387da7b67b028f2723" kindref="member">parse</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>str);</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"></highlight></codeline>
 <codeline lineno="90" refid="classmac__address_1a6bb4baa273773b83fb65e353d15de11e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classoptional" kindref="compound">optional&lt;mac_address&gt;</ref><sp/><ref refid="classmac__address_1a6bb4baa273773b83fb65e353d15de11e" kindref="member">parse</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classip__address" kindref="compound">ip_address</ref>&amp;<sp/>ip,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>iface<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"></highlight></codeline>
-<codeline lineno="96" refid="classmac__address_1aa1edbd710bc07f3bdb2d2038be4e0500" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1aa1edbd710bc07f3bdb2d2038be4e0500" kindref="member">to_string</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="96" refid="classmac__address_1a53cb07c346b7aff8e5391a802129017e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1a53cb07c346b7aff8e5391a802129017e" kindref="member">to_string</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>
 <codeline lineno="103" refid="classmac__address_1a5f514425d18e072104db69c298e3e74a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1a5f514425d18e072104db69c298e3e74a" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1aa1ded32d3a7d520511d240cf937373b0" kindref="member">mac_address</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bytes_<sp/>==<sp/>other.bytes_;<sp/>}</highlight></codeline>
 <codeline lineno="104"><highlight class="normal"></highlight></codeline>
 <codeline lineno="110" refid="classmac__address_1a9f59af4eada3c079455bec9c007f7f05" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1a9f59af4eada3c079455bec9c007f7f05" kindref="member">operator!=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1aa1ded32d3a7d520511d240cf937373b0" kindref="member">mac_address</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!(*</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>==<sp/>other);<sp/>}</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="116" refid="classmac__address_1a6bc375130c7e39aaee55e3e8c8696bf6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1a016a26b0735f132f3c0853ed48fec549" kindref="member">bytes_type</ref>&amp;<sp/><ref refid="classmac__address_1a6bc375130c7e39aaee55e3e8c8696bf6" kindref="member">bytes</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bytes_;<sp/>}</highlight></codeline>
+<codeline lineno="116" refid="classmac__address_1a79f77b1426c46d6c99911af1aee86799" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classmac__address_1a016a26b0735f132f3c0853ed48fec549" kindref="member">bytes_type</ref>&amp;<sp/><ref refid="classmac__address_1a79f77b1426c46d6c99911af1aee86799" kindref="member">bytes</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>bytes_;<sp/>}</highlight></codeline>
 <codeline lineno="117"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>NetworkUtil</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="120"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Network</highlight><highlight class="normal"></highlight></codeline>
@@ -445,6 +447,6 @@
 <codeline lineno="123"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_UTIL_MAC_ADDRESS_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/util/mac_address.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/util/mac_address.hpp"/>
   </compounddef>
 </doxygen>

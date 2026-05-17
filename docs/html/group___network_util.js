@@ -30,10 +30,10 @@ var group___network_util =
       [ "mac_address", "classmac__address.html#aa1ded32d3a7d520511d240cf937373b0", null ],
       [ "mac_address", "classmac__address.html#a71cc5e117db9c63945c421ee6d49a2e8", null ],
       [ "mac_address", "classmac__address.html#a0816a2699d4bd2f57e7bdbd4edaa0dc9", null ],
-      [ "bytes", "classmac__address.html#a6bc375130c7e39aaee55e3e8c8696bf6", null ],
+      [ "bytes", "classmac__address.html#a79f77b1426c46d6c99911af1aee86799", null ],
       [ "operator!=", "classmac__address.html#a9f59af4eada3c079455bec9c007f7f05", null ],
       [ "operator==", "classmac__address.html#a5f514425d18e072104db69c298e3e74a", null ],
-      [ "to_string", "classmac__address.html#aa1edbd710bc07f3bdb2d2038be4e0500", null ]
+      [ "to_string", "classmac__address.html#a53cb07c346b7aff8e5391a802129017e", null ]
     ] ],
     [ "ports", "structports.html", [
       [ "raw", "structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8", [
@@ -71,13 +71,13 @@ var group___network_util =
       [ "ports", "structports.html#aed7286a23ab2d5be7c08b47807fa5eb0", null ],
       [ "ports", "structports.html#ad16ca5a958a7bac673c09ae68918d311", null ],
       [ "ports", "structports.html#a9971f3b73413357e32b44e4229062f26", null ],
-      [ "is_dynamic", "structports.html#af36ad633f7e9d94fb0cde671ef89c480", null ],
-      [ "is_registered", "structports.html#aa263ef720ce252dab8d075a1a9abefdd", null ],
-      [ "is_well_known", "structports.html#a8b073e5dbb9367b27dcc00c95b70d4bf", null ],
+      [ "is_dynamic", "structports.html#a5e0c722dfa002ad5de2337253c6bdf96", null ],
+      [ "is_registered", "structports.html#a3afe905e1fe2ab57f027603deefb1a34", null ],
+      [ "is_well_known", "structports.html#a1e367f583832b1c8248db707d4a291b7", null ],
       [ "operator bool", "structports.html#abd4092003d11db99eda911f01d242bc8", null ],
       [ "operator uint16_t", "structports.html#a88dc0ead0b9d0c484727d7a04d12f6f0", null ],
-      [ "to_string", "structports.html#ad216c705c2904893b0ff3331ca5f88ab", null ],
-      [ "to_string", "structports.html#ae098763e06d7db0c2b1c5be30c09d5dd", null ],
+      [ "to_string", "structports.html#af7987c6381e99da471b1fbca3f0fdca5", null ],
+      [ "to_string", "structports.html#aa893d0b879fc3a99bcfeeb5442c4a18f", null ],
       [ "port", "structports.html#ac83896c19af3451bbd0ce66a1b9a233e", null ]
     ] ],
     [ "url", "structurl.html", [

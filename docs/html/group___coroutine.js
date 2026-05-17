@@ -5,7 +5,7 @@ var group___coroutine =
     [ "suspend_never", "structsuspend__never.html", null ],
     [ "cancellation_token", "classcancellation__token.html", [
       [ "check_awaiter", "structcancellation__token_1_1check__awaiter.html", [
-        [ "await_ready", "structcancellation__token_1_1check__awaiter.html#a37b0c4e38de746e7ca7dca8354aed798", null ],
+        [ "await_ready", "structcancellation__token_1_1check__awaiter.html#abede9dab199259de830093219935a4b1", null ],
         [ "await_resume", "structcancellation__token_1_1check__awaiter.html#ab9f45a67e46515646ca6b302a64b7b5d", null ],
         [ "await_suspend", "structcancellation__token_1_1check__awaiter.html#af127c8ef34d7e722eac42f8633cedcab", null ],
         [ "token", "structcancellation__token_1_1check__awaiter.html#a6b7a548a0164dca499a1aa75cccba7d2", null ]
@@ -14,8 +14,8 @@ var group___coroutine =
       [ "cancellation_token", "classcancellation__token.html#af58b901c45f45ac616d47ebd3dc56ea7", null ],
       [ "~cancellation_token", "classcancellation__token.html#a8e560556afc7e861711e374069764bfc", null ],
       [ "cancel", "classcancellation__token.html#a1c816b81662bc8177659073b145a9616", null ],
-      [ "check", "classcancellation__token.html#a52c484072d073e4d76ab6c8c3bf6cff5", null ],
-      [ "is_cancelled", "classcancellation__token.html#ab7f18cffb62c36a8579967ed1763371d", null ],
+      [ "check", "classcancellation__token.html#a1a9953892c6e2eeaf7eecc61b9d44f56", null ],
+      [ "is_cancelled", "classcancellation__token.html#a8669eb1d30807fd64dbc3da8ecc518ba", null ],
       [ "operator=", "classcancellation__token.html#a957e3f2937364b799e2a242cc5905ba9", null ]
     ] ],
     [ "generator&lt; T &gt;", "classgenerator.html", [
@@ -44,12 +44,12 @@ var group___coroutine =
       [ "generator", "classgenerator.html#aa48ca8ad825e064655e761d732e65819", null ],
       [ "~generator", "classgenerator.html#abb02336a640655e154ad36b3098d2089", null ],
       [ "begin", "classgenerator.html#a93d1141d7d23880142c7c76ebccd9b72", null ],
-      [ "chain", "classgenerator.html#a5105f0069374425b8a26c1201dc6f13d", null ],
+      [ "chain", "classgenerator.html#a757dd0515c4cbda28f18c5e953a1cc23", null ],
       [ "end", "classgenerator.html#ac71d240be5537e677c32f705a10e032c", null ],
-      [ "filter", "classgenerator.html#ab1f5a6a5b71d484d89a8198e9a2c50dc", null ],
+      [ "filter", "classgenerator.html#a42e31b9a207e4ddb02528345ec7d0b9f", null ],
       [ "fold", "classgenerator.html#aa4f9b8c2bbf7ade48a1c22232388bdac", null ],
       [ "for_each", "classgenerator.html#a84a424f19a10b9aa131ab3a41a96cec8", null ],
-      [ "map", "classgenerator.html#a78f3cce891b72e1fbe4c095c60853277", null ],
+      [ "map", "classgenerator.html#a51f5167f0cb27cdf1db9f415d465a3fb", null ],
       [ "operator=", "classgenerator.html#a74c79ed421adae0f2c9100a32fef7d25", null ],
       [ "skip", "classgenerator.html#a309904d7d8382a112f6367f880698b28", null ],
       [ "take", "classgenerator.html#a46d368ae7fd0d8678a0a704aa92bd397", null ]
@@ -59,12 +59,13 @@ var group___coroutine =
         [ "final_awaiter", "structtask_1_1promise__type_1_1final__awaiter.html", [
           [ "await_ready", "structtask_1_1promise__type_1_1final__awaiter.html#a8eec994c01bff91f6e824770f4a3e89f", null ],
           [ "await_resume", "structtask_1_1promise__type_1_1final__awaiter.html#a19038e9552c057303552ca44cb07ec31", null ],
-          [ "await_suspend", "structtask_1_1promise__type_1_1final__awaiter.html#ac9266960119774b0ecd39811a7ed9f6c", null ]
+          [ "await_suspend", "structtask_1_1promise__type_1_1final__awaiter.html#aeaf71fc9db7af58664b18ad4d5b6943e", null ]
         ] ],
+        [ "value_type", "structtask_1_1promise__type.html#ad6f6e12c7ce031092b0204db645fcb35", null ],
         [ "final_suspend", "structtask_1_1promise__type.html#a6cd0f261bbc603cb79641a1437352a18", null ],
         [ "get_return_object", "structtask_1_1promise__type.html#aad034494a4dbaa044bcaf37154e08aaa", null ],
         [ "initial_suspend", "structtask_1_1promise__type.html#ade322af155aa4cbedfa55e785c5de167", null ],
-        [ "is_cancelled", "structtask_1_1promise__type.html#add4f907d33863244ecf95b06eaacbdf7", null ],
+        [ "is_cancelled", "structtask_1_1promise__type.html#ae7c74020b783602469377c01aa4640e5", null ],
         [ "return_value", "structtask_1_1promise__type.html#a4b2240e1afadcea4b4f98414914cc002", null ],
         [ "set_cancellation_token", "structtask_1_1promise__type.html#a5339e9a8325537229a77e5263fd4a15c", null ],
         [ "unhandled_exception", "structtask_1_1promise__type.html#a367a255980a9849de883c314ffd5f644", null ],
@@ -74,7 +75,7 @@ var group___coroutine =
         [ "token", "structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f", null ]
       ] ],
       [ "awaiter", "structtask_1_1awaiter.html", [
-        [ "await_ready", "structtask_1_1awaiter.html#a851717827edd19b476f3f9339730a0db", null ],
+        [ "await_ready", "structtask_1_1awaiter.html#ac637bb26e0ba09fb261c41b198b1b183", null ],
         [ "await_resume", "structtask_1_1awaiter.html#a9dd1df2703e550a5dd2759dd453eac51", null ],
         [ "await_suspend", "structtask_1_1awaiter.html#acb1099aa7940b78bc6f08516dfe4190e", null ],
         [ "handle", "structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05", null ]
@@ -82,53 +83,19 @@ var group___coroutine =
       [ "task", "classtask.html#ae229bb88041fade9c572408e8dcbedfd", null ],
       [ "task", "classtask.html#a5e94b9581b7921975806fdc1483f78f4", null ],
       [ "~task", "classtask.html#abcf9c660515466997e2ba3e6d5166dd1", null ],
-      [ "done", "classtask.html#ab631774bfa12bb16808de715b5844278", null ],
+      [ "done", "classtask.html#a130ab0e77a4fc039cb0a6bd04d17960c", null ],
       [ "get", "classtask.html#a58502672d9bef3a69f89611e79483c31", null ],
-      [ "is_cancelled", "classtask.html#ac359179551baf1c15f49de6ec5653b0a", null ],
+      [ "is_cancelled", "classtask.html#aef076be7ad451137332b01423a73745a", null ],
       [ "operator co_await", "classtask.html#a3650489fb1edb0a9ab612b126b94c112", null ],
       [ "operator=", "classtask.html#a20d669386e15b25103aee3212ae684ad", null ],
       [ "resume", "classtask.html#a4eb3a6735d6e5bf52b2d7534ba0769d4", null ],
       [ "set_cancellation_token", "classtask.html#a055a89b2c4ef8ad941976ae9ce12349f", null ]
     ] ],
     [ "task&lt; void &gt;", "classtask_3_01void_01_4.html", null ],
-    [ "virtual_thread_task", "structvirtual__thread__task.html", [
-      [ "promise_type", "structvirtual__thread__task_1_1promise__type.html", [
-        [ "final_suspend", "structvirtual__thread__task_1_1promise__type.html#aaa221a87a605e7d9ad35bc13ae393821", null ],
-        [ "get_return_object", "structvirtual__thread__task_1_1promise__type.html#abfb12fb610b1028ef2ce7a71060256d5", null ],
-        [ "initial_suspend", "structvirtual__thread__task_1_1promise__type.html#a80bb560c74f8fa5a58f6997866816133", null ],
-        [ "return_void", "structvirtual__thread__task_1_1promise__type.html#afb4c03a917686ddef60158995dee2be4", null ],
-        [ "unhandled_exception", "structvirtual__thread__task_1_1promise__type.html#aa0fe2e55596d0c95a0886310f400fb28", null ],
-        [ "exception_", "structvirtual__thread__task_1_1promise__type.html#ac3ddcbd783e23872722f2aa196028cf8", null ],
-        [ "scheduled_", "structvirtual__thread__task_1_1promise__type.html#a098161502ceabf51bb0f266d123cbade", null ]
-      ] ],
-      [ "virtual_thread_task", "structvirtual__thread__task.html#ad999c5bc10cf195db92c5ad7d97f0fdc", null ],
-      [ "~virtual_thread_task", "structvirtual__thread__task.html#affa79416f219f96824fb4a9491ac0125", null ],
-      [ "virtual_thread_task", "structvirtual__thread__task.html#ad6d298c579a2ee733c7896bbb73373c6", null ],
-      [ "virtual_thread_task", "structvirtual__thread__task.html#ae589260f89456025d7bc690df427abdd", null ],
-      [ "operator=", "structvirtual__thread__task.html#ac64cfcafa6371aa3ecba138c9ab361df", null ],
-      [ "operator=", "structvirtual__thread__task.html#ae6a8baf3cd9bb4fe8f972b031248e957", null ],
-      [ "handle_", "structvirtual__thread__task.html#aab9696a7dd5e0aa596d91bd6e71ecbd2", null ]
-    ] ],
-    [ "virtual_thread_scheduler", "classvirtual__thread__scheduler.html", [
-      [ "~virtual_thread_scheduler", "classvirtual__thread__scheduler.html#a0eaf83ca4a7c46f687e07bdade6b359e", null ],
-      [ "schedule", "classvirtual__thread__scheduler.html#ab5f2bf091c5ad0289c46707cc8b83369", null ],
-      [ "shutdown", "classvirtual__thread__scheduler.html#a7334d89ceba9ab3a422db2544a1a49aa", null ],
-      [ "start_workers", "classvirtual__thread__scheduler.html#a2269fc5d6435eca5dcb8b16db7df2f42", null ]
-    ] ],
-    [ "virtual_thread_awaiter", "structvirtual__thread__awaiter.html", [
-      [ "await_ready", "structvirtual__thread__awaiter.html#ad7bdae88963a3294aab9fd693cf23541", null ],
-      [ "await_resume", "structvirtual__thread__awaiter.html#a96d9bfe6591041d9e4ff8233da912417", null ],
-      [ "await_suspend", "structvirtual__thread__awaiter.html#ab2b9357585a921806dde17a797a84a03", null ],
-      [ "handle_", "structvirtual__thread__awaiter.html#a0d9a71b420f6d08c8bcc5c471b5245f9", null ]
-    ] ],
-    [ "sleep_awaiter", "structsleep__awaiter.html", [
-      [ "ms_", "structsleep__awaiter.html#a4c24def4e871d5af8d0f6c1dd1cc0a97", null ]
-    ] ],
-    [ "virtual_thread", "classvirtual__thread.html", null ],
     [ "coroutine_handle", "group___coroutine.html#ga6b28debebaa0f1d57331130e5ccb6181", null ],
     [ "noop_coroutine_handle", "group___coroutine.html#ga8688aa61087dce3a6914a4d6c7f7b55a", null ],
     [ "noop_coroutine_promise", "group___coroutine.html#ga703e941b1a9f15e23513daa24ed4d587", null ],
     [ "noop_coroutine", "group___coroutine.html#ga43aa77a087a863d0064283cc5871fde7", null ],
-    [ "retry", "group___coroutine.html#ga79f854a5ada0083996d280c91b6cb2c1", null ],
-    [ "when_all", "group___coroutine.html#ga8c72fd92de476361237939b98f6a450c", null ]
+    [ "retry", "group___coroutine.html#gaeeb129739f934bdf8c9e19059ba3ee29", null ],
+    [ "when_all", "group___coroutine.html#gaf1931de6c9023a80830659338702aed7", null ]
 ];

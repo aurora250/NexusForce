@@ -57,9 +57,11 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="42" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
@@ -80,7 +82,7 @@
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="51">
+      <node id="50">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="10" relation="include">
@@ -89,7 +91,7 @@
       <node id="44">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="45" relation="include">
         </childnode>
@@ -100,8 +102,6 @@
         <childnode refid="48" relation="include">
         </childnode>
         <childnode refid="49" relation="include">
-        </childnode>
-        <childnode refid="50" relation="include">
         </childnode>
       </node>
       <node id="11">
@@ -197,7 +197,7 @@
       <node id="33">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -271,7 +271,7 @@
       <node id="37">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="14" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
@@ -340,6 +340,8 @@
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
         </childnode>
       </node>
       <node id="62">
@@ -433,13 +435,19 @@
         </childnode>
       </node>
       <node id="12">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="49">
+        <label>ctime</label>
       </node>
       <node id="6">
         <label>initializer_list</label>
       </node>
-      <node id="52">
+      <node id="51">
         <label>intrin.h</label>
+      </node>
+      <node id="52">
+        <label>intrin0.inl.h</label>
       </node>
       <node id="36">
         <label>new</label>
@@ -450,17 +458,11 @@
       <node id="46">
         <label>processthreadsapi.h</label>
       </node>
-      <node id="50">
-        <label>riscv_pause.h</label>
-      </node>
       <node id="48">
         <label>sched.h</label>
       </node>
       <node id="47">
         <label>synchapi.h</label>
-      </node>
-      <node id="49">
-        <label>unistd.h</label>
       </node>
       <node id="24">
         <label>utility</label>
@@ -597,7 +599,7 @@
 <codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">ctx_deleter<sp/>{</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>operator()(::SSL_CTX*<sp/>ctx)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ctx)<sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ctx<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::SSL_CTX_free(ctx);</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -617,7 +619,7 @@
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437" kindref="member">ssl_context</ref>(<ref refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437" kindref="member">ssl_context</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437" kindref="member">ssl_context</ref>&amp;<sp/>operator=(<ref refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437" kindref="member">ssl_context</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99" refid="classssl__context_1a10459f705e17d31675e237b26d1f1b2a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437" kindref="member">ssl_context</ref><sp/><ref refid="classssl__context_1a10459f705e17d31675e237b26d1f1b2a" kindref="member">clone</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="99" refid="classssl__context_1aead2f35459c96c45a82e8a2f06229656" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437" kindref="member">ssl_context</ref><sp/><ref refid="classssl__context_1aead2f35459c96c45a82e8a2f06229656" kindref="member">clone</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"></highlight></codeline>
 <codeline lineno="106" refid="classssl__context_1afd2628b66a19c8d6a89e94d21c297a16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;ssl_context&gt;</ref><sp/><ref refid="classssl__context_1afd2628b66a19c8d6a89e94d21c297a16" kindref="member">clone_shared</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="107"><highlight class="normal"></highlight></codeline>
@@ -657,6 +659,6 @@
 <codeline lineno="257"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="258"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_context.hpp"/>
   </compounddef>
 </doxygen>

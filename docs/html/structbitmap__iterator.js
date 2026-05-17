@@ -16,8 +16,8 @@ var structbitmap__iterator =
     [ "decrement", "structbitmap__iterator.html#a8540584a3b179dfdc82f7c37590459ad", null ],
     [ "dereference", "structbitmap__iterator.html#a822180a21984130f24cd06694d765aa9", null ],
     [ "distance_to", "structbitmap__iterator.html#a923c725a4d8cade74ef973886b707077", null ],
-    [ "equal_to", "structbitmap__iterator.html#ad525051a8ef722f9dddfbac2fe7faba2", null ],
+    [ "equal_to", "structbitmap__iterator.html#a444b65123dceacadb3cba6f7ddeea55a", null ],
     [ "increment", "structbitmap__iterator.html#a5d07aa9cd236ae6185f0ce7b56ecb57a", null ],
-    [ "less_than", "structbitmap__iterator.html#aa380c147f70c6ddafd1f329c382c2d65", null ],
+    [ "less_than", "structbitmap__iterator.html#a4f61668b8bef27523b8ed1ed08be6254", null ],
     [ "operator[]", "structbitmap__iterator.html#ab068a3e22dc2a0378ac5271594e9d981", null ]
 ];

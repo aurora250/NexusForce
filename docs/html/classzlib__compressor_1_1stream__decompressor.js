@@ -1,7 +1,7 @@
 var classzlib__compressor_1_1stream__decompressor =
 [
     [ "stream_decompressor", "classzlib__compressor_1_1stream__decompressor.html#a739b1c01acf4453a8648bb71f926a771", null ],
-    [ "~stream_decompressor", "classzlib__compressor_1_1stream__decompressor.html#a612784d1b704308ddb6ccc3acefe63b4", null ],
+    [ "~stream_decompressor", "classzlib__compressor_1_1stream__decompressor.html#ae3a4bbc66c50a5a6b9c6de03684da888", null ],
     [ "stream_decompressor", "classzlib__compressor_1_1stream__decompressor.html#a65165f16352ba1d319fe438a6f974117", null ],
     [ "bytes_input", "classzlib__compressor_1_1stream__decompressor.html#a6a807a9ea54ed6365129976b6da3d49e", null ],
     [ "bytes_output", "classzlib__compressor_1_1stream__decompressor.html#a787a7952c76454ec25c60dd1f8862359", null ],

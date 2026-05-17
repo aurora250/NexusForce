@@ -10,7 +10,7 @@ var classreverse__iterator =
     [ "reverse_iterator", "classreverse__iterator.html#a1f3cdb818d2dfb561f04838959e402ac", null ],
     [ "~reverse_iterator", "classreverse__iterator.html#aba83ec3680b4985cec0bee44992d8494", null ],
     [ "base", "classreverse__iterator.html#ac5146c23a880d14be4fd3eb2132554c6", null ],
-    [ "operator*", "classreverse__iterator.html#aa92443cacd0a674148c8c9518a26a464", null ],
+    [ "operator*", "classreverse__iterator.html#a668cc1dcaca4e3fb5c26d2b6aa0c92a5", null ],
     [ "operator+", "classreverse__iterator.html#ad55cc5d7dc52b92a20433f7b8b2ab4d4", null ],
     [ "operator++", "classreverse__iterator.html#a6bf35c27bc8f798f7fe9559f6ccfc17d", null ],
     [ "operator++", "classreverse__iterator.html#abf9a26543d05d22668256a54734eb465", null ],
@@ -19,7 +19,7 @@ var classreverse__iterator =
     [ "operator--", "classreverse__iterator.html#af6d89fe1828f166853d2a4d6bde8cba9", null ],
     [ "operator--", "classreverse__iterator.html#a35bb328ecf2d22151a7aff3c5c0de26e", null ],
     [ "operator-=", "classreverse__iterator.html#a6dbe308931894795977e762cd166beab", null ],
-    [ "operator->", "classreverse__iterator.html#af111c9655c52fe6ca8a6b699731208ae", null ],
+    [ "operator->", "classreverse__iterator.html#a90ada5d564d5394ade7a916e30444d51", null ],
     [ "operator=", "classreverse__iterator.html#ac888ce44fb68f00645d1c260b82f8791", null ],
-    [ "operator[]", "classreverse__iterator.html#af26e9ab20b0d04edc0cc5501c620a552", null ]
+    [ "operator[]", "classreverse__iterator.html#a4666bfef276aabb5da0147aea214e113", null ]
 ];

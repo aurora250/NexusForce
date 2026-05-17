@@ -6,6 +6,6 @@ var generator_8hpp =
     [ "task&lt; T &gt;::promise_type", "structtask_1_1promise__type.html", "structtask_1_1promise__type" ],
     [ "task&lt; T &gt;::promise_type::final_awaiter", "structtask_1_1promise__type_1_1final__awaiter.html", "structtask_1_1promise__type_1_1final__awaiter" ],
     [ "task&lt; T &gt;::awaiter", "structtask_1_1awaiter.html", "structtask_1_1awaiter" ],
-    [ "retry", "group___coroutine.html#ga79f854a5ada0083996d280c91b6cb2c1", null ],
-    [ "when_all", "group___coroutine.html#ga8c72fd92de476361237939b98f6a450c", null ]
+    [ "retry", "group___coroutine.html#gaeeb129739f934bdf8c9e19059ba3ee29", null ],
+    [ "when_all", "group___coroutine.html#gaf1931de6c9023a80830659338702aed7", null ]
 ];

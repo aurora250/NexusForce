@@ -92,7 +92,7 @@ $(function(){initNavTree('index.html','',''); });
   <div class="headertitle"><div class="title">NexusForce V1.0.0 </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md__d_1_2_workspace_2_cpp_01_workspace_2_c_line_01_workspace_2_nexus_force_2_r_e_a_d_m_e"></a></p>
+<div class="textblock"><p><a class="anchor" id="md__d_1_2_workspace_2_nexus_force_2_r_e_a_d_m_e"></a></p>
 <p><a href="https://vcpkg.io"><img src="https://img.shields.io/badge/vcpkg-Enabled-0A7FAA?style=flat-square&amp;logo=vcpkg&amp;logoColor=white" alt="vcpkg" class="inline"/></a> <a href="https://cmake.org"><img src="https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&amp;logo=cmake&amp;logoColor=white" alt="CMake" class="inline"/></a> <a href="https://isocpp.org"><img src="https://img.shields.io/badge/C++-14/17/20-00599C?style=flat-square&amp;logo=cplusplus&amp;logoColor=white" alt="C++" class="inline"/></a> <a href="https://github.com/aurora250/NexusForce/actions/workflows/codeql.yml"><img src="https://github.com/aurora250/NexusForce/workflows/CodeQL%20Analysis/badge.svg" alt="CodeQL" style="pointer-events: none;" class="inline"/></a> [<img src="https://img.shields.io/badge/Quality%20Gate-Passed-success?style=flat-square&amp;logo=sonarqube&amp;logoColor=white" alt="Quality Gate" class="inline"/>]() <a href="https://clang.llvm.org/docs/ClangFormat.html"><img src="https://img.shields.io/badge/Clang--Format-19.0-blue?style=flat-square&amp;logo=llvm&amp;logoColor=white" alt="Clang Format" class="inline"/></a> <a href="https://clang.llvm.org/extra/clang-tidy/"><img src="https://img.shields.io/badge/Clang--Tidy-Passed-brightgreen?style=flat-square&amp;logo=llvm&amp;logoColor=white" alt="Clang Tidy" class="inline"/></a> <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines"><img src="https://img.shields.io/badge/C%2B%2B%20Core%20Guidelines-Checked-00599C?style=flat-square&amp;logo=cplusplus&amp;logoColor=white" alt="C++ Core Guidelines" class="inline"/></a> <a href="https://valgrind.org"><img src="https://img.shields.io/badge/Valgrind-Tested-2E8B57?style=flat-square&amp;logo=valgrind&amp;logoColor=white" alt="Valgrind" class="inline"/></a> [<img src="https://img.shields.io/badge/Memory%20Leak-None-00C853?style=flat-square" alt="Memory Leak" class="inline"/>](valgrind) <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-F9A825?style=flat-square" alt="License" class="inline"/></a> <a href="https://nexusforce.org.cn"><img src="https://img.shields.io/badge/Docs-Website-1565C0?style=flat-square&amp;logo=readthedocs&amp;logoColor=white" alt="Docs" class="inline"/></a> <a href="https://github.com/aurora250/NexusForce/pulls"><img src="https://img.shields.io/badge/PRs-Welcome-4CAF50?style=flat-square&amp;logo=git&amp;logoColor=white" alt="PRs Welcome" class="inline"/></a></p>
 <blockquote class="doxtable">
 <p>🌐 <b>语言</b> / <b>Language</b> <br  />
@@ -128,18 +128,22 @@ $(function(){initNavTree('index.html','',''); });
 🖥️ 支持环境</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">平台  </th><th class="markdownTableHeadNone">指令集  </th><th class="markdownTableHeadNone">位宽  </th><th class="markdownTableHeadNone">编译器  </th><th class="markdownTableHeadNone">C++ 标准  </th></tr>
+<th class="markdownTableHeadNone">项目  </th><th class="markdownTableHeadNone">详情  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">🪟 WINDOWS  </td><td class="markdownTableBodyNone">X86  </td><td class="markdownTableBodyNone">32位  </td><td class="markdownTableBodyNone">MSVC  </td><td class="markdownTableBodyNone">14 (除MinGW)  </td></tr>
+<td class="markdownTableBodyNone">平台  </td><td class="markdownTableBodyNone">🪟 WINDOWS / 🐧 LINUX  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">🐧 LINUX  </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">64位  </td><td class="markdownTableBodyNone">MinGW  </td><td class="markdownTableBodyNone">17  </td></tr>
+<td class="markdownTableBodyNone">指令集  </td><td class="markdownTableBodyNone">X86  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">LLVM-MinGW  </td><td class="markdownTableBodyNone">20  </td></tr>
+<td class="markdownTableBodyNone">位宽  </td><td class="markdownTableBodyNone">64位  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">GCC  </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">编译器  </td><td class="markdownTableBodyNone">MSVC (Windows) / LLVM-Clang (Windows, Linux) / ClangCL (Windows) / GCC (Linux)  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">Clang  </td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">C++ 标准  </td><td class="markdownTableBodyNone">14 / 17 / 20  </td></tr>
 </table>
+<blockquote class="doxtable">
+<p>ℹ️ <b>兼容性说明</b> <br  />
+ 本库欢迎开发者进行更多编译器与操作系统的兼容性开发，欢迎您进行贡献。 </p>
+</blockquote>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 ✨ 工程质量</h1>
@@ -553,8 +557,9 @@ $(function(){initNavTree('index.html','',''); });
 <li class="unchecked">🍎 支持 macOS 平台</li>
 </ul>
 <ul class="check">
-<li class="unchecked">🖥️ 支持 ARM / RISC-V / LOONG ARCH 架构 </li>
+<li class="unchecked">🖥️ 支持 ARM / RISC-V / LOONG ARCH 架构</li>
 </ul>
+<p>更多 TODO 条例参见代码内的 TODO 注释 </p>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->

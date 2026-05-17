@@ -145,7 +145,7 @@ $(function(){initNavTree('path_8hpp_source.html','',''); });
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        path_(<a class="code hl_function" href="classpath.html#a0447f2f276d120cfc7206f4d27934e5e">path</a>),</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        start_(pos),</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        done_(false) {</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">if</span> (!path_ || path_-&gt;empty() || start_ &gt;= path_-&gt;size()) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">if</span> (path_ == <span class="keyword">nullptr</span> || path_-&gt;empty() || start_ &gt;= path_-&gt;size()) {</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                done_ = true;</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                return;</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            }</div>
@@ -196,7 +196,7 @@ $(function(){initNavTree('path_8hpp_source.html','',''); });
 </div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordtype">string</span> path_{}; </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordtype">string</span> path_; </div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="classpath.html#a0447f2f276d120cfc7206f4d27934e5e">  197</a></span>    <a class="code hl_function" href="classpath.html#a0447f2f276d120cfc7206f4d27934e5e">path</a>() = <span class="keywordflow">default</span>;</div>
@@ -231,7 +231,7 @@ $(function(){initNavTree('path_8hpp_source.html','',''); });
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span></div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno"><a class="line" href="classpath.html#a2319837a72df8ccc2a3fb56f676fb025">  253</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classpath_1_1split__iterator.html">split_iterator</a> <a class="code hl_function" href="classpath.html#a2319837a72df8ccc2a3fb56f676fb025">begin</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_class" href="classpath_1_1split__iterator.html">split_iterator</a>(&amp;path_, 0); }</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span></div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="classpath.html#a77542b3355d9893683f0428eace2bce7">  259</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classpath_1_1split__iterator.html">split_iterator</a> <a class="code hl_function" href="classpath.html#a77542b3355d9893683f0428eace2bce7">end</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code hl_class" href="classpath_1_1split__iterator.html">split_iterator</a>(); }</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="classpath.html#a77542b3355d9893683f0428eace2bce7">  259</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classpath_1_1split__iterator.html">split_iterator</a> <a class="code hl_function" href="classpath.html#a77542b3355d9893683f0428eace2bce7">end</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> {}; }</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span></div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno"><a class="line" href="classpath.html#a4da811ccc2c97473a6a8ba86cb907887">  265</a></span>    NEFORCE_NODISCARD <a class="code hl_function" href="classpath.html#a0447f2f276d120cfc7206f4d27934e5e">path</a> <a class="code hl_function" href="classpath.html#a4da811ccc2c97473a6a8ba86cb907887">parent_path</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span></div>

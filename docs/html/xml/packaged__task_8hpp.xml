@@ -6,6 +6,7 @@
     <includes refid="thread_8hpp" local="yes">NeForce/core/async/thread.hpp</includes>
     <includedby refid="async_8hpp" local="yes">async.hpp</includedby>
     <includedby refid="thread__pool_8hpp" local="yes">thread_pool.hpp</includedby>
+    <includedby refid="timer_8hpp" local="yes">timer.hpp</includedby>
     <incdepgraph>
       <node id="57">
         <label>NeForce/core/algorithm/compare.hpp</label>
@@ -14,7 +15,7 @@
         </childnode>
         <childnode refid="59" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="62" relation="include">
         </childnode>
@@ -22,7 +23,7 @@
       <node id="61">
         <label>NeForce/core/algorithm/iterator.hpp</label>
         <link refid="iterator_8hpp"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="51" relation="include">
         </childnode>
@@ -52,6 +53,8 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="10" relation="include">
         </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
@@ -74,7 +77,7 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
       <node id="35">
@@ -115,7 +118,7 @@
         <childnode refid="65" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="21">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="13" relation="include">
@@ -138,7 +141,7 @@
       <node id="14">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
@@ -149,8 +152,6 @@
         <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
         </childnode>
       </node>
       <node id="66">
@@ -179,7 +180,7 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="22">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="5" relation="include">
@@ -188,7 +189,7 @@
       <node id="29">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
-        <childnode refid="21" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
       <node id="38">
@@ -287,7 +288,7 @@
         <childnode refid="51" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="20">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="12" relation="include">
@@ -314,7 +315,7 @@
         <link refid="standard__allocator_8hpp"/>
         <childnode refid="54" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -462,13 +463,19 @@
         </childnode>
       </node>
       <node id="6">
-        <label>assert.h</label>
+        <label>cassert</label>
+      </node>
+      <node id="19">
+        <label>ctime</label>
       </node>
       <node id="58">
         <label>initializer_list</label>
       </node>
-      <node id="24">
+      <node id="23">
         <label>intrin.h</label>
+      </node>
+      <node id="24">
+        <label>intrin0.inl.h</label>
       </node>
       <node id="54">
         <label>new</label>
@@ -479,9 +486,6 @@
       <node id="69">
         <label>pthread.h</label>
       </node>
-      <node id="20">
-        <label>riscv_pause.h</label>
-      </node>
       <node id="18">
         <label>sched.h</label>
       </node>
@@ -490,9 +494,6 @@
       </node>
       <node id="39">
         <label>typeinfo</label>
-      </node>
-      <node id="19">
-        <label>unistd.h</label>
       </node>
       <node id="64">
         <label>utility</label>
@@ -516,6 +517,8 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
       </node>
       <node id="4">
         <label>thread_pool.hpp</label>
@@ -523,6 +526,12 @@
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>timer.hpp</label>
+        <link refid="timer_8hpp"/>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -561,16 +570,16 @@
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Res,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
-<codeline lineno="36" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>&lt;Res(Args...)&gt;<sp/>{</highlight></codeline>
+<codeline lineno="36" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>&lt;Res(Args...)&gt;<sp/>{</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">StateType<sp/>=<sp/>inner::__future_base::task_state_base&lt;Res(Args...)&gt;;<sp/></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;StateType&gt;</ref><sp/>state_ptr;<sp/></highlight></codeline>
 <codeline lineno="40"><highlight class="normal"></highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="47" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>()<sp/>noexcept<sp/>{}</highlight></codeline>
+<codeline lineno="47" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>=<sp/>enable_if_t&lt;!is_same_v&lt;packaged_task,<sp/>remove_cvref_t&lt;Func&gt;&gt;&gt;&gt;</highlight></codeline>
-<codeline lineno="58" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a1e138c21753a8bef3af52ab548884825" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a1e138c21753a8bef3af52ab548884825" kindref="member">packaged_task</ref>(Func&amp;&amp;<sp/><ref refid="classfunction" kindref="compound">function</ref>)<sp/>:</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>Func,<sp/>typename<sp/>=<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt;<ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>,<sp/><ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;Func&gt;&gt;&gt;&gt;</highlight></codeline>
+<codeline lineno="58" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a1e138c21753a8bef3af52ab548884825" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>explicit<sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>(Func&amp;&amp;<sp/><ref refid="classfunction" kindref="compound">function</ref>)<sp/>:</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>state_ptr(inner::create_task_state&lt;Res(Args...)&gt;(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Func&gt;(<ref refid="classfunction" kindref="compound">function</ref>)))<sp/>{}</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
 <codeline lineno="66" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a94bb0b76b969c5a71970777406a2b768" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a94bb0b76b969c5a71970777406a2b768" kindref="member">~packaged_task</ref>()<sp/>{</highlight></codeline>
@@ -579,19 +588,19 @@
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a474623a4049c9013b4b948e1f100d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a474623a4049c9013b4b948e1f100d0" kindref="member">packaged_task</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="73" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a32c746c6407f06616b1c2eead52151" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>&amp;<sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a32c746c6407f06616b1c2eead52151" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="72" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a474623a4049c9013b4b948e1f100d0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a474623a4049c9013b4b948e1f100d0" kindref="member">packaged_task</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="73" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a32c746c6407f06616b1c2eead52151" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>&amp;<sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a3a32c746c6407f06616b1c2eead52151" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/></highlight></codeline>
 <codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a78e3200ea269e7f873e946b362315ff8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a78e3200ea269e7f873e946b362315ff8" kindref="member">packaged_task</ref>(<ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>this-&gt;<ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(other);<sp/>}</highlight></codeline>
+<codeline lineno="79" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a78e3200ea269e7f873e946b362315ff8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a78e3200ea269e7f873e946b362315ff8" kindref="member">packaged_task</ref>(<ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>this-&gt;<ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(other);<sp/>}</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="86" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1acdf07176055889ad21430d63393c1fc3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>&amp;<sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1acdf07176055889ad21430d63393c1fc3" kindref="member">operator=</ref>(<ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other)).swap(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="86" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1acdf07176055889ad21430d63393c1fc3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>&amp;<sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1acdf07176055889ad21430d63393c1fc3" kindref="member">operator=</ref>(<ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other)).swap(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"></highlight></codeline>
-<codeline lineno="95" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1aa6f152cd498d6f799acdeafdbf183616" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1aa6f152cd498d6f799acdeafdbf183616" kindref="member">swap</ref>(<ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>state_ptr.swap(other.state_ptr);<sp/>}</highlight></codeline>
+<codeline lineno="95" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1aa6f152cd498d6f799acdeafdbf183616" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1aa6f152cd498d6f799acdeafdbf183616" kindref="member">swap</ref>(<ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>state_ptr.swap(other.state_ptr);<sp/>}</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"></highlight></codeline>
-<codeline lineno="101" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a7cd09ddad944479f2a571e124afe79b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a7cd09ddad944479f2a571e124afe79b4" kindref="member">valid</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(state_ptr);<sp/>}</highlight></codeline>
+<codeline lineno="101" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1ab3b664d109dcfba1181779d3e83956a3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1ab3b664d109dcfba1181779d3e83956a3" kindref="member">valid</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(state_ptr);<sp/>}</highlight></codeline>
 <codeline lineno="102"><highlight class="normal"></highlight></codeline>
 <codeline lineno="108" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a41f6eea0c7672b66b7bcae8096460d4a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfuture" kindref="compound">future&lt;Res&gt;</ref><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a41f6eea0c7672b66b7bcae8096460d4a" kindref="member">get_future</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classfuture" kindref="compound">future&lt;Res&gt;</ref>(state_ptr);<sp/>}</highlight></codeline>
 <codeline lineno="109"><highlight class="normal"></highlight></codeline>
@@ -607,7 +616,7 @@
 <codeline lineno="134"><highlight class="normal"></highlight></codeline>
 <codeline lineno="142" refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a13ff349103d61896e17b7afed6947cec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a13ff349103d61896e17b7afed6947cec" kindref="member">reset</ref>()<sp/>{</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::__future_base::state_base::check(state_ptr);</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a9344ccdedcc2820d362e32277696e453" kindref="member">packaged_task</ref><sp/>temp;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a2218a03e808dbb4eb171fcb1c7f9881a" kindref="member">packaged_task</ref><sp/>temp;</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>temp.state_ptr<sp/>=<sp/>state_ptr;</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_ptr<sp/>=<sp/>state_ptr-&gt;reset();</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -634,7 +643,7 @@
 <codeline lineno="176"><highlight class="normal"></highlight></codeline>
 <codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>complete_async()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/>state_base::set_result(create_task_setter(result_storage,<sp/>function),<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
 <codeline lineno="178"><highlight class="normal"></highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_deferred_future()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_deferred_future()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="180"><highlight class="normal"></highlight></codeline>
 <codeline lineno="181"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
@@ -646,56 +655,58 @@
 <codeline lineno="193"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">__future_base::async_state_common<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>__future_base::state_base<sp/>{</highlight></codeline>
 <codeline lineno="194"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>_NEFORCE<sp/>thread<sp/>thread;</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/>_NEFORCE<sp/>once_flag<sp/>once_flag;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/>once_flag<sp/>flag;</highlight></codeline>
 <codeline lineno="197"><highlight class="normal"></highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>~async_state_common()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"></highlight></codeline>
-<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>complete_async()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/>join();<sp/>}</highlight></codeline>
-<codeline lineno="201"><highlight class="normal"></highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>join()<sp/>{<sp/>_NEFORCE<sp/><ref refid="group___call_once_1ga6b72113ff3b073878b5fc971d6fe1026" kindref="member">call_once</ref>(once_flag,<sp/>&amp;_NEFORCE<sp/><ref refid="classthread_1ac77d974035148375cbcd0835d631b3d0" kindref="member">thread::join</ref>,<sp/>&amp;thread);<sp/>}</highlight></codeline>
-<codeline lineno="203"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"></highlight></codeline>
-<codeline lineno="212"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Res&gt;</highlight></codeline>
-<codeline lineno="213"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">__future_base::async_state_impl<sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>__future_base::async_state_common<sp/>{</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PtrType<sp/>=<sp/>__future_base::Ptr&lt;basic_result&lt;Res&gt;&gt;;</highlight></codeline>
-<codeline lineno="216"><highlight class="normal"></highlight></codeline>
-<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>PtrType<sp/>result_storage;</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>Func<sp/>function;</highlight></codeline>
-<codeline lineno="219"><highlight class="normal"></highlight></codeline>
-<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>run()<sp/>{</highlight></codeline>
-<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_base::set_result(__future_base::create_task_setter(result_storage,<sp/>function));</highlight></codeline>
-<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
-<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(result_storage))<sp/>{</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_base::break_promise(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(result_storage));</highlight></codeline>
-<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"></highlight></codeline>
-<codeline lineno="231"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
-<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>async_state_impl(Args&amp;&amp;...<sp/>args)<sp/>:</highlight></codeline>
-<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/>result_storage(new<sp/>basic_result&lt;Res&gt;()),</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/>function(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Args&gt;(args)...)<sp/>{</highlight></codeline>
-<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>thread<sp/>=<sp/>_NEFORCE<sp/>thread{&amp;async_state_impl::run,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">};</highlight></codeline>
-<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="238"><highlight class="normal"></highlight></codeline>
-<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/>~async_state_impl()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(thread.joinable())<sp/>{</highlight></codeline>
-<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>thread.join();</highlight></codeline>
-<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="244"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"></highlight></codeline>
-<codeline lineno="246"><highlight class="normal">NEFORCE_END_INNER__</highlight></codeline>
-<codeline lineno="248"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Async</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="250"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="252"><highlight class="normal"></highlight></codeline>
-<codeline lineno="253"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="254"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_PACKAGED_TASK_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>~async_state_common()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>complete_async()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/>join();<sp/>}</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>join()<sp/>{<sp/>_NEFORCE<sp/><ref refid="group___call_once_1ga6b72113ff3b073878b5fc971d6fe1026" kindref="member">call_once</ref>(flag,<sp/>&amp;_NEFORCE<sp/><ref refid="classthread_1ac77d974035148375cbcd0835d631b3d0" kindref="member">thread::join</ref>,<sp/>&amp;thread);<sp/>}</highlight></codeline>
+<codeline lineno="205"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Res&gt;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">__future_base::async_state_impl<sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>__future_base::async_state_common<sp/>{</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">PtrType<sp/>=<sp/>__future_base::Ptr&lt;basic_result&lt;Res&gt;&gt;;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>PtrType<sp/>result_storage;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/>Func<sp/>function;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>run()<sp/>{</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_base::set_result(__future_base::create_task_setter(result_storage,<sp/>function));</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(result_storage))<sp/>{</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_base::break_promise(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(result_storage));</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>async_state_impl(Args&amp;&amp;...<sp/>args)<sp/>:</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>result_storage(new<sp/>basic_result&lt;Res&gt;()),</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/>function(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Args&gt;(args)...)<sp/>{</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>thread<sp/>=<sp/>_NEFORCE<sp/>thread{&amp;async_state_impl::run,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/>~async_state_impl()</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(thread.joinable())<sp/>{</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>thread.join();</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="246"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal">NEFORCE_END_INNER__</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Async</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_PACKAGED_TASK_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/packaged_task.hpp"/>
   </compounddef>
 </doxygen>

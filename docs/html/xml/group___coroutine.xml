@@ -12,11 +12,6 @@
     <innerclass refid="classgenerator" prot="public">generator</innerclass>
     <innerclass refid="classtask" prot="public">task</innerclass>
     <innerclass refid="classtask_3_01void_01_4" prot="public">task&lt; void &gt;</innerclass>
-    <innerclass refid="structvirtual__thread__task" prot="public">virtual_thread_task</innerclass>
-    <innerclass refid="classvirtual__thread__scheduler" prot="public">virtual_thread_scheduler</innerclass>
-    <innerclass refid="structvirtual__thread__awaiter" prot="public">virtual_thread_awaiter</innerclass>
-    <innerclass refid="structsleep__awaiter" prot="public">sleep_awaiter</innerclass>
-    <innerclass refid="classvirtual__thread" prot="public">virtual_thread</innerclass>
     <sectiondef kind="typedef">
       <memberdef kind="typedef" id="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" prot="public" static="no">
         <templateparamlist>
@@ -46,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="64" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="64" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="64" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="group___coroutine_1ga703e941b1a9f15e23513daa24ed4d587" prot="public" static="no">
         <type><ref refid="group___coroutine_1ga8688aa61087dce3a6914a4d6c7f7b55a" kindref="member">std::noop_coroutine_handle</ref></type>
@@ -60,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="95" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="95" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="95" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="group___coroutine_1ga8688aa61087dce3a6914a4d6c7f7b55a" prot="public" static="no">
         <type><ref refid="group___coroutine_1ga6b28debebaa0f1d57331130e5ccb6181" kindref="member">coroutine_handle</ref>&lt; <ref refid="group___coroutine_1ga703e941b1a9f15e23513daa24ed4d587" kindref="member">noop_coroutine_promise</ref> &gt;</type>
@@ -74,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="100" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="100" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="100" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="100" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -93,10 +88,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="109" column="30" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="109" bodyend="109"/>
-        <referencedby refid="structtask_1_1promise__type_1_1final__awaiter_1ac9266960119774b0ecd39811a7ed9f6c" compoundref="generator_8hpp" startline="490" endline="496">task&lt; T &gt;::promise_type::final_awaiter::await_suspend</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" line="109" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/coroutine.hpp" bodystart="109" bodyend="109"/>
       </memberdef>
-      <memberdef kind="function" id="group___coroutine_1ga8c72fd92de476361237939b98f6a450c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___coroutine_1gaf1931de6c9023a80830659338702aed7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -104,12 +98,12 @@
             <defname>Tasks</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="classtask" kindref="compound">task</ref>&lt; tuple&lt; typename Tasks::promise_type::result_type... &gt; &gt;</type>
-        <definition>task&lt; tuple&lt; typename Tasks::promise_type::result_type... &gt; &gt; when_all</definition>
-        <argsstring>(Tasks &amp;&amp;... tasks)</argsstring>
+        <type><ref refid="classtask" kindref="compound">task</ref>&lt; tuple&lt; typename Tasks::promise_type::value_type... &gt; &gt;</type>
+        <definition>task&lt; tuple&lt; typename Tasks::promise_type::value_type... &gt; &gt; when_all</definition>
+        <argsstring>(Tasks... tasks)</argsstring>
         <name>when_all</name>
         <param>
-          <type>Tasks &amp;&amp;...</type>
+          <type>Tasks...</type>
           <declname>tasks</declname>
         </param>
         <briefdescription>
@@ -136,14 +130,16 @@
 </parameterlist>
 <simplesect kind="return"><para>包含所有任务结果的任务</para>
 </simplesect>
-并行执行多个任务，等待所有任务完成后返回结果元组。 </para>
+执行多个任务，等待所有任务完成后返回结果元组。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="844" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="844" bodyend="848"/>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3007" endline="3009">forward</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="875" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="875" bodyend="882"/>
+        <references refid="group___async_1gac14e5033806977e33886d78a20feffaa" compoundref="future_8hpp" startline="1189" endline="1192">get</references>
+        <references refid="group___tuple_1ga5ed4cb761dbf974f5a60b613fdebb1bf" compoundref="tuple_8hpp" startline="750" endline="753">make_tuple</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
       </memberdef>
-      <memberdef kind="function" id="group___coroutine_1ga79f854a5ada0083996d280c91b6cb2c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___coroutine_1gaeeb129739f934bdf8c9e19059ba3ee29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -154,10 +150,10 @@
         </templateparamlist>
         <type><ref refid="classtask" kindref="compound">task</ref>&lt; T &gt;</type>
         <definition>task&lt; T &gt; retry</definition>
-        <argsstring>(Factory &amp;&amp;factory, const size_t max_attempts, function&lt; bool(const exception_ptr &amp;)&gt; should_retry=nullptr)</argsstring>
+        <argsstring>(Factory factory, const size_t max_attempts, const function&lt; bool(const exception_ptr &amp;)&gt; &amp;should_retry={})</argsstring>
         <name>retry</name>
         <param>
-          <type>Factory &amp;&amp;</type>
+          <type>Factory</type>
           <declname>factory</declname>
         </param>
         <param>
@@ -165,9 +161,9 @@
           <declname>max_attempts</declname>
         </param>
         <param>
-          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; bool(const <ref refid="classexception__ptr" kindref="compound">exception_ptr</ref> &amp;)&gt;</type>
+          <type>const <ref refid="classfunction" kindref="compound">function</ref>&lt; bool(const <ref refid="classexception__ptr" kindref="compound">exception_ptr</ref> &amp;)&gt; &amp;</type>
           <declname>should_retry</declname>
-          <defval>nullptr</defval>
+          <defval>{}</defval>
         </param>
         <briefdescription>
 <para>带重试的异步操作 </para>
@@ -221,10 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="863" column="6" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="863" bodyend="885"/>
-        <references refid="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419">current_exception</references>
-        <references refid="group___invoke_function_1gabdbb43df9038587b1f25b2169c305571" compoundref="invoke_8hpp" startline="418">is_invocable_r_v</references>
-        <references refid="group___exception_handling_1ga12342507bc5abdc903c22fabac839d32">rethrow_exception</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" line="897" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/generator.hpp" bodystart="897" bodyend="919"/>
         <referencedby refid="classlock__free__queue_1a24c20d863075bbbcedc192df5625d1e3" compoundref="lock__free__queue_8hpp" startline="290" endline="315">lock_free_queue&lt; T &gt;::try_pop</referencedby>
       </memberdef>
     </sectiondef>
@@ -232,7 +225,6 @@
 <para>协程支持 </para>
     </briefdescription>
     <detaileddescription>
-<para>协程和虚拟线程相关功能</para>
     </detaileddescription>
   </compounddef>
 </doxygen>

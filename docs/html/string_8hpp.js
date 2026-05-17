@@ -13,9 +13,9 @@ var string_8hpp =
     [ "getline", "group___string.html#ga1aeb60798fa2aa059ce982c314312d41", null ],
     [ "getline", "group___string.html#ga911be5c5361b5c7b4a67a42c17facf24", null ],
     [ "getline", "group___string.html#ga2728f07f1ff98d727c1616574019d6b7", null ],
-    [ "operator\"\"_s", "group___user_literals.html#gac77a92a7a9b1a6cd5ea8e9160b412163", null ],
-    [ "operator\"\"_s", "group___user_literals.html#ga3617897e652526bbef954041f0e58324", null ],
-    [ "operator\"\"_s", "group___user_literals.html#ga641d888cf3cd5d86bb3de75abc2c3881", null ],
-    [ "operator\"\"_s", "group___user_literals.html#gafe2bfaa77f94f9d3d1e1a0afd01ae355", null ],
-    [ "operator\"\"_s", "group___user_literals.html#ga66f51862257f74f44b1902a6fed1660d", null ]
+    [ "operator\"\"_s", "group___user_literals.html#gace96639e2d66727c19b0a7519bf53aad", null ],
+    [ "operator\"\"_s", "group___user_literals.html#gac8a213d39fa19bcc562472adf8ef1ed7", null ],
+    [ "operator\"\"_s", "group___user_literals.html#ga80ee9084b895eaaf40d28a9b1c75e97d", null ],
+    [ "operator\"\"_s", "group___user_literals.html#ga9c75c7aedcfe1daeee75a9ba0cf27d30", null ],
+    [ "operator\"\"_s", "group___user_literals.html#gaa244d306fc9b88f21dac220fc8e39d3a", null ]
 ];

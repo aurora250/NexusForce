@@ -175,7 +175,7 @@
       <node id="35">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -245,7 +245,7 @@
       <node id="39">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
@@ -331,6 +331,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
       </node>
       <node id="59">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -367,8 +369,6 @@
       <node id="69">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="30" relation="include">
-        </childnode>
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="56" relation="include">
@@ -523,7 +523,7 @@
         </childnode>
       </node>
       <node id="14">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="2">
         <label>hiredis/hiredis.h</label>
@@ -573,7 +573,7 @@
 <codeline lineno="43" refid="structredis__connect" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structredis__connect_1a69264b09c6c9587b922d9654da862629" kindref="member">redis_connect</ref><sp/>final<sp/>:<sp/><ref refid="structidb__kv__connect" kindref="compound">idb_kv_connect</ref><sp/>{</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>::redisContext*<sp/>link_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/></highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>last_error_{};<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>last_error_;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>::redisReply*<sp/>execute_command(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;string_view&gt;</ref>&amp;<sp/>args)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>authenticate(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>password)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
@@ -591,20 +591,20 @@
 <codeline lineno="84" refid="structredis__connect_1a834b77723f344390fc9b76fa59acd22a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structredis__connect_1a834b77723f344390fc9b76fa59acd22a" kindref="member">close</ref>()<sp/>noexcept<sp/>override;</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"></highlight></codeline>
 <codeline lineno="90" refid="structredis__connect_1aa66bf3a032d2b0be45f87bacd5e78e47" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structredis__connect_1aa66bf3a032d2b0be45f87bacd5e78e47" kindref="member">NEFORCE_DEPRECATED_FOR</ref>(</highlight><highlight class="stringliteral">&quot;Redis<sp/>not<sp/>support<sp/>setting<sp/>character<sp/>sets&quot;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad" kindref="member">set_character_set</ref>(const<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;)<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structidb__connect_1a3b5de8434d4f29793ecd5442549cef25" kindref="member">set_character_set</ref>(const<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/></highlight><highlight class="comment">/*encoding*/</highlight><highlight class="normal">)<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"></highlight></codeline>
 <codeline lineno="97" refid="structredis__connect_1aa9c3e1b7af3100595a9b9e3988b6c4d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structredis__connect_1aa9c3e1b7af3100595a9b9e3988b6c4d1" kindref="member">NEFORCE_DEPRECATED_FOR</ref>(</highlight><highlight class="stringliteral">&quot;Redis<sp/>not<sp/>support<sp/>setting<sp/>character<sp/>sets&quot;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767" kindref="member">get_character_set</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="structidb__connect_1a9663188aaae0acb8b65c2de0d5cbe75f" kindref="member">get_character_set</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"></highlight></codeline>
 <codeline lineno="104" refid="structredis__connect_1af5c327e104b050e226fa3de67f1e3bea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/><ref refid="structredis__connect_1af5c327e104b050e226fa3de67f1e3bea" kindref="member">get_error</ref>()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="105"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110" refid="structredis__connect_1a5e7c796199dc65854b6a6dd0008daae3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structredis__connect_1a5e7c796199dc65854b6a6dd0008daae3" kindref="member">get_errno</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>link_<sp/>?<sp/>link_-&gt;err<sp/>:<sp/>0;<sp/>}</highlight></codeline>
+<codeline lineno="110" refid="structredis__connect_1a5e7c796199dc65854b6a6dd0008daae3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structredis__connect_1a5e7c796199dc65854b6a6dd0008daae3" kindref="member">get_errno</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>link_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/>link_-&gt;err<sp/>:<sp/>0;<sp/>}</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"></highlight></codeline>
 <codeline lineno="117" refid="structredis__connect_1ae1eeac414607310e4c1ce4ba0c01affb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__connect_1ae1eeac414607310e4c1ce4ba0c01affb" kindref="member">update</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>sql)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"></highlight></codeline>
 <codeline lineno="124" refid="structredis__connect_1aaa7dda4e2701374c7419cfbc6387c2e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;idb_kv_result&gt;</ref><sp/><ref refid="structredis__connect_1aaa7dda4e2701374c7419cfbc6387c2e1" kindref="member">query</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>sql)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"></highlight></codeline>
-<codeline lineno="130" refid="structredis__connect_1abf1840d0ce8ba66dcf167c41cfc162f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__connect_1abf1840d0ce8ba66dcf167c41cfc162f1" kindref="member">connected</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>link_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>&amp;&amp;<sp/>!link_-&gt;err;<sp/>}</highlight></codeline>
+<codeline lineno="130" refid="structredis__connect_1abf1840d0ce8ba66dcf167c41cfc162f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__connect_1abf1840d0ce8ba66dcf167c41cfc162f1" kindref="member">connected</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>link_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>&amp;&amp;<sp/>link_-&gt;err<sp/>==<sp/>0;<sp/>}</highlight></codeline>
 <codeline lineno="131"><highlight class="normal"></highlight></codeline>
 <codeline lineno="136" refid="structredis__connect_1a1e01a0f142f0ebad62d1d0ff4518067d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structredis__connect_1a1e01a0f142f0ebad62d1d0ff4518067d" kindref="member">is_valid</ref>()<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"></highlight></codeline>
@@ -627,10 +627,10 @@
 <codeline lineno="154" refid="structredis__connect_1a79e9d07a7e0519bc228a6d2388fc13c8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunique__ptr" kindref="compound">unique_ptr&lt;idb_kv_result&gt;</ref><sp/><ref refid="structredis__connect_1a79e9d07a7e0519bc228a6d2388fc13c8" kindref="member">smembers</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>key)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;<sp/></highlight></codeline>
 <codeline lineno="155"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"></highlight></codeline>
-<codeline lineno="163" refid="classredis__factory" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classredis__factory_1afcb386b318af23c88490153675e69dfd" kindref="member">redis_factory</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classidb__factory_1ad680ec3a992a6a696e3cff3e7f0b34e1" kindref="member">idb_factory</ref><sp/>{</highlight></codeline>
+<codeline lineno="163" refid="classredis__factory" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classredis__factory_1afcb386b318af23c88490153675e69dfd" kindref="member">redis_factory</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classidb__factory_1a875d00f918348f454bb6452c57579ab1" kindref="member">idb_factory</ref><sp/>{</highlight></codeline>
 <codeline lineno="164"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="169" refid="classredis__factory_1afcb386b318af23c88490153675e69dfd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classredis__factory_1afcb386b318af23c88490153675e69dfd" kindref="member">redis_factory</ref>(<ref refid="structdb__config" kindref="compound">db_config</ref><sp/>config)<sp/>:</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classidb__factory_1ad680ec3a992a6a696e3cff3e7f0b34e1" kindref="member">idb_factory</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(config))<sp/>{}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classidb__factory_1a875d00f918348f454bb6452c57579ab1" kindref="member">idb_factory</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(config))<sp/>{}</highlight></codeline>
 <codeline lineno="171"><highlight class="normal"></highlight></codeline>
 <codeline lineno="176" refid="classredis__factory_1a8a6fd92e39cbdb60de258bedf95a4a1b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structidb__connect" kindref="compound">idb_connect</ref>*<sp/><ref refid="classredis__factory_1a8a6fd92e39cbdb60de258bedf95a4a1b" kindref="member">create_connect</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="177"><highlight class="normal"></highlight></codeline>
@@ -643,6 +643,6 @@
 <codeline lineno="191"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="192"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_DATABASE_REDIS_CONNECT_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/db/redis/redis_connect.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_connect.hpp"/>
   </compounddef>
 </doxygen>

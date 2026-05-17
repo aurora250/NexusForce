@@ -8,7 +8,7 @@ var classdate =
     [ "days_of_week", "classdate.html#ab45247a1ff4975696add401a3f6ac576", null ],
     [ "days_of_year", "classdate.html#a6d18b75b9cac84ce18a41c03e8915f30", null ],
     [ "equal_to", "classdate.html#a81a046bf3201d1ebfe1636bde493ade8", null ],
-    [ "is_valid", "classdate.html#a6a3245b6888126f41fed86d78b4ba8f7", null ],
+    [ "is_valid", "classdate.html#a9aa9d8fea007d53984e146eceb390b95", null ],
     [ "less_than", "classdate.html#a66188e891caa0f0cc03eff042310bb58", null ],
     [ "month", "classdate.html#aec731c8289bc469a30dac9c413779db6", null ],
     [ "operator+", "classdate.html#ae027ddd0d858df582e9351ce77352eb9", null ],
@@ -20,7 +20,7 @@ var classdate =
     [ "operator-=", "classdate.html#af83e9dd475d740fd090b6aa134c3adb4", null ],
     [ "swap", "classdate.html#a88d8ae28e2103f1757579793737d32a6", null ],
     [ "to_hash", "classdate.html#a23f913f720afaf933bdc405f1ad950ca", null ],
-    [ "to_julian_day", "classdate.html#ae29f568673cd4002a2400597fc719799", null ],
+    [ "to_julian_day", "classdate.html#a6af9fa82b742bbb4aa8dbfcfe2cc7f04", null ],
     [ "to_string", "classdate.html#a39083a80ab2ff7a6d8f731c1aa2cfac8", null ],
     [ "year", "classdate.html#a74130178d05c0a806658b4b41f26b046", null ]
 ];

@@ -139,7 +139,7 @@
       <node id="33">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -189,7 +189,7 @@
       <node id="37">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="14" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
@@ -265,7 +265,7 @@
         </childnode>
       </node>
       <node id="12">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="6">
         <label>initializer_list</label>
@@ -318,8 +318,8 @@
 <codeline lineno="128" refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___leonardo_heap_1gac60b0313c9a99501982d00f52c3017c4" kindref="member">adjust_leonardo_heap</ref>(Iterator<sp/>first,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>current_heap,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>level_index,<sp/><ref refid="classvector" kindref="compound">vector&lt;int&gt;</ref>&amp;<sp/>levels)<sp/>{</highlight></codeline>
 <codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___iterator_category_checks_1gafd48e5648f10e974c82b7b9adf9abdc8" kindref="member">is_ranges_rnd_iter_v&lt;Iterator&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Iterator<sp/>must<sp/>be<sp/>random_access_iterator&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="130"><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>child_heap1;</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>child_heap2;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>child_heap1<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>child_heap2<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(level_index<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>prev_heap<sp/>=<sp/>current_heap<sp/>-<sp/><ref refid="group___math_functions_1ga26007f8cd6027cb5ac19933049de833b" kindref="member">leonardo</ref>(levels[level_index]);</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(*(first<sp/>+<sp/>current_heap)<sp/>&lt;<sp/>*(first<sp/>+<sp/>prev_heap))<sp/>{</highlight></codeline>
@@ -333,7 +333,7 @@
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" kindref="member">iter_swap</ref>(first<sp/>+<sp/>current_heap,<sp/>first<sp/>+<sp/>prev_heap);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga309693af10e7b124bdab41ac99f7edc3" kindref="member">iter_swap</ref>(first<sp/>+<sp/>current_heap,<sp/>first<sp/>+<sp/>prev_heap);</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_heap<sp/>=<sp/>prev_heap;</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>--level_index;</highlight></codeline>
 <codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
@@ -354,11 +354,11 @@
 <codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="165"><highlight class="normal"></highlight></codeline>
 <codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(max_child<sp/>==<sp/>child_heap1)<sp/>{</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" kindref="member">iter_swap</ref>(first<sp/>+<sp/>current_heap,<sp/>first<sp/>+<sp/>child_heap1);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga309693af10e7b124bdab41ac99f7edc3" kindref="member">iter_swap</ref>(first<sp/>+<sp/>current_heap,<sp/>first<sp/>+<sp/>child_heap1);</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_heap<sp/>=<sp/>child_heap1;</highlight></codeline>
 <codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>--current_level;</highlight></codeline>
 <codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(max_child<sp/>==<sp/>child_heap2)<sp/>{</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" kindref="member">iter_swap</ref>(first<sp/>+<sp/>current_heap,<sp/>first<sp/>+<sp/>child_heap2);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga309693af10e7b124bdab41ac99f7edc3" kindref="member">iter_swap</ref>(first<sp/>+<sp/>current_heap,<sp/>first<sp/>+<sp/>child_heap2);</highlight></codeline>
 <codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_heap<sp/>=<sp/>child_heap2;</highlight></codeline>
 <codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_level<sp/>-=<sp/>2;</highlight></codeline>
 <codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
@@ -520,6 +520,6 @@
 <codeline lineno="382"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="383"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ALGORITHM_LEONARDO_HEAP_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/leonardo_heap.hpp"/>
   </compounddef>
 </doxygen>

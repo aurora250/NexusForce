@@ -104,7 +104,7 @@
       <node id="93">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="4" relation="include">
+        <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
@@ -116,8 +116,6 @@
         </childnode>
         <childnode refid="96" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
-        </childnode>
       </node>
       <node id="92">
         <label>NeForce/core/async/thread.hpp</label>
@@ -126,7 +124,7 @@
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
-        <childnode refid="98" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
         <childnode refid="88" relation="include">
         </childnode>
@@ -313,12 +311,12 @@
         <childnode refid="71" relation="include">
         </childnode>
       </node>
-      <node id="98">
+      <node id="97">
         <label>NeForce/core/functional/apply.hpp</label>
         <link refid="apply_8hpp"/>
         <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="99" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
       </node>
       <node id="20">
@@ -402,7 +400,7 @@
       <node id="63">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="3" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
       </node>
       <node id="21">
@@ -466,6 +464,8 @@
       <node id="57">
         <label>NeForce/core/memory/temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
+        <childnode refid="44" relation="include">
+        </childnode>
         <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
@@ -476,7 +476,7 @@
       <node id="37">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="22" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
@@ -546,6 +546,8 @@
         <link refid="char__traits_8hpp"/>
         <childnode refid="44" relation="include">
         </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
       </node>
       <node id="49">
         <label>NeForce/core/string/char_types.hpp</label>
@@ -582,8 +584,6 @@
       <node id="85">
         <label>NeForce/core/string/to_numerics.hpp</label>
         <link refid="to__numerics_8hpp"/>
-        <childnode refid="29" relation="include">
-        </childnode>
         <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
@@ -683,7 +683,7 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="99">
+      <node id="98">
         <label>NeForce/core/utility/tuple.hpp</label>
         <link refid="tuple_8hpp"/>
         <childnode refid="46" relation="include">
@@ -700,7 +700,7 @@
         </childnode>
       </node>
       <node id="91">
-        <label>log_event.hpp</label>
+        <label>NeForce/logging/log_event.hpp</label>
         <link refid="log__event_8hpp"/>
         <childnode refid="92" relation="include">
         </childnode>
@@ -709,10 +709,12 @@
         <childnode refid="73" relation="include">
         </childnode>
       </node>
-      <node id="100">
-        <label>log_formatter.hpp</label>
+      <node id="99">
+        <label>NeForce/logging/log_formatter.hpp</label>
         <link refid="log__formatter_8hpp"/>
         <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
         </childnode>
       </node>
       <node id="90">
@@ -720,7 +722,7 @@
         <link refid="log__sink_8hpp"/>
         <childnode refid="91" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="99" relation="include">
         </childnode>
       </node>
       <node id="66">
@@ -730,10 +732,13 @@
         <label>aio.h</label>
       </node>
       <node id="6">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="15">
         <label>cerrno</label>
+      </node>
+      <node id="96">
+        <label>ctime</label>
       </node>
       <node id="67">
         <label>fcntl.h</label>
@@ -750,17 +755,11 @@
       <node id="9">
         <label>pthread.h</label>
       </node>
-      <node id="97">
-        <label>riscv_pause.h</label>
-      </node>
       <node id="95">
         <label>sched.h</label>
       </node>
       <node id="8">
         <label>synchapi.h</label>
-      </node>
-      <node id="96">
-        <label>unistd.h</label>
       </node>
       <node id="48">
         <label>utility</label>
@@ -799,7 +798,7 @@
 <codeline lineno="14"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="36" refid="classfile__sink" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classfile__sink_1aed99db6b438e9f70757f82f162779868" kindref="member">file_sink</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classlog__sink" kindref="compound">log_sink</ref><sp/>{</highlight></codeline>
+<codeline lineno="36" refid="classfile__sink" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classfile__sink_1accd9902a8a619e5cd56ae16bdea89d1c" kindref="member">file_sink</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classlog__sink" kindref="compound">log_sink</ref><sp/>{</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfile" kindref="compound">file</ref><sp/>file_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classmutex" kindref="compound">mutex</ref><sp/>mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
@@ -817,17 +816,18 @@
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>rotate_by_date(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>today);</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="83" refid="classfile__sink_1aed99db6b438e9f70757f82f162779868" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classfile__sink_1aed99db6b438e9f70757f82f162779868" kindref="member">file_sink</ref>(<ref refid="classpath" kindref="compound">path</ref><sp/>filename,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>max_file_size<sp/>=<sp/>10<sp/>*<sp/>1024<sp/>*<sp/>1024,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_date_rotation<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92" refid="classfile__sink_1a5852a135e31a2e0d371d2c19729d052a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfile__sink_1a5852a135e31a2e0d371d2c19729d052a" kindref="member">log</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlog__event" kindref="compound">log_event</ref>&amp;<sp/>event)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99" refid="classfile__sink_1a664527322116a172e817afa7b0766fa6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfile__sink_1a664527322116a172e817afa7b0766fa6" kindref="member">flush</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="100"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Logging</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="103"><highlight class="normal"></highlight></codeline>
-<codeline lineno="104"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_LOGGING_FILE_SINK_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="classfile__sink_1accd9902a8a619e5cd56ae16bdea89d1c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classfile__sink_1accd9902a8a619e5cd56ae16bdea89d1c" kindref="member">file_sink</ref>(<ref refid="classpath" kindref="compound">path</ref><sp/>filename,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>max_file_size<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(10<sp/>*<sp/>1024<sp/>*<sp/>1024),</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_date_rotation<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93" refid="classfile__sink_1a5852a135e31a2e0d371d2c19729d052a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfile__sink_1a5852a135e31a2e0d371d2c19729d052a" kindref="member">log</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structlog__event" kindref="compound">log_event</ref>&amp;<sp/>event)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="classfile__sink_1a664527322116a172e817afa7b0766fa6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfile__sink_1a664527322116a172e817afa7b0766fa6" kindref="member">flush</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Logging</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_LOGGING_FILE_SINK_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/logging/file_sink.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/logging/file_sink.hpp"/>
   </compounddef>
 </doxygen>

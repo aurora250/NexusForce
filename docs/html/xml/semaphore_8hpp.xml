@@ -13,6 +13,8 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
         <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="18" relation="include">
@@ -35,7 +37,7 @@
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -44,7 +46,7 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="16">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="6" relation="include">
@@ -65,7 +67,7 @@
       <node id="9">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
@@ -76,8 +78,6 @@
         <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="7">
@@ -92,7 +92,7 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="17">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="7" relation="include">
@@ -101,7 +101,7 @@
       <node id="25">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="30">
@@ -110,7 +110,7 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="15">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="5" relation="include">
@@ -186,20 +186,23 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="8">
-        <label>assert.h</label>
-      </node>
       <node id="31">
         <label>bits/local_lim.h</label>
       </node>
-      <node id="19">
+      <node id="8">
+        <label>cassert</label>
+      </node>
+      <node id="14">
+        <label>ctime</label>
+      </node>
+      <node id="18">
         <label>intrin.h</label>
+      </node>
+      <node id="19">
+        <label>intrin0.inl.h</label>
       </node>
       <node id="11">
         <label>processthreadsapi.h</label>
-      </node>
-      <node id="15">
-        <label>riscv_pause.h</label>
       </node>
       <node id="13">
         <label>sched.h</label>
@@ -209,9 +212,6 @@
       </node>
       <node id="12">
         <label>synchapi.h</label>
-      </node>
-      <node id="14">
-        <label>unistd.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -320,9 +320,9 @@
 <codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="142"><highlight class="normal"></highlight></codeline>
 <codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Clock,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Dur&gt;</highlight></codeline>
-<codeline lineno="153" refid="classatomic__semaphore_1aefde002d6314ac824dccb0b426fe1a20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classatomic__semaphore_1aefde002d6314ac824dccb0b426fe1a20" kindref="member">try_acquire_until</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structtime__point" kindref="compound">time_point&lt;Clock, Dur&gt;</ref>&amp;<sp/><ref refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="153" refid="classatomic__semaphore_1aefde002d6314ac824dccb0b426fe1a20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classatomic__semaphore_1aefde002d6314ac824dccb0b426fe1a20" kindref="member">try_acquire_until</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structtime__point" kindref="compound">time_point&lt;Clock, Dur&gt;</ref>&amp;<sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>pred<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>this-&gt;do_try_acquire();<sp/>};</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga681f430806c0f5f197523c0d03d13e8c" kindref="member">atomic_wait_address_until</ref>(&amp;counter_,<sp/>pred,<sp/><ref refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga681f430806c0f5f197523c0d03d13e8c" kindref="member">atomic_wait_address_until</ref>(&amp;counter_,<sp/>pred,<sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>);</highlight></codeline>
 <codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="157"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="158"><highlight class="normal"></highlight></codeline>
@@ -347,9 +347,9 @@
 <codeline lineno="190"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="191"><highlight class="normal"></highlight></codeline>
 <codeline lineno="192"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>try_acquire_for_impl(<ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>try_acquire_for_impl(<ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="194"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>try_acquire_for_impl(<ref refid="group___duration_1ga9a8cc91104c0b0cceec0f8cf188bd19d" kindref="member">nanoseconds</ref><sp/><ref refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>try_acquire_for_impl(<ref refid="group___duration_1ga9a8cc91104c0b0cceec0f8cf188bd19d" kindref="member">nanoseconds</ref><sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="196"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="197"><highlight class="normal"></highlight></codeline>
 <codeline lineno="198"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
@@ -376,17 +376,17 @@
 <codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="252"><highlight class="normal"></highlight></codeline>
 <codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Clock,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Dur&gt;</highlight></codeline>
-<codeline lineno="264" refid="classsemaphore_1aff6123797344a446506be860322273c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsemaphore_1aff6123797344a446506be860322273c4" kindref="member">try_acquire_until</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structtime__point" kindref="compound">time_point&lt;Clock, Dur&gt;</ref>&amp;<sp/><ref refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="264" refid="classsemaphore_1aff6123797344a446506be860322273c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsemaphore_1aff6123797344a446506be860322273c4" kindref="member">try_acquire_until</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structtime__point" kindref="compound">time_point&lt;Clock, Dur&gt;</ref>&amp;<sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>now<sp/>=<sp/>Clock::now();</highlight></codeline>
-<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref><sp/>&lt;=<sp/>now)<sp/>{</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref><sp/>&lt;=<sp/>now)<sp/>{</highlight></codeline>
 <codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsemaphore_1a6fac839c9604da4b0d700e138c735efa" kindref="member">try_acquire</ref>();</highlight></codeline>
 <codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsemaphore_1aeccec009d808843dfa063fadbc0fce7f" kindref="member">try_acquire_for</ref>(<ref refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref><sp/>-<sp/>now);</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsemaphore_1aeccec009d808843dfa063fadbc0fce7f" kindref="member">try_acquire_for</ref>(<ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref><sp/>-<sp/>now);</highlight></codeline>
 <codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="271"><highlight class="normal"></highlight></codeline>
 <codeline lineno="279" refid="classsemaphore_1a25ef4fd1a54c09a07290806f242e8b50" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsemaphore_1a25ef4fd1a54c09a07290806f242e8b50" kindref="member">release</ref>(</highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>update<sp/>=<sp/>1);</highlight></codeline>
 <codeline lineno="280"><highlight class="normal"></highlight></codeline>
-<codeline lineno="288" refid="classsemaphore_1ab20020329e57e990088ef2d658a761cf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classsemaphore_1ab20020329e57e990088ef2d658a761cf" kindref="member">value</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="288" refid="classsemaphore_1a9cc205098e072d6a6acae8d30ef3ef78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classsemaphore_1a9cc205098e072d6a6acae8d30ef3ef78" kindref="member">value</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
 <codeline lineno="289"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="290"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Semaphores</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="292"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AsyncComponents</highlight><highlight class="normal"></highlight></codeline>
@@ -394,6 +394,6 @@
 <codeline lineno="295"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="296"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_SEMAPHORE_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/semaphore.hpp"/>
   </compounddef>
 </doxygen>

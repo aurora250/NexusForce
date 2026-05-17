@@ -1,6 +1,10 @@
 var console_8hpp =
 [
     [ "sys_console::console_size", "structsys__console_1_1console__size.html", "structsys__console_1_1console__size" ],
+    [ "eprint", "group___console_i_o.html#ga6f478d3770fa7741309600f1b0b26398", null ],
+    [ "eprintf", "group___console_i_o.html#gac1006701abbc2e20e39a3226ff81e72f", null ],
+    [ "eprintfln", "group___console_i_o.html#ga4fbaef464fbfa5110cb301a849c08872", null ],
+    [ "eprintln", "group___console_i_o.html#ga8dd0ae9ad8f5b08a27403c9b3cf9379c", null ],
     [ "print", "group___console_i_o.html#ga9f7ee8aaf17d6a59f5fce3710fd1dce9", null ],
     [ "printc", "group___console_i_o.html#ga60055762362801db865b6b02b6d690ae", null ],
     [ "printcf", "group___console_i_o.html#ga418e291ec9c66c2917331cdb598a94e5", null ],

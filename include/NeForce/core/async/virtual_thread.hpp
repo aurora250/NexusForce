@@ -23,7 +23,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup VirtualThread 协程
+ * @defgroup VirtualThread 虚拟线程
  * @brief 虚拟线程相关功能
  * @{
  */

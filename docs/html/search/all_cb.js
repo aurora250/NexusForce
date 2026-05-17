@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🏗️_20编译步骤_0',['🏗️ 编译步骤',['../index.html#autotoc_md41',1,'']]]
+  ['🎨_20图形、色彩与数学_0',['🎨 图形、色彩与数学',['../index.html#autotoc_md16',1,'']]]
 ];

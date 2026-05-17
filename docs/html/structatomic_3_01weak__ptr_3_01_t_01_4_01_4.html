@@ -100,8 +100,8 @@ $(function(){initNavTree('structatomic_3_01weak__ptr_3_01_t_01_4_01_4.html','','
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a66caafd27fd7c27c5f825c8427597668" id="r_a66caafd27fd7c27c5f825c8427597668"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a66caafd27fd7c27c5f825c8427597668">is_lock_free</a> () const noexcept</td></tr>
-<tr class="memdesc:a66caafd27fd7c27c5f825c8427597668"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否无锁  <br /></td></tr>
+<tr class="memitem:a7a8b23b446240418b9078f3e16d142c6" id="r_a7a8b23b446240418b9078f3e16d142c6"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a7a8b23b446240418b9078f3e16d142c6">is_lock_free</a> () const noexcept</td></tr>
+<tr class="memdesc:a7a8b23b446240418b9078f3e16d142c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否无锁  <br /></td></tr>
 <tr class="memitem:a8418d6f39ab56c0ecb47f955dbf49baa" id="r_a8418d6f39ab56c0ecb47f955dbf49baa"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8418d6f39ab56c0ecb47f955dbf49baa">atomic</a> (value_type value) noexcept</td></tr>
 <tr class="memdesc:a8418d6f39ab56c0ecb47f955dbf49baa"><td class="mdescLeft">&#160;</td><td class="mdescRight">从weak_ptr构造  <br /></td></tr>
 <tr class="memitem:adbe257302df56da163cea95ccb7e67dd" id="r_adbe257302df56da163cea95ccb7e67dd"><td class="memItemLeft">value_type&#160;</td><td class="memItemRight"><a class="el" href="#adbe257302df56da163cea95ccb7e67dd">load</a> (<a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) const noexcept</td></tr>
@@ -151,7 +151,7 @@ struct atomic&lt; weak_ptr&lt; T &gt; &gt;</div><p>weak_ptr的原子特化 </p>
 </dl>
 <p>提供weak_ptr的原子操作支持，实现无锁的原子操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00457">457</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00459">459</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a8418d6f39ab56c0ecb47f955dbf49baa" name="a8418d6f39ab56c0ecb47f955dbf49baa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8418d6f39ab56c0ecb47f955dbf49baa">&#9670;&#160;</a></span>atomic()</h2>
@@ -186,7 +186,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00479">479</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00481">481</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -232,14 +232,14 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>交换前的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00515">515</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00517">517</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a>.</p>
 
 </div>
 </div>
-<a id="a66caafd27fd7c27c5f825c8427597668" name="a66caafd27fd7c27c5f825c8427597668"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66caafd27fd7c27c5f825c8427597668">&#9670;&#160;</a></span>is_lock_free()</h2>
+<a id="a7a8b23b446240418b9078f3e16d142c6" name="a7a8b23b446240418b9078f3e16d142c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a8b23b446240418b9078f3e16d142c6">&#9670;&#160;</a></span>is_lock_free()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -250,7 +250,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="structatomic.html">atomic</a>&lt; <a class="el" href="classweak__ptr.html">weak_ptr</a>&lt; T &gt; &gt;::is_lock_free </td>
+          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="structatomic.html">atomic</a>&lt; <a class="el" href="classweak__ptr.html">weak_ptr</a>&lt; T &gt; &gt;::is_lock_free </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -266,7 +266,7 @@ template&lt;typename T&gt; </div>
 <p>检查是否无锁 </p>
 <dl class="section return"><dt>返回</dt><dd>始终返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00471">471</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00473">473</a> 行定义.</p>
 
 </div>
 </div>
@@ -304,7 +304,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>加载的值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00490">490</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00492">492</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a>.</p>
 
@@ -378,7 +378,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00502">502</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00504">504</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00183">memory_order_seq_cst</a>.</p>
 

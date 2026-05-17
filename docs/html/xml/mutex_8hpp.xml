@@ -18,6 +18,7 @@
     <includedby refid="registry_8hpp" local="yes">registry.hpp</includedby>
     <includedby refid="shared__mutex_8hpp" local="yes">shared_mutex.hpp</includedby>
     <includedby refid="signals_8hpp" local="yes">signals.hpp</includedby>
+    <includedby refid="virtual__thread_8hpp" local="yes">virtual_thread.hpp</includedby>
     <incdepgraph>
       <node id="1">
         <label>mutex.hpp</label>
@@ -56,7 +57,7 @@
         </childnode>
       </node>
       <node id="5">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="8">
         <label>pthread.h</label>
@@ -112,6 +113,8 @@
         <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="28">
@@ -505,7 +508,7 @@
 <codeline lineno="369" refid="classunique__lock_1a9732001877bf83c2d0cbd51c404a0bfb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classunique__lock_1a7b0e20ed2032e613a03c2883d3df7b0c" kindref="member">mutex_type</ref>*<sp/><ref refid="classunique__lock_1a9732001877bf83c2d0cbd51c404a0bfb" kindref="member">mutex</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mutex_;<sp/>}</highlight></codeline>
 <codeline lineno="370"><highlight class="normal"></highlight></codeline>
 <codeline lineno="376" refid="classunique__lock_1aa31d80f6bf8c45a5e30d075896e0426a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classunique__lock_1aa31d80f6bf8c45a5e30d075896e0426a" kindref="member">lock_quiet</ref>()<sp/>{</highlight></codeline>
-<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!mutex_)<sp/>{</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mutex_<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owns_lock_)<sp/>{</highlight></codeline>
@@ -516,7 +519,7 @@
 <codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="386"><highlight class="normal"></highlight></codeline>
 <codeline lineno="392" refid="classunique__lock_1a0473323402bab23a6c89eb5a5ab58798" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classunique__lock_1a0473323402bab23a6c89eb5a5ab58798" kindref="member">unlock_quiet</ref>()<sp/>{</highlight></codeline>
-<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!mutex_)<sp/>{</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mutex_<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!owns_lock_)<sp/>{</highlight></codeline>
@@ -527,7 +530,7 @@
 <codeline lineno="401"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="402"><highlight class="normal"></highlight></codeline>
 <codeline lineno="409" refid="classunique__lock_1a0f7defd5ab0b7d85f7d8bbc7d7a712a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classunique__lock_1a0f7defd5ab0b7d85f7d8bbc7d7a712a9" kindref="member">try_lock</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="410"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!mutex_)<sp/>{</highlight></codeline>
+<codeline lineno="410"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mutex_<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="411"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owns_lock_)<sp/>{</highlight></codeline>
@@ -550,6 +553,6 @@
 <codeline lineno="438"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="439"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_ASYNC_MUTEX_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/core/async/mutex.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp"/>
   </compounddef>
 </doxygen>

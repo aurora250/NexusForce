@@ -143,7 +143,7 @@
       <node id="33">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -207,7 +207,7 @@
       <node id="37">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="14" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
@@ -280,6 +280,8 @@
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
         </childnode>
       </node>
       <node id="52">
@@ -427,7 +429,7 @@
         </childnode>
       </node>
       <node id="12">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="6">
         <label>initializer_list</label>
@@ -510,7 +512,7 @@
 <codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"></highlight></codeline>
 <codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>receive_reply(<ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>,<sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>expected_id,<sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>expected_seq,<sp/><ref refid="classip__address" kindref="compound">ip_address</ref>&amp;<sp/>sender,</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>receive_reply(<ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>,<sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>expected_id,<sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>expected_seq,<sp/><ref refid="classip__address" kindref="compound">ip_address</ref>&amp;<sp/>sender,</highlight></codeline>
 <codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structicmp__header" kindref="compound">icmp_header</ref>&amp;<sp/>out_header,<sp/><ref refid="classvector" kindref="compound">vector&lt;char&gt;</ref>&amp;<sp/>out_data,<sp/><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref>&amp;<sp/>recv_ttl);</highlight></codeline>
 <codeline lineno="138"><highlight class="normal"></highlight></codeline>
 <codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>send_echo_request(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classip__address" kindref="compound">ip_address</ref>&amp;<sp/>dest,<sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>seq,<sp/><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref><sp/>ttl,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>,</highlight></codeline>
@@ -524,7 +526,7 @@
 <codeline lineno="154"><highlight class="normal"></highlight></codeline>
 <codeline lineno="161" refid="classicmp__socket_1a5e22d67c0aa794d751b4bee655c762af" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classicmp__socket_1a5e22d67c0aa794d751b4bee655c762af" kindref="member">open</ref>();</highlight></codeline>
 <codeline lineno="162"><highlight class="normal"></highlight></codeline>
-<codeline lineno="174" refid="classicmp__socket_1a2635f1da346bb2d7473d692cd960497f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structicmp__socket_1_1ping__result" kindref="compound">ping_result</ref><sp/><ref refid="classicmp__socket_1a2635f1da346bb2d7473d692cd960497f" kindref="member">ping</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classip__address" kindref="compound">ip_address</ref>&amp;<sp/>dest,<sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1gga6baf1ad6102bc30ce73b6f15b570b493a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>,<sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>sequence<sp/>=<sp/>0,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="174" refid="classicmp__socket_1a2635f1da346bb2d7473d692cd960497f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structicmp__socket_1_1ping__result" kindref="compound">ping_result</ref><sp/><ref refid="classicmp__socket_1a2635f1da346bb2d7473d692cd960497f" kindref="member">ping</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classip__address" kindref="compound">ip_address</ref>&amp;<sp/>dest,<sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>,<sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>sequence<sp/>=<sp/>0,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>data_len<sp/>=<sp/>0);</highlight></codeline>
 <codeline lineno="176"><highlight class="normal"></highlight></codeline>
 <codeline lineno="188" refid="classicmp__socket_1a5d7a7d636558ba6fb91d5d4e1ff2811d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;traceroute_hop&gt;</ref><sp/><ref refid="classicmp__socket_1a5d7a7d636558ba6fb91d5d4e1ff2811d" kindref="member">traceroute</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classip__address" kindref="compound">ip_address</ref>&amp;<sp/>dest,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>max_hops<sp/>=<sp/>30,</highlight></codeline>
@@ -535,6 +537,6 @@
 <codeline lineno="194"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="195"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_ICMP_SOCKET_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp"/>
   </compounddef>
 </doxygen>

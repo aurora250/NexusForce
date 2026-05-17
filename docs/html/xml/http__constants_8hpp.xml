@@ -142,7 +142,7 @@
       <node id="28">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
@@ -199,6 +199,8 @@
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="40">
@@ -274,7 +276,7 @@
         </childnode>
       </node>
       <node id="11">
-        <label>assert.h</label>
+        <label>cassert</label>
       </node>
       <node id="36">
         <label>initializer_list</label>
@@ -598,7 +600,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" line="197" column="1" bodyfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" bodystart="197" bodyend="347"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" line="197" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" bodystart="197" bodyend="347"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -618,7 +620,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" line="349" column="20" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" declline="349" declcolumn="20"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" line="349" column="20" declfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" declline="349" declcolumn="20"/>
       </memberdef>
       <memberdef kind="function" id="http__constants_8hpp_1a72c95b827ac21b4725584d889ee3e4cb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>NEFORCE_API <ref refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57" kindref="member">http_status</ref></type>
@@ -635,7 +637,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" line="351" column="25" declfile="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" declline="351" declcolumn="25"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" line="351" column="25" declfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" declline="351" declcolumn="25"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -743,8 +745,8 @@
 <codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="388"><highlight class="normal"></highlight></codeline>
-<codeline lineno="393" refid="structhttp__content_1a55c037ad74a45f34078fbc16ca4cfe91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structhttp__content_1a55c037ad74a45f34078fbc16ca4cfe91" kindref="member">http_content</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="structhttp__content_1aef0a7beb18a1cd331698cc6828d4fceb" kindref="member">content</ref>)<sp/>:</highlight></codeline>
-<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/>content_(<ref refid="structhttp__content_1aef0a7beb18a1cd331698cc6828d4fceb" kindref="member">content</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="393" refid="structhttp__content_1a571dee243c20b843ea98f6613a7d45e5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structhttp__content_1a571dee243c20b843ea98f6613a7d45e5" kindref="member">http_content</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structhttp__content_1aef0a7beb18a1cd331698cc6828d4fceb" kindref="member">content</ref>)<sp/>:</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/>content_(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(<ref refid="structhttp__content_1aef0a7beb18a1cd331698cc6828d4fceb" kindref="member">content</ref>))<sp/>{}</highlight></codeline>
 <codeline lineno="395"><highlight class="normal"></highlight></codeline>
 <codeline lineno="401" refid="structhttp__content_1ac0b6f075b3f047ed029b955d70bcbc0b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>http_content&amp;<sp/><ref refid="structhttp__content_1ac0b6f075b3f047ed029b955d70bcbc0b" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/><ref refid="structhttp__content_1aef0a7beb18a1cd331698cc6828d4fceb" kindref="member">content</ref>)<sp/>{</highlight></codeline>
 <codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>content_<sp/>=<sp/><ref refid="structhttp__content_1aef0a7beb18a1cd331698cc6828d4fceb" kindref="member">content</ref>;</highlight></codeline>
@@ -904,8 +906,8 @@
 <codeline lineno="635"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="636"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="637"><highlight class="normal"></highlight></codeline>
-<codeline lineno="642" refid="structhttp__cookie__name_1a19b13ab7f22bea2bdabf8c3004e07910" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie__name_1a19b13ab7f22bea2bdabf8c3004e07910" kindref="member">http_cookie_name</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>cookie)<sp/>:</highlight></codeline>
-<codeline lineno="643"><highlight class="normal"><sp/><sp/><sp/><sp/>cookie_(cookie)<sp/>{}</highlight></codeline>
+<codeline lineno="642" refid="structhttp__cookie__name_1a4c1ab0deb689b24ad1ecb0004d6169f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structhttp__cookie__name_1a4c1ab0deb689b24ad1ecb0004d6169f5" kindref="member">http_cookie_name</ref>(</highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>cookie)<sp/>:</highlight></codeline>
+<codeline lineno="643"><highlight class="normal"><sp/><sp/><sp/><sp/>cookie_(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(cookie))<sp/>{}</highlight></codeline>
 <codeline lineno="644"><highlight class="normal"></highlight></codeline>
 <codeline lineno="650" refid="structhttp__cookie__name_1a42f5913039443fdb62b17ffcf6dd070f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>http_cookie_name&amp;<sp/><ref refid="structhttp__cookie__name_1a42f5913039443fdb62b17ffcf6dd070f" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>cookie)<sp/>{</highlight></codeline>
 <codeline lineno="651"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cookie_<sp/>=<sp/>cookie;</highlight></codeline>
@@ -946,6 +948,6 @@
 <codeline lineno="699"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
 <codeline lineno="700"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_HTTP_HTTP_CONSTANTS_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp"/>
   </compounddef>
 </doxygen>
