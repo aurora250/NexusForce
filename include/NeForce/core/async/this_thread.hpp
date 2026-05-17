@@ -91,7 +91,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void relax() noexcept {
 #    if defined(NEFORCE_ARCH_X86)
     __builtin_ia32_pause();
 #    elif defined(NEFORCE_ARCH_ARM)
-    asm volatile("yield" ::: "memory");
+    asm volatile("yield");
 #    elif defined(NEFORCE_ARCH_RISCV)
     asm volatile("pause" ::: "memory");
 #    elif defined(NEFORCE_ARCH_LOONGARCH)
@@ -100,27 +100,6 @@ NEFORCE_ALWAYS_INLINE_INLINE void relax() noexcept {
     this_thread::yield();
 #    endif
 #endif
-}
-
-/**
- * @brief 根据计数进行线程放松
- * @param count 放松计数
- *
- * 根据计数值选择不同程度的放松策略：
- * - 小计数：多次调用relax()
- * - 中等计数：调用一次relax()
- * - 大计数：直接让出时间片
- */
-NEFORCE_ALWAYS_INLINE_INLINE void relax(const int count) noexcept {
-    if (count < 4) {
-        for (int i = 0; i < (1 << count); ++i) {
-            this_thread::relax();
-        }
-    } else if (count < 8) {
-        this_thread::relax();
-    } else {
-        this_thread::yield();
-    }
 }
 
 /**

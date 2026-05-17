@@ -9,8 +9,8 @@
  * 包括协程特征、协程句柄、暂停点定义等。
  */
 
-#include "NeForce/core/functional/hash.hpp"
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
+#    include "NeForce/core/functional/hash.hpp"
 #    include <coroutine>
 NEFORCE_BEGIN_NAMESPACE__
 

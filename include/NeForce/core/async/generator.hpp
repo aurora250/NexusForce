@@ -12,8 +12,8 @@
  * - 组合操作符 (when_all, retry 等)
  */
 
-#include "NeForce/core/async/coroutine.hpp"
-#if defined(NEFORCE_STANDARD_20) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_STANDARD_20
+#    include "NeForce/core/async/coroutine.hpp"
 #    include "NeForce/core/async/atomic.hpp"
 #    include "NeForce/core/exception/exception_ptr.hpp"
 #    include "NeForce/core/functional/function.hpp"
@@ -22,8 +22,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Coroutine 协程
- * @brief 协程支持
+ * @addtogroup Coroutine 协程
  * @{
  */
 
@@ -150,6 +149,31 @@ public:
 };
 
 
+template <typename T>
+class generator;
+
+/// @cond
+NEFORCE_BEGIN_INNER__
+
+template <typename T, typename F>
+generator<invoke_result_t<F, T>> generator_map(generator<T> source, F func);
+
+template <typename T, typename Pred>
+generator<T> generator_filter(generator<T> source, Pred pred);
+
+template <typename T>
+generator<T> generator_take(generator<T> source, size_t n);
+
+template <typename T>
+generator<T> generator_skip(generator<T> source, size_t n);
+
+template <typename T>
+generator<T> generator_chain(generator<T> source, generator<T> other);
+
+NEFORCE_END_INNER__
+/// @endcond
+
+
 /**
  * @class generator
  * @brief 懒序列生成器
@@ -193,7 +217,7 @@ public:
          * @return 总是暂停
          */
         suspend_always yield_value(T value) {
-            current_value = _NEFORCEmove(value);
+            current_value = _NEFORCE move(value);
             return {};
         }
 
@@ -361,10 +385,8 @@ public:
      * @return 变换后的生成器
      */
     template <typename F>
-    invoke_result_t<F, T> map(F func) {
-        for (auto&& value: *this) {
-            co_yield func(_NEFORCE forward<decltype(value)>(value));
-        }
+    generator<invoke_result_t<F, T>> map(F func) {
+        return inner::generator_map(move(*this), move(func));
     }
 
     /**
@@ -375,11 +397,7 @@ public:
      */
     template <typename Pred>
     generator filter(Pred pred) {
-        for (auto&& value: *this) {
-            if (pred(value)) {
-                co_yield _NEFORCE forward<decltype(value)>(value);
-            }
-        }
+        return inner::generator_filter(move(*this), move(pred));
     }
 
     /**
@@ -387,46 +405,21 @@ public:
      * @param n 元素个数
      * @return 新的生成器
      */
-    generator take(const size_t n) {
-        size_t count = 0;
-        for (auto&& value: *this) {
-            if (count >= n) {
-                break;
-            }
-            co_yield _NEFORCE forward<decltype(value)>(value);
-            ++count;
-        }
-    }
+    generator take(const size_t n) { return inner::generator_take(move(*this), n); }
 
     /**
      * @brief 跳过前n个元素
      * @param n 要跳过的个数
      * @return 新的生成器
      */
-    generator skip(const size_t n) {
-        size_t count = 0;
-        for (auto&& value: *this) {
-            if (count < n) {
-                ++count;
-                continue;
-            }
-            co_yield _NEFORCE forward<decltype(value)>(value);
-        }
-    }
+    generator skip(const size_t n) { return inner::generator_skip(move(*this), n); }
 
     /**
      * @brief 连接两个生成器
      * @param other 另一个生成器
      * @return 连接后的生成器
      */
-    generator chain(generator other) {
-        for (auto&& value: *this) {
-            co_yield _NEFORCE forward<decltype(value)>(value);
-        }
-        for (auto&& value: other) {
-            co_yield _NEFORCE forward<decltype(value)>(value);
-        }
-    }
+    generator chain(generator other) { return inner::generator_chain(move(*this), move(other)); }
 
     /**
      * @brief 遍历每个元素
@@ -458,6 +451,62 @@ public:
     }
 };
 
+
+/// @cond
+NEFORCE_BEGIN_INNER__
+
+template <typename T, typename F>
+generator<invoke_result_t<F, T>> generator_map(generator<T> source, F func) {
+    for (auto&& value: source) {
+        co_yield func(_NEFORCE forward<decltype(value)>(value));
+    }
+}
+
+template <typename T, typename Pred>
+generator<T> generator_filter(generator<T> source, Pred pred) {
+    for (auto&& value: source) {
+        if (pred(value)) {
+            co_yield _NEFORCE forward<decltype(value)>(value);
+        }
+    }
+}
+
+template <typename T>
+generator<T> generator_take(generator<T> source, size_t n) {
+    size_t count = 0;
+    for (auto&& value: source) {
+        if (count >= n) {
+            break;
+        }
+        co_yield _NEFORCE forward<decltype(value)>(value);
+        ++count;
+    }
+}
+
+template <typename T>
+generator<T> generator_skip(generator<T> source, size_t n) {
+    size_t count = 0;
+    for (auto&& value: source) {
+        if (count < n) {
+            ++count;
+            continue;
+        }
+        co_yield _NEFORCE forward<decltype(value)>(value);
+    }
+}
+
+template <typename T>
+generator<T> generator_chain(generator<T> source, generator<T> other) {
+    for (auto&& value: source) {
+        co_yield _NEFORCE forward<decltype(value)>(value);
+    }
+    for (auto&& value: other) {
+        co_yield _NEFORCE forward<decltype(value)>(value);
+    }
+}
+
+NEFORCE_END_INNER__
+/// @endcond
 
 /**
  * @class task
@@ -491,12 +540,11 @@ public:
              * @param h 协程句柄
              * @return 要继续的协程
              */
-            coroutine_handle<> await_suspend(coroutine_handle<promise_type> h) noexcept {
+            void await_suspend(coroutine_handle<promise_type> h) noexcept {
                 auto& promise = h.promise();
                 if (promise.continuation) {
-                    return promise.continuation;
+                    promise.continuation.resume();
                 }
-                return noop_coroutine();
             }
 
             /**
@@ -504,6 +552,8 @@ public:
              */
             void await_resume() noexcept {}
         };
+
+        using value_type = T; ///< 任务结果类型别名
 
         optional<T> result;                  ///< 结果值
         exception_ptr exception;             ///< 异常指针
@@ -698,6 +748,8 @@ template <>
 class task<void> {
 public:
     struct promise_type {
+        using value_type = void; ///< 任务结果类型别名
+
         exception_ptr exception;
         coroutine_handle<> continuation;
         cancellation_token* token = nullptr;
@@ -713,12 +765,11 @@ public:
         struct final_awaiter {
             bool await_ready() noexcept { return false; }
 
-            coroutine_handle<> await_suspend(coroutine_handle<promise_type> h) noexcept {
+            void await_suspend(coroutine_handle<promise_type> h) noexcept {
                 auto& promise = h.promise();
                 if (promise.continuation) {
-                    return promise.continuation;
+                    promise.continuation.resume();
                 }
-                return noop_coroutine();
             }
 
             void await_resume() noexcept {}
@@ -812,42 +863,21 @@ public:
 };
 
 
-/// @cond
-NEFORCE_BEGIN_INNER__
-
-template <typename... Ts>
-struct when_all_result {
-    tuple<Ts...> values;
-};
-
-template <size_t I, typename Tuple, typename... Tasks, enable_if_t<(I < sizeof...(Tasks)), int> = 0>
-task<void> when_all_helper(Tuple& results, Tasks&&... tasks) {
-    auto& current_task = _NEFORCE get<I>(_NEFORCE forward_as_tuple(_NEFORCE forward<Tasks>(tasks)...));
-    _NEFORCE get<I>(results) = co_await _NEFORCE move(current_task);
-    co_await when_all_helper<I + 1>(results, _NEFORCE forward<Tasks>(tasks)...);
-    co_return;
-}
-
-template <size_t I, typename Tuple, typename... Tasks, enable_if_t<I == sizeof...(Tasks), int> = 0>
-task<void> when_all_helper(Tuple& /*unused*/, Tasks&&... /*unused*/) {
-    co_return;
-}
-
-NEFORCE_END_INNER__
-/// @endcond
-
 /**
  * @brief 等待所有任务完成
  * @tparam Tasks 任务类型
  * @param tasks 要等待的任务
  * @return 包含所有任务结果的任务
  *
- * 并行执行多个任务，等待所有任务完成后返回结果元组。
+ * 执行多个任务，等待所有任务完成后返回结果元组。
  */
 template <typename... Tasks>
-auto when_all(Tasks&&... tasks) -> task<tuple<typename Tasks::promise_type::result_type...>> {
-    tuple<typename Tasks::promise_type::result_type...> results;
-    co_await inner::when_all_helper<0>(results, _NEFORCE forward<Tasks>(tasks)...);
+auto when_all(Tasks... tasks) -> task<tuple<typename Tasks::promise_type::value_type...>> {
+    tuple<typename Tasks::promise_type::value_type...> results;
+    auto task_tuple = _NEFORCE make_tuple(_NEFORCE move(tasks)...);
+    [&]<size_t... Is>(index_sequence<Is...>) {
+        ((_NEFORCE get<Is>(results) = _NEFORCE get<Is>(task_tuple).get()), ...);
+    }(index_sequence_for<Tasks...>{});
     co_return results;
 }
 
@@ -864,8 +894,8 @@ auto when_all(Tasks&&... tasks) -> task<tuple<typename Tasks::promise_type::resu
  * 执行异步操作，失败时根据策略重试。
  */
 template <typename T, typename Factory>
-task<T> retry(Factory&& factory, const size_t max_attempts,
-              function<bool(const exception_ptr&)> should_retry = nullptr) {
+task<T> retry(Factory factory, const size_t max_attempts,
+              const function<bool(const exception_ptr&)>& should_retry = {}) {
     static_assert(_NEFORCE is_invocable_r_v<task<T>, Factory>, "Factory must return task<T>");
 
     exception_ptr last_exception;

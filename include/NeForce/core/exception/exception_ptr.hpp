@@ -35,7 +35,7 @@ public:
      *
      * 重新抛出被包装的异常。
      */
-    virtual void rethrow() const = 0;
+    NEFORCE_NORETURN virtual void rethrow() const = 0;
 
     /**
      * @brief 获取异常类型信息
@@ -82,7 +82,7 @@ public:
      * @brief 重新抛出异常
      * @note 重新抛出存储的异常
      */
-    NEFORCE_ALWAYS_INLINE void rethrow() const override { throw exception_; }
+    NEFORCE_NORETURN NEFORCE_ALWAYS_INLINE void rethrow() const override { throw exception_; }
 
     /**
      * @brief 获取异常类型信息
@@ -99,6 +99,17 @@ public:
     }
 };
 
+class exception_ptr;
+
+/**
+ * @brief 重新抛出异常
+ * @param p 异常指针
+ *
+ * 重新抛出异常指针引用的异常。
+ *
+ * @note 如果异常指针为空，进程将被终止。
+ */
+NEFORCE_NORETURN void NEFORCE_API rethrow_exception(const exception_ptr& p);
 
 /**
  * @class exception_ptr
@@ -331,16 +342,6 @@ exception_ptr make_exception_ptr(Ex ex) noexcept {
  * 如果当前没有异常被捕获，返回空的异常指针。
  */
 exception_ptr NEFORCE_API current_exception() noexcept;
-
-/**
- * @brief 重新抛出异常
- * @param p 异常指针
- *
- * 重新抛出异常指针引用的异常。
- *
- * @note 如果异常指针为空，进程将被终止。
- */
-void NEFORCE_API rethrow_exception(const exception_ptr& p);
 
 /** @} */ // ExceptionHandling
 

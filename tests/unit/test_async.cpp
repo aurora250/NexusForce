@@ -1,5 +1,6 @@
 #include <NeForce/core/async/async.hpp>
 #include <NeForce/core/async/barrier.hpp>
+#include <NeForce/core/async/generator.hpp>
 #include <NeForce/core/async/hazard_ptr.hpp>
 #include <NeForce/core/async/latch.hpp>
 #include <NeForce/core/async/scoped_thread.hpp>
@@ -1601,9 +1602,11 @@ TEST(ThreadPool, WaitMultipleFutures) {
     pool.stop();
 }
 
+#ifdef NEFORCE_STANDARD_20
+
 class VirtualThreadEnvironment : public ::testing::Environment {
 public:
-    void SetUp() override { virtual_thread::initialize(1); }
+    void SetUp() override { virtual_thread::initialize(4); }
     void TearDown() override { virtual_thread::shutdown(); }
 };
 
@@ -1611,7 +1614,7 @@ public:
 
 TEST(VirtualThread, StartBasic) {
     atomic<bool> ran{false};
-    auto vt = virtual_thread::start([&] { ran.store(true); });
+    virtual_thread::start([&] { ran.store(true); });
     this_thread::sleep_for(50_ms);
     EXPECT_TRUE(ran.load());
 }
@@ -1619,12 +1622,11 @@ TEST(VirtualThread, StartBasic) {
 TEST(VirtualThread, Yield) {
     atomic<int> sequence{0};
     atomic<int> result{0};
-    auto task_lambda = [&]() -> virtual_thread_task {
+    virtual_thread::start([&]() -> virtual_thread_task<void> {
         sequence.store(sequence.load() + 1);
         co_await virtual_thread::yield();
         result.store(sequence.load());
-    };
-    auto vt = virtual_thread::start(task_lambda);
+    });
     this_thread::sleep_for(50_ms);
     EXPECT_EQ(result.load(), 1);
 }
@@ -1632,52 +1634,453 @@ TEST(VirtualThread, Yield) {
 TEST(VirtualThread, MultipleTasks) {
     atomic<int> counter{0};
     constexpr int N = 5;
-    vector<virtual_thread> threads;
     for (int i = 0; i < N; ++i) {
-        threads.push_back(virtual_thread::start([&] { counter.fetch_add(1); }));
+        virtual_thread::start([&] { counter.fetch_add(1); });
     }
     this_thread::sleep_for(100_ms);
     EXPECT_EQ(counter.load(), N);
 }
 
-TEST(VirtualThread, ExceptionHandling) {
-    auto vt = virtual_thread::start([] { throw exception("test"); });
+TEST(VirtualThread, ExceptionInFireAndForget) {
+    virtual_thread::start([] { throw exception("test"); });
     this_thread::sleep_for(50_ms);
     SUCCEED();
 }
 
-TEST(VirtualThread, SleepNoCrash) {
-    auto task_lambda = []() -> virtual_thread_task { co_await virtual_thread::sleep(10); };
-    auto vt = virtual_thread::start(task_lambda);
+TEST(VirtualThread, Sleep) {
+    atomic<bool> done{false};
+    virtual_thread::start([&]() -> virtual_thread_task<void> {
+        co_await virtual_thread::sleep(10);
+        done.store(true);
+    });
     this_thread::sleep_for(50_ms);
-    SUCCEED();
+    EXPECT_TRUE(done.load());
+}
+
+TEST(VirtualThread, ReturnValueSync) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> { co_return 42; });
+    EXPECT_EQ(task.get_result(), 42);
+}
+
+TEST(VirtualThread, ReturnValueAfterSleep) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::sleep(10);
+        co_return 99;
+    });
+    EXPECT_EQ(task.get_result(), 99);
+}
+
+TEST(VirtualThread, ReturnValueAfterYield) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 7;
+    });
+    EXPECT_EQ(task.get_result(), 7);
+}
+
+TEST(VirtualThread, VoidTaskGetResult) {
+    atomic<bool> ran{false};
+    auto task = virtual_thread::start([&]() -> virtual_thread_task<void> {
+        ran.store(true);
+        co_return;
+    });
+    task.get_result();
+    EXPECT_TRUE(ran.load());
+}
+
+TEST(VirtualThread, AwaitSyncSubtask) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        auto sub = []() -> virtual_thread_task<int> { co_return 7; };
+        int val = co_await sub();
+        co_return val * 3;
+    });
+    EXPECT_EQ(task.get_result(), 21);
+}
+
+TEST(VirtualThread, AwaitSubtaskWithYield) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        auto sub = []() -> virtual_thread_task<int> {
+            co_await virtual_thread::yield();
+            co_return 10;
+        };
+        int val = co_await sub();
+        co_return val + 5;
+    });
+    EXPECT_EQ(task.get_result(), 15);
+}
+
+TEST(VirtualThread, AwaitVoidSubtask) {
+    atomic<bool> innerRan{false};
+    auto task = virtual_thread::start([&]() -> virtual_thread_task<int> {
+        auto sub = [&]() -> virtual_thread_task<void> {
+            innerRan.store(true);
+            co_return;
+        };
+        co_await sub();
+        co_return 1;
+    });
+    EXPECT_EQ(task.get_result(), 1);
+    EXPECT_TRUE(innerRan.load());
+}
+
+TEST(VirtualThread, DeepNesting) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        auto leaf = []() -> virtual_thread_task<int> {
+            co_await virtual_thread::yield();
+            co_return 1;
+        };
+        auto middle = [&]() -> virtual_thread_task<int> {
+            int v = co_await leaf();
+            co_return v + 1;
+        };
+        int v = co_await middle();
+        co_return v + 1;
+    });
+    EXPECT_EQ(task.get_result(), 3);
+}
+
+TEST(VirtualThread, ExceptionPropagation) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        auto sub = []() -> virtual_thread_task<int> {
+            throw value_exception("inner error");
+            co_return 1;
+        };
+        co_await sub();
+        co_return 2;
+    });
+    EXPECT_THROW(task.get_result(), value_exception);
+}
+
+TEST(VirtualThread, ExceptionAfterYield) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        throw value_exception("after yield");
+        co_return 1;
+    });
+    EXPECT_THROW(task.get_result(), value_exception);
 }
 
 TEST(VirtualThreadTask, MoveConstructor) {
-    auto createTask = []() -> virtual_thread_task { co_return; };
-    virtual_thread_task task1 = createTask();
-    EXPECT_TRUE(task1.handle_);
-    virtual_thread_task task2(move(task1));
-    EXPECT_FALSE(task1.handle_);
-    EXPECT_TRUE(task2.handle_);
+    auto task1 = virtual_thread::start([]() -> virtual_thread_task<int> { co_return 42; });
+    EXPECT_TRUE(task1.valid());
+    auto task2 = move(task1);
+    EXPECT_FALSE(task1.valid());
+    EXPECT_TRUE(task2.valid());
+    EXPECT_EQ(task2.get_result(), 42);
 }
 
 TEST(VirtualThreadTask, MoveAssignment) {
-    auto createTask = []() -> virtual_thread_task { co_return; };
-    virtual_thread_task task1 = createTask();
-    virtual_thread_task task2;
+    auto task1 = virtual_thread::start([]() -> virtual_thread_task<int> { co_return 55; });
+    virtual_thread_task<int> task2;
     task2 = move(task1);
-    EXPECT_FALSE(task1.handle_);
-    EXPECT_TRUE(task2.handle_);
+    EXPECT_FALSE(task1.valid());
+    EXPECT_TRUE(task2.valid());
+    EXPECT_EQ(task2.get_result(), 55);
 }
 
-TEST(VirtualThread, MoveVirtualThread) {
+TEST(VirtualThreadTask, MoveVoidTask) {
+    auto task1 = virtual_thread::start([]() -> virtual_thread_task<void> { co_return; });
+    EXPECT_TRUE(task1.valid());
+    auto task2 = move(task1);
+    EXPECT_FALSE(task1.valid());
+    EXPECT_TRUE(task2.valid());
+    task2.get_result();
+}
+
+TEST(VirtualThreadTask, MoveFireAndForget) {
     atomic<bool> ran{false};
-    auto vt1 = virtual_thread::start([&] { ran.store(true); });
-    virtual_thread vt2(move(vt1));
+    auto task1 = virtual_thread::start([&] { ran.store(true); });
+    EXPECT_TRUE(task1.valid());
+    auto task2 = move(task1);
+    EXPECT_FALSE(task1.valid());
+    EXPECT_TRUE(task2.valid());
     this_thread::sleep_for(50_ms);
     EXPECT_TRUE(ran.load());
 }
+
+TEST(VirtualThread, ConcurrentTasks) {
+    auto t1 = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 1;
+    });
+    auto t2 = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 2;
+    });
+    EXPECT_EQ(t1.get_result(), 1);
+    EXPECT_EQ(t2.get_result(), 2);
+}
+
+TEST(VirtualThread, SequentialAwaitConcurrent) {
+    auto t1 = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 10;
+    });
+    auto t2 = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 20;
+    });
+    auto wrapper = virtual_thread::start([&]() -> virtual_thread_task<int> {
+        int a = co_await t1;
+        int b = co_await t2;
+        co_return a + b;
+    });
+    EXPECT_EQ(wrapper.get_result(), 30);
+}
+
+TEST(VirtualThread, SynchronousCompletion) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> { co_return 100; });
+    EXPECT_TRUE(task.is_done());
+    EXPECT_EQ(task.get_result(), 100);
+}
+
+TEST(VirtualThread, MultipleYields) {
+    atomic<int> counter{0};
+    auto task = virtual_thread::start([&]() -> virtual_thread_task<int> {
+        for (int i = 0; i < 5; ++i) {
+            counter.fetch_add(1);
+            co_await virtual_thread::yield();
+        }
+        co_return counter.load();
+    });
+    EXPECT_EQ(task.get_result(), 5);
+}
+
+TEST(VirtualThread, IsDone) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::sleep(20);
+        co_return 42;
+    });
+    EXPECT_FALSE(task.is_done());
+    task.get_result();
+    EXPECT_TRUE(task.is_done());
+}
+
+TEST(VirtualThread, DefaultConstructedTask) {
+    virtual_thread_task<int> task;
+    EXPECT_FALSE(task.valid());
+    EXPECT_FALSE(task.is_done());
+}
+
+TEST(VirtualThread, GetResultBlocking) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::sleep(50);
+        co_return 88;
+    });
+    auto start = steady_clock::now();
+    EXPECT_EQ(task.get_result(), 88);
+    auto elapsed = steady_clock::now() - start;
+    EXPECT_GE(elapsed, 40_ms);
+}
+
+TEST(VirtualThread, GetResultCrossThreadBlocking) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::sleep(30);
+        co_return 77;
+    });
+    atomic<bool> completed{false};
+    atomic<int> result{0};
+    thread t([&]() {
+        result.store(task.get_result());
+        completed.store(true);
+    });
+    while (!completed.load()) {
+        this_thread::sleep_for(1_ms);
+    }
+    EXPECT_EQ(result.load(), 77);
+    t.join();
+}
+
+TEST(VirtualThread, GetResultAfterFrameDestroyed) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 55;
+    });
+    while (!task.is_done()) {
+        this_thread::sleep_for(1_ms);
+    }
+    this_thread::sleep_for(20_ms);
+    EXPECT_EQ(task.get_result(), 55);
+}
+
+TEST(VirtualThread, ExceptionTypePreservation) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        auto sub = []() -> virtual_thread_task<int> {
+            throw value_exception("specific inner error");
+            co_return 1;
+        };
+        co_await sub();
+        co_return 2;
+    });
+    try {
+        task.get_result();
+        FAIL() << "Expected value_exception";
+    } catch (const value_exception& e) {
+        EXPECT_STREQ(e.what(), "specific inner error");
+    } catch (...) {
+        FAIL() << "Exception type not preserved";
+    }
+}
+
+TEST(VirtualThread, ExceptionTypePreservationAfterYield) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        throw value_exception("after yield");
+        co_return 1;
+    });
+    EXPECT_THROW(
+            {
+                try {
+                    task.get_result();
+                } catch (const value_exception& e) {
+                    EXPECT_STREQ(e.what(), "after yield");
+                    throw;
+                }
+            },
+            value_exception);
+}
+
+TEST(VirtualThread, SleepZero) {
+    atomic<bool> done{false};
+    auto task = virtual_thread::start([&]() -> virtual_thread_task<void> {
+        co_await virtual_thread::sleep(0);
+        done.store(true);
+        co_return;
+    });
+    task.get_result();
+    EXPECT_TRUE(done.load());
+}
+
+TEST(VirtualThread, MultipleSleeps) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::sleep(5);
+        co_await virtual_thread::sleep(5);
+        co_return 3;
+    });
+    EXPECT_EQ(task.get_result(), 3);
+}
+
+TEST(VirtualThread, MixYieldAndSleep) {
+    atomic<int> phase{0};
+    auto task = virtual_thread::start([&]() -> virtual_thread_task<int> {
+        phase.store(1);
+        co_await virtual_thread::yield();
+        phase.store(2);
+        co_await virtual_thread::sleep(10);
+        phase.store(3);
+        co_await virtual_thread::yield();
+        phase.store(4);
+        co_return 42;
+    });
+    EXPECT_EQ(task.get_result(), 42);
+    EXPECT_EQ(phase.load(), 4);
+}
+
+TEST(VirtualThreadTask, MoveAssignToNonEmpty) {
+    auto task1 = virtual_thread::start([]() -> virtual_thread_task<int> { co_return 42; });
+    auto task2 = virtual_thread::start([]() -> virtual_thread_task<int> { co_return 100; });
+    EXPECT_EQ(task2.get_result(), 100);
+    task2 = move(task1);
+    EXPECT_FALSE(task1.valid());
+    EXPECT_TRUE(task2.valid());
+    EXPECT_EQ(task2.get_result(), 42);
+}
+
+TEST(VirtualThreadTask, MoveAssignToNonEmptyWithYield) {
+    auto task1 = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 77;
+    });
+    auto task2 = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 200;
+    });
+    EXPECT_EQ(task2.get_result(), 200);
+    task2 = move(task1);
+    EXPECT_FALSE(task1.valid());
+    EXPECT_TRUE(task2.valid());
+    EXPECT_EQ(task2.get_result(), 77);
+}
+
+TEST(VirtualThreadTask, SelfMoveAssignment) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> { co_return 10; });
+    task = move(task);
+    EXPECT_TRUE(task.valid());
+    EXPECT_EQ(task.get_result(), 10);
+}
+
+TEST(VirtualThreadTask, MoveAfterGetResult) {
+    auto task1 = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 42;
+    });
+    EXPECT_EQ(task1.get_result(), 42);
+    EXPECT_TRUE(task1.is_done());
+    auto task2 = move(task1);
+    EXPECT_FALSE(task1.valid());
+    EXPECT_TRUE(task2.valid());
+    EXPECT_TRUE(task2.is_done());
+}
+
+TEST(VirtualThreadTask, MoveChain) {
+    auto task1 = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 99;
+    });
+    auto task2 = move(task1);
+    auto task3 = move(task2);
+    EXPECT_FALSE(task1.valid());
+    EXPECT_FALSE(task2.valid());
+    EXPECT_TRUE(task3.valid());
+    EXPECT_EQ(task3.get_result(), 99);
+}
+
+TEST(VirtualThread, DestroyWithoutGetResult) {
+    {
+        auto task = virtual_thread::start([]() -> virtual_thread_task<string> { co_return string("hello world"); });
+    }
+    SUCCEED();
+}
+
+TEST(VirtualThread, DestroyWithoutGetResultAfterYield) {
+    {
+        auto task = virtual_thread::start([]() -> virtual_thread_task<string> {
+            co_await virtual_thread::yield();
+            co_return string("yielded");
+        });
+        this_thread::sleep_for(30_ms);
+    }
+    SUCCEED();
+}
+
+TEST(VirtualThread, ConcurrentGetResult) {
+    auto task = virtual_thread::start([]() -> virtual_thread_task<int> {
+        co_await virtual_thread::yield();
+        co_return 123;
+    });
+    EXPECT_EQ(task.get_result(), 123);
+    EXPECT_TRUE(task.is_done());
+}
+
+namespace {
+    virtual_thread_task<int> multiply_task(int val) {
+        co_await virtual_thread::yield();
+        co_return val * 2;
+    }
+} // namespace
+
+TEST(VirtualThread, ManyConcurrentYields) {
+    constexpr int N = 20;
+    vector<virtual_thread_task<int>> tasks;
+    for (int i = 0; i < N; ++i) {
+        tasks.push_back(multiply_task(i));
+    }
+    for (int i = 0; i < N; ++i) {
+        EXPECT_EQ(tasks[i].get_result(), i * 2);
+    }
+}
+
+#endif
 
 TEST(SignalTest, BasicEmit) {
     neforce::signal<int> sig;
@@ -1999,3 +2402,308 @@ TEST(SignalTest, OperatorCall) {
     sig(42);
     EXPECT_EQ(val, 42);
 }
+
+#ifdef NEFORCE_STANDARD_20
+
+namespace {
+    generator<int> iota_gen(int from, int to) {
+        for (int i = from; i < to; ++i) {
+            co_yield i;
+        }
+    }
+
+    generator<int> empty_gen() {
+        if (false) {
+            co_yield 0;
+        }
+        co_return;
+    }
+} // namespace
+
+TEST(Generator, BasicIteration) {
+    auto gen = iota_gen(0, 5);
+    vector<int> values;
+    for (auto v: gen) {
+        values.push_back(v);
+    }
+    EXPECT_EQ(values, (vector<int>{0, 1, 2, 3, 4}));
+}
+
+TEST(Generator, Empty) {
+    auto gen = empty_gen();
+    int count = 0;
+    for (auto v: gen) {
+        (void) v;
+        ++count;
+    }
+    EXPECT_EQ(count, 0);
+}
+
+TEST(Generator, MoveSemantics) {
+    auto gen1 = iota_gen(0, 3);
+    auto gen2 = move(gen1);
+    vector<int> values;
+    for (auto v: gen2) {
+        values.push_back(v);
+    }
+    EXPECT_EQ(values, (vector<int>{0, 1, 2}));
+}
+
+TEST(Generator, Map) {
+    auto gen = iota_gen(1, 4).map([](int x) { return x * 10; });
+    vector<int> values;
+    for (auto v: gen) {
+        values.push_back(v);
+    }
+    EXPECT_EQ(values, (vector<int>{10, 20, 30}));
+}
+
+TEST(Generator, Filter) {
+    auto gen = iota_gen(0, 10).filter([](int x) { return x % 2 == 0; });
+    vector<int> values;
+    for (auto v: gen) {
+        values.push_back(v);
+    }
+    EXPECT_EQ(values, (vector<int>{0, 2, 4, 6, 8}));
+}
+
+TEST(Generator, Take) {
+    auto gen = iota_gen(0, 100).take(3);
+    vector<int> values;
+    for (auto v: gen) {
+        values.push_back(v);
+    }
+    EXPECT_EQ(values, (vector<int>{0, 1, 2}));
+}
+
+TEST(Generator, Skip) {
+    auto gen = iota_gen(0, 10).skip(7);
+    vector<int> values;
+    for (auto v: gen) {
+        values.push_back(v);
+    }
+    EXPECT_EQ(values, (vector<int>{7, 8, 9}));
+}
+
+TEST(Generator, Chain) {
+    auto gen = iota_gen(0, 3).chain(iota_gen(5, 7));
+    vector<int> values;
+    for (auto v: gen) {
+        values.push_back(v);
+    }
+    EXPECT_EQ(values, (vector<int>{0, 1, 2, 5, 6}));
+}
+
+TEST(Generator, Fold) {
+    auto gen = iota_gen(1, 5);
+    int result = gen.fold(0, [](int acc, int v) { return acc + v; });
+    EXPECT_EQ(result, 10);
+}
+
+TEST(Generator, ForEach) {
+    auto gen = iota_gen(0, 3);
+    int sum = 0;
+    gen.for_each([&sum](int v) { sum += v; });
+    EXPECT_EQ(sum, 3);
+}
+
+TEST(Generator, NestedPipeline) {
+    auto gen = iota_gen(0, 20).filter([](int x) { return x % 2 == 0; }).map([](int x) { return x * 2; }).take(3);
+    vector<int> values;
+    for (auto v: gen) {
+        values.push_back(v);
+    }
+    EXPECT_EQ(values, (vector<int>{0, 4, 8}));
+}
+
+namespace {
+    task<int> task_answer() { co_return 42; }
+
+    task<int> task_double(int x) { co_return x * 2; }
+
+    task<void> task_noop() { co_return; }
+
+    task<int> task_chain_add(int a, int b) {
+        int va = co_await task_double(a);
+        int vb = co_await task_double(b);
+        co_return va + vb;
+    }
+} // namespace
+
+TEST(TaskT, GetResult) {
+    auto t = task_answer();
+    EXPECT_EQ(t.get(), 42);
+}
+
+TEST(TaskT, CoAwaitReturnsValue) {
+    auto t = []() -> task<int> {
+        int val = co_await task_answer();
+        co_return val;
+    }();
+    EXPECT_EQ(t.get(), 42);
+}
+
+TEST(TaskT, ChainCoAwait) {
+    auto t = task_chain_add(3, 5);
+    EXPECT_EQ(t.get(), 16);
+}
+
+TEST(TaskT, DoneAfterGet) {
+    auto t = task_answer();
+    EXPECT_FALSE(t.done());
+    t.get();
+    EXPECT_TRUE(t.done());
+}
+
+TEST(TaskT, ResumeAndDone) {
+    auto t = task_answer();
+    EXPECT_FALSE(t.done());
+    t.resume();
+    EXPECT_TRUE(t.done());
+    EXPECT_EQ(t.get(), 42);
+}
+
+TEST(TaskT, MoveConstruct) {
+    auto t1 = task_answer();
+    auto t2 = move(t1);
+    EXPECT_EQ(t2.get(), 42);
+}
+
+TEST(TaskT, MoveAssign) {
+    auto t1 = task_answer();
+    auto t2 = task_double(5);
+    t2 = move(t1);
+    EXPECT_EQ(t2.get(), 42);
+}
+
+TEST(TaskVoid, GetResult) {
+    auto t = task_noop();
+    EXPECT_NO_THROW(t.get());
+    EXPECT_TRUE(t.done());
+}
+
+TEST(TaskVoid, CoAwaitCompletion) {
+    bool completed = false;
+    auto t = [&completed]() -> task<void> {
+        completed = true;
+        co_return;
+    }();
+    t.get();
+    EXPECT_TRUE(completed);
+}
+
+namespace {
+    task<int> task_throw() {
+        throw value_exception("task error");
+        co_return 0;
+    }
+
+    task<int> task_rethrow() {
+        int val = co_await task_throw();
+        co_return val;
+    }
+} // namespace
+
+TEST(TaskException, DirectException) {
+    auto t = task_throw();
+    EXPECT_THROW(t.get(), value_exception);
+}
+
+TEST(TaskException, PropagationThroughCoAwait) {
+    auto t = task_rethrow();
+    EXPECT_THROW(t.get(), value_exception);
+}
+
+TEST(CancellationToken, NotCancelledByDefault) {
+    cancellation_token token;
+    EXPECT_FALSE(token.is_cancelled());
+}
+
+TEST(CancellationToken, CancelSetsFlag) {
+    cancellation_token token;
+    token.cancel();
+    EXPECT_TRUE(token.is_cancelled());
+}
+
+TEST(CancellationToken, CopySharesState) {
+    cancellation_token token1;
+    cancellation_token token2 = token1;
+    token1.cancel();
+    EXPECT_TRUE(token2.is_cancelled());
+}
+
+TEST(CancellationToken, AssignSharesState) {
+    cancellation_token token1;
+    cancellation_token token2;
+    token2 = token1;
+    token1.cancel();
+    EXPECT_TRUE(token2.is_cancelled());
+}
+
+TEST(CancellationToken, CheckAwaiterCancelled) {
+    cancellation_token token;
+    token.cancel();
+    auto awaiter = token.check();
+    EXPECT_TRUE(awaiter.await_ready());
+    EXPECT_THROW(awaiter.await_resume(), neforce::exception);
+}
+
+TEST(CancellationToken, CheckAwaiterNotCancelled) {
+    cancellation_token token;
+    auto awaiter = token.check();
+    EXPECT_FALSE(awaiter.await_ready());
+}
+
+TEST(WhenAll, TwoTasks) {
+    auto t = when_all(task_answer(), task_double(3));
+    auto [a, b] = t.get();
+    EXPECT_EQ(a, 42);
+    EXPECT_EQ(b, 6);
+}
+
+TEST(WhenAll, ThreeTasks) {
+    auto t = when_all(task_double(1), task_double(2), task_double(3));
+    auto [a, b, c] = t.get();
+    EXPECT_EQ(a, 2);
+    EXPECT_EQ(b, 4);
+    EXPECT_EQ(c, 6);
+}
+
+TEST(Retry, SuccessFirstAttempt) {
+    int attempts = 0;
+    auto factory = [&attempts]() -> task<int> {
+        ++attempts;
+        co_return 42;
+    };
+    auto t = retry<int>(factory, 3);
+    EXPECT_EQ(t.get(), 42);
+    EXPECT_EQ(attempts, 1);
+}
+
+TEST(Retry, RetryThenSuccess) {
+    int attempts = 0;
+    auto factory = [&attempts]() -> task<int> {
+        ++attempts;
+        if (attempts < 3) {
+            throw value_exception("failed");
+        }
+        co_return 7;
+    };
+    auto t = retry<int>(factory, 5);
+    EXPECT_EQ(t.get(), 7);
+    EXPECT_EQ(attempts, 3);
+}
+
+TEST(Retry, Exhaustion) {
+    int attempts = 0;
+    auto factory = [&attempts]() -> task<int> {
+        ++attempts;
+        throw value_exception("always fail");
+        co_return 1;
+    };
+    auto t = retry<int>(factory, 3);
+    EXPECT_THROW(t.get(), value_exception);
+    EXPECT_EQ(attempts, 3);
+}
+
+#endif

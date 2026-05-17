@@ -43,7 +43,7 @@ private:
     friend void call_once(once_flag& flag, Callable&& func, Args&&... args);
 
 public:
-    once_flag() noexcept = default;
+    constexpr once_flag() noexcept = default;
     once_flag(const once_flag&) = delete;
     once_flag& operator=(const once_flag&) = delete;
     once_flag(once_flag&&) = delete;
@@ -63,6 +63,7 @@ public:
  * 如果函数已成功执行，后续调用将立即返回。
  *
  * @note 如果函数抛出异常，则视为未执行，后续线程将尝试重新执行
+ * @warning 对 call_once 递归调用会导致死锁
  */
 template <typename Callable, typename... Args>
 void call_once(once_flag& flag, Callable&& func, Args&&... args) {
@@ -71,6 +72,7 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
     }
 
     uint32_t spin_count = 0;
+
     while (true) {
         const uint32_t state = flag.state_.load(memory_order_acquire);
         if (state == 2) {
@@ -79,7 +81,7 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
 
         if (state == 0) {
             uint32_t expected = 0;
-            if (flag.state_.compare_exchange_strong(expected, 1, memory_order_acq_rel, memory_order_relaxed)) {
+            if (flag.state_.compare_exchange_strong(expected, 1, memory_order_acquire, memory_order_relaxed)) {
                 try {
                     _NEFORCE invoke<Callable, Args...>(_NEFORCE forward<Callable>(func),
                                                        _NEFORCE forward<Args>(args)...);
@@ -94,14 +96,18 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
             continue;
         }
 
-        if (spin_count < 10) {
-            for (uint32_t i = 0; i < (1U << spin_count); ++i) {
-                this_thread::relax();
-            }
-            ++spin_count;
-        } else {
+        if (spin_count < 64) {
+            this_thread::relax();
+        } else if (spin_count < 1024) {
             this_thread::yield();
+        } else if (spin_count < 2048) {
+            this_thread::sleep_for_ms(0);
+        } else if (spin_count < 4096) {
+            this_thread::sleep_for_ms(1);
+        } else {
+            this_thread::sleep_for_ms(10);
         }
+        ++spin_count;
     }
 }
 

@@ -190,7 +190,7 @@ TEST(ExceptionPtrTest, CurrentExceptionWithNeForceException) {
     } catch (...) {
         auto ep = current_exception();
         ASSERT_TRUE(ep);
-        EXPECT_EQ(ep.exception_type(), typeid(exception));
+        EXPECT_EQ(ep.exception_type(), typeid(math_exception));
         return;
     }
     FAIL() << "Expected exception not thrown";
