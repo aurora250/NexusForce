@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.0.0-beta] - 2026-05-16
+## [1.0.0-beta] - 2026-05-18
 
 ### 🚀 New Features
 - 项目从 MSTL 重命名为 NexusForce
@@ -46,7 +46,7 @@
 - 大幅优化 network 结构设计
 - 优化文档结构
 - 优化 FUTEX / atomic 设计结构
-- 优化 call_once 设计
+- 优化 call_once ，采用 FUTEX 线程提示机制
 - 优化 path / file 设计，分离职责到子工具类
 - 使用 iiterator 优化迭代器实现
 - 优化 unique_ptr 的转换功能

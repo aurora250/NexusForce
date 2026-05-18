@@ -9,8 +9,8 @@
  * 包括符号位检测、特殊值判断、正规性检查等功能。
  */
 
+#include "NeForce/core/memory/memory.hpp"
 #include "NeForce/core/numeric/numeric_traits.hpp"
-#include "NeForce/core/typeinfo/type_traits.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

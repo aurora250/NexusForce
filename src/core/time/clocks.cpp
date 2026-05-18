@@ -1,4 +1,5 @@
 #include <NeForce/core/time/clocks.hpp>
+#include <NeForce/core/async/futex.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/config/windef.hpp>
 #    include <handleapi.h>
@@ -120,7 +121,7 @@ milliseconds relative_time(const int64_t sec, const int64_t nsec, const bool is_
         return milliseconds(1);
     }
 
-    constexpr int64_t max_timeout = numeric_traits<::DWORD>::max() - 1;
+    constexpr int64_t max_timeout = numeric_traits<platform_wait_t>::max() - 1;
     if (diff_ms.count() > max_timeout) {
         return milliseconds(max_timeout);
     }
